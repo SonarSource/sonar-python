@@ -1,0 +1,6681 @@
+{
+"indico:indico/__init__.py": [
+0
+],
+"indico:indico/cli/cleanup.py": [
+0,
+16,
+24
+],
+"indico:indico/cli/core.py": [
+0,
+30,
+118,
+170
+],
+"indico:indico/cli/database.py": [
+0,
+32,
+50,
+103,
+124,
+150
+],
+"indico:indico/cli/devserver.py": [
+0,
+25,
+35,
+44,
+104,
+117,
+118,
+132,
+143,
+170
+],
+"indico:indico/cli/event.py": [
+0,
+22,
+124
+],
+"indico:indico/cli/i18n.py": [
+0,
+27,
+87,
+95,
+97,
+116,
+143,
+151,
+191,
+195
+],
+"indico:indico/cli/maintenance.py": [
+0,
+25,
+29
+],
+"indico:indico/cli/python_upgrader.py": [
+0,
+20,
+121
+],
+"indico:indico/cli/setup.py": [
+0,
+41,
+45,
+50,
+55,
+59,
+68,
+75,
+92,
+94,
+136,
+137,
+316,
+423,
+450,
+472,
+483,
+497,
+503,
+520,
+570,
+575
+],
+"indico:indico/cli/shell.py": [
+0,
+34,
+44,
+57,
+58,
+75,
+120
+],
+"indico:indico/cli/user.py": [
+0,
+25,
+29,
+50,
+54,
+269
+],
+"indico:indico/cli/util.py": [
+0,
+24
+],
+"indico:indico/cli/watchman.py": [
+0,
+22,
+26,
+36,
+82
+],
+"indico:indico/core/auth.py": [
+0,
+23
+],
+"indico:indico/core/cache.py": [
+0,
+22,
+84
+],
+"indico:indico/core/cache_test.py": [
+0,
+15,
+32,
+66
+],
+"indico:indico/core/celery/__init__.py": [
+0,
+45,
+50,
+57,
+62,
+68,
+86
+],
+"indico:indico/core/celery/blueprint.py": [
+0
+],
+"indico:indico/core/celery/cli.py": [
+0
+],
+"indico:indico/core/celery/controllers.py": [
+0,
+17
+],
+"indico:indico/core/celery/core.py": [
+0,
+85,
+105,
+145
+],
+"indico:indico/core/celery/util.py": [
+0,
+22
+],
+"indico:indico/core/celery/views.py": [
+0,
+11
+],
+"indico:indico/core/config.py": [
+0,
+144,
+155,
+165,
+172
+],
+"indico:indico/core/db/__init__.py": [
+0
+],
+"indico:indico/core/db/sqlalchemy/__init__.py": [
+0
+],
+"indico:indico/core/db/sqlalchemy/attachments.py": [
+0,
+43,
+60
+],
+"indico:indico/core/db/sqlalchemy/colors.py": [
+0
+],
+"indico:indico/core/db/sqlalchemy/core.py": [
+0,
+60,
+66,
+118,
+125,
+131,
+143,
+148,
+159,
+163
+],
+"indico:indico/core/db/sqlalchemy/custom/__init__.py": [
+0
+],
+"indico:indico/core/db/sqlalchemy/custom/greatest.py": [
+0,
+12,
+17,
+22
+],
+"indico:indico/core/db/sqlalchemy/custom/int_enum.py": [
+0,
+90,
+92
+],
+"indico:indico/core/db/sqlalchemy/custom/ip_network.py": [
+0,
+14,
+22,
+26,
+30
+],
+"indico:indico/core/db/sqlalchemy/custom/least.py": [
+0,
+12,
+17,
+22
+],
+"indico:indico/core/db/sqlalchemy/custom/natsort.py": [
+0,
+25,
+35
+],
+"indico:indico/core/db/sqlalchemy/custom/static_array.py": [
+24,
+48,
+61,
+72,
+80
+],
+"indico:indico/core/db/sqlalchemy/custom/unaccent.py": [
+0,
+28,
+55,
+63
+],
+"indico:indico/core/db/sqlalchemy/custom/utcdatetime.py": [
+0,
+15,
+19
+],
+"indico:indico/core/db/sqlalchemy/descriptions.py": [
+0,
+56,
+66,
+72,
+87,
+102
+],
+"indico:indico/core/db/sqlalchemy/links.py": [
+0,
+22,
+46,
+59,
+68,
+114,
+118,
+373
+],
+"indico:indico/core/db/sqlalchemy/locations.py": [
+0,
+60,
+65,
+76
+],
+"indico:indico/core/db/sqlalchemy/logging.py": [
+0,
+24,
+28,
+32,
+36,
+40,
+50,
+56,
+66,
+103,
+117
+],
+"indico:indico/core/db/sqlalchemy/migration.py": [
+0,
+50,
+61,
+75
+],
+"indico:indico/core/db/sqlalchemy/notes.py": [
+0
+],
+"indico:indico/core/db/sqlalchemy/principals.py": [
+0,
+21,
+32,
+107,
+527,
+631
+],
+"indico:indico/core/db/sqlalchemy/protection.py": [
+0,
+30,
+37,
+69,
+338,
+554,
+558,
+559,
+568
+],
+"indico:indico/core/db/sqlalchemy/review_comments.py": [
+0,
+16
+],
+"indico:indico/core/db/sqlalchemy/review_questions.py": [
+0,
+16,
+17,
+24
+],
+"indico:indico/core/db/sqlalchemy/review_ratings.py": [
+0,
+15
+],
+"indico:indico/core/db/sqlalchemy/searchable.py": [
+0,
+15
+],
+"indico:indico/core/db/sqlalchemy/util/management.py": [
+0
+],
+"indico:indico/core/db/sqlalchemy/util/models.py": [
+0,
+28,
+216,
+339,
+355,
+359,
+379,
+385,
+391
+],
+"indico:indico/core/db/sqlalchemy/util/models_test.py": [
+0,
+34
+],
+"indico:indico/core/db/sqlalchemy/util/queries.py": [
+0,
+41,
+59,
+69,
+123,
+157
+],
+"indico:indico/core/db/sqlalchemy/util/session.py": [
+0,
+16
+],
+"indico:indico/core/emails.py": [
+0,
+37,
+69,
+114,
+123,
+143
+],
+"indico:indico/core/emails_test.py": [
+0,
+14,
+26,
+40
+],
+"indico:indico/core/limiter.py": [
+0,
+16,
+74
+],
+"indico:indico/core/logger.py": [
+0,
+22,
+29,
+36,
+45,
+50,
+58
+],
+"indico:indico/core/marshmallow.py": [
+0,
+28,
+32,
+54,
+85,
+104,
+111
+],
+"indico:indico/core/notifications.py": [
+0,
+24,
+26,
+63
+],
+"indico:indico/core/oauth/__init__.py": [
+0,
+21,
+27
+],
+"indico:indico/core/oauth/endpoints.py": [
+0,
+18,
+39
+],
+"indico:indico/core/oauth/grants.py": [
+0,
+20,
+61
+],
+"indico:indico/core/oauth/logger.py": [
+0
+],
+"indico:indico/core/oauth/models/applications.py": [
+0,
+21
+],
+"indico:indico/core/oauth/models/applications_test.py": [
+0,
+19,
+24,
+28,
+46
+],
+"indico:indico/core/oauth/models/personal_tokens.py": [
+0
+],
+"indico:indico/core/oauth/models/personal_tokens_test.py": [
+0,
+11,
+15
+],
+"indico:indico/core/oauth/models/tokens.py": [
+0,
+21,
+128
+],
+"indico:indico/core/oauth/models/tokens_test.py": [
+0,
+11,
+15,
+19
+],
+"indico:indico/core/oauth/oauth2.py": [
+0,
+22
+],
+"indico:indico/core/oauth/oauth2_test.py": [
+0,
+29,
+44,
+64,
+118,
+147,
+165,
+174,
+259,
+280,
+302,
+313,
+324,
+342,
+358,
+381,
+402,
+422,
+443,
+490,
+504
+],
+"indico:indico/core/oauth/protector.py": [
+0,
+19,
+28,
+35,
+56
+],
+"indico:indico/core/oauth/scopes.py": [
+0
+],
+"indico:indico/core/oauth/testing/fixtures.py": [
+0,
+23
+],
+"indico:indico/core/oauth/util.py": [
+0,
+32,
+53,
+61
+],
+"indico:indico/core/permissions.py": [
+0
+],
+"indico:indico/core/plugins/__init__.py": [
+0,
+36,
+189,
+201,
+283,
+287,
+308,
+320
+],
+"indico:indico/core/plugins/alembic/env.py": [
+0,
+38,
+42
+],
+"indico:indico/core/plugins/blueprint.py": [
+0
+],
+"indico:indico/core/plugins/controllers.py": [
+0,
+22,
+26,
+47
+],
+"indico:indico/core/plugins/views.py": [
+0,
+11
+],
+"indico:indico/core/sentry.py": [
+0,
+30,
+51,
+57,
+90
+],
+"indico:indico/core/settings/__init__.py": [
+0
+],
+"indico:indico/core/settings/converters.py": [
+0
+],
+"indico:indico/core/settings/models/base.py": [
+0,
+19
+],
+"indico:indico/core/settings/models/settings.py": [
+0,
+16,
+24,
+38
+],
+"indico:indico/core/settings/models/settings_test.py": [
+0,
+16,
+17
+],
+"indico:indico/core/settings/proxy.py": [
+0,
+317
+],
+"indico:indico/core/settings/proxy_test.py": [
+0,
+19,
+25,
+34,
+45,
+57,
+68,
+82,
+101,
+110,
+123,
+129,
+144,
+153,
+165,
+177
+],
+"indico:indico/core/settings/util.py": [
+0,
+14,
+18
+],
+"indico:indico/core/signals/__init__.py": [
+0
+],
+"indico:indico/core/signals/acl.py": [
+0
+],
+"indico:indico/core/signals/agreements.py": [
+0
+],
+"indico:indico/core/signals/attachments.py": [
+0
+],
+"indico:indico/core/signals/category.py": [
+0
+],
+"indico:indico/core/signals/core.py": [
+0
+],
+"indico:indico/core/signals/event/__init__.py": [
+0
+],
+"indico:indico/core/signals/event/abstracts.py": [
+0
+],
+"indico:indico/core/signals/event/contributions.py": [
+0
+],
+"indico:indico/core/signals/event/core.py": [
+0
+],
+"indico:indico/core/signals/event/designer.py": [
+0
+],
+"indico:indico/core/signals/event/notes.py": [
+0
+],
+"indico:indico/core/signals/event/persons.py": [
+0
+],
+"indico:indico/core/signals/event/registration.py": [
+0
+],
+"indico:indico/core/signals/event/timetable.py": [
+0
+],
+"indico:indico/core/signals/event_management.py": [
+0
+],
+"indico:indico/core/signals/menu.py": [
+0
+],
+"indico:indico/core/signals/plugin.py": [
+0
+],
+"indico:indico/core/signals/rb.py": [
+0
+],
+"indico:indico/core/signals/rh.py": [
+0
+],
+"indico:indico/core/signals/users.py": [
+0
+],
+"indico:indico/core/storage/__init__.py": [
+0
+],
+"indico:indico/core/storage/backend.py": [
+0,
+45,
+216,
+276,
+284,
+290
+],
+"indico:indico/core/storage/backend_test.py": [
+0,
+18,
+23,
+34,
+39,
+62,
+67,
+72,
+81,
+93,
+121,
+130,
+144,
+154,
+155
+],
+"indico:indico/core/storage/models.py": [
+29,
+90
+],
+"indico:indico/core/webpack.py": [
+0,
+17
+],
+"indico:indico/legacy/pdfinterface/base.py": [
+0,
+37,
+51,
+59,
+75,
+98,
+228,
+239,
+251,
+262,
+274,
+288,
+302,
+316,
+330,
+354,
+479
+],
+"indico:indico/legacy/pdfinterface/conference.py": [
+0,
+44,
+61,
+140,
+220,
+759,
+919,
+954,
+959,
+967,
+1041,
+1095
+],
+"indico:indico/legacy/pdfinterface/latex.py": [
+0,
+40,
+52,
+55,
+81,
+121,
+125,
+223,
+226,
+241,
+280,
+303,
+325,
+367,
+378,
+401,
+421,
+466
+],
+"indico:indico/migrations/env.py": [
+0,
+29,
+37
+],
+"indico:indico/migrations/versions/20170905_1445_f1eee7b4880a_add_event_roles_table.py": [
+19,
+44
+],
+"indico:indico/migrations/versions/20170905_1521_640584a3987e_add_event_roles_to_acls.py": [
+19,
+116
+],
+"indico:indico/migrations/versions/20170914_1433_790a06790309_rename_roles_to_permissions.py": [
+18,
+25
+],
+"indico:indico/migrations/versions/20170915_1023_1d512a9ebb30_add_default_session_to_tracks.py": [
+19,
+26
+],
+"indico:indico/migrations/versions/20171101_1149_566d5de4e0e5_add_is_private_column_to_contribution_types.py": [
+19,
+28
+],
+"indico:indico/migrations/versions/20171124_1138_2af245be72a6_review_questions_models.py": [
+22,
+41
+],
+"indico:indico/migrations/versions/20171214_1059_9c4418d7a6aa_add_session_types_table.py": [
+19,
+54
+],
+"indico:indico/migrations/versions/20180126_1130_093533d27a96_add_visibility_options_to_contribution.py": [
+22,
+34
+],
+"indico:indico/migrations/versions/20180129_0706_c820455976ba_add_include_description_to_reminders.py": [
+19,
+25
+],
+"indico:indico/migrations/versions/20180129_0842_813ea74ce8dc_add_attachment_folder_is_hidden.py": [
+19,
+27
+],
+"indico:indico/migrations/versions/20180423_1602_66ecbb1c0ddd_add_natsort_function.py": [
+20,
+24
+],
+"indico:indico/migrations/versions/20180509_1521_a13e25814c4c_add_favorite_rooms_table.py": [
+19,
+31
+],
+"indico:indico/migrations/versions/20180803_1703_93985a8c11ed_remove_room_thumbnail.py": [
+19,
+23
+],
+"indico:indico/migrations/versions/20181023_1051_55893713f6b7_add_room_name_format.py": [
+19,
+26
+],
+"indico:indico/migrations/versions/20181023_1103_f7ab9ee32bdf_add_verbose_name_column.py": [
+19,
+28
+],
+"indico:indico/migrations/versions/20181023_1104_c0888cb57c58_remove_holidays_table.py": [
+19,
+23
+],
+"indico:indico/migrations/versions/20181023_1209_7a72d63acba9_update_map_aspects_structure.py": [
+19,
+46
+],
+"indico:indico/migrations/versions/20181023_1716_c5c21246445a_rename_aspects_to_map_areas.py": [
+18,
+27
+],
+"indico:indico/migrations/versions/20181023_1730_0117bd0fa784_store_room_coordinates_as_numbers.py": [
+19,
+28
+],
+"indico:indico/migrations/versions/20181024_1424_27c45c384d65_make_equipment_types_global.py": [
+19,
+42,
+52
+],
+"indico:indico/migrations/versions/20181025_1148_ec410be271df_make_room_attributes_global.py": [
+19,
+42,
+53
+],
+"indico:indico/migrations/versions/20181025_1224_7749141f3e08_remove_room_attribute_nesting.py": [
+19,
+24
+],
+"indico:indico/migrations/versions/20181025_1538_db32adb8fc4e_remove_equipment_nesting.py": [
+19,
+24
+],
+"indico:indico/migrations/versions/20181025_1710_868c04697dd7_remove_reservation_equipment_association.py": [
+19,
+23
+],
+"indico:indico/migrations/versions/20181026_1322_7e03b2262e9e_add_room_features.py": [
+19,
+40
+],
+"indico:indico/migrations/versions/20181123_1036_4f98f2f979c7_remove_roomattribute_is_required.py": [
+19,
+23
+],
+"indico:indico/migrations/versions/20181213_1049_252c0015c9a0_add_missing_blocking_principal.py": [
+19,
+45
+],
+"indico:indico/migrations/versions/20181213_1110_cbe630695800_add_room_principals_table.py": [
+28,
+51,
+56,
+66,
+78,
+115,
+124,
+141,
+174,
+220
+],
+"indico:indico/migrations/versions/20190117_1044_579a36843848_use_enum_for_reservation_state.py": [
+22,
+39
+],
+"indico:indico/migrations/versions/20190118_1213_7ec3949a21c7_use_enum_for_resv_occurrence_state.py": [
+22,
+38
+],
+"indico:indico/migrations/versions/20190118_1349_ff49d8d05ce7_disallow_empty_rejection_reasons.py": [
+18,
+27
+],
+"indico:indico/migrations/versions/20190118_1514_416f9c877300_add_reservationlink_table.py": [
+22,
+75
+],
+"indico:indico/migrations/versions/20190221_1423_7aabedfb5e3a_make_some_room_cols_not_nullable.py": [
+18,
+30
+],
+"indico:indico/migrations/versions/20190227_1523_081d4c97060a_add_end_notifications.py": [
+19,
+33
+],
+"indico:indico/migrations/versions/20190319_1720_3e4a0c08eae6_fix_truncated_constraint_names.py": [
+18,
+51
+],
+"indico:indico/migrations/versions/20190319_1728_fe73a07da0b4_add_room_notification_emails_column.py": [
+20,
+37
+],
+"indico:indico/migrations/versions/20190331_1619_8521bce91242_remove_location_is_default.py": [
+19,
+23
+],
+"indico:indico/migrations/versions/20190423_0920_ad0625914645_room_is_active_is_deleted.py": [
+18,
+24
+],
+"indico:indico/migrations/versions/20190423_1431_a83e77e11e36_add_location_is_deleted.py": [
+19,
+28
+],
+"indico:indico/migrations/versions/20190425_1507_7024f7f66e20_remove_assistance_vc_columns_from_rb.py": [
+19,
+26
+],
+"indico:indico/migrations/versions/20190517_1313_06a4ec717b84_switch_from_json_to_jsonb.py": [
+18,
+135
+],
+"indico:indico/migrations/versions/20190809_1711_620b312814f3_migrate_indico_weeks_view_theme_name.py": [
+18,
+26
+],
+"indico:indico/migrations/versions/20190821_1515_eefba82b42c5_add_track_groups_table.py": [
+19,
+36
+],
+"indico:indico/migrations/versions/20190918_1722_1b741c9123f6_add_columns_for_program_codes.py": [
+19,
+31
+],
+"indico:indico/migrations/versions/20190923_1438_0f20a5e4018e_add_new_abstract_state.py": [
+18,
+24
+],
+"indico:indico/migrations/versions/20190924_1509_f6fba869a27c_add_uuid_column_to_abstracts.py": [
+20,
+27
+],
+"indico:indico/migrations/versions/20191021_1350_a2472148d2c5_add_signature_token_column_to_user.py": [
+20,
+38
+],
+"indico:indico/migrations/versions/20191107_1816_bb522e9f9066_add_files_table.py": [
+22,
+41
+],
+"indico:indico/migrations/versions/20191108_1402_39a25a873063_add_editing_file_types_table.py": [
+21,
+40
+],
+"indico:indico/migrations/versions/20191108_1713_4e459d27adab_add_tables_for_editing_revisions.py": [
+23,
+115
+],
+"indico:indico/migrations/versions/20191111_1820_2496c4adc7e9_add_track_principal.py": [
+25,
+33,
+41,
+107,
+201,
+209,
+217,
+242
+],
+"indico:indico/migrations/versions/20200120_1055_e01c48de5a5e_allow_more_digits_in_prices.py": [
+18,
+31
+],
+"indico:indico/migrations/versions/20200120_1340_6a185fdcd4ee_add_filename_template_column.py": [
+19,
+23
+],
+"indico:indico/migrations/versions/20200204_1201_4d263fa78830_add_category_roles_table.py": [
+19,
+44
+],
+"indico:indico/migrations/versions/20200207_1615_b3ce69ab24d9_add_category_roles_to_acls.py": [
+19,
+163
+],
+"indico:indico/migrations/versions/20200319_1342_18a1088f1ea8_use_ondelete_cascade_for_comments.py": [
+18,
+24
+],
+"indico:indico/migrations/versions/20200319_1605_56a26a721717_add_slides_as_editable_type.py": [
+18,
+25
+],
+"indico:indico/migrations/versions/20200324_0926_266d78b1c5db_add_table_for_event_labels.py": [
+19,
+37
+],
+"indico:indico/migrations/versions/20200324_1004_a3295d628e3b_migrate_event_labels_from_settings.py": [
+22,
+55
+],
+"indico:indico/migrations/versions/20200327_1501_6444c893a21f_associate_file_types_with_editable_types.py": [
+22,
+31
+],
+"indico:indico/migrations/versions/20200331_1251_3c5462aef0b7_review_conditions_editable_types.py": [
+18,
+26
+],
+"indico:indico/migrations/versions/20200401_1738_02bf20df06b3_add_table_for_review_conditions.py": [
+22,
+49
+],
+"indico:indico/migrations/versions/20200402_1113_933665578547_migrate_review_conditions_from_settings.py": [
+24,
+52
+],
+"indico:indico/migrations/versions/20200409_1711_7f56252c73ab_add_map_url_to_events_table.py": [
+19,
+24
+],
+"indico:indico/migrations/versions/20200428_1807_532f0ea25bb1_add_user_profile_picture.py": [
+20,
+29
+],
+"indico:indico/migrations/versions/20200615_2142_c0fc1e46888b_disallow_editing_permissions_for_groups.py": [
+18,
+24
+],
+"indico:indico/migrations/versions/20200619_1526_b6dd0a4ed40d_add_registration_form_to_event_acls.py": [
+19,
+125
+],
+"indico:indico/migrations/versions/20200623_1718_05f227f4b938_add_metadata_to_event_logs.py": [
+20,
+27
+],
+"indico:indico/migrations/versions/20200729_1503_4f0b4dd412b5_remove_email_principals_from_tracks.py": [
+18,
+40
+],
+"indico:indico/migrations/versions/20200729_1842_d89abffb0f63_add_menu_entries_registered_only.py": [
+19,
+25
+],
+"indico:indico/migrations/versions/20200729_1848_12fbf6af2367_add_custom_boa_file_to_event.py": [
+19,
+24
+],
+"indico:indico/migrations/versions/20200804_1308_497c61b68050_fix_session_friendly_id_index.py": [
+19,
+25
+],
+"indico:indico/migrations/versions/20200805_1423_c997dc927fbc_add_default_badge_to_categories.py": [
+23,
+46
+],
+"indico:indico/migrations/versions/20200904_1543_f37d509e221c_add_user_profile_picture_source_column.py": [
+25,
+32,
+45
+],
+"indico:indico/migrations/versions/20201103_1431_8d614ef75968_allow_mx_user_title.py": [
+18,
+37
+],
+"indico:indico/migrations/versions/20201209_2010_e4fb983dc64c_add_until_approved_regform_modification_mode.py": [
+18,
+25
+],
+"indico:indico/migrations/versions/20210129_2232_e787389ca868_add_rejection_reason.py": [
+19,
+25
+],
+"indico:indico/migrations/versions/20210211_1613_26985db8ed12_add_attach_ical_to_reminders.py": [
+19,
+25
+],
+"indico:indico/migrations/versions/20210215_1052_f26c201c8254_add_attach_ical_to_registrationform.py": [
+19,
+25
+],
+"indico:indico/migrations/versions/20210219_1428_3782de7970da_rename_oauth_default_scopes.py": [
+18,
+22
+],
+"indico:indico/migrations/versions/20210219_1555_da06d8f50342_separate_authorized_scopes_from_tokens.py": [
+20,
+53
+],
+"indico:indico/migrations/versions/20210222_1754_c36abe1c23c7_make_oauth_pkce_flow_configurable.py": [
+19,
+26
+],
+"indico:indico/migrations/versions/20210222_1914_d354278c6d95_store_tokens_as_hashes.py": [
+25,
+29,
+46
+],
+"indico:indico/migrations/versions/20210224_1805_ecc7088914e7_use_cascading_fks_for_oauth.py": [
+18,
+28
+],
+"indico:indico/migrations/versions/20210224_1808_26806768cd3f_remove_flower_oauth_app.py": [
+20,
+27
+],
+"indico:indico/migrations/versions/20210507_1812_d89585afaf2e_add_index_on_user_merged_into_id.py": [
+18,
+22
+],
+"indico:indico/migrations/versions/20210524_1447_cf9e1b4e2f5f_restrict_event_creation_cat_subcats.py": [
+18,
+33
+],
+"indico:indico/migrations/versions/20210527_1314_178d297eae7e_disallow_seconds_in_durations.py": [
+18,
+62
+],
+"indico:indico/migrations/versions/20210607_1548_735dc4e8d2f3_update_merged_users_in_registrations.py": [
+18,
+47
+],
+"indico:indico/migrations/versions/20210615_1612_fda76e047e87_make_sure_contributions_have_titles.py": [
+18,
+25
+],
+"indico:indico/migrations/versions/20210615_1627_79e770865675_add_more_fts_indexes.py": [
+19,
+38
+],
+"indico:indico/migrations/versions/20210622_1655_90384b9b3d22_make_room_division_non_nullable.py": [
+18,
+23
+],
+"indico:indico/migrations/versions/20210630_1104_356b8985ae7c_add_survey_anonymous_submissions_table.py": [
+19,
+31
+],
+"indico:indico/migrations/versions/20210630_1205_1f6738730753_add_personal_access_tokens.py": [
+22,
+41
+],
+"indico:indico/migrations/versions/20210630_1206_1b7e98f581bc_make_token_scopes_not_nullable.py": [
+18,
+22
+],
+"indico:indico/migrations/versions/20210630_1349_5cbb0eb12eb3_add_last_used_ip_and_use_count_to_tokens.py": [
+20,
+29
+],
+"indico:indico/migrations/versions/20210705_1337_420195768776_add_reminder_send_to_speakers_column.py": [
+19,
+26
+],
+"indico:indico/migrations/versions/20210705_1726_cd3fef2095b4_add_is_flat_view_enabled_setting_for_categories.py": [
+19,
+25
+],
+"indico:indico/migrations/versions/20210707_1635_1cec32e42f65_add_reviewed_dt_to_paper_revisions.py": [
+20,
+31
+],
+"indico:indico/migrations/versions/20210802_1514_4b097412a8d9_add_category_logs.py": [
+24,
+29,
+36,
+58
+],
+"indico:indico/migrations/versions/20210804_1211_9d00917b2fa8_add_event_category_request.py": [
+22,
+29,
+35,
+67
+],
+"indico:indico/migrations/versions/20210813_1633_dc53d6e8c576_make_event_category_nullable.py": [
+18,
+25
+],
+"indico:indico/migrations/versions/20210927_1027_b36825c7869e_add_registration_tags.py": [
+19,
+46
+],
+"indico:indico/migrations/versions/20211116_1457_8993132179d3_ensure_single_choice_fields_have_item_type.py": [
+18,
+28
+],
+"indico:indico/migrations/versions/20211119_1539_84874a17eaf3_cleanup_registration_fields_is_billable.py": [
+18,
+72
+],
+"indico:indico/migrations/versions/20211121_1403_3dafee32ba7d_remove_is_billable_from_registration_fields.py": [
+18,
+44
+],
+"indico:indico/modules/__init__.py": [
+0
+],
+"indico:indico/modules/admin/__init__.py": [
+0,
+21,
+30,
+36
+],
+"indico:indico/modules/admin/controllers/base.py": [
+0
+],
+"indico:indico/modules/admin/notices.py": [
+0,
+41,
+48,
+55,
+56,
+97,
+98,
+108,
+126,
+134,
+143,
+149,
+155
+],
+"indico:indico/modules/admin/notices_test.py": [
+0,
+25,
+45,
+61,
+73
+],
+"indico:indico/modules/admin/views.py": [
+0
+],
+"indico:indico/modules/announcement/__init__.py": [
+0,
+25,
+34
+],
+"indico:indico/modules/announcement/blueprint.py": [
+0
+],
+"indico:indico/modules/announcement/controllers.py": [
+0,
+19
+],
+"indico:indico/modules/announcement/forms.py": [
+0,
+17
+],
+"indico:indico/modules/announcement/views.py": [
+0,
+11
+],
+"indico:indico/modules/api/__init__.py": [
+0,
+23,
+40,
+60,
+66
+],
+"indico:indico/modules/api/blueprint.py": [
+0,
+38
+],
+"indico:indico/modules/api/controllers.py": [
+0
+],
+"indico:indico/modules/api/forms.py": [
+0,
+27
+],
+"indico:indico/modules/api/models/keys.py": [
+0
+],
+"indico:indico/modules/api/views.py": [
+0,
+12,
+17
+],
+"indico:indico/modules/attachments/__init__.py": [
+0,
+28,
+38,
+46,
+52,
+58,
+64
+],
+"indico:indico/modules/attachments/api/hooks.py": [
+0,
+18
+],
+"indico:indico/modules/attachments/api/util.py": [
+0,
+18,
+36,
+60,
+78,
+87,
+105
+],
+"indico:indico/modules/attachments/blueprint.py": [
+0,
+41,
+45
+],
+"indico:indico/modules/attachments/clone.py": [
+0,
+22
+],
+"indico:indico/modules/attachments/controllers/compat.py": [
+0,
+19,
+37,
+45,
+55,
+62,
+75
+],
+"indico:indico/modules/attachments/controllers/display/base.py": [
+0
+],
+"indico:indico/modules/attachments/controllers/display/category.py": [
+0,
+12
+],
+"indico:indico/modules/attachments/controllers/display/event.py": [
+0,
+20,
+38,
+57
+],
+"indico:indico/modules/attachments/controllers/display/event_test.py": [
+0,
+25,
+35,
+47,
+84,
+98,
+111,
+122
+],
+"indico:indico/modules/attachments/controllers/event_package.py": [
+0,
+36,
+47,
+55,
+124,
+179,
+226,
+244
+],
+"indico:indico/modules/attachments/controllers/management/base.py": [
+0,
+30,
+35,
+39,
+55
+],
+"indico:indico/modules/attachments/controllers/management/category.py": [
+0,
+20,
+34,
+38,
+42,
+46,
+52,
+56,
+62,
+68
+],
+"indico:indico/modules/attachments/controllers/management/event.py": [
+0,
+25,
+45,
+49,
+55,
+59,
+63,
+69,
+73,
+79,
+85,
+91
+],
+"indico:indico/modules/attachments/controllers/util.py": [
+0
+],
+"indico:indico/modules/attachments/forms.py": [
+0,
+26,
+52,
+57,
+61,
+71,
+76,
+81,
+85,
+89,
+140
+],
+"indico:indico/modules/attachments/logging.py": [
+0,
+20,
+35,
+42,
+49,
+62,
+70,
+75,
+80,
+85,
+93,
+99
+],
+"indico:indico/modules/attachments/models/attachments.py": [
+0,
+34,
+40,
+117,
+275
+],
+"indico:indico/modules/attachments/models/folders.py": [
+0,
+27,
+222
+],
+"indico:indico/modules/attachments/models/folders_test.py": [
+0,
+11,
+35
+],
+"indico:indico/modules/attachments/models/legacy_mapping.py": [
+0,
+14
+],
+"indico:indico/modules/attachments/models/principals.py": [
+0,
+15,
+46
+],
+"indico:indico/modules/attachments/operations.py": [
+0
+],
+"indico:indico/modules/attachments/preview.py": [
+0,
+41,
+46,
+57,
+67,
+96,
+101
+],
+"indico:indico/modules/attachments/tasks.py": [
+0,
+17
+],
+"indico:indico/modules/attachments/util.py": [
+0,
+77,
+98
+],
+"indico:indico/modules/attachments/views.py": [
+0,
+13,
+21,
+27,
+34,
+38,
+42
+],
+"indico:indico/modules/auth/__init__.py": [
+0,
+31,
+107,
+112,
+120,
+122
+],
+"indico:indico/modules/auth/blueprint.py": [
+0,
+38
+],
+"indico:indico/modules/auth/controllers.py": [
+0,
+39,
+130,
+395,
+447,
+510,
+616
+],
+"indico:indico/modules/auth/forms.py": [
+0,
+21,
+25,
+30,
+35,
+46,
+51,
+60,
+86,
+91,
+97,
+103,
+114,
+132,
+152
+],
+"indico:indico/modules/auth/models/identities.py": [
+0
+],
+"indico:indico/modules/auth/models/registration_requests.py": [
+0,
+16
+],
+"indico:indico/modules/auth/providers.py": [
+0,
+17,
+34
+],
+"indico:indico/modules/auth/util.py": [
+0,
+108,
+114
+],
+"indico:indico/modules/auth/views.py": [
+0,
+12,
+19
+],
+"indico:indico/modules/bootstrap/blueprint.py": [
+0
+],
+"indico:indico/modules/bootstrap/controllers.py": [
+0,
+31
+],
+"indico:indico/modules/bootstrap/forms.py": [
+0,
+18
+],
+"indico:indico/modules/categories/__init__.py": [
+0,
+35,
+40,
+45,
+54,
+72,
+79,
+84,
+89,
+96
+],
+"indico:indico/modules/categories/blueprint.py": [
+0,
+35,
+113
+],
+"indico:indico/modules/categories/compat.py": [
+0,
+19
+],
+"indico:indico/modules/categories/controllers/admin.py": [
+0,
+20
+],
+"indico:indico/modules/categories/controllers/base.py": [
+0,
+16,
+51
+],
+"indico:indico/modules/categories/controllers/display.py": [
+0,
+60,
+64,
+79,
+90,
+114,
+121,
+146,
+164,
+327,
+335,
+392,
+497,
+529
+],
+"indico:indico/modules/categories/controllers/display_test.py": [
+0,
+17
+],
+"indico:indico/modules/categories/controllers/management.py": [
+0,
+59,
+63,
+68,
+73,
+103,
+129,
+150,
+155,
+203,
+218,
+243,
+265,
+275,
+296,
+372,
+420,
+448
+],
+"indico:indico/modules/categories/controllers/util.py": [
+0,
+26,
+27,
+33,
+41,
+44,
+60,
+64,
+68,
+85
+],
+"indico:indico/modules/categories/fields.py": [
+0,
+56,
+58
+],
+"indico:indico/modules/categories/forms.py": [
+0,
+33,
+70,
+79,
+86,
+140,
+164,
+197
+],
+"indico:indico/modules/categories/models/__init__.py": [
+0,
+16,
+75
+],
+"indico:indico/modules/categories/models/categories.py": [
+0,
+37,
+43,
+51,
+59,
+585,
+677,
+690
+],
+"indico:indico/modules/categories/models/categories_test.py": [
+0,
+29,
+37,
+41,
+42,
+82,
+94,
+114,
+124,
+136
+],
+"indico:indico/modules/categories/models/event_move_request.py": [
+0,
+16
+],
+"indico:indico/modules/categories/models/legacy_mapping.py": [
+0
+],
+"indico:indico/modules/categories/models/principals.py": [
+0,
+16
+],
+"indico:indico/modules/categories/models/roles.py": [
+0,
+14
+],
+"indico:indico/modules/categories/models/settings.py": [
+0,
+16
+],
+"indico:indico/modules/categories/operations.py": [
+0,
+20,
+37,
+47,
+52,
+65,
+81,
+104
+],
+"indico:indico/modules/categories/schemas.py": [
+0,
+15,
+16,
+21,
+22,
+27,
+28,
+33,
+34
+],
+"indico:indico/modules/categories/serialize.py": [
+0,
+98,
+129
+],
+"indico:indico/modules/categories/settings.py": [
+0,
+16,
+18
+],
+"indico:indico/modules/categories/tasks.py": [
+0,
+28,
+51
+],
+"indico:indico/modules/categories/util.py": [
+0,
+177,
+199,
+204,
+235
+],
+"indico:indico/modules/categories/util_test.py": [
+0,
+15
+],
+"indico:indico/modules/categories/views.py": [
+0,
+19
+],
+"indico:indico/modules/cephalopod/__init__.py": [
+0,
+32
+],
+"indico:indico/modules/cephalopod/blueprint.py": [
+0
+],
+"indico:indico/modules/cephalopod/controllers.py": [
+0,
+31,
+35,
+77,
+98
+],
+"indico:indico/modules/cephalopod/forms.py": [
+0,
+18
+],
+"indico:indico/modules/cephalopod/util.py": [
+0,
+23,
+27,
+63,
+84
+],
+"indico:indico/modules/cephalopod/views.py": [
+0,
+11
+],
+"indico:indico/modules/core/__init__.py": [
+0,
+18,
+24,
+29
+],
+"indico:indico/modules/core/blueprint.py": [
+0
+],
+"indico:indico/modules/core/controllers.py": [
+0,
+46,
+53,
+190,
+297,
+304
+],
+"indico:indico/modules/core/forms.py": [
+0,
+17
+],
+"indico:indico/modules/core/settings.py": [
+0
+],
+"indico:indico/modules/core/views.py": [
+0,
+14,
+19
+],
+"indico:indico/modules/designer/__init__.py": [
+0,
+19,
+25,
+31,
+61,
+83,
+92,
+99
+],
+"indico:indico/modules/designer/blueprint.py": [
+0,
+23,
+27
+],
+"indico:indico/modules/designer/controllers.py": [
+0,
+79,
+134,
+158,
+170,
+198,
+218,
+222,
+226,
+230,
+234,
+240,
+246,
+252,
+295,
+310,
+333,
+354,
+365,
+375,
+395
+],
+"indico:indico/modules/designer/forms.py": [
+0,
+18
+],
+"indico:indico/modules/designer/models/images.py": [
+0,
+17
+],
+"indico:indico/modules/designer/models/templates.py": [
+0,
+25,
+156
+],
+"indico:indico/modules/designer/operations.py": [
+0
+],
+"indico:indico/modules/designer/pdf.py": [
+0,
+49,
+53
+],
+"indico:indico/modules/designer/placeholders.py": [
+0,
+38,
+49,
+57,
+65,
+76,
+90,
+106,
+116,
+126,
+136,
+146,
+156,
+166,
+176,
+183,
+190,
+197,
+204,
+211,
+218,
+225,
+232,
+238,
+244,
+250,
+256,
+266,
+276,
+282,
+288,
+294,
+300,
+306,
+312
+],
+"indico:indico/modules/designer/util.py": [
+0,
+35,
+41,
+48,
+73,
+83,
+93
+],
+"indico:indico/modules/designer/views.py": [
+0,
+13,
+18
+],
+"indico:indico/modules/events/__init__.py": [
+0,
+55,
+66,
+77,
+102,
+124,
+129,
+133,
+141,
+152,
+157,
+164,
+167,
+176,
+182,
+191
+],
+"indico:indico/modules/events/abstracts/__init__.py": [
+0,
+38,
+48,
+56,
+61,
+66,
+81,
+87,
+99,
+105,
+110,
+115,
+120,
+126,
+135,
+142,
+149,
+158,
+164,
+169,
+173,
+189
+],
+"indico:indico/modules/events/abstracts/blueprint.py": [
+0,
+164
+],
+"indico:indico/modules/events/abstracts/clone.py": [
+0,
+19
+],
+"indico:indico/modules/events/abstracts/compat.py": [
+0,
+16
+],
+"indico:indico/modules/events/abstracts/controllers/abstract.py": [
+0,
+27,
+44,
+91
+],
+"indico:indico/modules/events/abstracts/controllers/abstract_list.py": [
+0,
+88,
+98,
+180,
+228,
+232,
+236,
+240,
+244,
+248
+],
+"indico:indico/modules/events/abstracts/controllers/base.py": [
+0
+],
+"indico:indico/modules/events/abstracts/controllers/boa.py": [
+0,
+52
+],
+"indico:indico/modules/events/abstracts/controllers/common.py": [
+0
+],
+"indico:indico/modules/events/abstracts/controllers/display.py": [
+0,
+76
+],
+"indico:indico/modules/events/abstracts/controllers/email_templates.py": [
+0,
+117,
+126
+],
+"indico:indico/modules/events/abstracts/controllers/management.py": [
+0,
+227,
+237,
+255,
+265,
+275,
+281
+],
+"indico:indico/modules/events/abstracts/controllers/management_test.py": [
+0,
+29
+],
+"indico:indico/modules/events/abstracts/controllers/reviewing.py": [
+0,
+69,
+83,
+100,
+159,
+182,
+195,
+212,
+223,
+229,
+242,
+250,
+263,
+267,
+271,
+275,
+279
+],
+"indico:indico/modules/events/abstracts/fields.py": [
+0,
+34,
+41,
+51
+],
+"indico:indico/modules/events/abstracts/forms.py": [
+0,
+58,
+339,
+459,
+515,
+521,
+540,
+557,
+574,
+590,
+605,
+609,
+639,
+654,
+673
+],
+"indico:indico/modules/events/abstracts/lists.py": [
+0
+],
+"indico:indico/modules/events/abstracts/models/abstracts.py": [
+0,
+36,
+49,
+66,
+77
+],
+"indico:indico/modules/events/abstracts/models/call_for_abstracts.py": [
+0
+],
+"indico:indico/modules/events/abstracts/models/comments.py": [
+0,
+19
+],
+"indico:indico/modules/events/abstracts/models/email_logs.py": [
+0,
+15
+],
+"indico:indico/modules/events/abstracts/models/email_templates.py": [
+0
+],
+"indico:indico/modules/events/abstracts/models/fields.py": [
+0
+],
+"indico:indico/modules/events/abstracts/models/files.py": [
+0,
+17
+],
+"indico:indico/modules/events/abstracts/models/persons.py": [
+0
+],
+"indico:indico/modules/events/abstracts/models/related_tracks.py": [
+0
+],
+"indico:indico/modules/events/abstracts/models/review_questions.py": [
+0,
+14
+],
+"indico:indico/modules/events/abstracts/models/review_ratings.py": [
+0,
+14
+],
+"indico:indico/modules/events/abstracts/models/reviews.py": [
+0,
+18
+],
+"indico:indico/modules/events/abstracts/notifications.py": [
+0,
+21
+],
+"indico:indico/modules/events/abstracts/notifications_test.py": [
+0,
+29,
+30,
+39,
+40,
+49,
+50,
+61,
+67,
+87,
+115,
+147,
+165,
+190,
+191
+],
+"indico:indico/modules/events/abstracts/operations.py": [
+0,
+34,
+58,
+78,
+93,
+120,
+172,
+186,
+199,
+277,
+285,
+293,
+303,
+315,
+323,
+350,
+397,
+411,
+417
+],
+"indico:indico/modules/events/abstracts/placeholders.py": [
+0,
+24,
+33,
+42,
+51,
+60,
+70,
+79,
+90,
+101,
+116,
+125,
+134,
+143,
+153,
+163,
+172,
+184,
+194,
+204,
+215,
+226,
+237
+],
+"indico:indico/modules/events/abstracts/schemas.py": [
+0,
+25,
+29,
+36,
+37,
+42,
+43,
+48,
+56,
+63,
+64,
+70,
+87
+],
+"indico:indico/modules/events/abstracts/settings.py": [
+0,
+15,
+27,
+33,
+40
+],
+"indico:indico/modules/events/abstracts/testing/fixtures.py": [
+0,
+17,
+18,
+29
+],
+"indico:indico/modules/events/abstracts/util.py": [
+0,
+110,
+223,
+244,
+394,
+405
+],
+"indico:indico/modules/events/abstracts/views.py": [
+0,
+16,
+25,
+30,
+34,
+38,
+43
+],
+"indico:indico/modules/events/agreements/__init__.py": [
+0,
+27,
+33,
+43,
+48
+],
+"indico:indico/modules/events/agreements/api.py": [
+0,
+18
+],
+"indico:indico/modules/events/agreements/base.py": [
+0,
+20
+],
+"indico:indico/modules/events/agreements/blueprint.py": [
+0
+],
+"indico:indico/modules/events/agreements/controllers.py": [
+0,
+125,
+148,
+163,
+181,
+188,
+198,
+255
+],
+"indico:indico/modules/events/agreements/forms.py": [
+0,
+19,
+25,
+44
+],
+"indico:indico/modules/events/agreements/models/agreements.py": [
+0,
+21
+],
+"indico:indico/modules/events/agreements/models/agreements_test.py": [
+0,
+28,
+41,
+56,
+69,
+75,
+82,
+91,
+113,
+131,
+143,
+156,
+162,
+169,
+176,
+182
+],
+"indico:indico/modules/events/agreements/notifications.py": [
+0,
+16,
+26,
+33,
+40
+],
+"indico:indico/modules/events/agreements/placeholders.py": [
+0,
+15,
+24
+],
+"indico:indico/modules/events/agreements/testing/fixtures.py": [
+0,
+20,
+31,
+43,
+54
+],
+"indico:indico/modules/events/agreements/util.py": [
+0,
+15
+],
+"indico:indico/modules/events/agreements/views.py": [
+0,
+13,
+20,
+24
+],
+"indico:indico/modules/events/api.py": [
+0,
+50,
+61,
+81,
+97,
+416,
+647,
+655,
+676,
+683,
+696,
+735,
+740,
+745,
+747
+],
+"indico:indico/modules/events/blueprint.py": [
+0
+],
+"indico:indico/modules/events/clone.py": [
+0,
+21,
+48,
+77,
+118
+],
+"indico:indico/modules/events/cloning.py": [
+0,
+194
+],
+"indico:indico/modules/events/cloning_test.py": [
+0,
+34,
+62,
+79
+],
+"indico:indico/modules/events/contributions/__init__.py": [
+0,
+30,
+39,
+46,
+57,
+64,
+70,
+76,
+84,
+89,
+93,
+101,
+105,
+110,
+126
+],
+"indico:indico/modules/events/contributions/blueprint.py": [
+0
+],
+"indico:indico/modules/events/contributions/clone.py": [
+0,
+32,
+59,
+87
+],
+"indico:indico/modules/events/contributions/contrib_fields.py": [
+0,
+26,
+43,
+56,
+60
+],
+"indico:indico/modules/events/contributions/controllers/common.py": [
+0
+],
+"indico:indico/modules/events/contributions/controllers/compat.py": [
+0,
+17,
+27
+],
+"indico:indico/modules/events/contributions/controllers/display.py": [
+0,
+49,
+53,
+77,
+148,
+157,
+200,
+208,
+250
+],
+"indico:indico/modules/events/contributions/controllers/display_test.py": [
+0,
+20,
+39
+],
+"indico:indico/modules/events/contributions/controllers/management.py": [
+0,
+70,
+172,
+193,
+220,
+247,
+377,
+384,
+393,
+408,
+423,
+469,
+477,
+783
+],
+"indico:indico/modules/events/contributions/fields.py": [
+0
+],
+"indico:indico/modules/events/contributions/forms.py": [
+0,
+36,
+95,
+112,
+133,
+158,
+182
+],
+"indico:indico/modules/events/contributions/ical.py": [
+0
+],
+"indico:indico/modules/events/contributions/lists.py": [
+0,
+181
+],
+"indico:indico/modules/events/contributions/lists_test.py": [
+0,
+21,
+37
+],
+"indico:indico/modules/events/contributions/models/contributions.py": [
+0,
+76,
+578,
+602,
+608,
+616,
+625
+],
+"indico:indico/modules/events/contributions/models/contributions_test.py": [
+0,
+16,
+28
+],
+"indico:indico/modules/events/contributions/models/fields.py": [
+0,
+26,
+34,
+145,
+181
+],
+"indico:indico/modules/events/contributions/models/legacy_mapping.py": [
+0
+],
+"indico:indico/modules/events/contributions/models/persons.py": [
+0,
+15
+],
+"indico:indico/modules/events/contributions/models/principals.py": [
+0,
+16
+],
+"indico:indico/modules/events/contributions/models/references.py": [
+0,
+13,
+32
+],
+"indico:indico/modules/events/contributions/models/subcontributions.py": [
+0,
+38
+],
+"indico:indico/modules/events/contributions/models/types.py": [
+0,
+15
+],
+"indico:indico/modules/events/contributions/operations.py": [
+0,
+54,
+113,
+124,
+137,
+147,
+158
+],
+"indico:indico/modules/events/contributions/schemas.py": [
+0,
+17,
+18,
+23,
+24,
+29,
+34
+],
+"indico:indico/modules/events/contributions/util.py": [
+0,
+50,
+67,
+89,
+96,
+127,
+197,
+203,
+217,
+241,
+332,
+338,
+344
+],
+"indico:indico/modules/events/contributions/util_test.py": [
+0,
+18,
+24,
+63,
+99
+],
+"indico:indico/modules/events/contributions/views.py": [
+0,
+13,
+22,
+28,
+32,
+36,
+40
+],
+"indico:indico/modules/events/controllers/admin.py": [
+0,
+26,
+30,
+84,
+88
+],
+"indico:indico/modules/events/controllers/base.py": [
+0,
+19,
+53,
+99,
+103
+],
+"indico:indico/modules/events/controllers/base_test.py": [
+0
+],
+"indico:indico/modules/events/controllers/creation.py": [
+0,
+113
+],
+"indico:indico/modules/events/controllers/display.py": [
+0,
+28,
+77
+],
+"indico:indico/modules/events/controllers/entry.py": [
+0,
+21
+],
+"indico:indico/modules/events/editing/__init__.py": [
+0,
+25,
+51,
+56,
+64,
+72,
+78,
+83,
+87,
+102,
+117,
+124,
+130,
+136
+],
+"indico:indico/modules/events/editing/blueprint.py": [
+0
+],
+"indico:indico/modules/events/editing/clone.py": [
+0,
+19
+],
+"indico:indico/modules/events/editing/controllers/backend/common.py": [
+0
+],
+"indico:indico/modules/events/editing/controllers/backend/editable_list.py": [
+0,
+52,
+63,
+83,
+102,
+116
+],
+"indico:indico/modules/events/editing/controllers/backend/management.py": [
+0,
+119,
+137,
+155,
+168,
+181,
+194,
+212,
+218,
+235
+],
+"indico:indico/modules/events/editing/controllers/backend/service.py": [
+0
+],
+"indico:indico/modules/events/editing/controllers/backend/timeline.py": [
+0,
+45,
+53,
+418,
+429
+],
+"indico:indico/modules/events/editing/controllers/base.py": [
+0,
+24
+],
+"indico:indico/modules/events/editing/controllers/base_test.py": [
+0,
+17,
+18,
+22
+],
+"indico:indico/modules/events/editing/controllers/frontend.py": [
+0,
+16,
+24,
+39
+],
+"indico:indico/modules/events/editing/fields.py": [
+0,
+21,
+73,
+75,
+84,
+86
+],
+"indico:indico/modules/events/editing/models/comments.py": [
+0,
+16
+],
+"indico:indico/modules/events/editing/models/editable.py": [
+0,
+22,
+34,
+47,
+255
+],
+"indico:indico/modules/events/editing/models/file_types.py": [
+0,
+17
+],
+"indico:indico/modules/events/editing/models/review_conditions.py": [
+0,
+14
+],
+"indico:indico/modules/events/editing/models/revision_files.py": [
+0,
+15
+],
+"indico:indico/modules/events/editing/models/revisions.py": [
+0,
+21,
+32,
+49,
+63,
+67
+],
+"indico:indico/modules/events/editing/models/tags.py": [
+0,
+14
+],
+"indico:indico/modules/events/editing/notifications.py": [
+0,
+13
+],
+"indico:indico/modules/events/editing/operations.py": [
+0,
+50,
+55,
+66,
+80,
+91,
+100,
+108,
+148,
+167,
+186,
+200,
+207,
+234,
+244,
+253,
+260,
+267,
+278,
+283,
+291,
+297,
+302,
+309,
+315,
+320,
+338,
+354,
+367,
+376,
+394
+],
+"indico:indico/modules/events/editing/operations_test.py": [
+0,
+15,
+55
+],
+"indico:indico/modules/events/editing/schemas.py": [
+0,
+37,
+47,
+53,
+59,
+60,
+71,
+72,
+91,
+92,
+110,
+111,
+123,
+124,
+130,
+131,
+150,
+151,
+197,
+201,
+202,
+234,
+235,
+239,
+240,
+249,
+250,
+264,
+265,
+288,
+296,
+306,
+311,
+312,
+336,
+337,
+387,
+388,
+408,
+415,
+419,
+420,
+426,
+431,
+440,
+441,
+457,
+464,
+472
+],
+"indico:indico/modules/events/editing/service.py": [
+0,
+29,
+42,
+58,
+62,
+70,
+83,
+91,
+97,
+113,
+123,
+135,
+156,
+191,
+212,
+248,
+264
+],
+"indico:indico/modules/events/editing/settings.py": [
+0
+],
+"indico:indico/modules/events/editing/util.py": [
+0
+],
+"indico:indico/modules/events/editing/views.py": [
+0,
+11,
+18
+],
+"indico:indico/modules/events/export.py": [
+0,
+140,
+172,
+344,
+349,
+383,
+400,
+404,
+623,
+688,
+693,
+705
+],
+"indico:indico/modules/events/export_test.py": [
+0,
+25,
+36,
+42,
+47,
+72,
+114
+],
+"indico:indico/modules/events/features/__init__.py": [
+0,
+25,
+32,
+39,
+47
+],
+"indico:indico/modules/events/features/base.py": [
+0
+],
+"indico:indico/modules/events/features/blueprint.py": [
+0
+],
+"indico:indico/modules/events/features/controllers.py": [
+0,
+25
+],
+"indico:indico/modules/events/features/util.py": [
+0,
+115
+],
+"indico:indico/modules/events/features/views.py": [
+0,
+11
+],
+"indico:indico/modules/events/fields.py": [
+0,
+73,
+181,
+194
+],
+"indico:indico/modules/events/fields_test.py": [
+0,
+15,
+23,
+39
+],
+"indico:indico/modules/events/forms.py": [
+0,
+33,
+56,
+72,
+91,
+99,
+109
+],
+"indico:indico/modules/events/ical.py": [
+0,
+40
+],
+"indico:indico/modules/events/layout/__init__.py": [
+0,
+51,
+58,
+67,
+78,
+88,
+95,
+100,
+110,
+117
+],
+"indico:indico/modules/events/layout/blueprint.py": [
+0
+],
+"indico:indico/modules/events/layout/clone.py": [
+0,
+18,
+47
+],
+"indico:indico/modules/events/layout/compat.py": [
+0,
+16,
+22
+],
+"indico:indico/modules/events/layout/controllers/images.py": [
+0,
+27,
+32,
+36,
+43,
+77,
+91
+],
+"indico:indico/modules/events/layout/controllers/layout.py": [
+0,
+40,
+44,
+68,
+77,
+148,
+179,
+188,
+204,
+214,
+223,
+234,
+250
+],
+"indico:indico/modules/events/layout/controllers/menu.py": [
+0,
+29,
+34,
+39,
+50,
+58,
+74,
+90,
+112,
+152,
+158,
+171,
+209,
+236
+],
+"indico:indico/modules/events/layout/forms.py": [
+0,
+29,
+34,
+39,
+63,
+113,
+124,
+130,
+142,
+159,
+167,
+171,
+175,
+179
+],
+"indico:indico/modules/events/layout/models/images.py": [
+0,
+17
+],
+"indico:indico/modules/events/layout/models/legacy_mapping.py": [
+0
+],
+"indico:indico/modules/events/layout/models/menu.py": [
+0,
+30,
+39,
+173,
+195,
+393
+],
+"indico:indico/modules/events/layout/util.py": [
+0,
+32,
+37,
+143,
+271,
+276,
+299,
+309,
+314,
+350,
+359
+],
+"indico:indico/modules/events/layout/views.py": [
+0,
+12,
+17,
+23,
+28
+],
+"indico:indico/modules/events/legacy_ids_test.py": [
+0,
+14,
+24,
+33,
+46
+],
+"indico:indico/modules/events/management/__init__.py": [
+0,
+17,
+27,
+41,
+55,
+62,
+69
+],
+"indico:indico/modules/events/management/blueprint.py": [
+0
+],
+"indico:indico/modules/events/management/controllers/__init__.py": [
+0
+],
+"indico:indico/modules/events/management/controllers/actions.py": [
+0
+],
+"indico:indico/modules/events/management/controllers/actions_test.py": [
+0,
+16,
+24,
+46
+],
+"indico:indico/modules/events/management/controllers/base.py": [
+0,
+23
+],
+"indico:indico/modules/events/management/controllers/cloning.py": [
+0,
+44,
+52,
+61,
+91,
+105,
+125,
+205,
+258
+],
+"indico:indico/modules/events/management/controllers/posters.py": [
+0,
+26,
+46
+],
+"indico:indico/modules/events/management/controllers/privacy.py": [
+0
+],
+"indico:indico/modules/events/management/controllers/program_codes.py": [
+0,
+33,
+40,
+59,
+73,
+107,
+121,
+136,
+152
+],
+"indico:indico/modules/events/management/controllers/protection.py": [
+0,
+119,
+127,
+138,
+144
+],
+"indico:indico/modules/events/management/controllers/settings.py": [
+0,
+77,
+109,
+114,
+123,
+128,
+136,
+141
+],
+"indico:indico/modules/events/management/forms.py": [
+0,
+59,
+97,
+168,
+179,
+189,
+215,
+234,
+250,
+318,
+331,
+335,
+362,
+372,
+394,
+398,
+413,
+423,
+429,
+436,
+440
+],
+"indico:indico/modules/events/management/program_codes.py": [
+0,
+14,
+42,
+48,
+66,
+75,
+84,
+93,
+131,
+140,
+149,
+158,
+167
+],
+"indico:indico/modules/events/management/settings.py": [
+0
+],
+"indico:indico/modules/events/management/util.py": [
+0,
+21,
+79,
+85
+],
+"indico:indico/modules/events/management/views.py": [
+0,
+62,
+68,
+72,
+76,
+80
+],
+"indico:indico/modules/events/models/__init__.py": [
+0,
+16
+],
+"indico:indico/modules/events/models/acls_test.py": [
+0,
+23,
+30,
+44,
+94,
+98,
+139,
+153,
+175,
+193,
+203,
+208,
+215,
+229,
+244,
+247,
+262,
+265,
+275,
+278,
+281,
+285,
+316,
+322,
+332,
+340,
+347,
+353,
+361,
+369,
+374,
+384,
+392,
+396,
+407,
+418,
+423,
+433,
+442,
+450,
+455
+],
+"indico:indico/modules/events/models/events.py": [
+0,
+53,
+64,
+1046,
+1098,
+1107,
+1113,
+1126
+],
+"indico:indico/modules/events/models/events_test.py": [
+0,
+20,
+54,
+74,
+89,
+117
+],
+"indico:indico/modules/events/models/labels.py": [
+0,
+15
+],
+"indico:indico/modules/events/models/legacy_mapping.py": [
+0
+],
+"indico:indico/modules/events/models/persons.py": [
+0,
+26,
+69,
+518,
+520,
+532
+],
+"indico:indico/modules/events/models/principals.py": [
+0,
+16
+],
+"indico:indico/modules/events/models/references.py": [
+0,
+15,
+59,
+118
+],
+"indico:indico/modules/events/models/reviews.py": [
+0,
+171
+],
+"indico:indico/modules/events/models/roles.py": [
+0,
+14
+],
+"indico:indico/modules/events/models/series.py": [
+0
+],
+"indico:indico/modules/events/models/settings.py": [
+0,
+16,
+47,
+63
+],
+"indico:indico/modules/events/models/static_list_links.py": [
+0
+],
+"indico:indico/modules/events/notes/__init__.py": [
+0,
+16,
+22
+],
+"indico:indico/modules/events/notes/api.py": [
+0,
+19
+],
+"indico:indico/modules/events/notes/blueprint.py": [
+0
+],
+"indico:indico/modules/events/notes/clone.py": [
+0,
+18
+],
+"indico:indico/modules/events/notes/controllers.py": [
+0,
+136
+],
+"indico:indico/modules/events/notes/forms.py": [
+0,
+15
+],
+"indico:indico/modules/events/notes/models/notes.py": [
+0,
+27,
+175,
+241,
+249,
+267
+],
+"indico:indico/modules/events/notes/models/notes_test.py": [
+0,
+16,
+23,
+29,
+43,
+54,
+60,
+70,
+80,
+91,
+100,
+109,
+114,
+119,
+126,
+134,
+140,
+162
+],
+"indico:indico/modules/events/notes/util.py": [
+0,
+15,
+24,
+44
+],
+"indico:indico/modules/events/notifications.py": [
+0,
+19
+],
+"indico:indico/modules/events/notifications_test.py": [
+0,
+21,
+39
+],
+"indico:indico/modules/events/operations.py": [
+0,
+30,
+39,
+45,
+51,
+58,
+67,
+73,
+140,
+230,
+281,
+285,
+291,
+302,
+313,
+317,
+335,
+343,
+350,
+357,
+371,
+378,
+384,
+395,
+416
+],
+"indico:indico/modules/events/papers/__init__.py": [
+31,
+39,
+49,
+55,
+60,
+80,
+87,
+98,
+105,
+111,
+117,
+124,
+127,
+132,
+137
+],
+"indico:indico/modules/events/papers/blueprint.py": [
+0,
+103
+],
+"indico:indico/modules/events/papers/controllers/api.py": [
+0,
+28,
+33,
+46,
+59,
+91,
+104,
+120,
+156,
+185
+],
+"indico:indico/modules/events/papers/controllers/base.py": [
+0,
+59
+],
+"indico:indico/modules/events/papers/controllers/display.py": [
+0,
+24,
+45,
+74
+],
+"indico:indico/modules/events/papers/controllers/management.py": [
+0,
+34,
+141,
+174,
+220,
+238,
+255,
+264,
+283,
+291,
+301,
+307
+],
+"indico:indico/modules/events/papers/controllers/management_test.py": [
+0,
+19,
+32
+],
+"indico:indico/modules/events/papers/controllers/paper.py": [
+0
+],
+"indico:indico/modules/events/papers/controllers/templates.py": [
+0,
+41
+],
+"indico:indico/modules/events/papers/fields.py": [
+0,
+16
+],
+"indico:indico/modules/events/papers/forms.py": [
+0,
+27,
+36,
+57,
+68,
+109,
+113,
+122,
+135
+],
+"indico:indico/modules/events/papers/lists.py": [
+0
+],
+"indico:indico/modules/events/papers/models/call_for_papers.py": [
+0
+],
+"indico:indico/modules/events/papers/models/comments.py": [
+0,
+19
+],
+"indico:indico/modules/events/papers/models/competences.py": [
+0,
+14
+],
+"indico:indico/modules/events/papers/models/files.py": [
+0,
+18
+],
+"indico:indico/modules/events/papers/models/papers.py": [
+0
+],
+"indico:indico/modules/events/papers/models/review_questions.py": [
+0,
+15
+],
+"indico:indico/modules/events/papers/models/review_ratings.py": [
+0,
+14
+],
+"indico:indico/modules/events/papers/models/reviews.py": [
+0,
+18,
+26,
+32
+],
+"indico:indico/modules/events/papers/models/revisions.py": [
+0,
+23,
+32
+],
+"indico:indico/modules/events/papers/models/templates.py": [
+0,
+18
+],
+"indico:indico/modules/events/papers/models/user_contributions.py": [
+0
+],
+"indico:indico/modules/events/papers/notifications.py": [
+0,
+15,
+38,
+49,
+69,
+75,
+80,
+85,
+92
+],
+"indico:indico/modules/events/papers/operations.py": [
+0,
+39,
+48,
+69,
+93,
+101,
+110,
+122,
+128,
+134,
+153,
+172,
+181,
+192,
+202,
+210,
+216,
+248,
+270,
+302,
+322,
+339,
+348
+],
+"indico:indico/modules/events/papers/schemas.py": [
+0,
+31,
+37,
+40,
+45,
+49,
+54,
+60,
+65,
+70,
+92,
+98,
+108,
+130,
+131,
+136,
+139,
+150,
+160,
+171,
+172,
+176,
+177,
+184,
+192,
+198,
+219,
+222
+],
+"indico:indico/modules/events/papers/settings.py": [
+0,
+15,
+33
+],
+"indico:indico/modules/events/papers/util.py": [
+0,
+22,
+64,
+70,
+78,
+82,
+90
+],
+"indico:indico/modules/events/papers/views.py": [
+0,
+13,
+22,
+27,
+31,
+35,
+39
+],
+"indico:indico/modules/events/payment/__init__.py": [
+0,
+42,
+48,
+55,
+59
+],
+"indico:indico/modules/events/payment/blueprint.py": [
+0
+],
+"indico:indico/modules/events/payment/controllers.py": [
+0,
+159
+],
+"indico:indico/modules/events/payment/forms.py": [
+0,
+23,
+50
+],
+"indico:indico/modules/events/payment/models/transactions.py": [
+0,
+20,
+24,
+28,
+32,
+36,
+40,
+47,
+60
+],
+"indico:indico/modules/events/payment/models/transactions_test.py": [
+0,
+24,
+31,
+52,
+69,
+85,
+101,
+119,
+137,
+154,
+159,
+170
+],
+"indico:indico/modules/events/payment/notifications.py": [
+0,
+14
+],
+"indico:indico/modules/events/payment/plugins.py": [
+0,
+24,
+29,
+42
+],
+"indico:indico/modules/events/payment/testing/fixtures.py": [
+0,
+17
+],
+"indico:indico/modules/events/payment/util.py": [
+0
+],
+"indico:indico/modules/events/payment/util_test.py": [
+0,
+22
+],
+"indico:indico/modules/events/payment/views.py": [
+0,
+13,
+17,
+22
+],
+"indico:indico/modules/events/persons/__init__.py": [
+0,
+21,
+28
+],
+"indico:indico/modules/events/persons/blueprint.py": [
+0
+],
+"indico:indico/modules/events/persons/controllers.py": [
+0,
+65,
+204,
+369,
+384
+],
+"indico:indico/modules/events/persons/forms.py": [
+0,
+20,
+44
+],
+"indico:indico/modules/events/persons/operations.py": [
+0,
+16
+],
+"indico:indico/modules/events/persons/placeholders.py": [
+0,
+23,
+32,
+41,
+50,
+59,
+69,
+93
+],
+"indico:indico/modules/events/persons/schemas.py": [
+0,
+16,
+48,
+49
+],
+"indico:indico/modules/events/persons/util.py": [
+0
+],
+"indico:indico/modules/events/persons/util_test.py": [
+0,
+13,
+26,
+40,
+100
+],
+"indico:indico/modules/events/persons/views.py": [
+0,
+11
+],
+"indico:indico/modules/events/posters.py": [
+0,
+21
+],
+"indico:indico/modules/events/registration/__init__.py": [
+0,
+42,
+50,
+63,
+77,
+89,
+93,
+108,
+119,
+149,
+155,
+165,
+182,
+187,
+192,
+198,
+208
+],
+"indico:indico/modules/events/registration/api.py": [
+0,
+71
+],
+"indico:indico/modules/events/registration/badges.py": [
+0,
+26,
+30,
+105,
+133
+],
+"indico:indico/modules/events/registration/blueprint.py": [
+0
+],
+"indico:indico/modules/events/registration/clone.py": [
+0,
+22,
+88
+],
+"indico:indico/modules/events/registration/clone_test.py": [
+0,
+18
+],
+"indico:indico/modules/events/registration/controllers/__init__.py": [
+0,
+32
+],
+"indico:indico/modules/events/registration/controllers/compat.py": [
+0,
+16
+],
+"indico:indico/modules/events/registration/controllers/display.py": [
+0,
+37,
+63,
+120,
+125,
+151,
+154,
+166
+],
+"indico:indico/modules/events/registration/controllers/display_test.py": [
+0,
+21
+],
+"indico:indico/modules/events/registration/controllers/management/__init__.py": [
+0
+],
+"indico:indico/modules/events/registration/controllers/management/fields.py": [
+0,
+24,
+25,
+60,
+61,
+65,
+143,
+148
+],
+"indico:indico/modules/events/registration/controllers/management/invitations.py": [
+0,
+23,
+33
+],
+"indico:indico/modules/events/registration/controllers/management/regforms.py": [
+0
+],
+"indico:indico/modules/events/registration/controllers/management/reglists.py": [
+0,
+64,
+400,
+538
+],
+"indico:indico/modules/events/registration/controllers/management/sections.py": [
+0,
+98,
+103
+],
+"indico:indico/modules/events/registration/controllers/management/tags.py": [
+0,
+82
+],
+"indico:indico/modules/events/registration/controllers/management/tickets.py": [
+0,
+86
+],
+"indico:indico/modules/events/registration/fields/__init__.py": [
+0
+],
+"indico:indico/modules/events/registration/fields/base.py": [
+0,
+17,
+28,
+163,
+189
+],
+"indico:indico/modules/events/registration/fields/choices.py": [
+0,
+33,
+62,
+68,
+82,
+101,
+114,
+137,
+211,
+244,
+248,
+263,
+363,
+367,
+371,
+391,
+401,
+451,
+504,
+517
+],
+"indico:indico/modules/events/registration/fields/choices_test.py": [
+0,
+17,
+23,
+35,
+50,
+55,
+62,
+69,
+79,
+89,
+101,
+113,
+127,
+144
+],
+"indico:indico/modules/events/registration/fields/simple.py": [
+0,
+31,
+40,
+50,
+70,
+78,
+115,
+131,
+167,
+205,
+233,
+265,
+271,
+297,
+312,
+342
+],
+"indico:indico/modules/events/registration/forms.py": [
+0,
+40,
+47,
+124,
+140,
+164,
+189,
+216,
+224,
+255,
+377,
+414,
+429
+],
+"indico:indico/modules/events/registration/lists.py": [
+0
+],
+"indico:indico/modules/events/registration/logging.py": [
+0,
+17
+],
+"indico:indico/modules/events/registration/models/form_fields.py": [
+0,
+103,
+122
+],
+"indico:indico/modules/events/registration/models/forms.py": [
+0,
+31,
+444
+],
+"indico:indico/modules/events/registration/models/invitations.py": [
+0,
+20
+],
+"indico:indico/modules/events/registration/models/items.py": [
+0,
+37,
+393
+],
+"indico:indico/modules/events/registration/models/legacy_mapping.py": [
+0
+],
+"indico:indico/modules/events/registration/models/registrations.py": [
+0,
+39,
+418,
+428,
+719,
+721,
+725,
+732
+],
+"indico:indico/modules/events/registration/models/tags.py": [
+0
+],
+"indico:indico/modules/events/registration/notifications.py": [
+0,
+31,
+60,
+67,
+74
+],
+"indico:indico/modules/events/registration/placeholders/invitations.py": [
+0,
+15,
+24,
+33
+],
+"indico:indico/modules/events/registration/placeholders/registrations.py": [
+0,
+16,
+25,
+34,
+43,
+54,
+63,
+73,
+82
+],
+"indico:indico/modules/events/registration/schemas.py": [
+0,
+17,
+18,
+26,
+27
+],
+"indico:indico/modules/events/registration/settings.py": [
+0
+],
+"indico:indico/modules/events/registration/stats.py": [
+0,
+16,
+84,
+325
+],
+"indico:indico/modules/events/registration/testing/fixtures.py": [
+0
+],
+"indico:indico/modules/events/registration/util.py": [
+0,
+116,
+122,
+128,
+213,
+275,
+313,
+417,
+465,
+477,
+488,
+497,
+586,
+599,
+618
+],
+"indico:indico/modules/events/registration/util_test.py": [
+0,
+25,
+62,
+121,
+153,
+185,
+211,
+235,
+261,
+288,
+351,
+374,
+389
+],
+"indico:indico/modules/events/registration/views.py": [
+0,
+14,
+35,
+39,
+43,
+51,
+58,
+62
+],
+"indico:indico/modules/events/reminders/__init__.py": [
+0,
+26,
+31,
+38,
+49,
+55,
+59
+],
+"indico:indico/modules/events/reminders/blueprint.py": [
+0
+],
+"indico:indico/modules/events/reminders/controllers.py": [
+0,
+24
+],
+"indico:indico/modules/events/reminders/forms.py": [
+0,
+19
+],
+"indico:indico/modules/events/reminders/models/reminders.py": [
+0
+],
+"indico:indico/modules/events/reminders/tasks.py": [
+0,
+19
+],
+"indico:indico/modules/events/reminders/util.py": [
+0
+],
+"indico:indico/modules/events/reminders/views.py": [
+0,
+11
+],
+"indico:indico/modules/events/requests/__init__.py": [
+0,
+22,
+28,
+37,
+43,
+50
+],
+"indico:indico/modules/events/requests/base.py": [
+0,
+22,
+29
+],
+"indico:indico/modules/events/requests/blueprint.py": [
+0
+],
+"indico:indico/modules/events/requests/controllers.py": [
+0,
+22
+],
+"indico:indico/modules/events/requests/exceptions.py": [
+0,
+8
+],
+"indico:indico/modules/events/requests/models/requests.py": [
+0,
+19
+],
+"indico:indico/modules/events/requests/notifications.py": [
+0
+],
+"indico:indico/modules/events/requests/util.py": [
+0
+],
+"indico:indico/modules/events/requests/views.py": [
+0,
+11
+],
+"indico:indico/modules/events/reviewing_questions_fields.py": [
+0,
+18,
+22,
+26,
+41,
+55,
+59,
+63,
+67
+],
+"indico:indico/modules/events/roles/__init__.py": [
+0,
+21,
+28
+],
+"indico:indico/modules/events/roles/blueprint.py": [
+0
+],
+"indico:indico/modules/events/roles/clone.py": [
+0,
+17
+],
+"indico:indico/modules/events/roles/controllers.py": [
+0,
+31,
+37,
+42
+],
+"indico:indico/modules/events/roles/forms.py": [
+0,
+19,
+41
+],
+"indico:indico/modules/events/roles/util.py": [
+0
+],
+"indico:indico/modules/events/roles/views.py": [
+0,
+11
+],
+"indico:indico/modules/events/schemas.py": [
+0,
+16,
+20,
+21
+],
+"indico:indico/modules/events/sessions/__init__.py": [
+0,
+40,
+47,
+58,
+66,
+72,
+77,
+81,
+89,
+92
+],
+"indico:indico/modules/events/sessions/blueprint.py": [
+0
+],
+"indico:indico/modules/events/sessions/clone.py": [
+0,
+21
+],
+"indico:indico/modules/events/sessions/controllers/compat.py": [
+0,
+16
+],
+"indico:indico/modules/events/sessions/controllers/display.py": [
+0,
+23,
+34,
+50,
+74,
+82
+],
+"indico:indico/modules/events/sessions/controllers/management/__init__.py": [
+0
+],
+"indico:indico/modules/events/sessions/controllers/management/sessions.py": [
+0,
+44,
+54,
+112,
+256
+],
+"indico:indico/modules/events/sessions/fields.py": [
+0,
+13
+],
+"indico:indico/modules/events/sessions/forms.py": [
+0,
+28,
+55,
+70,
+81
+],
+"indico:indico/modules/events/sessions/ical.py": [
+0
+],
+"indico:indico/modules/events/sessions/models/blocks.py": [
+0,
+20,
+147,
+156
+],
+"indico:indico/modules/events/sessions/models/legacy_mapping.py": [
+0
+],
+"indico:indico/modules/events/sessions/models/persons.py": [
+0
+],
+"indico:indico/modules/events/sessions/models/principals.py": [
+0,
+16
+],
+"indico:indico/modules/events/sessions/models/sessions.py": [
+0,
+41,
+253
+],
+"indico:indico/modules/events/sessions/models/types.py": [
+0,
+15
+],
+"indico:indico/modules/events/sessions/operations.py": [
+0,
+35,
+58,
+100,
+127
+],
+"indico:indico/modules/events/sessions/schemas.py": [
+0,
+15,
+18,
+23,
+26
+],
+"indico:indico/modules/events/sessions/util.py": [
+0,
+51,
+144,
+150,
+157,
+161,
+169
+],
+"indico:indico/modules/events/sessions/views.py": [
+0,
+12,
+18,
+24
+],
+"indico:indico/modules/events/settings.py": [
+0,
+26,
+28,
+185,
+189
+],
+"indico:indico/modules/events/static/__init__.py": [
+0,
+22,
+27
+],
+"indico:indico/modules/events/static/blueprint.py": [
+0
+],
+"indico:indico/modules/events/static/controllers.py": [
+0,
+19,
+23,
+29,
+40
+],
+"indico:indico/modules/events/static/models/static.py": [
+0,
+20
+],
+"indico:indico/modules/events/static/offline.py": [
+0,
+71,
+225
+],
+"indico:indico/modules/events/static/tasks.py": [
+0,
+27,
+53
+],
+"indico:indico/modules/events/static/util.py": [
+0,
+96,
+141,
+146
+],
+"indico:indico/modules/events/static/views.py": [
+0,
+18,
+23,
+31,
+35,
+39,
+44,
+48,
+52,
+58,
+62,
+68,
+74,
+78,
+82
+],
+"indico:indico/modules/events/surveys/__init__.py": [
+0,
+27,
+35,
+42,
+43,
+49,
+56,
+65,
+74,
+79,
+84,
+88,
+98,
+106,
+114
+],
+"indico:indico/modules/events/surveys/blueprint.py": [
+0
+],
+"indico:indico/modules/events/surveys/clone.py": [
+0,
+15
+],
+"indico:indico/modules/events/surveys/clone_test.py": [
+0,
+14
+],
+"indico:indico/modules/events/surveys/controllers/display.py": [
+0,
+29,
+37,
+43,
+58,
+91,
+139
+],
+"indico:indico/modules/events/surveys/controllers/management/__init__.py": [
+0
+],
+"indico:indico/modules/events/surveys/controllers/management/questionnaire.py": [
+0,
+370
+],
+"indico:indico/modules/events/surveys/controllers/management/results.py": [
+0,
+73
+],
+"indico:indico/modules/events/surveys/controllers/management/survey.py": [
+0
+],
+"indico:indico/modules/events/surveys/fields/__init__.py": [
+0,
+19,
+30
+],
+"indico:indico/modules/events/surveys/fields/base.py": [
+0,
+17,
+24
+],
+"indico:indico/modules/events/surveys/fields/choices.py": [
+0,
+18,
+29,
+45
+],
+"indico:indico/modules/events/surveys/fields/simple.py": [
+0,
+15,
+22,
+39
+],
+"indico:indico/modules/events/surveys/forms.py": [
+0,
+25,
+74,
+93,
+102,
+107,
+114
+],
+"indico:indico/modules/events/surveys/models/anonymous_submissions.py": [
+0,
+11
+],
+"indico:indico/modules/events/surveys/models/items.py": [
+0,
+29,
+33,
+39,
+149,
+188,
+221,
+241
+],
+"indico:indico/modules/events/surveys/models/submissions.py": [
+0,
+23,
+111
+],
+"indico:indico/modules/events/surveys/models/surveys.py": [
+0,
+28,
+37,
+319,
+325
+],
+"indico:indico/modules/events/surveys/operations.py": [
+0
+],
+"indico:indico/modules/events/surveys/placeholders.py": [
+0,
+15,
+24,
+33
+],
+"indico:indico/modules/events/surveys/tasks.py": [
+0,
+16
+],
+"indico:indico/modules/events/surveys/util.py": [
+0,
+108,
+115,
+143
+],
+"indico:indico/modules/events/surveys/views.py": [
+0,
+13,
+19,
+23,
+31,
+38
+],
+"indico:indico/modules/events/timetable/__init__.py": [
+0,
+24,
+28,
+36,
+46,
+52,
+58
+],
+"indico:indico/modules/events/timetable/blueprint.py": [
+0
+],
+"indico:indico/modules/events/timetable/clone.py": [
+0,
+19
+],
+"indico:indico/modules/events/timetable/controllers/__init__.py": [
+0,
+17,
+56
+],
+"indico:indico/modules/events/timetable/controllers/display.py": [
+0,
+29,
+37,
+76,
+103
+],
+"indico:indico/modules/events/timetable/controllers/display_test.py": [
+0,
+20
+],
+"indico:indico/modules/events/timetable/controllers/legacy.py": [
+0,
+50,
+74,
+97,
+117,
+139,
+162,
+243,
+280,
+285,
+302,
+347,
+398,
+453,
+473,
+527,
+540
+],
+"indico:indico/modules/events/timetable/controllers/manage.py": [
+0
+],
+"indico:indico/modules/events/timetable/forms.py": [
+0,
+32,
+90,
+101,
+115,
+133,
+165,
+203
+],
+"indico:indico/modules/events/timetable/legacy.py": [
+0,
+22,
+198,
+205,
+286,
+292,
+302,
+314
+],
+"indico:indico/modules/events/timetable/models/breaks.py": [
+0,
+22,
+88,
+97
+],
+"indico:indico/modules/events/timetable/models/entries.py": [
+0,
+26,
+34,
+44,
+341,
+354,
+359,
+364,
+369
+],
+"indico:indico/modules/events/timetable/operations.py": [
+0,
+26,
+41,
+52,
+60,
+69,
+85,
+96,
+108,
+120,
+206,
+216
+],
+"indico:indico/modules/events/timetable/reschedule.py": [
+0,
+27
+],
+"indico:indico/modules/events/timetable/testing/fixtures.py": [
+0,
+17
+],
+"indico:indico/modules/events/timetable/util.py": [
+0,
+32,
+50,
+256,
+278,
+310,
+317,
+350,
+355
+],
+"indico:indico/modules/events/timetable/util_test.py": [
+0,
+24
+],
+"indico:indico/modules/events/timetable/views/__init__.py": [
+0,
+29,
+39,
+45,
+123
+],
+"indico:indico/modules/events/timetable/views/weeks.py": [
+0,
+19,
+23
+],
+"indico:indico/modules/events/tracks/__init__.py": [
+0,
+26,
+32,
+36,
+44,
+50,
+55,
+61,
+65,
+73,
+79
+],
+"indico:indico/modules/events/tracks/blueprint.py": [
+0
+],
+"indico:indico/modules/events/tracks/clone.py": [
+0,
+21
+],
+"indico:indico/modules/events/tracks/controllers.py": [
+0,
+32,
+56,
+68,
+75,
+89,
+100,
+110,
+127,
+134,
+149,
+155,
+164,
+173
+],
+"indico:indico/modules/events/tracks/forms.py": [
+0,
+20,
+37,
+45
+],
+"indico:indico/modules/events/tracks/models/groups.py": [
+0,
+15
+],
+"indico:indico/modules/events/tracks/models/principals.py": [
+0,
+17
+],
+"indico:indico/modules/events/tracks/models/tracks.py": [
+0,
+15,
+29
+],
+"indico:indico/modules/events/tracks/operations.py": [
+0,
+18,
+28,
+36,
+41,
+47,
+57,
+65
+],
+"indico:indico/modules/events/tracks/schemas.py": [
+0,
+14,
+15,
+20
+],
+"indico:indico/modules/events/tracks/settings.py": [
+0
+],
+"indico:indico/modules/events/tracks/views.py": [
+0,
+13,
+22
+],
+"indico:indico/modules/events/util.py": [
+0,
+56,
+173,
+301,
+536,
+552,
+575,
+593,
+603,
+625,
+697,
+710
+],
+"indico:indico/modules/events/views.py": [
+0,
+30,
+50,
+59,
+89,
+93,
+150,
+231,
+304,
+311
+],
+"indico:indico/modules/files/__init__.py": [
+0,
+16
+],
+"indico:indico/modules/files/blueprint.py": [
+0
+],
+"indico:indico/modules/files/controllers.py": [
+0,
+69,
+74,
+86
+],
+"indico:indico/modules/files/models/files.py": [
+0,
+22
+],
+"indico:indico/modules/files/schemas.py": [
+0,
+12,
+13,
+18,
+19
+],
+"indico:indico/modules/files/tasks.py": [
+0,
+23
+],
+"indico:indico/modules/groups/__init__.py": [
+0,
+21,
+27
+],
+"indico:indico/modules/groups/blueprint.py": [
+0
+],
+"indico:indico/modules/groups/controllers.py": [
+0,
+64,
+126,
+152
+],
+"indico:indico/modules/groups/core.py": [
+0,
+120,
+170
+],
+"indico:indico/modules/groups/forms.py": [
+0,
+18,
+24
+],
+"indico:indico/modules/groups/models/groups.py": [
+0,
+13
+],
+"indico:indico/modules/groups/util.py": [
+0
+],
+"indico:indico/modules/groups/views.py": [
+0,
+11
+],
+"indico:indico/modules/legal/__init__.py": [
+0,
+37,
+43,
+50
+],
+"indico:indico/modules/legal/blueprint.py": [
+0
+],
+"indico:indico/modules/legal/controllers.py": [
+0,
+18,
+27,
+35
+],
+"indico:indico/modules/legal/forms.py": [
+0,
+16
+],
+"indico:indico/modules/legal/views.py": [
+0,
+14,
+18,
+22,
+30
+],
+"indico:indico/modules/logs/__init__.py": [
+0,
+23,
+30,
+36,
+42
+],
+"indico:indico/modules/logs/blueprint.py": [
+0
+],
+"indico:indico/modules/logs/controllers.py": [
+0,
+23,
+28,
+55,
+99,
+108
+],
+"indico:indico/modules/logs/models/entries.py": [
+0,
+21,
+30,
+36
+],
+"indico:indico/modules/logs/renderers.py": [
+0,
+46,
+59
+],
+"indico:indico/modules/logs/util.py": [
+0,
+20,
+106,
+116,
+143,
+165
+],
+"indico:indico/modules/logs/views.py": [
+0,
+12,
+18
+],
+"indico:indico/modules/networks/__init__.py": [
+0,
+24,
+31,
+41
+],
+"indico:indico/modules/networks/blueprint.py": [
+0
+],
+"indico:indico/modules/networks/controllers.py": [
+0,
+22
+],
+"indico:indico/modules/networks/fields.py": [
+0
+],
+"indico:indico/modules/networks/forms.py": [
+0
+],
+"indico:indico/modules/networks/models/networks.py": [
+0,
+20,
+95
+],
+"indico:indico/modules/networks/util.py": [
+0
+],
+"indico:indico/modules/networks/views.py": [
+0,
+11
+],
+"indico:indico/modules/news/__init__.py": [
+0,
+33
+],
+"indico:indico/modules/news/blueprint.py": [
+0
+],
+"indico:indico/modules/news/controllers.py": [
+0,
+27,
+40,
+54,
+58,
+64,
+75,
+90,
+96,
+110
+],
+"indico:indico/modules/news/forms.py": [
+0,
+17,
+30
+],
+"indico:indico/modules/news/models/news.py": [
+0,
+16
+],
+"indico:indico/modules/news/util.py": [
+0
+],
+"indico:indico/modules/news/views.py": [
+0,
+13,
+21
+],
+"indico:indico/modules/oauth/__init__.py": [
+0,
+18,
+24
+],
+"indico:indico/modules/oauth/blueprint.py": [
+0,
+51
+],
+"indico:indico/modules/oauth/controllers.py": [
+0,
+60,
+101,
+111,
+118
+],
+"indico:indico/modules/oauth/forms.py": [
+0,
+25,
+34,
+72
+],
+"indico:indico/modules/oauth/util.py": [
+0
+],
+"indico:indico/modules/oauth/views.py": [
+0,
+13,
+17,
+21
+],
+"indico:indico/modules/rb/__init__.py": [
+0,
+51,
+56,
+63,
+70,
+76,
+83,
+98,
+108,
+116,
+125,
+133,
+142,
+150
+],
+"indico:indico/modules/rb/api.py": [
+0,
+33,
+47,
+85,
+123,
+151,
+307,
+324,
+342,
+348,
+352
+],
+"indico:indico/modules/rb/api_test.py": [
+0,
+14,
+29,
+37,
+57
+],
+"indico:indico/modules/rb/blueprint.py": [
+0,
+132,
+137,
+142,
+148,
+153
+],
+"indico:indico/modules/rb/controllers/__init__.py": [
+0
+],
+"indico:indico/modules/rb/controllers/backend/admin.py": [
+0,
+46,
+56,
+69,
+122,
+167,
+222,
+284,
+292,
+297,
+305,
+313,
+332,
+337,
+346,
+364,
+393,
+434
+],
+"indico:indico/modules/rb/controllers/backend/blockings.py": [
+0,
+22,
+35,
+54,
+67,
+72,
+77,
+105
+],
+"indico:indico/modules/rb/controllers/backend/bookings.py": [
+0,
+54,
+92,
+112,
+135,
+197,
+203,
+210,
+215,
+257,
+285,
+296,
+332,
+392,
+415
+],
+"indico:indico/modules/rb/controllers/backend/common.py": [
+0
+],
+"indico:indico/modules/rb/controllers/backend/locations.py": [
+0,
+18
+],
+"indico:indico/modules/rb/controllers/backend/misc.py": [
+0,
+33,
+56,
+68,
+75,
+86,
+108,
+113,
+128
+],
+"indico:indico/modules/rb/controllers/backend/rooms.py": [
+0,
+35,
+44,
+55,
+116,
+121,
+126,
+141,
+149,
+155,
+160,
+183,
+192
+],
+"indico:indico/modules/rb/controllers/frontend.py": [
+0,
+12
+],
+"indico:indico/modules/rb/event/controllers.py": [
+0,
+24,
+33,
+42,
+48
+],
+"indico:indico/modules/rb/event/fields.py": [
+0,
+15
+],
+"indico:indico/modules/rb/event/forms.py": [
+0,
+15
+],
+"indico:indico/modules/rb/models/blocked_rooms.py": [
+0,
+19,
+26
+],
+"indico:indico/modules/rb/models/blocked_rooms_test.py": [
+0,
+21,
+26,
+44,
+75
+],
+"indico:indico/modules/rb/models/blocking_principals.py": [
+0,
+15
+],
+"indico:indico/modules/rb/models/blockings.py": [
+0,
+21
+],
+"indico:indico/modules/rb/models/blockings_test.py": [
+0,
+26,
+35,
+43,
+56,
+71,
+86,
+96
+],
+"indico:indico/modules/rb/models/equipment.py": [
+0,
+50
+],
+"indico:indico/modules/rb/models/favorites.py": [
+0
+],
+"indico:indico/modules/rb/models/locations.py": [
+0,
+16
+],
+"indico:indico/modules/rb/models/locations_test.py": [
+0,
+14
+],
+"indico:indico/modules/rb/models/map_areas.py": [
+0,
+12
+],
+"indico:indico/modules/rb/models/photos.py": [
+0,
+11
+],
+"indico:indico/modules/rb/models/principals.py": [
+0,
+17
+],
+"indico:indico/modules/rb/models/reservation_edit_logs.py": [
+0,
+15
+],
+"indico:indico/modules/rb/models/reservation_occurrences.py": [
+0,
+32,
+39
+],
+"indico:indico/modules/rb/models/reservation_occurrences_test.py": [
+0,
+23,
+39,
+40,
+49,
+62,
+72,
+84,
+91,
+99,
+106,
+119,
+151,
+171,
+186,
+198,
+208,
+214,
+224,
+243,
+268,
+287,
+309,
+324,
+338,
+347,
+355,
+364,
+373,
+378,
+388,
+398
+],
+"indico:indico/modules/rb/models/reservations.py": [
+0,
+40,
+44,
+51,
+84,
+91,
+117,
+682
+],
+"indico:indico/modules/rb/models/reservations_test.py": [
+0,
+22,
+43,
+57,
+70,
+80,
+84,
+94,
+98,
+105,
+112,
+116,
+120,
+129,
+135,
+145,
+159,
+179,
+198,
+216,
+223,
+237,
+257,
+272,
+280,
+290,
+301,
+307,
+311
+],
+"indico:indico/modules/rb/models/room_attributes.py": [
+0,
+14,
+51
+],
+"indico:indico/modules/rb/models/room_bookable_hours.py": [
+0,
+13,
+52
+],
+"indico:indico/modules/rb/models/room_bookable_hours_test.py": [
+0,
+39
+],
+"indico:indico/modules/rb/models/room_features.py": [
+0,
+12
+],
+"indico:indico/modules/rb/models/room_nonbookable_periods.py": [
+0,
+13
+],
+"indico:indico/modules/rb/models/room_nonbookable_periods_test.py": [
+0,
+22
+],
+"indico:indico/modules/rb/models/rooms.py": [
+0,
+38
+],
+"indico:indico/modules/rb/models/rooms_test.py": [
+0,
+30,
+37,
+52,
+62,
+71,
+76,
+80,
+84,
+95,
+102,
+109,
+126,
+134,
+153,
+166,
+172,
+204,
+235,
+250,
+257,
+273,
+277,
+286,
+301,
+309,
+319,
+329,
+341,
+350,
+360,
+376
+],
+"indico:indico/modules/rb/models/util.py": [
+0,
+14
+],
+"indico:indico/modules/rb/models/util_test.py": [
+0,
+26
+],
+"indico:indico/modules/rb/notifications/blockings.py": [
+0
+],
+"indico:indico/modules/rb/notifications/reservation_occurrences.py": [
+0,
+14,
+29,
+46,
+63
+],
+"indico:indico/modules/rb/notifications/reservations.py": [
+0,
+19,
+44,
+82,
+97,
+114,
+133,
+148,
+165,
+180
+],
+"indico:indico/modules/rb/operations/admin.py": [
+0,
+20,
+26,
+32,
+43,
+57,
+66,
+84,
+101
+],
+"indico:indico/modules/rb/operations/blockings.py": [
+0,
+26,
+48,
+58,
+62,
+73,
+86,
+95,
+113,
+127,
+138,
+143
+],
+"indico:indico/modules/rb/operations/bookings.py": [
+0,
+42,
+54,
+70,
+76,
+102,
+154,
+159,
+201,
+257,
+290,
+296,
+322,
+339,
+357,
+364,
+373,
+387
+],
+"indico:indico/modules/rb/operations/bookings_test.py": [
+0,
+18,
+39,
+46
+],
+"indico:indico/modules/rb/operations/conflicts.py": [
+0,
+23,
+75,
+94,
+109,
+122,
+139
+],
+"indico:indico/modules/rb/operations/misc.py": [
+0,
+16,
+36
+],
+"indico:indico/modules/rb/operations/rooms.py": [
+0,
+30,
+45,
+51,
+67,
+76,
+85,
+94
+],
+"indico:indico/modules/rb/operations/rooms_test.py": [
+0,
+20,
+50,
+56
+],
+"indico:indico/modules/rb/operations/suggestions.py": [
+0,
+28,
+43,
+82,
+112,
+137,
+161,
+162
+],
+"indico:indico/modules/rb/schemas.py": [
+0,
+45,
+49,
+54,
+55,
+60,
+63,
+71,
+72,
+77,
+82,
+91,
+123,
+124,
+129,
+130,
+136,
+140,
+145,
+159,
+167,
+173,
+178,
+181,
+193,
+196,
+201,
+202,
+213,
+217,
+222,
+238,
+254,
+258,
+269,
+275,
+288,
+292,
+297,
+298,
+303,
+306,
+311,
+314,
+319,
+323,
+331,
+351,
+352,
+357,
+361,
+366,
+367,
+372,
+375,
+380,
+381,
+405,
+406,
+423,
+424,
+440,
+441,
+458,
+512,
+518,
+520,
+531,
+533,
+542,
+544,
+562,
+564
+],
+"indico:indico/modules/rb/settings.py": [
+0,
+14
+],
+"indico:indico/modules/rb/statistics.py": [
+0,
+21,
+32,
+61
+],
+"indico:indico/modules/rb/tasks.py": [
+0,
+27,
+39,
+66,
+77,
+123
+],
+"indico:indico/modules/rb/tasks_test.py": [
+0,
+189
+],
+"indico:indico/modules/rb/testing/fixtures.py": [
+0,
+26,
+46,
+73,
+96,
+121,
+134,
+146
+],
+"indico:indico/modules/rb/user_prefs.py": [
+0,
+18
+],
+"indico:indico/modules/rb/util.py": [
+0,
+60,
+93,
+100,
+109,
+116,
+121,
+126,
+131,
+136,
+141,
+158,
+176,
+221,
+259,
+328
+],
+"indico:indico/modules/rb/util_test.py": [
+0,
+24,
+35,
+60,
+81,
+110,
+133
+],
+"indico:indico/modules/rb/views.py": [
+0,
+13,
+20
+],
+"indico:indico/modules/search/__init__.py": [
+0,
+15,
+21
+],
+"indico:indico/modules/search/base.py": [
+0,
+36,
+46,
+52,
+60
+],
+"indico:indico/modules/search/blueprint.py": [
+0
+],
+"indico:indico/modules/search/controllers.py": [
+0,
+23,
+28,
+33,
+64
+],
+"indico:indico/modules/search/internal.py": [
+0,
+37,
+53,
+58,
+63,
+108,
+144
+],
+"indico:indico/modules/search/result_schemas.py": [
+0,
+25,
+26,
+30,
+40,
+47,
+54,
+59,
+60,
+67,
+77,
+86,
+114,
+153,
+173,
+191,
+230,
+284,
+296,
+311,
+316
+],
+"indico:indico/modules/search/schemas.py": [
+0,
+25,
+26,
+33,
+34,
+47,
+61,
+67,
+68,
+82,
+83,
+99,
+100,
+118,
+119,
+146,
+147,
+171,
+178,
+185
+],
+"indico:indico/modules/search/schemas_test.py": [
+0,
+25,
+58,
+96,
+137,
+175
+],
+"indico:indico/modules/search/views.py": [
+0,
+15,
+20,
+43
+],
+"indico:indico/modules/users/__init__.py": [
+0,
+50,
+55,
+62,
+73,
+79,
+86,
+96
+],
+"indico:indico/modules/users/api.py": [
+0,
+17,
+27
+],
+"indico:indico/modules/users/blueprint.py": [
+0
+],
+"indico:indico/modules/users/controllers.py": [
+0,
+87,
+119,
+150,
+182,
+196,
+291,
+314,
+319,
+338,
+376,
+384,
+403,
+449,
+457,
+584,
+636,
+685,
+686,
+767,
+773
+],
+"indico:indico/modules/users/ext.py": [
+0
+],
+"indico:indico/modules/users/forms.py": [
+0,
+29,
+46,
+84,
+98,
+109,
+116,
+130,
+148
+],
+"indico:indico/modules/users/models/affiliations.py": [
+0,
+12
+],
+"indico:indico/modules/users/models/emails.py": [
+0,
+12
+],
+"indico:indico/modules/users/models/favorites.py": [
+0
+],
+"indico:indico/modules/users/models/settings.py": [
+0,
+46,
+48
+],
+"indico:indico/modules/users/models/suggestions.py": [
+0,
+12
+],
+"indico:indico/modules/users/models/users.py": [
+0,
+40,
+51,
+64,
+146,
+746,
+754,
+762
+],
+"indico:indico/modules/users/models/users_test.py": [
+0,
+19,
+29,
+43,
+64,
+74,
+88,
+91,
+114,
+125,
+134,
+140,
+156,
+162
+],
+"indico:indico/modules/users/operations.py": [
+0
+],
+"indico:indico/modules/users/schemas.py": [
+0,
+15,
+18,
+24,
+25
+],
+"indico:indico/modules/users/tasks.py": [
+0,
+20
+],
+"indico:indico/modules/users/util.py": [
+0,
+167,
+192,
+198,
+243,
+418,
+441,
+475,
+485
+],
+"indico:indico/modules/users/views.py": [
+0,
+50,
+54,
+58,
+62
+],
+"indico:indico/modules/vc/__init__.py": [
+0,
+28,
+38,
+46,
+55,
+65,
+66,
+74,
+80,
+86,
+93,
+100,
+106
+],
+"indico:indico/modules/vc/blueprint.py": [
+0
+],
+"indico:indico/modules/vc/clone.py": [
+0,
+16
+],
+"indico:indico/modules/vc/controllers.py": [
+0,
+35,
+69,
+73,
+109,
+165
+],
+"indico:indico/modules/vc/exceptions.py": [
+0,
+8,
+15
+],
+"indico:indico/modules/vc/forms.py": [
+0,
+29,
+53,
+62,
+101,
+112,
+131
+],
+"indico:indico/modules/vc/models/__init__.py": [
+0
+],
+"indico:indico/modules/vc/models/vc_rooms.py": [
+0,
+25,
+38,
+49,
+54,
+129,
+245,
+249,
+353
+],
+"indico:indico/modules/vc/notifications.py": [
+0,
+39
+],
+"indico:indico/modules/vc/plugins.py": [
+0,
+26
+],
+"indico:indico/modules/vc/util.py": [
+0,
+22,
+26
+],
+"indico:indico/modules/vc/views.py": [
+0,
+15,
+21,
+27
+],
+"indico:indico/testing/fixtures/app.py": [
+0
+],
+"indico:indico/testing/fixtures/cache.py": [
+0
+],
+"indico:indico/testing/fixtures/category.py": [
+0,
+17
+],
+"indico:indico/testing/fixtures/contribution.py": [
+0,
+19,
+29
+],
+"indico:indico/testing/fixtures/database.py": [
+0,
+112,
+135,
+140
+],
+"indico:indico/testing/fixtures/disallow.py": [
+0,
+24,
+30
+],
+"indico:indico/testing/fixtures/event.py": [
+0,
+21
+],
+"indico:indico/testing/fixtures/person.py": [
+0,
+14,
+15
+],
+"indico:indico/testing/fixtures/session.py": [
+0,
+19,
+29
+],
+"indico:indico/testing/fixtures/smtp.py": [
+0
+],
+"indico:indico/testing/fixtures/storage.py": [
+0,
+20,
+24,
+47
+],
+"indico:indico/testing/fixtures/user.py": [
+0,
+18,
+48
+],
+"indico:indico/testing/fixtures/util.py": [
+0,
+26,
+47,
+54
+],
+"indico:indico/testing/pytest_plugin.py": [
+0,
+27,
+40,
+44
+],
+"indico:indico/testing/util.py": [
+0
+],
+"indico:indico/util/benchmark.py": [
+0
+],
+"indico:indico/util/caching.py": [
+0,
+17,
+27,
+31,
+42,
+75,
+76,
+79,
+82,
+86
+],
+"indico:indico/util/caching_test.py": [
+0,
+14,
+23,
+27
+],
+"indico:indico/util/console.py": [
+0,
+24,
+27,
+36,
+49,
+79,
+105
+],
+"indico:indico/util/countries.py": [
+0,
+16,
+23,
+30,
+37
+],
+"indico:indico/util/countries_test.py": [
+0,
+13,
+21,
+28
+],
+"indico:indico/util/date_time.py": [
+0,
+152,
+258,
+318,
+335,
+345,
+358,
+414
+],
+"indico:indico/util/date_time_test.py": [
+0,
+36,
+44,
+69,
+77
+],
+"indico:indico/util/decorators.py": [
+0,
+8,
+28,
+49,
+50
+],
+"indico:indico/util/enum.py": [
+0,
+42
+],
+"indico:indico/util/event.py": [
+0,
+11
+],
+"indico:indico/util/event_test.py": [
+0,
+38
+],
+"indico:indico/util/fs.py": [
+0,
+24,
+209
+],
+"indico:indico/util/fs_test.py": [
+0,
+26,
+43,
+47
+],
+"indico:indico/util/i18n.py": [
+0,
+87,
+101,
+112,
+200,
+259,
+298
+],
+"indico:indico/util/i18n_test.py": [
+0,
+23,
+63,
+69,
+78,
+89,
+105,
+113,
+121,
+130,
+136,
+142,
+151,
+182,
+190
+],
+"indico:indico/util/iterables.py": [
+0,
+12,
+66,
+68
+],
+"indico:indico/util/iterables_test.py": [
+0,
+11
+],
+"indico:indico/util/json.py": [
+0
+],
+"indico:indico/util/locators.py": [
+0,
+49,
+81
+],
+"indico:indico/util/locators_test.py": [
+0,
+13,
+20,
+21,
+26,
+36,
+37,
+55,
+56,
+86,
+88
+],
+"indico:indico/util/marshmallow.py": [
+0,
+38,
+60,
+70,
+71,
+78,
+83,
+90,
+305
+],
+"indico:indico/util/marshmallow_test.py": [
+0,
+17,
+30
+],
+"indico:indico/util/mathjax.py": [
+0,
+11
+],
+"indico:indico/util/mdx_latex.py": [
+143,
+147,
+155,
+179,
+184,
+203,
+204,
+311,
+315,
+356,
+446,
+454,
+464,
+472,
+494,
+501
+],
+"indico:indico/util/mdx_latex_test.py": [
+0,
+14,
+21,
+43
+],
+"indico:indico/util/mimetypes.py": [
+0
+],
+"indico:indico/util/mimetypes_test.py": [
+0,
+173,
+177
+],
+"indico:indico/util/network.py": [
+0
+],
+"indico:indico/util/network_test.py": [
+0,
+25
+],
+"indico:indico/util/packaging.py": [
+0
+],
+"indico:indico/util/passwords.py": [
+0,
+18,
+46,
+126
+],
+"indico:indico/util/passwords_test.py": [
+0,
+16,
+22,
+28,
+37,
+38,
+50,
+58,
+68,
+75,
+83,
+90,
+98,
+106,
+120,
+138,
+141,
+144
+],
+"indico:indico/util/placeholders.py": [
+0,
+56,
+80,
+148,
+165,
+178
+],
+"indico:indico/util/process.py": [
+0
+],
+"indico:indico/util/roles.py": [
+0
+],
+"indico:indico/util/rules.py": [
+0
+],
+"indico:indico/util/rules_test.py": [
+0,
+14,
+20,
+34,
+52,
+66,
+73,
+78,
+82,
+107
+],
+"indico:indico/util/signals.py": [
+0
+],
+"indico:indico/util/signals_test.py": [
+0,
+15,
+19,
+27,
+32,
+39,
+46,
+53,
+63,
+71,
+77,
+87
+],
+"indico:indico/util/signing.py": [
+0
+],
+"indico:indico/util/spreadsheets.py": [
+0,
+35,
+41,
+93
+],
+"indico:indico/util/spreadsheets_test.py": [
+0,
+15,
+49
+],
+"indico:indico/util/string.py": [
+73,
+77,
+81,
+152,
+190,
+239,
+243,
+247,
+349,
+399,
+463,
+473,
+478
+],
+"indico:indico/util/string_test.py": [
+0,
+19,
+26,
+30,
+46,
+50,
+54,
+65,
+69,
+82,
+97,
+98,
+102,
+118,
+130,
+134,
+144,
+152,
+169,
+181,
+191,
+211,
+215,
+225
+],
+"indico:indico/util/suggestions.py": [
+0,
+22,
+37,
+44,
+103
+],
+"indico:indico/util/system.py": [
+0,
+13
+],
+"indico:indico/util/tasks.py": [
+25
+],
+"indico:indico/util/user.py": [
+0,
+28
+],
+"indico:indico/util/user_test.py": [
+0,
+16
+],
+"indico:indico/vendor/colorclass/__init__.py": [
+0
+],
+"indico:indico/vendor/django_mail/backends/console.py": [
+24
+],
+"indico:indico/vendor/django_mail/encoding_utils.py": [
+0,
+23
+],
+"indico:indico/vendor/django_mail/message.py": [
+0,
+49,
+136,
+164,
+171,
+192
+],
+"indico:indico/vendor/django_mail/module_loading_utils.py": [
+0
+],
+"indico:indico/vendor/django_mail/utils.py": [
+26
+],
+"indico:indico/web/args.py": [
+0,
+17,
+52,
+66,
+94,
+132
+],
+"indico:indico/web/args_test.py": [
+0,
+22,
+37,
+47,
+51,
+63,
+84,
+85,
+109,
+140,
+141,
+172,
+186,
+220,
+249,
+261,
+274,
+275,
+286,
+296,
+303,
+309,
+325
+],
+"indico:indico/web/assets/blueprint.py": [
+0,
+32,
+39,
+48,
+79,
+84,
+119,
+127,
+133
+],
+"indico:indico/web/assets/util.py": [
+0,
+15,
+25
+],
+"indico:indico/web/assets/vars_js.py": [
+0,
+23,
+41,
+65,
+87
+],
+"indico:indico/web/breadcrumbs.py": [
+0
+],
+"indico:indico/web/errors.py": [
+0,
+26,
+45,
+49,
+69,
+73,
+81,
+105
+],
+"indico:indico/web/fields/__init__.py": [
+0
+],
+"indico:indico/web/fields/base.py": [
+0,
+18
+],
+"indico:indico/web/fields/choices.py": [
+0,
+17,
+29,
+45,
+52,
+59,
+88,
+115
+],
+"indico:indico/web/fields/simple.py": [
+0,
+17,
+25,
+53,
+66,
+82
+],
+"indico:indico/web/flask/app.py": [
+0,
+62,
+95,
+108,
+124,
+138,
+146,
+160,
+180,
+188,
+193,
+260,
+266,
+296,
+317,
+321,
+328,
+337,
+352,
+359,
+365,
+387
+],
+"indico:indico/web/flask/errors.py": [
+0,
+31,
+41,
+48,
+59,
+72,
+80,
+94,
+99,
+104,
+109
+],
+"indico:indico/web/flask/session.py": [
+0,
+25,
+27,
+47,
+133
+],
+"indico:indico/web/flask/stats.py": [
+0,
+15,
+24,
+26,
+30,
+36,
+44
+],
+"indico:indico/web/flask/templating.py": [
+0,
+34,
+38,
+61,
+71,
+176,
+189,
+222,
+277,
+305
+],
+"indico:indico/web/flask/templating_test.py": [
+0,
+23,
+36,
+40,
+57,
+77,
+92,
+97,
+108,
+115,
+116,
+130,
+131,
+168,
+169,
+171,
+208,
+209,
+211
+],
+"indico:indico/web/flask/util.py": [
+0,
+78,
+98,
+105,
+106,
+228,
+286,
+339
+],
+"indico:indico/web/flask/util_test.py": [
+0,
+21
+],
+"indico:indico/web/flask/wrappers.py": [
+0,
+37,
+59,
+96,
+104,
+147,
+185
+],
+"indico:indico/web/flask/wrappers_test.py": [
+0,
+17
+],
+"indico:indico/web/forms/base.py": [
+0,
+49,
+72,
+88,
+89,
+169
+],
+"indico:indico/web/forms/colors.py": [
+0,
+11,
+36
+],
+"indico:indico/web/forms/fields/__init__.py": [
+0
+],
+"indico:indico/web/forms/fields/colors.py": [
+0,
+65
+],
+"indico:indico/web/forms/fields/datetime.py": [
+0,
+177,
+181,
+198,
+339,
+353,
+377
+],
+"indico:indico/web/forms/fields/enums.py": [
+0,
+16,
+59
+],
+"indico:indico/web/forms/fields/files.py": [
+0,
+68
+],
+"indico:indico/web/forms/fields/itemlists.py": [
+0
+],
+"indico:indico/web/forms/fields/location.py": [
+0,
+15
+],
+"indico:indico/web/forms/fields/markdown.py": [
+0
+],
+"indico:indico/web/forms/fields/principals.py": [
+0,
+29,
+106,
+141
+],
+"indico:indico/web/forms/fields/protection.py": [
+0,
+18
+],
+"indico:indico/web/forms/fields/simple.py": [
+0,
+22,
+26,
+37,
+49,
+58,
+66,
+106,
+124,
+160,
+169,
+173,
+177
+],
+"indico:indico/web/forms/fields/sqlalchemy.py": [
+0,
+38
+],
+"indico:indico/web/forms/fields/util.py": [
+0,
+8
+],
+"indico:indico/web/forms/jinja_helpers.py": [
+0,
+22,
+34
+],
+"indico:indico/web/forms/util.py": [
+0
+],
+"indico:indico/web/forms/validators.py": [
+0,
+108,
+298,
+300,
+330
+],
+"indico:indico/web/forms/widgets.py": [
+0
+],
+"indico:indico/web/http_api/__init__.py": [
+0
+],
+"indico:indico/web/http_api/exceptions.py": [
+0,
+8,
+12
+],
+"indico:indico/web/http_api/handlers.py": [
+66,
+77,
+103
+],
+"indico:indico/web/http_api/hooks/base.py": [
+202,
+276
+],
+"indico:indico/web/http_api/hooks/file.py": [
+0,
+48
+],
+"indico:indico/web/http_api/metadata/__init__.py": [
+0
+],
+"indico:indico/web/http_api/metadata/atom.py": [
+0,
+18,
+26
+],
+"indico:indico/web/http_api/metadata/html.py": [
+0,
+19,
+27
+],
+"indico:indico/web/http_api/metadata/ical.py": [
+0,
+41,
+49,
+81,
+91,
+95,
+104,
+110
+],
+"indico:indico/web/http_api/metadata/json.py": [
+0
+],
+"indico:indico/web/http_api/metadata/jsonp.py": [
+0
+],
+"indico:indico/web/http_api/metadata/serializer.py": [
+0,
+8
+],
+"indico:indico/web/http_api/metadata/xml.py": [
+0,
+19
+],
+"indico:indico/web/http_api/responses.py": [
+0,
+17,
+23,
+45
+],
+"indico:indico/web/http_api/util.py": [
+0,
+8
+],
+"indico:indico/web/menu.py": [
+0,
+16
+],
+"indico:indico/web/rh.py": [
+0,
+41,
+153,
+329,
+349,
+367
+],
+"indico:indico/web/util.py": [
+0,
+35,
+128,
+184,
+215,
+288,
+301,
+331,
+335
+],
+"indico:indico/web/util_test.py": [
+0,
+34,
+47,
+53,
+68,
+91,
+97,
+101,
+107,
+120,
+130,
+139,
+151,
+161,
+168,
+176,
+186,
+200,
+210,
+230,
+238,
+244,
+248,
+258,
+278,
+297,
+318,
+339,
+348,
+361,
+376,
+377,
+386,
+390,
+535,
+538
+],
+"indico:indico/web/views.py": [
+0,
+29,
+38,
+48,
+158,
+200,
+283,
+338,
+362
+]
+}

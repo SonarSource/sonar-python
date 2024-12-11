@@ -1,0 +1,1352 @@
+{
+"saleor:saleor/account/__init__.py": [
+4
+],
+"saleor:saleor/account/i18n.py": [
+59,
+89,
+160
+],
+"saleor:saleor/account/models.py": [
+74,
+179,
+286,
+307,
+325
+],
+"saleor:saleor/app/types.py": [
+1,
+8,
+35
+],
+"saleor:saleor/attribute/__init__.py": [
+4,
+87,
+94
+],
+"saleor:saleor/attribute/models/base.py": [
+31,
+186,
+224,
+254
+],
+"saleor:saleor/attribute/models/page.py": [
+20,
+42,
+63
+],
+"saleor:saleor/attribute/models/product.py": [
+20,
+44,
+65
+],
+"saleor:saleor/attribute/models/product_variant.py": [
+20,
+44,
+66
+],
+"saleor:saleor/channel/models.py": [
+15
+],
+"saleor:saleor/checkout/__init__.py": [
+6
+],
+"saleor:saleor/checkout/fetch.py": [
+44,
+55,
+91
+],
+"saleor:saleor/checkout/interface.py": [
+7,
+22
+],
+"saleor:saleor/checkout/models.py": [
+188
+],
+"saleor:saleor/core/__init__.py": [
+4,
+18,
+27
+],
+"saleor:saleor/core/exceptions.py": [
+13
+],
+"saleor:saleor/core/models.py": [
+16,
+59,
+76,
+122,
+144,
+164
+],
+"saleor:saleor/core/notify_events.py": [
+1,
+37
+],
+"saleor:saleor/core/taxes.py": [
+55
+],
+"saleor:saleor/core/units.py": [
+1,
+19,
+37,
+69
+],
+"saleor:saleor/core/utils/translations.py": [
+7,
+30,
+39
+],
+"saleor:saleor/csv/__init__.py": [
+1,
+27
+],
+"saleor:saleor/csv/utils/__init__.py": [
+1
+],
+"saleor:saleor/discount/__init__.py": [
+11,
+21,
+27,
+40
+],
+"saleor:saleor/discount/models.py": [
+95,
+207,
+218,
+243,
+271,
+330,
+341,
+390
+],
+"saleor:saleor/giftcard/__init__.py": [
+9,
+42
+],
+"saleor:saleor/giftcard/models.py": [
+20,
+110,
+138
+],
+"saleor:saleor/graphql/account/bulk_mutations.py": [
+16,
+21,
+26,
+42,
+76,
+84
+],
+"saleor:saleor/graphql/account/filters.py": [
+57,
+83
+],
+"saleor:saleor/graphql/account/i18n.py": [
+10
+],
+"saleor:saleor/graphql/account/mutations/account.py": [
+70,
+79,
+167,
+173,
+193,
+208,
+239,
+248,
+293,
+306,
+345,
+354,
+365,
+371,
+410,
+427,
+491,
+502
+],
+"saleor:saleor/graphql/account/mutations/authentication.py": [
+65,
+69,
+148,
+158,
+263,
+266,
+296,
+320,
+331,
+361,
+370,
+411,
+420,
+453,
+462,
+485,
+494
+],
+"saleor:saleor/graphql/account/mutations/base.py": [
+56,
+63,
+110,
+129,
+195,
+205,
+243,
+249,
+291,
+297,
+339,
+342,
+430,
+435
+],
+"saleor:saleor/graphql/account/mutations/permission_group.py": [
+47,
+52,
+186,
+192,
+411,
+414
+],
+"saleor:saleor/graphql/account/mutations/staff.py": [
+74,
+85,
+91,
+154,
+159,
+167,
+178,
+183,
+277,
+283,
+415,
+423,
+448,
+456,
+481,
+491,
+503,
+510,
+548,
+554,
+583
+],
+"saleor:saleor/graphql/account/schema.py": [
+82,
+87,
+92
+],
+"saleor:saleor/graphql/account/sorters.py": [
+26,
+44
+],
+"saleor:saleor/graphql/account/types.py": [
+75,
+155,
+283,
+427,
+471,
+512,
+548
+],
+"saleor:saleor/graphql/account/utils.py": [
+23,
+24,
+51,
+77
+],
+"saleor:saleor/graphql/app/filters.py": [
+39,
+52
+],
+"saleor:saleor/graphql/app/mutations.py": [
+44,
+49,
+83,
+86,
+111,
+114,
+133,
+139,
+171,
+178,
+206,
+209,
+229,
+232,
+249,
+252,
+269,
+274,
+291,
+299,
+345,
+351,
+383,
+386
+],
+"saleor:saleor/graphql/app/schema.py": [
+43,
+48
+],
+"saleor:saleor/graphql/app/sorters.py": [
+19
+],
+"saleor:saleor/graphql/app/types.py": [
+65,
+115,
+134,
+149,
+209,
+254,
+263
+],
+"saleor:saleor/graphql/attribute/bulk_mutations.py": [
+15,
+20,
+67,
+74
+],
+"saleor:saleor/graphql/attribute/descriptions.py": [
+1,
+26
+],
+"saleor:saleor/graphql/attribute/filters.py": [
+61,
+85,
+112,
+117
+],
+"saleor:saleor/graphql/attribute/mutations.py": [
+36,
+86,
+275,
+466,
+471,
+531,
+537,
+590,
+593,
+621,
+631,
+690,
+698,
+742,
+745,
+787,
+793
+],
+"saleor:saleor/graphql/attribute/sorters.py": [
+52,
+73
+],
+"saleor:saleor/graphql/attribute/types.py": [
+60,
+135,
+193,
+265,
+283,
+301
+],
+"saleor:saleor/graphql/attribute/utils.py": [
+36,
+55,
+513
+],
+"saleor:saleor/graphql/channel/__init__.py": [
+16
+],
+"saleor:saleor/graphql/channel/mutations.py": [
+49,
+54,
+107,
+113,
+167,
+171,
+264,
+351,
+354,
+385,
+388
+],
+"saleor:saleor/graphql/channel/types.py": [
+21,
+44,
+71,
+94,
+118
+],
+"saleor:saleor/graphql/checkout/filters.py": [
+86,
+92
+],
+"saleor:saleor/graphql/checkout/mutations.py": [
+331,
+336,
+498,
+515,
+664,
+701,
+709,
+762,
+772,
+815,
+831,
+881,
+890,
+930,
+943,
+1064,
+1077,
+1115,
+1127,
+1156,
+1166,
+1210,
+1220,
+1393,
+1400,
+1644,
+1673,
+1799,
+1811,
+1886,
+1902
+],
+"saleor:saleor/graphql/checkout/sorters.py": [
+33
+],
+"saleor:saleor/graphql/checkout/types.py": [
+48,
+66,
+87,
+164,
+169,
+273,
+536
+],
+"saleor:saleor/graphql/core/connection.py": [
+428,
+436,
+460
+],
+"saleor:saleor/graphql/core/filters.py": [
+101
+],
+"saleor:saleor/graphql/core/mutations.py": [
+98,
+364,
+544,
+582,
+683,
+694,
+699
+],
+"saleor:saleor/graphql/core/types/common.py": [
+68,
+82,
+379,
+387
+],
+"saleor:saleor/graphql/core/types/filter_input.py": [
+77
+],
+"saleor:saleor/graphql/core/types/money.py": [
+11,
+27,
+41,
+52,
+65,
+85
+],
+"saleor:saleor/graphql/core/types/sort_input.py": [
+19,
+50
+],
+"saleor:saleor/graphql/core/types/upload.py": [
+5
+],
+"saleor:saleor/graphql/core/utils/reordering.py": [
+13,
+23
+],
+"saleor:saleor/graphql/csv/filters.py": [
+32
+],
+"saleor:saleor/graphql/csv/mutations.py": [
+33,
+114,
+119,
+185,
+190
+],
+"saleor:saleor/graphql/csv/sorters.py": [
+20
+],
+"saleor:saleor/graphql/csv/types.py": [
+34,
+68,
+102
+],
+"saleor:saleor/graphql/discount/bulk_mutations.py": [
+11,
+16,
+26,
+31
+],
+"saleor:saleor/graphql/discount/filters.py": [
+88,
+101
+],
+"saleor:saleor/graphql/discount/mutations.py": [
+76,
+201,
+206,
+250,
+256,
+266,
+269,
+289,
+296,
+308,
+324,
+363,
+370,
+554,
+566,
+571,
+607,
+613,
+640,
+643,
+672,
+679,
+684,
+716,
+770,
+777
+],
+"saleor:saleor/graphql/discount/schema.py": [
+33,
+38
+],
+"saleor:saleor/graphql/discount/sorters.py": [
+32,
+73
+],
+"saleor:saleor/graphql/discount/types.py": [
+50,
+93,
+167,
+178,
+240,
+341,
+366
+],
+"saleor:saleor/graphql/giftcard/bulk_mutations.py": [
+49,
+54,
+152,
+157,
+166,
+171,
+198,
+205
+],
+"saleor:saleor/graphql/giftcard/filters.py": [
+92,
+114,
+151
+],
+"saleor:saleor/graphql/giftcard/mutations.py": [
+105,
+110,
+258,
+264,
+357,
+360,
+372,
+375,
+400,
+403,
+440,
+445,
+512,
+521
+],
+"saleor:saleor/graphql/giftcard/sorters.py": [
+20
+],
+"saleor:saleor/graphql/giftcard/types.py": [
+93,
+193,
+286,
+493,
+498
+],
+"saleor:saleor/graphql/invoice/mutations.py": [
+20,
+28,
+114,
+122,
+193,
+198,
+219,
+222,
+246,
+252,
+303,
+306
+],
+"saleor:saleor/graphql/invoice/tests/test_invoice_utils.py": [
+29,
+37
+],
+"saleor:saleor/graphql/invoice/types.py": [
+17
+],
+"saleor:saleor/graphql/menu/bulk_mutations.py": [
+11,
+16,
+26,
+31
+],
+"saleor:saleor/graphql/menu/filters.py": [
+30,
+38,
+44,
+49
+],
+"saleor:saleor/graphql/menu/mutations.py": [
+59,
+64,
+144,
+150,
+165,
+168,
+203,
+212,
+250,
+260,
+279,
+282,
+297,
+307,
+313,
+445,
+452
+],
+"saleor:saleor/graphql/menu/sorters.py": [
+24,
+41
+],
+"saleor:saleor/graphql/menu/types.py": [
+41,
+62,
+83,
+205
+],
+"saleor:saleor/graphql/meta/mutations.py": [
+31,
+235,
+241,
+265,
+271,
+294,
+300,
+324,
+330
+],
+"saleor:saleor/graphql/middleware.py": [
+7
+],
+"saleor:saleor/graphql/notifications/mutations/external_notification_trigger.py": [
+44,
+58
+],
+"saleor:saleor/graphql/order/bulk_mutations/draft_orders.py": [
+13,
+18,
+40,
+45
+],
+"saleor:saleor/graphql/order/bulk_mutations/orders.py": [
+13,
+18
+],
+"saleor:saleor/graphql/order/filters.py": [
+131,
+153
+],
+"saleor:saleor/graphql/order/mutations/discount_order.py": [
+45,
+99,
+106,
+159,
+168,
+224,
+229,
+268,
+277,
+343,
+348
+],
+"saleor:saleor/graphql/order/mutations/draft_orders.py": [
+95,
+100,
+347,
+353,
+380,
+383,
+415,
+420
+],
+"saleor:saleor/graphql/order/mutations/fulfillments.py": [
+87,
+95,
+296,
+302,
+341,
+347,
+430,
+439,
+531,
+706,
+715,
+846,
+852
+],
+"saleor:saleor/graphql/order/mutations/orders.py": [
+196,
+202,
+262,
+263,
+282,
+293,
+419,
+429,
+469,
+472,
+498,
+504,
+539,
+545,
+597,
+600,
+638,
+644,
+700,
+703,
+772,
+782,
+892,
+895,
+959,
+965
+],
+"saleor:saleor/graphql/order/schema.py": [
+63,
+68
+],
+"saleor:saleor/graphql/order/sorters.py": [
+35
+],
+"saleor:saleor/graphql/order/types.py": [
+214,
+373,
+382,
+408,
+497,
+781,
+1209
+],
+"saleor:saleor/graphql/page/bulk_mutations.py": [
+11,
+16,
+26,
+34,
+48,
+55
+],
+"saleor:saleor/graphql/page/filters.py": [
+41,
+47,
+56
+],
+"saleor:saleor/graphql/page/mutations/attributes.py": [
+28,
+39,
+118,
+131,
+158,
+168,
+213,
+219
+],
+"saleor:saleor/graphql/page/mutations/pages.py": [
+49,
+54,
+118,
+124,
+147,
+150,
+191,
+219,
+224,
+262,
+268,
+318,
+321
+],
+"saleor:saleor/graphql/page/sorters.py": [
+22,
+40
+],
+"saleor:saleor/graphql/page/types.py": [
+47,
+87,
+114,
+137
+],
+"saleor:saleor/graphql/payment/filters.py": [
+11,
+17
+],
+"saleor:saleor/graphql/payment/mutations.py": [
+105,
+117,
+308,
+312,
+339,
+368,
+371,
+398,
+413,
+495,
+500
+],
+"saleor:saleor/graphql/payment/types.py": [
+30,
+59,
+118,
+191,
+196
+],
+"saleor:saleor/graphql/plugins/mutations.py": [
+35,
+46
+],
+"saleor:saleor/graphql/plugins/sorters.py": [
+61
+],
+"saleor:saleor/graphql/plugins/types.py": [
+20,
+36,
+60,
+81
+],
+"saleor:saleor/graphql/product/bulk_mutations/products.py": [
+64,
+69,
+83,
+88,
+114,
+119,
+242,
+254,
+567,
+574,
+657,
+668,
+742,
+801,
+810,
+841,
+848,
+878,
+885
+],
+"saleor:saleor/graphql/product/filters.py": [
+595,
+638,
+658,
+681,
+709,
+722,
+727,
+732,
+737,
+742
+],
+"saleor:saleor/graphql/product/mutations/attributes.py": [
+55,
+91,
+102,
+302,
+315,
+355,
+366,
+550,
+556,
+613,
+619,
+669,
+675
+],
+"saleor:saleor/graphql/product/mutations/channels.py": [
+99,
+106,
+319,
+332,
+487,
+496
+],
+"saleor:saleor/graphql/product/mutations/digital_contents.py": [
+50,
+59,
+125,
+131,
+154,
+163,
+238,
+243
+],
+"saleor:saleor/graphql/product/mutations/products.py": [
+87,
+99,
+148,
+154,
+164,
+167,
+214,
+219,
+271,
+277,
+298,
+301,
+346,
+352,
+416,
+424,
+479,
+487,
+560,
+565,
+688,
+694,
+728,
+731,
+837,
+842,
+1049,
+1057,
+1104,
+1109,
+1213,
+1218,
+1290,
+1296,
+1324,
+1327,
+1388,
+1393,
+1473,
+1479,
+1504,
+1515,
+1569,
+1579,
+1620,
+1631,
+1691,
+1694,
+1718,
+1724,
+1765,
+1772,
+1817,
+1823
+],
+"saleor:saleor/graphql/product/sorters.py": [
+67,
+119,
+226,
+249
+],
+"saleor:saleor/graphql/product/types/channels.py": [
+69,
+247,
+263,
+295
+],
+"saleor:saleor/graphql/product/types/digital_contents.py": [
+23,
+49,
+67
+],
+"saleor:saleor/graphql/product/types/products.py": [
+171,
+192,
+206,
+322,
+719,
+819,
+1196,
+1253,
+1365,
+1408,
+1480,
+1520,
+1599,
+1616,
+1656
+],
+"saleor:saleor/graphql/shipping/bulk_mutations.py": [
+11,
+18,
+28,
+35
+],
+"saleor:saleor/graphql/shipping/filters.py": [
+22,
+28
+],
+"saleor:saleor/graphql/shipping/mutations/channels.py": [
+61,
+70
+],
+"saleor:saleor/graphql/shipping/mutations/shippings.py": [
+105,
+199,
+204,
+221,
+227,
+244,
+247,
+263,
+280,
+446,
+451,
+479,
+485,
+514,
+517,
+552,
+559,
+596,
+604
+],
+"saleor:saleor/graphql/shipping/types.py": [
+47,
+64,
+119,
+243,
+345,
+370
+],
+"saleor:saleor/graphql/shop/mutations.py": [
+93,
+98,
+160,
+163,
+197,
+200,
+224,
+256,
+262,
+316,
+325,
+335,
+340,
+366,
+371,
+409,
+414
+],
+"saleor:saleor/graphql/shop/types.py": [
+44,
+52,
+65,
+267
+],
+"saleor:saleor/graphql/translations/descriptions.py": [
+1
+],
+"saleor:saleor/graphql/translations/mutations.py": [
+72,
+144,
+154,
+164,
+174,
+206,
+216,
+232,
+242,
+278,
+288,
+298,
+308,
+318,
+327,
+343,
+352,
+368,
+380,
+402,
+411,
+432,
+441,
+459,
+468
+],
+"saleor:saleor/graphql/translations/schema.py": [
+45,
+58
+],
+"saleor:saleor/graphql/translations/types.py": [
+49,
+73,
+93,
+106,
+123,
+136,
+162,
+192,
+228,
+263,
+294,
+324,
+355,
+380,
+417,
+447,
+468,
+482,
+502,
+517,
+526,
+546,
+560,
+583
+],
+"saleor:saleor/graphql/warehouse/filters.py": [
+72,
+78,
+85,
+91
+],
+"saleor:saleor/graphql/warehouse/mutations.py": [
+32,
+83,
+88,
+103,
+111,
+130,
+138,
+157,
+165,
+182,
+190
+],
+"saleor:saleor/graphql/warehouse/sorters.py": [
+18
+],
+"saleor:saleor/graphql/warehouse/types.py": [
+76,
+116,
+138,
+183,
+194
+],
+"saleor:saleor/graphql/webhook/filters.py": [
+26
+],
+"saleor:saleor/graphql/webhook/mutations.py": [
+57,
+62,
+156,
+162,
+207,
+210,
+250,
+255
+],
+"saleor:saleor/graphql/webhook/sorters.py": [
+18,
+35
+],
+"saleor:saleor/graphql/webhook/types.py": [
+31,
+46,
+63,
+88,
+95,
+113,
+134,
+170
+],
+"saleor:saleor/invoice/__init__.py": [
+1
+],
+"saleor:saleor/invoice/models.py": [
+72
+],
+"saleor:saleor/menu/models.py": [
+70
+],
+"saleor:saleor/order/__init__.py": [
+8,
+37,
+49,
+73,
+181,
+208
+],
+"saleor:saleor/order/fetch.py": [
+12,
+21
+],
+"saleor:saleor/order/interface.py": [
+7
+],
+"saleor:saleor/order/models.py": [
+254,
+565,
+692
+],
+"saleor:saleor/page/models.py": [
+48
+],
+"saleor:saleor/payment/__init__.py": [
+18,
+48,
+90,
+124
+],
+"saleor:saleor/payment/interface.py": [
+11,
+24,
+49,
+70,
+100,
+107,
+125,
+135,
+145
+],
+"saleor:saleor/payment/migrations/0002_transfer_payment_to_payment_method.py": [
+10
+],
+"saleor:saleor/payment/models.py": [
+101,
+243
+],
+"saleor:saleor/plugins/admin_email/plugin.py": [
+35
+],
+"saleor:saleor/plugins/avatax/__init__.py": [
+46,
+60,
+65
+],
+"saleor:saleor/plugins/base_plugin.py": [
+47,
+67,
+74
+],
+"saleor:saleor/plugins/email_common.py": [
+44
+],
+"saleor:saleor/plugins/models.py": [
+21
+],
+"saleor:saleor/plugins/sendgrid/__init__.py": [
+6
+],
+"saleor:saleor/plugins/user_email/plugin.py": [
+49
+],
+"saleor:saleor/plugins/vatlayer/__init__.py": [
+13
+],
+"saleor:saleor/plugins/webhook/tasks.py": [
+51
+],
+"saleor:saleor/plugins/webhook/utils.py": [
+31,
+37
+],
+"saleor:saleor/product/__init__.py": [
+4,
+14
+],
+"saleor:saleor/product/migrations/0102_migrate_data_enterprise_grade_attributes.py": [
+63
+],
+"saleor:saleor/product/models.py": [
+96,
+118,
+425,
+475,
+555,
+665,
+732,
+796,
+812,
+824,
+902,
+914
+],
+"saleor:saleor/product/utils/availability.py": [
+27,
+37
+],
+"saleor:saleor/product/utils/costs.py": [
+14
+],
+"saleor:saleor/seo/models.py": [
+15,
+27
+],
+"saleor:saleor/shipping/__init__.py": [
+1,
+11
+],
+"saleor:saleor/shipping/interface.py": [
+12
+],
+"saleor:saleor/shipping/models.py": [
+239,
+290,
+302
+],
+"saleor:saleor/site/__init__.py": [
+1
+],
+"saleor:saleor/site/models.py": [
+102,
+140
+],
+"saleor:saleor/warehouse/__init__.py": [
+1
+],
+"saleor:saleor/warehouse/models.py": [
+243,
+295,
+317,
+353,
+381
+],
+"saleor:saleor/webhook/deprecated_event_types.py": [
+14
+],
+"saleor:saleor/webhook/event_types.py": [
+14,
+196
+],
+"saleor:saleor/webhook/models.py": [
+20
+],
+"saleor:saleor/wishlist/models.py": [
+86
+]
+}

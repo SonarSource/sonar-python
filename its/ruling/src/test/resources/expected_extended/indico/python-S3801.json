@@ -1,0 +1,376 @@
+{
+"indico:indico/cli/database.py": [
+103
+],
+"indico:indico/core/celery/__init__.py": [
+62,
+68
+],
+"indico:indico/core/db/sqlalchemy/custom/utcdatetime.py": [
+50,
+54
+],
+"indico:indico/core/db/sqlalchemy/links.py": [
+140,
+159,
+169,
+179,
+189,
+199,
+209,
+235,
+250,
+264,
+278,
+292,
+306
+],
+"indico:indico/core/db/sqlalchemy/logging.py": [
+40
+],
+"indico:indico/core/db/sqlalchemy/principals.py": [
+229,
+239,
+250,
+261,
+272,
+309,
+324,
+339,
+354,
+369
+],
+"indico:indico/core/db/sqlalchemy/protection.py": [
+76,
+85,
+94
+],
+"indico:indico/core/oauth/grants.py": [
+38
+],
+"indico:indico/core/plugins/__init__.py": [
+201,
+207,
+320
+],
+"indico:indico/legacy/pdfinterface/latex.py": [
+266
+],
+"indico:indico/modules/announcement/__init__.py": [
+25
+],
+"indico:indico/modules/api/__init__.py": [
+60
+],
+"indico:indico/modules/attachments/__init__.py": [
+38,
+46
+],
+"indico:indico/modules/attachments/clone.py": [
+31
+],
+"indico:indico/modules/attachments/preview.py": [
+86
+],
+"indico:indico/modules/auth/__init__.py": [
+31,
+122
+],
+"indico:indico/modules/auth/controllers.py": [
+149,
+217
+],
+"indico:indico/modules/categories/blueprint.py": [
+113
+],
+"indico:indico/modules/categories/controllers/display.py": [
+584
+],
+"indico:indico/modules/cephalopod/__init__.py": [
+32
+],
+"indico:indico/modules/core/controllers.py": [
+191
+],
+"indico:indico/modules/designer/__init__.py": [
+92,
+99
+],
+"indico:indico/modules/events/__init__.py": [
+102
+],
+"indico:indico/modules/events/abstracts/__init__.py": [
+48,
+115,
+189
+],
+"indico:indico/modules/events/agreements/__init__.py": [
+33
+],
+"indico:indico/modules/events/agreements/controllers.py": [
+96
+],
+"indico:indico/modules/events/api.py": [
+154,
+163
+],
+"indico:indico/modules/events/clone.py": [
+30,
+57,
+93
+],
+"indico:indico/modules/events/contributions/__init__.py": [
+30
+],
+"indico:indico/modules/events/contributions/clone.py": [
+40,
+67,
+97
+],
+"indico:indico/modules/events/contributions/models/contributions.py": [
+436,
+441,
+446
+],
+"indico:indico/modules/events/editing/__init__.py": [
+64,
+72
+],
+"indico:indico/modules/events/editing/schemas.py": [
+172
+],
+"indico:indico/modules/events/features/__init__.py": [
+25
+],
+"indico:indico/modules/events/layout/clone.py": [
+30
+],
+"indico:indico/modules/events/layout/controllers/layout.py": [
+224
+],
+"indico:indico/modules/events/layout/util.py": [
+327
+],
+"indico:indico/modules/events/models/events.py": [
+871
+],
+"indico:indico/modules/events/notes/clone.py": [
+27
+],
+"indico:indico/modules/events/papers/__init__.py": [
+31,
+39,
+49
+],
+"indico:indico/modules/events/papers/models/revisions.py": [
+197
+],
+"indico:indico/modules/events/payment/__init__.py": [
+42,
+48
+],
+"indico:indico/modules/events/payment/plugins.py": [
+76
+],
+"indico:indico/modules/events/payment/util.py": [
+32
+],
+"indico:indico/modules/events/persons/__init__.py": [
+21
+],
+"indico:indico/modules/events/registration/__init__.py": [
+63,
+77,
+149
+],
+"indico:indico/modules/events/registration/clone.py": [
+34,
+105
+],
+"indico:indico/modules/events/registration/controllers/display.py": [
+288,
+343
+],
+"indico:indico/modules/events/registration/fields/choices.py": [
+62
+],
+"indico:indico/modules/events/registration/models/forms.py": [
+435
+],
+"indico:indico/modules/events/reminders/__init__.py": [
+31,
+68
+],
+"indico:indico/modules/events/reminders/forms.py": [
+81
+],
+"indico:indico/modules/events/requests/__init__.py": [
+28,
+37
+],
+"indico:indico/modules/events/requests/controllers.py": [
+143
+],
+"indico:indico/modules/events/requests/notifications.py": [
+40
+],
+"indico:indico/modules/events/reviewing_questions_fields.py": [
+67
+],
+"indico:indico/modules/events/roles/__init__.py": [
+21
+],
+"indico:indico/modules/events/roles/clone.py": [
+30
+],
+"indico:indico/modules/events/sessions/__init__.py": [
+58
+],
+"indico:indico/modules/events/sessions/clone.py": [
+31
+],
+"indico:indico/modules/events/static/__init__.py": [
+27
+],
+"indico:indico/modules/events/surveys/__init__.py": [
+35,
+56,
+65
+],
+"indico:indico/modules/events/surveys/clone.py": [
+24
+],
+"indico:indico/modules/events/surveys/controllers/display.py": [
+74
+],
+"indico:indico/modules/events/surveys/fields/simple.py": [
+16,
+23,
+40
+],
+"indico:indico/modules/events/surveys/models/items.py": [
+173
+],
+"indico:indico/modules/events/timetable/__init__.py": [
+36,
+58
+],
+"indico:indico/modules/events/timetable/forms.py": [
+63
+],
+"indico:indico/modules/events/timetable/models/entries.py": [
+160,
+260
+],
+"indico:indico/modules/events/timetable/operations.py": [
+206,
+216
+],
+"indico:indico/modules/events/timetable/util.py": [
+297
+],
+"indico:indico/modules/events/tracks/__init__.py": [
+26
+],
+"indico:indico/modules/events/tracks/clone.py": [
+34
+],
+"indico:indico/modules/events/util.py": [
+301,
+603
+],
+"indico:indico/modules/events/views.py": [
+30
+],
+"indico:indico/modules/groups/__init__.py": [
+21
+],
+"indico:indico/modules/legal/__init__.py": [
+43,
+50
+],
+"indico:indico/modules/logs/__init__.py": [
+23
+],
+"indico:indico/modules/networks/__init__.py": [
+31
+],
+"indico:indico/modules/oauth/__init__.py": [
+18
+],
+"indico:indico/modules/rb/__init__.py": [
+56,
+63
+],
+"indico:indico/modules/rb/controllers/backend/bookings.py": [
+416
+],
+"indico:indico/modules/rb/models/reservations.py": [
+62
+],
+"indico:indico/modules/rb/operations/bookings.py": [
+387
+],
+"indico:indico/modules/rb/operations/suggestions.py": [
+112,
+137
+],
+"indico:indico/modules/rb/util.py": [
+141,
+259
+],
+"indico:indico/modules/search/__init__.py": [
+21
+],
+"indico:indico/modules/search/schemas.py": [
+164
+],
+"indico:indico/modules/users/controllers.py": [
+91
+],
+"indico:indico/modules/vc/__init__.py": [
+28,
+38,
+46,
+55,
+93
+],
+"indico:indico/modules/vc/clone.py": [
+34
+],
+"indico:indico/testing/fixtures/disallow.py": [
+24
+],
+"indico:indico/util/passwords.py": [
+153
+],
+"indico:indico/util/passwords_test.py": [
+144
+],
+"indico:indico/web/errors.py": [
+73
+],
+"indico:indico/web/fields/choices.py": [
+123
+],
+"indico:indico/web/fields/simple.py": [
+74
+],
+"indico:indico/web/flask/app.py": [
+352
+],
+"indico:indico/web/flask/util.py": [
+356
+],
+"indico:indico/web/flask/wrappers.py": [
+192
+],
+"indico:indico/web/forms/fields/datetime.py": [
+208,
+215,
+227,
+277,
+284,
+291
+]
+}

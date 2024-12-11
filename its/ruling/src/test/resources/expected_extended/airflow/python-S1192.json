@@ -1,0 +1,242 @@
+{
+"airflow:airflow/api/common/experimental/pool.py": [
+31
+],
+"airflow:airflow/api_connexion/endpoints/role_and_permission_endpoint.py": [
+60
+],
+"airflow:airflow/api_connexion/endpoints/user_endpoint.py": [
+45
+],
+"airflow:airflow/cli/commands/connection_command.py": [
+108
+],
+"airflow:airflow/cli/commands/info_command.py": [
+197
+],
+"airflow:airflow/cli/commands/task_command.py": [
+257
+],
+"airflow:airflow/configuration.py": [
+662,
+742,
+839
+],
+"airflow:airflow/dag_processing/manager.py": [
+169,
+862
+],
+"airflow:airflow/jobs/scheduler_job.py": [
+536,
+845
+],
+"airflow:airflow/migrations/versions/092435bf5d12_add_max_active_runs_column_to_dagmodel_.py": [
+47
+],
+"airflow:airflow/migrations/versions/92c57b58940d_add_fab_tables.py": [
+111
+],
+"airflow:airflow/migrations/versions/ccde3e26fe78_add_index_on_state_dag_id_for_queued_.py": [
+43
+],
+"airflow:airflow/models/dag.py": [
+719
+],
+"airflow:airflow/models/dagrun.py": [
+127,
+137
+],
+"airflow:airflow/models/xcom.py": [
+149
+],
+"airflow:airflow/operators/sql.py": [
+138
+],
+"airflow:airflow/plugins_manager.py": [
+330,
+425
+],
+"airflow:airflow/providers/airbyte/hooks/airbyte.py": [
+95
+],
+"airflow:airflow/providers/alibaba/cloud/example_dags/example_oss_object.py": [
+41
+],
+"airflow:airflow/providers/amazon/aws/example_dags/example_eks_templated.py": [
+83
+],
+"airflow:airflow/providers/amazon/aws/hooks/datasync.py": [
+227
+],
+"airflow:airflow/providers/apache/beam/example_dags/example_beam.py": [
+107,
+213,
+215
+],
+"airflow:airflow/providers/apache/livy/hooks/livy.py": [
+176
+],
+"airflow:airflow/providers/databricks/operators/databricks.py": [
+87
+],
+"airflow:airflow/providers/dingding/example_dags/example_dingding.py": [
+107,
+167
+],
+"airflow:airflow/providers/docker/example_dags/example_docker_copy_data.py": [
+54,
+72
+],
+"airflow:airflow/providers/docker/operators/docker.py": [
+229
+],
+"airflow:airflow/providers/docker/operators/docker_swarm.py": [
+125
+],
+"airflow:airflow/providers/google/cloud/example_dags/example_automl_tables.py": [
+89
+],
+"airflow:airflow/providers/google/cloud/example_dags/example_cloud_storage_transfer_service_aws.py": [
+125
+],
+"airflow:airflow/providers/google/cloud/example_dags/example_cloud_storage_transfer_service_gcp.py": [
+117
+],
+"airflow:airflow/providers/google/cloud/example_dags/example_dataflow.py": [
+67,
+180
+],
+"airflow:airflow/providers/google/cloud/example_dags/example_datafusion.py": [
+91
+],
+"airflow:airflow/providers/google/cloud/example_dags/example_dataproc.py": [
+131,
+132
+],
+"airflow:airflow/providers/google/cloud/example_dags/example_dlp.py": [
+66
+],
+"airflow:airflow/providers/google/cloud/example_dags/example_gcs_to_gcs.py": [
+69,
+98
+],
+"airflow:airflow/providers/google/cloud/example_dags/example_vision.py": [
+119
+],
+"airflow:airflow/providers/google/cloud/hooks/bigquery.py": [
+1619,
+1623
+],
+"airflow:airflow/providers/google/cloud/hooks/cloud_memorystore.py": [
+149,
+481
+],
+"airflow:airflow/providers/google/cloud/hooks/dataflow.py": [
+701
+],
+"airflow:airflow/providers/google/cloud/hooks/dataproc.py": [
+206,
+565
+],
+"airflow:airflow/providers/google/cloud/hooks/dlp.py": [
+179
+],
+"airflow:airflow/providers/google/cloud/hooks/spanner.py": [
+119
+],
+"airflow:airflow/providers/google/cloud/operators/bigquery.py": [
+422
+],
+"airflow:airflow/providers/google/cloud/operators/bigtable.py": [
+169
+],
+"airflow:airflow/providers/google/cloud/operators/cloud_sql.py": [
+328
+],
+"airflow:airflow/providers/google/cloud/operators/cloud_storage_transfer_service.py": [
+447
+],
+"airflow:airflow/providers/google/cloud/operators/datacatalog.py": [
+376
+],
+"airflow:airflow/providers/google/cloud/operators/dataflow.py": [
+133,
+443
+],
+"airflow:airflow/providers/google/cloud/operators/dataproc.py": [
+1099,
+1120,
+1584,
+1591
+],
+"airflow:airflow/providers/google/cloud/operators/gcs.py": [
+131
+],
+"airflow:airflow/providers/google/cloud/operators/mlengine.py": [
+205,
+734
+],
+"airflow:airflow/providers/google/cloud/operators/pubsub.py": [
+146
+],
+"airflow:airflow/providers/google/cloud/operators/spanner.py": [
+95,
+97,
+252
+],
+"airflow:airflow/providers/google/cloud/operators/video_intelligence.py": [
+119
+],
+"airflow:airflow/providers/google/marketing_platform/example_dags/example_display_video.py": [
+89
+],
+"airflow:airflow/providers/imap/hooks/imap.py": [
+199
+],
+"airflow:airflow/providers/microsoft/azure/example_dags/example_azure_blob_to_gcs.py": [
+29
+],
+"airflow:airflow/providers/microsoft/azure/hooks/cosmos.py": [
+138,
+144,
+180
+],
+"airflow:airflow/providers/microsoft/azure/hooks/fileshare.py": [
+78
+],
+"airflow:airflow/providers/openfaas/hooks/openfaas.py": [
+63
+],
+"airflow:airflow/providers/qubole/example_dags/example_qubole.py": [
+72
+],
+"airflow:airflow/providers/yandex/example_dags/example_yandexcloud_dataproc.py": [
+82
+],
+"airflow:airflow/utils/dot_renderer.py": [
+68
+],
+"airflow:airflow/www/api/experimental/endpoints.py": [
+106
+],
+"airflow:airflow/www/fab_security/manager.py": [
+714
+],
+"airflow:airflow/www/fab_security/sqla/models.py": [
+153
+],
+"airflow:airflow/www/utils.py": [
+280,
+385
+],
+"airflow:airflow/www/views.py": [
+158,
+1761,
+1879,
+3318,
+3822,
+3825,
+4148,
+4280
+]
+}
