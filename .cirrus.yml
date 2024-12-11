@@ -94,8 +94,27 @@ build_task:
     - git checkout
     - cd -
     - source cirrus-env BUILD
-    - regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true
+    - regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true -DskipTypshed -DskipTests=true -Dsonar.skip=true
     - ./check-license-compliance.sh
+  cleanup_before_cache_script: cleanup_maven_repository
+
+test_analyze_task:
+  depends_on:
+    - build
+  <<: *BUILD_CONTAINER_DEFINITION
+  <<: *ONLY_SONARSOURCE_QA
+  env:
+    CIRRUS_CLONE_DEPTH: 10
+    SONARSOURCE_QA: true
+  maven_cache:
+    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  <<: *ORCHESTRATOR_CACHE_DEFINITION
+  submodules_script:
+    - git submodule update --init
+  build_script:
+    - source cirrus-env QA
+    - source set_maven_build_version $BUILD_NUMBER
+    - mvn clean install -Denforcer.skip=true -Dskip.its=true
   cleanup_before_cache_script: cleanup_maven_repository
 
 build_win_task:
@@ -208,6 +227,7 @@ pr_analysis_qa_task:
 
 promote_task:
   depends_on:
+    - test_analyze
     - ruling
     - plugin_qa
     - ws_scan
