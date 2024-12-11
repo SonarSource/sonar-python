@@ -1,0 +1,2913 @@
+{
+"buildbot:buildbot/__init__.py": [
+0
+],
+"buildbot:buildbot/buildrequest.py": [
+0
+],
+"buildbot:buildbot/buildslave.py": [
+0,
+365,
+371,
+373,
+382,
+392,
+394,
+396,
+404,
+406,
+408,
+418,
+468,
+517,
+548,
+641,
+644,
+648,
+662,
+677,
+702,
+706,
+718,
+802,
+810,
+958,
+972,
+988
+],
+"buildbot:buildbot/changes/base.py": [
+0,
+24,
+54,
+62
+],
+"buildbot:buildbot/changes/bonsaipoller.py": [
+0,
+26,
+32,
+35,
+38,
+205
+],
+"buildbot:buildbot/changes/changes.py": [
+0,
+95,
+210,
+275
+],
+"buildbot:buildbot/changes/filter.py": [
+0,
+20,
+40,
+44,
+50
+],
+"buildbot:buildbot/changes/gerritchangesource.py": [
+0,
+68,
+108
+],
+"buildbot:buildbot/changes/gitpoller.py": [
+0,
+87,
+94,
+103,
+112,
+122,
+136,
+145,
+171,
+183,
+200,
+209
+],
+"buildbot:buildbot/changes/hgbuildbot.py": [
+0,
+43,
+46,
+95,
+138,
+141
+],
+"buildbot:buildbot/changes/mail.py": [
+53,
+58,
+74,
+270,
+399,
+427,
+429,
+431,
+433,
+435,
+505
+],
+"buildbot:buildbot/changes/manager.py": [
+0
+],
+"buildbot:buildbot/changes/p4poller.py": [
+0
+],
+"buildbot:buildbot/changes/pb.py": [
+0,
+25,
+96
+],
+"buildbot:buildbot/changes/svnpoller.py": [
+0,
+32,
+35,
+150,
+175
+],
+"buildbot:buildbot/clients/base.py": [
+0,
+78
+],
+"buildbot:buildbot/clients/debug.py": [
+0,
+26
+],
+"buildbot:buildbot/clients/gtkPanes.py": [
+0,
+275,
+328,
+409,
+497,
+541
+],
+"buildbot:buildbot/clients/sendchange.py": [
+0,
+21,
+48
+],
+"buildbot:buildbot/clients/tryclient.py": [
+0,
+28,
+69,
+97,
+135,
+153,
+169,
+212,
+226,
+294,
+312,
+334,
+337,
+386,
+406,
+441
+],
+"buildbot:buildbot/clients/usersclient.py": [
+0,
+41,
+44
+],
+"buildbot:buildbot/config.py": [
+0,
+28,
+43,
+49,
+211,
+225,
+229,
+402,
+524,
+594,
+700
+],
+"buildbot:buildbot/db/base.py": [
+0,
+16,
+57,
+68,
+78
+],
+"buildbot:buildbot/db/buildrequests.py": [
+0,
+23,
+26,
+29,
+34,
+35,
+44,
+49,
+68,
+107,
+127,
+156,
+189,
+226,
+239,
+254
+],
+"buildbot:buildbot/db/builds.py": [
+0,
+20,
+24,
+37,
+45,
+54,
+71
+],
+"buildbot:buildbot/db/buildsets.py": [
+26,
+29,
+34,
+96,
+112,
+123,
+149,
+166
+],
+"buildbot:buildbot/db/changes.py": [
+26,
+29,
+47,
+115,
+130,
+141,
+154,
+161,
+180,
+233
+],
+"buildbot:buildbot/db/connector.py": [
+0,
+25,
+44,
+98
+],
+"buildbot:buildbot/db/enginestrategy.py": [
+34,
+38,
+123,
+136,
+187
+],
+"buildbot:buildbot/db/exceptions.py": [
+0,
+16
+],
+"buildbot:buildbot/db/migrate/versions/001_initial.py": [
+0,
+166,
+172,
+239,
+271
+],
+"buildbot:buildbot/db/migrate/versions/002_add_proj_repo.py": [
+0,
+18,
+23
+],
+"buildbot:buildbot/db/migrate/versions/003_scheduler_class_name.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/004_add_autoincrement.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/005_add_indexes.py": [
+0,
+18,
+27
+],
+"buildbot:buildbot/db/migrate/versions/006_drop_last_access.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/007_add_object_tables.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/008_add_scheduler_changes_index.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/009_add_patch_author.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/010_fix_column_lengths.py": [
+0,
+19
+],
+"buildbot:buildbot/db/migrate/versions/011_add_buildrequest_claims.py": [
+0,
+20,
+55,
+67
+],
+"buildbot:buildbot/db/migrate/versions/012_add_users_table.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/013_remove_schedulers_state_column.py": [
+0,
+19
+],
+"buildbot:buildbot/db/migrate/versions/014_add_users_userpass_columns.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/015_remove_bad_master_objectid.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/016_restore_buildrequest_indices.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/017_restore_other_indices.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/018_add_sourcestampset.py": [
+0,
+20
+],
+"buildbot:buildbot/db/migrate/versions/019_merge_schedulers_to_objects.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/020_remove_change_links.py": [
+0,
+18
+],
+"buildbot:buildbot/db/migrate/versions/021_fix_postgres_sequences.py": [
+0,
+18
+],
+"buildbot:buildbot/db/model.py": [
+0,
+29,
+402,
+425,
+436,
+444,
+464,
+468
+],
+"buildbot:buildbot/db/pool.py": [
+0,
+38,
+63,
+71,
+82,
+99,
+233,
+263
+],
+"buildbot:buildbot/db/schedulers.py": [
+0,
+20,
+24,
+51,
+60,
+62
+],
+"buildbot:buildbot/db/sourcestamps.py": [
+0,
+22,
+25,
+28,
+34,
+81,
+82,
+102
+],
+"buildbot:buildbot/db/sourcestampsets.py": [
+0,
+18,
+22
+],
+"buildbot:buildbot/db/state.py": [
+0,
+21,
+24,
+27,
+38,
+44,
+55,
+81,
+83,
+106,
+116,
+125
+],
+"buildbot:buildbot/db/users.py": [
+0,
+21,
+24,
+28,
+75,
+106,
+137,
+153,
+211,
+223
+],
+"buildbot:buildbot/ec2buildslave.py": [
+40
+],
+"buildbot:buildbot/interfaces.py": [
+27,
+29,
+31,
+33,
+37,
+104,
+277,
+294,
+304,
+411,
+996,
+1003,
+1041,
+1056,
+1092,
+1209
+],
+"buildbot:buildbot/libvirtbuildslave.py": [
+0,
+58,
+119,
+127,
+133,
+173,
+196,
+199,
+205,
+212,
+216,
+246,
+251
+],
+"buildbot:buildbot/locks.py": [
+0,
+155,
+163
+],
+"buildbot:buildbot/manhole.py": [
+0,
+33,
+43,
+59,
+140,
+149
+],
+"buildbot:buildbot/master.py": [
+0,
+48,
+53,
+192,
+247,
+349,
+426,
+472,
+500,
+750,
+758,
+763
+],
+"buildbot:buildbot/monkeypatches/__init__.py": [
+0,
+25,
+36,
+44,
+50,
+56
+],
+"buildbot:buildbot/monkeypatches/bug4881.py": [
+0,
+21
+],
+"buildbot:buildbot/monkeypatches/bug5079.py": [
+0,
+20,
+41
+],
+"buildbot:buildbot/monkeypatches/sqlalchemy2189.py": [
+0,
+23,
+69,
+114
+],
+"buildbot:buildbot/monkeypatches/sqlalchemy2364.py": [
+0,
+16,
+20
+],
+"buildbot:buildbot/pbmanager.py": [
+0,
+70,
+96,
+145,
+152,
+159,
+171
+],
+"buildbot:buildbot/pbutil.py": [
+26
+],
+"buildbot:buildbot/process/base.py": [
+0
+],
+"buildbot:buildbot/process/botmaster.py": [
+0,
+84,
+97,
+143,
+422,
+436,
+602,
+613,
+630,
+637,
+646,
+651,
+679
+],
+"buildbot:buildbot/process/build.py": [
+0,
+228,
+233
+],
+"buildbot:buildbot/process/builder.py": [
+0,
+33,
+91,
+264,
+629,
+708,
+724,
+733,
+738,
+760
+],
+"buildbot:buildbot/process/buildrequest.py": [
+0,
+191
+],
+"buildbot:buildbot/process/buildstep.py": [
+0,
+33,
+36,
+274,
+303,
+342,
+384,
+727,
+737,
+803,
+903
+],
+"buildbot:buildbot/process/cache.py": [
+0
+],
+"buildbot:buildbot/process/debug.py": [
+0,
+24,
+111
+],
+"buildbot:buildbot/process/factory.py": [
+0,
+28,
+105,
+131,
+138,
+192,
+208,
+222
+],
+"buildbot:buildbot/process/metrics.py": [
+51,
+56,
+62,
+70,
+76,
+77,
+78,
+84,
+93,
+99,
+115,
+116,
+119,
+128,
+138,
+155,
+187,
+216,
+242,
+265,
+295,
+323,
+331,
+358,
+364
+],
+"buildbot:buildbot/process/mtrlogobserver.py": [
+0,
+54,
+346,
+371,
+449
+],
+"buildbot:buildbot/process/properties.py": [
+0,
+198,
+209,
+220
+],
+"buildbot:buildbot/process/slavebuilder.py": [
+0,
+112,
+146,
+175,
+209,
+222,
+239,
+245,
+260,
+269
+],
+"buildbot:buildbot/process/subunitlogobserver.py": [
+0
+],
+"buildbot:buildbot/process/users/manager.py": [
+0,
+20
+],
+"buildbot:buildbot/process/users/manual.py": [
+0,
+237,
+246
+],
+"buildbot:buildbot/process/users/users.py": [
+0
+],
+"buildbot:buildbot/revlinks.py": [
+0,
+18,
+38,
+49
+],
+"buildbot:buildbot/scheduler.py": [
+0
+],
+"buildbot:buildbot/schedulers/base.py": [
+0,
+195,
+218,
+232,
+369,
+371,
+377,
+382,
+388,
+389,
+400
+],
+"buildbot:buildbot/schedulers/basic.py": [
+0,
+37,
+100,
+129,
+134,
+218,
+252
+],
+"buildbot:buildbot/schedulers/dependent.py": [
+0,
+22
+],
+"buildbot:buildbot/schedulers/filter.py": [
+0
+],
+"buildbot:buildbot/schedulers/forcesched.py": [
+0,
+29,
+85,
+94,
+102,
+111,
+117,
+126,
+144,
+155,
+181,
+198,
+288,
+297
+],
+"buildbot:buildbot/schedulers/manager.py": [
+0,
+22
+],
+"buildbot:buildbot/schedulers/timed.py": [
+0,
+56,
+79,
+130,
+152,
+174,
+197,
+207,
+230,
+236,
+284,
+287,
+301
+],
+"buildbot:buildbot/schedulers/triggerable.py": [
+0,
+21,
+49
+],
+"buildbot:buildbot/schedulers/trysched.py": [
+0,
+30,
+57,
+61,
+69,
+183,
+198,
+209,
+275,
+288,
+297
+],
+"buildbot:buildbot/scripts/checkconfig.py": [
+0,
+20
+],
+"buildbot:buildbot/scripts/logwatcher.py": [
+0,
+22,
+25,
+27,
+30,
+37
+],
+"buildbot:buildbot/scripts/reconfig.py": [
+0,
+26
+],
+"buildbot:buildbot/scripts/runner.py": [
+0,
+32,
+35,
+37,
+40,
+52,
+67,
+155,
+180,
+328,
+365,
+440,
+531,
+552,
+558,
+599,
+617,
+624,
+628,
+637,
+644,
+668,
+684,
+704,
+708,
+712,
+723,
+734,
+841,
+843,
+853,
+877,
+1002,
+1007,
+1015,
+1044,
+1060,
+1074,
+1143,
+1227,
+1229,
+1238,
+1297
+],
+"buildbot:buildbot/scripts/startup.py": [
+0,
+19,
+63,
+89
+],
+"buildbot:buildbot/sourcestamp.py": [
+0,
+116,
+125,
+288,
+295,
+299,
+309
+],
+"buildbot:buildbot/status/__init__.py": [
+0
+],
+"buildbot:buildbot/status/base.py": [
+0,
+23,
+89,
+95,
+102
+],
+"buildbot:buildbot/status/build.py": [
+0,
+26
+],
+"buildbot:buildbot/status/builder.py": [
+0,
+284,
+551
+],
+"buildbot:buildbot/status/buildrequest.py": [
+0,
+22,
+119
+],
+"buildbot:buildbot/status/buildset.py": [
+0,
+20,
+47,
+57
+],
+"buildbot:buildbot/status/buildstep.py": [
+0
+],
+"buildbot:buildbot/status/client.py": [
+0,
+28,
+31,
+39,
+58,
+80,
+115,
+133,
+151,
+229,
+254,
+294,
+310,
+322,
+347,
+361,
+434
+],
+"buildbot:buildbot/status/event.py": [
+0,
+19
+],
+"buildbot:buildbot/status/html.py": [
+0
+],
+"buildbot:buildbot/status/logfile.py": [
+0,
+33,
+581,
+596,
+612,
+642
+],
+"buildbot:buildbot/status/mail.py": [
+0,
+54,
+673,
+674,
+685,
+692,
+701
+],
+"buildbot:buildbot/status/master.py": [
+0,
+29,
+191,
+227,
+237,
+259,
+411,
+429
+],
+"buildbot:buildbot/status/persistent_queue.py": [
+0,
+24,
+32,
+240,
+353
+],
+"buildbot:buildbot/status/progress.py": [
+0,
+130,
+260
+],
+"buildbot:buildbot/status/results.py": [
+0,
+19
+],
+"buildbot:buildbot/status/slave.py": [
+0,
+21
+],
+"buildbot:buildbot/status/status_gerrit.py": [
+26,
+58
+],
+"buildbot:buildbot/status/status_push.py": [
+82,
+170
+],
+"buildbot:buildbot/status/testresult.py": [
+0,
+19
+],
+"buildbot:buildbot/status/tinderbox.py": [
+0
+],
+"buildbot:buildbot/status/web/about.py": [
+0,
+23
+],
+"buildbot:buildbot/status/web/auth.py": [
+0,
+45,
+56,
+84,
+139,
+148,
+156,
+164,
+169,
+180
+],
+"buildbot:buildbot/status/web/authz.py": [
+0,
+131,
+141,
+166
+],
+"buildbot:buildbot/status/web/base.py": [
+0,
+50,
+111,
+123,
+126,
+129,
+134,
+138,
+142,
+147,
+151,
+180,
+194,
+240,
+255,
+261,
+327,
+336,
+344,
+350,
+415,
+421,
+435,
+468,
+569,
+612,
+654,
+691,
+700,
+702,
+712,
+732,
+748,
+766
+],
+"buildbot:buildbot/status/web/baseweb.py": [
+0,
+50,
+392,
+411
+],
+"buildbot:buildbot/status/web/build.py": [
+0,
+31,
+94,
+132,
+314
+],
+"buildbot:buildbot/status/web/builder.py": [
+0,
+30,
+63,
+101,
+125,
+164,
+191,
+324,
+370,
+423,
+443,
+473,
+496,
+517,
+531
+],
+"buildbot:buildbot/status/web/buildstatus.py": [
+0,
+18
+],
+"buildbot:buildbot/status/web/change_hook.py": [
+0,
+27,
+78,
+81
+],
+"buildbot:buildbot/status/web/changes.py": [
+0,
+24,
+31,
+43,
+58
+],
+"buildbot:buildbot/status/web/console.py": [
+0,
+26,
+60,
+641,
+705,
+715
+],
+"buildbot:buildbot/status/web/feeds.py": [
+0,
+47,
+66,
+72,
+273,
+280
+],
+"buildbot:buildbot/status/web/grid.py": [
+0,
+21,
+23,
+154,
+216
+],
+"buildbot:buildbot/status/web/hooks/base.py": [
+0
+],
+"buildbot:buildbot/status/web/hooks/github.py": [
+55
+],
+"buildbot:buildbot/status/web/hooks/googlecode.py": [
+0,
+22,
+25,
+66
+],
+"buildbot:buildbot/status/web/logs.py": [
+0,
+28,
+52,
+146,
+160
+],
+"buildbot:buildbot/status/web/olpb.py": [
+0,
+94
+],
+"buildbot:buildbot/status/web/root.py": [
+0,
+22
+],
+"buildbot:buildbot/status/web/session.py": [
+0,
+29,
+34
+],
+"buildbot:buildbot/status/web/slaves.py": [
+0,
+27,
+51,
+121
+],
+"buildbot:buildbot/status/web/status_json.py": [
+90,
+94,
+156,
+167,
+186,
+189,
+341,
+360,
+372,
+379,
+399,
+412,
+426,
+443,
+483,
+509,
+524,
+564,
+578,
+601,
+618,
+627,
+667,
+680,
+698
+],
+"buildbot:buildbot/status/web/step.py": [
+0,
+25,
+77
+],
+"buildbot:buildbot/status/web/tests.py": [
+0,
+23,
+64
+],
+"buildbot:buildbot/status/web/users.py": [
+0,
+22,
+40,
+53,
+67
+],
+"buildbot:buildbot/status/web/waterfall.py": [
+0,
+34,
+42,
+51,
+122,
+145,
+164,
+197,
+207,
+219,
+229,
+268,
+401,
+406,
+414,
+424,
+492,
+575
+],
+"buildbot:buildbot/status/words.py": [
+0,
+42,
+67,
+71,
+104,
+532,
+612,
+872,
+889,
+954
+],
+"buildbot:buildbot/steps/blocker.py": [
+0,
+350
+],
+"buildbot:buildbot/steps/master.py": [
+0,
+59
+],
+"buildbot:buildbot/steps/maxq.py": [
+0,
+20
+],
+"buildbot:buildbot/steps/python.py": [
+0,
+29,
+68
+],
+"buildbot:buildbot/steps/python_twisted.py": [
+0,
+102,
+150,
+594
+],
+"buildbot:buildbot/steps/shell.py": [
+0,
+264,
+291,
+345,
+370,
+595,
+604,
+648
+],
+"buildbot:buildbot/steps/slave.py": [
+0
+],
+"buildbot:buildbot/steps/source/__init__.py": [
+0
+],
+"buildbot:buildbot/steps/source/bzr.py": [
+0,
+23,
+66,
+84,
+133,
+147,
+183,
+197,
+217,
+230,
+248
+],
+"buildbot:buildbot/steps/source/cvs.py": [
+0,
+26,
+60,
+126,
+151,
+160,
+175,
+204,
+216,
+235,
+248,
+262
+],
+"buildbot:buildbot/steps/source/git.py": [
+0,
+97,
+204,
+228,
+237,
+246,
+257,
+276,
+297,
+306,
+370,
+391,
+423
+],
+"buildbot:buildbot/steps/source/mercurial.py": [
+0,
+105,
+152,
+188,
+197,
+251,
+280,
+298,
+314
+],
+"buildbot:buildbot/steps/source/oldsource.py": [
+0,
+26
+],
+"buildbot:buildbot/steps/source/svn.py": [
+0,
+86,
+257,
+295,
+373,
+397,
+416,
+463
+],
+"buildbot:buildbot/steps/subunit.py": [
+0
+],
+"buildbot:buildbot/steps/transfer.py": [
+0,
+171,
+218,
+293,
+299,
+366,
+418,
+489,
+549,
+560
+],
+"buildbot:buildbot/steps/trigger.py": [
+0,
+23,
+116,
+135,
+153,
+177,
+198
+],
+"buildbot:buildbot/steps/vstudio.py": [
+0,
+37,
+78,
+206,
+247,
+291,
+338,
+356,
+362
+],
+"buildbot:buildbot/test/__init__.py": [
+0
+],
+"buildbot:buildbot/test/fake/fakebuild.py": [
+0,
+21,
+32
+],
+"buildbot:buildbot/test/fake/fakedb.py": [
+80,
+98,
+110,
+132,
+143,
+154,
+164,
+179,
+189,
+196,
+212,
+224,
+242,
+254,
+266,
+277,
+289,
+300,
+317,
+325,
+443,
+497,
+513,
+599,
+776,
+852,
+975,
+1031
+],
+"buildbot:buildbot/test/fake/fakemaster.py": [
+0,
+31
+],
+"buildbot:buildbot/test/fake/remotecommand.py": [
+0,
+25,
+48,
+64
+],
+"buildbot:buildbot/test/fake/state.py": [
+0
+],
+"buildbot:buildbot/test/fake/web.py": [
+0,
+42
+],
+"buildbot:buildbot/test/regressions/test_bad_change_properties_rows.py": [
+0,
+21,
+30,
+44,
+47,
+59,
+62
+],
+"buildbot:buildbot/test/regressions/test_import_unicode_changes.py": [
+0,
+21,
+24,
+50,
+67,
+69,
+85,
+107
+],
+"buildbot:buildbot/test/regressions/test_oldpaths.py": [
+0
+],
+"buildbot:buildbot/test/regressions/test_shell_command_properties.py": [
+0,
+24,
+28,
+52,
+61,
+76,
+94
+],
+"buildbot:buildbot/test/regressions/test_sourcestamp_revision.py": [
+0,
+21
+],
+"buildbot:buildbot/test/regressions/test_steps_shell_WarningCountingShellCommand.py": [
+0,
+21
+],
+"buildbot:buildbot/test/regressions/test_unpickling.py": [
+0,
+24
+],
+"buildbot:buildbot/test/test_extra_coverage.py": [
+0
+],
+"buildbot:buildbot/test/unit/test_buildslave.py": [
+0,
+22,
+24
+],
+"buildbot:buildbot/test/unit/test_changes_base.py": [
+0,
+21,
+22,
+32,
+54,
+65,
+75
+],
+"buildbot:buildbot/test/unit/test_changes_bonsaipoller.py": [
+0,
+157,
+222,
+225,
+238,
+253,
+261
+],
+"buildbot:buildbot/test/unit/test_changes_filter.py": [
+0,
+23,
+29
+],
+"buildbot:buildbot/test/unit/test_changes_gerritchangesource.py": [
+0,
+21,
+58
+],
+"buildbot:buildbot/test/unit/test_changes_gitpoller.py": [
+0,
+46,
+51,
+54,
+60,
+67,
+69,
+74,
+80,
+106,
+113,
+148,
+151,
+154,
+157,
+165
+],
+"buildbot:buildbot/test/unit/test_changes_mail.py": [
+0,
+21,
+64,
+70,
+84,
+90
+],
+"buildbot:buildbot/test/unit/test_changes_mail_CVSMaildirSource.py": [
+0,
+73
+],
+"buildbot:buildbot/test/unit/test_changes_manager.py": [
+0,
+21,
+24,
+43,
+55
+],
+"buildbot:buildbot/test/unit/test_changes_p4poller.py": [
+0,
+78,
+95,
+143,
+150,
+204,
+206,
+225,
+227,
+244,
+250
+],
+"buildbot:buildbot/test/unit/test_changes_pb.py": [
+28,
+37,
+157,
+162,
+170,
+180,
+191,
+203,
+214,
+225,
+238,
+251,
+261,
+271
+],
+"buildbot:buildbot/test/unit/test_changes_svnpoller.py": [
+0,
+227,
+241,
+250,
+288,
+383,
+388,
+395,
+399,
+405,
+409,
+421,
+426,
+454,
+469,
+504
+],
+"buildbot:buildbot/test/unit/test_clients_sendchange.py": [
+0,
+23,
+75,
+87,
+101,
+114,
+137,
+171,
+208
+],
+"buildbot:buildbot/test/unit/test_clients_usersclient.py": [
+0,
+22,
+70,
+81
+],
+"buildbot:buildbot/test/unit/test_config.py": [
+0,
+53,
+57,
+61,
+66,
+72,
+98,
+126,
+312,
+594,
+700,
+726,
+733,
+905,
+1019,
+1031,
+1037,
+1047,
+1053,
+1081,
+1102
+],
+"buildbot:buildbot/test/unit/test_contrib_buildbot_cvs_mail.py": [
+0,
+83,
+108,
+155,
+166,
+178,
+188
+],
+"buildbot:buildbot/test/unit/test_db_base.py": [
+0,
+22,
+50,
+57,
+70
+],
+"buildbot:buildbot/test/unit/test_db_buildrequests.py": [
+0,
+25,
+54,
+92,
+104,
+130,
+167,
+208,
+242,
+294,
+308,
+311,
+323,
+386,
+388,
+414,
+415,
+436,
+439,
+451,
+477,
+482,
+506,
+509,
+517,
+638,
+639
+],
+"buildbot:buildbot/test/unit/test_db_builds.py": [
+0,
+23,
+32,
+60,
+70,
+84,
+101,
+102,
+123,
+124,
+147,
+148
+],
+"buildbot:buildbot/test/unit/test_db_buildsets.py": [
+0,
+24,
+38,
+62,
+63,
+95,
+96,
+132,
+165,
+183,
+201,
+216,
+233,
+242,
+264,
+280,
+297,
+298,
+315,
+316,
+333,
+335,
+346,
+348
+],
+"buildbot:buildbot/test/unit/test_db_changes.py": [
+0,
+27,
+38,
+122,
+131,
+134,
+142,
+149,
+152,
+159,
+162,
+169,
+172,
+192,
+193,
+210,
+211,
+222,
+223,
+234,
+235,
+262,
+263,
+271,
+272,
+279,
+280,
+287,
+288,
+317,
+318,
+326,
+327,
+334,
+335,
+342,
+343,
+356,
+367,
+382,
+413,
+414,
+437,
+438,
+457,
+467,
+477
+],
+"buildbot:buildbot/test/unit/test_db_connector.py": [
+0,
+80,
+94,
+101,
+103
+],
+"buildbot:buildbot/test/unit/test_db_enginestrategy.py": [
+0
+],
+"buildbot:buildbot/test/unit/test_db_migrate_versions_011_add_buildrequest_claims.py": [
+0,
+21,
+89,
+92
+],
+"buildbot:buildbot/test/unit/test_db_migrate_versions_015_remove_bad_master_objectid.py": [
+0,
+20,
+83,
+87,
+98,
+102,
+108,
+113,
+124,
+129
+],
+"buildbot:buildbot/test/unit/test_db_migrate_versions_016_restore_buildrequest_indices.py": [
+0,
+21,
+65,
+68
+],
+"buildbot:buildbot/test/unit/test_db_migrate_versions_017_restore_other_indices.py": [
+0,
+21,
+97,
+100
+],
+"buildbot:buildbot/test/unit/test_db_migrate_versions_018_add_sourcestampset.py": [
+0,
+22,
+139,
+143,
+164,
+168,
+190,
+194,
+209,
+213
+],
+"buildbot:buildbot/test/unit/test_db_migrate_versions_019_merge_schedulers_to_objects.py": [
+0,
+20,
+97,
+100
+],
+"buildbot:buildbot/test/unit/test_db_migrate_versions_020_remove_change_links.py": [
+0,
+20,
+51,
+54
+],
+"buildbot:buildbot/test/unit/test_db_migrate_versions_021_fix_postgres_sequences.py": [
+0,
+20,
+43,
+58
+],
+"buildbot:buildbot/test/unit/test_db_model.py": [
+0,
+30
+],
+"buildbot:buildbot/test/unit/test_db_pool.py": [
+0,
+24,
+37,
+41,
+47,
+51,
+53,
+59,
+62,
+65,
+71,
+75,
+81,
+85,
+87,
+100,
+103,
+109,
+126,
+133,
+151,
+164,
+170,
+179,
+194,
+199
+],
+"buildbot:buildbot/test/unit/test_db_schedulers.py": [
+0,
+21,
+29,
+40,
+58,
+72,
+73,
+94,
+95,
+113,
+114,
+129,
+130,
+146,
+158
+],
+"buildbot:buildbot/test/unit/test_db_sourcestamps.py": [
+0,
+21,
+30,
+50,
+51,
+82,
+83,
+112,
+113,
+146,
+163,
+181,
+196,
+209
+],
+"buildbot:buildbot/test/unit/test_db_sourcestampsets.py": [
+0,
+21,
+30,
+47,
+48
+],
+"buildbot:buildbot/test/unit/test_db_state.py": [
+0,
+21,
+29,
+41,
+43,
+59,
+69,
+75,
+82,
+84,
+91,
+98,
+110,
+122,
+124,
+135,
+136,
+152,
+154,
+166,
+167,
+181,
+187,
+188
+],
+"buildbot:buildbot/test/unit/test_db_users.py": [
+0,
+22,
+28,
+85,
+86,
+108,
+110,
+134,
+136,
+159,
+173,
+175,
+197,
+199,
+207,
+210,
+217,
+220,
+227,
+230,
+237,
+240,
+247,
+254,
+257,
+264,
+267,
+275,
+278,
+285,
+288,
+295,
+299,
+302,
+310,
+314,
+317,
+326,
+330,
+333,
+341,
+345,
+348,
+357,
+362,
+365,
+379,
+386,
+391,
+394,
+403,
+407,
+410,
+417,
+421,
+424,
+431,
+435,
+438,
+445,
+448,
+449,
+459,
+466,
+473,
+476
+],
+"buildbot:buildbot/test/unit/test_master.py": [
+0,
+32,
+37,
+80,
+109,
+118,
+164,
+174,
+195,
+216,
+222,
+238,
+261,
+276,
+283,
+292,
+300,
+308,
+320,
+335,
+385,
+399,
+405,
+421,
+464,
+482,
+501,
+519,
+529,
+543,
+552,
+561,
+570,
+577
+],
+"buildbot:buildbot/test/unit/test_pbmanager.py": [
+0,
+24,
+55,
+60,
+81,
+89
+],
+"buildbot:buildbot/test/unit/test_process_botmaster_BotMaster.py": [
+0,
+25,
+109,
+123,
+127,
+151
+],
+"buildbot:buildbot/test/unit/test_process_botmaster_BuildRequestDistributor.py": [
+0,
+24,
+29,
+41,
+61,
+78,
+89,
+93,
+102,
+111,
+120,
+132,
+147,
+157,
+169,
+191,
+200,
+211,
+218,
+233,
+240,
+251
+],
+"buildbot:buildbot/test/unit/test_process_botmaster_DuplicateSlaveArbitrator.py": [
+0,
+27,
+38,
+52,
+86,
+100,
+117,
+119,
+131,
+143,
+156,
+177,
+206,
+208
+],
+"buildbot:buildbot/test/unit/test_process_build.py": [
+0,
+28,
+32,
+41,
+52,
+61,
+69,
+72,
+75,
+109,
+142,
+150,
+157,
+174,
+203,
+244,
+277,
+304,
+312
+],
+"buildbot:buildbot/test/unit/test_process_builder.py": [
+0,
+27,
+54,
+130,
+135,
+363,
+385,
+437,
+439,
+449,
+455,
+461,
+466,
+474,
+482,
+484,
+494,
+500,
+506,
+511,
+643,
+682,
+716,
+722,
+742,
+790,
+799
+],
+"buildbot:buildbot/test/unit/test_process_buildrequest.py": [
+0,
+20,
+46,
+80,
+136
+],
+"buildbot:buildbot/test/unit/test_process_buildstep.py": [
+0,
+26,
+33,
+39,
+42,
+73,
+75,
+122,
+136,
+151,
+157,
+173,
+188
+],
+"buildbot:buildbot/test/unit/test_process_cache.py": [
+0,
+20,
+43
+],
+"buildbot:buildbot/test/unit/test_process_debug.py": [
+0,
+23,
+26,
+160,
+174
+],
+"buildbot:buildbot/test/unit/test_process_factory.py": [
+0,
+22
+],
+"buildbot:buildbot/test/unit/test_process_metrics.py": [
+0,
+22,
+37,
+63,
+71,
+95,
+100,
+112,
+126,
+161,
+206,
+213
+],
+"buildbot:buildbot/test/unit/test_process_properties.py": [
+0,
+24,
+32,
+40,
+253,
+345,
+475,
+483,
+486,
+492,
+532
+],
+"buildbot:buildbot/test/unit/test_process_users_manager.py": [
+0,
+22,
+25
+],
+"buildbot:buildbot/test/unit/test_process_users_manual.py": [
+0,
+32,
+55,
+67,
+69,
+87,
+89,
+109,
+111,
+132,
+134,
+152,
+154,
+168,
+170,
+189,
+191,
+206,
+219,
+233,
+245,
+254,
+262,
+268,
+279,
+281,
+290,
+292,
+304
+],
+"buildbot:buildbot/test/unit/test_process_users_users.py": [
+0,
+22,
+31,
+39,
+48,
+60,
+73,
+85,
+97,
+109,
+126,
+138,
+145
+],
+"buildbot:buildbot/test/unit/test_revlinks.py": [
+0,
+19,
+38,
+54,
+77
+],
+"buildbot:buildbot/test/unit/test_schedulers_base.py": [
+0,
+27,
+60,
+68,
+78,
+80,
+89,
+99,
+117,
+143,
+150,
+186,
+227,
+246,
+266,
+286,
+309,
+333,
+361,
+384,
+408,
+434
+],
+"buildbot:buildbot/test/unit/test_schedulers_basic.py": [
+0,
+24,
+37,
+47,
+57,
+64,
+102,
+127,
+142,
+154,
+166,
+181,
+254,
+288,
+295,
+317,
+337
+],
+"buildbot:buildbot/test/unit/test_schedulers_dependent.py": [
+0,
+24,
+37,
+72
+],
+"buildbot:buildbot/test/unit/test_schedulers_forcesched.py": [
+0,
+25,
+45,
+122,
+158
+],
+"buildbot:buildbot/test/unit/test_schedulers_manager.py": [
+0,
+22,
+29,
+48,
+64,
+70,
+79
+],
+"buildbot:buildbot/test/unit/test_schedulers_timed_Nightly.py": [
+0,
+26,
+39,
+52,
+60
+],
+"buildbot:buildbot/test/unit/test_schedulers_timed_Periodic.py": [
+0,
+21,
+31,
+47,
+51
+],
+"buildbot:buildbot/test/unit/test_schedulers_timed_Timed.py": [
+0,
+21,
+31
+],
+"buildbot:buildbot/test/unit/test_schedulers_triggerable.py": [
+0,
+22,
+79
+],
+"buildbot:buildbot/test/unit/test_schedulers_trysched.py": [
+0,
+29,
+44,
+64,
+75,
+317,
+334,
+353,
+356,
+368,
+376,
+395,
+426,
+450,
+474,
+485,
+490,
+516
+],
+"buildbot:buildbot/test/unit/test_scripts_checkconfig.py": [
+0,
+25
+],
+"buildbot:buildbot/test/unit/test_scripts_runner.py": [
+0,
+27,
+39,
+105,
+107,
+128,
+138,
+165,
+188,
+203,
+220,
+235,
+237,
+246,
+257,
+259,
+268,
+270,
+276,
+306,
+308,
+360,
+488,
+556,
+558,
+580,
+588,
+590,
+600,
+602,
+611,
+613,
+623,
+625,
+635,
+637,
+648,
+650,
+661,
+663,
+673,
+675,
+686,
+688,
+699,
+701,
+712,
+714,
+725,
+727,
+738,
+740,
+751,
+753,
+764,
+766,
+777,
+787,
+795,
+809
+],
+"buildbot:buildbot/test/unit/test_sourcestamp.py": [
+0,
+21,
+47,
+77,
+101
+],
+"buildbot:buildbot/test/unit/test_status_build.py": [
+0,
+23
+],
+"buildbot:buildbot/test/unit/test_status_buildstep.py": [
+0,
+21
+],
+"buildbot:buildbot/test/unit/test_status_client.py": [
+0,
+21,
+41
+],
+"buildbot:buildbot/test/unit/test_status_logfile.py": [
+0,
+25,
+49,
+164,
+264,
+311
+],
+"buildbot:buildbot/test/unit/test_status_mail.py": [
+0,
+26,
+34,
+43,
+149,
+152,
+157,
+297,
+317,
+319,
+323,
+336,
+367,
+371,
+376,
+424,
+428,
+446,
+474,
+480,
+498,
+511
+],
+"buildbot:buildbot/test/unit/test_status_master.py": [
+0,
+22,
+25,
+46
+],
+"buildbot:buildbot/test/unit/test_status_persistent_queue.py": [
+0,
+24
+],
+"buildbot:buildbot/test/unit/test_status_progress.py": [
+0,
+19
+],
+"buildbot:buildbot/test/unit/test_status_web_authz_Authz.py": [
+0,
+23,
+40,
+53,
+60,
+69,
+76,
+87,
+96,
+105,
+112,
+117,
+123,
+128,
+134,
+139,
+160,
+169,
+182
+],
+"buildbot:buildbot/test/unit/test_status_web_base.py": [
+0,
+22,
+26,
+36,
+46,
+55
+],
+"buildbot:buildbot/test/unit/test_status_web_change_hook.py": [
+0,
+23,
+35,
+46,
+57,
+64,
+73,
+110,
+133,
+135,
+142,
+152,
+162
+],
+"buildbot:buildbot/test/unit/test_status_web_change_hooks_github.py": [
+0,
+124,
+136,
+169,
+185,
+199
+],
+"buildbot:buildbot/test/unit/test_status_web_change_hooks_googlecode.py": [
+0,
+47,
+74
+],
+"buildbot:buildbot/test/unit/test_status_web_links.py": [
+0,
+57,
+151,
+186
+],
+"buildbot:buildbot/test/unit/test_status_words.py": [
+0,
+23,
+31,
+34,
+42,
+48,
+142,
+158,
+196,
+207,
+229,
+244,
+328,
+331,
+361,
+377,
+384
+],
+"buildbot:buildbot/test/unit/test_steps_blocker.py": [
+0
+],
+"buildbot:buildbot/test/unit/test_steps_master.py": [
+0,
+26,
+44
+],
+"buildbot:buildbot/test/unit/test_steps_maxq.py": [
+0,
+23
+],
+"buildbot:buildbot/test/unit/test_steps_python.py": [
+0,
+80,
+263,
+329
+],
+"buildbot:buildbot/test/unit/test_steps_python_twisted.py": [
+0,
+25
+],
+"buildbot:buildbot/test/unit/test_steps_shell.py": [
+0,
+28,
+266,
+311,
+366,
+386,
+402,
+418,
+434,
+441,
+525,
+585,
+618,
+636,
+657,
+672,
+677,
+701,
+720
+],
+"buildbot:buildbot/test/unit/test_steps_slave.py": [
+0,
+25,
+62,
+120,
+127,
+166
+],
+"buildbot:buildbot/test/unit/test_steps_source_bzr.py": [
+0,
+22
+],
+"buildbot:buildbot/test/unit/test_steps_source_cvs.py": [
+0,
+22
+],
+"buildbot:buildbot/test/unit/test_steps_source_git.py": [
+0,
+22
+],
+"buildbot:buildbot/test/unit/test_steps_source_mercurial.py": [
+0,
+23
+],
+"buildbot:buildbot/test/unit/test_steps_source_oldsource_Repo.py": [
+0,
+20
+],
+"buildbot:buildbot/test/unit/test_steps_source_oldsource_Source.py": [
+0,
+25,
+28,
+39,
+77,
+99
+],
+"buildbot:buildbot/test/unit/test_steps_source_svn.py": [
+0,
+25,
+1004
+],
+"buildbot:buildbot/test/unit/test_steps_subunit.py": [
+0,
+27,
+30
+],
+"buildbot:buildbot/test/unit/test_steps_transfer.py": [
+0,
+27,
+132,
+158,
+185
+],
+"buildbot:buildbot/test/unit/test_steps_trigger.py": [
+0,
+28,
+45,
+63,
+91,
+113,
+118,
+124,
+144,
+158,
+174,
+233,
+336
+],
+"buildbot:buildbot/test/unit/test_steps_vstudio.py": [
+0,
+46,
+73,
+178,
+218,
+314,
+322,
+407,
+493,
+532,
+586,
+592,
+634,
+658,
+682
+],
+"buildbot:buildbot/test/unit/test_util.py": [
+0,
+22,
+57,
+82,
+99,
+110,
+131
+],
+"buildbot:buildbot/test/unit/test_util_ComparableMixin.py": [
+0,
+22,
+23,
+28
+],
+"buildbot:buildbot/test/unit/test_util_bbcollections.py": [
+0,
+20,
+34
+],
+"buildbot:buildbot/test/unit/test_util_eventual.py": [
+0,
+22,
+43,
+61,
+78,
+88,
+99
+],
+"buildbot:buildbot/test/unit/test_util_loop.py": [
+0,
+24,
+40,
+57,
+68,
+77,
+84,
+93,
+101,
+108,
+113,
+121,
+129,
+136,
+146,
+152,
+158,
+159,
+170,
+174,
+186,
+187,
+192,
+196,
+208,
+218
+],
+"buildbot:buildbot/test/unit/test_util_lru.py": [
+0,
+24,
+26,
+29,
+127,
+195,
+279,
+286,
+292,
+300,
+306,
+318,
+324,
+331,
+333,
+335,
+372,
+383
+],
+"buildbot:buildbot/test/unit/test_util_maildir.py": [
+0,
+22,
+44,
+49,
+52,
+58,
+62
+],
+"buildbot:buildbot/test/unit/test_util_misc.py": [
+0,
+23,
+30,
+34,
+42,
+45,
+54,
+57,
+65,
+73,
+78,
+92,
+94,
+109,
+116,
+125
+],
+"buildbot:buildbot/test/unit/test_util_netstrings.py": [
+0,
+20
+],
+"buildbot:buildbot/test/unit/test_util_sautils.py": [
+0,
+19
+],
+"buildbot:buildbot/test/unit/test_util_subscriptions.py": [
+0,
+21,
+31,
+53
+],
+"buildbot:buildbot/test/util/change_import.py": [
+0,
+55
+],
+"buildbot:buildbot/test/util/changesource.py": [
+0,
+35,
+71
+],
+"buildbot:buildbot/test/util/compat.py": [
+0
+],
+"buildbot:buildbot/test/util/connector_component.py": [
+0,
+20,
+37,
+47
+],
+"buildbot:buildbot/test/util/db.py": [
+0,
+26,
+27,
+138
+],
+"buildbot:buildbot/test/util/dirs.py": [
+0,
+20
+],
+"buildbot:buildbot/test/util/gpo.py": [
+0,
+100,
+107
+],
+"buildbot:buildbot/test/util/migration.py": [
+0,
+33,
+40,
+54,
+69
+],
+"buildbot:buildbot/test/util/misc.py": [
+0,
+29
+],
+"buildbot:buildbot/test/util/pbmanager.py": [
+0,
+19,
+29
+],
+"buildbot:buildbot/test/util/querylog.py": [
+0,
+23,
+28
+],
+"buildbot:buildbot/test/util/scheduler.py": [
+0,
+20,
+39,
+121
+],
+"buildbot:buildbot/test/util/sourcesteps.py": [
+0
+],
+"buildbot:buildbot/test/util/steps.py": [
+0,
+82,
+110,
+125,
+131,
+138,
+146,
+212
+],
+"buildbot:buildbot/util/__init__.py": [
+0,
+29,
+34,
+62,
+79,
+106,
+117,
+151
+],
+"buildbot:buildbot/util/bbcollections.py": [
+0,
+21
+],
+"buildbot:buildbot/util/eventual.py": [
+0,
+22
+],
+"buildbot:buildbot/util/loop.py": [
+69,
+208,
+222
+],
+"buildbot:buildbot/util/lru.py": [
+0,
+101,
+150,
+167
+],
+"buildbot:buildbot/util/maildir.py": [
+0,
+32
+],
+"buildbot:buildbot/util/misc.py": [
+31,
+32,
+38,
+80,
+85
+],
+"buildbot:buildbot/util/monkeypatches.py": [
+0,
+30,
+33,
+42
+],
+"buildbot:buildbot/util/netstrings.py": [
+0
+],
+"buildbot:buildbot/util/sautils.py": [
+0,
+31,
+37
+]
+}
