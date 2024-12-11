@@ -77,6 +77,7 @@ public class PythonScanner extends Scanner {
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
   private final Map<PythonInputFile, Set<PythonCheck>> checksExecutedWithoutParsingByFiles = new HashMap<>();
+  private int recognitionErrorCount = 0;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
@@ -123,6 +124,7 @@ public class PythonScanner extends Scanner {
 
       LOG.error("Unable to parse file: " + inputFile);
       LOG.error(newMessage);
+      recognitionErrorCount++;
       context.newAnalysisError()
         .onFile(inputFile.wrappedFile())
         .at(inputFile.wrappedFile().newPointer(line, 0))
@@ -400,5 +402,9 @@ public class PythonScanner extends Scanner {
 
   private static TextRange rangeFromTextSpan(InputFile file, PythonTextEdit pythonTextEdit) {
     return file.newRange(pythonTextEdit.startLine(), pythonTextEdit.startLineOffset(), pythonTextEdit.endLine(), pythonTextEdit.endLineOffset());
+  }
+
+  public int getRecognitionErrorCount() {
+    return recognitionErrorCount;
   }
 }
