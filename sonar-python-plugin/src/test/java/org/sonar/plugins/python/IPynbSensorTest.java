@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -210,10 +211,18 @@ class IPynbSensorTest {
   }
 
   @Test
-  void test_notebook_sensor_is_excuted_on_json_file() {
+  void test_notebook_sensor_is_executed_on_json_file() {
     inputFile(NOTEBOOK_FILE);
     activeRules = new ActiveRulesBuilder().build();
-    assertDoesNotThrow(() -> notebookSensor().execute(context));
+    var sensor = notebookSensor();
+    assertDoesNotThrow(() -> sensor.execute(context));
+    assertThat(sensor.getSensorTelemetryStorage().data)
+      .containsExactlyInAnyOrderEntriesOf(Map.of(
+        SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY, "1",
+        SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY, "0",
+        SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY, "0",
+        SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY, "1",
+        SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY, "0"));
   }
 
   @Test
@@ -234,5 +243,12 @@ class IPynbSensorTest {
     sensor.execute(context);
     var logs = String.join("", logTester.logs());
     assertThat(logs).contains("Unable to parse file: notebook_parse_error.ipynbParse error at line 1");
+    assertThat(sensor.getSensorTelemetryStorage().data)
+      .containsExactlyInAnyOrderEntriesOf(Map.of(
+        SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY, "1",
+        SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY, "0",
+        SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY, "1",
+        SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY, "0",
+        SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY, "1"));
   }
 }
