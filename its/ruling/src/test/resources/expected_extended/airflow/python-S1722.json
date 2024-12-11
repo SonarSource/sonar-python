@@ -1,0 +1,332 @@
+{
+"airflow:airflow/api/auth/backend/kerberos_auth.py": [
+61
+],
+"airflow:airflow/api/client/api_client.py": [
+22
+],
+"airflow:airflow/api_connexion/schemas/connection_schema.py": [
+29
+],
+"airflow:airflow/api_connexion/schemas/dag_run_schema.py": [
+56,
+131
+],
+"airflow:airflow/api_connexion/schemas/dag_schema.py": [
+33,
+44
+],
+"airflow:airflow/api_connexion/schemas/error_schema.py": [
+28
+],
+"airflow:airflow/api_connexion/schemas/event_log_schema.py": [
+29
+],
+"airflow:airflow/api_connexion/schemas/pool_schema.py": [
+29
+],
+"airflow:airflow/api_connexion/schemas/role_and_permission_schema.py": [
+29,
+40,
+65,
+77
+],
+"airflow:airflow/api_connexion/schemas/sla_miss_schema.py": [
+26
+],
+"airflow:airflow/api_connexion/schemas/task_instance_schema.py": [
+35
+],
+"airflow:airflow/api_connexion/schemas/user_schema.py": [
+30
+],
+"airflow:airflow/api_connexion/schemas/xcom_schema.py": [
+28
+],
+"airflow:airflow/cli/cli_parser.py": [
+117
+],
+"airflow:airflow/cli/commands/info_command.py": [
+126,
+148,
+181
+],
+"airflow:airflow/cli/commands/standalone_command.py": [
+38
+],
+"airflow:airflow/decorators/__init__.py": [
+39
+],
+"airflow:airflow/executors/celery_executor.py": [
+147
+],
+"airflow:airflow/executors/executor_loader.py": [
+48
+],
+"airflow:airflow/executors/kubernetes_executor.py": [
+63
+],
+"airflow:airflow/executors/local_executor.py": [
+215,
+271
+],
+"airflow:airflow/jobs/backfill_job.py": [
+67
+],
+"airflow:airflow/kubernetes/kube_config.py": [
+23
+],
+"airflow:airflow/kubernetes/pod_generator.py": [
+88
+],
+"airflow:airflow/kubernetes/pod_generator_deprecated.py": [
+36,
+76
+],
+"airflow:airflow/kubernetes/pod_launcher_deprecated.py": [
+54
+],
+"airflow:airflow/lineage/__init__.py": [
+42
+],
+"airflow:airflow/lineage/backend.py": [
+25
+],
+"airflow:airflow/lineage/entities.py": [
+29,
+37,
+46,
+53,
+72
+],
+"airflow:airflow/listeners/listener.py": [
+35
+],
+"airflow:airflow/models/base.py": [
+44
+],
+"airflow:airflow/models/baseoperator.py": [
+98,
+145
+],
+"airflow:airflow/models/crypto.py": [
+40
+],
+"airflow:airflow/models/dag.py": [
+2983
+],
+"airflow:airflow/models/param.py": [
+31,
+203
+],
+"airflow:airflow/models/taskinstance.py": [
+2312
+],
+"airflow:airflow/models/taskmixin.py": [
+35
+],
+"airflow:airflow/plugins_manager.py": [
+87,
+129
+],
+"airflow:airflow/providers/amazon/aws/hooks/sagemaker.py": [
+37
+],
+"airflow:airflow/providers/apache/beam/hooks/beam.py": [
+33
+],
+"airflow:airflow/providers/cncf/kubernetes/backcompat/pod.py": [
+38,
+103
+],
+"airflow:airflow/providers/cncf/kubernetes/backcompat/pod_runtime_info_env.py": [
+34
+],
+"airflow:airflow/providers/cncf/kubernetes/backcompat/volume.py": [
+30
+],
+"airflow:airflow/providers/cncf/kubernetes/backcompat/volume_mount.py": [
+30
+],
+"airflow:airflow/providers/cncf/kubernetes/utils/pod_manager.py": [
+59
+],
+"airflow:airflow/providers/cncf/kubernetes/utils/xcom_sidecar.py": [
+27
+],
+"airflow:airflow/providers/databricks/hooks/databricks.py": [
+74
+],
+"airflow:airflow/providers/elasticsearch/log/es_task_handler.py": [
+362
+],
+"airflow:airflow/providers/google/cloud/hooks/bigquery.py": [
+2167
+],
+"airflow:airflow/providers/google/cloud/hooks/cloud_sql.py": [
+62
+],
+"airflow:airflow/providers/google/cloud/hooks/cloud_storage_transfer_service.py": [
+40,
+48
+],
+"airflow:airflow/providers/google/cloud/hooks/compute.py": [
+32
+],
+"airflow:airflow/providers/google/cloud/hooks/dataflow.py": [
+120,
+151
+],
+"airflow:airflow/providers/google/cloud/hooks/datafusion.py": [
+35
+],
+"airflow:airflow/providers/google/cloud/hooks/dataproc.py": [
+48
+],
+"airflow:airflow/providers/google/cloud/hooks/vision.py": [
+55
+],
+"airflow:airflow/providers/google/cloud/operators/bigquery.py": [
+97
+],
+"airflow:airflow/providers/google/cloud/operators/bigtable.py": [
+34
+],
+"airflow:airflow/providers/google/cloud/operators/cloud_build.py": [
+820
+],
+"airflow:airflow/providers/google/cloud/operators/cloud_storage_transfer_service.py": [
+63,
+129
+],
+"airflow:airflow/providers/google/cloud/operators/dataflow.py": [
+53
+],
+"airflow:airflow/providers/google/cloud/operators/dataproc.py": [
+95
+],
+"airflow:airflow/providers/google/cloud/operators/functions.py": [
+236
+],
+"airflow:airflow/providers/google/cloud/transfers/postgres_to_gcs.py": [
+33
+],
+"airflow:airflow/providers/google/cloud/transfers/presto_to_gcs.py": [
+27
+],
+"airflow:airflow/providers/google/cloud/transfers/trino_to_gcs.py": [
+27
+],
+"airflow:airflow/providers/google/cloud/utils/mlengine_prediction_summary.py": [
+120
+],
+"airflow:airflow/providers/imap/hooks/imap.py": [
+327
+],
+"airflow:airflow/providers/microsoft/azure/hooks/data_factory.py": [
+95
+],
+"airflow:airflow/providers/qubole/operators/qubole_check.py": [
+27
+],
+"airflow:airflow/providers/sftp/operators/sftp.py": [
+28
+],
+"airflow:airflow/sensors/smart_sensor.py": [
+51,
+163,
+203
+],
+"airflow:airflow/sentry.py": [
+30
+],
+"airflow:airflow/serialization/serialized_objects.py": [
+185,
+506,
+1109
+],
+"airflow:airflow/stats.py": [
+76,
+154,
+228,
+246,
+289
+],
+"airflow:airflow/templates.py": [
+23
+],
+"airflow:airflow/ti_deps/dep_context.py": [
+30
+],
+"airflow:airflow/ti_deps/deps/base_ti_dep.py": [
+25
+],
+"airflow:airflow/triggers/base.py": [
+81
+],
+"airflow:airflow/utils/callback_requests.py": [
+23
+],
+"airflow:airflow/utils/cli.py": [
+290
+],
+"airflow:airflow/utils/context.py": [
+45,
+69
+],
+"airflow:airflow/utils/log/log_reader.py": [
+31
+],
+"airflow:airflow/utils/log/logging_mixin.py": [
+38,
+58
+],
+"airflow:airflow/utils/mixins.py": [
+24
+],
+"airflow:airflow/utils/operator_helpers.py": [
+118
+],
+"airflow:airflow/utils/operator_resources.py": [
+30,
+105
+],
+"airflow:airflow/utils/sqlalchemy.py": [
+253
+],
+"airflow:airflow/utils/state.py": [
+77,
+207
+],
+"airflow:airflow/utils/task_group.py": [
+412
+],
+"airflow:airflow/utils/trigger_rule.py": [
+22
+],
+"airflow:airflow/utils/types.py": [
+23
+],
+"airflow:airflow/utils/weight_rule.py": [
+22
+],
+"airflow:airflow/www/extensions/init_appbuilder.py": [
+69
+],
+"airflow:airflow/www/fab_security/manager.py": [
+89
+],
+"airflow:airflow/www/utils.py": [
+447,
+610
+],
+"airflow:airflow/www/validators.py": [
+61
+],
+"airflow:airflow/www/views.py": [
+4818
+],
+"airflow:airflow/www/widgets.py": [
+30
+]
+}

@@ -1,0 +1,582 @@
+{
+"indico:indico/cli/python_upgrader.py": [
+20
+],
+"indico:indico/cli/setup.py": [
+316
+],
+"indico:indico/cli/watchman.py": [
+36,
+82
+],
+"indico:indico/core/cache.py": [
+22,
+84
+],
+"indico:indico/core/celery/core.py": [
+188
+],
+"indico:indico/core/config.py": [
+212
+],
+"indico:indico/core/db/sqlalchemy/attachments.py": [
+16
+],
+"indico:indico/core/db/sqlalchemy/colors.py": [
+53
+],
+"indico:indico/core/db/sqlalchemy/custom/ip_network.py": [
+14
+],
+"indico:indico/core/db/sqlalchemy/descriptions.py": [
+35
+],
+"indico:indico/core/db/sqlalchemy/links.py": [
+68
+],
+"indico:indico/core/db/sqlalchemy/locations.py": [
+16
+],
+"indico:indico/core/db/sqlalchemy/notes.py": [
+13
+],
+"indico:indico/core/db/sqlalchemy/principals.py": [
+64,
+107
+],
+"indico:indico/core/db/sqlalchemy/protection.py": [
+37
+],
+"indico:indico/core/db/sqlalchemy/review_questions.py": [
+24
+],
+"indico:indico/core/db/sqlalchemy/review_ratings.py": [
+15
+],
+"indico:indico/core/db/sqlalchemy/searchable.py": [
+41
+],
+"indico:indico/core/emails_test.py": [
+14
+],
+"indico:indico/core/limiter.py": [
+16
+],
+"indico:indico/core/logger.py": [
+22,
+29,
+58
+],
+"indico:indico/core/oauth/oauth2_test.py": [
+29,
+44
+],
+"indico:indico/core/permissions.py": [
+18
+],
+"indico:indico/core/settings/converters.py": [
+18
+],
+"indico:indico/core/settings/models/base.py": [
+25
+],
+"indico:indico/core/settings/models/settings.py": [
+16
+],
+"indico:indico/core/settings/proxy.py": [
+18,
+36,
+275,
+317,
+333
+],
+"indico:indico/core/storage/backend.py": [
+57,
+206
+],
+"indico:indico/core/storage/models.py": [
+29,
+90
+],
+"indico:indico/legacy/pdfinterface/base.py": [
+37,
+354
+],
+"indico:indico/legacy/pdfinterface/conference.py": [
+140
+],
+"indico:indico/legacy/pdfinterface/latex.py": [
+40,
+131
+],
+"indico:indico/modules/admin/notices.py": [
+48,
+55,
+56,
+98
+],
+"indico:indico/modules/attachments/controllers/management/base.py": [
+60,
+75,
+105,
+158
+],
+"indico:indico/modules/attachments/controllers/util.py": [
+15,
+36
+],
+"indico:indico/modules/attachments/forms.py": [
+76
+],
+"indico:indico/modules/attachments/models/legacy_mapping.py": [
+14
+],
+"indico:indico/modules/attachments/preview.py": [
+16
+],
+"indico:indico/modules/auth/controllers.py": [
+395
+],
+"indico:indico/modules/categories/controllers/display.py": [
+497
+],
+"indico:indico/modules/categories/schemas.py": [
+16,
+22,
+28,
+34
+],
+"indico:indico/modules/core/controllers.py": [
+190
+],
+"indico:indico/modules/designer/controllers.py": [
+89,
+134
+],
+"indico:indico/modules/designer/pdf.py": [
+53
+],
+"indico:indico/modules/events/abstracts/controllers/base.py": [
+20
+],
+"indico:indico/modules/events/abstracts/controllers/common.py": [
+25,
+46,
+65,
+77
+],
+"indico:indico/modules/events/abstracts/forms.py": [
+515,
+557,
+590,
+605,
+609
+],
+"indico:indico/modules/events/abstracts/models/call_for_abstracts.py": [
+14
+],
+"indico:indico/modules/events/abstracts/schemas.py": [
+29,
+37,
+43,
+56,
+64,
+87
+],
+"indico:indico/modules/events/agreements/base.py": [
+20,
+47
+],
+"indico:indico/modules/events/api.py": [
+142
+],
+"indico:indico/modules/events/cloning.py": [
+17
+],
+"indico:indico/modules/events/contributions/controllers/common.py": [
+13
+],
+"indico:indico/modules/events/contributions/controllers/management.py": [
+737
+],
+"indico:indico/modules/events/contributions/models/contributions.py": [
+54
+],
+"indico:indico/modules/events/contributions/models/contributions_test.py": [
+16
+],
+"indico:indico/modules/events/contributions/schemas.py": [
+18,
+24,
+34
+],
+"indico:indico/modules/events/editing/controllers/base.py": [
+24
+],
+"indico:indico/modules/events/editing/schemas.py": [
+60,
+72,
+92,
+111,
+131,
+151,
+202,
+240,
+250,
+265,
+312,
+337,
+388,
+420,
+441
+],
+"indico:indico/modules/events/export.py": [
+140,
+383
+],
+"indico:indico/modules/events/export_test.py": [
+25
+],
+"indico:indico/modules/events/features/base.py": [
+12
+],
+"indico:indico/modules/events/layout/models/menu.py": [
+39
+],
+"indico:indico/modules/events/layout/util.py": [
+58
+],
+"indico:indico/modules/events/management/controllers/base.py": [
+23,
+47
+],
+"indico:indico/modules/events/management/controllers/cloning.py": [
+61
+],
+"indico:indico/modules/events/management/util.py": [
+21
+],
+"indico:indico/modules/events/models/persons.py": [
+26,
+69
+],
+"indico:indico/modules/events/models/reviews.py": [
+15,
+64,
+106,
+171,
+178
+],
+"indico:indico/modules/events/models/settings.py": [
+16
+],
+"indico:indico/modules/events/papers/models/call_for_papers.py": [
+17
+],
+"indico:indico/modules/events/papers/models/reviews.py": [
+38
+],
+"indico:indico/modules/events/papers/schemas.py": [
+40,
+49,
+108,
+131,
+139,
+160,
+192
+],
+"indico:indico/modules/events/payment/models/transactions.py": [
+60
+],
+"indico:indico/modules/events/payment/plugins.py": [
+42
+],
+"indico:indico/modules/events/persons/schemas.py": [
+49
+],
+"indico:indico/modules/events/registration/controllers/__init__.py": [
+16,
+32
+],
+"indico:indico/modules/events/registration/controllers/display.py": [
+226
+],
+"indico:indico/modules/events/registration/controllers/management/fields.py": [
+25
+],
+"indico:indico/modules/events/registration/fields/base.py": [
+32
+],
+"indico:indico/modules/events/registration/schemas.py": [
+18,
+27
+],
+"indico:indico/modules/events/registration/stats.py": [
+16,
+113
+],
+"indico:indico/modules/events/requests/base.py": [
+39
+],
+"indico:indico/modules/events/requests/controllers.py": [
+22
+],
+"indico:indico/modules/events/schemas.py": [
+21
+],
+"indico:indico/modules/events/sessions/schemas.py": [
+18,
+26
+],
+"indico:indico/modules/events/settings.py": [
+189
+],
+"indico:indico/modules/events/static/offline.py": [
+75
+],
+"indico:indico/modules/events/static/views.py": [
+23
+],
+"indico:indico/modules/events/surveys/fields/choices.py": [
+18
+],
+"indico:indico/modules/events/timetable/forms.py": [
+32
+],
+"indico:indico/modules/events/timetable/legacy.py": [
+22
+],
+"indico:indico/modules/events/timetable/reschedule.py": [
+38
+],
+"indico:indico/modules/events/tracks/schemas.py": [
+15
+],
+"indico:indico/modules/events/util.py": [
+218,
+639
+],
+"indico:indico/modules/files/controllers.py": [
+24
+],
+"indico:indico/modules/files/schemas.py": [
+13,
+19
+],
+"indico:indico/modules/groups/core.py": [
+26
+],
+"indico:indico/modules/legal/views.py": [
+14
+],
+"indico:indico/modules/logs/controllers.py": [
+55
+],
+"indico:indico/modules/logs/renderers.py": [
+13
+],
+"indico:indico/modules/rb/models/reservations.py": [
+51
+],
+"indico:indico/modules/rb/notifications/reservations.py": [
+44
+],
+"indico:indico/modules/rb/schemas.py": [
+49,
+55,
+63,
+72,
+124,
+130,
+140,
+173,
+181,
+196,
+202,
+217,
+238,
+258,
+275,
+292,
+298,
+306,
+314,
+323,
+352,
+361,
+367,
+375,
+381,
+406,
+424,
+441
+],
+"indico:indico/modules/search/base.py": [
+46,
+52,
+60
+],
+"indico:indico/modules/search/result_schemas.py": [
+26,
+296
+],
+"indico:indico/modules/search/schemas.py": [
+26,
+34,
+68,
+83,
+100,
+119,
+147
+],
+"indico:indico/modules/search/views.py": [
+15
+],
+"indico:indico/modules/users/controllers.py": [
+686
+],
+"indico:indico/modules/users/ext.py": [
+8
+],
+"indico:indico/modules/users/models/users.py": [
+71
+],
+"indico:indico/modules/users/schemas.py": [
+18,
+25
+],
+"indico:indico/modules/vc/controllers.py": [
+73
+],
+"indico:indico/modules/vc/plugins.py": [
+26
+],
+"indico:indico/util/benchmark.py": [
+14
+],
+"indico:indico/util/countries_test.py": [
+13
+],
+"indico:indico/util/locators.py": [
+13
+],
+"indico:indico/util/locators_test.py": [
+21,
+26,
+37,
+56,
+88
+],
+"indico:indico/util/mathjax.py": [
+11
+],
+"indico:indico/util/passwords.py": [
+18,
+46,
+77
+],
+"indico:indico/util/passwords_test.py": [
+28
+],
+"indico:indico/util/placeholders.py": [
+19
+],
+"indico:indico/util/roles.py": [
+23,
+86
+],
+"indico:indico/util/rules.py": [
+13
+],
+"indico:indico/util/string_test.py": [
+98
+],
+"indico:indico/vendor/django_mail/backends/base.py": [
+19
+],
+"indico:indico/vendor/django_mail/message.py": [
+136,
+204
+],
+"indico:indico/vendor/django_mail/utils.py": [
+26
+],
+"indico:indico/web/args_test.py": [
+22,
+275
+],
+"indico:indico/web/breadcrumbs.py": [
+18
+],
+"indico:indico/web/fields/base.py": [
+25
+],
+"indico:indico/web/fields/choices.py": [
+29,
+88
+],
+"indico:indico/web/fields/simple.py": [
+17,
+25,
+53,
+66,
+82
+],
+"indico:indico/web/flask/templating.py": [
+140
+],
+"indico:indico/web/flask/util.py": [
+326
+],
+"indico:indico/web/forms/base.py": [
+29,
+89,
+229,
+282,
+324
+],
+"indico:indico/web/forms/fields/enums.py": [
+16
+],
+"indico:indico/web/forms/validators.py": [
+19,
+40,
+77,
+113,
+125,
+172,
+221,
+254,
+306,
+319,
+342,
+403
+],
+"indico:indico/web/forms/widgets.py": [
+24,
+61
+],
+"indico:indico/web/http_api/hooks/base.py": [
+36,
+202
+],
+"indico:indico/web/http_api/metadata/serializer.py": [
+8
+],
+"indico:indico/web/http_api/responses.py": [
+23
+],
+"indico:indico/web/menu.py": [
+16,
+60,
+103
+],
+"indico:indico/web/rh.py": [
+41,
+349
+],
+"indico:indico/web/views.py": [
+84,
+158
+]
+}

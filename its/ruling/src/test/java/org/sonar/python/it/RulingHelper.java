@@ -24,7 +24,6 @@ import com.sonar.orchestrator.locator.MavenLocation;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.List;
 import org.sonarqube.ws.Measures;
 import org.sonarqube.ws.client.HttpConnector;
@@ -84,68 +83,6 @@ class RulingHelper {
     Files.write(file.toPath(), profile.getBytes());
     orchestrator.getServer().restoreProfile(FileLocation.of(file));
     file.delete();
-  }
-
-  // TODO: SONARPY-984, read rules metadata instead of hardcoding this list
-  static List<String> bugRuleKeys() {
-    return Arrays.asList(
-      "PreIncrementDecrement",
-      "S935",
-      "S1045",
-      "S1143",
-      "S1226",
-      "S1656",
-      "S1716",
-      "S1751",
-      "S1763",
-      "S1764",
-      "S1862",
-      "S2159",
-      "S2190",
-      "S2201",
-      "S2275",
-      "S2711",
-      "S2712",
-      "S2734",
-      "S2757",
-      "S2823",
-      "S2876",
-      "S3403",
-      "S3699",
-      "S3827",
-      "S3862",
-      "S3923",
-      "S3981",
-      "S3984",
-      "S4143",
-      "S5549",
-      "S5607",
-      "S5632",
-      "S5642",
-      "S5644",
-      "S5707",
-      "S5708",
-      "S5714",
-      "S5719",
-      "S5722",
-      "S5724",
-      "S5756",
-      "S5796",
-      "S5807",
-      "S5828",
-      "S5842",
-      "S5850",
-      "S5855",
-      "S5856",
-      "S5868",
-      "S5996",
-      "S6002",
-      "S6323",
-      "S6328",
-      "S6468",
-      "S6662",
-      "S905",
-      "S930");
   }
 
   static Measures.Measure getMeasure(Orchestrator orchestrator, String branch, String componentKey, String metricKey) {
