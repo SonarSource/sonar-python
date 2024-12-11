@@ -167,8 +167,8 @@ ruling_task:
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
     <<: *QA_CONTAINER_DEFINITION
-    cpu: 4
-    memory: 8G
+    cpu: 16
+    memory: 32G
   env:
     CIRRUS_CLONE_DEPTH: 10
     SONARSOURCE_QA: true
