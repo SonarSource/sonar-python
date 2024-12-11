@@ -45,7 +45,8 @@ class RulingHelper {
       .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
       .setEdition(sonarEdition)
       .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
-      .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.11.0.2659"));
+      .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.11.0.2659"))
+      .setServerProperty("sonar.telemetry.enable", "false"); // Disable telemetry waiting for ORCH-497
 
     if (sonarEdition != Edition.COMMUNITY) {
       builder.activateLicense();

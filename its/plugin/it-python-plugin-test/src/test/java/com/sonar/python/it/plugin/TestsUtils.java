@@ -50,6 +50,8 @@ public final class TestsUtils {
     .useDefaultAdminCredentialsForBuilds(true)
     .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(PLUGIN_LOCATION)
+    .setServerProperty("sonar.telemetry.enable", "false") // Disable telemetry waiting for ORCH-497
+
     // Custom rules plugin
     .addPlugin(FileLocation.byWildcardMavenFilename(new File("../python-custom-rules-plugin/target"), "python-custom-rules-plugin-*.jar"))
     .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../../docs/python-custom-rules-example/target"), "python-custom-rules-example-*.jar"))
