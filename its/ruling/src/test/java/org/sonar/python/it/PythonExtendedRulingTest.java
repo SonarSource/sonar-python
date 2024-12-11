@@ -32,7 +32,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
-// Ruling test for bug rules, to ensure they are properly tested without slowing down the CI
 class PythonExtendedRulingTest {
 
   @RegisterExtension
