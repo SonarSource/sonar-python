@@ -35,7 +35,6 @@ public class SensorTelemetryStorage {
 
   public SensorTelemetryStorage() {
     data = new HashMap<>();
-    data.put(NOTEBOOK_PRESENT_KEY.key(), "false");
   }
 
   public Map<String, String> data() {
