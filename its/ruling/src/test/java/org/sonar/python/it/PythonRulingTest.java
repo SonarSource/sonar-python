@@ -17,6 +17,9 @@
 package org.sonar.python.it;
 
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.orchestrator.version.Version;
+import com.sonar.orchestrator.build.SonarScannerInstaller;
+import com.sonar.orchestrator.config.Configuration;
 import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
@@ -26,17 +29,21 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.sonarsource.analyzer.commons.ProfileGenerator;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
-// Ruling test for bug rules, to ensure they are properly tested without slowing down the CI
+@Execution(ExecutionMode.CONCURRENT)
 class PythonRulingTest {
+
 
   @RegisterExtension
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
+  public static final Configuration CONFIGURATION = ORCHESTRATOR.getConfiguration();
 
   private static final String PROFILE_NAME = "rules";
 
@@ -50,6 +57,11 @@ class PythonRulingTest {
     ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(profileFile));
     File iPythonProfileFile = ProfileGenerator.generateProfile(serverUrl, "ipynb", "ipython", parameters, Collections.emptySet());
     ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(iPythonProfileFile));
+  }
+
+  @BeforeAll
+  static void install_sonar_scanner() {
+    new SonarScannerInstaller(CONFIGURATION.locators()).install(Version.create(SonarScanner.DEFAULT_SCANNER_VERSION), CONFIGURATION.fileSystem().workspace());
   }
 
   @Test
