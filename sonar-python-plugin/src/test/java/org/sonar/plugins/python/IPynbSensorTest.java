@@ -223,7 +223,7 @@ class IPynbSensorTest {
     var sensorTelemetryStorage = spy(new SensorTelemetryStorage());
     var sensor = spy(notebookSensor(sensorTelemetryStorage));
     assertDoesNotThrow(() -> sensor.execute(context));
-    assertThat(sensor.getSensorTelemetryStorage().data)
+    assertThat(sensor.getSensorTelemetryStorage().data())
       .containsExactlyInAnyOrderEntriesOf(Map.of(
         SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY.key(), "1",
         SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "0",
@@ -250,7 +250,7 @@ class IPynbSensorTest {
     sensor.execute(context);
     var logs = String.join("", logTester.logs());
     assertThat(logs).contains("Unable to parse file: notebook_parse_error.ipynbParse error at line 1");
-    assertThat(sensor.getSensorTelemetryStorage().data)
+    assertThat(sensor.getSensorTelemetryStorage().data())
       .containsExactlyInAnyOrderEntriesOf(Map.of(
         SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY.key(), "1",
         SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY.key(), "1",

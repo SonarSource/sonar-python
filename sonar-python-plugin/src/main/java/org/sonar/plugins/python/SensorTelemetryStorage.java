@@ -16,6 +16,7 @@
  */
 package org.sonar.plugins.python;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -29,11 +30,16 @@ public class SensorTelemetryStorage {
   public static final MetricKey NOTEBOOK_TOTAL_KEY = new MetricKey("python.notebook.total");
   public static final MetricKey NOTEBOOK_RECOGNITION_ERROR_KEY = new MetricKey("python.notebook.recognition_error");
   public static final MetricKey NOTEBOOK_EXCEPTION_KEY = new MetricKey("python.notebook.exceptions");
-  final Map<String, String> data;
+
+  private final Map<String, String> data;
 
   public SensorTelemetryStorage() {
     data = new HashMap<>();
     data.put(NOTEBOOK_PRESENT_KEY.key(), "false");
+  }
+
+  public Map<String, String> data() {
+    return Collections.unmodifiableMap(data);
   }
 
   public void send(SensorContext sensorContext) {
