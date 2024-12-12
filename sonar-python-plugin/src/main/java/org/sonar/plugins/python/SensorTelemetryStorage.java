@@ -27,7 +27,6 @@ public class SensorTelemetryStorage {
 
   public static final MetricKey NOTEBOOK_PRESENT_KEY = new MetricKey("python.notebook.present");
   public static final MetricKey NOTEBOOK_TOTAL_KEY = new MetricKey("python.notebook.total");
-  public static final MetricKey NOTEBOOK_PARSE_ERROR_KEY = new MetricKey("python.notebook.parse_error");
   public static final MetricKey NOTEBOOK_RECOGNITION_ERROR_KEY = new MetricKey("python.notebook.recognition_error");
   public static final MetricKey NOTEBOOK_EXCEPTION_KEY = new MetricKey("python.notebook.exceptions");
   final Map<String, String> data;

@@ -58,6 +58,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class IPynbSensorTest {
@@ -168,12 +170,16 @@ class IPynbSensorTest {
     assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_313);
   }
 
-  private IPynbSensor notebookSensor() {
+  private IPynbSensor notebookSensor(SensorTelemetryStorage sensorTelemetryStorage) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class));
+    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), sensorTelemetryStorage);
+  }
+
+  private IPynbSensor notebookSensor() {
+    return notebookSensor(new SensorTelemetryStorage());
   }
 
   @Test
@@ -214,15 +220,16 @@ class IPynbSensorTest {
   void test_notebook_sensor_is_executed_on_json_file() {
     inputFile(NOTEBOOK_FILE);
     activeRules = new ActiveRulesBuilder().build();
-    var sensor = notebookSensor();
+    var sensorTelemetryStorage = spy(new SensorTelemetryStorage());
+    var sensor = spy(notebookSensor(sensorTelemetryStorage));
     assertDoesNotThrow(() -> sensor.execute(context));
     assertThat(sensor.getSensorTelemetryStorage().data)
       .containsExactlyInAnyOrderEntriesOf(Map.of(
         SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY.key(), "1",
         SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "0",
-        SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY.key(), "0",
         SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY.key(), "1",
         SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY.key(), "0"));
+    verify(sensorTelemetryStorage, Mockito.times(1)).send(context);
   }
 
   @Test
@@ -246,7 +253,6 @@ class IPynbSensorTest {
     assertThat(sensor.getSensorTelemetryStorage().data)
       .containsExactlyInAnyOrderEntriesOf(Map.of(
         SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY.key(), "1",
-        SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY.key(), "0",
         SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY.key(), "1",
         SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY.key(), "0",
         SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "1"));

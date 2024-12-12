@@ -47,24 +47,24 @@ public final class IPynbSensor implements Sensor {
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
   private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
-
-  public SensorTelemetryStorage getSensorTelemetryStorage() {
-    return sensorTelemetryStorage;
-  }
-
   private final SensorTelemetryStorage sensorTelemetryStorage;
 
-  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, @Nullable PythonIndexer indexer) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, indexer, new SensorTelemetryStorage());
   }
 
-  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, @Nullable PythonIndexer indexer) {
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter mock, SensorTelemetryStorage sensorTelemetryStorage) {
+    this(fileLinesContextFactory, checkFactory, mock, null, sensorTelemetryStorage);
+  }
+
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, @Nullable PythonIndexer indexer,
+    SensorTelemetryStorage sensorTelemetryStorage) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, CheckList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;
-    this.sensorTelemetryStorage = new SensorTelemetryStorage();
+    this.sensorTelemetryStorage = sensorTelemetryStorage;
   }
 
   @Override
@@ -104,18 +104,13 @@ public final class IPynbSensor implements Sensor {
     List<PythonInputFile> generatedIPythonFiles = new ArrayList<>();
 
     sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY, String.valueOf(pythonFiles.size()));
-    var numberOfFailedParsing = 0;
     var numberOfExceptions = 0;
 
     for (PythonInputFile inputFile : pythonFiles) {
       try {
         sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY, "1");
         var result = IpynbNotebookParser.parseNotebook(inputFile);
-        if (result.isPresent()) {
-          generatedIPythonFiles.add(result.get());
-        } else {
-          numberOfFailedParsing++;
-        }
+        result.ifPresent(generatedIPythonFiles::add);
       } catch (Exception e) {
         numberOfExceptions++;
         if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isErrorOnTestFile(inputFile)) {
@@ -124,7 +119,6 @@ public final class IPynbSensor implements Sensor {
       }
     }
 
-    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY, String.valueOf(numberOfFailedParsing));
     sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY, String.valueOf(numberOfExceptions));
 
     return generatedIPythonFiles;
@@ -147,4 +141,9 @@ public final class IPynbSensor implements Sensor {
   private static boolean isErrorOnTestFile(PythonInputFile inputFile) {
     return inputFile.wrappedFile().type() == InputFile.Type.TEST;
   }
+
+  public SensorTelemetryStorage getSensorTelemetryStorage() {
+    return sensorTelemetryStorage;
+  }
+
 }
