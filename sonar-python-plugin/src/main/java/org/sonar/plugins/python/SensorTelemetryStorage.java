@@ -25,20 +25,36 @@ import org.sonar.api.batch.sensor.SensorContext;
 public class SensorTelemetryStorage {
   private static final Logger LOG = LoggerFactory.getLogger(SensorTelemetryStorage.class);
 
-  public static final String NOTEBOOK_PRESENT_KEY = "python.notebook.present";
-  public static final String NOTEBOOK_TOTAL_KEY = "python.notebook.total";
-  public static final String NOTEBOOK_PARSE_ERROR_KEY = "python.notebook.parse_error";
-  public static final String NOTEBOOK_RECOGNITION_ERROR_KEY = "python.notebook.recognition_error";
-  public static final String NOTEBOOK_EXCEPTION_KEY = "python.notebook.exceptions";
+  public static final MetricKey NOTEBOOK_PRESENT_KEY = new MetricKey("python.notebook.present");
+  public static final MetricKey NOTEBOOK_TOTAL_KEY = new MetricKey("python.notebook.total");
+  public static final MetricKey NOTEBOOK_PARSE_ERROR_KEY = new MetricKey("python.notebook.parse_error");
+  public static final MetricKey NOTEBOOK_RECOGNITION_ERROR_KEY = new MetricKey("python.notebook.recognition_error");
+  public static final MetricKey NOTEBOOK_EXCEPTION_KEY = new MetricKey("python.notebook.exceptions");
   final Map<String, String> data;
 
   public SensorTelemetryStorage() {
     data = new HashMap<>();
-    data.put(NOTEBOOK_PRESENT_KEY, "false");
+    data.put(NOTEBOOK_PRESENT_KEY.key(), "false");
   }
 
   public void send(SensorContext sensorContext) {
     data.forEach(sensorContext::addTelemetryProperty);
     data.forEach((k, v) -> LOG.info("Metrics property: {}={}", k, v));
+  }
+
+  public void updateMetric(MetricKey key, String value) {
+    data.put(key.key(), value);
+  }
+
+  static class MetricKey {
+    private final String key;
+
+    private MetricKey(String key) {
+      this.key = key;
+    }
+
+    public String key() {
+      return key;
+    }
   }
 }

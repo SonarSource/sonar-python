@@ -97,21 +97,25 @@ public final class IPynbSensor implements Sensor {
     PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), pythonIndexer);
     scanner.execute(pythonFiles, context);
-    sensorTelemetryStorage.data.put(SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY, String.valueOf(scanner.getRecognitionErrorCount()));
+    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY, String.valueOf(scanner.getRecognitionErrorCount()));
   }
 
   private List<PythonInputFile> parseNotebooks(List<PythonInputFile> pythonFiles, SensorContext context) {
     List<PythonInputFile> generatedIPythonFiles = new ArrayList<>();
 
-    sensorTelemetryStorage.data.put(SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY, String.valueOf(pythonFiles.size()));
-    final int[] numberOfFailedParsing = {0};
+    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY, String.valueOf(pythonFiles.size()));
+    var numberOfFailedParsing = 0;
     var numberOfExceptions = 0;
 
     for (PythonInputFile inputFile : pythonFiles) {
       try {
-        sensorTelemetryStorage.data.put(SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY, "1");
+        sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY, "1");
         var result = IpynbNotebookParser.parseNotebook(inputFile);
-        result.ifPresentOrElse(generatedIPythonFiles::add, () -> numberOfFailedParsing[0]++);
+        if (result.isPresent()) {
+          generatedIPythonFiles.add(result.get());
+        } else {
+          numberOfFailedParsing++;
+        }
       } catch (Exception e) {
         numberOfExceptions++;
         if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isErrorOnTestFile(inputFile)) {
@@ -120,8 +124,8 @@ public final class IPynbSensor implements Sensor {
       }
     }
 
-    sensorTelemetryStorage.data.put(SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY, String.valueOf(numberOfFailedParsing[0]));
-    sensorTelemetryStorage.data.put(SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY, String.valueOf(numberOfExceptions));
+    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY, String.valueOf(numberOfFailedParsing));
+    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY, String.valueOf(numberOfExceptions));
 
     return generatedIPythonFiles;
   }

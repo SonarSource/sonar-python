@@ -218,11 +218,11 @@ class IPynbSensorTest {
     assertDoesNotThrow(() -> sensor.execute(context));
     assertThat(sensor.getSensorTelemetryStorage().data)
       .containsExactlyInAnyOrderEntriesOf(Map.of(
-        SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY, "1",
-        SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY, "0",
-        SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY, "0",
-        SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY, "1",
-        SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY, "0"));
+        SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY.key(), "1",
+        SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "0",
+        SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY.key(), "0",
+        SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY.key(), "1",
+        SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY.key(), "0"));
   }
 
   @Test
@@ -236,7 +236,7 @@ class IPynbSensorTest {
   }
 
   @Test
-  void test_notebook_sensor_parse_error_on_valid_line(){
+  void test_notebook_sensor_parse_error_on_valid_line() {
     inputFile("notebook_parse_error.ipynb");
     activeRules = new ActiveRulesBuilder().build();
     var sensor = notebookSensor();
@@ -245,10 +245,10 @@ class IPynbSensorTest {
     assertThat(logs).contains("Unable to parse file: notebook_parse_error.ipynbParse error at line 1");
     assertThat(sensor.getSensorTelemetryStorage().data)
       .containsExactlyInAnyOrderEntriesOf(Map.of(
-        SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY, "1",
-        SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY, "0",
-        SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY, "1",
-        SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY, "0",
-        SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY, "1"));
+        SensorTelemetryStorage.NOTEBOOK_PRESENT_KEY.key(), "1",
+        SensorTelemetryStorage.NOTEBOOK_PARSE_ERROR_KEY.key(), "0",
+        SensorTelemetryStorage.NOTEBOOK_TOTAL_KEY.key(), "1",
+        SensorTelemetryStorage.NOTEBOOK_EXCEPTION_KEY.key(), "0",
+        SensorTelemetryStorage.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "1"));
   }
 }
