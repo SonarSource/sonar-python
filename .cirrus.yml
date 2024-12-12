@@ -125,8 +125,9 @@ build_win_task:
   depends_on:
     - build
   maven_cache:
-    #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
-    folder: ~/.m2/repository
+    # windows cache is buggy if using ${CIRRUS_WORKING_DIR}
+    # Additionally "~" seems to resolve differently in the context of the cache and the context of the build_script below
+    folder: C:/.m2/repository
   build_script:
     - git config --global core.autocrlf input
     - git submodule update --init
@@ -136,7 +137,7 @@ build_win_task:
     - cd -
     - source cirrus-env CI
     - unset SONARSOURCE_QA
-    - mvn.cmd package -DskipTypeshed=true -DfailStubGenerationFast=true
+    - mvn.cmd package -Dmaven.repo.local=C:/.m2/repository -DskipTypeshed=true -DfailStubGenerationFast=true
 
 ws_scan_task:
   depends_on:
