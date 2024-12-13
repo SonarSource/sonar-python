@@ -24,9 +24,7 @@ import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.sonarqube.ws.Measures.Measure;
 
-import static com.sonar.python.it.plugin.TestsUtils.getMeasure;
 import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsDouble;
 import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,12 +43,10 @@ class MetricsTest {
   private static final String DUPLICATED_FILES = "duplicated_files";
   private static final String DUPLICATED_LINES = "duplicated_lines";
   private static final String DUPLICATED_LINES_DENSITY = "duplicated_lines_density";
-  private static final String EXECUTABLE_LINES_DATA = "executable_lines_data";
   private static final String FILES = "files";
   private static final String FUNCTIONS = "functions";
   private static final String LINES = "lines";
   private static final String NCLOC = "ncloc";
-  private static final String NCLOC_DATA = "ncloc_data";
   private static final String STATEMENTS = "statements";
   private static final String TESTS = "tests";
   private static final String VIOLATIONS = "violations";
@@ -155,10 +151,6 @@ class MetricsTest {
 
   /* Helper methods */
 
-  private Measure getProjectMeasure(String metricKey) {
-    return getMeasure(PROJECT_KEY, metricKey);
-  }
-
   private Integer getProjectMeasureAsInt(String metricKey) {
     return getMeasureAsInt(PROJECT_KEY, metricKey);
   }
@@ -167,20 +159,12 @@ class MetricsTest {
     return getMeasureAsDouble(PROJECT_KEY, metricKey);
   }
 
-  private Measure getDirectoryMeasure(String metricKey) {
-    return getMeasure(keyFor("dir"), metricKey);
-  }
-
   private Integer getDirectoryMeasureAsInt(String metricKey) {
     return getMeasureAsInt(keyFor("dir"), metricKey);
   }
 
   private Double getDirectoryMeasureAsDouble(String metricKey) {
     return getMeasureAsDouble(keyFor("dir"), metricKey);
-  }
-
-  private Measure getFileMeasure(String metricKey) {
-    return getMeasure(keyFor(HELLO_WORLD_PY), metricKey);
   }
 
   private Integer getFileMeasureAsInt(String metricKey) {
