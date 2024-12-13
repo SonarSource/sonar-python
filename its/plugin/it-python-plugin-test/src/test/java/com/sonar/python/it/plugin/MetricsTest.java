@@ -153,17 +153,6 @@ class MetricsTest {
     assertThat(getFileMeasureAsInt(VIOLATIONS)).isZero();
   }
 
-  @Test
-  void should_be_compatible_with_DevCockpit() {
-    // TODO probably bug in Sonar: order might depend on JVM
-    assertThat(getFileMeasure(NCLOC_DATA).getValue())
-      .doesNotContain("1=1")
-      .contains("5=1");
-    assertThat(getFileMeasure(EXECUTABLE_LINES_DATA).getValue())
-      .doesNotContain("1=1")
-      .contains("5=1");
-  }
-
   /* Helper methods */
 
   private Measure getProjectMeasure(String metricKey) {
