@@ -218,10 +218,10 @@ class IPynbSensorTest {
     var sensor = spy(notebookSensor());
     var contextSpy = spy(context);
     assertDoesNotThrow(() -> sensor.execute(contextSpy));
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(SensorTelemetryStorage.MetricKey.NOTEBOOK_PRESENT_KEY.key(), "1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(SensorTelemetryStorage.MetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "0");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(SensorTelemetryStorage.MetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(SensorTelemetryStorage.MetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_PRESENT_KEY.key(), "1");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "0");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
   }
 
   @Test
@@ -243,9 +243,9 @@ class IPynbSensorTest {
     sensor.execute(contextSpy);
     var logs = String.join("", logTester.logs());
     assertThat(logs).contains("Unable to parse file: notebook_parse_error.ipynbParse error at line 1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(SensorTelemetryStorage.MetricKey.NOTEBOOK_PRESENT_KEY.key(), "1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(SensorTelemetryStorage.MetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(SensorTelemetryStorage.MetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(SensorTelemetryStorage.MetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_PRESENT_KEY.key(), "1");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "1");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
   }
 }

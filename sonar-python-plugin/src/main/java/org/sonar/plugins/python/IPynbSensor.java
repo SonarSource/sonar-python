@@ -92,18 +92,18 @@ public final class IPynbSensor implements Sensor {
     PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), pythonIndexer);
     scanner.execute(pythonFiles, context);
-    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.MetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY, String.valueOf(scanner.getRecognitionErrorCount()));
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY, String.valueOf(scanner.getRecognitionErrorCount()));
   }
 
   private List<PythonInputFile> parseNotebooks(List<PythonInputFile> pythonFiles, SensorContext context) {
     List<PythonInputFile> generatedIPythonFiles = new ArrayList<>();
 
-    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.MetricKey.NOTEBOOK_TOTAL_KEY, String.valueOf(pythonFiles.size()));
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_TOTAL_KEY, String.valueOf(pythonFiles.size()));
     var numberOfExceptions = 0;
 
     for (PythonInputFile inputFile : pythonFiles) {
       try {
-        sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.MetricKey.NOTEBOOK_PRESENT_KEY, "1");
+        sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_PRESENT_KEY, "1");
         var result = IpynbNotebookParser.parseNotebook(inputFile);
         result.ifPresent(generatedIPythonFiles::add);
       } catch (Exception e) {
@@ -114,7 +114,7 @@ public final class IPynbSensor implements Sensor {
       }
     }
 
-    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.MetricKey.NOTEBOOK_EXCEPTION_KEY, String.valueOf(numberOfExceptions));
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY, String.valueOf(numberOfExceptions));
     return generatedIPythonFiles;
   }
 
