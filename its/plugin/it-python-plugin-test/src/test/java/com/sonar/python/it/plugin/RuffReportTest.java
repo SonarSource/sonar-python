@@ -16,8 +16,6 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
 import java.util.Comparator;
 import java.util.List;
@@ -34,14 +32,14 @@ class RuffReportTest {
   private final String PROJECT = "ruff_project";
 
   @RegisterExtension
-  public static final Orchestrator ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   @Test
   void import_report() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "no_rule");
     ORCHESTRATOR.executeBuild(
-        SonarScanner.create()
+        ORCHESTRATOR.createSonarScanner()
             .setProjectDir(new File("projects/ruff_project")));
 
     List<Issues.Issue> issues = issues(PROJECT).stream().sorted(Comparator.comparing(Issues.Issue::getRule))

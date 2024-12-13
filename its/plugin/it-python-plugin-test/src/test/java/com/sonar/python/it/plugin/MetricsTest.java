@@ -18,7 +18,6 @@ package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.BeforeAll;
@@ -56,7 +55,7 @@ class MetricsTest {
   private static final Offset<Double> OFFSET = Offset.offset(0.01d);
 
   @RegisterExtension
-  public static final OrchestratorExtension orchestrator = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension orchestrator = TestsUtils.ORCHESTRATOR;
 
   private static BuildResult buildResult;
 
@@ -64,7 +63,7 @@ class MetricsTest {
   static void startServer() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "no_rule");
-    SonarScanner build = SonarScanner.create()
+    SonarScanner build = orchestrator.createSonarScanner()
       .setProjectDir(new File("projects/metrics"))
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_KEY)

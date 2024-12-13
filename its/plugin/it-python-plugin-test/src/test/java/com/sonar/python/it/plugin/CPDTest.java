@@ -17,7 +17,6 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.BeforeAll;
@@ -41,13 +40,13 @@ class CPDTest {
   private static final String DUPLICATED_LINES_DENSITY = "duplicated_lines_density";
 
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   @BeforeAll
   static void startServer() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "no_rule");
-    SonarScanner build = SonarScanner.create()
+    SonarScanner build = ORCHESTRATOR.createSonarScanner()
       .setProjectDir(new File("projects/cpd"))
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_KEY)

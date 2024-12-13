@@ -17,7 +17,6 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -34,13 +33,13 @@ class NoSonarTest {
   private static final String PROFILE_NAME = "nosonar";
 
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   @BeforeAll
   static void startServer() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", PROFILE_NAME);
-    SonarScanner build = SonarScanner.create()
+    SonarScanner build = ORCHESTRATOR.createSonarScanner()
       .setProjectDir(new File("projects", PROJECT_KEY))
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_KEY)

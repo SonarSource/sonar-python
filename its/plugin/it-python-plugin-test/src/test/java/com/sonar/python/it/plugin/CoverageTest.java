@@ -20,7 +20,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +32,7 @@ class CoverageTest {
 
   private static final String COVERAGE_PROJECT = "projects/coverage_project";
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   private static final String PROJECT_KEY = "coverage_project";
   private static final String LINES_TO_COVER = "lines_to_cover";
@@ -55,7 +54,7 @@ class CoverageTest {
   }
 
   private static void basicCoverageReports(String utReportPath) {
-    SonarScanner build = SonarScanner.create()
+    SonarScanner build = ORCHESTRATOR.createSonarScanner()
       .setProjectDir(new File(COVERAGE_PROJECT))
       .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, "someReport")
       .setProperty(COVERAGE_REPORT_PATHS, utReportPath+",it-coverage1.xml,it-coverage2.xml");
@@ -75,7 +74,7 @@ class CoverageTest {
 
   @Test
   void default_values() {
-    SonarScanner build = SonarScanner.create()
+    SonarScanner build = ORCHESTRATOR.createSonarScanner()
       .setProjectDir(new File(COVERAGE_PROJECT));
     ORCHESTRATOR.executeBuild(build);
 
@@ -90,7 +89,7 @@ class CoverageTest {
 
   @Test
   void empty_property() {
-    SonarScanner build = SonarScanner.create()
+    SonarScanner build = ORCHESTRATOR.createSonarScanner()
       .setProjectDir(new File(COVERAGE_PROJECT))
       .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, "")
       .setProperty(COVERAGE_REPORT_PATHS, "");
@@ -106,7 +105,7 @@ class CoverageTest {
 
   @Test
   void empty_coverage_report() {
-    SonarScanner build = SonarScanner.create()
+    SonarScanner build = ORCHESTRATOR.createSonarScanner()
       .setProjectDir(new File(COVERAGE_PROJECT))
       .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, EMPTY_XML)
       .setProperty(COVERAGE_REPORT_PATHS, EMPTY_XML);

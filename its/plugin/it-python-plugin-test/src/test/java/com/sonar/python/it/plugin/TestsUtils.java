@@ -16,7 +16,6 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public final class TestsUtils {
 
   public static final FileLocation PLUGIN_LOCATION = FileLocation.byWildcardMavenFilename(new File("../../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar");
 
-  public static final OrchestratorExtension ORCHESTRATOR = OrchestratorExtension.builderEnv()
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = ConcurrentOrchestratorExtension.builderEnv()
     .useDefaultAdminCredentialsForBuilds(true)
     .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(PLUGIN_LOCATION)

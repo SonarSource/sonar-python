@@ -17,12 +17,12 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.parallel.ResourceLock;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.client.issues.SearchRequest;
 
@@ -30,19 +30,20 @@ import static com.sonar.python.it.plugin.TestsUtils.newWsClient;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ResourceLock("project/custom_rules")
 class CustomRulesExampleTest {
 
   @RegisterExtension
-  public static final OrchestratorExtension orchestrator = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension orchestrator = TestsUtils.ORCHESTRATOR;
 
-  private static final String PROJECT_KEY = "custom-rules";
-  private static final String PROJECT_NAME = "Custom Rules";
+  private static final String PROJECT_KEY = "custom-rules-example";
+  private static final String PROJECT_NAME = "Custom Rules Example";
 
   @BeforeAll
   static void prepare() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_NAME);
     orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "python-custom-rules-example-profile");
-    SonarScanner build = SonarScanner.create()
+    SonarScanner build = orchestrator.createSonarScanner()
       .setProjectDir(new File("projects/custom_rules"))
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_NAME)
