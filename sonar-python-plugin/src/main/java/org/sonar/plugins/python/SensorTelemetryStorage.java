@@ -22,6 +22,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.utils.Version;
 
 public class SensorTelemetryStorage {
   private static final Logger LOG = LoggerFactory.getLogger(SensorTelemetryStorage.class);
@@ -42,8 +43,19 @@ public class SensorTelemetryStorage {
   }
 
   public void send(SensorContext sensorContext) {
-    data.forEach(sensorContext::addTelemetryProperty);
     data.forEach((k, v) -> LOG.info("Metrics property: {}={}", k, v));
+    var apiVersion = sensorContext.runtime().getApiVersion();
+    if (apiVersion.isGreaterThanOrEqual(Version.create(10, 9))) {
+      // This try/catch block should be useless, as in the worst case it should be a no-op depending on the SensorContext implementation
+      // It exists to be extra sure for the LTA
+      try {
+        data.forEach(sensorContext::addTelemetryProperty);
+      } catch (Exception e) {
+        LOG.error("Failed to send metrics", e);
+      }
+    } else {
+      LOG.info("Skipping sending metrics because the plugin API version is {}", apiVersion);
+    }
   }
 
   public void updateMetric(MetricKey key, String value) {
