@@ -31,7 +31,10 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
@@ -246,10 +249,24 @@ public class ProjectLevelSymbolTable {
     }
 
     private boolean isCallRegisteringDjangoView(CallExpression callExpression) {
+      if (!isCallToPath(callExpression)) {
+        return false;
+      }
       TypeChecker typeChecker = new TypeChecker(new BasicTypeTable(new ProjectLevelTypeTable(ProjectLevelSymbolTable.this)));
       TriBool isConfPathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.conf.path").check(callExpression.callee().typeV2());
       TriBool isPathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.path").check(callExpression.callee().typeV2());
       return isConfPathCall.equals(TriBool.TRUE) || isPathCall.equals(TriBool.TRUE);
+    }
+
+    private boolean isCallToPath(CallExpression callExpression) {
+      Expression callee = callExpression.callee();
+      if (callee instanceof QualifiedExpression qualifiedExpression) {
+        return qualifiedExpression.name().name().equals("path");
+      }
+      if (callee instanceof Name name) {
+        return name.name().equals("path");
+      }
+      return false;
     }
   }
 }
