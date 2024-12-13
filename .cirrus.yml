@@ -122,8 +122,6 @@ test_analyze_task:
 build_win_task:
   <<: *WINDOWS_VM_DEFINITION
   <<: *ONLY_SONARSOURCE_QA
-  depends_on:
-    - build
   maven_cache:
     # windows cache is buggy if using ${CIRRUS_WORKING_DIR}
     # Additionally "~" seems to resolve differently in the context of the cache and the context of the build_script below
