@@ -521,7 +521,7 @@ class ProjectLevelSymbolTableTest {
       """);
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     projectLevelSymbolTable.addModule(tree, "my_package", pythonFile("mod.py"));
-    assertThat(projectLevelSymbolTable.typeShedDescriptorsProvider().stubModules()).containsExactlyInAnyOrder("math", "os");
+    assertThat(projectLevelSymbolTable.typeShedDescriptorsProvider().stubModules()).containsExactlyInAnyOrder("math", "os", "django", "django.urls.conf", "django.urls");
   }
 
   @Test

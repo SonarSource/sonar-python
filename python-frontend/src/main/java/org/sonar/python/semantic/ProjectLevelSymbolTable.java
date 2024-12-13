@@ -46,6 +46,7 @@ import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeChecker;
 import org.sonar.python.types.v2.UnknownType;
 
@@ -223,9 +224,19 @@ public class ProjectLevelSymbolTable {
   private class DjangoViewsVisitor extends BaseTreeVisitor {
 
     String fullyQualifiedModuleName;
+    private TypeCheckBuilder confPathCall = null;
+    private TypeCheckBuilder pathCall = null;
 
     public DjangoViewsVisitor(String fullyQualifiedModuleName) {
       this.fullyQualifiedModuleName = fullyQualifiedModuleName;
+    }
+
+    @Override
+    public void visitFileInput(FileInput fileInput) {
+      TypeChecker typeChecker = new TypeChecker(new BasicTypeTable(new ProjectLevelTypeTable(ProjectLevelSymbolTable.this)));
+      confPathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.conf.path");
+      pathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.path");
+      super.visitFileInput(fileInput);
     }
 
     @Override
@@ -246,9 +257,8 @@ public class ProjectLevelSymbolTable {
     }
 
     private boolean isCallRegisteringDjangoView(CallExpression callExpression) {
-      TypeChecker typeChecker = new TypeChecker(new BasicTypeTable(new ProjectLevelTypeTable(ProjectLevelSymbolTable.this)));
-      TriBool isConfPathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.conf.path").check(callExpression.callee().typeV2());
-      TriBool isPathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.path").check(callExpression.callee().typeV2());
+      TriBool isConfPathCall = confPathCall.check(callExpression.callee().typeV2());
+      TriBool isPathCall = pathCall.check(callExpression.callee().typeV2());
       return isConfPathCall.equals(TriBool.TRUE) || isPathCall.equals(TriBool.TRUE);
     }
   }
