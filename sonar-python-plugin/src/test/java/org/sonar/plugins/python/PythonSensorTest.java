@@ -1113,7 +1113,7 @@ class PythonSensorTest {
 
     assertThat(writeCache.getData().keySet()).containsExactlyInAnyOrder(
       "python:cache_version", "python:files", "python:descriptors:moduleKey:pass.py", "python:imports:moduleKey:pass.py",
-      "python:cpd:data:moduleKey:pass.py", "python:cpd:stringTable:moduleKey:pass.py", "python:content_hashes:moduleKey:pass.py");
+      "python:cpd:data:moduleKey:pass.py", "python:cpd:stringTable:moduleKey:pass.py", "python:content_hashes:moduleKey:pass.py", "python:typeshed_modules");
 
     byte[] tokenData = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
     byte[] stringTable = writeCache.getData().get("python:cpd:stringTable:moduleKey:pass.py");
