@@ -891,7 +891,6 @@ class PythonSensorTest {
     // typing comes from TypeCheckBuilder querying the ProjectLevelType table (by looking for TypeVar) in its checks, which then queries & cache info in TypeShedDescriptorsProvider
     assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder(
       "typing", "math",
-      "django", "django.urls.conf", "django.urls",
       "fastapi", "fastapi.responses"
     );
   }
