@@ -163,7 +163,7 @@ plugin_qa_task:
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
     <<: *QA_CONTAINER_DEFINITION
-    cpu: 3
+    cpu: 6
     memory: 8G
   env:
     CIRRUS_CLONE_DEPTH: 10
@@ -178,7 +178,7 @@ plugin_qa_task:
     - source cirrus-env QA
     - source set_maven_build_version $BUILD_NUMBER
     - cd its/plugin
-    - mvn verify -Dsonar.runtimeVersion=${SQ_VERSION} -Dmaven.test.redirectTestOutputToFile=false -B -e -V
+    - mvn verify -Dsonar.runtimeVersion=${SQ_VERSION} -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Djunit.jupiter.execution.parallel.config.dynamic.factor=1
   cleanup_before_cache_script: cleanup_maven_repository
   cleanup_before_orchestrator_cache_script: bash .cirrus/clean-orchestrator-cache.sh
 
