@@ -17,8 +17,6 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.BuildResult;
-import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -32,7 +30,7 @@ class PylintReportTest {
   private static final String LEGACY_PROPERTY = "sonar.python.pylint.reportPath";
 
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   @Test
   void import_report() {
@@ -82,7 +80,7 @@ class PylintReportTest {
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(projectKey, "py", "no_rule");
 
     return ORCHESTRATOR.executeBuild(
-      SonarScanner.create()
+      ORCHESTRATOR.createSonarScanner()
         .setDebugLogs(true)
         .setProjectKey(projectKey)
         .setProjectName(projectKey)

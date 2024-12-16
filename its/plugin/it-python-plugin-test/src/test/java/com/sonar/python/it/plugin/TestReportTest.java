@@ -21,7 +21,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,10 +41,10 @@ class TestReportTest {
   public static final String TEST_EXECUTION_TIME = "test_execution_time";
 
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   private static SonarScanner createBuild(String projectKey, String testReportPath) {
-    return SonarScanner.create()
+    return ORCHESTRATOR.createSonarScanner()
       .setProjectKey(projectKey)
       .setProjectName(projectKey)
       .setProjectDir(new File("projects/nosetests_project"))

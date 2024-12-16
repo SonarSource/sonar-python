@@ -16,8 +16,6 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -33,14 +31,14 @@ class Flake8ReportTest {
   private static final String PROJECT = "flake8_project";
 
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   @Test
   void import_report() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "no_rule");
     ORCHESTRATOR.executeBuild(
-      SonarScanner.create()
+      ORCHESTRATOR.createSonarScanner()
         .setProjectDir(new File("projects/flake8_project")));
 
     List<Issues.Issue> issues = issues(PROJECT);
