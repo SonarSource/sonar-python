@@ -68,17 +68,14 @@ public final class PythonSensor implements Sensor {
   static final String UNSET_VERSION_WARNING = "Your code is analyzed as compatible with all Python 3 versions by default." +
     " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python.version\"";
 
+  private final SensorTelemetryStorage sensorTelemetryStorage;
+
   /**
    * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
    */
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
     NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings);
-  }
-
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-    PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings, new SensorTelemetryStorage());
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
@@ -86,12 +83,18 @@ public final class PythonSensor implements Sensor {
     // ^^ This constructor implicitly assumes that a PythonIndexer and a SonarLintCache are always available at the same time.
     // In practice, this is currently the case, since both are provided by PythonPlugin under the same conditions.
     // See also PythonPlugin::SonarLintPluginAPIManager::addSonarlintPythonIndexer.
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings, new SensorTelemetryStorage());
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
     @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer,
     @Nullable SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, indexer, sonarLintCache, analysisWarnings, new SensorTelemetryStorage());
+  }
+
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
+    @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer,
+    @Nullable SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings, SensorTelemetryStorage sensorTelemetryStorage) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
@@ -100,6 +103,12 @@ public final class PythonSensor implements Sensor {
     this.indexer = indexer;
     this.sonarLintCache = sonarLintCache;
     this.analysisWarnings = analysisWarnings;
+    this.sensorTelemetryStorage = sensorTelemetryStorage;
+  }
+
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, PythonCustomRuleRepository[] customRuleRepositories,
+    AnalysisWarningsWrapper analysisWarnings, SensorTelemetryStorage sensorTelemetryStorage) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings, sensorTelemetryStorage);
   }
 
   @Override
@@ -121,13 +130,25 @@ public final class PythonSensor implements Sensor {
     if (pythonVersionParameter.length != 0){
       ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersionParameter));
     }
+    updatePythonVersionTelemetry(context, pythonVersionParameter);
     CacheContext cacheContext = CacheContextImpl.of(context);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     pythonIndexer.setSonarLintCache(sonarLintCache);
     TypeShed.setProjectLevelSymbolTable(pythonIndexer.projectLevelSymbolTable());
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer);
     scanner.execute(pythonFiles, context);
+    sensorTelemetryStorage.send(context);
     durationReport.stop();
+  }
+
+  private void updatePythonVersionTelemetry(SensorContext context, String[] pythonVersionParameter) {
+    if (context.runtime().getProduct() == SonarProduct.SONARLINT) {
+      return;
+    }
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_VERSION_SET_KEY, pythonVersionParameter.length != 0 ? "1" : "0");
+    if (pythonVersionParameter.length != 0) {
+      sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_VERSION_KEY, String.join(",", pythonVersionParameter));
+    }
   }
 
   private static List<PythonInputFile> getInputFiles(SensorContext context) {

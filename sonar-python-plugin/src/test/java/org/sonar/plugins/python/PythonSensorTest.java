@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
@@ -1408,6 +1409,40 @@ class PythonSensorTest {
     assertThat(PythonScanner.isNotebook(notebookPythonFile)).isTrue();
   }
 
+  @Test
+  void send_telemetry_with_version() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.10,3.13"));
+
+    SensorTelemetryStorage sensorTelemetryStorage = spy(new SensorTelemetryStorage());
+    PythonSensor sensor = sensor(sensorTelemetryStorage);
+    sensor.execute(context);
+    verify(sensorTelemetryStorage, times(1)).send(context);
+    assertThat(sensorTelemetryStorage.data()).containsExactlyInAnyOrderEntriesOf(Map.of(TelemetryMetricKey.PYTHON_VERSION_KEY, "3.10,3.13",
+      TelemetryMetricKey.PYTHON_VERSION_SET_KEY, "1"));
+  }
+
+  @Test
+  void send_telemetry_no_version() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    SensorTelemetryStorage sensorTelemetryStorage = spy(new SensorTelemetryStorage());
+    PythonSensor sensor = sensor(sensorTelemetryStorage);
+    sensor.execute(context);
+    verify(sensorTelemetryStorage, times(1)).send(context);
+    assertThat(sensorTelemetryStorage.data()).containsExactlyInAnyOrderEntriesOf(Map.of(TelemetryMetricKey.PYTHON_VERSION_SET_KEY, "0"));
+
+  }
+
   private com.sonar.sslr.api.Token passToken(URI uri) {
     return com.sonar.sslr.api.Token.builder()
       .setType(PythonKeyword.PASS)
@@ -1422,7 +1457,16 @@ class PythonSensorTest {
     return sensor(CUSTOM_RULES, null, analysisWarning);
   }
 
+  private PythonSensor sensor(SensorTelemetryStorage sensorTelemetryStorage) {
+    return sensor(CUSTOM_RULES, null, analysisWarning, sensorTelemetryStorage);
+  }
+
   private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings) {
+    return sensor(customRuleRepositories, indexer, analysisWarnings, new SensorTelemetryStorage());
+  }
+
+  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings,
+    SensorTelemetryStorage sensorTelemetryStorage) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
@@ -1431,7 +1475,7 @@ class PythonSensorTest {
       return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), analysisWarnings);
     }
     if (indexer == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings, sensorTelemetryStorage);
     }
     if (customRuleRepositories == null) {
       return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCache(), analysisWarnings);
