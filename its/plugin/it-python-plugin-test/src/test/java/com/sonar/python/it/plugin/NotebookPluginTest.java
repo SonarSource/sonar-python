@@ -49,7 +49,9 @@ class NotebookPluginTest {
   @Test
   void test() {
     List<Issues.Issue> issues = issues(PROJECT_KEY);
-    assertThat(issues).isEmpty();
+    assertThat(issues)
+      .extracting(Issues.Issue::getRule)
+      .containsExactlyInAnyOrder("ipython:PrintStatementUsage", "ipython:S1854", "ipython:S3457", "ipython:S5727", "ipython:S5727");
   }
 }
 
