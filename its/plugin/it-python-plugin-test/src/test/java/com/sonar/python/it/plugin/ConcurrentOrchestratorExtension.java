@@ -61,10 +61,6 @@ public class ConcurrentOrchestratorExtension extends Orchestrator implements Bef
     return new ConcurrentOrchestratorExtensionBuilder(Configuration.createEnv());
   }
 
-  public static ConcurrentOrchestratorExtensionBuilder builder(Configuration config) {
-    return new ConcurrentOrchestratorExtensionBuilder(config);
-  }
-
   public static class ConcurrentOrchestratorExtensionBuilder extends OrchestratorBuilder<ConcurrentOrchestratorExtensionBuilder, ConcurrentOrchestratorExtension> {
     ConcurrentOrchestratorExtensionBuilder(Configuration initialConfig) {
       this(initialConfig, System2.INSTANCE);
