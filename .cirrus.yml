@@ -180,6 +180,8 @@ plugin_qa_task:
     - cd its/plugin
     - mvn verify -Dsonar.runtimeVersion=${SQ_VERSION} -Dmaven.test.redirectTestOutputToFile=false -B -e -V
   cleanup_before_cache_script: cleanup_maven_repository
+  cleanup_before_orchestrator_cache_script: bash .cirrus/clean-orchestrator-cache.sh
+
 
 ruling_task:
   depends_on:
@@ -225,6 +227,7 @@ pr_analysis_qa_task:
     - cd its/ruling
     - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonPrAnalysisTest
   cleanup_before_cache_script: cleanup_maven_repository
+  cleanup_before_orchestrator_cache_script: bash .cirrus/clean-orchestrator-cache.sh
 
 promote_task:
   depends_on:
