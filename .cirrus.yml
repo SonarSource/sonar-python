@@ -32,7 +32,7 @@ win_vm_definition: &WINDOWS_VM_DEFINITION
     image: base-windows-jdk17-v*
     platform: windows
     region: eu-central-1
-    type: t3.xlarge
+    type: c5.2xlarge
     use_ssd: true
 
 build_container_definition: &BUILD_CONTAINER_DEFINITION
@@ -128,7 +128,7 @@ build_win_task:
     folder: C:/.m2/repository
   build_script:
     - git config --global core.autocrlf input
-    - git submodule update --init
+    - git submodule update --init --jobs 4
     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
     - git sparse-checkout set stubs/sklearn 
     - git checkout
