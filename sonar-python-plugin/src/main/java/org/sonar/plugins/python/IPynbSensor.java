@@ -103,7 +103,7 @@ public final class IPynbSensor implements Sensor {
 
     for (PythonInputFile inputFile : pythonFiles) {
       try {
-        sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_PRESENT_KEY, "1");
+        sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_PRESENT_KEY, true);
         var result = IpynbNotebookParser.parseNotebook(inputFile);
         result.ifPresent(generatedIPythonFiles::add);
       } catch (Exception e) {
@@ -114,7 +114,7 @@ public final class IPynbSensor implements Sensor {
       }
     }
 
-    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY, String.valueOf(numberOfExceptions));
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY, numberOfExceptions);
     return generatedIPythonFiles;
   }
 

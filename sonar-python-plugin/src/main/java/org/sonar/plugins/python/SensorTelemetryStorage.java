@@ -55,4 +55,12 @@ public class SensorTelemetryStorage {
     data.put(key, String.valueOf(value));
   }
 
+  public void updateMetric(TelemetryMetricKey key, boolean value) {
+    data.put(key, boolToString(value));
+  }
+
+  private static String boolToString(boolean value) {
+    return value ? "1" : "0";
+  }
+
 }
