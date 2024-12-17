@@ -29,6 +29,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -39,6 +40,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
 @Execution(ExecutionMode.CONCURRENT)
+@ExtendWith(TestDurationMeasureExtension.class)
 class PythonRulingTest {
 
   @RegisterExtension
