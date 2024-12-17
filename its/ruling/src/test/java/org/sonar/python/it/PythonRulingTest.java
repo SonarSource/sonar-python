@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.parallel.Execution;
@@ -39,7 +40,6 @@ import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
 @Execution(ExecutionMode.CONCURRENT)
 class PythonRulingTest {
-
 
   @RegisterExtension
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
@@ -65,6 +65,7 @@ class PythonRulingTest {
   }
 
   @Test
+  @Tag("big-it-project")
   void test_airflow() throws IOException {
     SonarScanner build = buildWithCommonProperties("airflow");
     build.setProperty("sonar.sources", "airflow");
@@ -167,6 +168,7 @@ class PythonRulingTest {
   }
 
   @Test
+  @Tag("big-it-project")
   void test_indico() throws IOException {
     SonarScanner build = buildWithCommonProperties("indico");
     build.setProperty("sonar.sources", "indico");
@@ -222,6 +224,7 @@ class PythonRulingTest {
   }
 
   @Test
+  @Tag("big-it-project")
   void test_saleor() throws IOException {
     SonarScanner build = buildWithCommonProperties("saleor");
     build.setProperty("sonar.sources", "saleor");
@@ -229,6 +232,7 @@ class PythonRulingTest {
   }
 
   @Test
+  @Tag("big-it-project")
   void test_salt() throws IOException {
     SonarScanner build = buildWithCommonProperties("salt");
     // salt is not actually a Python 3.12 project. This is to ensure analysis is performed correctly when the parameter is set.
@@ -252,6 +256,7 @@ class PythonRulingTest {
   }
 
   @Test
+  @Tag("big-it-project")
   void test_tensorflow() throws IOException {
     SonarScanner build = buildWithCommonProperties("tensorflow");
     build.setProperty("sonar.sources", "python");

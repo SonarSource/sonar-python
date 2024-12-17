@@ -201,7 +201,30 @@ ruling_task:
     - source cirrus-env QA
     - source set_maven_build_version $BUILD_NUMBER
     - cd its/ruling
-    - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonRulingTest -Djunit.jupiter.execution.parallel.config.dynamic.factor=1
+    - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonRulingTest  -Djunit.jupiter.execution.parallel.config.dynamic.factor=1 -DexcludedGroups=big-it-project
+  cleanup_before_cache_script: cleanup_maven_repository
+
+ruling_big_task:
+  depends_on:
+    - build
+  <<: *ONLY_SONARSOURCE_QA
+  eks_container:
+    <<: *QA_CONTAINER_DEFINITION
+    cpu: 5
+    memory: 16G
+  env:
+    CIRRUS_CLONE_DEPTH: 10
+    SONARSOURCE_QA: true
+  maven_cache:
+    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  <<: *ORCHESTRATOR_CACHE_DEFINITION
+  submodules_script:
+    - git submodule update --init
+  ruling_script:
+    - source cirrus-env QA
+    - source set_maven_build_version $BUILD_NUMBER
+    - cd its/ruling
+    - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonRulingTest -Djunit.jupiter.execution.parallel.config.dynamic.factor=1 -Dgroups=big-it-project
   cleanup_before_cache_script: cleanup_maven_repository
 
 pr_analysis_qa_task:
@@ -230,6 +253,7 @@ promote_task:
   depends_on:
     - test_analyze
     - ruling
+    - ruling_big
     - plugin_qa
     - ws_scan
     - pr_analysis_qa
