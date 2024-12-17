@@ -93,6 +93,7 @@ public final class IPynbSensor implements Sensor {
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), pythonIndexer);
     scanner.execute(pythonFiles, context);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY, scanner.getRecognitionErrorCount());
+    updateDatabricksTelemetry(scanner);
   }
 
   private List<PythonInputFile> parseNotebooks(List<PythonInputFile> pythonFiles, SensorContext context) {
@@ -135,4 +136,9 @@ public final class IPynbSensor implements Sensor {
   private static boolean isErrorOnTestFile(PythonInputFile inputFile) {
     return inputFile.wrappedFile().type() == InputFile.Type.TEST;
   }
+
+  private void updateDatabricksTelemetry(PythonScanner scanner) {
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.IPYNB_DATABRICKS_FOUND, scanner.getFoundDatabricks());
+  }
+
 }

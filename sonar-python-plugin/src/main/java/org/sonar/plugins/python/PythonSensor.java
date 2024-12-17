@@ -131,8 +131,13 @@ public final class PythonSensor implements Sensor {
     TypeShed.setProjectLevelSymbolTable(pythonIndexer.projectLevelSymbolTable());
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer);
     scanner.execute(pythonFiles, context);
+    updateDatabricksTelemetry(scanner);
     sensorTelemetryStorage.send(context);
     durationReport.stop();
+  }
+
+  private void updateDatabricksTelemetry(PythonScanner scanner) {
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_DATABRICKS_FOUND, scanner.getFoundDatabricks());
   }
 
   private void updatePythonVersionTelemetry(SensorContext context, String[] pythonVersionParameter) {

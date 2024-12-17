@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
 import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,6 +79,8 @@ public class PythonScanner extends Scanner {
   private final PythonIndexer indexer;
   private final Map<PythonInputFile, Set<PythonCheck>> checksExecutedWithoutParsingByFiles = new HashMap<>();
   private int recognitionErrorCount = 0;
+  private static final Pattern DATABRICKS_MAGIC_COMMAND_PATTERN = Pattern.compile("^\\h*#\\h*(MAGIC|COMMAND).*");
+  private boolean foundDatabricks = false;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
@@ -150,6 +153,13 @@ public class PythonScanner extends Scanner {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile.wrappedFile())).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
+
+    searchForDataBricks(visitorContext);
+  }
+
+  private void searchForDataBricks(PythonVisitorContext visitorContext) {
+    foundDatabricks |= visitorContext.pythonFile().content().lines().anyMatch(
+      line -> DATABRICKS_MAGIC_COMMAND_PATTERN.matcher(line).matches());
   }
 
   private static PythonTreeMaker getTreeMaker(PythonInputFile inputFile) {
@@ -406,5 +416,9 @@ public class PythonScanner extends Scanner {
 
   public int getRecognitionErrorCount() {
     return recognitionErrorCount;
+  }
+
+  public boolean getFoundDatabricks() {
+    return foundDatabricks;
   }
 }
