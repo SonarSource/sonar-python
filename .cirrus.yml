@@ -75,6 +75,9 @@ orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
 
 build_task:
   <<: *BUILD_CONTAINER_DEFINITION
+  eks_container:
+    cpu: 4
+
   <<: *ONLY_SONARSOURCE_QA
   env:
     # analysis on next
@@ -97,6 +100,9 @@ test_analyze_task:
   depends_on:
     - build
   <<: *BUILD_CONTAINER_DEFINITION
+  eks_container:
+    cpu: 4
+    memory: 4G
   <<: *ONLY_SONARSOURCE_QA
   env:
     # analysis on next
@@ -109,12 +115,12 @@ test_analyze_task:
     PGP_PASSPHRASE: VAULT[development/kv/data/sign data.passphrase]
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-  analyze_script:
-    - git submodule update --init
+  submodules_script:
+    - git submodule update --init --jobs 4
     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
     - git sparse-checkout set stubs/sklearn
     - git checkout
-    - cd -
+  analyze_script:
     - source cirrus-env BUILD
     - DEPLOY_PULL_REQUEST=false regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true -P-release,-sign -Dsonar.analysisCache.enabled=true -Dskip.its=true
   cleanup_before_cache_script: cleanup_maven_repository
@@ -126,13 +132,13 @@ build_win_task:
     # windows cache is buggy if using ${CIRRUS_WORKING_DIR}
     # Additionally "~" seems to resolve differently in the context of the cache and the context of the build_script below
     folder: C:/.m2/repository
-  build_script:
+  git_script:
     - git config --global core.autocrlf input
     - git submodule update --init --jobs 4
     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
-    - git sparse-checkout set stubs/sklearn 
+    - git sparse-checkout set stubs/sklearn
     - git checkout
-    - cd -
+  build_script:
     - source cirrus-env CI
     - unset SONARSOURCE_QA
     - mvn.cmd package -Dmaven.repo.local=C:/.m2/repository -DskipTypeshed=true -DfailStubGenerationFast=true
@@ -141,6 +147,7 @@ ws_scan_task:
   depends_on:
     - build
   <<: *BUILD_CONTAINER_DEFINITION
+
   # run only on master and long-term branches
   only_if: $CIRRUS_USER_COLLABORATOR == 'true' && $CIRRUS_TAG == "" && ($CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*")
   env:
@@ -198,13 +205,14 @@ ruling_task:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
   <<: *ORCHESTRATOR_CACHE_DEFINITION
   submodules_script:
-    - git submodule update --init
+    - git submodule update --init --jobs 4
   ruling_script:
     - source cirrus-env QA
     - source set_maven_build_version $BUILD_NUMBER
     - cd its/ruling
     - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonRulingTest -Djunit.jupiter.execution.parallel.config.dynamic.factor=1
   cleanup_before_cache_script: cleanup_maven_repository
+  cleanup_before_orchestrator_cache_script: bash .cirrus/clean-orchestrator-cache.sh
 
 pr_analysis_qa_task:
   depends_on:
