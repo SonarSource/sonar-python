@@ -47,6 +47,7 @@ public final class IPynbSensor implements Sensor {
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
   private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
+  private final SensorTelemetryStorage sensorTelemetryStorage;
 
   public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
@@ -58,6 +59,7 @@ public final class IPynbSensor implements Sensor {
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;
+    this.sensorTelemetryStorage = new SensorTelemetryStorage();
   }
 
   @Override
@@ -80,29 +82,39 @@ public final class IPynbSensor implements Sensor {
     } else {
       processNotebooksFiles(pythonFiles, context);
     }
+    sensorTelemetryStorage.send(context);
   }
 
   private void processNotebooksFiles(List<PythonInputFile> pythonFiles, SensorContext context) {
-    pythonFiles = parseNotebooks(pythonFiles, context);
+    pythonFiles = this.parseNotebooks(pythonFiles, context);
     // Disable caching for IPynb files for now see: SONARPY-2020
     CacheContext cacheContext = CacheContextImpl.dummyCache();
     PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), pythonIndexer);
     scanner.execute(pythonFiles, context);
+    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.MetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY, String.valueOf(scanner.getRecognitionErrorCount()));
   }
 
-  private static List<PythonInputFile> parseNotebooks(List<PythonInputFile> pythonFiles, SensorContext context) {
+  private List<PythonInputFile> parseNotebooks(List<PythonInputFile> pythonFiles, SensorContext context) {
     List<PythonInputFile> generatedIPythonFiles = new ArrayList<>();
+
+    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.MetricKey.NOTEBOOK_TOTAL_KEY, String.valueOf(pythonFiles.size()));
+    var numberOfExceptions = 0;
+
     for (PythonInputFile inputFile : pythonFiles) {
       try {
+        sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.MetricKey.NOTEBOOK_PRESENT_KEY, "1");
         var result = IpynbNotebookParser.parseNotebook(inputFile);
         result.ifPresent(generatedIPythonFiles::add);
       } catch (Exception e) {
+        numberOfExceptions++;
         if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isErrorOnTestFile(inputFile)) {
           throw new IllegalStateException("Exception when parsing " + inputFile, e);
         }
       }
     }
+
+    sensorTelemetryStorage.updateMetric(SensorTelemetryStorage.MetricKey.NOTEBOOK_EXCEPTION_KEY, String.valueOf(numberOfExceptions));
     return generatedIPythonFiles;
   }
 
