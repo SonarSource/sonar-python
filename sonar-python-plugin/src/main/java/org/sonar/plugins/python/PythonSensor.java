@@ -68,6 +68,8 @@ public final class PythonSensor implements Sensor {
   static final String UNSET_VERSION_WARNING = "Your code is analyzed as compatible with all Python 3 versions by default." +
     " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python.version\"";
 
+  private final SensorTelemetryStorage sensorTelemetryStorage;
+
   /**
    * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
    */
@@ -100,6 +102,7 @@ public final class PythonSensor implements Sensor {
     this.indexer = indexer;
     this.sonarLintCache = sonarLintCache;
     this.analysisWarnings = analysisWarnings;
+    this.sensorTelemetryStorage = new SensorTelemetryStorage();
   }
 
   @Override
@@ -121,13 +124,25 @@ public final class PythonSensor implements Sensor {
     if (pythonVersionParameter.length != 0){
       ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersionParameter));
     }
+    updatePythonVersionTelemetry(context, pythonVersionParameter);
     CacheContext cacheContext = CacheContextImpl.of(context);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     pythonIndexer.setSonarLintCache(sonarLintCache);
     TypeShed.setProjectLevelSymbolTable(pythonIndexer.projectLevelSymbolTable());
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer);
     scanner.execute(pythonFiles, context);
+    sensorTelemetryStorage.send(context);
     durationReport.stop();
+  }
+
+  private void updatePythonVersionTelemetry(SensorContext context, String[] pythonVersionParameter) {
+    if (context.runtime().getProduct() == SonarProduct.SONARLINT) {
+      return;
+    }
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_VERSION_SET_KEY, pythonVersionParameter.length != 0);
+    if (pythonVersionParameter.length != 0) {
+      sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_VERSION_KEY, String.join(",", pythonVersionParameter));
+    }
   }
 
   private static List<PythonInputFile> getInputFiles(SensorContext context) {

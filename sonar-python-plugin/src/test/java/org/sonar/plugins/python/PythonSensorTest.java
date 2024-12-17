@@ -1408,6 +1408,36 @@ class PythonSensorTest {
     assertThat(PythonScanner.isNotebook(notebookPythonFile)).isTrue();
   }
 
+  @Test
+  void send_telemetry_with_version() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.10,3.13"));
+    var contextSpy = spy(context);
+    PythonSensor sensor = sensor();
+    sensor.execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_VERSION_KEY.key(), "3.10,3.13");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_VERSION_SET_KEY.key(), "1");
+  }
+
+  @Test
+  void send_telemetry_no_version() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    PythonSensor sensor = sensor();
+    var contextSpy = spy(context);
+    sensor.execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_VERSION_SET_KEY.key(), "0");
+  }
+
   private com.sonar.sslr.api.Token passToken(URI uri) {
     return com.sonar.sslr.api.Token.builder()
       .setType(PythonKeyword.PASS)

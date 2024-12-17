@@ -20,7 +20,9 @@ public enum TelemetryMetricKey {
   NOTEBOOK_PRESENT_KEY("python.notebook.present"),
   NOTEBOOK_TOTAL_KEY("python.notebook.total"),
   NOTEBOOK_RECOGNITION_ERROR_KEY("python.notebook.recognition_error"),
-  NOTEBOOK_EXCEPTION_KEY("python.notebook.exceptions");
+  NOTEBOOK_EXCEPTION_KEY("python.notebook.exceptions"),
+  PYTHON_VERSION_SET_KEY("python.version.set"),
+  PYTHON_VERSION_KEY("python.version");
 
   private final String key;
 
