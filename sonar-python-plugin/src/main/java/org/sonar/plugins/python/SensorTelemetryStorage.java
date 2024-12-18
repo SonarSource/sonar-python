@@ -35,12 +35,12 @@ public class SensorTelemetryStorage {
       var apiVersion = sensorContext.runtime().getApiVersion();
       if (apiVersion.isGreaterThanOrEqual(Version.create(10, 9))) {
         data.forEach((k, v) -> {
-          LOG.info("Collected metric: {}={}", k, v);
+          LOG.debug("Collected metric: {}={}", k, v);
           sensorContext.addTelemetryProperty(k.key(), v);
         });
 
       } else {
-        LOG.info("Skipping sending metrics because the plugin API version is {}", apiVersion);
+        LOG.debug("Skipping sending metrics because the plugin API version is {}", apiVersion);
       }
     } catch (Exception e) {
       LOG.error("Failed to send metrics", e);
