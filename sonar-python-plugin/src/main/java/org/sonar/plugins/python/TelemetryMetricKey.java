@@ -22,7 +22,9 @@ public enum TelemetryMetricKey {
   NOTEBOOK_RECOGNITION_ERROR_KEY("python.notebook.recognition_error"),
   NOTEBOOK_EXCEPTION_KEY("python.notebook.exceptions"),
   PYTHON_VERSION_SET_KEY("python.version.set"),
-  PYTHON_VERSION_KEY("python.version");
+  PYTHON_VERSION_KEY("python.version"),
+  PYTHON_DATABRICKS_FOUND("python.notebook.databricks.python"),
+  IPYNB_DATABRICKS_FOUND("python.notebook.databricks.ipynb");
 
   private final String key;
 

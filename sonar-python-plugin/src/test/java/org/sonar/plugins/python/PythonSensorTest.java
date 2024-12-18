@@ -1438,6 +1438,36 @@ class PythonSensorTest {
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_VERSION_SET_KEY.key(), "0");
   }
 
+  @Test
+  void detects_databricks() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "PrintStatementUsage"))
+        .setName("Print Statement Usage")
+        .build())
+      .build();
+
+    inputFile("databricks.py");
+    var spyContext = spy(context);
+    sensor().execute(spyContext);
+    verify(spyContext, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_DATABRICKS_FOUND.key(), "1");
+  }
+
+  @Test
+  void detects_databricks_negative() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "PrintStatementUsage"))
+        .setName("Print Statement Usage")
+        .build())
+      .build();
+
+    inputFile(FILE_1);
+    var spyContext = spy(context);
+    sensor().execute(spyContext);
+    verify(spyContext, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_DATABRICKS_FOUND.key(), "0");
+  }
+
   private com.sonar.sslr.api.Token passToken(URI uri) {
     return com.sonar.sslr.api.Token.builder()
       .setType(PythonKeyword.PASS)
