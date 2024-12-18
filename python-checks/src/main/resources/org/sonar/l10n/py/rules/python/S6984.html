@@ -1,8 +1,8 @@
 <p>This rule raises an issue when an incorrect pattern is provided to an <code>einops</code> operation.</p>
 <h2>Why is this an issue?</h2>
 <p>The <code>einops</code> library provides a powerful and flexible way to manipulate tensors using the Einstein summation convention. The
-<code>einops</code> uses a different convention than the <a href="https://rockt.github.io/2018/04/30/einsum">traditional</a> one. In particular, the
-axis names can be more than one letter long and are separated by spaces.</p>
+<code>einops</code> uses a different convention than the <a href="https://ejenner.com/post/einsum/">traditional</a> one. In particular, the axis names
+can be more than one letter long and are separated by spaces.</p>
 <h2>How to fix it</h2>
 <p>Correct the syntax of the <code>einops</code> operation by balancing the parentheses and following the convention.</p>
 <h3>Code examples</h3>
