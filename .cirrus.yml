@@ -95,6 +95,7 @@ build_task:
     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
     - git sparse-checkout set stubs/sklearn
     - git checkout
+    - cd -
 
     - source cirrus-env BUILD
     - regular_mvn_build_deploy_analyze -DskipTests=true -Dsonar.skip=true
