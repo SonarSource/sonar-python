@@ -91,6 +91,10 @@ build_task:
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
   build_script:
+    - git submodule update --init --jobs 4
+    - cd python-frontend/typeshed_serializer/resources/python-type-stubs
+    - git sparse-checkout set stubs/sklearn
+
     - source cirrus-env BUILD
     - regular_mvn_build_deploy_analyze -DskipTests=true -Dsonar.skip=true
     - ./check-license-compliance.sh
