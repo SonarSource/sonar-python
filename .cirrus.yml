@@ -90,9 +90,14 @@ build_task:
     PGP_PASSPHRASE: VAULT[development/kv/data/sign data.passphrase]
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  submodules_script:
+    - git submodule update --init --jobs 4
+    - cd python-frontend/typeshed_serializer/resources/python-type-stubs
+    - git sparse-checkout set stubs/sklearn
+    - git checkout
   build_script:
     - source cirrus-env BUILD
-    - regular_mvn_build_deploy_analyze -DskipTests=true -Dsonar.skip=true -P-typeshed_serializer
+    - regular_mvn_build_deploy_analyze -DskipTests=true -Dsonar.skip=true -DfailStubGenerationFast=true
     - ./check-license-compliance.sh
   cleanup_before_cache_script: cleanup_maven_repository
 
