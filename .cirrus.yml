@@ -81,31 +81,6 @@ build_task:
   <<: *ONLY_SONARSOURCE_QA
   env:
     # analysis on next
-    SONAR_TOKEN: dummy-value
-    SONAR_HOST_URL: dummy-value
-    #allow deployment of pull request artifacts to repox
-    DEPLOY_PULL_REQUEST: true
-    CIRRUS_CLONE_DEPTH: 50
-    SIGN_KEY: VAULT[development/kv/data/sign data.key]
-    PGP_PASSPHRASE: VAULT[development/kv/data/sign data.passphrase]
-  maven_cache:
-    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-  build_script:
-    - source cirrus-env BUILD
-    - regular_mvn_build_deploy_analyze -DskipTests=true -Dsonar.skip=true -P-typeshed_serializer
-    - ./check-license-compliance.sh
-  cleanup_before_cache_script: cleanup_maven_repository
-
-test_analyze_task:
-  depends_on:
-    - build
-  <<: *BUILD_CONTAINER_DEFINITION
-  eks_container:
-    cpu: 4
-    memory: 4G
-  <<: *ONLY_SONARSOURCE_QA
-  env:
-    # analysis on next
     SONAR_TOKEN: VAULT[development/kv/data/next data.token]
     SONAR_HOST_URL: https://next.sonarqube.com/sonarqube
     #allow deployment of pull request artifacts to repox
@@ -120,9 +95,10 @@ test_analyze_task:
     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
     - git sparse-checkout set stubs/sklearn
     - git checkout
-  analyze_script:
+  build_script:
     - source cirrus-env BUILD
-    - DEPLOY_PULL_REQUEST=false regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true -P-release,-sign -Dsonar.analysisCache.enabled=true -Dskip.its=true
+    - regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true
+    - ./check-license-compliance.sh
   cleanup_before_cache_script: cleanup_maven_repository
 
 build_win_task:
@@ -239,7 +215,6 @@ pr_analysis_qa_task:
 
 promote_task:
   depends_on:
-    - test_analyze
     - ruling
     - plugin_qa
     - ws_scan
