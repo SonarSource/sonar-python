@@ -122,7 +122,7 @@ test_analyze_task:
     - git checkout
   analyze_script:
     - source cirrus-env BUILD
-    - DEPLOY_PULL_REQUEST=false regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true -P-release,-sign -Dsonar.analysisCache.enabled=true -Dskip.its=true
+    - PULL_REQUEST_SHA=$GIT_SHA1 regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true -P-deploy-sonarsource,-release,-sign -Dmaven.deploy.skip=true -Dskip.its=true -Dsonar.analysisCache.enabled=true
   cleanup_before_cache_script: cleanup_maven_repository
 
 build_win_task:
