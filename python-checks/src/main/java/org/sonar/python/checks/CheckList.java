@@ -114,7 +114,7 @@ import org.sonarsource.api.sonarlint.SonarLintSide;
 @ServerSide
 @ComputeEngineSide
 @SonarLintSide
-public final class CheckList {
+public class CheckList {
 
   public static final String REPOSITORY_KEY = "python";
 

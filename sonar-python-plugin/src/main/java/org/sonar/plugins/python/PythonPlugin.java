@@ -59,6 +59,7 @@ public class PythonPlugin implements Plugin {
 
   @Override
   public void define(Context context) {
+    registerCheckList(context);
     context.addExtensions(
       PropertyDefinition.builder(PYTHON_FILE_SUFFIXES_KEY)
         .index(10)
@@ -91,8 +92,6 @@ public class PythonPlugin implements Plugin {
         .subCategory(GENERAL)
         .onQualifiers(Qualifiers.PROJECT)
         .build(),
-
-      CheckList.class,
       Python.class,
 
       PythonProfile.class,
@@ -121,6 +120,10 @@ public class PythonPlugin implements Plugin {
       SonarLintPluginAPIManager sonarLintPluginAPIManager = new SonarLintPluginAPIManager();
       sonarLintPluginAPIManager.addSonarlintPythonIndexer(context, new SonarLintPluginAPIVersion());
     }
+  }
+
+  protected void registerCheckList(Context context) {
+    context.addExtension(CheckList.class);
   }
 
   private static void addCoberturaExtensions(Context context) {
