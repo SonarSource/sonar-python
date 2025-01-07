@@ -131,7 +131,7 @@ class IPynbSensorTest {
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer);
+    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new CheckList());
   }
 
   private PythonInputFile inputFile(String name) {
@@ -174,7 +174,7 @@ class IPynbSensorTest {
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class));
+    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), new CheckList());
   }
 
   @Test

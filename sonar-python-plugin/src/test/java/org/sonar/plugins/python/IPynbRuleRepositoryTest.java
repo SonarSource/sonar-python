@@ -79,7 +79,7 @@ class IPynbRuleRepositoryTest {
 
   private static RulesDefinition.Repository buildRepository(int majorVersion, int minorVersion) {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
-    IPynbRuleRepository ruleRepository = new IPynbRuleRepository(sonarRuntime);
+    IPynbRuleRepository ruleRepository = new IPynbRuleRepository(sonarRuntime, new CheckList());
     RulesDefinition.Context context = new RulesDefinition.Context();
     ruleRepository.define(context);
     return context.repository(CheckList.IPYTHON_REPOSITORY_KEY);

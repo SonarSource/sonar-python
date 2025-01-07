@@ -39,6 +39,7 @@ import org.sonar.plugins.python.ruff.RuffRulesDefinition;
 import org.sonar.plugins.python.ruff.RuffSensor;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
+import org.sonar.python.checks.CheckList;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
 
@@ -58,7 +59,6 @@ public class PythonPlugin implements Plugin {
 
   @Override
   public void define(Context context) {
-
     context.addExtensions(
       PropertyDefinition.builder(PYTHON_FILE_SUFFIXES_KEY)
         .index(10)
@@ -83,15 +83,16 @@ public class PythonPlugin implements Plugin {
         .build(),
 
       PropertyDefinition.builder(PYTHON_VERSION_KEY)
-      .index(12)
-      .name("Python versions")
-      .description("Comma-separated list of Python versions this project is compatible with.")
-      .multiValues(true)
-      .category(PYTHON_CATEGORY)
-      .subCategory(GENERAL)
-      .onQualifiers(Qualifiers.PROJECT)
-      .build(),
+        .index(12)
+        .name("Python versions")
+        .description("Comma-separated list of Python versions this project is compatible with.")
+        .multiValues(true)
+        .category(PYTHON_CATEGORY)
+        .subCategory(GENERAL)
+        .onQualifiers(Qualifiers.PROJECT)
+        .build(),
 
+      CheckList.class,
       Python.class,
 
       PythonProfile.class,
@@ -236,6 +237,10 @@ public class PythonPlugin implements Plugin {
         .multiValues(true)
         .build(),
       RuffRulesDefinition.class);
+  }
+
+  protected void registerRuleRepositories(Context context) {
+    registerPythonSensors(context);
   }
 
   static class SonarLintPluginAPIManager {

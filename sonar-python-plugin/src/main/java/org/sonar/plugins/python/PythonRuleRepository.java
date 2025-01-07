@@ -35,9 +35,11 @@ public class PythonRuleRepository implements RulesDefinition {
   private static final Set<String> TEMPLATE_RULE_KEYS = Collections.singleton("CommentRegularExpression");
 
   private final SonarRuntime runtime;
+  private final CheckList checkList;
 
-  public PythonRuleRepository(SonarRuntime runtime) {
+  public PythonRuleRepository(SonarRuntime runtime, CheckList checkList) {
     this.runtime = runtime;
+    this.checkList = checkList;
   }
 
   @Override
@@ -56,8 +58,8 @@ public class PythonRuleRepository implements RulesDefinition {
     repository.done();
   }
 
-  private static List<Class<?>> getCheckClasses() {
-    return StreamSupport.stream(CheckList.getChecks().spliterator(), false)
+  private List<Class<?>> getCheckClasses() {
+    return StreamSupport.stream(checkList.getChecks().spliterator(), false)
       .map(check -> (Class<?>) check)
       .collect(Collectors.toList());
   }

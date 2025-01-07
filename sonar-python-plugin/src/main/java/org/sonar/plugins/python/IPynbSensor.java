@@ -49,13 +49,20 @@ public final class IPynbSensor implements Sensor {
   private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
   private final SensorTelemetryStorage sensorTelemetryStorage;
 
-  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory,
+    CheckFactory checkFactory,
+    NoSonarFilter noSonarFilter,
+    CheckList checkList) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, checkList);
   }
 
-  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, @Nullable PythonIndexer indexer) {
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory,
+    CheckFactory checkFactory,
+    NoSonarFilter noSonarFilter,
+    @Nullable PythonIndexer indexer,
+    CheckList checkList) {
     this.checks = new PythonChecks(checkFactory)
-      .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, CheckList.getChecks());
+      .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, checkList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;
