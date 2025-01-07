@@ -19,6 +19,9 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import org.sonar.api.ce.ComputeEngineSide;
+import org.sonar.api.scanner.ScannerSide;
+import org.sonar.api.server.ServerSide;
 import org.sonar.python.checks.cdk.DisabledEFSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledESDomainEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
@@ -105,13 +108,18 @@ import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 import org.sonar.python.checks.tests.UnconditionalAssertionCheck;
+import org.sonarsource.api.sonarlint.SonarLintSide;
 
+@ScannerSide
+@ServerSide
+@ComputeEngineSide
+@SonarLintSide
 public final class CheckList {
 
   public static final String REPOSITORY_KEY = "python";
 
   public static final String IPYTHON_REPOSITORY_KEY = "ipython";
-  
+
   public Iterable<Class<?>> getChecks() {
     return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
       AfterJumpStatementCheck.class,

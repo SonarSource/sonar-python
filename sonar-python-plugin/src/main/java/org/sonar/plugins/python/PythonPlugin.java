@@ -240,7 +240,7 @@ public class PythonPlugin implements Plugin {
   }
 
   protected void registerRuleRepositories(Context context) {
-    registerPythonSensors(context);
+
   }
 
   static class SonarLintPluginAPIManager {
