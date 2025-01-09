@@ -123,6 +123,7 @@ public class PythonPlugin implements Plugin {
   }
 
   protected void registerCheckList(Context context) {
+    LOG.info("Registering check list");
     context.addExtension(CheckList.class);
   }
 
