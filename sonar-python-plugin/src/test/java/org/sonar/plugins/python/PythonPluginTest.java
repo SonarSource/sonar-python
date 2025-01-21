@@ -52,9 +52,9 @@ class PythonPluginTest {
 
   @Test
   void classNotAvailable() {
-    PythonPlugin.SonarLintPluginAPIVersion sonarLintPluginAPIVersion = mock(PythonPlugin.SonarLintPluginAPIVersion.class);
+    PythonExtensions.SonarLintPluginAPIVersion sonarLintPluginAPIVersion = mock(PythonExtensions.SonarLintPluginAPIVersion.class);
     when(sonarLintPluginAPIVersion.isDependencyAvailable()).thenReturn(false);
-    PythonPlugin.SonarLintPluginAPIManager sonarLintPluginAPIManager = new PythonPlugin.SonarLintPluginAPIManager();
+    PythonExtensions.SonarLintPluginAPIManager sonarLintPluginAPIManager = new PythonExtensions.SonarLintPluginAPIManager();
     Plugin.Context context = mock(Plugin.Context.class);
     sonarLintPluginAPIManager.addSonarlintPythonIndexer(context, sonarLintPluginAPIVersion);
     assertThat(logTester.logs(Level.DEBUG)).containsExactly("Error while trying to inject SonarLintPythonIndexer");
