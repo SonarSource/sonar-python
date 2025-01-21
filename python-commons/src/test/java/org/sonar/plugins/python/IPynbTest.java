@@ -23,7 +23,7 @@ import org.sonar.api.config.internal.MapSettings;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.sonar.plugins.python.PythonPlugin.IPYNB_FILE_SUFFIXES_KEY;
+import static org.sonar.plugins.python.PythonExtensions.IPYNB_FILE_SUFFIXES_KEY;
 
 class IPynbTest {
 
