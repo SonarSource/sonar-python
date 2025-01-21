@@ -66,7 +66,8 @@ public final class PythonSensor implements Sensor {
   private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = LoggerFactory.getLogger(PythonSensor.class);
   static final String UNSET_VERSION_WARNING = "Your code is analyzed as compatible with all Python 3 versions by default." +
-    " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python.version\"";
+    " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python" +
+    ".version\"";
 
   private final SensorTelemetryStorage sensorTelemetryStorage;
 
@@ -121,7 +122,7 @@ public final class PythonSensor implements Sensor {
       LOG.warn(UNSET_VERSION_WARNING);
       analysisWarnings.addUnique(UNSET_VERSION_WARNING);
     }
-    if (pythonVersionParameter.length != 0){
+    if (pythonVersionParameter.length != 0) {
       ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersionParameter));
     }
     updatePythonVersionTelemetry(context, pythonVersionParameter);
@@ -129,7 +130,8 @@ public final class PythonSensor implements Sensor {
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     pythonIndexer.setSonarLintCache(sonarLintCache);
     TypeShed.setProjectLevelSymbolTable(pythonIndexer.projectLevelSymbolTable());
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(),
+      pythonIndexer);
     scanner.execute(pythonFiles, context);
     updateDatabricksTelemetry(scanner);
     sensorTelemetryStorage.send(context);
@@ -154,7 +156,7 @@ public final class PythonSensor implements Sensor {
     FilePredicates p = context.fileSystem().predicates();
     Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasLanguage(Python.KEY)));
     List<PythonInputFile> list = new ArrayList<>();
-    it.forEach(f -> list.add(new  PythonInputFileImpl(f)));
+    it.forEach(f -> list.add(new PythonInputFileImpl(f)));
     return Collections.unmodifiableList(list);
   }
 

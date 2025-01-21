@@ -36,7 +36,7 @@ public class IPynb extends AbstractLanguage {
 
   @Override
   public String[] getFileSuffixes() {
-    String[] suffixes = filterEmptyStrings(configuration.getStringArray(PythonPlugin.IPYNB_FILE_SUFFIXES_KEY));
+    String[] suffixes = filterEmptyStrings(configuration.getStringArray(PythonExtensions.IPYNB_FILE_SUFFIXES_KEY));
     return suffixes.length == 0 ? DEFAULT_FILE_SUFFIXES : suffixes;
   }
 
