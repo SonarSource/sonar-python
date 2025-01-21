@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class PythonPluginTest {
+class PythonExtensionsTest {
 
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
@@ -62,7 +62,7 @@ class PythonPluginTest {
 
   private static List extensions(SonarRuntime runtime) {
     Plugin.Context context = new Plugin.Context(runtime);
-    new PythonPlugin().define(context);
+    PythonExtensions.addCommonExtensions(context);
     return context.getExtensions();
   }
 
