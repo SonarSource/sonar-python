@@ -20,7 +20,7 @@ Sonar's [Clean Code solutions](https://www.sonarsource.com/solutions/clean-code/
 
 The easiest way to build the Project is by running:
 
-`mvn clean install -DskipTypeshed`
+`mvn clean install -DskipTypeshed -P-private`
 
 It builds only Java Maven modules, runs tests, and installs jar locally.
 The Python interpreter is not required in that case.
@@ -44,7 +44,7 @@ All the above should be available in PATH.
 
 To execute the full build just run:
 
-`mvn clean install`
+`mvn clean install -P-private`
 
 The full build executes [Typeshed](https://github.com/python/typeshed) serializer script. 
 It generates protobuf messages for Typeshed symbols (for standard Python API) and our customs symbols 

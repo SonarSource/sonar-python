@@ -289,5 +289,16 @@
         <skip.its>false</skip.its>
       </properties>
     </profile>
+    <profile>
+      <id>private</id>
+      <activation>
+        <property>
+          <name>!env.IS_COMMUNITY</name>
+        </property>
+      </activation>
+      <modules>
+        <module>private</module>
+      </modules>
+    </profile>
   </profiles>
 </project>
