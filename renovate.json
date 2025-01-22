@@ -26,8 +26,9 @@
       "groupSlug": "protobuf"
     },
     {
-      "matchPackageNames": ["org.sonarsource.parent:parent", "com.sonarsource.parent:parent"],
-      "groupName": "parent"
+      "matchPackageNames": ["org.sonarsource.parent:parent"],
+      "groupName": "parent",
+      "automerge": true
     },
     {
       "matchDepTypes": [
@@ -35,6 +36,6 @@
       ],
       "rollbackPrs": false,
       "pinDigests": false
-    }
+  }
   ]
 }

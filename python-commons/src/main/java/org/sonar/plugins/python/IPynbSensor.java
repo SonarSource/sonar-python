@@ -32,12 +32,10 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.caching.CacheContext;
-import org.sonar.plugins.python.editions.RepositoryInfoProvider;
-import org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
-import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.python.caching.CacheContextImpl;
+import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
@@ -52,31 +50,16 @@ public final class IPynbSensor implements Sensor {
   private final SensorTelemetryStorage sensorTelemetryStorage;
 
   public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()});
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
   }
 
-  public IPynbSensor(
-    FileLinesContextFactory fileLinesContextFactory,
-    CheckFactory checkFactory,
-    NoSonarFilter noSonarFilter,
-    @Nullable PythonIndexer indexer,
-    RepositoryInfoProvider[] editionMetadataProviders) {
-
-    this.checks = createPythonChecks(checkFactory, editionMetadataProviders);
-
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, @Nullable PythonIndexer indexer) {
+    this.checks = new PythonChecks(checkFactory)
+      .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, CheckList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;
     this.sensorTelemetryStorage = new SensorTelemetryStorage();
-  }
-
-  private static PythonChecks createPythonChecks(CheckFactory checkFactory, RepositoryInfoProvider[] editionMetadataProviders) {
-    PythonChecks checks = new PythonChecks(checkFactory);
-    for (RepositoryInfoProvider repositoryInfoProvider : editionMetadataProviders) {
-      RepositoryInfo repositoryInfo = repositoryInfoProvider.getIPynbInfo();
-      checks.addChecks(repositoryInfo.repositoryKey(), repositoryInfo.checks());
-    }
-    return checks;
   }
 
   @Override

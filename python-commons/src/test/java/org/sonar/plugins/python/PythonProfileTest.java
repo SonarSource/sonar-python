@@ -21,13 +21,11 @@ import org.junit.jupiter.api.Test;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInActiveRule;
-import org.sonar.plugins.python.editions.RepositoryInfoProvider;
-import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.plugins.python.PythonProfile.GET_REPOSITORY_KEY;
 import static org.sonar.plugins.python.PythonProfile.SECURITY_RULES_CLASS_NAME;
 import static org.sonar.plugins.python.PythonProfile.SECURITY_RULE_KEYS_METHOD_NAME;
+import static org.sonar.plugins.python.PythonProfile.GET_REPOSITORY_KEY;
 import static org.sonar.plugins.python.PythonProfile.getDataflowBugDetectionRuleKeys;
 import static org.sonar.plugins.python.PythonProfile.getExternalRuleKeys;
 import static org.sonar.plugins.python.PythonProfile.getSecurityRuleKeys;
@@ -37,7 +35,7 @@ class PythonProfileTest {
 
   public BuiltInQualityProfilesDefinition.BuiltInQualityProfile getProfile() {
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
-    new PythonProfile(new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()}).define(context);
+    new PythonProfile().define(context);
     return context.profile("py", "Sonar way");
   }
 

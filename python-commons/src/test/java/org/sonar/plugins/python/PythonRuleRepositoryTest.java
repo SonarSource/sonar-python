@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
@@ -28,6 +29,7 @@ import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.Version;
+import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -132,7 +134,7 @@ class PythonRuleRepositoryTest {
     PythonRuleRepository ruleRepository = new PythonRuleRepository(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
     ruleRepository.define(context);
-    return context.repository(PythonRuleRepository.REPOSITORY_KEY);
+    return context.repository(CheckList.REPOSITORY_KEY);
   }
 
 }

@@ -1338,58 +1338,6 @@ public class TypeInferenceV2Test {
   }
 
   @Test
-  void global_variable_in_nested_function() {
-    FileInput fileInput = inferTypes("""
-      def outer():
-        a = 24
-        def nested():
-          global a
-        a
-      """);
-    var outerFunctionDef = (FunctionDef) fileInput.statements().statements().get(0);
-    SymbolV2 symbolV2 = ((Name) ((ExpressionStatement) outerFunctionDef.body().statements().get(2)).expressions().get(0)).symbolV2();
-    assertThat(symbolV2.usages()).extracting(UsageV2::kind).containsExactlyInAnyOrder(UsageV2.Kind.ASSIGNMENT_LHS, UsageV2.Kind.GLOBAL_DECLARATION, UsageV2.Kind.OTHER);
-  }
-
-  @Test
-  void nonlocal_variable_in_nested_function() {
-    FileInput fileInput = inferTypes("""
-      def outer():
-        a = 24
-        def nested():
-          nonlocal a
-        a
-      """);
-    var outerFunctionDef = (FunctionDef) fileInput.statements().statements().get(0);
-    SymbolV2 symbolV2 = ((Name) ((ExpressionStatement) outerFunctionDef.body().statements().get(2)).expressions().get(0)).symbolV2();
-    assertThat(symbolV2.usages()).extracting(UsageV2::kind).containsExactlyInAnyOrder(UsageV2.Kind.ASSIGNMENT_LHS, UsageV2.Kind.NONLOCAL_DECLARATION, UsageV2.Kind.OTHER);
-  }
-
-  @Test
-  void nonlocal_variable_try_except() {
-    FileInput fileInput = inferTypes("""
-      def outer():
-          contains_target = True
-            
-          def nested(item):
-              nonlocal contains_target
-              if cond():
-                  contains_target = contains_target and foo()
-            
-          try:
-              return contains_target
-          except Exception as e:
-              ...
-          contains_target
-      """);
-    var outerFunctionDef = (FunctionDef) fileInput.statements().statements().get(0);
-    SymbolV2 symbolV2 = ((Name) ((ExpressionStatement) outerFunctionDef.body().statements().get(3)).expressions().get(0)).symbolV2();
-    assertThat(symbolV2.usages()).extracting(UsageV2::kind).containsExactlyInAnyOrder(
-      UsageV2.Kind.ASSIGNMENT_LHS, UsageV2.Kind.NONLOCAL_DECLARATION, UsageV2.Kind.ASSIGNMENT_LHS, UsageV2.Kind.OTHER, UsageV2.Kind.OTHER, UsageV2.Kind.OTHER
-    );
-  }
-
-  @Test
   void conditional_assignment() {
     PythonType type = lastExpression("""
       if p:

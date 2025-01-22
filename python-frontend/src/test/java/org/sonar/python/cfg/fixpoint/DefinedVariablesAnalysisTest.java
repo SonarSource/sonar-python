@@ -99,20 +99,6 @@ class DefinedVariablesAnalysisTest {
       "after_loop(succ = [END], defIn = [_a], defOut = [_a], gen = [_a], kill = [])",
       "foo(a)");
   }
-
-  @Test
-  void test_function_generics() {
-    String code = """
-      def wrapper[T]():
-        block( succ = [END], defIn= [_T], defOut = [_T])
-      """;
-    FileInput fileInput = PythonTestUtils.parse(code);
-    FunctionDef fun = (FunctionDef) fileInput.statements().statements().get(0);
-    ControlFlowGraph cfg = ControlFlowGraph.build(fun, file);
-    DefinedVariablesAnalysis analysis = DefinedVariablesAnalysis.analyze(cfg, fun.localVariables());
-    CfgValidator.assertDefinedVariables(cfg, analysis);
-  }
-
   private void verifyDefVariableAnalysis(String... lines) {
     FileInput fileInput = PythonTestUtils.parse("def wrapper():", Arrays.stream(lines).map(s -> "  " + s).collect(Collectors.joining("\n")));
     FunctionDef fun = (FunctionDef) fileInput.statements().statements().get(0);

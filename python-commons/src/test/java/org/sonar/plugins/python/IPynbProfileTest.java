@@ -18,8 +18,6 @@ package org.sonar.plugins.python;
 
 import org.junit.jupiter.api.Test;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.plugins.python.editions.RepositoryInfoProvider;
-import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,7 +25,7 @@ class IPynbProfileTest {
 
   public BuiltInQualityProfilesDefinition.BuiltInQualityProfile getProfile() {
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
-    new IPynbProfile(new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()}).define(context);
+    new IPynbProfile().define(context);
     return context.profile("ipynb", "Sonar way");
   }
 

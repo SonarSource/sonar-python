@@ -16,7 +16,9 @@
  */
 package org.sonar.python.checks;
 
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import org.sonar.python.checks.cdk.DisabledEFSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledESDomainEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
@@ -104,13 +106,17 @@ import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 import org.sonar.python.checks.tests.UnconditionalAssertionCheck;
 
-public class OpenSourceCheckList {
+public final class CheckList {
 
-  public static final String RESOURCE_FOLDER = "org/sonar/l10n/py/rules/python";
-  public static final String SONAR_WAY_PROFILE_LOCATION = RESOURCE_FOLDER + "/Sonar_way_profile.json";
+  public static final String REPOSITORY_KEY = "python";
 
-  public Stream<Class<?>> getChecks() {
-    return Stream.of(
+  public static final String IPYTHON_REPOSITORY_KEY = "ipython";
+
+  private CheckList() {
+  }
+
+  public static Iterable<Class<?>> getChecks() {
+    return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
       AfterJumpStatementCheck.class,
       AllBranchesAreIdenticalCheck.class,
       AnchorPrecedenceCheck.class,
@@ -409,6 +415,7 @@ public class OpenSourceCheckList {
       DjangoReceiverDecoratorCheck.class,
       DjangoModelStringFieldCheck.class,
       DjangoModelStrMethodCheck.class,
-      HardcodedCredentialsCallCheck.class);
+      HardcodedCredentialsCallCheck.class)));
   }
+
 }

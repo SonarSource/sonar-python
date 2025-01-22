@@ -17,7 +17,6 @@
   <inceptionYear>2011</inceptionYear>
   <organization>
     <name>SonarSource</name>
-    <url>http://www.sonarsource.com</url>
   </organization>
 
   <licenses>
@@ -75,8 +74,7 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
     <sonar.pluginName>Python</sonar.pluginName>
-    <!-- Used as the build name when deployed to Artifactory -->
-    <gitRepositoryName>sonar-python-enterprise</gitRepositoryName>
+    <gitRepositoryName>sonar-python</gitRepositoryName>
     <!-- Release: enable publication to Bintray -->
     <artifactsToPublish>${project.groupId}:sonar-python-plugin:jar</artifactsToPublish>
     <!-- we depend on API ${sonar.version} but we keep backward compatibility with LTS -->
@@ -290,17 +288,6 @@
       <properties>
         <skip.its>false</skip.its>
       </properties>
-    </profile>
-    <profile>
-      <id>private</id>
-      <activation>
-        <property>
-          <name>!env.IS_COMMUNITY</name>
-        </property>
-      </activation>
-      <modules>
-        <module>private</module>
-      </modules>
     </profile>
   </profiles>
 </project>

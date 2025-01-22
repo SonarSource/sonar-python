@@ -19,30 +19,51 @@ package org.sonar.plugins.python;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.sonar.api.SonarRuntime;
-import org.sonar.python.checks.OpenSourceCheckList;
+import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.python.checks.CheckList;
+import org.sonarsource.analyzer.commons.RuleMetadataLoader;
 
-public class IPynbRuleRepository extends AbstractPythonRuleRepository {
+public class IPynbRuleRepository implements RulesDefinition {
 
-  public static final String IPYTHON_REPOSITORY_KEY = "ipython";
-  public static final Set<String> DISABLED_RULES = Set.of("S905", "S2201", "S5754", "S1481");
+  private static final String REPOSITORY_NAME = "SonarAnalyzer";
+
+  static final String RESOURCE_FOLDER = "org/sonar/l10n/py/rules/python";
+
+  private static final Set<String> TEMPLATE_RULE_KEYS = Collections.singleton("CommentRegularExpression");
+
+  private final SonarRuntime runtime;
 
   public IPynbRuleRepository(SonarRuntime runtime) {
-    super(IPYTHON_REPOSITORY_KEY, OpenSourceCheckList.RESOURCE_FOLDER, IPynb.KEY, runtime);
+    this.runtime = runtime;
   }
 
   @Override
-  protected List<Class<?>> getCheckClasses() {
-    return new OpenSourceCheckList().getChecks().toList();
+  public void define(Context context) {
+    NewRepository repository = context
+      .createRepository(CheckList.IPYTHON_REPOSITORY_KEY, IPynb.KEY)
+      .setName(REPOSITORY_NAME);
+
+    RuleMetadataLoader loader = new RuleMetadataLoader(RESOURCE_FOLDER, PythonProfile.PROFILE_LOCATION, runtime);
+    loader.addRulesByAnnotatedClass(repository, getCheckClasses());
+
+    repository.rules().stream()
+      .filter(rule -> TEMPLATE_RULE_KEYS.contains(rule.key()))
+      .forEach(rule -> rule.setTemplate(true));
+
+    repository.rules().stream()
+      .filter(rule -> IPynbProfile.DISABLED_RULES.contains(rule.key()))
+      .forEach(rule -> rule.setActivatedByDefault(false));
+
+    repository.done();
   }
 
-  @Override
-  protected Set<String> getTemplateRuleKeys() {
-    return Collections.singleton("CommentRegularExpression");
+  private static List<Class<?>> getCheckClasses() {
+    return StreamSupport.stream(CheckList.getChecks().spliterator(), false)
+      .map(check -> (Class<?>) check)
+      .collect(Collectors.toList());
   }
 
-  @Override
-  protected Set<String> getDisabledRules() {
-    return DISABLED_RULES;
-  }
 }

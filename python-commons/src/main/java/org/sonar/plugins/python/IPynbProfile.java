@@ -16,37 +16,32 @@
  */
 package org.sonar.plugins.python;
 
+import java.util.Set;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.plugins.python.editions.RepositoryInfoProvider;
+import org.sonar.python.checks.CheckList;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
-import static org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
+import static org.sonar.plugins.python.PythonRuleRepository.RESOURCE_FOLDER;
 
 public class IPynbProfile implements BuiltInQualityProfilesDefinition {
 
   static final String PROFILE_NAME = "Sonar way";
-
-  private final RepositoryInfoProvider[] editionMetadataProviders;
-
-  public IPynbProfile(RepositoryInfoProvider[] editionMetadataProviders) {
-    this.editionMetadataProviders = editionMetadataProviders;
-  }
+  static final String PROFILE_LOCATION = RESOURCE_FOLDER + "/Sonar_way_profile.json";
+  static final Set<String> DISABLED_RULES = Set.of("S905", "S2201", "S5754", "S1481");
 
   @Override
   public void define(Context context) {
     NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(PROFILE_NAME, IPynb.KEY);
-    for(RepositoryInfoProvider repositoryInfoProvider : editionMetadataProviders) {
-      registerRulesForEdition(repositoryInfoProvider, profile);
-    }
+    BuiltInQualityProfileJsonLoader.load(profile, CheckList.IPYTHON_REPOSITORY_KEY, PROFILE_LOCATION);
+    profile.activeRules().removeIf(IPynbProfile::isDisabled);
     profile.done();
   }
 
-  private static void registerRulesForEdition(RepositoryInfoProvider repositoryInfoProvider, NewBuiltInQualityProfile profile) {
-    RepositoryInfo repositoryInfo = repositoryInfoProvider.getIPynbInfo();
-    BuiltInQualityProfileJsonLoader.load(profile, repositoryInfo.repositoryKey(), repositoryInfo.profileLocation());
-
-    // Some rules from the default Python quality profile are considered noisy in IPython notebooks context.
-    // They are therefore filtered out of the default profile.
-    profile.activeRules().removeIf(rule -> repositoryInfo.disabledRules().contains(rule.ruleKey()));
+  /**
+   * Some rules from the default Python quality profile are considered noisy in IPython notebooks context
+   * They are therefore filtered out of the default profile.
+   */
+  private static boolean isDisabled(NewBuiltInActiveRule rule) {
+    return DISABLED_RULES.contains(rule.ruleKey());
   }
 }

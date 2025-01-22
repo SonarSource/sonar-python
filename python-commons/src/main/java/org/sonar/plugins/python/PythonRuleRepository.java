@@ -19,23 +19,47 @@ package org.sonar.plugins.python;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.sonar.api.SonarRuntime;
-import org.sonar.python.checks.OpenSourceCheckList;
+import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.python.checks.CheckList;
+import org.sonarsource.analyzer.commons.RuleMetadataLoader;
 
-public class PythonRuleRepository extends AbstractPythonRuleRepository {
+public class PythonRuleRepository implements RulesDefinition {
 
-  public static final String REPOSITORY_KEY = "python";
+  private static final String REPOSITORY_NAME = "SonarAnalyzer";
+
+  static final String RESOURCE_FOLDER = "org/sonar/l10n/py/rules/python";
+
+  private static final Set<String> TEMPLATE_RULE_KEYS = Collections.singleton("CommentRegularExpression");
+
+  private final SonarRuntime runtime;
 
   public PythonRuleRepository(SonarRuntime runtime) {
-    super(REPOSITORY_KEY, OpenSourceCheckList.RESOURCE_FOLDER, Python.KEY, runtime);
-  }
-
-  protected List<Class<?>> getCheckClasses() {
-    return new OpenSourceCheckList().getChecks().toList();
+    this.runtime = runtime;
   }
 
   @Override
-  protected Set<String> getTemplateRuleKeys() {
-    return Collections.singleton("CommentRegularExpression");
+  public void define(Context context) {
+    NewRepository repository = context
+      .createRepository(CheckList.REPOSITORY_KEY, Python.KEY)
+      .setName(REPOSITORY_NAME);
+
+    RuleMetadataLoader loader = new RuleMetadataLoader(RESOURCE_FOLDER, PythonProfile.PROFILE_LOCATION, runtime);
+    loader.addRulesByAnnotatedClass(repository, getCheckClasses());
+
+    repository.rules().stream()
+      .filter(rule -> TEMPLATE_RULE_KEYS.contains(rule.key()))
+      .forEach(rule -> rule.setTemplate(true));
+
+    repository.done();
   }
+
+  private static List<Class<?>> getCheckClasses() {
+    return StreamSupport.stream(CheckList.getChecks().spliterator(), false)
+      .map(check -> (Class<?>) check)
+      .collect(Collectors.toList());
+  }
+
 }

@@ -173,8 +173,8 @@ public class TypeInferenceV2 {
       boolean hasMissingBindingUsage = variable.usages().stream()
         .filter(UsageV2::isBindingUsage)
         .anyMatch(u -> !assignedNames.contains(u.tree()));
-      boolean isGlobalOrNonLocal = variable.usages().stream().anyMatch(v -> v.kind().equals(UsageV2.Kind.GLOBAL_DECLARATION) || v.kind().equals(UsageV2.Kind.NONLOCAL_DECLARATION));
-      if (!hasMissingBindingUsage && !isGlobalOrNonLocal) {
+      boolean isGlobal = variable.usages().stream().anyMatch(v -> v.kind().equals(UsageV2.Kind.GLOBAL_DECLARATION));
+      if (!hasMissingBindingUsage && !isGlobal) {
         trackedVars.add(variable);
       }
     }

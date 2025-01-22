@@ -39,13 +39,11 @@ import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
-import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
-import org.sonar.plugins.python.editions.RepositoryInfoProvider;
-import org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.caching.CacheContextImpl;
+import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.types.TypeShed;
 import org.sonarsource.performance.measure.PerformanceMeasure;
@@ -78,14 +76,12 @@ public final class PythonSensor implements Sensor {
    */
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
     NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()});
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
     PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()});
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
@@ -93,38 +89,21 @@ public final class PythonSensor implements Sensor {
     // ^^ This constructor implicitly assumes that a PythonIndexer and a SonarLintCache are always available at the same time.
     // In practice, this is currently the case, since both are provided by PythonPlugin under the same conditions.
     // See also PythonPlugin::SonarLintPluginAPIManager::addSonarlintPythonIndexer.
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()});
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings);
   }
 
-  public PythonSensor(
-    FileLinesContextFactory fileLinesContextFactory,
-    CheckFactory checkFactory,
-    NoSonarFilter noSonarFilter,
-    @Nullable PythonCustomRuleRepository[] customRuleRepositories,
-    @Nullable PythonIndexer indexer,
-    @Nullable SonarLintCache sonarLintCache,
-    AnalysisWarningsWrapper analysisWarnings,
-    RepositoryInfoProvider[] editionMetadataProviders) {
-
-    this.checks = createPythonChecks(checkFactory, editionMetadataProviders)
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
+    @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer,
+    @Nullable SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
+    this.checks = new PythonChecks(checkFactory)
+      .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
-
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;
     this.sonarLintCache = sonarLintCache;
     this.analysisWarnings = analysisWarnings;
     this.sensorTelemetryStorage = new SensorTelemetryStorage();
-  }
-
-  private static PythonChecks createPythonChecks(CheckFactory checkFactory, RepositoryInfoProvider[] editionMetadataProviders) {
-    PythonChecks checks = new PythonChecks(checkFactory);
-    for (RepositoryInfoProvider repositoryInfoProvider : editionMetadataProviders) {
-      RepositoryInfo repositoryInfo = repositoryInfoProvider.getInfo();
-      checks.addChecks(repositoryInfo.repositoryKey(), repositoryInfo.checks());
-    }
-    return checks;
   }
 
   @Override

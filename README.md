@@ -20,7 +20,7 @@ Sonar's [Clean Code solutions](https://www.sonarsource.com/solutions/clean-code/
 
 The easiest way to build the Project is by running:
 
-`mvn clean install -DskipTypeshed -P-private`
+`mvn clean install -DskipTypeshed`
 
 It builds only Java Maven modules, runs tests, and installs jar locally.
 The Python interpreter is not required in that case.
@@ -44,7 +44,7 @@ All the above should be available in PATH.
 
 To execute the full build just run:
 
-`mvn clean install -P-private`
+`mvn clean install`
 
 The full build executes [Typeshed](https://github.com/python/typeshed) serializer script. 
 It generates protobuf messages for Typeshed symbols (for standard Python API) and our customs symbols 
@@ -85,5 +85,3 @@ Copyright 2011-2024 SonarSource.
 SonarQube analyzers released after November 29, 2024, including patch fixes for prior versions, are published under the [Sonar Source-Available License Version 1 (SSALv1)](LICENSE.txt).
 
 See individual files for details that specify the license applicable to each file. Files subject to the SSALv1 will be noted in their headers.
-
-This is a test change
