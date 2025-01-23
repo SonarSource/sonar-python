@@ -16,7 +16,6 @@
  */
 package org.sonar.plugins.python;
 
-import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.Plugin;
@@ -24,6 +23,7 @@ import org.sonar.api.PropertyType;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
+import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
@@ -103,7 +103,7 @@ public class PythonExtensions {
           "The reports have to conform to the Cobertura XML format.")
         .category(PYTHON_CATEGORY)
         .subCategory(TEST_AND_COVERAGE)
-        .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+        .onQualifiers(Qualifiers.PROJECT)
         .defaultValue(PythonCoverageSensor.DEFAULT_REPORT_PATH)
         .multiValues(true)
         .build(),
@@ -115,7 +115,7 @@ public class PythonExtensions {
           "Path to a coverage report. Ant patterns are accepted for relative path. The report has to conform to the Cobertura XML format.")
         .category(PYTHON_CATEGORY)
         .subCategory(TEST_AND_COVERAGE)
-        .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+        .onQualifiers(Qualifiers.PROJECT)
         .defaultValue("")
         .build(),
       PythonCoverageSensor.class);
@@ -130,7 +130,7 @@ public class PythonExtensions {
           "are not found. Disabled by default.")
         .category(PYTHON_CATEGORY)
         .subCategory(TEST_AND_COVERAGE)
-        .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+        .onQualifiers(Qualifiers.PROJECT)
         .defaultValue("false")
         .type(PropertyType.BOOLEAN)
         .build(),
@@ -141,7 +141,7 @@ public class PythonExtensions {
           "conform to the junitreport XML format.")
         .category(PYTHON_CATEGORY)
         .subCategory(TEST_AND_COVERAGE)
-        .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+        .onQualifiers(Qualifiers.PROJECT)
         .defaultValue(PythonXUnitSensor.DEFAULT_REPORT_PATH)
         .build(),
       PythonXUnitSensor.class);
@@ -154,7 +154,7 @@ public class PythonExtensions {
         .description("Paths (absolute or relative) to json files with Bandit issues.")
         .category(EXTERNAL_ANALYZERS_CATEGORY)
         .subCategory(PYTHON_CATEGORY)
-        .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+        .onQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       BanditRulesDefinition.class);
@@ -167,7 +167,7 @@ public class PythonExtensions {
         .description("Paths (absolute or relative) to report files with Pylint issues.")
         .category(EXTERNAL_ANALYZERS_CATEGORY)
         .subCategory(PYTHON_CATEGORY)
-        .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+        .onQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       PylintRulesDefinition.class);
@@ -180,7 +180,7 @@ public class PythonExtensions {
         .description("Paths (absolute or relative) to report files with Flake8 issues.")
         .category(EXTERNAL_ANALYZERS_CATEGORY)
         .subCategory(PYTHON_CATEGORY)
-        .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+        .onQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       Flake8RulesDefinition.class);
@@ -193,7 +193,7 @@ public class PythonExtensions {
         .description("Paths (absolute or relative) to report files with Mypy issues.")
         .category(EXTERNAL_ANALYZERS_CATEGORY)
         .subCategory(PYTHON_CATEGORY)
-        .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+        .onQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       MypyRulesDefinition.class);
@@ -206,7 +206,7 @@ public class PythonExtensions {
         .description("Paths (absolute or relative) to report files with Ruff issues.")
         .category(EXTERNAL_ANALYZERS_CATEGORY)
         .subCategory(PYTHON_CATEGORY)
-        .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+        .onQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       RuffRulesDefinition.class);
@@ -220,7 +220,7 @@ public class PythonExtensions {
       .multiValues(true)
       .category(PYTHON_CATEGORY)
       .subCategory(GENERAL)
-      .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+      .onQualifiers(Qualifiers.PROJECT)
       .build();
   }
 
@@ -232,7 +232,7 @@ public class PythonExtensions {
       .multiValues(true)
       .category(PYTHON_CATEGORY)
       .subCategory(GENERAL)
-      .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+      .onQualifiers(Qualifiers.PROJECT)
       .defaultValue("ipynb")
       .build();
   }
@@ -245,7 +245,7 @@ public class PythonExtensions {
       .multiValues(true)
       .category(PYTHON_CATEGORY)
       .subCategory(GENERAL)
-      .onConfigScopes(Set.of(PropertyDefinition.ConfigScope.PROJECT))
+      .onQualifiers(Qualifiers.PROJECT)
       .defaultValue("py")
       .build();
   }

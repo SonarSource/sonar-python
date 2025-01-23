@@ -176,7 +176,7 @@ plugin_qa_task:
     CIRRUS_CLONE_DEPTH: 10
     SONARSOURCE_QA: true
     matrix:
-      - SQ_VERSION: LATEST_RELEASE[25.1]
+      - SQ_VERSION: LATEST_RELEASE[10.6]
       - SQ_VERSION: DEV
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
