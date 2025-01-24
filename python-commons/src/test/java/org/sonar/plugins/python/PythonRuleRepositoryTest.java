@@ -131,7 +131,7 @@ class PythonRuleRepositoryTest {
 
   private static RulesDefinition.Repository buildRepository(int majorVersion, int minorVersion) {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
-    PythonRuleRepository ruleRepository = new PythonRuleRepository(sonarRuntime);
+    PythonRuleRepository ruleRepository = new PythonRuleRepository(sonarRuntime, new CheckList());
     RulesDefinition.Context context = new RulesDefinition.Context();
     ruleRepository.define(context);
     return context.repository(CheckList.REPOSITORY_KEY);

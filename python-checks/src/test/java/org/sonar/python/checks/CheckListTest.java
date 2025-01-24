@@ -61,7 +61,7 @@ class CheckListTest {
         count++;
       }
     }
-    assertThat(Iterables.size(CheckList.getChecks())).isEqualTo(count);
+    assertThat(new CheckList().getChecks().count()).isEqualTo(count);
   }
 
   /**
@@ -69,7 +69,7 @@ class CheckListTest {
    */
   @Test
   void test() {
-    Iterable<Class<?>> checks = CheckList.getChecks();
+    List<Class<?>> checks = new CheckList().getChecks().toList();
 
     for (Class<?> cls : checks) {
       String testName = '/' + cls.getName().replace('.', '/') + "Test.class";

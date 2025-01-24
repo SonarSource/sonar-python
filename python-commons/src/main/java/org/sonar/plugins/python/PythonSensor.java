@@ -76,12 +76,12 @@ public final class PythonSensor implements Sensor {
    */
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
     NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings, new CheckList());
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
     PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings, new CheckList());
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
@@ -89,14 +89,21 @@ public final class PythonSensor implements Sensor {
     // ^^ This constructor implicitly assumes that a PythonIndexer and a SonarLintCache are always available at the same time.
     // In practice, this is currently the case, since both are provided by PythonPlugin under the same conditions.
     // See also PythonPlugin::SonarLintPluginAPIManager::addSonarlintPythonIndexer.
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings, new CheckList());
   }
 
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-    @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer,
-    @Nullable SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
+  public PythonSensor(
+    FileLinesContextFactory fileLinesContextFactory,
+    CheckFactory checkFactory,
+    NoSonarFilter noSonarFilter,
+    @Nullable PythonCustomRuleRepository[] customRuleRepositories,
+    @Nullable PythonIndexer indexer,
+    @Nullable SonarLintCache sonarLintCache,
+    AnalysisWarningsWrapper analysisWarnings,
+    CheckList checkList) {
+
     this.checks = new PythonChecks(checkFactory)
-      .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
+      .addChecks(CheckList.REPOSITORY_KEY, checkList.getChecks().toList())
       .addCustomChecks(customRuleRepositories);
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;

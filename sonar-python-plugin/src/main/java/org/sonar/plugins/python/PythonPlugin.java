@@ -17,6 +17,7 @@
 package org.sonar.plugins.python;
 
 import org.sonar.api.Plugin;
+import org.sonar.python.checks.CheckList;
 
 public class PythonPlugin implements Plugin {
 
@@ -24,6 +25,7 @@ public class PythonPlugin implements Plugin {
   @Override
   public void define(Context context) {
     PythonExtensions.addCommonExtensions(context);
+    context.addExtension(CheckList.class);
   }
 
 }

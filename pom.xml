@@ -17,6 +17,7 @@
   <inceptionYear>2011</inceptionYear>
   <organization>
     <name>SonarSource</name>
+    <url>http://www.sonarsource.com</url>
   </organization>
 
   <licenses>
@@ -299,6 +300,21 @@
       <modules>
         <module>private</module>
       </modules>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>license-maven-plugin</artifactId>
+              <configuration>
+                <includedLicenses>
+                  apache_v2|bouncy_castle|bsd|cddl_gpl|cddl_v1|epl_v1|epl_v2|h2|jaxen|lgpl_v2_1|lgpl_v3|mit|public_domain|tmate|SSALv1|sonarsource
+                </includedLicenses>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
     </profile>
   </profiles>
 </project>

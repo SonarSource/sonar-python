@@ -19,6 +19,10 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.stream.Stream;
+import org.sonar.api.ce.ComputeEngineSide;
+import org.sonar.api.server.ServerSide;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.python.checks.cdk.DisabledEFSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledESDomainEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
@@ -105,18 +109,21 @@ import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 import org.sonar.python.checks.tests.UnconditionalAssertionCheck;
+import org.sonarsource.api.sonarlint.SonarLintSide;
 
-public final class CheckList {
+
+@ServerSide
+@ScannerSide
+@SonarLintSide
+@ComputeEngineSide
+public class CheckList {
 
   public static final String REPOSITORY_KEY = "python";
 
   public static final String IPYTHON_REPOSITORY_KEY = "ipython";
 
-  private CheckList() {
-  }
-
-  public static Iterable<Class<?>> getChecks() {
-    return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+  public Stream<Class<?>> getChecks() {
+    return Stream.of(
       AfterJumpStatementCheck.class,
       AllBranchesAreIdenticalCheck.class,
       AnchorPrecedenceCheck.class,
@@ -415,7 +422,6 @@ public final class CheckList {
       DjangoReceiverDecoratorCheck.class,
       DjangoModelStringFieldCheck.class,
       DjangoModelStrMethodCheck.class,
-      HardcodedCredentialsCallCheck.class)));
+      HardcodedCredentialsCallCheck.class);
   }
-
 }
