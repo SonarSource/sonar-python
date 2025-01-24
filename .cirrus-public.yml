@@ -46,7 +46,7 @@ build_task:
     - rm -rf private
     - source cirrus-env BUILD
     - regular_mvn_build_deploy_analyze -DskipTests=true -Dsonar.skip=true -P-typeshed_serializer,-sign,-private
-    - ./check-license-compliance.sh -P-private
+    - ./check-license-compliance.sh
   cleanup_before_cache_script: cleanup_maven_repository
 
 test_analyze_task:
