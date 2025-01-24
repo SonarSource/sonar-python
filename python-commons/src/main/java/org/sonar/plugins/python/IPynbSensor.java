@@ -50,12 +50,18 @@ public final class IPynbSensor implements Sensor {
   private final SensorTelemetryStorage sensorTelemetryStorage;
 
   public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, new CheckList());
   }
 
-  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, @Nullable PythonIndexer indexer) {
+  public IPynbSensor(
+    FileLinesContextFactory fileLinesContextFactory,
+    CheckFactory checkFactory,
+    NoSonarFilter noSonarFilter,
+    @Nullable PythonIndexer indexer,
+    CheckList checkList) {
+
     this.checks = new PythonChecks(checkFactory)
-      .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, CheckList.getChecks());
+      .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, checkList.getChecks().toList());
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;

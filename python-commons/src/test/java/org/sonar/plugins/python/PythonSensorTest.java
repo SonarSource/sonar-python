@@ -1496,7 +1496,7 @@ class PythonSensorTest {
     if (customRuleRepositories == null) {
       return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCache(), analysisWarnings);
     }
-    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, new SonarLintCache(), analysisWarnings);
+    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, new SonarLintCache(), analysisWarnings, new CheckList());
   }
 
   private SonarLintPythonIndexer pythonIndexer(List<PythonInputFile> files) {

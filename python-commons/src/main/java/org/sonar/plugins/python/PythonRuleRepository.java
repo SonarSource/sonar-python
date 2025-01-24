@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.python.checks.CheckList;
@@ -36,8 +35,11 @@ public class PythonRuleRepository implements RulesDefinition {
 
   private final SonarRuntime runtime;
 
-  public PythonRuleRepository(SonarRuntime runtime) {
+  private final CheckList checkList;
+
+  public PythonRuleRepository(SonarRuntime runtime, CheckList checkList) {
     this.runtime = runtime;
+    this.checkList = checkList;
   }
 
   @Override
@@ -56,8 +58,8 @@ public class PythonRuleRepository implements RulesDefinition {
     repository.done();
   }
 
-  private static List<Class<?>> getCheckClasses() {
-    return StreamSupport.stream(CheckList.getChecks().spliterator(), false)
+  private List<Class<?>> getCheckClasses() {
+    return checkList.getChecks()
       .map(check -> (Class<?>) check)
       .collect(Collectors.toList());
   }
