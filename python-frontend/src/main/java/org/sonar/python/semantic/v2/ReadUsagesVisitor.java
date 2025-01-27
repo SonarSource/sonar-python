@@ -139,7 +139,13 @@ public class ReadUsagesVisitor extends ScopeVisitor {
     var scope = currentScope();
     var symbol = scope.resolve(name.name());
     if (symbol != null && symbol.usages().stream().noneMatch(usage -> usage.tree().equals(name))) {
-      symbol.addUsage(name, UsageV2.Kind.OTHER);
+      if (name.parent().is(Tree.Kind.GLOBAL_STMT)) {
+        symbol.addUsage(name, UsageV2.Kind.GLOBAL_DECLARATION);
+      } else if (name.parent().is(Tree.Kind.NONLOCAL_STMT)) {
+        symbol.addUsage(name, UsageV2.Kind.NONLOCAL_DECLARATION);
+      } else {
+        symbol.addUsage(name, UsageV2.Kind.OTHER);
+      }
     }
   }
 }
