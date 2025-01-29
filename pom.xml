@@ -75,7 +75,8 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
     <sonar.pluginName>Python</sonar.pluginName>
-    <gitRepositoryName>sonar-python</gitRepositoryName>
+    <!-- Used as the build name when deployed to Artifactory -->
+    <gitRepositoryName>sonar-python-enterprise</gitRepositoryName>
     <!-- Release: enable publication to Bintray -->
     <artifactsToPublish>${project.groupId}:sonar-python-plugin:jar</artifactsToPublish>
     <!-- we depend on API ${sonar.version} but we keep backward compatibility with LTS -->
