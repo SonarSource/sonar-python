@@ -16,13 +16,7 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.stream.Stream;
-import org.sonar.api.ce.ComputeEngineSide;
-import org.sonar.api.server.ServerSide;
-import org.sonar.api.scanner.ScannerSide;
 import org.sonar.python.checks.cdk.DisabledEFSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledESDomainEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
@@ -109,18 +103,11 @@ import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 import org.sonar.python.checks.tests.UnconditionalAssertionCheck;
-import org.sonarsource.api.sonarlint.SonarLintSide;
 
+public class OpenSourceCheckList {
 
-@ServerSide
-@ScannerSide
-@SonarLintSide
-@ComputeEngineSide
-public class CheckList {
-
-  public static final String REPOSITORY_KEY = "python";
-
-  public static final String IPYTHON_REPOSITORY_KEY = "ipython";
+  public static final String RESOURCE_FOLDER = "org/sonar/l10n/py/rules/python";
+  public static final String SONAR_WAY_PROFILE_LOCATION = RESOURCE_FOLDER + "/Sonar_way_profile.json";
 
   public Stream<Class<?>> getChecks() {
     return Stream.of(

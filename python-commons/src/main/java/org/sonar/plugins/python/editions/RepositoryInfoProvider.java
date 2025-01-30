@@ -14,16 +14,23 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.editions;
 
-import org.sonar.api.Plugin;
+import java.util.List;
+import java.util.Set;
+import org.sonar.api.ce.ComputeEngineSide;
+import org.sonar.api.scanner.ScannerSide;
+import org.sonar.api.server.ServerSide;
+import org.sonarsource.api.sonarlint.SonarLintSide;
 
-public class PythonPlugin implements Plugin {
+@ServerSide
+@ScannerSide
+@SonarLintSide
+@ComputeEngineSide
+public interface RepositoryInfoProvider {
+  RepositoryInfo getInfo();
+  RepositoryInfo getIPynbInfo();
 
-
-  @Override
-  public void define(Context context) {
-    PythonExtensions.addCommonExtensions(context);
+  record RepositoryInfo(String repositoryKey, String profileLocation, List<Class<?>> checks, Set<String> disabledRules) {
   }
-
 }

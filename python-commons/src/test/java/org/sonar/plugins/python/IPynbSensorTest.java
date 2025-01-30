@@ -47,10 +47,11 @@ import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
+import org.sonar.plugins.python.editions.RepositoryInfoProvider;
+import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
-import org.sonar.python.checks.CheckList;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -103,7 +104,7 @@ class IPynbSensorTest {
 
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.IPYTHON_REPOSITORY_KEY, "PrintStatementUsage"))
+        .setRuleKey(RuleKey.of(IPynbRuleRepository.IPYTHON_REPOSITORY_KEY, "PrintStatementUsage"))
         .setName("Print Statement Usage")
         .build())
       .build();
@@ -131,7 +132,7 @@ class IPynbSensorTest {
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new CheckList());
+    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()});
   }
 
   private PythonInputFile inputFile(String name) {
