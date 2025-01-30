@@ -16,7 +16,6 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.Iterables;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -43,7 +42,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-class CheckListTest {
+class OpenSourceCheckListTest {
 
   private static final Path METADATA_DIR = Paths.get("src/main/resources/org/sonar/l10n/py/rules/python");
 
@@ -61,7 +60,7 @@ class CheckListTest {
         count++;
       }
     }
-    assertThat(new CheckList().getChecks().count()).isEqualTo(count);
+    assertThat(new OpenSourceCheckList().getChecks().count()).isEqualTo(count);
   }
 
   /**
@@ -69,7 +68,7 @@ class CheckListTest {
    */
   @Test
   void test() {
-    List<Class<?>> checks = new CheckList().getChecks().toList();
+    List<Class<?>> checks = new OpenSourceCheckList().getChecks().toList();
 
     for (Class<?> cls : checks) {
       String testName = '/' + cls.getName().replace('.', '/') + "Test.class";
@@ -94,7 +93,7 @@ class CheckListTest {
         .toList();
 
       List<String> sqKeys = jsonList.stream()
-        .map(CheckListTest::extractSqKey)
+        .map(OpenSourceCheckListTest::extractSqKey)
         .toList();
 
       assertThat(fileNames).isEqualTo(sqKeys);
