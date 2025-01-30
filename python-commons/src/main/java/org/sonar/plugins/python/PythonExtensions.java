@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
+import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
 import org.sonar.plugins.python.flake8.Flake8RulesDefinition;
 import org.sonar.plugins.python.flake8.Flake8Sensor;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
@@ -75,7 +76,9 @@ public class PythonExtensions {
       IPynb.class,
       IPynbProfile.class,
       IPynbSensor.class,
-      IPynbRuleRepository.class);
+      IPynbRuleRepository.class,
+      OpenSourceRepositoryInfoProvider.class
+    );
 
     SonarRuntime sonarRuntime = context.getRuntime();
     if (sonarRuntime.getProduct() != SonarProduct.SONARLINT) {

@@ -14,28 +14,31 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.editions;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
-import org.sonar.api.SonarRuntime;
+import org.sonar.plugins.python.IPynbRuleRepository;
+import org.sonar.plugins.python.PythonRuleRepository;
 import org.sonar.python.checks.OpenSourceCheckList;
 
-public class PythonRuleRepository extends AbstractPythonRuleRepository {
-
-  public static final String REPOSITORY_KEY = "python";
-
-  public PythonRuleRepository(SonarRuntime runtime) {
-    super(REPOSITORY_KEY, OpenSourceCheckList.RESOURCE_FOLDER, Python.KEY, runtime);
-  }
-
-  protected List<Class<?>> getCheckClasses() {
-    return new OpenSourceCheckList().getChecks().toList();
+public class OpenSourceRepositoryInfoProvider implements RepositoryInfoProvider {
+  @Override
+  public RepositoryInfo getInfo() {
+    return new RepositoryInfo(
+      PythonRuleRepository.REPOSITORY_KEY,
+      OpenSourceCheckList.SONAR_WAY_PROFILE_LOCATION,
+      new OpenSourceCheckList().getChecks().toList(),
+      Set.of()
+    );
   }
 
   @Override
-  protected Set<String> getTemplateRuleKeys() {
-    return Collections.singleton("CommentRegularExpression");
+  public RepositoryInfo getIPynbInfo() {
+    return new RepositoryInfo(
+      IPynbRuleRepository.IPYTHON_REPOSITORY_KEY,
+      OpenSourceCheckList.SONAR_WAY_PROFILE_LOCATION,
+      new OpenSourceCheckList().getChecks().toList(),
+      IPynbRuleRepository.DISABLED_RULES
+    );
   }
 }
