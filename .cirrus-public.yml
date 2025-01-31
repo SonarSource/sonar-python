@@ -72,5 +72,5 @@ test_analyze_task:
   analyze_script:
     - rm -rf private
     - source cirrus-env BUILD
-    - PULL_REQUEST_SHA=$GIT_SHA1 regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true -P-deploy-sonarsource,-release,-sign,-private -Dmaven.deploy.skip=true -Dskip.its=true -Dsonar.analysisCache.enabled=true -Dsonar.skip=true # FIXME
+    - PULL_REQUEST_SHA=$GIT_SHA1 ./.cirrus/test_analyze.sh -Dsonar.skip=true
   cleanup_before_cache_script: cleanup_maven_repository
