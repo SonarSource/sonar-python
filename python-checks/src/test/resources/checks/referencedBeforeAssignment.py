@@ -201,3 +201,10 @@ def type_aliases_statement_fp_reference():
 
     class C[A]():
         ...
+
+class A[T]:
+    def __init__(self, value: T):
+        result: T = type(values[0])() # OK
+
+def sum_them[T](values: list[T]) -> T | None:
+    result: T = type(values[0])() # OK
