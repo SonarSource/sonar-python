@@ -40,7 +40,7 @@ public class DefinedVariablesAnalysis {
   private void compute(ControlFlowGraph cfg, Set<Symbol> localVariables) {
     Map<Symbol, VariableDefinition> initialState = new HashMap<>();
     for (Symbol variable : localVariables) {
-      boolean isParameter = variable.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.PARAMETER);
+      boolean isParameter = isParameter(variable);
       initialState.put(variable, isParameter ? VariableDefinition.DEFINED : VariableDefinition.UNDEFINED);
     }
     Set<CfgBlock> blocks = cfg.blocks();
@@ -54,6 +54,10 @@ public class DefinedVariablesAnalysis {
         currentBlock.successors().forEach(workList::push);
       }
     }
+  }
+
+  private static boolean isParameter(Symbol variable) {
+    return variable.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.PARAMETER || u.kind() == Usage.Kind.TYPE_PARAM_DECLARATION);
   }
 
   public DefinedVariables getDefinedVariables(CfgBlock block) {
