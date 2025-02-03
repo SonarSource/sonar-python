@@ -21,6 +21,8 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.python.it.ConcurrentOrchestratorExtension;
+import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,10 +30,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import static com.sonar.python.it.plugin.TestsUtils.assertProjectMeasures;
+import static com.sonar.python.it.TestsUtils.assertProjectMeasures;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TestReportTest {
+public class TestReportTest {
 
   public static final String TESTS = "tests";
   public static final String TEST_FAILURES = "test_failures";
@@ -41,7 +43,7 @@ class TestReportTest {
   public static final String TEST_EXECUTION_TIME = "test_execution_time";
 
   @RegisterExtension
-  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.dynamicOrchestrator;
 
   private static SonarScanner createBuild(String projectKey, String testReportPath) {
     return ORCHESTRATOR.createSonarScanner()

@@ -18,17 +18,19 @@ package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.python.it.ConcurrentOrchestratorExtension;
+import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsDouble;
-import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsInt;
+import static com.sonar.python.it.TestsUtils.getMeasureAsDouble;
+import static com.sonar.python.it.TestsUtils.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MetricsTest {
+public class MetricsTest {
 
   private static final String PROJECT_KEY = "metrics";
 
@@ -55,7 +57,7 @@ class MetricsTest {
   private static final Offset<Double> OFFSET = Offset.offset(0.01d);
 
   @RegisterExtension
-  public static final ConcurrentOrchestratorExtension orchestrator = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension orchestrator = TestsUtils.dynamicOrchestrator;
 
   private static BuildResult buildResult;
 

@@ -20,6 +20,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.python.it.ConcurrentOrchestratorExtension;
+import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,11 +30,11 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CoverageTest {
+public class CoverageTest {
 
   private static final String COVERAGE_PROJECT = "projects/coverage_project";
   @RegisterExtension
-  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.dynamicOrchestrator;
 
   private static final String PROJECT_KEY = "coverage_project";
   private static final String LINES_TO_COVER = "lines_to_cover";

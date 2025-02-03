@@ -1,3 +1,0 @@
-
-class RelativeImportInitException(NotImplementedError):
-    pass

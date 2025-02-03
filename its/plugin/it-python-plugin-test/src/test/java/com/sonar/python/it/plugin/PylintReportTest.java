@@ -17,20 +17,22 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.BuildResult;
+import com.sonar.python.it.ConcurrentOrchestratorExtension;
+import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import static com.sonar.python.it.plugin.TestsUtils.issues;
+import static com.sonar.python.it.TestsUtils.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PylintReportTest {
+public class PylintReportTest {
 
   private static final String DEFAULT_PROPERTY = "sonar.python.pylint.reportPaths";
   private static final String LEGACY_PROPERTY = "sonar.python.pylint.reportPath";
 
   @RegisterExtension
-  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.dynamicOrchestrator;
 
   @Test
   void import_report() {

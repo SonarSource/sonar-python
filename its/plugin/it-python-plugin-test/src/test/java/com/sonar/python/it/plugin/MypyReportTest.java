@@ -16,6 +16,8 @@
  */
 package com.sonar.python.it.plugin;
 
+import com.sonar.python.it.ConcurrentOrchestratorExtension;
+import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -23,15 +25,15 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Common;
 import org.sonarqube.ws.Issues;
 
-import static com.sonar.python.it.plugin.TestsUtils.issues;
+import static com.sonar.python.it.TestsUtils.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MypyReportTest {
+public class MypyReportTest {
 
   private static final String PROJECT = "mypy_project";
 
   @RegisterExtension
-  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.dynamicOrchestrator;
 
   @Test
   void import_report() {

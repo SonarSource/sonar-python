@@ -1,3 +1,0 @@
-
-class ParentException(NotImplementedError):
-    pass
