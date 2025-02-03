@@ -17,16 +17,18 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.python.it.ConcurrentOrchestratorExtension;
+import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsDouble;
+import static com.sonar.python.it.TestsUtils.getMeasureAsDouble;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CPDTest {
+public class CPDTest {
 
   private static final String PROJECT_KEY = "cpd";
 
@@ -40,7 +42,7 @@ class CPDTest {
   private static final String DUPLICATED_LINES_DENSITY = "duplicated_lines_density";
 
   @RegisterExtension
-  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.dynamicOrchestrator;
 
   @BeforeAll
   static void startServer() {

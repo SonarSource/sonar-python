@@ -16,6 +16,8 @@
  */
 package com.sonar.python.it.plugin;
 
+import com.sonar.python.it.PluginLocator;
+import com.sonar.python.it.TestsUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -58,13 +60,14 @@ import org.sonarsource.sonarlint.core.plugin.commons.PluginsLoader;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-class SonarLintIPythonTest {
+public class SonarLintIPythonTest {
 
   @TempDir
   public static Path temp;
 
   private static AnalysisEngine sonarlintEngine;
   private final ProgressMonitor progressMonitor = new ProgressMonitor(null);
+
 
   @BeforeAll
   static void prepare() {
@@ -79,7 +82,7 @@ class SonarLintIPythonTest {
       }
     };
     SonarLintLogger.setTarget(logOutput);
-    var pluginJarLocation = Set.of(TestsUtils.PLUGIN_LOCATION.getFile().toPath());
+    var pluginJarLocation = Set.of(TestsUtils.dynamicOrchestrator.getConfiguration().locators().locate(PluginLocator.pythonPluginLocation()).toPath());
     var enabledLanguages = Set.of(SonarLanguage.IPYTHON);
     var pluginConfiguration = new PluginsLoader.Configuration(pluginJarLocation, enabledLanguages, false, Optional.empty());
     var pluginLoader = new PluginsLoader().load(pluginConfiguration, Set.of());

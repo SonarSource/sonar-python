@@ -17,6 +17,8 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.python.it.ConcurrentOrchestratorExtension;
+import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,16 +26,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Issues;
 
-import static com.sonar.python.it.plugin.TestsUtils.issues;
+import static com.sonar.python.it.TestsUtils.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class NoSonarTest {
+public class NoSonarTest {
 
   private static final String PROJECT_KEY = "nosonar";
   private static final String PROFILE_NAME = "nosonar";
 
   @RegisterExtension
-  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.dynamicOrchestrator;
 
   @BeforeAll
   static void startServer() {

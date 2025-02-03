@@ -17,6 +17,8 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.python.it.ConcurrentOrchestratorExtension;
+import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,15 +28,15 @@ import org.junit.jupiter.api.parallel.ResourceLock;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.client.issues.SearchRequest;
 
-import static com.sonar.python.it.plugin.TestsUtils.newWsClient;
+import static com.sonar.python.it.TestsUtils.newWsClient;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ResourceLock("project/custom_rules")
-class CustomRulesTest {
+public class CustomRulesTest {
 
   @RegisterExtension
-  public static final ConcurrentOrchestratorExtension orchestrator = TestsUtils.ORCHESTRATOR;
+  public static final ConcurrentOrchestratorExtension orchestrator = TestsUtils.dynamicOrchestrator;
 
   private static final String PROJECT_KEY = "custom-rules";
   private static final String PROJECT_NAME = "Custom Rules";
