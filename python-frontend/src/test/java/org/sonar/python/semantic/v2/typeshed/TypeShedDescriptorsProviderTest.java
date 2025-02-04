@@ -146,6 +146,7 @@ class TypeShedDescriptorsProviderTest {
     assertThat(provider.descriptorsForModule("ctypes.util")).isNotEmpty();
     assertThat(provider.descriptorsForModule("lib2to3.pgen2.grammar")).isNotEmpty();
     assertThat(provider.descriptorsForModule("cryptography")).isNotEmpty();
+    assertThat(provider.descriptorsForModule("pyspark")).isNotEmpty();
     // resolved but still empty
     assertThat(provider.descriptorsForModule("kazoo")).isEmpty();
   }

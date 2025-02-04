@@ -3638,6 +3638,17 @@ public class TypeInferenceV2Test {
       .isNotEqualTo(actualFoo.typeV2());
   }
 
+  @Test
+  void pysparkStubs() {
+    var fileInput = inferTypes("""
+      from pyspark.sql import SparkSession
+      SparkSession
+      """);
+    var sparkSessionType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    ClassType classType = (ClassType) sparkSessionType;
+    assertThat(classType.fullyQualifiedName()).isEqualTo("pyspark.sql.session.SparkSession");
+  }
+
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
     FileInput root = parse(lines);
     var symbolTable = new SymbolTableBuilderV2(root).build();
