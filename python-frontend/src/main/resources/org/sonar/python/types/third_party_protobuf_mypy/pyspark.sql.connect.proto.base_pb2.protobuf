@@ -135,7 +135,7 @@ DESCRIPTOR9pyspark.sql.connect.proto.base_pb2.UserContext.DESCRIPTOR
 user_id6pyspark.sql.connect.proto.base_pb2.UserContext.user_id
 builtins.str"builtins.strrc
 	user_name8pyspark.sql.connect.proto.base_pb2.UserContext.user_name
-builtins.str"builtins.strÀô
+builtins.str"builtins.strŸ™
 AnalyzePlanRequest5pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest"builtins.object*º
 user_contextBpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.user_context"`
 .pyspark.sql.connect.proto.base_pb2.UserContext".pyspark.sql.connect.proto.base_pb2.UserContext*x
@@ -508,7 +508,679 @@ DESCRIPTOR@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DESCRIPTOR
 session_id@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.session_id
 builtins.str"builtins.strrn
 client_typeApyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.client_type
-builtins.str"builtins.strúÜ
+builtins.str"builtins.strzÓ
+Schema<pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema"builtins.object*¥
+planApyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema.plan"R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan*Ü
+self|
+<pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema"<pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema0:property`*â
+__init__Epyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema.__init__"
+None*Ü
+self|
+<pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema"<pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema*¢
+planï
+3Union[pyspark.sql.connect.proto.base_pb2.Plan,None]R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan
+None *æ
+HasFieldEpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema.HasField"
+builtins.bool"builtins.bool*Ü
+self|
+<pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema"<pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*¨
+
+ClearFieldGpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema.ClearField"
+None*Ü
+self|
+<pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema"<pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr^
+
+DESCRIPTORGpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema.DESCRIPTOR
+AnyrÅ
+PLAN_FIELD_NUMBERNpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Schema.PLAN_FIELD_NUMBER
+builtins.int"builtins.intz–9
+Explain=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain"builtins.object*∑
+planBpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.plan"R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain0:property`*–
+__init__Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.__init__"
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain*¢
+planï
+3Union[pyspark.sql.connect.proto.base_pb2.Plan,None]R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan
+None *¡
+explain_mode¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType *¡
+HasFieldFpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.HasField"
+builtins.bool"builtins.bool*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*’
+
+ClearFieldHpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.ClearField"
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr_
+
+DESCRIPTORHpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.DESCRIPTOR
+Anyr°
+EXPLAIN_MODE_UNSPECIFIEDVpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.EXPLAIN_MODE_UNSPECIFIED¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyperó
+EXPLAIN_MODE_SIMPLEQpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.EXPLAIN_MODE_SIMPLE¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyperõ
+EXPLAIN_MODE_EXTENDEDSpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.EXPLAIN_MODE_EXTENDED¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyperô
+EXPLAIN_MODE_CODEGENRpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.EXPLAIN_MODE_CODEGEN¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyperì
+EXPLAIN_MODE_COSTOpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.EXPLAIN_MODE_COST¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyperù
+EXPLAIN_MODE_FORMATTEDTpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.EXPLAIN_MODE_FORMATTED¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyperÇ
+PLAN_FIELD_NUMBEROpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.PLAN_FIELD_NUMBER
+builtins.int"builtins.intrí
+EXPLAIN_MODE_FIELD_NUMBERWpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.EXPLAIN_MODE_FIELD_NUMBER
+builtins.int"builtins.intrâ
+explain_modeJpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.explain_mode¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTypezµ
+_ExplainModeJpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode"builtins.objectz«
+	ValueTypeTpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"builtins.int*’
+__init__]pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType.__init__"
+None*∑
+self¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType*&
+item
+builtins.int"builtins.intz⁄
+_ExplainModeEnumTypeWrapperYpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainModeEnumTypeWrapper"builtins.typer{
+
+DESCRIPTORdpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainModeEnumTypeWrapper.DESCRIPTOR
+AnyrΩ
+EXPLAIN_MODE_UNSPECIFIEDrpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainModeEnumTypeWrapper.EXPLAIN_MODE_UNSPECIFIED¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyper≥
+EXPLAIN_MODE_SIMPLEmpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainModeEnumTypeWrapper.EXPLAIN_MODE_SIMPLE¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyper∑
+EXPLAIN_MODE_EXTENDEDopyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainModeEnumTypeWrapper.EXPLAIN_MODE_EXTENDED¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyperµ
+EXPLAIN_MODE_CODEGENnpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainModeEnumTypeWrapper.EXPLAIN_MODE_CODEGEN¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyperØ
+EXPLAIN_MODE_COSTkpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainModeEnumTypeWrapper.EXPLAIN_MODE_COST¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTyperπ
+EXPLAIN_MODE_FORMATTEDppyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainModeEnumTypeWrapper.EXPLAIN_MODE_FORMATTED¨
+Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueType"Tpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode.ValueTypezÅ
+ExplainModeIpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain.ExplainMode"Jpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainMode@bYpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Explain._ExplainModeEnumTypeWrapperzµ
+
+TreeString@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString"builtins.object*¡
+planEpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString.plan"R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan*è
+selfÑ
+@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString"@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString0:property`*È
+__init__Ipyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString.__init__"
+None*è
+selfÑ
+@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString"@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString*¢
+planï
+3Union[pyspark.sql.connect.proto.base_pb2.Plan,None]R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan
+None *Q
+levelD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ò
+HasFieldIpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString.HasField"
+builtins.bool"builtins.bool*è
+selfÑ
+@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString"@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString*é
+
+field_name˝
+êUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*Ü
+
+ClearFieldKpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString.ClearField"
+None*è
+selfÑ
+@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString"@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString*é
+
+field_name˝
+êUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*ö
+
+WhichOneofKpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString.WhichOneof"h
+!Union[Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None*è
+selfÑ
+@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString"@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString*¬
+oneof_group∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrb
+
+DESCRIPTORKpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString.DESCRIPTOR
+AnyrÖ
+PLAN_FIELD_NUMBERRpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString.PLAN_FIELD_NUMBER
+builtins.int"builtins.intrá
+LEVEL_FIELD_NUMBERSpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString.LEVEL_FIELD_NUMBER
+builtins.int"builtins.intrm
+levelFpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.TreeString.level
+builtins.int"builtins.intz˛
+IsLocal=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal"builtins.object*∑
+planBpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal.plan"R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal0:property`*å
+__init__Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal.__init__"
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal*¢
+planï
+3Union[pyspark.sql.connect.proto.base_pb2.Plan,None]R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan
+None *¡
+HasFieldFpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal.HasField"
+builtins.bool"builtins.bool*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*Ø
+
+ClearFieldHpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal.ClearField"
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr_
+
+DESCRIPTORHpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal.DESCRIPTOR
+AnyrÇ
+PLAN_FIELD_NUMBEROpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsLocal.PLAN_FIELD_NUMBER
+builtins.int"builtins.intz¬
+IsStreamingApyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming"builtins.object*ƒ
+planFpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming.plan"R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming"Apyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming0:property`*ô
+__init__Jpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming.__init__"
+None*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming"Apyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming*¢
+planï
+3Union[pyspark.sql.connect.proto.base_pb2.Plan,None]R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan
+None *Œ
+HasFieldJpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming.HasField"
+builtins.bool"builtins.bool*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming"Apyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*º
+
+ClearFieldLpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming.ClearField"
+None*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming"Apyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrc
+
+DESCRIPTORLpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming.DESCRIPTOR
+AnyrÜ
+PLAN_FIELD_NUMBERSpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.IsStreaming.PLAN_FIELD_NUMBER
+builtins.int"builtins.intz≤
+
+InputFiles@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles"builtins.object*¡
+planEpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles.plan"R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan*è
+selfÑ
+@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles"@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles0:property`*ñ
+__init__Ipyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles.__init__"
+None*è
+selfÑ
+@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles"@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles*¢
+planï
+3Union[pyspark.sql.connect.proto.base_pb2.Plan,None]R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan
+None *À
+HasFieldIpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles.HasField"
+builtins.bool"builtins.bool*è
+selfÑ
+@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles"@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*π
+
+ClearFieldKpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles.ClearField"
+None*è
+selfÑ
+@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles"@pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrb
+
+DESCRIPTORKpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles.DESCRIPTOR
+AnyrÖ
+PLAN_FIELD_NUMBERRpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.InputFiles.PLAN_FIELD_NUMBER
+builtins.int"builtins.intz√
+SparkVersionBpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SparkVersion"builtins.object*˜
+__init__Kpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SparkVersion.__init__"
+None*ì
+selfà
+Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SparkVersion"Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SparkVersionrd
+
+DESCRIPTORMpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SparkVersion.DESCRIPTOR
+Anyzö	
+DDLParse>pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DDLParse"builtins.object*õ
+__init__Gpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DDLParse.__init__"
+None*ã
+selfÄ
+>pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DDLParse">pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DDLParse*.
+
+ddl_string
+builtins.str"builtins.str *≥
+
+ClearFieldIpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DDLParse.ClearField"
+None*ã
+selfÄ
+>pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DDLParse">pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DDLParse*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr`
+
+DESCRIPTORIpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DDLParse.DESCRIPTOR
+Anyrè
+DDL_STRING_FIELD_NUMBERVpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DDLParse.DDL_STRING_FIELD_NUMBER
+builtins.int"builtins.intru
+
+ddl_stringIpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.DDLParse.ddl_string
+builtins.str"builtins.strzÏ
+SameSemanticsCpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics"builtins.object*ÿ
+target_planOpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics.target_plan"R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics"Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics0:property`*÷
+
+other_planNpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics.other_plan"R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics"Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics0:property`*—
+__init__Lpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics.__init__"
+None*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics"Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics*©
+target_planï
+3Union[pyspark.sql.connect.proto.base_pb2.Plan,None]R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan
+None *®
+
+other_planï
+3Union[pyspark.sql.connect.proto.base_pb2.Plan,None]R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan
+None *˙
+HasFieldLpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics.HasField"
+builtins.bool"builtins.bool*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics"Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*Ë
+
+ClearFieldNpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics.ClearField"
+None*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics"Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesre
+
+DESCRIPTORNpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics.DESCRIPTOR
+Anyrñ
+TARGET_PLAN_FIELD_NUMBER\pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics.TARGET_PLAN_FIELD_NUMBER
+builtins.int"builtins.intrî
+OTHER_PLAN_FIELD_NUMBER[pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SameSemantics.OTHER_PLAN_FIELD_NUMBER
+builtins.int"builtins.intz“
+SemanticHashBpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash"builtins.object*«
+planGpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash.plan"R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan*ì
+selfà
+Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash"Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash0:property`*ú
+__init__Kpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash.__init__"
+None*ì
+selfà
+Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash"Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash*¢
+planï
+3Union[pyspark.sql.connect.proto.base_pb2.Plan,None]R
+'pyspark.sql.connect.proto.base_pb2.Plan"'pyspark.sql.connect.proto.base_pb2.Plan
+None *—
+HasFieldKpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash.HasField"
+builtins.bool"builtins.bool*ì
+selfà
+Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash"Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*ø
+
+ClearFieldMpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash.ClearField"
+None*ì
+selfà
+Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash"Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrd
+
+DESCRIPTORMpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash.DESCRIPTOR
+Anyrá
+PLAN_FIELD_NUMBERTpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.SemanticHash.PLAN_FIELD_NUMBER
+builtins.int"builtins.intzØ
+Persist=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist"builtins.object*—
+relationFpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist.relation"d
+0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist0:property`*›
+storage_levelKpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist.storage_level"f
+1pyspark.sql.connect.proto.common_pb2.StorageLevel"1pyspark.sql.connect.proto.common_pb2.StorageLevel*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist0:property`*˜
+__init__Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist.__init__"
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist*¡
+relation∞
+<Union[pyspark.sql.connect.proto.relations_pb2.Relation,None]d
+0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation
+None *…
+storage_level≥
+=Union[pyspark.sql.connect.proto.common_pb2.StorageLevel,None]f
+1pyspark.sql.connect.proto.common_pb2.StorageLevel"1pyspark.sql.connect.proto.common_pb2.StorageLevel
+None *é
+HasFieldFpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist.HasField"
+builtins.bool"builtins.bool*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist*é
+
+field_name˝
+êUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*¸
+
+ClearFieldHpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist.ClearField"
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist*é
+
+field_name˝
+êUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*ê
+
+WhichOneofHpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist.WhichOneof"h
+!Union[Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist*¬
+oneof_group∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr_
+
+DESCRIPTORHpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist.DESCRIPTOR
+Anyrä
+RELATION_FIELD_NUMBERSpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist.RELATION_FIELD_NUMBER
+builtins.int"builtins.intrî
+STORAGE_LEVEL_FIELD_NUMBERXpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Persist.STORAGE_LEVEL_FIELD_NUMBER
+builtins.int"builtins.intzı
+	Unpersist?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist"builtins.object*ÿ
+relationHpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist.relation"d
+0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist"?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist0:property`*ã
+__init__Hpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist.__init__"
+None*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist"?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist*¡
+relation∞
+<Union[pyspark.sql.connect.proto.relations_pb2.Relation,None]d
+0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation
+None *W
+blockingG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *ï
+HasFieldHpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist.HasField"
+builtins.bool"builtins.bool*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist"?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist*é
+
+field_name˝
+êUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*É
+
+ClearFieldJpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist.ClearField"
+None*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist"?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist*é
+
+field_name˝
+êUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*ó
+
+WhichOneofJpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist.WhichOneof"h
+!Union[Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist"?pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist*¬
+oneof_group∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesra
+
+DESCRIPTORJpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist.DESCRIPTOR
+Anyrå
+RELATION_FIELD_NUMBERUpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist.RELATION_FIELD_NUMBER
+builtins.int"builtins.intrå
+BLOCKING_FIELD_NUMBERUpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist.BLOCKING_FIELD_NUMBER
+builtins.int"builtins.intrt
+blockingHpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.Unpersist.blocking
+builtins.bool"builtins.boolz√
+GetStorageLevelEpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel"builtins.object*Í
+relationNpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel.relation"d
+0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*ô
+selfé
+Epyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel"Epyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel0:property`*ƒ
+__init__Npyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel.__init__"
+None*ô
+selfé
+Epyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel"Epyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel*¡
+relation∞
+<Union[pyspark.sql.connect.proto.relations_pb2.Relation,None]d
+0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation
+None *⁄
+HasFieldNpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel.HasField"
+builtins.bool"builtins.bool*ô
+selfé
+Epyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel"Epyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*»
+
+ClearFieldPpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel.ClearField"
+None*ô
+selfé
+Epyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel"Epyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrg
+
+DESCRIPTORPpyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel.DESCRIPTOR
+Anyrí
+RELATION_FIELD_NUMBER[pyspark.sql.connect.proto.base_pb2.AnalyzePlanRequest.GetStorageLevel.RELATION_FIELD_NUMBER
+builtins.int"builtins.int≠ä
 AnalyzePlanResponse6pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse"builtins.object*—
 schema=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.schema"~
 =pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema*z
@@ -823,7 +1495,361 @@ DESCRIPTORApyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DESCRIPTOR
 builtins.int"builtins.intrm
 
 session_idApyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.session_id
-builtins.str"builtins.strµ>
+builtins.str"builtins.strz†
+Schema=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema"builtins.object*≈
+schemaDpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema.schema"\
+,pyspark.sql.connect.proto.types_pb2.DataType",pyspark.sql.connect.proto.types_pb2.DataType*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema0:property`*ù
+__init__Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema.__init__"
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema*≥
+schema§
+8Union[pyspark.sql.connect.proto.types_pb2.DataType,None]\
+,pyspark.sql.connect.proto.types_pb2.DataType",pyspark.sql.connect.proto.types_pb2.DataType
+None *¡
+HasFieldFpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema.HasField"
+builtins.bool"builtins.bool*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*Ø
+
+ClearFieldHpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema.ClearField"
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema"=pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr_
+
+DESCRIPTORHpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema.DESCRIPTOR
+AnyrÜ
+SCHEMA_FIELD_NUMBERQpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Schema.SCHEMA_FIELD_NUMBER
+builtins.int"builtins.intz≠	
+Explain>pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Explain"builtins.object*ü
+__init__Gpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Explain.__init__"
+None*ã
+selfÄ
+>pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Explain">pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Explain*2
+explain_string
+builtins.str"builtins.str *≥
+
+ClearFieldIpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Explain.ClearField"
+None*ã
+selfÄ
+>pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Explain">pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Explain*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr`
+
+DESCRIPTORIpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Explain.DESCRIPTOR
+Anyró
+EXPLAIN_STRING_FIELD_NUMBERZpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Explain.EXPLAIN_STRING_FIELD_NUMBER
+builtins.int"builtins.intr}
+explain_stringMpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Explain.explain_string
+builtins.str"builtins.strzø	
+
+TreeStringApyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.TreeString"builtins.object*•
+__init__Jpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.TreeString.__init__"
+None*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.TreeString"Apyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.TreeString*/
+tree_string
+builtins.str"builtins.str *º
+
+ClearFieldLpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.TreeString.ClearField"
+None*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.TreeString"Apyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.TreeString*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrc
+
+DESCRIPTORLpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.TreeString.DESCRIPTOR
+Anyrî
+TREE_STRING_FIELD_NUMBERZpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.TreeString.TREE_STRING_FIELD_NUMBER
+builtins.int"builtins.intrz
+tree_stringMpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.TreeString.tree_string
+builtins.str"builtins.strzì	
+IsLocal>pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsLocal"builtins.object*õ
+__init__Gpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsLocal.__init__"
+None*ã
+selfÄ
+>pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsLocal">pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsLocal*.
+is_local
+builtins.bool"builtins.bool *≥
+
+ClearFieldIpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsLocal.ClearField"
+None*ã
+selfÄ
+>pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsLocal">pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsLocal*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr`
+
+DESCRIPTORIpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsLocal.DESCRIPTOR
+Anyrã
+IS_LOCAL_FIELD_NUMBERTpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsLocal.IS_LOCAL_FIELD_NUMBER
+builtins.int"builtins.intrs
+is_localGpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsLocal.is_local
+builtins.bool"builtins.boolz”	
+IsStreamingBpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsStreaming"builtins.object*´
+__init__Kpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsStreaming.__init__"
+None*ì
+selfà
+Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsStreaming"Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsStreaming*2
+is_streaming
+builtins.bool"builtins.bool *ø
+
+ClearFieldMpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsStreaming.ClearField"
+None*ì
+selfà
+Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsStreaming"Bpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsStreaming*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrd
+
+DESCRIPTORMpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsStreaming.DESCRIPTOR
+Anyró
+IS_STREAMING_FIELD_NUMBER\pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsStreaming.IS_STREAMING_FIELD_NUMBER
+builtins.int"builtins.intr
+is_streamingOpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.IsStreaming.is_streaming
+builtins.bool"builtins.boolzú
+
+InputFilesApyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles"builtins.object*˚
+filesGpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles.files"
+Any*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles"Apyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles0:property`*å
+__init__Jpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles.__init__"
+None*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles"Apyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles*ï
+filesá
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None *º
+
+ClearFieldLpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles.ClearField"
+None*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles"Apyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrc
+
+DESCRIPTORLpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles.DESCRIPTOR
+Anyrà
+FILES_FIELD_NUMBERTpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.InputFiles.FILES_FIELD_NUMBER
+builtins.int"builtins.intz¡	
+SparkVersionCpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SparkVersion"builtins.object*ß
+__init__Lpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SparkVersion.__init__"
+None*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SparkVersion"Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SparkVersion*+
+version
+builtins.str"builtins.str *¬
+
+ClearFieldNpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SparkVersion.ClearField"
+None*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SparkVersion"Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SparkVersion*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesre
+
+DESCRIPTORNpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SparkVersion.DESCRIPTOR
+Anyré
+VERSION_FIELD_NUMBERXpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SparkVersion.VERSION_FIELD_NUMBER
+builtins.int"builtins.intrt
+versionKpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SparkVersion.version
+builtins.str"builtins.strzƒ
+DDLParse?pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse"builtins.object*Ã
+parsedFpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse.parsed"\
+,pyspark.sql.connect.proto.types_pb2.DataType",pyspark.sql.connect.proto.types_pb2.DataType*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse"?pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse0:property`*§
+__init__Hpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse.__init__"
+None*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse"?pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse*≥
+parsed§
+8Union[pyspark.sql.connect.proto.types_pb2.DataType,None]\
+,pyspark.sql.connect.proto.types_pb2.DataType",pyspark.sql.connect.proto.types_pb2.DataType
+None *»
+HasFieldHpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse.HasField"
+builtins.bool"builtins.bool*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse"?pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*∂
+
+ClearFieldJpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse.ClearField"
+None*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse"?pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesra
+
+DESCRIPTORJpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse.DESCRIPTOR
+Anyrà
+PARSED_FIELD_NUMBERSpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.DDLParse.PARSED_FIELD_NUMBER
+builtins.int"builtins.intzÀ	
+SameSemanticsDpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SameSemantics"builtins.object*´
+__init__Mpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SameSemantics.__init__"
+None*ó
+selfå
+Dpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SameSemantics"Dpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SameSemantics*,
+result
+builtins.bool"builtins.bool *≈
+
+ClearFieldOpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SameSemantics.ClearField"
+None*ó
+selfå
+Dpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SameSemantics"Dpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SameSemantics*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrf
+
+DESCRIPTOROpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SameSemantics.DESCRIPTOR
+Anyrç
+RESULT_FIELD_NUMBERXpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SameSemantics.RESULT_FIELD_NUMBER
+builtins.int"builtins.intru
+resultKpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SameSemantics.result
+builtins.bool"builtins.boolzº	
+SemanticHashCpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SemanticHash"builtins.object*¶
+__init__Lpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SemanticHash.__init__"
+None*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SemanticHash"Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SemanticHash**
+result
+builtins.int"builtins.int *¬
+
+ClearFieldNpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SemanticHash.ClearField"
+None*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SemanticHash"Cpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SemanticHash*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesre
+
+DESCRIPTORNpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SemanticHash.DESCRIPTOR
+Anyrå
+RESULT_FIELD_NUMBERWpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SemanticHash.RESULT_FIELD_NUMBER
+builtins.int"builtins.intrr
+resultJpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.SemanticHash.result
+builtins.int"builtins.intz™
+Persist>pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Persist"builtins.object*Î
+__init__Gpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Persist.__init__"
+None*ã
+selfÄ
+>pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Persist">pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Persistr`
+
+DESCRIPTORIpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Persist.DESCRIPTOR
+Anyz∂
+	Unpersist@pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Unpersist"builtins.object*Ò
+__init__Ipyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Unpersist.__init__"
+None*è
+selfÑ
+@pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Unpersist"@pyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Unpersistrb
+
+DESCRIPTORKpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.Unpersist.DESCRIPTOR
+Anyz
+GetStorageLevelFpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel"builtins.object*˘
+storage_levelTpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel.storage_level"f
+1pyspark.sql.connect.proto.common_pb2.StorageLevel"1pyspark.sql.connect.proto.common_pb2.StorageLevel*õ
+selfê
+Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel"Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel0:property`*œ
+__init__Opyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel.__init__"
+None*õ
+selfê
+Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel"Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel*…
+storage_level≥
+=Union[pyspark.sql.connect.proto.common_pb2.StorageLevel,None]f
+1pyspark.sql.connect.proto.common_pb2.StorageLevel"1pyspark.sql.connect.proto.common_pb2.StorageLevel
+None *›
+HasFieldOpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel.HasField"
+builtins.bool"builtins.bool*õ
+selfê
+Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel"Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*À
+
+ClearFieldQpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel.ClearField"
+None*õ
+selfê
+Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel"Fpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrh
+
+DESCRIPTORQpyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel.DESCRIPTOR
+Anyrù
+STORAGE_LEVEL_FIELD_NUMBERapyspark.sql.connect.proto.base_pb2.AnalyzePlanResponse.GetStorageLevel.STORAGE_LEVEL_FIELD_NUMBER
+builtins.int"builtins.int˜\
 ExecutePlanRequest5pyspark.sql.connect.proto.base_pb2.ExecutePlanRequest"builtins.object*º
 user_contextBpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.user_context"`
 .pyspark.sql.connect.proto.base_pb2.UserContext".pyspark.sql.connect.proto.base_pb2.UserContext*x
@@ -1003,7 +2029,90 @@ session_id@pyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.session_id
 operation_idBpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.operation_id
 builtins.str"builtins.strrn
 client_typeApyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.client_type
-builtins.str"builtins.strÂy
+builtins.str"builtins.strzø
+RequestOptionCpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption"builtins.object*¯
+reattach_optionsTpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption.reattach_options"h
+2pyspark.sql.connect.proto.base_pb2.ReattachOptions"2pyspark.sql.connect.proto.base_pb2.ReattachOptions*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption"Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption0:property`*â
+	extensionMpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption.extension"
+Any*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption"Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption0:property`*Ö
+__init__Lpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption.__init__"
+None*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption"Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption*œ
+reattach_options∂
+>Union[pyspark.sql.connect.proto.base_pb2.ReattachOptions,None]h
+2pyspark.sql.connect.proto.base_pb2.ReattachOptions"2pyspark.sql.connect.proto.base_pb2.ReattachOptions
+None *7
+	extension&
+Union[Any,None]
+Any
+None *°
+HasFieldLpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption.HasField"
+builtins.bool"builtins.bool*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption"Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption*é
+
+field_name˝
+êUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*è
+
+ClearFieldNpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption.ClearField"
+None*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption"Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption*é
+
+field_name˝
+êUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*Û
+
+WhichOneofNpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption.WhichOneof"∑
+7Union[Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption"Cpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption*¬
+oneof_group∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesre
+
+DESCRIPTORNpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption.DESCRIPTOR
+Anyr†
+REATTACH_OPTIONS_FIELD_NUMBERapyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption.REATTACH_OPTIONS_FIELD_NUMBER
+builtins.int"builtins.intrí
+EXTENSION_FIELD_NUMBERZpyspark.sql.connect.proto.base_pb2.ExecutePlanRequest.RequestOption.EXTENSION_FIELD_NUMBER
+builtins.int"builtins.intç˛
 ExecutePlanResponse6pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse"builtins.object*‰
 arrow_batchBpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.arrow_batch"Ü
 Apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch"Apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch*z
@@ -1289,7 +2398,324 @@ session_idApyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.session_id
 operation_idCpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.operation_id
 builtins.str"builtins.strro
 response_idBpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.response_id
-builtins.str"builtins.str±
+builtins.str"builtins.strz‚
+SqlCommandResultGpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult"builtins.object*
+relationPpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult.relation"d
+0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation*ù
+selfí
+Gpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult"Gpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult0:property`* 
+__init__Ppyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult.__init__"
+None*ù
+selfí
+Gpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult"Gpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult*¡
+relation∞
+<Union[pyspark.sql.connect.proto.relations_pb2.Relation,None]d
+0pyspark.sql.connect.proto.relations_pb2.Relation"0pyspark.sql.connect.proto.relations_pb2.Relation
+None *‡
+HasFieldPpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult.HasField"
+builtins.bool"builtins.bool*ù
+selfí
+Gpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult"Gpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*Œ
+
+ClearFieldRpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult.ClearField"
+None*ù
+selfí
+Gpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult"Gpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesri
+
+DESCRIPTORRpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult.DESCRIPTOR
+Anyrî
+RELATION_FIELD_NUMBER]pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.SqlCommandResult.RELATION_FIELD_NUMBER
+builtins.int"builtins.intzÑ
+
+ArrowBatchApyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch"builtins.object*—
+__init__Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch.__init__"
+None*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch"Apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch*-
+	row_count
+builtins.int"builtins.int *,
+data 
+builtins.bytes"builtins.bytes *‚
+
+ClearFieldLpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch.ClearField"
+None*ë
+selfÜ
+Apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch"Apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrc
+
+DESCRIPTORLpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch.DESCRIPTOR
+Anyrê
+ROW_COUNT_FIELD_NUMBERXpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch.ROW_COUNT_FIELD_NUMBER
+builtins.int"builtins.intrÜ
+DATA_FIELD_NUMBERSpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch.DATA_FIELD_NUMBER
+builtins.int"builtins.intrv
+	row_countKpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch.row_count
+builtins.int"builtins.intrp
+dataFpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ArrowBatch.data 
+builtins.bytes"builtins.byteszÎQ
+Metrics>pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics"builtins.object*ˆ
+metricsFpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.metrics"
+Any*ã
+selfÄ
+>pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics">pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics0:property`*É
+__init__Gpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.__init__"
+None*ã
+selfÄ
+>pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics">pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics*ï
+metricsÖ
+hUnion[typing.Iterable[pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject],None]å
+\typing.Iterable[pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject]ö
+Kpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject"Kpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject"typing.Iterable
+None *≥
+
+ClearFieldIpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.ClearField"
+None*ã
+selfÄ
+>pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics">pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr`
+
+DESCRIPTORIpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.DESCRIPTOR
+Anyrâ
+METRICS_FIELD_NUMBERSpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.METRICS_FIELD_NUMBER
+builtins.int"builtins.intzï3
+MetricObjectKpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject"builtins.object*±
+execution_metrics]pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.execution_metrics"
+Any*•
+selfö
+Kpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject"Kpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject0:property`*Ë
+__init__Tpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.__init__"
+None*•
+selfö
+Kpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject"Kpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject*(
+name
+builtins.str"builtins.str *+
+plan_id
+builtins.int"builtins.int **
+parent
+builtins.int"builtins.int *–
+execution_metrics∂
+sUnion[typing.Mapping[builtins.str,pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue],None]≤
+gtyping.Mapping[builtins.str,pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue]
+builtins.str"builtins.strò
+Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue"Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue"typing.Mapping
+None *Õ
+
+ClearFieldVpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ClearField"
+None*•
+selfö
+Kpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject"Kpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject*¥
+
+field_name£
+æUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrm
+
+DESCRIPTORVpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.DESCRIPTOR
+Anyrê
+NAME_FIELD_NUMBER]pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.NAME_FIELD_NUMBER
+builtins.int"builtins.intrñ
+PLAN_ID_FIELD_NUMBER`pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.PLAN_ID_FIELD_NUMBER
+builtins.int"builtins.intrî
+PARENT_FIELD_NUMBER_pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.PARENT_FIELD_NUMBER
+builtins.int"builtins.intr™
+EXECUTION_METRICS_FIELD_NUMBERjpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.EXECUTION_METRICS_FIELD_NUMBER
+builtins.int"builtins.intrv
+namePpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.name
+builtins.str"builtins.strr|
+plan_idSpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.plan_id
+builtins.int"builtins.intrz
+parentRpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.parent
+builtins.int"builtins.intzÊ
+ExecutionMetricsEntryapyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry"builtins.object*Ì
+valuegpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry.value"ò
+Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue"Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue*—
+self∆
+apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry"apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry0:property`*ç
+__init__jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry.__init__"
+None*—
+self∆
+apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry"apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry*'
+key
+builtins.str"builtins.str *ç
+valueˇ
+VUnion[pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue,None]ò
+Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue"Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue
+None *Æ
+HasFieldjpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry.HasField"
+builtins.bool"builtins.bool*—
+self∆
+apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry"apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*¬
+
+ClearFieldlpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry.ClearField"
+None*—
+self∆
+apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry"apyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrÉ
+
+DESCRIPTORlpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry.DESCRIPTOR
+Anyr§
+KEY_FIELD_NUMBERrpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry.KEY_FIELD_NUMBER
+builtins.int"builtins.intr®
+VALUE_FIELD_NUMBERtpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry.VALUE_FIELD_NUMBER
+builtins.int"builtins.inträ
+keyepyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricObject.ExecutionMetricsEntry.key
+builtins.str"builtins.strz”
+MetricValueJpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue"builtins.object*ï
+__init__Spyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue.__init__"
+None*£
+selfò
+Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue"Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue*(
+name
+builtins.str"builtins.str *)
+value
+builtins.int"builtins.int */
+metric_type
+builtins.str"builtins.str *§
+
+ClearFieldUpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue.ClearField"
+None*£
+selfò
+Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue"Jpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue*é
+
+field_name˝
+êUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrl
+
+DESCRIPTORUpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue.DESCRIPTOR
+Anyrè
+NAME_FIELD_NUMBER\pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue.NAME_FIELD_NUMBER
+builtins.int"builtins.intrë
+VALUE_FIELD_NUMBER]pyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue.VALUE_FIELD_NUMBER
+builtins.int"builtins.intrù
+METRIC_TYPE_FIELD_NUMBERcpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue.METRIC_TYPE_FIELD_NUMBER
+builtins.int"builtins.intru
+nameOpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue.name
+builtins.str"builtins.strrw
+valuePpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue.value
+builtins.int"builtins.intrÉ
+metric_typeVpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.Metrics.MetricValue.metric_type
+builtins.str"builtins.strzÙ
+ObservedMetricsFpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics"builtins.object*å
+valuesMpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics.values"
+Any*õ
+selfê
+Fpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics"Fpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics0:property`*á
+__init__Opyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics.__init__"
+None*õ
+selfê
+Fpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics"Fpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics*(
+name
+builtins.str"builtins.str *◊
+values»
+YUnion[typing.Iterable[pyspark.sql.connect.proto.expressions_pb2.Expression.Literal],None]ﬁ
+Mtyping.Iterable[pyspark.sql.connect.proto.expressions_pb2.Expression.Literal]|
+<pyspark.sql.connect.proto.expressions_pb2.Expression.Literal"<pyspark.sql.connect.proto.expressions_pb2.Expression.Literal"typing.Iterable
+None *Ò
+
+ClearFieldQpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics.ClearField"
+None*õ
+selfê
+Fpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics"Fpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrh
+
+DESCRIPTORQpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics.DESCRIPTOR
+Anyrã
+NAME_FIELD_NUMBERXpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics.NAME_FIELD_NUMBER
+builtins.int"builtins.intrè
+VALUES_FIELD_NUMBERZpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics.VALUES_FIELD_NUMBER
+builtins.int"builtins.intrq
+nameKpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ObservedMetrics.name
+builtins.str"builtins.strz‘
+ResultCompleteEpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ResultComplete"builtins.object*Ä
+__init__Npyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ResultComplete.__init__"
+None*ô
+selfé
+Epyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ResultComplete"Epyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ResultCompleterg
+
+DESCRIPTORPpyspark.sql.connect.proto.base_pb2.ExecutePlanResponse.ResultComplete.DESCRIPTOR
+Any±
 KeyValue+pyspark.sql.connect.proto.base_pb2.KeyValue"builtins.object*¨
 __init__4pyspark.sql.connect.proto.base_pb2.KeyValue.__init__"
 None*d
@@ -1360,7 +2786,7 @@ DESCRIPTOR6pyspark.sql.connect.proto.base_pb2.KeyValue.DESCRIPTOR
 key/pyspark.sql.connect.proto.base_pb2.KeyValue.key
 builtins.str"builtins.strrX
 value1pyspark.sql.connect.proto.base_pb2.KeyValue.value
-builtins.str"builtins.strå%
+builtins.str"builtins.str·¬
 ConfigRequest0pyspark.sql.connect.proto.base_pb2.ConfigRequest"builtins.object*≠
 user_context=pyspark.sql.connect.proto.base_pb2.ConfigRequest.user_context"`
 .pyspark.sql.connect.proto.base_pb2.UserContext".pyspark.sql.connect.proto.base_pb2.UserContext*n
@@ -1469,7 +2895,447 @@ DESCRIPTOR;pyspark.sql.connect.proto.base_pb2.ConfigRequest.DESCRIPTOR
 session_id;pyspark.sql.connect.proto.base_pb2.ConfigRequest.session_id
 builtins.str"builtins.strri
 client_type<pyspark.sql.connect.proto.base_pb2.ConfigRequest.client_type
-builtins.str"builtins.strØ
+builtins.str"builtins.strz“J
+	Operation:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation"builtins.object*∆
+set>pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.set"l
+4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set"4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation0:property`*∆
+get>pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.get"l
+4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get"4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation0:property`*˜
+get_with_defaultKpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.get_with_default"Ç
+?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault"?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation0:property`*‡
+
+get_optionEpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.get_option"x
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption":pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation0:property`*‘
+get_allBpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.get_all"r
+7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll"7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation0:property`*Œ
+unset@pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.unset"p
+6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset"6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation0:property`*Ï
+is_modifiableHpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.is_modifiable"~
+=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable"=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation0:property`*Ì
+__init__Cpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.__init__"
+None*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation*»
+setº
+@Union[pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set,None]l
+4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set"4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set
+None *»
+getº
+@Union[pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get,None]l
+4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get"4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get
+None *˜
+get_with_defaultﬁ
+KUnion[pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault,None]Ç
+?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault"?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault
+None *·
+
+get_optionŒ
+FUnion[pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption,None]x
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption":pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption
+None *’
+get_all≈
+CUnion[pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll,None]r
+7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll"7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll
+None *–
+unset¬
+BUnion[pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset,None]p
+6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset"6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset
+None *Ì
+is_modifiable◊
+IUnion[pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable,None]~
+=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable"=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable
+None *√
+HasFieldCpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.HasField"
+builtins.bool"builtins.bool*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation*Ã
+
+
+field_nameª
+
+ˆUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*±
+
+ClearFieldEpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.ClearField"
+None*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation*Ã
+
+
+field_nameª
+
+ˆUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*„
+
+WhichOneofEpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.WhichOneof"√
+•Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation":pyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation*¬
+oneof_group∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr\
+
+DESCRIPTOREpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.DESCRIPTOR
+Anyr}
+SET_FIELD_NUMBERKpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.SET_FIELD_NUMBER
+builtins.int"builtins.intr}
+GET_FIELD_NUMBERKpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.GET_FIELD_NUMBER
+builtins.int"builtins.intró
+GET_WITH_DEFAULT_FIELD_NUMBERXpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.GET_WITH_DEFAULT_FIELD_NUMBER
+builtins.int"builtins.intrã
+GET_OPTION_FIELD_NUMBERRpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.GET_OPTION_FIELD_NUMBER
+builtins.int"builtins.intrÖ
+GET_ALL_FIELD_NUMBEROpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.GET_ALL_FIELD_NUMBER
+builtins.int"builtins.intrÅ
+UNSET_FIELD_NUMBERMpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.UNSET_FIELD_NUMBER
+builtins.int"builtins.intrë
+IS_MODIFIABLE_FIELD_NUMBERUpyspark.sql.connect.proto.base_pb2.ConfigRequest.Operation.IS_MODIFIABLE_FIELD_NUMBER
+builtins.int"builtins.intzÔ
+
+Set4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set"builtins.object*“
+pairs:pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set.pairs"
+Any*v
+selfl
+4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set"4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set0:property`*‡
+__init__=pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set.__init__"
+None*v
+selfl
+4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set"4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set*í
+pairsÑ
+HUnion[typing.Iterable[pyspark.sql.connect.proto.base_pb2.KeyValue],None]´
+<typing.Iterable[pyspark.sql.connect.proto.base_pb2.KeyValue]Z
++pyspark.sql.connect.proto.base_pb2.KeyValue"+pyspark.sql.connect.proto.base_pb2.KeyValue"typing.Iterable
+None *ì
+
+ClearField?pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set.ClearField"
+None*v
+selfl
+4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set"4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrV
+
+DESCRIPTOR?pyspark.sql.connect.proto.base_pb2.ConfigRequest.Set.DESCRIPTOR
+Anyr{
+PAIRS_FIELD_NUMBERGpyspark.sql.connect.proto.base_pb2.ConfigRequest.Set.PAIRS_FIELD_NUMBER
+builtins.int"builtins.intzÌ	
+Get4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get"builtins.object*–
+keys9pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get.keys"
+Any*v
+selfl
+4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get"4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get0:property`*‚
+__init__=pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get.__init__"
+None*v
+selfl
+4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get"4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get*î
+keysá
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None *ì
+
+ClearField?pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get.ClearField"
+None*v
+selfl
+4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get"4pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrV
+
+DESCRIPTOR?pyspark.sql.connect.proto.base_pb2.ConfigRequest.Get.DESCRIPTOR
+Anyry
+KEYS_FIELD_NUMBERFpyspark.sql.connect.proto.base_pb2.ConfigRequest.Get.KEYS_FIELD_NUMBER
+builtins.int"builtins.intzÖ
+GetWithDefault?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault"builtins.object*ı
+pairsEpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault.pairs"
+Any*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault"?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault0:property`*É
+__init__Hpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault.__init__"
+None*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault"?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault*í
+pairsÑ
+HUnion[typing.Iterable[pyspark.sql.connect.proto.base_pb2.KeyValue],None]´
+<typing.Iterable[pyspark.sql.connect.proto.base_pb2.KeyValue]Z
++pyspark.sql.connect.proto.base_pb2.KeyValue"+pyspark.sql.connect.proto.base_pb2.KeyValue"typing.Iterable
+None *∂
+
+ClearFieldJpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault.ClearField"
+None*ç
+selfÇ
+?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault"?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesra
+
+DESCRIPTORJpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault.DESCRIPTOR
+AnyrÜ
+PAIRS_FIELD_NUMBERRpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetWithDefault.PAIRS_FIELD_NUMBER
+builtins.int"builtins.intzæ
+
+	GetOption:pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption"builtins.object*„
+keys?pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption.keys"
+Any*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption":pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption0:property`*ı
+__init__Cpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption.__init__"
+None*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption":pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption*î
+keysá
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None *¶
+
+ClearFieldEpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption.ClearField"
+None*Ç
+selfx
+:pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption":pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr\
+
+DESCRIPTOREpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption.DESCRIPTOR
+Anyr
+KEYS_FIELD_NUMBERLpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetOption.KEYS_FIELD_NUMBER
+builtins.int"builtins.intzﬂ
+GetAll7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll"builtins.object*®
+__init__@pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll.__init__"
+None*|
+selfr
+7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll"7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll*R
+prefixD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *‘
+HasField@pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll.HasField"
+builtins.bool"builtins.bool*|
+selfr
+7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll"7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*¬
+
+ClearFieldBpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll.ClearField"
+None*|
+selfr
+7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll"7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*˝
+
+WhichOneofBpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll.WhichOneof"h
+!Union[Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None*|
+selfr
+7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll"7pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll*¬
+oneof_group∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrY
+
+DESCRIPTORBpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll.DESCRIPTOR
+AnyrÄ
+PREFIX_FIELD_NUMBERKpyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll.PREFIX_FIELD_NUMBER
+builtins.int"builtins.intrf
+prefix>pyspark.sql.connect.proto.base_pb2.ConfigRequest.GetAll.prefix
+builtins.str"builtins.strzá
+
+Unset6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset"builtins.object*÷
+keys;pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset.keys"
+Any*z
+selfp
+6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset"6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset0:property`*Ë
+__init__?pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset.__init__"
+None*z
+selfp
+6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset"6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset*î
+keysá
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None *ô
+
+ClearFieldApyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset.ClearField"
+None*z
+selfp
+6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset"6pyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrX
+
+DESCRIPTORApyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset.DESCRIPTOR
+Anyr{
+KEYS_FIELD_NUMBERHpyspark.sql.connect.proto.base_pb2.ConfigRequest.Unset.KEYS_FIELD_NUMBER
+builtins.int"builtins.intzÊ
+
+IsModifiable=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable"builtins.object*Ï
+keysBpyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable.keys"
+Any*à
+self~
+=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable"=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable0:property`*˛
+__init__Fpyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable.__init__"
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable"=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable*î
+keysá
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None *Ø
+
+ClearFieldHpyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable.ClearField"
+None*à
+self~
+=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable"=pyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr_
+
+DESCRIPTORHpyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable.DESCRIPTOR
+AnyrÇ
+KEYS_FIELD_NUMBEROpyspark.sql.connect.proto.base_pb2.ConfigRequest.IsModifiable.KEYS_FIELD_NUMBER
+builtins.int"builtins.intØ
 ConfigResponse1pyspark.sql.connect.proto.base_pb2.ConfigResponse"builtins.object*…
 pairs7pyspark.sql.connect.proto.base_pb2.ConfigResponse.pairs"
 Any*p
@@ -1527,7 +3393,7 @@ DESCRIPTOR<pyspark.sql.connect.proto.base_pb2.ConfigResponse.DESCRIPTOR
 builtins.int"builtins.intrh
 
 session_id<pyspark.sql.connect.proto.base_pb2.ConfigResponse.session_id
-builtins.str"builtins.strû@
+builtins.str"builtins.str–ç
 AddArtifactsRequest6pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest"builtins.object*ø
 user_contextCpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.user_context"`
 .pyspark.sql.connect.proto.base_pb2.UserContext".pyspark.sql.connect.proto.base_pb2.UserContext*z
@@ -1704,7 +3570,198 @@ DESCRIPTORApyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.DESCRIPTOR
 session_idApyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.session_id
 builtins.str"builtins.strro
 client_typeBpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.client_type
-builtins.str"builtins.str™
+builtins.str"builtins.strzç
+ArtifactChunkDpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk"builtins.object*‘
+__init__Mpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk.__init__"
+None*ó
+selfå
+Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk"Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk*,
+data 
+builtins.bytes"builtins.bytes *'
+crc
+builtins.int"builtins.int *Î
+
+ClearFieldOpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk.ClearField"
+None*ó
+selfå
+Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk"Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrf
+
+DESCRIPTOROpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk.DESCRIPTOR
+Anyrâ
+DATA_FIELD_NUMBERVpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk.DATA_FIELD_NUMBER
+builtins.int"builtins.intrá
+CRC_FIELD_NUMBERUpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk.CRC_FIELD_NUMBER
+builtins.int"builtins.intrs
+dataIpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk.data 
+builtins.bytes"builtins.bytesrm
+crcHpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk.crc
+builtins.int"builtins.intzΩ
+SingleChunkArtifactJpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact"builtins.object*ö
+dataOpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact.data"å
+Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk"Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk*£
+selfò
+Jpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact"Jpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact0:property`*∂
+__init__Spyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact.__init__"
+None*£
+selfò
+Jpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact"Jpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact*(
+name
+builtins.str"builtins.str *˙
+dataÌ
+PUnion[pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk,None]å
+Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk"Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk
+None *È
+HasFieldSpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact.HasField"
+builtins.bool"builtins.bool*£
+selfò
+Jpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact"Jpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*˝
+
+ClearFieldUpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact.ClearField"
+None*£
+selfò
+Jpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact"Jpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrl
+
+DESCRIPTORUpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact.DESCRIPTOR
+Anyrè
+NAME_FIELD_NUMBER\pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact.NAME_FIELD_NUMBER
+builtins.int"builtins.intrè
+DATA_FIELD_NUMBER\pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact.DATA_FIELD_NUMBER
+builtins.int"builtins.intru
+nameOpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact.name
+builtins.str"builtins.strzÊ
+Batch<pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch"builtins.object*Û
+	artifactsFpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch.artifacts"
+Any*Ü
+self|
+<pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch"<pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch0:property`*˙
+__init__Epyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch.__init__"
+None*Ü
+self|
+<pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch"<pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch*ì
+	artifactsÅ
+gUnion[typing.Iterable[pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact],None]â
+[typing.Iterable[pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact]ò
+Jpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact"Jpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.SingleChunkArtifact"typing.Iterable
+None *¨
+
+ClearFieldGpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch.ClearField"
+None*Ü
+self|
+<pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch"<pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesr^
+
+DESCRIPTORGpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch.DESCRIPTOR
+Anyrã
+ARTIFACTS_FIELD_NUMBERSpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.Batch.ARTIFACTS_FIELD_NUMBER
+builtins.int"builtins.intzˆ
+BeginChunkedArtifactKpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact"builtins.object*Ø
+initial_chunkYpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.initial_chunk"å
+Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk"Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk*•
+selfö
+Kpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact"Kpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact0:property`*£
+__init__Tpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.__init__"
+None*•
+selfö
+Kpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact"Kpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact*(
+name
+builtins.str"builtins.str */
+total_bytes
+builtins.int"builtins.int *.
+
+num_chunks
+builtins.int"builtins.int *É
+initial_chunkÌ
+PUnion[pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk,None]å
+Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk"Dpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.ArtifactChunk
+None *Ï
+HasFieldTpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.HasField"
+builtins.bool"builtins.bool*•
+selfö
+Kpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact"Kpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*Õ
+
+ClearFieldVpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.ClearField"
+None*•
+selfö
+Kpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact"Kpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact*¥
+
+field_name£
+æUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrm
+
+DESCRIPTORVpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.DESCRIPTOR
+Anyrê
+NAME_FIELD_NUMBER]pyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.NAME_FIELD_NUMBER
+builtins.int"builtins.intrû
+TOTAL_BYTES_FIELD_NUMBERdpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.TOTAL_BYTES_FIELD_NUMBER
+builtins.int"builtins.intrú
+NUM_CHUNKS_FIELD_NUMBERcpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.NUM_CHUNKS_FIELD_NUMBER
+builtins.int"builtins.intr¢
+INITIAL_CHUNK_FIELD_NUMBERfpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.INITIAL_CHUNK_FIELD_NUMBER
+builtins.int"builtins.intrv
+namePpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.name
+builtins.str"builtins.strrÑ
+total_bytesWpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.total_bytes
+builtins.int"builtins.intrÇ
+
+num_chunksVpyspark.sql.connect.proto.base_pb2.AddArtifactsRequest.BeginChunkedArtifact.num_chunks
+builtins.int"builtins.int£
 AddArtifactsResponse7pyspark.sql.connect.proto.base_pb2.AddArtifactsResponse"builtins.object*„
 	artifactsApyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.artifacts"
 Any*|
@@ -1735,7 +3792,43 @@ field_name∞
 DESCRIPTORBpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.DESCRIPTOR
 AnyrÜ
 ARTIFACTS_FIELD_NUMBERNpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ARTIFACTS_FIELD_NUMBER
-builtins.int"builtins.intØ$
+builtins.int"builtins.intzˆ
+ArtifactSummaryGpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary"builtins.object*È
+__init__Ppyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary.__init__"
+None*ù
+selfí
+Gpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary"Gpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary*(
+name
+builtins.str"builtins.str *7
+is_crc_successful
+builtins.bool"builtins.bool *Ù
+
+ClearFieldRpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary.ClearField"
+None*ù
+selfí
+Gpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary"Gpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesri
+
+DESCRIPTORRpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary.DESCRIPTOR
+Anyrå
+NAME_FIELD_NUMBERYpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary.NAME_FIELD_NUMBER
+builtins.int"builtins.intr¶
+IS_CRC_SUCCESSFUL_FIELD_NUMBERfpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary.IS_CRC_SUCCESSFUL_FIELD_NUMBER
+builtins.int"builtins.intrr
+nameLpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary.name
+builtins.str"builtins.strré
+is_crc_successfulYpyspark.sql.connect.proto.base_pb2.AddArtifactsResponse.ArtifactSummary.is_crc_successful
+builtins.bool"builtins.boolØ$
 ArtifactStatusesRequest:pyspark.sql.connect.proto.base_pb2.ArtifactStatusesRequest"builtins.object*Ã
 user_contextGpyspark.sql.connect.proto.base_pb2.ArtifactStatusesRequest.user_context"`
 .pyspark.sql.connect.proto.base_pb2.UserContext".pyspark.sql.connect.proto.base_pb2.UserContext*Ç
@@ -1841,7 +3934,7 @@ DESCRIPTOREpyspark.sql.connect.proto.base_pb2.ArtifactStatusesRequest.DESCRIPTO
 session_idEpyspark.sql.connect.proto.base_pb2.ArtifactStatusesRequest.session_id
 builtins.str"builtins.strrs
 client_typeFpyspark.sql.connect.proto.base_pb2.ArtifactStatusesRequest.client_type
-builtins.str"builtins.strù
+builtins.str"builtins.strÔ,
 ArtifactStatusesResponse;pyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse"builtins.object*Ó
 statusesDpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.statuses"
 Any*Ñ
@@ -1873,7 +3966,85 @@ field_name∞
 DESCRIPTORFpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.DESCRIPTOR
 Anyrà
 STATUSES_FIELD_NUMBERQpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.STATUSES_FIELD_NUMBER
-builtins.int"builtins.int⁄=
+builtins.int"builtins.intzà
+
+ArtifactStatusJpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus"builtins.object*Ω
+__init__Spyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus.__init__"
+None*£
+selfò
+Jpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus"Jpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus*,
+exists
+builtins.bool"builtins.bool *◊
+
+ClearFieldUpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus.ClearField"
+None*£
+selfò
+Jpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus"Jpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrl
+
+DESCRIPTORUpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus.DESCRIPTOR
+Anyrì
+EXISTS_FIELD_NUMBER^pyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus.EXISTS_FIELD_NUMBER
+builtins.int"builtins.intr{
+existsQpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus.exists
+builtins.bool"builtins.boolzƒ
+StatusesEntryIpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry"builtins.object*•
+valueOpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry.value"ò
+Jpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus"Jpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus*°
+selfñ
+Ipyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry"Ipyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry0:property`*≈
+__init__Rpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry.__init__"
+None*°
+selfñ
+Ipyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry"Ipyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry*'
+key
+builtins.str"builtins.str *ç
+valueˇ
+VUnion[pyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus,None]ò
+Jpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus"Jpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.ArtifactStatus
+None *Ê
+HasFieldRpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry.HasField"
+builtins.bool"builtins.bool*°
+selfñ
+Ipyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry"Ipyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes*˙
+
+ClearFieldTpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry.ClearField"
+None*°
+selfñ
+Ipyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry"Ipyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry*Á
+
+field_name÷
+bUnion[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytes7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrk
+
+DESCRIPTORTpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry.DESCRIPTOR
+Anyrå
+KEY_FIELD_NUMBERZpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry.KEY_FIELD_NUMBER
+builtins.int"builtins.intrê
+VALUE_FIELD_NUMBER\pyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry.VALUE_FIELD_NUMBER
+builtins.int"builtins.intrr
+keyMpyspark.sql.connect.proto.base_pb2.ArtifactStatusesResponse.StatusesEntry.key
+builtins.str"builtins.strÂN
 InterruptRequest3pyspark.sql.connect.proto.base_pb2.InterruptRequest"builtins.object*∂
 user_context@pyspark.sql.connect.proto.base_pb2.InterruptRequest.user_context"`
 .pyspark.sql.connect.proto.base_pb2.UserContext".pyspark.sql.connect.proto.base_pb2.UserContext*t
@@ -2038,7 +4209,28 @@ Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueType"Lp
 operation_tagApyspark.sql.connect.proto.base_pb2.InterruptRequest.operation_tag
 builtins.str"builtins.strrn
 operation_id@pyspark.sql.connect.proto.base_pb2.InterruptRequest.operation_id
-builtins.str"builtins.str˛
+builtins.str"builtins.strzè
+_InterruptTypeBpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType"builtins.objectzß
+	ValueTypeLpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueType"builtins.int*Ω
+__init__Upyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueType.__init__"
+None*ß
+selfú
+Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueType"Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueType*&
+item
+builtins.int"builtins.intzà
+_InterruptTypeEnumTypeWrapperQpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptTypeEnumTypeWrapper"builtins.typers
+
+DESCRIPTOR\pyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptTypeEnumTypeWrapper.DESCRIPTOR
+Anyr©
+INTERRUPT_TYPE_UNSPECIFIEDlpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptTypeEnumTypeWrapper.INTERRUPT_TYPE_UNSPECIFIEDú
+Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueType"Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueTyperô
+INTERRUPT_TYPE_ALLdpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptTypeEnumTypeWrapper.INTERRUPT_TYPE_ALLú
+Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueType"Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueTyperô
+INTERRUPT_TYPE_TAGdpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptTypeEnumTypeWrapper.INTERRUPT_TYPE_TAGú
+Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueType"Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueTyper´
+INTERRUPT_TYPE_OPERATION_IDmpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptTypeEnumTypeWrapper.INTERRUPT_TYPE_OPERATION_IDú
+Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueType"Lpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType.ValueTypezÎ
+InterruptTypeApyspark.sql.connect.proto.base_pb2.InterruptRequest.InterruptType"Bpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptType@bQpyspark.sql.connect.proto.base_pb2.InterruptRequest._InterruptTypeEnumTypeWrapper˛
 InterruptResponse4pyspark.sql.connect.proto.base_pb2.InterruptResponse"builtins.object*Ê
 interrupted_idsDpyspark.sql.connect.proto.base_pb2.InterruptResponse.interrupted_ids"
 Any*v
@@ -2248,7 +4440,7 @@ session_idDpyspark.sql.connect.proto.base_pb2.ReattachExecuteRequest.session_id
 client_typeEpyspark.sql.connect.proto.base_pb2.ReattachExecuteRequest.client_type
 builtins.str"builtins.strr|
 last_response_idJpyspark.sql.connect.proto.base_pb2.ReattachExecuteRequest.last_response_id
-builtins.str"builtins.str¯;
+builtins.str"builtins.str≠I
 ReleaseExecuteRequest8pyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest"builtins.object*≈
 user_contextEpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.user_context"`
 .pyspark.sql.connect.proto.base_pb2.UserContext".pyspark.sql.connect.proto.base_pb2.UserContext*~
@@ -2413,6 +4605,41 @@ session_idCpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.session_id
 operation_idEpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.operation_id
 builtins.str"builtins.strrq
 client_typeDpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.client_type
+builtins.str"builtins.strz∆
+
+ReleaseAllCpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseAll"builtins.object*˙
+__init__Lpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseAll.__init__"
+None*ï
+selfä
+Cpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseAll"Cpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseAllre
+
+DESCRIPTORNpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseAll.DESCRIPTOR
+AnyzÈ	
+ReleaseUntilEpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseUntil"builtins.object*±
+__init__Npyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseUntil.__init__"
+None*ô
+selfé
+Epyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseUntil"Epyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseUntil*/
+response_id
+builtins.str"builtins.str *»
+
+ClearFieldPpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseUntil.ClearField"
+None*ô
+selfé
+Epyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseUntil"Epyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseUntil*¡
+
+field_name∞
+4Union[Literal[builtins.str],Literal[builtins.bytes]]7
+Literal[builtins.str]	
+builtins.str"builtins.str=
+Literal[builtins.bytes]	 
+builtins.bytes"builtins.bytesrg
+
+DESCRIPTORPpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseUntil.DESCRIPTOR
+Anyrò
+RESPONSE_ID_FIELD_NUMBER^pyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseUntil.RESPONSE_ID_FIELD_NUMBER
+builtins.int"builtins.intr~
+response_idQpyspark.sql.connect.proto.base_pb2.ReleaseExecuteRequest.ReleaseUntil.response_id
 builtins.str"builtins.strá
 ReleaseExecuteResponse9pyspark.sql.connect.proto.base_pb2.ReleaseExecuteResponse"builtins.object*Â
 __init__Bpyspark.sql.connect.proto.base_pb2.ReleaseExecuteResponse.__init__"
