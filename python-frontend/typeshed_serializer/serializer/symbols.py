@@ -285,6 +285,7 @@ class ClassSymbol:
         self.super_classes = []
         self.methods = []
         self.overloaded_methods = []
+        self.nested_classes = []
         self.vars = []
         self.is_enum = type_info.is_enum
         self.is_generic = type_info.is_generic()
@@ -302,6 +303,8 @@ class ClassSymbol:
                 self.methods.append(FunctionSymbol(node.func, decorators=node.original_decorators))
             elif isinstance(node, mpn.OverloadedFuncDef):
                 self.overloaded_methods.append(OverloadedFunctionSymbol(node))
+            elif isinstance(node, mpn.TypeInfo):
+                self.nested_classes.append(ClassSymbol(node))
             elif isinstance(node, mpn.Var) and node.name not in DEFAULT_EXPORTED_VARS:
                 self.vars.append(VarSymbol.from_var(node))
         class_def = type_info.defn
@@ -340,6 +343,8 @@ class ClassSymbol:
             pb_class.methods.append(method.to_proto())
         for overloaded_method in self.overloaded_methods:
             pb_class.overloaded_methods.append(overloaded_method.to_proto())
+        for nested_class in self.nested_classes:
+            pb_class.nested_classes.append(nested_class.to_proto())
         for var in self.vars:
             pb_class.attributes.append(var.to_proto())
         return pb_class

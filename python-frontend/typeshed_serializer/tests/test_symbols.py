@@ -79,6 +79,8 @@ def test_class_symbol(typeshed_stdlib):
     assert cmd_class_symbol.super_classes == [OBJECT_FQN]
     assert len(cmd_class_symbol.methods) == 18
     assert len(cmd_class_symbol.vars) == 17
+    assert len(cmd_class_symbol.nested_classes) == 1
+    assert cmd_class_symbol.nested_classes[0].fullname == "cmd.Cmd.FakeNestedClass"
 
     pb_class_symbol = cmd_class_symbol.to_proto()
     assert pb_class_symbol.name == "Cmd"

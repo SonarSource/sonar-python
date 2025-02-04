@@ -65,6 +65,7 @@ import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
+import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
@@ -3647,6 +3648,10 @@ public class TypeInferenceV2Test {
     var sparkSessionType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     ClassType classType = (ClassType) sparkSessionType;
     assertThat(classType.fullyQualifiedName()).isEqualTo("pyspark.sql.session.SparkSession");
+    
+    Member nestedBuilderMember = classType.members().stream().filter(m -> m.name().equals("Builder")).findFirst().get();
+    assertThat(nestedBuilderMember.type()).isInstanceOf(ClassType.class);
+    assertThat(((ClassType) nestedBuilderMember.type()).fullyQualifiedName()).isEqualTo("pyspark.sql.session.SparkSession.Builder");
   }
 
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {

@@ -82,6 +82,7 @@ message ClassSymbol {
   optional string metaclass_name = 12;
   repeated string valid_for = 13;
   repeated VarSymbol attributes = 14;
+  repeated ClassSymbol nested_classes = 15;
 }
 
 message ModuleSymbol {

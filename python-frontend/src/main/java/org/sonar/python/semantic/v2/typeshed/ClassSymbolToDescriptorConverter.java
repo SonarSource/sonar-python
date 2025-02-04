@@ -59,7 +59,12 @@ public class ClassSymbolToDescriptorConverter {
       .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
       .map(s -> overloadedFunctionConverter.convert(s, true));
 
-    var members = ProtoUtils.disambiguateByName(Stream.of(variableDescriptors, functionDescriptors, overloadedFunctionDescriptors))
+    var nestedClassesDescriptors = classSymbol.getNestedClassesList()
+      .stream()
+      .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
+      .map(this::convert);
+
+    var members = ProtoUtils.disambiguateByName(Stream.of(variableDescriptors, functionDescriptors, overloadedFunctionDescriptors, nestedClassesDescriptors))
       .values().stream().map(Descriptor.class::cast).collect(Collectors.toSet());
 
     return new ClassDescriptor.ClassDescriptorBuilder()
