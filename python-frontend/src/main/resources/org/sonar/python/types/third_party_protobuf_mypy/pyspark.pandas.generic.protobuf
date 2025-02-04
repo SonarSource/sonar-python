@@ -1,0 +1,985 @@
+
+pyspark.pandas.genericç¶
+Framepyspark.pandas.generic.Frame"builtins.object*Ÿ
+__getitem__(pyspark.pandas.generic.Frame.__getitem__"
+Any*><
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*	
+Any0:abstractmethod@*ë
+	_internal&pyspark.pandas.generic.Frame._internal"N
+%pyspark.pandas.internal.InternalFrame"%pyspark.pandas.internal.InternalFrame*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property:abstractmethod@`*ñ
+_apply_series_op-pyspark.pandas.generic.Frame._apply_series_op"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*S
+opK
+CallableType[builtins.function]&
+builtins.function"builtins.function*4
+should_resolve
+builtins.bool"builtins.bool 0:abstractmethod@*‚
+_reduce_for_stat_function6pyspark.pandas.generic.Frame._reduce_for_stat_function"Ý
+¶Union[pyspark.pandas.series.Series[Any],TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]]J
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.SeriesÓ
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.Scalar*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*U
+sfunK
+CallableType[builtins.function]&
+builtins.function"builtins.function*&
+name
+builtins.str"builtins.str*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *2
+numeric_only
+builtins.bool"builtins.bool *,
+skipna
+builtins.bool"builtins.bool *
+kwargs
+Any0:abstractmethod@*€
+dtypes#pyspark.pandas.generic.Frame.dtypes"è
+oUnion[pandas.core.series.Series[Any],TypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]]D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series¬
+ITypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]¾
+>Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype](
+numpy.dtype[Any]
+Any"numpy.dtypeP
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype"pyspark.pandas._typing.Dtype*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property:abstractmethod@`*Ù
+	to_pandas&pyspark.pandas.generic.Frame.to_pandas"Ç
+AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abstractmethod@*Û
+
+_to_pandas'pyspark.pandas.generic.Frame._to_pandas"Ç
+AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abstractmethod@*Û
+index"pyspark.pandas.generic.Frame.index"F
+!pyspark.pandas.indexes.base.Index"!pyspark.pandas.indexes.base.Index*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property:abstractmethod@`*Î
+copy!pyspark.pandas.generic.Frame.copy"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abstractmethod@*í
+_to_internal_pandas0pyspark.pandas.generic.Frame._to_internal_pandas"Ç
+AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abstractmethod@*õ
+head!pyspark.pandas.generic.Frame.head"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*%
+n
+builtins.int"builtins.int 0:abstractmethod@*ì
+cummin#pyspark.pandas.generic.Frame.cummin"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*,
+skipna
+builtins.bool"builtins.bool *ì
+cummax#pyspark.pandas.generic.Frame.cummax"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*,
+skipna
+builtins.bool"builtins.bool *ì
+cumsum#pyspark.pandas.generic.Frame.cumsum"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*,
+skipna
+builtins.bool"builtins.bool *î
+cumprod$pyspark.pandas.generic.Frame.cumprod"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*,
+skipna
+builtins.bool"builtins.bool *Ï
+get_dtype_counts-pyspark.pandas.generic.Frame.get_dtype_counts"D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*ù
+pipe!pyspark.pandas.generic.Frame.pipe"
+Any*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*
+kwargs
+Any*´
+to_numpy%pyspark.pandas.generic.Frame.to_numpy"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*¾
+values#pyspark.pandas.generic.Frame.values"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*Ø
+to_csv#pyspark.pandas.generic.Frame.to_csv"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *'
+sep
+builtins.str"builtins.str **
+na_rep
+builtins.str"builtins.str *Ç
+columns·
+OUnion[builtins.list[TypeAlias[Union[Any,TypeAlias[builtins.tuple[Any]]]]],None]×
+Cbuiltins.list[TypeAlias[Union[Any,TypeAlias[builtins.tuple[Any]]]]]€
+4TypeAlias[Union[Any,TypeAlias[builtins.tuple[Any]]]]¨
+)Union[Any,TypeAlias[builtins.tuple[Any]]]
+Anyp
+TypeAlias[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"pyspark.pandas._typing.Label"pyspark.pandas._typing.Name"builtins.list
+None *,
+header
+builtins.bool"builtins.bool *-
+	quotechar
+builtins.str"builtins.str *W
+date_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *V
+
+escapecharD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *U
+	num_filesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *(
+mode
+builtins.str"builtins.str *Ã
+partition_cols¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *¾
+	index_col¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *
+options
+Any*·
+to_json$pyspark.pandas.generic.Frame.to_json"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None */
+compression
+builtins.str"builtins.str *U
+	num_filesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *(
+mode
+builtins.str"builtins.str **
+orient
+builtins.str"builtins.str *+
+lines
+builtins.bool"builtins.bool *Ã
+partition_cols¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *¾
+	index_col¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *
+options
+Any*”
+to_excel%pyspark.pandas.generic.Frame.to_excel"
+None*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*²
+excel_writerŸ
+5Union[builtins.str,pandas.io.excel._base.ExcelWriter]
+builtins.str"builtins.strF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter*.
+
+sheet_name
+builtins.str"builtins.str **
+na_rep
+builtins.str"builtins.str *X
+float_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *¼
+columns¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *,
+header
+builtins.bool"builtins.bool *+
+index
+builtins.bool"builtins.bool *À
+index_label¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *,
+startrow
+builtins.int"builtins.int *,
+startcol
+builtins.int"builtins.int *R
+engineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *1
+merge_cells
+builtins.bool"builtins.bool *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+inf_rep
+builtins.str"builtins.str *-
+verbose
+builtins.bool"builtins.bool *±
+freeze_panesœ
+,Union[Tuple[builtins.int,builtins.int],None]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+None *°	
+mean!pyspark.pandas.generic.Frame.mean"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *,
+skipna
+builtins.bool"builtins.bool *2
+numeric_only
+builtins.bool"builtins.bool *Ý	
+sum pyspark.pandas.generic.Frame.sum"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *,
+skipna
+builtins.bool"builtins.bool *2
+numeric_only
+builtins.bool"builtins.bool *-
+	min_count
+builtins.int"builtins.int *å	
+product$pyspark.pandas.generic.Frame.product"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *,
+skipna
+builtins.bool"builtins.bool *2
+numeric_only
+builtins.bool"builtins.bool *-
+	min_count
+builtins.int"builtins.int *°	
+skew!pyspark.pandas.generic.Frame.skew"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *,
+skipna
+builtins.bool"builtins.bool *2
+numeric_only
+builtins.bool"builtins.bool *¸	
+kurtosis%pyspark.pandas.generic.Frame.kurtosis"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *,
+skipna
+builtins.bool"builtins.bool *2
+numeric_only
+builtins.bool"builtins.bool *®	
+min pyspark.pandas.generic.Frame.min"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *,
+skipna
+builtins.bool"builtins.bool *2
+numeric_only
+builtins.bool"builtins.bool *®	
+max pyspark.pandas.generic.Frame.max"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *,
+skipna
+builtins.bool"builtins.bool *2
+numeric_only
+builtins.bool"builtins.bool *„	
+count"pyspark.pandas.generic.Frame.count"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *2
+numeric_only
+builtins.bool"builtins.bool *Ø	
+std pyspark.pandas.generic.Frame.std"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *,
+skipna
+builtins.bool"builtins.bool *(
+ddof
+builtins.int"builtins.int *2
+numeric_only
+builtins.bool"builtins.bool *ª	
+var pyspark.pandas.generic.Frame.var"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *(
+ddof
+builtins.int"builtins.int *2
+numeric_only
+builtins.bool"builtins.bool *â	
+median#pyspark.pandas.generic.Frame.median"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *,
+skipna
+builtins.bool"builtins.bool *2
+numeric_only
+builtins.bool"builtins.bool *,
+accuracy
+builtins.int"builtins.int *Ø	
+sem pyspark.pandas.generic.Frame.sem"Ý
+¶Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *,
+skipna
+builtins.bool"builtins.bool *(
+ddof
+builtins.int"builtins.int *2
+numeric_only
+builtins.bool"builtins.bool *
+size!pyspark.pandas.generic.Frame.size"
+builtins.int"builtins.int*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*¸
+abs pyspark.pandas.generic.Frame.abs"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*–
+groupby$pyspark.pandas.generic.Frame.groupby"å
+@pyspark.pandas.groupby.GroupBy[pyspark.pandas._typing.FrameLike]€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.groupby.GroupBy*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*Ò
+byÉ
+Union[TypeAlias[Union[Any,TypeAlias[builtins.tuple[Any]]]],pyspark.pandas.series.Series[Any],builtins.list[Union[Unknown,pyspark.pandas.series.Series[Any]]]]€
+4TypeAlias[Union[Any,TypeAlias[builtins.tuple[Any]]]]¨
+)Union[Any,TypeAlias[builtins.tuple[Any]]]
+Anyp
+TypeAlias[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"pyspark.pandas._typing.Label"pyspark.pandas._typing.NameJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.SeriesÕ
+?builtins.list[Union[Unknown,pyspark.pandas.series.Series[Any]]]‚
+0Union[Unknown,pyspark.pandas.series.Series[Any]] J
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series"builtins.list*»
+axis®
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"pyspark.pandas._typing.Axis *.
+as_index
+builtins.bool"builtins.bool *,
+dropna
+builtins.bool"builtins.bool * 
+_build_groupby+pyspark.pandas.generic.Frame._build_groupby"å
+@pyspark.pandas.groupby.GroupBy[pyspark.pandas._typing.FrameLike]€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.groupby.GroupBy*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*ü
+byó
+Vbuiltins.list[Union[pyspark.pandas.series.Series[Any],TypeAlias[builtins.tuple[Any]]]]‰
+GUnion[pyspark.pandas.series.Series[Any],TypeAlias[builtins.tuple[Any]]]J
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Seriesp
+TypeAlias[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"pyspark.pandas._typing.Label"builtins.list*,
+as_index
+builtins.bool"builtins.bool**
+dropna
+builtins.bool"builtins.bool0:abstractmethod@*‘
+bool!pyspark.pandas.generic.Frame.bool"
+builtins.bool"builtins.bool*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*Ñ
+first_valid_index.pyspark.pandas.generic.Frame.first_valid_index"Ã
+±Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],builtins.tuple[Unknown],None]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.Scalar+
+builtins.tuple[Unknown] "builtins.tuple
+None*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*Ï
+last_valid_index-pyspark.pandas.generic.Frame.last_valid_index"Ã
+±Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],builtins.tuple[Unknown],None]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.Scalar+
+builtins.tuple[Unknown] "builtins.tuple
+None*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*¦
+rolling$pyspark.pandas.generic.Frame.rolling"ã
+?pyspark.pandas.window.Rolling[pyspark.pandas._typing.FrameLike]€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.window.Rolling*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*(
+window
+builtins.int"builtins.int*W
+min_periodsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ü
+	expanding&pyspark.pandas.generic.Frame.expanding"ç
+Apyspark.pandas.window.Expanding[pyspark.pandas._typing.FrameLike]€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.window.Expanding*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*/
+min_periods
+builtins.int"builtins.int *
+ewm pyspark.pandas.generic.Frame.ewm"÷
+Ipyspark.pandas.window.ExponentialMoving[pyspark.pandas._typing.FrameLike]€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"'pyspark.pandas.window.ExponentialMoving*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*U
+comJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *V
+spanJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *Z
+halflifeJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *W
+alphaJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *W
+min_periodsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None */
+	ignore_na
+builtins.bool"builtins.bool *Á
+get pyspark.pandas.generic.Frame.get"
+Any*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*
+key
+Any*5
+default&
+Union[Any,None]
+Any
+None *È	
+squeeze$pyspark.pandas.generic.Frame.squeeze"Ñ
+ÚUnion[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]],pyspark.pandas.frame.DataFrame[Any],pyspark.pandas.series.Series[Any]]Ó
+TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]Ÿ
+‚Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes$
+_decimal.Decimal"_decimal.Decimal
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime
+None"pyspark.pandas._typing.ScalarN
+#pyspark.pandas.frame.DataFrame[Any]
+Any"pyspark.pandas.frame.DataFrameJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *„
+truncate%pyspark.pandas.generic.Frame.truncate"ô
+WTypeAlias[Union[pyspark.pandas.frame.DataFrame[Any],pyspark.pandas.series.Series[Any]]]ì
+LUnion[pyspark.pandas.frame.DataFrame[Any],pyspark.pandas.series.Series[Any]]N
+#pyspark.pandas.frame.DataFrame[Any]
+Any"pyspark.pandas.frame.DataFrameJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series"(pyspark.pandas._typing.DataFrameOrSeries*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*4
+before&
+Union[Any,None]
+Any
+None *3
+after&
+Union[Any,None]
+Any
+None *{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None **
+copy
+builtins.bool"builtins.bool *ž
+to_markdown(pyspark.pandas.generic.Frame.to_markdown"
+builtins.str"builtins.str*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*¬
+buf 
+0Union[typing.IO[builtins.str],builtins.str,None]B
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO
+builtins.str"builtins.str
+None *P
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ú
+fillna#pyspark.pandas.generic.Frame.fillna"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*3
+value&
+Union[Any,None]
+Any
+None *R
+methodD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *-
+inplace
+builtins.bool"builtins.bool *Q
+limitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 0:abstractmethod@*»
+bfill"pyspark.pandas.generic.Frame.bfill"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *-
+inplace
+builtins.bool"builtins.bool *Q
+limitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *»
+ffill"pyspark.pandas.generic.Frame.ffill"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*{
+axiso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *-
+inplace
+builtins.bool"builtins.bool *Q
+limitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ü
+interpolate(pyspark.pandas.generic.Frame.interpolate"€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
+self€
+ pyspark.pandas._typing.FrameLike<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame**
+method
+builtins.str"builtins.str *Q
+limitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *[
+limit_directionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *V
+
+limit_areaD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ã
+atpyspark.pandas.generic.Frame.at"F
+!pyspark.pandas.indexing.AtIndexer"!pyspark.pandas.indexing.AtIndexer*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*Ç
+iat pyspark.pandas.generic.Frame.iat"H
+"pyspark.pandas.indexing.iAtIndexer""pyspark.pandas.indexing.iAtIndexer*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*Ë
+iloc!pyspark.pandas.generic.Frame.iloc"J
+#pyspark.pandas.indexing.iLocIndexer"#pyspark.pandas.indexing.iLocIndexer*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*Ç
+loc pyspark.pandas.generic.Frame.loc"H
+"pyspark.pandas.indexing.LocIndexer""pyspark.pandas.indexing.LocIndexer*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*‡
+__bool__%pyspark.pandas.generic.Frame.__bool__"
+NoReturn
+*F
+self<
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*Ø
+_count_expr(pyspark.pandas.generic.Frame._count_expr"6
+pyspark.sql.column.Column"pyspark.sql.column.Column*U
+psserJ
+!pyspark.pandas.series.Series[Any]
+Any"pyspark.pandas.series.Series0:staticmethodh@babc.ABCMetarv
+prod!pyspark.pandas.generic.Frame.prodK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrv
+kurt!pyspark.pandas.generic.Frame.kurtK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr~
+backfill%pyspark.pandas.generic.Frame.backfillK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrt
+pad pyspark.pandas.generic.Frame.padK
+CallableType[builtins.function]&
+builtins.function"builtins.function/
+_testpyspark.pandas.generic._test"
+None*’
+__annotations__&pyspark.pandas.generic.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+npnumpy *
+pdpandas *
+Fpyspark.sql.functions *
+pspyspark.pandas *&
+SFpyspark.pandas.spark.functions 

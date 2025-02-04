@@ -1,0 +1,496 @@
+
+pyspark.mllib.classification“
+LinearClassificationModel6pyspark.mllib.classification.LinearClassificationModel"$pyspark.mllib.regression.LinearModel*À
+__init__?pyspark.mllib.classification.LinearClassificationModel.__init__"
+None*z
+selfp
+6pyspark.mllib.classification.LinearClassificationModel"6pyspark.mllib.classification.LinearClassificationModel*G
+weights:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector*/
+	intercept 
+builtins.float"builtins.float*à
+setThresholdCpyspark.mllib.classification.LinearClassificationModel.setThreshold"
+None*z
+selfp
+6pyspark.mllib.classification.LinearClassificationModel"6pyspark.mllib.classification.LinearClassificationModel*+
+value 
+builtins.float"builtins.float0*£
+	threshold@pyspark.mllib.classification.LinearClassificationModel.threshold"J
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*z
+selfp
+6pyspark.mllib.classification.LinearClassificationModel"6pyspark.mllib.classification.LinearClassificationModel0:property`*ﬂ
+clearThresholdEpyspark.mllib.classification.LinearClassificationModel.clearThreshold"
+None*z
+selfp
+6pyspark.mllib.classification.LinearClassificationModel"6pyspark.mllib.classification.LinearClassificationModel02◊
+predict>pyspark.mllib.classification.LinearClassificationModel.predictã
+predict>pyspark.mllib.classification.LinearClassificationModel.predict"f
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float*z
+selfp
+6pyspark.mllib.classification.LinearClassificationModel"6pyspark.mllib.classification.LinearClassificationModel*Õ
+test¬
+ÅTypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]ó
+vUnion[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike0:overloadX˝
+predict>pyspark.mllib.classification.LinearClassificationModel.predict"Æ
+3pyspark.rdd.RDD[Union[builtins.int,builtins.float]]f
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float"pyspark.rdd.RDD*z
+selfp
+6pyspark.mllib.classification.LinearClassificationModel"6pyspark.mllib.classification.LinearClassificationModel*ˆ
+testÎ
+ípyspark.rdd.RDD[TypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]]¬
+ÅTypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]ó
+vUnion[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike"pyspark.rdd.RDD0:overloadXrõ
+
+_thresholdApyspark.mllib.classification.LinearClassificationModel._thresholdJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+Noneá%
+LogisticRegressionModel4pyspark.mllib.classification.LogisticRegressionModel"6pyspark.mllib.classification.LinearClassificationModel*¢
+__init__=pyspark.mllib.classification.LogisticRegressionModel.__init__"
+None*v
+selfl
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel*G
+weights:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector*/
+	intercept 
+builtins.float"builtins.float*-
+numFeatures
+builtins.int"builtins.int*,
+
+numClasses
+builtins.int"builtins.int*Û
+numFeatures@pyspark.mllib.classification.LogisticRegressionModel.numFeatures"
+builtins.int"builtins.int*v
+selfl
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel0:property`*Ò
+
+numClasses?pyspark.mllib.classification.LogisticRegressionModel.numClasses"
+builtins.int"builtins.int*v
+selfl
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel0:property`*≥
+save9pyspark.mllib.classification.LogisticRegressionModel.save"
+None*v
+selfl
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel*D
+sc<
+pyspark.context.SparkContext"pyspark.context.SparkContext*&
+path
+builtins.str"builtins.str0*Ì
+load9pyspark.mllib.classification.LogisticRegressionModel.load"l
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel*º
+cls≤
+:Type[pyspark.mllib.classification.LogisticRegressionModel]l
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel"type*D
+sc<
+pyspark.context.SparkContext"pyspark.context.SparkContext*&
+path
+builtins.str"builtins.str0:classmethodp*◊
+__repr__=pyspark.mllib.classification.LogisticRegressionModel.__repr__"
+builtins.str"builtins.str*nl
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel2√
+predict<pyspark.mllib.classification.LogisticRegressionModel.predictÇ
+predict<pyspark.mllib.classification.LogisticRegressionModel.predict"f
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float*v
+selfl
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel* 
+x¬
+ÅTypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]ó
+vUnion[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike0:overloadXÙ
+predict<pyspark.mllib.classification.LogisticRegressionModel.predict"Æ
+3pyspark.rdd.RDD[Union[builtins.int,builtins.float]]f
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float"pyspark.rdd.RDD*v
+selfl
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel*Û
+xÎ
+ípyspark.rdd.RDD[TypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]]¬
+ÅTypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]ó
+vUnion[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike"pyspark.rdd.RDD0:overloadXro
+_numFeaturesApyspark.mllib.classification.LogisticRegressionModel._numFeatures
+builtins.int"builtins.intrm
+_numClasses@pyspark.mllib.classification.LogisticRegressionModel._numClasses
+builtins.int"builtins.intrÉ
+_dataWithBiasSizeFpyspark.mllib.classification.LogisticRegressionModel._dataWithBiasSize&
+Union[Any,None]
+Any
+Noner¬
+_weightsMatrixCpyspark.mllib.classification.LogisticRegressionModel._weightsMatrixk
+"Union[numpy.ndarray[Any,Any],None]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray
+NoneÏ
+LogisticRegressionWithSGD6pyspark.mllib.classification.LogisticRegressionWithSGD"builtins.object*Ö
+train<pyspark.mllib.classification.LogisticRegressionWithSGD.train"l
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel*¬
+cls∏
+<Type[pyspark.mllib.classification.LogisticRegressionWithSGD]p
+6pyspark.mllib.classification.LogisticRegressionWithSGD"6pyspark.mllib.classification.LogisticRegressionWithSGD"type*§
+dataô
+6pyspark.rdd.RDD[pyspark.mllib.regression.LabeledPoint]N
+%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"pyspark.rdd.RDD*.
+
+iterations
+builtins.int"builtins.int *,
+step 
+builtins.float"builtins.float *9
+miniBatchFraction 
+builtins.float"builtins.float *Ω
+initialWeights¶
+{Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float],None]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple
+None *0
+regParam 
+builtins.float"builtins.float *+
+regType
+builtins.str"builtins.str */
+	intercept
+builtins.bool"builtins.bool *2
+validateData
+builtins.bool"builtins.bool *6
+convergenceTol 
+builtins.float"builtins.float 0:classmethodpÎ
+LogisticRegressionWithLBFGS8pyspark.mllib.classification.LogisticRegressionWithLBFGS"builtins.object*Ä
+train>pyspark.mllib.classification.LogisticRegressionWithLBFGS.train"l
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel*»
+clsæ
+>Type[pyspark.mllib.classification.LogisticRegressionWithLBFGS]t
+8pyspark.mllib.classification.LogisticRegressionWithLBFGS"8pyspark.mllib.classification.LogisticRegressionWithLBFGS"type*§
+dataô
+6pyspark.rdd.RDD[pyspark.mllib.regression.LabeledPoint]N
+%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"pyspark.rdd.RDD*.
+
+iterations
+builtins.int"builtins.int *Ω
+initialWeights¶
+{Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float],None]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple
+None *0
+regParam 
+builtins.float"builtins.float *+
+regType
+builtins.str"builtins.str */
+	intercept
+builtins.bool"builtins.bool */
+corrections
+builtins.int"builtins.int *1
+	tolerance 
+builtins.float"builtins.float *2
+validateData
+builtins.bool"builtins.bool *.
+
+numClasses
+builtins.int"builtins.int 0:classmethodpÄ
+SVMModel%pyspark.mllib.classification.SVMModel"6pyspark.mllib.classification.LinearClassificationModel*ò
+__init__.pyspark.mllib.classification.SVMModel.__init__"
+None*X
+selfN
+%pyspark.mllib.classification.SVMModel"%pyspark.mllib.classification.SVMModel*G
+weights:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector*/
+	intercept 
+builtins.float"builtins.float*Ü
+save*pyspark.mllib.classification.SVMModel.save"
+None*X
+selfN
+%pyspark.mllib.classification.SVMModel"%pyspark.mllib.classification.SVMModel*D
+sc<
+pyspark.context.SparkContext"pyspark.context.SparkContext*&
+path
+builtins.str"builtins.str0*ì
+load*pyspark.mllib.classification.SVMModel.load"N
+%pyspark.mllib.classification.SVMModel"%pyspark.mllib.classification.SVMModel*è
+clsÖ
++Type[pyspark.mllib.classification.SVMModel]N
+%pyspark.mllib.classification.SVMModel"%pyspark.mllib.classification.SVMModel"type*D
+sc<
+pyspark.context.SparkContext"pyspark.context.SparkContext*&
+path
+builtins.str"builtins.str0:classmethodp2⁄
+predict-pyspark.mllib.classification.SVMModel.predict’
+predict-pyspark.mllib.classification.SVMModel.predict"f
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float*X
+selfN
+%pyspark.mllib.classification.SVMModel"%pyspark.mllib.classification.SVMModel* 
+x¬
+ÅTypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]ó
+vUnion[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike0:overloadX«
+predict-pyspark.mllib.classification.SVMModel.predict"Æ
+3pyspark.rdd.RDD[Union[builtins.int,builtins.float]]f
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float"pyspark.rdd.RDD*X
+selfN
+%pyspark.mllib.classification.SVMModel"%pyspark.mllib.classification.SVMModel*Û
+xÎ
+ípyspark.rdd.RDD[TypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]]¬
+ÅTypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]ó
+vUnion[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike"pyspark.rdd.RDD0:overloadXÙ
+
+
+SVMWithSGD'pyspark.mllib.classification.SVMWithSGD"builtins.object*´
+
+train-pyspark.mllib.classification.SVMWithSGD.train"N
+%pyspark.mllib.classification.SVMModel"%pyspark.mllib.classification.SVMModel*ï
+clsã
+-Type[pyspark.mllib.classification.SVMWithSGD]R
+'pyspark.mllib.classification.SVMWithSGD"'pyspark.mllib.classification.SVMWithSGD"type*§
+dataô
+6pyspark.rdd.RDD[pyspark.mllib.regression.LabeledPoint]N
+%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"pyspark.rdd.RDD*.
+
+iterations
+builtins.int"builtins.int *,
+step 
+builtins.float"builtins.float *0
+regParam 
+builtins.float"builtins.float *9
+miniBatchFraction 
+builtins.float"builtins.float *Ω
+initialWeights¶
+{Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float],None]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple
+None *+
+regType
+builtins.str"builtins.str */
+	intercept
+builtins.bool"builtins.bool *2
+validateData
+builtins.bool"builtins.bool *6
+convergenceTol 
+builtins.float"builtins.float 0:classmethodp‡
+NaiveBayesModel,pyspark.mllib.classification.NaiveBayesModel"pyspark.mllib.util.Saveable"pyspark.mllib.util.Loader*É
+__init__5pyspark.mllib.classification.NaiveBayesModel.__init__"
+None*f
+self\
+,pyspark.mllib.classification.NaiveBayesModel",pyspark.mllib.classification.NaiveBayesModel*E
+labels9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*A
+pi9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*D
+theta9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*ô
+save1pyspark.mllib.classification.NaiveBayesModel.save"
+None*f
+self\
+,pyspark.mllib.classification.NaiveBayesModel",pyspark.mllib.classification.NaiveBayesModel*D
+sc<
+pyspark.context.SparkContext"pyspark.context.SparkContext*&
+path
+builtins.str"builtins.str*Ω
+load1pyspark.mllib.classification.NaiveBayesModel.load"\
+,pyspark.mllib.classification.NaiveBayesModel",pyspark.mllib.classification.NaiveBayesModel*§
+clsö
+2Type[pyspark.mllib.classification.NaiveBayesModel]\
+,pyspark.mllib.classification.NaiveBayesModel",pyspark.mllib.classification.NaiveBayesModel"type*D
+sc<
+pyspark.context.SparkContext"pyspark.context.SparkContext*&
+path
+builtins.str"builtins.str0:classmethodp2û
+predict4pyspark.mllib.classification.NaiveBayesModel.predict≠
+predict4pyspark.mllib.classification.NaiveBayesModel.predict"®
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64*f
+self\
+,pyspark.mllib.classification.NaiveBayesModel",pyspark.mllib.classification.NaiveBayesModel* 
+x¬
+ÅTypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]ó
+vUnion[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike0:overloadX¨	
+predict4pyspark.mllib.classification.NaiveBayesModel.predict"˛
+@pyspark.rdd.RDD[TypeAlias[numpy.floating[numpy._typing._64Bit]]]®
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"pyspark.rdd.RDD*f
+self\
+,pyspark.mllib.classification.NaiveBayesModel",pyspark.mllib.classification.NaiveBayesModel*Û
+xÎ
+ípyspark.rdd.RDD[TypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]]¬
+ÅTypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]ó
+vUnion[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike"pyspark.rdd.RDD0:overloadX8rx
+labels3pyspark.mllib.classification.NaiveBayesModel.labels9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayrp
+pi/pyspark.mllib.classification.NaiveBayesModel.pi9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayrv
+theta2pyspark.mllib.classification.NaiveBayesModel.theta9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayﬁ
+
+NaiveBayes'pyspark.mllib.classification.NaiveBayes"builtins.object*ï
+train-pyspark.mllib.classification.NaiveBayes.train"\
+,pyspark.mllib.classification.NaiveBayesModel",pyspark.mllib.classification.NaiveBayesModel*ï
+clsã
+-Type[pyspark.mllib.classification.NaiveBayes]R
+'pyspark.mllib.classification.NaiveBayes"'pyspark.mllib.classification.NaiveBayes"type*§
+dataô
+6pyspark.rdd.RDD[pyspark.mllib.regression.LabeledPoint]N
+%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"pyspark.rdd.RDD*/
+lambda_ 
+builtins.float"builtins.float 0:classmethodpæ
+"StreamingLogisticRegressionWithSGD?pyspark.mllib.classification.StreamingLogisticRegressionWithSGD"1pyspark.mllib.regression.StreamingLinearAlgorithm*¯
+__init__Hpyspark.mllib.classification.StreamingLogisticRegressionWithSGD.__init__"
+None*ç
+selfÇ
+?pyspark.mllib.classification.StreamingLogisticRegressionWithSGD"?pyspark.mllib.classification.StreamingLogisticRegressionWithSGD*0
+stepSize 
+builtins.float"builtins.float *1
+numIterations
+builtins.int"builtins.int *9
+miniBatchFraction 
+builtins.float"builtins.float *0
+regParam 
+builtins.float"builtins.float *6
+convergenceTol 
+builtins.float"builtins.float *◊
+setInitialWeightsQpyspark.mllib.classification.StreamingLogisticRegressionWithSGD.setInitialWeights"Ç
+?pyspark.mllib.classification.StreamingLogisticRegressionWithSGD"?pyspark.mllib.classification.StreamingLogisticRegressionWithSGD*ç
+selfÇ
+?pyspark.mllib.classification.StreamingLogisticRegressionWithSGD"?pyspark.mllib.classification.StreamingLogisticRegressionWithSGD*◊
+initialWeights¬
+ÅTypeAlias[Union[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]]ó
+vUnion[numpy.ndarray[Any,Any],pyspark.mllib.linalg.Vector,builtins.list[builtins.float],builtins.tuple[builtins.float]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.VectorP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuple" pyspark.mllib._typing.VectorLike0*º
+trainOnGpyspark.mllib.classification.StreamingLogisticRegressionWithSGD.trainOn"
+None*ç
+selfÇ
+?pyspark.mllib.classification.StreamingLogisticRegressionWithSGD"?pyspark.mllib.classification.StreamingLogisticRegressionWithSGD*À
+dstreamΩ
+Hpyspark.streaming.dstream.DStream[pyspark.mllib.regression.LabeledPoint]N
+%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"!pyspark.streaming.dstream.DStream08rv
+stepSizeHpyspark.mllib.classification.StreamingLogisticRegressionWithSGD.stepSize 
+builtins.float"builtins.floatr|
+numIterationsMpyspark.mllib.classification.StreamingLogisticRegressionWithSGD.numIterations
+builtins.int"builtins.intrv
+regParamHpyspark.mllib.classification.StreamingLogisticRegressionWithSGD.regParam 
+builtins.float"builtins.floatrà
+miniBatchFractionQpyspark.mllib.classification.StreamingLogisticRegressionWithSGD.miniBatchFraction 
+builtins.float"builtins.floatrÇ
+convergenceTolNpyspark.mllib.classification.StreamingLogisticRegressionWithSGD.convergenceTol 
+builtins.float"builtins.floatrè
+_modelFpyspark.mllib.classification.StreamingLogisticRegressionWithSGD._modelº
+@Union[pyspark.mllib.classification.LogisticRegressionModel,None]l
+4pyspark.mllib.classification.LogisticRegressionModel"4pyspark.mllib.classification.LogisticRegressionModel
+None5
+_test"pyspark.mllib.classification._test"
+None*ò
+__annotations__,pyspark.mllib.classification.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*{
+__all__$pyspark.mllib.classification.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

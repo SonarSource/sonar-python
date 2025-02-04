@@ -1,0 +1,1045 @@
+
+pyspark.streamingàH
+StreamingContext*pyspark.streaming.context.StreamingContext"builtins.object*å
+__init__3pyspark.streaming.context.StreamingContext.__init__"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*N
+sparkContext<
+pyspark.context.SparkContext"pyspark.context.SparkContext*Y
+batchDurationD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *2
+jssc&
+Union[Any,None]
+Any
+None *‹
+_initialize_context>pyspark.streaming.context.StreamingContext._initialize_context"
+Any*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*D
+sc<
+pyspark.context.SparkContext"pyspark.context.SparkContext*R
+durationD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*€
+
+_jduration5pyspark.streaming.context.StreamingContext._jduration"
+Any*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*)
+seconds
+builtins.int"builtins.int*ë
+_ensure_initialized>pyspark.streaming.context.StreamingContext._ensure_initialized"
+None*û
+clsî
+0Type[pyspark.streaming.context.StreamingContext]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type0:classmethodp*ﬂ
+getOrCreate6pyspark.streaming.context.StreamingContext.getOrCreate"X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*û
+clsî
+0Type[pyspark.streaming.context.StreamingContext]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type*0
+checkpointPath
+builtins.str"builtins.str*Z
+	setupFuncK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:classmethodp*î
+	getActive4pyspark.streaming.context.StreamingContext.getActive"û
+6Union[pyspark.streaming.context.StreamingContext,None]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext
+None*û
+clsî
+0Type[pyspark.streaming.context.StreamingContext]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type0:classmethodp*Î
+getActiveOrCreate<pyspark.streaming.context.StreamingContext.getActiveOrCreate"X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*û
+clsî
+0Type[pyspark.streaming.context.StreamingContext]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type*0
+checkpointPath
+builtins.str"builtins.str*Z
+	setupFuncK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:classmethodp*˜
+sparkContext7pyspark.streaming.context.StreamingContext.sparkContext"<
+pyspark.context.SparkContext"pyspark.context.SparkContext*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext0:property`*ß
+start0pyspark.streaming.context.StreamingContext.start"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*í
+awaitTermination;pyspark.streaming.context.StreamingContext.awaitTermination"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*S
+timeoutD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *˙
+awaitTerminationOrTimeoutDpyspark.streaming.context.StreamingContext.awaitTerminationOrTimeout"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*)
+timeout
+builtins.int"builtins.int*ì
+stop/pyspark.streaming.context.StreamingContext.stop"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*6
+stopSparkContext
+builtins.bool"builtins.bool *4
+stopGraceFully
+builtins.bool"builtins.bool *Ÿ
+remember3pyspark.streaming.context.StreamingContext.remember"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext**
+duration
+builtins.int"builtins.int*ﬁ
+
+checkpoint5pyspark.streaming.context.StreamingContext.checkpoint"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*+
+	directory
+builtins.str"builtins.str*◊
+socketTextStream;pyspark.streaming.context.StreamingContext.socketTextStream"r
+/pyspark.streaming.dstream.DStream[builtins.str]
+builtins.str"builtins.str"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext**
+hostname
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*Z
+storageLevelF
+!pyspark.storagelevel.StorageLevel"!pyspark.storagelevel.StorageLevel *–
+textFileStream9pyspark.streaming.context.StreamingContext.textFileStream"r
+/pyspark.streaming.dstream.DStream[builtins.str]
+builtins.str"builtins.str"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*+
+	directory
+builtins.str"builtins.str*ê
+binaryRecordsStream>pyspark.streaming.context.StreamingContext.binaryRecordsStream"x
+1pyspark.streaming.dstream.DStream[builtins.bytes] 
+builtins.bytes"builtins.bytes"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*+
+	directory
+builtins.str"builtins.str*.
+recordLength
+builtins.int"builtins.int*≥
+_check_serializers=pyspark.streaming.context.StreamingContext._check_serializers"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*Ô
+rdds‰
+;builtins.list[pyspark.rdd.RDD[pyspark.streaming.context.T]]ï
+,pyspark.rdd.RDD[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD"builtins.list*˙
+queueStream6pyspark.streaming.context.StreamingContext.queueStream"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*Ô
+rdds‰
+;builtins.list[pyspark.rdd.RDD[pyspark.streaming.context.T]]ï
+,pyspark.rdd.RDD[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD"builtins.list*0
+
+oneAtATime
+builtins.bool"builtins.bool *Ó
+defaultﬁ
+8Union[pyspark.rdd.RDD[pyspark.streaming.context.T],None]ï
+,pyspark.rdd.RDD[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD
+None *Ô
+	transform4pyspark.streaming.context.StreamingContext.transform"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*´
+dstreamsú
+5builtins.list[pyspark.streaming.dstream.DStream[Any]]T
+&pyspark.streaming.dstream.DStream[Any]
+Any"!pyspark.streaming.dstream.DStream"builtins.list*^
+transformFuncK
+CallableType[builtins.function]&
+builtins.function"builtins.function*§
+union0pyspark.streaming.context.StreamingContext.union"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*»
+dstreamsπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*∫
+addStreamingListener?pyspark.streaming.context.StreamingContext.addStreamingListener"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*s
+streamingListener\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListenerrî
+_transformerSerializerApyspark.streaming.context.StreamingContext._transformerSerializer∂
+>Union[pyspark.streaming.util.TransformFunctionSerializer,None]h
+2pyspark.streaming.util.TransformFunctionSerializer"2pyspark.streaming.util.TransformFunctionSerializer
+NonerÏ
+_activeContext9pyspark.streaming.context.StreamingContext._activeContextû
+6Union[pyspark.streaming.context.StreamingContext,None]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext
+Noners
+_sc.pyspark.streaming.context.StreamingContext._sc<
+pyspark.context.SparkContext"pyspark.context.SparkContextr_
+_jvm/pyspark.streaming.context.StreamingContext._jvm&
+Union[Any,None]
+Any
+NonerB
+_jssc0pyspark.streaming.context.StreamingContext._jssc
+Any‰¢
+DStream!pyspark.streaming.dstream.DStream"builtins.object*‡
+__init__*pyspark.streaming.dstream.DStream.__init__"
+None* 
+selfø
+Apyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T_co]W
+pyspark.streaming.dstream.T_co"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*
+jdstream
+Any*a
+sscX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*W
+jrdd_deserializer@
+pyspark.serializers.Serializer"pyspark.serializers.Serializer*€
+context)pyspark.streaming.dstream.DStream.context"X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext* 
+selfø
+Apyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T_co]W
+pyspark.streaming.dstream.T_co"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Ò
+count'pyspark.streaming.dstream.DStream.count"r
+/pyspark.streaming.dstream.DStream[builtins.int]
+builtins.int"builtins.int"!pyspark.streaming.dstream.DStream* 
+selfø
+Apyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T_co]W
+pyspark.streaming.dstream.T_co"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*â
+filter(pyspark.streaming.dstream.DStream.filter"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*»
+flatMap)pyspark.streaming.dstream.DStream.flatMap"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*;
+preservesPartitioning
+builtins.bool"builtins.bool *¿
+map%pyspark.streaming.dstream.DStream.map"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*;
+preservesPartitioning
+builtins.bool"builtins.bool *‘
+mapPartitions/pyspark.streaming.dstream.DStream.mapPartitions"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*;
+preservesPartitioning
+builtins.bool"builtins.bool *Ê
+mapPartitionsWithIndex8pyspark.streaming.dstream.DStream.mapPartitionsWithIndex"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*;
+preservesPartitioning
+builtins.bool"builtins.bool *å
+reduce(pyspark.streaming.dstream.DStream.reduce"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Ì
+reduceByKey-pyspark.streaming.dstream.DStream.reduceByKey"˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *∑	
+combineByKey.pyspark.streaming.dstream.DStream.combineByKey"˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*_
+createCombinerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*[
+
+mergeValueK
+CallableType[builtins.function]&
+builtins.function"builtins.function*_
+mergeCombinersK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Œ
+partitionBy-pyspark.streaming.dstream.DStream.partitionBy"˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*/
+numPartitions
+builtins.int"builtins.int*`
+partitionFuncK
+CallableType[builtins.function]&
+builtins.function"builtins.function *≤
+pprint(pyspark.streaming.dstream.DStream.pprint"
+None* 
+selfø
+Apyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T_co]W
+pyspark.streaming.dstream.T_co"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*'
+num
+builtins.int"builtins.int *ã
+	mapValues+pyspark.streaming.dstream.DStream.mapValues"˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ì
+flatMapValues/pyspark.streaming.dstream.DStream.flatMapValues"˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*˛
+glom&pyspark.streaming.dstream.DStream.glom"Ü
+Mpyspark.streaming.dstream.DStream[builtins.list[pyspark.streaming.dstream.T]]ë
+*builtins.list[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"builtins.list"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*≥
+cache'pyspark.streaming.dstream.DStream.cache"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ë
+persist)pyspark.streaming.dstream.DStream.persist"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*X
+storageLevelF
+!pyspark.storagelevel.StorageLevel"!pyspark.storagelevel.StorageLevel*È
+
+checkpoint,pyspark.streaming.dstream.DStream.checkpoint"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream**
+interval
+builtins.int"builtins.int*¯
+
+groupByKey,pyspark.streaming.dstream.DStream.groupByKey"€
+rpyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,typing.Iterable[pyspark.streaming.dstream.V]]]¡
+OTuple[pyspark.streaming.dstream.K,typing.Iterable[pyspark.streaming.dstream.V]]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.Hashableï
+,typing.Iterable[pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"typing.Iterable"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *©
+countByValue.pyspark.streaming.dstream.DStream.countByValue"°
+Rpyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,builtins.int]]ß
+/Tuple[pyspark.streaming.dstream.K,builtins.int]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.Hashable
+builtins.int"builtins.int"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.K]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.Hashable"!pyspark.streaming.dstream.DStream*ô
+saveAsTextFiles1pyspark.streaming.dstream.DStream.saveAsTextFiles"
+None* 
+selfø
+Apyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T_co]W
+pyspark.streaming.dstream.T_co"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*(
+prefix
+builtins.str"builtins.str*R
+suffixD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+repartition-pyspark.streaming.dstream.DStream.repartition"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*/
+numPartitions
+builtins.int"builtins.int*ß
+_slideDuration0pyspark.streaming.dstream.DStream._slideDuration"
+None* 
+selfø
+Apyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T_co]W
+pyspark.streaming.dstream.T_co"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream0:property`*π
+union'pyspark.streaming.dstream.DStream.union"˜
+apyspark.streaming.dstream.DStream[Union[pyspark.streaming.dstream.T,pyspark.streaming.dstream.U]]Ó
+>Union[pyspark.streaming.dstream.T,pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.objectT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*≈
+otherπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*æ
+cogroup)pyspark.streaming.dstream.DStream.cogroup"°
+“pyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,Tuple[pyspark.resultiterable.ResultIterable[pyspark.streaming.dstream.V],pyspark.resultiterable.ResultIterable[pyspark.streaming.dstream.U]]]]¶
+ØTuple[pyspark.streaming.dstream.K,Tuple[pyspark.resultiterable.ResultIterable[pyspark.streaming.dstream.V],pyspark.resultiterable.ResultIterable[pyspark.streaming.dstream.U]]]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.Hashableô
+åTuple[pyspark.resultiterable.ResultIterable[pyspark.streaming.dstream.V],pyspark.resultiterable.ResultIterable[pyspark.streaming.dstream.U]]¡
+Bpyspark.resultiterable.ResultIterable[pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"%pyspark.resultiterable.ResultIterable¡
+Bpyspark.resultiterable.ResultIterable[pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"%pyspark.resultiterable.ResultIterable"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*É
+other˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *
+join&pyspark.streaming.dstream.DStream.join"Ÿ
+Ñpyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,Tuple[pyspark.streaming.dstream.V,pyspark.streaming.dstream.U]]]¨
+aTuple[pyspark.streaming.dstream.K,Tuple[pyspark.streaming.dstream.V,pyspark.streaming.dstream.U]]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableÓ
+>Tuple[pyspark.streaming.dstream.V,pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.objectT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*É
+other˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ﬁ
+leftOuterJoin/pyspark.streaming.dstream.DStream.leftOuterJoin"µ
+êpyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,Tuple[pyspark.streaming.dstream.V,Union[pyspark.streaming.dstream.U,None]]]]¸
+mTuple[pyspark.streaming.dstream.K,Tuple[pyspark.streaming.dstream.V,Union[pyspark.streaming.dstream.U,None]]]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.Hashable≤
+JTuple[pyspark.streaming.dstream.V,Union[pyspark.streaming.dstream.U,None]]T
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.objectã
+'Union[pyspark.streaming.dstream.U,None]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object
+None"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*É
+other˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *‡
+rightOuterJoin0pyspark.streaming.dstream.DStream.rightOuterJoin"µ
+êpyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,Tuple[Union[pyspark.streaming.dstream.V,None],pyspark.streaming.dstream.U]]]¸
+mTuple[pyspark.streaming.dstream.K,Tuple[Union[pyspark.streaming.dstream.V,None],pyspark.streaming.dstream.U]]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.Hashable≤
+JTuple[Union[pyspark.streaming.dstream.V,None],pyspark.streaming.dstream.U]ã
+'Union[pyspark.streaming.dstream.V,None]T
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object
+NoneT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*É
+other˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *∫
+fullOuterJoin/pyspark.streaming.dstream.DStream.fullOuterJoin"ë
+úpyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,Tuple[Union[pyspark.streaming.dstream.V,None],Union[pyspark.streaming.dstream.U,None]]]]Ã
+yTuple[pyspark.streaming.dstream.K,Tuple[Union[pyspark.streaming.dstream.V,None],Union[pyspark.streaming.dstream.U,None]]]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.Hashableˆ
+VTuple[Union[pyspark.streaming.dstream.V,None],Union[pyspark.streaming.dstream.U,None]]ã
+'Union[pyspark.streaming.dstream.V,None]T
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object
+Noneã
+'Union[pyspark.streaming.dstream.U,None]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object
+None"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*É
+other˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ª
+_jtime(pyspark.streaming.dstream.DStream._jtime"
+Any* 
+selfø
+Apyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T_co]W
+pyspark.streaming.dstream.T_co"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*∞
+	timestamp†
+4Union[datetime.datetime,builtins.int,builtins.float]&
+datetime.datetime"datetime.datetime
+builtins.int"builtins.int 
+builtins.float"builtins.float*⁄
+slice'pyspark.streaming.dstream.DStream.slice"‰
+;builtins.list[pyspark.rdd.RDD[pyspark.streaming.dstream.T]]ï
+,pyspark.rdd.RDD[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD"builtins.list* 
+selfø
+Apyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T_co]W
+pyspark.streaming.dstream.T_co"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*z
+begino
+%Union[datetime.datetime,builtins.int]&
+datetime.datetime"datetime.datetime
+builtins.int"builtins.int*x
+endo
+%Union[datetime.datetime,builtins.int]&
+datetime.datetime"datetime.datetime
+builtins.int"builtins.int*§
+_validate_window_param8pyspark.streaming.dstream.DStream._validate_window_param"
+None* 
+selfø
+Apyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T_co]W
+pyspark.streaming.dstream.T_co"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*(
+window
+builtins.int"builtins.int*O
+slideD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*»
+window(pyspark.streaming.dstream.DStream.window"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream* 
+selfø
+Apyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T_co]W
+pyspark.streaming.dstream.T_co"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*0
+windowDuration
+builtins.int"builtins.int*Y
+slideDurationD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *¢
+reduceByWindow0pyspark.streaming.dstream.DStream.reduceByWindow"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*[
+
+reduceFuncK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ö
+invReduceFuncÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*0
+windowDuration
+builtins.int"builtins.int*/
+slideDuration
+builtins.int"builtins.int*ﬁ
+countByWindow/pyspark.streaming.dstream.DStream.countByWindow"r
+/pyspark.streaming.dstream.DStream[builtins.int]
+builtins.int"builtins.int"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*0
+windowDuration
+builtins.int"builtins.int*/
+slideDuration
+builtins.int"builtins.int*˘
+countByValueAndWindow7pyspark.streaming.dstream.DStream.countByValueAndWindow"°
+Rpyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.T,builtins.int]]ß
+/Tuple[pyspark.streaming.dstream.T,builtins.int]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object
+builtins.int"builtins.int"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*0
+windowDuration
+builtins.int"builtins.int*/
+slideDuration
+builtins.int"builtins.int*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ì
+groupByKeyAndWindow5pyspark.streaming.dstream.DStream.groupByKeyAndWindow"€
+rpyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,typing.Iterable[pyspark.streaming.dstream.V]]]¡
+OTuple[pyspark.streaming.dstream.K,typing.Iterable[pyspark.streaming.dstream.V]]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.Hashableï
+,typing.Iterable[pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"typing.Iterable"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*0
+windowDuration
+builtins.int"builtins.int*/
+slideDuration
+builtins.int"builtins.int*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ø
+reduceByKeyAndWindow6pyspark.streaming.dstream.DStream.reduceByKeyAndWindow"˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*î
+invFuncÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*0
+windowDuration
+builtins.int"builtins.int*Y
+slideDurationD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ô
+
+filterFuncÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *˘
+updateStateByKey2pyspark.streaming.dstream.DStream.updateStateByKey"˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.S]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.S]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.S"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*Ç
+self˜
+apyspark.streaming.dstream.DStream[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*[
+
+updateFuncK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Y
+numPartitionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *˘
+
+initialRDDÊ
+´Union[pyspark.rdd.RDD[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.S]],typing.Iterable[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.S]],None]”
+Opyspark.rdd.RDD[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.S]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.S]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.S"
+builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD”
+Otyping.Iterable[Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.S]]Ó
+>Tuple[pyspark.streaming.dstream.K,pyspark.streaming.dstream.S]T
+pyspark.streaming.dstream.K"
+typing.Hashable"typing.Hashable"typing.HashableT
+pyspark.streaming.dstream.S"
+builtins.object"builtins.object"builtins.object"typing.Iterable
+None 2†
+
+foreachRDD,pyspark.streaming.dstream.DStream.foreachRDD
+
+foreachRDD,pyspark.streaming.dstream.DStream.foreachRDD"
+None*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:overloadX
+
+foreachRDD,pyspark.streaming.dstream.DStream.foreachRDD"
+None*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:overloadX2™	
+	transform+pyspark.streaming.dstream.DStream.transform∂
+	transform+pyspark.streaming.dstream.DStream.transform"œ
+Ipyspark.streaming.dstream.TransformedDStream[pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object",pyspark.streaming.dstream.TransformedDStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:overloadX∂
+	transform+pyspark.streaming.dstream.DStream.transform"œ
+Ipyspark.streaming.dstream.TransformedDStream[pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object",pyspark.streaming.dstream.TransformedDStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:overloadX2í
+transformWith/pyspark.streaming.dstream.DStream.transformWith¶
+transformWith/pyspark.streaming.dstream.DStream.transformWith"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*≈
+otherπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*4
+keepSerializer
+builtins.bool"builtins.bool 0:overloadX¶
+transformWith/pyspark.streaming.dstream.DStream.transformWith"π
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.V]T
+pyspark.streaming.dstream.V"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*ƒ
+selfπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.T]T
+pyspark.streaming.dstream.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*≈
+otherπ
+>pyspark.streaming.dstream.DStream[pyspark.streaming.dstream.U]T
+pyspark.streaming.dstream.U"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*4
+keepSerializer
+builtins.bool"builtins.bool 0:overloadXPrA
+	_jdstream+pyspark.streaming.dstream.DStream._jdstream
+Anyrà
+_ssc&pyspark.streaming.dstream.DStream._sscX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContextrj
+_sc%pyspark.streaming.dstream.DStream._sc<
+pyspark.context.SparkContext"pyspark.context.SparkContextrå
+_jrdd_deserializer4pyspark.streaming.dstream.DStream._jrdd_deserializer@
+pyspark.serializers.Serializer"pyspark.serializers.SerializerrX
+	is_cached+pyspark.streaming.dstream.DStream.is_cached
+builtins.bool"builtins.boolrd
+is_checkpointed1pyspark.streaming.dstream.DStream.is_checkpointed
+builtins.bool"builtins.boolæ
+StreamingListener,pyspark.streaming.listener.StreamingListener"builtins.object*≥
+__init__5pyspark.streaming.listener.StreamingListener.__init__"
+None*f
+self\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListener*Ê
+onStreamingStarted?pyspark.streaming.listener.StreamingListener.onStreamingStarted"
+None*f
+self\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListener*
+streamingStarted
+Any*„
+onReceiverStarted>pyspark.streaming.listener.StreamingListener.onReceiverStarted"
+None*f
+self\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListener*
+receiverStarted
+Any*›
+onReceiverError<pyspark.streaming.listener.StreamingListener.onReceiverError"
+None*f
+self\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListener*
+receiverError
+Any*„
+onReceiverStopped>pyspark.streaming.listener.StreamingListener.onReceiverStopped"
+None*f
+self\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListener*
+receiverStopped
+Any*‡
+onBatchSubmitted=pyspark.streaming.listener.StreamingListener.onBatchSubmitted"
+None*f
+self\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListener*
+batchSubmitted
+Any*‹
+onBatchStarted;pyspark.streaming.listener.StreamingListener.onBatchStarted"
+None*f
+self\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListener*
+batchSubmitted
+Any*‡
+onBatchCompleted=pyspark.streaming.listener.StreamingListener.onBatchCompleted"
+None*f
+self\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListener*
+batchCompleted
+Any*¯
+onOutputOperationStartedEpyspark.streaming.listener.StreamingListener.onOutputOperationStarted"
+None*f
+self\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListener*#
+outputOperationStarted
+Any*˛
+onOutputOperationCompletedGpyspark.streaming.listener.StreamingListener.onOutputOperationCompleted"
+None*f
+self\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListener*%
+outputOperationCompleted
+Any*r
+__path__pyspark.streaming.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ç
+__annotations__!pyspark.streaming.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*p
+__all__pyspark.streaming.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

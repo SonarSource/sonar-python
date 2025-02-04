@@ -1,0 +1,692 @@
+
+pyspark.sql.connect.catalog≠c
+PySparkCatalogpyspark.sql.catalog.Catalog"builtins.object*ÿ
+__init__$pyspark.sql.catalog.Catalog.__init__"
+None*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*V
+sparkSessionD
+ pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*†
+currentCatalog*pyspark.sql.catalog.Catalog.currentCatalog"
+builtins.str"builtins.str*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*¡
+setCurrentCatalog-pyspark.sql.catalog.Catalog.setCurrentCatalog"
+None*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*-
+catalogName
+builtins.str"builtins.str*ß
+listCatalogs(pyspark.sql.catalog.Catalog.listCatalogs"—
+Fbuiltins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None]]]]˜
+7TypeAlias[Tuple[builtins.str,Union[builtins.str,None]]]î
+,Tuple[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"#pyspark.sql.catalog.CatalogMetadata"builtins.list*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*S
+patternD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *¢
+currentDatabase+pyspark.sql.catalog.Catalog.currentDatabase"
+builtins.str"builtins.str*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*æ
+setCurrentDatabase.pyspark.sql.catalog.Catalog.setCurrentDatabase"
+None*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*(
+dbName
+builtins.str"builtins.str*¯
+listDatabases)pyspark.sql.catalog.Catalog.listDatabases"†
+lbuiltins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,None],builtins.str]]]†
+]TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,None],builtins.str]]û
+RTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,None],builtins.str]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str"pyspark.sql.catalog.Database"builtins.list*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*S
+patternD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *…
+getDatabase'pyspark.sql.catalog.Catalog.getDatabase"†
+]TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,None],builtins.str]]û
+RTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,None],builtins.str]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str"pyspark.sql.catalog.Database*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*(
+dbName
+builtins.str"builtins.str*Ã
+databaseExists*pyspark.sql.catalog.Catalog.databaseExists"
+builtins.bool"builtins.bool*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*(
+dbName
+builtins.str"builtins.str*å	
+
+listTables&pyspark.sql.catalog.Catalog.listTables"Ê
+¢builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]]Ø
+ìTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]˘
+àTuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str
+builtins.bool"builtins.bool"pyspark.sql.catalog.Table"builtins.list*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*R
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+patternD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *’
+getTable$pyspark.sql.catalog.Catalog.getTable"Ø
+ìTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]˘
+àTuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str
+builtins.bool"builtins.bool"pyspark.sql.catalog.Table*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*ï	
+listFunctions)pyspark.sql.catalog.Catalog.listFunctions"È
+¢builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]]≤
+ìTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]˘
+àTuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str
+builtins.bool"builtins.bool"pyspark.sql.catalog.Function"builtins.list*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*R
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+patternD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *¶
+functionExists*pyspark.sql.catalog.Catalog.functionExists"
+builtins.bool"builtins.bool*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*.
+functionName
+builtins.str"builtins.str*R
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *·
+getFunction'pyspark.sql.catalog.Catalog.getFunction"≤
+ìTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]˘
+àTuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str
+builtins.bool"builtins.bool"pyspark.sql.catalog.Function*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*.
+functionName
+builtins.str"builtins.str*Î
+listColumns'pyspark.sql.catalog.Catalog.listColumns"Î
+}builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.bool,builtins.bool,builtins.bool]]]⁄
+nTypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.bool,builtins.bool,builtins.bool]]…
+cTuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.bool,builtins.bool,builtins.bool]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str
+builtins.bool"builtins.bool
+builtins.bool"builtins.bool
+builtins.bool"builtins.bool"pyspark.sql.catalog.Column"builtins.list*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*R
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ù
+tableExists'pyspark.sql.catalog.Catalog.tableExists"
+builtins.bool"builtins.bool*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*R
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *”
+createExternalTable/pyspark.sql.catalog.Catalog.createExternalTable"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+sourceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ç
+schemat
+(Union[pyspark.sql.types.StructType,None]<
+pyspark.sql.types.StructType"pyspark.sql.types.StructType
+None *)
+options
+builtins.str"builtins.str*ú
+createTable'pyspark.sql.catalog.Catalog.createTable"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+sourceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ç
+schemat
+(Union[pyspark.sql.types.StructType,None]<
+pyspark.sql.types.StructType"pyspark.sql.types.StructType
+None *W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *)
+options
+builtins.str"builtins.str* 
+dropTempView(pyspark.sql.catalog.Catalog.dropTempView"
+builtins.bool"builtins.bool*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog**
+viewName
+builtins.str"builtins.str*÷
+dropGlobalTempView.pyspark.sql.catalog.Catalog.dropGlobalTempView"
+builtins.bool"builtins.bool*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog**
+viewName
+builtins.str"builtins.str*·
+registerFunction,pyspark.sql.catalog.Catalog.registerFunction"Z
++pyspark.sql._typing.UserDefinedFunctionLike"+pyspark.sql._typing.UserDefinedFunctionLike*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*&
+name
+builtins.str"builtins.str*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Ä
+
+returnTypen
+&Union[pyspark.sql.types.DataType,None]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+None *√
+isCached$pyspark.sql.catalog.Catalog.isCached"
+builtins.bool"builtins.bool*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*Ã
+
+cacheTable&pyspark.sql.catalog.Catalog.cacheTable"
+None*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*ò
+storageLevelÉ
+-Union[pyspark.storagelevel.StorageLevel,None]F
+!pyspark.storagelevel.StorageLevel"!pyspark.storagelevel.StorageLevel
+None *µ
+uncacheTable(pyspark.sql.catalog.Catalog.uncacheTable"
+None*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*Ñ
+
+clearCache&pyspark.sql.catalog.Catalog.clearCache"
+None*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*µ
+refreshTable(pyspark.sql.catalog.Catalog.refreshTable"
+None*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*ø
+recoverPartitions-pyspark.sql.catalog.Catalog.recoverPartitions"
+None*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*≤
+refreshByPath)pyspark.sql.catalog.Catalog.refreshByPath"
+None*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalog*&
+path
+builtins.str"builtins.str*|
+_reset"pyspark.sql.catalog.Catalog._reset"
+None*D
+self:
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.CatalogrÄ
+_sparkSession)pyspark.sql.catalog.Catalog._sparkSessionD
+ pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSessionrE
+_jsparkSession*pyspark.sql.catalog.Catalog._jsparkSession
+Anyrd
+_scpyspark.sql.catalog.Catalog._sc<
+pyspark.context.SparkContext"pyspark.context.SparkContextr;
+	_jcatalog%pyspark.sql.catalog.Catalog._jcatalog
+Any¶i
+Catalog#pyspark.sql.connect.catalog.Catalog"builtins.object*Ä
+__init__,pyspark.sql.connect.catalog.Catalog.__init__"
+None*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*f
+sparkSessionT
+(pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession*π
+_execute_and_fetch6pyspark.sql.connect.catalog.Catalog._execute_and_fetch":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*Y
+catalogL
+$pyspark.sql.connect.plan.LogicalPlan"$pyspark.sql.connect.plan.LogicalPlan*∏
+currentCatalog2pyspark.sql.connect.catalog.Catalog.currentCatalog"
+builtins.str"builtins.str*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*Ÿ
+setCurrentCatalog5pyspark.sql.connect.catalog.Catalog.setCurrentCatalog"
+None*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*-
+catalogName
+builtins.str"builtins.str*ø
+listCatalogs0pyspark.sql.connect.catalog.Catalog.listCatalogs"—
+Fbuiltins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None]]]]˜
+7TypeAlias[Tuple[builtins.str,Union[builtins.str,None]]]î
+,Tuple[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"#pyspark.sql.catalog.CatalogMetadata"builtins.list*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*S
+patternD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *∫
+currentDatabase3pyspark.sql.connect.catalog.Catalog.currentDatabase"
+builtins.str"builtins.str*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*÷
+setCurrentDatabase6pyspark.sql.connect.catalog.Catalog.setCurrentDatabase"
+None*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*(
+dbName
+builtins.str"builtins.str*ê
+listDatabases1pyspark.sql.connect.catalog.Catalog.listDatabases"†
+lbuiltins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,None],builtins.str]]]†
+]TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,None],builtins.str]]û
+RTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,None],builtins.str]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str"pyspark.sql.catalog.Database"builtins.list*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*S
+patternD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *·
+getDatabase/pyspark.sql.connect.catalog.Catalog.getDatabase"†
+]TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,None],builtins.str]]û
+RTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,None],builtins.str]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str"pyspark.sql.catalog.Database*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*(
+dbName
+builtins.str"builtins.str*‰
+databaseExists2pyspark.sql.connect.catalog.Catalog.databaseExists"
+builtins.bool"builtins.bool*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*(
+dbName
+builtins.str"builtins.str*§	
+
+listTables.pyspark.sql.connect.catalog.Catalog.listTables"Ê
+¢builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]]Ø
+ìTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]˘
+àTuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str
+builtins.bool"builtins.bool"pyspark.sql.catalog.Table"builtins.list*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*R
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+patternD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ì
+getTable,pyspark.sql.connect.catalog.Catalog.getTable"Ø
+ìTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]˘
+àTuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str
+builtins.bool"builtins.bool"pyspark.sql.catalog.Table*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*≠	
+listFunctions1pyspark.sql.connect.catalog.Catalog.listFunctions"È
+¢builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]]≤
+ìTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]˘
+àTuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str
+builtins.bool"builtins.bool"pyspark.sql.catalog.Function"builtins.list*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*R
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+patternD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *æ
+functionExists2pyspark.sql.connect.catalog.Catalog.functionExists"
+builtins.bool"builtins.bool*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*.
+functionName
+builtins.str"builtins.str*R
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *˘
+getFunction/pyspark.sql.connect.catalog.Catalog.getFunction"≤
+ìTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]]˘
+àTuple[builtins.str,Union[builtins.str,None],Union[builtins.list[builtins.str],None],Union[builtins.str,None],builtins.str,builtins.bool]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str
+builtins.bool"builtins.bool"pyspark.sql.catalog.Function*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*.
+functionName
+builtins.str"builtins.str*É
+listColumns/pyspark.sql.connect.catalog.Catalog.listColumns"Î
+}builtins.list[TypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.bool,builtins.bool,builtins.bool]]]⁄
+nTypeAlias[Tuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.bool,builtins.bool,builtins.bool]]…
+cTuple[builtins.str,Union[builtins.str,None],builtins.str,builtins.bool,builtins.bool,builtins.bool]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str
+builtins.bool"builtins.bool
+builtins.bool"builtins.bool
+builtins.bool"builtins.bool"pyspark.sql.catalog.Column"builtins.list*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*R
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *µ
+tableExists/pyspark.sql.connect.catalog.Catalog.tableExists"
+builtins.bool"builtins.bool*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*R
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *˚
+createExternalTable7pyspark.sql.connect.catalog.Catalog.createExternalTable"R
+'pyspark.sql.connect.dataframe.DataFrame"'pyspark.sql.connect.dataframe.DataFrame*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+sourceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ç
+schemat
+(Union[pyspark.sql.types.StructType,None]<
+pyspark.sql.types.StructType"pyspark.sql.types.StructType
+None *)
+options
+builtins.str"builtins.str*ƒ
+createTable/pyspark.sql.connect.catalog.Catalog.createTable"R
+'pyspark.sql.connect.dataframe.DataFrame"'pyspark.sql.connect.dataframe.DataFrame*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+sourceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ç
+schemat
+(Union[pyspark.sql.types.StructType,None]<
+pyspark.sql.types.StructType"pyspark.sql.types.StructType
+None *W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *)
+options
+builtins.str"builtins.str*‚
+dropTempView0pyspark.sql.connect.catalog.Catalog.dropTempView"
+builtins.bool"builtins.bool*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog**
+viewName
+builtins.str"builtins.str*Ó
+dropGlobalTempView6pyspark.sql.connect.catalog.Catalog.dropGlobalTempView"
+builtins.bool"builtins.bool*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog**
+viewName
+builtins.str"builtins.str*€
+isCached,pyspark.sql.connect.catalog.Catalog.isCached"
+builtins.bool"builtins.bool*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*‰
+
+cacheTable.pyspark.sql.connect.catalog.Catalog.cacheTable"
+None*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*ò
+storageLevelÉ
+-Union[pyspark.storagelevel.StorageLevel,None]F
+!pyspark.storagelevel.StorageLevel"!pyspark.storagelevel.StorageLevel
+None *Õ
+uncacheTable0pyspark.sql.connect.catalog.Catalog.uncacheTable"
+None*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*ú
+
+clearCache.pyspark.sql.connect.catalog.Catalog.clearCache"
+None*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*Õ
+refreshTable0pyspark.sql.connect.catalog.Catalog.refreshTable"
+None*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str*◊
+recoverPartitions5pyspark.sql.connect.catalog.Catalog.recoverPartitions"
+None*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*+
+	tableName
+builtins.str"builtins.str* 
+refreshByPath1pyspark.sql.connect.catalog.Catalog.refreshByPath"
+None*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*&
+path
+builtins.str"builtins.str*µ
+registerFunction4pyspark.sql.connect.catalog.Catalog.registerFunction"j
+3pyspark.sql.connect._typing.UserDefinedFunctionLike"3pyspark.sql.connect._typing.UserDefinedFunctionLike*T
+selfJ
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalog*&
+name
+builtins.str"builtins.str*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*¨
+
+returnTypeô
+3Union[pyspark.sql.types.DataType,builtins.str,None]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str
+None rò
+_sparkSession1pyspark.sql.connect.catalog.Catalog._sparkSessionT
+(pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession4
+_test!pyspark.sql.connect.catalog._test"
+None*ó
+__annotations__+pyspark.sql.connect.catalog.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+pdpandas 

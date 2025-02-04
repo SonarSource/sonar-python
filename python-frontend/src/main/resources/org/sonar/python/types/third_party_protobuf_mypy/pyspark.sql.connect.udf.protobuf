@@ -1,0 +1,196 @@
+
+pyspark.sql.connect.udfŸ
+PySparkUDFRegistrationpyspark.sql.udf.UDFRegistration"builtins.object*ä
+__init__(pyspark.sql.udf.UDFRegistration.__init__"
+None*L
+selfB
+pyspark.sql.udf.UDFRegistration"pyspark.sql.udf.UDFRegistration*V
+sparkSessionD
+ pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*¿
+register(pyspark.sql.udf.UDFRegistration.register"Z
++pyspark.sql._typing.UserDefinedFunctionLike"+pyspark.sql._typing.UserDefinedFunctionLike*L
+selfB
+pyspark.sql.udf.UDFRegistration"pyspark.sql.udf.UDFRegistration*&
+name
+builtins.str"builtins.str*‡
+fÿ
+RUnion[CallableType[builtins.function],pyspark.sql._typing.UserDefinedFunctionLike]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionZ
++pyspark.sql._typing.UserDefinedFunctionLike"+pyspark.sql._typing.UserDefinedFunctionLike*¬
+
+returnType™
+3Union[pyspark.sql.types.DataType,builtins.str,None]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str
+None *¬
+registerJavaFunction4pyspark.sql.udf.UDFRegistration.registerJavaFunction"
+None*L
+selfB
+pyspark.sql.udf.UDFRegistration"pyspark.sql.udf.UDFRegistration*&
+name
+builtins.str"builtins.str*/
+javaClassName
+builtins.str"builtins.str*¬
+
+returnType™
+3Union[pyspark.sql.types.DataType,builtins.str,None]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str
+None *õ
+registerJavaUDAF0pyspark.sql.udf.UDFRegistration.registerJavaUDAF"
+None*L
+selfB
+pyspark.sql.udf.UDFRegistration"pyspark.sql.udf.UDFRegistration*&
+name
+builtins.str"builtins.str*/
+javaClassName
+builtins.str"builtins.strr‚
+sparkSession,pyspark.sql.udf.UDFRegistration.sparkSessionD
+ pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession›
+UserDefinedFunction+pyspark.sql.connect.udf.UserDefinedFunction"builtins.object*Ê
+__init__4pyspark.sql.connect.udf.UserDefinedFunction.__init__"
+None*d
+selfZ
++pyspark.sql.connect.udf.UserDefinedFunction"+pyspark.sql.connect.udf.UserDefinedFunction*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*‹
+
+returnTypeø
+9TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]]Š
+.Union[pyspark.sql.types.DataType,builtins.str]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str",pyspark.sql.connect._typing.DataTypeOrString *P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *,
+evalType
+builtins.int"builtins.int *3
+deterministic
+builtins.bool"builtins.bool *
+*_build_common_inline_user_defined_functionVpyspark.sql.connect.udf.UserDefinedFunction._build_common_inline_user_defined_function"‚
+?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction*d
+selfZ
++pyspark.sql.connect.udf.UserDefinedFunction"+pyspark.sql.connect.udf.UserDefinedFunction*›
+cols
+@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]Ÿ
+5Union[pyspark.sql.connect.column.Column,builtins.str]F
+!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
+builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName*Œ
+__call__4pyspark.sql.connect.udf.UserDefinedFunction.__call__"F
+!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column*d
+selfZ
++pyspark.sql.connect.udf.UserDefinedFunction"+pyspark.sql.connect.udf.UserDefinedFunction*›
+cols
+@TypeAlias[Union[pyspark.sql.connect.column.Column,builtins.str]]Ÿ
+5Union[pyspark.sql.connect.column.Column,builtins.str]F
+!pyspark.sql.connect.column.Column"!pyspark.sql.connect.column.Column
+builtins.str"builtins.str"(pyspark.sql.connect._typing.ColumnOrName*’
+_wrapped4pyspark.sql.connect.udf.UserDefinedFunction._wrapped"j
+3pyspark.sql.connect._typing.UserDefinedFunctionLike"3pyspark.sql.connect._typing.UserDefinedFunctionLike*d
+selfZ
++pyspark.sql.connect.udf.UserDefinedFunction"+pyspark.sql.connect.udf.UserDefinedFunction*–
+asNondeterministic>pyspark.sql.connect.udf.UserDefinedFunction.asNondeterministic"Z
++pyspark.sql.connect.udf.UserDefinedFunction"+pyspark.sql.connect.udf.UserDefinedFunction*d
+selfZ
++pyspark.sql.connect.udf.UserDefinedFunction"+pyspark.sql.connect.udf.UserDefinedFunctionr…
+func0pyspark.sql.connect.udf.UserDefinedFunction.funcK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr~
+
+returnType6pyspark.sql.connect.udf.UserDefinedFunction.returnType8
+pyspark.sql.types.DataType"pyspark.sql.types.DataTyperX
+_name1pyspark.sql.connect.udf.UserDefinedFunction._name
+builtins.str"builtins.strr^
+evalType4pyspark.sql.connect.udf.UserDefinedFunction.evalType
+builtins.int"builtins.intrj
+deterministic9pyspark.sql.connect.udf.UserDefinedFunction.deterministic
+builtins.bool"builtins.boolÐ
+UDFRegistration'pyspark.sql.connect.udf.UDFRegistration"builtins.object*Œ
+__init__0pyspark.sql.connect.udf.UDFRegistration.__init__"
+None*\
+selfR
+'pyspark.sql.connect.udf.UDFRegistration"'pyspark.sql.connect.udf.UDFRegistration*f
+sparkSessionT
+(pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession*ÿ
+register0pyspark.sql.connect.udf.UDFRegistration.register"j
+3pyspark.sql.connect._typing.UserDefinedFunctionLike"3pyspark.sql.connect._typing.UserDefinedFunctionLike*\
+selfR
+'pyspark.sql.connect.udf.UDFRegistration"'pyspark.sql.connect.udf.UDFRegistration*&
+name
+builtins.str"builtins.str*Ÿ
+f—
+ZUnion[CallableType[builtins.function],pyspark.sql.connect._typing.UserDefinedFunctionLike]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionj
+3pyspark.sql.connect._typing.UserDefinedFunctionLike"3pyspark.sql.connect._typing.UserDefinedFunctionLike*¬
+
+returnType™
+3Union[pyspark.sql.types.DataType,builtins.str,None]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str
+None *Ä
+registerJavaFunction<pyspark.sql.connect.udf.UDFRegistration.registerJavaFunction"
+None*\
+selfR
+'pyspark.sql.connect.udf.UDFRegistration"'pyspark.sql.connect.udf.UDFRegistration*&
+name
+builtins.str"builtins.str*/
+javaClassName
+builtins.str"builtins.str*¬
+
+returnType™
+3Union[pyspark.sql.types.DataType,builtins.str,None]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str
+None *
+registerJavaUDAF8pyspark.sql.connect.udf.UDFRegistration.registerJavaUDAF"
+None*\
+selfR
+'pyspark.sql.connect.udf.UDFRegistration"'pyspark.sql.connect.udf.UDFRegistration*&
+name
+builtins.str"builtins.str*/
+javaClassName
+builtins.str"builtins.strrš
+sparkSession4pyspark.sql.connect.udf.UDFRegistration.sparkSessionT
+(pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSessionÝ
+_create_py_udf&pyspark.sql.connect.udf._create_py_udf"j
+3pyspark.sql.connect._typing.UserDefinedFunctionLike"3pyspark.sql.connect._typing.UserDefinedFunctionLike*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*‰
+
+returnTypeø
+9TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]]Š
+.Union[pyspark.sql.types.DataType,builtins.str]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str",pyspark.sql.connect._typing.DataTypeOrString*W
+useArrowG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None ±
+_create_udf#pyspark.sql.connect.udf._create_udf"j
+3pyspark.sql.connect._typing.UserDefinedFunctionLike"3pyspark.sql.connect._typing.UserDefinedFunctionLike*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*‰
+
+returnTypeø
+9TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]]Š
+.Union[pyspark.sql.types.DataType,builtins.str]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str",pyspark.sql.connect._typing.DataTypeOrString**
+evalType
+builtins.int"builtins.int*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *3
+deterministic
+builtins.bool"builtins.bool *“
+__annotations__'pyspark.sql.connect.udf.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

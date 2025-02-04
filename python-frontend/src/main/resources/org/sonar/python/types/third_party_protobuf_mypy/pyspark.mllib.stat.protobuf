@@ -1,0 +1,248 @@
+
+pyspark.mllib.stat¸
+
+Statistics)pyspark.mllib.stat._statistics.Statistics"builtins.object*×
+colStats2pyspark.mllib.stat._statistics.Statistics.colStats"~
+=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary"=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary*„
+rdd{
+,pyspark.rdd.RDD[pyspark.mllib.linalg.Vector]:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector"pyspark.rdd.RDD0:staticmethodh*Ž
+kolmogorovSmirnovTest?pyspark.mllib.stat._statistics.Statistics.kolmogorovSmirnovTest"j
+3pyspark.mllib.stat.test.KolmogorovSmirnovTestResult"3pyspark.mllib.stat.test.KolmogorovSmirnovTestResult*^
+dataT
+pyspark.rdd.RDD[builtins.float] 
+builtins.float"builtins.float"pyspark.rdd.RDD*§
+distName–
+ TypeAlias[Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str"7pyspark.mllib._typing.KolmogorovSmirnovTestDistNameType *,
+params 
+builtins.float"builtins.float0:staticmethodh2“
+corr.pyspark.mllib.stat._statistics.Statistics.corrÞ
+corr.pyspark.mllib.stat._statistics.Statistics.corr":
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix*‚
+x{
+,pyspark.rdd.RDD[pyspark.mllib.linalg.Vector]:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector"pyspark.rdd.RDD*Æ
+method·
+7Union[Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None 0:overload:staticmethodXhù
+corr.pyspark.mllib.stat._statistics.Statistics.corr" 
+builtins.float"builtins.float*[
+xT
+pyspark.rdd.RDD[builtins.float] 
+builtins.float"builtins.float"pyspark.rdd.RDD*[
+yT
+pyspark.rdd.RDD[builtins.float] 
+builtins.float"builtins.float"pyspark.rdd.RDD*Æ
+method·
+7Union[Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None 0:overload:staticmethodXh2ì
+	chiSqTest3pyspark.mllib.stat._statistics.Statistics.chiSqTestü
+	chiSqTest3pyspark.mllib.stat._statistics.Statistics.chiSqTest"R
+'pyspark.mllib.stat.test.ChiSqTestResult"'pyspark.mllib.stat.test.ChiSqTestResult*H
+observed:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix0:overload:staticmethodXh€
+	chiSqTest3pyspark.mllib.stat._statistics.Statistics.chiSqTest"R
+'pyspark.mllib.stat.test.ChiSqTestResult"'pyspark.mllib.stat.test.ChiSqTestResult*H
+observed:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector*
+expectedq
+'Union[pyspark.mllib.linalg.Vector,None]:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector
+None 0:overload:staticmethodXh§
+	chiSqTest3pyspark.mllib.stat._statistics.Statistics.chiSqTest"›
+6builtins.list[pyspark.mllib.stat.test.ChiSqTestResult]R
+'pyspark.mllib.stat.test.ChiSqTestResult"'pyspark.mllib.stat.test.ChiSqTestResult"builtins.list*¨
+observed™
+6pyspark.rdd.RDD[pyspark.mllib.regression.LabeledPoint]N
+%pyspark.mllib.regression.LabeledPoint"%pyspark.mllib.regression.LabeledPoint"pyspark.rdd.RDD0:overload:staticmethodXh
+MultivariateStatisticalSummary=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary"%pyspark.mllib.common.JavaModelWrapper*
+meanBpyspark.mllib.stat._statistics.MultivariateStatisticalSummary.mean"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*ˆ
+self~
+=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary"=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary*˜
+varianceFpyspark.mllib.stat._statistics.MultivariateStatisticalSummary.variance"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*ˆ
+self~
+=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary"=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary*õ
+countCpyspark.mllib.stat._statistics.MultivariateStatisticalSummary.count"
+builtins.int"builtins.int*ˆ
+self~
+=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary"=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary*ž
+numNonzerosIpyspark.mllib.stat._statistics.MultivariateStatisticalSummary.numNonzeros"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*ˆ
+self~
+=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary"=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary*Ž
+maxApyspark.mllib.stat._statistics.MultivariateStatisticalSummary.max"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*ˆ
+self~
+=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary"=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary*Ž
+minApyspark.mllib.stat._statistics.MultivariateStatisticalSummary.min"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*ˆ
+self~
+=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary"=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary*”
+normL1Dpyspark.mllib.stat._statistics.MultivariateStatisticalSummary.normL1"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*ˆ
+self~
+=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary"=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary*”
+normL2Dpyspark.mllib.stat._statistics.MultivariateStatisticalSummary.normL2"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*ˆ
+self~
+=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary"=pyspark.mllib.stat._statistics.MultivariateStatisticalSummary´ 
+MultivariateGaussian4pyspark.mllib.stat.distribution.MultivariateGaussian"builtins.tuple*Ü
+_replace=pyspark.mllib.stat.distribution.MultivariateGaussian._replace"ù
+8pyspark.mllib.stat.distribution.MultivariateGaussian._NTº
+>Tuple[pyspark.mllib.linalg.Vector,pyspark.mllib.linalg.Matrix]:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix*…
+_selfù
+8pyspark.mllib.stat.distribution.MultivariateGaussian._NTº
+>Tuple[pyspark.mllib.linalg.Vector,pyspark.mllib.linalg.Matrix]:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix*D
+mu:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector *G
+sigma:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix * 
+__new__<pyspark.mllib.stat.distribution.MultivariateGaussian.__new__"ù
+8pyspark.mllib.stat.distribution.MultivariateGaussian._NTº
+>Tuple[pyspark.mllib.linalg.Vector,pyspark.mllib.linalg.Matrix]:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix*Ï
+_clsÄ
+>Type[pyspark.mllib.stat.distribution.MultivariateGaussian._NT]ù
+8pyspark.mllib.stat.distribution.MultivariateGaussian._NTº
+>Tuple[pyspark.mllib.linalg.Vector,pyspark.mllib.linalg.Matrix]:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix"type*B
+mu:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector*E
+sigma:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix*¨
+_asdict<pyspark.mllib.stat.distribution.MultivariateGaussian._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*…
+_selfù
+8pyspark.mllib.stat.distribution.MultivariateGaussian._NTº
+>Tuple[pyspark.mllib.linalg.Vector,pyspark.mllib.linalg.Matrix]:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix*Š
+_make:pyspark.mllib.stat.distribution.MultivariateGaussian._make"ù
+8pyspark.mllib.stat.distribution.MultivariateGaussian._NTº
+>Tuple[pyspark.mllib.linalg.Vector,pyspark.mllib.linalg.Matrix]:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix*Ï
+_clsÄ
+>Type[pyspark.mllib.stat.distribution.MultivariateGaussian._NT]ù
+8pyspark.mllib.stat.distribution.MultivariateGaussian._NTº
+>Tuple[pyspark.mllib.linalg.Vector,pyspark.mllib.linalg.Matrix]:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vector:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrix"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodpry
+mu7pyspark.mllib.stat.distribution.MultivariateGaussian.mu:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vectorr
+sigma:pyspark.mllib.stat.distribution.MultivariateGaussian.sigma:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrixry
+mu7pyspark.mllib.stat.distribution.MultivariateGaussian.mu:
+pyspark.mllib.linalg.Vector"pyspark.mllib.linalg.Vectorr
+sigma:pyspark.mllib.stat.distribution.MultivariateGaussian.sigma:
+pyspark.mllib.linalg.Matrix"pyspark.mllib.linalg.Matrixr©
+_fields<pyspark.mllib.stat.distribution.MultivariateGaussian._fields`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strrª
+_field_typesApyspark.mllib.stat.distribution.MultivariateGaussian._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr°
+_field_defaultsDpyspark.mllib.stat.distribution.MultivariateGaussian._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictre
+_source<pyspark.mllib.stat.distribution.MultivariateGaussian._source
+builtins.str"builtins.strr°
+__annotations__Dpyspark.mllib.stat.distribution.MultivariateGaussian.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict¥
+ChiSqTestResult'pyspark.mllib.stat.test.ChiSqTestResult""pyspark.mllib.stat.test.TestResult*Â
+method.pyspark.mllib.stat.test.ChiSqTestResult.method"
+builtins.str"builtins.str*\
+selfR
+'pyspark.mllib.stat.test.ChiSqTestResult"'pyspark.mllib.stat.test.ChiSqTestResult0:property`8x
+KolmogorovSmirnovTestResult3pyspark.mllib.stat.test.KolmogorovSmirnovTestResult""pyspark.mllib.stat.test.TestResult8±
+KernelDensity.pyspark.mllib.stat.KernelDensity.KernelDensity"builtins.object*¹
+__init__7pyspark.mllib.stat.KernelDensity.KernelDensity.__init__"
+None*j
+self`
+.pyspark.mllib.stat.KernelDensity.KernelDensity".pyspark.mllib.stat.KernelDensity.KernelDensity*ò
+setBandwidth;pyspark.mllib.stat.KernelDensity.KernelDensity.setBandwidth"
+None*j
+self`
+.pyspark.mllib.stat.KernelDensity.KernelDensity".pyspark.mllib.stat.KernelDensity.KernelDensity*/
+	bandwidth 
+builtins.float"builtins.float*
+	setSample8pyspark.mllib.stat.KernelDensity.KernelDensity.setSample"
+None*j
+self`
+.pyspark.mllib.stat.KernelDensity.KernelDensity".pyspark.mllib.stat.KernelDensity.KernelDensity*`
+sampleT
+pyspark.rdd.RDD[builtins.float] 
+builtins.float"builtins.float"pyspark.rdd.RDD*Ì
+estimate7pyspark.mllib.stat.KernelDensity.KernelDensity.estimate"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*j
+self`
+.pyspark.mllib.stat.KernelDensity.KernelDensity".pyspark.mllib.stat.KernelDensity.KernelDensity*`
+pointsT
+typing.Iterable[builtins.float] 
+builtins.float"builtins.float"typing.Iterableri
+
+_bandwidth9pyspark.mllib.stat.KernelDensity.KernelDensity._bandwidth 
+builtins.float"builtins.floatrÓ
+_sample6pyspark.mllib.stat.KernelDensity.KernelDensity._sample
++Union[pyspark.rdd.RDD[builtins.float],None]T
+pyspark.rdd.RDD[builtins.float] 
+builtins.float"builtins.float"pyspark.rdd.RDD
+None*s
+__path__pyspark.mllib.stat.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*Ž
+__annotations__"pyspark.mllib.stat.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*q
+__all__pyspark.mllib.stat.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

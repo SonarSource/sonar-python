@@ -1,0 +1,709 @@
+
+logging.handlersı
+WatchedFileHandler#logging.handlers.WatchedFileHandler"logging.FileHandler*¿
+__init__,logging.handlers.WatchedFileHandler.__init__"
+None*T
+selfJ
+#logging.handlers.WatchedFileHandler"#logging.handlers.WatchedFileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+mode
+builtins.str"builtins.str *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *û
+_statstream/logging.handlers.WatchedFileHandler._statstream"
+None*T
+selfJ
+#logging.handlers.WatchedFileHandler"#logging.handlers.WatchedFileHandler*§
+reopenIfNeeded2logging.handlers.WatchedFileHandler.reopenIfNeeded"
+None*T
+selfJ
+#logging.handlers.WatchedFileHandler"#logging.handlers.WatchedFileHandlerrL
+dev'logging.handlers.WatchedFileHandler.dev
+builtins.int"builtins.intrL
+ino'logging.handlers.WatchedFileHandler.ino
+builtins.int"builtins.intˆ
+BaseRotatingHandler$logging.handlers.BaseRotatingHandler"logging.FileHandler*¡
+__init__-logging.handlers.BaseRotatingHandler.__init__"
+None*V
+selfL
+$logging.handlers.BaseRotatingHandler"$logging.handlers.BaseRotatingHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*&
+mode
+builtins.str"builtins.str*T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *Ò
+rotation_filename6logging.handlers.BaseRotatingHandler.rotation_filename"
+builtins.str"builtins.str*V
+selfL
+$logging.handlers.BaseRotatingHandler"$logging.handlers.BaseRotatingHandler*.
+default_name
+builtins.str"builtins.str*È
+rotate+logging.handlers.BaseRotatingHandler.rotate"
+None*V
+selfL
+$logging.handlers.BaseRotatingHandler"$logging.handlers.BaseRotatingHandler*(
+source
+builtins.str"builtins.str*&
+dest
+builtins.str"builtins.strrº
+namer*logging.handlers.BaseRotatingHandler.namerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner¿
+rotator,logging.handlers.BaseRotatingHandler.rotatorÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None“
+
+RotatingFileHandler$logging.handlers.RotatingFileHandler"$logging.handlers.BaseRotatingHandler*¢
+__init__-logging.handlers.RotatingFileHandler.__init__"
+None*V
+selfL
+$logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+mode
+builtins.str"builtins.str *,
+maxBytes
+builtins.int"builtins.int */
+backupCount
+builtins.int"builtins.int *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *ü
+
+doRollover/logging.handlers.RotatingFileHandler.doRollover"
+None*V
+selfL
+$logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandler*Ô
+shouldRollover3logging.handlers.RotatingFileHandler.shouldRollover"
+builtins.int"builtins.int*V
+selfL
+$logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandler*2
+record&
+logging.LogRecord"logging.LogRecordrW
+maxBytes-logging.handlers.RotatingFileHandler.maxBytes
+builtins.str"builtins.strr]
+backupCount0logging.handlers.RotatingFileHandler.backupCount
+builtins.int"builtins.intÁ
+TimedRotatingFileHandler)logging.handlers.TimedRotatingFileHandler"$logging.handlers.BaseRotatingHandler*≥
+__init__2logging.handlers.TimedRotatingFileHandler.__init__"
+None*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+when
+builtins.str"builtins.str *,
+interval
+builtins.int"builtins.int */
+backupCount
+builtins.int"builtins.int *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *)
+utc
+builtins.bool"builtins.bool *U
+atTimeG
+Union[datetime.time,None]
+datetime.time"datetime.time
+None *Æ
+
+doRollover4logging.handlers.TimedRotatingFileHandler.doRollover"
+None*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandler*˛
+shouldRollover8logging.handlers.TimedRotatingFileHandler.shouldRollover"
+builtins.int"builtins.int*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandler*2
+record&
+logging.LogRecord"logging.LogRecord*˚
+computeRollover9logging.handlers.TimedRotatingFileHandler.computeRollover"
+builtins.int"builtins.int*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandler*-
+currentTime
+builtins.int"builtins.int*¸
+getFilesToDelete:logging.handlers.TimedRotatingFileHandler.getFilesToDelete"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*`
+selfV
+)logging.handlers.TimedRotatingFileHandler")logging.handlers.TimedRotatingFileHandlerrT
+when.logging.handlers.TimedRotatingFileHandler.when
+builtins.str"builtins.strrb
+backupCount5logging.handlers.TimedRotatingFileHandler.backupCount
+builtins.int"builtins.intrT
+utc-logging.handlers.TimedRotatingFileHandler.utc
+builtins.bool"builtins.boolrÉ
+atTime0logging.handlers.TimedRotatingFileHandler.atTimeG
+Union[datetime.time,None]
+datetime.time"datetime.time
+Noner\
+interval2logging.handlers.TimedRotatingFileHandler.interval
+builtins.int"builtins.intrX
+suffix0logging.handlers.TimedRotatingFileHandler.suffix
+builtins.str"builtins.strr^
+	dayOfWeek3logging.handlers.TimedRotatingFileHandler.dayOfWeek
+builtins.int"builtins.intr`
+
+rolloverAt4logging.handlers.TimedRotatingFileHandler.rolloverAt
+builtins.int"builtins.intrÑ
+extMatch2logging.handlers.TimedRotatingFileHandler.extMatchD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.PatternÉ
+SocketHandlerlogging.handlers.SocketHandler"logging.Handler*Å
+__init__'logging.handlers.SocketHandler.__init__"
+None*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*&
+host
+builtins.str"builtins.str*N
+portD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*‘
+
+makeSocket)logging.handlers.SocketHandler.makeSocket"
+socket.socket"socket.socket*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*/
+timeout 
+builtins.float"builtins.float *Ÿ
+
+makePickle)logging.handlers.SocketHandler.makePickle" 
+builtins.bytes"builtins.bytes*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*2
+record&
+logging.LogRecord"logging.LogRecord*‚
+send#logging.handlers.SocketHandler.send"
+None*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandler*ﬁ
+s÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*ë
+createSocket+logging.handlers.SocketHandler.createSocket"
+None*J
+self@
+logging.handlers.SocketHandler"logging.handlers.SocketHandlerrI
+host#logging.handlers.SocketHandler.host
+builtins.str"builtins.strrq
+port#logging.handlers.SocketHandler.portD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerÏ
+address&logging.handlers.SocketHandler.address∏
+4Union[Tuple[builtins.str,builtins.int],builtins.str]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.str"builtins.strrt
+sock#logging.handlers.SocketHandler.sockG
+Union[socket.socket,None]
+socket.socket"socket.socket
+Noner[
+closeOnError+logging.handlers.SocketHandler.closeOnError
+builtins.bool"builtins.boolrÅ
+	retryTime(logging.handlers.SocketHandler.retryTimeJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+NonerY
+
+retryStart)logging.handlers.SocketHandler.retryStart 
+builtins.float"builtins.floatr[
+retryFactor*logging.handlers.SocketHandler.retryFactor 
+builtins.float"builtins.floatrU
+retryMax'logging.handlers.SocketHandler.retryMax 
+builtins.float"builtins.floatˇ
+DatagramHandler logging.handlers.DatagramHandler"logging.handlers.SocketHandler*©
+
+makeSocket+logging.handlers.DatagramHandler.makeSocket"
+socket.socket"socket.socket*N
+selfD
+ logging.handlers.DatagramHandler" logging.handlers.DatagramHandlerú%
+SysLogHandlerlogging.handlers.SysLogHandler"logging.Handler*Á
+__init__'logging.handlers.SysLogHandler.__init__"
+None*J
+self@
+logging.handlers.SysLogHandler"logging.handlers.SysLogHandler*»
+address∏
+4Union[Tuple[builtins.str,builtins.int],builtins.str]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.str"builtins.str *,
+facility
+builtins.int"builtins.int *c
+socktypeS
+Union[socket.SocketKind,None]&
+socket.SocketKind"socket.SocketKind
+None *â
+encodePriority-logging.handlers.SysLogHandler.encodePriority"
+builtins.int"builtins.int*J
+self@
+logging.handlers.SysLogHandler"logging.handlers.SysLogHandler*n
+facility`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*n
+priority`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*–
+mapPriority*logging.handlers.SysLogHandler.mapPriority"
+builtins.str"builtins.str*J
+self@
+logging.handlers.SysLogHandler"logging.handlers.SysLogHandler*+
+	levelName
+builtins.str"builtins.strrS
+	LOG_EMERG(logging.handlers.SysLogHandler.LOG_EMERG
+builtins.int"builtins.intrS
+	LOG_ALERT(logging.handlers.SysLogHandler.LOG_ALERT
+builtins.int"builtins.intrQ
+LOG_CRIT'logging.handlers.SysLogHandler.LOG_CRIT
+builtins.int"builtins.intrO
+LOG_ERR&logging.handlers.SysLogHandler.LOG_ERR
+builtins.int"builtins.intrW
+LOG_WARNING*logging.handlers.SysLogHandler.LOG_WARNING
+builtins.int"builtins.intrU
+
+LOG_NOTICE)logging.handlers.SysLogHandler.LOG_NOTICE
+builtins.int"builtins.intrQ
+LOG_INFO'logging.handlers.SysLogHandler.LOG_INFO
+builtins.int"builtins.intrS
+	LOG_DEBUG(logging.handlers.SysLogHandler.LOG_DEBUG
+builtins.int"builtins.intrQ
+LOG_KERN'logging.handlers.SysLogHandler.LOG_KERN
+builtins.int"builtins.intrQ
+LOG_USER'logging.handlers.SysLogHandler.LOG_USER
+builtins.int"builtins.intrQ
+LOG_MAIL'logging.handlers.SysLogHandler.LOG_MAIL
+builtins.int"builtins.intrU
+
+LOG_DAEMON)logging.handlers.SysLogHandler.LOG_DAEMON
+builtins.int"builtins.intrQ
+LOG_AUTH'logging.handlers.SysLogHandler.LOG_AUTH
+builtins.int"builtins.intrU
+
+LOG_SYSLOG)logging.handlers.SysLogHandler.LOG_SYSLOG
+builtins.int"builtins.intrO
+LOG_LPR&logging.handlers.SysLogHandler.LOG_LPR
+builtins.int"builtins.intrQ
+LOG_NEWS'logging.handlers.SysLogHandler.LOG_NEWS
+builtins.int"builtins.intrQ
+LOG_UUCP'logging.handlers.SysLogHandler.LOG_UUCP
+builtins.int"builtins.intrQ
+LOG_CRON'logging.handlers.SysLogHandler.LOG_CRON
+builtins.int"builtins.intrY
+LOG_AUTHPRIV+logging.handlers.SysLogHandler.LOG_AUTHPRIV
+builtins.int"builtins.intrO
+LOG_FTP&logging.handlers.SysLogHandler.LOG_FTP
+builtins.int"builtins.intrU
+
+LOG_LOCAL0)logging.handlers.SysLogHandler.LOG_LOCAL0
+builtins.int"builtins.intrU
+
+LOG_LOCAL1)logging.handlers.SysLogHandler.LOG_LOCAL1
+builtins.int"builtins.intrU
+
+LOG_LOCAL2)logging.handlers.SysLogHandler.LOG_LOCAL2
+builtins.int"builtins.intrU
+
+LOG_LOCAL3)logging.handlers.SysLogHandler.LOG_LOCAL3
+builtins.int"builtins.intrU
+
+LOG_LOCAL4)logging.handlers.SysLogHandler.LOG_LOCAL4
+builtins.int"builtins.intrU
+
+LOG_LOCAL5)logging.handlers.SysLogHandler.LOG_LOCAL5
+builtins.int"builtins.intrU
+
+LOG_LOCAL6)logging.handlers.SysLogHandler.LOG_LOCAL6
+builtins.int"builtins.intrU
+
+LOG_LOCAL7)logging.handlers.SysLogHandler.LOG_LOCAL7
+builtins.int"builtins.intrÏ
+address&logging.handlers.SysLogHandler.address∏
+4Union[Tuple[builtins.str,builtins.int],builtins.str]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.str"builtins.strrW
+
+unixsocket)logging.handlers.SysLogHandler.unixsocket
+builtins.bool"builtins.boolr[
+socktype'logging.handlers.SysLogHandler.socktype&
+socket.SocketKind"socket.SocketKindrK
+ident$logging.handlers.SysLogHandler.ident
+builtins.str"builtins.strrW
+
+append_nul)logging.handlers.SysLogHandler.append_nul
+builtins.bool"builtins.boolrQ
+facility'logging.handlers.SysLogHandler.facility
+builtins.int"builtins.intr∂
+priority_names-logging.handlers.SysLogHandler.priority_namesu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dictr∂
+facility_names-logging.handlers.SysLogHandler.facility_namesu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dictr≤
+priority_map+logging.handlers.SysLogHandler.priority_mapu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictÕ
+NTEventLogHandler"logging.handlers.NTEventLogHandler"logging.Handler*¬
+__init__+logging.handlers.NTEventLogHandler.__init__"
+None*R
+selfH
+"logging.handlers.NTEventLogHandler""logging.handlers.NTEventLogHandler*)
+appname
+builtins.str"builtins.str*S
+dllnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+logtype
+builtins.str"builtins.str *Ì
+getEventCategory3logging.handlers.NTEventLogHandler.getEventCategory"
+builtins.int"builtins.int*R
+selfH
+"logging.handlers.NTEventLogHandler""logging.handlers.NTEventLogHandler*2
+record&
+logging.LogRecord"logging.LogRecord*Â
+getEventType/logging.handlers.NTEventLogHandler.getEventType"
+builtins.int"builtins.int*R
+selfH
+"logging.handlers.NTEventLogHandler""logging.handlers.NTEventLogHandler*2
+record&
+logging.LogRecord"logging.LogRecord*Â
+getMessageID/logging.handlers.NTEventLogHandler.getMessageID"
+builtins.int"builtins.int*R
+selfH
+"logging.handlers.NTEventLogHandler""logging.handlers.NTEventLogHandler*2
+record&
+logging.LogRecord"logging.LogRecordà
+SMTPHandlerlogging.handlers.SMTPHandler"logging.Handler*ƒ
+__init__%logging.handlers.SMTPHandler.__init__"
+None*F
+self<
+logging.handlers.SMTPHandler"logging.handlers.SMTPHandler*«
+mailhost∏
+4Union[builtins.str,Tuple[builtins.str,builtins.int]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int**
+fromaddr
+builtins.str"builtins.str*´
+toaddrsù
+/Union[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*)
+subject
+builtins.str"builtins.str*∞
+credentialsú
+,Union[Tuple[builtins.str,builtins.str],None]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None *ã
+secure¸
+HUnion[Tuple[],Tuple[builtins.str],Tuple[builtins.str,builtins.str],None]
+Tuple[]5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None */
+timeout 
+builtins.float"builtins.float *œ
+
+getSubject'logging.handlers.SMTPHandler.getSubject"
+builtins.str"builtins.str*F
+self<
+logging.handlers.SMTPHandler"logging.handlers.SMTPHandler*2
+record&
+logging.LogRecord"logging.LogRecordrO
+mailhost%logging.handlers.SMTPHandler.mailhost
+builtins.str"builtins.strrw
+mailport%logging.handlers.SMTPHandler.mailportD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerw
+username%logging.handlers.SMTPHandler.usernameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerO
+password%logging.handlers.SMTPHandler.password
+builtins.str"builtins.strrO
+fromaddr%logging.handlers.SMTPHandler.fromaddr
+builtins.str"builtins.strr{
+toaddrs$logging.handlers.SMTPHandler.toaddrsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrM
+subject$logging.handlers.SMTPHandler.subject
+builtins.str"builtins.strr¨
+secure#logging.handlers.SMTPHandler.secure¸
+HUnion[Tuple[],Tuple[builtins.str],Tuple[builtins.str,builtins.str],None]
+Tuple[]5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+NonerQ
+timeout$logging.handlers.SMTPHandler.timeout 
+builtins.float"builtins.float“
+BufferingHandler!logging.handlers.BufferingHandler"logging.Handler*æ
+__init__*logging.handlers.BufferingHandler.__init__"
+None*P
+selfF
+!logging.handlers.BufferingHandler"!logging.handlers.BufferingHandler**
+capacity
+builtins.int"builtins.int*‚
+shouldFlush-logging.handlers.BufferingHandler.shouldFlush"
+builtins.bool"builtins.bool*P
+selfF
+!logging.handlers.BufferingHandler"!logging.handlers.BufferingHandler*2
+record&
+logging.LogRecord"logging.LogRecordrT
+capacity*logging.handlers.BufferingHandler.capacity
+builtins.int"builtins.intrç
+buffer(logging.handlers.BufferingHandler.bufferY
+ builtins.list[logging.LogRecord]&
+logging.LogRecord"logging.LogRecord"builtins.listË
+MemoryHandlerlogging.handlers.MemoryHandler"!logging.handlers.BufferingHandler*ˆ
+__init__'logging.handlers.MemoryHandler.__init__"
+None*J
+self@
+logging.handlers.MemoryHandler"logging.handlers.MemoryHandler**
+capacity
+builtins.int"builtins.int*.
+
+flushLevel
+builtins.int"builtins.int *[
+targetM
+Union[logging.Handler,None]"
+logging.Handler"logging.Handler
+None *2
+flushOnClose
+builtins.bool"builtins.bool *Ê
+	setTarget(logging.handlers.MemoryHandler.setTarget"
+None*J
+self@
+logging.handlers.MemoryHandler"logging.handlers.MemoryHandler*Y
+targetM
+Union[logging.Handler,None]"
+logging.Handler"logging.Handler
+NonerU
+
+flushLevel)logging.handlers.MemoryHandler.flushLevel
+builtins.int"builtins.intr~
+target%logging.handlers.MemoryHandler.targetM
+Union[logging.Handler,None]"
+logging.Handler"logging.Handler
+Noner[
+flushOnClose+logging.handlers.MemoryHandler.flushOnClose
+builtins.bool"builtins.boolå
+HTTPHandlerlogging.handlers.HTTPHandler"logging.Handler*∫
+__init__%logging.handlers.HTTPHandler.__init__"
+None*F
+self<
+logging.handlers.HTTPHandler"logging.handlers.HTTPHandler*&
+host
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.str**
+method
+builtins.str"builtins.str *,
+secure
+builtins.bool"builtins.bool *∞
+credentialsú
+,Union[Tuple[builtins.str,builtins.str],None]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None *Y
+contextJ
+Union[ssl.SSLContext,None] 
+ssl.SSLContext"ssl.SSLContext
+None *é
+mapLogRecord)logging.handlers.HTTPHandler.mapLogRecord"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*F
+self<
+logging.handlers.HTTPHandler"logging.handlers.HTTPHandler*2
+record&
+logging.LogRecord"logging.LogRecordrG
+host!logging.handlers.HTTPHandler.host
+builtins.str"builtins.strrE
+url logging.handlers.HTTPHandler.url
+builtins.str"builtins.strrK
+method#logging.handlers.HTTPHandler.method
+builtins.str"builtins.strrM
+secure#logging.handlers.HTTPHandler.secure
+builtins.bool"builtins.boolr÷
+credentials(logging.handlers.HTTPHandler.credentialsú
+,Union[Tuple[builtins.str,builtins.str],None]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+Noner{
+context$logging.handlers.HTTPHandler.contextJ
+Union[ssl.SSLContext,None] 
+ssl.SSLContext"ssl.SSLContext
+None°
+QueueHandlerlogging.handlers.QueueHandler"logging.Handler*ß
+__init__&logging.handlers.QueueHandler.__init__"
+None*H
+self>
+logging.handlers.QueueHandler"logging.handlers.QueueHandler*û
+queueí
+.Union[queue.SimpleQueue[Any],queue.Queue[Any]]4
+queue.SimpleQueue[Any]
+Any"queue.SimpleQueue(
+queue.Queue[Any]
+Any"queue.Queue*∑
+prepare%logging.handlers.QueueHandler.prepare"
+Any*H
+self>
+logging.handlers.QueueHandler"logging.handlers.QueueHandler*2
+record&
+logging.LogRecord"logging.LogRecord*∏
+enqueue%logging.handlers.QueueHandler.enqueue"
+None*H
+self>
+logging.handlers.QueueHandler"logging.handlers.QueueHandler*2
+record&
+logging.LogRecord"logging.LogRecordr¡
+queue#logging.handlers.QueueHandler.queueí
+.Union[queue.SimpleQueue[Any],queue.Queue[Any]]4
+queue.SimpleQueue[Any]
+Any"queue.SimpleQueue(
+queue.Queue[Any]
+Any"queue.Queueè
+QueueListenerlogging.handlers.QueueListener"builtins.object*ô
+__init__'logging.handlers.QueueListener.__init__"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*û
+queueí
+.Union[queue.SimpleQueue[Any],queue.Queue[Any]]4
+queue.SimpleQueue[Any]
+Any"queue.SimpleQueue(
+queue.Queue[Any]
+Any"queue.Queue*0
+handlers"
+logging.Handler"logging.Handler*;
+respect_handler_level
+builtins.bool"builtins.bool *–
+dequeue&logging.handlers.QueueListener.dequeue"&
+logging.LogRecord"logging.LogRecord*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*)
+block
+builtins.bool"builtins.bool*∫
+prepare&logging.handlers.QueueListener.prepare"
+Any*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*2
+record&
+logging.LogRecord"logging.LogRecord*É
+start$logging.handlers.QueueListener.start"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*Å
+stop#logging.handlers.QueueListener.stop"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*ô
+enqueue_sentinel/logging.handlers.QueueListener.enqueue_sentinel"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*π
+handle%logging.handlers.QueueListener.handle"
+None*J
+self@
+logging.handlers.QueueListener"logging.handlers.QueueListener*2
+record&
+logging.LogRecord"logging.LogRecordrä
+handlers'logging.handlers.QueueListener.handlersU
+builtins.tuple[logging.Handler]"
+logging.Handler"logging.Handler"builtins.tuplerm
+respect_handler_level4logging.handlers.QueueListener.respect_handler_level
+builtins.bool"builtins.boolr¬
+queue$logging.handlers.QueueListener.queueí
+.Union[queue.SimpleQueue[Any],queue.Queue[Any]]4
+queue.SimpleQueue[Any]
+Any"queue.SimpleQueue(
+queue.Queue[Any]
+Any"queue.Queue*å
+__annotations__ logging.handlers.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+httphttp *c
+DEFAULT_TCP_LOGGING_PORT)logging.handlers.DEFAULT_TCP_LOGGING_PORT
+builtins.int"builtins.int*c
+DEFAULT_UDP_LOGGING_PORT)logging.handlers.DEFAULT_UDP_LOGGING_PORT
+builtins.int"builtins.int*e
+DEFAULT_HTTP_LOGGING_PORT*logging.handlers.DEFAULT_HTTP_LOGGING_PORT
+builtins.int"builtins.int*e
+DEFAULT_SOAP_LOGGING_PORT*logging.handlers.DEFAULT_SOAP_LOGGING_PORT
+builtins.int"builtins.int*Q
+SYSLOG_UDP_PORT logging.handlers.SYSLOG_UDP_PORT
+builtins.int"builtins.int*Q
+SYSLOG_TCP_PORT logging.handlers.SYSLOG_TCP_PORT
+builtins.int"builtins.int

@@ -1,0 +1,165 @@
+
+pyspark.ml.connect.baseˆ
+	Estimator!pyspark.ml.connect.base.Estimator"pyspark.ml.param.Params*ª
+_fit&pyspark.ml.connect.base.Estimator._fit"Ž
+pyspark.ml.connect.base.MJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer*ý
+selfò
+<pyspark.ml.connect.base.Estimator[pyspark.ml.connect.base.M]Ž
+pyspark.ml.connect.base.MJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"!pyspark.ml.connect.base.Estimator*Ô
+datasetÆ
+BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame0:abstractmethod@*þ	
+fit%pyspark.ml.connect.base.Estimator.fit"«
+IUnion[pyspark.ml.connect.base.M,builtins.list[pyspark.ml.connect.base.M]]Ž
+pyspark.ml.connect.base.MJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.TransformerÊ
+(builtins.list[pyspark.ml.connect.base.M]Ž
+pyspark.ml.connect.base.MJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"builtins.list*ý
+selfò
+<pyspark.ml.connect.base.Estimator[pyspark.ml.connect.base.M]Ž
+pyspark.ml.connect.base.MJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"!pyspark.ml.connect.base.Estimator*Ô
+datasetÆ
+BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*Ê
+params»
+EUnion[TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]],None]å
+9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]ˆ
+.builtins.dict[pyspark.ml.param.Param[Any],Any]>
+pyspark.ml.param.Param[Any]
+Any"pyspark.ml.param.Param
+Any"builtins.dict"pyspark.ml._typing.ParamMap
+None 8@Pbabc.ABCMeta®
+Transformer#pyspark.ml.connect.base.Transformer"pyspark.ml.param.Params*æ
+_input_columns2pyspark.ml.connect.base.Transformer._input_columns"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*T
+selfJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer*Á
+_output_columns3pyspark.ml.connect.base.Transformer._output_columns"¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list*T
+selfJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer*í
+_get_transform_fn5pyspark.ml.connect.base.Transformer._get_transform_fn"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*T
+selfJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer*ý
+	transform-pyspark.ml.connect.base.Transformer.transform"Æ
+BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*T
+selfJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer*Ô
+datasetÆ
+BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*Ê
+params»
+EUnion[TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]],None]å
+9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]ˆ
+.builtins.dict[pyspark.ml.param.Param[Any],Any]>
+pyspark.ml.param.Param[Any]
+Any"pyspark.ml.param.Param
+Any"builtins.dict"pyspark.ml._typing.ParamMap
+None *²
+
+_transform.pyspark.ml.connect.base.Transformer._transform"Æ
+BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*T
+selfJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer*Ô
+datasetÆ
+BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame8@babc.ABCMetaö	
+	Evaluator!pyspark.ml.connect.base.Evaluator"pyspark.ml.param.Params*—
+	_evaluate+pyspark.ml.connect.base.Evaluator._evaluate" 
+builtins.float"builtins.float*P
+selfF
+!pyspark.ml.connect.base.Evaluator"!pyspark.ml.connect.base.Evaluator*Ô
+datasetÆ
+BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame0:abstractmethod@*È
+evaluate*pyspark.ml.connect.base.Evaluator.evaluate" 
+builtins.float"builtins.float*P
+selfF
+!pyspark.ml.connect.base.Evaluator"!pyspark.ml.connect.base.Evaluator*O
+datasetB
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Ê
+params»
+EUnion[TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]],None]å
+9TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]]ˆ
+.builtins.dict[pyspark.ml.param.Param[Any],Any]>
+pyspark.ml.param.Param[Any]
+Any"pyspark.ml.param.Param
+Any"builtins.dict"pyspark.ml._typing.ParamMap
+None *¶
+isLargerBetter0pyspark.ml.connect.base.Evaluator.isLargerBetter"
+builtins.bool"builtins.bool*P
+selfF
+!pyspark.ml.connect.base.Evaluator"!pyspark.ml.connect.base.Evaluator08@babc.ABCMeta\
+Modelpyspark.ml.connect.base.Model"#pyspark.ml.connect.base.Transformer8@babc.ABCMetaµ
+_PredictorParams(pyspark.ml.connect.base._PredictorParams"#pyspark.ml.param.shared.HasLabelCol"&pyspark.ml.param.shared.HasFeaturesCol"(pyspark.ml.param.shared.HasPredictionCol8Þ
+	Predictor!pyspark.ml.connect.base.Predictor"!pyspark.ml.connect.base.Estimator"(pyspark.ml.connect.base._PredictorParams*½
+setLabelCol-pyspark.ml.connect.base.Predictor.setLabelCol"T
+&pyspark.ml.connect.base.Predictor[Any]
+Any"!pyspark.ml.connect.base.Predictor*ý
+selfò
+<pyspark.ml.connect.base.Predictor[pyspark.ml.connect.base.M]Ž
+pyspark.ml.connect.base.MJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"!pyspark.ml.connect.base.Predictor*'
+value
+builtins.str"builtins.str0*Ã
+setFeaturesCol0pyspark.ml.connect.base.Predictor.setFeaturesCol"T
+&pyspark.ml.connect.base.Predictor[Any]
+Any"!pyspark.ml.connect.base.Predictor*ý
+selfò
+<pyspark.ml.connect.base.Predictor[pyspark.ml.connect.base.M]Ž
+pyspark.ml.connect.base.MJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"!pyspark.ml.connect.base.Predictor*'
+value
+builtins.str"builtins.str0*Ç
+setPredictionCol2pyspark.ml.connect.base.Predictor.setPredictionCol"T
+&pyspark.ml.connect.base.Predictor[Any]
+Any"!pyspark.ml.connect.base.Predictor*ý
+selfò
+<pyspark.ml.connect.base.Predictor[pyspark.ml.connect.base.M]Ž
+pyspark.ml.connect.base.MJ
+#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"!pyspark.ml.connect.base.Predictor*'
+value
+builtins.str"builtins.str08@Pbabc.ABCMetaÉ
+PredictionModel'pyspark.ml.connect.base.PredictionModel"pyspark.ml.connect.base.Model"(pyspark.ml.connect.base._PredictorParams*¥
+setFeaturesCol6pyspark.ml.connect.base.PredictionModel.setFeaturesCol"R
+'pyspark.ml.connect.base.PredictionModel"'pyspark.ml.connect.base.PredictionModel*\
+selfR
+'pyspark.ml.connect.base.PredictionModel"'pyspark.ml.connect.base.PredictionModel*'
+value
+builtins.str"builtins.str0*©
+setPredictionCol8pyspark.ml.connect.base.PredictionModel.setPredictionCol"R
+'pyspark.ml.connect.base.PredictionModel"'pyspark.ml.connect.base.PredictionModel*\
+selfR
+'pyspark.ml.connect.base.PredictionModel"'pyspark.ml.connect.base.PredictionModel*'
+value
+builtins.str"builtins.str0*Þ
+numFeatures3pyspark.ml.connect.base.PredictionModel.numFeatures"
+builtins.int"builtins.int*\
+selfR
+'pyspark.ml.connect.base.PredictionModel"'pyspark.ml.connect.base.PredictionModel0:property:abstractmethod@`8@babc.ABCMeta*“
+__annotations__'pyspark.ml.connect.base.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+pdpandas *ˆ
+'_SPARKML_TRANSFORMER_TMP_OUTPUT_COLNAME?pyspark.ml.connect.base._SPARKML_TRANSFORMER_TMP_OUTPUT_COLNAME
+builtins.str"builtins.str

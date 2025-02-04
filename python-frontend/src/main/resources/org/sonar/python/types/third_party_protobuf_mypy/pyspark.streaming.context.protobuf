@@ -1,0 +1,224 @@
+
+pyspark.streaming.contextˆH
+StreamingContext*pyspark.streaming.context.StreamingContext"builtins.object*Œ
+__init__3pyspark.streaming.context.StreamingContext.__init__"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*N
+sparkContext<
+pyspark.context.SparkContext"pyspark.context.SparkContext*Y
+batchDurationD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *2
+jssc&
+Union[Any,None]
+Any
+None *Ü
+_initialize_context>pyspark.streaming.context.StreamingContext._initialize_context"
+Any*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*D
+sc<
+pyspark.context.SparkContext"pyspark.context.SparkContext*R
+durationD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*Û
+
+_jduration5pyspark.streaming.context.StreamingContext._jduration"
+Any*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*)
+seconds
+builtins.int"builtins.int*‘
+_ensure_initialized>pyspark.streaming.context.StreamingContext._ensure_initialized"
+None*ž
+cls”
+0Type[pyspark.streaming.context.StreamingContext]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type0:classmethodp*ß
+getOrCreate6pyspark.streaming.context.StreamingContext.getOrCreate"X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*ž
+cls”
+0Type[pyspark.streaming.context.StreamingContext]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type*0
+checkpointPath
+builtins.str"builtins.str*Z
+	setupFuncK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:classmethodp*”
+	getActive4pyspark.streaming.context.StreamingContext.getActive"ž
+6Union[pyspark.streaming.context.StreamingContext,None]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext
+None*ž
+cls”
+0Type[pyspark.streaming.context.StreamingContext]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type0:classmethodp*ë
+getActiveOrCreate<pyspark.streaming.context.StreamingContext.getActiveOrCreate"X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*ž
+cls”
+0Type[pyspark.streaming.context.StreamingContext]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext"type*0
+checkpointPath
+builtins.str"builtins.str*Z
+	setupFuncK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:classmethodp*÷
+sparkContext7pyspark.streaming.context.StreamingContext.sparkContext"<
+pyspark.context.SparkContext"pyspark.context.SparkContext*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext0:property`*§
+start0pyspark.streaming.context.StreamingContext.start"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*’
+awaitTermination;pyspark.streaming.context.StreamingContext.awaitTermination"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*S
+timeoutD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ú
+awaitTerminationOrTimeoutDpyspark.streaming.context.StreamingContext.awaitTerminationOrTimeout"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*)
+timeout
+builtins.int"builtins.int*“
+stop/pyspark.streaming.context.StreamingContext.stop"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*6
+stopSparkContext
+builtins.bool"builtins.bool *4
+stopGraceFully
+builtins.bool"builtins.bool *Ù
+remember3pyspark.streaming.context.StreamingContext.remember"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext**
+duration
+builtins.int"builtins.int*Þ
+
+checkpoint5pyspark.streaming.context.StreamingContext.checkpoint"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*+
+	directory
+builtins.str"builtins.str*×
+socketTextStream;pyspark.streaming.context.StreamingContext.socketTextStream"r
+/pyspark.streaming.dstream.DStream[builtins.str]
+builtins.str"builtins.str"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext**
+hostname
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*Z
+storageLevelF
+!pyspark.storagelevel.StorageLevel"!pyspark.storagelevel.StorageLevel *Ð
+textFileStream9pyspark.streaming.context.StreamingContext.textFileStream"r
+/pyspark.streaming.dstream.DStream[builtins.str]
+builtins.str"builtins.str"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*+
+	directory
+builtins.str"builtins.str*
+binaryRecordsStream>pyspark.streaming.context.StreamingContext.binaryRecordsStream"x
+1pyspark.streaming.dstream.DStream[builtins.bytes] 
+builtins.bytes"builtins.bytes"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*+
+	directory
+builtins.str"builtins.str*.
+recordLength
+builtins.int"builtins.int*³
+_check_serializers=pyspark.streaming.context.StreamingContext._check_serializers"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*ï
+rddsä
+;builtins.list[pyspark.rdd.RDD[pyspark.streaming.context.T]]•
+,pyspark.rdd.RDD[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD"builtins.list*ú
+queueStream6pyspark.streaming.context.StreamingContext.queueStream"¹
+>pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*ï
+rddsä
+;builtins.list[pyspark.rdd.RDD[pyspark.streaming.context.T]]•
+,pyspark.rdd.RDD[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD"builtins.list*0
+
+oneAtATime
+builtins.bool"builtins.bool *î
+defaultÞ
+8Union[pyspark.rdd.RDD[pyspark.streaming.context.T],None]•
+,pyspark.rdd.RDD[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"pyspark.rdd.RDD
+None *ï
+	transform4pyspark.streaming.context.StreamingContext.transform"¹
+>pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*«
+dstreamsœ
+5builtins.list[pyspark.streaming.dstream.DStream[Any]]T
+&pyspark.streaming.dstream.DStream[Any]
+Any"!pyspark.streaming.dstream.DStream"builtins.list*^
+transformFuncK
+CallableType[builtins.function]&
+builtins.function"builtins.function*¤
+union0pyspark.streaming.context.StreamingContext.union"¹
+>pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*È
+dstreams¹
+>pyspark.streaming.dstream.DStream[pyspark.streaming.context.T]T
+pyspark.streaming.context.T"
+builtins.object"builtins.object"builtins.object"!pyspark.streaming.dstream.DStream*º
+addStreamingListener?pyspark.streaming.context.StreamingContext.addStreamingListener"
+None*b
+selfX
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext*s
+streamingListener\
+,pyspark.streaming.listener.StreamingListener",pyspark.streaming.listener.StreamingListenerr”
+_transformerSerializerApyspark.streaming.context.StreamingContext._transformerSerializer¶
+>Union[pyspark.streaming.util.TransformFunctionSerializer,None]h
+2pyspark.streaming.util.TransformFunctionSerializer"2pyspark.streaming.util.TransformFunctionSerializer
+Nonerì
+_activeContext9pyspark.streaming.context.StreamingContext._activeContextž
+6Union[pyspark.streaming.context.StreamingContext,None]X
+*pyspark.streaming.context.StreamingContext"*pyspark.streaming.context.StreamingContext
+Noners
+_sc.pyspark.streaming.context.StreamingContext._sc<
+pyspark.context.SparkContext"pyspark.context.SparkContextr_
+_jvm/pyspark.streaming.context.StreamingContext._jvm&
+Union[Any,None]
+Any
+NonerB
+_jssc0pyspark.streaming.context.StreamingContext._jssc
+Any*•
+__annotations__)pyspark.streaming.context.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*=
+java_import%pyspark.streaming.context.java_import
+Any*C
+is_instance_of(pyspark.streaming.context.is_instance_of
+Any*;
+
+JavaObject$pyspark.streaming.context.JavaObject
+Any*x
+__all__!pyspark.streaming.context.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

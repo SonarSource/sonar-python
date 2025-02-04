@@ -1,0 +1,262 @@
+
+tornado.netutil¶	
+Resolvertornado.netutil.Resolver"tornado.util.Configurable*™
+configurable_base*tornado.netutil.Resolver.configurable_base"^
+Type[tornado.netutil.Resolver]4
+tornado.netutil.Resolver"tornado.netutil.Resolver"type*g
+cls^
+Type[tornado.netutil.Resolver]4
+tornado.netutil.Resolver"tornado.netutil.Resolver"type0:classmethodp*Ÿ
+configurable_default-tornado.netutil.Resolver.configurable_default"^
+Type[tornado.netutil.Resolver]4
+tornado.netutil.Resolver"tornado.netutil.Resolver"type*g
+cls^
+Type[tornado.netutil.Resolver]4
+tornado.netutil.Resolver"tornado.netutil.Resolver"type0:classmethodp*Ã
+resolve tornado.netutil.Resolver.resolve"É
+8typing.Awaitable[builtins.list[Tuple[builtins.int,Any]]]{
+&builtins.list[Tuple[builtins.int,Any]]B
+Tuple[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.list"typing.Awaitable*>
+self4
+tornado.netutil.Resolver"tornado.netutil.Resolver*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*:
+family,
+socket.AddressFamily"socket.AddressFamily *q
+closetornado.netutil.Resolver.close"
+None*>
+self4
+tornado.netutil.Resolver"tornado.netutil.Resolverë
+DefaultExecutorResolver'tornado.netutil.DefaultExecutorResolver"tornado.netutil.Resolver*Œ
+resolve/tornado.netutil.DefaultExecutorResolver.resolve"ã
+@typing.Coroutine[Any,Any,builtins.list[Tuple[builtins.int,Any]]]
+Any
+Any{
+&builtins.list[Tuple[builtins.int,Any]]B
+Tuple[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.list"typing.Coroutine*\
+selfR
+'tornado.netutil.DefaultExecutorResolver"'tornado.netutil.DefaultExecutorResolver*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*:
+family,
+socket.AddressFamily"socket.AddressFamily H×
+DefaultLoopResolver#tornado.netutil.DefaultLoopResolver"tornado.netutil.Resolver*€
+resolve+tornado.netutil.DefaultLoopResolver.resolve"ã
+@typing.Coroutine[Any,Any,builtins.list[Tuple[builtins.int,Any]]]
+Any
+Any{
+&builtins.list[Tuple[builtins.int,Any]]B
+Tuple[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.list"typing.Coroutine*T
+selfJ
+#tornado.netutil.DefaultLoopResolver"#tornado.netutil.DefaultLoopResolver*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*:
+family,
+socket.AddressFamily"socket.AddressFamily HÁ	
+ExecutorResolver tornado.netutil.ExecutorResolver"tornado.netutil.Resolver*à
+
+initialize+tornado.netutil.ExecutorResolver.initialize"
+None*N
+selfD
+ tornado.netutil.ExecutorResolver" tornado.netutil.ExecutorResolver*”
+executorƒ
+-Union[concurrent.futures._base.Executor,None]F
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor
+None *4
+close_executor
+builtins.bool"builtins.bool *‰
+close&tornado.netutil.ExecutorResolver.close"
+None*N
+selfD
+ tornado.netutil.ExecutorResolver" tornado.netutil.ExecutorResolver*Ÿ
+resolve(tornado.netutil.ExecutorResolver.resolve"{
+&builtins.list[Tuple[builtins.int,Any]]B
+Tuple[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.list*N
+selfD
+ tornado.netutil.ExecutorResolver" tornado.netutil.ExecutorResolver*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*:
+family,
+socket.AddressFamily"socket.AddressFamily 0:run_on_executorr}
+executor)tornado.netutil.ExecutorResolver.executorF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executorra
+close_executor/tornado.netutil.ExecutorResolver.close_executor
+builtins.bool"builtins.boolì
+BlockingResolver tornado.netutil.BlockingResolver" tornado.netutil.ExecutorResolver*“
+
+initialize+tornado.netutil.BlockingResolver.initialize"
+None*N
+selfD
+ tornado.netutil.BlockingResolver" tornado.netutil.BlockingResolverÐ
+ThreadedResolver tornado.netutil.ThreadedResolver" tornado.netutil.ExecutorResolver*Ä
+
+initialize+tornado.netutil.ThreadedResolver.initialize"
+None*N
+selfD
+ tornado.netutil.ThreadedResolver" tornado.netutil.ThreadedResolver*/
+num_threads
+builtins.int"builtins.int *è
+_create_threadpool3tornado.netutil.ThreadedResolver._create_threadpool"\
+,concurrent.futures.thread.ThreadPoolExecutor",concurrent.futures.thread.ThreadPoolExecutor*
+clsv
+&Type[tornado.netutil.ThreadedResolver]D
+ tornado.netutil.ThreadedResolver" tornado.netutil.ThreadedResolver"type*-
+num_threads
+builtins.int"builtins.int0:classmethodprâ
+_threadpool,tornado.netutil.ThreadedResolver._threadpool¤
+8Union[concurrent.futures.thread.ThreadPoolExecutor,None]\
+,concurrent.futures.thread.ThreadPoolExecutor",concurrent.futures.thread.ThreadPoolExecutor
+Nonera
+_threadpool_pid0tornado.netutil.ThreadedResolver._threadpool_pid
+builtins.int"builtins.int·	
+OverrideResolver tornado.netutil.OverrideResolver"tornado.netutil.Resolver*Ÿ
+
+initialize+tornado.netutil.OverrideResolver.initialize"
+None*N
+selfD
+ tornado.netutil.OverrideResolver" tornado.netutil.OverrideResolver*B
+resolver4
+tornado.netutil.Resolver"tornado.netutil.Resolver*F
+mapping9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*‰
+close&tornado.netutil.OverrideResolver.close"
+None*N
+selfD
+ tornado.netutil.OverrideResolver" tornado.netutil.OverrideResolver*Û
+resolve(tornado.netutil.OverrideResolver.resolve"É
+8typing.Awaitable[builtins.list[Tuple[builtins.int,Any]]]{
+&builtins.list[Tuple[builtins.int,Any]]B
+Tuple[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.list"typing.Awaitable*N
+selfD
+ tornado.netutil.OverrideResolver" tornado.netutil.OverrideResolver*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*:
+family,
+socket.AddressFamily"socket.AddressFamily rk
+resolver)tornado.netutil.OverrideResolver.resolver4
+tornado.netutil.Resolver"tornado.netutil.Resolverrn
+mapping(tornado.netutil.OverrideResolver.mapping9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictæ
+bind_socketstornado.netutil.bind_sockets"M
+builtins.list[socket.socket]
+socket.socket"socket.socket"builtins.list*&
+port
+builtins.int"builtins.int*S
+addressD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *:
+family,
+socket.AddressFamily"socket.AddressFamily *+
+backlog
+builtins.int"builtins.int *Q
+flagsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *0
+
+reuse_port
+builtins.bool"builtins.bool Ó
+bind_unix_socket tornado.netutil.bind_unix_socket"
+socket.socket"socket.socket*&
+file
+builtins.str"builtins.str*(
+mode
+builtins.int"builtins.int *+
+backlog
+builtins.int"builtins.int Š
+add_accept_handler"tornado.netutil.add_accept_handler"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*(
+sock
+socket.socket"socket.socket*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.functionp
+is_valid_iptornado.netutil.is_valid_ip"
+builtins.bool"builtins.bool*$
+ip
+builtins.str"builtins.str·
+_resolve_addrtornado.netutil._resolve_addr"{
+&builtins.list[Tuple[builtins.int,Any]]B
+Tuple[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.list*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*:
+family,
+socket.AddressFamily"socket.AddressFamily ‡
+ssl_options_to_context&tornado.netutil.ssl_options_to_context" 
+ssl.SSLContext"ssl.SSLContext*Æ
+ssl_options´
+5Union[builtins.dict[builtins.str,Any],ssl.SSLContext]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+ssl.SSLContext"ssl.SSLContext*Z
+server_sideG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None •
+ssl_wrap_sockettornado.netutil.ssl_wrap_socket"
+ssl.SSLSocket"ssl.SSLSocket**
+socket
+socket.socket"socket.socket*Æ
+ssl_options´
+5Union[builtins.dict[builtins.str,Any],ssl.SSLContext]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+ssl.SSLContext"ssl.SSLContext*[
+server_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Z
+server_sideG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *
+kwargs
+Any*‹
+__annotations__tornado.netutil.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+
+concurrent
+concurrent *^
+_client_ssl_defaults$tornado.netutil._client_ssl_defaults 
+ssl.SSLContext"ssl.SSLContext*^
+_server_ssl_defaults$tornado.netutil._server_ssl_defaults 
+ssl.SSLContext"ssl.SSLContext*R
+_DEFAULT_BACKLOG tornado.netutil._DEFAULT_BACKLOG
+builtins.int"builtins.int*”
+_SSL_CONTEXT_KEYWORDS%tornado.netutil._SSL_CONTEXT_KEYWORDST
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozenset

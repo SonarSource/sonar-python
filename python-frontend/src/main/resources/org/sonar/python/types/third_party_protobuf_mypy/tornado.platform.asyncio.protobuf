@@ -1,0 +1,383 @@
+
+tornado.platform.asyncioÒ
+
+_HasFileno#tornado.platform.asyncio._HasFileno"builtins.object*™
+fileno*tornado.platform.asyncio._HasFileno.fileno"
+builtins.int"builtins.int*T
+selfJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno@Xı+
+BaseAsyncIOLoop(tornado.platform.asyncio.BaseAsyncIOLoop"tornado.ioloop.IOLoop*ò
+
+initialize3tornado.platform.asyncio.BaseAsyncIOLoop.initialize"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*V
+asyncio_loopD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*
+kwargs
+Any*–
+close.tornado.platform.asyncio.BaseAsyncIOLoop.close"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*-
+all_fds
+builtins.bool"builtins.bool *«
+add_handler4tornado.platform.asyncio.BaseAsyncIOLoop.add_handler"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*ì
+fdä
+.Union[builtins.int,tornado.ioloop._Selectable]
+builtins.int"builtins.int8
+tornado.ioloop._Selectable"tornado.ioloop._Selectable*X
+handlerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*(
+events
+builtins.int"builtins.int*Û
+update_handler7tornado.platform.asyncio.BaseAsyncIOLoop.update_handler"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*ì
+fdä
+.Union[builtins.int,tornado.ioloop._Selectable]
+builtins.int"builtins.int8
+tornado.ioloop._Selectable"tornado.ioloop._Selectable*(
+events
+builtins.int"builtins.int*…
+remove_handler7tornado.platform.asyncio.BaseAsyncIOLoop.remove_handler"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*ì
+fdä
+.Union[builtins.int,tornado.ioloop._Selectable]
+builtins.int"builtins.int8
+tornado.ioloop._Selectable"tornado.ioloop._Selectable*É
+_handle_events7tornado.platform.asyncio.BaseAsyncIOLoop._handle_events"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*$
+fd
+builtins.int"builtins.int*(
+events
+builtins.int"builtins.int*°
+start.tornado.platform.asyncio.BaseAsyncIOLoop.start"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*ü
+stop-tornado.platform.asyncio.BaseAsyncIOLoop.stop"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*Ó
+call_at0tornado.platform.asyncio.BaseAsyncIOLoop.call_at""
+builtins.object"builtins.object*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop**
+when 
+builtins.float"builtins.float*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*
+kwargs
+Any*‰
+remove_timeout7tornado.platform.asyncio.BaseAsyncIOLoop.remove_timeout"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*/
+timeout"
+builtins.object"builtins.object*≤
+add_callback5tornado.platform.asyncio.BaseAsyncIOLoop.add_callback"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*
+kwargs
+Any* 
+add_callback_from_signalAtornado.platform.asyncio.BaseAsyncIOLoop.add_callback_from_signal"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*
+kwargs
+Any*ƒ
+run_in_executor8tornado.platform.asyncio.BaseAsyncIOLoop.run_in_executor"ó
+-typing.Awaitable[tornado.platform.asyncio._T]T
+tornado.platform.asyncio._T"
+builtins.object"builtins.object"builtins.object"typing.Awaitable*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*í
+executorÉ
+-Union[concurrent.futures._base.Executor,None]F
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor
+None*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*ï
+set_default_executor=tornado.platform.asyncio.BaseAsyncIOLoop.set_default_executor"
+None*^
+selfT
+(tornado.platform.asyncio.BaseAsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*T
+executorF
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executorrã
+asyncio_loop5tornado.platform.asyncio.BaseAsyncIOLoop.asyncio_loopD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLooprç
+selector_loop6tornado.platform.asyncio.BaseAsyncIOLoop.selector_loopD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLooprñ
+handlers1tornado.platform.asyncio.BaseAsyncIOLoop.handlers÷
+qbuiltins.dict[builtins.int,Tuple[Union[builtins.int,tornado.ioloop._Selectable],CallableType[builtins.function]]]
+builtins.int"builtins.int≥
+UTuple[Union[builtins.int,tornado.ioloop._Selectable],CallableType[builtins.function]]ä
+.Union[builtins.int,tornado.ioloop._Selectable]
+builtins.int"builtins.int8
+tornado.ioloop._Selectable"tornado.ioloop._SelectableK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrÖ
+readers0tornado.platform.asyncio.BaseAsyncIOLoop.readersH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.setrÖ
+writers0tornado.platform.asyncio.BaseAsyncIOLoop.writersH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.setr[
+closing0tornado.platform.asyncio.BaseAsyncIOLoop.closing
+builtins.bool"builtins.bool‹
+AsyncIOMainLoop(tornado.platform.asyncio.AsyncIOMainLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*¿
+
+initialize3tornado.platform.asyncio.AsyncIOMainLoop.initialize"
+None*^
+selfT
+(tornado.platform.asyncio.AsyncIOMainLoop"(tornado.platform.asyncio.AsyncIOMainLoop*
+kwargs
+Any*±
+_make_current6tornado.platform.asyncio.AsyncIOMainLoop._make_current"
+None*^
+selfT
+(tornado.platform.asyncio.AsyncIOMainLoop"(tornado.platform.asyncio.AsyncIOMainLoopû
+AsyncIOLoop$tornado.platform.asyncio.AsyncIOLoop"(tornado.platform.asyncio.BaseAsyncIOLoop*¥
+
+initialize/tornado.platform.asyncio.AsyncIOLoop.initialize"
+None*V
+selfL
+$tornado.platform.asyncio.AsyncIOLoop"$tornado.platform.asyncio.AsyncIOLoop*
+kwargs
+Any*ƒ
+close*tornado.platform.asyncio.AsyncIOLoop.close"
+None*V
+selfL
+$tornado.platform.asyncio.AsyncIOLoop"$tornado.platform.asyncio.AsyncIOLoop*-
+all_fds
+builtins.bool"builtins.bool *•
+_make_current2tornado.platform.asyncio.AsyncIOLoop._make_current"
+None*V
+selfL
+$tornado.platform.asyncio.AsyncIOLoop"$tornado.platform.asyncio.AsyncIOLoop*±
+_clear_current_hook8tornado.platform.asyncio.AsyncIOLoop._clear_current_hook"
+None*V
+selfL
+$tornado.platform.asyncio.AsyncIOLoop"$tornado.platform.asyncio.AsyncIOLoopr]
+
+is_current/tornado.platform.asyncio.AsyncIOLoop.is_current
+builtins.bool"builtins.boolrÖ
+old_asyncio0tornado.platform.asyncio.AsyncIOLoop.old_asyncioD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop–
+AnyThreadEventLoopPolicy1tornado.platform.asyncio.AnyThreadEventLoopPolicy"/asyncio.unix_events._UnixDefaultEventLoopPolicy*¬
+__init__:tornado.platform.asyncio.AnyThreadEventLoopPolicy.__init__"
+None*p
+selff
+1tornado.platform.asyncio.AnyThreadEventLoopPolicy"1tornado.platform.asyncio.AnyThreadEventLoopPolicy*ä
+get_event_loop@tornado.platform.asyncio.AnyThreadEventLoopPolicy.get_event_loop"D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*p
+selff
+1tornado.platform.asyncio.AnyThreadEventLoopPolicy"1tornado.platform.asyncio.AnyThreadEventLoopPolicyßF
+AddThreadSelectorEventLoop3tornado.platform.asyncio.AddThreadSelectorEventLoop" asyncio.events.AbstractEventLoop*Ô
+__getattribute__Dtornado.platform.asyncio.AddThreadSelectorEventLoop.__getattribute__"
+Any*lj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*
+builtins.str"builtins.str*ù
+__init__<tornado.platform.asyncio.AddThreadSelectorEventLoop.__init__"
+None*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*S
+	real_loopD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*æ
+__del__;tornado.platform.asyncio.AddThreadSelectorEventLoop.__del__"
+None*lj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*¬
+close9tornado.platform.asyncio.AddThreadSelectorEventLoop.close"
+None*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*‘
+_wake_selectorBtornado.platform.asyncio.AddThreadSelectorEventLoop._wake_selector"
+None*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*‘
+_consume_wakerBtornado.platform.asyncio.AddThreadSelectorEventLoop._consume_waker"
+None*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*“
+_start_selectAtornado.platform.asyncio.AddThreadSelectorEventLoop._start_select"
+None*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*Œ
+_run_select?tornado.platform.asyncio.AddThreadSelectorEventLoop._run_select"
+None*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*Ó
+_handle_selectBtornado.platform.asyncio.AddThreadSelectorEventLoop._handle_select"
+None*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*ä
+rsÅ
+Qbuiltins.list[TypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]]ú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLike"builtins.list*ä
+wsÅ
+Qbuiltins.list[TypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]]ú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLike"builtins.list*¯
+_handle_eventAtornado.platform.asyncio.AddThreadSelectorEventLoop._handle_event"
+None*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*•
+fdú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLike*˚
+cb_mapÓ
+qbuiltins.dict[TypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]],CallableType[builtins.function]]ú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLikeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*‚
+
+add_reader>tornado.platform.asyncio.AddThreadSelectorEventLoop.add_reader"
+None*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*•
+fdú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLike*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*‚
+
+add_writer>tornado.platform.asyncio.AddThreadSelectorEventLoop.add_writer"
+None*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*•
+fdú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLike*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*ê
+remove_readerAtornado.platform.asyncio.AddThreadSelectorEventLoop.remove_reader"
+builtins.bool"builtins.bool*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*•
+fdú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLike*ê
+remove_writerAtornado.platform.asyncio.AddThreadSelectorEventLoop.remove_writer"
+builtins.bool"builtins.bool*t
+selfj
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop*•
+fdú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLikerú
+MY_ATTRIBUTESAtornado.platform.asyncio.AddThreadSelectorEventLoop.MY_ATTRIBUTESH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrí
+
+_real_loop>tornado.platform.asyncio.AddThreadSelectorEventLoop._real_loopD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoopr|
+_select_cond@tornado.platform.asyncio.AddThreadSelectorEventLoop._select_cond*
+threading.Condition"threading.ConditionrÅ
+_select_args@tornado.platform.asyncio.AddThreadSelectorEventLoop._select_argsÆ
+{Union[Tuple[builtins.list[TypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]],builtins.list[Unknown]],None]¢
+oTuple[builtins.list[TypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]],builtins.list[Unknown]]Å
+Qbuiltins.list[TypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]]ú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLike"builtins.list)
+builtins.list[Unknown] "builtins.list
+Nonerz
+_closing_selectorEtornado.platform.asyncio.AddThreadSelectorEventLoop._closing_selector
+builtins.bool"builtins.boolrl
+_thread;tornado.platform.asyncio.AddThreadSelectorEventLoop._thread$
+threading.Thread"threading.Threadrπ
+_readers<tornado.platform.asyncio.AddThreadSelectorEventLoop._readersÓ
+qbuiltins.dict[TypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]],CallableType[builtins.function]]ú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLikeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrπ
+_writers<tornado.platform.asyncio.AddThreadSelectorEventLoop._writersÓ
+qbuiltins.dict[TypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]],CallableType[builtins.function]]ú
+BTypeAlias[Union[builtins.int,tornado.platform.asyncio._HasFileno]]•
+7Union[builtins.int,tornado.platform.asyncio._HasFileno]
+builtins.int"builtins.intJ
+#tornado.platform.asyncio._HasFileno"#tornado.platform.asyncio._HasFileno",tornado.platform.asyncio._FileDescriptorLikeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrh
+_waker_r<tornado.platform.asyncio.AddThreadSelectorEventLoop._waker_r
+socket.socket"socket.socketrh
+_waker_w<tornado.platform.asyncio.AddThreadSelectorEventLoop._waker_w
+socket.socket"socket.socketG
+_atexit_callback)tornado.platform.asyncio._atexit_callback"
+None”
+to_tornado_future*tornado.platform.asyncio.to_tornado_future">
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*R
+asyncio_future>
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future”
+to_asyncio_future*tornado.platform.asyncio.to_asyncio_future">
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*R
+tornado_future>
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*î
+__annotations__(tornado.platform.asyncio.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+
+concurrent
+concurrent *˚
+_selector_loops(tornado.platform.asyncio._selector_loopsΩ
+Abuiltins.set[tornado.platform.asyncio.AddThreadSelectorEventLoop]j
+3tornado.platform.asyncio.AddThreadSelectorEventLoop"3tornado.platform.asyncio.AddThreadSelectorEventLoop"builtins.set

@@ -1,0 +1,639 @@
+
+pyspark.sql.connect.expressions¥
+
+
+Expression*pyspark.sql.connect.expressions.Expression"builtins.object*≠
+__init__3pyspark.sql.connect.expressions.Expression.__init__"
+None*b
+selfX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*Ü
+to_plan2pyspark.sql.connect.expressions.Expression.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*b
+selfX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*π
+__repr__3pyspark.sql.connect.expressions.Expression.__repr__"
+builtins.str"builtins.str*ZX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*∑
+alias0pyspark.sql.connect.expressions.Expression.alias"Z
++pyspark.sql.connect.expressions.ColumnAlias"+pyspark.sql.connect.expressions.ColumnAlias*b
+selfX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*'
+alias
+builtins.str"builtins.str*
+kwargs
+Any*π
+name/pyspark.sql.connect.expressions.Expression.name"
+builtins.str"builtins.str*b
+selfX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.ExpressionÙ
+CaseWhen(pyspark.sql.connect.expressions.CaseWhen"*pyspark.sql.connect.expressions.Expression*Ç
+__init__1pyspark.sql.connect.expressions.CaseWhen.__init__"
+None*^
+selfT
+(pyspark.sql.connect.expressions.CaseWhen"(pyspark.sql.connect.expressions.CaseWhen*¶
+branchesó
+mtyping.Sequence[Tuple[pyspark.sql.connect.expressions.Expression,pyspark.sql.connect.expressions.Expression]]î
+\Tuple[pyspark.sql.connect.expressions.Expression,pyspark.sql.connect.expressions.Expression]X
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.ExpressionX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression"typing.Sequence*Ø
+
+else_valueû
+6Union[pyspark.sql.connect.expressions.Expression,None]X
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression
+None*Ä
+to_plan0pyspark.sql.connect.expressions.CaseWhen.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*^
+selfT
+(pyspark.sql.connect.expressions.CaseWhen"(pyspark.sql.connect.expressions.CaseWhen*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*≥
+__repr__1pyspark.sql.connect.expressions.CaseWhen.__repr__"
+builtins.str"builtins.str*VT
+(pyspark.sql.connect.expressions.CaseWhen"(pyspark.sql.connect.expressions.CaseWhenrm
+	_branches2pyspark.sql.connect.expressions.CaseWhen._branches,
+builtins.list[Any]
+Any"builtins.listr‰
+_else_value4pyspark.sql.connect.expressions.CaseWhen._else_valueû
+6Union[pyspark.sql.connect.expressions.Expression,None]X
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression
+None≥
+ColumnAlias+pyspark.sql.connect.expressions.ColumnAlias"*pyspark.sql.connect.expressions.Expression*à
+__init__4pyspark.sql.connect.expressions.ColumnAlias.__init__"
+None*d
+selfZ
++pyspark.sql.connect.expressions.ColumnAlias"+pyspark.sql.connect.expressions.ColumnAlias*d
+parentX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*Y
+aliasN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*
+metadata
+Any*â
+to_plan3pyspark.sql.connect.expressions.ColumnAlias.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*d
+selfZ
++pyspark.sql.connect.expressions.ColumnAlias"+pyspark.sql.connect.expressions.ColumnAlias*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*º
+__repr__4pyspark.sql.connect.expressions.ColumnAlias.__repr__"
+builtins.str"builtins.str*\Z
++pyspark.sql.connect.expressions.ColumnAlias"+pyspark.sql.connect.expressions.ColumnAliasrå
+_alias2pyspark.sql.connect.expressions.ColumnAlias._aliasN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequencerK
+	_metadata5pyspark.sql.connect.expressions.ColumnAlias._metadata
+Anyrò
+_parent3pyspark.sql.connect.expressions.ColumnAlias._parentX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.ExpressionÒ
+LiteralExpression1pyspark.sql.connect.expressions.LiteralExpression"*pyspark.sql.connect.expressions.Expression*û
+__init__:pyspark.sql.connect.expressions.LiteralExpression.__init__"
+None*p
+selff
+1pyspark.sql.connect.expressions.LiteralExpression"1pyspark.sql.connect.expressions.LiteralExpression*
+value
+Any*F
+dataType8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType*·
+_infer_type=pyspark.sql.connect.expressions.LiteralExpression._infer_type"8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType*≥
+cls©
+7Type[pyspark.sql.connect.expressions.LiteralExpression]f
+1pyspark.sql.connect.expressions.LiteralExpression"1pyspark.sql.connect.expressions.LiteralExpression"type*
+value
+Any0:classmethodp*è
+_from_value=pyspark.sql.connect.expressions.LiteralExpression._from_value"f
+1pyspark.sql.connect.expressions.LiteralExpression"1pyspark.sql.connect.expressions.LiteralExpression*≥
+cls©
+7Type[pyspark.sql.connect.expressions.LiteralExpression]f
+1pyspark.sql.connect.expressions.LiteralExpression"1pyspark.sql.connect.expressions.LiteralExpression"type*
+value
+Any0:classmethodp*§
+	_to_value;pyspark.sql.connect.expressions.LiteralExpression._to_value"
+Any*≥
+cls©
+7Type[pyspark.sql.connect.expressions.LiteralExpression]f
+1pyspark.sql.connect.expressions.LiteralExpression"1pyspark.sql.connect.expressions.LiteralExpression"type*â
+literal|
+<pyspark.sql.connect.proto.expressions_pb2.Expression.Literal"<pyspark.sql.connect.proto.expressions_pb2.Expression.Literal*~
+dataTypen
+&Union[pyspark.sql.types.DataType,None]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+None 0:classmethodp*õ
+to_plan9pyspark.sql.connect.expressions.LiteralExpression.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*p
+selff
+1pyspark.sql.connect.expressions.LiteralExpression"1pyspark.sql.connect.expressions.LiteralExpression*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*Œ
+__repr__:pyspark.sql.connect.expressions.LiteralExpression.__repr__"
+builtins.str"builtins.str*hf
+1pyspark.sql.connect.expressions.LiteralExpression"1pyspark.sql.connect.expressions.LiteralExpressionrK
+_value8pyspark.sql.connect.expressions.LiteralExpression._value
+AnyrÇ
+	_dataType;pyspark.sql.connect.expressions.LiteralExpression._dataType8
+pyspark.sql.types.DataType"pyspark.sql.types.DataTypeƒ
+ColumnReference/pyspark.sql.connect.expressions.ColumnReference"*pyspark.sql.connect.expressions.Expression*»
+__init__8pyspark.sql.connect.expressions.ColumnReference.__init__"
+None*l
+selfb
+/pyspark.sql.connect.expressions.ColumnReference"/pyspark.sql.connect.expressions.ColumnReference*5
+unparsed_identifier
+builtins.str"builtins.str*S
+plan_idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *»
+name4pyspark.sql.connect.expressions.ColumnReference.name"
+builtins.str"builtins.str*l
+selfb
+/pyspark.sql.connect.expressions.ColumnReference"/pyspark.sql.connect.expressions.ColumnReference*ï
+to_plan7pyspark.sql.connect.expressions.ColumnReference.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*l
+selfb
+/pyspark.sql.connect.expressions.ColumnReference"/pyspark.sql.connect.expressions.ColumnReference*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*»
+__repr__8pyspark.sql.connect.expressions.ColumnReference.__repr__"
+builtins.str"builtins.str*db
+/pyspark.sql.connect.expressions.ColumnReference"/pyspark.sql.connect.expressions.ColumnReference*—
+__eq__6pyspark.sql.connect.expressions.ColumnReference.__eq__"
+builtins.bool"builtins.bool*db
+/pyspark.sql.connect.expressions.ColumnReference"/pyspark.sql.connect.expressions.ColumnReference*	
+Anyrz
+_unparsed_identifierDpyspark.sql.connect.expressions.ColumnReference._unparsed_identifier
+builtins.str"builtins.strrä
+_plan_id8pyspark.sql.connect.expressions.ColumnReference._plan_idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneÕ
+
+UnresolvedStar.pyspark.sql.connect.expressions.UnresolvedStar"*pyspark.sql.connect.expressions.Expression*î
+__init__7pyspark.sql.connect.expressions.UnresolvedStar.__init__"
+None*j
+self`
+.pyspark.sql.connect.expressions.UnresolvedStar".pyspark.sql.connect.expressions.UnresolvedStar*Y
+unparsed_targetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*í
+to_plan6pyspark.sql.connect.expressions.UnresolvedStar.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*j
+self`
+.pyspark.sql.connect.expressions.UnresolvedStar".pyspark.sql.connect.expressions.UnresolvedStar*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*≈
+__repr__7pyspark.sql.connect.expressions.UnresolvedStar.__repr__"
+builtins.str"builtins.str*b`
+.pyspark.sql.connect.expressions.UnresolvedStar".pyspark.sql.connect.expressions.UnresolvedStar*Œ
+__eq__5pyspark.sql.connect.expressions.UnresolvedStar.__eq__"
+builtins.bool"builtins.bool*b`
+.pyspark.sql.connect.expressions.UnresolvedStar".pyspark.sql.connect.expressions.UnresolvedStar*	
+Anyrô
+_unparsed_target?pyspark.sql.connect.expressions.UnresolvedStar._unparsed_targetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneá
+SQLExpression-pyspark.sql.connect.expressions.SQLExpression"*pyspark.sql.connect.expressions.Expression*ﬁ
+__init__6pyspark.sql.connect.expressions.SQLExpression.__init__"
+None*h
+self^
+-pyspark.sql.connect.expressions.SQLExpression"-pyspark.sql.connect.expressions.SQLExpression*&
+expr
+builtins.str"builtins.str*è
+to_plan5pyspark.sql.connect.expressions.SQLExpression.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*h
+self^
+-pyspark.sql.connect.expressions.SQLExpression"-pyspark.sql.connect.expressions.SQLExpression*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*À
+__eq__4pyspark.sql.connect.expressions.SQLExpression.__eq__"
+builtins.bool"builtins.bool*`^
+-pyspark.sql.connect.expressions.SQLExpression"-pyspark.sql.connect.expressions.SQLExpression*	
+AnyrZ
+_expr3pyspark.sql.connect.expressions.SQLExpression._expr
+builtins.str"builtins.str˜
+
+	SortOrder)pyspark.sql.connect.expressions.SortOrder"*pyspark.sql.connect.expressions.Expression*Ú
+__init__2pyspark.sql.connect.expressions.SortOrder.__init__"
+None*`
+selfV
+)pyspark.sql.connect.expressions.SortOrder")pyspark.sql.connect.expressions.SortOrder*c
+childX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*/
+	ascending
+builtins.bool"builtins.bool *0
+
+nullsFirst
+builtins.bool"builtins.bool *∂
+__repr__2pyspark.sql.connect.expressions.SortOrder.__repr__"
+builtins.str"builtins.str*XV
+)pyspark.sql.connect.expressions.SortOrder")pyspark.sql.connect.expressions.SortOrder*É
+to_plan1pyspark.sql.connect.expressions.SortOrder.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*`
+selfV
+)pyspark.sql.connect.expressions.SortOrder")pyspark.sql.connect.expressions.SortOrder*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrî
+_child0pyspark.sql.connect.expressions.SortOrder._childX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expressionrb
+
+_ascending4pyspark.sql.connect.expressions.SortOrder._ascending
+builtins.bool"builtins.boolrd
+_nullsFirst5pyspark.sql.connect.expressions.SortOrder._nullsFirst
+builtins.bool"builtins.boolÖ
+UnresolvedFunction2pyspark.sql.connect.expressions.UnresolvedFunction"*pyspark.sql.connect.expressions.Expression*÷
+__init__;pyspark.sql.connect.expressions.UnresolvedFunction.__init__"
+None*r
+selfh
+2pyspark.sql.connect.expressions.UnresolvedFunction"2pyspark.sql.connect.expressions.UnresolvedFunction*&
+name
+builtins.str"builtins.str*≥
+args®
+;typing.Sequence[pyspark.sql.connect.expressions.Expression]X
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression"typing.Sequence*1
+is_distinct
+builtins.bool"builtins.bool *û
+to_plan:pyspark.sql.connect.expressions.UnresolvedFunction.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*r
+selfh
+2pyspark.sql.connect.expressions.UnresolvedFunction"2pyspark.sql.connect.expressions.UnresolvedFunction*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*—
+__repr__;pyspark.sql.connect.expressions.UnresolvedFunction.__repr__"
+builtins.str"builtins.str*jh
+2pyspark.sql.connect.expressions.UnresolvedFunction"2pyspark.sql.connect.expressions.UnresolvedFunctionr_
+_name8pyspark.sql.connect.expressions.UnresolvedFunction._name
+builtins.str"builtins.strro
+_args8pyspark.sql.connect.expressions.UnresolvedFunction._args,
+builtins.list[Any]
+Any"builtins.listro
+_is_distinct?pyspark.sql.connect.expressions.UnresolvedFunction._is_distinct
+builtins.bool"builtins.bool”
+	PythonUDF)pyspark.sql.connect.expressions.PythonUDF"builtins.object*˚
+__init__2pyspark.sql.connect.expressions.PythonUDF.__init__"
+None*`
+selfV
+)pyspark.sql.connect.expressions.PythonUDF")pyspark.sql.connect.expressions.PythonUDF*ú
+output_typeä
+.Union[pyspark.sql.types.DataType,builtins.str]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str*+
+	eval_type
+builtins.int"builtins.int*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*,
+
+python_ver
+builtins.str"builtins.str*Å
+to_plan1pyspark.sql.connect.expressions.PythonUDF.to_plan"j
+3pyspark.sql.connect.proto.expressions_pb2.PythonUDF"3pyspark.sql.connect.proto.expressions_pb2.PythonUDF*`
+selfV
+)pyspark.sql.connect.expressions.PythonUDF")pyspark.sql.connect.expressions.PythonUDF*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*∂
+__repr__2pyspark.sql.connect.expressions.PythonUDF.__repr__"
+builtins.str"builtins.str*XV
+)pyspark.sql.connect.expressions.PythonUDF")pyspark.sql.connect.expressions.PythonUDFrÄ
+_output_type6pyspark.sql.connect.expressions.PythonUDF._output_type8
+pyspark.sql.types.DataType"pyspark.sql.types.DataTyper`
+
+_eval_type4pyspark.sql.connect.expressions.PythonUDF._eval_type
+builtins.int"builtins.intrÖ
+_func/pyspark.sql.connect.expressions.PythonUDF._funcK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrb
+_python_ver5pyspark.sql.connect.expressions.PythonUDF._python_ver
+builtins.str"builtins.str°
+JavaUDF'pyspark.sql.connect.expressions.JavaUDF"builtins.object*≥
+__init__0pyspark.sql.connect.expressions.JavaUDF.__init__"
+None*\
+selfR
+'pyspark.sql.connect.expressions.JavaUDF"'pyspark.sql.connect.expressions.JavaUDF*,
+
+class_name
+builtins.str"builtins.str*≠
+output_typeô
+3Union[pyspark.sql.types.DataType,builtins.str,None]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str
+None */
+	aggregate
+builtins.bool"builtins.bool *˜
+to_plan/pyspark.sql.connect.expressions.JavaUDF.to_plan"f
+1pyspark.sql.connect.proto.expressions_pb2.JavaUDF"1pyspark.sql.connect.proto.expressions_pb2.JavaUDF*\
+selfR
+'pyspark.sql.connect.expressions.JavaUDF"'pyspark.sql.connect.expressions.JavaUDF*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*∞
+__repr__0pyspark.sql.connect.expressions.JavaUDF.__repr__"
+builtins.str"builtins.str*TR
+'pyspark.sql.connect.expressions.JavaUDF"'pyspark.sql.connect.expressions.JavaUDFr`
+_class_name3pyspark.sql.connect.expressions.JavaUDF._class_name
+builtins.str"builtins.strr¥
+_output_type4pyspark.sql.connect.expressions.JavaUDF._output_typen
+&Union[pyspark.sql.types.DataType,None]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+Noner`
+
+_aggregate2pyspark.sql.connect.expressions.JavaUDF._aggregate
+builtins.bool"builtins.boolÏ
+CommonInlineUserDefinedFunction?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"*pyspark.sql.connect.expressions.Expression*´
+__init__Hpyspark.sql.connect.expressions.CommonInlineUserDefinedFunction.__init__"
+None*ç
+selfÇ
+?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction*/
+function_name
+builtins.str"builtins.str*ó
+functionà
+XUnion[pyspark.sql.connect.expressions.PythonUDF,pyspark.sql.connect.expressions.JavaUDF]V
+)pyspark.sql.connect.expressions.PythonUDF")pyspark.sql.connect.expressions.PythonUDFR
+'pyspark.sql.connect.expressions.JavaUDF"'pyspark.sql.connect.expressions.JavaUDF*3
+deterministic
+builtins.bool"builtins.bool *∫
+	arguments®
+;typing.Sequence[pyspark.sql.connect.expressions.Expression]X
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression"typing.Sequence *«
+to_planGpyspark.sql.connect.expressions.CommonInlineUserDefinedFunction.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*ç
+selfÇ
+?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*˙
+to_plan_udfKpyspark.sql.connect.expressions.CommonInlineUserDefinedFunction.to_plan_udf"ñ
+Ipyspark.sql.connect.proto.expressions_pb2.CommonInlineUserDefinedFunction"Ipyspark.sql.connect.proto.expressions_pb2.CommonInlineUserDefinedFunction*ç
+selfÇ
+?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*¸
+to_plan_judfLpyspark.sql.connect.expressions.CommonInlineUserDefinedFunction.to_plan_judf"ñ
+Ipyspark.sql.connect.proto.expressions_pb2.CommonInlineUserDefinedFunction"Ipyspark.sql.connect.proto.expressions_pb2.CommonInlineUserDefinedFunction*ç
+selfÇ
+?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*˙
+__repr__Hpyspark.sql.connect.expressions.CommonInlineUserDefinedFunction.__repr__"
+builtins.str"builtins.str*ÖÇ
+?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunction"?pyspark.sql.connect.expressions.CommonInlineUserDefinedFunctionr~
+_function_nameNpyspark.sql.connect.expressions.CommonInlineUserDefinedFunction._function_name
+builtins.str"builtins.strrÄ
+_deterministicNpyspark.sql.connect.expressions.CommonInlineUserDefinedFunction._deterministic
+builtins.bool"builtins.boolrÉ
+
+_argumentsJpyspark.sql.connect.expressions.CommonInlineUserDefinedFunction._arguments®
+;typing.Sequence[pyspark.sql.connect.expressions.Expression]X
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression"typing.Sequencer·
+	_functionIpyspark.sql.connect.expressions.CommonInlineUserDefinedFunction._functionà
+XUnion[pyspark.sql.connect.expressions.PythonUDF,pyspark.sql.connect.expressions.JavaUDF]V
+)pyspark.sql.connect.expressions.PythonUDF")pyspark.sql.connect.expressions.PythonUDFR
+'pyspark.sql.connect.expressions.JavaUDF"'pyspark.sql.connect.expressions.JavaUDF
+	WithField)pyspark.sql.connect.expressions.WithField"*pyspark.sql.connect.expressions.Expression*™
+__init__2pyspark.sql.connect.expressions.WithField.__init__"
+None*`
+selfV
+)pyspark.sql.connect.expressions.WithField")pyspark.sql.connect.expressions.WithField*h
+
+structExprX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*+
+	fieldName
+builtins.str"builtins.str*g
+	valueExprX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*É
+to_plan1pyspark.sql.connect.expressions.WithField.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*`
+selfV
+)pyspark.sql.connect.expressions.WithField")pyspark.sql.connect.expressions.WithField*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*∂
+__repr__2pyspark.sql.connect.expressions.WithField.__repr__"
+builtins.str"builtins.str*XV
+)pyspark.sql.connect.expressions.WithField")pyspark.sql.connect.expressions.WithFieldrû
+_structExpr5pyspark.sql.connect.expressions.WithField._structExprX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expressionr`
+
+_fieldName4pyspark.sql.connect.expressions.WithField._fieldName
+builtins.str"builtins.strrú
+
+_valueExpr4pyspark.sql.connect.expressions.WithField._valueExprX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.ExpressionË	
+	DropField)pyspark.sql.connect.expressions.DropField"*pyspark.sql.connect.expressions.Expression*¡
+__init__2pyspark.sql.connect.expressions.DropField.__init__"
+None*`
+selfV
+)pyspark.sql.connect.expressions.DropField")pyspark.sql.connect.expressions.DropField*h
+
+structExprX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*+
+	fieldName
+builtins.str"builtins.str*É
+to_plan1pyspark.sql.connect.expressions.DropField.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*`
+selfV
+)pyspark.sql.connect.expressions.DropField")pyspark.sql.connect.expressions.DropField*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*∂
+__repr__2pyspark.sql.connect.expressions.DropField.__repr__"
+builtins.str"builtins.str*XV
+)pyspark.sql.connect.expressions.DropField")pyspark.sql.connect.expressions.DropFieldrû
+_structExpr5pyspark.sql.connect.expressions.DropField._structExprX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expressionr`
+
+_fieldName4pyspark.sql.connect.expressions.DropField._fieldName
+builtins.str"builtins.str˛
+UnresolvedExtractValue6pyspark.sql.connect.expressions.UnresolvedExtractValue"*pyspark.sql.connect.expressions.Expression*†
+__init__?pyspark.sql.connect.expressions.UnresolvedExtractValue.__init__"
+None*z
+selfp
+6pyspark.sql.connect.expressions.UnresolvedExtractValue"6pyspark.sql.connect.expressions.UnresolvedExtractValue*c
+childX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*h
+
+extractionX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*™
+to_plan>pyspark.sql.connect.expressions.UnresolvedExtractValue.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*z
+selfp
+6pyspark.sql.connect.expressions.UnresolvedExtractValue"6pyspark.sql.connect.expressions.UnresolvedExtractValue*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*›
+__repr__?pyspark.sql.connect.expressions.UnresolvedExtractValue.__repr__"
+builtins.str"builtins.str*rp
+6pyspark.sql.connect.expressions.UnresolvedExtractValue"6pyspark.sql.connect.expressions.UnresolvedExtractValuer°
+_child=pyspark.sql.connect.expressions.UnresolvedExtractValue._childX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expressionr´
+_extractionBpyspark.sql.connect.expressions.UnresolvedExtractValue._extractionX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.ExpressionÇ
+
+UnresolvedRegex/pyspark.sql.connect.expressions.UnresolvedRegex"*pyspark.sql.connect.expressions.Expression*Ω
+__init__8pyspark.sql.connect.expressions.UnresolvedRegex.__init__"
+None*l
+selfb
+/pyspark.sql.connect.expressions.UnresolvedRegex"/pyspark.sql.connect.expressions.UnresolvedRegex**
+col_name
+builtins.str"builtins.str*S
+plan_idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ï
+to_plan7pyspark.sql.connect.expressions.UnresolvedRegex.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*l
+selfb
+/pyspark.sql.connect.expressions.UnresolvedRegex"/pyspark.sql.connect.expressions.UnresolvedRegex*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*»
+__repr__8pyspark.sql.connect.expressions.UnresolvedRegex.__repr__"
+builtins.str"builtins.str*db
+/pyspark.sql.connect.expressions.UnresolvedRegex"/pyspark.sql.connect.expressions.UnresolvedRegexrb
+col_name8pyspark.sql.connect.expressions.UnresolvedRegex.col_name
+builtins.str"builtins.strrä
+_plan_id8pyspark.sql.connect.expressions.UnresolvedRegex._plan_idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None˜
+CastExpression.pyspark.sql.connect.expressions.CastExpression"*pyspark.sql.connect.expressions.Expression*∫
+__init__7pyspark.sql.connect.expressions.CastExpression.__init__"
+None*j
+self`
+.pyspark.sql.connect.expressions.CastExpression".pyspark.sql.connect.expressions.CastExpression*b
+exprX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*ö
+	data_typeä
+.Union[pyspark.sql.types.DataType,builtins.str]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.str*í
+to_plan6pyspark.sql.connect.expressions.CastExpression.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*j
+self`
+.pyspark.sql.connect.expressions.CastExpression".pyspark.sql.connect.expressions.CastExpression*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*≈
+__repr__7pyspark.sql.connect.expressions.CastExpression.__repr__"
+builtins.str"builtins.str*b`
+.pyspark.sql.connect.expressions.CastExpression".pyspark.sql.connect.expressions.CastExpressionró
+_expr4pyspark.sql.connect.expressions.CastExpression._exprX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expressionr‘
+
+_data_type9pyspark.sql.connect.expressions.CastExpression._data_typeä
+.Union[pyspark.sql.types.DataType,builtins.str]8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType
+builtins.str"builtins.strΩ
+UnresolvedNamedLambdaVariable=pyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable"*pyspark.sql.connect.expressions.Expression*«
+__init__Fpyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable.__init__"
+None*à
+self~
+=pyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable"=pyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable*^
+
+name_partsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*¿
+to_planEpyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*à
+self~
+=pyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable"=pyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*Û
+__repr__Fpyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable.__repr__"
+builtins.str"builtins.str*Ä~
+=pyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable"=pyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable*∂
+fresh_var_nameLpyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable.fresh_var_name"
+builtins.str"builtins.str*&
+name
+builtins.str"builtins.str0:staticmethodhrn
+_lockCpyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable._lock 
+threading.Lock"threading.Lockr|
+_nextVarNameIdLpyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable._nextVarNameId
+builtins.int"builtins.intrÜ
+_name_partsIpyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable._name_parts,
+builtins.list[Any]
+Any"builtins.list˙
+LambdaFunction.pyspark.sql.connect.expressions.LambdaFunction"*pyspark.sql.connect.expressions.Expression*ï
+__init__7pyspark.sql.connect.expressions.LambdaFunction.__init__"
+None*j
+self`
+.pyspark.sql.connect.expressions.LambdaFunction".pyspark.sql.connect.expressions.LambdaFunction*f
+functionX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*Ò
+	arguments·
+Ntyping.Sequence[pyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable]~
+=pyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable"=pyspark.sql.connect.expressions.UnresolvedNamedLambdaVariable"typing.Sequence*í
+to_plan6pyspark.sql.connect.expressions.LambdaFunction.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*j
+self`
+.pyspark.sql.connect.expressions.LambdaFunction".pyspark.sql.connect.expressions.LambdaFunction*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*≈
+__repr__7pyspark.sql.connect.expressions.LambdaFunction.__repr__"
+builtins.str"builtins.str*b`
+.pyspark.sql.connect.expressions.LambdaFunction".pyspark.sql.connect.expressions.LambdaFunctionrü
+	_function8pyspark.sql.connect.expressions.LambdaFunction._functionX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expressionru
+
+_arguments9pyspark.sql.connect.expressions.LambdaFunction._arguments,
+builtins.list[Any]
+Any"builtins.list∑
+WindowExpression0pyspark.sql.connect.expressions.WindowExpression"*pyspark.sql.connect.expressions.Expression*ç
+__init__9pyspark.sql.connect.expressions.WindowExpression.__init__"
+None*n
+selfd
+0pyspark.sql.connect.expressions.WindowExpression"0pyspark.sql.connect.expressions.WindowExpression*l
+windowFunctionX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression*^
+
+windowSpecN
+%pyspark.sql.connect.window.WindowSpec"%pyspark.sql.connect.window.WindowSpec*ò
+to_plan8pyspark.sql.connect.expressions.WindowExpression.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*n
+selfd
+0pyspark.sql.connect.expressions.WindowExpression"0pyspark.sql.connect.expressions.WindowExpression*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*À
+__repr__9pyspark.sql.connect.expressions.WindowExpression.__repr__"
+builtins.str"builtins.str*fd
+0pyspark.sql.connect.expressions.WindowExpression"0pyspark.sql.connect.expressions.WindowExpressionr≠
+_windowFunction@pyspark.sql.connect.expressions.WindowExpression._windowFunctionX
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expressionrõ
+_windowSpec<pyspark.sql.connect.expressions.WindowExpression._windowSpecN
+%pyspark.sql.connect.window.WindowSpec"%pyspark.sql.connect.window.WindowSpecÅ
+DistributedSequenceID5pyspark.sql.connect.expressions.DistributedSequenceID"*pyspark.sql.connect.expressions.Expression*ß
+to_plan=pyspark.sql.connect.expressions.DistributedSequenceID.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*x
+selfn
+5pyspark.sql.connect.expressions.DistributedSequenceID"5pyspark.sql.connect.expressions.DistributedSequenceID*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*⁄
+__repr__>pyspark.sql.connect.expressions.DistributedSequenceID.__repr__"
+builtins.str"builtins.str*pn
+5pyspark.sql.connect.expressions.DistributedSequenceID"5pyspark.sql.connect.expressions.DistributedSequenceIDì
+
+CallFunction,pyspark.sql.connect.expressions.CallFunction"*pyspark.sql.connect.expressions.Expression*ë
+__init__5pyspark.sql.connect.expressions.CallFunction.__init__"
+None*f
+self\
+,pyspark.sql.connect.expressions.CallFunction",pyspark.sql.connect.expressions.CallFunction*&
+name
+builtins.str"builtins.str*≥
+args®
+;typing.Sequence[pyspark.sql.connect.expressions.Expression]X
+*pyspark.sql.connect.expressions.Expression"*pyspark.sql.connect.expressions.Expression"typing.Sequence*å
+to_plan4pyspark.sql.connect.expressions.CallFunction.to_plan"l
+4pyspark.sql.connect.proto.expressions_pb2.Expression"4pyspark.sql.connect.proto.expressions_pb2.Expression*f
+self\
+,pyspark.sql.connect.expressions.CallFunction",pyspark.sql.connect.expressions.CallFunction*u
+sessionh
+2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClient*ø
+__repr__5pyspark.sql.connect.expressions.CallFunction.__repr__"
+builtins.str"builtins.str*^\
+,pyspark.sql.connect.expressions.CallFunction",pyspark.sql.connect.expressions.CallFunctionrY
+_name2pyspark.sql.connect.expressions.CallFunction._name
+builtins.str"builtins.strri
+_args2pyspark.sql.connect.expressions.CallFunction._args,
+builtins.list[Any]
+Any"builtins.list*õ
+__annotations__/pyspark.sql.connect.expressions.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+npnumpy *$
+protopyspark.sql.connect.proto 

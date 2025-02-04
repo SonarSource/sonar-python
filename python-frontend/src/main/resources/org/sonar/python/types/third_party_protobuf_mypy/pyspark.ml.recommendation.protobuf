@@ -1,0 +1,411 @@
+
+pyspark.ml.recommendation¢
+_ALSModelParams)pyspark.ml.recommendation._ALSModelParams"(pyspark.ml.param.shared.HasPredictionCol"$pyspark.ml.param.shared.HasBlockSize*Ω
+__init__2pyspark.ml.recommendation._ALSModelParams.__init__"
+None*`
+selfV
+)pyspark.ml.recommendation._ALSModelParams")pyspark.ml.recommendation._ALSModelParams*
+args
+Any*ƒ
+
+getUserCol4pyspark.ml.recommendation._ALSModelParams.getUserCol"
+builtins.str"builtins.str*`
+selfV
+)pyspark.ml.recommendation._ALSModelParams")pyspark.ml.recommendation._ALSModelParams0*ƒ
+
+getItemCol4pyspark.ml.recommendation._ALSModelParams.getItemCol"
+builtins.str"builtins.str*`
+selfV
+)pyspark.ml.recommendation._ALSModelParams")pyspark.ml.recommendation._ALSModelParams0*ÿ
+getColdStartStrategy>pyspark.ml.recommendation._ALSModelParams.getColdStartStrategy"
+builtins.str"builtins.str*`
+selfV
+)pyspark.ml.recommendation._ALSModelParams")pyspark.ml.recommendation._ALSModelParams08rö
+userCol1pyspark.ml.recommendation._ALSModelParams.userCol\
+$pyspark.ml.param.Param[builtins.str]
+builtins.str"builtins.str"pyspark.ml.param.Paramrö
+itemCol1pyspark.ml.recommendation._ALSModelParams.itemCol\
+$pyspark.ml.param.Param[builtins.str]
+builtins.str"builtins.str"pyspark.ml.param.ParamrÆ
+coldStartStrategy;pyspark.ml.recommendation._ALSModelParams.coldStartStrategy\
+$pyspark.ml.param.Param[builtins.str]
+builtins.str"builtins.str"pyspark.ml.param.Param≈
+
+_ALSParams$pyspark.ml.recommendation._ALSParams")pyspark.ml.recommendation._ALSModelParams""pyspark.ml.param.shared.HasMaxIter"#pyspark.ml.param.shared.HasRegParam"-pyspark.ml.param.shared.HasCheckpointInterval"pyspark.ml.param.shared.HasSeed*Æ
+__init__-pyspark.ml.recommendation._ALSParams.__init__"
+None*V
+selfL
+$pyspark.ml.recommendation._ALSParams"$pyspark.ml.recommendation._ALSParams*
+args
+Any*Ø
+getRank,pyspark.ml.recommendation._ALSParams.getRank"
+builtins.int"builtins.int*V
+selfL
+$pyspark.ml.recommendation._ALSParams"$pyspark.ml.recommendation._ALSParams0*¡
+getNumUserBlocks5pyspark.ml.recommendation._ALSParams.getNumUserBlocks"
+builtins.int"builtins.int*V
+selfL
+$pyspark.ml.recommendation._ALSParams"$pyspark.ml.recommendation._ALSParams0*¡
+getNumItemBlocks5pyspark.ml.recommendation._ALSParams.getNumItemBlocks"
+builtins.int"builtins.int*V
+selfL
+$pyspark.ml.recommendation._ALSParams"$pyspark.ml.recommendation._ALSParams0*√
+getImplicitPrefs5pyspark.ml.recommendation._ALSParams.getImplicitPrefs"
+builtins.bool"builtins.bool*V
+selfL
+$pyspark.ml.recommendation._ALSParams"$pyspark.ml.recommendation._ALSParams0*µ
+getAlpha-pyspark.ml.recommendation._ALSParams.getAlpha" 
+builtins.float"builtins.float*V
+selfL
+$pyspark.ml.recommendation._ALSParams"$pyspark.ml.recommendation._ALSParams0*π
+getRatingCol1pyspark.ml.recommendation._ALSParams.getRatingCol"
+builtins.str"builtins.str*V
+selfL
+$pyspark.ml.recommendation._ALSParams"$pyspark.ml.recommendation._ALSParams0*ø
+getNonnegative3pyspark.ml.recommendation._ALSParams.getNonnegative"
+builtins.bool"builtins.bool*V
+selfL
+$pyspark.ml.recommendation._ALSParams"$pyspark.ml.recommendation._ALSParams0*◊
+getIntermediateStorageLevel@pyspark.ml.recommendation._ALSParams.getIntermediateStorageLevel"
+builtins.str"builtins.str*V
+selfL
+$pyspark.ml.recommendation._ALSParams"$pyspark.ml.recommendation._ALSParams0*…
+getFinalStorageLevel9pyspark.ml.recommendation._ALSParams.getFinalStorageLevel"
+builtins.str"builtins.str*V
+selfL
+$pyspark.ml.recommendation._ALSParams"$pyspark.ml.recommendation._ALSParams08rè
+rank)pyspark.ml.recommendation._ALSParams.rank\
+$pyspark.ml.param.Param[builtins.int]
+builtins.int"builtins.int"pyspark.ml.param.Paramr°
+numUserBlocks2pyspark.ml.recommendation._ALSParams.numUserBlocks\
+$pyspark.ml.param.Param[builtins.int]
+builtins.int"builtins.int"pyspark.ml.param.Paramr°
+numItemBlocks2pyspark.ml.recommendation._ALSParams.numItemBlocks\
+$pyspark.ml.param.Param[builtins.int]
+builtins.int"builtins.int"pyspark.ml.param.Paramr§
+implicitPrefs2pyspark.ml.recommendation._ALSParams.implicitPrefs_
+%pyspark.ml.param.Param[builtins.bool]
+builtins.bool"builtins.bool"pyspark.ml.param.Paramró
+alpha*pyspark.ml.recommendation._ALSParams.alphab
+&pyspark.ml.param.Param[builtins.float] 
+builtins.float"builtins.float"pyspark.ml.param.Paramrô
+	ratingCol.pyspark.ml.recommendation._ALSParams.ratingCol\
+$pyspark.ml.param.Param[builtins.str]
+builtins.str"builtins.str"pyspark.ml.param.Paramr†
+nonnegative0pyspark.ml.recommendation._ALSParams.nonnegative_
+%pyspark.ml.param.Param[builtins.bool]
+builtins.bool"builtins.bool"pyspark.ml.param.Paramr∑
+intermediateStorageLevel=pyspark.ml.recommendation._ALSParams.intermediateStorageLevel\
+$pyspark.ml.param.Param[builtins.str]
+builtins.str"builtins.str"pyspark.ml.param.Paramr©
+finalStorageLevel6pyspark.ml.recommendation._ALSParams.finalStorageLevel\
+$pyspark.ml.param.Param[builtins.str]
+builtins.str"builtins.str"pyspark.ml.param.Param∆9
+ALSpyspark.ml.recommendation.ALS" pyspark.ml.wrapper.JavaEstimator"$pyspark.ml.recommendation._ALSParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*ä
+__init__&pyspark.ml.recommendation.ALS.__init__"
+None*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*(
+rank
+builtins.int"builtins.int *+
+maxIter
+builtins.int"builtins.int *0
+regParam 
+builtins.float"builtins.float *1
+numUserBlocks
+builtins.int"builtins.int *1
+numItemBlocks
+builtins.int"builtins.int *3
+implicitPrefs
+builtins.bool"builtins.bool *-
+alpha 
+builtins.float"builtins.float *+
+userCol
+builtins.str"builtins.str *+
+itemCol
+builtins.str"builtins.str *P
+seedD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *-
+	ratingCol
+builtins.str"builtins.str *1
+nonnegative
+builtins.bool"builtins.bool *6
+checkpointInterval
+builtins.int"builtins.int *<
+intermediateStorageLevel
+builtins.str"builtins.str *5
+finalStorageLevel
+builtins.str"builtins.str *5
+coldStartStrategy
+builtins.str"builtins.str *-
+	blockSize
+builtins.int"builtins.int 0:keyword_only*¬
+	setParams'pyspark.ml.recommendation.ALS.setParams">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*(
+rank
+builtins.int"builtins.int *+
+maxIter
+builtins.int"builtins.int *0
+regParam 
+builtins.float"builtins.float *1
+numUserBlocks
+builtins.int"builtins.int *1
+numItemBlocks
+builtins.int"builtins.int *3
+implicitPrefs
+builtins.bool"builtins.bool *-
+alpha 
+builtins.float"builtins.float *+
+userCol
+builtins.str"builtins.str *+
+itemCol
+builtins.str"builtins.str *P
+seedD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *-
+	ratingCol
+builtins.str"builtins.str *1
+nonnegative
+builtins.bool"builtins.bool *6
+checkpointInterval
+builtins.int"builtins.int *<
+intermediateStorageLevel
+builtins.str"builtins.str *5
+finalStorageLevel
+builtins.str"builtins.str *5
+coldStartStrategy
+builtins.str"builtins.str *-
+	blockSize
+builtins.int"builtins.int 0:keyword_only*È
+_create_model+pyspark.ml.recommendation.ALS._create_model"H
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*
+
+java_model
+Any*Â
+setRank%pyspark.ml.recommendation.ALS.setRank">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.int"builtins.int0*˜
+setNumUserBlocks.pyspark.ml.recommendation.ALS.setNumUserBlocks">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.int"builtins.int0*˜
+setNumItemBlocks.pyspark.ml.recommendation.ALS.setNumItemBlocks">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.int"builtins.int0*Ô
+setNumBlocks*pyspark.ml.recommendation.ALS.setNumBlocks">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.int"builtins.int0*˘
+setImplicitPrefs.pyspark.ml.recommendation.ALS.setImplicitPrefs">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*)
+value
+builtins.bool"builtins.bool0*Î
+setAlpha&pyspark.ml.recommendation.ALS.setAlpha">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*+
+value 
+builtins.float"builtins.float0*Î
+
+setUserCol(pyspark.ml.recommendation.ALS.setUserCol">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.str"builtins.str0*Î
+
+setItemCol(pyspark.ml.recommendation.ALS.setItemCol">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.str"builtins.str0*Ô
+setRatingCol*pyspark.ml.recommendation.ALS.setRatingCol">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.str"builtins.str0*ı
+setNonnegative,pyspark.ml.recommendation.ALS.setNonnegative">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*)
+value
+builtins.bool"builtins.bool0*ç
+setIntermediateStorageLevel9pyspark.ml.recommendation.ALS.setIntermediateStorageLevel">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.str"builtins.str0*ˇ
+setFinalStorageLevel2pyspark.ml.recommendation.ALS.setFinalStorageLevel">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.str"builtins.str0*ˇ
+setColdStartStrategy2pyspark.ml.recommendation.ALS.setColdStartStrategy">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.str"builtins.str0*È
+
+setMaxIter(pyspark.ml.recommendation.ALS.setMaxIter">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.int"builtins.int*Ô
+setRegParam)pyspark.ml.recommendation.ALS.setRegParam">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*+
+value 
+builtins.float"builtins.float*ı
+setPredictionCol.pyspark.ml.recommendation.ALS.setPredictionCol">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.str"builtins.str*ˇ
+setCheckpointInterval3pyspark.ml.recommendation.ALS.setCheckpointInterval">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.int"builtins.int*„
+setSeed%pyspark.ml.recommendation.ALS.setSeed">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.int"builtins.int*Ô
+setBlockSize*pyspark.ml.recommendation.ALS.setBlockSize">
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*H
+self>
+pyspark.ml.recommendation.ALS"pyspark.ml.recommendation.ALS*'
+value
+builtins.int"builtins.int08rï
+_input_kwargs+pyspark.ml.recommendation.ALS._input_kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict˛
+ALSModel"pyspark.ml.recommendation.ALSModel"pyspark.ml.wrapper.JavaModel")pyspark.ml.recommendation._ALSModelParams"pyspark.ml.util.JavaMLWritable"pyspark.ml.util.JavaMLReadable*Ñ
+
+setUserCol-pyspark.ml.recommendation.ALSModel.setUserCol"H
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*'
+value
+builtins.str"builtins.str0*Ñ
+
+setItemCol-pyspark.ml.recommendation.ALSModel.setItemCol"H
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*'
+value
+builtins.str"builtins.str0*ò
+setColdStartStrategy7pyspark.ml.recommendation.ALSModel.setColdStartStrategy"H
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*'
+value
+builtins.str"builtins.str0*ê
+setPredictionCol3pyspark.ml.recommendation.ALSModel.setPredictionCol"H
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*'
+value
+builtins.str"builtins.str0*à
+setBlockSize/pyspark.ml.recommendation.ALSModel.setBlockSize"H
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*'
+value
+builtins.int"builtins.int0*Ø
+rank'pyspark.ml.recommendation.ALSModel.rank"
+builtins.int"builtins.int*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel0:property`*„
+userFactors.pyspark.ml.recommendation.ALSModel.userFactors"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel0:property`*„
+itemFactors.pyspark.ml.recommendation.ALSModel.itemFactors"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel0:property`*ì
+recommendForAllUsers7pyspark.ml.recommendation.ALSModel.recommendForAllUsers"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel**
+numItems
+builtins.int"builtins.int*ì
+recommendForAllItems7pyspark.ml.recommendation.ALSModel.recommendForAllItems"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel**
+numUsers
+builtins.int"builtins.int*Ë
+recommendForUserSubset9pyspark.ml.recommendation.ALSModel.recommendForUserSubset"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*O
+datasetB
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame**
+numItems
+builtins.int"builtins.int*Ë
+recommendForItemSubset9pyspark.ml.recommendation.ALSModel.recommendForItemSubset"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*R
+selfH
+"pyspark.ml.recommendation.ALSModel""pyspark.ml.recommendation.ALSModel*O
+datasetB
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame**
+numUsers
+builtins.int"builtins.int*ï
+__annotations__)pyspark.ml.recommendation.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*;
+
+JavaObject$pyspark.ml.recommendation.JavaObject
+Any*x
+__all__!pyspark.ml.recommendation.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*
+pysparkpyspark *Å
+globspyspark.ml.recommendation.globsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*n
+sparkpyspark.ml.recommendation.sparkD
+ pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*`
+scpyspark.ml.recommendation.sc<
+pyspark.context.SparkContext"pyspark.context.SparkContext*N
+	temp_path#pyspark.ml.recommendation.temp_path
+builtins.str"builtins.str*V
+failure_count'pyspark.ml.recommendation.failure_count
+builtins.int"builtins.int*P
+
+test_count$pyspark.ml.recommendation.test_count
+builtins.int"builtins.int

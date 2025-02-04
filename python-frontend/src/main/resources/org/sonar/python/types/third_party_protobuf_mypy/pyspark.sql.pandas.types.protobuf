@@ -1,0 +1,139 @@
+
+pyspark.sql.pandas.types‚
+to_arrow_type&pyspark.sql.pandas.types.to_arrow_type"
+Any*@
+dt8
+pyspark.sql.types.DataType"pyspark.sql.types.DataTypeŽ
+to_arrow_schema(pyspark.sql.pandas.types.to_arrow_schema"
+Any*H
+schema<
+pyspark.sql.types.StructType"pyspark.sql.types.StructTypeÂ
+from_arrow_type(pyspark.sql.pandas.types.from_arrow_type"8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType*
+at
+Any*:
+prefer_timestamp_ntz
+builtins.bool"builtins.bool Ô
+from_arrow_schema*pyspark.sql.pandas.types.from_arrow_schema"<
+pyspark.sql.types.StructType"pyspark.sql.types.StructType*
+arrow_schema
+Any*:
+prefer_timestamp_ntz
+builtins.bool"builtins.bool a
+_get_local_timezone,pyspark.sql.pandas.types._get_local_timezone"
+builtins.str"builtins.strž
+!_check_series_localize_timestamps:pyspark.sql.pandas.types._check_series_localize_timestamps"D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*K
+sD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series**
+timezone
+builtins.str"builtins.str®
+)_check_series_convert_timestamps_internalBpyspark.sql.pandas.types._check_series_convert_timestamps_internal"D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*K
+sD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series**
+timezone
+builtins.str"builtins.str²
+)_check_series_convert_timestamps_localizeBpyspark.sql.pandas.types._check_series_convert_timestamps_localize"D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*K
+sD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*W
+from_timezoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*U
+to_timezoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None®
+)_check_series_convert_timestamps_local_tzBpyspark.sql.pandas.types._check_series_convert_timestamps_local_tz"D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*K
+sD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series**
+timezone
+builtins.str"builtins.str®
+)_check_series_convert_timestamps_tz_localBpyspark.sql.pandas.types._check_series_convert_timestamps_tz_local"D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*K
+sD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series**
+timezone
+builtins.str"builtins.strä
+_convert_map_items_to_dict3pyspark.sql.pandas.types._convert_map_items_to_dict"D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*K
+sD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Seriesä
+_convert_dict_to_map_items3pyspark.sql.pandas.types._convert_dict_to_map_items"D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*K
+sD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series¹
+_to_corrected_pandas_type2pyspark.sql.pandas.types._to_corrected_pandas_type"&
+Union[Any,None]
+Any
+None*@
+dt8
+pyspark.sql.types.DataType"pyspark.sql.types.DataTypeŠ
+_create_converter_to_pandas4pyspark.sql.pandas.types._create_converter_to_pandas"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*G
+	data_type8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType*.
+nullable
+builtins.bool"builtins.bool *T
+timezoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *\
+struct_in_pandasD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *E
+error_on_duplicated_field_names
+builtins.bool"builtins.bool *=
+timestamp_utc_localized
+builtins.bool"builtins.bool *5
+ndarray_as_list
+builtins.bool"builtins.bool Õ
+_create_converter_from_pandas6pyspark.sql.pandas.types._create_converter_from_pandas"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*G
+	data_type8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType*R
+timezoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*E
+error_on_duplicated_field_names
+builtins.bool"builtins.bool *K
+%ignore_unexpected_complex_type_values
+builtins.bool"builtins.bool Ø
+_dedup_names%pyspark.sql.pandas.types._dedup_names"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*U
+namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listÉ
+_deduplicate_field_names1pyspark.sql.pandas.types._deduplicate_field_names"8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType*@
+dt8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType*”
+__annotations__(pyspark.sql.pandas.types.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+pdpandas **
+papyspark.sql.pandas.types.pa
+Any

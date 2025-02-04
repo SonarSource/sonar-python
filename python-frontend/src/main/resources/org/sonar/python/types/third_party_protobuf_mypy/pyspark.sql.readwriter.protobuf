@@ -1,0 +1,1024 @@
+
+pyspark.sql.readwriterë
+OptionUtils"pyspark.sql.readwriter.OptionUtils"builtins.object*¦
+	_set_opts,pyspark.sql.readwriter.OptionUtils._set_opts"
+None*R
+selfH
+"pyspark.sql.readwriter.OptionUtils""pyspark.sql.readwriter.OptionUtils*®
+schemaŸ
+5Union[pyspark.sql.types.StructType,builtins.str,None]<
+pyspark.sql.types.StructType"pyspark.sql.types.StructType
+builtins.str"builtins.str
+None *Û
+optionsÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType…‚
+DataFrameReader&pyspark.sql.readwriter.DataFrameReader""pyspark.sql.readwriter.OptionUtils*ò
+__init__/pyspark.sql.readwriter.DataFrameReader.__init__"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*O
+sparkD
+ pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*ã
+_df*pyspark.sql.readwriter.DataFrameReader._df"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*
+jdf
+Any*
+format-pyspark.sql.readwriter.DataFrameReader.format"P
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*(
+source
+builtins.str"builtins.str*…
+schema-pyspark.sql.readwriter.DataFrameReader.schema"P
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*
+schema
+0Union[pyspark.sql.types.StructType,builtins.str]<
+pyspark.sql.types.StructType"pyspark.sql.types.StructType
+builtins.str"builtins.str*è
+option-pyspark.sql.readwriter.DataFrameReader.option"P
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*%
+key
+builtins.str"builtins.str*Ù
+valueÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType*Å
+options.pyspark.sql.readwriter.DataFrameReader.options"P
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*Û
+optionsÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType*ò
+load+pyspark.sql.readwriter.DataFrameReader.load"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*¹
+path¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *R
+formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *®
+schemaŸ
+5Union[pyspark.sql.types.StructType,builtins.str,None]<
+pyspark.sql.types.StructType"pyspark.sql.types.StructType
+builtins.str"builtins.str
+None *Û
+optionsÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType*þ
+json+pyspark.sql.readwriter.DataFrameReader.json"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*–
+path‹
+MUnion[builtins.str,builtins.list[builtins.str],pyspark.rdd.RDD[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listN
+pyspark.rdd.RDD[builtins.str]
+builtins.str"builtins.str"pyspark.rdd.RDD*®
+schemaŸ
+5Union[pyspark.sql.types.StructType,builtins.str,None]<
+pyspark.sql.types.StructType"pyspark.sql.types.StructType
+builtins.str"builtins.str
+None *Œ
+primitivesAsStringr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *ˆ
+prefersDecimalr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‡
+allowCommentsr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‘
+allowUnquotedFieldNamesr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‹
+allowSingleQuotesr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‘
+allowNumericLeadingZeror
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *œ
+"allowBackslashEscapingAnyCharacterr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *P
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *e
+columnNameOfCorruptRecordD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *V
+
+dateFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *[
+timestampFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ƒ
+	multiLiner
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *“
+allowUnquotedControlCharsr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *S
+lineSepD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Š
+samplingRatiou
+'Union[builtins.float,builtins.str,None] 
+builtins.float"builtins.float
+builtins.str"builtins.str
+None *Œ
+dropFieldIfAllNullr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+localeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ˆ
+pathGlobFilterr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *
+recursiveFileLookupr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *ˆ
+modifiedBeforer
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‡
+modifiedAfterr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *
+allowNonNumericNumbersr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‚
+table,pyspark.sql.readwriter.DataFrameReader.table"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*+
+	tableName
+builtins.str"builtins.str*à
+parquet.pyspark.sql.readwriter.DataFrameReader.parquet"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*'
+paths
+builtins.str"builtins.str*Û
+optionsÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType*š	
+text+pyspark.sql.readwriter.DataFrameReader.text"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*Ž
+paths‚
+:TypeAlias[Union[builtins.str,builtins.list[builtins.str]]]
+/Union[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list""pyspark.sql.readwriter.PathOrPaths*/
+	wholetext
+builtins.bool"builtins.bool *S
+lineSepD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ˆ
+pathGlobFilterr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *
+recursiveFileLookupr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *ˆ
+modifiedBeforer
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‡
+modifiedAfterr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *ó 
+csv*pyspark.sql.readwriter.DataFrameReader.csv"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*
+path‚
+:TypeAlias[Union[builtins.str,builtins.list[builtins.str]]]
+/Union[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list""pyspark.sql.readwriter.PathOrPaths*®
+schemaŸ
+5Union[pyspark.sql.types.StructType,builtins.str,None]<
+pyspark.sql.types.StructType"pyspark.sql.types.StructType
+builtins.str"builtins.str
+None *O
+sepD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+quoteD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+escapeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+commentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *€
+headerr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *…
+inferSchemar
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‘
+ignoreLeadingWhiteSpacer
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *’
+ignoreTrailingWhiteSpacer
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *U
+	nullValueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+nanValueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+positiveInfD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+negativeInfD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *V
+
+dateFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *[
+timestampFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+
+maxColumnso
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *ˆ
+maxCharsPerColumno
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *’
+maxMalformedLogPerPartitiono
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *P
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *e
+columnNameOfCorruptRecordD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ƒ
+	multiLiner
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *e
+charToEscapeQuoteEscapingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Š
+samplingRatiou
+'Union[builtins.float,builtins.str,None] 
+builtins.float"builtins.float
+builtins.str"builtins.str
+None *‡
+enforceSchemar
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *V
+
+emptyValueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+localeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+lineSepD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ˆ
+pathGlobFilterr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *
+recursiveFileLookupr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *ˆ
+modifiedBeforer
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‡
+modifiedAfterr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *b
+unescapedQuoteHandlingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *í
+orc*pyspark.sql.readwriter.DataFrameReader.orc"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*
+path‚
+:TypeAlias[Union[builtins.str,builtins.list[builtins.str]]]
+/Union[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list""pyspark.sql.readwriter.PathOrPaths*Z
+mergeSchemaG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *ˆ
+pathGlobFilterr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *
+recursiveFileLookupr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *ˆ
+modifiedBeforer
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‡
+modifiedAfterr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None 2×
+jdbc+pyspark.sql.readwriter.DataFrameReader.jdbc€
+jdbc+pyspark.sql.readwriter.DataFrameReader.jdbc"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*%
+url
+builtins.str"builtins.str*'
+table
+builtins.str"builtins.str*Ì
+
+properties¹
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None 0:overloadX¿
+jdbc+pyspark.sql.readwriter.DataFrameReader.jdbc"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*%
+url
+builtins.str"builtins.str*'
+table
+builtins.str"builtins.str*(
+column
+builtins.str"builtins.str*p
+
+lowerBound`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*p
+
+upperBound`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*/
+numPartitions
+builtins.int"builtins.int*Ì
+
+properties¹
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None 0:overloadXÜ
+jdbc+pyspark.sql.readwriter.DataFrameReader.jdbc"B
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*Z
+selfP
+&pyspark.sql.readwriter.DataFrameReader"&pyspark.sql.readwriter.DataFrameReader*%
+url
+builtins.str"builtins.str*'
+table
+builtins.str"builtins.str*Z
+
+predicatesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*Ì
+
+properties¹
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None 0:overloadXrD
+_jreader/pyspark.sql.readwriter.DataFrameReader._jreader
+Anyr}
+_spark-pyspark.sql.readwriter.DataFrameReader._sparkD
+ pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession·a
+DataFrameWriter&pyspark.sql.readwriter.DataFrameWriter""pyspark.sql.readwriter.OptionUtils*í
+__init__/pyspark.sql.readwriter.DataFrameWriter.__init__"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*J
+dfB
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*ù
+_sq*pyspark.sql.readwriter.DataFrameWriter._sq"X
+*pyspark.sql.streaming.query.StreamingQuery"*pyspark.sql.streaming.query.StreamingQuery*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*
+jsq
+Any*µ
+mode+pyspark.sql.readwriter.DataFrameWriter.mode"P
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*R
+saveModeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*
+format-pyspark.sql.readwriter.DataFrameWriter.format"P
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*(
+source
+builtins.str"builtins.str*è
+option-pyspark.sql.readwriter.DataFrameWriter.option"P
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*%
+key
+builtins.str"builtins.str*Ù
+valueÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType*Å
+options.pyspark.sql.readwriter.DataFrameWriter.options"P
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Û
+optionsÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType*²
+save+pyspark.sql.readwriter.DataFrameWriter.save"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *P
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *À
+partitionBy¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *Û
+optionsÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType*¬
+
+insertInto1pyspark.sql.readwriter.DataFrameWriter.insertInto"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*+
+	tableName
+builtins.str"builtins.str*X
+	overwriteG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *–
+saveAsTable2pyspark.sql.readwriter.DataFrameWriter.saveAsTable"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*&
+name
+builtins.str"builtins.str*R
+formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *P
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *À
+partitionBy¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *Û
+optionsÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType*Ù
+json+pyspark.sql.readwriter.DataFrameWriter.json"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*&
+path
+builtins.str"builtins.str*P
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+compressionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *V
+
+dateFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *[
+timestampFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+lineSepD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Š
+ignoreNullFieldsr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *µ
+parquet.pyspark.sql.readwriter.DataFrameWriter.parquet"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*&
+path
+builtins.str"builtins.str*P
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *À
+partitionBy¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *W
+compressionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ï
+text+pyspark.sql.readwriter.DataFrameWriter.text"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*&
+path
+builtins.str"builtins.str*W
+compressionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+lineSepD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *’
+csv*pyspark.sql.readwriter.DataFrameWriter.csv"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*&
+path
+builtins.str"builtins.str*P
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+compressionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *O
+sepD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+quoteD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+escapeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *€
+headerr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *U
+	nullValueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *†
+escapeQuotesr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *‚
+quoteAllr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *V
+
+dateFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *[
+timestampFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *‘
+ignoreLeadingWhiteSpacer
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *’
+ignoreTrailingWhiteSpacer
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *e
+charToEscapeQuoteEscapingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *V
+
+emptyValueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+lineSepD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *­
+orc*pyspark.sql.readwriter.DataFrameWriter.orc"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*&
+path
+builtins.str"builtins.str*P
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *À
+partitionBy¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *W
+compressionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Š
+jdbc+pyspark.sql.readwriter.DataFrameWriter.jdbc"
+None*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*%
+url
+builtins.str"builtins.str*'
+table
+builtins.str"builtins.str*P
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ì
+
+properties¹
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None 2¿
+partitionBy2pyspark.sql.readwriter.DataFrameWriter.partitionBy¥
+partitionBy2pyspark.sql.readwriter.DataFrameWriter.partitionBy"P
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*&
+cols
+builtins.str"builtins.str0:overloadXÓ
+partitionBy2pyspark.sql.readwriter.DataFrameWriter.partitionBy"P
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*T
+colsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list0:overloadX2Á
+bucketBy/pyspark.sql.readwriter.DataFrameWriter.bucketByô
+bucketBy/pyspark.sql.readwriter.DataFrameWriter.bucketBy"P
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*,
+
+numBuckets
+builtins.int"builtins.int*%
+col
+builtins.str"builtins.str*&
+cols
+builtins.str"builtins.str0:overloadXŒ
+bucketBy/pyspark.sql.readwriter.DataFrameWriter.bucketBy"P
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*,
+
+numBuckets
+builtins.int"builtins.int*ä
+colÚ
+JTypeAlias[Union[builtins.list[builtins.str],builtins.tuple[builtins.str]]]Ý
+?Union[builtins.list[builtins.str],builtins.tuple[builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple"*pyspark.sql.readwriter.TupleOrListOfString0:overloadX2Ù
+sortBy-pyspark.sql.readwriter.DataFrameWriter.sortByÂ
+sortBy-pyspark.sql.readwriter.DataFrameWriter.sortBy"P
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*%
+col
+builtins.str"builtins.str*&
+cols
+builtins.str"builtins.str0:overloadXÚ
+sortBy-pyspark.sql.readwriter.DataFrameWriter.sortBy"P
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*Z
+selfP
+&pyspark.sql.readwriter.DataFrameWriter"&pyspark.sql.readwriter.DataFrameWriter*ä
+colÚ
+JTypeAlias[Union[builtins.list[builtins.str],builtins.tuple[builtins.str]]]Ý
+?Union[builtins.list[builtins.str],builtins.tuple[builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple"*pyspark.sql.readwriter.TupleOrListOfString0:overloadXru
+_df*pyspark.sql.readwriter.DataFrameWriter._dfB
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFramer}
+_spark-pyspark.sql.readwriter.DataFrameWriter._sparkD
+ pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSessionrB
+_jwrite.pyspark.sql.readwriter.DataFrameWriter._jwrite
+Anyß
+DataFrameWriterV2(pyspark.sql.readwriter.DataFrameWriterV2"builtins.object*œ
+__init__1pyspark.sql.readwriter.DataFrameWriterV2.__init__"
+None*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2*J
+dfB
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame*'
+table
+builtins.str"builtins.str*›
+using.pyspark.sql.readwriter.DataFrameWriterV2.using"T
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2**
+provider
+builtins.str"builtins.str0*ô
+option/pyspark.sql.readwriter.DataFrameWriterV2.option"T
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2*%
+key
+builtins.str"builtins.str*Ù
+valueÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType0*Ñ
+options0pyspark.sql.readwriter.DataFrameWriterV2.options"T
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2*Û
+optionsÍ
+MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Î
+BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.str"builtins.str
+None")pyspark.sql._typing.OptionalPrimitiveType0*Ô
+tableProperty6pyspark.sql.readwriter.DataFrameWriterV2.tableProperty"T
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2**
+property
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str0*‚
+partitionedBy6pyspark.sql.readwriter.DataFrameWriterV2.partitionedBy"T
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2*?
+col6
+pyspark.sql.column.Column"pyspark.sql.column.Column*@
+cols6
+pyspark.sql.column.Column"pyspark.sql.column.Column0*¥
+create/pyspark.sql.readwriter.DataFrameWriterV2.create"
+None*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV20*§
+replace0pyspark.sql.readwriter.DataFrameWriterV2.replace"
+None*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV20*·
+createOrReplace8pyspark.sql.readwriter.DataFrameWriterV2.createOrReplace"
+None*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV20*¥
+append/pyspark.sql.readwriter.DataFrameWriterV2.append"
+None*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV20*ò
+	overwrite2pyspark.sql.readwriter.DataFrameWriterV2.overwrite"
+None*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV2*E
+	condition6
+pyspark.sql.column.Column"pyspark.sql.column.Column0*¿
+overwritePartitions<pyspark.sql.readwriter.DataFrameWriterV2.overwritePartitions"
+None*^
+selfT
+(pyspark.sql.readwriter.DataFrameWriterV2"(pyspark.sql.readwriter.DataFrameWriterV20rw
+_df,pyspark.sql.readwriter.DataFrameWriterV2._dfB
+pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFramer
+_spark/pyspark.sql.readwriter.DataFrameWriterV2._sparkD
+ pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSessionrF
+_jwriter1pyspark.sql.readwriter.DataFrameWriterV2._jwriter
+Any/
+_testpyspark.sql.readwriter._test"
+None*’
+__annotations__&pyspark.sql.readwriter.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*6
+	JavaClass pyspark.sql.readwriter.JavaClass
+Any*8
+
+JavaObject!pyspark.sql.readwriter.JavaObject
+Any*u
+__all__pyspark.sql.readwriter.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

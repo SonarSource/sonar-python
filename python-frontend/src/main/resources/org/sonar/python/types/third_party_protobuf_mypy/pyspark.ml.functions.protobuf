@@ -1,0 +1,135 @@
+
+pyspark.ml.functions¿
+_batchedpyspark.ml.functions._batched"{
+,typing.Iterator[pandas.core.frame.DataFrame]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame"typing.Iterator*È
+dataﬁ
+gUnion[pandas.core.series.Series[Any],pandas.core.frame.DataFrame,Tuple[pandas.core.series.Series[Any]]]D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameo
+%Tuple[pandas.core.series.Series[Any]]D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*,
+
+batch_size
+builtins.int"builtins.int™
+_is_tensor_col#pyspark.ml.functions._is_tensor_col"
+builtins.bool"builtins.bool*“
+data«
+AUnion[pandas.core.series.Series[Any],pandas.core.frame.DataFrame]D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame≈
+_has_tensor_cols%pyspark.ml.functions._has_tensor_cols"
+builtins.bool"builtins.bool*È
+dataﬁ
+gUnion[pandas.core.series.Series[Any],pandas.core.frame.DataFrame,Tuple[pandas.core.series.Series[Any]]]D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameo
+%Tuple[pandas.core.series.Series[Any]]D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series¥
+'_validate_and_transform_multiple_inputs<pyspark.ml.functions._validate_and_transform_multiple_inputs"q
+%builtins.list[numpy.ndarray[Any,Any]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"builtins.list*E
+batch:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*ﬁ
+input_shapesÀ
+6builtins.list[Union[builtins.list[builtins.int],None]]Å
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None"builtins.list*0
+num_input_cols
+builtins.int"builtins.int§
+$_validate_and_transform_single_input9pyspark.ml.functions._validate_and_transform_single_input"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*E
+batch:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*ﬁ
+input_shapesÀ
+6builtins.list[Union[builtins.list[builtins.int],None]]Å
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None"builtins.list*/
+has_tensors
+builtins.bool"builtins.bool*-
+	has_tuple
+builtins.bool"builtins.bool¡
+)_validate_and_transform_prediction_result>pyspark.ml.functions._validate_and_transform_prediction_result"«
+AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*å
+predsÄ
+ÅUnion[numpy.ndarray[Any,Any],typing.Mapping[builtins.str,numpy.ndarray[Any,Any]],builtins.list[typing.Mapping[builtins.str,Any]]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayû
+3typing.Mapping[builtins.str,numpy.ndarray[Any,Any]]
+builtins.str"builtins.str9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"typing.Mappingõ
+/builtins.list[typing.Mapping[builtins.str,Any]]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"builtins.list*0
+num_input_rows
+builtins.int"builtins.int*I
+return_type8
+pyspark.sql.types.DataType"pyspark.sql.types.DataTypeü
+predict_batch_udf&pyspark.ml.functions.predict_batch_udf"Z
++pyspark.sql._typing.UserDefinedFunctionLike"+pyspark.sql._typing.UserDefinedFunctionLike*`
+make_predict_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*I
+return_type8
+pyspark.sql.types.DataType"pyspark.sql.types.DataType*,
+
+batch_size
+builtins.int"builtins.int*™
+input_tensor_shapesé
+{Union[builtins.list[Union[builtins.list[builtins.int],None]],typing.Mapping[builtins.int,builtins.list[builtins.int]],None]À
+6builtins.list[Union[builtins.list[builtins.int],None]]Å
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None"builtins.list¥
+8typing.Mapping[builtins.int,builtins.list[builtins.int]]
+builtins.int"builtins.intJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"typing.Mapping
+None -
+_testpyspark.ml.functions._test"
+None*ê
+__annotations__$pyspark.ml.functions.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+npnumpy *
+pdpandas *Õ
+
+supported_scalar_types+pyspark.ml.functions.supported_scalar_typesÖ
+
+‰Tuple[CallableType[pyspark.sql.types.DataTypeSingleton],CallableType[pyspark.sql.types.DataTypeSingleton],CallableType[pyspark.sql.types.DataTypeSingleton],CallableType[pyspark.sql.types.DataTypeSingleton],CallableType[pyspark.sql.types.DataTypeSingleton],CallableType[pyspark.sql.types.DataTypeSingleton],CallableType[pyspark.sql.types.DataTypeSingleton]]Å
+1CallableType[pyspark.sql.types.DataTypeSingleton]J
+#pyspark.sql.types.DataTypeSingleton"#pyspark.sql.types.DataTypeSingletonÅ
+1CallableType[pyspark.sql.types.DataTypeSingleton]J
+#pyspark.sql.types.DataTypeSingleton"#pyspark.sql.types.DataTypeSingletonÅ
+1CallableType[pyspark.sql.types.DataTypeSingleton]J
+#pyspark.sql.types.DataTypeSingleton"#pyspark.sql.types.DataTypeSingletonÅ
+1CallableType[pyspark.sql.types.DataTypeSingleton]J
+#pyspark.sql.types.DataTypeSingleton"#pyspark.sql.types.DataTypeSingletonÅ
+1CallableType[pyspark.sql.types.DataTypeSingleton]J
+#pyspark.sql.types.DataTypeSingleton"#pyspark.sql.types.DataTypeSingletonÅ
+1CallableType[pyspark.sql.types.DataTypeSingleton]J
+#pyspark.sql.types.DataTypeSingleton"#pyspark.sql.types.DataTypeSingletonÅ
+1CallableType[pyspark.sql.types.DataTypeSingleton]J
+#pyspark.sql.types.DataTypeSingleton"#pyspark.sql.types.DataTypeSingleton

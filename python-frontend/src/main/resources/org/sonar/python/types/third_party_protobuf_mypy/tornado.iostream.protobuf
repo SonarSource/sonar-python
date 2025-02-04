@@ -1,0 +1,639 @@
+
+tornado.iostreamù
+StreamClosedError"tornado.iostream.StreamClosedError"builtins.OSError*‹
+__init__+tornado.iostream.StreamClosedError.__init__"
+None*R
+selfH
+"tornado.iostream.StreamClosedError""tornado.iostream.StreamClosedError*t
+
+real_errorb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None rŸ
+
+real_error-tornado.iostream.StreamClosedError.real_errorb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+NoneU
+UnsatisfiableReadError'tornado.iostream.UnsatisfiableReadError"builtins.ExceptionS
+StreamBufferFullError&tornado.iostream.StreamBufferFullError"builtins.ExceptionÕ
+_StreamBuffertornado.iostream._StreamBuffer"builtins.object*‰
+__init__'tornado.iostream._StreamBuffer.__init__"
+None*J
+self@
+tornado.iostream._StreamBuffer"tornado.iostream._StreamBuffer*“
+__len__&tornado.iostream._StreamBuffer.__len__"
+builtins.int"builtins.int*B@
+tornado.iostream._StreamBuffer"tornado.iostream._StreamBuffer*Ë
+append%tornado.iostream._StreamBuffer.append"
+None*J
+self@
+tornado.iostream._StreamBuffer"tornado.iostream._StreamBuffer*Ã
+data¸
+<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview*Ë
+peek#tornado.iostream._StreamBuffer.peek"*
+builtins.memoryview"builtins.memoryview*J
+self@
+tornado.iostream._StreamBuffer"tornado.iostream._StreamBuffer*&
+size
+builtins.int"builtins.int*¯
+advance&tornado.iostream._StreamBuffer.advance"
+None*J
+self@
+tornado.iostream._StreamBuffer"tornado.iostream._StreamBuffer*&
+size
+builtins.int"builtins.intri
+_large_buf_threshold3tornado.iostream._StreamBuffer._large_buf_threshold
+builtins.int"builtins.intr“
+_buffers'tornado.iostream._StreamBuffer._buffersÝ
+Ucollections.deque[Tuple[builtins.bool,Union[builtins.bytearray,builtins.memoryview]]]ð
+BTuple[builtins.bool,Union[builtins.bytearray,builtins.memoryview]]
+builtins.bool"builtins.bool‡
+-Union[builtins.bytearray,builtins.memoryview](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview"collections.dequerU
+
+_first_pos)tornado.iostream._StreamBuffer._first_pos
+builtins.int"builtins.intrK
+_size$tornado.iostream._StreamBuffer._size
+builtins.int"builtins.intƒc
+BaseIOStreamtornado.iostream.BaseIOStream"builtins.object*£
+__init__&tornado.iostream.BaseIOStream.__init__"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*[
+max_buffer_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *[
+read_chunk_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *a
+max_write_buffer_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *…
+fileno$tornado.iostream.BaseIOStream.fileno"Š
+.Union[builtins.int,tornado.ioloop._Selectable]
+builtins.int"builtins.int8
+tornado.ioloop._Selectable"tornado.ioloop._Selectable*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*†
+close_fd&tornado.iostream.BaseIOStream.close_fd"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*Ö
+write_to_fd)tornado.iostream.BaseIOStream.write_to_fd"
+builtins.int"builtins.int*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*4
+data*
+builtins.memoryview"builtins.memoryview*Þ
+read_from_fd*tornado.iostream.BaseIOStream.read_from_fd"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*‘
+buf‡
+-Union[builtins.bytearray,builtins.memoryview](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview*Ü
+get_fd_error*tornado.iostream.BaseIOStream.get_fd_error"V
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*è
+read_until_regex.tornado.iostream.BaseIOStream.read_until_regex"V
+ typing.Awaitable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Awaitable*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*+
+regex 
+builtins.bytes"builtins.bytes*U
+	max_bytesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *à
+
+read_until(tornado.iostream.BaseIOStream.read_until"V
+ typing.Awaitable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Awaitable*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*/
+	delimiter 
+builtins.bytes"builtins.bytes*U
+	max_bytesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *´
+
+read_bytes(tornado.iostream.BaseIOStream.read_bytes"V
+ typing.Awaitable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Awaitable*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*+
+	num_bytes
+builtins.int"builtins.int*-
+partial
+builtins.bool"builtins.bool *²
+	read_into'tornado.iostream.BaseIOStream.read_into"P
+typing.Awaitable[builtins.int]
+builtins.int"builtins.int"typing.Awaitable*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*1
+buf(
+builtins.bytearray"builtins.bytearray*-
+partial
+builtins.bool"builtins.bool *ä
+read_until_close.tornado.iostream.BaseIOStream.read_until_close"V
+ typing.Awaitable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Awaitable*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*À
+write#tornado.iostream.BaseIOStream.write"@
+asyncio.futures.Future[None]
+None"asyncio.futures.Future*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*…
+data{
+)Union[builtins.bytes,builtins.memoryview] 
+builtins.bytes"builtins.bytes*
+builtins.memoryview"builtins.memoryview*²
+set_close_callback0tornado.iostream.BaseIOStream.set_close_callback"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*•
+callback†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*ã
+close#tornado.iostream.BaseIOStream.close"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*à
+exc_infoÏ
+£Union[None,builtins.bool,builtins.BaseException,Tuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]]]
+None
+builtins.bool"builtins.bool0
+builtins.BaseException"builtins.BaseExceptionÈ
+rTuple[Union[Type[builtins.BaseException],None],Union[builtins.BaseException,None],Union[types.TracebackType,None]]
+(Union[Type[builtins.BaseException],None]X
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException"type
+Noneb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+NoneY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None *’
+_signal_closed,tornado.iostream.BaseIOStream._signal_closed"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*š
+reading%tornado.iostream.BaseIOStream.reading"
+builtins.bool"builtins.bool*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*š
+writing%tornado.iostream.BaseIOStream.writing"
+builtins.bool"builtins.bool*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*˜
+closed$tornado.iostream.BaseIOStream.closed"
+builtins.bool"builtins.bool*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*·
+set_nodelay)tornado.iostream.BaseIOStream.set_nodelay"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*)
+value
+builtins.bool"builtins.bool*”
+_handle_connect-tornado.iostream.BaseIOStream._handle_connect"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*Ò
+_handle_events,tornado.iostream.BaseIOStream._handle_events"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*“
+fdŠ
+.Union[builtins.int,tornado.ioloop._Selectable]
+builtins.int"builtins.int8
+tornado.ioloop._Selectable"tornado.ioloop._Selectable*(
+events
+builtins.int"builtins.int*Ú
+_read_to_buffer_loop2tornado.iostream.BaseIOStream._read_to_buffer_loop"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*Ž
+_handle_read*tornado.iostream.BaseIOStream._handle_read"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*Â
+_start_read)tornado.iostream.BaseIOStream._start_read">
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*¶
+_finish_read*tornado.iostream.BaseIOStream._finish_read"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*&
+size
+builtins.int"builtins.int*–
+_try_inline_read.tornado.iostream.BaseIOStream._try_inline_read"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*Ð
+_read_to_buffer-tornado.iostream.BaseIOStream._read_to_buffer"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*¿
+_read_from_buffer/tornado.iostream.BaseIOStream._read_from_buffer"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*%
+pos
+builtins.int"builtins.int*Î
+_find_read_pos,tornado.iostream.BaseIOStream._find_read_pos"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*Ã
+_check_max_bytes.tornado.iostream.BaseIOStream._check_max_bytes"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*‚
+	delimiters
+%Union[builtins.bytes,re.Pattern[Any]] 
+builtins.bytes"builtins.bytes&
+re.Pattern[Any]
+Any"
+re.Pattern*&
+size
+builtins.int"builtins.int*
+_handle_write+tornado.iostream.BaseIOStream._handle_write"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*Å
+_consume&tornado.iostream.BaseIOStream._consume" 
+builtins.bytes"builtins.bytes*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*%
+loc
+builtins.int"builtins.int*
+_check_closed+tornado.iostream.BaseIOStream._check_closed"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*¨
+_maybe_add_error_listener7tornado.iostream.BaseIOStream._maybe_add_error_listener"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*¹
+_add_io_state+tornado.iostream.BaseIOStream._add_io_state"
+None*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*'
+state
+builtins.int"builtins.int*á
+_is_connreset+tornado.iostream.BaseIOStream._is_connreset"
+builtins.bool"builtins.bool*H
+self>
+tornado.iostream.BaseIOStream"tornado.iostream.BaseIOStream*9
+exc0
+builtins.BaseException"builtins.BaseExceptionr`
+io_loop%tornado.iostream.BaseIOStream.io_loop.
+tornado.ioloop.IOLoop"tornado.ioloop.IOLoopr^
+max_buffer_size-tornado.iostream.BaseIOStream.max_buffer_size
+builtins.int"builtins.intr^
+read_chunk_size-tornado.iostream.BaseIOStream.read_chunk_size
+builtins.int"builtins.intr’
+max_write_buffer_size3tornado.iostream.BaseIOStream.max_write_buffer_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner
+error#tornado.iostream.BaseIOStream.errorb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+Nonerd
+_read_buffer*tornado.iostream.BaseIOStream._read_buffer(
+builtins.bytearray"builtins.bytearrayrb
+_read_buffer_size/tornado.iostream.BaseIOStream._read_buffer_size
+builtins.int"builtins.intrd
+_user_read_buffer/tornado.iostream.BaseIOStream._user_read_buffer
+builtins.bool"builtins.boolr¨
+_after_user_read_buffer5tornado.iostream.BaseIOStream._after_user_read_bufferV
+Union[builtins.bytearray,None](
+builtins.bytearray"builtins.bytearray
+Noner~
+_write_buffer+tornado.iostream.BaseIOStream._write_buffer@
+tornado.iostream._StreamBuffer"tornado.iostream._StreamBufferrd
+_total_write_index0tornado.iostream.BaseIOStream._total_write_index
+builtins.int"builtins.intrn
+_total_write_done_index5tornado.iostream.BaseIOStream._total_write_done_index
+builtins.int"builtins.intrŒ
+_read_delimiter-tornado.iostream.BaseIOStream._read_delimiterJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+Noner‹
+_read_regex)tornado.iostream.BaseIOStream._read_regexQ
+Union[re.Pattern[Any],None]&
+re.Pattern[Any]
+Any"
+re.Pattern
+Noner†
+_read_max_bytes-tornado.iostream.BaseIOStream._read_max_bytesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner~
+_read_bytes)tornado.iostream.BaseIOStream._read_bytesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner\
+_read_partial+tornado.iostream.BaseIOStream._read_partial
+builtins.bool"builtins.boolrd
+_read_until_close/tornado.iostream.BaseIOStream._read_until_close
+builtins.bool"builtins.boolr±
+_read_future*tornado.iostream.BaseIOStream._read_futureu
+'Union[asyncio.futures.Future[Any],None]>
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future
+Noner°
+_write_futures,tornado.iostream.BaseIOStream._write_futuresï
+Ccollections.deque[Tuple[builtins.int,asyncio.futures.Future[None]]]”
+0Tuple[builtins.int,asyncio.futures.Future[None]]
+builtins.int"builtins.int@
+asyncio.futures.Future[None]
+None"asyncio.futures.Future"collections.dequerÉ
+_close_callback-tornado.iostream.BaseIOStream._close_callback†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner”
+_connect_future-tornado.iostream.BaseIOStream._connect_futureÑ
+=Union[asyncio.futures.Future[tornado.iostream.IOStream],None]ƒ
+1asyncio.futures.Future[tornado.iostream.IOStream]6
+tornado.iostream.IOStream"tornado.iostream.IOStream"asyncio.futures.Future
+Noner¨
+_ssl_connect_future1tornado.iostream.BaseIOStream._ssl_connect_futureÝ
+@Union[asyncio.futures.Future[tornado.iostream.SSLIOStream],None]Œ
+4asyncio.futures.Future[tornado.iostream.SSLIOStream]<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream"asyncio.futures.Future
+NonerX
+_connecting)tornado.iostream.BaseIOStream._connecting
+builtins.bool"builtins.boolrt
+_state$tornado.iostream.BaseIOStream._stateD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerP
+_closed%tornado.iostream.BaseIOStream._closed
+builtins.bool"builtins.boolÔ
+IOStreamtornado.iostream.IOStream"tornado.iostream.BaseIOStream*Î
+__init__"tornado.iostream.IOStream.__init__"
+None*@
+self6
+tornado.iostream.IOStream"tornado.iostream.IOStream**
+socket
+socket.socket"socket.socket*
+args
+Any*
+kwargs
+Any*ù
+fileno tornado.iostream.IOStream.fileno"Š
+.Union[builtins.int,tornado.ioloop._Selectable]
+builtins.int"builtins.int8
+tornado.ioloop._Selectable"tornado.ioloop._Selectable*@
+self6
+tornado.iostream.IOStream"tornado.iostream.IOStream*z
+close_fd"tornado.iostream.IOStream.close_fd"
+None*@
+self6
+tornado.iostream.IOStream"tornado.iostream.IOStream*Ð
+get_fd_error&tornado.iostream.IOStream.get_fd_error"V
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None*@
+self6
+tornado.iostream.IOStream"tornado.iostream.IOStream*Ò
+read_from_fd&tornado.iostream.IOStream.read_from_fd"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*@
+self6
+tornado.iostream.IOStream"tornado.iostream.IOStream*‘
+buf‡
+-Union[builtins.bytearray,builtins.memoryview](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview*Ê
+write_to_fd%tornado.iostream.IOStream.write_to_fd"
+builtins.int"builtins.int*@
+self6
+tornado.iostream.IOStream"tornado.iostream.IOStream*4
+data*
+builtins.memoryview"builtins.memoryview*ê
+connect!tornado.iostream.IOStream.connect"Ç
+6asyncio.futures.Future[tornado.iostream._IOStreamType]u
+tornado.iostream._IOStreamType6
+tornado.iostream.IOStream"tornado.iostream.IOStream"tornado.iostream.IOStream"asyncio.futures.Future*
+selfu
+tornado.iostream._IOStreamType6
+tornado.iostream.IOStream"tornado.iostream.IOStream"tornado.iostream.IOStream*
+address
+Any*[
+server_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ý
+	start_tls#tornado.iostream.IOStream.start_tls"€
+.typing.Awaitable[tornado.iostream.SSLIOStream]<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream"typing.Awaitable*@
+self6
+tornado.iostream.IOStream"tornado.iostream.IOStream*/
+server_side
+builtins.bool"builtins.bool*×
+ssl_optionsÃ
+:Union[builtins.dict[builtins.str,Any],ssl.SSLContext,None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+ssl.SSLContext"ssl.SSLContext
+None *[
+server_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ˆ
+_handle_connect)tornado.iostream.IOStream._handle_connect"
+None*@
+self6
+tornado.iostream.IOStream"tornado.iostream.IOStream*«
+set_nodelay%tornado.iostream.IOStream.set_nodelay"
+None*@
+self6
+tornado.iostream.IOStream"tornado.iostream.IOStream*)
+value
+builtins.bool"builtins.boolrJ
+socket tornado.iostream.IOStream.socket
+socket.socket"socket.socketè
+SSLIOStreamtornado.iostream.SSLIOStream"tornado.iostream.IOStream*«
+__init__%tornado.iostream.SSLIOStream.__init__"
+None*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*
+args
+Any*
+kwargs
+Any*—
+reading$tornado.iostream.SSLIOStream.reading"
+builtins.bool"builtins.bool*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*—
+writing$tornado.iostream.SSLIOStream.writing"
+builtins.bool"builtins.bool*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*•
+_do_ssl_handshake.tornado.iostream.SSLIOStream._do_ssl_handshake"
+None*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*™
+_finish_ssl_connect0tornado.iostream.SSLIOStream._finish_ssl_connect"
+None*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*¸
+_verify_cert)tornado.iostream.SSLIOStream._verify_cert"
+builtins.bool"builtins.bool*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*
+peercert
+Any*‹
+_handle_read)tornado.iostream.SSLIOStream._handle_read"
+None*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*
+_handle_write*tornado.iostream.SSLIOStream._handle_write"
+None*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream* 
+connect$tornado.iostream.SSLIOStream.connect"Œ
+4asyncio.futures.Future[tornado.iostream.SSLIOStream]<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream"asyncio.futures.Future*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*;
+address.
+builtins.tuple[Any]
+Any"builtins.tuple*[
+server_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *‘
+_handle_connect,tornado.iostream.SSLIOStream._handle_connect"
+None*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*œ
+wait_for_handshake/tornado.iostream.SSLIOStream.wait_for_handshake"Œ
+4asyncio.futures.Future[tornado.iostream.SSLIOStream]<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream"asyncio.futures.Future*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*Ó
+write_to_fd(tornado.iostream.SSLIOStream.write_to_fd"
+builtins.int"builtins.int*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*4
+data*
+builtins.memoryview"builtins.memoryview*Û
+read_from_fd)tornado.iostream.SSLIOStream.read_from_fd"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*‘
+buf‡
+-Union[builtins.bytearray,builtins.memoryview](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview*Ü
+_is_connreset*tornado.iostream.SSLIOStream._is_connreset"
+builtins.bool"builtins.bool*F
+self<
+tornado.iostream.SSLIOStream"tornado.iostream.SSLIOStream*7
+e0
+builtins.BaseException"builtins.BaseExceptionrM
+socket#tornado.iostream.SSLIOStream.socket
+ssl.SSLSocket"ssl.SSLSocketrB
+_ssl_options)tornado.iostream.SSLIOStream._ssl_options
+Anyr]
+_ssl_accepting+tornado.iostream.SSLIOStream._ssl_accepting
+builtins.bool"builtins.boolre
+_handshake_reading/tornado.iostream.SSLIOStream._handshake_reading
+builtins.bool"builtins.boolre
+_handshake_writing/tornado.iostream.SSLIOStream._handshake_writing
+builtins.bool"builtins.boolr‡
+_server_hostname-tornado.iostream.SSLIOStream._server_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None‰
+
+PipeIOStreamtornado.iostream.PipeIOStream"tornado.iostream.BaseIOStream*Ô
+__init__&tornado.iostream.PipeIOStream.__init__"
+None*H
+self>
+tornado.iostream.PipeIOStream"tornado.iostream.PipeIOStream*$
+fd
+builtins.int"builtins.int*
+args
+Any*
+kwargs
+Any*–
+fileno$tornado.iostream.PipeIOStream.fileno"
+builtins.int"builtins.int*H
+self>
+tornado.iostream.PipeIOStream"tornado.iostream.PipeIOStream*†
+close_fd&tornado.iostream.PipeIOStream.close_fd"
+None*H
+self>
+tornado.iostream.PipeIOStream"tornado.iostream.PipeIOStream*Ö
+write_to_fd)tornado.iostream.PipeIOStream.write_to_fd"
+builtins.int"builtins.int*H
+self>
+tornado.iostream.PipeIOStream"tornado.iostream.PipeIOStream*4
+data*
+builtins.memoryview"builtins.memoryview*Þ
+read_from_fd*tornado.iostream.PipeIOStream.read_from_fd"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*H
+self>
+tornado.iostream.PipeIOStream"tornado.iostream.PipeIOStream*‘
+buf‡
+-Union[builtins.bytearray,builtins.memoryview](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryviewrD
+fd tornado.iostream.PipeIOStream.fd
+builtins.int"builtins.intrB
+_fio"tornado.iostream.PipeIOStream._fio
+	io.FileIO"	io.FileIO.
+docteststornado.iostream.doctests"
+Any*Œ
+__annotations__ tornado.iostream.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*î
+_ERRNO_CONNRESET!tornado.iostream._ERRNO_CONNRESET¶
+:Tuple[builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*E
+_WINDOWStornado.iostream._WINDOWS
+builtins.bool"builtins.bool
