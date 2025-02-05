@@ -66,6 +66,14 @@ def fake_module_typing_features():
     }
     return build_modules(modules).get("fakemodule_typing_features")
 
+@pytest.fixture(scope="session")
+def fake_module_with_decorators():
+    modules = {
+        "fakemodule_with_decorators": os.path.join(CURRENT_PATH, "resources/fakemodule_with_decorators.pyi"),
+        "fakemodule_with_decorators_imported": os.path.join(CURRENT_PATH, "resources/fakemodule_with_decorators_imported.pyi")
+    }
+    return build_modules(modules).get("fakemodule_with_decorators")
+
 
 @pytest.fixture(scope="session")
 def typeshed_third_parties():

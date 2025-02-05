@@ -42,7 +42,7 @@ import org.sonar.python.tree.TreeUtils;
 public class NonStringInAllPropertyCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Replace this symbol with a string; \"__all__\" can only contain strings.";
-  private static final List<String> ACCEPTED_DECORATORS = Arrays.asList("overload", "staticmethod", "classmethod");
+  private static final List<String> ACCEPTED_DECORATORS = Arrays.asList("typing.overload", "overload", "staticmethod", "classmethod");
 
   @Override
   public void initialize(Context context) {

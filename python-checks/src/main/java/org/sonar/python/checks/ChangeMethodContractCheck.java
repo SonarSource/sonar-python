@@ -42,7 +42,8 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   private static final Set<String> IGNORING_DECORATORS = Set.of(
     "abc.abstractmethod",
     "abstractmethod",
-    "overload"
+    "overload",
+    "typing.overload"
   );
 
   @Override

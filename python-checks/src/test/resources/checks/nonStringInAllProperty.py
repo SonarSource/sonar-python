@@ -1,4 +1,5 @@
 from external import unknown_imported
+from typing import overload
 
 class MyClass:
   @property

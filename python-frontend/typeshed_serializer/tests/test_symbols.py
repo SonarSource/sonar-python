@@ -237,3 +237,49 @@ def test_error_when_overloaded_definitions_are_missing():
         with pytest.raises(RuntimeError) as raised:
             symbols.OverloadedFunctionSymbol(overloaded_func_mock)
         assert raised.value.args[0] == 'Overloaded function symbol should contain at least 2 definitions.'
+
+
+def test_module_with_decorators(fake_module_with_decorators):
+    fake_module = symbols.ModuleSymbol(fake_module_with_decorators)
+    
+    # SONARPY-2590 there are more than 4 functions in the module. However, functions with decorator are not serialized
+    assert len(fake_module.functions) == 4
+    assert fake_module.functions[0].name == "another_imported_decorator"
+    assert fake_module.functions[1].name == "alias_decorator"
+    assert fake_module.functions[2].name == "a_method_decorator"
+    assert fake_module.functions[3].name == "a_function_decorator"
+    
+    assert len(fake_module.classes) == 1
+    common_class = fake_module.classes[0]
+    assert common_class.name == "CommonClass"
+    assert common_class.fullname == "fakemodule_with_decorators.CommonClass"
+    
+    assert len(common_class.methods) == 5
+    common_class_methods = common_class.methods
+    
+    assert common_class_methods[0].name == "common_method"
+    assert common_class_methods[0].fullname == "fakemodule_with_decorators.CommonClass.common_method"
+    assert common_class_methods[0].has_decorators is True
+    assert common_class_methods[0].resolved_decorator_names == ['fakemodule_with_decorators.a_method_decorator']
+
+    assert common_class_methods[1].name == "common_method2"
+    assert common_class_methods[1].fullname == "fakemodule_with_decorators.CommonClass.common_method2"
+    assert common_class_methods[1].has_decorators is True
+    assert common_class_methods[1].resolved_decorator_names == ['fakemodule_with_decorators_imported.an_imported_decorator']
+    
+    assert common_class_methods[2].name == "common_method3"
+    assert common_class_methods[2].fullname == "fakemodule_with_decorators.CommonClass.common_method3"
+    assert common_class_methods[2].has_decorators is True
+    assert common_class_methods[2].resolved_decorator_names == ['fakemodule_with_decorators_imported.another_imported_decorator']
+    
+    assert common_class_methods[3].name == "common_method4"
+    assert common_class_methods[3].fullname == "fakemodule_with_decorators.CommonClass.common_method4"
+    assert common_class_methods[3].has_decorators is True
+    assert common_class_methods[3].resolved_decorator_names == ['fakemodule_with_decorators_imported.another_imported_decorator']
+    
+    assert common_class_methods[4].name == "common_method5"
+    assert common_class_methods[4].fullname == "fakemodule_with_decorators.CommonClass.common_method5"
+    assert common_class_methods[4].has_decorators is True
+    assert common_class_methods[4].resolved_decorator_names == ['fakemodule_with_decorators_imported.alias_imported_decorator']
+    
+        

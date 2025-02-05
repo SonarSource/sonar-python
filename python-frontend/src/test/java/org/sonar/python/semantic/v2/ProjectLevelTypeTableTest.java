@@ -349,9 +349,8 @@ class ProjectLevelTypeTableTest {
     assertThat(functionType.fullyQualifiedName()).isEqualTo("abc.abstractmethod");
     var tznameType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
     typeWrapper = (LazyTypeWrapper) tznameType.decorators().get(0);
-    // SONARPY-2300 - need to fix serializer to use fully qualified names
-    assertThat(typeWrapper.hasImportPath("abstractmethod")).isTrue();
-    assertThat(typeWrapper.type()).isInstanceOf(UnknownType.class);
+    assertThat(typeWrapper.hasImportPath("abc.abstractmethod")).isTrue();
+    assertThat(typeWrapper.type()).isInstanceOf(FunctionType.class);
   }
 
   @Test
