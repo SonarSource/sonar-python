@@ -85,3 +85,5 @@ Copyright 2011-2024 SonarSource.
 SonarQube analyzers released after November 29, 2024, including patch fixes for prior versions, are published under the [Sonar Source-Available License Version 1 (SSALv1)](LICENSE.txt).
 
 See individual files for details that specify the license applicable to each file. Files subject to the SSALv1 will be noted in their headers.
+
+This is a test change
