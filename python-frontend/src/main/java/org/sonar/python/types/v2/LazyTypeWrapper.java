@@ -20,10 +20,12 @@ import java.util.Objects;
 
 public class LazyTypeWrapper implements TypeWrapper {
   private PythonType type;
+  private String importPath;
 
   public LazyTypeWrapper(PythonType type) {
     this.type = type;
     if (type instanceof LazyType lazyType) {
+      this.importPath = lazyType.importPath();
       lazyType.addConsumer(this::resolveLazyType);
     }
   }
@@ -44,7 +46,7 @@ public class LazyTypeWrapper implements TypeWrapper {
   }
 
   public boolean hasImportPath(String importPath) {
-    return ((LazyType) type).importPath().equals(importPath);
+    return this.importPath != null && this.importPath.equals(importPath);
   }
 
   @Override

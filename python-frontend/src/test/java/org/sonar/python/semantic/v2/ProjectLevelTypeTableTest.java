@@ -345,10 +345,13 @@ class ProjectLevelTypeTableTest {
     var fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
     var typeWrapper = (LazyTypeWrapper) fooType.decorators().get(0);
     assertThat(typeWrapper.hasImportPath("abc.abstractmethod")).isTrue();
+    FunctionType functionType = (FunctionType) typeWrapper.type();
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("abc.abstractmethod");
     var tznameType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
     typeWrapper = (LazyTypeWrapper) tznameType.decorators().get(0);
     // SONARPY-2300 - need to fix serializer to use fully qualified names
     assertThat(typeWrapper.hasImportPath("abstractmethod")).isTrue();
+    assertThat(typeWrapper.type()).isInstanceOf(UnknownType.class);
   }
 
   @Test

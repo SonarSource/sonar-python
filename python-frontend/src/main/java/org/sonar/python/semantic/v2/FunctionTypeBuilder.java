@@ -135,7 +135,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   }
 
   public FunctionTypeBuilder withReturnType(PythonType returnType) {
-    withReturnType(new LazyTypeWrapper(returnType));
+    withReturnType(TypeWrapper.of(returnType));
     return this;
   }
 
@@ -198,7 +198,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     Token starToken = parameter.starToken();
     if (parameterName != null) {
       ParameterType parameterType = getParameterType(parameter, projectLevelTypeTable);
-      this.parameters.add(new ParameterV2(parameterName.name(), new LazyTypeWrapper(parameterType.pythonType()), parameter.defaultValue() != null,
+      this.parameters.add(new ParameterV2(parameterName.name(), TypeWrapper.of(parameterType.pythonType()), parameter.defaultValue() != null,
         parameterState.keywordOnly, parameterState.positionalOnly, parameterType.isKeywordVariadic(), parameterType.isPositionalVariadic(), locationInFile(parameter, fileId)));
       if (starToken != null) {
         hasVariadicParameter = true;
