@@ -3654,6 +3654,41 @@ public class TypeInferenceV2Test {
     assertThat(((ClassType) nestedBuilderMember.type()).fullyQualifiedName()).isEqualTo("pyspark.sql.session.SparkSession.Builder");
   }
 
+  @Test
+  void propertyMemberAccess() {
+    FileInput fileInput = inferTypes("""
+      class A:
+        @property
+        def foo(self) -> int:
+          return 42
+      a = A()
+      a.foo
+      A.foo
+      """);
+    var qualifiedExpression1 = ((QualifiedExpression) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0));
+    var qualifiedExpression2 = ((QualifiedExpression) ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0));
+    assertThat(qualifiedExpression1.name().typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(qualifiedExpression2.name().typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void customPropertyMemberAccess() {
+    FileInput fileInput = inferTypes("""
+      class CustomProperty(property): ...
+      class A:
+        @CustomProperty
+        def foo(self) -> int:
+          return 42
+      a = A()
+      a.foo
+      A.foo
+      """);
+    var qualifiedExpression1 = ((QualifiedExpression) ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0));
+    var qualifiedExpression2 = ((QualifiedExpression) ((ExpressionStatement) fileInput.statements().statements().get(4)).expressions().get(0));
+    assertThat(qualifiedExpression1.name().typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(qualifiedExpression2.name().typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
     FileInput root = parse(lines);
     var symbolTable = new SymbolTableBuilderV2(root).build();

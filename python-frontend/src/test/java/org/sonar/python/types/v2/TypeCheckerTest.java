@@ -382,4 +382,49 @@ class TypeCheckerTest {
     var genericClassType = new ClassType("MyClass", "mod.MyClass", Set.of(), List.of(), List.of(), List.of(), false, true, null);
     assertThat(builder.check(genericClassType)).isEqualTo(TriBool.TRUE);
   }
+
+  @Test
+  void isSubtypeOfTest() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+
+    FileInput initTree = parseWithoutSymbols("");
+    PythonFile initFile = PythonTestUtils.pythonFile("__init__.py");
+    projectLevelSymbolTable.addModule(initTree, "my_package", initFile);
+
+    PythonFile libFile = PythonTestUtils.pythonFile("lib.py");
+    PythonFile modFile = PythonTestUtils.pythonFile("mod.py");
+    String lib = """
+      class LibClass: ...
+      """;
+
+    var libFileInput = parseWithoutSymbols(lib);
+    projectLevelSymbolTable.addModule(libFileInput, "my_package", libFile);
+
+    String input = """
+      from lib import LibClass, UnresolvedLibClass
+      class A: ...
+      class B(A): ...
+      class C: ...
+      B
+      """;
+
+
+    var modFileInput = parseWithoutSymbols(input);
+    projectLevelSymbolTable.addModule(modFileInput, "my_package", modFile);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    TypeChecker localTypeChecker = new TypeChecker(projectLevelTypeTable);
+
+    modFileInput = parseAndInferTypes(projectLevelTypeTable, modFile, input);
+    var bType = ((ExpressionStatement) modFileInput.statements().statements().get(4)).expressions().get(0).typeV2();
+
+    assertThat(localTypeChecker.typeCheckBuilder().isSubtypeOf("my_package.mod.A").check(bType)).isEqualTo(TriBool.TRUE);
+    assertThat(localTypeChecker.typeCheckBuilder().isSubtypeOf("my_package.mod.B").check(bType)).isEqualTo(TriBool.TRUE);
+    assertThat(localTypeChecker.typeCheckBuilder().isSubtypeOf("my_package.mod.C").check(bType)).isEqualTo(TriBool.FALSE);
+    assertThat(localTypeChecker.typeCheckBuilder().isSubtypeOf("my_package.mod.UnknownLocalClass").check(bType)).isEqualTo(TriBool.UNKNOWN);
+
+    assertThat(localTypeChecker.typeCheckBuilder().isSubtypeOf("my_package.unknown.Other").check(bType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(localTypeChecker.typeCheckBuilder().isSubtypeOf("my_package.lib.LibClass").check(bType)).isEqualTo(TriBool.FALSE);
+    assertThat(localTypeChecker.typeCheckBuilder().isSubtypeOf("my_package.lib.UnresolvedLibClass").check(bType)).isEqualTo(TriBool.UNKNOWN);
+
+  }
 }

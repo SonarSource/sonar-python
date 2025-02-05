@@ -58,6 +58,12 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isSubtypeOf(String fqn) {
+    PythonType type = projectLevelTypeTable.getType(fqn);
+    predicates.add(new IsSubtypeOfPredicate(type, fqn));
+    return this;
+  }
+
   public TypeCheckBuilder isInstance() {
     predicates.add(new IsInstancePredicate());
     return this;
@@ -168,6 +174,24 @@ public class TypeCheckBuilder {
     }
   }
 
+  record IsSubtypeOfPredicate(PythonType expectedType, String expectedFqnName) implements TypePredicate {
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      if (pythonType instanceof ClassType testedClassType) {
+        // SONARPY-2593: We shouldn't have to rely on fully qualified names here
+        var types = collectTypes(testedClassType);
+        if (types.stream().anyMatch(t -> (t instanceof ClassType ct) && ct.fullyQualifiedName().equals(expectedFqnName))) {
+          return TriBool.TRUE;
+        }
+      }
+      if (expectedType instanceof ClassType expectedClassType) {
+        return isClassInheritedFrom(pythonType, expectedClassType);
+      }
+      return TriBool.UNKNOWN;
+    }
+  }
+
   record IsInstanceOfPredicate(PythonType expectedType) implements TypePredicate {
 
     @Override
@@ -216,44 +240,6 @@ public class TypeCheckBuilder {
         return candidatesResults.get(0);
       }
     }
-
-    private static TriBool isClassInheritedFrom(PythonType classType, ClassType expectedClassType) {
-      if (classType == expectedClassType) {
-        return TriBool.TRUE;
-      }
-
-      var types = collectTypes(classType);
-
-      if (types.contains(expectedClassType)) {
-        return TriBool.TRUE;
-      } else if (containsUnknown(types)) {
-        return TriBool.UNKNOWN;
-      } else {
-        return TriBool.FALSE;
-      }
-    }
-
-    private static Set<PythonType> collectTypes(PythonType type) {
-      var result = new HashSet<PythonType>();
-      var queue = new ArrayDeque<PythonType>();
-      queue.add(type);
-      while (!queue.isEmpty()) {
-        var currentType = queue.pop();
-        if (result.contains(currentType)) {
-          continue;
-        }
-        result.add(currentType);
-        if (currentType instanceof UnionType) {
-          result.clear();
-          result.add(PythonType.UNKNOWN);
-          queue.clear();
-        } else if (currentType instanceof ClassType classType) {
-          queue.addAll(classType.superClasses().stream().map(TypeWrapper::type).toList());
-        }
-      }
-      return result;
-    }
-
   }
 
   record IsInstancePredicate() implements TypePredicate {
@@ -290,6 +276,43 @@ public class TypeCheckBuilder {
       }
       return TriBool.UNKNOWN;
     }
+  }
+
+  private static TriBool isClassInheritedFrom(PythonType classType, ClassType expectedParentClassType) {
+    if (classType == expectedParentClassType) {
+      return TriBool.TRUE;
+    }
+
+    var types = collectTypes(classType);
+
+    if (types.contains(expectedParentClassType)) {
+      return TriBool.TRUE;
+    } else if (containsUnknown(types)) {
+      return TriBool.UNKNOWN;
+    } else {
+      return TriBool.FALSE;
+    }
+  }
+
+  private static Set<PythonType> collectTypes(PythonType type) {
+    var result = new HashSet<PythonType>();
+    var queue = new ArrayDeque<PythonType>();
+    queue.add(type);
+    while (!queue.isEmpty()) {
+      var currentType = queue.pop();
+      if (result.contains(currentType)) {
+        continue;
+      }
+      result.add(currentType);
+      if (currentType instanceof UnionType) {
+        result.clear();
+        result.add(PythonType.UNKNOWN);
+        queue.clear();
+      } else if (currentType instanceof ClassType classType) {
+        queue.addAll(classType.superClasses().stream().map(TypeWrapper::type).toList());
+      }
+    }
+    return result;
   }
 
   private static boolean containsUnknown(Set<PythonType> types) {
