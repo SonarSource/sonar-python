@@ -23,39 +23,14 @@ build_container_definition: &BUILD_CONTAINER_DEFINITION
     builder_instance_type: t3.small
     region: eu-central-1
     namespace: default
-    cpu: 2
+    cpu: 4
     memory: 4G
 
 only_sonarsource_qa: &ONLY_SONARSOURCE_QA
   only_if: $LOCAL == "1" || ($CIRRUS_USER_COLLABORATOR == 'true' && $CIRRUS_TAG == "" && ($CIRRUS_PR != "" || $CIRRUS_BRANCH == 'master' || $CIRRUS_BRANCH =~ "branch-.*" || $CIRRUS_BUILD_SOURCE == 'api'  || $CIRRUS_BRANCH =~ "dogfood-on-.*"))
 
-build_task:
-  <<: *BUILD_CONTAINER_DEFINITION
-  eks_container:
-    cpu: 4
-
-  <<: *ONLY_SONARSOURCE_QA
-  env:
-    # analysis on next
-    SONAR_TOKEN: dummy-value
-    SONAR_HOST_URL: dummy-value
-    CIRRUS_CLONE_DEPTH: 50
-  maven_cache:
-    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-  build_script:
-    - rm -rf private
-    - source cirrus-env BUILD
-    - regular_mvn_build_deploy_analyze -DskipTests=true -Dsonar.skip=true -P-typeshed_serializer,-sign,-private
-    - ./check-license-compliance.sh
-  cleanup_before_cache_script: cleanup_maven_repository
-
 test_analyze_task:
-  depends_on:
-    - build
   <<: *BUILD_CONTAINER_DEFINITION
-  eks_container:
-    cpu: 4
-    memory: 4G
   <<: *ONLY_SONARSOURCE_QA
   env:
     # analysis on next
@@ -72,5 +47,5 @@ test_analyze_task:
   analyze_script:
     - rm -rf private
     - source cirrus-env BUILD
-    - PULL_REQUEST_SHA=$GIT_SHA1 ./.cirrus/test_analyze.sh -Dsonar.skip=true
+    - PULL_REQUEST_SHA=$GIT_SHA1 ./.cirrus/test_analyze.sh
   cleanup_before_cache_script: cleanup_maven_repository
