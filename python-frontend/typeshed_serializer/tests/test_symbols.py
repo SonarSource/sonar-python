@@ -242,12 +242,36 @@ def test_error_when_overloaded_definitions_are_missing():
 def test_module_with_decorators(fake_module_with_decorators):
     fake_module = symbols.ModuleSymbol(fake_module_with_decorators)
     
-    # SONARPY-2590 there are more than 4 functions in the module. However, functions with decorator are not serialized
-    assert len(fake_module.functions) == 4
+    assert len(fake_module.functions) == 9
     assert fake_module.functions[0].name == "another_imported_decorator"
     assert fake_module.functions[1].name == "alias_decorator"
     assert fake_module.functions[2].name == "a_method_decorator"
     assert fake_module.functions[3].name == "a_function_decorator"
+    
+    assert fake_module.functions[4].name == 'a_common_function'
+    assert fake_module.functions[4].fullname == 'fakemodule_with_decorators.a_common_function'
+    assert fake_module.functions[4].has_decorators is True
+    assert fake_module.functions[4].resolved_decorator_names == ['fakemodule_with_decorators.a_function_decorator']
+
+    assert fake_module.functions[5].name == 'a_common_function2'
+    assert fake_module.functions[5].fullname == 'fakemodule_with_decorators.a_common_function2'
+    assert fake_module.functions[5].has_decorators is True
+    assert fake_module.functions[5].resolved_decorator_names == ['fakemodule_with_decorators_imported.an_imported_decorator']
+    
+    assert fake_module.functions[6].name == 'a_common_function3'
+    assert fake_module.functions[6].fullname == 'fakemodule_with_decorators.a_common_function3'
+    assert fake_module.functions[6].has_decorators is True
+    assert fake_module.functions[6].resolved_decorator_names == ['fakemodule_with_decorators_imported.another_imported_decorator']
+    
+    assert fake_module.functions[7].name == 'a_common_function4'
+    assert fake_module.functions[7].fullname == 'fakemodule_with_decorators.a_common_function4'
+    assert fake_module.functions[7].has_decorators is True
+    assert fake_module.functions[7].resolved_decorator_names == ['fakemodule_with_decorators_imported.another_imported_decorator']
+    
+    assert fake_module.functions[8].name == 'a_common_function5'
+    assert fake_module.functions[8].fullname == 'fakemodule_with_decorators.a_common_function5'
+    assert fake_module.functions[8].has_decorators is True
+    assert fake_module.functions[8].resolved_decorator_names == ['fakemodule_with_decorators_imported.alias_imported_decorator']
     
     assert len(fake_module.classes) == 1
     common_class = fake_module.classes[0]

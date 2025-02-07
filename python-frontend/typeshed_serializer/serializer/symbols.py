@@ -403,6 +403,8 @@ class ModuleSymbol:
             symbol_table_node = name.node
             if isinstance(symbol_table_node, mpn.FuncDef):
                 self.functions.append(FunctionSymbol(symbol_table_node, name=key))
+            if isinstance(symbol_table_node, mpn.Decorator):
+                self.functions.append(FunctionSymbol(symbol_table_node.func, decorators=symbol_table_node.original_decorators))
             if isinstance(symbol_table_node, mpn.OverloadedFuncDef):
                 self.overloaded_functions.append(OverloadedFunctionSymbol(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.TypeInfo):
