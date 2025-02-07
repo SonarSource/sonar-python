@@ -33,7 +33,6 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.FunctionType;
-import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.SimpleTypeWrapper;
