@@ -118,7 +118,7 @@
 	uuid.UUID"	uuid.UUIDrV
 regex/werkzeug.routing.converters.UUIDConverter.regex
 builtins.str"builtins.strS
-ValidationError+werkzeug.routing.converters.ValidationError"builtins.ValueError¨
+ValidationError+werkzeug.routing.converters.ValidationError"builtins.ValueErrorª
 
 BuildError&werkzeug.routing.exceptions.BuildError",werkzeug.routing.exceptions.RoutingException"builtins.LookupError*ï
 __init__/werkzeug.routing.exceptions.BuildError.__init__"
@@ -138,13 +138,13 @@ BuildError&werkzeug.routing.exceptions.BuildError",werkzeug.routing.exceptions.
 adapter}
 +Union[werkzeug.routing.map.MapAdapter,None]B
 werkzeug.routing.map.MapAdapter"werkzeug.routing.map.MapAdapter
-None *ü
+None *Æ
 	suggested0werkzeug.routing.exceptions.BuildError.suggested"q
 'Union[werkzeug.routing.rules.Rule,None]:
 werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule
 None*Z
 selfP
-&werkzeug.routing.exceptions.BuildError"&werkzeug.routing.exceptions.BuildError0:cached_property*ü
+&werkzeug.routing.exceptions.BuildError"&werkzeug.routing.exceptions.BuildError0:werkzeug.utils.cached_property*ü
 closest_rule3werkzeug.routing.exceptions.BuildError.closest_rule"q
 'Union[werkzeug.routing.rules.Rule,None]:
 werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule
@@ -251,7 +251,7 @@ XUnion[TypeAlias[builtins.dict[builtins.str,Any]],werkzeug.wrappers.request.Requ
 new_url3werkzeug.routing.exceptions.RequestRedirect.new_url
 builtins.str"builtins.strT
 RoutingException,werkzeug.routing.exceptions.RoutingException"builtins.Exceptionb
-WebsocketMismatch-werkzeug.routing.exceptions.WebsocketMismatch"werkzeug.exceptions.BadRequestÍ3
+WebsocketMismatch-werkzeug.routing.exceptions.WebsocketMismatch"werkzeug.exceptions.BadRequestÛ3
 Mapwerkzeug.routing.map.Map"builtins.object*ä
 __init__!werkzeug.routing.map.Map.__init__"
 None*>
@@ -302,12 +302,12 @@ Ltyping.Mapping[builtins.str,Type[werkzeug.routing.converters.BaseConverter]]
 endpoint
 builtins.str"builtins.str*+
 	arguments
-builtins.str"builtins.str*
+builtins.str"builtins.str*˘
 _ruleswerkzeug.routing.map.Map._rules"w
 *builtins.list[werkzeug.routing.rules.Rule]:
 werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule"builtins.list*>
 self4
-werkzeug.routing.map.Map"werkzeug.routing.map.Map0:property`*ƒ
+werkzeug.routing.map.Map"werkzeug.routing.map.Map0:builtins.property`*ƒ
 
 iter_rules#werkzeug.routing.map.Map.iter_rules"{
 ,typing.Iterator[werkzeug.routing.rules.Rule]:
@@ -427,7 +427,7 @@ Kbuiltins.dict[builtins.str,Type[werkzeug.routing.converters.BaseConverter]]
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None∆C
+None–C
 
 MapAdapterwerkzeug.routing.map.MapAdapter"builtins.object*·
 __init__(werkzeug.routing.map.MapAdapter.__init__"
@@ -623,8 +623,8 @@ query_args±
 url_schemeD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 2µ
-match%werkzeug.routing.map.MapAdapter.matchÍ
+None 2ø
+match%werkzeug.routing.map.MapAdapter.matchÔ
 match%werkzeug.routing.map.MapAdapter.match"±
 4Tuple[builtins.str,typing.Mapping[builtins.str,Any]]
 builtins.str"builtins.strY
@@ -655,8 +655,7 @@ query_args¿
 	websocketG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None 0:
-t.overloadXó
+None 0:typing.overloadXú
 match%werkzeug.routing.map.MapAdapter.match"ﬁ
 CTuple[werkzeug.routing.rules.Rule,typing.Mapping[builtins.str,Any]]:
 werkzeug.routing.rules.Rule"werkzeug.routing.rules.RuleY
@@ -687,8 +686,7 @@ query_args¿
 	websocketG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None 0:
-t.overloadXr`
+None 0:typing.overloadXr`
 map#werkzeug.routing.map.MapAdapter.map4
 werkzeug.routing.map.Map"werkzeug.routing.map.MaprX
 server_name+werkzeug.routing.map.MapAdapter.server_name
@@ -774,7 +772,7 @@ JTuple[werkzeug.routing.rules.Rule,typing.MutableMapping[builtins.str,Any]]:
 builtins.str"builtins.strr«
 rules+werkzeug.routing.rules.EndpointPrefix.rulesê
 3typing.Iterable[werkzeug.routing.rules.RuleFactory]H
-"werkzeug.routing.rules.RuleFactory""werkzeug.routing.rules.RuleFactory"typing.Iterable D
+"werkzeug.routing.rules.RuleFactory""werkzeug.routing.rules.RuleFactory"typing.Iterable”D
 Rulewerkzeug.routing.rules.Rule""werkzeug.routing.rules.RuleFactory*Å
 
 __init__$werkzeug.routing.rules.Rule.__init__"
@@ -890,14 +888,14 @@ query_varsY
 compile#werkzeug.routing.rules.Rule.compile"
 None*D
 self:
-werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule*Ô
+werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule*¯
 _get_func_code*werkzeug.routing.rules.Rule._get_func_code"K
 CallableType[builtins.function]&
 builtins.function"builtins.function**
 code 
 types.CodeType"types.CodeType*&
 name
-builtins.str"builtins.str0:staticmethodh*â
+builtins.str"builtins.str0:builtins.staticmethodh*â
 _compile_builder,werkzeug.routing.rules.Rule._compile_builder"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*D

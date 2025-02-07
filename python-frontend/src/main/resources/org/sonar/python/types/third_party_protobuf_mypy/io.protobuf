@@ -1,6 +1,6 @@
 
 ioV
-UnsupportedOperationio.UnsupportedOperation"builtins.OSError"builtins.ValueError÷
+UnsupportedOperationio.UnsupportedOperation"builtins.OSError"builtins.ValueErrorﬂ
 IOBase	io.IOBase"builtins.object*é
 __iter__io.IOBase.__iter__"T
 typing.Iterator[builtins.bytes] 
@@ -106,11 +106,11 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 None *@
 __del__io.IOBase.__del__"
 None*
-	io.IOBase"	io.IOBase*j
+	io.IOBase"	io.IOBase*s
 closedio.IOBase.closed"
 builtins.bool"builtins.bool* 
 self
-	io.IOBase"	io.IOBase0:property`*£
+	io.IOBase"	io.IOBase0:builtins.property`*£
 _checkClosedio.IOBase._checkClosed"
 None* 
 self
@@ -230,7 +230,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 io.BufferedIOBase"io.BufferedIOBase* 
 builtins.int"builtins.int r:
 rawio.BufferedIOBase.raw
-io.RawIOBase"io.RawIOBase∆
+io.RawIOBase"io.RawIOBaseœ
 FileIO	io.FileIO"io.RawIOBase"typing.BinaryIO*ç	
 __init__io.FileIO.__init__"
 None* 
@@ -258,11 +258,11 @@ XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtin
 CallableType[builtins.function]&
 builtins.function"builtins.function"
 os._Opener
-None *l
+None *u
 closefdio.FileIO.closefd"
 builtins.bool"builtins.bool* 
 self
-	io.FileIO"	io.FileIO0:property`*¥
+	io.FileIO"	io.FileIO0:builtins.property`*¥
 writeio.FileIO.write"
 builtins.int"builtins.int* 
 self
@@ -490,7 +490,7 @@ writelinesio.TextIOBase.writelines"
 builtins.str"builtins.strL
 builtins.tuple[builtins.str]
 builtins.str"builtins.str"builtins.tuple
-None›
+NoneÇ
 TextIOWrapperio.TextIOWrapper"io.TextIOBase"typing.TextIO*ü
 __init__io.TextIOWrapper.__init__"
 None*.
@@ -514,23 +514,23 @@ writelinesio.TextIOBase.writelines"
 line_buffering
 builtins.bool"builtins.bool *3
 write_through
-builtins.bool"builtins.bool *É
+builtins.bool"builtins.bool *å
 bufferio.TextIOWrapper.buffer""
 typing.BinaryIO"typing.BinaryIO*.
 self$
-io.TextIOWrapper"io.TextIOWrapper0:property`*
+io.TextIOWrapper"io.TextIOWrapper0:builtins.property`*à
 closedio.TextIOWrapper.closed"
 builtins.bool"builtins.bool*.
 self$
-io.TextIOWrapper"io.TextIOWrapper0:property`*è
+io.TextIOWrapper"io.TextIOWrapper0:builtins.property`*ò
 line_bufferingio.TextIOWrapper.line_buffering"
 builtins.bool"builtins.bool*.
 self$
-io.TextIOWrapper"io.TextIOWrapper0:property`*ç
+io.TextIOWrapper"io.TextIOWrapper0:builtins.property`*ñ
 write_throughio.TextIOWrapper.write_through"
 builtins.bool"builtins.bool*.
 self$
-io.TextIOWrapper"io.TextIOWrapper0:property`*°
+io.TextIOWrapper"io.TextIOWrapper0:builtins.property`*°
 reconfigureio.TextIOWrapper.reconfigure"
 None*.
 self$
@@ -610,7 +610,7 @@ writelinesio.TextIOWrapper.writelines"
 self
 io.StringIO"io.StringIOr!
 nameio.StringIO.name
-Any”
+Any‹
 IncrementalNewlineDecoderio.IncrementalNewlineDecoder"codecs.IncrementalDecoder*ÿ
 __init__%io.IncrementalNewlineDecoder.__init__"
 None*F
@@ -644,7 +644,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer
 builtins.str"builtins.str*+
 final
-builtins.bool"builtins.bool *π
+builtins.bool"builtins.bool *¬
 newlines%io.IncrementalNewlineDecoder.newlines"Ø
 5Union[builtins.str,builtins.tuple[builtins.str],None]
 builtins.str"builtins.strL
@@ -652,7 +652,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 builtins.str"builtins.str"builtins.tuple
 None*F
 self<
-io.IncrementalNewlineDecoder"io.IncrementalNewlineDecoder0:property`*Ì
+io.IncrementalNewlineDecoder"io.IncrementalNewlineDecoder0:builtins.property`*Ì
 setstate%io.IncrementalNewlineDecoder.setstate"
 None*F
 self<

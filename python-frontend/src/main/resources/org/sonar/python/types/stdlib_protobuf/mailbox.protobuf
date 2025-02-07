@@ -28,8 +28,8 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 io.StringIO"io.StringIOD
  mailbox._SupportsReadAndReadline" mailbox._SupportsReadAndReadline"mailbox._MessageData"typing.Iterator*0
 self&
-mailbox._HasItems"mailbox._HasItemsz38z39z310z311z312z313Xj38j39j310j311j312j313©h
-Mailboxmailbox.Mailbox"builtins.object*–
+mailbox._HasItems"mailbox._HasItemsz38z39z310z311z312z313Xj38j39j310j311j312j313ái
+Mailboxmailbox.Mailbox"builtins.object*‘
 addmailbox.Mailbox.add"
 builtins.str"builtins.str*å
 selfÅ
@@ -43,7 +43,7 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 builtins.bytes"builtins.bytes
 builtins.str"builtins.str
 io.StringIO"io.StringIOD
- mailbox._SupportsReadAndReadline" mailbox._SupportsReadAndReadline"mailbox._MessageData0:abstractmethod@z38z39z310z311z312z313*ê
+ mailbox._SupportsReadAndReadline" mailbox._SupportsReadAndReadline"mailbox._MessageData0:abc.abstractmethod@z38z39z310z311z312z313*î
 removemailbox.Mailbox.remove"
 None*å
 selfÅ
@@ -51,7 +51,7 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox*%
 key
-builtins.str"builtins.str0:abstractmethod@z38z39z310z311z312z313*˜
+builtins.str"builtins.str0:abc.abstractmethod@z38z39z310z311z312z313*˜
 __delitem__mailbox.Mailbox.__delitem__"
 None*ÑÅ
 "mailbox.Mailbox[mailbox._MessageT]J
@@ -65,7 +65,7 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox*%
 key
-builtins.str"builtins.strz38z39z310z311z312z313*Ÿ
+builtins.str"builtins.strz38z39z310z311z312z313*›
 __setitem__mailbox.Mailbox.__setitem__"
 None*ÑÅ
 "mailbox.Mailbox[mailbox._MessageT]J
@@ -78,14 +78,14 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 builtins.bytes"builtins.bytes
 builtins.str"builtins.str
 io.StringIO"io.StringIOD
- mailbox._SupportsReadAndReadline" mailbox._SupportsReadAndReadline"mailbox._MessageData0:abstractmethod@z38z39z310z311z312z313*π
+ mailbox._SupportsReadAndReadline" mailbox._SupportsReadAndReadline"mailbox._MessageData0:abc.abstractmethod@z38z39z310z311z312z313*π
 __getitem__mailbox.Mailbox.__getitem__"J
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message*ÑÅ
 "mailbox.Mailbox[mailbox._MessageT]J
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox*
-builtins.str"builtins.strz38z39z310z311z312z313*‹
+builtins.str"builtins.strz38z39z310z311z312z313*‡
 get_messagemailbox.Mailbox.get_message"J
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message*å
@@ -94,7 +94,7 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox*%
 key
-builtins.str"builtins.str0:abstractmethod@z38z39z310z311z312z313*ò
+builtins.str"builtins.str0:abc.abstractmethod@z38z39z310z311z312z313*ò
 
 get_stringmailbox.Mailbox.get_string"
 builtins.str"builtins.str*å
@@ -103,7 +103,7 @@ get_stringmailbox.Mailbox.get_string"
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox*%
 key
-builtins.str"builtins.strz38z39z310z311z312z313*Æ
+builtins.str"builtins.strz38z39z310z311z312z313*≤
 	get_bytesmailbox.Mailbox.get_bytes" 
 builtins.bytes"builtins.bytes*å
 selfÅ
@@ -111,7 +111,7 @@ get_stringmailbox.Mailbox.get_string"
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox*%
 key
-builtins.str"builtins.str0:abstractmethod@z38z39z310z311z312z313*ì
+builtins.str"builtins.str0:abc.abstractmethod@z38z39z310z311z312z313*ó
 get_filemailbox.Mailbox.get_file"
 Any*å
 selfÅ
@@ -119,14 +119,14 @@ get_stringmailbox.Mailbox.get_string"
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox*%
 key
-builtins.str"builtins.str0:abstractmethod@z38z39z310z311z312z313*≥
+builtins.str"builtins.str0:abc.abstractmethod@z38z39z310z311z312z313*∑
 iterkeysmailbox.Mailbox.iterkeys"N
 typing.Iterator[builtins.str]
 builtins.str"builtins.str"typing.Iterator*å
 selfÅ
 "mailbox.Mailbox[mailbox._MessageT]J
 mailbox._MessageT"
-mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abstractmethod@z38z39z310z311z312z313*ì
+mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abc.abstractmethod@z38z39z310z311z312z313*ì
 keysmailbox.Mailbox.keys"J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*å
@@ -177,18 +177,18 @@ itervaluesmailbox.Mailbox.itervalues"Å
 selfÅ
 "mailbox.Mailbox[mailbox._MessageT]J
 mailbox._MessageT"
-mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailboxz38z39z310z311z312z313*£
+mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailboxz38z39z310z311z312z313*ß
 __contains__mailbox.Mailbox.__contains__"
 builtins.bool"builtins.bool*ÑÅ
 "mailbox.Mailbox[mailbox._MessageT]J
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox*
-builtins.str"builtins.str0:abstractmethod@z38z39z310z311z312z313*˜
+builtins.str"builtins.str0:abc.abstractmethod@z38z39z310z311z312z313*˚
 __len__mailbox.Mailbox.__len__"
 builtins.int"builtins.int*ÑÅ
 "mailbox.Mailbox[mailbox._MessageT]J
 mailbox._MessageT"
-mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abstractmethod@z38z39z310z311z312z313*”
+mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abc.abstractmethod@z38z39z310z311z312z313*”
 clearmailbox.Mailbox.clear"
 None*å
 selfÅ
@@ -225,31 +225,31 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 builtins.str"builtins.str
 io.StringIO"io.StringIOD
  mailbox._SupportsReadAndReadline" mailbox._SupportsReadAndReadline"mailbox._MessageData"typing.Iterable
-None z38z39z310z311z312z313*Á
+None z38z39z310z311z312z313*Î
 flushmailbox.Mailbox.flush"
 None*å
 selfÅ
 "mailbox.Mailbox[mailbox._MessageT]J
 mailbox._MessageT"
-mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abstractmethod@z38z39z310z311z312z313*Â
+mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abc.abstractmethod@z38z39z310z311z312z313*È
 lockmailbox.Mailbox.lock"
 None*å
 selfÅ
 "mailbox.Mailbox[mailbox._MessageT]J
 mailbox._MessageT"
-mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abstractmethod@z38z39z310z311z312z313*È
+mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abc.abstractmethod@z38z39z310z311z312z313*Ì
 unlockmailbox.Mailbox.unlock"
 None*å
 selfÅ
 "mailbox.Mailbox[mailbox._MessageT]J
 mailbox._MessageT"
-mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abstractmethod@z38z39z310z311z312z313*Á
+mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abc.abstractmethod@z38z39z310z311z312z313*Î
 closemailbox.Mailbox.close"
 None*å
 selfÅ
 "mailbox.Mailbox[mailbox._MessageT]J
 mailbox._MessageT"
-mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abstractmethod@z38z39z310z311z312z313*–
+mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox0:abc.abstractmethod@z38z39z310z311z312z313*–
 __class_getitem__!mailbox.Mailbox.__class_getitem__"(
 types.GenericAlias"types.GenericAlias*¿
 cls∂
@@ -258,8 +258,8 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 mailbox._MessageT"
 mailbox.Message"mailbox.Message"mailbox.Message"mailbox.Mailbox"type*
 item
-Anypz39z310z311z312z3132ô	
-__init__mailbox.Mailbox.__init__ 
+Anypz39z310z311z312z3132ß	
+__init__mailbox.Mailbox.__init__—
 __init__mailbox.Mailbox.__init__"
 None*å
 selfÅ
@@ -276,7 +276,7 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 CallableType[builtins.function]&
 builtins.function"builtins.function*,
 create
-builtins.bool"builtins.bool 0:overloadXâ
+builtins.bool"builtins.bool 0:typing.overloadXê
 __init__mailbox.Mailbox.__init__"
 None*å
 selfÅ
@@ -292,8 +292,8 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 factory
 None *,
 create
-builtins.bool"builtins.bool 0:overloadX"38"39"310"311"312"3132ó
-getmailbox.Mailbox.get
+builtins.bool"builtins.bool 0:typing.overloadX"38"39"310"311"312"3132•
+getmailbox.Mailbox.get˜
 getmailbox.Mailbox.get"w
 Union[mailbox._MessageT,None]J
 mailbox._MessageT"
@@ -306,7 +306,7 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 key
 builtins.str"builtins.str*
 default
-None 0:overloadXÎ
+None 0:typing.overloadXÚ
 getmailbox.Mailbox.get"∏
 #Union[mailbox._MessageT,mailbox._T]J
 mailbox._MessageT"
@@ -323,8 +323,8 @@ mailbox._T"
 defaultC
 
 mailbox._T"
-builtins.object"builtins.object"builtins.object0:overloadX"38"39"310"311"312"3132ó
-popmailbox.Mailbox.pop
+builtins.object"builtins.object"builtins.object0:typing.overloadX"38"39"310"311"312"3132•
+popmailbox.Mailbox.pop˜
 popmailbox.Mailbox.pop"w
 Union[mailbox._MessageT,None]J
 mailbox._MessageT"
@@ -337,7 +337,7 @@ mailbox._T"
 key
 builtins.str"builtins.str*
 default
-None 0:overloadXÎ
+None 0:typing.overloadXÚ
 popmailbox.Mailbox.pop"∏
 #Union[mailbox._MessageT,mailbox._T]J
 mailbox._MessageT"
@@ -354,7 +354,7 @@ mailbox._T"
 defaultC
 
 mailbox._T"
-builtins.object"builtins.object"builtins.object0:overloadX"38"39"310"311"312"313Pj38j39j310j311j312j313rX
+builtins.object"builtins.object"builtins.object0:typing.overloadX"38"39"310"311"312"313Pj38j39j310j311j312j313rX
 _pathmailbox.Mailbox._path
 builtins.str"builtins.str*38*39*310*311*312*313r…
 _factorymailbox.Mailbox._factoryÜ
@@ -1086,7 +1086,7 @@ eUnion[email.message.Message,builtins.bytes,builtins.str,io.StringIO,mailbox._Su
 None*6
 self,
 mailbox.BabylMessage"mailbox.BabylMessagez38z39z310z311z312z313j38j39j310j311j312j313X
-MMDFMessagemailbox.MMDFMessage"mailbox._mboxMMDFMessagej38j39j310j311j312j313Œ+
+MMDFMessagemailbox.MMDFMessage"mailbox._mboxMMDFMessagej38j39j310j311j312j313◊+
 
 _ProxyFilemailbox._ProxyFile"builtins.object*†
 __init__mailbox._ProxyFile.__init__"
@@ -1224,13 +1224,13 @@ _ProxyFilemailbox._ProxyFile"builtins.object*†
 self
 !mailbox._ProxyFile[typing.AnyStr]F
 typing.AnyStr"
-builtins.object"builtins.object"builtins.object"mailbox._ProxyFilez38z39z310z311z312z313*˘
+builtins.object"builtins.object"builtins.object"mailbox._ProxyFilez38z39z310z311z312z313*Ç
 closedmailbox._ProxyFile.closed"
 builtins.bool"builtins.bool*â
 self
 !mailbox._ProxyFile[typing.AnyStr]F
 typing.AnyStr"
-builtins.object"builtins.object"builtins.object"mailbox._ProxyFile0:property`z38z39z310z311z312z313*œ
+builtins.object"builtins.object"builtins.object"mailbox._ProxyFile0:builtins.property`z38z39z310z311z312z313*œ
 __class_getitem__$mailbox._ProxyFile.__class_getitem__"(
 types.GenericAlias"types.GenericAlias*º
 cls≤

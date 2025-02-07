@@ -45,19 +45,19 @@ CPU_PINNEDFpandas.core.interchange.dataframe_protocol.DlpackDeviceType.CPU_PINN
 USE_BYTEMASKFpandas.core.interchange.dataframe_protocol.ColumnNullType.USE_BYTEMASK
 builtins.int"builtins.int\
 ColumnBuffers8pandas.core.interchange.dataframe_protocol.ColumnBuffers"typing._TypedDictn
-CategoricalDescriptionApandas.core.interchange.dataframe_protocol.CategoricalDescription"typing._TypedDict®	
-Buffer1pandas.core.interchange.dataframe_protocol.Buffer"abc.ABC*Ù
+CategoricalDescriptionApandas.core.interchange.dataframe_protocol.CategoricalDescription"typing._TypedDict 	
+Buffer1pandas.core.interchange.dataframe_protocol.Buffer"abc.ABC*Å
 bufsize9pandas.core.interchange.dataframe_protocol.Buffer.bufsize"
 builtins.int"builtins.int*p
 selff
-1pandas.core.interchange.dataframe_protocol.Buffer"1pandas.core.interchange.dataframe_protocol.Buffer0:property:abstractmethod@`*Ï
+1pandas.core.interchange.dataframe_protocol.Buffer"1pandas.core.interchange.dataframe_protocol.Buffer0:builtins.property:abc.abstractmethod@`*˘
 ptr5pandas.core.interchange.dataframe_protocol.Buffer.ptr"
 builtins.int"builtins.int*p
 selff
-1pandas.core.interchange.dataframe_protocol.Buffer"1pandas.core.interchange.dataframe_protocol.Buffer0:property:abstractmethod@`*h
+1pandas.core.interchange.dataframe_protocol.Buffer"1pandas.core.interchange.dataframe_protocol.Buffer0:builtins.property:abc.abstractmethod@`*l
 
 __dlpack__<pandas.core.interchange.dataframe_protocol.Buffer.__dlpack__*
-self0:abstractmethod@*Ç
+self0:abc.abstractmethod@*Ü
 __dlpack_device__Cpandas.core.interchange.dataframe_protocol.Buffer.__dlpack_device__"°
 [Tuple[pandas.core.interchange.dataframe_protocol.DlpackDeviceType,Union[builtins.int,None]]z
 ;pandas.core.interchange.dataframe_protocol.DlpackDeviceType";pandas.core.interchange.dataframe_protocol.DlpackDeviceTypeD
@@ -65,16 +65,16 @@ __dlpack__<pandas.core.interchange.dataframe_protocol.Buffer.__dlpack__*
 builtins.int"builtins.int
 None*p
 selff
-1pandas.core.interchange.dataframe_protocol.Buffer"1pandas.core.interchange.dataframe_protocol.Buffer0:abstractmethod@@babc.ABCMeta∫
-Column1pandas.core.interchange.dataframe_protocol.Column"abc.ABC*Ó
+1pandas.core.interchange.dataframe_protocol.Buffer"1pandas.core.interchange.dataframe_protocol.Buffer0:abc.abstractmethod@@babc.ABCMeta°
+Column1pandas.core.interchange.dataframe_protocol.Column"abc.ABC*˚
 size6pandas.core.interchange.dataframe_protocol.Column.size"
 builtins.int"builtins.int*p
 selff
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:property:abstractmethod@`*Ú
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:builtins.property:abc.abstractmethod@`*ˇ
 offset8pandas.core.interchange.dataframe_protocol.Column.offset"
 builtins.int"builtins.int*p
 selff
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:property:abstractmethod@`*É
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:builtins.property:abc.abstractmethod@`*ê
 dtype7pandas.core.interchange.dataframe_protocol.Column.dtype"Æ
 bTuple[pandas.core.interchange.dataframe_protocol.DtypeKind,builtins.int,builtins.str,builtins.str]l
 4pandas.core.interchange.dataframe_protocol.DtypeKind"4pandas.core.interchange.dataframe_protocol.DtypeKind
@@ -82,36 +82,36 @@ bTuple[pandas.core.interchange.dataframe_protocol.DtypeKind,builtins.int,builtin
 builtins.str"builtins.str
 builtins.str"builtins.str*p
 selff
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:property:abstractmethod@`*‹
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:builtins.property:abc.abstractmethod@`*È
 describe_categoricalFpandas.core.interchange.dataframe_protocol.Column.describe_categorical"j
 TypeAlias[TypedDict]
 	TypedDict"Apandas.core.interchange.dataframe_protocol.CategoricalDescription*p
 selff
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:property:abstractmethod@`*Æ
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:builtins.property:abc.abstractmethod@`*ª
 describe_null?pandas.core.interchange.dataframe_protocol.Column.describe_null"…
 DTuple[pandas.core.interchange.dataframe_protocol.ColumnNullType,Any]v
 9pandas.core.interchange.dataframe_protocol.ColumnNullType"9pandas.core.interchange.dataframe_protocol.ColumnNullType
 Any*p
 selff
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:property:abstractmethod@`*¢
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:builtins.property:abc.abstractmethod@`*Ø
 
 null_count<pandas.core.interchange.dataframe_protocol.Column.null_count"D
 Union[builtins.int,None]
 builtins.int"builtins.int
 None*p
 selff
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:property:abstractmethod@`*±
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:builtins.property:abc.abstractmethod@`*æ
 metadata:pandas.core.interchange.dataframe_protocol.Column.metadata"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
 Any"builtins.dict*p
 selff
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:property:abstractmethod@`*Ó
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:builtins.property:abc.abstractmethod@`*Ú
 
 num_chunks<pandas.core.interchange.dataframe_protocol.Column.num_chunks"
 builtins.int"builtins.int*p
 selff
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:abstractmethod@*Ê
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:abc.abstractmethod@*Í
 
 get_chunks<pandas.core.interchange.dataframe_protocol.Column.get_chunks"Ω
 Btyping.Iterable[pandas.core.interchange.dataframe_protocol.Column]f
@@ -121,13 +121,13 @@ Btyping.Iterable[pandas.core.interchange.dataframe_protocol.Column]f
 n_chunksD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:abstractmethod@*µ
+None 0:abc.abstractmethod@*π
 get_buffers=pandas.core.interchange.dataframe_protocol.Column.get_buffers"a
 TypeAlias[TypedDict]
 	TypedDict"8pandas.core.interchange.dataframe_protocol.ColumnBuffers*p
 selff
-1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:abstractmethod@@babc.ABCMeta˚"
-	DataFrame4pandas.core.interchange.dataframe_protocol.DataFrame"abc.ABC*Õ
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column0:abc.abstractmethod@@babc.ABCMeta¥#
+	DataFrame4pandas.core.interchange.dataframe_protocol.DataFrame"abc.ABC*—
 __dataframe__Bpandas.core.interchange.dataframe_protocol.DataFrame.__dataframe__"
 Any*v
 selfl
@@ -136,65 +136,65 @@ Btyping.Iterable[pandas.core.interchange.dataframe_protocol.Column]f
 builtins.bool"builtins.bool *0
 
 allow_copy
-builtins.bool"builtins.bool 0:abstractmethod@*∫
+builtins.bool"builtins.bool 0:abc.abstractmethod@*«
 metadata=pandas.core.interchange.dataframe_protocol.DataFrame.metadata"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
 Any"builtins.dict*v
 selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:property:abstractmethod@`*˘
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:builtins.property:abc.abstractmethod@`*˝
 num_columns@pandas.core.interchange.dataframe_protocol.DataFrame.num_columns"
 builtins.int"builtins.int*v
 selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abstractmethod@*õ
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abc.abstractmethod@*ü
 num_rows=pandas.core.interchange.dataframe_protocol.DataFrame.num_rows"D
 Union[builtins.int,None]
 builtins.int"builtins.int
 None*v
 selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abstractmethod@*˜
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abc.abstractmethod@*˚
 
 num_chunks?pandas.core.interchange.dataframe_protocol.DataFrame.num_chunks"
 builtins.int"builtins.int*v
 selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abstractmethod@*≠
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abc.abstractmethod@*±
 column_namesApandas.core.interchange.dataframe_protocol.DataFrame.column_names"N
 typing.Iterable[builtins.str]
 builtins.str"builtins.str"typing.Iterable*v
 selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abstractmethod@*Ê
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abc.abstractmethod@*Í
 
 get_column?pandas.core.interchange.dataframe_protocol.DataFrame.get_column"f
 1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column*v
 selfl
 4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*#
 i
-builtins.int"builtins.int0:abstractmethod@*˘
+builtins.int"builtins.int0:abc.abstractmethod@*˝
 get_column_by_nameGpandas.core.interchange.dataframe_protocol.DataFrame.get_column_by_name"f
 1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column*v
 selfl
 4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*&
 name
-builtins.str"builtins.str0:abstractmethod@*õ
+builtins.str"builtins.str0:abc.abstractmethod@*ü
 get_columns@pandas.core.interchange.dataframe_protocol.DataFrame.get_columns"Ω
 Btyping.Iterable[pandas.core.interchange.dataframe_protocol.Column]f
 1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column"typing.Iterable*v
 selfl
-4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abstractmethod@*¨
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abc.abstractmethod@*∞
 select_columnsCpandas.core.interchange.dataframe_protocol.DataFrame.select_columns"l
 4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*v
 selfl
 4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*[
 indicesN
 typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence0:abstractmethod@*∫
+builtins.int"builtins.int"typing.Sequence0:abc.abstractmethod@*æ
 select_columns_by_nameKpandas.core.interchange.dataframe_protocol.DataFrame.select_columns_by_name"l
 4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*v
 selfl
 4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*Y
 namesN
 typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence0:abstractmethod@*¯
+builtins.str"builtins.str"typing.Sequence0:abc.abstractmethod@*¸
 
 get_chunks?pandas.core.interchange.dataframe_protocol.DataFrame.get_chunks"∆
 Etyping.Iterable[pandas.core.interchange.dataframe_protocol.DataFrame]l
@@ -204,7 +204,7 @@ Etyping.Iterable[pandas.core.interchange.dataframe_protocol.DataFrame]l
 n_chunksD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:abstractmethod@@babc.ABCMetare
+None 0:abc.abstractmethod@@babc.ABCMetare
 version<pandas.core.interchange.dataframe_protocol.DataFrame.version
 builtins.int"builtins.int*¶
 __annotations__:pandas.core.interchange.dataframe_protocol.__annotations__W

@@ -1,14 +1,14 @@
 
-pyspark.pandas.genericç¶
-Framepyspark.pandas.generic.Frame"builtins.object*Ÿ
+pyspark.pandas.genericõ·
+Framepyspark.pandas.generic.Frame"builtins.object*£
 __getitem__(pyspark.pandas.generic.Frame.__getitem__"
 Any*><
 pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*	
-Any0:abstractmethod@*ë
+Any0:abc.abstractmethod@*ø
 	_internal&pyspark.pandas.generic.Frame._internal"N
 %pyspark.pandas.internal.InternalFrame"%pyspark.pandas.internal.InternalFrame*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property:abstractmethod@`*ñ
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:builtins.property:abc.abstractmethod@`*õ
 _apply_series_op-pyspark.pandas.generic.Frame._apply_series_op"€
  pyspark.pandas._typing.FrameLike<
 pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
@@ -19,7 +19,7 @@
 CallableType[builtins.function]&
 builtins.function"builtins.function*4
 should_resolve
-builtins.bool"builtins.bool 0:abstractmethod@*‚
+builtins.bool"builtins.bool 0:abc.abstractmethod@*†
 _reduce_for_stat_function6pyspark.pandas.generic.Frame._reduce_for_stat_function"Ý
 ¶Union[pyspark.pandas.series.Series[Any],TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.bytes,_decimal.Decimal,datetime.date,datetime.datetime,None]]]J
 !pyspark.pandas.series.Series[Any]
@@ -52,7 +52,7 @@
 skipna
 builtins.bool"builtins.bool *
 kwargs
-Any0:abstractmethod@*€
+Any0:abc.abstractmethod@*
 dtypes#pyspark.pandas.generic.Frame.dtypes"è
 oUnion[pandas.core.series.Series[Any],TypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]]D
 pandas.core.series.Series[Any]
@@ -63,14 +63,14 @@ ITypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]¾
 Any"numpy.dtypeP
 &pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype"pyspark.pandas._typing.Dtype*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property:abstractmethod@`*Ù
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:builtins.property:abc.abstractmethod@`*Ý
 	to_pandas&pyspark.pandas.generic.Frame.to_pandas"Ç
 AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
 pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
 pandas.core.series.Series[Any]
 Any"pandas.core.series.Series*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abstractmethod@*Û
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abc.abstractmethod@*ß
 
 _to_pandas'pyspark.pandas.generic.Frame._to_pandas"Ç
 AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
@@ -78,24 +78,24 @@ AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
 pandas.core.series.Series[Any]
 Any"pandas.core.series.Series*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abstractmethod@*Û
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abc.abstractmethod@*è
 index"pyspark.pandas.generic.Frame.index"F
 !pyspark.pandas.indexes.base.Index"!pyspark.pandas.indexes.base.Index*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property:abstractmethod@`*Î
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:builtins.property:abc.abstractmethod@`*Ò
 copy!pyspark.pandas.generic.Frame.copy"€
  pyspark.pandas._typing.FrameLike<
 pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
 self€
  pyspark.pandas._typing.FrameLike<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abstractmethod@*í
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abc.abstractmethod@*ñ
 _to_internal_pandas0pyspark.pandas.generic.Frame._to_internal_pandas"Ç
 AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
 pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
 pandas.core.series.Series[Any]
 Any"pandas.core.series.Series*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abstractmethod@*õ
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:abc.abstractmethod@*ù
 head!pyspark.pandas.generic.Frame.head"€
  pyspark.pandas._typing.FrameLike<
 pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
@@ -103,7 +103,7 @@ AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
  pyspark.pandas._typing.FrameLike<
 pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*%
 n
-builtins.int"builtins.int 0:abstractmethod@*ì
+builtins.int"builtins.int 0:abc.abstractmethod@*ì
 cummin#pyspark.pandas.generic.Frame.cummin"€
  pyspark.pandas._typing.FrameLike<
 pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
@@ -157,13 +157,13 @@ AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
 Any
 Any"numpy.ndarray*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*¾
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*Ç
 values#pyspark.pandas.generic.Frame.values"9
 numpy.ndarray[Any,Any]
 Any
 Any"numpy.ndarray*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*Ø
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:builtins.property`*Ø
 to_csv#pyspark.pandas.generic.Frame.to_csv"D
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -633,11 +633,11 @@ sheet_name
 ddof
 builtins.int"builtins.int *2
 numeric_only
-builtins.bool"builtins.bool *
+builtins.bool"builtins.bool *¦
 size!pyspark.pandas.generic.Frame.size"
 builtins.int"builtins.int*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*¸
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:builtins.property`*¸
 abs pyspark.pandas.generic.Frame.abs"€
  pyspark.pandas._typing.FrameLike<
 pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
@@ -673,7 +673,7 @@ sheet_name
 as_index
 builtins.bool"builtins.bool *,
 dropna
-builtins.bool"builtins.bool * 
+builtins.bool"builtins.bool *¤
 _build_groupby+pyspark.pandas.generic.Frame._build_groupby"å
 @pyspark.pandas.groupby.GroupBy[pyspark.pandas._typing.FrameLike]€
  pyspark.pandas._typing.FrameLike<
@@ -692,7 +692,7 @@ GUnion[pyspark.pandas.series.Series[Any],TypeAlias[builtins.tuple[Any]]]J
 as_index
 builtins.bool"builtins.bool**
 dropna
-builtins.bool"builtins.bool0:abstractmethod@*‘
+builtins.bool"builtins.bool0:abc.abstractmethod@*‘
 bool!pyspark.pandas.generic.Frame.bool"
 builtins.bool"builtins.bool*F
 self<
@@ -853,7 +853,7 @@ LUnion[pyspark.pandas.frame.DataFrame[Any],pyspark.pandas.series.Series[Any]]
 modeD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *Ú
+None *Þ
 fillna#pyspark.pandas.generic.Frame.fillna"€
  pyspark.pandas._typing.FrameLike<
 pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
@@ -878,7 +878,7 @@ LUnion[pyspark.pandas.frame.DataFrame[Any],pyspark.pandas.series.Series[Any]]
 limitD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:abstractmethod@*»
+None 0:abc.abstractmethod@*»
 bfill"pyspark.pandas.generic.Frame.bfill"€
  pyspark.pandas._typing.FrameLike<
 pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*‹
@@ -933,33 +933,33 @@ LUnion[pyspark.pandas.frame.DataFrame[Any],pyspark.pandas.series.Series[Any]]
 limit_areaD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *Ã
+None *Ì
 atpyspark.pandas.generic.Frame.at"F
 !pyspark.pandas.indexing.AtIndexer"!pyspark.pandas.indexing.AtIndexer*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*Ç
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:builtins.property`*Ð
 iat pyspark.pandas.generic.Frame.iat"H
 "pyspark.pandas.indexing.iAtIndexer""pyspark.pandas.indexing.iAtIndexer*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*Ë
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:builtins.property`*Ô
 iloc!pyspark.pandas.generic.Frame.iloc"J
 #pyspark.pandas.indexing.iLocIndexer"#pyspark.pandas.indexing.iLocIndexer*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*Ç
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:builtins.property`*Ð
 loc pyspark.pandas.generic.Frame.loc"H
 "pyspark.pandas.indexing.LocIndexer""pyspark.pandas.indexing.LocIndexer*F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:property`*‡
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame0:builtins.property`*‡
 __bool__%pyspark.pandas.generic.Frame.__bool__"
 NoReturn
 *F
 self<
-pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*Ø
+pyspark.pandas.generic.Frame"pyspark.pandas.generic.Frame*á
 _count_expr(pyspark.pandas.generic.Frame._count_expr"6
 pyspark.sql.column.Column"pyspark.sql.column.Column*U
 psserJ
 !pyspark.pandas.series.Series[Any]
-Any"pyspark.pandas.series.Series0:staticmethodh@babc.ABCMetarv
+Any"pyspark.pandas.series.Series0:builtins.staticmethodh@babc.ABCMetarv
 prod!pyspark.pandas.generic.Frame.prodK
 CallableType[builtins.function]&
 builtins.function"builtins.functionrv

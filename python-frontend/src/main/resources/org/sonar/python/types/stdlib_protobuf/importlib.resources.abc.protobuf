@@ -1,63 +1,63 @@
 
-importlib.resources.abcË
-ResourceReaderimportlib.abc.ResourceReader"builtins.object*œ
+importlib.resources.abcÛ
+ResourceReaderimportlib.abc.ResourceReader"builtins.object* 
 open_resource*importlib.abc.ResourceReader.open_resource"H
 typing.IO[builtins.bytes] 
 builtins.bytes"builtins.bytes"	typing.IO*F
 self<
 importlib.abc.ResourceReader"importlib.abc.ResourceReader**
 resource
-builtins.str"builtins.str0:abstractmethod@z311z312z313*ð
+builtins.str"builtins.str0:abc.abstractmethod@z311z312z313*ô
 resource_path*importlib.abc.ResourceReader.resource_path"
 builtins.str"builtins.str*F
 self<
 importlib.abc.ResourceReader"importlib.abc.ResourceReader**
 resource
-builtins.str"builtins.str0:abstractmethod@z311z312z313*ê
+builtins.str"builtins.str0:abc.abstractmethod@z311z312z313*î
 is_resource(importlib.abc.ResourceReader.is_resource"
 builtins.bool"builtins.bool*F
 self<
 importlib.abc.ResourceReader"importlib.abc.ResourceReader*&
 path
-builtins.str"builtins.str0:abstractmethod@z311z312z313*ì
+builtins.str"builtins.str0:abc.abstractmethod@z311z312z313*ð
 contents%importlib.abc.ResourceReader.contents"N
 typing.Iterator[builtins.str]
 builtins.str"builtins.str"typing.Iterator*F
 self<
-importlib.abc.ResourceReader"importlib.abc.ResourceReader0:abstractmethod@z311z312z313@babc.ABCMetaj311j312j313‹á
-Traversableimportlib.abc.Traversable"builtins.object*¯
+importlib.abc.ResourceReader"importlib.abc.ResourceReader0:abc.abstractmethod@z311z312z313@babc.ABCMetaj311j312j313â
+Traversableimportlib.abc.Traversable"builtins.object*³
 is_dir importlib.abc.Traversable.is_dir"
 builtins.bool"builtins.bool*@
 self6
-importlib.abc.Traversable"importlib.abc.Traversable0:abstractmethod@z311z312z313*±
+importlib.abc.Traversable"importlib.abc.Traversable0:abc.abstractmethod@z311z312z313*µ
 is_file!importlib.abc.Traversable.is_file"
 builtins.bool"builtins.bool*@
 self6
-importlib.abc.Traversable"importlib.abc.Traversable0:abstractmethod@z311z312z313*ˆ
+importlib.abc.Traversable"importlib.abc.Traversable0:abc.abstractmethod@z311z312z313*Œ
 iterdir!importlib.abc.Traversable.iterdir"u
 *typing.Iterator[importlib.abc.Traversable]6
 importlib.abc.Traversable"importlib.abc.Traversable"typing.Iterator*@
 self6
-importlib.abc.Traversable"importlib.abc.Traversable0:abstractmethod@z311z312z313*ú
+importlib.abc.Traversable"importlib.abc.Traversable0:abc.abstractmethod@z311z312z313*þ
 joinpath"importlib.abc.Traversable.joinpath"6
 importlib.abc.Traversable"importlib.abc.Traversable*@
 self6
 importlib.abc.Traversable"importlib.abc.Traversable*-
 descendants
-builtins.str"builtins.str0:abstractmethod@z311z312z313*µ
+builtins.str"builtins.str0:abc.abstractmethod@z311z312z313*Â
 nameimportlib.abc.Traversable.name"
 builtins.str"builtins.str*@
 self6
-importlib.abc.Traversable"importlib.abc.Traversable0:property:abstractmethod@`z311z312z313*é
+importlib.abc.Traversable"importlib.abc.Traversable0:builtins.property:abc.abstractmethod@`z311z312z313*í
 __truediv__%importlib.abc.Traversable.__truediv__"6
 importlib.abc.Traversable"importlib.abc.Traversable*86
 importlib.abc.Traversable"importlib.abc.Traversable*
-builtins.str"builtins.str0:abstractmethod@z311z312z313*¹
+builtins.str"builtins.str0:abc.abstractmethod@z311z312z313*½
 
 read_bytes$importlib.abc.Traversable.read_bytes" 
 builtins.bytes"builtins.bytes*@
 self6
-importlib.abc.Traversable"importlib.abc.Traversable0:abstractmethod@z311z312z313*‰
+importlib.abc.Traversable"importlib.abc.Traversable0:abc.abstractmethod@z311z312z313*
 	read_text#importlib.abc.Traversable.read_text"
 builtins.str"builtins.str*@
 self6
@@ -65,8 +65,8 @@ read_bytes$importlib.abc.Traversable.read_bytes"
 encodingD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 0:abstractmethod@z311z312z3132áÒ
-openimportlib.abc.Traversable.openìB
+None 0:abc.abstractmethod@z311z312z3132®Ó
+openimportlib.abc.Traversable.open÷B
 openimportlib.abc.Traversable.open"$
 io.TextIOWrapper"io.TextIOWrapper*@
 self6
@@ -199,7 +199,7 @@ read_bytes$importlib.abc.Traversable.read_bytes"
 newlineD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 0:overload:abstractmethod@XÊ0
+None 0:typing.overload:abc.abstractmethod@XÕ0
 openimportlib.abc.Traversable.open"
 	io.FileIO"	io.FileIO*@
 self6
@@ -297,7 +297,7 @@ read_bytes$importlib.abc.Traversable.read_bytes"
 errors
 None *
 newline
-None 0:overload:abstractmethod@X„
+None 0:typing.overload:abc.abstractmethod@X
 openimportlib.abc.Traversable.open"&
 io.BufferedRandom"io.BufferedRandom*@
 self6
@@ -364,7 +364,7 @@ read_bytes$importlib.abc.Traversable.read_bytes"
 errors
 None *
 newline
-None 0:overload:abstractmethod@Xé
+None 0:typing.overload:abc.abstractmethod@Xô
 openimportlib.abc.Traversable.open"&
 io.BufferedWriter"io.BufferedWriter*@
 self6
@@ -395,7 +395,7 @@ read_bytes$importlib.abc.Traversable.read_bytes"
 errors
 None *
 newline
-None 0:overload:abstractmethod@X³
+None 0:typing.overload:abc.abstractmethod@X¾
 
 openimportlib.abc.Traversable.open"&
 io.BufferedReader"io.BufferedReader*@
@@ -431,7 +431,7 @@ read_bytes$importlib.abc.Traversable.read_bytes"
 errors
 None *
 newline
-None 0:overload:abstractmethod@X½0
+None 0:typing.overload:abc.abstractmethod@XÈ0
 openimportlib.abc.Traversable.open""
 typing.BinaryIO"typing.BinaryIO*@
 self6
@@ -528,7 +528,7 @@ read_bytes$importlib.abc.Traversable.read_bytes"
 errors
 None *
 newline
-None 0:overload:abstractmethod@X„
+None 0:typing.overload:abc.abstractmethod@X
 openimportlib.abc.Traversable.open"$
 typing.IO[Any]
 Any"	typing.IO*@
@@ -549,12 +549,12 @@ read_bytes$importlib.abc.Traversable.read_bytes"
 newlineD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 0:overload:abstractmethod@X"311"312"3138Xj311j312j313é	
-TraversableResources"importlib.abc.TraversableResources"importlib.abc.ResourceReader*à
+None 0:typing.overload:abc.abstractmethod@X"311"312"3138Xj311j312j313í	
+TraversableResources"importlib.abc.TraversableResources"importlib.abc.ResourceReader*ä
 files(importlib.abc.TraversableResources.files"6
 importlib.abc.Traversable"importlib.abc.Traversable*R
 selfH
-"importlib.abc.TraversableResources""importlib.abc.TraversableResources0:abstractmethod@z311z312z313*ø
+"importlib.abc.TraversableResources""importlib.abc.TraversableResources0:abc.abstractmethod@z311z312z313*ø
 open_resource0importlib.abc.TraversableResources.open_resource"&
 io.BufferedReader"io.BufferedReader*R
 selfH

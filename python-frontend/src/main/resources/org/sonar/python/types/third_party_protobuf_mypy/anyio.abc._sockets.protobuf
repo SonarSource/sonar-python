@@ -58,21 +58,21 @@ JTypeAlias[Union[TypeAlias[Tuple[builtins.str,builtins.int]],builtins.str]]˜
 builtins.int"builtins.int"!anyio.abc._sockets.IPSockAddrType
 builtins.str"builtins.str"anyio.abc._sockets.SockAddrTyper[
 remote_port.anyio.abc._sockets.SocketAttribute.remote_port
-builtins.int"builtins.int‚
-_SocketProvider"anyio.abc._sockets._SocketProvider"-anyio._core._typedattr.TypedAttributeProvider*Ç
+builtins.int"builtins.int˜
+_SocketProvider"anyio.abc._sockets._SocketProvider"-anyio._core._typedattr.TypedAttributeProvider*Ð
 extra_attributes3anyio.abc._sockets._SocketProvider.extra_attributes"›
 3typing.Mapping[Any,CallableType[builtins.function]]
 AnyK
 CallableType[builtins.function]&
 builtins.function"builtins.function"typing.Mapping*R
 selfH
-"anyio.abc._sockets._SocketProvider""anyio.abc._sockets._SocketProvider0:property`*Ñ
+"anyio.abc._sockets._SocketProvider""anyio.abc._sockets._SocketProvider0:builtins.property`*Þ
 _raw_socket.anyio.abc._sockets._SocketProvider._raw_socket"
 socket.socket"socket.socket*R
 selfH
-"anyio.abc._sockets._SocketProvider""anyio.abc._sockets._SocketProvider0:property:abstractmethod@`r
-SocketStreamanyio.abc._sockets.SocketStream"anyio.abc._streams.ByteStream""anyio.abc._sockets._SocketProviderÄ
-UNIXSocketStream#anyio.abc._sockets.UNIXSocketStream"anyio.abc._sockets.SocketStream*Î
+"anyio.abc._sockets._SocketProvider""anyio.abc._sockets._SocketProvider0:builtins.property:abc.abstractmethod@`r
+SocketStreamanyio.abc._sockets.SocketStream"anyio.abc._streams.ByteStream""anyio.abc._sockets._SocketProviderÌ
+UNIXSocketStream#anyio.abc._sockets.UNIXSocketStream"anyio.abc._sockets.SocketStream*Ò
 send_fds,anyio.abc._sockets.UNIXSocketStream.send_fds"N
 typing.Coroutine[Any,Any,None]
 Any
@@ -86,7 +86,7 @@ JTypeAlias[Union[TypeAlias[Tuple[builtins.str,builtins.int]],builtins.str]]˜
 0typing.Collection[Union[builtins.int,io.IOBase]]W
 Union[builtins.int,io.IOBase]
 builtins.int"builtins.int
-	io.IOBase"	io.IOBase"typing.Collection0:abstractmethod@H*˜
+	io.IOBase"	io.IOBase"typing.Collection0:abc.abstractmethod@H*œ
 receive_fds/anyio.abc._sockets.UNIXSocketStream.receive_fds"—
 Ktyping.Coroutine[Any,Any,Tuple[builtins.bytes,builtins.list[builtins.int]]]
 Any
@@ -100,15 +100,15 @@ Ktyping.Coroutine[Any,Any,Tuple[builtins.bytes,builtins.list[builtins.int]]]
 msglen
 builtins.int"builtins.int*(
 maxfds
-builtins.int"builtins.int0:abstractmethod@Hë
-SocketListener!anyio.abc._sockets.SocketListener"anyio.abc._streams.Listener""anyio.abc._sockets._SocketProvider*À
+builtins.int"builtins.int0:abc.abstractmethod@Hï
+SocketListener!anyio.abc._sockets.SocketListener"anyio.abc._streams.Listener""anyio.abc._sockets._SocketProvider*Ä
 accept(anyio.abc._sockets.SocketListener.accept"£
 9typing.Coroutine[Any,Any,anyio.abc._sockets.SocketStream]
 Any
 AnyB
 anyio.abc._sockets.SocketStream"anyio.abc._sockets.SocketStream"typing.Coroutine*P
 selfF
-!anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener0:abstractmethod@H*±
+!anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener0:abc.abstractmethod@H*±
 serve'anyio.abc._sockets.SocketListener.serve"N
 typing.Coroutine[Any,Any,None]
 Any

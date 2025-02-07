@@ -1,6 +1,6 @@
 
-datetimeù
-tzinfodatetime.tzinfo"builtins.object*ÿ
+datetime…
+tzinfodatetime.tzinfo"builtins.object*ƒ
 tznamedatetime.tzinfo.tzname"D
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -9,7 +9,7 @@
 datetime.tzinfo"datetime.tzinfo*US
 Union[datetime.datetime,None]&
 datetime.datetime"datetime.datetime
-None0:abstractmethod@*—
+None0:abc.abstractmethod@*›
 	utcoffsetdatetime.tzinfo.utcoffset"V
 Union[datetime.timedelta,None](
 datetime.timedelta"datetime.timedelta
@@ -18,7 +18,7 @@
 datetime.tzinfo"datetime.tzinfo*US
 Union[datetime.datetime,None]&
 datetime.datetime"datetime.datetime
-None0:abstractmethod@*‹
+None0:abc.abstractmethod@*
 dstdatetime.tzinfo.dst"V
 Union[datetime.timedelta,None](
 datetime.timedelta"datetime.timedelta
@@ -27,7 +27,7 @@
 datetime.tzinfo"datetime.tzinfo*US
 Union[datetime.datetime,None]&
 datetime.datetime"datetime.datetime
-None0:abstractmethod@*¢
+None0:abc.abstractmethod@*¢
 fromutcdatetime.tzinfo.fromutc"&
 datetime.datetime"datetime.datetime*,
 self"
@@ -68,7 +68,7 @@
 mindatetime.timezone.min&
 datetime.timezone"datetime.timezonerD
 maxdatetime.timezone.max&
-datetime.timezone"datetime.timezoneÓ0
+datetime.timezone"datetime.timezone°1
 datedatetime.date"builtins.object*Å
 __new__datetime.date.__new__"E
 datetime.date.Self
@@ -82,7 +82,7 @@
 monthB
 typing_extensions.SupportsIndex"typing_extensions.SupportsIndex*K
 dayB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndex*œ
+typing_extensions.SupportsIndex"typing_extensions.SupportsIndex*¥
 fromtimestampdatetime.date.fromtimestamp"E
 datetime.date.Self
 datetime.date"datetime.date"datetime.date*r
@@ -90,14 +90,14 @@
 Type[datetime.date.Self]E
 datetime.date.Self
 datetime.date"datetime.date"datetime.date"type*" 
-builtins.float"builtins.float0:classmethodp*è
+builtins.float"builtins.float0:builtins.classmethodp*ñ
 todaydatetime.date.today"E
 datetime.date.Self
 datetime.date"datetime.date"datetime.date*r
 clsi
 Type[datetime.date.Self]E
 datetime.date.Self
-datetime.date"datetime.date"datetime.date"type0:classmethodp*”
+datetime.date"datetime.date"datetime.date"type0:builtins.classmethodp*
 fromordinaldatetime.date.fromordinal"E
 datetime.date.Self
 datetime.date"datetime.date"datetime.date*r
@@ -105,7 +105,7 @@
 Type[datetime.date.Self]E
 datetime.date.Self
 datetime.date"datetime.date"datetime.date"type*
-builtins.int"builtins.int0:classmethodp*˜
+builtins.int"builtins.int0:builtins.classmethodp*¡
 fromisoformatdatetime.date.fromisoformat"E
 datetime.date.Self
 datetime.date"datetime.date"datetime.date*r
@@ -113,7 +113,7 @@
 Type[datetime.date.Self]E
 datetime.date.Self
 datetime.date"datetime.date"datetime.date"type*
-builtins.str"builtins.str0:classmethodp*ó
+builtins.str"builtins.str0:builtins.classmethodp*ü
 fromisocalendardatetime.date.fromisocalendar"E
 datetime.date.Self
 datetime.date"datetime.date"datetime.date*r
@@ -126,19 +126,19 @@
 week
 builtins.int"builtins.int*%
 day
-builtins.int"builtins.int0:classmethodp*p
+builtins.int"builtins.int0:builtins.classmethodp*y
 yeardatetime.date.year"
 builtins.int"builtins.int*(
 self
-datetime.date"datetime.date0:property`*r
+datetime.date"datetime.date0:builtins.property`*{
 monthdatetime.date.month"
 builtins.int"builtins.int*(
 self
-datetime.date"datetime.date0:property`*n
+datetime.date"datetime.date0:builtins.property`*w
 daydatetime.date.day"
 builtins.int"builtins.int*(
 self
-datetime.date"datetime.date0:property`*d
+datetime.date"datetime.date0:builtins.property`*d
 ctimedatetime.date.ctime"
 builtins.str"builtins.str*(
 self
@@ -231,32 +231,32 @@ isoweekdaydatetime.date.isoweekday"
 builtins.int"builtins.int
 builtins.int"builtins.int*(
 self
-datetime.date"datetime.date2÷
-__sub__datetime.date.__sub__ê
+datetime.date"datetime.date2Œ
+__sub__datetime.date.__sub__ñ
 __sub__datetime.date.__sub__"E
 datetime.date.Self
 datetime.date"datetime.date"datetime.date*GE
 datetime.date.Self
 datetime.date"datetime.date"datetime.date**(
-datetime.timedelta"datetime.timedelta0:overloadXˆ
+datetime.timedelta"datetime.timedelta0:typing.overloadX
 __sub__datetime.date.__sub__"
 NoReturn
 * 
 datetime.date"datetime.date*(&
-datetime.datetime"datetime.datetime0:overloadXÜ
+datetime.datetime"datetime.datetime0:typing.overloadXã
 __sub__datetime.date.__sub__"(
 datetime.timedelta"datetime.timedelta*@>
 datetime._D
 datetime.date"datetime.date"datetime.date*@>
 datetime._D
-datetime.date"datetime.date"datetime.date0:overloadXr8
+datetime.date"datetime.date"datetime.date0:typing.overloadXr8
 mindatetime.date.min
 datetime.date"datetime.dater8
 maxdatetime.date.max
 datetime.date"datetime.daterP
 
 resolutiondatetime.date.resolution(
-datetime.timedelta"datetime.timedeltaâ
+datetime.timedelta"datetime.timedelta¢ 
 timedatetime.time"builtins.object*­
 __new__datetime.time.__new__"E
 datetime.time.Self
@@ -278,33 +278,33 @@ resolutiondatetime.date.resolution(
 datetime.tzinfo"datetime.tzinfo
 None *(
 fold
-builtins.int"builtins.int *p
+builtins.int"builtins.int *y
 hourdatetime.time.hour"
 builtins.int"builtins.int*(
 self
-datetime.time"datetime.time0:property`*t
+datetime.time"datetime.time0:builtins.property`*}
 minutedatetime.time.minute"
 builtins.int"builtins.int*(
 self
-datetime.time"datetime.time0:property`*t
+datetime.time"datetime.time0:builtins.property`*}
 seconddatetime.time.second"
 builtins.int"builtins.int*(
 self
-datetime.time"datetime.time0:property`*~
+datetime.time"datetime.time0:builtins.property`*‡
 microseconddatetime.time.microsecond"
 builtins.int"builtins.int*(
 self
-datetime.time"datetime.time0:property`*¥
+datetime.time"datetime.time0:builtins.property`*®
 tzinfodatetime.time.tzinfo"M
 Union[datetime.tzinfo,None]"
 datetime.tzinfo"datetime.tzinfo
 None*(
 self
-datetime.time"datetime.time0:property`*p
+datetime.time"datetime.time0:builtins.property`*y
 folddatetime.time.fold"
 builtins.int"builtins.int*(
 self
-datetime.time"datetime.time0:property`*‚
+datetime.time"datetime.time0:builtins.property`*‚
 __le__datetime.time.__le__"
 builtins.bool"builtins.bool* 
 datetime.time"datetime.time* 
@@ -326,7 +326,7 @@ resolutiondatetime.date.resolution(
 self
 datetime.time"datetime.time*,
 timespec
-builtins.str"builtins.str *˜
+builtins.str"builtins.str *¡
 fromisoformatdatetime.time.fromisoformat"E
 datetime.time.Self
 datetime.time"datetime.time"datetime.time*r
@@ -334,7 +334,7 @@ resolutiondatetime.date.resolution(
 Type[datetime.time.Self]E
 datetime.time.Self
 datetime.time"datetime.time"datetime.time"type*
-builtins.str"builtins.str0:classmethodp*Š
+builtins.str"builtins.str0:builtins.classmethodp*Š
 strftimedatetime.time.strftime"
 builtins.str"builtins.str*(
 self
@@ -390,7 +390,7 @@ __format__datetime.time.__format__"
 datetime.time"datetime.timerP
 
 resolutiondatetime.time.resolution(
-datetime.timedelta"datetime.timedeltaê%
+datetime.timedelta"datetime.timedelta¢&
 	timedeltadatetime.timedelta"builtins.object*é
 __new__datetime.timedelta.__new__"Y
 datetime.timedelta.Self(
@@ -412,19 +412,19 @@ resolutiondatetime.time.resolution(
 hours 
 builtins.float"builtins.float *-
 weeks 
-builtins.float"builtins.float *
+builtins.float"builtins.float *ˆ
 daysdatetime.timedelta.days"
 builtins.int"builtins.int*2
 self(
-datetime.timedelta"datetime.timedelta0:property`*…
+datetime.timedelta"datetime.timedelta0:builtins.property`*
 secondsdatetime.timedelta.seconds"
 builtins.int"builtins.int*2
 self(
-datetime.timedelta"datetime.timedelta0:property`*
+datetime.timedelta"datetime.timedelta0:builtins.property`*˜
 microsecondsdatetime.timedelta.microseconds"
 builtins.int"builtins.int*2
 self(
-datetime.timedelta"datetime.timedelta0:property`*‡
+datetime.timedelta"datetime.timedelta0:builtins.property`*‡
 total_seconds datetime.timedelta.total_seconds" 
 builtins.float"builtins.float*2
 self(
@@ -492,32 +492,32 @@ __divmod__datetime.timedelta.__divmod__"r
 __bool__datetime.timedelta.__bool__"
 builtins.bool"builtins.bool*2
 self(
-datetime.timedelta"datetime.timedelta2›
-__floordiv__datetime.timedelta.__floordiv__³
+datetime.timedelta"datetime.timedelta2©
+__floordiv__datetime.timedelta.__floordiv__º
 __floordiv__datetime.timedelta.__floordiv__"
 builtins.int"builtins.int**(
 datetime.timedelta"datetime.timedelta**(
-datetime.timedelta"datetime.timedelta0:overloadX³
+datetime.timedelta"datetime.timedelta0:typing.overloadXº
 __floordiv__datetime.timedelta.__floordiv__"(
 datetime.timedelta"datetime.timedelta**(
 datetime.timedelta"datetime.timedelta*
-builtins.int"builtins.int0:overloadX2
-__truediv__datetime.timedelta.__truediv__µ
+builtins.int"builtins.int0:typing.overloadX2«
+__truediv__datetime.timedelta.__truediv__¼
 __truediv__datetime.timedelta.__truediv__" 
 builtins.float"builtins.float**(
 datetime.timedelta"datetime.timedelta**(
-datetime.timedelta"datetime.timedelta0:overloadXµ
+datetime.timedelta"datetime.timedelta0:typing.overloadX¼
 __truediv__datetime.timedelta.__truediv__"(
 datetime.timedelta"datetime.timedelta**(
 datetime.timedelta"datetime.timedelta*" 
-builtins.float"builtins.float0:overloadXrG
+builtins.float"builtins.float0:typing.overloadXrG
 mindatetime.timedelta.min(
 datetime.timedelta"datetime.timedeltarG
 maxdatetime.timedelta.max(
 datetime.timedelta"datetime.timedeltarU
 
 resolutiondatetime.timedelta.resolution(
-datetime.timedelta"datetime.timedeltaåA
+datetime.timedelta"datetime.timedeltaáB
 datetimedatetime.datetime"datetime.date*À
 __new__datetime.datetime.__new__"U
 datetime.datetime.Self&
@@ -545,33 +545,33 @@ resolutiondatetime.timedelta.resolution(
 datetime.tzinfo"datetime.tzinfo
 None *(
 fold
-builtins.int"builtins.int *|
+builtins.int"builtins.int *…
 hourdatetime.datetime.hour"
 builtins.int"builtins.int*0
 self&
-datetime.datetime"datetime.datetime0:property`*€
+datetime.datetime"datetime.datetime0:builtins.property`*‰
 minutedatetime.datetime.minute"
 builtins.int"builtins.int*0
 self&
-datetime.datetime"datetime.datetime0:property`*€
+datetime.datetime"datetime.datetime0:builtins.property`*‰
 seconddatetime.datetime.second"
 builtins.int"builtins.int*0
 self&
-datetime.datetime"datetime.datetime0:property`*Š
+datetime.datetime"datetime.datetime0:builtins.property`*“
 microseconddatetime.datetime.microsecond"
 builtins.int"builtins.int*0
 self&
-datetime.datetime"datetime.datetime0:property`*±
+datetime.datetime"datetime.datetime0:builtins.property`*º
 tzinfodatetime.datetime.tzinfo"M
 Union[datetime.tzinfo,None]"
 datetime.tzinfo"datetime.tzinfo
 None*0
 self&
-datetime.datetime"datetime.datetime0:property`*|
+datetime.datetime"datetime.datetime0:builtins.property`*…
 folddatetime.datetime.fold"
 builtins.int"builtins.int*0
 self&
-datetime.datetime"datetime.datetime0:property`*
+datetime.datetime"datetime.datetime0:builtins.property`*§
 fromtimestampdatetime.datetime.fromtimestamp"U
 datetime.datetime.Self&
 datetime.datetime"datetime.datetime"datetime.datetime*†
@@ -583,7 +583,7 @@ resolutiondatetime.timedelta.resolution(
 tzM
 Union[datetime.tzinfo,None]"
 datetime.tzinfo"datetime.tzinfo
-None 0:classmethodp*Ë
+None 0:builtins.classmethodp*Ô
 utcfromtimestamp"datetime.datetime.utcfromtimestamp"U
 datetime.datetime.Self&
 datetime.datetime"datetime.datetime"datetime.datetime*†
@@ -591,7 +591,7 @@ resolutiondatetime.timedelta.resolution(
 Type[datetime.datetime.Self]U
 datetime.datetime.Self&
 datetime.datetime"datetime.datetime"datetime.datetime"type*" 
-builtins.float"builtins.float0:classmethodp*æ
+builtins.float"builtins.float0:builtins.classmethodp*ï
 nowdatetime.datetime.now"U
 datetime.datetime.Self&
 datetime.datetime"datetime.datetime"datetime.datetime*†
@@ -602,14 +602,14 @@ resolutiondatetime.timedelta.resolution(
 tzM
 Union[datetime.tzinfo,None]"
 datetime.tzinfo"datetime.tzinfo
-None 0:classmethodp*“
+None 0:builtins.classmethodp*œ
 utcnowdatetime.datetime.utcnow"U
 datetime.datetime.Self&
 datetime.datetime"datetime.datetime"datetime.datetime*†
 cls}
 Type[datetime.datetime.Self]U
 datetime.datetime.Self&
-datetime.datetime"datetime.datetime"datetime.datetime"type0:classmethodp*Æ
+datetime.datetime"datetime.datetime"datetime.datetime"type0:builtins.classmethodp*Ï
 combinedatetime.datetime.combine"U
 datetime.datetime.Self&
 datetime.datetime"datetime.datetime"datetime.datetime*†
@@ -624,7 +624,7 @@ resolutiondatetime.timedelta.resolution(
 tzinfoM
 Union[datetime.tzinfo,None]"
 datetime.tzinfo"datetime.tzinfo
-None 0:classmethodp*|
+None 0:builtins.classmethodp*|
 	timestampdatetime.datetime.timestamp" 
 builtins.float"builtins.float*0
 self&
@@ -699,7 +699,7 @@ astimezonedatetime.datetime.astimezone"U
 sep
 builtins.str"builtins.str *,
 timespec
-builtins.str"builtins.str *×
+builtins.str"builtins.str *à
 strptimedatetime.datetime.strptime"U
 datetime.datetime.Self&
 datetime.datetime"datetime.datetime"datetime.datetime*†
@@ -708,7 +708,7 @@ astimezonedatetime.datetime.astimezone"U
 datetime.datetime.Self&
 datetime.datetime"datetime.datetime"datetime.datetime"type*
 builtins.str"builtins.str*
-builtins.str"builtins.str0:classmethodp*²
+builtins.str"builtins.str0:builtins.classmethodp*²
 	utcoffsetdatetime.datetime.utcoffset"V
 Union[datetime.timedelta,None](
 datetime.timedelta"datetime.timedelta
@@ -742,20 +742,20 @@ astimezonedatetime.datetime.astimezone"U
 __gt__datetime.datetime.__gt__"
 builtins.bool"builtins.bool*(&
 datetime.datetime"datetime.datetime*(&
-datetime.datetime"datetime.datetime2˜
-__sub__datetime.datetime.__sub__
+datetime.datetime"datetime.datetime2¦
+__sub__datetime.datetime.__sub__•
 __sub__datetime.datetime.__sub__"U
 datetime.datetime.Self&
 datetime.datetime"datetime.datetime"datetime.datetime*WU
 datetime.datetime.Self&
 datetime.datetime"datetime.datetime"datetime.datetime**(
-datetime.timedelta"datetime.timedelta0:overloadXà
+datetime.timedelta"datetime.timedelta0:typing.overloadXç
 __sub__datetime.datetime.__sub__"(
 datetime.timedelta"datetime.timedelta*@>
 datetime._D
 datetime.date"datetime.date"datetime.date*@>
 datetime._D
-datetime.date"datetime.date"datetime.date0:overloadXrD
+datetime.date"datetime.date"datetime.date0:typing.overloadXrD
 mindatetime.datetime.min&
 datetime.datetime"datetime.datetimerD
 maxdatetime.datetime.max&

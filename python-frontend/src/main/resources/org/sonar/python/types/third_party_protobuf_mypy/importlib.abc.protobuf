@@ -27,14 +27,14 @@
 self,
 importlib.abc.Loader"importlib.abc.Loader*0
 module$
-types.ModuleType"types.ModuleType@babc.ABCMetaû
-ResourceLoaderimportlib.abc.ResourceLoader"importlib.abc.Loader*◊
+types.ModuleType"types.ModuleType@babc.ABCMeta¢
+ResourceLoaderimportlib.abc.ResourceLoader"importlib.abc.Loader*€
 get_data%importlib.abc.ResourceLoader.get_data" 
 builtins.bytes"builtins.bytes*F
 self<
 importlib.abc.ResourceLoader"importlib.abc.ResourceLoader*&
 path
-builtins.str"builtins.str0:abstractmethod@§
+builtins.str"builtins.str0:abc.abstractmethod@±
 InspectLoaderimportlib.abc.InspectLoader"importlib.abc.Loader*∆
 
 is_package&importlib.abc.InspectLoader.is_package"
@@ -50,7 +50,7 @@ is_package&importlib.abc.InspectLoader.is_package"
 self:
 importlib.abc.InspectLoader"importlib.abc.InspectLoader**
 fullname
-builtins.str"builtins.str*Ä
+builtins.str"builtins.str*Ñ
 
 get_source&importlib.abc.InspectLoader.get_source"D
 Union[builtins.str,None]
@@ -59,13 +59,13 @@ get_source&importlib.abc.InspectLoader.get_source"D
 self:
 importlib.abc.InspectLoader"importlib.abc.InspectLoader**
 fullname
-builtins.str"builtins.str0:abstractmethod@*∏
+builtins.str"builtins.str0:abc.abstractmethod@*∏
 exec_module'importlib.abc.InspectLoader.exec_module"
 None*D
 self:
 importlib.abc.InspectLoader"importlib.abc.InspectLoader*0
 module$
-types.ModuleType"types.ModuleType*Á
+types.ModuleType"types.ModuleType*
 source_to_code*importlib.abc.InspectLoader.source_to_code" 
 types.CodeType"types.CodeType*ƒ	
 dataπ	
@@ -106,14 +106,14 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath 0:staticmethodh≤
-ExecutionLoaderimportlib.abc.ExecutionLoader"importlib.abc.InspectLoader*‚
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath 0:builtins.staticmethodh∂
+ExecutionLoaderimportlib.abc.ExecutionLoader"importlib.abc.InspectLoader*Ê
 get_filename*importlib.abc.ExecutionLoader.get_filename"
 builtins.str"builtins.str*H
 self>
 importlib.abc.ExecutionLoader"importlib.abc.ExecutionLoader**
 fullname
-builtins.str"builtins.str0:abstractmethod@˜
+builtins.str"builtins.str0:abc.abstractmethod@˜
 SourceLoaderimportlib.abc.SourceLoader"importlib.abc.ResourceLoader"importlib.abc.ExecutionLoader*¡
 
 path_mtime%importlib.abc.SourceLoader.path_mtime" 
@@ -255,32 +255,32 @@ FileLoaderimportlib.abc.FileLoader"importlib.abc.ResourceLoader"importlib.ab
 nameimportlib.abc.FileLoader.name
 builtins.str"builtins.strrC
 pathimportlib.abc.FileLoader.path
-builtins.str"builtins.strÄ
-ResourceReaderimportlib.abc.ResourceReader"builtins.object*ç
+builtins.str"builtins.strê
+ResourceReaderimportlib.abc.ResourceReader"builtins.object*ë
 open_resource*importlib.abc.ResourceReader.open_resource"H
 typing.IO[builtins.bytes] 
 builtins.bytes"builtins.bytes"	typing.IO*F
 self<
 importlib.abc.ResourceReader"importlib.abc.ResourceReader**
 resource
-builtins.str"builtins.str0:abstractmethod@*·
+builtins.str"builtins.str0:abc.abstractmethod@*Â
 resource_path*importlib.abc.ResourceReader.resource_path"
 builtins.str"builtins.str*F
 self<
 importlib.abc.ResourceReader"importlib.abc.ResourceReader**
 resource
-builtins.str"builtins.str0:abstractmethod@*€
+builtins.str"builtins.str0:abc.abstractmethod@*ﬂ
 is_resource(importlib.abc.ResourceReader.is_resource"
 builtins.bool"builtins.bool*F
 self<
 importlib.abc.ResourceReader"importlib.abc.ResourceReader*&
 name
-builtins.str"builtins.str0:abstractmethod@*›
+builtins.str"builtins.str0:abc.abstractmethod@*·
 contents%importlib.abc.ResourceReader.contents"N
 typing.Iterator[builtins.str]
 builtins.str"builtins.str"typing.Iterator*F
 self<
-importlib.abc.ResourceReader"importlib.abc.ResourceReader0:abstractmethod@@babc.ABCMeta*â
+importlib.abc.ResourceReader"importlib.abc.ResourceReader0:abc.abstractmethod@@babc.ABCMeta*â
 __annotations__importlib.abc.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

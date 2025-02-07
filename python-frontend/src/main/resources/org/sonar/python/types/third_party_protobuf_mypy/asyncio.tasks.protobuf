@@ -1,5 +1,5 @@
 
-asyncio.tasksÈ"
+asyncio.tasks˚"
 Taskasyncio.tasks.Task"asyncio.futures.Future*á	
 __init__asyncio.tasks.Task.__init__"
 None*ñ
@@ -82,7 +82,7 @@ ityping.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]]
 fileG
 Union[typing.TextIO,None]
 typing.TextIO"typing.TextIO
-None *ç
+None *ñ
 current_taskasyncio.tasks.Task.current_task"i
 #Union[asyncio.tasks.Task[Any],None]6
 asyncio.tasks.Task[Any]
@@ -96,7 +96,7 @@ ityping.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]]
 loopÄ
 ,Union[asyncio.events.AbstractEventLoop,None]D
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None 0:classmethodp*ã
+None 0:builtins.classmethodp*î
 	all_tasksasyncio.tasks.Task.all_tasks"m
 %builtins.set[asyncio.tasks.Task[Any]]6
 asyncio.tasks.Task[Any]
@@ -109,7 +109,7 @@ ityping.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]]
 loopÄ
 ,Union[asyncio.events.AbstractEventLoop,None]D
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None 0:classmethodpPì
+None 0:builtins.classmethodpPì
 as_completedasyncio.tasks.as_completed"‹
 9typing.Iterator[asyncio.futures.Future[asyncio.tasks._T]]ç
 (asyncio.futures.Future[asyncio.tasks._T]I
@@ -268,8 +268,8 @@ $asyncio.tasks.Task[asyncio.tasks._T]I
 None*@
 task6
 asyncio.tasks.Task[Any]
-Any"asyncio.tasks.Task"⁄
-ensure_futureasyncio.tasks.ensure_futureΩ
+Any"asyncio.tasks.Task"Ë
+ensure_futureasyncio.tasks.ensure_futureƒ
 ensure_futureasyncio.tasks.ensure_future"m
 asyncio.tasks._FT>
 asyncio.futures.Future[Any]
@@ -281,7 +281,7 @@ $asyncio.tasks.Task[asyncio.tasks._T]I
 loopÄ
 ,Union[asyncio.events.AbstractEventLoop,None]D
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None 0:overloadXÎ
+None 0:typing.overloadXÚ
 ensure_futureasyncio.tasks.ensure_future"Ö
 $asyncio.tasks.Task[asyncio.tasks._T]I
 asyncio.tasks._T"
@@ -293,8 +293,8 @@ $asyncio.tasks.Task[asyncio.tasks._T]I
 loopÄ
 ,Union[asyncio.events.AbstractEventLoop,None]D
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None 0:overloadX"˘˛
-gatherasyncio.tasks.gather∞	
+None 0:typing.overloadX"∆ˇ
+gatherasyncio.tasks.gather∑	
 gatherasyncio.tasks.gather"¥
 0asyncio.futures.Future[Tuple[asyncio.tasks._T1]]h
 Tuple[asyncio.tasks._T1]J
@@ -319,7 +319,7 @@ $asyncio.tasks.Task[asyncio.tasks._T]I
 None *S
 return_exceptions:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:overloadXâ
+builtins.bool"builtins.bool 0:typing.overloadXê
 gatherasyncio.tasks.gather"•
 Basyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2]]∆
 *Tuple[asyncio.tasks._T1,asyncio.tasks._T2]J
@@ -359,7 +359,7 @@ Basyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2]]∆
 None *S
 return_exceptions:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:overloadX·
+builtins.bool"builtins.bool 0:typing.overloadXË
 gatherasyncio.tasks.gather"ï
 Tasyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3]]§
 <Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3]J
@@ -414,7 +414,7 @@ Tasyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks.
 None *S
 return_exceptions:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:overloadXπ
+builtins.bool"builtins.bool 0:typing.overloadX¿
 gatherasyncio.tasks.gather"Ö
 fasyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3,asyncio.tasks._T4]]Ç
 NTuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3,asyncio.tasks._T4]J
@@ -484,7 +484,7 @@ NTuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3,asyncio.tasks._T4]
 None *S
 return_exceptions:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:overloadXë$
+builtins.bool"builtins.bool 0:typing.overloadXò$
 gatherasyncio.tasks.gather"ı
 xasyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3,asyncio.tasks._T4,asyncio.tasks._T5]]‡
 `Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3,asyncio.tasks._T4,asyncio.tasks._T5]J
@@ -569,7 +569,7 @@ xasyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks.
 None *S
 return_exceptions:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:overloadX∑
+builtins.bool"builtins.bool 0:typing.overloadXæ
 
 gatherasyncio.tasks.gather"Ÿ
 Nasyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException]]]Ó
@@ -596,7 +596,7 @@ Nasyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException]]]
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *5
 return_exceptions
-builtins.bool"builtins.bool0:overloadX≥
+builtins.bool"builtins.bool0:typing.overloadX∫
 gatherasyncio.tasks.gather"Ì
 ~asyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException]]]“
 fTuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException]]±
@@ -639,7 +639,7 @@ fTuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,b
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *5
 return_exceptions
-builtins.bool"builtins.bool0:overloadX±
+builtins.bool"builtins.bool0:typing.overloadX∏
 gatherasyncio.tasks.gather"É
 Æasyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException]]]∑
 ñTuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException]]±
@@ -699,7 +699,7 @@ fTuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,b
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *5
 return_exceptions
-builtins.bool"builtins.bool0:overloadX≠"
+builtins.bool"builtins.bool0:typing.overloadX¥"
 gatherasyncio.tasks.gather"ó	
 ﬁasyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException],Union[asyncio.tasks._T4,builtins.BaseException]]]õ
 ∆Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException],Union[asyncio.tasks._T4,builtins.BaseException]]±
@@ -776,7 +776,7 @@ fTuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,b
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *5
 return_exceptions
-builtins.bool"builtins.bool0:overloadX©*
+builtins.bool"builtins.bool0:typing.overloadX∞*
 gatherasyncio.tasks.gather"´
 éasyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException],Union[asyncio.tasks._T4,builtins.BaseException],Union[asyncio.tasks._T5,builtins.BaseException]]]ˇ
 ˆTuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException],Union[asyncio.tasks._T4,builtins.BaseException],Union[asyncio.tasks._T5,builtins.BaseException]]±
@@ -870,7 +870,7 @@ fTuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,b
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *5
 return_exceptions
-builtins.bool"builtins.bool0:overloadXÂ
+builtins.bool"builtins.bool0:typing.overloadXÏ
 gatherasyncio.tasks.gather"r
 *asyncio.futures.Future[builtins.list[Any]],
 builtins.list[Any]
@@ -894,8 +894,8 @@ fTuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,b
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *7
 return_exceptions
-builtins.bool"builtins.bool 0:overloadX"π
-sleepasyncio.tasks.sleepπ
+builtins.bool"builtins.bool 0:typing.overloadX"«
+sleepasyncio.tasks.sleep¿
 sleepasyncio.tasks.sleep"N
 typing.Coroutine[Any,Any,None]
 Any
@@ -906,7 +906,7 @@ fTuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,b
 loopÄ
 ,Union[asyncio.events.AbstractEventLoop,None]D
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None 0:overloadHXﬁ
+None 0:typing.overloadHXÂ
 sleepasyncio.tasks.sleep"õ
 *typing.Coroutine[Any,Any,asyncio.tasks._T]
 Any
@@ -921,8 +921,8 @@ fTuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,b
 loopÄ
 ,Union[asyncio.events.AbstractEventLoop,None]D
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None 0:overloadHX"á
-waitasyncio.tasks.waité
+None 0:typing.overloadHX"ï
+waitasyncio.tasks.waitï
 waitasyncio.tasks.wait"ï
 `typing.Coroutine[Any,Any,Tuple[builtins.set[asyncio.tasks._FT],builtins.set[asyncio.tasks._FT]]]
 Any
@@ -950,7 +950,7 @@ FTuple[builtins.set[asyncio.tasks._FT],builtins.set[asyncio.tasks._FT]]û
 builtins.float"builtins.float
 None */
 return_when
-builtins.str"builtins.str 0:overloadHXŸ	
+builtins.str"builtins.str 0:typing.overloadHX‡	
 waitasyncio.tasks.wait"∫
 Ütyping.Coroutine[Any,Any,Tuple[builtins.set[asyncio.tasks.Task[asyncio.tasks._T]],builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]]]
 Any
@@ -978,7 +978,7 @@ $asyncio.tasks.Task[asyncio.tasks._T]I
 builtins.float"builtins.float
 None */
 return_when
-builtins.str"builtins.str 0:overloadHX*â
+builtins.str"builtins.str 0:typing.overloadHX*â
 __annotations__asyncio.tasks.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

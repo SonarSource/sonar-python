@@ -222,17 +222,17 @@ Hmultiprocessing.pool.ApplyResult[builtins.list[multiprocessing.pool._T]]â
 ProcessError$multiprocessing.context.ProcessError"builtins.Exception^
 BufferTooShort&multiprocessing.context.BufferTooShort"$multiprocessing.context.ProcessErrorZ
 TimeoutError$multiprocessing.context.TimeoutError"$multiprocessing.context.ProcessErrorh
-AuthenticationError+multiprocessing.context.AuthenticationError"$multiprocessing.context.ProcessErrorﬂô
-BaseContext#multiprocessing.context.BaseContext"builtins.object*§
+AuthenticationError+multiprocessing.context.AuthenticationError"$multiprocessing.context.ProcessErrorÅõ
+BaseContext#multiprocessing.context.BaseContext"builtins.object*≠
 current_process3multiprocessing.context.BaseContext.current_process"J
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:staticmethodh*‚
+#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodh*Î
 parent_process2multiprocessing.context.BaseContext.parent_process"â
 /Union[multiprocessing.process.BaseProcess,None]J
 #multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess
-None0:staticmethodh*Í
+None0:builtins.staticmethodh*Û
 active_children3multiprocessing.context.BaseContext.active_children"è
 2builtins.list[multiprocessing.process.BaseProcess]J
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess"builtins.list0:staticmethodh*Æ
+#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess"builtins.list0:builtins.staticmethodh*Æ
 	cpu_count-multiprocessing.context.BaseContext.cpu_count"
 builtins.int"builtins.int*T
 selfJ
@@ -389,8 +389,8 @@ executable
 _check_available4multiprocessing.context.BaseContext._check_available"
 None*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext2Ω
-RawValue,multiprocessing.context.BaseContext.RawValueì
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext2À
+RawValue,multiprocessing.context.BaseContext.RawValueö
 RawValue,multiprocessing.context.BaseContext.RawValue"N
 multiprocessing.context._CT
 ctypes._CData"ctypes._CData"ctypes._CData*T
@@ -401,7 +401,7 @@ executable
 multiprocessing.context._CT
 ctypes._CData"ctypes._CData"ctypes._CData"type*
 args
-Any0:overloadXÏ
+Any0:typing.overloadXÛ
 RawValue,multiprocessing.context.BaseContext.RawValue"
 Any*T
 selfJ
@@ -409,8 +409,8 @@ executable
 typecode_or_type
 builtins.str"builtins.str*
 args
-Any0:overloadX2É
-RawArray,multiprocessing.context.BaseContext.RawArray‘
+Any0:typing.overloadX2ë
+RawArray,multiprocessing.context.BaseContext.RawArray€
 RawArray,multiprocessing.context.BaseContext.RawArray"â
 )ctypes.Array[multiprocessing.context._CT]N
 multiprocessing.context._CT
@@ -425,7 +425,7 @@ executable
 (Union[builtins.int,typing.Sequence[Any]]
 builtins.int"builtins.int0
 typing.Sequence[Any]
-Any"typing.Sequence0:overloadXÒ
+Any"typing.Sequence0:typing.overloadX¯
 RawArray,multiprocessing.context.BaseContext.RawArray"
 Any*T
 selfJ
@@ -436,8 +436,8 @@ executable
 (Union[builtins.int,typing.Sequence[Any]]
 builtins.int"builtins.int0
 typing.Sequence[Any]
-Any"typing.Sequence0:overloadX2
-Value)multiprocessing.context.BaseContext.Value”
+Any"typing.Sequence0:typing.overloadX2å
+Value)multiprocessing.context.BaseContext.Value⁄
 Value)multiprocessing.context.BaseContext.Value"N
 multiprocessing.context._CT
 ctypes._CData"ctypes._CData"ctypes._CData*T
@@ -451,7 +451,7 @@ executable
 Any*D
 lock:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool0:overloadX©
+builtins.bool"builtins.bool0:typing.overloadX∞
 Value)multiprocessing.context.BaseContext.Value"À
 Jmultiprocessing.sharedctypes.SynchronizedBase[multiprocessing.context._CT]N
 multiprocessing.context._CT
@@ -471,7 +471,7 @@ rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,m
 TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]€
 IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:overloadXÈ
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX
 Value)multiprocessing.context.BaseContext.Value"l
 2multiprocessing.sharedctypes.SynchronizedBase[Any]
 Any"-multiprocessing.sharedctypes.SynchronizedBase*T
@@ -488,7 +488,7 @@ rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,m
 TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]€
 IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:overloadXÕ
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX‘
 Value)multiprocessing.context.BaseContext.Value"
 Any*T
 selfJ
@@ -506,8 +506,8 @@ iUnion[builtins.bool,TypeAlias[Union[multiprocessing.synchronize.Lock,multiproce
 TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]€
 IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:overloadX2à
-Array)multiprocessing.context.BaseContext.Arrayÿ
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX2§
+Array)multiprocessing.context.BaseContext.Arrayﬂ
 Array)multiprocessing.context.BaseContext.Array"N
 multiprocessing.context._CT
 ctypes._CData"ctypes._CData"ctypes._CData*T
@@ -524,7 +524,7 @@ IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
 Any"typing.Sequence*D
 lock:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool0:overloadX∞	
+builtins.bool"builtins.bool0:typing.overloadX∑	
 Array)multiprocessing.context.BaseContext.Array"Õ
 Kmultiprocessing.sharedctypes.SynchronizedArray[multiprocessing.context._CT]N
 multiprocessing.context._CT
@@ -547,7 +547,7 @@ rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,m
 TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]€
 IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:overloadX
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX˜
 Array)multiprocessing.context.BaseContext.Array"n
 3multiprocessing.sharedctypes.SynchronizedArray[Any]
 Any".multiprocessing.sharedctypes.SynchronizedArray*T
@@ -567,7 +567,7 @@ rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,m
 TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]€
 IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:overloadX“
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXŸ
 Array)multiprocessing.context.BaseContext.Array"
 Any*T
 selfJ
@@ -588,42 +588,42 @@ iUnion[builtins.bool,TypeAlias[Union[multiprocessing.synchronize.Lock,multiproce
 TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]€
 IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:overloadX2ò
-get_context/multiprocessing.context.BaseContext.get_contextå
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX2ª
+get_context/multiprocessing.context.BaseContext.get_contextì
 get_context/multiprocessing.context.BaseContext.get_context"P
 &multiprocessing.context.DefaultContext"&multiprocessing.context.DefaultContext*T
 selfJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*
 method
-None 0:overloadXµ
+None 0:typing.overloadXº
 get_context/multiprocessing.context.BaseContext.get_context"L
 $multiprocessing.context.SpawnContext"$multiprocessing.context.SpawnContext*T
 selfJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*C
 method7
 Literal[builtins.str]	
-builtins.str"builtins.str0:overloadX≥
+builtins.str"builtins.str0:typing.overloadX∫
 get_context/multiprocessing.context.BaseContext.get_context"J
 #multiprocessing.context.ForkContext"#multiprocessing.context.ForkContext*T
 selfJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*C
 method7
 Literal[builtins.str]	
-builtins.str"builtins.str0:overloadXø
+builtins.str"builtins.str0:typing.overloadX∆
 get_context/multiprocessing.context.BaseContext.get_context"V
 )multiprocessing.context.ForkServerContext")multiprocessing.context.ForkServerContext*T
 selfJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*C
 method7
 Literal[builtins.str]	
-builtins.str"builtins.str0:overloadXò
+builtins.str"builtins.str0:typing.overloadXü
 get_context/multiprocessing.context.BaseContext.get_context"J
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*T
 selfJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*(
 method
-builtins.str"builtins.str0:overloadX2à
-get_start_method4multiprocessing.context.BaseContext.get_start_methodò
+builtins.str"builtins.str0:typing.overloadX2ñ
+get_start_method4multiprocessing.context.BaseContext.get_start_methodü
 get_start_method4multiprocessing.context.BaseContext.get_start_method"
 builtins.str"builtins.str*T
 selfJ
@@ -631,7 +631,7 @@ $multiprocessing.context.SpawnContext"$multiprocessing.context.SpawnContext*T
 
 allow_none:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:overloadX¢
+builtins.bool"builtins.bool 0:typing.overloadX©
 get_start_method4multiprocessing.context.BaseContext.get_start_method"D
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -640,18 +640,18 @@ allow_none:
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*.
 
 allow_none
-builtins.bool"builtins.bool0:overloadX2À
-reducer+multiprocessing.context.BaseContext.reducer∫
+builtins.bool"builtins.bool0:typing.overloadX2Õ
+reducer+multiprocessing.context.BaseContext.reducer√
 reducer+multiprocessing.context.BaseContext.reducer"
 builtins.str"builtins.str*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext0:propertyX`’
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext0:builtins.propertyX`Œ
 reducer+multiprocessing.context.BaseContext.reducer"
 None*T
 selfJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*+
 	reduction
-builtins.str"builtins.str0:reducer.setterr≈
+builtins.str"builtins.str0:.setterr≈
 ProcessError0multiprocessing.context.BaseContext.ProcessErrorÇ
 *Type[multiprocessing.context.ProcessError]L
 $multiprocessing.context.ProcessError"$multiprocessing.context.ProcessError"typerœ
@@ -663,12 +663,12 @@ $multiprocessing.context.ProcessError"$multiprocessing.context.ProcessError"typ
 $multiprocessing.context.TimeoutError"$multiprocessing.context.TimeoutError"typerË
 AuthenticationError7multiprocessing.context.BaseContext.AuthenticationErroró
 1Type[multiprocessing.context.AuthenticationError]Z
-+multiprocessing.context.AuthenticationError"+multiprocessing.context.AuthenticationError"type 
-Processmultiprocessing.context.Process"#multiprocessing.process.BaseProcess*Ò
++multiprocessing.context.AuthenticationError"+multiprocessing.context.AuthenticationError"type”
+Processmultiprocessing.context.Process"#multiprocessing.process.BaseProcess*˙
 _Popen&multiprocessing.context.Process._Popen"P
 &multiprocessing.context.DefaultContext"&multiprocessing.context.DefaultContext*[
 process_objJ
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:staticmethodhrÑ
+#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodhrÑ
 _start_method-multiprocessing.context.Process._start_methodD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -694,12 +694,12 @@ allow_none
 &multiprocessing.context.DefaultContext"&multiprocessing.context.DefaultContextrÆ
 Process.multiprocessing.context.DefaultContext.Processs
 %Type[multiprocessing.context.Process]B
-multiprocessing.context.Process"multiprocessing.context.Process"type∑
-SpawnProcess$multiprocessing.context.SpawnProcess"#multiprocessing.process.BaseProcess*¯
+multiprocessing.context.Process"multiprocessing.context.Process"type¿
+SpawnProcess$multiprocessing.context.SpawnProcess"#multiprocessing.process.BaseProcess*Å
 _Popen+multiprocessing.context.SpawnProcess._Popen"R
 'multiprocessing.popen_spawn_posix.Popen"'multiprocessing.popen_spawn_posix.Popen*[
 process_objJ
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:staticmethodhra
+#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodhra
 _start_method2multiprocessing.context.SpawnProcess._start_method
 builtins.str"builtins.strÎ
 SpawnContext$multiprocessing.context.SpawnContext"#multiprocessing.context.BaseContextrQ
@@ -707,19 +707,19 @@ allow_none
 builtins.str"builtins.strrº
 Process,multiprocessing.context.SpawnContext.ProcessÇ
 *Type[multiprocessing.context.SpawnProcess]L
-$multiprocessing.context.SpawnProcess"$multiprocessing.context.SpawnProcess"type•
-ForkProcess#multiprocessing.context.ForkProcess"#multiprocessing.process.BaseProcess*È
+$multiprocessing.context.SpawnProcess"$multiprocessing.context.SpawnProcess"typeÆ
+ForkProcess#multiprocessing.context.ForkProcess"#multiprocessing.process.BaseProcess*Ú
 _Popen*multiprocessing.context.ForkProcess._Popen"D
  multiprocessing.popen_fork.Popen" multiprocessing.popen_fork.Popen*[
 process_objJ
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:staticmethodhr`
+#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodhr`
 _start_method1multiprocessing.context.ForkProcess._start_method
-builtins.str"builtins.str…
-ForkServerProcess)multiprocessing.context.ForkServerProcess"#multiprocessing.process.BaseProcess*˚
+builtins.str"builtins.str“
+ForkServerProcess)multiprocessing.context.ForkServerProcess"#multiprocessing.process.BaseProcess*Ñ
 _Popen0multiprocessing.context.ForkServerProcess._Popen"P
 &multiprocessing.popen_forkserver.Popen"&multiprocessing.popen_forkserver.Popen*[
 process_objJ
-#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:staticmethodhrf
+#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodhrf
 _start_method7multiprocessing.context.ForkServerProcess._start_method
 builtins.str"builtins.str„
 ForkContext#multiprocessing.context.ForkContext"#multiprocessing.context.BaseContextrP

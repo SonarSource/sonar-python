@@ -1,5 +1,5 @@
 
-jinja2.environmentöª
+jinja2.environment‰ª
 Environmentjinja2.environment.Environment"builtins.object*˛
 __init__'jinja2.environment.Environment.__init__"
 None*J
@@ -168,11 +168,11 @@ cache_size
 jinja2.bccache.BytecodeCache"jinja2.bccache.BytecodeCache
 None *2
 enable_async
-builtins.bool"builtins.bool *±
+builtins.bool"builtins.bool *∫
 lexer$jinja2.environment.Environment.lexer"(
 jinja2.lexer.Lexer"jinja2.lexer.Lexer*J
 self@
-jinja2.environment.Environment"jinja2.environment.Environment0:property`*ı
+jinja2.environment.Environment"jinja2.environment.Environment0:builtins.property`*ı
 iter_extensions.jinja2.environment.Environment.iter_extensions"f
 %typing.Iterator[jinja2.ext.Extension],
 jinja2.ext.Extension"jinja2.ext.Extension"typing.Iterator*J
@@ -282,7 +282,7 @@ $Union[jinja2.nodes.EvalContext,None]4
 eval_ctxh
 $Union[jinja2.nodes.EvalContext,None]4
 jinja2.nodes.EvalContext"jinja2.nodes.EvalContext
-None *ã
+None *ò
 parse$jinja2.environment.Environment.parse".
 jinja2.nodes.Template"jinja2.nodes.Template*J
 self@
@@ -296,7 +296,7 @@ $Union[jinja2.nodes.EvalContext,None]4
 filenameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 0:internalcode*˘
+None 0:jinja2.utils.internalcode*˘
 _parse%jinja2.environment.Environment._parse".
 jinja2.nodes.Template"jinja2.nodes.Template*J
 self@
@@ -458,7 +458,7 @@ extensionsç
 template
 builtins.str"builtins.str*(
 parent
-builtins.str"builtins.str*∫
+builtins.str"builtins.str*«
 _load_template-jinja2.environment.Environment._load_template":
 jinja2.environment.Template"jinja2.environment.Template*J
 self@
@@ -470,7 +470,7 @@ extensionsç
 'typing.MutableMapping[builtins.str,Any]
 builtins.str"builtins.str
 Any"typing.MutableMapping
-None0:internalcode*ˇ
+None0:jinja2.utils.internalcode*å
 get_template+jinja2.environment.Environment.get_template":
 jinja2.environment.Template"jinja2.environment.Template*J
 self@
@@ -488,7 +488,7 @@ extensionsç
 'typing.MutableMapping[builtins.str,Any]
 builtins.str"builtins.str
 Any"typing.MutableMapping
-None 0:internalcode*‹
+None 0:jinja2.utils.internalcode*È
 select_template.jinja2.environment.Environment.select_template":
 jinja2.environment.Template"jinja2.environment.Template*J
 self@
@@ -507,7 +507,7 @@ extensionsç
 'typing.MutableMapping[builtins.str,Any]
 builtins.str"builtins.str
 Any"typing.MutableMapping
-None 0:internalcode*≈
+None 0:jinja2.utils.internalcode*“
 get_or_select_template5jinja2.environment.Environment.get_or_select_template":
 jinja2.environment.Template"jinja2.environment.Template*J
 self@
@@ -529,7 +529,7 @@ nUnion[builtins.str,jinja2.environment.Template,builtins.list[Union[builtins.str
 'typing.MutableMapping[builtins.str,Any]
 builtins.str"builtins.str
 Any"typing.MutableMapping
-None 0:internalcode*∆
+None 0:jinja2.utils.internalcode*∆
 from_string*jinja2.environment.Environment.from_string":
 jinja2.environment.Template"jinja2.environment.Template*J
 self@
@@ -719,7 +719,7 @@ extensions)jinja2.environment.Environment.extensionsç
 builtins.str"builtins.str,
 jinja2.ext.Extension"jinja2.ext.Extension"builtins.dictrS
 is_async'jinja2.environment.Environment.is_async
-builtins.bool"builtins.boolÈP
+builtins.bool"builtins.bool¨Q
 Templatejinja2.environment.Template"builtins.object*Ω
 __new__#jinja2.environment.Template.__new__"
 Any*p
@@ -788,7 +788,7 @@ autoescape•
 CallableType[builtins.function]&
 builtins.function"builtins.function *2
 enable_async
-builtins.bool"builtins.bool *Ä
+builtins.bool"builtins.bool *â
 	from_code%jinja2.environment.Template.from_code":
 jinja2.environment.Template"jinja2.environment.Template*p
 clsg
@@ -806,7 +806,7 @@ autoescape•
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None 0:classmethodp*¬
+None 0:builtins.classmethodp*À
 from_module_dict,jinja2.environment.Template.from_module_dict":
 jinja2.environment.Template"jinja2.environment.Template*p
 clsg
@@ -821,7 +821,7 @@ autoescape•
 globalsg
 'typing.MutableMapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.MutableMapping0:classmethodp*æ
+Any"typing.MutableMapping0:builtins.classmethodp*«
 _from_namespace+jinja2.environment.Template._from_namespace":
 jinja2.environment.Template"jinja2.environment.Template*p
 clsg
@@ -836,7 +836,7 @@ autoescape•
 globalsg
 'typing.MutableMapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.MutableMapping0:classmethodp*∏
+Any"typing.MutableMapping0:builtins.classmethodp*∏
 render"jinja2.environment.Template.render"
 builtins.str"builtins.str*D
 self:
@@ -938,7 +938,7 @@ autoescape•
  typing.Mapping[builtins.str,Any]
 builtins.str"builtins.str
 Any"typing.Mapping
-None H*”
+None H*‡
 _get_default_module/jinja2.environment.Template._get_default_module"F
 !jinja2.environment.TemplateModule"!jinja2.environment.TemplateModule*D
 self:
@@ -946,7 +946,7 @@ autoescape•
 ctxb
 "Union[jinja2.runtime.Context,None]0
 jinja2.runtime.Context"jinja2.runtime.Context
-None 0:internalcode*µ
+None 0:jinja2.utils.internalcode*µ
 _get_default_module_async5jinja2.environment.Template._get_default_module_async"©
 ;typing.Coroutine[Any,Any,jinja2.environment.TemplateModule]
 Any
@@ -957,21 +957,21 @@ autoescape•
 ctxb
 "Union[jinja2.runtime.Context,None]0
 jinja2.runtime.Context"jinja2.runtime.Context
-None H*»
+None H*—
 module"jinja2.environment.Template.module"F
 !jinja2.environment.TemplateModule"!jinja2.environment.TemplateModule*D
 self:
-jinja2.environment.Template"jinja2.environment.Template0:property`*ﬁ
+jinja2.environment.Template"jinja2.environment.Template0:builtins.property`*ﬁ
 get_corresponding_lineno4jinja2.environment.Template.get_corresponding_lineno"
 builtins.int"builtins.int*D
 self:
 jinja2.environment.Template"jinja2.environment.Template*(
 lineno
-builtins.int"builtins.int*Æ
+builtins.int"builtins.int*∑
 is_up_to_date)jinja2.environment.Template.is_up_to_date"
 builtins.bool"builtins.bool*D
 self:
-jinja2.environment.Template"jinja2.environment.Template0:property`*≠
+jinja2.environment.Template"jinja2.environment.Template0:builtins.property`*∂
 
 debug_info&jinja2.environment.Template.debug_info"¢
 /builtins.list[Tuple[builtins.int,builtins.int]]`
@@ -979,7 +979,7 @@ debug_info&jinja2.environment.Template.debug_info"¢
 builtins.int"builtins.int
 builtins.int"builtins.int"builtins.list*D
 self:
-jinja2.environment.Template"jinja2.environment.Template0:property`*å
+jinja2.environment.Template"jinja2.environment.Template0:builtins.property`*å
 __repr__$jinja2.environment.Template.__repr__"
 builtins.str"builtins.str*<:
 jinja2.environment.Template"jinja2.environment.Templater¥

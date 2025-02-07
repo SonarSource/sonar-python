@@ -1,13 +1,13 @@
 
-pyspark.pandas.typedef·
-Iterabletyping.Iterable"builtins.object*¨
+pyspark.pandas.typedefÂ
+Iterabletyping.Iterable"builtins.object*∞
 __iter__typing.Iterable.__iter__"w
 typing.Iterator[typing._T_co]E
 typing._T_co"
 builtins.object"builtins.object"builtins.object"typing.Iterator*yw
 typing.Iterable[typing._T_co]E
 typing._T_co"
-builtins.object"builtins.object"builtins.object"typing.Iterable0:abstractmethod@8PX«
+builtins.object"builtins.object"builtins.object"typing.Iterable0:abc.abstractmethod@8PX«
 LooseVersiondistutils.version.LooseVersion"distutils.version.Version*ﬁ
 __init__'distutils.version.LooseVersion.__init__"
 None*J
@@ -48,8 +48,7 @@ re.PatternrO
 0builtins.tuple[Union[builtins.str,builtins.int]]`
  Union[builtins.str,builtins.int]
 builtins.str"builtins.str
-builtins.int"builtins.int"builtins.tupleÒ
-
+builtins.int"builtins.int"builtins.tupleÉ
 CategoricalDtype*pandas.core.dtypes.dtypes.CategoricalDtype".pandas.core.dtypes.dtypes.PandasExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype*í
 __init__3pandas.core.dtypes.dtypes.CategoricalDtype.__init__"
 None*b
@@ -69,25 +68,25 @@ aUnion[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],builti
 $TypeAlias[Union[builtins.bool,None]]G
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None"pandas._typing.Ordered *Ö
+None"pandas._typing.Ordered *é
 
 categories5pandas.core.dtypes.dtypes.CategoricalDtype.categories"N
 #pandas.core.indexes.base.Index[Any]
 Any"pandas.core.indexes.base.Index*b
 selfX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtype0:property`*ª
+*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtype0:builtins.property`*ƒ
 ordered2pandas.core.dtypes.dtypes.CategoricalDtype.ordered"â
 $TypeAlias[Union[builtins.bool,None]]G
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
 None"pandas._typing.Ordered*b
 selfX
-*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtype0:property`˜
-ExtensionDtype&pandas.core.dtypes.base.ExtensionDtype"builtins.object*…
+*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtype0:builtins.property`≠
+ExtensionDtype&pandas.core.dtypes.base.ExtensionDtype"builtins.object*“
 na_value/pandas.core.dtypes.base.ExtensionDtype.na_value""
 builtins.object"builtins.object*Z
 selfP
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype0:property`*ê
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype0:builtins.property`*ô
 kind+pandas.core.dtypes.base.ExtensionDtype.kind"
 ¯Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 Literal[builtins.str]	
@@ -113,14 +112,14 @@ $TypeAlias[Union[builtins.bool,None]]G
 Literal[builtins.str]	
 builtins.str"builtins.str*Z
 selfP
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype0:property`*£
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype0:builtins.property`*¨
 names,pandas.core.dtypes.base.ExtensionDtype.names"Å
 'Union[builtins.list[builtins.str],None]J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list
 None*Z
 selfP
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype0:property`* 
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype0:builtins.property`* 
 empty,pandas.core.dtypes.base.ExtensionDtype.empty"à
 ,Type[pandas.core.arrays.base.ExtensionArray]P
 &pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray"type*Z
@@ -130,27 +129,27 @@ $TypeAlias[Union[builtins.bool,None]]G
 0Union[builtins.int,builtins.tuple[builtins.int]]
 builtins.int"builtins.intL
 builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*Ñ
+builtins.int"builtins.int"builtins.tuple*ç
 construct_array_type;pandas.core.dtypes.base.ExtensionDtype.construct_array_type"à
 ,Type[pandas.core.arrays.base.ExtensionArray]P
 &pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray"type*í
 clsà
 ,Type[pandas.core.dtypes.base.ExtensionDtype]P
-&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype"type0:classmethodp*˜
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype"type0:builtins.classmethodp*Ä
 construct_from_string<pandas.core.dtypes.base.ExtensionDtype.construct_from_string"P
 &pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype*í
 clsà
 ,Type[pandas.core.dtypes.base.ExtensionDtype]P
 &pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype"type*(
 string
-builtins.str"builtins.str0:classmethodp*∞
+builtins.str"builtins.str0:builtins.classmethodp*π
 is_dtype/pandas.core.dtypes.base.ExtensionDtype.is_dtype"
 builtins.bool"builtins.bool*í
 clsà
 ,Type[pandas.core.dtypes.base.ExtensionDtype]P
 &pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype"type*-
 dtype"
-builtins.object"builtins.object0:classmethodprS
+builtins.object"builtins.object0:builtins.classmethodprS
 type+pandas.core.dtypes.base.ExtensionDtype.type
 builtins.type"builtins.typerQ
 name+pandas.core.dtypes.base.ExtensionDtype.name
@@ -161,16 +160,16 @@ Int16Dtype%pandas.core.arrays.integer.Int16Dtype"(pandas.core.arrays.integer._I
 
 Int32Dtype%pandas.core.arrays.integer.Int32Dtype"(pandas.core.arrays.integer._IntegerDtype]
 
-Int64Dtype%pandas.core.arrays.integer.Int64Dtype"(pandas.core.arrays.integer._IntegerDtypeÁ
-BooleanDtype'pandas.core.arrays.boolean.BooleanDtype"&pandas.core.dtypes.base.ExtensionDtype*ã
+Int64Dtype%pandas.core.arrays.integer.Int64Dtype"(pandas.core.arrays.integer._IntegerDtype
+BooleanDtype'pandas.core.arrays.boolean.BooleanDtype"&pandas.core.dtypes.base.ExtensionDtype*î
 construct_array_type<pandas.core.arrays.boolean.BooleanDtype.construct_array_type"ã
 -Type[pandas.core.arrays.boolean.BooleanArray]R
 'pandas.core.arrays.boolean.BooleanArray"'pandas.core.arrays.boolean.BooleanArray"type*ï
 clsã
 -Type[pandas.core.arrays.boolean.BooleanDtype]R
-'pandas.core.arrays.boolean.BooleanDtype"'pandas.core.arrays.boolean.BooleanDtype"type0:classmethodprx
+'pandas.core.arrays.boolean.BooleanDtype"'pandas.core.arrays.boolean.BooleanDtype"type0:builtins.classmethodprx
 na_value0pandas.core.arrays.boolean.BooleanDtype.na_value:
-pandas._libs.missing.NAType"pandas._libs.missing.NATypeØ
+pandas._libs.missing.NAType"pandas._libs.missing.NAType∏
 StringDtype&pandas.core.arrays.string_.StringDtype"&pandas.core.dtypes.base.ExtensionDtype*Î
 __init__/pandas.core.arrays.string_.StringDtype.__init__"
 None*Z
@@ -182,13 +181,13 @@ Int64Dtype%pandas.core.arrays.integer.Int64Dtype"(pandas.core.arrays.integer._I
 builtins.str"builtins.str7
 Literal[builtins.str]	
 builtins.str"builtins.str
-None *·
+None *Í
 na_value/pandas.core.arrays.string_.StringDtype.na_value":
 pandas._libs.missing.NAType"pandas._libs.missing.NAType*Z
 selfP
-&pandas.core.arrays.string_.StringDtype"&pandas.core.arrays.string_.StringDtype0:property`a
+&pandas.core.arrays.string_.StringDtype"&pandas.core.arrays.string_.StringDtype0:builtins.property`a
 Float32Dtype(pandas.core.arrays.floating.Float32Dtype"'pandas.core.arrays.numeric.NumericDtypea
-Float64Dtype(pandas.core.arrays.floating.Float64Dtype"'pandas.core.arrays.numeric.NumericDtypeù+
+Float64Dtype(pandas.core.arrays.floating.Float64Dtype"'pandas.core.arrays.numeric.NumericDtypeÂ+
 InternalField%pyspark.pandas.internal.InternalField"builtins.object*Á
 __init__.pyspark.pandas.internal.InternalField.__init__"
 None*X
@@ -203,13 +202,13 @@ ITypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]æ
 struct_fieldw
 )Union[pyspark.sql.types.StructField,None]>
 pyspark.sql.types.StructField"pyspark.sql.types.StructField
-None *º
+None *≈
 from_struct_field7pyspark.pandas.internal.InternalField.from_struct_field"N
 %pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField*P
 struct_field>
 pyspark.sql.types.StructField"pyspark.sql.types.StructField*:
 use_extension_dtypes
-builtins.bool"builtins.bool 0:staticmethodh*À
+builtins.bool"builtins.bool 0:builtins.staticmethodh*‘
 dtype+pyspark.pandas.internal.InternalField.dtype"¨
 ITypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]æ
 >Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype](
@@ -217,36 +216,36 @@ ITypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]æ
 Any"numpy.dtypeP
 &pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype"pyspark.pandas._typing.Dtype*X
 selfN
-%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:property`*£
+%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:builtins.property`*¨
 struct_field2pyspark.pandas.internal.InternalField.struct_field"w
 )Union[pyspark.sql.types.StructField,None]>
 pyspark.sql.types.StructField"pyspark.sql.types.StructField
 None*X
 selfN
-%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:property`*∏
+%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:builtins.property`*¡
 name*pyspark.pandas.internal.InternalField.name"
 builtins.str"builtins.str*X
 selfN
-%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:property`*‡
+%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:builtins.property`*È
 
 spark_type0pyspark.pandas.internal.InternalField.spark_type"8
 pyspark.sql.types.DataType"pyspark.sql.types.DataType*X
 selfN
-%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:property`*¬
+%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:builtins.property`*À
 nullable.pyspark.pandas.internal.InternalField.nullable"
 builtins.bool"builtins.bool*X
 selfN
-%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:property`*˚
+%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:builtins.property`*Ñ
 metadata.pyspark.pandas.internal.InternalField.metadata"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
 Any"builtins.dict*X
 selfN
-%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:property`*÷
+%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:builtins.property`*ﬂ
 is_extension_dtype8pyspark.pandas.internal.InternalField.is_extension_dtype"
 builtins.bool"builtins.bool*X
 selfN
-%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:property`*¸
+%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField0:builtins.property`*¸
 normalize_spark_type:pyspark.pandas.internal.InternalField.normalize_spark_type"N
 %pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField*X
 selfN
@@ -330,7 +329,7 @@ ITypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]æ
 &pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype"pyspark.pandas._typing.Dtyper~
 
 spark_type6pyspark.pandas.typedef.typehints.SeriesType.spark_type8
-pyspark.sql.types.DataType"pyspark.sql.types.DataType¶
+pyspark.sql.types.DataType"pyspark.sql.types.DataType∏
 DataFrameType.pyspark.pandas.typedef.typehints.DataFrameType"builtins.object*é
 __init__7pyspark.pandas.typedef.typehints.DataFrameType.__init__"
 None*j
@@ -341,7 +340,7 @@ spark_type6pyspark.pandas.typedef.typehints.SeriesType.spark_type8
 %pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField"builtins.list*ß
 data_fieldsï
 4builtins.list[pyspark.pandas.internal.InternalField]N
-%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField"builtins.list*‘
+%pyspark.pandas.internal.InternalField"%pyspark.pandas.internal.InternalField"builtins.list*›
 dtypes5pyspark.pandas.typedef.typehints.DataFrameType.dtypes"ò
 Xbuiltins.list[TypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]]¨
 ITypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]æ
@@ -350,12 +349,12 @@ ITypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]æ
 Any"numpy.dtypeP
 &pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype"pyspark.pandas._typing.Dtype"builtins.list*j
 self`
-.pyspark.pandas.typedef.typehints.DataFrameType".pyspark.pandas.typedef.typehints.DataFrameType0:property`*ˇ
+.pyspark.pandas.typedef.typehints.DataFrameType".pyspark.pandas.typedef.typehints.DataFrameType0:builtins.property`*à
 
 spark_type9pyspark.pandas.typedef.typehints.DataFrameType.spark_type"<
 pyspark.sql.types.StructType"pyspark.sql.types.StructType*j
 self`
-.pyspark.pandas.typedef.typehints.DataFrameType".pyspark.pandas.typedef.typehints.DataFrameType0:property`*≈
+.pyspark.pandas.typedef.typehints.DataFrameType".pyspark.pandas.typedef.typehints.DataFrameType0:builtins.property`*≈
 __repr__7pyspark.pandas.typedef.typehints.DataFrameType.__repr__"
 builtins.str"builtins.str*b`
 .pyspark.pandas.typedef.typehints.DataFrameType".pyspark.pandas.typedef.typehints.DataFrameTyper„

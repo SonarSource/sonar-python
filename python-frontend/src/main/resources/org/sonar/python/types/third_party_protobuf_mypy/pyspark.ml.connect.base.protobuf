@@ -1,6 +1,6 @@
 
-pyspark.ml.connect.baseˆ
-	Estimator!pyspark.ml.connect.base.Estimator"pyspark.ml.param.Params*ª
+pyspark.ml.connect.baseŒ
+	Estimator!pyspark.ml.connect.base.Estimator"pyspark.ml.param.Params*®
 _fit&pyspark.ml.connect.base.Estimator._fit"Ž
 pyspark.ml.connect.base.MJ
 #pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer*ý
@@ -11,7 +11,7 @@
 datasetÆ
 BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
 pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame:
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame0:abstractmethod@*þ	
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame0:abc.abstractmethod@*þ	
 fit%pyspark.ml.connect.base.Estimator.fit"«
 IUnion[pyspark.ml.connect.base.M,builtins.list[pyspark.ml.connect.base.M]]Ž
 pyspark.ml.connect.base.MJ
@@ -81,8 +81,8 @@ BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
 datasetÆ
 BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
 pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame:
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame8@babc.ABCMetaö	
-	Evaluator!pyspark.ml.connect.base.Evaluator"pyspark.ml.param.Params*—
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame8@babc.ABCMetaú	
+	Evaluator!pyspark.ml.connect.base.Evaluator"pyspark.ml.param.Params*›
 	_evaluate+pyspark.ml.connect.base.Evaluator._evaluate" 
 builtins.float"builtins.float*P
 selfF
@@ -90,7 +90,7 @@ BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
 datasetÆ
 BUnion[pyspark.sql.dataframe.DataFrame,pandas.core.frame.DataFrame]B
 pyspark.sql.dataframe.DataFrame"pyspark.sql.dataframe.DataFrame:
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame0:abstractmethod@*È
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame0:abc.abstractmethod@*È
 evaluate*pyspark.ml.connect.base.Evaluator.evaluate" 
 builtins.float"builtins.float*P
 selfF
@@ -138,7 +138,7 @@ EUnion[TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]],None]å
 pyspark.ml.connect.base.MJ
 #pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"#pyspark.ml.connect.base.Transformer"!pyspark.ml.connect.base.Predictor*'
 value
-builtins.str"builtins.str08@Pbabc.ABCMetaÉ
+builtins.str"builtins.str08@Pbabc.ABCMetaÖ
 PredictionModel'pyspark.ml.connect.base.PredictionModel"pyspark.ml.connect.base.Model"(pyspark.ml.connect.base._PredictorParams*¥
 setFeaturesCol6pyspark.ml.connect.base.PredictionModel.setFeaturesCol"R
 'pyspark.ml.connect.base.PredictionModel"'pyspark.ml.connect.base.PredictionModel*\
@@ -151,11 +151,11 @@ EUnion[TypeAlias[builtins.dict[pyspark.ml.param.Param[Any],Any]],None]å
 selfR
 'pyspark.ml.connect.base.PredictionModel"'pyspark.ml.connect.base.PredictionModel*'
 value
-builtins.str"builtins.str0*Þ
+builtins.str"builtins.str0*ë
 numFeatures3pyspark.ml.connect.base.PredictionModel.numFeatures"
 builtins.int"builtins.int*\
 selfR
-'pyspark.ml.connect.base.PredictionModel"'pyspark.ml.connect.base.PredictionModel0:property:abstractmethod@`8@babc.ABCMeta*“
+'pyspark.ml.connect.base.PredictionModel"'pyspark.ml.connect.base.PredictionModel0:builtins.property:abc.abstractmethod@`8@babc.ABCMeta*“
 __annotations__'pyspark.ml.connect.base.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

@@ -20,8 +20,8 @@
 response
 Any*
 kwargs
-AnyHz38z39z310z311z312z313Xj38j39j310j311j312j313¬x
-Redisredis.asyncio.client.Redis"redis.client.AbstractRedis"/redis.commands.redismodules.RedisModuleCommands"%redis.commands.core.AsyncCoreCommands"-redis.commands.sentinel.AsyncSentinelCommands*Ñ
+AnyHz38z39z310z311z312z313Xj38j39j310j311j312j313Àx
+Redisredis.asyncio.client.Redis"redis.client.AbstractRedis"/redis.commands.redismodules.RedisModuleCommands"%redis.commands.core.AsyncCoreCommands"-redis.commands.sentinel.AsyncSentinelCommands*ç
 from_url#redis.asyncio.client.Redis.from_url"F
 redis.asyncio.client.Redis[Any]
 Any"redis.asyncio.client.Redis*°
@@ -35,7 +35,7 @@
 url
 builtins.str"builtins.str*
 kwargs
-Any0:classmethodpz38z39z310z311z312z313*”
+Any0:builtins.classmethodpz38z39z310z311z312z313*”
 __init__#redis.asyncio.client.Redis.__init__"
 None*ﬁ
 self”
@@ -481,7 +481,7 @@ command_re'redis.asyncio.client.Monitor.command_re
 Any*38*39*310*311*312*313rZ
 
 connection'redis.asyncio.client.Monitor.connection
-Any*38*39*310*311*312*313·R
+Any*38*39*310*311*312*313ÍR
 PubSubredis.asyncio.client.PubSub"builtins.object*ä
 __init__$redis.asyncio.client.PubSub.__init__"
 None*D
@@ -557,12 +557,12 @@ on_connect&redis.asyncio.client.PubSub.on_connect"L
 redis.asyncio.client.PubSub"redis.asyncio.client.PubSub*Z
 
 connectionJ
-#redis.asyncio.connection.Connection"#redis.asyncio.connection.ConnectionHz38z39z310z311z312z313*ƒ
+#redis.asyncio.connection.Connection"#redis.asyncio.connection.ConnectionHz38z39z310z311z312z313*Õ
 
 subscribed&redis.asyncio.client.PubSub.subscribed"
 builtins.bool"builtins.bool*D
 self:
-redis.asyncio.client.PubSub"redis.asyncio.client.PubSub0:property`z38z39z310z311z312z313*’
+redis.asyncio.client.PubSub"redis.asyncio.client.PubSub0:builtins.property`z38z39z310z311z312z313*’
 execute_command+redis.asyncio.client.PubSub.execute_command"L
 typing.Coroutine[Any,Any,Any]
 Any
@@ -763,7 +763,7 @@ connection&redis.asyncio.client.PubSub.connection
 e0
 builtins.BaseException"builtins.BaseException*F
 pubsub:
-redis.asyncio.client.PubSub"redis.asyncio.client.PubSubHz38z39z310z311z312z313Xj38j39j310j311j312j313⁄Ÿ
+redis.asyncio.client.PubSub"redis.asyncio.client.PubSubHz38z39z310z311z312z313Xj38j39j310j311j312j313œ€
 Pipelineredis.asyncio.client.Pipeline"redis.asyncio.client.Redis*“
 
 __init__&redis.asyncio.client.Pipeline.__init__"
@@ -5601,8 +5601,8 @@ ITypeAlias[Union[builtins.bytes,builtins.float,builtins.int,builtins.str]]¬
 redis.client._StrTypef
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz38z39z310z311z312z3132˝"
-hset"redis.asyncio.client.Pipeline.hsetÊ
+builtins.bytes"builtins.bytesz38z39z310z311z312z3132í#
+hset"redis.asyncio.client.Pipeline.hsetÌ
 hset"redis.asyncio.client.Pipeline.hset"
 Any*‰
 selfŸ
@@ -5646,7 +5646,7 @@ ITypeAlias[Union[builtins.bytes,builtins.float,builtins.int,builtins.str]]¬
 Union[TypeAlias[Any],None]1
 TypeAlias[Any]
 Any"_typeshed.Incomplete
-None 0:overloadX¯	
+None 0:typing.overloadXˇ	
 hset"redis.asyncio.client.Pipeline.hset"
 Any*‰
 selfŸ
@@ -5680,7 +5680,7 @@ ITypeAlias[Union[builtins.bytes,builtins.float,builtins.int,builtins.str]]¬
 Union[TypeAlias[Any],None]1
 TypeAlias[Any]
 Any"_typeshed.Incomplete
-None 0:overloadX–	
+None 0:typing.overloadX◊	
 hset"redis.asyncio.client.Pipeline.hset"
 Any*‰
 selfŸ
@@ -5710,8 +5710,8 @@ ITypeAlias[Union[builtins.bytes,builtins.float,builtins.int,builtins.str]]¬
 Union[TypeAlias[Any],None]1
 TypeAlias[Any]
 Any"_typeshed.Incomplete
-None 0:overloadX"38"39"310"311"312"3132Ú
-blpop#redis.asyncio.client.Pipeline.blpop˜
+None 0:typing.overloadX"38"39"310"311"312"3132Ä
+blpop#redis.asyncio.client.Pipeline.blpop˛
 blpop#redis.asyncio.client.Pipeline.blpop"
 Any*‰
 selfŸ
@@ -5733,7 +5733,7 @@ ITypeAlias[Union[builtins.bytes,builtins.float,builtins.int,builtins.str]]¬
 !Union[Literal[builtins.int],None]7
 Literal[builtins.int]	
 builtins.int"builtins.int
-None 0:overloadX≠
+None 0:typing.overloadX¥
 blpop#redis.asyncio.client.Pipeline.blpop"
 Any*‰
 selfŸ
@@ -5752,8 +5752,8 @@ ITypeAlias[Union[builtins.bytes,builtins.float,builtins.int,builtins.str]]¬
 builtins.str"builtins.str"redis.client._Value-
 typing.Iterable[Unknown] "typing.Iterable*-
 timeout 
-builtins.float"builtins.float0:overloadX"38"39"310"311"312"3132Ú
-brpop#redis.asyncio.client.Pipeline.brpop˜
+builtins.float"builtins.float0:typing.overloadX"38"39"310"311"312"3132Ä
+brpop#redis.asyncio.client.Pipeline.brpop˛
 brpop#redis.asyncio.client.Pipeline.brpop"
 Any*‰
 selfŸ
@@ -5775,7 +5775,7 @@ ITypeAlias[Union[builtins.bytes,builtins.float,builtins.int,builtins.str]]¬
 !Union[Literal[builtins.int],None]7
 Literal[builtins.int]	
 builtins.int"builtins.int
-None 0:overloadX≠
+None 0:typing.overloadX¥
 brpop#redis.asyncio.client.Pipeline.brpop"
 Any*‰
 selfŸ
@@ -5794,8 +5794,8 @@ ITypeAlias[Union[builtins.bytes,builtins.float,builtins.int,builtins.str]]¬
 builtins.str"builtins.str"redis.client._Value-
 typing.Iterable[Unknown] "typing.Iterable*-
 timeout 
-builtins.float"builtins.float0:overloadX"38"39"310"311"312"3132ù%
-sort"redis.asyncio.client.Pipeline.sort®
+builtins.float"builtins.float0:typing.overloadX"38"39"310"311"312"3132≤%
+sort"redis.asyncio.client.Pipeline.sortØ
 sort"redis.asyncio.client.Pipeline.sort"π
 $builtins.list[redis.client._StrType]Å
 redis.client._StrTypef
@@ -5843,7 +5843,7 @@ RUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Sequence[Unknown],No
 store
 None *,
 groups
-builtins.bool"builtins.bool 0:overloadXô
+builtins.bool"builtins.bool 0:typing.overloadX†
 sort"redis.asyncio.client.Pipeline.sort"
 Any*‰
 selfŸ
@@ -5890,7 +5890,7 @@ RUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Sequence[Unknown],No
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes"redis.client._Key*,
 groups
-builtins.bool"builtins.bool 0:overloadXç
+builtins.bool"builtins.bool 0:typing.overloadXî
 sort"redis.asyncio.client.Pipeline.sort"
 Any*‰
 selfŸ
@@ -5937,8 +5937,8 @@ RUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Sequence[Unknown],No
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes"redis.client._Key*,
 groups
-builtins.bool"builtins.bool 0:overloadX"38"39"310"311"312"3132Õ
-zscan#redis.asyncio.client.Pipeline.zscanÍ
+builtins.bool"builtins.bool 0:typing.overloadX"38"39"310"311"312"3132‚
+zscan#redis.asyncio.client.Pipeline.zscanÒ
 zscan#redis.asyncio.client.Pipeline.zscan"
 Any*‰
 selfŸ
@@ -5964,7 +5964,7 @@ RUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Sequence[Unknown],No
 countD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:overloadXÃ
+None 0:typing.overloadX”
 zscan#redis.asyncio.client.Pipeline.zscan"
 Any*‰
 selfŸ
@@ -5993,7 +5993,7 @@ RUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Sequence[Unknown],No
 None *`
 score_cast_funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function0:overloadX∆
+builtins.function"builtins.function0:typing.overloadXÕ
 zscan#redis.asyncio.client.Pipeline.zscan"
 Any*‰
 selfŸ
@@ -6022,8 +6022,8 @@ RUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Sequence[Unknown],No
 None*`
 score_cast_funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function0:overloadX"38"39"310"311"312"3132–
-spop"redis.asyncio.client.Pipeline.spop˘
+builtins.function"builtins.function0:typing.overloadX"38"39"310"311"312"3132ﬁ
+spop"redis.asyncio.client.Pipeline.spopÄ
 spop"redis.asyncio.client.Pipeline.spop"
 Any*‰
 selfŸ
@@ -6038,7 +6038,7 @@ RUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Sequence[Unknown],No
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes"redis.client._Key*
 count
-None 0:overloadXã
+None 0:typing.overloadXí
 spop"redis.asyncio.client.Pipeline.spop"
 Any*‰
 selfŸ
@@ -6053,8 +6053,8 @@ RUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Sequence[Unknown],No
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes"redis.client._Key*'
 count
-builtins.int"builtins.int0:overloadX"38"39"310"311"312"3132¸
-srandmember)redis.asyncio.client.Pipeline.srandmemberà
+builtins.int"builtins.int0:typing.overloadX"38"39"310"311"312"3132ä	
+srandmember)redis.asyncio.client.Pipeline.srandmemberè
 srandmember)redis.asyncio.client.Pipeline.srandmember"
 Any*‰
 selfŸ
@@ -6069,7 +6069,7 @@ RUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Sequence[Unknown],No
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes"redis.client._Key*
 number
-None 0:overloadXö
+None 0:typing.overloadX°
 srandmember)redis.asyncio.client.Pipeline.srandmember"
 Any*‰
 selfŸ
@@ -6084,8 +6084,8 @@ RUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Sequence[Unknown],No
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes"redis.client._Key*(
 number
-builtins.int"builtins.int0:overloadX"38"39"310"311"312"3132•
-bzpopmax&redis.asyncio.client.Pipeline.bzpopmaxµ
+builtins.int"builtins.int0:typing.overloadX"38"39"310"311"312"3132≥
+bzpopmax&redis.asyncio.client.Pipeline.bzpopmaxº
 bzpopmax&redis.asyncio.client.Pipeline.bzpopmax"
 Any*‰
 selfŸ
@@ -6103,7 +6103,7 @@ MUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Iterable[Unknown]]
 typing.Iterable[Unknown] "typing.Iterable*F
 timeout7
 Literal[builtins.int]	
-builtins.int"builtins.int 0:overloadXú
+builtins.int"builtins.int 0:typing.overloadX£
 bzpopmax&redis.asyncio.client.Pipeline.bzpopmax"
 Any*‰
 selfŸ
@@ -6120,8 +6120,8 @@ MUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Iterable[Unknown]]
 builtins.bytes"builtins.bytes"redis.client._Key-
 typing.Iterable[Unknown] "typing.Iterable*-
 timeout 
-builtins.float"builtins.float0:overloadX"38"39"310"311"312"3132•
-bzpopmin&redis.asyncio.client.Pipeline.bzpopminµ
+builtins.float"builtins.float0:typing.overloadX"38"39"310"311"312"3132≥
+bzpopmin&redis.asyncio.client.Pipeline.bzpopminº
 bzpopmin&redis.asyncio.client.Pipeline.bzpopmin"
 Any*‰
 selfŸ
@@ -6139,7 +6139,7 @@ MUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Iterable[Unknown]]
 typing.Iterable[Unknown] "typing.Iterable*F
 timeout7
 Literal[builtins.int]	
-builtins.int"builtins.int 0:overloadXú
+builtins.int"builtins.int 0:typing.overloadX£
 bzpopmin&redis.asyncio.client.Pipeline.bzpopmin"
 Any*‰
 selfŸ
@@ -6156,8 +6156,8 @@ MUnion[TypeAlias[Union[builtins.str,builtins.bytes]],typing.Iterable[Unknown]]
 builtins.bytes"builtins.bytes"redis.client._Key-
 typing.Iterable[Unknown] "typing.Iterable*-
 timeout 
-builtins.float"builtins.float0:overloadX"38"39"310"311"312"3132æ(
-zrange$redis.asyncio.client.Pipeline.zrangeè
+builtins.float"builtins.float0:typing.overloadX"38"39"310"311"312"3132·(
+zrange$redis.asyncio.client.Pipeline.zrangeñ
 zrange$redis.asyncio.client.Pipeline.zrange"
 Any*‰
 selfŸ
@@ -6195,7 +6195,7 @@ withscores:
 numD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:overloadXë
+None 0:typing.overloadXò
 zrange$redis.asyncio.client.Pipeline.zrange"
 Any*‰
 selfŸ
@@ -6233,7 +6233,7 @@ withscores:
 numD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:overloadXÂ
+None 0:typing.overloadXÏ
 zrange$redis.asyncio.client.Pipeline.zrange"
 Any*‰
 selfŸ
@@ -6269,7 +6269,7 @@ withscores:
 numD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:overloadXÁ
+None 0:typing.overloadXÓ
 zrange$redis.asyncio.client.Pipeline.zrange"
 Any*‰
 selfŸ
@@ -6305,7 +6305,7 @@ withscores:
 numD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:overloadX˘
+None 0:typing.overloadXÄ
 zrange$redis.asyncio.client.Pipeline.zrange"
 Any*‰
 selfŸ
@@ -6342,8 +6342,8 @@ withscores
 numD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:overloadX"38"39"310"311"312"3132ù
-	zrevrange'redis.asyncio.client.Pipeline.zrevrangeÍ
+None 0:typing.overloadX"38"39"310"311"312"3132≤
+	zrevrange'redis.asyncio.client.Pipeline.zrevrangeÒ
 	zrevrange'redis.asyncio.client.Pipeline.zrevrange"
 Any*‰
 selfŸ
@@ -6367,7 +6367,7 @@ withscores:
 builtins.bool"builtins.bool*`
 score_cast_funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function0:overloadXà
+builtins.function"builtins.function0:typing.overloadXè
 	zrevrange'redis.asyncio.client.Pipeline.zrevrange"
 Any*‰
 selfŸ
@@ -6388,7 +6388,7 @@ withscores:
 
 withscores:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool0:overloadX“
+builtins.bool"builtins.bool0:typing.overloadXŸ
 	zrevrange'redis.asyncio.client.Pipeline.zrevrange"
 Any*‰
 selfŸ
@@ -6411,8 +6411,8 @@ withscores
 builtins.bool"builtins.bool *b
 score_cast_funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function 0:overloadX"38"39"310"311"312"3132Ò!
-zrangebyscore+redis.asyncio.client.Pipeline.zrangebyscoreÆ
+builtins.function"builtins.function 0:typing.overloadX"38"39"310"311"312"3132Ü"
+zrangebyscore+redis.asyncio.client.Pipeline.zrangebyscoreµ
 zrangebyscore+redis.asyncio.client.Pipeline.zrangebyscore"
 Any*‰
 selfŸ
@@ -6454,7 +6454,7 @@ withscores:
 builtins.bool"builtins.bool*`
 score_cast_funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function0:overloadXÃ
+builtins.function"builtins.function0:typing.overloadX”
 
 zrangebyscore+redis.asyncio.client.Pipeline.zrangebyscore"
 Any*‰
@@ -6494,7 +6494,7 @@ ITypeAlias[Union[builtins.bytes,builtins.float,builtins.int,builtins.str]]¬
 
 withscores:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool0:overloadXñ
+builtins.bool"builtins.bool0:typing.overloadXù
 zrangebyscore+redis.asyncio.client.Pipeline.zrangebyscore"
 Any*‰
 selfŸ
@@ -6535,8 +6535,8 @@ withscores
 builtins.bool"builtins.bool *b
 score_cast_funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function 0:overloadX"38"39"310"311"312"3132â"
-zrevrangebyscore.redis.asyncio.client.Pipeline.zrevrangebyscore¥
+builtins.function"builtins.function 0:typing.overloadX"38"39"310"311"312"3132û"
+zrevrangebyscore.redis.asyncio.client.Pipeline.zrevrangebyscoreª
 zrevrangebyscore.redis.asyncio.client.Pipeline.zrevrangebyscore"
 Any*‰
 selfŸ
@@ -6578,7 +6578,7 @@ withscores:
 builtins.bool"builtins.bool*`
 score_cast_funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function0:overloadX“
+builtins.function"builtins.function0:typing.overloadXŸ
 
 zrevrangebyscore.redis.asyncio.client.Pipeline.zrevrangebyscore"
 Any*‰
@@ -6618,7 +6618,7 @@ ITypeAlias[Union[builtins.bytes,builtins.float,builtins.int,builtins.str]]¬
 
 withscores:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool0:overloadXú
+builtins.bool"builtins.bool0:typing.overloadX£
 zrevrangebyscore.redis.asyncio.client.Pipeline.zrevrangebyscore"
 Any*‰
 selfŸ
@@ -6659,7 +6659,7 @@ withscores
 builtins.bool"builtins.bool *b
 score_cast_funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function 0:overloadX"38"39"310"311"312"313Pj38j39j310j311j312j313r®
+builtins.function"builtins.function 0:typing.overloadX"38"39"310"311"312"313Pj38j39j310j311j312j313r®
 UNWATCH_COMMANDS.redis.asyncio.client.Pipeline.UNWATCH_COMMANDSH
 builtins.set[builtins.str]
 builtins.str"builtins.str"builtins.set*38*39*310*311*312*313re

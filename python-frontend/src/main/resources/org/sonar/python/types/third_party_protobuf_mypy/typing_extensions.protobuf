@@ -1,5 +1,5 @@
 
-typing_extensionsô
+typing_extensions◊
 AsyncGeneratortyping.AsyncGenerator"typing.AsyncIterator*î
 	__anext__typing.AsyncGenerator.__anext__"y
 typing.Awaitable[typing._T_co]E
@@ -10,7 +10,7 @@
 typing._T_co"
 builtins.object"builtins.object"builtins.objectI
 typing._T_contra"
-builtins.object"builtins.object"builtins.object"typing.AsyncGenerator*Ì
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator*Ò
 asendtyping.AsyncGenerator.asend"y
 typing.Awaitable[typing._T_co]E
 typing._T_co"
@@ -22,7 +22,7 @@
 typing._T_contra"
 builtins.object"builtins.object"builtins.object"typing.AsyncGenerator*KI
 typing._T_contra"
-builtins.object"builtins.object"builtins.object0:abstractmethod@*…
+builtins.object"builtins.object"builtins.object0:abc.abstractmethod@*…
 aclosetyping.AsyncGenerator.aclose"4
 typing.Awaitable[None]
 None"typing.Awaitable*Í
@@ -31,7 +31,7 @@
 typing._T_co"
 builtins.object"builtins.object"builtins.objectI
 typing._T_contra"
-builtins.object"builtins.object"builtins.object"typing.AsyncGenerator*Æ
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator*∑
 ag_awaittyping.AsyncGenerator.ag_await"
 Any*Í
 selfﬂ
@@ -39,7 +39,7 @@
 typing._T_co"
 builtins.object"builtins.object"builtins.objectI
 typing._T_contra"
-builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:property`*≈
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:builtins.property`*Œ
 ag_codetyping.AsyncGenerator.ag_code" 
 types.CodeType"types.CodeType*Í
 selfﬂ
@@ -47,7 +47,7 @@
 typing._T_co"
 builtins.object"builtins.object"builtins.objectI
 typing._T_contra"
-builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:property`*…
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:builtins.property`*“
 ag_frametyping.AsyncGenerator.ag_frame""
 types.FrameType"types.FrameType*Í
 selfﬂ
@@ -55,7 +55,7 @@
 typing._T_co"
 builtins.object"builtins.object"builtins.objectI
 typing._T_contra"
-builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:property`*…
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:builtins.property`*“
 
 ag_running typing.AsyncGenerator.ag_running"
 builtins.bool"builtins.bool*Í
@@ -64,9 +64,8 @@ ag_running typing.AsyncGenerator.ag_running"
 typing._T_co"
 builtins.object"builtins.object"builtins.objectI
 typing._T_contra"
-builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:property`2Û
-
-athrowtyping.AsyncGenerator.athrow¯
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:builtins.property`2â
+athrowtyping.AsyncGenerator.athrowÉ
 athrowtyping.AsyncGenerator.athrow"y
 typing.Awaitable[typing._T_co]E
 typing._T_co"
@@ -84,7 +83,7 @@ ag_running typing.AsyncGenerator.ag_running"
 builtins.object"builtins.object *]Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-None 0:overload:abstractmethod@Xœ
+None 0:typing.overload:abc.abstractmethod@X⁄
 athrowtyping.AsyncGenerator.athrow"y
 typing.Awaitable[typing._T_co]E
 typing._T_co"
@@ -99,8 +98,8 @@ ag_running typing.AsyncGenerator.ag_running"
 None *]Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-None 0:overload:abstractmethod@XPë
-AsyncIterabletyping.AsyncIterable"builtins.object*“
+None 0:typing.overload:abc.abstractmethod@XPï
+AsyncIterabletyping.AsyncIterable"builtins.object*÷
 	__aiter__typing.AsyncIterable.__aiter__"Å
 "typing.AsyncIterator[typing._T_co]E
 typing._T_co"
@@ -108,8 +107,8 @@ ag_running typing.AsyncGenerator.ag_running"
 selfÅ
 "typing.AsyncIterable[typing._T_co]E
 typing._T_co"
-builtins.object"builtins.object"builtins.object"typing.AsyncIterable0:abstractmethod@8PXŒ
-AsyncIteratortyping.AsyncIterator"typing.AsyncIterable*…
+builtins.object"builtins.object"builtins.object"typing.AsyncIterable0:abc.abstractmethod@8PX“
+AsyncIteratortyping.AsyncIterator"typing.AsyncIterable*Õ
 	__anext__typing.AsyncIterator.__anext__"y
 typing.Awaitable[typing._T_co]E
 typing._T_co"
@@ -117,7 +116,7 @@ ag_running typing.AsyncGenerator.ag_running"
 selfÅ
 "typing.AsyncIterator[typing._T_co]E
 typing._T_co"
-builtins.object"builtins.object"builtins.object"typing.AsyncIterator0:abstractmethod@*æ
+builtins.object"builtins.object"builtins.object"typing.AsyncIterator0:abc.abstractmethod@*æ
 	__aiter__typing.AsyncIterator.__aiter__"Å
 "typing.AsyncIterator[typing._T_co]E
 typing._T_co"
@@ -125,8 +124,8 @@ ag_running typing.AsyncGenerator.ag_running"
 selfÅ
 "typing.AsyncIterator[typing._T_co]E
 typing._T_co"
-builtins.object"builtins.object"builtins.object"typing.AsyncIterator8PXê
-	Awaitabletyping.Awaitable"builtins.object*Ÿ
+builtins.object"builtins.object"builtins.object"typing.AsyncIterator8PXî
+	Awaitabletyping.Awaitable"builtins.object*›
 	__await__typing.Awaitable.__await__"ï
 'typing.Generator[Any,None,typing._T_co]
 Any
@@ -136,8 +135,8 @@ ag_running typing.AsyncGenerator.ag_running"
 selfy
 typing.Awaitable[typing._T_co]E
 typing._T_co"
-builtins.object"builtins.object"builtins.object"typing.Awaitable0:abstractmethod@8PX≈
-	Coroutinetyping.Coroutine"typing.Awaitable*í
+builtins.object"builtins.object"builtins.object"typing.Awaitable0:abc.abstractmethod@8PXá 
+	Coroutinetyping.Coroutine"typing.Awaitable*õ
 cr_awaittyping.Coroutine.cr_await"&
 Union[Any,None]
 Any
@@ -149,7 +148,7 @@ ag_running typing.AsyncGenerator.ag_running"
 typing._T_contra"
 builtins.object"builtins.object"builtins.objectE
 typing._V_co"
-builtins.object"builtins.object"builtins.object"typing.Coroutine0:property`*ä
+builtins.object"builtins.object"builtins.object"typing.Coroutine0:builtins.property`*ì
 cr_codetyping.Coroutine.cr_code" 
 types.CodeType"types.CodeType*¥
 self©
@@ -159,7 +158,7 @@ ag_running typing.AsyncGenerator.ag_running"
 typing._T_contra"
 builtins.object"builtins.object"builtins.objectE
 typing._V_co"
-builtins.object"builtins.object"builtins.object"typing.Coroutine0:property`*é
+builtins.object"builtins.object"builtins.object"typing.Coroutine0:builtins.property`*ó
 cr_frametyping.Coroutine.cr_frame""
 types.FrameType"types.FrameType*¥
 self©
@@ -169,7 +168,7 @@ ag_running typing.AsyncGenerator.ag_running"
 typing._T_contra"
 builtins.object"builtins.object"builtins.objectE
 typing._V_co"
-builtins.object"builtins.object"builtins.object"typing.Coroutine0:property`*é
+builtins.object"builtins.object"builtins.object"typing.Coroutine0:builtins.property`*ó
 
 cr_runningtyping.Coroutine.cr_running"
 builtins.bool"builtins.bool*¥
@@ -180,7 +179,7 @@ cr_runningtyping.Coroutine.cr_running"
 typing._T_contra"
 builtins.object"builtins.object"builtins.objectE
 typing._V_co"
-builtins.object"builtins.object"builtins.object"typing.Coroutine0:property`*¸
+builtins.object"builtins.object"builtins.object"typing.Coroutine0:builtins.property`*Ä
 sendtyping.Coroutine.send"E
 typing._T_co"
 builtins.object"builtins.object"builtins.object*¥
@@ -193,7 +192,7 @@ cr_runningtyping.Coroutine.cr_running"
 typing._V_co"
 builtins.object"builtins.object"builtins.object"typing.Coroutine*KI
 typing._T_contra"
-builtins.object"builtins.object"builtins.object0:abstractmethod@*Ù
+builtins.object"builtins.object"builtins.object0:abc.abstractmethod@*¯
 closetyping.Coroutine.close"
 None*¥
 self©
@@ -203,8 +202,8 @@ cr_runningtyping.Coroutine.cr_running"
 typing._T_contra"
 builtins.object"builtins.object"builtins.objectE
 typing._V_co"
-builtins.object"builtins.object"builtins.object"typing.Coroutine0:abstractmethod@2ä
-throwtyping.Coroutine.throwá
+builtins.object"builtins.object"builtins.object"typing.Coroutine0:abc.abstractmethod@2†
+throwtyping.Coroutine.throwí
 throwtyping.Coroutine.throw"E
 typing._T_co"
 builtins.object"builtins.object"builtins.object*¥
@@ -223,7 +222,7 @@ cr_runningtyping.Coroutine.cr_running"
 builtins.object"builtins.object *]Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-None 0:overload:abstractmethod@Xﬁ
+None 0:typing.overload:abc.abstractmethod@XÈ
 throwtyping.Coroutine.throw"E
 typing._T_co"
 builtins.object"builtins.object"builtins.object*¥
@@ -239,7 +238,7 @@ cr_runningtyping.Coroutine.cr_running"
 None *]Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-None 0:overload:abstractmethod@XPrK
+None 0:typing.overload:abc.abstractmethod@XPrK
 __qualname__typing.Coroutine.__qualname__
 builtins.str"builtins.strÓ
 _SpecialFormtyping_extensions._SpecialForm"builtins.object*¨
@@ -337,9 +336,9 @@ __origin__*typing_extensions.ParamSpecArgs.__origin__:
 typing_extensions.ParamSpec"typing_extensions.ParamSpecrv
 
 __origin__,typing_extensions.ParamSpecKwargs.__origin__:
-typing_extensions.ParamSpec"typing_extensions.ParamSpecæ
+typing_extensions.ParamSpec"typing_extensions.ParamSpec’
 
-NamedTupletyping_extensions.NamedTuple"builtins.tuple*¬
+NamedTupletyping_extensions.NamedTuple"builtins.tuple*À
 _make"typing_extensions.NamedTuple._make"Å
 !typing_extensions.NamedTuple.Self<
 typing_extensions.NamedTuple"typing_extensions.NamedTuple"typing_extensions.NamedTuple*ø
@@ -349,7 +348,7 @@ NamedTupletyping_extensions.NamedTuple"builtins.tuple*¬
 typing_extensions.NamedTuple"typing_extensions.NamedTuple"typing_extensions.NamedTuple"type*>
 iterable0
 typing.Iterable[Any]
-Any"typing.Iterable0:classmethodp*–
+Any"typing.Iterable0:builtins.classmethodp*–
 _asdict$typing_extensions.NamedTuple._asdict"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -363,8 +362,8 @@ NamedTupletyping_extensions.NamedTuple"builtins.tuple*¬
 !typing_extensions.NamedTuple.Self<
 typing_extensions.NamedTuple"typing_extensions.NamedTuple"typing_extensions.NamedTuple*
 kwargs
-Any2Ó
-__init__%typing_extensions.NamedTuple.__init__Õ
+Any2¸
+__init__%typing_extensions.NamedTuple.__init__‘
 __init__%typing_extensions.NamedTuple.__init__"
 None*F
 self<
@@ -375,7 +374,7 @@ NamedTupletyping_extensions.NamedTuple"builtins.tuple*¬
 (typing.Iterable[Tuple[builtins.str,Any]]B
 Tuple[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.Iterable 0:overloadXÍ
+Any"typing.Iterable 0:typing.overloadXÒ
 __init__%typing_extensions.NamedTuple.__init__"
 None*F
 self<
@@ -385,7 +384,7 @@ NamedTupletyping_extensions.NamedTuple"builtins.tuple*¬
 fields
 None *
 kwargs
-Any0:overloadXr≥
+Any0:typing.overloadXr≥
 _field_types)typing_extensions.NamedTuple._field_typesx
 )builtins.dict[builtins.str,builtins.type]
 builtins.str"builtins.str
@@ -436,7 +435,7 @@ NamedTupletyping_extensions.NamedTuple"builtins.tuple*¬
 __default__%typing_extensions.TypeVar.__default__&
 Union[Any,None]
 Any
-NoneÑ
+Noneñ
 	ParamSpectyping_extensions.ParamSpec"builtins.object*Ü
 __init__$typing_extensions.ParamSpec.__init__"
 None*D
@@ -459,15 +458,15 @@ NamedTupletyping_extensions.NamedTuple"builtins.tuple*¬
 	Type[Any]
 Any"type
 builtins.str"builtins.str
-None *¿
+None *…
 args typing_extensions.ParamSpec.args"B
 typing_extensions.ParamSpecArgs"typing_extensions.ParamSpecArgs*D
 self:
-typing_extensions.ParamSpec"typing_extensions.ParamSpec0:property`*»
+typing_extensions.ParamSpec"typing_extensions.ParamSpec0:builtins.property`*—
 kwargs"typing_extensions.ParamSpec.kwargs"F
 !typing_extensions.ParamSpecKwargs"!typing_extensions.ParamSpecKwargs*D
 self:
-typing_extensions.ParamSpec"typing_extensions.ParamSpec0:property`8ru
+typing_extensions.ParamSpec"typing_extensions.ParamSpec0:builtins.property`8ru
 	__bound__%typing_extensions.ParamSpec.__bound__A
 Union[Type[Any],None]
 	Type[Any]
@@ -628,23 +627,23 @@ deprecatedtyping_extensions.deprecated"K
 None *.
 
 stacklevel
-builtins.int"builtins.int "¯
+builtins.int"builtins.int "Ü
 
-get_origintyping_extensions.get_originÿ
+get_origintyping_extensions.get_originﬂ
 
 get_origintyping_extensions.get_origin":
 typing_extensions.ParamSpec"typing_extensions.ParamSpec*·
 tpÿ
 HUnion[typing_extensions.ParamSpecArgs,typing_extensions.ParamSpecKwargs]B
 typing_extensions.ParamSpecArgs"typing_extensions.ParamSpecArgsF
-!typing_extensions.ParamSpecKwargs"!typing_extensions.ParamSpecKwargs0:overloadXq
+!typing_extensions.ParamSpecKwargs"!typing_extensions.ParamSpecKwargs0:typing.overloadXx
 
 get_origintyping_extensions.get_origin"&
 Union[Any,None]
 Any
 None*
 tp
-Any0:overloadX*ç
+Any0:typing.overloadX*ç
 __annotations__!typing_extensions.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

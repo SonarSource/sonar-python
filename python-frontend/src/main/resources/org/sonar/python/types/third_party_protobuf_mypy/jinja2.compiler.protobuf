@@ -140,7 +140,7 @@ visit_Name0jinja2.compiler.UndeclaredNameVisitor.visit_Name"
 undeclared0jinja2.compiler.UndeclaredNameVisitor.undeclaredH
 builtins.set[builtins.str]
 builtins.str"builtins.str"builtins.set@
-CompilerExitjinja2.compiler.CompilerExit"builtins.ExceptionÍù
+CompilerExitjinja2.compiler.CompilerExit"builtins.Exception¸û
 CodeGeneratorjinja2.compiler.CodeGenerator"jinja2.visitor.NodeVisitor*∑
 __init__&jinja2.compiler.CodeGenerator.__init__"
 None*H
@@ -164,11 +164,11 @@ undeclared0jinja2.compiler.UndeclaredNameVisitor.undeclaredH
 defer_init
 builtins.bool"builtins.bool */
 	optimized
-builtins.bool"builtins.bool *¨
+builtins.bool"builtins.bool *µ
 	optimized'jinja2.compiler.CodeGenerator.optimized"
 builtins.bool"builtins.bool*H
 self>
-jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator0:property`*”
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator0:builtins.property`*”
 fail"jinja2.compiler.CodeGenerator.fail"
 NoReturn
 *H
@@ -534,11 +534,11 @@ visit_With(jinja2.compiler.CodeGenerator.visit_With"
 node.
 jinja2.nodes.ExprStmt"jinja2.nodes.ExprStmt*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame*s
+jinja2.compiler.Frame"jinja2.compiler.Frame*|
 _default_finalize/jinja2.compiler.CodeGenerator._default_finalize"
 Any*
 value
-Any0:staticmethodh*≥
+Any0:builtins.staticmethodh*≥
 _make_finalize,jinja2.compiler.CodeGenerator._make_finalize"®
 VTypeAlias[Tuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]]û
 KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
@@ -694,7 +694,7 @@ visit_Dict(jinja2.compiler.CodeGenerator.visit_Dict"
 node&
 jinja2.nodes.Dict"jinja2.nodes.Dict*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame*ê
+jinja2.compiler.Frame"jinja2.compiler.Frame*†
 visit_Concat*jinja2.compiler.CodeGenerator.visit_Concat"
 None*H
 self>
@@ -702,7 +702,7 @@ visit_Dict(jinja2.compiler.CodeGenerator.visit_Dict"
 node*
 jinja2.nodes.Concat"jinja2.nodes.Concat*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*î
+jinja2.compiler.Frame"jinja2.compiler.Frame0:jinja2.compiler.optimizeconst*§
 visit_Compare+jinja2.compiler.CodeGenerator.visit_Compare"
 None*H
 self>
@@ -710,7 +710,7 @@ visit_Dict(jinja2.compiler.CodeGenerator.visit_Dict"
 node,
 jinja2.nodes.Compare"jinja2.nodes.Compare*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*É
+jinja2.compiler.Frame"jinja2.compiler.Frame0:jinja2.compiler.optimizeconst*É
 visit_Operand+jinja2.compiler.CodeGenerator.visit_Operand"
 None*H
 self>
@@ -718,7 +718,7 @@ visit_Dict(jinja2.compiler.CodeGenerator.visit_Dict"
 node,
 jinja2.nodes.Operand"jinja2.nodes.Operand*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame*î
+jinja2.compiler.Frame"jinja2.compiler.Frame*§
 visit_Getattr+jinja2.compiler.CodeGenerator.visit_Getattr"
 None*H
 self>
@@ -726,7 +726,7 @@ visit_Dict(jinja2.compiler.CodeGenerator.visit_Dict"
 node,
 jinja2.nodes.Getattr"jinja2.nodes.Getattr*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*î
+jinja2.compiler.Frame"jinja2.compiler.Frame0:jinja2.compiler.optimizeconst*§
 visit_Getitem+jinja2.compiler.CodeGenerator.visit_Getitem"
 None*H
 self>
@@ -734,7 +734,7 @@ visit_Dict(jinja2.compiler.CodeGenerator.visit_Dict"
 node,
 jinja2.nodes.Getitem"jinja2.nodes.Getitem*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*˚
+jinja2.compiler.Frame"jinja2.compiler.Frame0:jinja2.compiler.optimizeconst*˚
 visit_Slice)jinja2.compiler.CodeGenerator.visit_Slice"
 None*H
 self>
@@ -742,7 +742,7 @@ visit_Dict(jinja2.compiler.CodeGenerator.visit_Dict"
 node(
 jinja2.nodes.Slice"jinja2.nodes.Slice*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame*‘
+jinja2.compiler.Frame"jinja2.compiler.Frame*ﬂ
 _filter_test_common1jinja2.compiler.CodeGenerator._filter_test_common"2
 typing.Iterator[None]
 None"typing.Iterator*H
@@ -755,7 +755,7 @@ visit_Dict(jinja2.compiler.CodeGenerator.visit_Dict"
 frame.
 jinja2.compiler.Frame"jinja2.compiler.Frame*-
 	is_filter
-builtins.bool"builtins.bool0:contextmanager*ê
+builtins.bool"builtins.bool0:contextlib.contextmanager*†
 visit_Filter*jinja2.compiler.CodeGenerator.visit_Filter"
 None*H
 self>
@@ -763,7 +763,7 @@ visit_Dict(jinja2.compiler.CodeGenerator.visit_Dict"
 node*
 jinja2.nodes.Filter"jinja2.nodes.Filter*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*à
+jinja2.compiler.Frame"jinja2.compiler.Frame0:jinja2.compiler.optimizeconst*ò
 
 visit_Test(jinja2.compiler.CodeGenerator.visit_Test"
 None*H
@@ -772,7 +772,7 @@ visit_Test(jinja2.compiler.CodeGenerator.visit_Test"
 node&
 jinja2.nodes.Test"jinja2.nodes.Test*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*ò
+jinja2.compiler.Frame"jinja2.compiler.Frame0:jinja2.compiler.optimizeconst*®
 visit_CondExpr,jinja2.compiler.CodeGenerator.visit_CondExpr"
 None*H
 self>
@@ -780,7 +780,7 @@ visit_Test(jinja2.compiler.CodeGenerator.visit_Test"
 node.
 jinja2.nodes.CondExpr"jinja2.nodes.CondExpr*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*æ
+jinja2.compiler.Frame"jinja2.compiler.Frame0:jinja2.compiler.optimizeconst*Œ
 
 visit_Call(jinja2.compiler.CodeGenerator.visit_Call"
 None*H
@@ -791,7 +791,7 @@ visit_Call(jinja2.compiler.CodeGenerator.visit_Call"
 frame.
 jinja2.compiler.Frame"jinja2.compiler.Frame*4
 forward_caller
-builtins.bool"builtins.bool 0:optimizeconst*É
+builtins.bool"builtins.bool 0:jinja2.compiler.optimizeconst*É
 visit_Keyword+jinja2.compiler.CodeGenerator.visit_Keyword"
 None*H
 self>
@@ -1035,7 +1035,7 @@ _last_line(jinja2.compiler.CodeGenerator._last_line
 builtins.str"builtins.str"builtins.set"builtins.listrû
 _context_reference_stack6jinja2.compiler.CodeGenerator._context_reference_stackJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listzÄ'
+builtins.str"builtins.str"builtins.listzı&
 _FinalizeInfo+jinja2.compiler.CodeGenerator._FinalizeInfo"builtins.tuple*‚
 _replace4jinja2.compiler.CodeGenerator._FinalizeInfo._replace"‘
 /jinja2.compiler.CodeGenerator._FinalizeInfo._NTû
@@ -1109,7 +1109,7 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 NoneD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*Æ
+None*£
 _make1jinja2.compiler.CodeGenerator._FinalizeInfo._make"‘
 /jinja2.compiler.CodeGenerator._FinalizeInfo._NTû
 KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
@@ -1137,7 +1137,7 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 new
 Any *
 len
-Any 0:classmethodpr√
+Any 0: pr√
 const1jinja2.compiler.CodeGenerator._FinalizeInfo.constÜ
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&

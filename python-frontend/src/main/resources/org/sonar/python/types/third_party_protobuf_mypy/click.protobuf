@@ -1,5 +1,5 @@
 
-click∫
+click√
 Argumentclick.core.Argument"click.core.Parameter*∂
 __init__click.core.Argument.__init__"
 None*4
@@ -13,11 +13,11 @@
 builtins.bool"builtins.bool
 None *
 attrs
-Any*†
+Any*©
 human_readable_name'click.core.Argument.human_readable_name"
 builtins.str"builtins.str*4
 self*
-click.core.Argument"click.core.Argument0:property`*Ñ
+click.core.Argument"click.core.Argument0:builtins.property`*Ñ
 make_metavar click.core.Argument.make_metavar"
 builtins.str"builtins.str*4
 self*
@@ -60,7 +60,7 @@ WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builti
 ctx(
 click.core.Context"click.core.ContextrT
 param_type_name#click.core.Argument.param_type_name
-builtins.str"builtins.strÁ%
+builtins.str"builtins.strÒ%
 BaseCommandclick.core.BaseCommand"builtins.object*Ô
 __init__click.core.BaseCommand.__init__"
 None*:
@@ -164,8 +164,8 @@ incomplete
 args
 Any*
 kwargs
-Any2‡
-mainclick.core.BaseCommand.main¨
+Any2Í
+mainclick.core.BaseCommand.main±
 mainclick.core.BaseCommand.main"
 NoReturn
 *:
@@ -188,8 +188,7 @@ incomplete
 Literal[builtins.bool]	
 builtins.bool"builtins.bool *
 extra
-Any0:
-t.overloadXã
+Any0:typing.overloadXê
 mainclick.core.BaseCommand.main"
 Any*:
 self0
@@ -210,8 +209,7 @@ t.overloadXã
 standalone_mode
 builtins.bool"builtins.bool *
 extra
-Any0:
-t.overloadXrÉ
+Any0:typing.overloadXrÉ
 context_class$click.core.BaseCommand.context_classL
 Type[click.core.Context](
 click.core.Context"click.core.Context"typer[
@@ -485,7 +483,7 @@ add_source'click.core.CommandCollection.add_source"
 click.core.Context"click.core.Contextrú
 sources$click.core.CommandCollection.sourcesk
 &builtins.list[click.core.MultiCommand]2
-click.core.MultiCommand"click.core.MultiCommand"builtins.list…P
+click.core.MultiCommand"click.core.MultiCommand"builtins.listP
 Contextclick.core.Context"builtins.object*∞
 __init__click.core.Context.__init__"
 None*2
@@ -564,20 +562,20 @@ add_source'click.core.CommandCollection.add_source"
 	__enter__click.core.Context.__enter__"(
 click.core.Context"click.core.Context**(
 click.core.Context"click.core.Context*/
-__exit__click.core.Context.__exit__* * * * *¯
+__exit__click.core.Context.__exit__* * * * *É
 scopeclick.core.Context.scope"`
 #typing.Iterator[click.core.Context](
 click.core.Context"click.core.Context"typing.Iterator*2
 self(
 click.core.Context"click.core.Context*-
 cleanup
-builtins.bool"builtins.bool 0:contextmanager*∫
+builtins.bool"builtins.bool 0:contextlib.contextmanager*√
 metaclick.core.Context.meta"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
 Any"builtins.dict*2
 self(
-click.core.Context"click.core.Context0:property`*©
+click.core.Context"click.core.Context0:builtins.property`*©
 make_formatter!click.core.Context.make_formatter"@
 click.formatting.HelpFormatter"click.formatting.HelpFormatter*2
 self(
@@ -602,11 +600,11 @@ add_source'click.core.CommandCollection.add_source"
 closeclick.core.Context.close"
 None*2
 self(
-click.core.Context"click.core.Context*è
+click.core.Context"click.core.Context*ò
 command_pathclick.core.Context.command_path"
 builtins.str"builtins.str*2
 self(
-click.core.Context"click.core.Context0:property`*á
+click.core.Context"click.core.Context0:builtins.property`*á
 	find_rootclick.core.Context.find_root"(
 click.core.Context"click.core.Context*2
 self(
@@ -698,8 +696,8 @@ add_source'click.core.CommandCollection.add_source"
 self(
 click.core.Context"click.core.Context*&
 name
-builtins.str"builtins.str2≈
-lookup_default!click.core.Context.lookup_defaultè
+builtins.str"builtins.str2œ
+lookup_default!click.core.Context.lookup_defaultî
 lookup_default!click.core.Context.lookup_default"&
 Union[Any,None]
 Any
@@ -710,8 +708,7 @@ add_source'click.core.CommandCollection.add_source"
 builtins.str"builtins.str*F
 call:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:
-t.overloadX˝
+builtins.bool"builtins.bool 0:typing.overloadXÇ
 lookup_default!click.core.Context.lookup_default"ì
 /Union[Any,CallableType[builtins.function],None]
 AnyK
@@ -724,8 +721,7 @@ t.overloadX˝
 builtins.str"builtins.str*F
 call:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:
-t.overloadXrß
+builtins.bool"builtins.bool 0:typing.overloadXrß
 formatter_class"click.core.Context.formatter_classp
 $Type[click.formatting.HelpFormatter]@
 click.formatting.HelpFormatter"click.formatting.HelpFormatter"typer{
@@ -815,7 +811,7 @@ $Type[click.formatting.HelpFormatter]@
 builtins.str"builtins.str8
 click.core.ParameterSource"click.core.ParameterSource"builtins.dictr[
 _exit_stackclick.core.Context._exit_stack,
-contextlib.ExitStack"contextlib.ExitStack‹
+contextlib.ExitStack"contextlib.ExitStack
 Groupclick.core.Group"click.core.MultiCommand*±
 __init__click.core.Group.__init__"
 None*.
@@ -861,15 +857,14 @@ $Type[click.formatting.HelpFormatter]@
 self$
 click.core.Group"click.core.Group*1
 ctx(
-click.core.Context"click.core.Context2›
-commandclick.core.Group.command‹
+click.core.Context"click.core.Context2Á
+commandclick.core.Group.command·
 commandclick.core.Group.command"(
 click.core.Command"click.core.Command*.
 self$
 click.core.Group"click.core.Group*MK
 CallableType[builtins.function]&
-builtins.function"builtins.function0:
-t.overloadXÿ
+builtins.function"builtins.function0:typing.overloadX›
 commandclick.core.Group.command"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*.
@@ -878,16 +873,14 @@ t.overloadXÿ
 args
 Any*
 kwargs
-Any0:
-t.overloadX2Õ
-groupclick.core.Group.group‘
+Any0:typing.overloadX2◊
+groupclick.core.Group.groupŸ
 groupclick.core.Group.group"$
 click.core.Group"click.core.Group*.
 self$
 click.core.Group"click.core.Group*MK
 CallableType[builtins.function]&
-builtins.function"builtins.function0:
-t.overloadX‘
+builtins.function"builtins.function0:typing.overloadXŸ
 groupclick.core.Group.group"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*.
@@ -896,8 +889,7 @@ t.overloadX‘
 args
 Any*
 kwargs
-Any0:
-t.overloadXr≤
+Any0:typing.overloadXr≤
 command_classclick.core.Group.command_classÄ
 $Union[Type[click.core.Command],None]L
 Type[click.core.Command](
@@ -1055,7 +1047,7 @@ incomplete
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None…/
+None”/
 Optionclick.core.Option"click.core.Parameter*É
 __init__click.core.Option.__init__"
 None*0
@@ -1189,8 +1181,8 @@ WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builti
 optsè
 1typing.Mapping[builtins.str,click.core.Parameter]
 builtins.str"builtins.str,
-click.core.Parameter"click.core.Parameter"typing.Mapping2¶
-get_defaultclick.core.Option.get_defaultë
+click.core.Parameter"click.core.Parameter"typing.Mapping2∞
+get_defaultclick.core.Option.get_defaultñ
 get_defaultclick.core.Option.get_default"&
 Union[Any,None]
 Any
@@ -1201,8 +1193,7 @@ WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builti
 click.core.Context"click.core.Context*F
 call:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:
-t.overloadX„
+builtins.bool"builtins.bool 0:typing.overloadXË
 get_defaultclick.core.Option.get_default"ì
 /Union[Any,CallableType[builtins.function],None]
 AnyK
@@ -1214,8 +1205,7 @@ t.overloadX„
 ctx(
 click.core.Context"click.core.Context**
 call
-builtins.bool"builtins.bool 0:
-t.overloadXrR
+builtins.bool"builtins.bool 0:typing.overloadXrR
 param_type_name!click.core.Option.param_type_name
 builtins.str"builtins.strrh
 promptclick.core.Option.promptD
@@ -1263,7 +1253,7 @@ flag_valueclick.core.Option.flag_value
 show_choicesclick.core.Option.show_choices
 builtins.bool"builtins.boolrL
 show_envvarclick.core.Option.show_envvar
-builtins.bool"builtins.bool”A
+builtins.bool"builtins.boolÊA
 	Parameterclick.core.Parameter"builtins.object*ì
 __init__click.core.Parameter.__init__"
 None*6
@@ -1341,11 +1331,11 @@ WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builti
 typing.Sequence[builtins.str]
 builtins.str"builtins.str"typing.Sequence*0
 expose_value
-builtins.bool"builtins.bool*£
+builtins.bool"builtins.bool*¨
 human_readable_name(click.core.Parameter.human_readable_name"
 builtins.str"builtins.str*6
 self,
-click.core.Parameter"click.core.Parameter0:property`*á
+click.core.Parameter"click.core.Parameter0:builtins.property`*á
 make_metavar!click.core.Parameter.make_metavar"
 builtins.str"builtins.str*6
 self,
@@ -1456,8 +1446,8 @@ WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builti
 click.core.Context"click.core.Context*,
 
 incomplete
-builtins.str"builtins.str2ª
-get_default click.core.Parameter.get_defaultö
+builtins.str"builtins.str2≈
+get_default click.core.Parameter.get_defaultü
 get_default click.core.Parameter.get_default"&
 Union[Any,None]
 Any
@@ -1468,8 +1458,7 @@ incomplete
 click.core.Context"click.core.Context*F
 call:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:
-t.overloadXÏ
+builtins.bool"builtins.bool 0:typing.overloadXÒ
 get_default click.core.Parameter.get_default"ì
 /Union[Any,CallableType[builtins.function],None]
 AnyK
@@ -1481,8 +1470,7 @@ t.overloadXÏ
 ctx(
 click.core.Context"click.core.Context**
 call
-builtins.bool"builtins.bool 0:
-t.overloadXrU
+builtins.bool"builtins.bool 0:typing.overloadXrU
 param_type_name$click.core.Parameter.param_type_name
 builtins.str"builtins.strrg
 nameclick.core.Parameter.nameD
@@ -1729,7 +1717,7 @@ UsageErrorclick.exceptions.UsageError"click.exceptions.ClickException*é
 cmdclick.exceptions.UsageError.cmdV
 Union[click.core.Command,None](
 click.core.Command"click.core.Command
-NoneΩ
+None”
 HelpFormatterclick.formatting.HelpFormatter"builtins.object*È
 __init__'click.formatting.HelpFormatter.__init__"
 None*J
@@ -1800,19 +1788,19 @@ write_text)click.formatting.HelpFormatter.write_text"
 col_max
 builtins.int"builtins.int */
 col_spacing
-builtins.int"builtins.int *Î
+builtins.int"builtins.int *ˆ
 section&click.formatting.HelpFormatter.section"2
 typing.Iterator[None]
 None"typing.Iterator*J
 self@
 click.formatting.HelpFormatter"click.formatting.HelpFormatter*&
 name
-builtins.str"builtins.str0:contextmanager*À
+builtins.str"builtins.str0:contextlib.contextmanager*÷
 indentation*click.formatting.HelpFormatter.indentation"2
 typing.Iterator[None]
 None"typing.Iterator*J
 self@
-click.formatting.HelpFormatter"click.formatting.HelpFormatter0:contextmanager*ù
+click.formatting.HelpFormatter"click.formatting.HelpFormatter0:contextlib.contextmanager*ù
 getvalue'click.formatting.HelpFormatter.getvalue"
 builtins.str"builtins.str*J
 self@
@@ -2394,7 +2382,8 @@ allow_dashclick.types.Path.allow_dash
 Union[Type[Any],None]
 	Type[Any]
 Any"type
-Noneˆ	
+Noneä
+
 Tupleclick.types.Tuple"click.types.CompositeParamType*µ
 __init__click.types.Tuple.__init__"
 None*0
@@ -2411,15 +2400,15 @@ allow_dashclick.types.Path.allow_dash
 builtins.str"builtins.str
 Any"builtins.dict*0
 self&
-click.types.Tuple"click.types.Tuple*|
+click.types.Tuple"click.types.Tuple*Ö
 nameclick.types.Tuple.name"
 builtins.str"builtins.str*0
 self&
-click.types.Tuple"click.types.Tuple0:property`*~
+click.types.Tuple"click.types.Tuple0:builtins.property`*á
 arityclick.types.Tuple.arity"
 builtins.int"builtins.int*0
 self&
-click.types.Tuple"click.types.Tuple0:property`*Ω
+click.types.Tuple"click.types.Tuple0:builtins.property`*Ω
 convertclick.types.Tuple.convert"
 Any*0
 self&
@@ -2862,13 +2851,12 @@ HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 lazy
 builtins.bool"builtins.bool *,
 atomic
-builtins.bool"builtins.bool "∑
-commandclick.decorators.command¨
+builtins.bool"builtins.bool "∆
+commandclick.decorators.command±
 commandclick.decorators.command"(
 click.core.Command"click.core.Command*MK
 CallableType[builtins.function]&
-builtins.function"builtins.function0:
-t.overloadXÊ
+builtins.function"builtins.function0:typing.overloadXÎ
 commandclick.decorators.command"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*P
@@ -2877,8 +2865,7 @@ t.overloadXÊ
 builtins.str"builtins.str
 None *
 attrs
-Any0:
-t.overloadX˘
+Any0:typing.overloadX˛
 commandclick.decorators.command"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*P
@@ -2891,14 +2878,12 @@ t.overloadX˘
 click.decorators.CmdType(
 click.core.Command"click.core.Command"click.core.Command"type *
 attrs
-Any0:
-t.overloadX"´
-groupclick.decorators.group§
+Any0:typing.overloadX"µ
+groupclick.decorators.group©
 groupclick.decorators.group"$
 click.core.Group"click.core.Group*MK
 CallableType[builtins.function]&
-builtins.function"builtins.function0:
-t.overloadX‚
+builtins.function"builtins.function0:typing.overloadXÁ
 groupclick.decorators.group"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*P
@@ -2907,22 +2892,19 @@ t.overloadX‚
 builtins.str"builtins.str
 None *
 attrs
-Any0:
-t.overloadX"»
-get_current_context!click.globals.get_current_contextº
+Any0:typing.overloadX"“
+get_current_context!click.globals.get_current_context¡
 get_current_context!click.globals.get_current_context"(
 click.core.Context"click.core.Context*H
 silent:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:
-t.overloadXŒ
+builtins.bool"builtins.bool 0:typing.overloadX”
 get_current_context!click.globals.get_current_context"V
 Union[click.core.Context,None](
 click.core.Context"click.core.Context
 None*,
 silent
-builtins.bool"builtins.bool 0:
-t.overloadX*f
+builtins.bool"builtins.bool 0:typing.overloadX*f
 __path__click.__path__J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*Å

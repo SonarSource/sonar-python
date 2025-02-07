@@ -86,8 +86,8 @@
 self8
 codecs._IncrementalDecoder"codecs._IncrementalDecoder**
 errors
-builtins.str"builtins.str XÆ
-	CodecInfocodecs.CodecInfo"builtins.tuple*Ÿ
+builtins.str"builtins.str X‰
+	CodecInfocodecs.CodecInfo"builtins.tuple*‚
 encodecodecs.CodecInfo.encode""
 codecs._Encoder"codecs._Encoder*É
 self¯
@@ -95,7 +95,7 @@ PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter
 codecs._Encoder"codecs._Encoder"
 codecs._Decoder"codecs._Decoder,
 codecs._StreamReader"codecs._StreamReader,
-codecs._StreamWriter"codecs._StreamWriter0:property`*Ÿ
+codecs._StreamWriter"codecs._StreamWriter0:builtins.property`*‚
 decodecodecs.CodecInfo.decode""
 codecs._Decoder"codecs._Decoder*É
 self¯
@@ -103,7 +103,7 @@ PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter
 codecs._Encoder"codecs._Encoder"
 codecs._Decoder"codecs._Decoder,
 codecs._StreamReader"codecs._StreamReader,
-codecs._StreamWriter"codecs._StreamWriter0:property`*Ô
+codecs._StreamWriter"codecs._StreamWriter0:builtins.property`*¯
 streamreadercodecs.CodecInfo.streamreader",
 codecs._StreamReader"codecs._StreamReader*É
 self¯
@@ -111,7 +111,7 @@ PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter
 codecs._Encoder"codecs._Encoder"
 codecs._Decoder"codecs._Decoder,
 codecs._StreamReader"codecs._StreamReader,
-codecs._StreamWriter"codecs._StreamWriter0:property`*Ô
+codecs._StreamWriter"codecs._StreamWriter0:builtins.property`*¯
 streamwritercodecs.CodecInfo.streamwriter",
 codecs._StreamWriter"codecs._StreamWriter*É
 self¯
@@ -119,7 +119,7 @@ PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter
 codecs._Encoder"codecs._Encoder"
 codecs._Decoder"codecs._Decoder,
 codecs._StreamReader"codecs._StreamReader,
-codecs._StreamWriter"codecs._StreamWriter0:property`*á
+codecs._StreamWriter"codecs._StreamWriter0:builtins.property`*ê
 incrementalencoder#codecs.CodecInfo.incrementalencoder"8
 codecs._IncrementalEncoder"codecs._IncrementalEncoder*É
 self¯
@@ -127,7 +127,7 @@ PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter
 codecs._Encoder"codecs._Encoder"
 codecs._Decoder"codecs._Decoder,
 codecs._StreamReader"codecs._StreamReader,
-codecs._StreamWriter"codecs._StreamWriter0:property`*á
+codecs._StreamWriter"codecs._StreamWriter0:builtins.property`*ê
 incrementaldecoder#codecs.CodecInfo.incrementaldecoder"8
 codecs._IncrementalDecoder"codecs._IncrementalDecoder*É
 self¯
@@ -135,7 +135,7 @@ PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter
 codecs._Encoder"codecs._Encoder"
 codecs._Decoder"codecs._Decoder,
 codecs._StreamReader"codecs._StreamReader,
-codecs._StreamWriter"codecs._StreamWriter0:property`*ë
+codecs._StreamWriter"codecs._StreamWriter0:builtins.property`*ë
 __new__codecs.CodecInfo.__new__"î
 codecs.CodecInfo.Self¯
 PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
@@ -201,14 +201,14 @@ PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter
 input 
 builtins.bytes"builtins.bytes**
 errors
-builtins.str"builtins.str „
+builtins.str"builtins.str Á
 IncrementalEncodercodecs.IncrementalEncoder"builtins.object*¶
 __init__"codecs.IncrementalEncoder.__init__"
 None*@
 self6
 codecs.IncrementalEncoder"codecs.IncrementalEncoder**
 errors
-builtins.str"builtins.str *¯
+builtins.str"builtins.str *¸
 encode codecs.IncrementalEncoder.encode" 
 builtins.bytes"builtins.bytes*@
 self6
@@ -216,7 +216,7 @@ PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter
 input
 builtins.str"builtins.str*+
 final
-builtins.bool"builtins.bool 0:abstractmethod@*t
+builtins.bool"builtins.bool 0:abc.abstractmethod@*t
 resetcodecs.IncrementalEncoder.reset"
 None*@
 self6
@@ -236,14 +236,14 @@ PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter
 builtins.int"builtins.int
 builtins.str"builtins.strrH
 errors codecs.IncrementalEncoder.errors
-builtins.str"builtins.strß
+builtins.str"builtins.str´
 IncrementalDecodercodecs.IncrementalDecoder"builtins.object*¶
 __init__"codecs.IncrementalDecoder.__init__"
 None*@
 self6
 codecs.IncrementalDecoder"codecs.IncrementalDecoder**
 errors
-builtins.str"builtins.str *∞
+builtins.str"builtins.str *¥
 decode codecs.IncrementalDecoder.decode"
 builtins.str"builtins.str*@
 self6
@@ -262,7 +262,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 ctypes._CData"ctypes._CData*
 pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*+
 final
-builtins.bool"builtins.bool 0:abstractmethod@*t
+builtins.bool"builtins.bool 0:abc.abstractmethod@*t
 resetcodecs.IncrementalDecoder.reset"
 None*@
 self6
@@ -282,14 +282,14 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 builtins.bytes"builtins.bytes
 builtins.int"builtins.intrH
 errors codecs.IncrementalDecoder.errors
-builtins.str"builtins.str˝
+builtins.str"builtins.strÅ
 BufferedIncrementalEncoder!codecs.BufferedIncrementalEncoder"codecs.IncrementalEncoder*æ
 __init__*codecs.BufferedIncrementalEncoder.__init__"
 None*P
 selfF
 !codecs.BufferedIncrementalEncoder"!codecs.BufferedIncrementalEncoder**
 errors
-builtins.str"builtins.str *é
+builtins.str"builtins.str *í
 _buffer_encode0codecs.BufferedIncrementalEncoder._buffer_encode"f
 "Tuple[builtins.bytes,builtins.int] 
 builtins.bytes"builtins.bytes
@@ -301,7 +301,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 errors
 builtins.str"builtins.str*)
 final
-builtins.bool"builtins.bool0:abstractmethod@*¸
+builtins.bool"builtins.bool0:abc.abstractmethod@*¸
 encode(codecs.BufferedIncrementalEncoder.encode" 
 builtins.bytes"builtins.bytes*P
 selfF
@@ -311,14 +311,14 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 final
 builtins.bool"builtins.bool rP
 buffer(codecs.BufferedIncrementalEncoder.buffer
-builtins.str"builtins.strÔ
+builtins.str"builtins.strÛ
 BufferedIncrementalDecoder!codecs.BufferedIncrementalDecoder"codecs.IncrementalDecoder*æ
 __init__*codecs.BufferedIncrementalDecoder.__init__"
 None*P
 selfF
 !codecs.BufferedIncrementalDecoder"!codecs.BufferedIncrementalDecoder**
 errors
-builtins.str"builtins.str *ƒ	
+builtins.str"builtins.str *»	
 _buffer_decode0codecs.BufferedIncrementalDecoder._buffer_decode"`
  Tuple[builtins.str,builtins.int]
 builtins.str"builtins.str
@@ -341,7 +341,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 errors
 builtins.str"builtins.str*)
 final
-builtins.bool"builtins.bool0:abstractmethod@*¥
+builtins.bool"builtins.bool0:abc.abstractmethod@*¥
 decode(codecs.BufferedIncrementalDecoder.decode"
 builtins.str"builtins.str*P
 selfF
@@ -1406,8 +1406,8 @@ iterdecodecodecs.iterdecode"n
 builtins.bytes"builtins.bytes
 builtins.int"builtins.int*=
 	exception.
-builtins.UnicodeError"builtins.UnicodeError"ñ
-encode_codecs.encode¸
+builtins.UnicodeError"builtins.UnicodeError"´
+encode_codecs.encodeÉ
 encode_codecs.encode" 
 builtins.bytes"builtins.bytes*‡
 obj÷
@@ -1459,7 +1459,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Literal[builtins.str]	
 builtins.str"builtins.str"_codecs._BytesToBytesEncoding**
 errors
-builtins.str"builtins.str 0:overloadX∞
+builtins.str"builtins.str 0:typing.overloadX∑
 encode_codecs.encode"
 builtins.str"builtins.str*%
 obj
@@ -1472,7 +1472,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Literal[builtins.str]	
 builtins.str"builtins.str"_codecs._StrToStrEncoding**
 errors
-builtins.str"builtins.str 0:overloadX…
+builtins.str"builtins.str 0:typing.overloadX–
 encode_codecs.encode" 
 builtins.bytes"builtins.bytes*%
 obj
@@ -1480,8 +1480,8 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 encoding
 builtins.str"builtins.str **
 errors
-builtins.str"builtins.str 0:overloadX"ò'
-decode_codecs.decode¸
+builtins.str"builtins.str 0:typing.overloadX"ª'
+decode_codecs.decodeÉ
 decode_codecs.decode" 
 builtins.bytes"builtins.bytes*‡
 obj÷
@@ -1533,7 +1533,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Literal[builtins.str]	
 builtins.str"builtins.str"_codecs._BytesToBytesEncoding**
 errors
-builtins.str"builtins.str 0:overloadX∞
+builtins.str"builtins.str 0:typing.overloadX∑
 decode_codecs.decode"
 builtins.str"builtins.str*%
 obj
@@ -1546,7 +1546,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Literal[builtins.str]	
 builtins.str"builtins.str"_codecs._StrToStrEncoding**
 errors
-builtins.str"builtins.str 0:overloadXÔ
+builtins.str"builtins.str 0:typing.overloadXˆ
 decode_codecs.decode"
 builtins.str"builtins.str*%
 obj
@@ -1562,7 +1562,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Literal[builtins.str]	
 builtins.str"builtins.str**
 errors
-builtins.str"builtins.str 0:overloadX’
+builtins.str"builtins.str 0:typing.overloadX‹
 decode_codecs.decode" 
 builtins.bytes"builtins.bytes*%
 obj
@@ -1574,7 +1574,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Literal[builtins.str]	
 builtins.str"builtins.str**
 errors
-builtins.str"builtins.str 0:overloadXÅ
+builtins.str"builtins.str 0:typing.overloadXà
 decode_codecs.decode"
 builtins.str"builtins.str*‡
 obj÷
@@ -1593,7 +1593,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 encoding
 builtins.str"builtins.str **
 errors
-builtins.str"builtins.str 0:overloadX*Ç
+builtins.str"builtins.str 0:typing.overloadX*Ç
 __annotations__codecs.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
