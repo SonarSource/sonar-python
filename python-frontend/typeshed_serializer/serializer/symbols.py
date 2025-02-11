@@ -303,7 +303,7 @@ class ClassSymbol:
                 self.methods.append(FunctionSymbol(node.func, decorators=node.original_decorators))
             elif isinstance(node, mpn.OverloadedFuncDef):
                 self.overloaded_methods.append(OverloadedFunctionSymbol(node))
-            elif isinstance(node, mpn.TypeInfo):
+            elif isinstance(node, mpn.TypeInfo) and not node.is_intersection:
                 self.nested_classes.append(ClassSymbol(node))
             elif isinstance(node, mpn.Var) and node.name not in DEFAULT_EXPORTED_VARS:
                 self.vars.append(VarSymbol.from_var(node))
@@ -407,7 +407,7 @@ class ModuleSymbol:
                 self.functions.append(FunctionSymbol(symbol_table_node.func, decorators=symbol_table_node.original_decorators))
             if isinstance(symbol_table_node, mpn.OverloadedFuncDef):
                 self.overloaded_functions.append(OverloadedFunctionSymbol(symbol_table_node, name=key))
-            if isinstance(symbol_table_node, mpn.TypeInfo):
+            if isinstance(symbol_table_node, mpn.TypeInfo) and not symbol_table_node.is_intersection:
                 self.classes.append(ClassSymbol(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.Var) and symbol_table_node.name not in DEFAULT_EXPORTED_VARS:
                 self.vars.append(VarSymbol.from_var(symbol_table_node, name=key))
