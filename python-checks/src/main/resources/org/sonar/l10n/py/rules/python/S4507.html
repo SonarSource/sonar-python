@@ -33,6 +33,23 @@ app = Flask()
 app.debug = True  # Sensitive
 app.run(debug=True)  # Sensitive
 </pre>
+<p>The following code defines a GraphQL endpoint with GraphiQL enabled. While this might be a useful configuration during development, it should never
+be enabled for applications deployed in production:</p>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+from flask import Flask
+from graphql_server.flask import GraphQLView
+
+app = Flask(__name__)
+
+app.add_url_rule(
+    '/graphql',
+    view_func=GraphQLView.as_view(
+        'graphql',
+        schema=schema,
+        graphiql=True # Sensitive
+    )
+)
+</pre>
 <h2>Compliant Solution</h2>
 <pre data-diff-id="1" data-diff-type="compliant">
 from django.conf import settings
@@ -53,6 +70,20 @@ from flask import Flask
 app = Flask()
 app.debug = False
 app.run(debug=False)
+</pre>
+<pre data-diff-id="4" data-diff-type="compliant">
+from flask import Flask
+from graphql_server.flask import GraphQLView
+
+app = Flask(__name__)
+
+app.add_url_rule(
+    '/graphql',
+    view_func=GraphQLView.as_view(
+        'graphql',
+        schema=schema
+    )
+)
 </pre>
 <h2>See</h2>
 <ul>
