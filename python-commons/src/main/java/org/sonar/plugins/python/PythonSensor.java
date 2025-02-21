@@ -39,6 +39,7 @@ import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.dependency.RequirementsTxtParser;
 import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
 import org.sonar.plugins.python.editions.RepositoryInfoProvider;
 import org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
@@ -79,13 +80,13 @@ public final class PythonSensor implements Sensor {
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
     NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()});
+      new RepositoryInfoProvider[] {new OpenSourceRepositoryInfoProvider()});
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
     PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()});
+      new RepositoryInfoProvider[] {new OpenSourceRepositoryInfoProvider()});
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
@@ -94,7 +95,7 @@ public final class PythonSensor implements Sensor {
     // In practice, this is currently the case, since both are provided by PythonPlugin under the same conditions.
     // See also PythonPlugin::SonarLintPluginAPIManager::addSonarlintPythonIndexer.
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()});
+      new RepositoryInfoProvider[] {new OpenSourceRepositoryInfoProvider()});
   }
 
   public PythonSensor(
@@ -151,12 +152,22 @@ public final class PythonSensor implements Sensor {
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     pythonIndexer.setSonarLintCache(sonarLintCache);
     TypeShed.setProjectLevelSymbolTable(pythonIndexer.projectLevelSymbolTable());
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(),
-      pythonIndexer);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer);
     scanner.execute(pythonFiles, context);
+
+    RequirementsTxtParser.parseRequirementFiles(context);
+
     updateDatabricksTelemetry(scanner);
     sensorTelemetryStorage.send(context);
     durationReport.stop();
+  }
+
+  private static List<PythonInputFile> getInputFiles(SensorContext context) {
+    FilePredicates p = context.fileSystem().predicates();
+    Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasLanguage(Python.KEY)));
+    List<PythonInputFile> list = new ArrayList<>();
+    it.forEach(f -> list.add(new PythonInputFileImpl(f)));
+    return Collections.unmodifiableList(list);
   }
 
   private void updateDatabricksTelemetry(PythonScanner scanner) {
@@ -171,14 +182,6 @@ public final class PythonSensor implements Sensor {
     if (pythonVersionParameter.length != 0) {
       sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_VERSION_KEY, String.join(",", pythonVersionParameter));
     }
-  }
-
-  private static List<PythonInputFile> getInputFiles(SensorContext context) {
-    FilePredicates p = context.fileSystem().predicates();
-    Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasLanguage(Python.KEY)));
-    List<PythonInputFile> list = new ArrayList<>();
-    it.forEach(f -> list.add(new PythonInputFileImpl(f)));
-    return Collections.unmodifiableList(list);
   }
 
   private static PerformanceMeasure.Duration createPerformanceMeasureReport(SensorContext context) {

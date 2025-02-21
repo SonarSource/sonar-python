@@ -893,8 +893,7 @@ class PythonSensorTest {
     assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder(
       "typing", "math",
       "django", "django.urls.conf", "django.urls",
-      "fastapi", "fastapi.responses"
-    );
+      "fastapi", "fastapi.responses");
   }
 
   @Test
@@ -933,8 +932,7 @@ class PythonSensorTest {
     assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder(
       "typing", "math",
       "django", "django.urls.conf", "django.urls",
-      "fastapi", "fastapi.responses"
-    );
+      "fastapi", "fastapi.responses");
   }
 
   @Test
@@ -1505,8 +1503,7 @@ class PythonSensorTest {
       indexer,
       new SonarLintCache(),
       analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()}
-    );
+      new RepositoryInfoProvider[] {new OpenSourceRepositoryInfoProvider()});
   }
 
   private SonarLintPythonIndexer pythonIndexer(List<PythonInputFile> files) {

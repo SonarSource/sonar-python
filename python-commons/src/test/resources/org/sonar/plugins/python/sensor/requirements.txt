@@ -1,0 +1,26 @@
+# This is a comment, to show how #-prefixed lines are ignored.
+# It is possible to specify requirements as plain names.
+package1
+package2
+package-with-dash
+package.with.dot
+package_with_underscore
+packageWithComment # inline comment should be ignore also
+  packageWithLeadingSpaces # leading white spaces are discarded
+package1 # package name shouldn't be duplicated
+         # only whitespaces and comment on this line
+
+# Only the plain package names should be stored
+packageWithFixedVersion == 0.6.1
+packageWithConstraints [security] >= 2.8.1, == 2.8.* ; python_version < "2.7"
+packageWithVCS @ https://github.com/urllib3/urllib3/archive/refs/tags/1.26.8.zip
+
+# For know, we ignore extra requirements files referred in requirements.txt
+-r other-requirements.txt
+-c constraints.txt
+
+# local paths are ignored
+./downloads/numpy-1.9.2-cp34-none-win32.whl
+
+# URL are ignored
+http://wxpython.org/Phoenix/snapshot-builds/wxPython_Phoenix-3.0.3.dev1820+49a8884-cp34-none-win_amd64.whl
