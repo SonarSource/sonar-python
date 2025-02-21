@@ -75,7 +75,7 @@ class PyProjectTomlParserTest {
         "test-package2",
         "test.package3",
       ]
-      """).containsExactlyInAnyOrder("httpx", "gidgethub", "django", "pip", "test_package1", "test-package2", "test.package3");
+      """).containsExactlyInAnyOrder("httpx", "gidgethub", "django", "pip", "test-package1", "test-package2", "test-package3");
 
     assertThat("""
       [project]

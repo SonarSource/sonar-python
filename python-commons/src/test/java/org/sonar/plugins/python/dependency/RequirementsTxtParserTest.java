@@ -69,14 +69,14 @@ class RequirementsTxtParserTest {
       "package1",
       "package2",
       "package-with-dash",
-      "package.with.dot",
-      "package_with_underscore",
-      "packageWithComment",
-      "packageWithLeadingSpaces",
-      "packageWithFixedVersion",
-      "packageWithConstraints",
-      "packageWithVCS",
-      "packageFromSubdir");
+      "package-with-dot",
+      "package-with-underscore",
+      "packagewithcomment",
+      "packagewithleadingspaces",
+      "packagewithfixedversion",
+      "packagewithconstraints",
+      "packagewithvcs",
+      "packagefromsubdir");
   }
 
   private void requirementFile() {
