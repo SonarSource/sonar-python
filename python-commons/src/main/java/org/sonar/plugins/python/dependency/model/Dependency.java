@@ -16,6 +16,17 @@
  */
 package org.sonar.plugins.python.dependency.model;
 
+import java.util.Locale;
 
 public record Dependency(String name) {
+  public Dependency(String name) {
+    this.name = normalizeName(name);
+  }
+
+  private static String normalizeName(String name) {
+    // see https://packaging.python.org/en/latest/specifications/name-normalization/ for details
+    return name
+      .toLowerCase(Locale.ENGLISH)
+      .replaceAll("[._-]+", "-");
+  }
 }
