@@ -106,6 +106,7 @@
     <protobuf.version>4.29.0</protobuf.version>
     <woodstox.version>6.2.7</woodstox.version>
     <gson.version>2.12.1</gson.version>
+    <jackson.version>2.18.2</jackson.version>
 
     <!-- Advertise minimal required JRE version -->
     <jre.min.version>11</jre.min.version>
@@ -192,6 +193,21 @@
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>33.4.0-jre</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
+        <artifactId>jackson-dataformat-toml</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jdk8</artifactId>
+        <version>${jackson.version}</version>
       </dependency>
 
       <!-- test dependencies -->
