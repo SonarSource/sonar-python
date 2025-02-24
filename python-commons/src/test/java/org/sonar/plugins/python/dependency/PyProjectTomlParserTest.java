@@ -16,13 +16,13 @@
  */
 package org.sonar.plugins.python.dependency;
 
-import java.io.StringReader;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import org.assertj.core.api.AbstractCollectionAssert;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ObjectAssert;
 import org.junit.jupiter.api.Test;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.plugins.python.dependency.model.Dependencies;
 import org.sonar.plugins.python.dependency.model.Dependency;
 
@@ -105,6 +105,9 @@ class PyProjectTomlParserTest {
   }
 
   private static Dependencies parse(String content) {
-    return PyProjectTomlParser.parse(new StringReader(content));
+    var inputFile = TestInputFileBuilder.create("modulekey", "pyproject.toml")
+      .setContents(content)
+      .build();
+    return PyProjectTomlParser.parse(inputFile);
   }
 }

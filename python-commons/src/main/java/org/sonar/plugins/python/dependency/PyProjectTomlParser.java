@@ -22,7 +22,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -31,6 +30,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.dependency.model.Dependencies;
 import org.sonar.plugins.python.dependency.model.Dependency;
 
@@ -40,20 +40,20 @@ public class PyProjectTomlParser {
   private PyProjectTomlParser() {
   }
 
-  public static Dependencies parse(Reader reader) {
+  public static Dependencies parse(InputFile inputFile) {
     try {
-      PyProjectToml pyProjectToml = readPyProjectToml(reader);
+      PyProjectToml pyProjectToml = readPyProjectToml(inputFile);
       return convertToDependenciesModel(pyProjectToml);
     } catch (IOException e) {
       return new Dependencies(Set.of());
     }
   }
 
-  private static PyProjectToml readPyProjectToml(Reader reader) throws IOException {
+  private static PyProjectToml readPyProjectToml(InputFile inputFile) throws IOException {
     return new TomlMapper()
       .registerModule(new Jdk8Module())
       .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-      .readValue(reader, PyProjectToml.class);
+      .readValue(inputFile.contents(), PyProjectToml.class);
   }
 
   private static Dependencies convertToDependenciesModel(PyProjectToml pyProjectToml) {

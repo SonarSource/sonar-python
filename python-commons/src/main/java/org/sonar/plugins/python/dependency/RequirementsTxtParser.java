@@ -17,17 +17,12 @@
 package org.sonar.plugins.python.dependency;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.dependency.model.Dependencies;
 import org.sonar.plugins.python.dependency.model.Dependency;
 
@@ -37,24 +32,14 @@ public class RequirementsTxtParser {
 
   private RequirementsTxtParser(){}
 
-  public static Dependencies parseRequirementFiles(SensorContext context) {
-    List<InputFile> requirementFiles = getRequirementFiles(context);
-
-    Set<Dependency> dependencies = new HashSet<>();
-    for (InputFile requirementFile : requirementFiles) {
-      dependencies.addAll(parseRequirementFile(requirementFile));
-    }
-    return new Dependencies(dependencies);
-  }
-
-  private static Set<Dependency> parseRequirementFile(InputFile requirementFile) {
+  public static Dependencies parseRequirementFile(InputFile requirementFile) {
     Set<Dependency> dependencySet = new HashSet<>();
     String fileContent = "";
     try {
       fileContent = requirementFile.contents();
     } catch (IOException e) {
       LOG.warn("There was an exception when parsing {}. No dependencies were extracted.", requirementFile.filename(), e);
-      return new HashSet<>();
+      return new Dependencies(Set.of());
     }
     for (String line : fileContent.lines().toList()) {
       line = line.strip();
@@ -66,15 +51,6 @@ public class RequirementsTxtParser {
         dependencySet.add(new Dependency(splittedLine[0]));
       }
     }
-    return dependencySet;
+    return new Dependencies(dependencySet);
   }
-
-  static List<InputFile> getRequirementFiles(SensorContext context) {
-    FilePredicates p = context.fileSystem().predicates();
-    Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasFilename("requirements.txt")));
-    List<InputFile> list = new ArrayList<>();
-    it.forEach(list::add);
-    return Collections.unmodifiableList(list);
-  }
-
 }

@@ -14,22 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.python.dependency.model;
+@ParametersAreNonnullByDefault
+package org.sonar.plugins.python.dependency;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
-public record Dependencies(Set<Dependency> dependencies) {
-  public Dependencies(Set<Dependency> dependencies) {
-    this.dependencies = Collections.unmodifiableSet(dependencies);
-  }
-
-  public static Collector<Dependencies, ?, Dependencies> mergeCollector() {
-    return Collectors.collectingAndThen(
-      Collectors.flatMapping((Dependencies dependencies) -> dependencies.dependencies().stream(), Collectors.toSet()),
-      Dependencies::new
-    );
-  }
-}
+import javax.annotation.ParametersAreNonnullByDefault;
