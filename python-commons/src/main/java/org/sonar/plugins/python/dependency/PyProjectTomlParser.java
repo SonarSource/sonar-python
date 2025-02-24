@@ -22,7 +22,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -57,26 +59,46 @@ public class PyProjectTomlParser {
   }
 
   private static Dependencies convertToDependenciesModel(PyProjectToml pyProjectToml) {
-    if(pyProjectToml.project() == null) {
-      return new Dependencies(Set.of());
-    } else {
-      var dependencies = pyProjectToml.project().dependencies().stream()
+    Set<Dependency> dependencies = new HashSet<>();
+    dependencies.addAll(collectProjectDependencies(pyProjectToml));
+    dependencies.addAll(collectPoetryDependencies(pyProjectToml));
+    return new Dependencies(dependencies);
+  }
+
+  private static Set<Dependency> collectProjectDependencies(PyProjectToml pyProjectToml) {
+    if (pyProjectToml.project() != null) {
+      return pyProjectToml.project().dependencies().stream()
         .flatMap(PyProjectTomlParser::parseDependency)
         .collect(Collectors.toSet());
-      return new Dependencies(dependencies);
     }
+    return Set.of();
+  }
+
+  private static Set<Dependency> collectPoetryDependencies(PyProjectToml pyProjectToml) {
+    if (pyProjectToml.tool() != null && pyProjectToml.tool().poetry() != null) {
+      return pyProjectToml.tool().poetry().dependencies().keySet().stream()
+        .flatMap(PyProjectTomlParser::parseDependency)
+        .collect(Collectors.toSet());
+    }
+    return Set.of();
   }
 
   private static Stream<Dependency> parseDependency(String dependency) {
     Matcher matcher = IDENTIFIER_PATTERN.matcher(dependency);
-    if(matcher.find()) {
+    if (matcher.find()) {
       return Stream.of(new Dependency(matcher.group()));
     } else {
       return Stream.empty();
     }
   }
 
+  private record PyProjectToml(@Nullable Project project, @Nullable Tool tool) {
+  }
+  private record Project(@Nonnull @JsonSetter(nulls = Nulls.AS_EMPTY) List<String> dependencies) {
+  }
+  private record Tool(@Nullable Poetry poetry) {
+  }
+  private record Poetry(@Nonnull @JsonSetter(nulls = Nulls.AS_EMPTY) Map<String, String> dependencies) {
+  }
 
-  private record PyProjectToml(@Nullable Project project) {}
-  private record Project(@Nonnull @JsonSetter(nulls = Nulls.AS_EMPTY) List<String> dependencies) {}
 }

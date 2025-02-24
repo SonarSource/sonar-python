@@ -84,6 +84,29 @@ class PyProjectTomlParserTest {
   }
 
   @Test
+  void testWithPoetryStyleDependencies() {
+    assertThat("""
+      [tool.poetry.dependencies]
+      package1 = "1.9"
+      package2 = "^2.13.0"
+      package3 = ">=3.8,<3.9.7 || >3.9.7,<4.0"
+      """).containsExactlyInAnyOrder("package1", "package2", "package3");
+  }
+
+  @Test
+  void testIllFormedPoetryStyleDependencies() {
+    assertThat("""
+      [tool]
+      smthWhichIsNotAPoetryDependency = "1.9"
+      """).isEmpty();
+
+    assertThat("""
+      [tool.poetry]
+      smthWhichIsNotPoetryDependency = "1.9"
+      """).isEmpty();
+  }
+
+  @Test
   void testCompleteTomlFile() {
     assertThat("""
       [project]
@@ -95,7 +118,10 @@ class PyProjectTomlParserTest {
       dependencies = [
           "pytest-cov>=6.0.0",
       ]
-      """).containsExactlyInAnyOrder("pytest-cov");
+
+      [tool.poetry.dependencies]
+      requests = "1.9"
+      """).containsExactlyInAnyOrder("pytest-cov", "requests");
   }
 
   private static AbstractCollectionAssert<?, Collection<?>, Object, ObjectAssert<Object>> assertThat(String code) {
