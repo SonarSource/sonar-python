@@ -39,7 +39,6 @@ import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
-import org.sonar.plugins.python.dependency.DependencyTelemetry;
 import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
 import org.sonar.plugins.python.editions.RepositoryInfoProvider;
 import org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
@@ -155,9 +154,7 @@ public final class PythonSensor implements Sensor {
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer);
     scanner.execute(pythonFiles, context);
 
-
     updateDatabricksTelemetry(scanner);
-    new DependencyTelemetry(sensorTelemetryStorage, context.fileSystem()).process();
 
     sensorTelemetryStorage.send(context);
     durationReport.stop();

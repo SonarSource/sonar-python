@@ -77,7 +77,8 @@ public class PythonExtensions {
       IPynbProfile.class,
       IPynbSensor.class,
       IPynbRuleRepository.class,
-      OpenSourceRepositoryInfoProvider.class
+      OpenSourceRepositoryInfoProvider.class,
+      DependencyTelemetrySensor.class
     );
 
     SonarRuntime sonarRuntime = context.getRuntime();
