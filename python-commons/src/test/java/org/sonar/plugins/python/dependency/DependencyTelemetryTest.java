@@ -64,6 +64,7 @@ class DependencyTelemetryTest {
         "pyproject-package2",
         "subdir-pyproject-package1"
         )));
+    verify(context).addTelemetryProperty(TelemetryMetricKey.PYTHON_DEPENDENCIES_FORMAT_VERSION.key(), "1");
   }
 
 

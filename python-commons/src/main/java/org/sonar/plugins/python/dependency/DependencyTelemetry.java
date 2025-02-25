@@ -28,6 +28,11 @@ import org.sonar.plugins.python.dependency.model.Dependencies;
 import org.sonar.plugins.python.dependency.model.Dependency;
 
 public class DependencyTelemetry {
+  /**
+   * A version to indicate the format of the telemetry data, ensuring that we know how to interpret the data
+   */
+  private static final String TELEMETRY_FORMAT_VERSION = "1";
+
   private final SensorTelemetryStorage sensorTelemetryStorage;
   private final FileSystem fileSystem;
 
@@ -39,7 +44,7 @@ public class DependencyTelemetry {
   public void process() {
     Dependencies dependencies = collectDependencies();
     var postProcessedDependencies =  DependencyPostProcessor.process(dependencies);
-    sendDependencies(postProcessedDependencies);
+    updateDependenciesTelemetryMetrics(postProcessedDependencies);
   }
 
   private Dependencies collectDependencies() {
@@ -65,9 +70,10 @@ public class DependencyTelemetry {
     return list;
   }
 
-  private void sendDependencies(Dependencies dependencies) {
+  private void updateDependenciesTelemetryMetrics(Dependencies dependencies) {
     String dependenciesString = formatDependencies(dependencies);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_DEPENDENCIES, dependenciesString);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_DEPENDENCIES_FORMAT_VERSION, TELEMETRY_FORMAT_VERSION);
   }
 
   private static String formatDependencies(Dependencies dependencies) {

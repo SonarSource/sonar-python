@@ -25,7 +25,8 @@ public enum TelemetryMetricKey {
   PYTHON_VERSION_KEY("python.version"),
   PYTHON_DATABRICKS_FOUND("python.notebook.databricks.python"),
   IPYNB_DATABRICKS_FOUND("python.notebook.databricks.ipynb"),
-  PYTHON_DEPENDENCIES("python.dependencies");
+  PYTHON_DEPENDENCIES("python.dependencies"),
+  PYTHON_DEPENDENCIES_FORMAT_VERSION("python.dependencies.format_version");
 
   private final String key;
 
