@@ -60,8 +60,8 @@ public class DependencyTelemetry {
   }
 
   private Stream<Dependencies> collectPyProjectTomlDependencies() {
-    List<InputFile> requirementsTxtFiles = collectInputFiles("pyproject.toml");
-    return requirementsTxtFiles.stream().map(PyProjectTomlParser::parse);
+    List<InputFile> pyProjectTomlFiles = collectInputFiles("pyproject.toml");
+    return pyProjectTomlFiles.stream().map(PyProjectTomlParser::parse);
   }
 
   private List<InputFile> collectInputFiles(String fileName) {

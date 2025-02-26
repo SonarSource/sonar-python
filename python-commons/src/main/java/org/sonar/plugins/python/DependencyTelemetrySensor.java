@@ -22,15 +22,11 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.plugins.python.dependency.DependencyTelemetry;
 
 public class DependencyTelemetrySensor implements Sensor {
-  private static final String TXT_LANGUAGE = "txt";
-  private static final String TOML_LANGUAGE = "toml";
-
   private final SensorTelemetryStorage sensorTelemetryStorage = new SensorTelemetryStorage();
 
   @Override
   public void describe(SensorDescriptor descriptor) {
     descriptor
-      .onlyOnLanguages(TXT_LANGUAGE, TOML_LANGUAGE)
       .name("Python Dependency Sensor");
   }
 

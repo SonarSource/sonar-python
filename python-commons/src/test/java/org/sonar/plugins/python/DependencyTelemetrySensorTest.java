@@ -32,7 +32,7 @@ class DependencyTelemetrySensorTest {
     new DependencyTelemetrySensor().describe(descriptor);
 
     assertThat(descriptor.name()).isEqualTo("Python Dependency Sensor");
-    assertThat(descriptor.languages()).containsOnly("txt", "toml");
+    assertThat(descriptor.languages()).isEmpty();
     assertThat(descriptor.type()).isNull();
   }
 
