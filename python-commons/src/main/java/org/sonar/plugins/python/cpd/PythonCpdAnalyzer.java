@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.caching.CacheContext;
-import org.sonar.python.TokenLocation;
+import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;

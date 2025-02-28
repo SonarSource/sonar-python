@@ -20,6 +20,7 @@ import com.sonar.sslr.impl.Lexer;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.python.lexer.LexerState;
 import org.sonar.python.lexer.PythonLexer;

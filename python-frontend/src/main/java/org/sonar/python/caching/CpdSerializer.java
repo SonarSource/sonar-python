@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.python.TokenLocation;
+import org.sonar.plugins.python.api.TokenLocation;
 
 public class CpdSerializer {
 

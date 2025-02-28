@@ -36,7 +36,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.SubscriptionVisitor;
-import org.sonar.python.TokenLocation;
+import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
 
 /**

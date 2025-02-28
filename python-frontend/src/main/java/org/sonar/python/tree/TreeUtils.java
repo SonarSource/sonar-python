@@ -57,7 +57,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.python.TokenLocation;
+import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
 
 public class TreeUtils {
