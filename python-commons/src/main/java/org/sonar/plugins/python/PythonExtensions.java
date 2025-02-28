@@ -25,6 +25,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.python.api.SonarLintCache;
+import org.sonar.plugins.python.architecture.ArchitectureCallbackWrapper;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
@@ -72,6 +73,7 @@ public class PythonExtensions {
       PythonSensor.class,
       PythonRuleRepository.class,
       AnalysisWarningsWrapper.class,
+      ArchitectureCallbackWrapper.class,
 
       IPynb.class,
       IPynbProfile.class,

@@ -79,6 +79,7 @@ import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
+import org.sonar.plugins.python.api.PythonFileConsumer;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
@@ -86,11 +87,12 @@ import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.architecture.ArchitectureCallbackWrapper;
 import org.sonar.plugins.python.caching.Caching;
 import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
-import org.sonar.plugins.python.editions.RepositoryInfoProvider;
 import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
+import org.sonar.plugins.python.editions.RepositoryInfoProvider;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
@@ -108,6 +110,7 @@ import org.sonarsource.sonarlint.core.commons.api.SonarLanguage;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -211,6 +214,7 @@ class PythonSensorTest {
   private ActiveRules activeRules;
 
   private final AnalysisWarningsWrapper analysisWarning = mock(AnalysisWarningsWrapper.class);
+  private final ArchitectureCallbackWrapper architectureUDGBuilderWrapper = new ArchitectureCallbackWrapper();
 
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
@@ -449,7 +453,7 @@ class PythonSensorTest {
     // "mod.py" created but not added to context
     PythonInputFile modFile = createInputFile("mod.py");
     PythonIndexer pythonIndexer = pythonIndexer(Arrays.asList(mainFile, modFile));
-    sensor(null, pythonIndexer, analysisWarning).execute(context);
+    sensor(null, pythonIndexer, analysisWarning, architectureUDGBuilderWrapper).execute(context);
     assertThat(context.allIssues()).hasSize(1);
     Issue issue = context.allIssues().iterator().next();
     assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile.wrappedFile());
@@ -471,7 +475,7 @@ class PythonSensorTest {
     PythonInputFile firstFile = inputFile("sklearn/__init__.py");
     PythonInputFile secondFile = inputFile("sklearn/my_file.py");
     PythonIndexer pythonIndexer = pythonIndexer(Arrays.asList(firstFile, secondFile));
-    sensor(null, pythonIndexer, analysisWarning).execute(context);
+    sensor(null, pythonIndexer, analysisWarning, architectureUDGBuilderWrapper).execute(context);
     assertThat(context.allIssues()).isEmpty();
   }
 
@@ -486,7 +490,7 @@ class PythonSensorTest {
     PythonInputFile initFile = inputFile("not_sklearn/__init__.py");
     PythonInputFile mainFile = inputFile("not_sklearn/my_file.py");
     PythonIndexer pythonIndexer = pythonIndexer(Arrays.asList(initFile, mainFile));
-    sensor(null, pythonIndexer, analysisWarning).execute(context);
+    sensor(null, pythonIndexer, analysisWarning, architectureUDGBuilderWrapper).execute(context);
     assertThat(context.allIssues()).hasSize(1);
     Issue issue = context.allIssues().iterator().next();
     assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile.wrappedFile());
@@ -517,7 +521,7 @@ class PythonSensorTest {
 
     PythonInputFile mainFile = inputFile("main.py");
     PythonIndexer pythonIndexer = pythonIndexer(Collections.singletonList(mainFile));
-    sensor(CUSTOM_RULES, pythonIndexer, analysisWarning).execute(context);
+    sensor(CUSTOM_RULES, pythonIndexer, analysisWarning, architectureUDGBuilderWrapper).execute(context);
     assertThat(context.allIssues()).isEmpty();
     assertThat(logTester.logs(Level.DEBUG)).contains("Project symbol table deactivated due to project size (total number of lines is 4, maximum for indexing is 1)");
     assertThat(logTester.logs(Level.DEBUG)).contains("Update \"sonar.python.sonarlint.indexing.maxlines\" to set a different limit.");
@@ -534,7 +538,7 @@ class PythonSensorTest {
     PythonInputFile mainFile = inputFile("modA.py");
     PythonInputFile modFile = inputFile("modB.py");
     PythonIndexer pythonIndexer = pythonIndexer(Arrays.asList(mainFile, modFile));
-    sensor(null, pythonIndexer, analysisWarning).execute(context);
+    sensor(null, pythonIndexer, analysisWarning, architectureUDGBuilderWrapper).execute(context);
 
     assertThat(context.allIssues()).hasSize(1);
   }
@@ -761,7 +765,7 @@ class PythonSensorTest {
     PythonInputFile inputFile = inputFile(FILE_1);
     activeRules = (new ActiveRulesBuilder()).build();
     context.setCancelled(true);
-    sensor(null, null, analysisWarning).execute(context);
+    sensor(null, null, analysisWarning, architectureUDGBuilderWrapper).execute(context);
     assertThat(context.measure(inputFile.wrappedFile().key(), CoreMetrics.NCLOC)).isNull();
     assertThat(context.allAnalysisErrors()).isEmpty();
   }
@@ -823,6 +827,36 @@ class PythonSensorTest {
     Path defaultPerformanceFile = workDir.resolve("sonar-python-performance-measure.json");
     assertThat(defaultPerformanceFile).exists();
     assertThat(new String(Files.readAllBytes(defaultPerformanceFile), UTF_8)).contains("\"PythonSensor\"");
+  }
+
+  @Test
+  void architecture_callback() {
+    inputFile(FILE_1);
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "PrintStatementUsage"))
+        .setName("Print Statement Usage")
+        .build())
+      .build();
+    PythonFileConsumer mock = mock(PythonFileConsumer.class);
+    ArchitectureCallbackWrapper architectureWrapper = new ArchitectureCallbackWrapper(mock);
+    sensor(null, null, analysisWarning, architectureWrapper).execute(context);
+    verify(mock).scanFile(any());
+    assertThat(context.allIssues()).hasSize(1);
+  }
+
+  @Test
+  void missing_architecture_callback_successful_analysis() {
+    inputFile(FILE_1);
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "PrintStatementUsage"))
+        .setName("Print Statement Usage")
+        .build())
+      .build();
+    ArchitectureCallbackWrapper architectureWrapper = new ArchitectureCallbackWrapper();
+    sensor(null, null, analysisWarning, architectureWrapper).execute(context);
+    assertThat(context.allIssues()).hasSize(1);
   }
 
   @Test
@@ -1478,22 +1512,22 @@ class PythonSensorTest {
   }
 
   private PythonSensor sensor() {
-    return sensor(CUSTOM_RULES, null, analysisWarning);
+    return sensor(CUSTOM_RULES, null, analysisWarning, architectureUDGBuilderWrapper);
   }
 
-  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings) {
+  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings, ArchitectureCallbackWrapper architectureUDGBuilderWrapper) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
     if (indexer == null && customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), analysisWarnings, architectureUDGBuilderWrapper);
     }
     if (indexer == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings, architectureUDGBuilderWrapper);
     }
     if (customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCache(), analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCache(), analysisWarnings, architectureUDGBuilderWrapper);
     }
     return new PythonSensor(
       fileLinesContextFactory,
@@ -1503,7 +1537,9 @@ class PythonSensorTest {
       indexer,
       new SonarLintCache(),
       analysisWarnings,
-      new RepositoryInfoProvider[] {new OpenSourceRepositoryInfoProvider()});
+      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()},
+      new ArchitectureCallbackWrapper()
+    );
   }
 
   private SonarLintPythonIndexer pythonIndexer(List<PythonInputFile> files) {

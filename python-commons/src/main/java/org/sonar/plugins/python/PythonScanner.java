@@ -46,6 +46,7 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.plugins.python.api.PythonFileConsumer;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
@@ -81,10 +82,11 @@ public class PythonScanner extends Scanner {
   private int recognitionErrorCount = 0;
   private static final Pattern DATABRICKS_MAGIC_COMMAND_PATTERN = Pattern.compile("^\\h*#\\h*(MAGIC|COMMAND).*");
   private boolean foundDatabricks = false;
+  private final PythonFileConsumer architectureCallback;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
-    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, PythonParser parser, PythonIndexer indexer) {
+    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, PythonParser parser, PythonIndexer indexer, PythonFileConsumer architectureCallback) {
     super(context);
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
@@ -93,6 +95,7 @@ public class PythonScanner extends Scanner {
     this.parser = parser;
     this.indexer = indexer;
     this.indexer.buildOnce(context);
+    this.architectureCallback = architectureCallback;
   }
 
   @Override
@@ -147,6 +150,7 @@ public class PythonScanner extends Scanner {
       }
     }
     SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext);
+    architectureCallback.scanFile(visitorContext);
     saveIssues(inputFile, visitorContext.getIssues());
 
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
@@ -177,6 +181,14 @@ public class PythonScanner extends Scanner {
   public boolean scanFileWithoutParsing(PythonInputFile inputFile) {
     InputFile.Type fileType = inputFile.wrappedFile().type();
     boolean result = true;
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
+    PythonInputFileContext inputFileContext = new PythonInputFileContext(
+      pythonFile,
+      context.fileSystem().workDir(),
+      indexer.cacheContext(),
+      context.runtime().getProduct(),
+      indexer.projectLevelSymbolTable()
+    );
     for (PythonCheck check : checks.all()) {
       if (!isCheckApplicable(check, fileType)) {
         continue;
@@ -187,14 +199,7 @@ public class PythonScanner extends Scanner {
         result = false;
         continue;
       }
-      PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
-      PythonInputFileContext inputFileContext = new PythonInputFileContext(
-        pythonFile,
-        context.fileSystem().workDir(),
-        indexer.cacheContext(),
-        context.runtime().getProduct(),
-        indexer.projectLevelSymbolTable()
-      );
+
       if (check.scanWithoutParsing(inputFileContext)) {
         Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
         executedChecks.add(check);
@@ -203,6 +208,7 @@ public class PythonScanner extends Scanner {
         result = false;
       }
     }
+    result &= architectureCallback.scanWithoutParsing(inputFileContext);
     if (!result) {
       // If scan without parsing is not successful, measures will be pushed during regular scan.
       // We must avoid pushing measures twice due to the risk of duplicate cache key error.

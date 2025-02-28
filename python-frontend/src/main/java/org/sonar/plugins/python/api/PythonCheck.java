@@ -24,15 +24,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 
-public interface PythonCheck {
-
-
-  void scanFile(PythonVisitorContext visitorContext);
-
-  @Beta
-  default boolean scanWithoutParsing(PythonInputFileContext inputFileContext) {
-    return true;
-  }
+public interface PythonCheck extends PythonFileConsumer {
 
   class PreciseIssue {
 
