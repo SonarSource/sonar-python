@@ -21,18 +21,26 @@
       "groupSlug": "sq"
     },
     {
-      "matchPackageNames": ["com.google.protobuf:protobuf-java", "com.google.protobuf:protoc"],
+      "matchPackageNames": [
+        "com.google.protobuf:protobuf-java",
+        "com.google.protobuf:protoc"
+      ],
       "groupName": "protobuf",
       "groupSlug": "protobuf"
     },
     {
-      "matchPackageNames": ["org.sonarsource.parent:parent", "com.sonarsource.parent:parent"],
+      "matchPackageNames": [
+        "org.sonarsource.parent:parent",
+        "com.sonarsource.parent:parent"
+      ],
       "groupName": "parent"
     },
     {
-      "matchDepTypes": [
-          "action"
-      ],
+      "matchPackageNames": ["/org.sonarsource.sonarlint.core.*/"],
+      "groupName": "SL core"
+    },
+    {
+      "matchDepTypes": ["action"],
       "rollbackPrs": false,
       "pinDigests": false
     }
