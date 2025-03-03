@@ -46,7 +46,7 @@ class PythonExtensionsTest {
     assertThat(extensions(runtime)).hasSize(36);
     assertThat(extensions(runtime)).contains(AnalysisWarningsWrapper.class);
     assertThat(extensions(SonarRuntimeImpl.forSonarLint(v79)))
-      .hasSize(17)
+      .hasSize(16)
       .contains(SonarLintCache.class);
   }
 

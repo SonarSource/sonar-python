@@ -79,8 +79,7 @@ public class PythonExtensions {
       IPynbProfile.class,
       IPynbSensor.class,
       IPynbRuleRepository.class,
-      OpenSourceRepositoryInfoProvider.class,
-      DependencyTelemetrySensor.class
+      OpenSourceRepositoryInfoProvider.class
     );
 
     SonarRuntime sonarRuntime = context.getRuntime();
@@ -92,6 +91,8 @@ public class PythonExtensions {
       addFlake8Extensions(context);
       addMypyExtensions(context);
       addRuffExtensions(context);
+
+      context.addExtension(DependencyTelemetrySensor.class);
     }
 
     if (sonarRuntime.getProduct() == SonarProduct.SONARLINT) {
