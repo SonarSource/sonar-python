@@ -16,15 +16,18 @@
  */
 package org.sonar.plugins.python.api;
 
+import com.google.common.annotations.Beta;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.TypeChecker;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -39,6 +42,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private final RecognitionException parsingException;
   private List<PreciseIssue> issues = new ArrayList<>();
   private final TypeChecker typeChecker;
+  private ModuleType moduleType = null;
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName) {
     super(pythonFile, workingDirectory, CacheContextImpl.dummyCache(), ProjectLevelSymbolTable.empty());
@@ -48,7 +52,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     symbolTableBuilder.visitFileInput(rootTree);
     var symbolTable = new SymbolTableBuilderV2(rootTree).build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferTypes(rootTree);
+    this.moduleType = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferModuleType(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
@@ -58,11 +62,10 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.rootTree = rootTree;
     this.parsingException = null;
     new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
-
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferTypes(rootTree);
+    this.moduleType = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferModuleType(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
@@ -75,7 +78,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferTypes(rootTree);
+    this.moduleType = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferModuleType(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
@@ -111,5 +114,11 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
   public List<PreciseIssue> getIssues() {
     return issues;
+  }
+
+  @CheckForNull
+  @Beta
+  public ModuleType moduleType() {
+    return moduleType;
   }
 }

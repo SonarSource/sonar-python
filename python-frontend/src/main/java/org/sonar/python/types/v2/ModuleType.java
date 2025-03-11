@@ -26,12 +26,17 @@ import org.sonar.api.Beta;
 @Beta
 public final class ModuleType implements PythonType {
   private final String name;
+  private final String fullyQualifiedName;
   private final ModuleType parent;
   private final Map<String, TypeWrapper> members;
   private final Map<String, TypeWrapper> subModules;
 
-  public ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, TypeWrapper> members) {
+  public ModuleType(@Nullable String name,
+    @Nullable String fullyQualifiedName,
+    @Nullable ModuleType parent,
+    Map<String, TypeWrapper> members) {
     this.name = name;
+    this.fullyQualifiedName = fullyQualifiedName;
     this.parent = parent;
     this.members = members;
     this.subModules = new HashMap<>();
@@ -53,7 +58,13 @@ public final class ModuleType implements PythonType {
   }
 
   public ModuleType(@Nullable String name, @Nullable ModuleType parent) {
-    this(name, parent, new HashMap<>());
+    this(name, null, parent, new HashMap<>());
+  }
+
+  public ModuleType(@Nullable String name,
+    @Nullable ModuleType parent,
+    Map<String, TypeWrapper> members) {
+    this(name, null, parent, members);
   }
 
   @Override
@@ -85,6 +96,11 @@ public final class ModuleType implements PythonType {
   @CheckForNull
   public String name() {
     return name;
+  }
+
+  @CheckForNull
+  public String fullyQualifiedName() {
+    return fullyQualifiedName;
   }
 
   @CheckForNull

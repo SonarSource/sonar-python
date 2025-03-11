@@ -16,12 +16,21 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ModuleTypeTest {
 
+  @Test
+  void constructorTest() {
+    var a = new ModuleType("a");
+    var b = new ModuleType("b", "a.b", a, new HashMap<>());
+
+    Assertions.assertThat(b.fullyQualifiedName()).isEqualTo("a.b");
+    Assertions.assertThat(a.resolveMember("b")).containsSame(b);
+  }
 
   @Test
   void resolveMemberTest() {

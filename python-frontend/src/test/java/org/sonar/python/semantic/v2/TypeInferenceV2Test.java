@@ -420,13 +420,14 @@ public class TypeInferenceV2Test {
     assertThat(importedNames.get(1))
       .extracting(Expression::typeV2)
       .isInstanceOf(ModuleType.class)
+      .hasFieldOrPropertyWithValue("fullyQualifiedName", "something.known")
+      .hasFieldOrPropertyWithValue("name", "known")
       .matches(type -> {
         assertThat(type.resolveMember("C").get())
           .isInstanceOf(ClassType.class);
         return true;
       })
-      .extracting(PythonType::name)
-      .isEqualTo("known");
+    ;
   }
 
   @Test
@@ -3326,6 +3327,15 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void moduleType_function_def() {
+    var moduleType = inferModuleType("""
+      def foo():
+        ...
+      """);
+    assertThat(moduleType.members()).hasSize(1);
+  }
+
+  @Test
   void typesBySymbol_class_def() {
     var typesBySymbol = inferTypesBySymbol("""
       class A:
@@ -3695,6 +3705,14 @@ public class TypeInferenceV2Test {
     var typeInferenceV2 = new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "");
     return typeInferenceV2.inferTypes(root);
   }
+
+  private static ModuleType inferModuleType(String lines) {
+    FileInput root = parse(lines);
+    var symbolTable = new SymbolTableBuilderV2(root).build();
+    var typeInferenceV2 = new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "");
+    return typeInferenceV2.inferModuleType(root);
+  }
+
 
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);

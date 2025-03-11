@@ -53,7 +53,7 @@ public class SymbolsModuleTypeProvider {
       .entrySet()
       .stream()
       .collect(Collectors.toMap(Map.Entry::getKey, e -> TypeWrapper.of(anyDescriptorToPythonTypeConverter.convert("", e.getValue(), TypeOrigin.STUB))));
-    this.rootModule = new ModuleType(null, null, rootModuleMembers);
+    this.rootModule = new ModuleType(null, null, null, rootModuleMembers);
   }
 
   public ModuleType createBuiltinModule() {
@@ -95,7 +95,7 @@ public class SymbolsModuleTypeProvider {
 
   private ModuleType createModuleType(String moduleName, String moduleFqn, ModuleType parent, Map<String, TypeWrapper> members) {
     addTypingAliases(moduleFqn, members);
-    return new ModuleType(moduleName, parent, members);
+    return new ModuleType(moduleName, moduleFqn, parent, members);
   }
 
   private void addTypingAliases(String moduleFqn, Map<String, TypeWrapper> members) {

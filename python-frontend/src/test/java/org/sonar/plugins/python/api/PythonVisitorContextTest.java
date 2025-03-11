@@ -47,19 +47,25 @@ class PythonVisitorContextTest {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
 
     PythonFile pythonFile = pythonFile("my_module.py");
-    new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
+    var ctx = new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");
+    assertThat(ctx.moduleType()).isNotNull()
+      .hasFieldOrPropertyWithValue("fullyQualifiedName", "my_package.my_module");
 
     // no package
-    new PythonVisitorContext(fileInput, pythonFile, null, "");
+    ctx = new PythonVisitorContext(fileInput, pythonFile, null, "");
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_module.foo");
+    assertThat(ctx.moduleType()).isNotNull()
+      .hasFieldOrPropertyWithValue("fullyQualifiedName", "my_module");
 
     // file without extension
     Mockito.when(pythonFile.fileName()).thenReturn("my_module");
-    new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
+    ctx = new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
     functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");
+    assertThat(ctx.moduleType()).isNotNull()
+      .hasFieldOrPropertyWithValue("fullyQualifiedName", "my_package.my_module");
   }
 
   @Test

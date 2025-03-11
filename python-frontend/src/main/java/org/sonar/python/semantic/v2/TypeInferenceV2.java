@@ -19,10 +19,12 @@ package org.sonar.python.semantic.v2;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -41,7 +43,10 @@ import org.sonar.python.semantic.v2.types.PropagationVisitor;
 import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
 import org.sonar.python.semantic.v2.types.TryStatementVisitor;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeWrapper;
+import org.sonar.python.types.v2.UnionType;
 
 public class TypeInferenceV2 {
 
@@ -56,6 +61,32 @@ public class TypeInferenceV2 {
     this.symbolTable = symbolTable;
     this.pythonFile = pythonFile;
     this.fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
+  }
+
+  public ModuleType inferModuleType(FileInput fileInput) {
+    var typesBySymbols = inferTypes(fileInput);
+    var members = typesBySymbols.entrySet().stream().map(entry -> {
+      var memberName = entry.getKey().name();
+      var types = entry.getValue();
+      var type = UnionType.or(types);
+      var typeWrapper = TypeWrapper.of(type);
+      return Map.entry(memberName, typeWrapper);
+    }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    var parent = getParentModuleType();
+    var fqnParts = fullyQualifiedModuleName.split("\\.");
+    var name = fqnParts[fqnParts.length - 1];
+    return new ModuleType(name, fullyQualifiedModuleName, parent, members);
+  }
+
+  @CheckForNull
+  private ModuleType getParentModuleType() {
+    var fqnParts = List.of(fullyQualifiedModuleName.split("\\."));
+    if (fqnParts.size() < 2) {
+      return null;
+    }
+    var parentFqnParts = fqnParts.subList(0, fqnParts.size() - 1);
+    var parent = projectLevelTypeTable.getModuleType(parentFqnParts);
+    return parent instanceof ModuleType moduleType ? moduleType : null;
   }
 
   public Map<SymbolV2, Set<PythonType>> inferTypes(FileInput fileInput) {
