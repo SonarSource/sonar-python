@@ -18,11 +18,11 @@ package org.sonar.python.semantic.v2;
 
 import java.util.List;
 import org.sonar.plugins.python.api.LocationInFile;
-import org.sonar.python.types.v2.Member;
-import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeSource;
-import org.sonar.python.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.Member;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeSource;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 
 public class ObjectTypeBuilder implements TypeBuilder<ObjectType> {
 

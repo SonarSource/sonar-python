@@ -34,7 +34,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeChecker;
 
 @Rule(key = "S1244")

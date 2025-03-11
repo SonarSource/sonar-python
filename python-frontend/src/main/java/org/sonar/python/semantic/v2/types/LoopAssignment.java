@@ -22,9 +22,9 @@ import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 
 public class LoopAssignment extends Assignment {
   public LoopAssignment(SymbolV2 lhsSymbol, Name lhsName, Expression rhs) {

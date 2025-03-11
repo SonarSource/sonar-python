@@ -18,6 +18,8 @@ package org.sonar.python.types.v2;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;

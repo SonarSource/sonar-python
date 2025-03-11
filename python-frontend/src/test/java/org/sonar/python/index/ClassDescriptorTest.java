@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
-import org.sonar.python.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.ClassType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;

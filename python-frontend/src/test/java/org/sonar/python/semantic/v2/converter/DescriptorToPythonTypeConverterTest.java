@@ -30,17 +30,17 @@ import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.LazyTypesContext;
-import org.sonar.python.types.v2.ClassType;
-import org.sonar.python.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyTypeWrapper;
-import org.sonar.python.types.v2.Member;
-import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.ParameterV2;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeOrigin;
-import org.sonar.python.types.v2.TypeWrapper;
-import org.sonar.python.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.Member;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.ParameterV2;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeOrigin;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.UnionType;
 
 class DescriptorToPythonTypeConverterTest {
 

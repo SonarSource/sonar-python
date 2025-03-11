@@ -23,10 +23,10 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
-import org.sonar.python.types.v2.ClassType;
-import org.sonar.python.types.v2.TypeWrapper;
-import org.sonar.python.types.v2.Member;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.Member;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class ClassTypeBuilder implements TypeBuilder<ClassType> {
 

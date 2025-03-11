@@ -33,7 +33,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v2;
+package org.sonar.plugins.python.api.types.v2;
 
 import java.util.Optional;
 import java.util.function.Predicate;

@@ -16,6 +16,8 @@
  */
 package org.sonar.python.types.v2;
 
+import org.sonar.plugins.python.api.types.v2.PythonType;
+
 public class SpecialFormType implements PythonType {
 
   private final String fullyQualifiedName;

@@ -14,28 +14,8 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2;
+@ParametersAreNonnullByDefault
+package org.sonar.plugins.python.api.types.v2;
 
-import java.util.Comparator;
-import java.util.stream.Stream;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-public enum TypeSource {
-  TYPE_HINT(0),
-  EXACT(1);
-
-  private final int score;
-
-  TypeSource(int score) {
-    this.score = score;
-  }
-
-  public int score() {
-    return score;
-  }
-
-  public static TypeSource min(TypeSource... typeSources) {
-    return Stream.of(typeSources)
-      .min(Comparator.comparing(TypeSource::score))
-      .orElse(EXACT);
-  }
-}

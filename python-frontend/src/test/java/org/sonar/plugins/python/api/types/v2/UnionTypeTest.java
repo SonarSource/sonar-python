@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2;
+package org.sonar.plugins.python.api.types.v2;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +27,8 @@ import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.LazyTypesContext;
-import org.sonar.python.types.v2.UnknownType.UnresolvedImportType;
+import org.sonar.plugins.python.api.types.v2.UnknownType.UnresolvedImportType;
+import org.sonar.python.types.v2.LazyType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

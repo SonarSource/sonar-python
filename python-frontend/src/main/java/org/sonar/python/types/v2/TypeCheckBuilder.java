@@ -21,6 +21,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.TypeSource;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.TypeTable;
 
 public class TypeCheckBuilder {

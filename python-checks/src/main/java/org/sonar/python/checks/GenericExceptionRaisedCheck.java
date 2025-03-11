@@ -22,8 +22,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.EXCEPTION;

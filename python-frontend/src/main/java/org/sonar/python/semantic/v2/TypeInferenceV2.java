@@ -43,10 +43,10 @@ import org.sonar.python.semantic.v2.types.PropagationVisitor;
 import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
 import org.sonar.python.semantic.v2.types.TryStatementVisitor;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.v2.ModuleType;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeWrapper;
-import org.sonar.python.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.UnionType;
 
 public class TypeInferenceV2 {
 

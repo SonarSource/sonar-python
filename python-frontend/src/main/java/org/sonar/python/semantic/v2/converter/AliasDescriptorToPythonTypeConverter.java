@@ -18,7 +18,7 @@ package org.sonar.python.semantic.v2.converter;
 
 import org.sonar.python.index.AliasDescriptor;
 import org.sonar.python.index.Descriptor;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class AliasDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
   @Override

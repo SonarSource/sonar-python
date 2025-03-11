@@ -22,6 +22,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnionType;
 
 public class LazyUnionType implements PythonType, ResolvableType {
 

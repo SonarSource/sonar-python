@@ -25,7 +25,7 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class SubscriptionExpressionImpl extends PyTree implements SubscriptionExpression {
 

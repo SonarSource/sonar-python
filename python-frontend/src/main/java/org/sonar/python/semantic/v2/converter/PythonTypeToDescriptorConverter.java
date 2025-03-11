@@ -30,14 +30,14 @@ import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
-import org.sonar.python.types.v2.ClassType;
-import org.sonar.python.types.v2.FunctionType;
-import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.ParameterV2;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeWrapper;
-import org.sonar.python.types.v2.UnionType;
-import org.sonar.python.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.ParameterV2;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 
 public class PythonTypeToDescriptorConverter {
 

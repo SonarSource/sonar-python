@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

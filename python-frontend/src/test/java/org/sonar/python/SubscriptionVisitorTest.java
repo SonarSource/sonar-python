@@ -31,7 +31,7 @@ import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.regex.RegexContext;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 

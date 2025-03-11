@@ -21,9 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.v2.LazyTypesContext;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeOrigin;
-import org.sonar.python.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeOrigin;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 
 public class AnyDescriptorToPythonTypeConverter {
 

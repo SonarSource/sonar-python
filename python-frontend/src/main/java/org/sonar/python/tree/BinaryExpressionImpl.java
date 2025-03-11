@@ -30,7 +30,7 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;

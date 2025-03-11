@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.sonar.python.tree.TokenImpl;
 import org.sonar.python.tree.UnaryExpressionImpl;
-import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.v2.TypesTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;

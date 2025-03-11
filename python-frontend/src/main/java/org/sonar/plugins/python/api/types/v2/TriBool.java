@@ -14,9 +14,23 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2;
+package org.sonar.plugins.python.api.types.v2;
 
-public enum TypeOrigin {
-  LOCAL,
-  STUB
+import org.sonar.api.Beta;
+
+@Beta
+public enum TriBool {
+  TRUE,
+  FALSE,
+  UNKNOWN;
+
+  public TriBool and(TriBool triBool) {
+    if (this.equals(triBool)) {
+      return this;
+    }
+    if (this.equals(UNKNOWN) || triBool.equals(UNKNOWN)) {
+      return UNKNOWN;
+    }
+    return FALSE;
+  }
 }

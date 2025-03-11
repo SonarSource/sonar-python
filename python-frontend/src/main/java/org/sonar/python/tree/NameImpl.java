@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class NameImpl extends PyTree implements Name {
   private final Token token;

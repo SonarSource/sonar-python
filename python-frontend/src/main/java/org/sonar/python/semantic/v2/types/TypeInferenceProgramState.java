@@ -25,7 +25,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.python.cfg.fixpoint.ProgramState;
 import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class TypeInferenceProgramState implements ProgramState {
   // Using Set of types instead of "Union type" in order to represent BOTTOM as an empty set

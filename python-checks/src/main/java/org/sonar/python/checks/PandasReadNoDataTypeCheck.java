@@ -26,8 +26,8 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 
 @Rule(key = "S6740")

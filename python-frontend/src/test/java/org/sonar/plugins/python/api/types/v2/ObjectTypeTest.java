@@ -14,10 +14,11 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2;
+package org.sonar.plugins.python.api.types.v2;
 
 import java.util.List;
 import java.util.Optional;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
@@ -35,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.TypeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
@@ -60,7 +62,7 @@ class ObjectTypeTest {
     assertThat(objectType.hasMember("foo")).isEqualTo(TriBool.FALSE);
     String fileId = SymbolUtils.pathOf(pythonFile).toString();
     assertThat(objectType.definitionLocation()).contains(new LocationInFile(fileId, 1, 6, 1, 7));
-    assertThat(TypeUtils.resolved(objectType)).isEqualTo(objectType);
+    Assertions.assertThat(TypeUtils.resolved(objectType)).isEqualTo(objectType);
   }
 
   @Test

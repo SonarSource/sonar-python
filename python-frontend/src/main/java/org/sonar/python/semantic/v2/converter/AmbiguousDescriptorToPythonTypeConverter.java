@@ -19,8 +19,8 @@ package org.sonar.python.semantic.v2.converter;
 import java.util.stream.Collectors;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnionType;
 
 public class AmbiguousDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 

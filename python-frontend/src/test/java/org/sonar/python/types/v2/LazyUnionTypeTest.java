@@ -19,6 +19,8 @@ package org.sonar.python.types.v2;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;

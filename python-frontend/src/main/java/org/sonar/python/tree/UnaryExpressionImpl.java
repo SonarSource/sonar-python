@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class UnaryExpressionImpl extends PyTree implements UnaryExpression, HasTypeDependencies {
 

@@ -32,12 +32,12 @@ import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.v2.FunctionType;
-import org.sonar.python.types.v2.ParameterV2;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ParameterV2;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.v2.SimpleTypeWrapper;
-import org.sonar.python.types.v2.TypeOrigin;
-import org.sonar.python.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.TypeOrigin;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 

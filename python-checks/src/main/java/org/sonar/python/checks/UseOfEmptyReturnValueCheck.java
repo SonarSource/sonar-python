@@ -24,7 +24,7 @@ import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
-import org.sonar.python.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;

@@ -19,7 +19,7 @@ package org.sonar.plugins.python.api.tree;
 import com.google.common.annotations.Beta;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public interface Expression extends Tree {
 

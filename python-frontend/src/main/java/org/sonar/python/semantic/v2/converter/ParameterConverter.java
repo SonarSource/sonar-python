@@ -19,11 +19,11 @@ package org.sonar.python.semantic.v2.converter;
 import java.util.Optional;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.types.v2.LazyTypeWrapper;
-import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.ParameterV2;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.ParameterV2;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.v2.SimpleTypeWrapper;
-import org.sonar.python.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 
 public class ParameterConverter {
 

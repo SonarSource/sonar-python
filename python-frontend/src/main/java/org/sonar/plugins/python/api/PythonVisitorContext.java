@@ -27,7 +27,7 @@ import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.python.types.v2.ModuleType;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.python.types.v2.TypeChecker;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;

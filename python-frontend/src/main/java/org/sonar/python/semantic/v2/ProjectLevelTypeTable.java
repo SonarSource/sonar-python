@@ -21,10 +21,10 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.LazyTypeWrapper;
-import org.sonar.python.types.v2.ModuleType;
-import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 
 public class ProjectLevelTypeTable implements TypeTable {
 

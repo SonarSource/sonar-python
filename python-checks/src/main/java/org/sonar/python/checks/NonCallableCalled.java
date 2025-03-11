@@ -21,8 +21,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 

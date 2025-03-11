@@ -19,7 +19,7 @@ package org.sonar.plugins.python.api.tree;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 /**
  * Qualified expression like "foo.bar"

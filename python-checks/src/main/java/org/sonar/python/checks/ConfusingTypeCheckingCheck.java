@@ -36,8 +36,8 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;

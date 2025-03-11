@@ -21,10 +21,10 @@ import java.util.Optional;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
-import org.sonar.python.types.v2.ParameterV2;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.ParameterV2;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeUtils;
-import org.sonar.python.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 
 public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 

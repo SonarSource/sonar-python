@@ -22,7 +22,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.types.v2.LazyUnionType;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class TypeAnnotationToPythonTypeConverter {
 

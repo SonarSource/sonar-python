@@ -17,7 +17,7 @@
 package org.sonar.python.semantic.v2;
 
 import java.util.List;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public interface TypeTable {
   PythonType getBuiltinsModule();

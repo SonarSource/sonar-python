@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.converter.AnyDescriptorToPythonTypeConverter;
-import org.sonar.python.types.v2.ModuleType;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeOrigin;
-import org.sonar.python.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeOrigin;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 
 public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;

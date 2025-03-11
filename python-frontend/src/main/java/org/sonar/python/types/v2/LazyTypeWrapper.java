@@ -17,6 +17,8 @@
 package org.sonar.python.types.v2;
 
 import java.util.Objects;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 
 public class LazyTypeWrapper implements TypeWrapper {
   private PythonType type;

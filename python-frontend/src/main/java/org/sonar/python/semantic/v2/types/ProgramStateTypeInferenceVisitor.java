@@ -24,9 +24,9 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.tree.NameImpl;
-import org.sonar.python.types.v2.FunctionType;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeUtils;
 

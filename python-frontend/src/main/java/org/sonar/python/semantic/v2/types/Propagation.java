@@ -22,7 +22,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public abstract class Propagation {
   private final Set<SymbolV2> variableDependencies;

@@ -19,6 +19,9 @@ package org.sonar.python.types.v2;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnionType;
 
 public class TypeUtils {
 
@@ -26,7 +29,7 @@ public class TypeUtils {
 
   }
 
-  static PythonType resolved(PythonType pythonType) {
+  public static PythonType resolved(PythonType pythonType) {
     if (pythonType instanceof ResolvableType resolvableType) {
       return resolvableType.resolve();
     }

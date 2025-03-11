@@ -43,12 +43,12 @@ import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
-import org.sonar.python.types.v2.FunctionType;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeChecker;
-import org.sonar.python.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
 

@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2;
+package org.sonar.plugins.python.api.types.v2;
 
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
@@ -25,7 +25,9 @@ import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
-import org.sonar.python.types.v2.UnknownType.UnresolvedImportType;
+import org.sonar.plugins.python.api.types.v2.UnknownType.UnresolvedImportType;
+import org.sonar.python.types.v2.SimpleTypeWrapper;
+import org.sonar.python.types.v2.TypesTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
