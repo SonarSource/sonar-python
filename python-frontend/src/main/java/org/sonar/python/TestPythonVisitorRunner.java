@@ -73,6 +73,12 @@ public class TestPythonVisitorRunner {
     return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, cacheContext);
   }
 
+  public static PythonVisitorContext createContext(MockPythonFile file, @Nullable File workingDirectory, String packageName,
+                                                   ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
+    FileInput rootTree = parseFile(file);
+    return new PythonVisitorContext(rootTree, file, workingDirectory, packageName, projectLevelSymbolTable, cacheContext);
+  }
+
   public static PythonVisitorContext createNotebookContext(File file, Map<Integer, IPythonLocation> locations, String content, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
     TestPythonFile pythonFile = new TestPythonFile(file);
@@ -84,14 +90,28 @@ public class TestPythonVisitorRunner {
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     for (File file : files) {
       var pythonFile = new TestPythonFile(file);
-      if (pythonFile.isIPython()) {
-        continue;
-      }
-      var astRoot = parseFile(pythonFile);
       String packageName = pythonPackageName(file, baseDir.getAbsolutePath());
-      projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
+      fillSymbolTableWithFile(pythonFile, projectLevelSymbolTable, packageName);
     }
     return projectLevelSymbolTable;
+  }
+
+  public static ProjectLevelSymbolTable globalSymbols(Map<String, String> pathToContent, String baseDir) {
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+    pathToContent.forEach((path, content) -> {
+      var file = new MockPythonFile(baseDir, path, content);
+      var packageName = pythonPackageName(file.file(), baseDir);
+      fillSymbolTableWithFile(file, projectLevelSymbolTable, packageName);
+    });
+    return projectLevelSymbolTable;
+  }
+
+  private static void fillSymbolTableWithFile(TestablePythonFile file, ProjectLevelSymbolTable projectLevelSymbolTable, String packageName) {
+    if (file.isIPython()) {
+      return;
+    }
+    var astRoot = parseFile(file);
+    projectLevelSymbolTable.addModule(astRoot, packageName, file);
   }
 
   public static FileInput parseNotebookFile(Map<Integer, IPythonLocation> locations, String content) {
@@ -101,7 +121,7 @@ public class TestPythonVisitorRunner {
     return treeMaker.fileInput(astNode);
   }
 
-  private static FileInput parseFile(TestPythonFile file) {
+  private static FileInput parseFile(TestablePythonFile file) {
     var parser = file.isIPython() ? PythonParser.createIPythonParser() : PythonParser.create();
     var treeMaker = file.isIPython() ? new IPythonTreeMaker(Map.of()) : new PythonTreeMaker();
 
@@ -109,7 +129,53 @@ public class TestPythonVisitorRunner {
     return treeMaker.fileInput(astNode);
   }
 
-  private static class TestPythonFile implements PythonFile {
+  interface TestablePythonFile extends PythonFile {
+    default boolean isIPython() {
+      return fileName().endsWith(".ipynb");
+    }
+  }
+  
+  public static class MockPythonFile implements TestablePythonFile {
+
+    private final String baseDir;
+    private final String path;
+
+    private final String content;
+
+    public MockPythonFile(String baseDir, String path, String content) {
+      this.baseDir = baseDir;
+      this.path = path;
+      this.content = content;
+    }
+
+    @Override
+    public String content() {
+      return content;
+    }
+
+    @Override
+    public String fileName() {
+      var file = new File(path);
+      return file.getName();
+    }
+
+    @Override
+    public URI uri() {
+      return new File(baseDir, path).toURI();
+    }
+
+    @Override
+    public String key() {
+      return path;
+    }
+
+    public File file() {
+      return new File(baseDir, path);
+    }
+
+  }
+  private static class TestPythonFile implements TestablePythonFile {
+
 
     private final File file;
 
@@ -139,10 +205,6 @@ public class TestPythonVisitorRunner {
     @Override
     public String key() {
       return file.getPath();
-    }
-
-    public boolean isIPython() {
-      return fileName().endsWith(".ipynb");
     }
 
   }

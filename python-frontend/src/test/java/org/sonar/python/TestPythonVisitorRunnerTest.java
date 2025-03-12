@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,6 +49,13 @@ class TestPythonVisitorRunnerTest {
   }
 
   @Test
+  void mockPythonFileUri() {
+    var file = new TestPythonVisitorRunner.MockPythonFile("", "file.py", "print('hello')");
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file, null, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
+    assertThat(context.pythonFile().uri()).isEqualTo(file.uri());
+  }
+
+  @Test
   void fileUriIPython() throws IOException {
     File tmpFile = Files.createTempFile("foo", ".ipynb").toFile();
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
@@ -59,6 +67,17 @@ class TestPythonVisitorRunnerTest {
     File baseDir = new File("src/test/resources").getAbsoluteFile();
     List<File> files = List.of(new File(baseDir, "file.py"));
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDir);
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("file"))
+      .extracting(Symbol::name)
+      .containsExactlyInAnyOrder("hello", "A");
+  }
+
+  @Test
+  void globalSymbols2() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(Map.of("src/test/resources/file.py", """
+      def hello(): ...
+      class A: ...
+      """), "src/test/resources");
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("file"))
       .extracting(Symbol::name)
       .containsExactlyInAnyOrder("hello", "A");
@@ -81,4 +100,5 @@ class TestPythonVisitorRunnerTest {
     PythonVisitorContext context = TestPythonVisitorRunner.scanNotebookFile(tmpFile, Map.of(), "", check);
     assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
   }
+
 }
