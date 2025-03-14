@@ -31,6 +31,7 @@ import org.sonar.python.semantic.v2.TypeInferenceV2;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
@@ -173,9 +174,19 @@ class FunctionTypeTest {
   @Test
   void declaredTypes() {
     // TODO: SONARPY-1776 handle declared return type
-    FunctionType functionType = functionType("def fn(p1: int): pass");
+    var functionType = functionType("def fn(p1: int): pass");
     assertThat(functionType.returnType()).isEqualTo(PythonType.UNKNOWN);
     assertThat(functionType.parameters()).extracting(ParameterV2::declaredType).extracting(TypeWrapper::type).extracting(PythonType::unwrappedType).containsExactly(INT_TYPE);
+
+    functionType = functionType("""
+    import typing
+    def fn(p1: typing.List): pass
+    """);
+    assertThat(functionType.returnType()).isEqualTo(PythonType.UNKNOWN);
+    assertThat(functionType.parameters())
+      .extracting(ParameterV2::declaredType)
+      .extracting(TypeWrapper::type).extracting(PythonType::unwrappedType)
+      .containsExactly(LIST_TYPE);
   }
 
   @Test

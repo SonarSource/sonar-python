@@ -567,6 +567,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       // TODO: we need to make a decision on should here be a union type of object types or an object type of a union type.
       //  ATM it is blocked by the generic types resolution redesign
       return UnionType.or(left, right);
+    } else if (expression.typeV2() instanceof ClassType classType) {
+      return new ObjectType(classType, TypeSource.TYPE_HINT);
     }
     return PythonType.UNKNOWN;
   }
