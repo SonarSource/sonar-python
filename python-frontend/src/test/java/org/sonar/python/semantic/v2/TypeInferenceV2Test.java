@@ -54,6 +54,19 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.Member;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.ParameterV2;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeOrigin;
+import org.sonar.plugins.python.api.types.v2.TypeSource;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.UnknownType.UnresolvedImportType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.semantic.ClassSymbolImpl;
@@ -62,21 +75,8 @@ import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.ExpressionStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
-import org.sonar.plugins.python.api.types.v2.ClassType;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
-import org.sonar.plugins.python.api.types.v2.Member;
-import org.sonar.plugins.python.api.types.v2.ModuleType;
-import org.sonar.plugins.python.api.types.v2.ObjectType;
-import org.sonar.plugins.python.api.types.v2.ParameterV2;
-import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.v2.SimpleTypeWrapper;
-import org.sonar.plugins.python.api.types.v2.TypeOrigin;
-import org.sonar.plugins.python.api.types.v2.TypeSource;
-import org.sonar.plugins.python.api.types.v2.TypeWrapper;
-import org.sonar.plugins.python.api.types.v2.UnionType;
-import org.sonar.plugins.python.api.types.v2.UnknownType;
-import org.sonar.plugins.python.api.types.v2.UnknownType.UnresolvedImportType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
@@ -3699,6 +3699,18 @@ public class TypeInferenceV2Test {
     assertThat(qualifiedExpression2.name().typeV2().unwrappedType()).isEqualTo(INT_TYPE);
   }
 
+  @Test
+  void importFromModulesType() {
+    var rootModule = new TestProject()
+      .addModule("f1", "def foo(): ...");
+
+    var fileInput = rootModule.inferTypes("from f1 import foo");
+    var importFrom = (ImportFrom) fileInput.statements().statements().get(0);
+    var types = importFrom.module().names().stream().map(Name::typeV2).toList();
+    assertThat(types.get(0)).isInstanceOfSatisfying(ModuleType.class, moduleType -> assertThat(moduleType.fullyQualifiedName()).isEqualTo("f1"));
+
+  }
+
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
     FileInput root = parse(lines);
     var symbolTable = new SymbolTableBuilderV2(root).build();
@@ -3767,6 +3779,11 @@ public class TypeInferenceV2Test {
       Expression lastExpr = lastExpression(code);
       assertThat(lastExpr).isInstanceOf(TupleImpl.class);
       return (TupleImpl) lastExpr;
+    }
+
+    public FileInput inferTypes(String code) {
+      ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+      return TypeInferenceV2Test.inferTypes(code, projectLevelTypeTable);
     }
   }
 }

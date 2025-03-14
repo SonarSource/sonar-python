@@ -64,6 +64,18 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.Member;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.TypeOrigin;
+import org.sonar.plugins.python.api.types.v2.TypeSource;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.SymbolV2;
@@ -81,20 +93,8 @@ import org.sonar.python.tree.StringLiteralImpl;
 import org.sonar.python.tree.SubscriptionExpressionImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
-import org.sonar.plugins.python.api.types.v2.ClassType;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
-import org.sonar.plugins.python.api.types.v2.Member;
-import org.sonar.plugins.python.api.types.v2.ModuleType;
-import org.sonar.plugins.python.api.types.v2.ObjectType;
-import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.v2.SpecialFormType;
-import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeChecker;
-import org.sonar.plugins.python.api.types.v2.TypeOrigin;
-import org.sonar.plugins.python.api.types.v2.TypeSource;
-import org.sonar.plugins.python.api.types.v2.TypeWrapper;
-import org.sonar.plugins.python.api.types.v2.UnionType;
-import org.sonar.plugins.python.api.types.v2.UnknownType;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
@@ -436,6 +436,13 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
           setTypeToName(boundName, type);
         });
     }
+
+    if (module instanceof ModuleType moduleType) {
+      Optional.ofNullable(importFrom.module())
+        .map(importedDottedName -> importedDottedName.names().get(importedDottedName.names().size() - 1))
+        .ifPresent(lastImportedModuleName -> setTypeToName(lastImportedModuleName, moduleType));
+    }
+    
   }
 
   private static UnknownType.UnresolvedImportType createUnresolvedImportType(List<String> moduleFqnList, Name name) {
