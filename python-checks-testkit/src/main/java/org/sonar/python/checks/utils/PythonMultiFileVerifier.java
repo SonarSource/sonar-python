@@ -17,9 +17,13 @@
 package org.sonar.python.checks.utils;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.caching.CacheContextImpl;
@@ -34,16 +38,50 @@ public class PythonMultiFileVerifier {
   }
 
   public static <R> Map<String, R> mapFiles(Map<String, String> pathToCode, String baseDir, String packageName, Function<PythonVisitorContext, R> function) {
-    var symbolTable = TestPythonVisitorRunner.globalSymbols(pathToCode, baseDir);
+    var tempDirectoryPath = createTemporaryDirectory();
+
+    var pathToFile = pathToCode.entrySet().stream().map(
+      entry -> writeTempFile(entry, tempDirectoryPath)
+    ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+    var newBaseDir = getNewBaseDir(baseDir, tempDirectoryPath);
+
+    var symbolTable = TestPythonVisitorRunner.globalSymbols(pathToCode, newBaseDir);
     Map<String, R> results = new HashMap<>();
 
-    pathToCode.forEach((path, code) -> {
-      var mockFile = new TestPythonVisitorRunner.MockPythonFile(baseDir, path, code);
-      var context = TestPythonVisitorRunner.createContext(mockFile, new File(baseDir), packageName, symbolTable, CacheContextImpl.dummyCache());
+    pathToFile.forEach((path, file) -> {
+      var context = TestPythonVisitorRunner.createContext(file, new File(newBaseDir), packageName, symbolTable, CacheContextImpl.dummyCache());
       results.put(path, function.apply(context));
     });
 
     return results;
+
+  }
+
+  protected static String getNewBaseDir(String baseDir, Path tempDirectoryPath) {
+    return tempDirectoryPath.resolve(baseDir).toString();
+  }
+
+  static Path createTemporaryDirectory() {
+    try {
+      return Files.createTempDirectory("");
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
+  }
+
+  static Map.Entry<String, File> writeTempFile(Map.Entry<String, String> stringStringEntry, Path tempDirectory) {
+    var newPath = tempDirectory.resolve(stringStringEntry.getKey());
+    try {
+      Files.createDirectories(newPath.getParent());
+      var fileWriter = Files.newBufferedWriter(newPath);
+      fileWriter.write(stringStringEntry.getValue());
+      fileWriter.close();
+
+      return Map.entry(stringStringEntry.getKey(), newPath.toFile());
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
   }
 
 }

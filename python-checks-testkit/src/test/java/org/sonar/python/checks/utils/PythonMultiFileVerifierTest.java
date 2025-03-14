@@ -16,12 +16,18 @@
  */
 package org.sonar.python.checks.utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PythonMultiFileVerifierTest {
 
@@ -35,4 +41,41 @@ class PythonMultiFileVerifierTest {
       .extracting(ModuleType::name)
       .isEqualTo("foo");
   }
+
+  @Test
+  void newBaseDirEmpty() {
+    var newBaseDir = PythonMultiFileVerifier.getNewBaseDir("", Path.of("temp"));
+    assertThat(newBaseDir).isEqualTo("temp");
+  }
+
+  @Test
+  void newBaseDirNotEmpty() {
+    var newBaseDir = PythonMultiFileVerifier.getNewBaseDir("my_dir", Path.of("temp"));
+    assertThat(newBaseDir).isEqualTo("temp" + File.separator + "my_dir");
+  }
+
+  @Test
+  void createTemporaryDirectorException() {
+    try (var files = Mockito.mockStatic(Files.class)) {
+      files.when(() -> Files.createTempDirectory(""))
+        .thenThrow(IOException.class);
+
+      assertThatThrownBy(PythonMultiFileVerifier::createTemporaryDirectory)
+        .isInstanceOf(IllegalStateException.class);
+    }
+  }
+
+  @Test
+  void writeTempFileException() {
+    var entry = Map.entry("foo.py", "class Foo: ...");
+    var tempDirectoryPath = Path.of("temp");
+    try (var files = Mockito.mockStatic(Files.class)) {
+      files.when(() -> Files.newBufferedWriter(Mockito.any()))
+        .thenThrow(IOException.class);
+
+      assertThatThrownBy(() -> PythonMultiFileVerifier.writeTempFile(entry, tempDirectoryPath))
+        .isInstanceOf(IllegalStateException.class);
+    }
+  }
+
 }
