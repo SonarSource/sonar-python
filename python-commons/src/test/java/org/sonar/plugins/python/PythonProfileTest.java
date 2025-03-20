@@ -28,6 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.plugins.python.PythonProfile.GET_REPOSITORY_KEY;
 import static org.sonar.plugins.python.PythonProfile.SECURITY_RULES_CLASS_NAME;
 import static org.sonar.plugins.python.PythonProfile.SECURITY_RULE_KEYS_METHOD_NAME;
+import static org.sonar.plugins.python.PythonProfile.getArchitectureRuleKeys;
 import static org.sonar.plugins.python.PythonProfile.getDataflowBugDetectionRuleKeys;
 import static org.sonar.plugins.python.PythonProfile.getExternalRuleKeys;
 import static org.sonar.plugins.python.PythonProfile.getSecurityRuleKeys;
@@ -79,6 +80,22 @@ class PythonProfileTest {
 
     com.sonarsource.plugins.dbd.api.PythonRules.throwOnCall = true;
     assertThat(getDataflowBugDetectionRuleKeys())
+      .isEmpty();
+    PythonRules.throwOnCall = false;
+  }
+
+  @Test
+  void should_contains_architecture_rules_if_available() {
+    // no architecture rules available
+    com.sonarsource.architecture.python.PythonRules.getRuleKeys().clear();
+    assertThat(getArchitectureRuleKeys()).isEmpty();
+
+    // one architecture rule available
+    com.sonarsource.architecture.python.PythonRules.getRuleKeys().add("S7134");
+    assertThat(getArchitectureRuleKeys()).containsOnly(RuleKey.of("pythonarchitecture", "S7134"));
+
+    com.sonarsource.architecture.python.PythonRules.throwOnCall = true;
+    assertThat(getArchitectureRuleKeys())
       .isEmpty();
     PythonRules.throwOnCall = false;
   }

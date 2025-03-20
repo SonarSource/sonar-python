@@ -38,6 +38,8 @@ public class PythonProfile implements BuiltInQualityProfilesDefinition {
   static final String SECURITY_RULE_KEYS_METHOD_NAME = "getRuleKeys";
   static final String DBD_RULES_CLASS_NAME = "com.sonarsource.plugins.dbd.api.PythonRules";
   static final String DBD_RULE_KEYS_METHOD_NAME = "getDataflowBugDetectionRuleKeys";
+  static final String ARCHITECTURE_RULES_CLASS_NAME = "com.sonarsource.architecture.python.PythonRules";
+  static final String ARCHITECTURE_RULE_KEYS_METHOD_NAME = "getRuleKeys";
   static final String GET_REPOSITORY_KEY = "getRepositoryKey";
 
   private final RepositoryInfoProvider[] editionMetadataProviders;
@@ -58,6 +60,8 @@ public class PythonProfile implements BuiltInQualityProfilesDefinition {
       .forEach(key -> profile.activateRule(key.repository(), key.rule()));
     getDataflowBugDetectionRuleKeys()
       .forEach(key -> profile.activateRule(key.repository(), key.rule()));
+    getArchitectureRuleKeys()
+      .forEach(key -> profile.activateRule(key.repository(), key.rule()));
     profile.done();
   }
 
@@ -73,6 +77,10 @@ public class PythonProfile implements BuiltInQualityProfilesDefinition {
 
   static Set<RuleKey> getDataflowBugDetectionRuleKeys() {
     return getExternalRuleKeys(DBD_RULES_CLASS_NAME, DBD_RULE_KEYS_METHOD_NAME, "dataflow bug detection");
+  }
+
+  static Set<RuleKey> getArchitectureRuleKeys() {
+    return getExternalRuleKeys(ARCHITECTURE_RULES_CLASS_NAME, ARCHITECTURE_RULE_KEYS_METHOD_NAME, "dataflow bug detection");
   }
 
   @SuppressWarnings("unchecked")
