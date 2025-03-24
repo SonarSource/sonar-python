@@ -12,7 +12,8 @@ function run_maven {
     -Dsonar.analysis.sha1="$GIT_SHA1" \
     -Dsonar.analysis.repository="$GITHUB_REPO" \
     -Dsonar.analysisCache.enabled=true \
-    -Dsonar.sca.recursiveManifestSearch=false \
+    -Dsonar.sca.recursiveManifestSearch=true \
+    -Dsonar.sca.excludedManifests=python-frontend/typeshed_serializer/**,its/plugin/it-python-plugin-test/projects/**,private/its-enterprise/sources_ruling/**,private/its-enterprise/it-python-enterprise-plugin/projects/**,**/test/resources/** \
     -DfailStubGenerationFast=true \
     -Dskip.its=true \
     --batch-mode --errors --show-version \
