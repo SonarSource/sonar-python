@@ -93,7 +93,7 @@ public class ProjectLevelSymbolTable {
     String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
     var symbolTable = new SymbolTableBuilderV2(fileInput).build();
     var typeInferenceV2 = new TypeInferenceV2(new BasicTypeTable(new ProjectLevelTypeTable(this)), pythonFile, symbolTable, packageName);
-    var typesBySymbol = typeInferenceV2.inferTypes(fileInput);
+    var typesBySymbol = typeInferenceV2.inferTopLevelTypes(fileInput);
     importsByModule.put(fullyQualifiedModuleName, typeInferenceV2.importedModulesFQN());
     var moduleDescriptors = typesBySymbol.entrySet()
       .stream()

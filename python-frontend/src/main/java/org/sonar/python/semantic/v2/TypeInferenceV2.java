@@ -90,12 +90,7 @@ public class TypeInferenceV2 {
   }
 
   public Map<SymbolV2, Set<PythonType>> inferTypes(FileInput fileInput) {
-    TrivialTypeInferenceVisitor trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile, fullyQualifiedModuleName);
-    this.importedModulesFQN = trivialTypeInferenceVisitor.importedModulesFQN();
-    fileInput.accept(trivialTypeInferenceVisitor);
-
-    var typesBySymbol = inferTypesAndMemberAccessSymbols(fileInput);
-
+    var result = inferTopLevelTypes(fileInput);
     fileInput.accept(new BaseTreeVisitor() {
       @Override
       public void visitFunctionDef(FunctionDef funcDef) {
@@ -103,7 +98,14 @@ public class TypeInferenceV2 {
         inferTypesAndMemberAccessSymbols(funcDef);
       }
     });
-    return typesBySymbol;
+    return result;
+  }
+
+  public Map<SymbolV2, Set<PythonType>> inferTopLevelTypes(FileInput fileInput) {
+    var trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile, fullyQualifiedModuleName);
+    this.importedModulesFQN = trivialTypeInferenceVisitor.importedModulesFQN();
+    fileInput.accept(trivialTypeInferenceVisitor);
+    return inferTypesAndMemberAccessSymbols(fileInput);
   }
 
   private Map<SymbolV2, Set<PythonType>> inferTypesAndMemberAccessSymbols(FileInput fileInput) {
