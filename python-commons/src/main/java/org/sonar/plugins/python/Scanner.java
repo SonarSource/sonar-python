@@ -19,12 +19,10 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonarsource.analyzer.commons.ProgressReport;
 
 public abstract class Scanner {
   private static final Logger LOG = LoggerFactory.getLogger(Scanner.class);
@@ -36,20 +34,22 @@ public abstract class Scanner {
   }
 
   public void execute(List<PythonInputFile> files, SensorContext context) {
-    ProgressReport progressReport = new ProgressReport(this.name() + " progress", TimeUnit.SECONDS.toMillis(10));
+    var progressReport = new MultiFileProgressReport(name());
     String name = this.name();
     LOG.info("Starting {}", name);
     List<String> filenames = files.stream().map(PythonInputFile::wrappedFile).map(InputFile::toString).toList();
 
     int numScannedWithoutParsing = 0;
-    progressReport.start(filenames);
+    progressReport.start(filenames.size());
     for (PythonInputFile file : files) {
       if (context.isCancelled()) {
         progressReport.cancel();
         return;
       }
+      var filename = file.wrappedFile().filename();
       try {
         boolean successfullyScannedWithoutParsing = false;
+        progressReport.startAnalysisFor(filename);
         if (canBeScannedWithoutParsing(file)) {
           successfullyScannedWithoutParsing = this.scanFileWithoutParsing(file);
         }
@@ -64,7 +64,7 @@ public abstract class Scanner {
           throw new IllegalStateException("Exception when analyzing " + file, e);
         }
       } finally {
-        progressReport.nextFile();
+        progressReport.finishAnalysisFor(filename);
       }
     }
     endOfAnalysis();
