@@ -20,12 +20,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -60,6 +62,7 @@ public class TypeShedDescriptorsProvider {
   private Map<String, Descriptor> builtins;
   private final Set<String> projectBasePackages;
   private final Map<String, Map<String, Descriptor>> cachedDescriptors;
+  private final Map<String, Lock> descriptorsForModuleLocks;
 
   public TypeShedDescriptorsProvider(Set<String> projectBasePackages) {
     this(projectBasePackages, ProjectPythonVersion.currentVersions());
@@ -67,7 +70,8 @@ public class TypeShedDescriptorsProvider {
 
   public TypeShedDescriptorsProvider(Set<String> projectBasePackages, Set<PythonVersionUtils.Version> projectPythonVersions) {
     moduleConverter = new ModuleSymbolToDescriptorConverter(projectPythonVersions);
-    cachedDescriptors = new HashMap<>();
+    cachedDescriptors = new ConcurrentHashMap<>();
+    descriptorsForModuleLocks = new ConcurrentHashMap<>();
     this.projectBasePackages = projectBasePackages;
   }
 
@@ -75,7 +79,7 @@ public class TypeShedDescriptorsProvider {
   // Public methods
   //================================================================================
 
-  public Map<String, Descriptor> builtinDescriptors() {
+  public synchronized Map<String, Descriptor> builtinDescriptors() {
     if (builtins == null) {
       Map<String, Descriptor> symbols = getModuleDescriptors(BUILTINS_FQN, PROTOBUF);
       symbols.put(NONE_TYPE, new ClassDescriptor.ClassDescriptorBuilder().withName(NONE_TYPE).withFullyQualifiedName(NONE_TYPE).build());
@@ -88,10 +92,16 @@ public class TypeShedDescriptorsProvider {
    * Returns map of exported symbols by name for a given module
    */
   public Map<String, Descriptor> descriptorsForModule(String moduleName) {
-    if (searchedModuleMatchesCurrentProject(moduleName)) {
-      return Collections.emptyMap();
+    var lock = descriptorsForModuleLocks.computeIfAbsent(moduleName, k -> new ReentrantLock());
+    lock.lock();
+    try {
+      if (searchedModuleMatchesCurrentProject(moduleName)) {
+        return new ConcurrentHashMap<>();
+      }
+      return cachedDescriptors.computeIfAbsent(moduleName, this::searchTypeShedForModule);
+    } finally {
+      lock.unlock();
     }
-    return cachedDescriptors.computeIfAbsent(moduleName, this::searchTypeShedForModule);
   }
 
   public Set<String> stubModules() {
@@ -118,11 +128,11 @@ public class TypeShedDescriptorsProvider {
     String fileName = MODULES_TO_DISAMBIGUATE.getOrDefault(moduleName, moduleName);
     InputStream resource = this.getClass().getResourceAsStream(dirName + fileName + ".protobuf");
     if (resource == null) {
-      return Collections.emptyMap();
+      return new ConcurrentHashMap<>(Collections.emptyMap());
     }
     var moduleSymbol = deserializedModule(moduleName, resource);
     var moduleDescriptor = moduleConverter.convert(moduleSymbol);
-    return Optional.ofNullable(moduleDescriptor).map(ModuleDescriptor::members).orElseGet(Map::of);
+    return new ConcurrentHashMap<>(Optional.ofNullable(moduleDescriptor).map(ModuleDescriptor::members).orElseGet(Map::of));
   }
 
   @CheckForNull
