@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
@@ -33,6 +34,10 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
@@ -43,23 +48,19 @@ import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
-import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeChecker;
-import org.sonar.plugins.python.api.types.v2.UnknownType;
 
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
 
 public class ProjectLevelSymbolTable {
 
-  private final PythonTypeToDescriptorConverter pythonTypeToDescriptorConverter = new PythonTypeToDescriptorConverter();
+  private final PythonTypeToDescriptorConverter pythonTypeToDescriptorConverter;
   private final Map<String, Set<Descriptor>> globalDescriptorsByModuleName;
   private Map<String, Descriptor> globalDescriptorsByFQN;
-  private final Set<String> djangoViewsFQN = new HashSet<>();
-  private final Map<String, Set<String>> importsByModule = new HashMap<>();
-  private final Set<String> projectBasePackages = new HashSet<>();
+  private final Set<String> djangoViewsFQN;
+  private final Map<String, Set<String>> importsByModule;
+  private final Set<String> projectBasePackages;
   private TypeShedDescriptorsProvider typeShedDescriptorsProvider = null;
   private Set<Symbol> cachedSymbols = null;
 
@@ -79,7 +80,11 @@ public class ProjectLevelSymbolTable {
   }
 
   private ProjectLevelSymbolTable() {
-    this.globalDescriptorsByModuleName = new HashMap<>();
+    this.pythonTypeToDescriptorConverter = new PythonTypeToDescriptorConverter();
+    this.globalDescriptorsByModuleName = new ConcurrentHashMap<>();
+    this.djangoViewsFQN = new HashSet<>();
+    this.importsByModule = new ConcurrentHashMap<>();
+    this.projectBasePackages = new HashSet<>();
   }
 
   public void removeModule(String packageName, String fileName) {
@@ -125,13 +130,13 @@ public class ProjectLevelSymbolTable {
     globalDescriptorsByFQN().putAll(moduleDescriptorsByFQN);
   }
 
-  private Map<String, Descriptor> globalDescriptorsByFQN() {
+  private synchronized Map<String, Descriptor> globalDescriptorsByFQN() {
     if (globalDescriptorsByFQN == null) {
       globalDescriptorsByFQN = globalDescriptorsByModuleName.values()
         .stream()
         .flatMap(Collection::stream)
         .filter(descriptor -> descriptor.fullyQualifiedName() != null)
-        .collect(Collectors.toMap(Descriptor::fullyQualifiedName, Function.identity(), AmbiguousDescriptor::create));
+        .collect(Collectors.toConcurrentMap(Descriptor::fullyQualifiedName, Function.identity(), AmbiguousDescriptor::create));
     }
     return globalDescriptorsByFQN;
   }
@@ -154,7 +159,7 @@ public class ProjectLevelSymbolTable {
 
   @CheckForNull
   public Set<Symbol> getSymbolsFromModule(@Nullable String moduleName) {
-    Set<Descriptor> descriptors = globalDescriptorsByModuleName.get(moduleName);
+    Set<Descriptor> descriptors = getDescriptorsFromModule(moduleName);
     if (descriptors == null) {
       return null;
     }
@@ -166,6 +171,9 @@ public class ProjectLevelSymbolTable {
 
   @CheckForNull
   public Set<Descriptor> getDescriptorsFromModule(@Nullable String moduleName) {
+    if (moduleName == null) {
+      return null;
+    }
     return globalDescriptorsByModuleName.get(moduleName);
   }
 
@@ -182,11 +190,15 @@ public class ProjectLevelSymbolTable {
     return globalDescriptorsByModuleName.get(moduleName);
   }
 
+  private synchronized void addDjangoView(String fqn) {
+    djangoViewsFQN.add(fqn);
+  }
+
   public boolean isDjangoView(@Nullable String fqn) {
     return djangoViewsFQN.contains(fqn);
   }
 
-  public void addProjectPackage(String projectPackage) {
+  public synchronized void addProjectPackage(String projectPackage) {
     projectBasePackages.add(projectPackage.split("\\.", 2)[0]);
   }
 
@@ -248,9 +260,9 @@ public class ProjectLevelSymbolTable {
           PythonType pythonType = viewArgument.expression().typeV2();
           if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
             String importPath = unresolvedImportType.importPath();
-            djangoViewsFQN.add(importPath);
+            addDjangoView(importPath);
           } else if (pythonType instanceof FunctionType functionType) {
-            djangoViewsFQN.add(functionType.fullyQualifiedName());
+            addDjangoView(functionType.fullyQualifiedName());
           }
         }
       }
