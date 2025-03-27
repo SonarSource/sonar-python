@@ -22,6 +22,7 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.slf4j.Logger;
@@ -48,7 +49,7 @@ public abstract class PythonIndexer {
   protected String projectBaseDirAbsolutePath;
 
   private final Map<URI, String> packageNames = new HashMap<>();
-  private final PythonParser parser = PythonParser.create();
+  private final Supplier<PythonParser> parserSupplier = PythonParser::create;
   private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
 
   public ProjectLevelSymbolTable projectLevelSymbolTable() {
@@ -84,7 +85,7 @@ public abstract class PythonIndexer {
   }
 
   void addFile(PythonInputFile inputFile) throws IOException {
-    AstNode astNode = parser.parse(inputFile.wrappedFile().contents());
+    AstNode astNode = parserSupplier.get().parse(inputFile.wrappedFile().contents());
     FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
     String packageName = pythonPackageName(inputFile.wrappedFile().file(), projectBaseDirAbsolutePath);
     packageNames.put(inputFile.wrappedFile().uri(), packageName);

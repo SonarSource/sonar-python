@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
@@ -46,11 +47,11 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.plugins.python.api.PythonFileConsumer;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.PythonFileConsumer;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
@@ -72,7 +73,7 @@ public class PythonScanner extends Scanner {
 
   private static final Logger LOG = LoggerFactory.getLogger(PythonScanner.class);
 
-  private final PythonParser parser;
+  private final Supplier<PythonParser> parserSupplier;
   private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
@@ -85,14 +86,14 @@ public class PythonScanner extends Scanner {
   private final PythonFileConsumer architectureCallback;
 
   public PythonScanner(
-    SensorContext context, PythonChecks checks,
-    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, PythonParser parser, PythonIndexer indexer, PythonFileConsumer architectureCallback) {
+    SensorContext context, PythonChecks checks, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
+    Supplier<PythonParser> parserSupplier, PythonIndexer indexer, PythonFileConsumer architectureCallback) {
     super(context);
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.cpdAnalyzer = new PythonCpdAnalyzer(context);
-    this.parser = parser;
+    this.parserSupplier = parserSupplier;
     this.indexer = indexer;
     this.indexer.buildOnce(context);
     this.architectureCallback = architectureCallback;
@@ -109,7 +110,7 @@ public class PythonScanner extends Scanner {
     PythonVisitorContext visitorContext;
     InputFile.Type fileType = inputFile.wrappedFile().type();
     try {
-      AstNode astNode = parser.parse(inputFile.contents());
+      AstNode astNode = parserSupplier.get().parse(inputFile.contents());
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
       FileInput parse = treeMaker.fileInput(astNode);
       visitorContext = new PythonVisitorContext(parse,
