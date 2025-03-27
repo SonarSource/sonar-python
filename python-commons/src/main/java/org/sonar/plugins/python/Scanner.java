@@ -19,6 +19,8 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
@@ -37,39 +39,49 @@ public abstract class Scanner {
     var progressReport = new MultiFileProgressReport(name());
     String name = this.name();
     LOG.info("Starting {}", name);
-    List<String> filenames = files.stream().map(PythonInputFile::wrappedFile).map(InputFile::toString).toList();
+    List<String> filenames = getFilesStream(files).map(PythonInputFile::wrappedFile).map(InputFile::toString).toList();
 
-    int numScannedWithoutParsing = 0;
+    var numScannedWithoutParsing = new AtomicInteger();
     progressReport.start(filenames.size());
-    for (PythonInputFile file : files) {
-      if (context.isCancelled()) {
-        progressReport.cancel();
-        return;
-      }
-      var filename = file.wrappedFile().filename();
-      try {
-        boolean successfullyScannedWithoutParsing = false;
-        progressReport.startAnalysisFor(filename);
-        if (canBeScannedWithoutParsing(file)) {
-          successfullyScannedWithoutParsing = this.scanFileWithoutParsing(file);
-        }
-        if (!successfullyScannedWithoutParsing) {
-          this.scanFile(file);
-        } else {
-          ++numScannedWithoutParsing;
-        }
-      } catch (Exception e) {
-        this.processException(e, file);
-        if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isParseErrorOnTestFile(file, e)) {
-          throw new IllegalStateException("Exception when analyzing " + file, e);
-        }
-      } finally {
-        progressReport.finishAnalysisFor(filename);
-      }
-    }
+    processFiles(files, context, progressReport, numScannedWithoutParsing);
     endOfAnalysis();
     progressReport.stop();
-    this.reportStatistics(numScannedWithoutParsing, files.size());
+    this.reportStatistics(numScannedWithoutParsing.get(), files.size());
+  }
+
+  protected void processFiles(List<PythonInputFile> files, SensorContext context, MultiFileProgressReport progressReport, AtomicInteger numScannedWithoutParsing) {
+    getFilesStream(files).forEach(file -> processFile(context, file, progressReport, numScannedWithoutParsing));
+  }
+
+  protected Stream<PythonInputFile> getFilesStream(List<PythonInputFile> files) {
+    return files.stream();
+  }
+
+  private void processFile(SensorContext context, PythonInputFile file, MultiFileProgressReport progressReport, AtomicInteger numScannedWithoutParsing) {
+    if (context.isCancelled()) {
+      progressReport.cancel();
+      return;
+    }
+    var filename = file.wrappedFile().filename();
+    try {
+      progressReport.startAnalysisFor(filename);
+      boolean successfullyScannedWithoutParsing = false;
+      if (canBeScannedWithoutParsing(file)) {
+        successfullyScannedWithoutParsing = this.scanFileWithoutParsing(file);
+      }
+      if (!successfullyScannedWithoutParsing) {
+        this.scanFile(file);
+      } else {
+        numScannedWithoutParsing.incrementAndGet();
+      }
+    } catch (Exception e) {
+      this.processException(e, file);
+      if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isParseErrorOnTestFile(file, e)) {
+        throw new IllegalStateException("Exception when analyzing " + file, e);
+      }
+    } finally {
+      progressReport.finishAnalysisFor(filename);
+    }
   }
 
   protected abstract String name();

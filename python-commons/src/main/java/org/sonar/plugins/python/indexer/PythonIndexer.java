@@ -22,13 +22,17 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.plugins.python.MultiFileProgressReport;
 import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.Scanner;
 import org.sonar.plugins.python.SonarQubePythonFile;
@@ -149,6 +153,22 @@ public abstract class PythonIndexer {
       // Global Symbol Table is deactivated for Notebooks see: SONARPY-2021
       if (inputFile.kind() == PythonInputFile.Kind.PYTHON) {
         addFile(inputFile);
+      }
+    }
+
+    @Override
+    protected Stream<PythonInputFile> getFilesStream(List<PythonInputFile> files) {
+      return files.stream().parallel();
+    }
+
+    @Override
+    protected void processFiles(List<PythonInputFile> files, SensorContext context, MultiFileProgressReport progressReport, AtomicInteger numScannedWithoutParsing) {
+      ForkJoinPool pool = new ForkJoinPool(1);
+      try {
+        pool.submit(() -> super.processFiles(files, context, progressReport, numScannedWithoutParsing))
+          .join();
+      } finally {
+        pool.shutdown();
       }
     }
 
