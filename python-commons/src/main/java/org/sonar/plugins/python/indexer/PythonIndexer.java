@@ -163,7 +163,7 @@ public abstract class PythonIndexer {
 
     @Override
     protected void processFiles(List<PythonInputFile> files, SensorContext context, MultiFileProgressReport progressReport, AtomicInteger numScannedWithoutParsing) {
-      var numberOfThreads = context.config().getInt(THREADS_PROPERTY_NAME).orElse(Runtime.getRuntime().availableProcessors());
+      var numberOfThreads = getNumberOfThreads(context);
       LOG.debug("Scanning global symbols in {} threads", numberOfThreads);
       ForkJoinPool pool = new ForkJoinPool(numberOfThreads);
       try {
@@ -174,9 +174,15 @@ public abstract class PythonIndexer {
       }
     }
 
+    private Integer getNumberOfThreads(SensorContext context) {
+      return context.config().getInt(THREADS_PROPERTY_NAME)
+        .orElse(Math.max(2, Math.min((int) Math.round(Runtime.getRuntime().availableProcessors() * 0.9), 6)));
+    }
+
     @Override
     protected void processException(Exception e, PythonInputFile file) {
       LOG.debug("Unable to construct project-level symbol table for file: {}", file, e);
     }
+
   }
 }
