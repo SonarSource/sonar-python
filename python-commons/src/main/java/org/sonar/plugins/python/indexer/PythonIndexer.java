@@ -19,9 +19,9 @@ package org.sonar.plugins.python.indexer;
 import com.sonar.sslr.api.AstNode;
 import java.io.IOException;
 import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
@@ -52,7 +52,7 @@ public abstract class PythonIndexer {
 
   protected String projectBaseDirAbsolutePath;
 
-  private final Map<URI, String> packageNames = new HashMap<>();
+  private final Map<URI, String> packageNames = new ConcurrentHashMap<>();
   private final Supplier<PythonParser> parserSupplier = PythonParser::create;
   private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
 
@@ -138,7 +138,7 @@ public abstract class PythonIndexer {
   public abstract CacheContext cacheContext();
 
   class GlobalSymbolsScanner extends Scanner {
-
+    private static final String THREADS_PROPERTY_NAME = "sonar.python.symbols.threads";
     protected GlobalSymbolsScanner(SensorContext context) {
       super(context);
     }
@@ -163,7 +163,9 @@ public abstract class PythonIndexer {
 
     @Override
     protected void processFiles(List<PythonInputFile> files, SensorContext context, MultiFileProgressReport progressReport, AtomicInteger numScannedWithoutParsing) {
-      ForkJoinPool pool = new ForkJoinPool(1);
+      var numberOfThreads = context.config().getInt(THREADS_PROPERTY_NAME).orElse(Runtime.getRuntime().availableProcessors());
+      LOG.debug("Scanning global symbols in {} threads", numberOfThreads);
+      ForkJoinPool pool = new ForkJoinPool(numberOfThreads);
       try {
         pool.submit(() -> super.processFiles(files, context, progressReport, numScannedWithoutParsing))
           .join();
@@ -174,8 +176,7 @@ public abstract class PythonIndexer {
 
     @Override
     protected void processException(Exception e, PythonInputFile file) {
-      LOG.debug("Unable to construct project-level symbol table for file: {}", file);
-      LOG.debug(e.getMessage());
+      LOG.debug("Unable to construct project-level symbol table for file: {}", file, e);
     }
   }
 }

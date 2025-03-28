@@ -82,6 +82,7 @@ class SonarQubePythonIndexerTest {
     Path workDir = Files.createTempDirectory("workDir");
     context.fileSystem().setWorkDir(workDir);
     context.settings().setProperty("sonar.python.skipUnchanged", true);
+    context.settings().setProperty("sonar.python.symbols.threads", 2);
 
     writeCache = new TestWriteCache();
     readCache = new TestReadCache();
@@ -120,7 +121,9 @@ class SonarQubePythonIndexerTest {
       .contains("1/1 source file has been analyzed");
     assertThat(logTester.logs(Level.WARN)).contains("Implementation version of the Python plugin not found. Cached data may not be invalidated properly, " +
       "which may lead to inaccurate analysis results.");
-    assertThat(logTester.logs(Level.DEBUG)).contains("Cache version still up to date: \"unknownPluginVersion\".");
+    assertThat(logTester.logs(Level.DEBUG))
+      .contains("Cache version still up to date: \"unknownPluginVersion\".")
+      .contains("Scanning global symbols in 2 threads");
   }
 
   @Test
