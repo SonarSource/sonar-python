@@ -2,7 +2,7 @@
 cd "$ORCHESTRATOR_HOME" || exit 1
 
 # Find all sonar-application-* JAR files, sort them by version, and list them
-files=$(find . -name "sonar-application-*" | sort --version-sort --field-separator=- --key=3 --reverse)
+files=$(find . -name "sonarqube-enterprise-*" | sort --version-sort --field-separator=- --key=3 --reverse)
 
 # Print the files that will be kept (the latest one)
 echo "Files that won't be deleted:"
