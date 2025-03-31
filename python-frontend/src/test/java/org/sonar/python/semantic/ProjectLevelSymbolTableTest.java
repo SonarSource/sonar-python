@@ -398,7 +398,10 @@ class ProjectLevelSymbolTableTest {
   }
 
   private static Set<Symbol> globalSymbols(FileInput fileInput, String packageName) {
-    ProjectLevelSymbolTable projectLevelSymbolTable = empty();
+    return globalSymbols(empty(), fileInput, packageName);
+  }
+
+  private static Set<Symbol> globalSymbols(ProjectLevelSymbolTable projectLevelSymbolTable, FileInput fileInput, String packageName) {
     projectLevelSymbolTable.addModule(fileInput, packageName, pythonFile("mod.py"));
     return projectLevelSymbolTable.getSymbolsFromModule(packageName.isEmpty() ? "mod" : packageName + ".mod");
   }
@@ -536,6 +539,46 @@ class ProjectLevelSymbolTableTest {
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("obj1", "obj2", "fn", "A");
     assertThat(globalSymbols).extracting(Symbol::fullyQualifiedName).containsExactlyInAnyOrder("mod.obj1", "mod.obj2", "mod.fn", "mod.A");
     assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
+  }
+
+  @Test
+  void global_symbols_override() {
+    var tree = parseWithoutSymbols(
+      """
+      obj1 = 42
+      obj2: int = 42
+      def fn(): pass
+      class A: pass
+      """
+    );
+    var symbolTable = empty();
+    var globalSymbols = globalSymbols(symbolTable, tree, "");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("obj1", "obj2", "fn", "A");
+    assertThat(globalSymbols).extracting(Symbol::fullyQualifiedName).containsExactlyInAnyOrder("mod.obj1", "mod.obj2", "mod.fn", "mod.A");
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
+
+    tree = parseWithoutSymbols(
+      """
+      obj1 = 42
+      obj2: int = 42
+      def fn(): pass
+      class B: pass
+      """
+    );
+    globalSymbols = globalSymbols(symbolTable, tree, "");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("obj1", "obj2", "fn", "A", "B");
+    assertThat(globalSymbols).extracting(Symbol::fullyQualifiedName).containsExactlyInAnyOrder("mod.obj1", "mod.obj2", "mod.fn", "mod.A", "mod.B");
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
+
+    var nonAmbiguousSymbolFqn = Set.of("mod.A", "mod.B");
+
+    assertThat(globalSymbols)
+      .filteredOn(s -> !nonAmbiguousSymbolFqn.contains(s.fullyQualifiedName()))
+      .allMatch(AmbiguousSymbol.class::isInstance);
+
+    assertThat(globalSymbols)
+      .filteredOn(s -> nonAmbiguousSymbolFqn.contains(s.fullyQualifiedName()))
+      .allMatch(ClassSymbol.class::isInstance);
   }
 
   @Test

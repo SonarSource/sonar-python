@@ -112,11 +112,35 @@ public class ProjectLevelSymbolTable {
         || entry.getKey().usages().stream().anyMatch(u -> u.kind().equals(UsageV2.Kind.IMPORT))))
       .map(Map.Entry::getValue)
       .collect(Collectors.toSet());
-    globalDescriptorsByModuleName.put(fullyQualifiedModuleName, moduleDescriptors);
+    globalDescriptorsByModuleName.merge(fullyQualifiedModuleName, moduleDescriptors, ProjectLevelSymbolTable::mergeDescriptors);
     addModuleToGlobalSymbolsByFQN(moduleDescriptors);
 
     DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor(fullyQualifiedModuleName);
     fileInput.accept(djangoViewsVisitor);
+  }
+
+  private static Set<Descriptor> mergeDescriptors(Set<Descriptor> oldDescriptors, Set<Descriptor> newDescriptors) {
+    var oldDescriptorsByFqn = oldDescriptors.stream()
+      .collect(Collectors.toMap(Descriptor::fullyQualifiedName, Function.identity(), AmbiguousDescriptor::create));
+    var newDescriptorsByFqn = newDescriptors.stream()
+      .collect(Collectors.toMap(Descriptor::fullyQualifiedName, Function.identity(), AmbiguousDescriptor::create));
+    var mergedDescriptorsByFqn = mergeDescriptors(oldDescriptorsByFqn, newDescriptorsByFqn);
+    return Set.copyOf(mergedDescriptorsByFqn.values());
+  }
+
+  private static Map<String, Descriptor> mergeDescriptors(Map<String, Descriptor> oldDescriptorsByFqn,
+    Map<String, Descriptor> newDescriptorsByFqn) {
+    var mergedMap = new HashMap<>(oldDescriptorsByFqn);
+    newDescriptorsByFqn.forEach((fqn, descriptor) -> mergedMap.merge(fqn, descriptor, ProjectLevelSymbolTable::mergeDescriptors));
+    return mergedMap;
+  }
+
+  @CheckForNull
+  private static Descriptor mergeDescriptors(@Nullable Descriptor oldDescriptor, @Nullable Descriptor newDescriptor) {
+    if (oldDescriptor == newDescriptor) {
+      return oldDescriptor;
+    }
+    return AmbiguousDescriptor.create(oldDescriptor, newDescriptor);
   }
 
   private static boolean isNotMissingType(Set<PythonType> types) {
@@ -124,10 +148,11 @@ public class ProjectLevelSymbolTable {
   }
 
   private void addModuleToGlobalSymbolsByFQN(Set<Descriptor> descriptors) {
-    Map<String, Descriptor> moduleDescriptorsByFQN = descriptors.stream()
+    var globalDescriptors = this.globalDescriptorsByFQN();
+    var moduleDescriptorsByFQN = descriptors.stream()
       .filter(d -> d.fullyQualifiedName() != null)
       .collect(Collectors.toMap(Descriptor::fullyQualifiedName, Function.identity(), AmbiguousDescriptor::create));
-    globalDescriptorsByFQN().putAll(moduleDescriptorsByFQN);
+    moduleDescriptorsByFQN.forEach((fqn, descriptor) -> globalDescriptors.merge(fqn, descriptor, ProjectLevelSymbolTable::mergeDescriptors));
   }
 
   private synchronized Map<String, Descriptor> globalDescriptorsByFQN() {
