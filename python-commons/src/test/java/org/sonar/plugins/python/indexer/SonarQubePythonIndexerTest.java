@@ -473,6 +473,21 @@ class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.projectLevelSymbolTable().getSymbolsFromModule("notebook")).isEmpty();
   }
 
+  @Test
+  void test_sensor_single_thread() throws IOException {
+    var contextSingleThread = SensorContextTester.create(baseDir);
+    contextSingleThread.settings().setProperty("sonar.python.symbols.threads", 1);
+    contextSingleThread.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+
+    var inputFiles = List.of(createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN));
+    var indexer = new SonarQubePythonIndexer(inputFiles, cacheContext, contextSingleThread);
+    indexer.buildOnce(contextSingleThread);
+
+    assertThat(indexer.projectLevelSymbolTable().getSymbolsFromModule("main")).isNotEmpty();
+
+
+  }
+
   private byte[] importsAsByteArray(List<String> mod) {
     return String.join(";", mod).getBytes(StandardCharsets.UTF_8);
   }
