@@ -14,12 +14,12 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package com.sonarsource.architecture.python;
+package com.sonarsource.plugins.architecturepythonfrontend.api;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class PythonRules {
+public class ArchitecturePythonRules {
   public static Set<String> ruleKeys = new HashSet<>();
 
   public static boolean throwOnCall = false;

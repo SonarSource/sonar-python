@@ -17,6 +17,7 @@
 package org.sonar.plugins.python;
 
 import com.sonar.plugins.security.api.PythonRules;
+import com.sonarsource.plugins.architecturepythonfrontend.api.ArchitecturePythonRules;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
@@ -87,14 +88,14 @@ class PythonProfileTest {
   @Test
   void should_contains_architecture_rules_if_available() {
     // no architecture rules available
-    com.sonarsource.architecture.python.PythonRules.getRuleKeys().clear();
+    ArchitecturePythonRules.getRuleKeys().clear();
     assertThat(getArchitectureRuleKeys()).isEmpty();
 
     // one architecture rule available
-    com.sonarsource.architecture.python.PythonRules.getRuleKeys().add("S7134");
+    ArchitecturePythonRules.getRuleKeys().add("S7134");
     assertThat(getArchitectureRuleKeys()).containsOnly(RuleKey.of("pythonarchitecture", "S7134"));
 
-    com.sonarsource.architecture.python.PythonRules.throwOnCall = true;
+    ArchitecturePythonRules.throwOnCall = true;
     assertThat(getArchitectureRuleKeys())
       .isEmpty();
     PythonRules.throwOnCall = false;
