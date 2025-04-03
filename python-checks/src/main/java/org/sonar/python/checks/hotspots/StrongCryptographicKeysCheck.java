@@ -47,8 +47,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   public static final String MESSAGE_AT_LEAST_224_BIT = "Use a key length of at least 224 bits.";
   public static final String MESSAGE_NIST_APPROVED_CURVE = "Use a NIST-approved elliptic curve.";
   public static final String CURVE = "curve";
-  private static final Pattern CRYPTOGRAPHY_FORBIDDEN_CURVE = Pattern.compile("(SECP192R1|SECT163K1|SECT163R2)");
-
+  private static final Pattern CRYPTOGRAPHY_FORBIDDEN_CURVE = Pattern.compile("(SECP192R1|SECT571K1|SECT409K1|SECT283K1|SECT233K1|SECT163K1|SECT571R1|SECT409R1|SECT283R1|SECT233R1|SECT163R2)");
   private static final ArgumentValidator CRYPTOGRAPHY_KEY_SIZE = new ArgumentValidator(
     1, "key_size", (ctx, argument) -> {
     if (isLessThan2048(argument)) {
@@ -106,17 +105,18 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   });
 
   private static final Map<String, Collection<CallValidator>> CALL_EXPRESSION_VALIDATORS =
-    Map.of(
-      "cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE),
-      "cryptography.hazmat.primitives.asymmetric.dsa.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE),
-      "cryptography.hazmat.primitives.asymmetric.ec.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE),
-      "Crypto.PublicKey.RSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTO_EXPONENT),
-      "Crypto.PublicKey.DSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTO_EXPONENT),
-      "Cryptodome.PublicKey.RSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTODOME_EXPONENT),
-      "Cryptodome.PublicKey.DSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTODOME_EXPONENT),
-      "Cryptodome.PublicKey.ElGamal.generate", List.of(CRYPTODOME_ELGAMAL_CURVE),
-      "Cryptodome.PublicKey.ECC.generate", List.of(CRYPTODOME_ECC_FORBIDDEN_CURVE),
-      "OpenSSL.crypto.PKey.generate_key", List.of(new OpenSslCryptoModuleCallValidator())
+    Map.ofEntries(
+      Map.entry("cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE)),
+      Map.entry("cryptography.hazmat.primitives.asymmetric.dsa.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE)),
+      Map.entry("cryptography.hazmat.primitives.asymmetric.ec.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE)),
+      Map.entry("cryptography.hazmat.primitives.asymmetric.dh.generate_parameters", List.of(CRYPTOGRAPHY_KEY_SIZE)),
+      Map.entry("Crypto.PublicKey.RSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTO_EXPONENT)),
+      Map.entry("Crypto.PublicKey.DSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTO_EXPONENT)),
+      Map.entry("Cryptodome.PublicKey.RSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTODOME_EXPONENT)),
+      Map.entry("Cryptodome.PublicKey.DSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTODOME_EXPONENT)),
+      Map.entry("Cryptodome.PublicKey.ElGamal.generate", List.of(CRYPTODOME_ELGAMAL_CURVE)),
+      Map.entry("Cryptodome.PublicKey.ECC.generate", List.of(CRYPTODOME_ECC_FORBIDDEN_CURVE)),
+      Map.entry("OpenSSL.crypto.PKey.generate_key", List.of(new OpenSslCryptoModuleCallValidator()))
     );
 
   @Override

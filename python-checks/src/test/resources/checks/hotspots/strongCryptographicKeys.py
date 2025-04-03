@@ -2,7 +2,7 @@
 ###            cryptography              ###
 ############################################
 def cryptography():
-    from cryptography.hazmat.primitives.asymmetric import rsa, ec, dsa
+    from cryptography.hazmat.primitives.asymmetric import rsa, ec, dsa, dh
     from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
 
     # key_size = DSA key size
@@ -40,15 +40,24 @@ def cryptography():
     ec.generate_private_key(curve=ec.SECT163R2()) # Noncompliant
     noncompliantCurve = ec.SECT163R2()
     ec.generate_private_key(curve=noncompliantCurve) # Noncompliant
-    ec.generate_private_key(curve=ec.SECT409R1) # Compliant
-    ec.generate_private_key(curve=ec.SECT409R1()) # Compliant
-    compliantCurve = ec.SECT409R1()
+    ec.generate_private_key(curve=ec.BrainpoolP256R1) # Compliant
+    ec.generate_private_key(curve=ec.BrainpoolP256R1()) # Compliant
+    compliantCurve = ec.BrainpoolP256R1()
     ec.generate_private_key(curve=compliantCurve) # Compliant
     ec.generate_private_key(curve=ec.Other) # Compliant
     ec.generate_private_key(curve=other.SECT409R1) # Compliant
     ec.generate_private_key(curve=rsa.SECT409R1) # Compliant
     ec.generate_private_key(curve=c) # Compliant
     ec.generate_private_key(curve=getCurve().SECT163R2) # Compliant
+
+    ec.generate_private_key(ec.SECP192R1()) # Noncompliant
+    ec.generate_private_key(ec.SECP224R1()) # Compliant
+    ec.generate_private_key(ec.SECT163K1()) # Noncompliant
+    ec.generate_private_key(ec.SECP192R1) # Noncompliant
+    ec.generate_private_key(ec.SECP224R1) # Compliant
+
+    dh.generate_parameters(2, 1024) # Noncompliant
+    dh.generate_parameters(2, 2048) # Compliant
 
 
 ############################################
