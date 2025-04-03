@@ -68,7 +68,7 @@ def crypto():
 ############################################
 
 def cryptodome():
-    from Cryptodome.PublicKey import DSA, RSA
+    from Cryptodome.PublicKey import DSA, RSA, ElGamal, ECC
 
     # bits = DSA key size
     DSA.generate(bits=1024) # Noncompliant
@@ -84,3 +84,11 @@ def cryptodome():
     RSA.other(bits=2048, e=65537) # Compliant
 
     RSA.generate(2048, None, 999) # Noncompliant
+
+    ElGamal.generate(1024)  # Noncompliant
+    ElGamal.generate(2048)  # Compliant
+
+    ECC.generate(curve="secp192r1")  # Noncompliant
+    ECC.generate(curve="ed25519")  # Compliant
+    ecc_algo = "p192"
+    ECC.generate(ecc_algo)  # Noncompliant {{Use a NIST-approved elliptic curve.}}

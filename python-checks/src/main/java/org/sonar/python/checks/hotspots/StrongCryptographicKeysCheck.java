@@ -16,8 +16,12 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -27,34 +31,101 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S4426")
 public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
-
-  private static final Pattern CRYPTOGRAPHY = Pattern.compile("cryptography.hazmat.primitives.asymmetric.(rsa|dsa|ec).generate_private_key");
+  public static final String MESSAGE_AT_LEAST_65537_EXPONENT = "Use a public key exponent of at least 65537.";
+  public static final String MESSAGE_AT_LEAST_2048_BIT = "Use a key length of at least 2048 bits.";
+  public static final String MESSAGE_AT_LEAST_224_BIT = "Use a key length of at least 224 bits.";
+  public static final String MESSAGE_NIST_APPROVED_CURVE = "Use a NIST-approved elliptic curve.";
+  public static final String CURVE = "curve";
   private static final Pattern CRYPTOGRAPHY_FORBIDDEN_CURVE = Pattern.compile("(SECP192R1|SECT163K1|SECT163R2)");
-  private static final Pattern CRYPTO = Pattern.compile("Crypto.PublicKey.(RSA|DSA).generate");
-  private static final Pattern CRYPTODOME = Pattern.compile("Cryptodome.PublicKey.(RSA|DSA).generate");
 
+  private static final ArgumentValidator CRYPTOGRAPHY_KEY_SIZE = new ArgumentValidator(
+    1, "key_size", (ctx, argument) -> {
+    if (isLessThan2048(argument)) {
+      ctx.addIssue(argument, MESSAGE_AT_LEAST_2048_BIT);
+    }
+  });
+
+  private static final ArgumentValidator CRYPTOGRAPHY_PUBLIC_EXPONENT = new ArgumentValidator(
+    0, "public_exponent", (ctx, argument) -> {
+    if (isLessThan65537(argument)) {
+      ctx.addIssue(argument, MESSAGE_AT_LEAST_65537_EXPONENT);
+    }
+  });
+
+  private static final ArgumentValidator CRYPTOGRAPHY_CURVE = new ArgumentValidator(
+    0, CURVE, (ctx, argument) -> {
+    if (isNonCompliantCurve(argument.expression())) {
+      ctx.addIssue(argument, MESSAGE_AT_LEAST_224_BIT);
+    }
+  });
+
+  private static final ArgumentValidator CRYPTO_CRYPTODOME_KEY_SIZE = new ArgumentValidator(
+    0, "bits", (ctx, argument) -> {
+    if (isLessThan2048(argument)) {
+      ctx.addIssue(argument, MESSAGE_AT_LEAST_2048_BIT);
+    }
+  });
+
+  private static final ArgumentValidator CRYPTO_EXPONENT = new ArgumentValidator(
+    3, "e", (ctx, argument) -> {
+    if (isLessThan65537(argument)) {
+      ctx.addIssue(argument, MESSAGE_AT_LEAST_65537_EXPONENT);
+    }
+  });
+
+  private static final ArgumentValidator CRYPTODOME_EXPONENT = new ArgumentValidator(
+    2, "e", (ctx, argument) -> {
+    if (isLessThan65537(argument)) {
+      ctx.addIssue(argument, MESSAGE_AT_LEAST_65537_EXPONENT);
+    }
+  });
+
+  private static final ArgumentValidator CRYPTODOME_ELGAMAL_CURVE = new ArgumentValidator(
+    0, CURVE, (ctx, argument) -> {
+    if (isLessThan2048(argument)) {
+      ctx.addIssue(argument, MESSAGE_AT_LEAST_2048_BIT);
+    }
+  });
+
+  private static final ArgumentValidator CRYPTODOME_ECC_FORBIDDEN_CURVE = new ArgumentValidator(
+    0, CURVE, (ctx, argument) -> {
+    if (isForbiddenCurve(argument.expression(), Set.of("NIST P-192", "p192", "P-192", "prime192v1", "secp192r1"))) {
+      ctx.addIssue(argument, MESSAGE_NIST_APPROVED_CURVE);
+    }
+  });
+
+  private static final Map<String, Collection<CallExpressionValidator>> CALL_EXPRESSION_VALIDATORS =
+    Map.of(
+      "cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE),
+      "cryptography.hazmat.primitives.asymmetric.dsa.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE),
+      "cryptography.hazmat.primitives.asymmetric.ec.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE),
+      "Crypto.PublicKey.RSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTO_EXPONENT),
+      "Crypto.PublicKey.DSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTO_EXPONENT),
+      "Cryptodome.PublicKey.RSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTODOME_EXPONENT),
+      "Cryptodome.PublicKey.DSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTODOME_EXPONENT),
+      "Cryptodome.PublicKey.ElGamal.generate", List.of(CRYPTODOME_ELGAMAL_CURVE),
+      "Cryptodome.PublicKey.ECC.generate", List.of(CRYPTODOME_ECC_FORBIDDEN_CURVE)
+    );
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-      List<Argument> arguments = callExpression.arguments();
-      String qualifiedName = getQualifiedName(callExpression);
-      if (CRYPTOGRAPHY.matcher(qualifiedName).matches()) {
-        new CryptographyModuleCheck().checkArguments(ctx, arguments);
-      } else if (CRYPTO.matcher(qualifiedName).matches()) {
-        new CryptoModuleCheck().checkArguments(ctx, arguments);
-      } else if (CRYPTODOME.matcher(qualifiedName).matches()) {
-        new CryptodomeModuleCheck().checkArguments(ctx, arguments);
-      }
+      var qualifiedName = getQualifiedName(callExpression);
+      var configs = CALL_EXPRESSION_VALIDATORS.getOrDefault(qualifiedName, List.of());
+
+      configs.forEach(config -> config.validate(ctx, callExpression));
     });
   }
 
@@ -64,140 +135,71 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
     return symbol != null && symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
   }
 
-  private abstract static class CryptoAPICheck {
+  interface CallExpressionValidator {
+    void validate(SubscriptionContext ctx, CallExpression callExpression);
+  }
 
-    abstract int getKeySizeArgumentPosition();
+  private record ArgumentValidator(
+    int position,
+    String keywordName,
+    BiConsumer<SubscriptionContext, RegularArgument> consumer
+  ) implements CallExpressionValidator {
 
-    abstract int getExponentArgumentPosition();
-
-    abstract String getKeySizeKeywordName();
-
-    abstract String getExponentKeywordName();
-
-    private static boolean isLessThan2048(RegularArgument argument) {
-      return isLessThan(argument.expression(), 2048);
-    }
-
-    private static boolean isLessThan65537(RegularArgument argument) {
-      return isLessThan(argument.expression(), 65537);
-    }
-
-    private static boolean isLessThan(Expression expression, int number) {
-      try {
-        return expression.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() < number;
-      } catch (NumberFormatException nfe) {
-        return false;
+    @Override
+    public void validate(SubscriptionContext ctx, CallExpression callExpression) {
+      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(position, keywordName, callExpression.arguments());
+      if (argument != null) {
+        consumer.accept(ctx, argument);
       }
     }
+  }
 
-    void checkArguments(SubscriptionContext ctx, List<Argument> arguments) {
-      argument(getKeySizeArgumentPosition(), getKeySizeKeywordName(), arguments)
-        .filter(CryptoAPICheck::isLessThan2048)
-        .ifPresent(arg -> ctx.addIssue(arg, "Use a key length of at least 2048 bits."));
+  private static boolean isForbiddenCurve(Expression expression, Set<String> forbiddenStrings) {
+    if (expression.getKind() == Kind.STRING_LITERAL) {
+      String curveName = ((StringLiteral) expression).trimmedQuotesValue();
+      return forbiddenStrings.contains(curveName);
+    }
+    if (expression.getKind() == Kind.NAME) {
+      return Expressions.singleAssignedNonNameValue(((Name) expression))
+        .map(v -> isForbiddenCurve(v, forbiddenStrings))
+        .orElse(false);
+    }
+    return false;
+  }
 
-      argument(getExponentArgumentPosition(), getExponentKeywordName(), arguments)
-        .filter(CryptoAPICheck::isLessThan65537)
-        .ifPresent(arg -> ctx.addIssue(arg, "Use a public key exponent of at least 65537."));
+  private static boolean isNonCompliantCurve(Expression expression) {
+    if (!expression.is(Kind.QUALIFIED_EXPR)) {
+      return false;
+    }
+    QualifiedExpression qualifiedExpressionTree = (QualifiedExpression) expression;
+    if (qualifiedExpressionTree.qualifier() instanceof HasSymbol hasSymbol) {
+      Symbol symbol = hasSymbol.symbol();
+      if (symbol == null || !"cryptography.hazmat.primitives.asymmetric.ec".equals(symbol.fullyQualifiedName())) {
+        return false;
+      }
+      return CRYPTOGRAPHY_FORBIDDEN_CURVE.matcher(qualifiedExpressionTree.name().name()).matches();
+    }
+    return false;
+  }
+
+  private static boolean isLessThan2048(RegularArgument argument) {
+    return isLessThan(argument.expression(), 2048);
+  }
+
+  private static boolean isLessThan65537(RegularArgument argument) {
+    return isLessThan(argument.expression(), 65537);
+  }
+
+  private static boolean isLessThan(Expression expression, int number) {
+    try {
+      return expression.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() < number;
+    } catch (NumberFormatException nfe) {
+      return false;
     }
   }
 
   public static Optional<RegularArgument> argument(int argPosition, String keyword, List<Argument> arguments) {
     return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(argPosition, keyword, arguments));
-  }
-
-  private static class CryptographyModuleCheck extends CryptoAPICheck {
-
-    private static final int CURVE_ARGUMENT_POSITION = 0;
-
-    @Override
-    protected int getKeySizeArgumentPosition() {
-      return 1;
-    }
-
-    @Override
-    protected int getExponentArgumentPosition() {
-      return 0;
-    }
-
-    @Override
-    protected String getKeySizeKeywordName() {
-      return "key_size";
-    }
-
-    @Override
-    protected String getExponentKeywordName() {
-      return "public_exponent";
-    }
-
-    @Override
-    void checkArguments(SubscriptionContext ctx, List<Argument> arguments) {
-      super.checkArguments(ctx, arguments);
-
-      argument(CURVE_ARGUMENT_POSITION, "curve", arguments)
-        .filter(arg -> isNonCompliantCurve(arg.expression()))
-        .ifPresent(arg -> ctx.addIssue(arg, "Use a key length of at least 224 bits."));
-    }
-
-    private static boolean isNonCompliantCurve(Expression expression) {
-      if (!expression.is(Kind.QUALIFIED_EXPR)) {
-        return false;
-      }
-      QualifiedExpression qualifiedExpressionTree = (QualifiedExpression) expression;
-      if (qualifiedExpressionTree.qualifier() instanceof HasSymbol hasSymbol) {
-        Symbol symbol = hasSymbol.symbol();
-        if (symbol == null || !"cryptography.hazmat.primitives.asymmetric.ec".equals(symbol.fullyQualifiedName())) {
-          return false;
-        }
-        return CRYPTOGRAPHY_FORBIDDEN_CURVE.matcher(qualifiedExpressionTree.name().name()).matches();
-      }
-      return false;
-    }
-  }
-
-  private static class CryptoModuleCheck extends CryptoAPICheck {
-
-    @Override
-    protected int getExponentArgumentPosition() {
-      return 3;
-    }
-
-    @Override
-    protected int getKeySizeArgumentPosition() {
-      return 0;
-    }
-
-    @Override
-    protected String getExponentKeywordName() {
-      return "e";
-    }
-
-    @Override
-    protected String getKeySizeKeywordName() {
-      return "bits";
-    }
-  }
-
-  private static class CryptodomeModuleCheck extends CryptoAPICheck {
-
-    @Override
-    protected int getExponentArgumentPosition() {
-      return 2;
-    }
-
-    @Override
-    protected String getExponentKeywordName() {
-      return "e";
-    }
-
-    @Override
-    protected String getKeySizeKeywordName() {
-      return "bits";
-    }
-
-    @Override
-    protected int getKeySizeArgumentPosition() {
-      return 0;
-    }
   }
 
 }
