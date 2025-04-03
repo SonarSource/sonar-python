@@ -36,7 +36,14 @@ def cryptography():
     # Forbidden values for curve parameter: SECP192R1, SECT163K1, SECT163R2
     private_key_ec = ec.generate_private_key(curve=ec.SECT163R2)  # Noncompliant {{Use a key length of at least 224 bits.}}
     ec.generate_private_key(ec.SECT163R2) # Noncompliant
+    ec.generate_private_key(ec.SECT163R2()) # Noncompliant
+    ec.generate_private_key(curve=ec.SECT163R2()) # Noncompliant
+    noncompliantCurve = ec.SECT163R2()
+    ec.generate_private_key(curve=noncompliantCurve) # Noncompliant
     ec.generate_private_key(curve=ec.SECT409R1) # Compliant
+    ec.generate_private_key(curve=ec.SECT409R1()) # Compliant
+    compliantCurve = ec.SECT409R1()
+    ec.generate_private_key(curve=compliantCurve) # Compliant
     ec.generate_private_key(curve=ec.Other) # Compliant
     ec.generate_private_key(curve=other.SECT409R1) # Compliant
     ec.generate_private_key(curve=rsa.SECT409R1) # Compliant

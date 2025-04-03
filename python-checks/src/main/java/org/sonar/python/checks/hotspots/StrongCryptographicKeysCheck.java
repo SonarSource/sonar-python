@@ -192,6 +192,15 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isNonCompliantCurve(Expression expression) {
+    if (expression instanceof Name name) {
+      expression = Expressions.singleAssignedValue(name);
+      if (expression == null) {
+        return false;
+      }
+    }
+    if (expression instanceof CallExpression callExpression) {
+      expression = callExpression.callee();
+    }
     if (!expression.is(Kind.QUALIFIED_EXPR)) {
       return false;
     }
