@@ -105,7 +105,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
     }
   });
 
-  private static final Map<String, Collection<CallExpressionValidator>> CALL_EXPRESSION_VALIDATORS =
+  private static final Map<String, Collection<CallValidator>> CALL_EXPRESSION_VALIDATORS =
     Map.of(
       "cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE),
       "cryptography.hazmat.primitives.asymmetric.dsa.generate_private_key", List.of(CRYPTOGRAPHY_KEY_SIZE, CRYPTOGRAPHY_PUBLIC_EXPONENT, CRYPTOGRAPHY_CURVE),
@@ -115,7 +115,8 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
       "Cryptodome.PublicKey.RSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTODOME_EXPONENT),
       "Cryptodome.PublicKey.DSA.generate", List.of(CRYPTO_CRYPTODOME_KEY_SIZE, CRYPTODOME_EXPONENT),
       "Cryptodome.PublicKey.ElGamal.generate", List.of(CRYPTODOME_ELGAMAL_CURVE),
-      "Cryptodome.PublicKey.ECC.generate", List.of(CRYPTODOME_ECC_FORBIDDEN_CURVE)
+      "Cryptodome.PublicKey.ECC.generate", List.of(CRYPTODOME_ECC_FORBIDDEN_CURVE),
+      "OpenSSL.crypto.PKey.generate_key", List.of(new OpenSslCryptoModuleCallValidator())
     );
 
   @Override
@@ -135,7 +136,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
     return symbol != null && symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
   }
 
-  interface CallExpressionValidator {
+  interface CallValidator {
     void validate(SubscriptionContext ctx, CallExpression callExpression);
   }
 
@@ -143,14 +144,37 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
     int position,
     String keywordName,
     BiConsumer<SubscriptionContext, RegularArgument> consumer
-  ) implements CallExpressionValidator {
+  ) implements CallValidator {
 
     @Override
     public void validate(SubscriptionContext ctx, CallExpression callExpression) {
-      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(position, keywordName, callExpression.arguments());
-      if (argument != null) {
-        consumer.accept(ctx, argument);
+      argument(position, keywordName, callExpression.arguments())
+        .ifPresent(argument -> consumer.accept(ctx, argument));
+    }
+  }
+
+  private static class OpenSslCryptoModuleCallValidator implements CallValidator {
+    private static final Set<String> KEY_TYPE_FQNS_TO_CHECK = Set.of("OpenSSL.crypto.TYPE_RSA", "OpenSSL.crypto.TYPE_DSA");
+
+    @Override
+    public void validate(SubscriptionContext ctx, CallExpression callExpression) {
+      var arguments = callExpression.arguments();
+      if (keyTypeNeedsToBeChecked(arguments)) {
+        argument(1, "bits", arguments)
+          .filter(StrongCryptographicKeysCheck::isLessThan2048)
+          .ifPresent(arg -> ctx.addIssue(arg, MESSAGE_AT_LEAST_2048_BIT));
       }
+    }
+
+    private static boolean keyTypeNeedsToBeChecked(List<Argument> arguments) {
+      return argument(0, "type", arguments)
+        .map(RegularArgument::expression)
+        .filter(HasSymbol.class::isInstance)
+        .map(HasSymbol.class::cast)
+        .map(HasSymbol::symbol)
+        .map(Symbol::fullyQualifiedName)
+        .map(KEY_TYPE_FQNS_TO_CHECK::contains)
+        .orElse(false);
     }
   }
 

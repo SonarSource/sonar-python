@@ -92,3 +92,16 @@ def cryptodome():
     ECC.generate(curve="ed25519")  # Compliant
     ecc_algo = "p192"
     ECC.generate(ecc_algo)  # Noncompliant {{Use a NIST-approved elliptic curve.}}
+
+############################################
+###                pyOpenSSL             ###
+############################################
+
+def pyOpenSSL():
+    from OpenSSL.crypto import PKey, TYPE_RSA, TYPE_DSA, TYPE_DH
+    key_rsa1024 = PKey()
+    key_rsa1024.generate_key(type=TYPE_RSA, bits=1024) # Noncompliant
+    key_rsa1024.generate_key(TYPE_RSA, 2048)
+    key_rsa1024.generate_key(TYPE_DSA, 1024) # Noncompliant
+    key_rsa1024.generate_key(TYPE_DSA, 2048)
+    key_rsa1024.generate_key(TYPE_DH, 1024)
