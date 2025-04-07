@@ -19,9 +19,7 @@ package org.sonar.python.checks.hotspots;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.BiConsumer;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -32,13 +30,16 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.checks.hotspots.CommonValidationUtils.ArgumentValidator;
+import org.sonar.python.checks.hotspots.CommonValidationUtils.CallValidator;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.semantic.SymbolUtils.qualifiedNameOrEmpty;
 
 @Rule(key = "S4426")
 public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
@@ -123,35 +124,13 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-      var qualifiedName = getQualifiedName(callExpression);
+      var qualifiedName = qualifiedNameOrEmpty(callExpression);
       var configs = CALL_EXPRESSION_VALIDATORS.getOrDefault(qualifiedName, List.of());
 
       configs.forEach(config -> config.validate(ctx, callExpression));
     });
   }
 
-
-  private static String getQualifiedName(CallExpression callExpression) {
-    Symbol symbol = callExpression.calleeSymbol();
-    return symbol != null && symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
-  }
-
-  interface CallValidator {
-    void validate(SubscriptionContext ctx, CallExpression callExpression);
-  }
-
-  private record ArgumentValidator(
-    int position,
-    String keywordName,
-    BiConsumer<SubscriptionContext, RegularArgument> consumer
-  ) implements CallValidator {
-
-    @Override
-    public void validate(SubscriptionContext ctx, CallExpression callExpression) {
-      argument(position, keywordName, callExpression.arguments())
-        .ifPresent(argument -> consumer.accept(ctx, argument));
-    }
-  }
 
   private static class OpenSslCryptoModuleCallValidator implements CallValidator {
     private static final Set<String> KEY_TYPE_FQNS_TO_CHECK = Set.of("OpenSSL.crypto.TYPE_RSA", "OpenSSL.crypto.TYPE_DSA");
@@ -160,14 +139,14 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
     public void validate(SubscriptionContext ctx, CallExpression callExpression) {
       var arguments = callExpression.arguments();
       if (keyTypeNeedsToBeChecked(arguments)) {
-        argument(1, "bits", arguments)
+        TreeUtils.nthArgumentOrKeywordOptional(1, "bits", arguments)
           .filter(StrongCryptographicKeysCheck::isLessThan2048)
           .ifPresent(arg -> ctx.addIssue(arg, MESSAGE_AT_LEAST_2048_BIT));
       }
     }
 
     private static boolean keyTypeNeedsToBeChecked(List<Argument> arguments) {
-      return argument(0, "type", arguments)
+      return TreeUtils.nthArgumentOrKeywordOptional(0, "type", arguments)
         .map(RegularArgument::expression)
         .filter(HasSymbol.class::isInstance)
         .map(HasSymbol.class::cast)
@@ -216,23 +195,11 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isLessThan2048(RegularArgument argument) {
-    return isLessThan(argument.expression(), 2048);
+    return CommonValidationUtils.isLessThan(argument.expression(), 2048);
   }
 
   private static boolean isLessThan65537(RegularArgument argument) {
-    return isLessThan(argument.expression(), 65537);
-  }
-
-  private static boolean isLessThan(Expression expression, int number) {
-    try {
-      return expression.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() < number;
-    } catch (NumberFormatException nfe) {
-      return false;
-    }
-  }
-
-  public static Optional<RegularArgument> argument(int argPosition, String keyword, List<Argument> arguments) {
-    return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(argPosition, keyword, arguments));
+    return CommonValidationUtils.isLessThan(argument.expression(), 65537);
   }
 
 }

@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
-import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -39,6 +38,7 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = DebugModeCheck.CHECK_KEY)
@@ -66,7 +66,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    var qualifiedName = getQualifiedName(callExpression);
+    var qualifiedName = SymbolUtils.qualifiedNameOrEmpty(callExpression);
 
     if (DJANGO_CONFIGURE_FQN.equals(qualifiedName)) {
       arguments.stream().filter(DebugModeCheck::isDebugArgument).forEach(arg -> ctx.addIssue(arg, MESSAGE));
@@ -90,7 +90,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isFlaskGraphqlViewAsViewMethodCall(CallExpression callExpression) {
-    var qualifiedName = getQualifiedName(callExpression);
+    var qualifiedName = SymbolUtils.qualifiedNameOrEmpty(callExpression);
     if (FLASK_GRAPHQL_VIEW_AS_VIEW_FQN.equals(qualifiedName)) {
       return true;
     }
@@ -197,9 +197,4 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  @CheckForNull
-  private static String getQualifiedName(CallExpression callExpression) {
-    Symbol symbol = callExpression.calleeSymbol();
-    return symbol != null ? symbol.fullyQualifiedName() : "";
-  }
 }

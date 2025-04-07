@@ -34,6 +34,7 @@ import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -57,7 +58,6 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
 
 public class TreeUtils {
@@ -322,6 +322,10 @@ public class TreeUtils {
       }
     }
     return null;
+  }
+
+  public static Optional<RegularArgument> nthArgumentOrKeywordOptional(int argPosition, String keyword, List<Argument> arguments) {
+    return Optional.ofNullable(nthArgumentOrKeyword(argPosition, keyword, arguments));
   }
 
   private static boolean hasKeyword(Argument argument, String keyword) {

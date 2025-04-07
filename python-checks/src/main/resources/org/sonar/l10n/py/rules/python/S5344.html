@@ -1,0 +1,803 @@
+<p>The improper storage of passwords poses a significant security risk to software applications. This vulnerability arises when passwords are stored
+in plaintext or with a fast hashing algorithm. To exploit this vulnerability, an attacker typically requires access to the stored passwords.</p>
+<h2>Why is this an issue?</h2>
+<p>Attackers who would get access to the stored passwords could reuse them without further attacks or with little additional effort.<br> Obtaining the
+plaintext passwords, they could then gain unauthorized access to user accounts, potentially leading to various malicious activities.</p>
+<h3>What is the potential impact?</h3>
+<p>Plaintext or weakly hashed password storage poses a significant security risk to software applications.</p>
+<h4>Unauthorized Access</h4>
+<p>When passwords are stored in plaintext or with weak hashing algorithms, an attacker who gains access to the password database can easily retrieve
+and use the passwords to gain unauthorized access to user accounts. This can lead to various malicious activities, such as unauthorized data access,
+identity theft, or even financial fraud.</p>
+<h4>Credential Reuse</h4>
+<p>Many users tend to reuse passwords across multiple platforms. If an attacker obtains plaintext or weakly hashed passwords, they can potentially use
+these credentials to gain unauthorized access to other accounts held by the same user. This can have far-reaching consequences, as sensitive personal
+information or critical systems may be compromised.</p>
+<h4>Regulatory Compliance</h4>
+<p>Many industries and jurisdictions have specific regulations and standards to protect user data and ensure its confidentiality. Storing passwords in
+plaintext or with weak hashing algorithms can lead to non-compliance with these regulations, potentially resulting in legal consequences, financial
+penalties, and damage to the reputation of the software application and its developers.</p>
+<h2>How to fix it in Argon2-cffi</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="200" data-diff-type="noncompliant">
+from argon2 import PasswordHasher, profiles
+
+def hash_password(password):
+    ph = PasswordHasher.from_parameters(profiles.CHEAPEST) # Noncompliant
+    return ph.hash(password)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="200" data-diff-type="compliant">
+from argon2 import PasswordHasher
+
+def hash_password(password):
+    ph = PasswordHasher()
+    return ph.hash(password)
+</pre>
+<h3>How does this work?</h3>
+<h4>Select the correct Argon2 parameters</h4>
+<p>In general, the default values of the Argon2 library are considered safe. If you need to change the parameters, you should note the following:</p>
+<p>First, Argon2 comes in three forms: Argon2i, Argon2d and Argon2id. Argon2i is optimized for hashing passwords and uses data-independent memory
+access. Argon2d is faster and uses data-dependent memory access, making it suitable for applications where there is no risk of side-channel
+attacks.<br> Argon2id is a mixture of Argon2i and Argon2d and is recommended for most applications.</p>
+<p>Argon2id has three different parameters that can be configured: the basic minimum memory size (m), the minimum number of iterations (t) and the
+degree of parallelism (p).<br> The higher the values of m, t and p result in safer hashes, but come at the cost of higher resource usage. There exist
+general recommendations that balance security and speed in an optimal way.</p>
+<p>Hashes should be at least 32 bytes long and salts should be at least 16 bytes long.</p>
+<p>Next, the recommended parameters for Argon2id are:</p>
+<table>
+  <colgroup>
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Recommendation type</th>
+      <th>Time Cost</th>
+      <th>Memory Cost</th>
+      <th>Parallelism</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> <p>Argon2 Creators</p> </td>
+      <td> <p>1</p> </td>
+      <td> <p>2097152 (2 GiB)</p> </td>
+      <td> <p>4</p> </td>
+    </tr>
+    <tr>
+      <td> <p>Argon2 Creators</p> </td>
+      <td> <p>3</p> </td>
+      <td> <p>65536 (64 MiB)</p> </td>
+      <td> <p>4</p> </td>
+    </tr>
+    <tr>
+      <td> <p>OWASP</p> </td>
+      <td> <p>1</p> </td>
+      <td> <p>47104 (46 MiB)</p> </td>
+      <td> <p>1</p> </td>
+    </tr>
+    <tr>
+      <td> <p>OWASP</p> </td>
+      <td> <p>2</p> </td>
+      <td> <p>19456 (19 MiB)</p> </td>
+      <td> <p>1</p> </td>
+    </tr>
+    <tr>
+      <td> <p>OWASP</p> </td>
+      <td> <p>3</p> </td>
+      <td> <p>12288 (12 MiB)</p> </td>
+      <td> <p>1</p> </td>
+    </tr>
+    <tr>
+      <td> <p>OWASP</p> </td>
+      <td> <p>4</p> </td>
+      <td> <p>9216 (9 MiB)</p> </td>
+      <td> <p>1</p> </td>
+    </tr>
+    <tr>
+      <td> <p>OWASP</p> </td>
+      <td> <p>5</p> </td>
+      <td> <p>7168 (7 MiB)</p> </td>
+      <td> <p>1</p> </td>
+    </tr>
+  </tbody>
+</table>
+<p>To use values recommended by the Argon2 authors, you can use the following objects:</p>
+<ul>
+  <li> <a href="https://argon2-cffi.readthedocs.io/en/stable/api.html#argon2.profiles.RFC_9106_HIGH_MEMORY">argon2.profiles.RFC_9106_HIGH_MEMORY</a>
+  </li>
+  <li> <a href="https://argon2-cffi.readthedocs.io/en/stable/api.html#argon2.profiles.RFC_9106_LOW_MEMORY">argon2.profiles.RFC_9106_LOW_MEMORY</a>
+  </li>
+</ul>
+<p>To use values recommended by the OWASP you can craft objects as follows:</p>
+<pre>
+from argon2 import Parameters
+from argon2.low_level import ARGON2_VERSION, Type
+
+OWASP_1 = argon2.Parameters(
+        type=Type.ID,
+        version=ARGON2_VERSION,
+        salt_len=16,
+        hash_len=32,
+        time_cost=1,
+        memory_cost=47104, # 46 MiB
+        parallelism=1)
+
+def hash_password(password):
+    ph = PasswordHasher.from_parameters(OWASP_1)
+    return ph.hash(password)
+</pre>
+<h3>Going the extra mile</h3>
+<h4>Selecting safe custom parameters for Argon2</h4>
+<p>To determine which one is the most appropriate for your application, you can use the argon2 CLI, for example with OWASP’s first recommendation:</p>
+<pre>
+$ pip install argon2
+$ python -m argon2 -t 1 -m 47104 -p 1 -l 32
+</pre>
+<p><a href="https://argon2-cffi.readthedocs.io/en/stable/api.html#module-argon2.profiles">Learn more here</a>.</p>
+<h4>Pepper</h4>
+<p>In a defense-in-depth security approach, <strong>peppering</strong> can also be used. This is a security technique where an external secret value
+is added to a password before it is hashed.<br> This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know
+the secret value to generate the correct hash.<br> <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
+<h2>How to fix it in Bcrypt</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>For password hashing:</p>
+<pre data-diff-id="201" data-diff-type="noncompliant">
+import bcrypt
+
+def hash_password(password):
+    return bcrypt.hashpw(password, bcrypt.gensalt(2)) # Noncompliant
+</pre>
+<p>For key derivation:</p>
+<pre data-diff-id="291" data-diff-type="noncompliant">
+import bcrypt
+
+def kdf(password, salt):
+    return bcrypt.kdf(
+        password=password,
+        salt=salt,
+        desired_key_bytes=32,
+        rounds=12,              # Noncompliant
+        ignore_few_rounds=True)
+</pre>
+<h4>Compliant solution</h4>
+<p>For password hashing:</p>
+<pre data-diff-id="201" data-diff-type="compliant">
+import bcrypt
+
+def hash_password(password):
+    return bcrypt.hashpw(password, bcrypt.gensalt())
+</pre>
+<p>For key derivation:</p>
+<pre data-diff-id="291" data-diff-type="compliant">
+import bcrypt
+
+def kdf(password, salt):
+    return bcrypt.kdf(
+        password=password,
+        salt=salt,
+        desired_key_bytes=32,
+        rounds=4096)
+</pre>
+<h3>How does this work?</h3>
+<h4>Use secure password hashing algorithms</h4>
+<p>In general, you should rely on an algorithm that has no known security vulnerabilities. The MD5 and SHA-1 algorithms should not be used.</p>
+<p>Some algorithms, such as the SHA family functions, are considered strong for some use cases, but are too fast in computation and therefore
+vulnerable to brute force attacks, especially with bruteforce-attack-oriented hardware.</p>
+<p>To protect passwords, it is therefore important to choose modern, slow password-hashing algorithms. The following algorithms are, in order of
+strength, the most secure password hashing algorithms to date:</p>
+<ol>
+  <li> Argon2 </li>
+  <li> scrypt </li>
+  <li> bcrypt </li>
+  <li> PBKDF2 </li>
+</ol>
+<p>Argon2 should be the best choice, and others should be used when the previous one is not available. For systems that must use FIPS-140-certified
+algorithms, PBKDF2 should be used.</p>
+<p>Whenever possible, choose the strongest algorithm available. If the algorithm currently used by your system should be upgraded, OWASP documents
+possible upgrade methods here: <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#upgrading-legacy-hashes">Upgrading Legacy Hashes</a>.</p>
+<h4>Select the correct Bcrypt parameters</h4>
+<p>When bcrypt’s hashing function is used, it is important to select a round count that is high enough to make the function slow enough to prevent
+brute force: More than 12 rounds.</p>
+<p>For bcrypt’s key derivation function, the number of rounds should likewise be high enough to make the function slow enough to prevent brute force:
+More than 4096 rounds <code>(2^12)</code>.<br> This number is not the same coefficient as the first one because it uses a different algorithm.</p>
+<p>In the python bcrypt library, the default number of rounds is 12, which is a good default value.<br> For the <code>bcrypt.kdf</code> function, at
+least 50 rounds should be set, and the <code>ignore_few_rounds</code> parameter should be avoided, as it allows fewer rounds.</p>
+<h3>Pitfalls</h3>
+<h4>Pre-hashing passwords</h4>
+<p>As bcrypt has a maximum length input length of 72 bytes for most implementations, some developers may be tempted to pre-hash the password with a
+stronger algorithm before hashing it with bcrypt.</p>
+<p>Pre-hashing passwords with bcrypt is not recommended as it can lead to a specific range of issues. Using a strong salt and a high number of rounds
+is enough to protect the password.</p>
+<p>More information about this can be found here: <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#pre-hashing-passwords-with-bcrypt">Pre-hashing Passwords with
+Bcrypt</a>.</p>
+<h3>Going the extra mile</h3>
+<h4>Pepper</h4>
+<p>In a defense-in-depth security approach, <strong>peppering</strong> can also be used. This is a security technique where an external secret value
+is added to a password before it is hashed.<br> This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know
+the secret value to generate the correct hash.<br> <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
+<h2>How to fix it in Python Standard Library</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>Code targeting scrypt:</p>
+<pre data-diff-id="206" data-diff-type="noncompliant">
+from hashlib import scrypt
+
+def hash_password(password, salt):
+    return scrypt(
+        password,
+        salt,
+        n=1 &lt;&lt; 10,  # Noncompliant: N is too low
+        r=8,
+        p=2,
+        dklen=64
+    )
+</pre>
+<p>Code targeting PBKDF2:</p>
+<pre data-diff-id="266" data-diff-type="noncompliant">
+from hashlib import pbkdf2_hmac
+
+def hash_password(password, salt):
+    return pbkdf2_hmac(
+        'sha1',
+        password,
+        salt,
+        500_000  # Noncompliant: not enough iterations for SHA-1
+    )
+</pre>
+<h4>Compliant solution</h4>
+<p>Code targeting scrypt:</p>
+<pre data-diff-id="206" data-diff-type="compliant">
+from hashlib import scrypt
+
+def hash_password(password, salt):
+    return scrypt(
+        password,
+        salt,
+        n=1 &lt;&lt; 14,
+        r=8,
+        p=5,
+        dklen=64,
+        maxmem=85_000_000  # Needs ~85MB of memory
+    )
+</pre>
+<p>Code targeting PBKDF2:</p>
+<pre data-diff-id="266" data-diff-type="compliant">
+from hashlib import pbkdf2_hmac
+
+def hash_password(password, salt):
+    return pbkdf2_hmac(
+        'sha256',
+        password,
+        salt,
+        600_000
+    )
+</pre>
+<h3>How does this work?</h3>
+<p>The following sections provide guidance on the usage of these secure password-hashing algorithms as provided by hashlib.</p>
+<h4>Select the correct Scrypt parameters</h4>
+<p>If scrypt must be used, the default values of scrypt are considered secure.</p>
+<p>Like Argon2id, scrypt has three different parameters that can be configured. N is the CPU/memory cost parameter and must be a power of two. r is
+the block size and p is the parallelization factor.</p>
+<p>All three parameters affect the memory and CPU usage of the algorithm. Higher values of N, r and p result in safer hashes, but come at the cost of
+higher resource usage.</p>
+<p>For scrypt, OWASP recommends to have a hash length of at least 64 bytes, and to set N, p and r to the values of one of the following rows:</p>
+<table>
+  <colgroup>
+    <col style="width: 33.3333%;">
+    <col style="width: 33.3333%;">
+    <col style="width: 33.3334%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>N (cost parameter)</th>
+      <th>p (parallelization factor)</th>
+      <th>r (block size)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> <p>2<sup>17</sup> (<code>1 &lt;&lt; 17</code>)</p> </td>
+      <td> <p>1</p> </td>
+      <td> <p>8</p> </td>
+    </tr>
+    <tr>
+      <td> <p>2<sup>16</sup> (<code>1 &lt;&lt; 16</code>)</p> </td>
+      <td> <p>2</p> </td>
+      <td> <p>8</p> </td>
+    </tr>
+    <tr>
+      <td> <p>2<sup>15</sup> (<code>1 &lt;&lt; 15</code>)</p> </td>
+      <td> <p>3</p> </td>
+      <td> <p>8</p> </td>
+    </tr>
+    <tr>
+      <td> <p>2<sup>14</sup> (<code>1 &lt;&lt; 14</code>)</p> </td>
+      <td> <p>5</p> </td>
+      <td> <p>8</p> </td>
+    </tr>
+    <tr>
+      <td> <p>2<sup>13</sup> (<code>1 &lt;&lt; 13</code>)</p> </td>
+      <td> <p>10</p> </td>
+      <td> <p>8</p> </td>
+    </tr>
+  </tbody>
+</table>
+<p>Every row provides the same level of defense. They only differ in the amount of CPU and RAM used: the top row has low CPU usage and high memory
+usage, while the bottom row has high CPU usage and low memory usage.</p>
+<h4>Select the correct PBKDF2 parameters</h4>
+<p>If PBKDF2 must be used, be aware that default values might not be considered secure.<br> Depending on the algorithm used, the number of iterations
+should be adjusted to ensure that the derived key is secure. The following are the recommended number of iterations for PBKDF2:</p>
+<ul>
+  <li> PBKDF2-HMAC-SHA1: 1,300,000 iterations </li>
+  <li> PBKDF2-HMAC-SHA256: 600,000 iterations </li>
+  <li> PBKDF2-HMAC-SHA512: 210,000 iterations </li>
+</ul>
+<p>Note that PBKDF2-HMAC-SHA256 is recommended by NIST.<br> Iterations are also called "rounds" depending on the library used.</p>
+<p>When recommended cost factors are too high in the context of the application or if the performance cost is unacceptable, a cost factor reduction
+might be considered. In that case, it should not be chosen under 100,000.</p>
+<h3>Pitfalls</h3>
+<h4>Pre-hashing passwords</h4>
+<p>As bcrypt has a maximum length input length of 72 bytes for most implementations, some developers may be tempted to pre-hash the password with a
+stronger algorithm before hashing it with bcrypt.</p>
+<p>Pre-hashing passwords with bcrypt is not recommended as it can lead to a specific range of issues. Using a strong salt and a high number of rounds
+is enough to protect the password.</p>
+<p>More information about this can be found here: <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#pre-hashing-passwords-with-bcrypt">Pre-hashing Passwords with
+Bcrypt</a>.</p>
+<h3>Going the extra mile</h3>
+<h4>Pepper</h4>
+<p>In a defense-in-depth security approach, <strong>peppering</strong> can also be used. This is a security technique where an external secret value
+is added to a password before it is hashed.<br> This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know
+the secret value to generate the correct hash.<br> <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
+<h2>How to fix it in pyca</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>Code targeting scrypt:</p>
+<pre data-diff-id="207" data-diff-type="noncompliant">
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
+
+def hash_password(password, salt):
+    scrypt = Scrypt(
+        salt=salt,
+        length=32,
+        n=1 &lt;&lt; 10,
+        r=8,
+        p=1) # Noncompliant
+
+    return scrypt.derive(password)
+</pre>
+<p>Code targeting PBKDF2:</p>
+<pre data-diff-id="277" data-diff-type="noncompliant">
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+
+def hash_password(password, salt):
+    pbkdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=salt,
+        iterations=480000) # Noncompliant
+
+    return pbkdf.derive(password)
+</pre>
+<h4>Compliant solution</h4>
+<p>Code targeting scrypt:</p>
+<pre data-diff-id="207" data-diff-type="compliant">
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
+
+def hash_password(password, salt):
+    scrypt = Scrypt(
+        salt=salt,
+        length=64,
+        n=1 &lt;&lt; 17,
+        r=8,
+        p=1)
+
+    return scrypt.derive(password)
+</pre>
+<p>Code targeting PBKDF2:</p>
+<pre data-diff-id="277" data-diff-type="compliant">
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+
+def hash_password(password, salt):
+    pbkdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=salt,
+        iterations=600_000) # Noncompliant
+
+    return pbkdf.derive(password)
+</pre>
+<h3>How does this work?</h3>
+<h4>Use secure password hashing algorithms</h4>
+<p>In general, you should rely on an algorithm that has no known security vulnerabilities. The MD5 and SHA-1 algorithms should not be used.</p>
+<p>Some algorithms, such as the SHA family functions, are considered strong for some use cases, but are too fast in computation and therefore
+vulnerable to brute force attacks, especially with bruteforce-attack-oriented hardware.</p>
+<p>To protect passwords, it is therefore important to choose modern, slow password-hashing algorithms. The following algorithms are, in order of
+strength, the most secure password hashing algorithms to date:</p>
+<ol>
+  <li> Argon2 </li>
+  <li> scrypt </li>
+  <li> bcrypt </li>
+  <li> PBKDF2 </li>
+</ol>
+<p>Argon2 should be the best choice, and others should be used when the previous one is not available. For systems that must use FIPS-140-certified
+algorithms, PBKDF2 should be used.</p>
+<p>Whenever possible, choose the strongest algorithm available. If the algorithm currently used by your system should be upgraded, OWASP documents
+possible upgrade methods here: <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#upgrading-legacy-hashes">Upgrading Legacy Hashes</a>.</p>
+<p>The following sections provide guidance on the usage of these secure password-hashing algorithms as provided by pyca/cryptography.</p>
+<h4>Select the correct Scrypt parameters</h4>
+<p>If scrypt must be used, the default values of scrypt are considered secure.</p>
+<p>Like Argon2id, scrypt has three different parameters that can be configured. N is the CPU/memory cost parameter and must be a power of two. r is
+the block size and p is the parallelization factor.</p>
+<p>All three parameters affect the memory and CPU usage of the algorithm. Higher values of N, r and p result in safer hashes, but come at the cost of
+higher resource usage.</p>
+<p>For scrypt, OWASP recommends to have a hash length of at least 64 bytes, and to set N, p and r to the values of one of the following rows:</p>
+<table>
+  <colgroup>
+    <col style="width: 33.3333%;">
+    <col style="width: 33.3333%;">
+    <col style="width: 33.3334%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>N (cost parameter)</th>
+      <th>p (parallelization factor)</th>
+      <th>r (block size)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> <p>2<sup>17</sup> (<code>1 &lt;&lt; 17</code>)</p> </td>
+      <td> <p>1</p> </td>
+      <td> <p>8</p> </td>
+    </tr>
+    <tr>
+      <td> <p>2<sup>16</sup> (<code>1 &lt;&lt; 16</code>)</p> </td>
+      <td> <p>2</p> </td>
+      <td> <p>8</p> </td>
+    </tr>
+    <tr>
+      <td> <p>2<sup>15</sup> (<code>1 &lt;&lt; 15</code>)</p> </td>
+      <td> <p>3</p> </td>
+      <td> <p>8</p> </td>
+    </tr>
+    <tr>
+      <td> <p>2<sup>14</sup> (<code>1 &lt;&lt; 14</code>)</p> </td>
+      <td> <p>5</p> </td>
+      <td> <p>8</p> </td>
+    </tr>
+    <tr>
+      <td> <p>2<sup>13</sup> (<code>1 &lt;&lt; 13</code>)</p> </td>
+      <td> <p>10</p> </td>
+      <td> <p>8</p> </td>
+    </tr>
+  </tbody>
+</table>
+<p>Every row provides the same level of defense. They only differ in the amount of CPU and RAM used: the top row has low CPU usage and high memory
+usage, while the bottom row has high CPU usage and low memory usage.</p>
+<p>To use values recommended by OWASP, you can use an object crafted as follows:</p>
+<pre>
+OWASP_1 = {
+    "n": 1 &lt;&lt; 17,
+    "r": 8,
+    "p": 1,
+    "length": 64,
+}
+
+# To use this example, you can use the dictionary as a ``**kwargs`` variable:
+scrypt(password, salt, **OWASP_1)
+</pre>
+<h4>Select the correct PBKDF2 parameters</h4>
+<p>If PBKDF2 must be used, be aware that default values might not be considered secure.<br> Depending on the algorithm used, the number of iterations
+should be adjusted to ensure that the derived key is secure. The following are the recommended number of iterations for PBKDF2:</p>
+<ul>
+  <li> PBKDF2-HMAC-SHA1: 1,300,000 iterations </li>
+  <li> PBKDF2-HMAC-SHA256: 600,000 iterations </li>
+  <li> PBKDF2-HMAC-SHA512: 210,000 iterations </li>
+</ul>
+<p>Note that PBKDF2-HMAC-SHA256 is recommended by NIST.<br> Iterations are also called "rounds" depending on the library used.</p>
+<p>When recommended cost factors are too high in the context of the application or if the performance cost is unacceptable, a cost factor reduction
+might be considered. In that case, it should not be chosen under 100,000.</p>
+<h3>Pitfalls</h3>
+<h4>Pre-hashing passwords</h4>
+<p>As bcrypt has a maximum length input length of 72 bytes for most implementations, some developers may be tempted to pre-hash the password with a
+stronger algorithm before hashing it with bcrypt.</p>
+<p>Pre-hashing passwords with bcrypt is not recommended as it can lead to a specific range of issues. Using a strong salt and a high number of rounds
+is enough to protect the password.</p>
+<p>More information about this can be found here: <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#pre-hashing-passwords-with-bcrypt">Pre-hashing Passwords with
+Bcrypt</a>.</p>
+<h3>Going the extra mile</h3>
+<h4>Pepper</h4>
+<p>In a defense-in-depth security approach, <strong>peppering</strong> can also be used. This is a security technique where an external secret value
+is added to a password before it is hashed.<br> This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know
+the secret value to generate the correct hash.<br> <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
+<h2>How to fix it in Django</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>Django uses the first item in the <code>PASSWORD_HASHERS</code> list to store new passwords. In this example, SHA-1 is used, which is too fast to
+store passwords.</p>
+<pre data-diff-id="203" data-diff-type="noncompliant">
+# settings.py
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.SHA1PasswordHasher',  # Noncompliant
+    'django.contrib.auth.hashers.CryptPasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.ScryptPasswordHasher',
+]
+</pre>
+<h4>Compliant solution</h4>
+<p>This example requires <code>argon2-cffi</code> to be installed, which can be done using <code>pip install django[argon2]</code>.</p>
+<pre data-diff-id="203" data-diff-type="compliant">
+# settings.py
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.ScryptPasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+]
+</pre>
+<h3>How does this work?</h3>
+<h4>Use secure password hashing algorithms</h4>
+<p>In general, you should rely on an algorithm that has no known security vulnerabilities. The MD5 and SHA-1 algorithms should not be used.</p>
+<p>Some algorithms, such as the SHA family functions, are considered strong for some use cases, but are too fast in computation and therefore
+vulnerable to brute force attacks, especially with bruteforce-attack-oriented hardware.</p>
+<p>To protect passwords, it is therefore important to choose modern, slow password-hashing algorithms. The following algorithms are, in order of
+strength, the most secure password hashing algorithms to date:</p>
+<ol>
+  <li> Argon2 </li>
+  <li> scrypt </li>
+  <li> bcrypt </li>
+  <li> PBKDF2 </li>
+</ol>
+<p>Argon2 should be the best choice, and others should be used when the previous one is not available. For systems that must use FIPS-140-certified
+algorithms, PBKDF2 should be used.</p>
+<p>Whenever possible, choose the strongest algorithm available. If the algorithm currently used by your system should be upgraded, OWASP documents
+possible upgrade methods here: <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#upgrading-legacy-hashes">Upgrading Legacy Hashes</a>.</p>
+<p>In the previous example, Argon2 is used as the default password hashing function by Django. Use the <code>PASSWORD_HASHERS</code> variable
+carefuly. If there is a need to upgrade, use <a href="https://docs.djangoproject.com/en/5.0/topics/auth/passwords/#password-upgrading">Django’s
+password upgrade documentation</a>.</p>
+<h3>Going the extra mile</h3>
+<h4>Tweaking password hashing parameters</h4>
+<p>It is possible to change the parameters of the password hashing algorithm to make it more secure. For example, you can increase the number of
+iterations or the length of the salt.<br> <a href="https://docs.djangoproject.com/en/5.0/topics/auth/passwords/">The Django documentation contains
+more details about these parameters</a>.</p>
+<h4>Preventing user enumeration attacks</h4>
+<p>Django uses the first item in <code>PASSWORD_HASHERS</code> to store passwords, but uses every hashing algorithm in the
+<code>PASSWORD_HASHERS</code> list to check passwords during user login. If a user password was not hashed using the first algorithm, then Django
+upgrades the hashed password after a user logs in.</p>
+<p>This process is convenient to keep users up to date, but is also vulnerable to enumeration. If an attacker wants to know whether an account exists,
+they can attempt a login with that account. By tracking how long it took to get a response, they can know if an older hashing algorithm was used (so
+the account exists) or the new hashing algorithm was used (the default is an account does not exist.)</p>
+<p>To fix this, <a href="https://docs.djangoproject.com/en/5.0/topics/auth/passwords/#password-upgrading-without-requiring-a-login">the Django
+documentation</a> defines how to upgrade passwords without needing to log in. In this case, a custom hasher has to be created that wraps the old
+hash.</p>
+<h4>Pepper</h4>
+<p>In a defense-in-depth security approach, <strong>peppering</strong> can also be used. This is a security technique where an external secret value
+is added to a password before it is hashed.<br> This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know
+the secret value to generate the correct hash.<br> <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
+<h2>How to fix it in Flask</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="204" data-diff-type="noncompliant">
+from flask import Flask, request
+from flask_bcrypt import Bcrypt
+
+app = Flask(__name__)
+bcrypt = Bcrypt(app)
+
+@app.get("/")
+def hash():
+    password = request.args.get('password', '')
+    hashed_password = bcrypt.generate_password_hash(password, rounds=2) # Noncompliant
+
+    return f"&lt;p&gt;{hashed_password.decode('utf-8')}&lt;/p&gt;"
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="204" data-diff-type="compliant">
+from flask import Flask, request
+from flask_bcrypt import Bcrypt
+
+app = Flask(__name__)
+bcrypt = Bcrypt(app)
+
+@app.get("/")
+def hash():
+    password = request.args.get('password', '')
+    hashed_password = bcrypt.generate_password_hash(password)
+
+    return f"&lt;p&gt;{hashed_password.Decode('utf-8')}&lt;/p&gt;"
+</pre>
+<h3>How does this work?</h3>
+<h4>Use secure password hashing algorithms</h4>
+<p>In general, you should rely on an algorithm that has no known security vulnerabilities. The MD5 and SHA-1 algorithms should not be used.</p>
+<p>Some algorithms, such as the SHA family functions, are considered strong for some use cases, but are too fast in computation and therefore
+vulnerable to brute force attacks, especially with bruteforce-attack-oriented hardware.</p>
+<p>To protect passwords, it is therefore important to choose modern, slow password-hashing algorithms. The following algorithms are, in order of
+strength, the most secure password hashing algorithms to date:</p>
+<ol>
+  <li> Argon2 </li>
+  <li> scrypt </li>
+  <li> bcrypt </li>
+  <li> PBKDF2 </li>
+</ol>
+<p>Argon2 should be the best choice, and others should be used when the previous one is not available. For systems that must use FIPS-140-certified
+algorithms, PBKDF2 should be used.</p>
+<p>Whenever possible, choose the strongest algorithm available. If the algorithm currently used by your system should be upgraded, OWASP documents
+possible upgrade methods here: <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#upgrading-legacy-hashes">Upgrading Legacy Hashes</a>.</p>
+<h4>Select the correct Bcrypt parameters</h4>
+<p>When bcrypt’s hashing function is used, it is important to select a round count that is high enough to make the function slow enough to prevent
+brute force: More than 12 rounds.</p>
+<p>For bcrypt’s key derivation function, the number of rounds should likewise be high enough to make the function slow enough to prevent brute force:
+More than 4096 rounds <code>(2^12)</code>.<br> This number is not the same coefficient as the first one because it uses a different algorithm.</p>
+<h4>Select the correct Argon2 parameters</h4>
+<p>In general, the default values of the Argon2 library are considered safe. If you need to change the parameters, you should note the following:</p>
+<p>First, Argon2 comes in three forms: Argon2i, Argon2d and Argon2id. Argon2i is optimized for hashing passwords and uses data-independent memory
+access. Argon2d is faster and uses data-dependent memory access, making it suitable for applications where there is no risk of side-channel
+attacks.<br> Argon2id is a mixture of Argon2i and Argon2d and is recommended for most applications.</p>
+<p>Argon2id has three different parameters that can be configured: the basic minimum memory size (m), the minimum number of iterations (t) and the
+degree of parallelism (p).<br> The higher the values of m, t and p result in safer hashes, but come at the cost of higher resource usage. There exist
+general recommendations that balance security and speed in an optimal way.</p>
+<p>Hashes should be at least 32 bytes long and salts should be at least 16 bytes long.</p>
+<p>Next, the recommended parameters for Argon2id are:</p>
+<table>
+  <colgroup>
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Recommendation type</th>
+      <th>Time Cost</th>
+      <th>Memory Cost</th>
+      <th>Parallelism</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> <p>Argon2 Creators</p> </td>
+      <td> <p>1</p> </td>
+      <td> <p>2097152 (2 GiB)</p> </td>
+      <td> <p>4</p> </td>
+    </tr>
+    <tr>
+      <td> <p>Argon2 Creators</p> </td>
+      <td> <p>3</p> </td>
+      <td> <p>65536 (64 MiB)</p> </td>
+      <td> <p>4</p> </td>
+    </tr>
+    <tr>
+      <td> <p>OWASP</p> </td>
+      <td> <p>1</p> </td>
+      <td> <p>47104 (46 MiB)</p> </td>
+      <td> <p>1</p> </td>
+    </tr>
+    <tr>
+      <td> <p>OWASP</p> </td>
+      <td> <p>2</p> </td>
+      <td> <p>19456 (19 MiB)</p> </td>
+      <td> <p>1</p> </td>
+    </tr>
+    <tr>
+      <td> <p>OWASP</p> </td>
+      <td> <p>3</p> </td>
+      <td> <p>12288 (12 MiB)</p> </td>
+      <td> <p>1</p> </td>
+    </tr>
+    <tr>
+      <td> <p>OWASP</p> </td>
+      <td> <p>4</p> </td>
+      <td> <p>9216 (9 MiB)</p> </td>
+      <td> <p>1</p> </td>
+    </tr>
+    <tr>
+      <td> <p>OWASP</p> </td>
+      <td> <p>5</p> </td>
+      <td> <p>7168 (7 MiB)</p> </td>
+      <td> <p>1</p> </td>
+    </tr>
+  </tbody>
+</table>
+<p>To use values recommended by the Argon2 authors, you can use the two following objects:</p>
+<ul>
+  <li> <a href="https://argon2-cffi.readthedocs.io/en/stable/api.html#argon2.profiles.RFC_9106_HIGH_MEMORY">argon2.profiles.RFC_9106_HIGH_MEMORY</a>
+  </li>
+  <li> <a href="https://argon2-cffi.readthedocs.io/en/stable/api.html#argon2.profiles.RFC_9106_LOW_MEMORY">argon2.profiles.RFC_9106_LOW_MEMORY</a>
+  </li>
+</ul>
+<p>To use values recommended by the OWASP, you can craft objects as follows:</p>
+<pre>
+import argon2
+from argon2.low_level import ARGON2_VERSION, Type
+
+OWASP_1 = argon2.Parameters(
+        type=Type.ID,
+        version=ARGON2_VERSION,
+        salt_len=16,
+        hash_len=32,
+        time_cost=1,
+        memory_cost=47104, # 46 MiB
+        parallelism=1)
+
+# To apply the parameters to the Flask app:
+def set_flask_argon2_parameters(app, parameters: argon2.Parameters):
+    app.config['ARGON2_SALT_LENGTH'] = parameters.salt_len
+    app.config['ARGON2_HASH_LENGTH'] = parameters.hash_len
+    app.config['ARGON2_TIME_COST']   = parameters.time_cost
+    app.config['ARGON2_MEMORY_COST'] = parameters.memory_cost
+    app.config['ARGON2_PARALLELISM'] = parameters.parallelism
+
+# ----
+# Or the unofficial way:
+from flask import Flask
+from flask_argon2 import Argon2
+
+app = Flask(__name__)
+argon2 = Argon2(app)
+argon2.ph = OWASP_1
+
+set_flask_argon2_parameters(app, OWASP_1)
+</pre>
+<h3>Pitfalls</h3>
+<h4>Pre-hashing passwords</h4>
+<p>As bcrypt has a maximum length input length of 72 bytes for most implementations, some developers may be tempted to pre-hash the password with a
+stronger algorithm before hashing it with bcrypt.</p>
+<p>Pre-hashing passwords with bcrypt is not recommended as it can lead to a specific range of issues. Using a strong salt and a high number of rounds
+is enough to protect the password.</p>
+<p>More information about this can be found here: <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#pre-hashing-passwords-with-bcrypt">Pre-hashing Passwords with
+Bcrypt</a>.</p>
+<h3>Going the extra mile</h3>
+<h4>Selecting safe custom parameters for Argon2</h4>
+<p>To determine which one is the most appropriate for your application, you can use the argon2 CLI, for example with OWASP’s first recommendation:</p>
+<pre>
+$ pip install argon2
+$ python -m argon2 -t 1 -m 47104 -p 1 -l 32
+</pre>
+<p><a href="https://argon2-cffi.readthedocs.io/en/stable/api.html#module-argon2.profiles">Learn more here</a>.</p>
+<h4>Pepper</h4>
+<p>In a defense-in-depth security approach, <strong>peppering</strong> can also be used. This is a security technique where an external secret value
+is added to a password before it is hashed.<br> This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know
+the secret value to generate the correct hash.<br> <a
+href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> OWASP CheatSheet - <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">Password Storage Cheat Sheet</a>
+  </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> OWASP - <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">Top 10 2021 Category A2 - Cryptographic Failures</a> </li>
+  <li> OWASP - <a href="https://owasp.org/Top10/A04_2021-Insecure_Design/">Top 10 2021 Category A4 - Insecure Design</a> </li>
+  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
+  Exposure</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/256">CWE-256 - Plaintext Storage of a Password</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/916">CWE-916 - Use of Password Hash With Insufficient Computational Effort</a> </li>
+  <li> STIG Viewer - <a href="https://stigviewer.com/stig/application_security_and_development/2023-06-08/finding/V-222542">Application Security and
+  Development: V-222542</a> - The application must only store cryptographic representations of passwords. </li>
+</ul>
+

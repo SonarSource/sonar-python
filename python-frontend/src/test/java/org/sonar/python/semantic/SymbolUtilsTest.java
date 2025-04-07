@@ -31,6 +31,8 @@ import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -38,6 +40,8 @@ import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.ClassDefImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.functionSymbol;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.lastFunctionSymbolWithName;
@@ -282,5 +286,26 @@ class SymbolUtilsTest {
       .map(child -> descendantFunction(child, name))
       .filter(Objects::nonNull)
       .findFirst().orElse(null);
+  }
+
+
+  @Test
+  void qualifiedNameOrEmpty() {
+    var callExpr1 = mock(CallExpression.class);
+    var calleeSymbol1 = mock(Symbol.class);
+    when(callExpr1.calleeSymbol()).thenReturn(calleeSymbol1);
+    when(calleeSymbol1.fullyQualifiedName()).thenReturn(null);
+
+    assertThat(SymbolUtils.qualifiedNameOrEmpty(callExpr1)).isEmpty();
+
+    var callExpr2 = mock(CallExpression.class);
+    when(callExpr2.calleeSymbol()).thenReturn(null);
+    assertThat(SymbolUtils.qualifiedNameOrEmpty(callExpr2)).isEmpty();
+
+    var callExpr3 = mock(CallExpression.class);
+    var calleeSymbol3 = mock(Symbol.class);
+    when(callExpr3.calleeSymbol()).thenReturn(calleeSymbol3);
+    when(calleeSymbol3.fullyQualifiedName()).thenReturn("test");
+    assertThat(SymbolUtils.qualifiedNameOrEmpty(callExpr3)).isEqualTo("test");
   }
 }

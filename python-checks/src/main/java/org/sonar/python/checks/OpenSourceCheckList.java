@@ -51,6 +51,7 @@ import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeLegacyCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
 import org.sonar.python.checks.hotspots.EmailSendingCheck;
 import org.sonar.python.checks.hotspots.ExpandingArchiveCheck;
+import org.sonar.python.checks.hotspots.FastHashingOrPlainTextCheck;
 import org.sonar.python.checks.hotspots.GraphQLIntrospectionCheck;
 import org.sonar.python.checks.hotspots.HardCodedCredentialsCheck;
 import org.sonar.python.checks.hotspots.HardCodedCredentialsEntropyCheck;
@@ -186,6 +187,7 @@ public class OpenSourceCheckList {
       ExecStatementUsageCheck.class,
       ExitHasBadArgumentsCheck.class,
       ExpandingArchiveCheck.class,
+      FastHashingOrPlainTextCheck.class,
       FieldDuplicatesClassNameCheck.class,
       FieldNameCheck.class,
       FileComplexityCheck.class,

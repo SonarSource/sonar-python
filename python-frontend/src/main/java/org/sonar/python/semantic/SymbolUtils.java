@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
@@ -356,5 +357,10 @@ public class SymbolUtils {
 
   public static boolean isPrivateName(String name) {
     return name.startsWith("_") && !name.startsWith("__");
+  }
+
+  public static String qualifiedNameOrEmpty(CallExpression callExpression) {
+    Symbol symbol = callExpression.calleeSymbol();
+    return symbol != null && symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
   }
 }
