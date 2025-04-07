@@ -46,7 +46,10 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
     Map.entry("cryptography.hazmat.primitives.kdf.scrypt.Scrypt", 0),
     Map.entry("Cryptodome.Protocol.KDF.PBKDF2", 1),
     Map.entry("Cryptodome.Protocol.KDF.scrypt", 1),
-    Map.entry("Cryptodome.Protocol.KDF.bcrypt", 2)
+    Map.entry("Cryptodome.Protocol.KDF.bcrypt", 2),
+    Map.entry("Crypto.Protocol.KDF.PBKDF2", 1),
+    Map.entry("Crypto.Protocol.KDF.scrypt", 1),
+    Map.entry("Crypto.Protocol.KDF.bcrypt", 2)
   );
 
   private static final Map<String, ArgumentInfo> SALT_FUNCTION_ARGUMENTS_TO_CHECK = Map.of(

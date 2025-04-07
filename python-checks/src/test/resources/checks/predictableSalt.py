@@ -109,39 +109,74 @@ derive_password(b"my great password", salt, backend)
 
 
 #cryptodome-salt
-
-from Cryptodome.Protocol.KDF import PBKDF2, scrypt, bcrypt
-from Crypto.Hash import SHA512
-from Crypto.Random import get_random_bytes
-
-
-def derive_password(password, salt):
-
-    PBKDF2(password,
-        b'D8VxSmTZt2E2YV454mkqAY5e', # Noncompliant {{Make this salt unpredictable.}}
-#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        32, count=100000
-    )
-
-    key = scrypt(password, b'D8VxSmTZt2E2YV454mkqAY5e', 32, N=2**14, r=8, p=1) # Noncompliant {{Make this salt unpredictable.}}
-#                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    key = bcrypt(password, 12, b'D8VxSmTZt2E2YV45') # Noncompliant {{Make this salt unpredictable.}}
-#                              ^^^^^^^^^^^^^^^^^^^
+def cryptodome_salt():
+    from Cryptodome.Protocol.KDF import PBKDF2, scrypt, bcrypt
+    from Crypto.Hash import SHA512
+    from Crypto.Random import get_random_bytes
 
 
-    PBKDF2(password, salt, # Compliant
-        32, count=100000
-    )
+    def derive_password(password, salt):
 
-    salt_ = get_random_bytes(32)
-    PBKDF2(password, salt_, # Compliant
-        32, count=100000,
-    )
+        PBKDF2(password,
+            b'D8VxSmTZt2E2YV454mkqAY5e', # Noncompliant {{Make this salt unpredictable.}}
+    #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            32, count=100000
+        )
 
-    key = scrypt(password, salt_, 32, N=2**14, r=8, p=1) # Compliant
+        key = scrypt(password, b'D8VxSmTZt2E2YV454mkqAY5e', 32, N=2**14, r=8, p=1) # Noncompliant {{Make this salt unpredictable.}}
+    #                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        key = bcrypt(password, 12, b'D8VxSmTZt2E2YV45') # Noncompliant {{Make this salt unpredictable.}}
+    #                              ^^^^^^^^^^^^^^^^^^^
 
-    salt_16 = get_random_bytes(16)
-    key = bcrypt(password, 12, salt_16) # Compliant
+
+        PBKDF2(password, salt, # Compliant
+            32, count=100000
+        )
+
+        salt_ = get_random_bytes(32)
+        PBKDF2(password, salt_, # Compliant
+            32, count=100000,
+        )
+
+        key = scrypt(password, salt_, 32, N=2**14, r=8, p=1) # Compliant
+
+        salt_16 = get_random_bytes(16)
+        key = bcrypt(password, 12, salt_16) # Compliant
+
+#crypto-salt
+def crypto_salt():
+    from Crypto.Protocol.KDF import PBKDF2, scrypt, bcrypt
+    from Crypto.Hash import SHA512
+    from Crypto.Random import get_random_bytes
+
+
+    def derive_password(password, salt):
+
+        PBKDF2(password,
+            b'D8VxSmTZt2E2YV454mkqAY5e', # Noncompliant {{Make this salt unpredictable.}}
+    #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            32, count=100000
+        )
+
+        key = scrypt(password, b'D8VxSmTZt2E2YV454mkqAY5e', 32, N=2**14, r=8, p=1) # Noncompliant {{Make this salt unpredictable.}}
+    #                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        key = bcrypt(password, 12, b'D8VxSmTZt2E2YV45') # Noncompliant {{Make this salt unpredictable.}}
+    #                              ^^^^^^^^^^^^^^^^^^^
+
+
+        PBKDF2(password, salt, # Compliant
+            32, count=100000
+        )
+
+        salt_ = get_random_bytes(32)
+        PBKDF2(password, salt_, # Compliant
+            32, count=100000,
+        )
+
+        key = scrypt(password, salt_, 32, N=2**14, r=8, p=1) # Compliant
+
+        salt_16 = get_random_bytes(16)
+        key = bcrypt(password, 12, salt_16) # Compliant
 
 
 salt = get_random_bytes(32)
