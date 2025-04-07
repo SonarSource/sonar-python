@@ -20,8 +20,12 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TriBool;
@@ -112,6 +116,11 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isTypeWithFqn(String expectedFqn) {
+    predicates.add(new IsTypeWithFullyQualifiedNamePredicate(expectedFqn));
+    return this;
+  }
+
   interface TypePredicate {
     TriBool test(PythonType pythonType);
   }
@@ -150,6 +159,34 @@ public class TypeCheckBuilder {
     @Override
     public TriBool test(PythonType pythonType) {
       return pythonType.typeSource() == typeSource ? TriBool.TRUE : TriBool.FALSE;
+    }
+  }
+
+  static class IsTypeWithFullyQualifiedNamePredicate implements TypePredicate {
+    String expectedFullyQualifiedName;
+
+    public IsTypeWithFullyQualifiedNamePredicate(String expectedFullyQualifiedName) {
+      this.expectedFullyQualifiedName = expectedFullyQualifiedName;
+    }
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      return Optional.of(pythonType)
+        .map(IsTypeWithFullyQualifiedNamePredicate::getFullyQualifiedName)
+        .map(typeFqn -> Objects.equals(expectedFullyQualifiedName, typeFqn) ? TriBool.TRUE : TriBool.FALSE)
+        .orElse(TriBool.UNKNOWN);
+    }
+
+    @CheckForNull
+    private static String getFullyQualifiedName(PythonType type) {
+      if (type instanceof FunctionType functionType) {
+        return functionType.fullyQualifiedName();
+      } else if (type instanceof ClassType classType) {
+        return classType.fullyQualifiedName();
+      } else if (type instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
+        return unresolvedImportType.importPath();
+      }
+      return null;
     }
   }
 

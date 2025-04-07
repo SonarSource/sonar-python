@@ -4,6 +4,7 @@ import os
 import hashlib
 import os
 
+hash = hashlib.scrypt(password, salt=b'')  # Noncompliant {{Make this salt unpredictable.}}
 # crypt-salt
 password = 'password123'
 salt = crypt.mksalt(crypt.METHOD_SHA256)
@@ -25,7 +26,29 @@ hash = hashlib.pbkdf2_hmac('sha256', password, b'', 100000)        # Noncomplian
 hash = hashlib.pbkdf2_hmac('sha256', password, b'D8VxSmTZt2E2YV454mkqAY5e', 100000)    # Noncompliant {{Make this salt unpredictable.}}
 hash = hashlib.pbkdf2_hmac('sha256', password, email, 100000)     # Noncompliant {{Make this salt unpredictable.}}
 hash = hashlib.scrypt(password, n=1024, r=1, p=1, salt=b'') # Noncompliant {{Make this salt unpredictable.}}
-#                                                 ^^^^^^^^
+
+def bytes_fromhex_salt():
+  salt1 = bytes.fromhex(b"0entropy")
+  hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), salt1, 100000) # Noncompliant
+#                                                       ^^^^^
+  str = b"0entropy"
+  salt2 = bytes.fromhex(str)
+  hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), salt2, 100000) # Noncompliant
+#                                                       ^^^^^
+
+def bytearray_fromhex_salt():
+  salt = bytearray.fromhex(b"0entropy")
+  hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), salt, 100000) # Noncompliant
+#                                                       ^^^^
+
+def base64_salt():
+  hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), base64.b64decode("abc"), 100000) # Noncompliant
+  hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), base64.b64encode("abc"), 100000) # Noncompliant
+  hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), base64.b32encode("abc"), 100000) # Noncompliant
+  hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), base64.b32decode("abc"), 100000) # Noncompliant
+  hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), base64.b16encode("abc"), 100000) # Noncompliant
+  hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), base64.b16decode("abc"), 100000) # Noncompliant
+  hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), base64.b16decode(unknown), 100000) # Compliant
 
 hash_ = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)     # Compliant
 hash_ = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), unknown, 100000)     # Compliant

@@ -19,14 +19,14 @@ package org.sonar.python.semantic.v2;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TriBool;
-import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType.UnresolvedImportType;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.types.v2.TypeCheckBuilder;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -125,6 +125,47 @@ class TypeCheckerBuilderTest {
       TriBool.TRUE,
       TriBool.UNKNOWN,
       TriBool.UNKNOWN,
+      TriBool.UNKNOWN
+    );
+  }
+
+  @Test
+  void isTypeWithFqnTest() {
+    var symbolTable = ProjectLevelSymbolTable.empty();
+    var table = new ProjectLevelTypeTable(symbolTable);
+    var intBuilder = new TypeCheckBuilder(table).isTypeWithFqn("int");
+    var fooBuilder = new TypeCheckBuilder(table).isTypeWithFqn("mod.foo");
+
+    var intClassType = table.getType("int");
+    var strClassType = table.getType("str");
+    var fooClassType = new ClassTypeBuilder("foo", "mod.foo").build();
+    var fooFunctionType = new FunctionTypeBuilder("foo").withFullyQualifiedName("mod.foo").build();
+    var fooUnresolvedImportType = new UnresolvedImportType("mod.foo");
+    var fooObjectType = new ObjectType(fooClassType);
+    var fooUnionType = UnionType.or(fooClassType, fooFunctionType);
+    var barClassType = new ClassTypeBuilder("bar", "mod.bar").build();
+
+    Assertions.assertThat(
+      List.of(
+        intBuilder.check(intClassType),
+        intBuilder.check(strClassType),
+        fooBuilder.check(fooClassType),
+        fooBuilder.check(fooFunctionType),
+        fooBuilder.check(fooUnresolvedImportType),
+        fooBuilder.check(fooObjectType),
+        fooBuilder.check(fooUnionType),
+        fooBuilder.check(barClassType),
+        fooBuilder.check(PythonType.UNKNOWN)
+      )
+    ).containsExactly(
+      TriBool.TRUE,
+      TriBool.FALSE,
+      TriBool.TRUE,
+      TriBool.TRUE,
+      TriBool.TRUE,
+      TriBool.UNKNOWN,
+      TriBool.UNKNOWN,
+      TriBool.FALSE,
       TriBool.UNKNOWN
     );
   }
