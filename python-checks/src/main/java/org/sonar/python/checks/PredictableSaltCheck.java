@@ -43,6 +43,7 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
     Map.entry("hashlib.scrypt", 4),
     Map.entry("crypt.crypt", 1),
     Map.entry("cryptography.hazmat.primitives.kdf.pbkdf2.PBKDF2HMAC", 2),
+    Map.entry("cryptography.hazmat.primitives.kdf.scrypt.Scrypt", 0),
     Map.entry("Cryptodome.Protocol.KDF.PBKDF2", 1),
     Map.entry("Cryptodome.Protocol.KDF.scrypt", 1),
     Map.entry("Cryptodome.Protocol.KDF.bcrypt", 2)

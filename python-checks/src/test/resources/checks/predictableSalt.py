@@ -64,6 +64,15 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
 
+def scrypt_salt():
+    from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
+    Scrypt(
+        salt="abc" # Noncompliant {{Make this salt unpredictable.}}
+    )
+    Scrypt(
+        "abc" # Noncompliant {{Make this salt unpredictable.}}
+    )
+
 def derive_password(password, salt, backend):
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
