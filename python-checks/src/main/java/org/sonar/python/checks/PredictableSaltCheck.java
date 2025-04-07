@@ -38,18 +38,19 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
 
   private static final String MISSING_SALT_MESSAGE = "Add an unpredictable salt value to this hash.";
   private static final String PREDICTABLE_SALT_MESSAGE = "Make this salt unpredictable.";
-  private static final Map<String, Integer> SENSITIVE_ARGUMENT_BY_FQN = Map.ofEntries(
-    Map.entry("hashlib.pbkdf2_hmac", 2),
-    Map.entry("hashlib.scrypt", 4),
-    Map.entry("crypt.crypt", 1),
-    Map.entry("cryptography.hazmat.primitives.kdf.pbkdf2.PBKDF2HMAC", 2),
-    Map.entry("cryptography.hazmat.primitives.kdf.scrypt.Scrypt", 0),
-    Map.entry("Cryptodome.Protocol.KDF.PBKDF2", 1),
-    Map.entry("Cryptodome.Protocol.KDF.scrypt", 1),
-    Map.entry("Cryptodome.Protocol.KDF.bcrypt", 2),
-    Map.entry("Crypto.Protocol.KDF.PBKDF2", 1),
-    Map.entry("Crypto.Protocol.KDF.scrypt", 1),
-    Map.entry("Crypto.Protocol.KDF.bcrypt", 2)
+  private static final String SALT_ARGUMENT_NAME = "salt";
+  private static final Map<String, ArgumentInfo> SENSITIVE_ARGUMENT_BY_FQN = Map.ofEntries(
+    Map.entry("hashlib.pbkdf2_hmac", new ArgumentInfo(2, SALT_ARGUMENT_NAME)),
+    Map.entry("hashlib.scrypt", new ArgumentInfo(4, SALT_ARGUMENT_NAME)),
+    Map.entry("crypt.crypt", new ArgumentInfo(1, SALT_ARGUMENT_NAME)),
+    Map.entry("cryptography.hazmat.primitives.kdf.pbkdf2.PBKDF2HMAC", new ArgumentInfo(2, SALT_ARGUMENT_NAME)),
+    Map.entry("cryptography.hazmat.primitives.kdf.scrypt.Scrypt", new ArgumentInfo(0, SALT_ARGUMENT_NAME)),
+    Map.entry("Cryptodome.Protocol.KDF.PBKDF2", new ArgumentInfo(1, SALT_ARGUMENT_NAME)),
+    Map.entry("Cryptodome.Protocol.KDF.scrypt", new ArgumentInfo(1, SALT_ARGUMENT_NAME)),
+    Map.entry("Cryptodome.Protocol.KDF.bcrypt", new ArgumentInfo(2, SALT_ARGUMENT_NAME)),
+    Map.entry("Crypto.Protocol.KDF.PBKDF2", new ArgumentInfo(1, SALT_ARGUMENT_NAME)),
+    Map.entry("Crypto.Protocol.KDF.scrypt", new ArgumentInfo(1, SALT_ARGUMENT_NAME)),
+    Map.entry("Crypto.Protocol.KDF.bcrypt", new ArgumentInfo(2, SALT_ARGUMENT_NAME, false))
   );
 
   private static final Map<String, ArgumentInfo> SALT_FUNCTION_ARGUMENTS_TO_CHECK = Map.of(
@@ -65,7 +66,7 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    var sensitiveArgumentByFqnCheck = new TypeCheckMap<Integer>();
+    var sensitiveArgumentByFqnCheck = new TypeCheckMap<ArgumentInfo>();
     var saltFunctionArgumentsToCheck = new TypeCheckMap<ArgumentInfo>();
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> initializeTypeChecks(ctx, sensitiveArgumentByFqnCheck,
       saltFunctionArgumentsToCheck));
@@ -77,7 +78,7 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
   }
 
   private static void initializeTypeChecks(SubscriptionContext ctx,
-    TypeCheckMap<Integer> sensitiveArgumentByFqnCheck,
+    TypeCheckMap<ArgumentInfo> sensitiveArgumentByFqnCheck,
     TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck) {
     SENSITIVE_ARGUMENT_BY_FQN.forEach((fqn, argumentNumber) -> {
       var checker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn);
@@ -90,7 +91,7 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
   }
 
   private static void handleCallExpression(CallExpression callExpression, SubscriptionContext ctx,
-    TypeCheckMap<Integer> sensitiveArgumentByFqnCheck, TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck) {
+    TypeCheckMap<ArgumentInfo> sensitiveArgumentByFqnCheck, TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck) {
     Optional.of(callExpression)
       .map(CallExpression::callee)
       .map(Expression::typeV2)
@@ -98,12 +99,12 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
       .ifPresent(sensitiveArgumentNumber -> checkArguments(callExpression, sensitiveArgumentNumber, ctx, saltFunctionArgumentsToCheck));
   }
 
-  private static void checkArguments(CallExpression callExpression, int argNb, SubscriptionContext ctx,
+  private static void checkArguments(CallExpression callExpression, ArgumentInfo argumentInfo, SubscriptionContext ctx,
     TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck) {
-    var argument = TreeUtils.nthArgumentOrKeyword(argNb, "salt", callExpression.arguments());
+    var argument = TreeUtils.nthArgumentOrKeyword(argumentInfo.position(), argumentInfo.name(), callExpression.arguments());
     if (argument != null) {
       checkSensitiveArgument(argument, ctx, saltFunctionArgumentsToCheck);
-    } else if (callExpression.arguments().stream().noneMatch(UnpackingExpression.class::isInstance)){
+    } else if (argumentInfo.required() && callExpression.arguments().stream().noneMatch(UnpackingExpression.class::isInstance)){
       ctx.addIssue(callExpression.callee(), MISSING_SALT_MESSAGE);
     }
   }
@@ -148,7 +149,10 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
       .orElse(null);
   }
 
-  private record ArgumentInfo(int position, String name) {
+  private record ArgumentInfo(int position, String name, boolean required) {
+    private ArgumentInfo(int position, String name) {
+      this(position, name, true);
+    }
   }
 
 

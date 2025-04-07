@@ -177,6 +177,9 @@ def crypto_salt():
 
         salt_16 = get_random_bytes(16)
         key = bcrypt(password, 12, salt_16) # Compliant
+        bcrypt(password, 12) # Compliand
+        scrypt(password) # Noncompliant
+        scrypt(password, base64.b16decode("abc"), 32, N=2**14, r=8, p=1) # Noncompliant {{Make this salt unpredictable.}}
 
 
 salt = get_random_bytes(32)
