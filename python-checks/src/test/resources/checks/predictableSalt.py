@@ -22,6 +22,16 @@ email = 'info@sonarsource'
 password = 'password123'
 salt = os.urandom(32)
 
+
+
+def hashlib_same_password_and_salt(p):
+  hashlib.scrypt(p, salt=p) # Noncompliant
+  pwd = "p"
+  slt = "p"
+  hashlib.scrypt(pwd, salt=slt) # Noncompliant
+  hashlib.pbkdf2_hmac('sha256', p, p) # Noncompliant
+  hashlib.pbkdf2_hmac('sha256', "p", "p") # Noncompliant
+
 hash = hashlib.pbkdf2_hmac('sha256', password, b'', 100000)        # Noncompliant {{Make this salt unpredictable.}}
 hash = hashlib.pbkdf2_hmac('sha256', password, b'D8VxSmTZt2E2YV454mkqAY5e', 100000)    # Noncompliant {{Make this salt unpredictable.}}
 hash = hashlib.pbkdf2_hmac('sha256', password, email, 100000)     # Noncompliant {{Make this salt unpredictable.}}
@@ -49,6 +59,7 @@ def base64_salt():
   hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), base64.b16encode("abc"), 100000) # Noncompliant
   hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), base64.b16decode("abc"), 100000) # Noncompliant
   hashlib.pbkdf2_hmac("sha1", bytes(password, "ascii"), base64.b16decode(unknown), 100000) # Compliant
+
 
 hash_ = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)     # Compliant
 hash_ = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), unknown, 100000)     # Compliant
@@ -151,7 +162,6 @@ def crypto_salt():
 
 
     def derive_password(password, salt):
-
         PBKDF2(password,
             b'D8VxSmTZt2E2YV454mkqAY5e', # Noncompliant {{Make this salt unpredictable.}}
     #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -180,6 +190,12 @@ def crypto_salt():
         bcrypt(password, 12) # Compliand
         scrypt(password) # Noncompliant
         scrypt(password, base64.b16decode("abc"), 32, N=2**14, r=8, p=1) # Noncompliant {{Make this salt unpredictable.}}
+        scrypt(password, password) # Noncompliant
+        scrypt("password", "password") # Noncompliant
+        p = "password"
+        s = "password"
+        scrypt(p, s) # Noncompliant
+        bcrypt(password, 12, salt=password) # Noncompliant
 
 
 salt = get_random_bytes(32)
