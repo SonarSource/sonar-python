@@ -16,14 +16,29 @@
  */
 package org.sonar.python.checks;
 
+import java.util.EnumSet;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class WeakSSLProtocolCheckTest {
 
+  @AfterEach
+  void reset_python_version() {
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+  }
+
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol.py", new WeakSSLProtocolCheck());
+  }
+
+  @Test
+  void test_python_310() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_310));
+    PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol_python310.py", new WeakSSLProtocolCheck());
   }
 
   @Test
