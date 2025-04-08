@@ -130,3 +130,105 @@ def passlib():
     scrypt.using(salt, block_size=8)  # Compliant
     scrypt.using(salt, 16, 11)  # Noncompliant
     scrypt.using(salt, 16, 12, 7)  # Noncompliant
+
+
+## PBKDF
+def hashlib():
+    from hashlib import pbkdf2_hmac
+
+    pbkdf2_hmac(
+        "sha1", password, salt, 10_000  # Noncompliant {{Use at least 100 000 iterations.}}
+    )
+    pbkdf2_hmac(
+        "sha1", password, salt, 1_300_000
+    )
+    pbkdf2_hmac(
+        "sha256", password, salt, 10_000  # Noncompliant {{Use at least 100 000 iterations.}}
+    )
+    pbkdf2_hmac(
+        "sha256", password, salt, 600_000
+    )
+    pbkdf2_hmac(
+        "sha512", password, salt, 10_000  # Noncompliant {{Use at least 100 000 iterations.}}
+    )
+    pbkdf2_hmac(
+        "sha512", password, salt, 210_000
+    )
+    algo = "sha1"
+    pbkdf2_hmac(
+        algo, password, salt, 10_000  # Noncompliant {{Use at least 100 000 iterations.}}
+    )
+    iters = 10_000
+    pbkdf2_hmac(
+        algo, password, salt, iters  # Noncompliant {{Use at least 100 000 iterations.}}
+    )
+    iters_2 = 1_300_000
+    pbkdf2_hmac(
+        algo, password, salt, iters_2
+    )
+    pbkdf2_hmac(
+        "unknown_algo", password, salt, 999_999
+    )
+    pbkdf2_hmac(
+        "sha1", password, salt  # Missing iteration count
+    )
+    pbkdf2_hmac(
+        32, password, salt, 10_000
+    )
+    pbkdf2_hmac()
+
+
+def cryptography():
+    from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+
+    PBKDF2HMAC(
+        "sha1",
+        length,
+        salt,
+        iterations=10_000,  # Noncompliant {{Use at least 100 000 iterations.}}
+    )
+    PBKDF2HMAC(
+        "sha1",
+        length,
+        salt,
+        iterations=1_300_000
+    )
+    PBKDF2HMAC(
+        "sha256",
+        length,
+        salt,
+        10_000,  # Noncompliant {{Use at least 100 000 iterations.}}
+    )
+    PBKDF2HMAC(
+        "sha256",
+        length,
+        salt,
+        600_000
+    )
+    PBKDF2HMAC(
+        "sha512",
+        length,
+        salt,
+        10_000,  # Noncompliant {{Use at least 100 000 iterations.}}
+    )
+    PBKDF2HMAC(
+        "sha512",
+        length,
+        salt,
+        210_000
+    )
+
+
+def passlib():
+    from passlib.hash import pbkdf2_sha1, pbkdf2_sha256, pbkdf2_sha512
+
+    pbkdf2_sha1.using(salt, rounds=10_000)  # Noncompliant {{Use at least 100 000 iterations.}}
+    pbkdf2_sha1.using(salt, rounds=1_300_000)
+    pbkdf2_sha256.using(salt, rounds=10_000)  # Noncompliant {{Use at least 100 000 iterations.}}
+    pbkdf2_sha256.using(salt, rounds=600_000)
+    pbkdf2_sha512.using(salt, rounds=10_000)  # Noncompliant {{Use at least 100 000 iterations.}}
+    pbkdf2_sha512.using(salt, rounds=210_000)
+    pbkdf2_sha1.using(salt)
+    pbkdf2_sha256.using(salt)  # Noncompliant
+    pbkdf2_sha512.using(salt)  # Noncompliant {{Use at least 100 000 iterations.}}
+#   ^^^^^^^^^^^^^^^^^^^
