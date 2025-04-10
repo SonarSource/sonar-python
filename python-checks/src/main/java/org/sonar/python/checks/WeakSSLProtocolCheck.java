@@ -19,6 +19,7 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -35,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TriBool;
@@ -66,6 +68,12 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
     "ssl.PROTOCOL_TLS"
   );
 
+  private static final Set<String> OPENSSL_DEFAULT_TLS_METHODS = Set.of(
+    "OpenSSL.SSL.TLS_METHOD",
+    "OpenSSL.SSL.TLS_SERVER_METHOD",
+    "OpenSSL.SSL.TLS_CLIENT_METHOD"
+  );
+
   private static final Set<String> SAFE_VERSION_NAMES = Set.of(
     "TLSv1_2",
     "TLSv1_3",
@@ -88,12 +96,14 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
 
   private TypeCheckBuilder createDefaultContextTypeCheckBuilder;
   private TypeCheckBuilder sslSSLContextTypeCheckBuilder;
+  private TypeCheckBuilder openSSLContextTypeCheckBuilder;
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
       createDefaultContextTypeCheckBuilder = ctx.typeChecker().typeCheckBuilder().isTypeWithName("ssl.create_default_context");
       sslSSLContextTypeCheckBuilder = ctx.typeChecker().typeCheckBuilder().isTypeWithName("ssl.SSLContext");
+      openSSLContextTypeCheckBuilder = ctx.typeChecker().typeCheckBuilder().isTypeWithName("OpenSSL.SSL.Context");
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, WeakSSLProtocolCheck::checkName);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
@@ -116,12 +126,18 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
     PythonType pythonType = callee.typeV2();
     if (isSslContextWithDefaultProtocols(pythonType, callExpression)) {
       checkSSLContext(ctx, callExpression);
+    } else if (isOpenSSLContextWithDefaultTLSMethods(pythonType, callExpression)) {
+      checkOpenSSLContext(ctx, callExpression);
     }
   }
 
   private boolean isSslContextWithDefaultProtocols(PythonType pythonType, CallExpression callExpression) {
     return (createDefaultContextTypeCheckBuilder.check(pythonType) == TriBool.TRUE && hasDefaultFirstArgument(callExpression, "purpose", DEFAULT_PURPOSES))
       || (sslSSLContextTypeCheckBuilder.check(pythonType) == TriBool.TRUE && hasDefaultFirstArgument(callExpression, "protocol", SSL_CONTEXT_DEPENDENT_PROTOCOLS));
+  }
+
+  private boolean isOpenSSLContextWithDefaultTLSMethods(PythonType pythonType, CallExpression callExpression) {
+    return openSSLContextTypeCheckBuilder.check(pythonType) == TriBool.TRUE && hasDefaultFirstArgument(callExpression, "method", OPENSSL_DEFAULT_TLS_METHODS);
   }
 
   private static boolean hasDefaultFirstArgument(CallExpression callExpr, String keyword, Set<String> allowedValues) {
@@ -146,6 +162,14 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
       );
   }
 
+  private static void checkOpenSSLContext(SubscriptionContext ctx, Tree tree) {
+    getContextSymbol(tree)
+      .ifPresentOrElse(
+        contextSymbol -> checkOpenSSLContextSymbol(ctx, contextSymbol, tree),
+        () -> ctx.addIssue(tree, WEAK_PROTOCOL_MESSAGE)
+      );
+  }
+
   private static void checkSSLContextSymbol(SubscriptionContext ctx, SymbolV2 contextSymbol, Tree locationForIssue) {
     boolean isUnsafeContext = isUnsafeDefaultContext(ctx, contextSymbol);
     Optional<AssignmentStatement> unsafeMaximumVersionStatement = findUnsafeMaximumVersionStatement(contextSymbol);
@@ -158,6 +182,12 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
       ctx.addIssue(unsafeMaximumVersionStatement.get(), WEAK_PROTOCOL_MESSAGE);
     } else if (isUnsafeContext) {
       // Create a standalone issue on the main location
+      ctx.addIssue(locationForIssue, WEAK_PROTOCOL_MESSAGE);
+    }
+  }
+
+  private static void checkOpenSSLContextSymbol(SubscriptionContext ctx, SymbolV2 contextSymbol, Tree locationForIssue) {
+    if (!isSecurelyConfiguredOpenSSLContext(contextSymbol)) {
       ctx.addIssue(locationForIssue, WEAK_PROTOCOL_MESSAGE);
     }
   }
@@ -178,12 +208,73 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
 
   private static boolean isSecurelyConfigured(SymbolV2 symbolV2) {
     // Check if secure through minimum_version or through security flags
-    Set<String> securityFlags = collectSecurityFlags(symbolV2);
+    Set<String> securityFlags = collectSecurityFlags(symbolV2, "options");
     return symbolV2.usages().stream()
       .anyMatch(u -> isSettingSafeMinimumVersion(u.tree())) || securityFlags.containsAll(REQUIRED_SECURITY_FLAGS);
   }
 
-  private static Set<String> collectSecurityFlags(SymbolV2 symbolV2) {
+  private static boolean isSecurelyConfiguredOpenSSLContext(SymbolV2 symbolV2) {
+    // Check if secure through set_min_proto_version or through set_options
+    return isSecureThroughMinProtoVersion(symbolV2) || isSecureThroughSetOptions(symbolV2);
+  }
+
+  private static boolean isSecureThroughMinProtoVersion(SymbolV2 symbolV2) {
+    return symbolV2.usages().stream()
+      .anyMatch(u -> {
+        // Look for a call expression ancestor
+        CallExpression callExpression = (CallExpression) TreeUtils.firstAncestorOfKind(u.tree(), Tree.Kind.CALL_EXPR);
+        if (callExpression == null) {
+          return false;
+        }
+
+        // Check if the callee type matches OpenSSL.SSL.Context.set_min_proto_version
+        Symbol symbol = callExpression.calleeSymbol();
+        if (symbol == null || !"set_min_proto_version".equals(symbol.name())) {
+          return false;
+        }
+
+        // Check if any argument refers to TLS1_2_VERSION or TLS1_3_VERSION
+        return callExpression.arguments().stream()
+          .filter(RegularArgument.class::isInstance)
+          .map(RegularArgument.class::cast)
+          .map(RegularArgument::expression)
+          .filter(HasSymbol.class::isInstance)
+          .map(HasSymbol.class::cast)
+          .map(HasSymbol::symbol)
+          .filter(Objects::nonNull)
+          .map(Symbol::fullyQualifiedName)
+          .filter(Objects::nonNull)
+          .anyMatch(fqn -> fqn.contains("TLS1_2_VERSION") || fqn.contains("TLS1_3_VERSION"));
+      });
+  }
+
+  private static boolean isSecureThroughSetOptions(SymbolV2 symbolV2) {
+    Set<String> securityFlags = collectOpenSSLSecurityFlags(symbolV2);
+    return securityFlags.containsAll(REQUIRED_SECURITY_FLAGS);
+  }
+
+  private static Set<String> collectOpenSSLSecurityFlags(SymbolV2 symbolV2) {
+    Set<String> securityFlags = new HashSet<>();
+    symbolV2.usages().stream()
+      .map(UsageV2::tree)
+      .map(Tree::parent)
+      .filter(QualifiedExpression.class::isInstance)
+      .map(QualifiedExpression.class::cast)
+      .filter(qe -> "set_options".equals(qe.name().name()))
+      .map(Tree::parent)
+      .filter(CallExpression.class::isInstance)
+      .map(CallExpression.class::cast)
+      .forEach(call -> {
+        if (!call.arguments().isEmpty()) {
+          TreeUtils.nthArgumentOrKeywordOptional(0, "options", call.arguments())
+            .map(RegularArgument::expression)
+            .ifPresent(expression -> collectSecurityFlagsFromExpression(expression, securityFlags));
+        }
+      });
+    return securityFlags;
+  }
+
+  private static Set<String> collectSecurityFlags(SymbolV2 symbolV2, String propertyName) {
     Set<String> securityFlags = new HashSet<>();
     symbolV2.usages()
       .stream()
@@ -191,7 +282,7 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
       .map(Tree::parent)
       .filter(QualifiedExpression.class::isInstance)
       .map(QualifiedExpression.class::cast)
-      .filter(qe -> "options".equals(qe.name().name()))
+      .filter(qe -> propertyName.equals(qe.name().name()))
       .map(qe -> TreeUtils.firstAncestorOfKind(qe, Tree.Kind.COMPOUND_ASSIGNMENT))
       .filter(CompoundAssignmentStatement.class::isInstance)
       .map(CompoundAssignmentStatement.class::cast)
@@ -256,4 +347,3 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
       .anyMatch(qexpr -> versionProperty.equals(qexpr.name().name()));
   }
 }
-

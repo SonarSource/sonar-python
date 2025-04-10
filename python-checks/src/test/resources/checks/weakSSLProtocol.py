@@ -141,3 +141,59 @@ def using_create_default_context():
 
     client_ctx = ssl.create_default_context(purpose=unknown())
 
+def test_openssl_default_tls_methods():
+    from OpenSSL import SSL
+    
+    # Default TLS methods are insecure by default
+    ctx1 = SSL.Context(SSL.TLS_METHOD)  # Noncompliant
+    ctx2 = SSL.Context(SSL.TLS_SERVER_METHOD)  # Noncompliant
+    ctx3 = SSL.Context(method=SSL.TLS_CLIENT_METHOD)  # Noncompliant
+    
+    # Making contexts secure with set_min_proto_version
+    ctx4 = SSL.Context(SSL.TLS_METHOD)  # Compliant
+    ctx4.set_min_proto_version(SSL.TLS1_2_VERSION)
+    
+    ctx5 = SSL.Context(SSL.TLS_SERVER_METHOD)  # Compliant
+    ctx5.set_min_proto_version(SSL.TLS1_3_VERSION)
+    
+    # Still insecure with lower versions
+    ctx6 = SSL.Context(SSL.TLS_CLIENT_METHOD)  # Noncompliant
+    ctx6.set_min_proto_version(SSL.TLS1_1_VERSION)
+    
+    # Making contexts secure with set_options
+    ctx7 = SSL.Context(SSL.TLS_METHOD)  # Compliant
+    ctx7.set_options(SSL.OP_NO_SSLv2 | SSL.OP_NO_SSLv3 | SSL.OP_NO_TLSv1 | SSL.OP_NO_TLSv1_1)
+    
+    ctx8 = SSL.Context(SSL.TLS_SERVER_METHOD)  # Compliant
+    ctx8.set_options(SSL.OP_NO_SSLv2)
+    ctx8.set_options(SSL.OP_NO_SSLv3)
+    ctx8.set_options(SSL.OP_NO_TLSv1)
+    ctx8.set_options(SSL.OP_NO_TLSv1_1)
+    
+    # Incomplete set_options (missing OP_NO_TLSv1_1)
+    ctx9 = SSL.Context(SSL.TLS_CLIENT_METHOD)  # Noncompliant
+    ctx9.set_options(SSL.OP_NO_SSLv2 | SSL.OP_NO_SSLv3 | SSL.OP_NO_TLSv1)
+    
+    # Combination of methods
+    ctx10 = SSL.Context(SSL.TLS_METHOD)  # Compliant
+    ctx10.set_min_proto_version(SSL.TLS1_2_VERSION)
+    ctx10.set_options(SSL.OP_NO_SSLv2 | SSL.OP_NO_SSLv3)
+    
+    # Invalid usage
+    ctx11 = SSL.Context(SSL.TLS_SERVER_METHOD)  # Noncompliant
+    foo(ctx11.set_options)
+    
+    # Reassignment (not flow-sensitive)
+    ctx12 = SSL.Context(SSL.TLS_CLIENT_METHOD)
+    ctx12.set_min_proto_version(SSL.TLS1_2_VERSION)
+    ctx12 = SSL.Context(SSL.TLS_CLIENT_METHOD)  # FN
+
+    ctx13 = SSL.Context(SSL.TLS_SERVER_METHOD) # Noncompliant
+    ctx13.set_options()
+
+    # Context used directly
+    foo(SSL.Context(SSL.TLS_SERVER_METHOD)) # Noncompliant
+
+    ctx14 = SSL.Context(SSL.TLS_SERVER_METHOD) # Noncompliant
+    # Possible FP if ctx14 is configured in bar
+    bar(ctx14)
