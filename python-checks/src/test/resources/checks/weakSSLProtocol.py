@@ -33,7 +33,7 @@ ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1_2) # Compliant
 
 def default_protocol_attributes():
     # Unsafe by default in Python versions under 3.10
-    ssl.SSLContext() # Noncompliant
+    ssl.SSLContext() # Noncompliant {{Use a stronger protocol, or upgrade to Python 3.10+ which uses secure defaults.}}
     ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT) # Noncompliant
     ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER) # Noncompliant
     ssl.SSLContext(ssl.PROTOCOL_TLS) # Noncompliant
@@ -44,7 +44,7 @@ def default_protocol_attributes():
     secure_ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
     secure_ctx.minimum_version = ssl.TLSv1_3  # Only TLSv1.3 will be used
 
-    unsafe_ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT) # Noncompliant
+    unsafe_ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT) # Noncompliant {{Use a stronger protocol, or upgrade to Python 3.10+ which uses secure defaults.}}
     unsafe_ctx.minimum_version = ssl.TLSv1_1  # Minimum version set to TLSv1.1 is insecure
 
     # Reassignment FN: rule is not flow sensitive
@@ -57,7 +57,7 @@ def default_protocol_attributes():
 
 
 def setting_unsafe_maximum_version():
-    ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER) # Noncompliant
+    ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER) # Noncompliant {{Change this code to use a stronger protocol.}}
 #         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     ctx.maximum_version = ssl.TLSVersion.TLSv1_1
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<

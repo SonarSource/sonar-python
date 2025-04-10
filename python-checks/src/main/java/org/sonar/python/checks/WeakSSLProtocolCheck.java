@@ -93,6 +93,7 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
   );
 
   private static final String WEAK_PROTOCOL_MESSAGE = "Change this code to use a stronger protocol.";
+  private static final String WEAK_PROTOCOL_MESSAGE_PYTHON_310 = "Use a stronger protocol, or upgrade to Python 3.10+ which uses secure defaults.";
 
   private TypeCheckBuilder createDefaultContextTypeCheckBuilder;
   private TypeCheckBuilder sslSSLContextTypeCheckBuilder;
@@ -158,7 +159,11 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
     getContextSymbol(tree)
       .ifPresentOrElse(
         contextSymbol -> checkSSLContextSymbol(ctx, contextSymbol, tree),
-        () -> ctx.addIssue(tree, WEAK_PROTOCOL_MESSAGE)
+        () -> {
+          if (!isSafePythonVersion(ctx)) {
+            ctx.addIssue(tree, WEAK_PROTOCOL_MESSAGE_PYTHON_310);
+          }
+        }
       );
   }
 
@@ -182,7 +187,7 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
       ctx.addIssue(unsafeMaximumVersionStatement.get(), WEAK_PROTOCOL_MESSAGE);
     } else if (isUnsafeContext) {
       // Create a standalone issue on the main location
-      ctx.addIssue(locationForIssue, WEAK_PROTOCOL_MESSAGE);
+      ctx.addIssue(locationForIssue, WEAK_PROTOCOL_MESSAGE_PYTHON_310);
     }
   }
 
@@ -193,8 +198,11 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isUnsafeDefaultContext(SubscriptionContext ctx, SymbolV2 contextSymbol) {
-    boolean isAllPython310OrAbove = PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(ctx.sourcePythonVersions(), PythonVersionUtils.Version.V_310);
-    return !isAllPython310OrAbove && !isSecurelyConfigured(contextSymbol);
+    return !isSafePythonVersion(ctx) && !isSecurelyConfigured(contextSymbol);
+  }
+
+  private static boolean isSafePythonVersion(SubscriptionContext ctx) {
+    return PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(ctx.sourcePythonVersions(), PythonVersionUtils.Version.V_310);
   }
 
   private static Optional<SymbolV2> getContextSymbol(Tree tree) {
