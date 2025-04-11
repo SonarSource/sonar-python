@@ -26,10 +26,12 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.checks.hotspots.CommonValidationUtils.ArgumentValidator;
@@ -40,6 +42,7 @@ import org.sonar.python.types.v2.TypeCheckBuilder;
 
 import static org.sonar.python.checks.hotspots.CommonValidationUtils.isEqualTo;
 import static org.sonar.python.checks.hotspots.CommonValidationUtils.isLessThan;
+import static org.sonar.python.checks.hotspots.CommonValidationUtils.isLessThanExponent;
 import static org.sonar.python.semantic.SymbolUtils.qualifiedNameOrEmpty;
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeywordOptional;
@@ -50,6 +53,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   private static final String SCRYPT_PARAMETERS_MESSAGE = "Use strong scrypt parameters.";
   private static final String PBKDF2_MESSAGE = "Use at least 100 000 iterations.";
   private static final String ARGON2_MESSAGE = "Use secure Argon2 parameters.";
+  private static final String BCRYPT_MESSAGE = "Use strong bcrypt parameters.";
   private static final Set<String> PBKDF2_ALGOS = Set.of(
     "sha1",
     "sha256",
@@ -72,7 +76,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   });
   private static final ArgumentValidator SCRYPT_N = new ArgumentValidator(
     2, "N", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || CommonValidationUtils.isLessThanExponent(argument.expression(), 13)) {
+    if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || isLessThanExponent(argument.expression(), 13)) {
       ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
     }
   });
@@ -85,7 +89,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   });
   private static final ArgumentValidator HASHLIB_N = new ArgumentValidator(
     2, "n", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || CommonValidationUtils.isLessThanExponent(argument.expression(), 13)) {
+    if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || isLessThanExponent(argument.expression(), 13)) {
       ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
     }
   });
@@ -104,7 +108,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   });
   private static final ArgumentValidator CRYPTOGRAPHY_N = new ArgumentValidator(
     2, "n", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || CommonValidationUtils.isLessThanExponent(argument.expression(), 13)) {
+    if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || isLessThanExponent(argument.expression(), 13)) {
       ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
     }
   });
@@ -141,6 +145,30 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     2, ROUNDS, PBKDF2_MESSAGE
   );
 
+  private static final CallValidator BCRYPT_GENSALT = new ArgumentValidator(
+    0, ROUNDS, (ctx, argument) -> {
+    if (isLessThan(argument.expression(), 12)) {
+      ctx.addIssue(argument, BCRYPT_MESSAGE);
+    }
+  });
+  private static final CallValidator BCRYPT_KDF = new ArgumentValidator(
+    3, ROUNDS, (ctx, argument) -> {
+    if (isLessThan(argument.expression(), 4096) || isLessThanExponent(argument.expression(), 12)) {
+      ctx.addIssue(argument, BCRYPT_MESSAGE);
+    }
+  });
+  private static final CallValidator PASSLIB_BCRYPT = new ArgumentValidator(
+    3, ROUNDS, (ctx, argument) -> {
+    if (isLessThan(argument.expression(), 12)) {
+      ctx.addIssue(argument, BCRYPT_MESSAGE);
+    }
+  });
+  private static final CallValidator FLASK_BCRYPT = new ArgumentValidator(
+    1, ROUNDS, (ctx, argument) -> {
+    if (isLessThan(argument.expression(), 12)) {
+      ctx.addIssue(argument, BCRYPT_MESSAGE);
+    }
+  });
 
   private static final Map<String, Collection<CallValidator>> CALL_EXPRESSION_VALIDATORS = Map.ofEntries(
     Map.entry("scrypt.hash", List.of(SCRYPT_R, SCRYPT_BUFLEN, SCRYPT_N)),
@@ -153,26 +181,65 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     Map.entry("argon2.Parameters", List.of(new Argon2PasswordHasherValidator(4, 5, 6))),
     Map.entry("argon2.low_level.hash_secret", List.of(new Argon2PasswordHasherValidator(2, 3, 4))),
     Map.entry("argon2.low_level.hash_secret_raw", List.of(new Argon2PasswordHasherValidator(2, 3, 4))),
-    Map.entry("passlib.handlers.argon2._Argon2Common.using", List.of(new Argon2PasswordHasherValidator(3, 4, 5)))
+    Map.entry("passlib.handlers.argon2._Argon2Common.using", List.of(new Argon2PasswordHasherValidator(3, 4, 5))),
+    Map.entry("bcrypt.gensalt", List.of(BCRYPT_GENSALT)),
+    Map.entry("bcrypt.kdf", List.of(BCRYPT_KDF)),
+    Map.entry("flask_bcrypt.generate_password_hash", List.of(FLASK_BCRYPT)),
+    Map.entry("flask_bcrypt.Bcrypt.generate_password_hash", List.of(FLASK_BCRYPT))
   );
 
   private static final Map<String, Collection<CallValidator>> QUALIFIED_EXPR_VALIDATOR = Map.of(
     "passlib.hash.pbkdf2_sha1.using", List.of(PASSLIB_PBKDF2),
     "passlib.hash.pbkdf2_sha256.using", List.of(PASSLIB_PBKDF2, PASSLIB_MISSING_ROUNDS),
-    "passlib.hash.pbkdf2_sha512.using", List.of(PASSLIB_PBKDF2, PASSLIB_MISSING_ROUNDS)
+    "passlib.hash.pbkdf2_sha512.using", List.of(PASSLIB_PBKDF2, PASSLIB_MISSING_ROUNDS),
+    "passlib.hash.bcrypt.using", List.of(PASSLIB_BCRYPT)
   );
 
 
   private TypeCheckBuilder argon2CheapestProfileTypeChecker = null;
+  private TypeCheckBuilder flaskConfigTypeChecker = null;
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::registerTypeCheckers);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, FastHashingOrPlainTextCheck::checkCallExpr);
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, this::checkName);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, subscriptionContext -> checkAssignment(subscriptionContext, flaskConfigTypeChecker));
   }
 
   private void registerTypeCheckers(SubscriptionContext subscriptionContext) {
     argon2CheapestProfileTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn("argon2.profiles.CHEAPEST");
+    flaskConfigTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isInstanceOf("flask.config.Config");
+  }
+
+  private static void checkAssignment(SubscriptionContext subscriptionContext, TypeCheckBuilder flaskConfigTypeChecker) {
+    var stmt = (AssignmentStatement) subscriptionContext.syntaxNode();
+    var lhsSubscription = stmt.lhsExpressions().stream().findFirst()
+      .map(ExpressionList::expressions)
+      .flatMap(list -> list.stream().findFirst())
+      .filter(expression -> subscriptionIsFlaskBcryptConfig(expression, flaskConfigTypeChecker));
+
+    if (lhsSubscription.isEmpty()) {
+      return;
+    }
+
+    if (isLessThan(stmt.assignedValue(), 12)) {
+      subscriptionContext.addIssue(stmt.assignedValue(), BCRYPT_MESSAGE);
+    }
+  }
+
+  private static boolean subscriptionIsFlaskBcryptConfig(Expression expression, TypeCheckBuilder flaskConfigTypeChecker) {
+    if (!expression.is(Tree.Kind.SUBSCRIPTION)) {
+      return false;
+    }
+    var subscription = (SubscriptionExpression) expression;
+    if (flaskConfigTypeChecker.check(subscription.object().typeV2()) != TriBool.TRUE) {
+      return false;
+    }
+    var subscriptMatch = subscription.subscripts().expressions()
+      .stream()
+      .findFirst()
+      .filter(expr -> "BCRYPT_LOG_ROUNDS".equals(singleAssignedString(expr)));
+    return subscriptMatch.isPresent();
   }
 
   private void checkName(SubscriptionContext subscriptionContext) {

@@ -303,3 +303,45 @@ def manual_unsafe():
 
     argon2.using(time_cost=4, memory_cost=7167, parallelism=1)  # Noncompliant
     argon2.using(time_cost=4, memory_cost=7167, parallelism=2)
+
+    
+## bcrypt
+def bcrypt():
+    from bcrypt import gensalt, kdf
+
+    gensalt(11)  # Noncompliant {{Use strong bcrypt parameters.}}
+    gensalt(12)
+
+    kdf(password, salt, key_bytes, 4095, ignore_few_rounds)  # Noncompliant {{Use strong bcrypt parameters.}}
+    kdf(password, salt, key_bytes, 4096, ignore_few_rounds)
+    kdf(password, salt, key_bytes, 1 << 11, ignore_few_rounds)  # Noncompliant {{Use strong bcrypt parameters.}}
+    kdf(password, salt, key_bytes, 1 << 12, ignore_few_rounds)
+
+
+def passlib():
+    from passlib.hash import bcrypt
+
+    bcrypt.using(rounds=11)  # Noncompliant {{Use strong bcrypt parameters.}}
+    bcrypt.using(rounds=12)
+
+
+def flask():
+    from flask_bcrypt import generate_password_hash
+    generate_password_hash(password, 11)  # Noncompliant {{Use strong bcrypt parameters.}}
+    generate_password_hash(password, 12)
+
+    from flask_bcrypt import Bcrypt
+    bcrypt_app = Bcrypt(app)
+    bcrypt_app.generate_password_hash(password, 11)  # Noncompliant {{Use strong bcrypt parameters.}}
+    bcrypt_app.generate_password_hash(password, 12)
+
+
+def flask_config():
+    from flask import Flask
+
+    app = Flask(__name__)
+    app.config['BCRYPT_LOG_ROUNDS'] = 11  # Noncompliant {{Use strong bcrypt parameters.}}
+    app.config['BCRYPT_LOG_ROUNDS'] = 12
+
+    some_dict = {}
+    some_dict['BCRYPT_LOG_ROUNDS'] = 11
