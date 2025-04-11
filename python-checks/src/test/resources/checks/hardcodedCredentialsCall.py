@@ -46,6 +46,43 @@ def obj_creation_hardcoded_assigned_value(password):
 def top_level_function_call():
     psycopg2cffi.connect(password="abc") # Noncompliant
 
+
+# Methods manually defined in "manual_hardcoded_credentials_call_check_meta.json"
+import psycopg
+import psycopg2
+import mysql.connector
+from mysql.connector import MySQLConnection
+import pymysql
+import redis as r
+from pymongo import MongoClient
+import boto3
+
+def manually_defined_method_calls_with_named_params():
+    psycopg.connect(password="abc") # Noncompliant
+    psycopg2.connect(password="abc") # Noncompliant
+    mysql.connector.connect(password='abc') # Noncompliant
+    mysql.connector.connect(passwd='abc') # Noncompliant
+    mysql.connector.connect(password1='abc', password2='abc', password3='abc') # Noncompliant 3
+    MySQLConnection(password='abc') # Noncompliant
+    MySQLConnection(passwd='abc') # Noncompliant
+    MySQLConnection(password1='abc', password2='abc', password3='abc') # Noncompliant 3
+    pymysql.connect(password="abc") # Noncompliant
+    pymysql.connect(passwd="abc") # Noncompliant
+    r.Redis(password="abc") # Noncompliant
+    MongoClient(password="abc") # Noncompliant
+    boto3.resource(aws_secret_access_key="abc") # Noncompliant
+
+def manually_defined_method_calls_with_positional_params():
+    r.Redis("host", "port", "db", "password") # Noncompliant
+    # The following calls are compliant because the password can't be a positional parameter
+    psycopg.connect("abc")
+    psycopg2.connect("abc")
+    mysql.connector.connect("abc")
+    MySQLConnection("abc")
+    pymysql.connect("abc")
+    MongoClient("abc")
+    boto3.resource("abc")
+
 # from S4433
 import ldap
 import os

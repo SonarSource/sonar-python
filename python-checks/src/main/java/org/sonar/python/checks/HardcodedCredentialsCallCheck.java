@@ -21,11 +21,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -64,15 +66,18 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
   }
 
   private void checkCallArguments(SubscriptionContext ctx, CallExpression call) {
-    getMethod(call)
-      .ifPresent(method -> method.indices()
-        .forEach(argumentIndex -> {
-          var argumentName = method.args().get(argumentIndex);
-          var argument = TreeUtils.nthArgumentOrKeyword(argumentIndex, argumentName, call.arguments());
-          if (argument != null) {
-            checkArgument(ctx, argument);
-          }
-        }));
+    getMethod(call).ifPresent(method ->
+      getArgumentsToCheck(call, method)
+        .forEach(argument -> checkArgument(ctx, argument))
+    );
+  }
+
+  private Stream<RegularArgument> getArgumentsToCheck(CallExpression call, CredentialMethod method) {
+    return method.sensitiveArguments().stream()
+      .map(sensitiveArgument -> sensitiveArgument.index() != null
+        ? TreeUtils.nthArgumentOrKeyword(sensitiveArgument.index(), sensitiveArgument.name(), call.arguments())
+        : TreeUtils.argumentByKeyword(sensitiveArgument.name(), call.arguments()))
+      .filter(Objects::nonNull);
   }
 
   private static void checkArgument(SubscriptionContext ctx, RegularArgument argument) {
@@ -142,26 +147,20 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
       .map(methods::get);
   }
 
-  public static class CredentialMethod {
-    private String name;
-    private List<String> args;
-    private List<Integer> indices;
+  public record CredentialMethod(
+    String name,
+    List<MethodArgument> sensitiveArguments) {
+  }
 
-    public String name() {
-      return name;
-    }
-
-    public List<String> args() {
-      return args;
-    }
-
-    public List<Integer> indices() {
-      return indices;
-    }
+  public record MethodArgument(
+    String name,
+    @Nullable Integer index) {
   }
 
   private static class CredentialMethodsLoader {
-    private static final String METHODS_RESOURCE_PATH = "/org/sonar/python/checks/hardcoded_credentials_call_check_meta.json";
+    private static final String CHECKS_DIR = "/org/sonar/python/checks";
+    private static final String GENERATED_METHODS_RESOURCE_PATH = CHECKS_DIR + "/generated_hardcoded_credentials_call_check_meta.json";
+    private static final String MANUAL_METHODS_RESOURCE_PATH = CHECKS_DIR + "/manual_hardcoded_credentials_call_check_meta.json";
     private final Gson gson;
 
     private CredentialMethodsLoader() {
@@ -169,15 +168,20 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
     }
 
     private Map<String, CredentialMethod> load() {
-      try (var is = HardcodedCredentialsCallCheck.class.getResourceAsStream(METHODS_RESOURCE_PATH)) {
+      var generatedCredentialMethods = loadMethodsFromResource(GENERATED_METHODS_RESOURCE_PATH);
+      var manualCredentialMethods = loadMethodsFromResource(MANUAL_METHODS_RESOURCE_PATH);
+      return Stream.concat(Stream.of(generatedCredentialMethods), Stream.of(manualCredentialMethods))
+        .collect(Collectors.toMap(CredentialMethod::name, Function.identity())); // Will throw an exception if there are duplicates
+    }
+
+    private CredentialMethod[] loadMethodsFromResource(String resourcePath) {
+      try (var is = HardcodedCredentialsCallCheck.class.getResourceAsStream(resourcePath)) {
         return Optional.ofNullable(is)
           .map(InputStreamReader::new)
-          .map(r -> gson.fromJson(r, CredentialMethod[].class))
-          .stream()
-          .flatMap(Stream::of)
-          .collect(Collectors.toMap(CredentialMethod::name, Function.identity()));
+          .map(reader -> gson.fromJson(reader, CredentialMethod[].class))
+          .orElseThrow(() -> new IllegalStateException("Unable to open resource: " + resourcePath));
       } catch (IOException e) {
-        throw new IllegalStateException("Unable to read methods metadata from " + METHODS_RESOURCE_PATH, e);
+        throw new IllegalStateException("Unable to read methods metadata from " + resourcePath, e);
       }
     }
   }
