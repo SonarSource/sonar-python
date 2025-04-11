@@ -41,13 +41,17 @@ class CommonValidationUtilsTest {
             ctx.addIssue(argument, "Argument is less than 10");
           }
         });
+      TreeUtils.nthArgumentOrKeywordOptional(1, "isEqualTo", callExpression.arguments())
+        .ifPresent(argument -> {
+          if (CommonValidationUtils.isEqualTo(argument.expression(), 10)) {
+            ctx.addIssue(argument, "Argument is equal to 10");
+          }
+        });
     }
   }
 
   @Test
   void isLessThan() {
     PythonCheckVerifier.verify("src/test/resources/checks/commonValidationUtils.py", new isLessThanTestCheck());
-
-
   }
 }

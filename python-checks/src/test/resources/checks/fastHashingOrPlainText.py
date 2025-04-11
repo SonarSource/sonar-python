@@ -232,3 +232,74 @@ def passlib():
     pbkdf2_sha256.using(salt)  # Noncompliant
     pbkdf2_sha512.using(salt)  # Noncompliant {{Use at least 100 000 iterations.}}
 #   ^^^^^^^^^^^^^^^^^^^
+
+## Argon2
+
+def not_cheapest():
+    from argon2 import PasswordHasher
+    from argon2.profiles import RFC_9106_HIGH_MEMORY
+    PasswordHasher.from_parameters(RFC_9106_HIGH_MEMORY)
+
+
+def manual_unsafe():
+    from argon2 import PasswordHasher, Parameters
+    PasswordHasher(  # Noncompliant {{Use secure Argon2 parameters.}}
+        time_cost=4,
+        memory_cost=7167,
+        parallelism=1,
+    )
+    PasswordHasher(
+        time_cost=4,
+        memory_cost=7167,
+        parallelism=2,
+    )
+    PasswordHasher(
+        time_cost=4,
+        memory_cost=7167,
+    )
+    PasswordHasher(
+        time_cost=4,
+        parallelism=1,
+    )
+    PasswordHasher(
+        memory_cost=7167,
+        parallelism=1,
+    )
+
+    Parameters(type, version, salt_len, hash_len, 1, 1, 1)  # Noncompliant
+
+    from argon2.low_level import hash_secret, hash_secret_raw
+    hash_secret(  # Noncompliant
+        password,
+        salt,
+        4,
+        7167,
+        1,
+    )
+    hash_secret(
+        password,
+        salt,
+        6,
+        7167,
+        1,
+    )
+
+    hash_secret_raw(  # Noncompliant
+        password,
+        salt,
+        4,
+        7167,
+        1,
+    )
+    hash_secret_raw(
+        password,
+        salt,
+        6,
+        7167,
+        1,
+    )
+
+    from passlib.hash import argon2
+
+    argon2.using(time_cost=4, memory_cost=7167, parallelism=1)  # Noncompliant
+    argon2.using(time_cost=4, memory_cost=7167, parallelism=2)

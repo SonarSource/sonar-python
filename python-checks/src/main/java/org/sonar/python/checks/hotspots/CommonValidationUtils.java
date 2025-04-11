@@ -59,6 +59,17 @@ public class CommonValidationUtils {
     return false;
   }
 
+  static boolean isEqualTo(Expression expression, int number) {
+    try {
+      if (expression.is(Tree.Kind.NAME)) {
+        return Expressions.singleAssignedNonNameValue(((Name) expression)).map(value -> isEqualTo(value, number)).orElse(false);
+      }
+      return expression.is(Tree.Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() == number;
+    } catch (NumberFormatException nfe) {
+      return false;
+    }
+  }
+
   interface CallValidator {
     void validate(SubscriptionContext ctx, CallExpression callExpression);
   }

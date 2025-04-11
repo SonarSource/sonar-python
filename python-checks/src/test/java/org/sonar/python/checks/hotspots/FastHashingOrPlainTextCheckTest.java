@@ -26,4 +26,14 @@ class FastHashingOrPlainTextCheckTest {
     PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/fastHashingOrPlainText.py"), new FastHashingOrPlainTextCheck());
   }
 
+  @Test
+  void cheapestAnywhereImportFrom() {
+    PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/fastHashingOrPlainTextArgon2ImportFrom.py"), new FastHashingOrPlainTextCheck());
+  }
+
+  @Test
+  void cheapestAnywhereImport() {
+    PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/fastHashingOrPlainTextArgon2Import.py"), new FastHashingOrPlainTextCheck());
+  }
+
 }
