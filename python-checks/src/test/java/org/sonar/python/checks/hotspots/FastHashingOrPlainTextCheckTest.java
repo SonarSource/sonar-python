@@ -16,24 +16,30 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class FastHashingOrPlainTextCheckTest {
   @Test
   void test() {
-    PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/fastHashingOrPlainText.py"), new FastHashingOrPlainTextCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/fastHashingOrPlainText/fastHashingOrPlainText.py", new FastHashingOrPlainTextCheck());
   }
 
   @Test
   void cheapestAnywhereImportFrom() {
-    PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/fastHashingOrPlainTextArgon2ImportFrom.py"), new FastHashingOrPlainTextCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/fastHashingOrPlainText/fastHashingOrPlainTextArgon2ImportFrom.py",
+      new FastHashingOrPlainTextCheck());
   }
 
   @Test
   void cheapestAnywhereImport() {
-    PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/fastHashingOrPlainTextArgon2Import.py"), new FastHashingOrPlainTextCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/fastHashingOrPlainText/fastHashingOrPlainTextArgon2Import.py",
+      new FastHashingOrPlainTextCheck());
+  }
+
+  @Test
+  void djangoSettings() {
+    PythonCheckVerifier.verify("src/test/resources/checks/fastHashingOrPlainText/settings.py", new FastHashingOrPlainTextCheck());
   }
 
 }

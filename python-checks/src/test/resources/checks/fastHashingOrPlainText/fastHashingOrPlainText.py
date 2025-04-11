@@ -345,3 +345,14 @@ def flask_config():
 
     some_dict = {}
     some_dict['BCRYPT_LOG_ROUNDS'] = 11
+
+
+## Django
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher"
+]
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.UnsaltedSHA1PasswordHasher",  # OK outside of settings.py
+]

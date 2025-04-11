@@ -19,7 +19,9 @@ package org.sonar.python.checks.hotspots;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -27,6 +29,7 @@ import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -54,12 +57,21 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   private static final String PBKDF2_MESSAGE = "Use at least 100 000 iterations.";
   private static final String ARGON2_MESSAGE = "Use secure Argon2 parameters.";
   private static final String BCRYPT_MESSAGE = "Use strong bcrypt parameters.";
+  private static final String DJANGO_MESSAGE = "Use a secure hashing algorithm to store passwords.";
+
   private static final Set<String> PBKDF2_ALGOS = Set.of(
     "sha1",
     "sha256",
     "sha512"
   );
   private static final String ROUNDS = "rounds";
+  private static final Set<String> DJANGO_FIRST_FORBIDDEN_HASHERS = Set.of(
+    "django.contrib.auth.hashers.SHA1PasswordHasher",
+    "django.contrib.auth.hashers.MD5PasswordHasher",
+    "django.contrib.auth.hashers.UnsaltedSHA1PasswordHasher",
+    "django.contrib.auth.hashers.UnsaltedMD5PasswordHasher",
+    "django.contrib.auth.hashers.CryptPasswordHasher"
+  );
 
 
   private static final ArgumentValidator SCRYPT_R = new ArgumentValidator(
@@ -201,9 +213,37 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::registerTypeCheckers);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, subscriptionContext1 -> {
+      if (!"settings.py".equals(subscriptionContext1.pythonFile().fileName())) {
+        return;
+      }
+      context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, FastHashingOrPlainTextCheck::checkDjangoHasher);
+    });
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, FastHashingOrPlainTextCheck::checkCallExpr);
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, this::checkName);
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, subscriptionContext -> checkAssignment(subscriptionContext, flaskConfigTypeChecker));
+  }
+
+  private static void checkDjangoHasher(SubscriptionContext subscriptionContext) {
+    var stmt = (AssignmentStatement) subscriptionContext.syntaxNode();
+    var lhsIsConfig = stmt.lhsExpressions().stream().findFirst()
+      .map(ExpressionList::expressions)
+      .flatMap(list -> list.stream().findFirst())
+      .filter(expression -> expression.is(Tree.Kind.NAME))
+      .filter(name -> "PASSWORD_HASHERS".equals(((Name) name).name()));
+
+    var firstRhsString = Optional.of(stmt.assignedValue())
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(ListLiteral.class))
+      .map(ListLiteral::elements)
+      .map(ExpressionList::expressions)
+      .map(List::stream)
+      .flatMap(Stream::findFirst)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
+      .filter(stringLiteral -> DJANGO_FIRST_FORBIDDEN_HASHERS.contains(stringLiteral.trimmedQuotesValue()));
+
+    if (lhsIsConfig.isPresent() && firstRhsString.isPresent()) {
+      subscriptionContext.addIssue(firstRhsString.get(), DJANGO_MESSAGE);
+    }
   }
 
   private void registerTypeCheckers(SubscriptionContext subscriptionContext) {
