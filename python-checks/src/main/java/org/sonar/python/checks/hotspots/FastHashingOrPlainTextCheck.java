@@ -42,6 +42,7 @@ import org.sonar.python.checks.hotspots.CommonValidationUtils.CallValidator;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeCheckMap;
 
 import static org.sonar.python.checks.hotspots.CommonValidationUtils.isEqualTo;
 import static org.sonar.python.checks.hotspots.CommonValidationUtils.isLessThan;
@@ -188,7 +189,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     Map.entry("hashlib.pbkdf2_hmac", List.of(HASHLIB_PBKDF2)),
     Map.entry("cryptography.hazmat.primitives.kdf.scrypt.Scrypt", List.of(CRYPTOGRAPHY_R, CRYPTOGRAPHY_N, CRYPTOGRAPHY_LENGTH)),
     Map.entry("cryptography.hazmat.primitives.kdf.pbkdf2.PBKDF2HMAC", List.of(CRYPTOGRAPHY_PBKDF2)),
-    Map.entry("passlib.hash.scrypt.using", List.of(PASSLIB_BLOCK_SIZE, PASSLIB_ROUNDS)),
+    Map.entry("passlib.handlers.scrypt.scrypt.using", List.of(PASSLIB_BLOCK_SIZE, PASSLIB_ROUNDS)),
     Map.entry("argon2.PasswordHasher", List.of(new Argon2PasswordHasherValidator(0, 1, 2))),
     Map.entry("argon2.Parameters", List.of(new Argon2PasswordHasherValidator(4, 5, 6))),
     Map.entry("argon2.low_level.hash_secret", List.of(new Argon2PasswordHasherValidator(2, 3, 4))),
@@ -196,7 +197,10 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     Map.entry("passlib.handlers.argon2._Argon2Common.using", List.of(new Argon2PasswordHasherValidator(3, 4, 5))),
     Map.entry("bcrypt.gensalt", List.of(BCRYPT_GENSALT)),
     Map.entry("bcrypt.kdf", List.of(BCRYPT_KDF)),
-    Map.entry("flask_bcrypt.generate_password_hash", List.of(FLASK_BCRYPT)),
+    Map.entry("flask_bcrypt.generate_password_hash", List.of(FLASK_BCRYPT))
+  );
+
+  private static final Map<String, Collection<CallValidator>> CALL_EXPRESSION_VALIDATORS_V1 = Map.ofEntries(
     Map.entry("flask_bcrypt.Bcrypt.generate_password_hash", List.of(FLASK_BCRYPT))
   );
 
@@ -210,6 +214,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
 
   private TypeCheckBuilder argon2CheapestProfileTypeChecker = null;
   private TypeCheckBuilder flaskConfigTypeChecker = null;
+  private TypeCheckMap<Collection<CallValidator>> typeCheckMap = new TypeCheckMap<>();
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::registerTypeCheckers);
@@ -219,7 +224,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
       }
       context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, FastHashingOrPlainTextCheck::checkDjangoHasher);
     });
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, FastHashingOrPlainTextCheck::checkCallExpr);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpr);
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, this::checkName);
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, subscriptionContext -> checkAssignment(subscriptionContext, flaskConfigTypeChecker));
   }
@@ -249,6 +254,11 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   private void registerTypeCheckers(SubscriptionContext subscriptionContext) {
     argon2CheapestProfileTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn("argon2.profiles.CHEAPEST");
     flaskConfigTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isInstanceOf("flask.config.Config");
+    typeCheckMap = new TypeCheckMap<>();
+    CALL_EXPRESSION_VALIDATORS.forEach((key, value) -> {
+      var typeCheckBuilder = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn(key);
+      typeCheckMap.put(typeCheckBuilder, value);
+    });
   }
 
   private static void checkAssignment(SubscriptionContext subscriptionContext, TypeCheckBuilder flaskConfigTypeChecker) {
@@ -298,18 +308,22 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     return ancestorAssign.lhsExpressions().stream().flatMap(expressionList -> expressionList.children().stream()).anyMatch(tree -> tree == name);
   }
 
-  private static void checkCallExpr(SubscriptionContext subscriptionContext) {
+  private void checkCallExpr(SubscriptionContext subscriptionContext) {
     CallExpression callExpression = (CallExpression) subscriptionContext.syntaxNode();
     var qualifiedName = qualifiedNameOrEmpty(callExpression);
-    var configs = CALL_EXPRESSION_VALIDATORS.getOrDefault(qualifiedName, List.of());
+    var configsV2 = typeCheckMap.getOptionalForType(callExpression.callee().typeV2()).orElse(List.of());
+    configsV2.forEach(config -> config.validate(subscriptionContext, callExpression));
+    // We need to keep some V1 checks because of SONARPY-2268.
+    // When resolving members, we can get an UnknownType for the callee. This looses all type information and makes typechecking impossible
+    // We could use the qualified expression mechanism to bypass this limitation, however handling it at the type inference level is better
+    var configsV1 = CALL_EXPRESSION_VALIDATORS_V1.getOrDefault(qualifiedName, List.of());
+    configsV1.forEach(config -> config.validate(subscriptionContext, callExpression));
 
-    configs.forEach(config -> config.validate(subscriptionContext, callExpression));
-
-    // We can't directly type check against the callee type (or FQN) for the passlib PBKDF2 because both type inference engine resolve passlib.utils.handlers.HasRounds.using
-    // which will result in false positives
+    // We can't directly type check against the callee type (or FQN) for the passlib PBKDF2 because both type inference engine resolve passlib.utils.handlers.HasRounds.using or
+    // passlib.ifc.PasswordHash.using which will result in false positives
     if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
       var fqn = TreeUtils.fullyQualifiedNameFromQualifiedExpression(((QualifiedExpression) callExpression.callee())).orElse("");
-      configs = QUALIFIED_EXPR_VALIDATOR.getOrDefault(fqn, List.of());
+      var configs = QUALIFIED_EXPR_VALIDATOR.getOrDefault(fqn, List.of());
       configs.forEach(config -> config.validate(subscriptionContext, callExpression));
     }
   }
