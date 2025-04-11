@@ -26,7 +26,6 @@ def pyopensslTest():
   ctxC1.set_verify(**kwargs)
   ctxC1.set_verify(noSSL.THIS_DOESNT_EXIST)
 
-
 def requestsTests():
   # Mutably borrowed from here:
   # https://github.com/SonarSource/security-expected-issues/blob/master/python/rules/vulnerabilities/\
@@ -107,6 +106,25 @@ def requestsTests():
   requests.request('GET', 'https://example.domain', verify=range("not numeric"))
   requests.request('GET', 'https://example.domain', verify=set(42))
 
+def requestsSessionTest():
+  import requests
+
+  s1 = requests.Session()
+  s1.verify = False # Noncompliant
+
+  s2 = requests.Session()
+  s2.verify = True
+
+  s3 = requests.Session()
+  s3.something_else = False
+
+  s4 = requests.Session()
+  s4.request("GET", "<https://expired.badssl.com>", verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^^^^
+  s4.get('https://example.domain', verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                       ^^^^^
+  s4.post('https://example.domain', verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                        ^^^^^
 
 def urllibTests():
   # Mutably borrowed from

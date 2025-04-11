@@ -50,9 +50,12 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.RegularArgumentImpl;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeCheckMap;
 
 import static java.util.Optional.ofNullable;
 
@@ -63,13 +66,27 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Enable server certificate validation on this SSL/TLS connection.";
   private static final String VERIFY_NONE = Fqn.ssl("VERIFY_NONE");
 
+  private TypeCheckBuilder requestsSessionTypeCheck;
+  private TypeCheckMap<Set<String>> requestsVerifyArguments;
+
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::initTypeChecks);
     context.registerSyntaxNodeConsumer(Tree.Kind.WITH_STMT, VerifiedSslTlsCertificateCheck::verifyAioHttpWithSession);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::sslSetVerifyCheck);
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::requestsCheck);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::requestsCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.REGULAR_ARGUMENT, VerifiedSslTlsCertificateCheck::standardSslCheckForRegularArgument);
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, VerifiedSslTlsCertificateCheck::standardSslCheckForAssignmentStatement);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::requestsSessionAssignmentCheck);
+  }
+
+  private void initTypeChecks(SubscriptionContext ctx) {
+    requestsSessionTypeCheck = ctx.typeChecker().typeCheckBuilder().isInstanceOf(REQUESTS_SESSIONS_FQN);
+    requestsVerifyArguments = new TypeCheckMap<>();
+    CALLS_WHERE_TO_ENFORCE_TRUE_ARGUMENT.forEach(fqn -> {
+      var check = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn);
+      requestsVerifyArguments.put(check, VERIFY_ARG_NAME);
+    });
   }
 
   private static void verifyAioHttpWithSession(SubscriptionContext ctx) {
@@ -104,12 +121,14 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       .forEach(sessionCallExpr -> verifyVulnerableMethods(ctx, sessionCallExpr, VERIFY_SSL_ARG_NAMES));
   }
 
-  /** Fully qualified name of the <code>set_verify</code> used in <code>sslSetVerifyCheck</code>. */
+  /**
+   * Fully qualified name of the <code>set_verify</code> used in <code>sslSetVerifyCheck</code>.
+   */
   private static final String SET_VERIFY = Fqn.context("set_verify");
 
   /**
    * Check for the <code>OpenSSL.SSL.Context.set_verify</code> flag settings.
-   *
+   * <p>
    * Searches for `set_verify` invocations on instances of `OpenSSL.SSL.Context`,
    * extracts the flags from the first argument, checks that the combination of flags is secure.
    *
@@ -136,7 +155,9 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     }
   }
 
-  /** Helper methods for generating FQNs frequently used in this check. */
+  /**
+   * Helper methods for generating FQNs frequently used in this check.
+   */
   private static class Fqn {
     private static String context(@SuppressWarnings("SameParameterValue") String method) {
       return ssl("Context." + method);
@@ -186,22 +207,19 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     return Optional.empty();
   }
 
-  /** Message and a token closest to the problematic position. Glorified <code>Pair&lt;A,B&gt;</code>. */
-  private static class IssueReport {
-    final String message;
-    final Token token;
-
-    private IssueReport(String message, Token token) {
-      this.message = message;
-      this.token = token;
-    }
+  /**
+   * Message and a token closest to the problematic position. Glorified <code>Pair&lt;A,B&gt;</code>.
+   */
+  private record IssueReport(String message, Token token) {
   }
 
   public static final Set<String> VERIFY_ARG_NAME = Set.of("verify");
+  public static final String VERIFY_FIELD_NAME = "verify";
   public static final Set<String> VERIFY_SSL_ARG_NAMES = Set.of("verify_ssl", "ssl");
   /**
    * Set of FQNs of methods in <code>requests</code>-module that have the vulnerable <code>verify</code>-option.
    */
+  public static final String REQUESTS_SESSIONS_FQN = "requests.sessions.Session";
   private static final Set<String> CALLS_WHERE_TO_ENFORCE_TRUE_ARGUMENT = Set.of(
     "requests.api.request",
     "requests.api.get",
@@ -211,6 +229,13 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     "requests.api.delete",
     "requests.api.patch",
     "requests.api.options",
+    REQUESTS_SESSIONS_FQN + ".request",
+    REQUESTS_SESSIONS_FQN + ".get",
+    REQUESTS_SESSIONS_FQN + ".head",
+    REQUESTS_SESSIONS_FQN + ".post",
+    REQUESTS_SESSIONS_FQN + ".put",
+    REQUESTS_SESSIONS_FQN + ".delete",
+    REQUESTS_SESSIONS_FQN + ".patch",
     "httpx.request",
     "httpx.stream",
     "httpx.get",
@@ -223,16 +248,23 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     "httpx.Client",
     "httpx.AsyncClient");
 
-  private static void requestsCheck(SubscriptionContext subscriptionContext) {
-    var callExpr = (CallExpression) subscriptionContext.syntaxNode();
-    var isVulnerableMethod = ofNullable(callExpr.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .filter(CALLS_WHERE_TO_ENFORCE_TRUE_ARGUMENT::contains)
-      .isPresent();
-
-    if (isVulnerableMethod) {
-      verifyVulnerableMethods(subscriptionContext, callExpr, VERIFY_ARG_NAME);
+  private void requestsSessionAssignmentCheck(SubscriptionContext ctx) {
+    var assignment = (AssignmentStatement) ctx.syntaxNode();
+    // SONARPY-2268
+    if (assignment.lhsExpressions().get(0).expressions().size() == 1
+        && assignment.lhsExpressions().get(0).expressions().get(0) instanceof QualifiedExpression qualifiedExpression
+        && requestsSessionTypeCheck.check(qualifiedExpression.qualifier().typeV2()) == TriBool.TRUE
+        && VERIFY_FIELD_NAME.equals(qualifiedExpression.name().name())
+        && Expressions.isFalsy(assignment.assignedValue())
+    ) {
+      ctx.addIssue(assignment, MESSAGE);
     }
+  }
+
+  private void requestsCheck(SubscriptionContext subscriptionContext) {
+    var callExpr = (CallExpression) subscriptionContext.syntaxNode();
+    requestsVerifyArguments.getOptionalForType(callExpr.callee().typeV2())
+      .ifPresent(args -> verifyVulnerableMethods(subscriptionContext, callExpr, args));
   }
 
   private static void verifyVulnerableMethods(SubscriptionContext ctx, CallExpression callExpr, Set<String> argumentNames) {
@@ -278,7 +310,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   /**
    * Attempts to find the <code>rhs</code> in some definition <code>kwargs = { 'verify': rhs }</code>
    * of <code>kwargs</code> used in the arguments of the given <code>callExpression</code>.
-   *
+   * <p>
    * Returns list of problematic expressions in the reverse order of importance (the <code>kwargs</code>-argument comes
    * first, the setting in the dictionary comes last).
    */
@@ -292,13 +324,17 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       .map(arg -> ((UnpackingExpression) arg).expression())
       .filter(Name.class::isInstance)
       .findFirst()
-      .flatMap(name -> Optional.ofNullable(Expressions.singleAssignedValue((Name) name))
+      .map(Name.class::cast)
+      .flatMap(name -> Optional.ofNullable(Expressions.singleAssignedValue(name))
         .filter(DictionaryLiteral.class::isInstance)
-        .flatMap(dict -> searchDangerousVerifySettingInDictionary((DictionaryLiteral) dict, argumentNames)
-          .map(settingInDict -> Arrays.asList(name, settingInDict))));
+        .map(DictionaryLiteral.class::cast)
+        .flatMap(dict -> searchDangerousVerifySettingInDictionary(dict, argumentNames))
+        .map(settingInDict -> Arrays.asList(name, settingInDict)));
   }
 
-  /** Searches for a dangerous falsy <code>verify: False</code> in a dictionary literal. */
+  /**
+   * Searches for a dangerous falsy <code>verify: False</code> in a dictionary literal.
+   */
   private static Optional<Expression> searchDangerousVerifySettingInDictionary(DictionaryLiteral dict, Set<String> argumentNames) {
     return dict.elements().stream()
       .filter(KeyValuePair.class::isInstance)
@@ -327,11 +363,15 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  /** FQNs of collection constructors that yield a falsy collection if invoked without arguments. */
+  /**
+   * FQNs of collection constructors that yield a falsy collection if invoked without arguments.
+   */
   private static final Set<String> NO_ARG_FALSY_COLLECTION_CONSTRUCTORS = new HashSet<>(Arrays.asList(
     "set", "list", "dict"));
 
-  /** Detects expressions like <code>dict()</code> or <code>list()</code>. */
+  /**
+   * Detects expressions like <code>dict()</code> or <code>list()</code>.
+   */
   private static boolean isFalsyNoArgCollectionConstruction(CallExpression callExpr, String fqn) {
     return NO_ARG_FALSY_COLLECTION_CONSTRUCTORS.contains(fqn) && callExpr.arguments().isEmpty();
   }
@@ -378,7 +418,9 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       .ifPresent(vulnTok -> subscriptionContext.addIssue(vulnTok.token, MESSAGE));
   }
 
-  /** Finds the next higher line where a binding usage occurs. */
+  /**
+   * Finds the next higher line where a binding usage occurs.
+   */
   private static int findNextAssignmentLine(List<Usage> usages, int firstAssignmentLine) {
     int closestHigher = Integer.MAX_VALUE;
     for (Usage u : usages) {
@@ -394,7 +436,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
   /**
    * Selects all non-binding usages between first assignment and next assignment.
-   *
+   * <p>
    * We assume that in a vast majority of cases, there will be no complex control flow between the instantiation
    * of the context and the modification of the settings, thus selecting and sorting usages by line numbers
    * should suffice here.
@@ -419,7 +461,9 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     "ssl.create_default_context", false,
     "ssl._create_default_https_context", false);
 
-  /** Pair and a mutable cell for combining all updates to <code>verify_mode</code>. */
+  /**
+   * Pair and a mutable cell for combining all updates to <code>verify_mode</code>.
+   */
   private static class VulnerabilityAndProblematicToken {
     boolean isInvisibleDefaultPreset;
     boolean isVulnerable;
