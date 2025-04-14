@@ -46,3 +46,28 @@ if ctx7 == whatever:
 
 if ssl._create_unverified_context() == whatever:
   pass
+
+def pyopenssl_noncompliant():
+  import socket
+  from OpenSSL import SSL
+
+  ctx = SSL.Context(SSL.TLSv1_2_METHOD)
+  #     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{This context does not perform hostname verification.}}
+  ctx.set_verify(SSL.VERIFY_PEER)
+
+  conn = SSL.Connection(ctx, socket.socket(socket.AF_INET, socket.SOCK_STREAM)) # Noncompliant {{Enable server hostname verification on this SSL/TLS connection.}}
+  #      ^^^^^^^^^^^^^^
+
+  SSL.Connection(SSL.Context(SSL.TLSv1_2_METHOD)) # Noncompliant
+# ^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<
+
+  if foo:
+    ctx2 = SSL.Context(SSL.TLSv1_2_METHOD)
+  else:
+    ctx2 = SSL.Context(SSL.TLSv1_3_METHOD)
+  SSL.Connection(ctx2) # Noncompliant
+# ^^^^^^^^^^^^^^ ^^^^<
+
+  ctx3 = foo()
+  SSL.Connection() # OK, no context argument
+  SSL.Connection(ctx3)

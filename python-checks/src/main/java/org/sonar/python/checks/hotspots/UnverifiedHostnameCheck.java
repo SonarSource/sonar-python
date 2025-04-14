@@ -30,19 +30,27 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.TypeCheckBuilder;
 
 @Rule(key = "S5527")
 public class UnverifiedHostnameCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Enable server hostname verification on this SSL/TLS connection.";
+  private static final String SECONDARY_OPENSSL = "This context does not perform hostname verification.";
 
   private static final Set<String> SECURE_BY_DEFAULT = new HashSet<>(Arrays.asList("ssl.create_default_context", "ssl._create_default_https_context"));
   private static final Set<String> UNSECURE_BY_DEFAULT = new HashSet<>(Arrays.asList("ssl._create_unverified_context", "ssl._create_stdlib_context"));
 
   private static Set<String> functionsToCheck;
+
+  private TypeCheckBuilder openSSLConnectionTypeCheckBuilder;
+  private TypeCheckBuilder openSSLContextTypeCheckBuilder;
 
   private static Set<String> functionsToCheck() {
     if (functionsToCheck == null) {
@@ -97,17 +105,43 @@ public class UnverifiedHostnameCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, UnverifiedHostnameCheck::checkCallExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      openSSLConnectionTypeCheckBuilder = ctx.typeChecker().typeCheckBuilder().isTypeWithName("OpenSSL.SSL.Connection");
+      openSSLContextTypeCheckBuilder = ctx.typeChecker().typeCheckBuilder().isInstanceOf("OpenSSL.SSL.Context");
+    });
   }
 
-  private static void checkCallExpression(SubscriptionContext ctx) {
+  private void checkCallExpression(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Symbol calleeSymbol = callExpression.calleeSymbol();
-    if (calleeSymbol == null) {
+    if (calleeSymbol != null && functionsToCheck().contains(calleeSymbol.fullyQualifiedName())) {
+      checkSuspiciousCall(callExpression, calleeSymbol, ctx);
+    }
+    checkOpenSSLConnection(ctx, callExpression);
+  }
+
+  private void checkOpenSSLConnection(SubscriptionContext ctx, CallExpression callExpression) {
+    Expression callee = callExpression.callee();
+    PythonType pythonType = callee.typeV2();
+
+    if (openSSLConnectionTypeCheckBuilder.check(pythonType) != TriBool.TRUE) {
       return;
     }
-    if (functionsToCheck().contains(calleeSymbol.fullyQualifiedName())) {
-      checkSuspiciousCall(callExpression, calleeSymbol, ctx);
+
+    RegularArgument contextArg = TreeUtils.nthArgumentOrKeyword(0, "context", callExpression.arguments());
+    if (contextArg == null) {
+      return;
+    }
+
+    Expression contextExpr = contextArg.expression();
+    PythonType contextType = contextExpr.typeV2();
+    if (openSSLContextTypeCheckBuilder.check(contextType) == TriBool.TRUE) {
+      PreciseIssue issue = ctx.addIssue(callee, MESSAGE);
+      Expressions.ifNameGetSingleAssignedNonNameValue(contextExpr)
+        .ifPresentOrElse(e -> issue.secondary(e, SECONDARY_OPENSSL),
+          () -> issue.secondary(contextExpr, SECONDARY_OPENSSL)
+        );
     }
   }
 }
