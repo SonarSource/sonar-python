@@ -47,6 +47,43 @@ if ctx7 == whatever:
 if ssl._create_unverified_context() == whatever:
   pass
 
+def ssl_context_constructor():
+  ctx1 = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)  # Noncompliant
+  ctx2 = ssl.SSLContext(ssl.PROTOCOL_TLS)  # Noncompliant
+  ctx3 = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)  # Compliant
+  ctx4 = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)  # Compliant
+
+  foo(ssl.SSLContext(ssl.PROTOCOL_TLSv1_2))  # Noncompliant
+  foo(ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT))  # Compliant
+
+  ctx5 = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+  ctx5.check_hostname = True  # Compliant
+
+  ctx6 = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)  # Noncompliant
+  ctx6.check_hostname = False
+
+  ctx7 = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT) # Noncompliant {{Enable server hostname verification on this SSL/TLS connection.}}
+    #    ^^^^^^^^^^^^^^
+  ctx7.check_hostname = False
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Hostname verification is disabled here.}}
+
+
+def edge_cases():
+  nonlocal no_symbol
+  ssl.SSLContext(no_symbol)
+
+  if cond:
+    from foo import bar
+  else:
+    bar = 42
+  ssl.SSLContext(bar)
+
+  something[1] = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2) # FN
+
+  ssl.SSLContext()
+  ssl.SSLContext(abc[42])
+
+
 def pyopenssl_noncompliant():
   import socket
   from OpenSSL import SSL
