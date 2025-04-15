@@ -266,7 +266,19 @@ def manual_unsafe():
         parallelism=1,
     )
 
-    Parameters(type, version, salt_len, hash_len, 1, 1, 1)  # Noncompliant
+    from argon2.low_level import Type, ARGON2_VERSION
+    Parameters(Type.ID, ARGON2_VERSION, salt_len, hash_len, 1, 1, 1)  # Noncompliant
+
+    Parameters(Type.D, ARGON2_VERSION, salt_len, hash_len, smth, smth, smth)  # Noncompliant {{Use Argon2ID to improve the security of the passwords.}}
+    #          ^^^^^^
+    Parameters(Type.I, ARGON2_VERSION, salt_len, hash_len, smth, smth, smth)  # Noncompliant
+    Parameters(Type.ID, ARGON2_VERSION, salt_len, hash_len, smth, smth, smth)
+
+    Parameters(Type.ID, 18, salt_len, hash_len, smth, smth, smth)  # Noncompliant {{Use the latest version of Argon2 ID.}}
+    #                   ^^
+    Parameters(Type.ID, 20, salt_len, hash_len, smth, smth, smth)  # Noncompliant
+    Parameters(Type.ID, 19, salt_len, hash_len, smth, smth, smth)
+    Parameters(Type.ID, ARGON2_VERSION, salt_len, hash_len, smth, smth, smth)
 
     from argon2.low_level import hash_secret, hash_secret_raw
     hash_secret(  # Noncompliant

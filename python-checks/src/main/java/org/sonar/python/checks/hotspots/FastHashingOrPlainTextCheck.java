@@ -183,7 +183,27 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     }
   });
 
-  private static final Map<String, Collection<CallValidator>> CALL_EXPRESSION_VALIDATORS = Map.ofEntries(
+
+  private TypeCheckBuilder argon2IDTypeChecker = null;
+  private final CallValidator argon2Type = new ArgumentValidator(
+    0, "type", (ctx, argument) -> {
+    if (argon2IDTypeChecker.check(argument.expression().typeV2()) == TriBool.FALSE) {
+      ctx.addIssue(argument, "Use Argon2ID to improve the security of the passwords.");
+    }
+  });
+  private TypeCheckBuilder argon2VersionTypeChecker = null;
+  private final CallValidator argon2Version = new ArgumentValidator(
+    1, "version", (ctx, argument) -> {
+    var typeCheck = argon2VersionTypeChecker.check(argument.expression().typeV2());
+    if (typeCheck == TriBool.TRUE) {
+      return;
+    }
+    if (!isEqualTo(argument.expression(), 19)) {
+      ctx.addIssue(argument, "Use the latest version of Argon2 ID.");
+    }
+  });
+
+  private final Map<String, Collection<CallValidator>> callExpressionValidators = Map.ofEntries(
     Map.entry("scrypt.hash", List.of(SCRYPT_R, SCRYPT_BUFLEN, SCRYPT_N)),
     Map.entry("hashlib.scrypt", List.of(HASHLIB_R, HASHLIB_N, HASHLIB_DKLEN)),
     Map.entry("hashlib.pbkdf2_hmac", List.of(HASHLIB_PBKDF2)),
@@ -191,7 +211,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     Map.entry("cryptography.hazmat.primitives.kdf.pbkdf2.PBKDF2HMAC", List.of(CRYPTOGRAPHY_PBKDF2)),
     Map.entry("passlib.handlers.scrypt.scrypt.using", List.of(PASSLIB_BLOCK_SIZE, PASSLIB_ROUNDS)),
     Map.entry("argon2.PasswordHasher", List.of(new Argon2PasswordHasherValidator(0, 1, 2))),
-    Map.entry("argon2.Parameters", List.of(new Argon2PasswordHasherValidator(4, 5, 6))),
+    Map.entry("argon2.Parameters", List.of(new Argon2PasswordHasherValidator(4, 5, 6), argon2Type, argon2Version)),
     Map.entry("argon2.low_level.hash_secret", List.of(new Argon2PasswordHasherValidator(2, 3, 4))),
     Map.entry("argon2.low_level.hash_secret_raw", List.of(new Argon2PasswordHasherValidator(2, 3, 4))),
     Map.entry("passlib.handlers.argon2._Argon2Common.using", List.of(new Argon2PasswordHasherValidator(3, 4, 5))),
@@ -254,8 +274,10 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   private void registerTypeCheckers(SubscriptionContext subscriptionContext) {
     argon2CheapestProfileTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn("argon2.profiles.CHEAPEST");
     flaskConfigTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isInstanceOf("flask.config.Config");
+    argon2IDTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn("argon2.low_level.Type.ID");
+    argon2VersionTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn("argon2.low_level.ARGON2_VERSION");
     typeCheckMap = new TypeCheckMap<>();
-    CALL_EXPRESSION_VALIDATORS.forEach((key, value) -> {
+    callExpressionValidators.forEach((key, value) -> {
       var typeCheckBuilder = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn(key);
       typeCheckMap.put(typeCheckBuilder, value);
     });
