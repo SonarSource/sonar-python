@@ -96,7 +96,27 @@ def pyssl_examples():
   ciphers4 = 'ECDHE:RSA:AES256:SHA'
   ctx.set_ciphers(ciphers4)  # Noncompliant
   ciphers5 = 'ECDHE:RSA:AES256:SHA:ECDHE-RSA-AES256-SHA'
+#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{The following cipher string is insecure: `SHA`}}
   ctx.set_ciphers(ciphers5)  # Noncompliant
+# ^^^^^^^^^^^^^^^
+
+  ctx = ssl.create_default_context()
+  ctx.set_ciphers("NULL+SHA")  # Noncompliant
+
+  ctx4 = ssl.create_default_context()
+  ctx4.set_ciphers("DEFAULT:-RSA+LOW:!SHA:LOW")  # Noncompliant
+# ^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{The following cipher string is insecure: `LOW`}}
+
+  ctx5 = ssl.create_default_context()
+  ctx5.set_ciphers("@SECLEVEL=1")  # Noncompliant
+
+  ctx6 = ssl.create_default_context()
+  ctx6.set_ciphers("@SECLEVEL=0")  # Noncompliant
+
+  ciphers6 = 'ECDHE:RSA:AES256:LOW:ECDHE-RSA-AES256-SHA'
+  #          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{The following cipher strings are insecure: `LOW`, `SHA`}}
+  ctx.set_ciphers(ciphers6)  # Noncompliant
+# ^^^^^^^^^^^^^^^
 
 def pycryptodome_compliant():
   from Crypto.Cipher import AES
@@ -130,4 +150,9 @@ def pyssl_compliant(unknown_cipher):
   ctx.set_ciphers(unknown_cipher)
   ctx.set_ciphers(ciphers, ciphers2)
 
+  ctx2 = ssl.create_default_context()
+  ctx2.set_ciphers("ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128")  # Compliant
+
+  ctx3 = ssl.create_default_context()
+  ctx3.set_ciphers("DEFAULT:!eNULL:!aNULL:!MD5")  # Compliant
 
