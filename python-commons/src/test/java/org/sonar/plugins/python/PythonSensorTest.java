@@ -79,11 +79,12 @@ import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
+import org.sonar.plugins.python.api.PythonCustomRuleRepositoryWrapper;
 import org.sonar.plugins.python.api.PythonFileConsumer;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.SonarLintCache;
+import org.sonar.plugins.python.api.SonarLintCacheWrapper;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.api.tree.Token;
@@ -91,9 +92,9 @@ import org.sonar.plugins.python.architecture.ArchitectureCallbackWrapper;
 import org.sonar.plugins.python.caching.Caching;
 import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
-import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
-import org.sonar.plugins.python.editions.RepositoryInfoProvider;
+import org.sonar.plugins.python.editions.RepositoryInfoProviderWrapper;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -1523,25 +1524,16 @@ class PythonSensorTest {
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    if (indexer == null && customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), analysisWarnings, architectureUDGBuilderWrapper);
-    }
-    if (indexer == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings, architectureUDGBuilderWrapper);
-    }
-    if (customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCache(), analysisWarnings, architectureUDGBuilderWrapper);
-    }
     return new PythonSensor(
       fileLinesContextFactory,
       checkFactory,
       mock(NoSonarFilter.class),
-      customRuleRepositories,
-      indexer,
-      new SonarLintCache(),
+      new PythonCustomRuleRepositoryWrapper(customRuleRepositories),
+      new PythonIndexerWrapper(indexer),
+      new SonarLintCacheWrapper(),
       analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()},
-      new ArchitectureCallbackWrapper()
+      new RepositoryInfoProviderWrapper(),
+      architectureUDGBuilderWrapper
     );
   }
 

@@ -24,14 +24,18 @@ import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.plugins.python.api.PythonCustomRuleRepositoryWrapper;
 import org.sonar.plugins.python.api.SonarLintCache;
+import org.sonar.plugins.python.api.SonarLintCacheWrapper;
 import org.sonar.plugins.python.architecture.ArchitectureCallbackWrapper;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
+import org.sonar.plugins.python.editions.RepositoryInfoProviderWrapper;
 import org.sonar.plugins.python.flake8.Flake8RulesDefinition;
 import org.sonar.plugins.python.flake8.Flake8Sensor;
+import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.mypy.MypyRulesDefinition;
 import org.sonar.plugins.python.mypy.MypySensor;
@@ -74,7 +78,11 @@ public class PythonExtensions {
       PythonRuleRepository.class,
       AnalysisWarningsWrapper.class,
       ArchitectureCallbackWrapper.class,
-
+      PythonCustomRuleRepositoryWrapper.class,
+      PythonIndexerWrapper.class,
+      RepositoryInfoProviderWrapper.class,
+      SonarLintCacheWrapper.class, 
+      
       IPynb.class,
       IPynbProfile.class,
       IPynbSensor.class,

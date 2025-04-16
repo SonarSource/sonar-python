@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
 import javax.annotation.Nullable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.SonarProduct;
@@ -35,16 +37,18 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
-import org.sonar.plugins.python.api.PythonCustomRuleRepository;
+import org.sonar.plugins.python.api.PythonCustomRuleRepositoryWrapper;
 import org.sonar.plugins.python.api.PythonFileConsumer;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SonarLintCache;
+import org.sonar.plugins.python.api.SonarLintCacheWrapper;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.architecture.ArchitectureCallbackWrapper;
-import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
 import org.sonar.plugins.python.editions.RepositoryInfoProvider;
 import org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
+import org.sonar.plugins.python.editions.RepositoryInfoProviderWrapper;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.caching.CacheContextImpl;
@@ -71,53 +75,28 @@ public final class PythonSensor implements Sensor {
   private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = LoggerFactory.getLogger(PythonSensor.class);
   static final String UNSET_VERSION_WARNING = "Your code is analyzed as compatible with all Python 3 versions by default." +
-    " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python" +
+    " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python"+
     ".version\"";
 
   private final SensorTelemetryStorage sensorTelemetryStorage;
-
-  /**
-   * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
-   */
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
-    NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings, ArchitectureCallbackWrapper architectureCallbackWrapper  ) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()}, architectureCallbackWrapper);
-  }
-
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-    @Nullable PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings, ArchitectureCallbackWrapper architectureCallbackWrapper) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()}, architectureCallbackWrapper);
-  }
-
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-    PythonIndexer indexer, SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings, ArchitectureCallbackWrapper architectureCallbackWrapper) {
-    // ^^ This constructor implicitly assumes that a PythonIndexer and a SonarLintCache are always available at the same time.
-    // In practice, this is currently the case, since both are provided by PythonPlugin under the same conditions.
-    // See also PythonPlugin::SonarLintPluginAPIManager::addSonarlintPythonIndexer.
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings,
-      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()}, architectureCallbackWrapper);
-  }
 
   public PythonSensor(
     FileLinesContextFactory fileLinesContextFactory,
     CheckFactory checkFactory,
     NoSonarFilter noSonarFilter,
-    @Nullable PythonCustomRuleRepository[] customRuleRepositories,
-    @Nullable PythonIndexer indexer,
-    @Nullable SonarLintCache sonarLintCache,
+    PythonCustomRuleRepositoryWrapper customRuleRepositoriesWrapper,
+    PythonIndexerWrapper indexerWrapper,
+    SonarLintCacheWrapper sonarLintCacheWrapper,
     AnalysisWarningsWrapper analysisWarnings,
-    RepositoryInfoProvider[] editionMetadataProviders,
+    RepositoryInfoProviderWrapper editionMetadataProviderWrapper,
     ArchitectureCallbackWrapper architectureUDGBuilderWrapper) {
 
-    this.checks = createPythonChecks(checkFactory, editionMetadataProviders)
-      .addCustomChecks(customRuleRepositories);
-
+    this.checks = createPythonChecks(checkFactory, editionMetadataProviderWrapper.infoProviders())
+        .addCustomChecks(customRuleRepositoriesWrapper.customRuleRepositories());
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
-    this.indexer = indexer;
-    this.sonarLintCache = sonarLintCache;
+    this.indexer = indexerWrapper.indexer();
+    this.sonarLintCache = sonarLintCacheWrapper.sonarLintCache();
     this.analysisWarnings = analysisWarnings;
     this.sensorTelemetryStorage = new SensorTelemetryStorage();
     this.architectureCallback = architectureUDGBuilderWrapper.architectureUdgBuilder();
