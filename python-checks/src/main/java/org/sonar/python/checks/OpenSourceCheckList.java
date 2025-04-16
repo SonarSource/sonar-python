@@ -70,6 +70,7 @@ import org.sonar.python.checks.hotspots.StandardInputCheck;
 import org.sonar.python.checks.hotspots.StrongCryptographicKeysCheck;
 import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
+import org.sonar.python.checks.hotspots.XMLSignatureValidationCheck;
 import org.sonar.python.checks.regex.AnchorPrecedenceCheck;
 import org.sonar.python.checks.regex.DuplicatesInCharacterClassCheck;
 import org.sonar.python.checks.regex.EmptyAlternativeCheck;
@@ -407,6 +408,7 @@ public class OpenSourceCheckList {
       WildcardImportCheck.class,
       WrongAssignmentOperatorCheck.class,
       XMLParserXXEVulnerableCheck.class,
+      XMLSignatureValidationCheck.class,
       DjangoModelFormFieldsCheck.class,
       DjangoReceiverDecoratorCheck.class,
       DjangoModelStringFieldCheck.class,

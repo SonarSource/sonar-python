@@ -39,7 +39,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.checks.hotspots.CommonValidationUtils.ArgumentValidator;
 import org.sonar.python.checks.hotspots.CommonValidationUtils.CallValidator;
-import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeCheckMap;
@@ -310,7 +309,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     var subscriptMatch = subscription.subscripts().expressions()
       .stream()
       .findFirst()
-      .filter(expr -> "BCRYPT_LOG_ROUNDS".equals(singleAssignedString(expr)));
+      .filter(expr -> "BCRYPT_LOG_ROUNDS".equals(CommonValidationUtils.singleAssignedString(expr)));
     return subscriptMatch.isPresent();
   }
 
@@ -350,15 +349,6 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static String singleAssignedString(Expression expression) {
-    if (expression.is(Tree.Kind.NAME)) {
-      return Expressions.singleAssignedNonNameValue(((Name) expression))
-        .map(FastHashingOrPlainTextCheck::singleAssignedString)
-        .orElse("");
-    }
-    return expression.is(Tree.Kind.STRING_LITERAL) ? ((StringLiteral) expression).trimmedQuotesValue() : "";
-  }
-
   record PBKDF2Validator(
     int algoPosition,
     String algoKeyword,
@@ -371,7 +361,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
         nthArgumentOrKeywordOptional(algoPosition, algoKeyword, callExpression.arguments());
       var algoString = algoArgument
         .map(RegularArgument::expression)
-        .map(FastHashingOrPlainTextCheck::singleAssignedString)
+        .map(CommonValidationUtils::singleAssignedString)
         .orElse("");
       if (!PBKDF2_ALGOS.contains(algoString)) {
         return;

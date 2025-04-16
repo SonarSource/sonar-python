@@ -14,16 +14,15 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.semantic.v2.types;
+package org.sonar.python.types.v2;
 
+import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
-import org.sonar.python.types.v2.TypeCheckBuilder;
-import org.sonar.python.types.v2.TypeCheckMap;
 
 class TypeCheckMapTest {
   @Test
@@ -32,9 +31,10 @@ class TypeCheckMapTest {
     var table = new ProjectLevelTypeTable(symbolTable);
     var intBuilder = new TypeCheckBuilder(table).isTypeWithFqn("int");
     var fooBuilder = new TypeCheckBuilder(table).isTypeWithFqn("mod.foo");
-    var map = new TypeCheckMap<Integer>();
-    map.put(intBuilder, 1);
-    map.put(fooBuilder, 2);
+    var map = TypeCheckMap.ofEntries(
+      Map.entry(intBuilder, 1),
+      Map.entry(fooBuilder, 2)
+    );
 
     var intClassType = table.getType("int");
     var strClassType = table.getType("str");

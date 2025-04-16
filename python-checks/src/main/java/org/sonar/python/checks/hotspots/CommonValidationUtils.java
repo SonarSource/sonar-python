@@ -24,6 +24,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
@@ -68,6 +69,15 @@ public class CommonValidationUtils {
     } catch (NumberFormatException nfe) {
       return false;
     }
+  }
+
+  static String singleAssignedString(Expression expression) {
+    if (expression instanceof Name name) {
+      return Expressions.singleAssignedNonNameValue(name)
+        .map(CommonValidationUtils::singleAssignedString)
+        .orElse("");
+    }
+    return expression.is(Tree.Kind.STRING_LITERAL) ? ((StringLiteral) expression).trimmedQuotesValue() : "";
   }
 
   interface CallValidator {

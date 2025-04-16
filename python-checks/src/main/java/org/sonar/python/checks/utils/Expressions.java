@@ -61,7 +61,7 @@ public class Expressions {
   }
 
   // https://docs.python.org/3/library/stdtypes.html#truth-value-testing
-  public static boolean isFalsy(@Nullable Expression expression) {
+  private static boolean isFalsyInternal(@Nullable Expression expression) {
     if (expression == null) {
       return false;
     }
@@ -77,8 +77,18 @@ public class Expressions {
     };
   }
 
+  public static boolean isFalsy(@Nullable Expression expression) {
+    if (expression instanceof Name name) {
+      if (Expressions.isFalsyInternal(expression)) {
+        return true;
+      }
+      return Optional.ofNullable(Expressions.singleAssignedValue(name)).map(Expressions::isFalsyInternal).orElse(false);
+    }
+    return Expressions.isFalsyInternal(expression);
+  }
+
   // https://docs.python.org/3/library/stdtypes.html#truth-value-testing
-  public static boolean isTruthy(@Nullable Expression expression) {
+  private static boolean isTruthyInternal(@Nullable Expression expression) {
     if (expression == null) {
       return false;
     }
@@ -87,6 +97,16 @@ public class Expressions {
       case STRING_LITERAL, NUMERIC_LITERAL, LIST_LITERAL, TUPLE, SET_LITERAL, DICTIONARY_LITERAL -> !isFalsy(expression);
       default -> false;
     };
+  }
+
+  public static boolean isTruthy(@Nullable Expression expression) {
+    if (expression instanceof Name name) {
+      if (Expressions.isTruthyInternal(expression)) {
+        return true;
+      }
+      return Optional.ofNullable(Expressions.singleAssignedValue(name)).map(Expressions::isTruthyInternal).orElse(false);
+    }
+    return Expressions.isTruthyInternal(expression);
   }
 
   @CheckForNull

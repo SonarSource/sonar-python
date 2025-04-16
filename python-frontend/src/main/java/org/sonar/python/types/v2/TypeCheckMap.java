@@ -34,6 +34,15 @@ public class TypeCheckMap<V> {
     this.map = map;
   }
 
+  @SafeVarargs
+  public static <V> TypeCheckMap<V> ofEntries(Map.Entry<TypeCheckBuilder, V>... entries) {
+    var typeCheckMap = new TypeCheckMap<V>();
+    for (var entry : entries) {
+      typeCheckMap.put(entry.getKey(), entry.getValue());
+    }
+    return typeCheckMap;
+  }
+
   public V put(TypeCheckBuilder key, V value) {
     return map.put(key, value);
   }
