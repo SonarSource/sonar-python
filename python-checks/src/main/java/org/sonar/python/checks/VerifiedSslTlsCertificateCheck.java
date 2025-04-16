@@ -16,8 +16,8 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
@@ -393,28 +394,36 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
   private static void standardSslCheckForAssignmentStatement(SubscriptionContext subscriptionContext) {
     AssignmentStatement asgnStmt = (AssignmentStatement) subscriptionContext.syntaxNode();
+    TreeUtils.toOptionalInstanceOf(CallExpression.class, asgnStmt.assignedValue())
+      .flatMap(VerifiedSslTlsCertificateCheck::isVulnerableMethodCall)
+      .ifPresent(vulnTok -> checkVulnerableMethodCallAssignment(subscriptionContext, asgnStmt, vulnTok));
+  }
 
-    Optional<VulnerabilityAndProblematicToken> vulnTokOpt = isVulnerableMethodCall(asgnStmt.assignedValue());
-    vulnTokOpt.ifPresent(vulnTok -> asgnStmt
-      .lhsExpressions()
+  private static void checkVulnerableMethodCallAssignment(SubscriptionContext subscriptionContext, AssignmentStatement asgnStmt, VulnerabilityAndProblematicToken vulnTok) {
+    asgnStmt.lhsExpressions()
       .stream()
-      .flatMap(it -> it.expressions().stream())
+      .map(ExpressionList::expressions)
+      .flatMap(Collection::stream)
       .findFirst()
-      .filter(Name.class::isInstance)
-      .map(expr -> ((Name) expr).symbol())
-      .ifPresent(symb -> {
-        for (Usage u : selectRelevantModifyingUsages(symb.usages(), vulnTok.token.line())) {
+      .flatMap(TreeUtils::getSymbolFromTree)
+      .map(Symbol::usages)
+      .map(usages -> selectRelevantModifyingUsages(usages, vulnTok.token.line()))
+      .filter(usages -> usages.stream().noneMatch(VerifiedSslTlsCertificateCheck::isCheckHostnameAttributeSetToTrue))
+      .ifPresent(usages -> {
+        for (Usage u : usages) {
           searchForVerifyModeOverride(u).ifPresent(vulnTok::overrideBy);
         }
         if (vulnTok.isVulnerable) {
           subscriptionContext.addIssue(vulnTok.token, MESSAGE);
         }
-      }));
+      });
   }
 
   private static void standardSslCheckForRegularArgument(SubscriptionContext subscriptionContext) {
-    var argument = (RegularArgument) subscriptionContext.syntaxNode();
-    isVulnerableMethodCall(argument.expression())
+    TreeUtils.toOptionalInstanceOf(RegularArgument.class, subscriptionContext.syntaxNode())
+      .map(RegularArgument::expression)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+      .flatMap(VerifiedSslTlsCertificateCheck::isVulnerableMethodCall)
       .ifPresent(vulnTok -> subscriptionContext.addIssue(vulnTok.token, MESSAGE));
   }
 
@@ -442,24 +451,45 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    * should suffice here.
    */
   private static List<Usage> selectRelevantModifyingUsages(List<Usage> usages, int firstAssignmentLine) {
-    int nextAssignmentLine = findNextAssignmentLine(usages, firstAssignmentLine);
-    ArrayList<Usage> result = new ArrayList<Usage>();
-    usages.stream().filter(u -> {
-      int line = u.tree().firstToken().line();
-      return !u.isBindingUsage() && line > firstAssignmentLine && line < nextAssignmentLine;
-    }).forEach(u -> result.add(u));
-    result.sort(Comparator.comparing(u -> u.tree().firstToken().line()));
-    return result;
+    var nextAssignmentLine = findNextAssignmentLine(usages, firstAssignmentLine);
+    return usages.stream()
+      .filter(Predicate.not(Usage::isBindingUsage))
+      .filter(u -> {
+        var line = u.tree().firstToken().line();
+        return line > firstAssignmentLine && line < nextAssignmentLine;
+      })
+      .sorted(Comparator.comparing(u -> u.tree().firstToken().line()))
+      .toList();
   }
 
   /**
    * Map from FQNs of sensitive context factories to the boolean that determines whether default settings are dangerous.
    */
-  private static final Map<String, Boolean> VULNERABLE_CONTEXT_FACTORIES = Map.of(
-    "ssl._create_unverified_context", true,
-    "ssl._create_stdlib_context", true,
-    "ssl.create_default_context", false,
-    "ssl._create_default_https_context", false);
+  private static final Map<String, Predicate<CallExpression>> VULNERABLE_CONTEXT_FACTORIES = Map.of(
+    "ssl._create_unverified_context", c -> true,
+    "ssl._create_stdlib_context", c -> true,
+    "ssl.create_default_context", c -> false,
+    "ssl._create_default_https_context", c -> false,
+    "ssl.SSLContext", VerifiedSslTlsCertificateCheck::isVulnerableSslContextInstantiation
+  );
+
+  private static final Set<String> VULNERABLE_SSL_PROTOCOLS = Set.of(
+    "ssl.PROTOCOL_SSLv23",
+    "ssl.PROTOCOL_TLS",
+    "ssl.PROTOCOL_SSLv3",
+    "ssl.PROTOCOL_TLSv1",
+    "ssl.PROTOCOL_TLSv1_1",
+    "ssl.PROTOCOL_TLSv1_2"
+  );
+
+  private static boolean isVulnerableSslContextInstantiation(CallExpression sslConstructorCallExpression) {
+    return TreeUtils.nthArgumentOrKeywordOptional(0, "protocol", sslConstructorCallExpression.arguments())
+      .map(RegularArgument::expression)
+      .flatMap(TreeUtils::getSymbolFromTree)
+      .map(Symbol::fullyQualifiedName)
+      .filter(VULNERABLE_SSL_PROTOCOLS::contains)
+      .isPresent();
+  }
 
   /**
    * Pair and a mutable cell for combining all updates to <code>verify_mode</code>.
@@ -490,21 +520,15 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    * if found, returns the token of the callee, together with the boolean that indicates whether the default settings
    * are dangerous.
    */
-  private static Optional<VulnerabilityAndProblematicToken> isVulnerableMethodCall(Expression expr) {
-    if (expr instanceof CallExpression callExpression) {
-      Symbol calleeSymbol = callExpression.calleeSymbol();
-      if (calleeSymbol != null) {
-        String fqn = calleeSymbol.fullyQualifiedName();
-        if (fqn != null && VULNERABLE_CONTEXT_FACTORIES.containsKey(fqn)) {
-          boolean isVulnerable = VULNERABLE_CONTEXT_FACTORIES.get(fqn);
-          return Optional.of(new VulnerabilityAndProblematicToken(
-            isVulnerable,
-            callExpression.callee().lastToken(),
-            true));
-        }
-      }
-    }
-    return Optional.empty();
+  private static Optional<VulnerabilityAndProblematicToken> isVulnerableMethodCall(CallExpression callExpression) {
+    return Optional.ofNullable(callExpression.calleeSymbol())
+      .map(Symbol::fullyQualifiedName)
+      .map(VULNERABLE_CONTEXT_FACTORIES::get)
+      .map(predicate -> predicate.test(callExpression))
+      .map(isVulnerable -> new VulnerabilityAndProblematicToken(
+        isVulnerable,
+        callExpression.callee().lastToken(),
+        true));
   }
 
   private static Optional<VulnerabilityAndProblematicToken> searchForVerifyModeOverride(Usage u) {
@@ -528,5 +552,20 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
             false)));
     }
     return Optional.empty();
+  }
+
+  private static boolean isCheckHostnameAttributeSetToTrue(Usage u) {
+    return Optional.of(u)
+      .filter(Predicate.not(Usage::isBindingUsage))
+      .map(Usage::tree)
+      .map(Tree::parent)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+      .filter(qe -> "check_hostname".equals(qe.name().name()))
+      .map(QualifiedExpression::parent)
+      .map(Tree::parent)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(AssignmentStatement.class))
+      .map(AssignmentStatement::assignedValue)
+      .filter(Expressions::isTruthy)
+      .isPresent();
   }
 }

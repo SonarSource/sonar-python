@@ -255,6 +255,41 @@ def call_expression_in_arguments():
     conn = httplib.client.HTTPSConnection("123.123.21.21", context=ssl._create_unverified_context()) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
 #                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^ 0
 
+def sslSetVerifyModeRequired():
+    import ssl
+
+    ctx1 = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)  # Noncompliant
+    ctx2 = ssl.SSLContext(ssl.PROTOCOL_TLS)  # Noncompliant
+    ctx3 = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)  # Compliant
+    ctx4 = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)  # Compliant
+
+    ctx5 = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    ctx5.verify_mode = ssl.CERT_REQUIRED  # Compliant
+
+    ctx6 = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    ctx6.verify_mode = ssl.CERT_NONE # Noncompliant
+
+    ctx7 = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+    ctx7.verify_mode = ssl.CERT_NONE # Noncompliant
+
+    ctx8 = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)  # Compliant
+    ctx8.verify_mode = ssl.CERT_OPTIONAL
+
+def sslCheckHostNameAttributeSet():
+    import ssl
+
+    ctx1 = ssl._create_unverified_context()
+    ctx1.check_hostname = True  # Compliant: this sets `verify_mode` to CERT_OPTIONAL
+
+    ctx2 = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    ctx2.check_hostname = True  # Compliant
+
+    ctx3 = ssl._create_stdlib_context()
+    ctx3.check_hostname = True  # Compliant
+
+    ctx4 = ssl.create_default_context()
+    ctx4.check_hostname = False  # Compliant
+
 def httpx_verify():
     import httpx
 
