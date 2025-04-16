@@ -69,7 +69,10 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     "DEFAULT@SECLEVEL=1"
   );
 
-  public static final String SSL_SET_CIPHERS_FQN = "ssl.SSLContext.set_ciphers";
+  public static final Set<String> SSL_SET_CIPHERS_FQN = Set.of(
+    "ssl.SSLContext.set_ciphers",
+    "OpenSSL.SSL.Context.set_cipher_list"
+  );
 
   private static final Set<String> SENSITIVE_CALLEE_FQNS = Set.of(
     "Crypto.Cipher.ARC2.new",
@@ -110,7 +113,7 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
       .ifPresent(fullyQualifiedName -> {
         if (SENSITIVE_CALLEE_FQNS.contains(fullyQualifiedName) || INSECURE_CIPHERS_PREFIXES.stream().anyMatch(fullyQualifiedName::startsWith)) {
           subscriptionContext.addIssue(callExpr.callee(), MESSAGE);
-        } else if (SSL_SET_CIPHERS_FQN.equals(fullyQualifiedName)) {
+        } else if (SSL_SET_CIPHERS_FQN.contains(fullyQualifiedName)) {
           checkForInsecureCiphers(subscriptionContext, callExpr);
         }
       });

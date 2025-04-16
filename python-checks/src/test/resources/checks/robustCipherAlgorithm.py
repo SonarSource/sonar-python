@@ -134,6 +134,19 @@ def pyssl_examples():
   ctx.set_ciphers(ciphers6)  # Noncompliant
 # ^^^^^^^^^^^^^^^
 
+def py_open_ssl_examples():
+    import socket
+    from OpenSSL import SSL
+
+    ctx = SSL.Context(SSL.TLS1_3_VERSION)
+    ctx.set_cipher_list(b"@SECLEVEL=0")  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^
+
+    ciphers2 = b'ECDHE:RSA:AES256:LOW:ECDHE-RSA-AES256-SHA'
+#              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{The following cipher strings are insecure: `LOW`, `SHA`}}
+    ctx.set_cipher_list(ciphers2)  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^
+
 def pycryptodome_compliant():
   from Crypto.Cipher import AES
   key = b'Sixteen byte key'
