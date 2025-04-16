@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,7 +24,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -34,17 +34,19 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
-import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -53,28 +55,29 @@ import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.checks.utils.Expressions;
-import org.sonar.python.tree.RegularArgumentImpl;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeCheckMap;
-
-import static java.util.Optional.ofNullable;
 
 // https://jira.sonarsource.com/browse/RSPEC-4830
 @Rule(key = "S4830")
 public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Enable server certificate validation on this SSL/TLS connection.";
-  private static final String VERIFY_NONE = Fqn.ssl("VERIFY_NONE");
+  private static final String VERIFY_NONE = "OpenSSL.SSL.VERIFY_NONE";
 
   private TypeCheckBuilder requestsSessionTypeCheck;
+  private TypeCheckBuilder isOpenSslContextCheck;
+  private TypeCheckBuilder isOpenSslContextSetVerifyCheck;
   private TypeCheckMap<Set<String>> requestsVerifyArguments;
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::initTypeChecks);
     context.registerSyntaxNodeConsumer(Tree.Kind.WITH_STMT, VerifiedSslTlsCertificateCheck::verifyAioHttpWithSession);
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::sslSetVerifyCheck);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::openSslContextCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::requestsCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.REGULAR_ARGUMENT, VerifiedSslTlsCertificateCheck::standardSslCheckForRegularArgument);
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, VerifiedSslTlsCertificateCheck::standardSslCheckForAssignmentStatement);
@@ -83,6 +86,8 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
   private void initTypeChecks(SubscriptionContext ctx) {
     requestsSessionTypeCheck = ctx.typeChecker().typeCheckBuilder().isInstanceOf(REQUESTS_SESSIONS_FQN);
+    isOpenSslContextCheck = ctx.typeChecker().typeCheckBuilder().isInstanceOf(OPENSSL_CONTEXT_FQN);
+    isOpenSslContextSetVerifyCheck = ctx.typeChecker().typeCheckBuilder().isTypeWithName(OPENSSL_CONTEXT_SET_VERIFY_FQN);
     requestsVerifyArguments = new TypeCheckMap<>();
     CALLS_WHERE_TO_ENFORCE_TRUE_ARGUMENT.forEach(fqn -> {
       var check = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn);
@@ -94,20 +99,22 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     var withStatement = (WithStatement) ctx.syntaxNode();
     withStatement.withItems()
       .stream()
-      .filter(item -> Optional.of(item)
-        .map(WithItem::test)
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
-        .map(CallExpression::calleeSymbol)
-        .map(Symbol::fullyQualifiedName)
-        .filter("aiohttp.ClientSession"::equals)
-        .isPresent())
+      .filter(VerifiedSslTlsCertificateCheck::isAioHttpClientSessionCall)
       .map(WithItem::expression)
-      .map(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+      .map(TreeUtils::getSymbolFromTree)
       .filter(Optional::isPresent)
       .map(Optional::get)
-      .map(HasSymbol::symbol)
-      .filter(Objects::nonNull)
       .forEach(symbol -> verifyAioHttpSessionSymbolUsages(ctx, symbol));
+  }
+
+  private static boolean isAioHttpClientSessionCall(WithItem item) {
+    return Optional.of(item)
+      .map(WithItem::test)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+      .map(CallExpression::calleeSymbol)
+      .map(Symbol::fullyQualifiedName)
+      .filter("aiohttp.ClientSession"::equals)
+      .isPresent();
   }
 
   private static void verifyAioHttpSessionSymbolUsages(SubscriptionContext ctx, Symbol sessionSymbol) {
@@ -122,10 +129,8 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       .forEach(sessionCallExpr -> verifyVulnerableMethods(ctx, sessionCallExpr, VERIFY_SSL_ARG_NAMES));
   }
 
-  /**
-   * Fully qualified name of the <code>set_verify</code> used in <code>sslSetVerifyCheck</code>.
-   */
-  private static final String SET_VERIFY = Fqn.context("set_verify");
+  private static final String OPENSSL_CONTEXT_SET_VERIFY_FQN = "OpenSSL.SSL.Context.set_verify";
+  private static final String OPENSSL_CONTEXT_FQN = "OpenSSL.SSL.Context";
 
   /**
    * Check for the <code>OpenSSL.SSL.Context.set_verify</code> flag settings.
@@ -135,38 +140,81 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    *
    * @param subscriptionContext the subscription context passed by <code>Context.registerSyntaxNodeConsumer</code>.
    */
-  private static void sslSetVerifyCheck(SubscriptionContext subscriptionContext) {
+  private void openSslContextCheck(SubscriptionContext subscriptionContext) {
+    var assignmentStatement = (AssignmentStatement) subscriptionContext.syntaxNode();
+    var assignedValue = assignmentStatement.lhsExpressions().get(0).expressions().get(0);
+    Optional.of(assignedValue)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+      .filter(n -> isOpenSslContextCheck.check(n.typeV2()) == TriBool.TRUE)
+      .map(Name::symbolV2)
+      .ifPresent(symbol -> checkContextSymbol(subscriptionContext, symbol, assignedValue));
+  }
 
-    CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
-
-    boolean isSetVerifyInvocation = ofNullable(callExpr.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .filter(SET_VERIFY::equals)
-      .isPresent();
-
-    if (isSetVerifyInvocation) {
-      List<Argument> args = callExpr.arguments();
-      if (!args.isEmpty()) {
-        Tree flagsArgument = args.get(0);
-        if (flagsArgument.is(Tree.Kind.REGULAR_ARGUMENT)) {
-          Set<QualifiedExpression> flags = extractFlags(((RegularArgumentImpl) flagsArgument).expression());
-          checkFlagSettings(flags).ifPresent(issue -> subscriptionContext.addIssue(issue.token, MESSAGE));
-        }
-      }
+  private void checkContextSymbol(SubscriptionContext subscriptionContext, SymbolV2 symbol, Expression assignedValue) {
+    var setVerifyCallExpressions = symbol
+      .usages()
+      .stream()
+      .filter(Predicate.not(UsageV2::isBindingUsage))
+      .map(UsageV2::tree)
+      .map(Tree::parent)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(QualifiedExpression.class))
+      .filter(qe -> isOpenSslContextSetVerifyCheck.check(qe.typeV2()) == TriBool.TRUE)
+      .map(Tree::parent)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(CallExpression.class))
+      .toList();
+    if (setVerifyCallExpressions.isEmpty()) {
+      subscriptionContext.addIssue(assignedValue, MESSAGE);
+    } else {
+      setVerifyCallExpressions
+        .forEach(setVerifyCallExpression -> checkSetVerifyArguments(subscriptionContext, setVerifyCallExpression));
     }
   }
 
-  /**
-   * Helper methods for generating FQNs frequently used in this check.
-   */
-  private static class Fqn {
-    private static String context(@SuppressWarnings("SameParameterValue") String method) {
-      return ssl("Context." + method);
-    }
+  private static void checkSetVerifyArguments(SubscriptionContext ctx, CallExpression setVerifyCallExpression) {
+    TreeUtils.nthArgumentOrKeywordOptional(0, "mode", setVerifyCallExpression.arguments())
+      .map(RegularArgument::expression)
+      .map(VerifiedSslTlsCertificateCheck::extractFlags)
+      .flatMap(VerifiedSslTlsCertificateCheck::checkFlagSettings)
+      .ifPresent(issueReport -> ctx.addIssue(issueReport.token, MESSAGE));
 
-    private static String ssl(String property) {
-      return "OpenSSL.SSL." + property;
-    }
+    TreeUtils.nthArgumentOrKeywordOptional(1, "callback", setVerifyCallExpression.arguments())
+      .map(RegularArgument::expression)
+      .filter(callbackArgument -> findCallbackDefinition(callbackArgument)
+        .filter(VerifiedSslTlsCertificateCheck::isAlwaysTruthyCallback)
+        .isPresent())
+      .ifPresent(callbackArgument -> ctx.addIssue(callbackArgument, MESSAGE));
+  }
+
+  private static Optional<FunctionDef> findCallbackDefinition(Expression callbackArgument) {
+    return TreeUtils.toOptionalInstanceOf(Name.class, callbackArgument)
+      .map(Name::symbolV2)
+      .map(SymbolV2::usages)
+      .stream()
+      .flatMap(Collection::stream)
+      .filter(usageV2 -> usageV2.kind() == UsageV2.Kind.FUNC_DECLARATION)
+      .map(UsageV2::tree)
+      .map(Tree::parent)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(FunctionDef.class))
+      .findFirst();
+  }
+
+  private static boolean isAlwaysTruthyCallback(FunctionDef callbackDefinition) {
+    var returns = new ArrayList<ReturnStatement>();
+    var returnsCollector = new BaseTreeVisitor() {
+      @Override
+      public void visitReturnStatement(ReturnStatement returnStatement) {
+        returns.add(returnStatement);
+      }
+    };
+    callbackDefinition.accept(returnsCollector);
+    return !returns.isEmpty()
+           && returns.stream()
+             .allMatch(VerifiedSslTlsCertificateCheck::isTruthyReturnStatement);
+  }
+
+  private static boolean isTruthyReturnStatement(ReturnStatement returnStatement) {
+    return returnStatement.expressions().size() == 1
+           && Expressions.isTruthy(returnStatement.expressions().get(0));
   }
 
   /**

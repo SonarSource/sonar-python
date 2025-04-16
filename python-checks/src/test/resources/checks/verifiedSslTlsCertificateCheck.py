@@ -26,6 +26,38 @@ def pyopensslTest():
   ctxC1.set_verify(**kwargs)
   ctxC1.set_verify(noSSL.THIS_DOESNT_EXIST)
 
+  def truthy_verify_callback_local(a):
+      if a:
+        return True
+      else:
+        return 1
+
+  def verify_callback_local(a):
+      if a:
+        return False
+      else:
+        return 1
+
+  def tuple_return_verify_callback_local(a, b):
+      return a, b
+
+  locally_defined_non_function_callback = ""
+  ctx2 = SSL.Context(SSL.TLSv1_2_METHOD)
+  ctx2.set_verify(SSL.VERIFY_PEER, truthy_verify_callback_local) # Noncompliant
+  #                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  ctx3 = SSL.Context(SSL.TLSv1_2_METHOD)
+  ctx3.set_verify(SSL.VERIFY_PEER, tuple_return_verify_callback_local) # Compliant
+  ctx3.set_verify(SSL.VERIFY_PEER, verify_callback_local) # Compliant
+  ctx3.set_verify(SSL.VERIFY_PEER, locally_defined_non_function_callback) # Compliant
+  ctx3.set_verify(SSL.VERIFY_PEER, something.unknown) # Compliant
+
+  ctx4 = SSL.Context(SSL.TLSv1_2_METHOD) # Noncompliant
+
+  ctx5 = SSL.Context(SSL.TLSv1_2_METHOD)
+  ctx5.use_privatekey(SSL.VERIFY_NONE) # Check that other random method call is not raised with wrong arguments
+  ctx5.set_verify(SSL.VERIFY_PEER, verify_callback_local) # Compliant
+
 def requestsTests():
   # Mutably borrowed from here:
   # https://github.com/SonarSource/security-expected-issues/blob/master/python/rules/vulnerabilities/\
