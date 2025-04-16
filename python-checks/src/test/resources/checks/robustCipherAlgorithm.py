@@ -1,6 +1,5 @@
-
 def pycryptodomex_examples():
-  from Cryptodome.Cipher import DES, DES3, ARC2, ARC4, Blowfish, AES
+  from Cryptodome.Cipher import DES, DES3, ARC2, ARC4, Blowfish, AES, CAST
   from Cryptodome.Random import get_random_bytes
 
   key = b'-8B key-'
@@ -23,6 +22,10 @@ def pycryptodomex_examples():
   cipher = Blowfish.new(key, Blowfish.MODE_CBC) # Noncompliant {{Use a strong cipher algorithm.}}
   #        ^^^^^^^^^^^^
 
+  key = os.urandom(16)
+  cipher = CAST.new(key, CAST.MODE_OPENPGP)  # Noncompliant {{Use a strong cipher algorithm.}}
+  #        ^^^^^^^^
+
   key = b'Sixteen byte key'
   cipher = AES.new(key, AES.MODE_CCM) # Compliant
 
@@ -35,7 +38,7 @@ def pycryptodomex_examples():
 
 # pycryptodome is a drop-in replacement for pycrpypto, currently those two libraries are not differentiated
 def pycroptodome_examples():
-  from Crypto.Cipher import DES, DES3, ARC2, ARC4, Blowfish, AES
+  from Crypto.Cipher import DES, DES3, ARC2, ARC4, Blowfish, AES, CAST, XOR
   from Crypto.Random import get_random_bytes
 
   key = b'-8B key-'
@@ -55,9 +58,18 @@ def pycroptodome_examples():
   cipher = Blowfish.new(key, Blowfish.MODE_CBC) # Noncompliant {{Use a strong cipher algorithm.}}
   #        ^^^^^^^^^^^^
 
+  key = os.urandom(16)
+  cipher = CAST.new(key, CAST.MODE_OPENPGP)  # Noncompliant {{Use a strong cipher algorithm.}}
+  #        ^^^^^^^^
+
+  key = os.urandom(16)
+  cipher = XOR.new(key)  # Noncompliant {{Use a strong cipher algorithm.}}
+  #        ^^^^^^^
+
 def pyca_examples():
   import os
   from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+  from cryptography.hazmat.decrepit.ciphers.algorithms import AnyAlgoFromDeprecitModule
   from cryptography.hazmat.backends import default_backend
 
   key = os.urandom(16)
@@ -69,6 +81,10 @@ def pyca_examples():
   #            ^^^^^^^^^^^^^^^^^^^
   rc42 = Cipher(algorithms.ARC4(key), mode=None, backend=default_backend()) # Noncompliant {{Use a strong cipher algorithm.}}
   #             ^^^^^^^^^^^^^^^
+  casts5 = Cipher(algorithms.CAST5(key), mode=None, backend=default_backend())  # Noncompliant {{Use a strong cipher algorithm.}}
+  #               ^^^^^^^^^^^^^^^^
+  deprecit = Cipher(AnyAlgoFromDeprecitModule(key), mode=None, backend=default_backend())  # Noncompliant {{Use a strong cipher algorithm.}}
+  #                 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 def pydes_examples():
   import pyDes;

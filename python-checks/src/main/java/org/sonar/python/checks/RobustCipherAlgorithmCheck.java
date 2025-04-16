@@ -44,7 +44,7 @@ import org.sonar.python.tree.TreeUtils;
 public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use a strong cipher algorithm.";
-
+  private static final Set<String> INSECURE_CIPHERS_PREFIXES = Set.of("cryptography.hazmat.decrepit.ciphers.");
   private static final Set<String> INSECURE_CIPHERS = Set.of(
     "NULL",
     "aNULL",
@@ -75,20 +75,27 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     "Crypto.Cipher.ARC2.new",
     "Crypto.Cipher.ARC4.new",
     "Crypto.Cipher.Blowfish.new",
+    "Crypto.Cipher.XOR.new",
+    "Crypto.Cipher.CAST.new",
     "Crypto.Cipher.DES.new",
     "Crypto.Cipher.DES3.new",
     "Cryptodome.Cipher.ARC2.new",
     "Cryptodome.Cipher.ARC4.new",
     "Cryptodome.Cipher.Blowfish.new",
+    "Cryptodome.Cipher.XOR.new",
+    "Cryptodome.Cipher.CAST.new",
     "Cryptodome.Cipher.DES.new",
     "Cryptodome.Cipher.DES3.new",
     "cryptography.hazmat.primitives.ciphers.algorithms.ARC4",
     "cryptography.hazmat.primitives.ciphers.algorithms.Blowfish",
     "cryptography.hazmat.primitives.ciphers.algorithms.IDEA",
+    "cryptography.hazmat.primitives.ciphers.algorithms.CAST5",
     "cryptography.hazmat.primitives.ciphers.algorithms.TripleDES",
     "pyDes.des",
     "pyDes.triple_des"
   );
+
+
 
   @Override
   public void initialize(Context context) {
@@ -101,7 +108,7 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
       .map(CallExpression::calleeSymbol)
       .map(Symbol::fullyQualifiedName)
       .ifPresent(fullyQualifiedName -> {
-        if (SENSITIVE_CALLEE_FQNS.contains(fullyQualifiedName)) {
+        if (SENSITIVE_CALLEE_FQNS.contains(fullyQualifiedName) || INSECURE_CIPHERS_PREFIXES.stream().anyMatch(fullyQualifiedName::startsWith)) {
           subscriptionContext.addIssue(callExpr.callee(), MESSAGE);
         } else if (SSL_SET_CIPHERS_FQN.equals(fullyQualifiedName)) {
           checkForInsecureCiphers(subscriptionContext, callExpr);
