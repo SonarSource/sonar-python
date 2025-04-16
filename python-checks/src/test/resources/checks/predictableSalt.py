@@ -75,7 +75,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
 
-def scrypt_salt():
+def scrypt_salt(password):
     from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
     Scrypt(
         salt="abc" # Noncompliant {{Make this salt unpredictable.}}
@@ -83,6 +83,18 @@ def scrypt_salt():
     Scrypt(
         "abc" # Noncompliant {{Make this salt unpredictable.}}
     )
+
+    hasher = Scrypt(
+        salt=password # Noncompliant {{Make this salt different than the derived key material.}}
+    )
+    hasher.derive(password)
+    #            <^^^^^^^^ {{The salt is used in the derive method here.}}
+
+    salt_ = os.urandom(16)
+    hasher = Scrypt(
+        salt=salt_ # Noncompliant {{Make this salt different than the derived key material.}}
+    ).derive(key_material=salt_)
+    #                    <^^^^^ {{The salt is used in the derive method here.}}
 
 def derive_password(password, salt, backend):
     kdf = PBKDF2HMAC(
@@ -113,6 +125,27 @@ def derive_password(password, salt, backend):
         backend=backend
     )
     key = kdf.derive(password)
+
+    some_salt = os.urandom(16)
+    kdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=some_salt,  # FN PBKDF2HMAC stubs are not resolved properly this should be solved with SONARPY-2053
+        iterations=100000,
+        backend=backend
+    )
+    key = kdf.derive(key_material=some_salt)
+
+    other_salt = os.urandom(16)
+    PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=other_salt,  # FN PBKDF2HMAC stubs are not resolved properly this should be solved with SONARPY-2053
+        iterations=100000,
+        backend=backend
+    ).derive(key_material=other_salt)
+
+
 
 salt = os.urandom(16)
 backend = default_backend()
