@@ -17,6 +17,7 @@
 package org.sonar.python.checks;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -34,9 +35,12 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.StringLiteralImpl;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.TypeCheckBuilder;
 
 // https://jira.sonarsource.com/browse/RSPEC-5547 (general)
 // https://jira.sonarsource.com/browse/RSPEC-5552 (python-specific)
@@ -44,7 +48,7 @@ import org.sonar.python.tree.TreeUtils;
 public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use a strong cipher algorithm.";
-  private static final Set<String> INSECURE_CIPHERS_PREFIXES = Set.of("cryptography.hazmat.decrepit.ciphers.");
+  private static final String INSECURE_CIPHERS_PREFIX = "cryptography.hazmat.decrepit.ciphers.";
   private static final Set<String> INSECURE_CIPHERS = Set.of(
     "NULL",
     "aNULL",
@@ -98,25 +102,40 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     "pyDes.triple_des"
   );
 
+  private List<TypeCheckBuilder> sensitiveCalleesTypeCheckers;
+  private List<TypeCheckBuilder> sslSetCipherTypeCheckers;
+  private TypeCheckBuilder urllibSslContextTypeChecker;
 
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, RobustCipherAlgorithmCheck::checkCallExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      sslSetCipherTypeCheckers = SSL_SET_CIPHERS_FQN.stream()
+        .map(fqn -> ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn))
+        .toList();
+      sensitiveCalleesTypeCheckers = SENSITIVE_CALLEE_FQNS.stream()
+        .map(fqn -> ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn))
+        .toList();
+      urllibSslContextTypeChecker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn("urllib3.util.ssl_.create_urllib3_context");
+    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
   }
 
-  private static void checkCallExpression(SubscriptionContext subscriptionContext) {
+  private void checkCallExpression(SubscriptionContext subscriptionContext) {
     CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
-    Optional.of(callExpr)
-      .map(CallExpression::calleeSymbol)
-      .map(Symbol::fullyQualifiedName)
-      .ifPresent(fullyQualifiedName -> {
-        if (SENSITIVE_CALLEE_FQNS.contains(fullyQualifiedName) || INSECURE_CIPHERS_PREFIXES.stream().anyMatch(fullyQualifiedName::startsWith)) {
-          subscriptionContext.addIssue(callExpr.callee(), MESSAGE);
-        } else if (SSL_SET_CIPHERS_FQN.contains(fullyQualifiedName)) {
-          checkForInsecureCiphers(subscriptionContext, callExpr);
-        }
-      });
+    PythonType calleeType = callExpr.callee().typeV2();
+    String fullyQualifiedName = Optional.ofNullable(callExpr.calleeSymbol()).map(Symbol::fullyQualifiedName).orElse("");
+    if (fullyQualifiedName.startsWith(INSECURE_CIPHERS_PREFIX)) {
+      subscriptionContext.addIssue(callExpr.callee(), MESSAGE);
+    } else if (sensitiveCalleesTypeCheckers.stream().anyMatch(checker -> checker.check(calleeType) == TriBool.TRUE)) {
+      subscriptionContext.addIssue(callExpr.callee(), MESSAGE);
+    } else if (sslSetCipherTypeCheckers.stream().anyMatch(checker -> checker.check(calleeType) == TriBool.TRUE)) {
+      checkForInsecureCiphers(subscriptionContext, callExpr);
+    } else if (urllibSslContextTypeChecker.check(calleeType) == TriBool.TRUE) {
+      Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(4, "ciphers", callExpr.arguments()))
+        .map(RegularArgument::expression)
+        .ifPresent(expression -> processCiphersArgument(subscriptionContext, callExpr, expression));
+    }
   }
 
   private static void checkForInsecureCiphers(SubscriptionContext ctx, CallExpression callExpression) {
@@ -125,18 +144,22 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
       .map(list -> list.get(0))
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
       .map(RegularArgument::expression)
-      .map(RobustCipherAlgorithmCheck::unpackArgument)
-      .ifPresent(stringLiteral -> Optional.of(stringLiteral.trimmedQuotesValue())
-        .map(RobustCipherAlgorithmCheck::findInsecureCiphers)
-        .filter(Predicate.not(Set::isEmpty))
-        .ifPresent(insecureCiphers -> {
-          var secondaryMessage = insecureCiphers.size() > 1 ? "The following cipher strings are insecure: " :
-            "The following cipher string is insecure: ";
-          secondaryMessage = insecureCiphers.stream().collect(Collectors.joining("`, `", secondaryMessage + "`", "`"));
+      .ifPresent(expression -> processCiphersArgument(ctx, callExpression, expression));
+  }
 
-          ctx.addIssue(callExpression.callee(), MESSAGE)
-            .secondary(stringLiteral, secondaryMessage);
-        }));
+  private static void processCiphersArgument(SubscriptionContext ctx, CallExpression callExpression, Expression expression) {
+    StringLiteral stringLiteral = unpackArgument(expression);
+    Optional.ofNullable(stringLiteral)
+      .map(StringLiteral::trimmedQuotesValue)
+      .map(RobustCipherAlgorithmCheck::findInsecureCiphers)
+      .filter(Predicate.not(Set::isEmpty))
+      .ifPresent(insecureCiphers -> {
+        var secondaryMessage = insecureCiphers.size() > 1 ? "The following cipher strings are insecure: " :
+          "The following cipher string is insecure: ";
+        secondaryMessage = insecureCiphers.stream().collect(Collectors.joining("`, `", secondaryMessage + "`", "`"));
+        ctx.addIssue(callExpression.callee(), MESSAGE)
+          .secondary(stringLiteral, secondaryMessage);
+      });
   }
 
   @CheckForNull
