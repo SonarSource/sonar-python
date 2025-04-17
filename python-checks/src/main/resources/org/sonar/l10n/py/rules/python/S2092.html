@@ -14,26 +14,48 @@ request and thus cannot be observed by an unauthorized person during a man-in-th
   <li> Set the <code>secure</code> flag to <em>true</em> for session-cookies. </li>
 </ul>
 <h2>Sensitive Code Example</h2>
-<p>Flask</p>
-<pre>
+<p>Using Flask:</p>
+<pre data-diff-id="11" data-diff-type="noncompliant">
 from flask import Response
 
 @app.route('/')
 def index():
     response = Response()
-    response.set_cookie('key', 'value') # Sensitive
+    response.set_cookie('key', 'value')  # Sensitive
     return response
 </pre>
+<p>Using FastAPI:</p>
+<pre data-diff-id="21" data-diff-type="noncompliant">
+from fastapi import FastAPI, Response
+
+app = FastAPI()
+
+@app.get('/')
+async def index(response: Response):
+    response.set_cookie('key', 'value')  # Sensitive
+    return {"message": "Hello world!"}
+</pre>
 <h2>Compliant Solution</h2>
-<p>Flask</p>
-<pre>
+<p>Using Flask:</p>
+<pre data-diff-id="11" data-diff-type="compliant">
 from flask import Response
 
 @app.route('/')
 def index():
     response = Response()
-    response.set_cookie('key', 'value', secure=True) # Compliant
+    response.set_cookie('key', 'value', secure=True)
     return response
+</pre>
+<p>Using FastAPI:</p>
+<pre data-diff-id="21" data-diff-type="compliant">
+from fastapi import FastAPI, Response
+
+app = FastAPI()
+
+@app.get('/')
+async def index(response: Response):
+    response.set_cookie('key', 'value', secure=True)
+    return {"message": "Hello world!"}
 </pre>
 <h2>See</h2>
 <ul>
