@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 public class ProjectLevelTypeTable implements TypeTable {
 
   private final SymbolsModuleTypeProvider symbolsModuleTypeProvider;
-  private final ModuleType rootModule;
+  private final PythonType rootModule;
   private final LazyTypesContext lazyTypesContext;
 
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
@@ -55,7 +55,7 @@ public class ProjectLevelTypeTable implements TypeTable {
 
   @Override
   public PythonType getType(List<String> typeFqnParts) {
-    var parent = (PythonType) rootModule;
+    var parent = rootModule;
     for (int i = 0; i < typeFqnParts.size(); i++) {
       var part = typeFqnParts.get(i);
       var moduleFqnParts = IntStream.rangeClosed(0, i)
@@ -104,7 +104,7 @@ public class ProjectLevelTypeTable implements TypeTable {
    */
   @Override
   public PythonType getModuleType(List<String> typeFqnParts) {
-    var parent = (PythonType) rootModule;
+    var parent = rootModule;
     for (int i = 0; i < typeFqnParts.size(); i++) {
       var part = typeFqnParts.get(i);
       var moduleFqnParts = IntStream.rangeClosed(0, i)

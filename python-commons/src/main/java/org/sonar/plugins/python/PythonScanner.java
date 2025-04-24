@@ -24,7 +24,6 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +55,6 @@ import org.sonar.plugins.python.api.PythonFileConsumer;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -120,6 +118,7 @@ public class PythonScanner extends Scanner {
         getWorkingDirectory(context),
         indexer.packageName(inputFile),
         indexer.projectLevelSymbolTable(),
+        indexer.projectLevelTypeTable(),
         indexer.cacheContext(),
         context.runtime().getProduct());
       if (fileType == InputFile.Type.MAIN) {
