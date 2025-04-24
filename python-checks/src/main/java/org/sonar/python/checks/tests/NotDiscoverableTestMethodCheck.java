@@ -42,11 +42,11 @@ import org.sonar.python.tree.TreeUtils;
 public class NotDiscoverableTestMethodCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Rename this method so that it starts with \"test\" or remove this unused helper.";
-  private static final Set<String> globalFixture = new HashSet<>();
+  private final Set<String> globalFixture = new HashSet<>();
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> NotDiscoverableTestMethodCheck.lookForGlobalFixture((FunctionDef) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> lookForGlobalFixture((FunctionDef) ctx.syntaxNode()));
 
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
       ClassDef classDefinition = (ClassDef) ctx.syntaxNode();
@@ -73,7 +73,7 @@ public class NotDiscoverableTestMethodCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static void lookForGlobalFixture(FunctionDef functionDef) {
+  private void lookForGlobalFixture(FunctionDef functionDef) {
     if (functionDef.isMethodDefinition()) {
       return;
     }
@@ -97,7 +97,7 @@ public class NotDiscoverableTestMethodCheck extends PythonSubscriptionCheck {
       .collect(Collectors.toSet());
   }
 
-  private static boolean isException(FunctionDef functionDef, Set<String> classFixtures) {
+  private boolean isException(FunctionDef functionDef, Set<String> classFixtures) {
     String functionName = functionDef.name().name();
     return overrideExistingMethod(functionName) || functionName.startsWith("test") || isHelper(functionDef, classFixtures);
   }
@@ -127,7 +127,7 @@ public class NotDiscoverableTestMethodCheck extends PythonSubscriptionCheck {
     return UnittestUtils.allMethods().contains(functionName) || functionName.startsWith("_");
   }
 
-  private static boolean isHelper(FunctionDef functionDef, Set<String> currentClassFixture) {
+  private boolean isHelper(FunctionDef functionDef, Set<String> currentClassFixture) {
     return Optional.ofNullable(TreeUtils.getFunctionSymbolFromDef(functionDef)).stream()
       .anyMatch(functionSymbol -> functionSymbol.hasDecorators() || !functionSymbol.parameters().stream()
         .map(FunctionSymbol.Parameter::name)
