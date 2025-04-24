@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import javax.annotation.CheckForNull;
@@ -79,7 +80,7 @@ public class PythonScanner extends Scanner {
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
-  private final Map<PythonInputFile, Set<PythonCheck>> checksExecutedWithoutParsingByFiles = new HashMap<>();
+  private final Map<PythonInputFile, Set<Class<? extends PythonCheck>>> checksExecutedWithoutParsingByFiles;
   private int recognitionErrorCount = 0;
   private static final Pattern DATABRICKS_MAGIC_COMMAND_PATTERN = Pattern.compile("^\\h*#\\h*(MAGIC|COMMAND).*");
   private boolean foundDatabricks = false;
@@ -97,6 +98,7 @@ public class PythonScanner extends Scanner {
     this.indexer = indexer;
     this.indexer.buildOnce(context);
     this.architectureCallback = architectureCallback;
+    this.checksExecutedWithoutParsingByFiles = new ConcurrentHashMap<>();
   }
 
   @Override
@@ -141,7 +143,7 @@ public class PythonScanner extends Scanner {
     List<PythonSubscriptionCheck> checksBasedOnTree = new ArrayList<>();
     for (PythonCheck check : checks.all()) {
       if (!isCheckApplicable(check, fileType)
-        || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check)) {
+        || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check.getClass())) {
         continue;
       }
       if (check instanceof PythonSubscriptionCheck pythonSubscriptionCheck) {
@@ -202,8 +204,8 @@ public class PythonScanner extends Scanner {
       }
 
       if (check.scanWithoutParsing(inputFileContext)) {
-        Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
-        executedChecks.add(check);
+        var executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
+        executedChecks.add(check.getClass());
         checksExecutedWithoutParsingByFiles.putIfAbsent(inputFile, executedChecks);
       } else {
         result = false;
@@ -225,10 +227,7 @@ public class PythonScanner extends Scanner {
   @Override
   public void endOfAnalysis() {
     indexer.postAnalysis(context);
-    checks.all().stream()
-      .filter(EndOfAnalysis.class::isInstance)
-      .map(EndOfAnalysis.class::cast)
-      .forEach(c -> c.endOfAnalysis(indexer.cacheContext()));
+    checks.endOfAnalyses().forEach(c -> c.endOfAnalysis(indexer.cacheContext()));
   }
 
   boolean isCheckApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {

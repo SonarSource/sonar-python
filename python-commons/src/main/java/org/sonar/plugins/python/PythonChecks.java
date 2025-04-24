@@ -16,46 +16,73 @@
  */
 package org.sonar.plugins.python;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.Checks;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
+import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 
 public class PythonChecks {
   private final CheckFactory checkFactory;
-  private List<Checks<PythonCheck>> checksByRepository = new ArrayList<>();
+  private final Map<String, RepositoryChecksInfo> repositoriesChecks;
+  private final Map<Class<? extends PythonCheck>, RuleKey> ruleKeys;
 
   PythonChecks(CheckFactory checkFactory) {
     this.checkFactory = checkFactory;
+    this.repositoriesChecks = new ConcurrentHashMap<>();
+    this.ruleKeys = new ConcurrentHashMap<>();
   }
-  public PythonChecks addChecks(String repositoryKey, Iterable<Class<?>> checkClass) {
-    checksByRepository.add(checkFactory.<PythonCheck>create(repositoryKey).addAnnotatedChecks(checkClass));
 
+  public PythonChecks addChecks(String repositoryKey, Iterable<Class<?>> checkClasses) {
+    var repositoryChecksInfo = new RepositoryChecksInfo(repositoryKey, checkClasses);
+    var checks = createChecks(repositoryChecksInfo);
+    checks.all().forEach(check -> {
+      var checkClass = check.getClass();
+      var ruleKey = checks.ruleKey(check);
+      ruleKeys.put(checkClass, ruleKey);
+    });
+    repositoriesChecks.put(repositoryChecksInfo.repositoryKey, repositoryChecksInfo);
     return this;
   }
 
   public PythonChecks addCustomChecks(@Nullable PythonCustomRuleRepository[] customRuleRepositories) {
-    if (customRuleRepositories != null) {
-      for (PythonCustomRuleRepository ruleRepository : customRuleRepositories) {
-        addChecks(ruleRepository.repositoryKey(), ruleRepository.checkClasses());
-      }
-    }
-
+    Stream.ofNullable(customRuleRepositories)
+      .flatMap(Stream::of)
+      .forEach(ruleRepository -> addChecks(ruleRepository.repositoryKey(), ruleRepository.checkClasses()));
     return this;
   }
 
-  public List<PythonCheck> all() {
-    return checksByRepository.stream().flatMap(c -> c.all().stream()).toList();
+  public synchronized List<PythonCheck> all() {
+    return repositoriesChecks.values().stream()
+      .map(this::createChecks)
+      .map(Checks::all)
+      .flatMap(Collection::stream)
+      .toList();
+  }
+
+  public List<EndOfAnalysis> endOfAnalyses() {
+    return all().stream()
+      .filter(EndOfAnalysis.class::isInstance)
+      .map(EndOfAnalysis.class::cast)
+      .toList();
   }
 
   @Nullable
   public RuleKey ruleKey(PythonCheck check) {
-    return checksByRepository.stream().map(c -> c.ruleKey(check)).filter(Objects::nonNull).findFirst().orElse(null);
+    return ruleKeys.getOrDefault(check.getClass(), null);
   }
+
+  private Checks<PythonCheck> createChecks(RepositoryChecksInfo repositoryChecksInfo) {
+    return checkFactory.<PythonCheck>create(repositoryChecksInfo.repositoryKey).addAnnotatedChecks(repositoryChecksInfo.checkClasses);
+  }
+
+  private record RepositoryChecksInfo(String repositoryKey, Iterable<Class<?>> checkClasses) {}
 
 }
