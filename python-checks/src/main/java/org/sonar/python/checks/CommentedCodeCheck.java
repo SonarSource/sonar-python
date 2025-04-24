@@ -47,8 +47,8 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
 
   private static final String DEFAULT_EXCEPTION_PATTERN = "(fmt|py\\w+):.*";
   private static final Pattern DATABRICKS_MAGIC_COMMAND_PATTERN = Pattern.compile("^\\h*(MAGIC|COMMAND).*");
-  private static final PythonParser parser = PythonParser.create();
 
+  private final PythonParser parser = PythonParser.create();
   private Pattern exceptionPattern;
 
   @RuleProperty(
@@ -83,7 +83,7 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     return firstElement.isTripleQuoted() && parent.is(Tree.Kind.EXPRESSION_STMT);
   }
 
-  private static void visitMultilineComment(StringLiteral stringLiteral, SubscriptionContext ctx) {
+  private void visitMultilineComment(StringLiteral stringLiteral, SubscriptionContext ctx) {
     String text = Expressions.unescape(stringLiteral);
     text = text.trim();
     if (!isEmpty(text) && isTextParsedAsCode(text)) {
@@ -141,7 +141,7 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     return trivia.token().line() < 3 && ENCODING_PATTERN.matcher(text).matches();
   }
 
-  private static boolean isTextParsedAsCode(String text) {
+  private boolean isTextParsedAsCode(String text) {
     try {
       AstNode astNode = parser.parse(text);
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
