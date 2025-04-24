@@ -334,7 +334,7 @@ public class PythonScanner extends Scanner {
     return newLocation;
   }
 
-  private void saveMeasures(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
+  private synchronized void saveMeasures(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
     FileMetrics fileMetrics = new FileMetrics(visitorContext, isNotebook(inputFile));
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
