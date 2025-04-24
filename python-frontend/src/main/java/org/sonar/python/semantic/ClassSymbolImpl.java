@@ -50,11 +50,11 @@ import static org.sonar.python.types.TypeShed.symbolsFromProtobufDescriptors;
 
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
-  private final List<Symbol> superClasses = new ArrayList<>();
-  private List<String> superClassesFqns = new ArrayList<>();
+  private final List<Symbol> superClasses = Collections.synchronizedList(new ArrayList<>());
+  private List<String> superClassesFqns = Collections.synchronizedList(new ArrayList<>());
   private List<String> inlinedSuperClassFqn = new ArrayList<>();
-  private Set<Symbol> allSuperClasses = null;
-  private Set<Symbol> allSuperClassesIncludingAmbiguousSymbols = null;
+  private volatile Set<Symbol> allSuperClasses = null;
+  private volatile Set<Symbol> allSuperClassesIncludingAmbiguousSymbols = null;
   private boolean hasSuperClassWithoutSymbol = false;
   private final Set<Symbol> members = new HashSet<>();
   private Map<String, Symbol> membersByName = null;
@@ -205,9 +205,9 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   @Override
-  public List<Symbol> superClasses() {
+  public synchronized List<Symbol> superClasses() {
     // In case of symbols coming from TypeShed protobuf, we resolve superclasses lazily
-    if (!hasAlreadyReadSuperClasses && superClasses.isEmpty() && !superClassesFqns.isEmpty()) {
+    if (shouldSearchHierarchyInTypeshed()) {
       superClassesFqns.stream().map(SymbolUtils::typeshedSymbolWithFQN).forEach(this::addSuperClass);
     }
     hasAlreadyReadSuperClasses = true;
@@ -362,7 +362,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     return metaclassFQN;
   }
 
-  private Set<Symbol> allSuperClasses(boolean includeAmbiguousSymbols) {
+  private synchronized Set<Symbol> allSuperClasses(boolean includeAmbiguousSymbols) {
     if (!includeAmbiguousSymbols) {
       if (allSuperClasses == null) {
         allSuperClasses = new LinkedHashSet<>();
