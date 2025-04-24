@@ -18,6 +18,7 @@ package org.sonar.python.semantic.v2;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -28,7 +29,7 @@ public class LazyTypesContext {
   private final TypeTable typeTable;
 
   public LazyTypesContext(ProjectLevelTypeTable typeTable) {
-    this.lazyTypes = new HashMap<>();
+    this.lazyTypes = new ConcurrentHashMap<>();
     this.typeTable = typeTable;
   }
 
@@ -37,12 +38,7 @@ public class LazyTypesContext {
   }
 
   public LazyType getOrCreateLazyType(String importPath) {
-    if (lazyTypes.containsKey(importPath)) {
-      return lazyTypes.get(importPath);
-    }
-    var lazyType = new LazyType(importPath, this);
-    lazyTypes.put(importPath, lazyType);
-    return lazyType;
+    return lazyTypes.computeIfAbsent(importPath, ip -> new LazyType(ip, this));
   }
 
   public PythonType resolveLazyType(LazyType lazyType) {

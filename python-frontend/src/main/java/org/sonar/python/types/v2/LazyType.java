@@ -16,9 +16,10 @@
  */
 package org.sonar.python.types.v2;
 
-import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Consumer;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -29,14 +30,14 @@ import org.sonar.python.semantic.v2.LazyTypesContext;
 public class LazyType implements PythonType, ResolvableType {
 
   String importPath;
-  private final Queue<Consumer<PythonType>> consumers;
+  private final BlockingQueue<Consumer<PythonType>> consumers;
   private final LazyTypesContext lazyTypesContext;
   private static final String INTERACTION_MESSAGE = "Lazy types should not be interacted with.";
 
   public LazyType(String importPath, LazyTypesContext lazyTypesContext) {
     this.importPath = importPath;
     this.lazyTypesContext = lazyTypesContext;
-    consumers = new ArrayDeque<>();
+    consumers = new LinkedBlockingQueue<>();
   }
 
   public String importPath() {
@@ -49,16 +50,20 @@ public class LazyType implements PythonType, ResolvableType {
   }
 
   public LazyType resolve(PythonType type) {
-    consumers.forEach(c -> c.accept(type));
-    consumers.clear();
+    notifyConsumers(type);
     return this;
   }
 
-  public PythonType resolve() {
+  public synchronized PythonType resolve() {
     PythonType resolvedType = lazyTypesContext.resolveLazyType(this);
-    consumers.forEach(c -> c.accept(resolvedType));
-    consumers.clear();
+    notifyConsumers(resolvedType);
     return resolvedType;
+  }
+
+  private void notifyConsumers(PythonType type) {
+    var toNotify = new ArrayList<Consumer<PythonType>>();
+    consumers.drainTo(toNotify);
+    toNotify.forEach(c -> c.accept(type));
   }
 
   @Override
