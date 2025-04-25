@@ -16,13 +16,12 @@
  */
 package org.sonar.python.semantic.v2;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.sonar.python.types.v2.LazyType;
-import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.python.types.v2.LazyType;
+import org.sonar.python.types.v2.LazyTypeWrapper;
 
 public class LazyTypesContext {
   private final Map<String, LazyType> lazyTypes;
