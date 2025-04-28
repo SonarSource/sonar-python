@@ -56,14 +56,9 @@ public abstract class PythonIndexer {
   private final Map<URI, String> packageNames = new ConcurrentHashMap<>();
   private final Supplier<PythonParser> parserSupplier = PythonParser::create;
   private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
-  private final ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
 
   public ProjectLevelSymbolTable projectLevelSymbolTable() {
     return projectLevelSymbolTable;
-  }
-
-  public ProjectLevelTypeTable projectLevelTypeTable() {
-    return projectLevelTypeTable;
   }
 
   public String packageName(PythonInputFile inputFile) {

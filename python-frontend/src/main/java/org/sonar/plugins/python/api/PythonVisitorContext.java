@@ -77,17 +77,12 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, SonarProduct sonarProduct) {
-    this(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, new ProjectLevelTypeTable(projectLevelSymbolTable), cacheContext, sonarProduct);
-  }
-
-  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
-    ProjectLevelSymbolTable projectLevelSymbolTable, ProjectLevelTypeTable projectLevelTypeTable, CacheContext cacheContext, SonarProduct sonarProduct) {
     super(pythonFile, workingDirectory, cacheContext, sonarProduct, projectLevelSymbolTable);
-
     var symbolTableBuilderV2 = new SymbolTableBuilderV2(rootTree);
     var symbolTable = symbolTableBuilderV2.build();
     var symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable);
     symbolTableBuilder.visitFileInput(rootTree);
+    var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
     this.moduleType = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferModuleType(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
     this.rootTree = rootTree;
