@@ -22,11 +22,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import org.slf4j.Logger;
@@ -44,26 +45,31 @@ public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
   private static final Logger LOG = LoggerFactory.getLogger(ResourceAccessPolicyCheck.class);
   private static final String MESSAGE = "Make sure granting access to all resources is safe here.";
   private static final String SECONDARY_MESSAGE = "Related effect";
+  private static final Map<String, Set<String>> CACHED_RESOURCES = new ConcurrentHashMap<>();
   // visible for testing
   String resourceNameSensitiveAwsActions = "ResourceAccessPolicyCheck.txt";
   private Set<String> sensitiveAwsActions = null;
 
   void init() {
-    try {
-      sensitiveAwsActions = new HashSet<>(loadResource(resourceNameSensitiveAwsActions));
-    } catch (IOException e) {
-      sensitiveAwsActions = Collections.emptySet();
-      LOG.error("Couldn't load resource '" + resourceNameSensitiveAwsActions + "', rule [S6304] ResourceAccessPolicyCheck will be disabled.", e);
-    }
-  }
+    sensitiveAwsActions = CACHED_RESOURCES.computeIfAbsent(resourceNameSensitiveAwsActions, ResourceAccessPolicyCheck::loadResourceWrapper);
 
+  }
   @Override
   public void initialize(SubscriptionCheck.Context context) {
     super.initialize(context);
     init();
   }
 
-  private static List<String> loadResource(String resourceName) throws IOException {
+  private static Set<String> loadResourceWrapper(String resourceName) {
+    try {
+      return loadResource(resourceName);
+    } catch (IOException e) {
+      LOG.error("Couldn't load resource '{}', rule [S6304] ResourceAccessPolicyCheck will be disabled.", resourceName, e);
+      return Set.of();
+    }
+  }
+
+  private static Set<String> loadResource(String resourceName) throws IOException {
     try (InputStream is = ResourceAccessPolicyCheck.class.getResourceAsStream(resourceName)) {
       if (is == null) {
         throw new IOException("Cannot find resource file '" + resourceName + "'");
@@ -75,7 +81,7 @@ public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
         while((line = br.readLine()) != null) {
           result.add(line);
         }
-        return result;
+        return new HashSet<>(result);
       }
     }
   }

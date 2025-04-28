@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -161,6 +162,7 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
     private static final String CHECKS_DIR = "/org/sonar/python/checks";
     private static final String GENERATED_METHODS_RESOURCE_PATH = CHECKS_DIR + "/generated_hardcoded_credentials_call_check_meta.json";
     private static final String MANUAL_METHODS_RESOURCE_PATH = CHECKS_DIR + "/manual_hardcoded_credentials_call_check_meta.json";
+    private static final Map<String, CredentialMethod[]> CACHED_METHODS = new ConcurrentHashMap<>();
     private final Gson gson;
 
     private CredentialMethodsLoader() {
@@ -168,8 +170,8 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
     }
 
     private Map<String, CredentialMethod> load() {
-      var generatedCredentialMethods = loadMethodsFromResource(GENERATED_METHODS_RESOURCE_PATH);
-      var manualCredentialMethods = loadMethodsFromResource(MANUAL_METHODS_RESOURCE_PATH);
+      var generatedCredentialMethods = CACHED_METHODS.computeIfAbsent(GENERATED_METHODS_RESOURCE_PATH, this::loadMethodsFromResource);
+      var manualCredentialMethods = CACHED_METHODS.computeIfAbsent(MANUAL_METHODS_RESOURCE_PATH, this::loadMethodsFromResource);
       return Stream.concat(Stream.of(generatedCredentialMethods), Stream.of(manualCredentialMethods))
         .collect(Collectors.toMap(CredentialMethod::name, Function.identity())); // Will throw an exception if there are duplicates
     }
