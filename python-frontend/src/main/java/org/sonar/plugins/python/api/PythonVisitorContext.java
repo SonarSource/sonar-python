@@ -46,9 +46,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName) {
     super(pythonFile, workingDirectory, CacheContextImpl.dummyCache(), ProjectLevelSymbolTable.empty());
-
-    SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
-    symbolTableBuilder.visitFileInput(rootTree);
+    buildSymbols(rootTree, pythonFile, packageName);
     var symbolTable = new SymbolTableBuilderV2(rootTree).build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
 
@@ -63,8 +61,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
     super(pythonFile, workingDirectory, cacheContext, projectLevelSymbolTable);
 
-    var symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable);
-    symbolTableBuilder.visitFileInput(rootTree);
+    buildSymbols(rootTree, pythonFile, packageName, projectLevelSymbolTable);
     var symbolTable = new SymbolTableBuilderV2(rootTree).build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
 
@@ -80,14 +77,22 @@ public class PythonVisitorContext extends PythonInputFileContext {
     super(pythonFile, workingDirectory, cacheContext, sonarProduct, projectLevelSymbolTable);
     var symbolTableBuilderV2 = new SymbolTableBuilderV2(rootTree);
     var symbolTable = symbolTableBuilderV2.build();
-    var symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable);
-    symbolTableBuilder.visitFileInput(rootTree);
+    buildSymbols(rootTree, pythonFile, packageName, projectLevelSymbolTable);
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
     this.moduleType = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferModuleType(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
     this.rootTree = rootTree;
     this.parsingException = null;
     this.issues = new ArrayList<>();
+  }
+
+  private static synchronized void buildSymbols(FileInput rootTree, PythonFile pythonFile, String packageName) {
+    buildSymbols(rootTree, pythonFile, packageName, ProjectLevelSymbolTable.empty());
+  }
+
+  private static synchronized void buildSymbols(FileInput rootTree, PythonFile pythonFile, String packageName, ProjectLevelSymbolTable projectLevelSymbolTable) {
+    var symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable);
+    symbolTableBuilder.visitFileInput(rootTree);
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {

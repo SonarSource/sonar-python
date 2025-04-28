@@ -183,7 +183,7 @@ public class ProjectLevelSymbolTable {
   }
 
   @CheckForNull
-  public Set<Symbol> getSymbolsFromModule(@Nullable String moduleName) {
+  public synchronized Set<Symbol> getSymbolsFromModule(@Nullable String moduleName) {
     Set<Descriptor> descriptors = getDescriptorsFromModule(moduleName);
     if (descriptors == null) {
       return null;

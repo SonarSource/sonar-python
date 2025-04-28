@@ -60,7 +60,7 @@ public class SymbolsModuleTypeProvider {
     return rootModule;
   }
 
-  public PythonType convertModuleType(List<String> moduleFqn, ModuleType parent) {
+  public synchronized PythonType convertModuleType(List<String> moduleFqn, ModuleType parent) {
     var moduleName = moduleFqn.get(moduleFqn.size() - 1);
     var moduleFqnString = getModuleFqnString(moduleFqn);
     Optional<ModuleType> result =  createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)

@@ -30,8 +30,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,6 +75,7 @@ import org.sonar.python.tree.PythonTreeMaker;
 public class PythonScanner extends Scanner {
 
   private static final Logger LOG = LoggerFactory.getLogger(PythonScanner.class);
+  private static final Pattern DATABRICKS_MAGIC_COMMAND_PATTERN = Pattern.compile("^\\h*#\\h*(MAGIC|COMMAND).*");
 
   private final Supplier<PythonParser> parserSupplier;
   private final PythonChecks checks;
@@ -79,9 +84,8 @@ public class PythonScanner extends Scanner {
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
   private final Map<PythonInputFile, Set<Class<? extends PythonCheck>>> checksExecutedWithoutParsingByFiles;
-  private int recognitionErrorCount = 0;
-  private static final Pattern DATABRICKS_MAGIC_COMMAND_PATTERN = Pattern.compile("^\\h*#\\h*(MAGIC|COMMAND).*");
-  private boolean foundDatabricks = false;
+  private final AtomicInteger recognitionErrorCount;
+  private final AtomicBoolean foundDatabricks;
   private final PythonFileConsumer architectureCallback;
 
   public PythonScanner(
@@ -97,11 +101,30 @@ public class PythonScanner extends Scanner {
     this.indexer.buildOnce(context);
     this.architectureCallback = architectureCallback;
     this.checksExecutedWithoutParsingByFiles = new ConcurrentHashMap<>();
+    this.recognitionErrorCount = new AtomicInteger(0);
+    this.foundDatabricks = new AtomicBoolean(false);
   }
 
   @Override
   protected String name() {
     return "rules execution";
+  }
+
+  @Override
+  protected void processFiles(List<PythonInputFile> files, SensorContext context, MultiFileProgressReport progressReport,
+    AtomicInteger numScannedWithoutParsing) {
+    ForkJoinPool pool = new ForkJoinPool(1);
+    try {
+      pool.submit(() -> super.processFiles(files, context, progressReport, numScannedWithoutParsing))
+        .join();
+    } finally {
+      pool.shutdown();
+    }
+  }
+
+  @Override
+  protected Stream<PythonInputFile> getFilesStream(List<PythonInputFile> files) {
+    return files.stream().parallel();
   }
 
   @Override
@@ -126,12 +149,13 @@ public class PythonScanner extends Scanner {
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct());
 
-      var line = (inputFile.kind() == PythonInputFile.Kind.IPYTHON) ? ((GeneratedIPythonFile) inputFile).locationMap().get(e.getLine()).line() : e.getLine();
+      var line = (inputFile.kind() == PythonInputFile.Kind.IPYTHON) ?
+        ((GeneratedIPythonFile) inputFile).locationMap().get(e.getLine()).line() : e.getLine();
       var newMessage = e.getMessage().replace("line " + e.getLine(), "line " + line);
 
-      LOG.error("Unable to parse file: " + inputFile);
+      LOG.error("Unable to parse file: {}", inputFile);
       LOG.error(newMessage);
-      recognitionErrorCount++;
+      recognitionErrorCount.incrementAndGet();
       context.newAnalysisError()
         .onFile(inputFile.wrappedFile())
         .at(inputFile.wrappedFile().newPointer(line, 0))
@@ -140,8 +164,8 @@ public class PythonScanner extends Scanner {
     }
     List<PythonSubscriptionCheck> checksBasedOnTree = new ArrayList<>();
     for (PythonCheck check : checks.all()) {
-      if (!isCheckApplicable(check, fileType)
-        || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check.getClass())) {
+      if (isCheckNotApplicable(check, fileType)
+          || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check.getClass())) {
         continue;
       }
       if (check instanceof PythonSubscriptionCheck pythonSubscriptionCheck) {
@@ -163,16 +187,18 @@ public class PythonScanner extends Scanner {
   }
 
   private void searchForDataBricks(PythonVisitorContext visitorContext) {
-    foundDatabricks |= visitorContext.pythonFile().content().lines().anyMatch(
+    var hasDatabricks = visitorContext.pythonFile().content().lines().anyMatch(
       line -> DATABRICKS_MAGIC_COMMAND_PATTERN.matcher(line).matches());
+    foundDatabricks.compareAndSet(false, hasDatabricks);
   }
 
   private static PythonTreeMaker getTreeMaker(PythonInputFile inputFile) {
-    return Python.KEY.equals(inputFile.wrappedFile().language()) ? new PythonTreeMaker() : new IPythonTreeMaker(getOffsetLocations(inputFile));
+    return Python.KEY.equals(inputFile.wrappedFile().language()) ? new PythonTreeMaker() :
+      new IPythonTreeMaker(getOffsetLocations(inputFile));
   }
 
   private static Map<Integer, IPythonLocation> getOffsetLocations(PythonInputFile inputFile) {
-    if(inputFile.kind() == PythonInputFile.Kind.IPYTHON){
+    if (inputFile.kind() == PythonInputFile.Kind.IPYTHON) {
       return ((GeneratedIPythonFile) inputFile).locationMap();
     }
     return Map.of();
@@ -191,7 +217,7 @@ public class PythonScanner extends Scanner {
       indexer.projectLevelSymbolTable()
     );
     for (PythonCheck check : checks.all()) {
-      if (!isCheckApplicable(check, fileType)) {
+      if (isCheckNotApplicable(check, fileType)) {
         continue;
       }
       if (checkRequiresParsingOfImpactedFile(inputFile, check)) {
@@ -228,12 +254,8 @@ public class PythonScanner extends Scanner {
     checks.endOfAnalyses().forEach(c -> c.endOfAnalysis(indexer.cacheContext()));
   }
 
-  boolean isCheckApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {
-    PythonCheck.CheckScope checkScope = pythonCheck.scope();
-    if (checkScope == PythonCheck.CheckScope.ALL) {
-      return true;
-    }
-    return fileType == InputFile.Type.MAIN;
+  boolean isCheckNotApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {
+    return fileType != InputFile.Type.MAIN && pythonCheck.scope() != PythonCheck.CheckScope.ALL;
   }
 
   // visible for testing
@@ -257,11 +279,12 @@ public class PythonScanner extends Scanner {
 
   @Override
   protected void reportStatistics(int numSkippedFiles, int numTotalFiles) {
-    LOG.info("The Python analyzer was able to leverage cached data from previous analyses for {} out of {} files. These files were not parsed.",
+    LOG.info("The Python analyzer was able to leverage cached data from previous analyses for {} out of {} files. These files were not " +
+             "parsed.",
       numSkippedFiles, numTotalFiles);
   }
 
-  private void saveIssues(PythonInputFile inputFile, List<PreciseIssue> issues) {
+  private synchronized void saveIssues(PythonInputFile inputFile, List<PreciseIssue> issues) {
     for (PreciseIssue preciseIssue : issues) {
       RuleKey ruleKey = checks.ruleKey(preciseIssue.check());
       NewIssue newIssue = context
@@ -304,7 +327,8 @@ public class PythonScanner extends Scanner {
 
   @CheckForNull
   private InputFile component(String fileId, SensorContext sensorContext) {
-    InputFile inputFile = Optional.ofNullable(sensorContext.fileSystem().inputFile(sensorContext.fileSystem().predicates().is(new File(fileId))))
+    var predicate = sensorContext.fileSystem().predicates().is(new File(fileId));
+    InputFile inputFile = Optional.ofNullable(sensorContext.fileSystem().inputFile(predicate))
       .orElseGet(() -> indexer.getFileWithId(fileId));
     if (inputFile == null) {
       LOG.debug("Failed to find InputFile for {}", fileId);
@@ -320,7 +344,8 @@ public class PythonScanner extends Scanner {
       if (location.startLineOffset() == IssueLocation.UNDEFINED_OFFSET) {
         range = inputFile.wrappedFile().selectLine(location.startLine());
       } else {
-        range = inputFile.wrappedFile().newRange(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
+        range = inputFile.wrappedFile().newRange(location.startLine(), location.startLineOffset(), location.endLine(),
+          location.endLineOffset());
       }
       newLocation.at(range);
     }
@@ -415,14 +440,15 @@ public class PythonScanner extends Scanner {
   }
 
   private static TextRange rangeFromTextSpan(InputFile file, PythonTextEdit pythonTextEdit) {
-    return file.newRange(pythonTextEdit.startLine(), pythonTextEdit.startLineOffset(), pythonTextEdit.endLine(), pythonTextEdit.endLineOffset());
+    return file.newRange(pythonTextEdit.startLine(), pythonTextEdit.startLineOffset(), pythonTextEdit.endLine(),
+      pythonTextEdit.endLineOffset());
   }
 
   public int getRecognitionErrorCount() {
-    return recognitionErrorCount;
+    return recognitionErrorCount.get();
   }
 
   public boolean getFoundDatabricks() {
-    return foundDatabricks;
+    return foundDatabricks.get();
   }
 }
