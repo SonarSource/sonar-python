@@ -345,8 +345,9 @@ class PythonSensorTest {
     verifyUsages(key, 47, 5, reference(48, 14, 48, 17));
   }
 
-  @Test
-  void test_issues() {
+  @ParameterizedTest
+  @ValueSource(ints = {1, 2})
+  void test_issues(int threads) {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -361,6 +362,7 @@ class PythonSensorTest {
       .build();
 
     PythonInputFile inputFile = inputFile(FILE_2);
+    context.settings().setProperty(PythonScanner.THREADS_PROPERTY_NAME, String.valueOf(threads));
     sensor().execute(context);
 
     assertThat(context.allIssues()).hasSize(3);
@@ -404,7 +406,11 @@ class PythonSensorTest {
     assertThat(logTester.logs(Level.INFO)).contains("Starting global symbols computation");
     assertThat(logTester.logs(Level.INFO)).contains("Starting rules execution");
     assertThat(logTester.logs(Level.INFO).stream().filter(line -> line.equals("1 source file to be analyzed")).count()).isEqualTo(2);
-
+    if (threads == 1) {
+      assertThat(logTester.logs(Level.DEBUG)).doesNotContain("Scanning files in");
+    } else {
+      assertThat(logTester.logs(Level.DEBUG)).contains("Scanning files in " + threads + " threads");
+    }
     assertThat(PythonScanner.getWorkingDirectory(context)).isEqualTo(workDir.toFile());
   }
 

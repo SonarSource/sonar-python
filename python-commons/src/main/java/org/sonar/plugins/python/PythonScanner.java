@@ -76,6 +76,7 @@ public class PythonScanner extends Scanner {
 
   private static final Logger LOG = LoggerFactory.getLogger(PythonScanner.class);
   private static final Pattern DATABRICKS_MAGIC_COMMAND_PATTERN = Pattern.compile("^\\h*#\\h*(MAGIC|COMMAND).*");
+  public static final String THREADS_PROPERTY_NAME = "sonar.python.analysis.threads";
 
   private final Supplier<PythonParser> parserSupplier;
   private final PythonChecks checks;
@@ -113,8 +114,14 @@ public class PythonScanner extends Scanner {
   @Override
   protected void processFiles(List<PythonInputFile> files, SensorContext context, MultiFileProgressReport progressReport,
     AtomicInteger numScannedWithoutParsing) {
-    ForkJoinPool pool = new ForkJoinPool(1);
+    var numberOfThreads = getNumberOfThreads(context);
+    if (numberOfThreads == 1) {
+      super.processFiles(files, context, progressReport, numScannedWithoutParsing);
+      return;
+    }
+    var pool = new ForkJoinPool(numberOfThreads);
     try {
+      LOG.debug("Scanning files in {} threads", numberOfThreads);
       pool.submit(() -> super.processFiles(files, context, progressReport, numScannedWithoutParsing))
         .join();
     } finally {
@@ -124,7 +131,7 @@ public class PythonScanner extends Scanner {
 
   @Override
   protected Stream<PythonInputFile> getFilesStream(List<PythonInputFile> files) {
-    return files.stream().parallel();
+    return getNumberOfThreads(context) == 1 ? files.stream() : files.stream().parallel();
   }
 
   @Override
@@ -450,5 +457,10 @@ public class PythonScanner extends Scanner {
 
   public boolean getFoundDatabricks() {
     return foundDatabricks.get();
+  }
+
+  private static Integer getNumberOfThreads(SensorContext context) {
+    return context.config().getInt(THREADS_PROPERTY_NAME)
+      .orElse(1);
   }
 }
