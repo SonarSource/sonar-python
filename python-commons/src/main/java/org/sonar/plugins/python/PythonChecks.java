@@ -19,7 +19,9 @@ package org.sonar.plugins.python;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -30,13 +32,17 @@ import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 
 public class PythonChecks {
+  private static final Set<String> SONAR_PYTHON_REPOSITORIES = Set.of("python", "pythonenterprise", "ipython", "ipythonenterprise");
+
   private final CheckFactory checkFactory;
-  private final Map<String, RepositoryChecksInfo> repositoriesChecks;
+  private final Map<String, RepositoryChecksInfo> sonarPythonRepositoriesChecks;
+  private final Map<String, RepositoryChecksInfo> noSonarPythonRepositoriesChecks;
   private final Map<Class<? extends PythonCheck>, RuleKey> ruleKeys;
 
   PythonChecks(CheckFactory checkFactory) {
     this.checkFactory = checkFactory;
-    this.repositoriesChecks = new ConcurrentHashMap<>();
+    this.sonarPythonRepositoriesChecks = new ConcurrentHashMap<>();
+    this.noSonarPythonRepositoriesChecks = new ConcurrentHashMap<>();
     this.ruleKeys = new ConcurrentHashMap<>();
   }
 
@@ -48,7 +54,11 @@ public class PythonChecks {
       var ruleKey = checks.ruleKey(check);
       ruleKeys.put(checkClass, ruleKey);
     });
-    repositoriesChecks.put(repositoryChecksInfo.repositoryKey, repositoryChecksInfo);
+    if (SONAR_PYTHON_REPOSITORIES.contains(repositoryKey)) {
+      sonarPythonRepositoriesChecks.put(repositoryChecksInfo.repositoryKey, repositoryChecksInfo);
+    } else {
+      noSonarPythonRepositoriesChecks.put(repositoryChecksInfo.repositoryKey, repositoryChecksInfo);
+    }
     return this;
   }
 
@@ -59,19 +69,35 @@ public class PythonChecks {
     return this;
   }
 
-  public synchronized List<PythonCheck> all() {
-    return repositoriesChecks.values().stream()
+  public synchronized List<PythonCheck> sonarPythonChecks() {
+    return sonarPythonRepositoriesChecks.values().stream()
       .map(this::createChecks)
       .map(Checks::all)
       .flatMap(Collection::stream)
       .toList();
   }
 
-  public List<EndOfAnalysis> endOfAnalyses() {
-    return all().stream()
+  public synchronized Map<String, List<PythonCheck>> noSonarPythonChecks() {
+    return noSonarPythonRepositoriesChecks.values()
+      .stream()
+      .collect(Collectors.toMap(
+        RepositoryChecksInfo::repositoryKey,
+        repositoryChecksInfo -> createChecks(repositoryChecksInfo).all().stream().toList()));
+  }
+
+  public List<EndOfAnalysis> sonarPythonEndOfAnalyses() {
+    return sonarPythonChecks().stream()
       .filter(EndOfAnalysis.class::isInstance)
       .map(EndOfAnalysis.class::cast)
       .toList();
+  }
+
+  public Map<String, List<EndOfAnalysis>> noSonarPythonEndOfAnalyses() {
+    return noSonarPythonChecks().entrySet().stream()
+      .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().stream()
+        .filter(EndOfAnalysis.class::isInstance)
+        .map(EndOfAnalysis.class::cast)
+        .toList()));
   }
 
   @Nullable

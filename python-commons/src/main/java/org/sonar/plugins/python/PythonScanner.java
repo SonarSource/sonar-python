@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
@@ -77,6 +78,7 @@ public class PythonScanner extends Scanner {
   private static final Logger LOG = LoggerFactory.getLogger(PythonScanner.class);
   private static final Pattern DATABRICKS_MAGIC_COMMAND_PATTERN = Pattern.compile("^\\h*#\\h*(MAGIC|COMMAND).*");
   public static final String THREADS_PROPERTY_NAME = "sonar.python.analysis.threads";
+  private static final String ARCHITECTURE_CALLBACK_LOCK_KEY = "architectureCallbackLock";
 
   private final Supplier<PythonParser> parserSupplier;
   private final PythonChecks checks;
@@ -88,6 +90,7 @@ public class PythonScanner extends Scanner {
   private final AtomicInteger recognitionErrorCount;
   private final AtomicBoolean foundDatabricks;
   private final PythonFileConsumer architectureCallback;
+  private final Map<String, Object> repositoryLocks;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
@@ -104,6 +107,7 @@ public class PythonScanner extends Scanner {
     this.checksExecutedWithoutParsingByFiles = new ConcurrentHashMap<>();
     this.recognitionErrorCount = new AtomicInteger(0);
     this.foundDatabricks = new AtomicBoolean(false);
+    this.repositoryLocks = new ConcurrentHashMap<>();
   }
 
   @Override
@@ -137,8 +141,29 @@ public class PythonScanner extends Scanner {
   @Override
   protected void scanFile(PythonInputFile inputFile) throws IOException {
     var pythonFile = SonarQubePythonFile.create(inputFile);
-    PythonVisitorContext visitorContext;
     InputFile.Type fileType = inputFile.wrappedFile().type();
+    PythonVisitorContext visitorContext = createVisitorContext(inputFile, pythonFile, fileType);
+
+    executeChecks(visitorContext, checks.sonarPythonChecks(), fileType, inputFile);
+    executeOtherChecks(inputFile, visitorContext, fileType);
+
+    synchronized (repositoryLocks.computeIfAbsent(ARCHITECTURE_CALLBACK_LOCK_KEY, k -> new Object())) {
+      architectureCallback.scanFile(visitorContext);
+    }
+
+    saveIssues(inputFile, visitorContext.getIssues());
+
+    if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
+      new SymbolVisitor(context.newSymbolTable().onFile(inputFile.wrappedFile())).visitFileInput(visitorContext.rootTree());
+      new PythonHighlighter(context, inputFile).scanFile(visitorContext);
+    }
+
+    searchForDataBricks(visitorContext);
+  }
+
+
+  private PythonVisitorContext createVisitorContext(PythonInputFile inputFile, PythonFile pythonFile, InputFile.Type fileType) throws IOException {
+    PythonVisitorContext visitorContext;
     try {
       AstNode astNode = parserSupplier.get().parse(inputFile.contents());
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
@@ -169,28 +194,33 @@ public class PythonScanner extends Scanner {
         .message(newMessage)
         .save();
     }
-    List<PythonSubscriptionCheck> checksBasedOnTree = new ArrayList<>();
-    for (PythonCheck check : checks.all()) {
+    return visitorContext;
+  }
+
+  private void executeChecks(PythonVisitorContext visitorContext, Collection<PythonCheck> checks, InputFile.Type fileType, PythonInputFile inputFile) {
+    Collection<PythonSubscriptionCheck> subscriptionChecks = new ArrayList<>();
+    for (PythonCheck check : checks) {
       if (isCheckNotApplicable(check, fileType)
-          || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check.getClass())) {
+        || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check.getClass())) {
         continue;
       }
       if (check instanceof PythonSubscriptionCheck pythonSubscriptionCheck) {
-        checksBasedOnTree.add(pythonSubscriptionCheck);
+        subscriptionChecks.add(pythonSubscriptionCheck);
       } else {
         check.scanFile(visitorContext);
       }
     }
-    SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext);
-    architectureCallback.scanFile(visitorContext);
-    saveIssues(inputFile, visitorContext.getIssues());
+    SubscriptionVisitor.analyze(subscriptionChecks, visitorContext);
+  }
 
-    if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
-      new SymbolVisitor(context.newSymbolTable().onFile(inputFile.wrappedFile())).visitFileInput(visitorContext.rootTree());
-      new PythonHighlighter(context, inputFile).scanFile(visitorContext);
-    }
-
-    searchForDataBricks(visitorContext);
+  private void executeOtherChecks(PythonInputFile inputFile, PythonVisitorContext visitorContext, InputFile.Type fileType) {
+    checks.noSonarPythonChecks().forEach((repositoryKey, repositoryChecks) -> {
+        var lock = repositoryLocks.computeIfAbsent(repositoryKey, k -> new Object());
+        synchronized (lock) {
+          executeChecks(visitorContext, repositoryChecks, fileType, inputFile);
+        }
+      }
+    );
   }
 
   private void searchForDataBricks(PythonVisitorContext visitorContext) {
@@ -223,25 +253,21 @@ public class PythonScanner extends Scanner {
       context.runtime().getProduct(),
       indexer.projectLevelSymbolTable()
     );
-    for (PythonCheck check : checks.all()) {
-      if (isCheckNotApplicable(check, fileType)) {
-        continue;
-      }
-      if (checkRequiresParsingOfImpactedFile(inputFile, check)) {
-        // For regular Python checks, only directly modified files need to be analyzed
-        // For DBD and Security, transitively impacted files must be re-analyzed.
-        result = false;
-        continue;
-      }
 
-      if (check.scanWithoutParsing(inputFileContext)) {
-        var executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
-        executedChecks.add(check.getClass());
-        checksExecutedWithoutParsingByFiles.putIfAbsent(inputFile, executedChecks);
-      } else {
-        result = false;
+    result = scanFileWithoutParsingSonarPython(inputFile, fileType, inputFileContext, result);
+
+    var otherChecks = checks.noSonarPythonChecks();
+    for (var entry : otherChecks.entrySet()) {
+      var repositoryKey = entry.getKey();
+      var repositoryChecks = entry.getValue();
+      var lock = repositoryLocks.computeIfAbsent(repositoryKey, k -> new Object());
+      synchronized (lock) {
+        for (var check : repositoryChecks) {
+          result = scanFileWithoutParsingNotSonarPython(inputFile, check, fileType, result, inputFileContext);
+        }
       }
     }
+
     result &= architectureCallback.scanWithoutParsing(inputFileContext);
     if (!result) {
       // If scan without parsing is not successful, measures will be pushed during regular scan.
@@ -251,14 +277,55 @@ public class PythonScanner extends Scanner {
     return restoreAndPushMeasuresIfApplicable(inputFile);
   }
 
-  private boolean checkRequiresParsingOfImpactedFile(PythonInputFile inputFile, PythonCheck check) {
-    return !indexer.canBeFullyScannedWithoutParsing(inputFile) && !check.getClass().getPackageName().startsWith("org.sonar.python.checks");
+  private boolean scanFileWithoutParsingNotSonarPython(PythonInputFile inputFile, PythonCheck check, InputFile.Type fileType, boolean result,
+    PythonInputFileContext inputFileContext) {
+    if (isCheckNotApplicable(check, fileType)) {
+      return result;
+    }
+    if (!indexer.canBeFullyScannedWithoutParsing(inputFile)) {
+      result = false;
+      return result;
+    }
+    if (check.scanWithoutParsing(inputFileContext)) {
+      var executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
+      executedChecks.add(check.getClass());
+      checksExecutedWithoutParsingByFiles.putIfAbsent(inputFile, executedChecks);
+    } else {
+      result = false;
+    }
+    return result;
   }
+
+  private boolean scanFileWithoutParsingSonarPython(PythonInputFile inputFile, InputFile.Type fileType, PythonInputFileContext inputFileContext, boolean result) {
+    var ourChecks = checks.sonarPythonChecks();
+    for (var check : ourChecks) {
+      if (isCheckNotApplicable(check, fileType)) {
+        continue;
+      }
+      if (check.scanWithoutParsing(inputFileContext)) {
+        var executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
+        executedChecks.add(check.getClass());
+        checksExecutedWithoutParsingByFiles.putIfAbsent(inputFile, executedChecks);
+      } else {
+        result = false;
+      }
+    }
+    return result;
+  }
+
 
   @Override
   public void endOfAnalysis() {
     indexer.postAnalysis(context);
-    checks.endOfAnalyses().forEach(c -> c.endOfAnalysis(indexer.cacheContext()));
+    checks.sonarPythonEndOfAnalyses().forEach(c -> c.endOfAnalysis(indexer.cacheContext()));
+    checks.noSonarPythonEndOfAnalyses().forEach(
+      (repositoryKey, endOfAnalyses) -> {
+        var lock = repositoryLocks.computeIfAbsent(repositoryKey, k -> new Object());
+        synchronized (lock) {
+          endOfAnalyses.forEach(c -> c.endOfAnalysis(indexer.cacheContext()));
+        }
+      }
+    );
   }
 
   boolean isCheckNotApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {
@@ -401,7 +468,7 @@ public class PythonScanner extends Scanner {
     return inputFile.kind() == PythonInputFile.Kind.IPYTHON;
   }
 
-  private boolean restoreAndPushMeasuresIfApplicable(PythonInputFile inputFile) {
+  private synchronized boolean restoreAndPushMeasuresIfApplicable(PythonInputFile inputFile) {
     if (inputFile.wrappedFile().type() == InputFile.Type.TEST) {
       return true;
     }
