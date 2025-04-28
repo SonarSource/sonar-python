@@ -280,13 +280,13 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     ));
   }
 
-  private static Map<String, TypeCheckBuilder> pureFunctionsCheckers = null;
-  private static Set<TypeCheckBuilder> pureGetitemTypesCheckers = null;
-  private static Set<TypeCheckBuilder> pureContainsTypesCheckers = null;
+  private Map<String, TypeCheckBuilder> pureFunctionsCheckers = null;
+  private Set<TypeCheckBuilder> pureGetitemTypesCheckers = null;
+  private Set<TypeCheckBuilder> pureContainsTypesCheckers = null;
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, IgnoredPureOperationsCheck::resetTypeCheckers);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::resetTypeCheckers);
     context.registerSyntaxNodeConsumer(Tree.Kind.EXPRESSION_STMT, ctx -> {
       ExpressionStatement expressionStatement = (ExpressionStatement) ctx.syntaxNode();
       if (TreeUtils.firstAncestor(expressionStatement, IgnoredPureOperationsCheck::isInTryBlock) != null) {
@@ -297,13 +297,13 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static void resetTypeCheckers(SubscriptionContext ctx) {
+  private void resetTypeCheckers(SubscriptionContext ctx) {
     pureFunctionsCheckers = PURE_FUNCTIONS.stream().collect(Collectors.toMap(f -> f, f -> ctx.typeChecker().typeCheckBuilder().isTypeWithName(f)));
     pureGetitemTypesCheckers = PURE_GETITEM_TYPES.stream().map(f -> ctx.typeChecker().typeCheckBuilder().isTypeOrInstanceWithName(f)).collect(Collectors.toSet());
     pureContainsTypesCheckers = PURE_CONTAINS_TYPES.stream().map(f -> ctx.typeChecker().typeCheckBuilder().isTypeOrInstanceWithName(f)).collect(Collectors.toSet());
   }
 
-  private static void checkExpression(SubscriptionContext ctx, Expression expression) {
+  private void checkExpression(SubscriptionContext ctx, Expression expression) {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       CallExpression callExpression = (CallExpression) expression;
       PythonType pythonType = callExpression.callee().typeV2();
