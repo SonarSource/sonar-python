@@ -27,13 +27,11 @@ import org.sonar.api.batch.fs.internal.DefaultTextPointer;
 import org.sonar.api.batch.fs.internal.DefaultTextRange;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SymbolVisitorTest {
+class NewSymbolsCollectorTest {
 
   private static SensorContextTester context;
   private static String componentKey;
@@ -49,10 +47,11 @@ class SymbolVisitorTest {
     context.fileSystem().add(inputFile);
     componentKey = inputFile.key();
 
-    SymbolVisitor symbolVisitor = new SymbolVisitor(context.newSymbolTable().onFile(inputFile));
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
-    FileInput fileInput = context.rootTree();
-    fileInput.accept(symbolVisitor);
+    var newSymbolTable = context.newSymbolTable().onFile(inputFile);
+    var visitorContext = TestPythonVisitorRunner.createContext(file);
+    var fileInput = visitorContext.rootTree();
+    var newSymbolsCollector = new NewSymbolsCollector(new Object());
+    newSymbolsCollector.collect(newSymbolTable, fileInput);
   }
 
   @Test
