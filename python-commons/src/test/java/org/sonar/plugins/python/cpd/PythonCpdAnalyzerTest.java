@@ -39,7 +39,7 @@ class PythonCpdAnalyzerTest {
 
   private static final String BASE_DIR = "src/test/resources/org/sonar/plugins/python";
   private SensorContextTester context = SensorContextTester.create(new File(BASE_DIR));
-  private PythonCpdAnalyzer cpdAnalyzer = new PythonCpdAnalyzer(context);
+  private PythonCpdAnalyzer cpdAnalyzer = new PythonCpdAnalyzer(context, new Object());
 
   @Test
   void code_chunks_2() {

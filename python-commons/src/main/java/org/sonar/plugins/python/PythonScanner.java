@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,7 +31,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
-import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.SonarProduct;
@@ -81,7 +79,7 @@ public class PythonScanner extends Scanner {
     Supplier<PythonParser> parserSupplier, PythonIndexer indexer, PythonFileConsumer architectureCallback) {
     super(context);
     this.checks = checks;
-    this.cpdAnalyzer = new PythonCpdAnalyzer(context);
+    this.cpdAnalyzer = new PythonCpdAnalyzer(context, this);
     this.parserSupplier = parserSupplier;
     this.indexer = indexer;
     this.indexer.buildOnce(context);
@@ -165,7 +163,7 @@ public class PythonScanner extends Scanner {
     return visitorContext;
   }
 
-  private synchronized void pushTokens(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
+  private void pushTokens(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
     if (!isInSonarLint(context) && inputFile.kind() == PythonInputFile.Kind.PYTHON) {
       cpdAnalyzer.pushCpdTokens(inputFile.wrappedFile(), visitorContext);
     }
@@ -335,7 +333,7 @@ public class PythonScanner extends Scanner {
       numSkippedFiles, numTotalFiles);
   }
 
-  private synchronized boolean restoreAndPushMeasuresIfApplicable(PythonInputFile inputFile) {
+  private boolean restoreAndPushMeasuresIfApplicable(PythonInputFile inputFile) {
     if (inputFile.wrappedFile().type() == InputFile.Type.TEST) {
       return true;
     }

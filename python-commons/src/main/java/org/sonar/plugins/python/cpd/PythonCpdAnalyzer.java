@@ -43,9 +43,11 @@ public class PythonCpdAnalyzer {
   private static final Logger LOG = LoggerFactory.getLogger(PythonCpdAnalyzer.class);
 
   private final SensorContext context;
+  private final Object monitor;
 
-  public PythonCpdAnalyzer(SensorContext context) {
+  public PythonCpdAnalyzer(SensorContext context, Object monitor) {
     this.context = context;
+    this.monitor = monitor;
   }
 
   public void pushCpdTokens(InputFile inputFile, PythonVisitorContext visitorContext) {
@@ -68,7 +70,7 @@ public class PythonCpdAnalyzer {
         }
       }
       saveTokensToCache(visitorContext, tokensToCache);
-      cpdTokens.save();
+      save(cpdTokens);
     }
   }
 
@@ -87,9 +89,8 @@ public class PythonCpdAnalyzer {
       NewCpdTokens cpdTokens = context.newCpdTokens().onFile(inputFile);
       tokens.forEach(tokenInfo ->
         cpdTokens.addToken(tokenInfo.startLine, tokenInfo.startLineOffset, tokenInfo.endLine, tokenInfo.endLineOffset, tokenInfo.value));
-      cpdTokens.save();
-      cacheContext.getWriteCache().copyFromPrevious(dataKey);
-      cacheContext.getWriteCache().copyFromPrevious(tableKey);
+      save(cpdTokens);
+      copyFromPrevious(cacheContext, dataKey, tableKey);
       return true;
     } catch (IOException e) {
       LOG.warn("Failed to deserialize CPD tokens ({}: {})", e.getClass().getSimpleName(), e.getMessage());
@@ -98,7 +99,7 @@ public class PythonCpdAnalyzer {
     return false;
   }
 
-  private static void saveTokensToCache(PythonVisitorContext visitorContext, List<Token> tokensToCache) {
+  private void saveTokensToCache(PythonVisitorContext visitorContext, List<Token> tokensToCache) {
     CacheContext cacheContext = visitorContext.cacheContext();
     if (!cacheContext.isCacheEnabled()) {
       return;
@@ -108,10 +109,29 @@ public class PythonCpdAnalyzer {
       String fileKey = visitorContext.pythonFile().key();
 
       CpdSerializer.SerializationResult result = CpdSerializer.serialize(tokensToCache);
-      cacheContext.getWriteCache().write(stringTableCacheKey(fileKey), result.stringTable);
-      cacheContext.getWriteCache().write(dataCacheKey(fileKey), result.data);
+      writeToCache(cacheContext, fileKey, result);
     } catch (Exception e) {
       LOG.warn("Could not write CPD tokens to cache ({}: {})", e.getClass().getSimpleName(), e.getMessage());
+    }
+  }
+
+  private void save(NewCpdTokens cpdTokens) {
+    synchronized (monitor) {
+      cpdTokens.save();
+    }
+  }
+
+  private void copyFromPrevious(CacheContext cacheContext, String dataKey, String tableKey) {
+    synchronized (monitor) {
+      cacheContext.getWriteCache().copyFromPrevious(dataKey);
+      cacheContext.getWriteCache().copyFromPrevious(tableKey);
+    }
+  }
+
+  private void writeToCache(CacheContext cacheContext, String fileKey, CpdSerializer.SerializationResult result) {
+    synchronized (monitor) {
+      cacheContext.getWriteCache().write(stringTableCacheKey(fileKey), result.stringTable);
+      cacheContext.getWriteCache().write(dataCacheKey(fileKey), result.data);
     }
   }
 
