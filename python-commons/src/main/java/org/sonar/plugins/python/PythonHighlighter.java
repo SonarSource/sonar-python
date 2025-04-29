@@ -25,6 +25,7 @@ import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -33,7 +34,6 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.SubscriptionVisitor;
-import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
 
@@ -83,73 +83,93 @@ import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
  * Reminder: a docstring is a string literal that occurs as the first statement in a module,
  * function, class, or method definition.
  */
-public class PythonHighlighter extends PythonSubscriptionCheck {
+public class PythonHighlighter {
 
-  private NewHighlighting newHighlighting;
-  private Set<Token> docStringTokens;
+  private final Object monitor;
 
-  public PythonHighlighter(SensorContext context, PythonInputFile inputFile) {
-    docStringTokens = new HashSet<>();
-    newHighlighting = context.newHighlighting();
-    newHighlighting.onFile(inputFile.wrappedFile());
+  public PythonHighlighter(Object monitor) {
+    this.monitor = monitor;
   }
 
-  @Override
-  public void scanFile(PythonVisitorContext visitorContext) {
-    SubscriptionVisitor.analyze(Collections.singletonList(this), visitorContext);
+  public PythonHighlighter() {
+    this(new Object());
   }
 
-  @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> checkFirstStatement(((FileInput) ctx.syntaxNode()).docstring()));
-    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> checkFirstStatement(((FunctionDef) ctx.syntaxNode()).docstring()));
-    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> checkFirstStatement(((ClassDef) ctx.syntaxNode()).docstring()));
-    context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> visitToken(((Token) ctx.syntaxNode())));
+  public void highlight(SensorContext sensorContext, PythonVisitorContext visitorContext, PythonInputFile inputFile) {
+    var check = new PythonHighlighterSubscriptionCheck(sensorContext, inputFile);
+    check.scanFile(visitorContext);
+    save(check.newHighlighting);
   }
 
-  private void checkFirstStatement(@Nullable StringLiteral docString) {
-    if (docString == null) {
-      return;
-    }
-    for (Tree stringElement : docString.children()) {
-      highlight(stringElement.firstToken(), TypeOfText.STRUCTURED_COMMENT);
-      docStringTokens.add(stringElement.firstToken());
+  private void save(NewHighlighting newHighlighting) {
+    synchronized (monitor) {
+      newHighlighting.save();
     }
   }
 
-  private void visitToken(Token token) {
-    if (token.type().equals(PythonTokenType.NUMBER)) {
-      highlight(token, TypeOfText.CONSTANT);
+  private static class PythonHighlighterSubscriptionCheck extends PythonSubscriptionCheck {
 
-    } else if (token.type() instanceof PythonKeyword) {
-      highlight(token, TypeOfText.KEYWORD);
+    private final NewHighlighting newHighlighting;
+    private final Set<Token> docStringTokens;
 
-    } else if (token.type().equals(PythonTokenType.STRING) && !docStringTokens.contains(token)) {
-      highlight(token, TypeOfText.STRING);
-
-    } else if (token.type().equals(IDENTIFIER) && isPython3Keyword(token.value())) {
-      // async and await are keywords starting python 3.5, however, for compatibility with previous versions, we cannot consider them as real keywords
-      highlight(token, TypeOfText.KEYWORD);
-
+    public PythonHighlighterSubscriptionCheck(SensorContext context, PythonInputFile inputFile) {
+      docStringTokens = new HashSet<>();
+      newHighlighting = context.newHighlighting();
+      newHighlighting.onFile(inputFile.wrappedFile());
     }
 
-    for (Trivia trivia : token.trivia()) {
-      highlight(trivia.token(), TypeOfText.COMMENT);
+    @Override
+    public void scanFile(PythonVisitorContext visitorContext) {
+      SubscriptionVisitor.analyze(Collections.singletonList(this), visitorContext);
     }
-  }
 
-  private static boolean isPython3Keyword(String value) {
-    return "await".equals(value) || "async".equals(value) || "match".equals(value) || "case".equals(value);
-  }
+    @Override
+    public void initialize(Context context) {
+      context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> checkFirstStatement(((FileInput) ctx.syntaxNode()).docstring()));
+      context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> checkFirstStatement(((FunctionDef) ctx.syntaxNode()).docstring()));
+      context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> checkFirstStatement(((ClassDef) ctx.syntaxNode()).docstring()));
+      context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> visitToken(((Token) ctx.syntaxNode())));
+    }
 
-  @Override
-  public void leaveFile() {
-    newHighlighting.save();
-  }
+    private void checkFirstStatement(@Nullable StringLiteral docString) {
+      if (docString == null) {
+        return;
+      }
+      for (Tree stringElement : docString.children()) {
+        highlight(stringElement.firstToken(), TypeOfText.STRUCTURED_COMMENT);
+        docStringTokens.add(stringElement.firstToken());
+      }
+    }
 
-  private void highlight(Token token, TypeOfText typeOfText) {
-    TokenLocation tokenLocation = new TokenLocation(token);
-    newHighlighting.highlight(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset(), typeOfText);
+    private void visitToken(Token token) {
+      if (token.type().equals(PythonTokenType.NUMBER)) {
+        highlight(token, TypeOfText.CONSTANT);
+
+      } else if (token.type() instanceof PythonKeyword) {
+        highlight(token, TypeOfText.KEYWORD);
+
+      } else if (token.type().equals(PythonTokenType.STRING) && !docStringTokens.contains(token)) {
+        highlight(token, TypeOfText.STRING);
+
+      } else if (token.type().equals(IDENTIFIER) && isPython3Keyword(token.value())) {
+        // async and await are keywords starting python 3.5, however, for compatibility with previous versions, we cannot consider them as real keywords
+        highlight(token, TypeOfText.KEYWORD);
+
+      }
+
+      for (Trivia trivia : token.trivia()) {
+        highlight(trivia.token(), TypeOfText.COMMENT);
+      }
+    }
+
+    private static boolean isPython3Keyword(String value) {
+      return "await".equals(value) || "async".equals(value) || "match".equals(value) || "case".equals(value);
+    }
+
+    private void highlight(Token token, TypeOfText typeOfText) {
+      TokenLocation tokenLocation = new TokenLocation(token);
+      newHighlighting.highlight(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset(), typeOfText);
+    }
   }
 
 }

@@ -29,6 +29,8 @@ import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.python.IPythonLocation;
 import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.caching.CacheContextImpl;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.plugins.python.NotebookTestUtils.mapToColumnMappingList;
@@ -67,8 +69,9 @@ class PythonHighlighterTest {
     context.fileSystem().add(notebookInputFile);
     context.fileSystem().add(notebookInputFileSingleLine);
 
-    PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new PythonInputFileImpl(inputFile));
-    TestPythonVisitorRunner.scanFile(file, pythonHighlighter);
+    var visitorContext = TestPythonVisitorRunner.createContext(file);
+    var pythonHighlighter = new PythonHighlighter();
+    pythonHighlighter.highlight(context, visitorContext, new PythonInputFileImpl(inputFile));
   }
 
   @Test
@@ -225,9 +228,10 @@ class PythonHighlighterTest {
       5, new IPythonLocation(13, 5),
       6, new IPythonLocation(14, 5, mapToColumnMappingList(Map.of(4, 1))),
       7, new IPythonLocation(14, 5)); //EOF Token
-    PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFile, pythonContent,
-      locations));
-    TestPythonVisitorRunner.scanNotebookFile(notebookFile, locations, pythonContent, pythonHighlighter);
+    
+    var visitorContext = TestPythonVisitorRunner.createNotebookContext(notebookFile, locations, pythonContent, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
+    var pythonHighlighter = new PythonHighlighter();
+    pythonHighlighter.highlight(context, visitorContext, new GeneratedIPythonFile(notebookInputFile, pythonContent, locations));
     // def
     checkOnRange(9, 5, 3, notebookFile, TypeOfText.KEYWORD);
     // pass
@@ -252,9 +256,11 @@ class PythonHighlighterTest {
       2, new IPythonLocation(1, 108, List.of(), true),
       3, new IPythonLocation(1, 121, List.of(), true),
       4, new IPythonLocation(1, 93, List.of(), true)); //EOF Token
-    PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFileSingleLine,
-      pythonContent, locations));
-    TestPythonVisitorRunner.scanNotebookFile(notebookFileSingleLine, locations, pythonContent, pythonHighlighter);
+
+    var visitorContext = TestPythonVisitorRunner.createNotebookContext(notebookFileSingleLine, locations, pythonContent, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
+    var pythonHighlighter = new PythonHighlighter();
+    pythonHighlighter.highlight(context, visitorContext, new GeneratedIPythonFile(notebookInputFileSingleLine, pythonContent, locations));
+
     // def
     checkOnRange(1, 93, 3, notebookFileSingleLine, TypeOfText.KEYWORD);
     // pass

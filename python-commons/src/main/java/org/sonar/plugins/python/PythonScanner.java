@@ -92,6 +92,7 @@ public class PythonScanner extends Scanner {
   private final PythonFileConsumer architectureCallback;
   private final Map<String, Object> repositoryLocks;
   private final NewSymbolsCollector newSymbolsCollector;
+  private final PythonHighlighter pythonHighlighter;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
@@ -110,6 +111,7 @@ public class PythonScanner extends Scanner {
     this.foundDatabricks = new AtomicBoolean(false);
     this.repositoryLocks = new ConcurrentHashMap<>();
     this.newSymbolsCollector = new NewSymbolsCollector(this);
+    this.pythonHighlighter = new PythonHighlighter(this);
   }
 
   @Override
@@ -156,8 +158,8 @@ public class PythonScanner extends Scanner {
     saveIssues(inputFile, visitorContext.getIssues());
 
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
-      new PythonHighlighter(context, inputFile).scanFile(visitorContext);
       newSymbolsCollector.collect(context.newSymbolTable().onFile(inputFile.wrappedFile()), visitorContext.rootTree());
+      pythonHighlighter.highlight(context, visitorContext, inputFile);
     }
 
     searchForDataBricks(visitorContext);
