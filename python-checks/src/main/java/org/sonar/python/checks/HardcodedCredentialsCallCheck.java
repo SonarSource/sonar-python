@@ -17,6 +17,7 @@
 package org.sonar.python.checks;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -182,8 +183,9 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
           .map(InputStreamReader::new)
           .map(reader -> gson.fromJson(reader, CredentialMethod[].class))
           .orElseThrow(() -> new IllegalStateException("Unable to open resource: " + resourcePath));
-      } catch (IOException e) {
-        throw new IllegalStateException("Unable to read methods metadata from " + resourcePath, e);
+      } catch (IOException | JsonSyntaxException e) {
+        throw new IllegalStateException("Unable to read methods metadata from " + resourcePath + ". If the analysis has already experienced a fatal exception before, this " +
+          "exception can be ignored.", e);
       }
     }
   }
