@@ -22,17 +22,13 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.plugins.python.MultiFileProgressReport;
 import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.Scanner;
 import org.sonar.plugins.python.SonarQubePythonFile;
@@ -148,6 +144,13 @@ public abstract class PythonIndexer {
     }
 
     @Override
+    protected void logStart(int numThreads) {
+      if (numThreads != 1) {
+        LOG.debug("Scanning global symbols in {} threads", numThreads);
+      }
+    }
+
+    @Override
     protected void scanFile(PythonInputFile inputFile) throws IOException {
       // Global Symbol Table is deactivated for Notebooks see: SONARPY-2021
       if (inputFile.kind() == PythonInputFile.Kind.PYTHON) {
@@ -156,37 +159,7 @@ public abstract class PythonIndexer {
     }
 
     @Override
-    protected Stream<PythonInputFile> getFilesStream(List<PythonInputFile> files) {
-      var numberOfThreads = getNumberOfThreads(context);
-      if (numberOfThreads == 1) {
-        return files.stream();
-      }
-      return files.stream().parallel();
-    }
-
-    @Override
-    protected void processFiles(List<PythonInputFile> files, SensorContext context, MultiFileProgressReport progressReport, AtomicInteger numScannedWithoutParsing) {
-      var numberOfThreads = getNumberOfThreads(context);
-      if (numberOfThreads != 1) {
-        processFilesWithThreads(files, context, progressReport, numScannedWithoutParsing, numberOfThreads);
-      } else {
-        super.processFiles(files, context, progressReport, numScannedWithoutParsing);
-      }
-    }
-
-    private void processFilesWithThreads(List<PythonInputFile> files, SensorContext context, MultiFileProgressReport progressReport, AtomicInteger numScannedWithoutParsing,
-      Integer numberOfThreads) {
-      LOG.debug("Scanning global symbols in {} threads", numberOfThreads);
-      ForkJoinPool pool = new ForkJoinPool(numberOfThreads);
-      try {
-        pool.submit(() -> super.processFiles(files, context, progressReport, numScannedWithoutParsing))
-          .join();
-      } finally {
-        pool.shutdown();
-      }
-    }
-
-    private Integer getNumberOfThreads(SensorContext context) {
+    protected int getNumberOfThreads(SensorContext context) {
       return context.config().getInt(THREADS_PROPERTY_NAME)
         .orElse(Math.max(2, Math.min((int) Math.round(Runtime.getRuntime().availableProcessors() * 0.9), 6)));
     }

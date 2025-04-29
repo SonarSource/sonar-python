@@ -31,12 +31,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,26 +118,8 @@ public class PythonScanner extends Scanner {
   }
 
   @Override
-  protected void processFiles(List<PythonInputFile> files, SensorContext context, MultiFileProgressReport progressReport,
-    AtomicInteger numScannedWithoutParsing) {
-    var numberOfThreads = getNumberOfThreads(context);
-    if (numberOfThreads == 1) {
-      super.processFiles(files, context, progressReport, numScannedWithoutParsing);
-      return;
-    }
-    var pool = new ForkJoinPool(numberOfThreads);
-    try {
-      LOG.debug("Scanning files in {} threads", numberOfThreads);
-      pool.submit(() -> super.processFiles(files, context, progressReport, numScannedWithoutParsing))
-        .join();
-    } finally {
-      pool.shutdown();
-    }
-  }
-
-  @Override
-  protected Stream<PythonInputFile> getFilesStream(List<PythonInputFile> files) {
-    return getNumberOfThreads(context) == 1 ? files.stream() : files.stream().parallel();
+  protected void logStart(int numThreads) {
+    LOG.debug("Scanning files in {} threads", numThreads);
   }
 
   @Override
@@ -164,7 +144,6 @@ public class PythonScanner extends Scanner {
 
     searchForDataBricks(visitorContext);
   }
-
 
   private PythonVisitorContext createVisitorContext(PythonInputFile inputFile, PythonFile pythonFile, InputFile.Type fileType) throws IOException {
     PythonVisitorContext visitorContext;
@@ -530,7 +509,8 @@ public class PythonScanner extends Scanner {
     return foundDatabricks.get();
   }
 
-  private static Integer getNumberOfThreads(SensorContext context) {
+  @Override
+  protected int getNumberOfThreads(SensorContext context) {
     return context.config().getInt(THREADS_PROPERTY_NAME)
       .orElse(1);
   }

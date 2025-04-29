@@ -19,6 +19,7 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
@@ -50,11 +51,27 @@ public abstract class Scanner {
   }
 
   protected void processFiles(List<PythonInputFile> files, SensorContext context, MultiFileProgressReport progressReport, AtomicInteger numScannedWithoutParsing) {
-    getFilesStream(files).forEach(file -> processFile(context, file, progressReport, numScannedWithoutParsing));
+    var numberOfThreads = getNumberOfThreads(context);
+    logStart(numberOfThreads);
+    if (numberOfThreads == 1) {
+      getFilesStream(files).forEach(file -> processFile(context, file, progressReport, numScannedWithoutParsing));
+      return;
+    }
+    var pool = new ForkJoinPool(numberOfThreads);
+    try {
+      pool.submit(() -> getFilesStream(files).forEach(file -> processFile(context, file, progressReport, numScannedWithoutParsing)))
+        .join();
+    } finally {
+      pool.shutdown();
+    }
   }
 
+  protected abstract void logStart(int numThreads);
+
   protected Stream<PythonInputFile> getFilesStream(List<PythonInputFile> files) {
-    return files.stream();
+    return getNumberOfThreads(context) == 1
+      ? files.stream()
+      : files.parallelStream();
   }
 
   private void processFile(SensorContext context, PythonInputFile file, MultiFileProgressReport progressReport, AtomicInteger numScannedWithoutParsing) {
@@ -110,4 +127,7 @@ public abstract class Scanner {
     // As test files may contain invalid syntax on purpose, we avoid failing the analysis when encountering parse errors on them
     return e instanceof RecognitionException && file.wrappedFile().type() == InputFile.Type.TEST;
   }
+
+  protected abstract int getNumberOfThreads(SensorContext context);
+
 }
