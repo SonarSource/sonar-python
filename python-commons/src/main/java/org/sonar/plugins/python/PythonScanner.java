@@ -20,15 +20,12 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -40,26 +37,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.issue.NewIssue;
-import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
-import org.sonar.api.rule.RuleKey;
-import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonFileConsumer;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.plugins.python.indexer.PythonIndexer;
@@ -91,6 +80,7 @@ public class PythonScanner extends Scanner {
   private final Map<String, Object> repositoryLocks;
   private final NewSymbolsCollector newSymbolsCollector;
   private final PythonHighlighter pythonHighlighter;
+  private final IssuesRepository issuesRepository;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
@@ -110,6 +100,7 @@ public class PythonScanner extends Scanner {
     this.repositoryLocks = new ConcurrentHashMap<>();
     this.newSymbolsCollector = new NewSymbolsCollector(this);
     this.pythonHighlighter = new PythonHighlighter(this);
+    this.issuesRepository = new IssuesRepository(context, checks, indexer, isInSonarLint(context), this);
   }
 
   @Override
@@ -135,7 +126,7 @@ public class PythonScanner extends Scanner {
       architectureCallback.scanFile(visitorContext);
     }
 
-    saveIssues(inputFile, visitorContext.getIssues());
+    issuesRepository.save(inputFile, visitorContext.getIssues());
 
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
       newSymbolsCollector.collect(context.newSymbolTable().onFile(inputFile.wrappedFile()), visitorContext.rootTree());
@@ -341,79 +332,6 @@ public class PythonScanner extends Scanner {
       numSkippedFiles, numTotalFiles);
   }
 
-  private synchronized void saveIssues(PythonInputFile inputFile, List<PreciseIssue> issues) {
-    for (PreciseIssue preciseIssue : issues) {
-      RuleKey ruleKey = checks.ruleKey(preciseIssue.check());
-      NewIssue newIssue = context
-        .newIssue()
-        .forRule(ruleKey);
-
-      Integer cost = preciseIssue.cost();
-      if (cost != null) {
-        newIssue.gap(cost.doubleValue());
-      }
-
-      NewIssueLocation primaryLocation = newLocation(inputFile, newIssue, preciseIssue.primaryLocation());
-      newIssue.at(primaryLocation);
-
-      Deque<NewIssueLocation> secondaryLocationsFlow = new ArrayDeque<>();
-
-      for (IssueLocation secondaryLocation : preciseIssue.secondaryLocations()) {
-        String fileId = secondaryLocation.fileId();
-        if (fileId != null) {
-          InputFile issueLocationFile = component(fileId, context);
-          if (issueLocationFile != null) {
-            secondaryLocationsFlow.addFirst(newLocation(new PythonInputFileImpl(issueLocationFile), newIssue, secondaryLocation));
-          }
-        } else {
-          newIssue.addLocation(newLocation(inputFile, newIssue, secondaryLocation));
-        }
-      }
-
-      // secondary locations on multiple files are only supported using flows
-      if (!secondaryLocationsFlow.isEmpty()) {
-        secondaryLocationsFlow.addFirst(primaryLocation);
-        newIssue.addFlow(secondaryLocationsFlow);
-      }
-
-      handleQuickFixes(inputFile.wrappedFile(), ruleKey, newIssue, preciseIssue);
-
-      newIssue.save();
-    }
-  }
-
-  @CheckForNull
-  private InputFile component(String fileId, SensorContext sensorContext) {
-    var predicate = sensorContext.fileSystem().predicates().is(new File(fileId));
-    InputFile inputFile = Optional.ofNullable(sensorContext.fileSystem().inputFile(predicate))
-      .orElseGet(() -> indexer.getFileWithId(fileId));
-    if (inputFile == null) {
-      LOG.debug("Failed to find InputFile for {}", fileId);
-    }
-    return inputFile;
-  }
-
-  private static NewIssueLocation newLocation(PythonInputFile inputFile, NewIssue issue, IssueLocation location) {
-    NewIssueLocation newLocation = issue.newLocation()
-      .on(inputFile.wrappedFile());
-    if (location.startLine() != IssueLocation.UNDEFINED_LINE) {
-      TextRange range;
-      if (location.startLineOffset() == IssueLocation.UNDEFINED_OFFSET) {
-        range = inputFile.wrappedFile().selectLine(location.startLine());
-      } else {
-        range = inputFile.wrappedFile().newRange(location.startLine(), location.startLineOffset(), location.endLine(),
-          location.endLineOffset());
-      }
-      newLocation.at(range);
-    }
-
-    String message = location.message();
-    if (message != null) {
-      newLocation.message(message);
-    }
-    return newLocation;
-  }
-
   private synchronized void saveMeasures(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
     FileMetrics fileMetrics = new FileMetrics(visitorContext, isNotebook(inputFile));
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
@@ -465,40 +383,6 @@ public class PythonScanner extends Scanner {
       .forMetric(metric)
       .on(inputFile.wrappedFile())
       .save();
-  }
-
-  private void handleQuickFixes(InputFile inputFile, RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
-    if (isInSonarLint(context)) {
-      List<PythonQuickFix> quickFixes = preciseIssue.quickFixes();
-      addQuickFixes(inputFile, ruleKey, quickFixes, newIssue);
-    }
-  }
-
-  private static void addQuickFixes(InputFile inputFile, RuleKey ruleKey, Iterable<PythonQuickFix> quickFixes, NewIssue sonarLintIssue) {
-    try {
-      for (PythonQuickFix quickFix : quickFixes) {
-        var newQuickFix = sonarLintIssue.newQuickFix()
-          .message(quickFix.getDescription());
-
-        var edit = newQuickFix.newInputFileEdit().on(inputFile);
-
-        quickFix.getTextEdits().stream()
-          .map(pythonTextEdit -> edit.newTextEdit().at(rangeFromTextSpan(inputFile, pythonTextEdit))
-            .withNewText(pythonTextEdit.replacementText()))
-          .forEach(edit::addTextEdit);
-        newQuickFix.addInputFileEdit(edit);
-        sonarLintIssue.addQuickFix(newQuickFix);
-      }
-      // TODO : is this try/catch still necessary ?
-    } catch (RuntimeException e) {
-      // We still want to report the issue if we did not manage to create a quick fix.
-      LOG.warn(String.format("Could not report quick fixes for rule: %s. %s: %s", ruleKey, e.getClass().getName(), e.getMessage()));
-    }
-  }
-
-  private static TextRange rangeFromTextSpan(InputFile file, PythonTextEdit pythonTextEdit) {
-    return file.newRange(pythonTextEdit.startLine(), pythonTextEdit.startLineOffset(), pythonTextEdit.endLine(),
-      pythonTextEdit.endLineOffset());
   }
 
   public int getRecognitionErrorCount() {
