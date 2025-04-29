@@ -39,10 +39,7 @@ import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
-import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.measures.Metric;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonFileConsumer;
@@ -54,8 +51,6 @@ import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.python.IPythonLocation;
 import org.sonar.python.SubscriptionVisitor;
-import org.sonar.python.metrics.FileLinesVisitor;
-import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -69,8 +64,6 @@ public class PythonScanner extends Scanner {
 
   private final Supplier<PythonParser> parserSupplier;
   private final PythonChecks checks;
-  private final FileLinesContextFactory fileLinesContextFactory;
-  private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
   private final Map<PythonInputFile, Set<Class<? extends PythonCheck>>> checksExecutedWithoutParsingByFiles;
@@ -81,14 +74,13 @@ public class PythonScanner extends Scanner {
   private final NewSymbolsCollector newSymbolsCollector;
   private final PythonHighlighter pythonHighlighter;
   private final IssuesRepository issuesRepository;
+  private final MeasuresRepository measuresRepository;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
     Supplier<PythonParser> parserSupplier, PythonIndexer indexer, PythonFileConsumer architectureCallback) {
     super(context);
     this.checks = checks;
-    this.fileLinesContextFactory = fileLinesContextFactory;
-    this.noSonarFilter = noSonarFilter;
     this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.parserSupplier = parserSupplier;
     this.indexer = indexer;
@@ -101,6 +93,7 @@ public class PythonScanner extends Scanner {
     this.newSymbolsCollector = new NewSymbolsCollector(this);
     this.pythonHighlighter = new PythonHighlighter(this);
     this.issuesRepository = new IssuesRepository(context, checks, indexer, isInSonarLint(context), this);
+    this.measuresRepository = new MeasuresRepository(context, noSonarFilter, fileLinesContextFactory, isInSonarLint(context), this);
   }
 
   @Override
@@ -150,7 +143,8 @@ public class PythonScanner extends Scanner {
         indexer.cacheContext(),
         context.runtime().getProduct());
       if (fileType == InputFile.Type.MAIN) {
-        saveMeasures(inputFile, visitorContext);
+        pushTokens(inputFile, visitorContext);
+        measuresRepository.save(inputFile, visitorContext);
       }
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct());
@@ -171,11 +165,18 @@ public class PythonScanner extends Scanner {
     return visitorContext;
   }
 
-  private void executeChecks(PythonVisitorContext visitorContext, Collection<PythonCheck> checks, InputFile.Type fileType, PythonInputFile inputFile) {
+  private synchronized void pushTokens(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
+    if (!isInSonarLint(context) && inputFile.kind() == PythonInputFile.Kind.PYTHON) {
+      cpdAnalyzer.pushCpdTokens(inputFile.wrappedFile(), visitorContext);
+    }
+  }
+
+  private void executeChecks(PythonVisitorContext visitorContext, Collection<PythonCheck> checks, InputFile.Type fileType,
+    PythonInputFile inputFile) {
     Collection<PythonSubscriptionCheck> subscriptionChecks = new ArrayList<>();
     for (PythonCheck check : checks) {
       if (isCheckNotApplicable(check, fileType)
-        || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check.getClass())) {
+          || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check.getClass())) {
         continue;
       }
       if (check instanceof PythonSubscriptionCheck pythonSubscriptionCheck) {
@@ -251,7 +252,8 @@ public class PythonScanner extends Scanner {
     return restoreAndPushMeasuresIfApplicable(inputFile);
   }
 
-  private boolean scanFileWithoutParsingNotSonarPython(PythonInputFile inputFile, PythonCheck check, InputFile.Type fileType, boolean result,
+  private boolean scanFileWithoutParsingNotSonarPython(PythonInputFile inputFile, PythonCheck check, InputFile.Type fileType,
+    boolean result,
     PythonInputFileContext inputFileContext) {
     if (isCheckNotApplicable(check, fileType)) {
       return result;
@@ -270,7 +272,8 @@ public class PythonScanner extends Scanner {
     return result;
   }
 
-  private boolean scanFileWithoutParsingSonarPython(PythonInputFile inputFile, InputFile.Type fileType, PythonInputFileContext inputFileContext, boolean result) {
+  private boolean scanFileWithoutParsingSonarPython(PythonInputFile inputFile, InputFile.Type fileType,
+    PythonInputFileContext inputFileContext, boolean result) {
     var ourChecks = checks.sonarPythonChecks();
     for (var check : ourChecks) {
       if (isCheckNotApplicable(check, fileType)) {
@@ -332,57 +335,12 @@ public class PythonScanner extends Scanner {
       numSkippedFiles, numTotalFiles);
   }
 
-  private synchronized void saveMeasures(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
-    FileMetrics fileMetrics = new FileMetrics(visitorContext, isNotebook(inputFile));
-    FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
-
-    noSonarFilter.noSonarInFile(inputFile.wrappedFile(), fileLinesVisitor.getLinesWithNoSonar());
-
-    if (!isInSonarLint(context)) {
-      if (inputFile.kind() == PythonInputFile.Kind.PYTHON) {
-        cpdAnalyzer.pushCpdTokens(inputFile.wrappedFile(), visitorContext);
-      }
-
-      Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
-      saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
-      saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, fileMetrics.numberOfStatements());
-      saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, fileMetrics.numberOfFunctions());
-      saveMetricOnFile(inputFile, CoreMetrics.CLASSES, fileMetrics.numberOfClasses());
-      saveMetricOnFile(inputFile, CoreMetrics.COMPLEXITY, fileMetrics.complexity());
-      saveMetricOnFile(inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, fileMetrics.cognitiveComplexity());
-      saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
-
-      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile.wrappedFile());
-      if (inputFile.kind() == PythonInputFile.Kind.PYTHON) {
-        for (int line : linesOfCode) {
-          fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
-        }
-      }
-      for (int line : fileLinesVisitor.getExecutableLines()) {
-        fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
-      }
-      fileLinesContext.save();
-    }
-  }
-
-  static boolean isNotebook(PythonInputFile inputFile) {
-    return inputFile.kind() == PythonInputFile.Kind.IPYTHON;
-  }
-
   private synchronized boolean restoreAndPushMeasuresIfApplicable(PythonInputFile inputFile) {
     if (inputFile.wrappedFile().type() == InputFile.Type.TEST) {
       return true;
     }
 
     return cpdAnalyzer.pushCachedCpdTokens(inputFile.wrappedFile(), indexer.cacheContext());
-  }
-
-  private void saveMetricOnFile(PythonInputFile inputFile, Metric<Integer> metric, Integer value) {
-    context.<Integer>newMeasure()
-      .withValue(value)
-      .forMetric(metric)
-      .on(inputFile.wrappedFile())
-      .save();
   }
 
   public int getRecognitionErrorCount() {

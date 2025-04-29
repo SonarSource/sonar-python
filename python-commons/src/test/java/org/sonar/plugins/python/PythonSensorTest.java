@@ -1441,17 +1441,6 @@ class PythonSensorTest {
   }
 
   @Test
-  void test_scanner_isNotebook() {
-    var regularPythonFile = mock(PythonInputFile.class);
-    when(regularPythonFile.kind()).thenReturn(PythonInputFile.Kind.PYTHON);
-    assertThat(PythonScanner.isNotebook(regularPythonFile)).isFalse();
-
-    var notebookPythonFile = mock(PythonInputFile.class);
-    when(notebookPythonFile.kind()).thenReturn(PythonInputFile.Kind.IPYTHON);
-    assertThat(PythonScanner.isNotebook(notebookPythonFile)).isTrue();
-  }
-
-  @Test
   void send_telemetry_with_version() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
