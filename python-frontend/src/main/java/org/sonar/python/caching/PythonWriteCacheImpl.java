@@ -21,14 +21,14 @@ import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
 public class PythonWriteCacheImpl implements PythonWriteCache {
 
-  private WriteCache writeCache;
+  private final WriteCache writeCache;
 
   public PythonWriteCacheImpl(WriteCache writeCache) {
     this.writeCache = writeCache;
   }
 
   @Override
-  public void write(String key, byte[] data) {
+  public synchronized void write(String key, byte[] data) {
     this.writeCache.write(key, data);
   }
 
