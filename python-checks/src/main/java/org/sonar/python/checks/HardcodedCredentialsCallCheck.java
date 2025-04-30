@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -180,7 +181,7 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
     private CredentialMethod[] loadMethodsFromResource(String resourcePath) {
       try (var is = HardcodedCredentialsCallCheck.class.getResourceAsStream(resourcePath)) {
         return Optional.ofNullable(is)
-          .map(InputStreamReader::new)
+          .map(i -> new InputStreamReader(i, StandardCharsets.UTF_8))
           .map(reader -> gson.fromJson(reader, CredentialMethod[].class))
           .orElseThrow(() -> new IllegalStateException("Unable to open resource: " + resourcePath));
       } catch (IOException | JsonSyntaxException e) {
