@@ -51,17 +51,18 @@ algorithm is the Advanced Encryption Standard (AES).</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="11" data-diff-type="noncompliant">
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms
-from cryptography.hazmat.backends import default_backend
 
-cipher = Cipher(algorithms.TripleDES(key), mode=None, backend=default_backend()) # Noncompliant
+cipher = Cipher(algorithms.TripleDES(key), mode=None)  # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="11" data-diff-type="compliant">
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.backends import default_backend
 
-cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+cipher = Cipher(algorithms.AES(key), modes.CTR(nonce))
 </pre>
+<p>In this example, the counter mode (CTR) of AES is used. This mode takes a cryptographic nonce (a <strong>n</strong>umber used only
+<strong>once</strong>) as its initialization vector (IV). This value must never be reused, as doing so allows attackers to decrypt any message
+encrypted with the same key.</p>
 <h3>How does this work?</h3>
 <h4>Use a secure algorithm</h4>
 <p>It is highly recommended to use an algorithm that is currently considered secure by the cryptographic community. A common choice for such an
@@ -74,15 +75,15 @@ algorithm is the Advanced Encryption Standard (AES).</p>
 <pre data-diff-id="21" data-diff-type="noncompliant">
 from Crypto.Cipher import DES
 
-cipher = DES.new(key) # Noncompliant
+cipher = DES.new(key, DES.MODE_OFB) # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
-<p>PyCrypto is deprecated, thus it is recommended to use another library like pyca.</p>
+<p>PyCrypto is deprecated, thus it is recommended to use another library like PyCryptodome.</p>
 <pre data-diff-id="21" data-diff-type="compliant">
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.backends import default_backend
+from Crypto.Cipher import AES # pycryptodome
+from Cryptodome.Cipher import AES # pycryptodomex
 
-cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+cipher = AES.new(key, AES.MODE_CCM)
 </pre>
 <h3>How does this work?</h3>
 <h4>Use a secure algorithm</h4>
@@ -99,13 +100,15 @@ import pyDes
 cipher = pyDes.des(key) # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
-<p>Since pyDes only provides DES, it is recommended to use another library like pyca.</p>
+<p>Since pyDes only provides DES, it is recommended to use another library like <code>pyca/cryptography</code>.</p>
 <pre data-diff-id="31" data-diff-type="compliant">
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.backends import default_backend
 
-cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+cipher = Cipher(algorithms.AES(key), modes.CTR(nonce))
 </pre>
+<p>In this example, the counter mode (CTR) of AES is used. This mode takes a cryptographic nonce (a <strong>n</strong>umber used only
+<strong>once</strong>) as its initialization vector (IV). This value must never be reused, as doing so allows attackers to decrypt any message
+encrypted with the same key.</p>
 <h3>How does this work?</h3>
 <h4>Use a secure algorithm</h4>
 <p>It is highly recommended to use an algorithm that is currently considered secure by the cryptographic community. A common choice for such an
@@ -129,7 +132,38 @@ import ssl
 ctx = ssl.create_default_context()
 </pre>
 <h3>How does this work?</h3>
-<p>It is recommended to not override the ciphers but instead, use the secure default ciphers of the module, as they might change over time.</p>
+<p>It is recommended to not override the ciphers but instead, use the secure default ciphers of the module, as they might change over time. If
+specific cipher suites need to be enabled or disabled, then this is also possible by adding them after the <code>DEFAULT</code> cipher suite
+string.</p>
+<p>For example, <code>DEFAULT:!RSA:!SHA</code> enables all default cipher suites except those using RSA and SHA1. <code>DEFAULT:HIGH+AESGCM</code>
+enables all default cipher suites, as well as all high encryption cipher suites that use AES-GCM.</p>
+<p>More information about possible options can be found in the <a
+href="https://www.openssl.org/docs/man1.1.1/man1/ciphers.html#CIPHER-LIST-FORMAT">OpenSSL documentation</a>.</p>
+<h2>How to fix it in OpenSSL</h2>
+<h3>Code examples</h3>
+<p>The following code contains examples of algorithms that are not considered highly resistant to cryptanalysis and thus should be avoided.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="51" data-diff-type="noncompliant">
+from OpenSSL import SSL
+
+ciphers = b"DEFAULT:RC4-SHA:RC4-MD5"
+ctx = SSL.Context(SSL.TLS1_3_VERSION)
+ctx.set_cipher_list(ciphers)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="51" data-diff-type="compliant">
+from OpenSSL import SSL
+
+ctx = SSL.Context(SSL.TLS1_3_VERSION)
+</pre>
+<h3>How does this work?</h3>
+<p>It is recommended to not override the ciphers but instead, use the secure default ciphers of the module, as they might change over time. If
+specific cipher suites need to be enabled or disabled, then this is also possible by adding them after the <code>DEFAULT</code> cipher suite
+string.</p>
+<p>For example, <code>DEFAULT:!RSA:!SHA</code> enables all default cipher suites except those using RSA and SHA1. <code>DEFAULT:HIGH+AESGCM</code>
+enables all default cipher suites, as well as all high encryption cipher suites that use AES-GCM.</p>
+<p>More information about possible options can be found in the <a
+href="https://www.openssl.org/docs/man1.1.1/man1/ciphers.html#CIPHER-LIST-FORMAT">OpenSSL documentation</a>.</p>
 <h2>Resources</h2>
 <h3>Standards</h3>
 <ul>
