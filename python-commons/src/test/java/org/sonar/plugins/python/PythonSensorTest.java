@@ -31,6 +31,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.BeforeEach;
@@ -141,6 +142,7 @@ class PythonSensorTest {
   private static final String CUSTOM_REPOSITORY_KEY = "customKey";
   private static final String CUSTOM_RULE_KEY = "key";
   private static final String RULE_CRASHING_ON_SCAN_KEY = "key2";
+  private static final String END_OF_ANALYSIS_KEY = "key3";
 
   private static final Version SONARLINT_DETECTABLE_VERSION = Version.create(6, 0);
 
@@ -154,7 +156,7 @@ class PythonSensorTest {
 
     @Override
     public List<Class<?>> checkClasses() {
-      return List.of(MyCustomRule.class, RuleCrashingOnRegularScan.class);
+      return List.of(MyCustomRule.class, RuleCrashingOnRegularScan.class, AccumulatingForEndOfAnalysis.class);
     }
   }};
   private static Path workDir;
@@ -164,9 +166,7 @@ class PythonSensorTest {
     name = "name",
     description = "desc",
     tags = {"bug"})
-  public static class MyCustomRule implements PythonCheck, EndOfAnalysis {
-
-    private static final Logger LOG = LoggerFactory.getLogger(MyCustomRule.class);
+  public static class MyCustomRule implements PythonCheck {
 
     @RuleProperty(
       key = "customParam",
@@ -184,10 +184,6 @@ class PythonSensorTest {
       return false;
     }
 
-    @Override
-    public void endOfAnalysis(CacheContext cacheContext) {
-      LOG.trace("End of analysis called!");
-    }
   }
 
   @Rule(
@@ -205,6 +201,27 @@ class PythonSensorTest {
     @Override
     public boolean scanWithoutParsing(PythonInputFileContext inputFile) {
       return true;
+    }
+  }
+
+  @Rule(key = END_OF_ANALYSIS_KEY)
+  public static class AccumulatingForEndOfAnalysis implements PythonCheck, EndOfAnalysis {
+    private static final Logger LOG = LoggerFactory.getLogger(AccumulatingForEndOfAnalysis.class);
+    private final AtomicInteger scanFileCount = new AtomicInteger(0);
+
+    @Override
+    public void scanFile(PythonVisitorContext visitorContext) {
+      scanFileCount.incrementAndGet();
+    }
+
+    @Override
+    public boolean scanWithoutParsing(PythonInputFileContext inputFile) {
+      return false;
+    }
+
+    @Override
+    public void endOfAnalysis(CacheContext cacheContext) {
+      LOG.trace("End of analysis called with {} files", scanFileCount.get());
     }
   }
 
@@ -506,15 +523,16 @@ class PythonSensorTest {
 
   @Test
   void end_of_analysis_called() {
+    inputFile(FILE_1);
     inputFile(FILE_2);
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, CUSTOM_RULE_KEY))
+        .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, END_OF_ANALYSIS_KEY))
         .build())
       .build();
     sensor().execute(context);
 
-    assertThat(traceLogTester.logs(Level.TRACE)).containsExactly("End of analysis called!");
+    assertThat(traceLogTester.logs(Level.TRACE)).containsExactly("End of analysis called with 2 files");
   }
 
   @Test

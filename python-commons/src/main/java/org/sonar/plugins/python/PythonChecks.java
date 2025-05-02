@@ -36,7 +36,7 @@ public class PythonChecks {
 
   private final CheckFactory checkFactory;
   private final Map<String, RepositoryChecksInfo> sonarPythonRepositoriesChecks;
-  private final Map<String, RepositoryChecksInfo> noSonarPythonRepositoriesChecks;
+  private final Map<String, Checks<PythonCheck>> noSonarPythonRepositoriesChecks;
   private final Map<Class<? extends PythonCheck>, RuleKey> ruleKeys;
 
   PythonChecks(CheckFactory checkFactory) {
@@ -57,7 +57,7 @@ public class PythonChecks {
     if (SONAR_PYTHON_REPOSITORIES.contains(repositoryKey)) {
       sonarPythonRepositoriesChecks.put(repositoryChecksInfo.repositoryKey, repositoryChecksInfo);
     } else {
-      noSonarPythonRepositoriesChecks.put(repositoryChecksInfo.repositoryKey, repositoryChecksInfo);
+      noSonarPythonRepositoriesChecks.put(repositoryChecksInfo.repositoryKey, createChecks(repositoryChecksInfo));
     }
     return this;
   }
@@ -78,11 +78,11 @@ public class PythonChecks {
   }
 
   public synchronized Map<String, List<PythonCheck>> noSonarPythonChecks() {
-    return noSonarPythonRepositoriesChecks.values()
+    return noSonarPythonRepositoriesChecks.entrySet()
       .stream()
-      .collect(Collectors.toMap(
-        RepositoryChecksInfo::repositoryKey,
-        repositoryChecksInfo -> createChecks(repositoryChecksInfo).all().stream().toList()));
+      .collect(Collectors.toMap(Map.Entry::getKey,
+        entry -> entry.getValue().all().stream().toList())
+      );
   }
 
   public List<EndOfAnalysis> sonarPythonEndOfAnalyses() {
