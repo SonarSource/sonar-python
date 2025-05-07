@@ -21,16 +21,16 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
-import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TriBool;
-import org.sonar.python.types.v2.TypeChecker;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.types.v2.LazyTypeWrapper;
+import org.sonar.python.types.v2.TypeChecker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
@@ -441,5 +441,23 @@ class ProjectLevelTypeTableTest {
     );
     TypeChecker typeChecker = new TypeChecker(projectLevelTypeTable);
     assertThat(typeChecker.typeCheckBuilder().isInstanceOf("lib.MyClass").check(myAliasType)).isEqualTo(TriBool.UNKNOWN);
+  }
+
+
+  @Test
+  void testConflictingReexports() {
+    // See SONARPY-2907 for details
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
+
+    var resolvedFirst = projectLevelTypeTable.getType("dateutil.parser.isoparser.isoparser");
+    assertThat(resolvedFirst).isInstanceOfSatisfying(ClassType.class, classType ->
+      assertThat(classType.name()).isEqualTo("isoparser"));
+
+    var resolvedSecond = projectLevelTypeTable.getType("dateutil.parser.isoparser");
+    assertThat(resolvedSecond).isInstanceOfSatisfying(ClassType.class, classType ->
+      assertThat(classType.name()).isEqualTo("isoparser"));
+
+    var resolvedThird = projectLevelTypeTable.getType("dateutil.parser.isoparser.isoparser");
+    assertThat(resolvedThird).isEqualTo(PythonType.UNKNOWN);
   }
 }
