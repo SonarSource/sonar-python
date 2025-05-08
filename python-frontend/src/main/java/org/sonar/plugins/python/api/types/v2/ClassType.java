@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
@@ -127,8 +128,13 @@ public final class ClassType implements PythonType {
 
   @Override
   public Optional<PythonType> resolveMember(String memberName) {
+    return resolveMember(memberName, new HashSet<>());
+  }
+
+  private Optional<PythonType> resolveMember(String memberName, Set<PythonType> visited) {
+    visited.add(this);
     return localMember(memberName)
-      .or(() -> inheritedMember(memberName));
+      .or(() -> inheritedMember(memberName, visited));
   }
 
   private Optional<PythonType> localMember(String memberName) {
@@ -138,9 +144,17 @@ public final class ClassType implements PythonType {
       .findFirst();
   }
 
-  private Optional<PythonType> inheritedMember(String memberName) {
+  private Optional<PythonType> inheritedMember(String memberName, Set<PythonType> visited) {
     return superClasses().stream()
-      .map(s -> s.type().resolveMember(memberName))
+      .map(TypeWrapper::type)
+      .filter(Predicate.not(visited::contains))
+      .map(t -> {
+        visited.add(t);
+        if (t instanceof ClassType superClassType) {
+          return superClassType.resolveMember(memberName, visited);
+        }
+        return t.resolveMember(memberName);
+      })
       .filter(Optional::isPresent)
       .map(Optional::get)
       .findFirst();

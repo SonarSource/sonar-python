@@ -16,7 +16,9 @@
  */
 package org.sonar.plugins.python.api.types.v2;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -30,6 +32,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
@@ -38,6 +41,8 @@ import org.sonar.python.semantic.v2.UsageV2;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
+import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.semantic.ProjectLevelSymbolTable.empty;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 
 public class ClassTypeTest {
@@ -107,6 +112,45 @@ public class ClassTypeTest {
     ClassType classB = classTypes.get(2);
     assertThat(classB.superClasses()).hasSize(2);
     assertThat(classB.superClasses()).extracting(TypeWrapper::type).containsExactlyInAnyOrder(classC, classA);
+  }
+
+  @Test
+  void recursive_inheritance_resolve_member() {
+    var classTypes = multiFilesClassTypes(Map.ofEntries(
+        Map.entry(
+          "a.py",
+          """
+            from b import B
+            class A(B): ...
+            """
+        ),
+        Map.entry(
+          "b.py",
+          """
+            from a import A
+            class B(A): ...
+            """
+        )
+      )
+    );
+    ClassType classA = classTypes.get("a.A");
+    assertThat(classA.resolveMember("foo")).isEmpty();
+  }
+
+  @Test
+  void unresolved_inheritance_resolve_member() {
+    var classTypes = multiFilesClassTypes(Map.ofEntries(
+        Map.entry(
+          "a.py",
+          """
+            from b import B
+            class A(B): ...
+            """
+        )
+      )
+    );
+    ClassType classA = classTypes.get("a.A");
+    assertThat(classA.resolveMember("foo")).containsInstanceOf(UnknownType.UnresolvedImportType.class);
   }
 
   @Test
@@ -610,5 +654,32 @@ public class ClassTypeTest {
       .map(Name::typeV2)
       .map(ClassType.class::cast)
       .toList();
+  }
+
+  public static Map<String, ClassType> multiFilesClassTypes(Map<String, String> filesCodes) {
+    var projectSymbolTable = empty();
+    var result = new HashMap<String, ClassType>();
+
+    filesCodes.forEach((fileName, code) -> {
+      var fileInput = parseWithoutSymbols(code);
+      projectSymbolTable.addModule(fileInput, "", pythonFile(fileName));
+    });
+
+    filesCodes.forEach((fileName, code) -> {
+      FileInput fileInput = parseWithoutSymbols(code);
+      var symbolTable = new SymbolTableBuilderV2(fileInput)
+        .build();
+
+      new TypeInferenceV2(new ProjectLevelTypeTable(projectSymbolTable), pythonFile(fileName), symbolTable, "").inferTypes(fileInput);
+      PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF))
+        .stream()
+        .map(ClassDef.class::cast)
+        .map(ClassDef::name)
+        .map(Name::typeV2)
+        .map(ClassType.class::cast)
+        .forEach(ct -> result.put(ct.fullyQualifiedName(), ct));
+    });
+
+    return result;
   }
 }
