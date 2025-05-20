@@ -1,0 +1,66 @@
+<p>This rule raises issues when <code>trio.sleep(0)</code> or <code>anyio.sleep(0)</code> is used instead of the more explicit and descriptive
+<code>trio.lowlevel.checkpoint()</code> or <code>anyio.lowlevel.checkpoint()</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>When using async libraries like <code>trio</code> or <code>anyio</code>, developers sometimes use <code>sleep(0)</code> as a technique to yield
+control back to the event loop, allowing other pending tasks to run. While this approach technically works, it obscures the actual intent.</p>
+<p>The <code>sleep(0)</code> pattern is confusing because it suggests waiting for a specific duration (which happens to be 0 seconds), when the actual
+intention is to create a checkpoint in the code where the current task can yield control to other tasks without any intended delay.</p>
+<p>Both <code>trio</code> and <code>anyio</code> provide dedicated functions for this exact purpose: <code>trio.lowlevel.checkpoint()</code> and
+<code>anyio.lowlevel.checkpoint()</code>. These functions clearly communicate the intent to create a checkpoint for task switching.</p>
+<h3>What is the potential impact?</h3>
+<ul>
+  <li> <strong>Readability</strong>: Code using <code>sleep(0)</code> is less self-documenting and can be confusing to other developers who need to
+  know the non-obvious intent of the code. </li>
+  <li> <strong>Maintainability</strong>: The intent behind <code>sleep(0)</code> is not immediately clear to developers reviewing or maintaining the
+  code. </li>
+</ul>
+<h2>How to fix it in Trio</h2>
+<p>Replace <code>trio.sleep(0)</code> with <code>trio.lowlevel.checkpoint()</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import trio
+
+async def main():
+    await trio.sleep(0)  # Noncompliant
+
+trio.run(main)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import trio
+
+async def main():
+    await trio.lowlevel.checkpoint()  # Compliant
+
+trio.run(main)
+</pre>
+<h2>How to fix it in AnyIO</h2>
+<p>Replace <code>anyio.sleep(0)</code> with <code>anyio.lowlevel.checkpoint()</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import anyio
+
+async def main():
+    await anyio.sleep(0)  # Noncompliant
+
+anyio.run(main)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import anyio
+
+async def main():
+    await anyio.lowlevel.checkpoint()  # Compliant
+
+anyio.run(main)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Trio Documentation - <a
+  href="https://trio.readthedocs.io/en/stable/reference-lowlevel.html#trio.lowlevel.checkpoint">trio.lowlevel.checkpoint</a> </li>
+  <li> AnyIO Documentation - <a href="https://anyio.readthedocs.io/en/stable/api.html#anyio.lowlevel.checkpoint">anyio.lowlevel.checkpoint</a> </li>
+</ul>
+

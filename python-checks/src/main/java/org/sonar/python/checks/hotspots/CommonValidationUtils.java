@@ -60,12 +60,29 @@ public class CommonValidationUtils {
     return false;
   }
 
-  static boolean isEqualTo(Expression expression, int number) {
+  public static boolean isEqualTo(Expression expression, int number) {
     try {
       if (expression.is(Tree.Kind.NAME)) {
         return Expressions.singleAssignedNonNameValue(((Name) expression)).map(value -> isEqualTo(value, number)).orElse(false);
       }
-      return expression.is(Tree.Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() == number;
+      return expression.is(Tree.Kind.NUMERIC_LITERAL)
+        && (isNumericLiteralEqualToInt((NumericLiteral) expression, number) || isNumericLiteralEqualToDouble((NumericLiteral) expression, number));
+    } catch (NumberFormatException nfe) {
+      return false;
+    }
+  }
+
+  private static boolean isNumericLiteralEqualToInt(NumericLiteral numericLiteral, int number) {
+    try {
+      return numericLiteral.valueAsLong() == number;
+    } catch (NumberFormatException nfe) {
+      return false;
+    }
+  }
+
+  private static boolean isNumericLiteralEqualToDouble(NumericLiteral numericLiteral, double number) {
+    try {
+      return Double.parseDouble(numericLiteral.valueAsString()) == number;
     } catch (NumberFormatException nfe) {
       return false;
     }

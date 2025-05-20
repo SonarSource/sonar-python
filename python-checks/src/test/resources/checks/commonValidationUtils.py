@@ -11,6 +11,7 @@ callExpr(var_wrong)
 
 callExpr(12, 0)
 callExpr(12, 10)  # Noncompliant {{Argument is equal to 10}}
+callExpr(12, 10.0)  # Noncompliant {{Argument is equal to 10}}
 ten = 10
 callExpr(isEqualTo=ten)  # Noncompliant {{Argument is equal to 10}}
 not_ten = 11

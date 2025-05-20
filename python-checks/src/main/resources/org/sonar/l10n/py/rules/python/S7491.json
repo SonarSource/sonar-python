@@ -1,0 +1,25 @@
+{
+  "title": "Checkpoints should be used instead of sleep(0)",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async",
+    "trio",
+    "anyio"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-7491",
+  "sqKey": "S7491",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "CLEAR"
+  }
+}
