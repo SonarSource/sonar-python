@@ -392,6 +392,13 @@ public class TreeUtils {
     return null;
   }
 
+  public static Optional<Token> asyncTokenOfEnclosingFunction(Tree tree) {
+    Tree enclosingFunction = TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF);
+    return Optional.ofNullable(enclosingFunction)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(FunctionDef.class))
+      .map(FunctionDef::asyncKeyword);
+  }
+
 
   public static boolean isFunctionWithGivenDecoratorFQN(Tree tree, String decoratorFQN) {
     if (!tree.is(Kind.FUNCDEF)) {

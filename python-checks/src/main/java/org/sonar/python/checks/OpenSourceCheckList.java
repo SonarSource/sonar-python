@@ -355,6 +355,7 @@ public class OpenSourceCheckList {
       SuperfluousCurlyBraceCheck.class,
       TempFileCreationCheck.class,
       ImplicitlySkippedTestCheck.class,
+      TimeSleepInAsyncCheck.class,
       ToDoCommentCheck.class,
       TooManyLinesInFileCheck.class,
       TooManyLinesInFunctionCheck.class,

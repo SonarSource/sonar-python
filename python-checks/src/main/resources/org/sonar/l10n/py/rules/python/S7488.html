@@ -1,0 +1,83 @@
+<p>This rule raises an issue when a synchronous <code>time.sleep()</code> call is used within an asynchronous function.</p>
+<h2>Why is this an issue?</h2>
+<p>Synchronous functions like <code>time.sleep()</code> halt the execution of the current thread. In an asynchronous context, which relies on a
+single-threaded event loop to manage multiple tasks concurrently, calling <code>time.sleep()</code> blocks this entire event loop. When the event loop
+is blocked, it cannot switch between tasks, process I/O events, or respond to other operations. Consequently, all other concurrent asynchronous tasks
+are paused until the <code>time.sleep()</code> call completes. This effectively negates the benefits of using <code>async/await</code> by turning a
+non-blocking operation (waiting) into a blocking one that freezes the application’s concurrency model.</p>
+<p>For instance, if an asynchronous web server uses <code>time.sleep()</code> in a request handler, it won’t be able to process any other incoming
+requests until the sleep call completes, leading to poor performance and responsiveness.</p>
+<p>The correct approach in asynchronous programming is to use non-blocking sleep functions provided by the specific asynchronous framework being used
+(e.g., <code>asyncio</code>, <code>Trio</code>, <code>AnyIO</code>). These functions give control back to the event loop, allowing it to run other
+tasks while the current task is "sleeping".</p>
+<h2>How to fix it in Asyncio</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import time
+import asyncio
+
+async def sleeping_function():
+    time.sleep(1) # Noncompliant
+
+asyncio.run(sleeping_function())
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import asyncio
+
+async def sleeping_function():
+    await asyncio.sleep(1)
+
+asyncio.run(sleeping_function())
+</pre>
+<h2>How to fix it in Trio</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import time
+import trio
+
+async def sleeping_function():
+    time.sleep(1) # Noncompliant
+
+trio.run(sleeping_function)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import trio
+
+async def sleeping_function():
+    await trio.sleep(1)
+
+trio.run(sleeping_function)
+</pre>
+<h2>How to fix it in AnyIO</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import time
+import anyio
+
+async def sleeping_function():
+    time.sleep(1) # Noncompliant
+
+anyio.run(sleeping_function)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+import anyio
+
+async def sleeping_function():
+    await anyio.sleep(1)
+
+anyio.run(sleeping_function)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.sleep">Sleeping</a> </li>
+  <li> Trio documentation - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.sleep">Time and clocks</a> </li>
+  <li> AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/api.html#anyio.sleep">Event loop</a> </li>
+</ul>
+

@@ -422,6 +422,24 @@ class TreeUtilsTest {
   }
 
   @Test
+  void test_asyncTokenOfEnclosingFunction() {
+    FileInput fileInput = PythonTestUtils.parse(
+      """
+        async def foo():
+          ...
+        def bar():
+          ...
+        """);
+    FunctionDef fooDef = ((FunctionDef) fileInput.statements().statements().get(0));
+    Token fooAsyncToken = fooDef.asyncKeyword();
+    Statement statement = fooDef.body().statements().get(0);
+    assertThat(TreeUtils.asyncTokenOfEnclosingFunction(statement)).contains(fooAsyncToken);
+    FunctionDef barDef = ((FunctionDef) fileInput.statements().statements().get(1));
+    statement = barDef.body().statements().get(0);
+    assertThat(TreeUtils.asyncTokenOfEnclosingFunction(statement)).isEmpty();
+  }
+
+  @Test
   void test_groupAssignmentByParentStatementList() {
     FileInput fileInput = PythonTestUtils.parse("def foo(a):\n" +
       "    b = a\n" +

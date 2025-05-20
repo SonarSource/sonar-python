@@ -1,0 +1,26 @@
+{
+  "title": "Use non-blocking sleep functions in asynchronous code",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async",
+    "asyncio",
+    "trio",
+    "anyio"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7488",
+  "sqKey": "S7488",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "COMPLETE"
+  }
+}
