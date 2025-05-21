@@ -3077,6 +3077,15 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void import_unknown_httpx_client() {
+    var statement = lastExpression("""
+      import httpx
+      httpx.Client()
+      """);
+    assertThat(statement.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
   void returnTypeOfTypeshedSymbol() {
     FileInput fileInput = inferTypes("""
       from sys import gettrace

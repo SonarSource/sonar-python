@@ -1,0 +1,27 @@
+{
+  "title": "Async functions should not contain synchronous HTTP client calls",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async",
+    "asyncio",
+    "anyio",
+    "trio",
+    "http"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7499",
+  "sqKey": "S7499",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "EFFICIENT"
+  }
+}

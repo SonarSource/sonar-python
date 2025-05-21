@@ -357,6 +357,7 @@ public class OpenSourceCheckList {
       SklearnPipelineParameterAreCorrectCheck.class,
       SuperfluousCurlyBraceCheck.class,
       TempFileCreationCheck.class,
+      SynchronousHttpOperationsInAsyncCheck.class,
       ImplicitlySkippedTestCheck.class,
       TimeSleepInAsyncCheck.class,
       ToDoCommentCheck.class,
