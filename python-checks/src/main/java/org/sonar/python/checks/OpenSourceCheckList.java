@@ -240,6 +240,7 @@ public class OpenSourceCheckList {
       InitReturnsValueCheck.class,
       InstanceAndClassMethodsAtLeastOnePositionalCheck.class,
       InstanceMethodSelfAsFirstCheck.class,
+      InputInAsyncCheck.class,
       InvalidOpenModeCheck.class,
       InvalidRegexCheck.class,
       InvariantReturnCheck.class,

@@ -1,0 +1,84 @@
+<p>This rule raises an issue when the built-in <code>input()</code> function is called in an asynchronous function.</p>
+<h2>Why is this an issue?</h2>
+<p>In Python’s asynchronous programming (using <code>asyncio</code>, <code>Trio</code>, or <code>AnyIO</code>), an event loop manages concurrent tasks
+by having them yield control during time-consuming operations, enabling other tasks to run.</p>
+<p>However, the synchronous <code>input()</code> function blocks the current thread until user input is received, and when called from a coroutine, it
+blocks the entire event loop, preventing other tasks from executing and making the application unresponsive - effectively defeating the purpose of
+asynchronous programming for applications requiring concurrent operations or user interaction.</p>
+<h2>How to fix it in Asyncio</h2>
+<p>You can use <code>asyncio.to_thread()</code> to run the <code>input()</code> function in a separate thread.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import asyncio
+
+async def get_name():
+    print("Please enter your name:")
+    name = input() # Noncompliant
+    return name
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import asyncio
+
+async def get_name():
+    print("Please enter your name:")
+    name = await asyncio.to_thread(input) # Compliant
+    return name
+</pre>
+<h2>How to fix it in Trio</h2>
+<p>You can use <code>trio.to_thread.run_sync()</code> to run the <code>input()</code> function in a separate thread.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import trio
+
+async def get_name():
+    print("Please enter your name:")
+    name = input() # Noncompliant
+    return name
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import trio
+
+async def get_name():
+    print("Please enter your name:")
+    name = await trio.to_thread.run_sync(input) # Compliant
+    return name
+</pre>
+<h2>How to fix it in AnyIO</h2>
+<p>You can use <code>anyio.to_thread.run_sync()</code> to run the <code>input()</code> function in a separate thread.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import anyio
+
+async def get_name():
+    print("Please enter your name:")
+    name = input() # Noncompliant
+    return name
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+import anyio
+
+async def get_name():
+    print("Please enter your name:")
+    name = await anyio.to_thread.run_sync(input) # Compliant
+    return name
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python asyncio - <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.to_thread">Running in threads</a> </li>
+  <li> Trio - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.to_thread.run_sync">Putting blocking I/O into worker threads</a>
+  </li>
+  <li> AnyIO - <a href="https://anyio.readthedocs.io/en/stable/threads.html#calling-synchronous-code-from-a-worker-thread">Calling synchronous code
+  from a worker thread</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Python - <a href="https://realpython.com/python-concurrency/">Concurrency and Parallelism in Python</a> </li>
+</ul>
+
