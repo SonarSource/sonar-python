@@ -1,0 +1,102 @@
+<p>This rule raises an issue when an asynchronous function accepts a <code>timeout</code> parameter instead of using the timeout context managers.</p>
+<h2>Why is this an issue?</h2>
+<p>Modern asynchronous Python libraries like <code>asyncio</code>, <code>anyio</code>, and <code>trio</code> promote a principle called
+<strong>structured concurrency</strong>. A key aspect of this is that the caller of an asynchronous function should be responsible for managing
+timeouts and cancellation, not the callee.</p>
+<p>When an <code>async</code> function accepts a <code>timeout</code> parameter, it violates this principle:</p>
+<ol>
+  <li> <strong>Coupling between logic and timeout handling</strong>: The function dictates how the timeout is handled internally, rather than letting
+  the caller decide. </li>
+  <li> <strong>Preempting caller control</strong>: The caller might want to enforce a different timeout duration or coordinate timeouts across several
+  concurrent operations. An internal timeout parameter makes this difficult or impossible. </li>
+  <li> <strong>Reducing composability</strong>: Combining functions that manage their own timeouts can lead to complex and unpredictable behavior,
+  especially when nesting calls or running tasks concurrently under a shared deadline. </li>
+</ol>
+<p>Instead, the caller should use the timeout features provided by the concurrency library (e.g., <code>async with asyncio.timeout()</code> or
+<code>with trio.move_on_after()</code>). This separates the concern of what the function does from how long the caller is willing to wait for it.</p>
+<h2>How to fix it in Asyncio</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import asyncio
+
+async def example_function(timeout): # Noncompliant
+    await asyncio.sleep(timeout)
+
+async def main():
+    await example_function(5)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import asyncio
+
+async def example_function():
+    await asyncio.sleep(5)
+
+async def main():
+    async with asyncio.timeout(5): # Compliant
+        await example_function()
+</pre>
+<h2>How to fix it in Trio</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import trio
+
+async def example_function(timeout): # Noncompliant
+    await trio.sleep(timeout)
+
+async def main():
+    await example_function(5)
+
+trio.run(main)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import trio
+
+async def example_function():
+    await trio.sleep(5)
+
+async def main():
+    with trio.move_on_after(5): # Compliant
+        await example_function()
+
+trio.run(main)
+</pre>
+<h2>How to fix it in AnyIO</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import anyio
+
+async def example_function(timeout): # Noncompliant
+    await anyio.sleep(timeout)
+
+async def main():
+    await example_function(5)
+
+anyio.run(main)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+import anyio
+
+async def example_function():
+    await anyio.sleep(5)
+
+async def main():
+    with anyio.move_on_after(5): # Compliant
+        await example_function()
+
+anyio.run(main)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.timeout">Timeouts</a> </li>
+  <li> Trio documentation - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#cancellation-and-timeouts">Cancellation and
+  timeouts</a> </li>
+  <li> AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/cancellation.html#timeouts">Timeouts</a> </li>
+</ul>
+

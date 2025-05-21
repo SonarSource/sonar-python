@@ -144,6 +144,10 @@ public final class ClassType implements PythonType {
       .findFirst();
   }
 
+  public Optional<PythonType> inheritedMember(String memberName) {
+    return inheritedMember(memberName, new HashSet<>());
+  }
+
   private Optional<PythonType> inheritedMember(String memberName, Set<PythonType> visited) {
     return superClasses().stream()
       .map(TypeWrapper::type)

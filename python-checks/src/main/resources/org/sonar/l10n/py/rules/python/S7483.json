@@ -1,0 +1,26 @@
+{
+  "title": "Asynchronous functions should not accept timeout parameters",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async",
+    "asyncio",
+    "anyio",
+    "trio"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7483",
+  "sqKey": "S7483",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "FOCUSED"
+  }
+}

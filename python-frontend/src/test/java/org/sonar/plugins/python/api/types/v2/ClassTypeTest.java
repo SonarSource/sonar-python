@@ -465,10 +465,14 @@ public class ClassTypeTest {
     assertThat(classB.members()).hasSize(1);
     ClassType classA = (ClassType) classB.superClasses().get(0).type();
     assertThat(classA.members()).hasSize(1);
+    PythonType meth = classA.resolveMember("meth").get();
+    assertThat(meth).isInstanceOf(FunctionType.class);
 
     assertThat(classB.resolveMember("foo")).isPresent();
     assertThat(classB.resolveMember("meth")).isPresent();
-    assertThat(classB.resolveMember("unkown")).isNotPresent();
+    assertThat(classB.resolveMember("unknown")).isNotPresent();
+    assertThat(classB.inheritedMember("foo")).isEmpty();
+    assertThat(classB.inheritedMember("meth")).contains(meth);
   }
 
   @Test
