@@ -356,6 +356,7 @@ public class OpenSourceCheckList {
       SklearnPipelineSpecifyMemoryArgumentCheck.class,
       SklearnPipelineParameterAreCorrectCheck.class,
       SuperfluousCurlyBraceCheck.class,
+      SynchronousFileOperationsInAsyncCheck.class,
       TempFileCreationCheck.class,
       SynchronousHttpOperationsInAsyncCheck.class,
       ImplicitlySkippedTestCheck.class,
