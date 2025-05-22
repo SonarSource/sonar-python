@@ -1,0 +1,25 @@
+<p>This rule raises an issue when the <code>reversed()</code> function is called with a <code>sorted()</code> as an argument.</p>
+<h2>Why is this an issue?</h2>
+<p>The <code>sorted()</code> function has a <code>reverse</code> parameter that provides the same functionality as the <code>reversed()</code>
+function.</p>
+<h2>How to fix it</h2>
+<p>Use the <code>reverse</code> parameter of the <code>sorted()</code> function to sort in descending order instead of using
+<code>reversed()</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+data = [3, 1, 4, 1, 5, 9]
+result = reversed(sorted(data)) # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+data = [3, 1, 4, 1, 5, 9]
+result = sorted(data, reverse=True)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python reference documentation - <a href="https://docs.python.org/3/library/functions.html#sorted">sorted</a> </li>
+  <li> Python reference documentation - <a href="https://docs.python.org/3/library/functions.html#reversed">reversed</a> </li>
+</ul>
+
