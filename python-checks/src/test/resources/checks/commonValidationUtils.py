@@ -17,3 +17,9 @@ callExpr(isEqualTo=ten)  # Noncompliant {{Argument is equal to 10}}
 not_ten = 11
 callExpr(isEqualTo=not_ten)
 callExpr(12, var_wrong)
+
+var_too_big = 100
+callExpr(var_too_big) # Noncompliant {{Argument is more than 42}}
+callExpr(45) # Noncompliant {{Argument is more than 42}}
+
+callExpr(2e64)

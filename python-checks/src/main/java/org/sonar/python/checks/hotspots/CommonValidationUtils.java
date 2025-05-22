@@ -46,6 +46,17 @@ public class CommonValidationUtils {
     }
   }
 
+  public static boolean isMoreThan(Expression expression, int number) {
+    try {
+      if (expression.is(Tree.Kind.NAME)) {
+        return Expressions.singleAssignedNonNameValue(((Name) expression)).map(value -> isMoreThan(value, number)).orElse(false);
+      }
+      return expression.is(Tree.Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() > number;
+    } catch (NumberFormatException nfe) {
+      return false;
+    }
+  }
+
   static boolean isLessThanExponent(Expression expression, int exponent) {
     if (expression.is(Tree.Kind.SHIFT_EXPR)) {
       var shiftExpression = (BinaryExpression) expression;

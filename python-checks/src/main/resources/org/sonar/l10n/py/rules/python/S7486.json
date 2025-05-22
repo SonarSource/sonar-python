@@ -1,0 +1,26 @@
+{
+  "title": "Long sleep durations should use sleep_forever() instead of arbitrary intervals",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async",
+    "asyncio",
+    "anyio",
+    "trio"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-7486",
+  "sqKey": "S7486",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}

@@ -27,10 +27,10 @@ import org.sonar.python.tree.TreeUtils;
 
 class CommonValidationUtilsTest {
 
-  class isLessThanTestCheck extends PythonSubscriptionCheck {
+  static class isLessThanMoreThanTestCheck extends PythonSubscriptionCheck {
     @Override
     public void initialize(Context context) {
-      context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, isLessThanTestCheck::checkCallExpr);
+      context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, isLessThanMoreThanTestCheck::checkCallExpr);
     }
 
     private static void checkCallExpr(SubscriptionContext ctx) {
@@ -39,6 +39,9 @@ class CommonValidationUtilsTest {
         .ifPresent(argument -> {
           if (CommonValidationUtils.isLessThan(argument.expression(), 10)) {
             ctx.addIssue(argument, "Argument is less than 10");
+          }
+          if (CommonValidationUtils.isMoreThan(argument.expression(), 42)) {
+            ctx.addIssue(argument, "Argument is more than 42");
           }
         });
       TreeUtils.nthArgumentOrKeywordOptional(1, "isEqualTo", callExpression.arguments())
@@ -52,6 +55,6 @@ class CommonValidationUtilsTest {
 
   @Test
   void isLessThan() {
-    PythonCheckVerifier.verify("src/test/resources/checks/commonValidationUtils.py", new isLessThanTestCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/commonValidationUtils.py", new isLessThanMoreThanTestCheck());
   }
 }

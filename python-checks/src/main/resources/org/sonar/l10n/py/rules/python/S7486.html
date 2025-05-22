@@ -1,0 +1,59 @@
+<p>This rules raises an issue when <code>trio.sleep()</code> or <code>anyio.sleep()</code> is called with a duration greater than 24 hours.</p>
+<h2>Why is this an issue?</h2>
+<p>When using <code>trio.sleep()</code> or <code>anyio.sleep()</code> with very long intervals (greater than 24 hours), the intent is usually to wait
+indefinitely or for an extremely long period. Both libraries provide dedicated methods specifically designed for this purpose:
+<code>trio.sleep_forever()</code> and <code>anyio.sleep_forever()</code>.</p>
+<p>Using explicit sleep durations greater than 24 hours has several drawbacks:</p>
+<ul>
+  <li> It obscures the developer’s intent. A very large number like <code>86400 * 365</code> doesn’t clearly communicate that the code intends to wait
+  indefinitely. </li>
+  <li> It makes code less maintainable, as other developers need to calculate what the large numbers actually represent. </li>
+</ul>
+<p>In summary, using <code>sleep_forever()</code> is preferable when the intent is to sleep indefinitely as it clearly conveys this purpose, avoiding
+maintainability issues caused by using arbitrarily large sleep durations.</p>
+<h2>How to fix it in Trio</h2>
+<p>Replace calls to <code>trio.sleep()</code> that use intervals greater than 24 hours with calls to <code>trio.sleep_forever()</code>.</p>
+<p>If the intention is truly to wait for a specific long duration rather than indefinitely, consider expressing that intent more clearly by using
+named variables or constants.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import trio
+
+async def long_wait():
+    await trio.sleep(86400 * 365)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import trio
+
+async def long_wait():
+    await trio.sleep_forever()
+</pre>
+<h2>How to fix it in AnyIO</h2>
+<p>Replace calls to <code>anyio.sleep()</code> that use intervals greater than 24 hours with calls to <code>anyio.sleep_forever()</code>.</p>
+<p>If the intention is truly to wait for a specific long duration rather than indefinitely, consider expressing that intent more clearly by using
+named variables or constants.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import anyio
+
+async def long_wait():
+    await anyio.sleep(86400 * 30)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import anyio
+
+async def long_wait():
+    await anyio.sleep_forever()
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Trio - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.sleep_forever">sleep_forever() documentation</a> </li>
+  <li> AnyIO - <a href="https://anyio.readthedocs.io/en/stable/api.html#anyio.sleep_forever">sleep_forever() documentation</a> </li>
+  <li> Python asyncio - <a href="https://docs.python.org/3/library/asyncio-task.html">Tasks and coroutines</a> </li>
+</ul>
+
