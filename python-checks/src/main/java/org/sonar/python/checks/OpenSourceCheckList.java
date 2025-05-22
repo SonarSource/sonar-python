@@ -177,6 +177,7 @@ public class OpenSourceCheckList {
       ElseAfterLoopsWithoutBreakCheck.class,
       EmailSendingCheck.class,
       EmptyAlternativeCheck.class,
+      EmptyCollectionConstructorCheck.class,
       EmptyGroupCheck.class,
       EmptyFunctionCheck.class,
       EmptyNestedBlockCheck.class,
