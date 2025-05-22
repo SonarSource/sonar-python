@@ -382,6 +382,7 @@ public class OpenSourceCheckList {
       ReferencedBeforeAssignmentCheck.class,
       RegexComplexityCheck.class,
       RegexLookaheadCheck.class,
+      RewriteCollectionConstructorAsComprehensionCheck.class,
       UnconditionalAssertionCheck.class,
       UndefinedNameAllPropertyCheck.class,
       UnencryptedSageMakerNotebookCheck.class,

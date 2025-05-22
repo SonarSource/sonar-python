@@ -1,0 +1,40 @@
+<p>This rule raises an issue when <code>list()</code>, <code>set()</code> or <code>dict()</code> is unnecessarily used around a generator
+expression.</p>
+<h2>Why is this an issue?</h2>
+<p>Using <code>list()</code>, <code>set()</code>, or <code>dict()</code> around a generator expression is redundant when a corresponding comprehension
+can directly express the same operation. Comprehensions are clearer, more concise, and often more readable than the equivalent constructor/generator
+expression combination.</p>
+<p>This principle applies to all three built-in collection types: <code>list</code>, <code>set</code>, and <code>dict</code>:</p>
+<ul>
+  <li> Use <code>[f(x) for x in foo]</code> instead of <code>list(f(x) for x in foo)</code> </li>
+  <li> Use <code>{f(x) for x in foo}</code> instead of <code>set(f(x) for x in foo)</code> </li>
+  <li> Use <code>{k: v for k, v in items}</code> instead of <code>dict((k, v) for k, v in items)</code> </li>
+</ul>
+<h3>Exceptions</h3>
+<p>If the generator expression doesn’t filter or modify the collection, the rule does not raise. For example, <code>list(x for x in foo)</code> is
+simply copying the iterable <code>foo</code> into a list, which is equivalent to <code>list(foo)</code> and covered by a different rule.</p>
+<h2>How to fix it</h2>
+<p>Replace the collection constructor with the appropriate comprehension syntax.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def f(x):
+    return x * 2
+
+list(f(x) for x in range(5))  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def f(x):
+    return x * 2
+
+[f(x) for x in range(5)] # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List Comprehensions</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">Dictionaries</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#sets">Sets</a> </li>
+</ul>
+
