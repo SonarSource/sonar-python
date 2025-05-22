@@ -391,6 +391,7 @@ public class OpenSourceCheckList {
       UnencryptedEbsVolumeCheck.class,
       UnionTypeExpressionCheck.class,
       UnnecessaryReversedCallCheck.class,
+      UnnecessarySubscriptReversalCheck.class,
       UnquantifiedNonCapturingGroupCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,
