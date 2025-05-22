@@ -1,0 +1,44 @@
+<p>This rule raises an issue when a dictionary comprehension uses a static key.</p>
+<h2>Why is this an issue?</h2>
+<p>Dictionary comprehensions are a concise way to create dictionaries, typically by dynamically generating key-value pairs during iteration. When the
+key part of a dictionary comprehension is static (e.g., a string literal like <code>"key"</code> or a variable defined outside the comprehension that
+isn’t updated during the comprehension), each iteration of the comprehension will attempt to assign a value to this <strong>same single
+key</strong>.</p>
+<p>The consequence is that the dictionary will only contain one entry for that static key, and its value will be the one computed during the
+<strong>last</strong> iteration of the comprehension. This behavior is often a misunderstanding of how dictionary comprehensions work or a logical
+error, as the intention is usually to create multiple distinct key-value pairs.</p>
+<p>Consider this example:</p>
+<pre>
+data = ["apple", "banana", "cherry"]
+
+# Each iteration overwrites the value associated with "fruit_type"
+result_dict = {"fruit_type": value.capitalize() for value in data}
+# After the first iteration: {"fruit_type": "Apple"}
+# After the second iteration: {"fruit_type": "Banana"}
+# Final result: {"fruit_type": "Cherry"}
+</pre>
+<p>In the code above, the loop iterates three times, but because <code>"fruit_type"</code> is always the same key, the final dictionary
+<code>result_dict</code> will only be <code>{'fruit_type': 'CHERRY'}</code>. All previous assignments for this key are overwritten. This is usually
+not what the developer intends when using a comprehension over <code>data</code>.</p>
+<p>If the goal was to have multiple distinct keys, the key expression in the comprehension must vary with each iteration.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue ensure that the key expression within the dictionary comprehension is dynamic, meaning it changes with each iteration, typically
+by using the iteration variable(s). This ensures that unique keys are generated, leading to a dictionary with multiple entries as usually
+intended.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+data = ["some", "Data"]
+
+output_dict = {"key": value.upper() for value in data} # Noncompliant: "key" is not modify for each iteration
+</pre>
+<pre data-diff-id="1" data-diff-type="compliant">
+data = ["some", "Data"]
+
+output_dict = {value: value.upper() for value in data} # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">Dictionaries</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/reference/expressions.html#dictionary-displays">Dictionary displays</a> </li>
+</ul>
+

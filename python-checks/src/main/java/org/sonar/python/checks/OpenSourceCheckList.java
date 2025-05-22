@@ -159,6 +159,7 @@ public class OpenSourceCheckList {
       DedicatedAssertionCheck.class,
       DeprecatedNumpyTypesCheck.class,
       DictionaryDuplicateKeyCheck.class,
+      DictionaryStaticKeyCheck.class,
       DirectTypeComparisonCheck.class,
       DisabledEFSEncryptionCheck.class,
       DisabledESDomainEncryptionCheck.class,
