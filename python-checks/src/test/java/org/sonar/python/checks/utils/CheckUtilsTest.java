@@ -99,6 +99,14 @@ class CheckUtilsTest {
   }
 
   @Test
+  void isEmptyStatement() {
+    assertThat(CheckUtils.isEmptyStatement(parse("pass").statements().statements().get(0))).isTrue();
+    assertThat(CheckUtils.isEmptyStatement(parse("...").statements().statements().get(0))).isTrue();
+    assertThat(CheckUtils.isEmptyStatement(parse("\"hello\"").statements().statements().get(0))).isTrue();
+    assertThat(CheckUtils.isEmptyStatement(parse("x = \"hello\"").statements().statements().get(0))).isFalse();
+  }
+
+  @Test
   void no_parent_class() {
     FileInput file = (FileInput) parse("" +
       "def f():\n" +
@@ -211,7 +219,7 @@ class CheckUtilsTest {
     }
   }
 
-  private static Tree parse(String content) {
+  private static FileInput parse(String content) {
     PythonParser parser = PythonParser.create();
     AstNode astNode = parser.parse(content);
     FileInput parse = new PythonTreeMaker().fileInput(astNode);
@@ -220,7 +228,7 @@ class CheckUtilsTest {
 
   private static FileInput parseFile(String path) throws IOException {
     try (var sourceFile = new Scanner(new File(path)).useDelimiter("\\Z")) {
-      return (FileInput) parse(sourceFile.next());
+      return parse(sourceFile.next());
     }
   }
 

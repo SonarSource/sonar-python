@@ -121,6 +121,7 @@ public class OpenSourceCheckList {
       AssertOnDissimilarTypesCheck.class,
       AssertAfterRaiseCheck.class,
       AssertOnTupleLiteralCheck.class,
+      AsyncFunctionNotAsyncCheck.class,
       AsyncFunctionWithTimeoutCheck.class,
       AsyncLongSleepCheck.class,
       BackslashInStringCheck.class,

@@ -26,12 +26,14 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.SetLiteral;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
@@ -178,6 +180,19 @@ public class CheckUtils {
       .stream()
       .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
       .anyMatch(foundDeco -> ABC_ABSTRACTMETHOD_DECORATORS.stream().anyMatch(abcDeco -> abcDeco.equals(foundDeco)));
+  }
+
+  public static boolean isEmptyStatement(Statement statement) {
+    return statement.is(Tree.Kind.PASS_STMT) ||
+      (statement.is(Tree.Kind.EXPRESSION_STMT) && isStringLiteralOrEllipsis((ExpressionStatement) statement));
+  }
+
+  private static boolean isStringLiteralOrEllipsis(ExpressionStatement statement) {
+    Tree expression = statement.expressions().get(0);
+    if (expression.is(STRING_LITERAL)) {
+      return true;
+    }
+    return expression.is(Tree.Kind.ELLIPSIS);
   }
 
   /**
