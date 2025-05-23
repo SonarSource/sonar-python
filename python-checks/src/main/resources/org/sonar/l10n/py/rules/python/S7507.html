@@ -1,0 +1,34 @@
+<p>This rule raises an issue when <code>default_factory</code> is incorrectly supplied as a keyword argument during the initialization of
+<code>collections.defaultdict</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>The <code>collections.defaultdict</code> class provides a dictionary-like structure that calls a factory function to supply missing values. This
+factory function (like <code>list</code>, <code>int</code>, or a <code>lambda</code>) is specified during initialization.</p>
+<p>Crucially, the <code>defaultdict</code> constructor signature requires the <code>default_factory</code> as its <strong>first positional
+argument</strong>. Any subsequent positional or keyword arguments are used to initialize the contents of the dictionary. This mirrors the behavior of
+the standard <code>dict</code> constructor.</p>
+<p>Providing the factory using the keyword <code>default_factory=…​</code>, as in <code>defaultdict(default_factory=list)</code>, is therefore
+incorrect and leads to unexpected behavior:</p>
+<ul>
+  <li> It does <strong>not</strong> set the default factory for missing keys. The <code>defaultdict</code> behaves like a regular <code>dict</code> in
+  this regard and will raise a <code>KeyError</code> when a missing key is accessed. </li>
+  <li> It <strong>does</strong> initialize the dictionary with a single key-value pair: <code>{'default_factory': list}</code>. </li>
+</ul>
+<h2>How to fix it</h2>
+<p>To fix this issue correctly initialize the <code>defaultdict</code> with a default factory by providing the factory callable as the first
+positional argument, not as a keyword argument.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from collections import defaultdict
+
+d1 = defaultdict(default_factory=int) # Noncompliant: this creates a dictionary with a single key-value pair.
+</pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from collections import defaultdict
+
+d1 = defaultdict(int) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/collections.html#collections.defaultdict">collections.defaultdict</a> </li>
+</ul>
+

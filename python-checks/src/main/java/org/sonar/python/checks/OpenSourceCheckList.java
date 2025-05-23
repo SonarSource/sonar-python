@@ -159,6 +159,7 @@ public class OpenSourceCheckList {
       DeadStoreCheck.class,
       DebugModeCheck.class,
       DedicatedAssertionCheck.class,
+      DefaultFactoryArgumentCheck.class,
       DeprecatedNumpyTypesCheck.class,
       DictionaryDuplicateKeyCheck.class,
       DictionaryStaticKeyCheck.class,
