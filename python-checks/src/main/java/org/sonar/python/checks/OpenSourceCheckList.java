@@ -364,6 +364,7 @@ public class OpenSourceCheckList {
       SuperfluousCurlyBraceCheck.class,
       SynchronousFileOperationsInAsyncCheck.class,
       SynchronousHttpOperationsInAsyncCheck.class,
+      SynchronousSubprocessOperationsInAsyncCheck.class,
       SynchronousOsCallsInAsyncCheck.class,
       TempFileCreationCheck.class,
       ImplicitlySkippedTestCheck.class,

@@ -1,0 +1,85 @@
+<p>This rule raises an issue when synchronous subprocess calls are used within asynchronous functions.</p>
+<h2>Why is this an issue?</h2>
+<p>Using synchronous subprocess calls like <code>subprocess.Popen</code> or similar functions in asynchronous code blocks the entire event loop. This
+undermines the primary advantage of asynchronous programming - the ability to perform concurrent operations without blocking execution.</p>
+<p>When an async function makes a synchronous call to create a subprocess:</p>
+<ul>
+  <li> The event loop is completely blocked until the subprocess operation completes </li>
+  <li> No other coroutines can run during this time, even if they’re ready to execute </li>
+  <li> The responsiveness of the application is degraded </li>
+  <li> In server applications, this can cause timeouts or failures for other concurrent requests </li>
+</ul>
+<p>Instead, async libraries provide dedicated APIs for running subprocesses in a non-blocking way:</p>
+<ul>
+  <li> <code>asyncio.create_subprocess_exec()</code> and <code>asyncio.create_subprocess_shell()</code> for asyncio </li>
+  <li> <code>trio.run_process()</code> for Trio </li>
+  <li> <code>anyio.run_process()</code> for AnyIO </li>
+</ul>
+<p>Using these APIs allows other tasks to continue executing while waiting for the subprocess to complete.</p>
+<h2>How to fix it in Asyncio</h2>
+<p>Replace synchronous subprocess calls with <code>asyncio.create_subprocess_exec()</code> or <code>asyncio.create_subprocess_shell()</code> depending
+on whether you need to run a specific command with arguments or a shell command string.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import subprocess
+
+async def process_data():
+    subprocess.run(["wget", "https://example.com/file.zip"])  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import asyncio
+
+async def process_data():
+    proc = await asyncio.create_subprocess_exec("wget", "https://example.com/file.zip")
+    result = await proc.wait()
+</pre>
+<h2>How to fix it in Trio</h2>
+<p>Replace synchronous subprocess calls with <code>trio.run_process()</code>, which handles both command arrays and shell commands.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import trio
+import subprocess
+
+async def download_files():
+    result = subprocess.run(["wget", "https://example.com/file.zip"])  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import trio
+
+async def download_files():
+    result = await trio.run_process(["wget", "https://example.com/file.zip"])
+</pre>
+<h2>How to fix it in AnyIO</h2>
+<p>Replace synchronous subprocess calls with <code>anyio.run_process()</code>, which works similar to Trio’s API and supports both command arrays and
+shell commands.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import subprocess
+
+async def process_image():
+    result = subprocess.run(["wget", "https://example.com/file.zip"])  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+import anyio
+
+async def process_image():
+    result = await anyio.run_process(["wget", "https://example.com/file.zip"])
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python asyncio - <a href="https://docs.python.org/3/library/asyncio-subprocess.html">Subprocess</a> </li>
+  <li> Trio - <a href="https://trio.readthedocs.io/en/stable/reference-io.html#trio.run_process">run_process() documentation</a> </li>
+  <li> AnyIO - <a href="https://anyio.readthedocs.io/en/stable/subprocesses.html">Subprocesses</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Python - <a href="https://realpython.com/python-concurrency/">Concurrency and Parallelism in Python</a> </li>
+</ul>
+
