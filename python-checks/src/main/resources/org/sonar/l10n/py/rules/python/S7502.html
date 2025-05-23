@@ -1,0 +1,70 @@
+<p>This rule raises an issue when <code>asyncio.create_task()</code> or <code>asyncio.ensure_future()</code> is called without saving the returned
+task.</p>
+<h2>Why is this an issue?</h2>
+<p>When creating asyncio tasks with <code>asyncio.create_task()</code> or <code>asyncio.ensure_future()</code>, you create independent units of work
+that execute concurrently. However, if you don’t save the returned task object in a variable or collection, the task may be garbage collected at any
+time, even before it’s done.</p>
+<p>This happens because the event loop only maintains a weak reference to tasks. Without a strong reference:</p>
+<ul>
+  <li> Tasks may be terminated unpredictably before completion </li>
+  <li> Application behavior becomes inconsistent and difficult to debug </li>
+  <li> Exceptions raised within the task are silently ignored </li>
+  <li> Results of the task execution are lost </li>
+  <li> Resources may not be properly released </li>
+</ul>
+<p>For a task to run to completion and handle exceptions properly, you must save the task reference and eventually await it.</p>
+<h2>How to fix it</h2>
+<p>To properly handle asyncio tasks:</p>
+<ul>
+  <li> Store the task in a variable or collection </li>
+  <li> Eventually await the task, either directly or using <code>asyncio.gather()</code>, <code>asyncio.wait()</code>, or similar functions </li>
+  <li> Consider using <code>asyncio.TaskGroup</code> (available in Python 3.11+) for structured concurrency with better cancellation semantics and
+  error handling </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import asyncio
+
+async def fetch_data():
+    asyncio.create_task(process_data()) # Noncompliant: task may be garbage collected before completion
+
+async def process_data():
+    await asyncio.sleep(1)
+    return {"result": "processed"}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import asyncio
+
+async def fetch_data():
+    task = asyncio.create_task(process_data()) # Compliant
+    await task
+
+async def process_data():
+    await asyncio.sleep(1)
+    return {"result": "processed"}
+</pre>
+<p>Or, using TaskGroup (Python 3.11+):</p>
+<pre>
+import asyncio
+
+async def fetch_data():
+    async with asyncio.TaskGroup() as tg:
+        # Tasks are managed by the TaskGroup and won't be garbage collected
+        tg.create_task(process_data())
+
+async def process_data():
+    await asyncio.sleep(1)
+    return {"result": "processed"}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python asyncio - <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.create_task">create_task() documentation</a> </li>
+  <li> Python asyncio - <a href="https://docs.python.org/3/library/asyncio-future.html#asyncio.ensure_future">ensure_future() documentation</a> </li>
+  <li> Python asyncio - <a href="https://docs.python.org/3/library/asyncio-dev.html#asyncio-dev">Developing with asyncio</a> </li>
+  <li> Python asyncio - <a href="https://docs.python.org/3/library/asyncio-task.html#task-object">Task Object</a> </li>
+  <li> Python asyncio - <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.TaskGroup">TaskGroup documentation</a> </li>
+</ul>
+

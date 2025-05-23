@@ -16,8 +16,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -40,7 +38,6 @@ public class AsyncLongSleepCheck extends PythonSubscriptionCheck {
 
   private TypeCheckBuilder isTrioSleepCall;
   private TypeCheckBuilder isAnyioSleepCall;
-  private final Map<String, String> asyncLibraryAliases = new HashMap<>();
 
   @Override
   public void initialize(Context context) {
@@ -51,7 +48,6 @@ public class AsyncLongSleepCheck extends PythonSubscriptionCheck {
   private void setupCheck(SubscriptionContext ctx) {
     isTrioSleepCall = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn("trio.sleep");
     isAnyioSleepCall = ctx.typeChecker().typeCheckBuilder().isTypeWithName("anyio.sleep");
-    asyncLibraryAliases.clear();
   }
 
   private void checkAsyncLongSleep(SubscriptionContext context) {
@@ -77,14 +73,12 @@ public class AsyncLongSleepCheck extends PythonSubscriptionCheck {
       return;
     }
     if (CommonValidationUtils.isMoreThan(durationExpr, SECONDS_IN_DAY)) {
-      String libraryAlias = asyncLibraryAliases.getOrDefault(libraryName, libraryName);
-      String message = String.format(MESSAGE, libraryAlias);
+      String message = String.format(MESSAGE, libraryName);
       context.addIssue(callExpression, message).secondary(asyncToken, "This function is async.");
     }
   }
 
   private static Optional<Expression> extractDurationExpression(CallExpression callExpression, String paramName) {
-    RegularArgument durationArgument = TreeUtils.nthArgumentOrKeyword(0, paramName, callExpression.arguments());
-    return durationArgument != null ? Optional.of(durationArgument.expression()) : Optional.empty();
+    return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(0, paramName, callExpression.arguments())).map(RegularArgument::expression);
   }
 }

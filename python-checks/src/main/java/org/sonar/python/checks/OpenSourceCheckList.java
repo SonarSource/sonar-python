@@ -123,6 +123,7 @@ public class OpenSourceCheckList {
       AssertOnTupleLiteralCheck.class,
       AsyncFunctionNotAsyncCheck.class,
       AsyncFunctionWithTimeoutCheck.class,
+      AsyncioTaskNotStoredCheck.class,
       AsyncLongSleepCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
