@@ -1,0 +1,26 @@
+{
+  "title": "Async functions should not contain synchronous OS calls",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async",
+    "asyncio",
+    "anyio",
+    "trio"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7489",
+  "sqKey": "S7489",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "EFFICIENT"
+  }
+}

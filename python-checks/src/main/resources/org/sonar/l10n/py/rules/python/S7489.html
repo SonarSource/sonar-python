@@ -1,0 +1,101 @@
+<p>This rule raises an issue when synchronous OS calls like <code>os.wait()</code> are used within asynchronous functions.</p>
+<h2>Why is this an issue?</h2>
+<p>Using synchronous operating system calls like <code>os.wait()</code>, <code>os.waitpid()</code>, or similar functions in asynchronous code blocks
+the entire event loop. This undermines the primary advantage of asynchronous programming - the ability to perform concurrent operations without
+blocking execution.</p>
+<p>When an async function makes a synchronous OS call:</p>
+<ul>
+  <li> The event loop is completely blocked until the OS operation completes </li>
+  <li> No other coroutines can run during this time, even if they’re ready to execute </li>
+  <li> The responsiveness of the application is degraded </li>
+  <li> In server applications, this can cause timeouts or failures for other concurrent requests </li>
+</ul>
+<p>Instead, async libraries provide mechanisms to run blocking operations in separate threads without blocking the event loop:</p>
+<ul>
+  <li> <code>asyncio.loop.run_in_executor()</code> for asyncio </li>
+  <li> <code>trio.to_thread.run_sync()</code> for Trio </li>
+  <li> <code>anyio.to_thread.run_sync()</code> for AnyIO </li>
+</ul>
+<p>Using these constructs allows other tasks to continue executing while waiting for the blocking OS call to complete.</p>
+<h2>How to fix it in Asyncio</h2>
+<p>Use <code>asyncio.loop.run_in_executor()</code> to run blocking OS calls in a separate thread pool.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import os
+
+async def wait_for_child_process(pid):
+    pid, status = os.waitpid(pid, 0)  # Noncompliant
+    return status
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import asyncio
+import os
+
+async def wait_for_child_process(pid):
+    loop = asyncio.get_running_loop()
+    pid, status = await loop.run_in_executor(
+        None,
+        os.waitpid, pid, 0
+    )
+    return status
+</pre>
+<h2>How to fix it in Trio</h2>
+<p>Use <code>trio.to_thread.run_sync()</code> to run blocking OS calls in a worker thread.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import os
+
+async def wait_for_child_process(pid):
+    pid, status = os.waitpid(pid, 0)  # Noncompliant
+    return status
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import trio
+import os
+
+async def wait_for_child_process(pid):
+    pid, status = await trio.to_thread.run_sync(
+        os.waitpid, pid, 0
+    )
+    return status
+</pre>
+<h2>How to fix it in AnyIO</h2>
+<p>Use <code>anyio.to_thread.run_sync()</code> to run blocking OS calls in a worker thread.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import os
+
+async def wait_for_child_process(pid):
+    pid, status = os.waitpid(pid, 0)  # Noncompliant
+    return status
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+import anyio
+import os
+
+async def wait_for_child_process(pid):
+    pid, status = await anyio.to_thread.run_sync(
+        os.waitpid, pid, 0
+    )
+    return status
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python asyncio - <a href="https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor">run_in_executor()
+  documentation</a> </li>
+  <li> Trio - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.to_thread.run_sync">to_thread.run_sync() documentation</a> </li>
+  <li> AnyIO - <a href="https://anyio.readthedocs.io/en/stable/threads.html">Thread handling</a> </li>
+  <li> Python OS - <a href="https://docs.python.org/3/library/os.html#os.waitpid">os.waitpid() documentation</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Python - <a href="https://realpython.com/python-concurrency/">Concurrency and Parallelism in Python</a> </li>
+</ul>
+
