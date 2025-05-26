@@ -56,7 +56,7 @@ public class AsyncioTaskNotStoredCheck extends PythonSubscriptionCheck {
     if (asyncioTaskTypeChecks.stream().noneMatch(t -> t.check(calleeType) == TriBool.TRUE)) {
       return;
     }
-    if (TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION, Tree.Kind.CALL_EXPR) == null) {
+    if (TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ASSIGNMENT_EXPRESSION, Tree.Kind.CALL_EXPR, Tree.Kind.RETURN_STMT) == null) {
       ctx.addIssue(callee, MESSAGE);
     }
   }

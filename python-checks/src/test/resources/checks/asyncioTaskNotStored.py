@@ -28,6 +28,9 @@ async def compliant_examples():
         asyncio.create_task(another_coroutine())
     )
 
+async def create_and_return_task():
+    return asyncio.create_task(some_coroutine())  # Compliant
+
 async def some_coroutine():
     await asyncio.sleep(1)
     return {"result": "value"}
