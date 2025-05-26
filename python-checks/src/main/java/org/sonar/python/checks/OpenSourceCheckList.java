@@ -133,6 +133,7 @@ public class OpenSourceCheckList {
       BreakContinueOutsideLoopCheck.class,
       BuiltinShadowingAssignmentCheck.class,
       BuiltinGenericsOverTypingModuleCheck.class,
+      CancellationScopeNoCheckpointCheck.class,
       CaughtExceptionsCheck.class,
       ChangeMethodContractCheck.class,
       ChildAndParentExceptionCaughtCheck.class,

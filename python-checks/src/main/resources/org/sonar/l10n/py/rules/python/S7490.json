@@ -1,0 +1,26 @@
+{
+  "title": "Cancellation scopes should contain checkpoints",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async",
+    "asyncio",
+    "trio",
+    "anyio"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7490",
+  "sqKey": "S7490",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
