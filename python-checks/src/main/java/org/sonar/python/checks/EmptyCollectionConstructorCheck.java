@@ -16,26 +16,32 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.TriBool;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeCheckMap;
 
 @Rule(key = "S7498")
 public class EmptyCollectionConstructorCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Replace this constructor call with a literal.";
-  private static final List<String> COLLECTION_CONSTRUCTORS = Arrays.asList("dict", "list", "tuple");
+  private static final Map<String, String> COLLECTION_CONSTRUCTORS = Map.ofEntries(
+    Map.entry("list", "[]"),
+    Map.entry("tuple", "()"),
+    Map.entry("dict", "{}")
+  );
 
-  private List<TypeCheckBuilder> collectionConstructorTypeCheckers = null;
+  private TypeCheckMap<String> collectionConstructorTypeCheckers = null;
   private TypeCheckBuilder dictChecker = null;
 
   @Override
@@ -43,9 +49,10 @@ public class EmptyCollectionConstructorCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
       dictChecker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn("dict");
 
-      collectionConstructorTypeCheckers = new ArrayList<>();
-      for (String constructor : COLLECTION_CONSTRUCTORS) {
-        collectionConstructorTypeCheckers.add(ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(constructor));
+      collectionConstructorTypeCheckers = new TypeCheckMap<>();
+      for (var constructorEntry : COLLECTION_CONSTRUCTORS.entrySet()) {
+        TypeCheckBuilder constructorTypeChecker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(constructorEntry.getKey());
+        collectionConstructorTypeCheckers.put(constructorTypeChecker, constructorEntry.getValue());
       }
     });
 
@@ -53,7 +60,8 @@ public class EmptyCollectionConstructorCheck extends PythonSubscriptionCheck {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
 
       if (isUnnecessaryCollectionConstructor(callExpression)) {
-        ctx.addIssue(callExpression.callee(), MESSAGE);
+        var issue = ctx.addIssue(callExpression.callee(), MESSAGE);
+        createQuickFix(callExpression).ifPresent(issue::addQuickFix);
       }
     });
   }
@@ -65,7 +73,7 @@ public class EmptyCollectionConstructorCheck extends PythonSubscriptionCheck {
 
   private boolean isCollectionConstructor(Expression calleeExpression) {
     var type = calleeExpression.typeV2();
-    return collectionConstructorTypeCheckers.stream().map(checker -> checker.check(type)).anyMatch(TriBool.TRUE::equals);
+    return collectionConstructorTypeCheckers.getOptionalForType(type).isPresent();
   }
 
   private static boolean isEmptyCall(CallExpression callExpression) {
@@ -86,5 +94,12 @@ public class EmptyCollectionConstructorCheck extends PythonSubscriptionCheck {
 
   private static boolean isKeywordArg(Argument arg) {
     return arg instanceof RegularArgument regularArg && regularArg.keywordArgument() != null;
+  }
+
+  private Optional<PythonQuickFix> createQuickFix(CallExpression callExpression) {
+    return Optional.of(callExpression)
+      .filter(EmptyCollectionConstructorCheck::isEmptyCall)
+      .flatMap(callExpr -> collectionConstructorTypeCheckers.getOptionalForType(callExpression.callee().typeV2()))
+      .map(replacementStr -> PythonQuickFix.newQuickFix("Replace with literal", TextEditUtils.replace(callExpression, replacementStr)));
   }
 }

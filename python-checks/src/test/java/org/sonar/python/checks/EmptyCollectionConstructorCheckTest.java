@@ -16,7 +16,12 @@
  */
 package org.sonar.python.checks;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class EmptyCollectionConstructorCheckTest {
@@ -24,6 +29,31 @@ class EmptyCollectionConstructorCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/emptyCollectionConstructor.py", new EmptyCollectionConstructorCheck());
+  }
+
+  private static Stream<Arguments> testQuickFixListConstructorSource() {
+    return Stream.of(
+      Arguments.of("dict()", "{}"),
+      Arguments.of("tuple()", "()"),
+      Arguments.of("list()", "[]")
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("testQuickFixListConstructorSource")
+  void testQuickFixListConstructor(String before, String after) {
+    PythonQuickFixVerifier.verify(
+      new EmptyCollectionConstructorCheck(),
+      before,
+      after
+    );
+
+    PythonQuickFixVerifier.verifyQuickFixMessages(new EmptyCollectionConstructorCheck(), before, "Replace with literal");
+  }
+
+  @Test
+  void testNoQuickFix() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(new EmptyCollectionConstructorCheck(), "dict(test=1)");
   }
 
 }
