@@ -1,0 +1,28 @@
+<p>This rule raises an issue when list comprehensions are used as parameters to <code>any()</code> or <code>all()</code> instead of generator
+expressions as this prevents <code>any()</code> or <code>all()</code> from short-circuiting.</p>
+<h2>Why is this an issue?</h2>
+<p>Using a list comprehension inside <code>any()</code> or <code>all()</code> forces the entire list to be created in memory before the check begins.
+This prevents the short-circuiting behavior that these functions are designed to leverage, where <code>any()</code> stops at the first
+<code>True</code> and <code>all()</code> stops at the first <code>False</code>.</p>
+<p>Using a generator expression provides the same functionality while preserving the short-circuiting behavior of these functions. This could save
+both processing time and memory, especially for large iterables or when the condition has side effects or is computationally expensive.</p>
+<h2>How to fix it</h2>
+<p>Use a generator expression instead of a list comprehension.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+numbers = [1, 5, 0, 10]
+res_all = all([x &gt; 2 for x in numbers])  # Noncompliant: will evaluate all numbers instead of stopping at "5"
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+numbers = [1, 5, 0, 10]
+res_all = all(x &gt; 2 for x in numbers)  # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Wiki - <a href="https://wiki.python.org/moin/Generators">Generators</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/glossary.html#term-generator">Generator Glossary Entry</a> </li>
+</ul>
+
