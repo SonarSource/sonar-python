@@ -116,17 +116,6 @@ public class CancellationReraisedInAsyncCheck extends PythonSubscriptionCheck {
 
   }
 
-  private static boolean isReRaise(RaiseStatement raiseStatement, ExceptClause exceptClause) {
-    var isBareRaise = raiseStatement.expressions().isEmpty();
-    var exceptionInstanceName = TreeUtils.toOptionalInstanceOf(Name.class, exceptClause.exceptionInstance());
-
-    var isReRaise = raiseStatement.expressions().size() == 1 && exceptionInstanceName.isPresent()
-      && raiseStatement.expressions().get(0).is(Kind.NAME)
-      && ((Name) raiseStatement.expressions().get(0)).name().equals(exceptionInstanceName.get().name());
-
-    return isBareRaise || isReRaise;
-  }
-
   static class ComplianceChecker extends BaseTreeVisitor {
     private final ExceptClause exceptClause;
     private boolean hasRaiseStatement = false;
@@ -139,6 +128,17 @@ public class CancellationReraisedInAsyncCheck extends PythonSubscriptionCheck {
     boolean isCompliant() {
       // If we never found a raise statement, it's not compliant
       return isCompliant && hasRaiseStatement;
+    }
+
+    private static boolean isReRaise(RaiseStatement raiseStatement, ExceptClause exceptClause) {
+      var isBareRaise = raiseStatement.expressions().isEmpty();
+      var exceptionInstanceName = TreeUtils.toOptionalInstanceOf(Name.class, exceptClause.exceptionInstance());
+
+      var isReRaise = raiseStatement.expressions().size() == 1 && exceptionInstanceName.isPresent()
+        && raiseStatement.expressions().get(0).is(Kind.NAME)
+        && ((Name) raiseStatement.expressions().get(0)).name().equals(exceptionInstanceName.get().name());
+
+      return isBareRaise || isReRaise;
     }
 
     @Override
