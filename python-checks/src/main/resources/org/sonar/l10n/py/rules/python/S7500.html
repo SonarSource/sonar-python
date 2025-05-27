@@ -1,0 +1,31 @@
+<p>This rule raises an issue when a comprehension is used to only copy a collection. Instead, the respective constructor should be used.</p>
+<h2>Why is this an issue?</h2>
+<p>Python comprehensions are a concise way to create new collections while transforming or filtering elements. However, using a comprehension that
+copies elements from one collection to another without any transformation is less readable than using the respective constructor directly.</p>
+<p>Therefore, when a comprehension is only copying elements, use the appropriate constructor instead:</p>
+<ul>
+  <li> Replace <code>[x for x in iterable]</code> with <code>list(iterable)</code> </li>
+  <li> Replace <code>{x for x in iterable}</code> with <code>set(iterable)</code> </li>
+  <li> Replace <code>{k: v for k, v in iterable.items()}</code> with <code>dict(iterable)</code> </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Replace comprehensions that copy elements from one collection to another with the respective constructor.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+some_list = [1, 2, 3, 2]
+[x for x in some_list] # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+some_list = [1, 2, 3, 2]
+list(some_list) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#dict">dict()</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#list">list()</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#set">set()</a> </li>
+</ul>
+
