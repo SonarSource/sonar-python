@@ -1,0 +1,105 @@
+<p>This rule raises an issue when the <code>sleep</code> function is used in an asynchronous loop instead of an Event object.</p>
+<h2>Why is this an issue?</h2>
+<p>Asynchronous tasks often need to wait for a condition to change or an event to occur. A simple-looking but inefficient way to achieve this is by
+polling the condition within a loop, using <code>sleep</code> to pause between checks:</p>
+<pre>
+while not condition_is_met:
+    await asyncio.sleep(0.1) # Noncompliant
+# Condition is met, we can proceed
+</pre>
+<p>This busy-waiting approach is problematic in asynchronous code because it introduces increased latency. The task only notices the condition change
+after the <code>sleep</code> interval expires. If the condition becomes true just after the task starts sleeping, the reaction is delayed.</p>
+<p>Instead of polling with <code>sleep</code>, use dedicated synchronization primitives like <code>asyncio.Event</code>, <code>trio.Event</code> or
+<code>anyio.Event</code>. Using an <code>Event</code> allows a task to efficiently pause (<code>await event.wait()</code>) until another part of the
+program signals the event (<code>event.set()</code>). The waiting task consumes almost no resources while paused and reacts immediately when the event
+is set.</p>
+<h2>How to fix it in Asyncio</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import asyncio
+
+SHARED_CONDITION = False
+
+async def worker():
+    while not SHARED_CONDITION: # Noncompliant
+        await asyncio.sleep(0.01)
+    print("Condition is now true")
+
+asyncio.run(worker)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import asyncio
+
+SHARED_CONDITION = asyncio.Event()
+
+async def worker():
+    await SHARED_CONDITION.wait() # Compliant
+    print("Condition is now true")
+
+asyncio.run(worker)
+</pre>
+<h2>How to fix it in Trio</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import trio
+
+SHARED_CONDITION = False
+
+async def worker():
+    while not SHARED_CONDITION: # Noncompliant
+        await trio.sleep(0.01)
+    print("Condition is now true")
+
+trio.run(worker)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import trio
+
+SHARED_CONDITION = trio.Event()
+
+async def worker():
+    await SHARED_CONDITION.wait() # Compliant
+    print("Condition is now true")
+
+trio.run(worker)
+</pre>
+<h2>How to fix it in AnyIO</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import anyio
+
+SHARED_CONDITION = False
+
+async def worker():
+    while not SHARED_CONDITION: # Noncompliant
+        await anyio.sleep(0.01)
+    print("Condition is now true")
+
+anyio.run(worker)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+import anyio
+
+SHARED_CONDITION = anyio.Event()
+
+async def worker():
+    await SHARED_CONDITION.wait() # Compliant
+    print("Condition is now true")
+
+anyio.run(worker)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-sync.html#asyncio.Event">Event</a> </li>
+  <li> Trio documentation - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#broadcasting-an-event-with-event">Broadcasting an event
+  with Event</a> </li>
+  <li> AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/synchronization.html#events">Events</a> </li>
+</ul>
+
