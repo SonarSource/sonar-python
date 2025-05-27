@@ -1,0 +1,27 @@
+{
+  "title": "Cancellation exceptions should be re-raised after cleanup",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async",
+    "asyncio",
+    "trio",
+    "anyio"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7497",
+  "sqKey": "S7497",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM",
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
+}

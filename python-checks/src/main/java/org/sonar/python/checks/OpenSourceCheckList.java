@@ -136,6 +136,7 @@ public class OpenSourceCheckList {
       BusyWaitingInAsyncCheck.class,
       CancellationScopeNoCheckpointCheck.class,
       CaughtExceptionsCheck.class,
+      CancellationReraisedInAsyncCheck.class,
       ChangeMethodContractCheck.class,
       ChildAndParentExceptionCaughtCheck.class,
       CipherBlockChainingCheck.class,

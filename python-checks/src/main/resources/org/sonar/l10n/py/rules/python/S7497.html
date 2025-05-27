@@ -1,0 +1,130 @@
+<p>This rule raises an issue when a cancellation excception is caught without re-raising it.</p>
+<h2>Why is this an issue?</h2>
+<p>Asynchronous frameworks like <code>asyncio</code>, <code>trio</code>, and <code>anyio</code> use special exceptions to signal that a task or
+operation should be cancelled. These exceptions are not typical errors indicating a logical flaw in the task but are directives for the task to
+terminate its execution prematurely and perform necessary cleanup.</p>
+<p>When a task is cancelled, the framework typically injects this cancellation exception into it. The task is expected to:</p>
+<ul>
+  <li> Catch this specific cancellation exception. </li>
+  <li> Perform any urgent and brief cleanup actions (e.g., releasing locks or other resources). </li>
+  <li> Re-raise the cancellation exception. </li>
+</ul>
+<p>If a cancellation exception is caught and not re-raised (e.g., it’s suppressed with a <code>pass</code> statement, only logged, the handler returns
+normally, or a different exception is raised instead), the cancellation signal is effectively "swallowed".</p>
+<p>This prevents the framework and any calling code from knowing that the task has acknowledged the cancellation and is stopping. The task might even
+continue running parts of its code after the <code>except</code> block, which is contrary to the purpose of cancellation.</p>
+<p>Properly propagating cancellation exceptions is crucial for the cooperative multitasking model these frameworks rely on.</p>
+<h3>What is the potential impact?</h3>
+<p>Suppressing cancellation exceptions can lead to significant problems:</p>
+<ul>
+  <li> <strong>Unresponsive Applications</strong>: Tasks ignoring cancellation may run indefinitely, making the application unresponsive to shutdown
+  signals. </li>
+  <li> <strong>Resource Leaks</strong>: Tasks not stopping properly can leave resources (files, connections, locks) unreleased, leading to resource
+  exhaustion. </li>
+  <li> <strong>Incorrect State</strong>: Partial execution of cancelled operations can leave the application in an inconsistent state, risking data
+  corruption. </li>
+  <li> <strong>Debugging Difficulties</strong>: Troubleshooting why tasks continue running or why shutdown fails becomes challenging. </li>
+  <li> <strong>Broken Abstractions</strong>: Reliable cancellation is essential for async patterns and libraries; ignoring it breaks timeouts and task
+  groups. </li>
+</ul>
+<h2>How to fix it in Asyncio</h2>
+<p>If you need to catch cancellation exceptions for cleanup purposes, make sure to re-raise them after your cleanup code.</p>
+<p>Alternatively, you could add a specific handler for cancellation exceptions before your general exception handler.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import asyncio
+
+async def compute_result(data): ...
+
+async def process_data(data):
+    try:
+        result = await compute_result(data)
+        return result
+    except asyncio.CancelledError:
+        return  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import asyncio
+
+async def compute_result(data): ...
+
+async def process_data(data):
+    try:
+        result = await compute_result(data)
+        return result
+    except asyncio.CancelledError:  # Compliant
+        raise
+</pre>
+<h2>How to fix it in Trio</h2>
+<p>If you need to catch cancellation exceptions for cleanup purposes, make sure to re-raise them after your cleanup code.</p>
+<p>Alternatively, you could add a specific handler for cancellation exceptions before your general exception handler.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import trio
+
+async def compute_result(data): ...
+
+async def process_data(data):
+    try:
+        result = await compute_result(data)
+        return result
+    except trio.Cancelled:  # Noncompliant
+        return
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import trio
+
+async def compute_result(data): ...
+
+async def process_data(data):
+    try:
+        result = await compute_result(data)
+        return result
+    except trio.Cancelled:  # Compliant
+        raise
+</pre>
+<h2>How to fix it in AnyIO</h2>
+<p>If you need to catch cancellation exceptions for cleanup purposes, make sure to re-raise them after your cleanup code.</p>
+<p>Alternatively, you could add a specific handler for cancellation exceptions before your general exception handler.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import anyio
+
+async def compute_result(data): ...
+
+async def process_data(data):
+    try:
+        result = await compute_result(data)
+        return result
+    except anyio.Cancelled:  # Noncompliant
+        return
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+import anyio
+
+async def compute_result(data): ...
+
+async def process_data(data):
+    try:
+        result = await compute_result(data)
+        return result
+    except anyio.Cancelled:  # Compliant
+        raise
+</pre>
+<h3>Pitfalls</h3>
+<p>Asynchronous cleanup operations in <code>except CancelledError</code> or <code>finally</code> blocks can themselves be interrupted by cancellation.
+While <code>asyncio.shield()</code> (or library equivalents) can protect critical cleanup code, use it sparingly as it may delay shutdown.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#task-cancellation">Task Cancellation</a> </li>
+  <li> Trio documentation - <a href="https://trio.readthedocs.io/en/latest/reference-core.html#trio.Cancelled">Exceptions and warnings</a> </li>
+  <li> AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/cancellation.html#timeouts">Timeouts</a> </li>
+</ul>
+
