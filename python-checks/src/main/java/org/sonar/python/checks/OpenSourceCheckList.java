@@ -399,6 +399,7 @@ public class OpenSourceCheckList {
       UnionTypeExpressionCheck.class,
       UnnecessaryListComprehensionArgumentCheck.class,
       UnnecessaryComprehensionCheck.class,
+      UnnecessaryLambdaMapCallCheck.class,
       UnnecessaryReversedCallCheck.class,
       UnnecessarySubscriptReversalCheck.class,
       UnquantifiedNonCapturingGroupCheck.class,

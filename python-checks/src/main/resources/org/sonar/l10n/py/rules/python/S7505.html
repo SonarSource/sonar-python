@@ -1,0 +1,38 @@
+<p>This rule raises an issue when a collection is created with the use of a <code>lambda</code> function inside of <code>map()</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>The <code>map()</code> function applies a given function to each item of an iterable. When this function is a <code>lambda</code>, especially a
+simple one, the resulting code can sometimes be less readable than its comprehension or generator expression equivalent. For example: A comprehension
+like <code>[x * 2 for x in nums]</code> is more straightforward to read and understand at a glance than <code>list(map(lambda x: x * 2, nums))</code>.
+The logic is more self-contained and doesn’t require mentally parsing the <code>map</code> and <code>lambda</code> separately.</p>
+<p>Using <code>map()</code> could also have an impact on performance. While <code>map()</code> can be very efficient when used with built-in functions
+or pre-defined functions written in C, the use of a Python <code>lambda</code> introduces function call overhead for each element in the iterable.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue replace the <code>map(lambda …​)</code> construct with an equivalent generator expression or a list, set, or dictionary
+comprehension.</p>
+<ul>
+  <li> Replace <code>map(lambda var: expression, iterable)</code> with the generator expression <code>(expression for var in iterable)</code>. </li>
+  <li> Replace <code>list(map(lambda var: expression, iterable))</code> with the list comprehension <code>[expression for var in iterable]</code>.
+  </li>
+  <li> Replace <code>set(map(lambda var: expression, iterable))</code> with the set comprehension <code>{expression for var in iterable}</code>. </li>
+  <li> Replace <code>dict(map(lambda var: (key_expr, value_expr), iterable))</code> with the dictionary comprehension <code>{key_expr: value_expr for
+  var in iterable}</code> . </li>
+</ul>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+nums = [1, 2, 3, 4]
+
+list_map = list(map(lambda num: num * 2, nums)) # Noncompliant: the map and lambda function can be replaced by a list-comprehension
+</pre>
+<pre data-diff-id="1" data-diff-type="compliant">
+nums = [1, 2, 3, 4]
+
+list_comp = [num * 2 for num in nums] # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List Comprehensions</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/classes.html#generator-expressions">Generator Expressions</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/functions.html#map">map()</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/reference/expressions.html#lambda">Lambdas</a> </li>
+</ul>
+
