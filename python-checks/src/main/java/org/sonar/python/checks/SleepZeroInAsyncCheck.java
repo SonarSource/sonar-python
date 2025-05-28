@@ -16,38 +16,71 @@
  */
 package org.sonar.python.checks;
 
+import static org.sonar.python.checks.hotspots.CommonValidationUtils.isEqualTo;
+
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ImportName;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckMap;
-
-import static org.sonar.python.checks.hotspots.CommonValidationUtils.isEqualTo;
 
 @Rule(key = "S7491")
 public class SleepZeroInAsyncCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use %s instead of %s.";
   private static final String SECONDARY_MESSAGE = "This function is async.";
-  
+  private static final String QUICK_FIX_MESSAGE = "Replace with %s";
+
   private TypeCheckMap<MessageHolder> asyncSleepFunctions;
+  private final Map<String, String> asyncLibraryAliases = new HashMap<>();
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, this::initializeTypeCheckMap);
+    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, this::initializeAnalysis);
+    context.registerSyntaxNodeConsumer(Kind.IMPORT_NAME, this::handleImportName);
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, this::checkCallExpr);
   }
 
-  private void initializeTypeCheckMap(SubscriptionContext context) {
+  private void initializeAnalysis(SubscriptionContext context) {
     asyncSleepFunctions = TypeCheckMap.ofEntries(
       Map.entry(context.typeChecker().typeCheckBuilder().isTypeWithFqn("trio.sleep"),
-        new MessageHolder("trio.sleep", "trio.lowlevel.checkpoint()", "seconds")),
+        new MessageHolder("trio.sleep", "%s.lowlevel.checkpoint()", "seconds", "trio")),
       Map.entry(context.typeChecker().typeCheckBuilder().isTypeOrInstanceWithName("anyio.sleep"),
-        new MessageHolder("anyio.sleep", "anyio.lowlevel.checkpoint()", "delay")));
+        new MessageHolder("anyio.sleep", "%s.lowlevel.checkpoint()", "delay", "anyio")));
+
+    asyncLibraryAliases.clear();
+  }
+
+  private void handleImportName(SubscriptionContext context) {
+    var importName = (ImportName) context.syntaxNode();
+    importName.modules().forEach(this::trackModuleImport);
+  }
+
+  private void trackModuleImport(AliasedName aliasedName) {
+    List<Name> names = aliasedName.dottedName().names();
+    if (names.size() > 1) {
+      return;
+    }
+
+    String moduleName = names.get(0).name();
+    if ("trio".equals(moduleName) || "anyio".equals(moduleName)) {
+      Name alias = aliasedName.alias();
+      String moduleAlias = alias != null ? alias.name() : moduleName;
+      asyncLibraryAliases.put(moduleName, moduleAlias);
+    }
   }
 
   private void checkCallExpr(SubscriptionContext context) {
@@ -59,26 +92,46 @@ public class SleepZeroInAsyncCheck extends PythonSubscriptionCheck {
 
     var callee = callExpr.callee();
     asyncSleepFunctions.getOptionalForType(callee.typeV2()).ifPresent(
-      messageHolder -> messageHolder.handleCallExpr(context, callExpr, asyncKeyword));
+      messageHolder -> handleCallExpr(context, messageHolder, callExpr, asyncKeyword, asyncLibraryAliases));
   }
 
-  record MessageHolder(String fqn, String replacement, String keywordArgumentName) {
-    public void handleCallExpr(SubscriptionContext ctx, CallExpression callExpr, Tree asyncKeyword) {
-      if (!isZero(callExpr, keywordArgumentName)) {
-        return;
-      }
-      var message = String.format(MESSAGE, replacement, fqn);
-      var issue = ctx.addIssue(callExpr, message);
-      issue.secondary(asyncKeyword, SECONDARY_MESSAGE);
+  private static void handleCallExpr(SubscriptionContext context, MessageHolder messageHolder, CallExpression callExpr, Tree asyncKeyword,
+    Map<String, String> asyncLibraryAliases) {
+    if (!isZero(callExpr, messageHolder.keywordArgumentName())) {
+      return;
     }
 
-    private static boolean isZero(CallExpression callExpr, String keywordArgumentName) {
-      var argument = TreeUtils.nthArgumentOrKeyword(0, keywordArgumentName, callExpr.arguments());
-      if (argument == null) {
-        return false;
-      }
-      return isEqualTo(argument.expression(), 0);
+    var moduleAlias = asyncLibraryAliases.getOrDefault(messageHolder.libraryName(), messageHolder.libraryName());
+    var formattedReplacement = messageHolder.replacement().formatted(moduleAlias);
+
+    var message = String.format(MESSAGE, formattedReplacement, messageHolder.fqn());
+    var issue = context.addIssue(callExpr, message);
+    issue.secondary(asyncKeyword, SECONDARY_MESSAGE);
+
+    createQuickFix(messageHolder, callExpr, formattedReplacement, asyncLibraryAliases).ifPresent(issue::addQuickFix);
+  }
+
+  private static Optional<PythonQuickFix> createQuickFix(MessageHolder messageHolder, CallExpression callExpr, String formattedReplacement,
+    Map<String, String> asyncLibraryAliases) {
+    if (!asyncLibraryAliases.containsKey(messageHolder.libraryName())) {
+      return Optional.empty();
     }
 
+    var quickFixMessage = String.format(QUICK_FIX_MESSAGE, formattedReplacement);
+    var quickFix = PythonQuickFix.newQuickFix(quickFixMessage)
+      .addTextEdit(TextEditUtils.replace(callExpr, formattedReplacement))
+      .build();
+    return Optional.of(quickFix);
+  }
+
+  private static boolean isZero(CallExpression callExpr, String keywordArgumentName) {
+    var argument = TreeUtils.nthArgumentOrKeyword(0, keywordArgumentName, callExpr.arguments());
+    if (argument == null) {
+      return false;
+    }
+    return isEqualTo(argument.expression(), 0);
+  }
+
+  record MessageHolder(String fqn, String replacement, String keywordArgumentName, String libraryName) {
   }
 }
