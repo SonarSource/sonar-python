@@ -146,6 +146,7 @@ public class OpenSourceCheckList {
       ClearTextProtocolsCheck.class,
       CognitiveComplexityFunctionCheck.class,
       CollapsibleIfStatementsCheck.class,
+      CollectionCreationWrappedInConstructorCheck.class,
       CollectionLengthComparisonCheck.class,
       CommandLineArgsCheck.class,
       CommentedCodeCheck.class,

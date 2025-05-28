@@ -1,0 +1,59 @@
+<p>This rule raises an issue when calls to <code>tuple()</code>, <code>list()</code>, <code>set()</code>, or <code>dict()</code> are done with an
+argument that is either already a collection literal or a comprehension.</p>
+<h2>Why is this an issue?</h2>
+<p>Python provides direct ways to create common data structures like tuples, lists, and dictionaries using literals, e.g., <code>()</code>,
+<code>(1,2)</code>, <code>[]</code>, <code>[1,2]</code>, <code>{}</code>, <code>{'a':1}</code> and comprehensions e.g., <code>[x for x in y]</code>,
+<code>{k:v for k,v in y}</code>. Wrapping these direct forms in a type constructors is unnecessary, as shown in the following examples:</p>
+<pre>
+tuple((1,2))
+
+list([1,2])
+list([x for x in [1,2]])
+
+set({})
+set({for k in [1,2]})
+
+dict({'a':1})
+dict({k:v for k,v in [1,2]})
+dict([(1,"a"), (2, "b")])
+</pre>
+<p>Such constructs:</p>
+<ul>
+  <li> add overhead by creating an intermediate collections </li>
+  <li> add verbosity without providing any additional functionality </li>
+  <li> add ambiguity and may mislead readers or imply a more complex operation than what is actually occurring </li>
+</ul>
+<h3>Exceptions</h3>
+<p>If there are no modification in the comprehension such as <code>list([x for x in [1,2]])</code> which is the same as <code>[1,2]</code>, this rule
+will not raise an issue; instead rule {rule:python:S7500} - Comprehensions only used to copy should be replaced with the respective constructor calls,
+will raise an issue.</p>
+<h2>How to fix it</h2>
+<p>To fix this, remove the constructor call and use the literal or comprehension syntax of the target type. As an exception, for a list or
+comprehension inside of a <code>tuple</code> constructor replace the comprehension by a generator.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+t1 = tuple([1, 2]) # Noncompliant: the tuple creation can be done directly without the intermediate list
+</pre>
+<pre data-diff-id="1" data-diff-type="compliant">
+t1 = (1, 2) # Compliant
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+l1 = list([x * 2 for x in [1,2,3]]) # Noncompliant: list is redundant.
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+l1 = [x * 2 for x in [1,2,3]] # Compliant
+</pre>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+s1 = set([x * 2 for x in [1,2,3]]) # Noncompliant: the set creation can be done with a set comprehension.
+</pre>
+<pre data-diff-id="3" data-diff-type="compliant">
+s1 = {x * 2 for x in [1,2,3]} # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List Comprehensions</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">Dictionaries</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#sets">Sets</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">Tuples and Sequences</a> </li>
+</ul>
+
