@@ -76,13 +76,19 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
     "base64.b16encode", new ArgumentInfo(0, "s"),
     "base64.b16decode", new ArgumentInfo(0, "s"));
 
+  private TypeCheckMap<ArgumentInfo> sensitiveArgumentByFqnCheck;
+  private TypeCheckMap<ArgumentInfo> saltFunctionArgumentsToCheck;
+  private List<TypeCheckBuilder> deriveFunctionsToCheck;
+
   @Override
   public void initialize(Context context) {
-    var sensitiveArgumentByFqnCheck = new TypeCheckMap<ArgumentInfo>();
-    var saltFunctionArgumentsToCheck = new TypeCheckMap<ArgumentInfo>();
-    var deriveFunctionsToCheck = new ArrayList<TypeCheckBuilder>();
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> initializeTypeChecks(ctx, sensitiveArgumentByFqnCheck,
-      saltFunctionArgumentsToCheck, deriveFunctionsToCheck));
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      sensitiveArgumentByFqnCheck = new TypeCheckMap<>();
+      saltFunctionArgumentsToCheck = new TypeCheckMap<>();
+      deriveFunctionsToCheck = new ArrayList<>();
+      initializeTypeChecks(ctx, sensitiveArgumentByFqnCheck,
+        saltFunctionArgumentsToCheck, deriveFunctionsToCheck);
+    });
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> handleCallExpression((CallExpression) ctx.syntaxNode(),
       ctx,
       sensitiveArgumentByFqnCheck,

@@ -233,7 +233,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
 
   private TypeCheckBuilder argon2CheapestProfileTypeChecker = null;
   private TypeCheckBuilder flaskConfigTypeChecker = null;
-  private TypeCheckMap<Collection<CallValidator>> typeCheckMap = new TypeCheckMap<>();
+  private TypeCheckMap<Collection<CallValidator>> typeCheckMap = null;
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::registerTypeCheckers);

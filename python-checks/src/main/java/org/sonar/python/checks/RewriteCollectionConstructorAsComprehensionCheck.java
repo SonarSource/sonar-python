@@ -45,8 +45,8 @@ public class RewriteCollectionConstructorAsComprehensionCheck extends PythonSubs
   @Override
   public void initialize(Context context) {
     IsComprehensionTransformedChecker isComprehensionTransformedChecker = new IsComprehensionTransformedChecker(context);
-    collectionTypeCheckerMap = new TypeCheckMap<>();
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      collectionTypeCheckerMap = new TypeCheckMap<>();
       for (var collectionEntry : COLLECTION_MESSAGES.entrySet()) {
         TypeCheckBuilder typeChecker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(collectionEntry.getKey());
         collectionTypeCheckerMap.put(typeChecker, collectionEntry.getValue());

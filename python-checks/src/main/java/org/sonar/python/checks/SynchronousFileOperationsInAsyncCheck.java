@@ -32,7 +32,7 @@ public class SynchronousFileOperationsInAsyncCheck extends PythonSubscriptionChe
   private static final String MESSAGE = "Use an asynchronous file API instead of synchronous %s() in this async function.";
   private static final String SECONDARY_MESSAGE = "This function is async.";
 
-  private final TypeCheckMap<String> syncFileFunctions = new TypeCheckMap<>();
+  private TypeCheckMap<String> syncFileFunctions;
 
   @Override
   public void initialize(Context context) {
@@ -55,6 +55,7 @@ public class SynchronousFileOperationsInAsyncCheck extends PythonSubscriptionChe
     "lzma.open");
 
   private void initializeTypeCheckMap(SubscriptionContext context) {
+    syncFileFunctions = new TypeCheckMap<>();
     SYNC_FILE_FUNCTIONS.forEach(fqn -> syncFileFunctions.put(context.typeChecker().typeCheckBuilder().isTypeOrInstanceWithName(fqn), fqn));
   }
 

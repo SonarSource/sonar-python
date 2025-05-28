@@ -59,7 +59,7 @@ public class SynchronousHttpOperationsInAsyncCheck extends PythonSubscriptionChe
     "httpx.options",
     "httpx.patch");
 
-  private final TypeCheckMap<Object> syncHttpTypeChecks = new TypeCheckMap<>();
+  private TypeCheckMap<Object> syncHttpTypeChecks;
 
   @Override
   public void initialize(Context context) {
@@ -68,6 +68,7 @@ public class SynchronousHttpOperationsInAsyncCheck extends PythonSubscriptionChe
   }
 
   private void setupTypeChecks(SubscriptionContext ctx) {
+    syncHttpTypeChecks = new TypeCheckMap<>();
     var object = new Object();
     IMPORT_PATHS.forEach(path -> syncHttpTypeChecks.put(ctx.typeChecker().typeCheckBuilder().isTypeOrInstanceWithName(path), object));
     IMPORT_PATHS_FQN.forEach(path -> syncHttpTypeChecks.put(ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(path), object));

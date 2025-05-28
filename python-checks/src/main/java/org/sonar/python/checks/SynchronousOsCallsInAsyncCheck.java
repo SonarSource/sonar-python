@@ -36,7 +36,7 @@ public class SynchronousOsCallsInAsyncCheck extends PythonSubscriptionCheck {
     "os.waitid"
   );
 
-  private final TypeCheckMap<Object> syncOsCallsTypeChecks = new TypeCheckMap<>();
+  private TypeCheckMap<Object> syncOsCallsTypeChecks;
 
   @Override
   public void initialize(Context context) {
@@ -45,8 +45,9 @@ public class SynchronousOsCallsInAsyncCheck extends PythonSubscriptionCheck {
   }
 
   private void setupTypeChecks(SubscriptionContext ctx) {
+    syncOsCallsTypeChecks = new TypeCheckMap<>();
     var object = new Object();
-    OS_BLOCKING_CALLS.forEach(path -> 
+    OS_BLOCKING_CALLS.forEach(path ->
       syncOsCallsTypeChecks.put(ctx.typeChecker().typeCheckBuilder().isTypeOrInstanceWithName(path), object));
   }
 
