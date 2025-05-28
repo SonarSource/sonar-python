@@ -31,37 +31,48 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.python.checks.utils.CheckUtils;
 
 @Rule(key = "S7503")
 public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
-  
+
   private static final String MESSAGE = "Use asynchronous features in this function or remove the `async` keyword.";
-  
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, AsyncFunctionNotAsyncCheck::checkAsyncFunction);
   }
-  
+
   private static void checkAsyncFunction(SubscriptionContext ctx) {
     FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-    
+
     Token asyncKeyword = functionDef.asyncKeyword();
     if (asyncKeyword == null || isException(functionDef)) {
       return;
     }
     AsyncFeatureVisitor visitor = new AsyncFeatureVisitor();
     functionDef.body().accept(visitor);
-    
+
     if (!visitor.hasAsyncFeature()) {
       ctx.addIssue(functionDef.name(), MESSAGE).secondary(asyncKeyword, "This function is async.");
     }
   }
 
   private static boolean isException(FunctionDef functionDef) {
-    return CheckUtils.isAbstract(functionDef) || isEmptyFunction(functionDef.body());
+    return CheckUtils.isAbstract(functionDef) ||
+      isEmptyFunction(functionDef.body()) ||
+      isDunderMethod(functionDef) ||
+      !functionDef.decorators().isEmpty() ||
+      mightBeOverridingMethod(functionDef);
   }
-  
+
+  private static boolean isDunderMethod(FunctionDef functionDef) {
+    String methodName = functionDef.name().name();
+    return methodName.startsWith("__");
+  }
+
   private static boolean isEmptyFunction(StatementList body) {
     for (Statement statement : body.statements()) {
       if (!CheckUtils.isEmptyStatement(statement)) {
@@ -70,20 +81,25 @@ public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
     }
     return true;
   }
-  
+
+  private static boolean mightBeOverridingMethod(FunctionDef functionDef) {
+    FunctionType functionType = (FunctionType) functionDef.name().typeV2();
+    return functionType.owner() instanceof ClassType classType && (classType.hasUnresolvedHierarchy() || classType.inheritedMember(functionType.name()).isPresent());
+  }
+
   private static class AsyncFeatureVisitor extends BaseTreeVisitor {
-    
+
     private boolean asyncFeatureFound = false;
-    
+
     public boolean hasAsyncFeature() {
       return asyncFeatureFound;
     }
-    
+
     @Override
     public void visitAwaitExpression(AwaitExpression awaitExpression) {
       asyncFeatureFound = true;
     }
-    
+
     @Override
     public void visitForStatement(ForStatement forStatement) {
       if (forStatement.isAsync()) {
@@ -94,7 +110,7 @@ public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
         super.visitForStatement(forStatement);
       }
     }
-    
+
     @Override
     public void visitWithStatement(WithStatement withStatement) {
       if (withStatement.isAsync()) {
@@ -104,22 +120,22 @@ public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
         super.visitWithStatement(withStatement);
       }
     }
-    
+
     @Override
     public void visitYieldStatement(YieldStatement yieldStatement) {
       asyncFeatureFound = true;
     }
-    
+
     @Override
     public void visitYieldExpression(YieldExpression yieldExpression) {
       asyncFeatureFound = true;
     }
-    
+
     @Override
     public void visitFunctionDef(FunctionDef functionDef) {
       // Skip nested functions
     }
-    
+
     @Override
     protected void scan(@Nullable Tree tree) {
       // Stop scanning if we've already found an async feature

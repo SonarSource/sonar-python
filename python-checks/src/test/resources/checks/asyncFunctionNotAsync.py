@@ -84,7 +84,7 @@ class AsyncClass:
         return await self.some_coroutine()
 
     @classmethod
-    async def async_classmethod_without_await(cls):  # Noncompliant
+    async def async_classmethod_without_await(cls):  # Avoid FPs with decorators
         return cls.some_value
 
     async def async_method_with_inner_function(self):
@@ -101,9 +101,75 @@ class AsyncClass:
         raise NotImplementedError("This is an abstract method")
 
     @abc.other
-    async def other_decorator_1(self):  # Noncompliant
+    async def other_decorator_1(self):  # Avoid FPs with decorators
         raise NotImplementedError("...")
 
     @unknown()
-    async def other_decorator_1(self):  # Noncompliant
+    async def other_decorator_1(self):  # Avoid FPs with decorators
         raise NotImplementedError("...")
+
+# Async protocol methods - should be compliant even without await
+class AsyncContextManager:
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        pass
+
+    async def __unknown_dunder__(self):
+        # Avoid risk of FPs
+        pass
+
+class AsyncIterator:
+    async def __aiter__(self):
+        return self
+
+    async def __anext__(self):
+        if self.should_stop():
+            raise StopAsyncIteration
+        return self.value
+
+class AsyncResource:
+    async def __aclose__(self):
+        print("Releasing resources")
+        
+class AsyncAwaitableObject:
+    async def __await__(self):
+        yield "something"
+
+    async def regular_method_without_await(self):  # Noncompliant
+        print("This is not a protocol method")
+
+# FastAPI route examples
+from fastapi import FastAPI, APIRouter
+
+app = FastAPI()
+router = APIRouter()
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: int):  # Compliant - FastAPI route
+    return {"item_id": item_id}
+
+@app.post("/users/")
+async def create_user(user_data: dict):  # Compliant - FastAPI route
+    # No await, but this is still valid for FastAPI routes
+    return {"user_id": 123, "data": user_data}
+
+@router.put("/items/{item_id}")
+async def update_item(item_id: int, item: dict):  # Compliant - FastAPI route via router
+    return {"item_id": item_id, "item": item}
+
+@app.delete("/items/{item_id}")
+async def delete_item(item_id: int):  # Compliant - FastAPI route
+    # No await, but this is still valid for FastAPI routes
+    return {"deleted": True}
+
+
+class MyClass:
+    async def my_method(self):
+        await something()
+
+class MyOtherClass(MyClass):
+    async def my_method(self):
+        # No issue on overriding methods
+        do_something()
