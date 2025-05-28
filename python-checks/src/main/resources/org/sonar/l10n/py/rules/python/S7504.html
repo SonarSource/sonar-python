@@ -1,0 +1,29 @@
+<p>This rule raises an issue when <code>list()</code> calls are applied to types that are already directly iterable with for-loops or
+comprehensions.</p>
+<h2>Why is this an issue?</h2>
+<p>When iterating over an already iterable object with a for loop or a comprehension, wrapping it with <code>list()</code> adds meaningless clutter
+that doesn’t provide any functional value. Additionally, it creates unnecessary overhead by generating an intermediate list in memory, which
+inefficiently consumes memory and can degrade performance, especially with large data structures. Iterating directly over the original object is
+cleaner and more efficient.</p>
+<h2>How to fix it</h2>
+<p>Remove the redundant <code>list()</code> call and iterate directly over the original iterable.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+some_iterable = range(10)
+for i in list(some_iterable): # Noncompliant: unnecessary list() call
+    print(i)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+some_iterable = range(10)
+for i in some_iterable: # Compliant
+    print(i)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/glossary.html#term-iterable">Iterable Glossary Entry</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.domainunion.de/3/library/stdtypes.html#list">list()</a> </li>
+</ul>
+
