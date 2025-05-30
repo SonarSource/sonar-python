@@ -688,6 +688,33 @@ class TreeUtilsTest {
     assertThat(result).hasSameElementsAs(List.of("a"));
   }
 
+  @Test
+  void test_stringValueFromNameOrQualifiedExpression() {
+    // Simple name
+    Expression expression = lastExpression("foo");
+    assertThat(TreeUtils.stringValueFromNameOrQualifiedExpression(expression)).contains("foo");
+
+    // Qualified expression
+    expression = lastExpression("os.path");
+    assertThat(TreeUtils.stringValueFromNameOrQualifiedExpression(expression)).contains("os.path");
+
+    // Nested qualified expression
+    expression = lastExpression("os.path.join");
+    assertThat(TreeUtils.stringValueFromNameOrQualifiedExpression(expression)).contains("os.path.join");
+
+    // Call expression - should return empty
+    expression = lastExpression("foo()");
+    assertThat(TreeUtils.stringValueFromNameOrQualifiedExpression(expression)).isEmpty();
+
+    // Complex qualifier - should return empty
+    expression = lastExpression("(x + y).method");
+    assertThat(TreeUtils.stringValueFromNameOrQualifiedExpression(expression)).isEmpty();
+
+    // Binary expression - should return empty
+    expression = lastExpression("a + b");
+    assertThat(TreeUtils.stringValueFromNameOrQualifiedExpression(expression)).isEmpty();
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }
@@ -698,3 +725,4 @@ class TreeUtilsTest {
     return new PythonTreeMaker().fileInput(astNode);
   }
 }
+

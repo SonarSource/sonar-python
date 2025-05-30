@@ -524,4 +524,33 @@ public class TreeUtils {
       .toList();
   }
 
+
+  /**
+   * Extracts the string value from a name or qualified expression.
+   * Returns empty Optional for expressions that are not simple names or chains of qualified expressions.
+   */
+  public static Optional<String> stringValueFromNameOrQualifiedExpression(Expression expression) {
+    if (expression.is(Tree.Kind.NAME)) {
+      return Optional.of(((Name) expression).name());
+    } else if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+      return extractStringValueFromQualifiedExpression((QualifiedExpression) expression);
+    }
+    return Optional.empty();
+  }
+
+
+  private static Optional<String> extractStringValueFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
+    String memberName = qualifiedExpression.name().name();
+    Expression qualifier = qualifiedExpression.qualifier();
+    
+    if (qualifier.is(Tree.Kind.NAME)) {
+      return Optional.of(((Name) qualifier).name() + "." + memberName);
+    } else if (qualifier.is(Tree.Kind.QUALIFIED_EXPR)) {
+      return extractStringValueFromQualifiedExpression((QualifiedExpression) qualifier)
+        .map(qualifiedName -> qualifiedName + "." + memberName);
+    }
+    
+    return Optional.empty();
+  }
+
 }
