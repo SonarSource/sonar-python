@@ -16,20 +16,26 @@
  */
 package org.sonar.python.checks;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.AliasedName;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.TriBool;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 
@@ -45,8 +51,11 @@ public class InputInAsyncCheck extends PythonSubscriptionCheck {
   private static final String LIB_TRIO = "trio";
   private static final String LIB_ANYIO = "anyio";
 
+  private static final String QUICK_FIX_TO_THREAD = "Wrap with await %s.to_thread(input%s)";
+  private static final String QUICK_FIX_RUN_SYNC = "Wrap with await %s.to_thread.run_sync(input%s)";
+
   private TypeCheckBuilder isInputCall;
-  private final Map<String, String> asyncLibraryAliases = new HashMap<>();
+  private final Map<String, String> asyncLibraryAliases = new LinkedHashMap<>();
 
   @Override
   public void initialize(Context context) {
@@ -83,7 +92,8 @@ public class InputInAsyncCheck extends PythonSubscriptionCheck {
     TreeUtils.asyncTokenOfEnclosingFunction(callExpression)
       .ifPresent(asyncKeyword -> {
         String message = getMessage();
-        context.addIssue(callee, message).secondary(asyncKeyword, SECONDARY_MESSAGE);
+        var issue = context.addIssue(callee, message).secondary(asyncKeyword, SECONDARY_MESSAGE);
+        createQuickFixes(callExpression, callee).forEach(issue::addQuickFix);
       });
   }
 
@@ -99,5 +109,31 @@ public class InputInAsyncCheck extends PythonSubscriptionCheck {
     } else {
       return String.format(MESSAGE_TO_THREAD_RUN_SYNC, asyncLibraryAliases.get(LIB_ANYIO));
     }
+  }
+
+  private List<PythonQuickFix> createQuickFixes(CallExpression callExpression, Expression inputCallee) {
+    if (inputCallee instanceof Name inputCalleeName && !"input".equals(inputCalleeName.name())) {
+      return List.of();
+    }
+
+    List<PythonQuickFix> fixes = new ArrayList<>();
+    List<Argument> args = callExpression.arguments();
+
+    String argsString = args.stream()
+      .map(arg -> TreeUtils.treeToString(arg, false))
+      .filter(Objects::nonNull)
+      .collect(Collectors.joining(", "));
+
+    var argsForTemplate = argsString.isEmpty() ? "" : (", " + argsString);
+
+    asyncLibraryAliases.forEach((library, alias) -> {
+      var replacementCall = LIB_ASYNCIO.equals(library) ? (alias + ".to_thread(input" + argsForTemplate + ")") : (alias + ".to_thread.run_sync(input" + argsForTemplate + ")");
+      var quickFixMsg = LIB_ASYNCIO.equals(library) ? String.format(QUICK_FIX_TO_THREAD, alias, argsForTemplate) : String.format(QUICK_FIX_RUN_SYNC, alias, argsForTemplate);
+      var quickFix = PythonQuickFix.newQuickFix(quickFixMsg)
+        .addTextEdit(TextEditUtils.replace(callExpression, "await " + replacementCall))
+        .build();
+      fixes.add(quickFix);
+    });
+    return fixes;
   }
 }
