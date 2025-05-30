@@ -2,6 +2,7 @@ import trio
 import anyio
 import trio as t
 import anyio as a
+import something_else
 
 async def long_sleep_trio():
     await trio.sleep(86401)  # Noncompliant
