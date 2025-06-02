@@ -245,6 +245,7 @@ public class OpenSourceCheckList {
       IncorrectExceptionTypeCheck.class,
       IncorrectParameterDatetimeConstructorsCheck.class,
       IndexMethodCheck.class,
+      InefficientDictIterationCheck.class,
       InequalityUsageCheck.class,
       InfiniteRecursionCheck.class,
       InitReturnsValueCheck.class,

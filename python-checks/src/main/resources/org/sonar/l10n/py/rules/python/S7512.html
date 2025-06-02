@@ -1,0 +1,55 @@
+<p>This rule raises an issue when <code>.items()</code> is used to iterate over a dictionary and then either the key or the value is discarded.</p>
+<h2>Why is this an issue?</h2>
+<p>Using <code>.items()</code> to iterate over a dictionary and then discarding either the key or the value in each iteration is less efficient than
+directly iterating over only the keys or values needed.</p>
+<p>Python dictionaries provide efficient ways to iterate over their contents:</p>
+<ul>
+  <li> Iterating directly over the dictionary yields the keys: </li>
+</ul>
+<pre>
+for k in my_dict:
+  ...
+</pre>
+<ul>
+  <li> Using <code>my_dict.keys()</code> explicitly yields the keys. </li>
+  <li> Using <code>my_dict.values()</code> yields the values. </li>
+  <li> Using <code>my_dict.items()</code> yields key-value pairs (as tuples). </li>
+</ul>
+<p>The <code>.items()</code> method is useful when you need both the key and the value within the loop. However, if your loop only uses the key,
+discarding the value, often with <code>_</code>, or only uses the value, discarding the key, calling <code>.items()</code> performs unnecessary work
+retrieving the part you don’t use.</p>
+<p>While the performance difference might be minor for small dictionaries, using the more specific method is clearer, more idiomatic, and avoids
+retrieving and unpacking data that is immediately ignored, like`.keys()` for keys, or <code>.values()</code> for values.</p>
+<h2>How to fix it</h2>
+<p>Adjust the loop to use the most appropriate dictionary view method based on whether you need keys, values, or both: * If only values are needed,
+iterate over <code>my_dict.values()</code>. * If only keys are needed, iterate directly over the dictionary (<code>for key in my_dict:</code>) or use
+<code>my_dict.keys()</code>. * If both key and value are needed, continue using <code>my_dict.items()</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+fruit = {'a': 'Apple', 'b': 'Banana'}
+for _, value in fruit.items(): # Discards key
+    print(value)
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+fruit = {'a': 'Apple', 'b': 'Banana'}
+for key, _ in fruit.items(): # Discards value
+    print(key)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+fruit = {'a': 'Apple', 'b': 'Banana'}
+for value in fruit.values(): # Iterates only on values
+    print(value)
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+fruit = {'a': 'Apple', 'b': 'Banana'}
+for key in fruit: # Iterates directly over dictionary (yields keys)
+    print(key)
+</pre>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#dictionary-view-objects">Dictionary View Objects
+  (<code>.keys()</code>, <code>.values()</code>, <code>.items()</code>)</a> </li>
+</ul>
+
