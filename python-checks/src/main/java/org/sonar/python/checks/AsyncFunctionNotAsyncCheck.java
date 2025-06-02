@@ -24,6 +24,7 @@ import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
@@ -33,19 +34,27 @@ import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.checks.utils.CheckUtils;
+import org.sonar.python.types.v2.TypeCheckBuilder;
 
 @Rule(key = "S7503")
 public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use asynchronous features in this function or remove the `async` keyword.";
+  private TypeCheckBuilder notImplementedTypeChecker;
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, AsyncFunctionNotAsyncCheck::checkAsyncFunction);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::setupTypeChecks);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, this::checkAsyncFunction);
   }
 
-  private static void checkAsyncFunction(SubscriptionContext ctx) {
+  private void setupTypeChecks(SubscriptionContext ctx) {
+    notImplementedTypeChecker = ctx.typeChecker().typeCheckBuilder().isTypeWithName("NotImplemented");
+  }
+
+  private void checkAsyncFunction(SubscriptionContext ctx) {
     FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
 
     Token asyncKeyword = functionDef.asyncKeyword();
@@ -60,9 +69,9 @@ public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean isException(FunctionDef functionDef) {
+  private boolean isException(FunctionDef functionDef) {
     return CheckUtils.isAbstract(functionDef) ||
-      isEmptyFunction(functionDef.body()) ||
+      isTrivialFunction(functionDef.body()) ||
       isDunderMethod(functionDef) ||
       !functionDef.decorators().isEmpty() ||
       mightBeOverridingMethod(functionDef);
@@ -73,13 +82,18 @@ public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
     return methodName.startsWith("__");
   }
 
-  private static boolean isEmptyFunction(StatementList body) {
+  private boolean isTrivialFunction(StatementList body) {
     for (Statement statement : body.statements()) {
-      if (!CheckUtils.isEmptyStatement(statement)) {
+      if (!CheckUtils.isEmptyStatement(statement) && !statement.is(Tree.Kind.RAISE_STMT) && !isReturnNotImplemented(statement)) {
         return false;
       }
     }
     return true;
+  }
+
+  private boolean isReturnNotImplemented(Statement statement) {
+    return statement.is(Tree.Kind.RETURN_STMT) &&
+      ((ReturnStatement) statement).expressions().stream().allMatch(e -> notImplementedTypeChecker.check(e.typeV2()) == TriBool.TRUE);
   }
 
   private static boolean mightBeOverridingMethod(FunctionDef functionDef) {

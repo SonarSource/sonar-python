@@ -77,7 +77,11 @@ async def async_generator_with_expression():  # Compliant
     return x
 
 class AsyncClass:
+    async def async_method_without_await_trivial(self):  # Noncompliant
+        return self.some_attribute
+
     async def async_method_without_await(self):  # Noncompliant
+        do_something()
         return self.some_attribute
 
     async def async_method_with_await(self):  # Compliant
@@ -119,6 +123,12 @@ class AsyncContextManager:
     async def __unknown_dunder__(self):
         # Avoid risk of FPs
         pass
+
+    async def not_implemented_error(self):
+        raise NotImplementedError("This method is not implemented")
+
+    async def not_implemented(self):
+        return NotImplemented
 
 class AsyncIterator:
     async def __aiter__(self):
