@@ -279,6 +279,7 @@ public class OpenSourceCheckList {
       ModuleNameCheck.class,
       MultipleWhitespaceCheck.class,
       NeedlessPassCheck.class,
+      NestedCollectionsCreationCheck.class,
       NestedConditionalExpressionCheck.class,
       NestedControlFlowDepthCheck.class,
       NewStyleClassCheck.class,

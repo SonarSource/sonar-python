@@ -1,0 +1,36 @@
+<p>This rule raises an issue when the functions <code>list()</code>, <code>tuple()</code>, <code>set()</code>, <code>sorted()</code>, or
+<code>reversed()</code> are unnecessarily wrapped around each other’s return values or used to convert values that don’t require conversion.</p>
+<h2>Why is this an issue?</h2>
+<p>Python’s built-in functions for processing iterables such as <code>list()</code>, <code>tuple()</code>, <code>set()</code>, <code>sorted()</code>,
+and <code>reversed()</code> are designed to accept any iterable as input. When these functions are unnecessarily nested within each other, it creates
+redundant operations that add unnecessary computational overhead by creating intermediate data structures, decrease code readability and make the
+intention less clear, and waste memory by duplicating data structures temporarily.</p>
+<h2>How to fix it</h2>
+<p>When the outer function is given a collection but could have been given an iterable, the unnecessary conversion should be removed. For example, in
+<code>sorted(list(iterable))</code>, the outer <code>sorted()</code> function can accept an iterable directly, so the inner <code>list()</code> call
+is redundant and should be removed.</p>
+<p>When the function <code>sorted()</code> is wrapped with <code>list()</code>, remove this conversion operation, since <code>sorted()</code> already
+returns a list.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+iterable = (3, 1, 4, 1)
+
+sorted_of_list = list(sorted(iterable)) # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+iterable = (3, 1, 4, 1)
+
+sorted_of_list = sorted(iterable)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#list">list</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#set">set</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/functions.html#sorted">sorted</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/functions.html#reversed">reversed</a> </li>
+</ul>
+
