@@ -268,6 +268,7 @@ public class OpenSourceCheckList {
       LoggersConfigurationCheck.class,
       LongIntegerWithLowercaseSuffixUsageCheck.class,
       LoopExecutingAtMostOnceCheck.class,
+      LoopOverDictKeyValuesCheck.class,
       MandatoryFunctionParameterTypeHintCheck.class,
       MandatoryFunctionReturnTypeHintCheck.class,
       MembershipTestSupportCheck.class,

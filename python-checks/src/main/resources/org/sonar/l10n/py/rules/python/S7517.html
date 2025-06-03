@@ -1,0 +1,38 @@
+<p>This rule raises an issue when a dictionary is iterated over without explicitly calling the <code>.items()</code> method.</p>
+<h2>Why is this an issue?</h2>
+<p>When iterating directly over a dictionary e.g., <code>for k, v in some_dict:</code> or <code>{k: v for k, v in some_dict}</code>, Python iterates
+over the dictionary’s keys by default. If the intention is to access both the key and the value, omitting <code>.items()</code> leads to unexpected
+behavior. In such cases, the <code>k</code> variable would receive the key, and the <code>v</code> variable would attempt to unpack the key itself,
+which can lead to errors or subtle bugs if the key is iterable, like a <code>string</code>. For example, if a key is a <code>string</code> like
+<code>"hi"</code>, <code>k</code> would be <code>'h'</code> and <code>v</code> would be <code>'i'</code>.</p>
+<h2>How to fix it</h2>
+<p>To fix this, simply append <code>.items()</code> to your dictionary when iterating.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+some_dict = { "k1": "v1", "k2": "v2"}
+
+{k: v for k, v in some_dict} # Noncompliant: `v` will not receive the value, but the first character of the key
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+some_dict = { "k1": "v1", "k2": "v2"}
+
+for k, v in some_dict: # Noncompliant: `v` will not receive the value, but the first character of the key
+  ...
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+some_dict = { "k1": "v1", "k2": "v2"}
+{k: v for k, v in some_dict.items()}
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+some_dict = { "k1": "v1", "k2": "v2"}
+for k, v in some_dict.items():
+  ...
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#looping-techniques">Looping Techniques</a> </li>
+</ul>
+
