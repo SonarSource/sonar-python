@@ -54,7 +54,8 @@ public class ConcurrentOrchestratorExtension extends Orchestrator implements Bef
 
 
   public SonarScanner createSonarScanner() {
-    return SonarScanner.create();
+    return SonarScanner.create()
+      .setProperty("sonar.scanner.skipJreProvisioning", "true");
   }
 
   public static ConcurrentOrchestratorExtensionBuilder builderEnv() {
