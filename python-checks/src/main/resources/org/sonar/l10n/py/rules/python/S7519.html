@@ -1,0 +1,28 @@
+<p>This rule raises an issue when a dictionary comprehension is used to create a dictionary where all values are the same constant.</p>
+<h2>Why is this an issue?</h2>
+<p>Using a dictionary comprehension to build a dictionary where every key maps to the exact same constant value e.g., <code>{k: 1 for k in
+keys}</code> is less efficient and less idiomatic than using the <code>dict.fromkeys()</code> class method. <code>dict.fromkeys()</code> is
+specifically designed for this use case and offers better performance, especially for large iterables, as it avoids the overhead of creating and
+processing individual key-value pairs in a comprehension.</p>
+<h2>How to fix it</h2>
+<p>Rewrite the dictionary comprehension <code>{x: constant for x in iterable}</code> as <code>dict.fromkeys(iterable, constant)</code>. If the
+constant value is <code>None</code>, you can omit the value argument in <code>dict.fromkeys()</code>, as it defaults to <code>None</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+keys = ['a', 'b', 'c']
+
+dict_comp_one = {k: 1 for k in keys} # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+keys = ['a', 'b', 'c']
+
+dict_fromkeys_one = dict.fromkeys(keys, 1)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#dict.fromkeys">dict.fromkeys</a> </li>
+</ul>
+

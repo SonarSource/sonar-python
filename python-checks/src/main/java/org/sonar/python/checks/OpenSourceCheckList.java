@@ -156,6 +156,7 @@ public class OpenSourceCheckList {
       ConfusingWalrusCheck.class,
       ConsistentReturnCheck.class,
       ConstantConditionCheck.class,
+      ConstantValueDictComprehensionCheck.class,
       CorsCheck.class,
       CsrfDisabledCheck.class,
       DataEncryptionCheck.class,
