@@ -1,0 +1,26 @@
+{
+  "title": "Control flow statements should not be used inside TaskGroup or Nursery blocks",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async",
+    "asyncio",
+    "trio",
+    "anyio"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7514",
+  "sqKey": "S7514",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
+}
