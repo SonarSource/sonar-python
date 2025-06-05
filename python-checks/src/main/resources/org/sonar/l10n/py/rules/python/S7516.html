@@ -1,0 +1,35 @@
+<p>This raises an issue when <code>set()</code> is directly around the output of <code>sorted()</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>Calling <code>set(sorted(iterable))</code> is usually an indication of a misunderstanding of the desired outcome or an inefficient way to achieve
+it. The <code>sorted()</code> function produces a <strong>list</strong> of items in sorted order. Applying <code>set()</code> to this sorted list
+converts it into a set, which is an <strong>unordered</strong> collection of unique elements. The effort spent on sorting is immediately negated if
+the final result is an unordered set, as the order established by <code>sorted()</code> is discarded.</p>
+<p>If the intention is to obtain a sorted list of unique elements from an iterable, the pattern <code>set(sorted(iterable))</code> is inefficient. It
+first sorts all elements, including duplicates (which can be computationally expensive for large lists with many duplicates), and then removes these
+duplicates while also discarding the order established by <code>sorted()</code>. The more efficient and standard idiom for getting unique, sorted
+items is to deduplicate <strong>first</strong> using <code>set()</code>, and then sort the unique items: <code>sorted(set(iterable))</code>. This way,
+<code>sorted()</code> operates on a potentially smaller collection of unique items.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue remove the call to either <code>set()</code> or <code>sorted()</code>, or call <code>sorted()</code> on the output of
+<code>set()</code>. If the goal is just to obtain unique items (and order is not important), then <code>set(iterable)</code> is sufficient; the
+<code>sorted()</code> call can be removed. If the goal is to obtain sorted items with duplicates preserved, then <code>sorted(iterable)</code> is
+sufficient; the <code>set()</code> call can be removed. If the goal is to obtain sorted items with duplicates removed, then
+<code>sorted(set(iterable))</code> is the correct way to proceed.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+data = [3, 4, 1 , 2]
+set(sorted(data)) # Noncompliant: set is called on a sorted list
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+data = [3, 4, 1 , 2]
+sorted(data) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/functions.html#sorted">sorted</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#sets">sets</a> </li>
+</ul>
+

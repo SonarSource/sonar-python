@@ -408,6 +408,7 @@ public class OpenSourceCheckList {
       UnnecessaryLambdaMapCallCheck.class,
       UnnecessaryListCastCheck.class,
       UnnecessaryReversedCallCheck.class,
+      UnnecessarySortInsideSetCheck.class,
       UnnecessarySubscriptReversalCheck.class,
       UnquantifiedNonCapturingGroupCheck.class,
       UnreachableExceptCheck.class,
