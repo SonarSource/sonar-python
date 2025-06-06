@@ -1,0 +1,109 @@
+<p>This rule raises when a TaskGroup or Nursery body contains only a single call to <code>.start</code> or <code>.start_soon</code> without passing
+itself as a parameter.</p>
+<h2>Why is this an issue?</h2>
+<p>TaskGroup and Nursery are powerful tools for structured concurrency that automatically manage the lifecycle of multiple concurrent tasks. However,
+when they are used to spawn only a single task that doesn’t need the nursery/TaskGroup instance itself, they add unnecessary overhead and
+complexity.</p>
+<p>The main issues with using TaskGroup and Nursery for single tasks are:</p>
+<ul>
+  <li> <strong>Unnecessary overhead</strong>: Creating a nursery or TaskGroup involves additional setup and teardown that serves no purpose when only
+  one task is spawned </li>
+  <li> <strong>Misleading code</strong>: The presence of a nursery suggests that multiple tasks will be managed, which can be confusing </li>
+  <li> <strong>Reduced readability</strong>: The structured concurrency syntax is more verbose than a simple function call </li>
+</ul>
+<h3>What is the potential impact?</h3>
+<ul>
+  <li> <strong>Performance</strong>: Minor performance overhead from unnecessary nursery/TaskGroup creation </li>
+  <li> <strong>Maintainability</strong>: Code is more complex than necessary, making it harder to understand and maintain </li>
+  <li> <strong>Code clarity</strong>: The intent of the code is obscured by unnecessary structured concurrency constructs </li>
+</ul>
+<h2>How to fix it in Asyncio</h2>
+<p>Replace the TaskGroup with a direct function call when the TaskGroup body contains only a single <code>create_task()</code> call.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import asyncio
+
+async def worker_task():
+    await asyncio.sleep(1)
+
+async def main():
+    # Unnecessary TaskGroup for a single task
+    async with asyncio.TaskGroup() as tg:
+        tg.create_task(worker_task())
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import asyncio
+
+async def worker_task():
+    await asyncio.sleep(1)
+
+async def main():
+    # Direct function call is simpler and more efficient
+    await worker_task()
+</pre>
+<h2>How to fix it in Trio</h2>
+<p>Replace the nursery with a direct function call when the nursery body contains only a single <code>start_soon()</code> or <code>start()</code>
+call.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import trio
+
+async def worker_task():
+    await trio.sleep(1)
+
+async def main():
+    # Unnecessary nursery for a single task
+    async with trio.open_nursery() as nursery:
+        nursery.start_soon(worker_task)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import trio
+
+async def worker_task():
+    await trio.sleep(1)
+
+async def main():
+    # Direct function call is simpler and more efficient
+    await worker_task()
+</pre>
+<h2>How to fix it in AnyIO</h2>
+<p>Replace the task group with a direct function call when the task group body contains only a single <code>start_soon()</code> or
+<code>start()</code> call.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import anyio
+
+async def worker_task():
+    await anyio.sleep(1)
+
+async def main():
+    # Unnecessary task group for a single task
+    async with anyio.create_task_group() as tg:
+        tg.start_soon(worker_task)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+import anyio
+
+async def worker_task():
+    await anyio.sleep(1)
+
+async def main():
+    # Direct function call is simpler and more efficient
+    await worker_task()
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#task-groups">Task Groups</a> </li>
+  <li> Trio documentation - <a href="https://trio.readthedocs.io/en/latest/reference-core.html#nurseries-and-spawning">Nurseries and spawning</a>
+  </li>
+  <li> AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/tasks.html#creating-and-managing-tasks">Creating and managing tasks</a>
+  </li>
+</ul>
+

@@ -1,0 +1,26 @@
+{
+  "title": "TaskGroup\/Nursery should not be used for a single start call",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async",
+    "asyncio",
+    "trio",
+    "anyio"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-7513",
+  "sqKey": "S7513",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}

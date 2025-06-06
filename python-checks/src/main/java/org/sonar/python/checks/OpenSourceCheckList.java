@@ -377,6 +377,7 @@ public class OpenSourceCheckList {
       SynchronousOsCallsInAsyncCheck.class,
       TempFileCreationCheck.class,
       ImplicitlySkippedTestCheck.class,
+      TaskGroupNurseryUsedOnlyOnceCheck.class,
       TimeSleepInAsyncCheck.class,
       ToDoCommentCheck.class,
       TooManyLinesInFileCheck.class,
