@@ -16,7 +16,12 @@
  */
 package org.sonar.python.checks;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class LoopOverDictKeyValuesCheckTest {
@@ -24,6 +29,59 @@ class LoopOverDictKeyValuesCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/loopOverDictKeyValues.py", new LoopOverDictKeyValuesCheck());
+  }
+
+  @ParameterizedTest
+  @MethodSource("quickFixTestCases")
+  void quickFixTest(String before, String after, String expectedMessage) {
+    var check = new LoopOverDictKeyValuesCheck();
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, expectedMessage);
+  }
+
+  @ParameterizedTest
+  @MethodSource("noQuickFixTestCases")
+  void noQuickFixTest(String before) {
+    PythonQuickFixVerifier.verifyNoQuickFixes(new LoopOverDictKeyValuesCheck(), before);
+  }
+
+  static Stream<Arguments> quickFixTestCases() {
+    return Stream.of(
+      Arguments.of(
+        """
+          some_dict = { "a": "b"}
+          for k, v in some_dict:
+            ...
+          """,
+        """
+          some_dict = { "a": "b"}
+          for k, v in some_dict.items():
+            ...
+          """,
+        "Replace with items method call"),
+      Arguments.of(
+        """
+          some_dict = { "hi": "hello"}
+          {k: v for k, v in some_dict}
+          """,
+        """
+          some_dict = { "hi": "hello"}
+          {k: v for k, v in some_dict.items()}
+          """,
+        "Replace with items method call")
+    );
+  }
+
+  static Stream<Arguments> noQuickFixTestCases() {
+    return Stream.of(
+      Arguments.of(
+        """
+          some_dict = {"hi": "hello"}
+          a = {k: v for k, v in {
+              "hi": "hello"
+          }}
+          """)
+    );
   }
 
 }

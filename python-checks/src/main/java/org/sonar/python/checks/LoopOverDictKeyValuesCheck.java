@@ -16,20 +16,26 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.v2.TriBool;
+import org.sonar.python.quickfix.TextEditUtils;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 
 @Rule(key = "S7517")
 public class LoopOverDictKeyValuesCheck extends PythonSubscriptionCheck {
-  public static final String DICT_FQN = "dict";
-  public static final String MESSAGE = "Use items to iterate over key-value pairs";
+  private static final String DICT_FQN = "dict";
+  private static final String MESSAGE = "Use items to iterate over key-value pairs";
+  private static final String QUICK_FIX_MESSAGE = "Replace with items method call";
   private TypeCheckBuilder dictTypeCheck;
 
 
@@ -51,7 +57,9 @@ public class LoopOverDictKeyValuesCheck extends PythonSubscriptionCheck {
     if (expressions.size() == 2
         && testExpressions.size() == 1
         && dictTypeCheck.check(testExpressions.get(0).typeV2()) == TriBool.TRUE) {
-      ctx.addIssue(testExpressions.get(0), MESSAGE);
+      var dict = testExpressions.get(0);
+      var issue = ctx.addIssue(dict, MESSAGE);
+      createQuickFix(dict).ifPresent(issue::addQuickFix);
     }
   }
 
@@ -60,7 +68,17 @@ public class LoopOverDictKeyValuesCheck extends PythonSubscriptionCheck {
     if (comprehensionFor.loopExpression() instanceof Tuple tuple
         && tuple.elements().size() == 2
         && dictTypeCheck.check(comprehensionFor.iterable().typeV2()) == TriBool.TRUE) {
-      ctx.addIssue(comprehensionFor.iterable(), MESSAGE);
+      var dict = comprehensionFor.iterable();
+      var issue = ctx.addIssue(dict, MESSAGE);
+      createQuickFix(dict).ifPresent(issue::addQuickFix);
     }
+  }
+
+  private static Optional<PythonQuickFix> createQuickFix(Expression dict) {
+    return Optional.ofNullable(TreeUtils.treeToString(dict, false))
+      .map("%s.items()"::formatted)
+      .map(replacementText -> TextEditUtils.replace(dict, replacementText))
+      .map(textEdit -> PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE).addTextEdit(textEdit))
+      .map(PythonQuickFix.Builder::build);
   }
 }
