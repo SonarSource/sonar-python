@@ -17,13 +17,52 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class UnnecessaryListCastCheckTest {
 
+  private static final UnnecessaryListCastCheck check = new UnnecessaryListCastCheck();
+
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/unnecessaryListCast.py", new UnnecessaryListCastCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/unnecessaryListCast.py", check);
   }
 
+  @Test
+  void test_quick_fix() {
+    String codeWithIssue = """
+    for x in list([1,2,5]):
+        ...
+    """;
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, "Remove the \"list\" call");
+
+    String correctCode = """
+    for x in [1,2,5]:
+        ...
+    """;
+
+    PythonQuickFixVerifier.verify(check, codeWithIssue, correctCode);
+  }
+
+  @Test
+  void test_quick_fix_comprehension() {
+    String codeWithIssue = "{i for i in list([1,2,3])}";
+    String correctCode = "{i for i in [1,2,3]}";
+
+    PythonQuickFixVerifier.verify(check, codeWithIssue, correctCode);
+  }
+
+  @Test
+  void test_no_quick_fix_on_multiline() {
+    String codeWithIssue = """
+    for x in list(
+        [
+        1,
+        2,
+        5]):
+        ...
+    """;
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+  }
 }

@@ -21,6 +21,7 @@ import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -28,6 +29,8 @@ import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.TriBool;
+import org.sonar.python.quickfix.TextEditUtils;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 
 @Rule(key = "S7504")
@@ -57,7 +60,13 @@ public class UnnecessaryListCastCheck extends PythonSubscriptionCheck {
 
   private void checkListCastCheck(List<Expression> expressions, SubscriptionContext ctx) {
     hasListCallOnIterable(expressions)
-      .ifPresent(listCall -> ctx.addIssue(listCall.callee(), "Remove this unnecessary `list()` call on an already iterable object."));
+      .ifPresent(listCall -> {
+        PreciseIssue issue = ctx.addIssue(listCall.callee(), "Remove this unnecessary `list()` call on an already iterable object.");
+        Optional.ofNullable(TreeUtils.treeToString(listCall.argumentList(), false))
+          .map(replacementText -> TextEditUtils.replace(listCall, replacementText))
+          .map(textEdit -> PythonQuickFix.newQuickFix("Remove the \"list\" call", textEdit))
+          .ifPresent(issue::addQuickFix);
+      });
   }
 
   private Optional<CallExpression> hasListCallOnIterable(List<Expression> testExpressions) {
