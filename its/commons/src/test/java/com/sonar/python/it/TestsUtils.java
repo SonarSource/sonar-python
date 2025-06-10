@@ -50,7 +50,7 @@ public final class TestsUtils {
   private static ConcurrentOrchestratorExtension makeDynamicOrchestrator() {
     var currentWorkingDirectory = new File(System.getProperty("user.dir"));
     if (currentWorkingDirectory.getParentFile().getName().equals("its-enterprise")) {
-      return orchestratorBuilder(Edition.ENTERPRISE, PluginLocator.Plugins.PYTHON_ENTERPRISE.get()).build();
+      return orchestratorBuilder(Edition.ENTERPRISE_LW, PluginLocator.Plugins.PYTHON_ENTERPRISE.get()).build();
     } else {
       return orchestratorBuilder(Edition.COMMUNITY, PluginLocator.Plugins.PYTHON_OSS.get()).build();
     }
