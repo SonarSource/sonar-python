@@ -125,6 +125,7 @@ public class OpenSourceCheckList {
       AsyncFunctionWithTimeoutCheck.class,
       AsyncioTaskNotStoredCheck.class,
       AsyncLongSleepCheck.class,
+      AsyncWithContextManagerCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
       BareRaiseInFinallyCheck.class,

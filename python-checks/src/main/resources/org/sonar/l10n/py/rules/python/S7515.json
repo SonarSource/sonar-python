@@ -1,0 +1,24 @@
+{
+  "title": "\"async with\" should be used for asynchronous resource management",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "async"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7515",
+  "sqKey": "S7515",
+  "scope": "All",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW",
+      "RELIABILITY": "LOW"
+    },
+    "attribute": "LOGICAL"
+  }
+}
