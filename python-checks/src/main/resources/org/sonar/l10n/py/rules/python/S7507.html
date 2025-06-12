@@ -21,7 +21,7 @@ from collections import defaultdict
 
 d1 = defaultdict(default_factory=int) # Noncompliant: this creates a dictionary with a single key-value pair.
 </pre>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="1" data-diff-type="compliant">
 from collections import defaultdict
 
 d1 = defaultdict(int) # Compliant

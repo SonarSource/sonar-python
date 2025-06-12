@@ -18,7 +18,7 @@ Without any checkpoints, the timeout will never be triggered, making it ineffect
   <li> The application might become unresponsive or hang </li>
   <li> Cancellation operations won’t be honored </li>
 </ul>
-<h2>How to fix it in AsyncIO</h2>
+<h2>How to fix it in Asyncio</h2>
 <p>There is no direct checkpoint method in <code>asyncio</code>, but you can use <code>await asyncio.sleep(0)</code> as a workaround.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>

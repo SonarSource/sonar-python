@@ -8,8 +8,8 @@ supports the membership protocol.</p>
 <code>__contains__</code>, <code>__iter__</code>, <code>__getitem__</code>.</p>
 <p>If none of these methods is implemented, a <code>TypeError</code> will be raised when performing a membership test.</p>
 <h2>How to fix it</h2>
-<h2>Code examples</h2>
-<h3>Noncompliant code example</h3>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre>
 myint = 42
 
@@ -23,7 +23,7 @@ class A:
 if "mystring" in A(["mystring"]):  # Noncompliant: class A doesn't support membership protocol
     ...
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre>
 mylist = [42]
 

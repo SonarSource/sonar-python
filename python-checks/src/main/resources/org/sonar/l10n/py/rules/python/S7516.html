@@ -18,12 +18,12 @@ sufficient; the <code>set()</code> call can be removed. If the goal is to obtain
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-data = [3, 4, 1 , 2]
+data = [3, 4, 1, 2]
 set(sorted(data)) # Noncompliant: set is called on a sorted list
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-data = [3, 4, 1 , 2]
+data = [3, 4, 1, 2]
 sorted(data) # Compliant
 </pre>
 <h2>Resources</h2>

@@ -101,7 +101,7 @@ async def process_data(data):
     try:
         result = await compute_result(data)
         return result
-    except anyio.Cancelled:  # Noncompliant
+    except anyio.get_cancelled_exc_class():  # Noncompliant
         return
 </pre>
 <h4>Compliant solution</h4>
@@ -114,7 +114,7 @@ async def process_data(data):
     try:
         result = await compute_result(data)
         return result
-    except anyio.Cancelled:  # Compliant
+    except anyio.get_cancelled_exc_class():  # Compliant
         raise
 </pre>
 <h3>Pitfalls</h3>

@@ -11,8 +11,8 @@ href="https://docs.python.org/3/tutorial/classes.html#generator-expressions">gen
 <code>__iter__</code> methods generated automatically.</p>
 <h2>How to fix it</h2>
 <p>Make sure that the <code>__iter__</code> method returns a valid iterator.</p>
-<h2>Code examples</h2>
-<h3>Noncompliant code example</h3>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 class MyIterable:
     def __init__(self, values):
@@ -21,7 +21,7 @@ class MyIterable:
     def __iter__(self):
         return None  # Noncompliant: Not a valid iterator
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 class MyIterable:
     def __init__(self, values):
