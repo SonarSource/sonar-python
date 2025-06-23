@@ -7,6 +7,7 @@ function run_maven {
     -Dmaven.test.redirectTestOutputToFile=false \
     -Dsonar.host.url="$SONAR_HOST_URL" \
     -Dsonar.token="$SONAR_TOKEN" \
+    -Dsonar.organization="sonarsource" \
     -Dsonar.analysis.buildNumber="$BUILD_NUMBER" \
     -Dsonar.analysis.pipeline="$PIPELINE_ID" \
     -Dsonar.analysis.sha1="$GIT_SHA1" \

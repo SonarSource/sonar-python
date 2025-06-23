@@ -11,6 +11,7 @@ env:
   CIRRUS_SHELL: bash
   DEPLOY_PULL_REQUEST: false
   IS_COMMUNITY: true
+  CRON_NIGHTLY_JOB_NAME: "nightly"
 
 build_container_definition: &BUILD_CONTAINER_DEFINITION
   eks_container:
@@ -29,13 +30,10 @@ build_container_definition: &BUILD_CONTAINER_DEFINITION
 only_sonarsource_qa: &ONLY_SONARSOURCE_QA
   only_if: $LOCAL == "1" || ($CIRRUS_USER_COLLABORATOR == 'true' && $CIRRUS_TAG == "" && ($CIRRUS_PR != "" || $CIRRUS_BRANCH == 'master' || $CIRRUS_BRANCH =~ "branch-.*" || $CIRRUS_BUILD_SOURCE == 'api'  || $CIRRUS_BRANCH =~ "dogfood-on-.*"))
 
-test_analyze_task:
+base_analysis_task: &BASE_ANALYSIS
   <<: *BUILD_CONTAINER_DEFINITION
   <<: *ONLY_SONARSOURCE_QA
   env:
-    # analysis on next
-    SONAR_TOKEN: VAULT[development/kv/data/next data.token]
-    SONAR_HOST_URL: https://next.sonarqube.com/sonarqube
     CIRRUS_CLONE_DEPTH: 50
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
@@ -47,5 +45,31 @@ test_analyze_task:
   analyze_script:
     - rm -rf private
     - source cirrus-env BUILD
-    - PULL_REQUEST_SHA=$GIT_SHA1 ./.cirrus/test_analyze.sh
+    - PULL_REQUEST_SHA=$GIT_SHA1 ./.cirrus/analyze.sh
   cleanup_before_cache_script: cleanup_maven_repository
+
+analysis_next_task:
+  <<: *BASE_ANALYSIS
+  name: "Analysis on SonarQube NEXT"
+  alias: analysis_next
+  env:
+      SONAR_TOKEN: VAULT[development/kv/data/next data.token]
+      SONAR_HOST_URL: https://next.sonarqube.com/sonarqube
+
+analysis_sqc_eu_shadow_task:
+  <<: *BASE_ANALYSIS
+  name: "Analysis on Sonarcloud.io"
+  alias: analysis_sqc_eu_shadow
+  only_if: $CIRRUS_CRON == $CRON_NIGHTLY_JOB_NAME && $CIRRUS_BRANCH == "master"
+  env:
+      SONAR_TOKEN: VAULT[development/kv/data/sonarcloud data.token]
+      SONAR_HOST_URL: https://sonarcloud.io
+
+analysis_sqc_us_shadow_task:
+  <<: *BASE_ANALYSIS
+  name: "Analysis on SonarQube.us"
+  alias: analysis_sqc_us_shadow
+  only_if: $CIRRUS_CRON == $CRON_NIGHTLY_JOB_NAME && $CIRRUS_BRANCH == "master"
+  env:
+    SONAR_TOKEN: VAULT[development/kv/data/sonarqube-us data.token]
+    SONAR_HOST_URL: https://sonarqube.us
