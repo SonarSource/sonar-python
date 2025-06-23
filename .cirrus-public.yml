@@ -30,7 +30,7 @@ build_container_definition: &BUILD_CONTAINER_DEFINITION
 only_sonarsource_qa: &ONLY_SONARSOURCE_QA
   only_if: $LOCAL == "1" || ($CIRRUS_USER_COLLABORATOR == 'true' && $CIRRUS_TAG == "" && ($CIRRUS_PR != "" || $CIRRUS_BRANCH == 'master' || $CIRRUS_BRANCH =~ "branch-.*" || $CIRRUS_BUILD_SOURCE == 'api'  || $CIRRUS_BRANCH =~ "dogfood-on-.*"))
 
-base_analysis_task: &BASE_ANALYSIS
+base_analysis_template: &BASE_ANALYSIS
   <<: *BUILD_CONTAINER_DEFINITION
   <<: *ONLY_SONARSOURCE_QA
   env:
