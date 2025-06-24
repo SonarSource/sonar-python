@@ -5,6 +5,7 @@ function run_maven {
   mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
     -Pcoverage \
     -Dmaven.test.redirectTestOutputToFile=false \
+    -Dsonar.projectKey="$SONAR_PROJECT_KEY" \
     -Dsonar.host.url="$SONAR_HOST_URL" \
     -Dsonar.token="$SONAR_TOKEN" \
     -Dsonar.organization="sonarsource" \
