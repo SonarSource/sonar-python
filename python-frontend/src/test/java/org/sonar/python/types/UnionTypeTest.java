@@ -111,8 +111,8 @@ class UnionTypeTest {
 
   @Test
   void test_hashCode() {
-    assertThat(or(a, b).hashCode()).isEqualTo(or(a, b).hashCode());
-    assertThat(or(a, b).hashCode()).isNotEqualTo(or(a, c).hashCode());
+    assertThat(or(a, b)).hasSameHashCodeAs(or(a, b));
+    assertThat(or(a, b)).doesNotHaveSameHashCodeAs(or(a, c));
   }
 
   @Test

@@ -68,8 +68,8 @@ class PythonSubscriptionCheckTest {
     IssueLocation primaryLocation = firstIssue.primaryLocation();
     assertThat(primaryLocation.message()).isEqualTo("hello");
 
-    assertThat(primaryLocation.startLine()).isEqualTo(1);
-    assertThat(primaryLocation.endLine()).isEqualTo(1);
+    assertThat(primaryLocation.startLine()).isOne();
+    assertThat(primaryLocation.endLine()).isOne();
     assertThat(primaryLocation.startLineOffset()).isEqualTo(4);
     assertThat(primaryLocation.endLineOffset()).isEqualTo(9);
   }
@@ -107,7 +107,7 @@ class PythonSubscriptionCheckTest {
     };
     List<PreciseIssue> issues = scanFileForIssues(FILE, check);
     assertThat(issues).hasSize(2);
-    assertThat(issues.get(0).primaryLocation().startLine()).isEqualTo(1);
+    assertThat(issues.get(0).primaryLocation().startLine()).isOne();
     assertThat(issues.get(1).primaryLocation().startLine()).isEqualTo(7);
   }
 
@@ -129,7 +129,7 @@ class PythonSubscriptionCheckTest {
     IssueLocation primaryLocation = issues.get(0).primaryLocation();
     assertThat(primaryLocation.startLine()).isEqualTo(5);
     assertThat(primaryLocation.endLine()).isEqualTo(5);
-    assertThat(primaryLocation.startLineOffset()).isEqualTo(0);
+    assertThat(primaryLocation.startLineOffset()).isZero();
     assertThat(primaryLocation.endLineOffset()).isEqualTo(10);
   }
 

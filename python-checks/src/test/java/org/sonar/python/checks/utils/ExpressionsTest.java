@@ -118,16 +118,16 @@ class ExpressionsTest {
 
   @Test
   void unescape_string_literal() {
-    assertThat(unescape(stringLiteral("''"))).isEqualTo("");
-    assertThat(unescape(stringLiteral("'' ''"))).isEqualTo("");
+    assertThat(unescape(stringLiteral("''"))).isEmpty();
+    assertThat(unescape(stringLiteral("'' ''"))).isEmpty();
     assertThat(unescape(stringLiteral("'abc' 'def'"))).isEqualTo("abcdef");
     assertThat(unescape(stringLiteral("'\\u0061' r'\\u0061' f'{value}'"))).isEqualTo("a\\u0061{value}");
   }
 
   @Test
   void unescape_string_element_using_different_prefix() {
-    assertThat(unescape(stringElement("''"))).isEqualTo("");
-    assertThat(unescape(stringElement("b''"))).isEqualTo("");
+    assertThat(unescape(stringElement("''"))).isEmpty();
+    assertThat(unescape(stringElement("b''"))).isEmpty();
     assertThat(unescape(stringElement("'a'"))).isEqualTo("a");
     assertThat(unescape(stringElement("u'a\\tc'"))).isEqualTo("a\tc");
     assertThat(unescape(stringElement("r'a\\tc'"))).isEqualTo("a\\tc");

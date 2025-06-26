@@ -86,7 +86,7 @@ class Flake8SensorTest {
     assertThat(externalIssues).hasSize(3);
 
     ExternalIssue first = externalIssues.get(0);
-    assertThat(first.ruleKey().toString()).isEqualTo(FLAKE8_F401);
+    assertThat(first.ruleKey()).hasToString(FLAKE8_F401);
     assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(first.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation firstPrimaryLoc = first.primaryLocation();
@@ -95,13 +95,13 @@ class Flake8SensorTest {
       .isEqualTo("'os' imported but unused");
     TextRange firstTextRange = firstPrimaryLoc.textRange();
     assertThat(firstTextRange).isNotNull();
-    assertThat(firstTextRange.start().line()).isEqualTo(1);
-    assertThat(firstTextRange.start().lineOffset()).isEqualTo(0);
-    assertThat(firstTextRange.end().line()).isEqualTo(1);
-    assertThat(firstTextRange.end().lineOffset()).isEqualTo(1);
+    assertThat(firstTextRange.start().line()).isOne();
+    assertThat(firstTextRange.start().lineOffset()).isZero();
+    assertThat(firstTextRange.end().line()).isOne();
+    assertThat(firstTextRange.end().lineOffset()).isOne();
 
     ExternalIssue second = externalIssues.get(1);
-    assertThat(second.ruleKey().toString()).isEqualTo("external_flake8:E302");
+    assertThat(second.ruleKey()).hasToString("external_flake8:E302");
     assertThat(second.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(second.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation secondPrimaryLoc = second.primaryLocation();
@@ -110,12 +110,12 @@ class Flake8SensorTest {
     TextRange secondTextRange = secondPrimaryLoc.textRange();
     assertThat(secondTextRange).isNotNull();
     assertThat(secondTextRange.start().line()).isEqualTo(3);
-    assertThat(secondTextRange.start().lineOffset()).isEqualTo(0);
+    assertThat(secondTextRange.start().lineOffset()).isZero();
     assertThat(secondTextRange.end().line()).isEqualTo(3);
-    assertThat(secondTextRange.end().lineOffset()).isEqualTo(1);
+    assertThat(secondTextRange.end().lineOffset()).isOne();
 
     ExternalIssue third = externalIssues.get(2);
-    assertThat(third.ruleKey().toString()).isEqualTo("external_flake8:C901");
+    assertThat(third.ruleKey()).hasToString("external_flake8:C901");
     assertThat(third.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(third.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation thirdPrimaryLoc = third.primaryLocation();
@@ -167,7 +167,7 @@ class Flake8SensorTest {
     assertThat(externalIssues).hasSize(2);
 
     ExternalIssue first = externalIssues.get(0);
-    assertThat(first.ruleKey().toString()).isEqualTo(FLAKE8_F401);
+    assertThat(first.ruleKey()).hasToString(FLAKE8_F401);
     assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(first.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation firstPrimaryLoc = first.primaryLocation();
@@ -176,13 +176,13 @@ class Flake8SensorTest {
       .isEqualTo("'os' imported but unused");
     TextRange firstTextRange = firstPrimaryLoc.textRange();
     assertThat(firstTextRange).isNotNull();
-    assertThat(firstTextRange.start().line()).isEqualTo(1);
-    assertThat(firstTextRange.start().lineOffset()).isEqualTo(0);
-    assertThat(firstTextRange.end().line()).isEqualTo(1);
+    assertThat(firstTextRange.start().line()).isOne();
+    assertThat(firstTextRange.start().lineOffset()).isZero();
+    assertThat(firstTextRange.end().line()).isOne();
     assertThat(firstTextRange.end().lineOffset()).isEqualTo(9);
 
     ExternalIssue second = externalIssues.get(1);
-    assertThat(second.ruleKey().toString()).isEqualTo("external_flake8:E302");
+    assertThat(second.ruleKey()).hasToString("external_flake8:E302");
     assertThat(second.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(second.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation secondPrimaryLoc = second.primaryLocation();
@@ -191,7 +191,7 @@ class Flake8SensorTest {
     TextRange secondTextRange = secondPrimaryLoc.textRange();
     assertThat(secondTextRange).isNotNull();
     assertThat(secondTextRange.start().line()).isEqualTo(3);
-    assertThat(secondTextRange.start().lineOffset()).isEqualTo(0);
+    assertThat(secondTextRange.start().lineOffset()).isZero();
 
     assertNoErrorWarnDebugLogs(logTester);
   }

@@ -93,9 +93,9 @@ public class CfgValidator {
       int expectedElementNumber = expectedCfg.expectedNumberOfElements(actualBlock);
       String message = format("Expecting %d elements instead of %d for '%s'",
         expectedElementNumber, actualElementNumber, blockTestId);
-      assertThat(actualBlock.elements().size())
+      assertThat(actualBlock.elements())
         .withFailMessage(message)
-        .isEqualTo(expectedCfg.expectedNumberOfElements(actualBlock));
+        .hasSize(expectedCfg.expectedNumberOfElements(actualBlock));
     }
   }
 

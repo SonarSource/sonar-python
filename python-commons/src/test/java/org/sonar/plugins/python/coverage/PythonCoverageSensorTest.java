@@ -118,7 +118,7 @@ class PythonCoverageSensorTest {
 
     coverageSensor.execute(context);
 
-    assertThat(context.lineHits(FILE1_KEY, 1)).isEqualTo(1);
+    assertThat(context.lineHits(FILE1_KEY, 1)).isOne();
   }
 
   @Test
@@ -136,7 +136,7 @@ class PythonCoverageSensorTest {
 
     assertThat(context.conditions(FILE2_KEY, 2)).isNull();
     assertThat(context.conditions(FILE2_KEY, 3)).isEqualTo(2);
-    assertThat(context.coveredConditions(FILE2_KEY, 3)).isEqualTo(1);
+    assertThat(context.coveredConditions(FILE2_KEY, 3)).isOne();
   }
 
   @Test
@@ -175,9 +175,9 @@ class PythonCoverageSensorTest {
 
     assertThat(context.conditions(FILE4_KEY, 7)).isNull();
     assertThat(context.conditions(FILE4_KEY, 8)).isEqualTo(2);
-    assertThat(context.coveredConditions(FILE4_KEY, 8)).isEqualTo(1);
+    assertThat(context.coveredConditions(FILE4_KEY, 8)).isOne();
     assertThat(context.conditions(FILE4_KEY, 10)).isEqualTo(2);
-    assertThat(context.coveredConditions(FILE4_KEY, 10)).isEqualTo(1);
+    assertThat(context.coveredConditions(FILE4_KEY, 10)).isOne();
   }
 
   @Test
@@ -185,7 +185,7 @@ class PythonCoverageSensorTest {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage.4.4.2-multi-sources.xml");
     coverageSensor.execute(context);
 
-    assertThat(context.lineHits("moduleKey:sources/folder1/file1.py", 1)).isEqualTo(1);
+    assertThat(context.lineHits("moduleKey:sources/folder1/file1.py", 1)).isOne();
     // file2.py ambiguity
     assertThat(context.lineHits("moduleKey:sources/folder1/file2.py", 1)).isNull();
     assertThat(context.lineHits("moduleKey:sources/folder2/file2.py", 1)).isNull();
@@ -198,7 +198,7 @@ class PythonCoverageSensorTest {
     coverageSensor.execute(context);
     List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).toList();
     Integer coverageAtLine6 = actual.get(5);
-    assertThat(coverageAtLine6).isEqualTo(1);
+    assertThat(coverageAtLine6).isOne();
     verify(analysisWarnings, times(1)).addUnique(eq("Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead."));
   }
 
@@ -209,12 +209,12 @@ class PythonCoverageSensorTest {
 
     coverageSensor.execute(context);
 
-    assertThat(context.lineHits(FILE1_KEY, 1)).isEqualTo(1);
+    assertThat(context.lineHits(FILE1_KEY, 1)).isOne();
     assertThat(context.lineHits(FILE1_KEY, 2)).isEqualTo(3);
-    assertThat(context.lineHits(FILE1_KEY, 3)).isEqualTo(1);
-    assertThat(context.lineHits(FILE1_KEY, 4)).isEqualTo(0);
-    assertThat(context.lineHits(FILE1_KEY, 5)).isEqualTo(1);
-    assertThat(context.lineHits(FILE1_KEY, 6)).isEqualTo(1);
+    assertThat(context.lineHits(FILE1_KEY, 3)).isOne();
+    assertThat(context.lineHits(FILE1_KEY, 4)).isZero();
+    assertThat(context.lineHits(FILE1_KEY, 5)).isOne();
+    assertThat(context.lineHits(FILE1_KEY, 6)).isOne();
   }
 
   @Test
@@ -254,13 +254,13 @@ class PythonCoverageSensorTest {
 
     assertThat(context.conditions(FILE2_KEY, 2)).isNull();
     assertThat(context.conditions(FILE2_KEY, 3)).isEqualTo(2);
-    assertThat(context.coveredConditions(FILE2_KEY, 3)).isEqualTo(1);
+    assertThat(context.coveredConditions(FILE2_KEY, 3)).isOne();
 
     assertThat(context.conditions(FILE4_KEY, 7)).isNull();
     assertThat(context.conditions(FILE4_KEY, 8)).isEqualTo(2);
-    assertThat(context.coveredConditions(FILE4_KEY, 8)).isEqualTo(1);
+    assertThat(context.coveredConditions(FILE4_KEY, 8)).isOne();
     assertThat(context.conditions(FILE4_KEY, 10)).isEqualTo(2);
-    assertThat(context.coveredConditions(FILE4_KEY, 10)).isEqualTo(1);
+    assertThat(context.coveredConditions(FILE4_KEY, 10)).isOne();
   }
 
   @Test

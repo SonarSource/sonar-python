@@ -51,8 +51,8 @@ class PythonCpdAnalyzerTest {
     TokensLine line1 = lines.get(0);
     assertThat(line1.getStartLine()).isEqualTo(2);
     assertThat(line1.getEndLine()).isEqualTo(2);
-    assertThat(line1.getStartUnit()).isEqualTo(1);
-    assertThat(line1.getEndUnit()).isEqualTo(1);
+    assertThat(line1.getStartUnit()).isOne();
+    assertThat(line1.getEndUnit()).isOne();
     List<String> values = lines.stream().map(TokensLine::getValue).toList();
     assertThat(values).containsExactly(
       "00000",
@@ -96,7 +96,7 @@ class PythonCpdAnalyzerTest {
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
     List<TokensLine> tokensLines = context.cpdTokens("moduleKey:cpd_dedent.py");
     assertThat(tokensLines).isNotNull();
-    assertThat(tokensLines.size() % 2).isEqualTo(0);
+    assertThat(tokensLines.size() % 2).isZero();
     int mid = tokensLines.size() / 2;
     for (int i = 0; i < mid; i++) {
       TokensLine tokensLine = tokensLines.get(i);

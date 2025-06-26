@@ -68,8 +68,8 @@ class PythonCheckTest {
     IssueLocation primaryLocation = firstIssue.primaryLocation();
     assertThat(primaryLocation.message()).isEqualTo("hello");
 
-    assertThat(primaryLocation.startLine()).isEqualTo(1);
-    assertThat(primaryLocation.endLine()).isEqualTo(1);
+    assertThat(primaryLocation.startLine()).isOne();
+    assertThat(primaryLocation.endLine()).isOne();
     assertThat(primaryLocation.startLineOffset()).isEqualTo(4);
     assertThat(primaryLocation.endLineOffset()).isEqualTo(9);
 
@@ -127,9 +127,9 @@ class PythonCheckTest {
     IssueLocation secondSecondaryLocation = secondaryLocations.get(1);
 
     assertThat(firstSecondaryLocation.message()).isEqualTo("def keyword");
-    assertThat(firstSecondaryLocation.startLine()).isEqualTo(1);
-    assertThat(firstSecondaryLocation.startLineOffset()).isEqualTo(0);
-    assertThat(firstSecondaryLocation.endLine()).isEqualTo(1);
+    assertThat(firstSecondaryLocation.startLine()).isOne();
+    assertThat(firstSecondaryLocation.startLineOffset()).isZero();
+    assertThat(firstSecondaryLocation.endLine()).isOne();
     assertThat(firstSecondaryLocation.endLineOffset()).isEqualTo(3);
 
     assertThat(secondSecondaryLocation.message()).isEqualTo("return statement");

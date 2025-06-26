@@ -112,7 +112,7 @@ class PythonRuleRepositoryTest {
       .map(RulesDefinition.Rule::template)
       .filter(Boolean::booleanValue)
       .count();
-    assertThat(repository.rules().size()).isGreaterThan(50);
+    assertThat(repository.rules()).hasSizeGreaterThan(50);
     assertThat(templateCount).isEqualTo(1);
   }
 

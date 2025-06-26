@@ -97,7 +97,7 @@ class SymbolTableBuilderTest {
   void local_variable() {
     FunctionDef functionTree = functionTreesByName.get("function_with_local");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
-    assertThat(symbolByName.keySet()).containsOnly("a", "t2");
+    assertThat(symbolByName).containsOnlyKeys("a", "t2");
     Symbol a = symbolByName.get("a");
     Name aTree = PythonTestUtils.getFirstChild(functionTree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("a"));
     assertThat(aTree.symbol()).isEqualTo(a);
@@ -122,21 +122,21 @@ class SymbolTableBuilderTest {
   void rebound_variable() {
     FunctionDef functionTree = functionTreesByName.get("function_with_rebound_variable");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
-    assertThat(symbolByName.keySet()).containsOnly("global_x");
+    assertThat(symbolByName).containsOnlyKeys("global_x");
   }
 
   @Test
   void simple_parameter() {
     FunctionDef functionTree = functionTreesByName.get("simple_parameter");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
-    assertThat(symbolByName.keySet()).containsOnly("a");
+    assertThat(symbolByName).containsOnlyKeys("a");
   }
 
   @Test
   void multiple_assignment() {
     FunctionDef functionTree = functionTreesByName.get("multiple_assignment");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
-    assertThat(symbolByName.keySet()).containsOnly("x", "y");
+    assertThat(symbolByName).containsOnlyKeys("x", "y");
     int functionStartLine = functionTree.firstToken().line();
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1);
@@ -150,7 +150,7 @@ class SymbolTableBuilderTest {
   void tuple_assignment() {
     FunctionDef functionTree = functionTreesByName.get("tuple_assignment");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
-    assertThat(symbolByName.keySet()).containsOnly("x", "y");
+    assertThat(symbolByName).containsOnlyKeys("x", "y");
     int functionStartLine = functionTree.firstToken().line();
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1);
@@ -176,7 +176,7 @@ class SymbolTableBuilderTest {
   void function_with_nested_nonlocal_var() {
     FunctionDef functionTree = functionTreesByName.get("function_with_nested_nonlocal_var");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
-    assertThat(symbolByName.keySet()).containsExactly("x", "innerFn");
+    assertThat(symbolByName).containsOnlyKeys("x", "innerFn");
     Symbol x = symbolByName.get("x");
     int functionStartLine = functionTree.firstToken().line();
     assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1, functionStartLine + 3, functionStartLine + 4);
@@ -189,7 +189,7 @@ class SymbolTableBuilderTest {
     FunctionDef functionTree = functionTreesByName.get("function_with_lambdas");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
-    assertThat(symbolByName.keySet()).containsOnly("x", "y");
+    assertThat(symbolByName).containsOnlyKeys("x", "y");
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).hasSize(1);
 
@@ -199,13 +199,13 @@ class SymbolTableBuilderTest {
     List<LambdaExpression> lambdas = PythonTestUtils.getAllDescendant(functionTree, t -> t.is(Tree.Kind.LAMBDA));
     LambdaExpression firstLambdaFunction = lambdas.get(0);
     symbolByName = firstLambdaFunction.localVariables().stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
-    assertThat(symbolByName.keySet()).containsOnly("x");
+    assertThat(symbolByName).containsOnlyKeys("x");
     Symbol innerX = symbolByName.get("x");
     assertThat(innerX.usages()).hasSize(3);
 
     LambdaExpression secondLambdaFunction = lambdas.get(1);
     symbolByName = secondLambdaFunction.localVariables().stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
-    assertThat(symbolByName.keySet()).containsOnly("z");
+    assertThat(symbolByName).containsOnlyKeys("z");
   }
 
   @Test
@@ -213,7 +213,7 @@ class SymbolTableBuilderTest {
     FunctionDef functionTree = functionTreesByName.get("function_with_loops");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
-    assertThat(symbolByName.keySet()).containsOnly("x", "y", "x1", "y1");
+    assertThat(symbolByName).containsOnlyKeys("x", "y", "x1", "y1");
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.LOOP_DECLARATION);
     Symbol y = symbolByName.get("y");
@@ -246,7 +246,7 @@ class SymbolTableBuilderTest {
     FunctionDef functionTree = functionTreesByName.get("var_with_usages_in_decorator");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
-    assertThat(symbolByName.keySet()).containsOnly("x", "y", "z", "foo");
+    assertThat(symbolByName).containsOnlyKeys("x", "y", "z", "foo");
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
     Symbol y = symbolByName.get("y");
@@ -260,7 +260,7 @@ class SymbolTableBuilderTest {
     FunctionDef functionTree = functionTreesByName.get("function_with_unused_import");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
-    assertThat(symbolByName.keySet()).containsOnly("mod1", "aliased_mod2", "x", "z");
+    assertThat(symbolByName).containsOnlyKeys("mod1", "aliased_mod2", "x", "z");
     assertThat(symbolByName.get("mod1").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
     assertThat(symbolByName.get("aliased_mod2").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
 

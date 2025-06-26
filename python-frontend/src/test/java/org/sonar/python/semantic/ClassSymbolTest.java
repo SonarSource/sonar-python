@@ -43,11 +43,11 @@ class ClassSymbolTest {
       "  pass");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
 
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.superClasses()).hasSize(0);
+    assertThat(classSymbol.superClasses()).isEmpty();
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(classSymbol.hasMetaClass()).isFalse();
   }
@@ -63,8 +63,8 @@ class ClassSymbolTest {
     Symbol parentSymbol = parentClass.name().symbol();
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classSymbol = (ClassSymbol) symbol;
     assertThat(classSymbol.superClasses()).hasSize(1);
     assertThat(classSymbol.superClasses()).containsExactlyInAnyOrder(parentSymbol);
@@ -88,8 +88,8 @@ class ClassSymbolTest {
     Symbol parentSymbol2 = parentClass2.name().symbol();
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(2);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classSymbol = (ClassSymbol) symbol;
     assertThat(classSymbol.superClasses()).hasSize(2);
     assertThat(classSymbol.superClasses()).containsExactlyInAnyOrder(parentSymbol, parentSymbol2);
@@ -105,10 +105,10 @@ class ClassSymbolTest {
       "  pass");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.superClasses()).hasSize(0);
+    assertThat(classSymbol.superClasses()).isEmpty();
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
@@ -121,8 +121,8 @@ class ClassSymbolTest {
       "  pass");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classSymbol = (ClassSymbol) symbol;
     assertThat(classSymbol.superClasses()).hasSize(2);
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
@@ -137,8 +137,8 @@ class ClassSymbolTest {
       "  pass");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classSymbol = (ClassSymbol) symbol;
     assertThat(classSymbol.superClasses()).hasSize(2);
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
@@ -152,8 +152,8 @@ class ClassSymbolTest {
       "C = \"hello\"");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isFalse();
-    assertThat(symbol.kind().equals(Symbol.Kind.AMBIGUOUS)).isTrue();
+    assertThat(symbol).isNotInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.AMBIGUOUS);
   }
 
   @Test
@@ -164,8 +164,8 @@ class ClassSymbolTest {
       "  pass");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isFalse();
-    assertThat(Symbol.Kind.CLASS.equals(symbol.kind())).isFalse();
+    assertThat(symbol).isNotInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isNotEqualTo(Symbol.Kind.CLASS);
   }
 
   @Test
@@ -177,10 +177,10 @@ class ClassSymbolTest {
       "  pass");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.superClasses()).hasSize(0);
+    assertThat(classSymbol.superClasses()).isEmpty();
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
@@ -194,8 +194,8 @@ class ClassSymbolTest {
       "  pass");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(2);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classSymbol = (ClassSymbol) symbol;
     assertThat(classSymbol.superClasses()).hasSize(1);
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
@@ -209,10 +209,10 @@ class ClassSymbolTest {
       "  pass");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.superClasses()).hasSize(0);
+    assertThat(classSymbol.superClasses()).isEmpty();
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
@@ -226,8 +226,8 @@ class ClassSymbolTest {
       "  pass");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(2);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classSymbol = (ClassSymbol) symbol;
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
@@ -327,7 +327,7 @@ class ClassSymbolTest {
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     Symbol symbol = classDef.name().symbol();
     //Currently, no symbol is created in case of global symbol
-    assertThat(symbol instanceof ClassSymbol).isFalse();
+    assertThat(symbol).isNotInstanceOf(ClassSymbol.class);
   }
 
   @Test
@@ -339,7 +339,7 @@ class ClassSymbolTest {
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     Symbol symbol = classDef.name().symbol();
     //Currently, no symbol is created in case of nonlocal symbol
-    assertThat(symbol instanceof ClassSymbol).isFalse();
+    assertThat(symbol).isNull();
   }
 
   @Test

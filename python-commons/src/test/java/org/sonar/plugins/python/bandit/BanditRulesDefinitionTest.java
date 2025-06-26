@@ -34,8 +34,8 @@ class BanditRulesDefinitionTest {
     assertThat(repository).isNotNull();
     assertThat(repository.name()).isEqualTo("Bandit");
     assertThat(repository.language()).isEqualTo("py");
-    assertThat(repository.isExternal()).isEqualTo(true);
-    assertThat(repository.rules().size()).isEqualTo(73);
+    assertThat(repository.isExternal()).isTrue();
+    assertThat(repository.rules()).hasSize(73);
 
     RulesDefinition.Rule rule = repository.rule("B101");
     assertThat(rule).isNotNull();

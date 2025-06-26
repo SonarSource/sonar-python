@@ -35,7 +35,7 @@ class PylintRulesDefinitionTest {
     assertThat(repository.name()).isEqualTo("Pylint");
     assertThat(repository.language()).isEqualTo("py");
     assertThat(repository.isExternal()).isTrue();
-    assertThat(repository.rules().size()).isEqualTo(370);
+    assertThat(repository.rules()).hasSize(370);
 
     RulesDefinition.Rule rule = repository.rule("C0121");
     assertThat(rule).isNotNull();

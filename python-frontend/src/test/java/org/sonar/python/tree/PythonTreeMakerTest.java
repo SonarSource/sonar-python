@@ -1085,9 +1085,9 @@ class PythonTreeMakerTest extends RuleTest {
     long nbNewline = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     long nbIndent = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
     long nbDedent = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.DEDENT)).count();
-    assertThat(nbNewline).isEqualTo(0);
-    assertThat(nbIndent).isEqualTo(0);
-    assertThat(nbDedent).isEqualTo(0);
+    assertThat(nbNewline).isZero();
+    assertThat(nbIndent).isZero();
+    assertThat(nbDedent).isZero();
 
     astNode = p.parse("for foo in bar:\n  pass\n");
     forStatement = treeMaker.forStatement(astNode);
@@ -1100,9 +1100,9 @@ class PythonTreeMakerTest extends RuleTest {
     nbNewline = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     nbIndent = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
     nbDedent = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.DEDENT)).count();
-    assertThat(nbNewline).isEqualTo(1);
-    assertThat(nbIndent).isEqualTo(1);
-    assertThat(nbDedent).isEqualTo(1);
+    assertThat(nbNewline).isOne();
+    assertThat(nbIndent).isOne();
+    assertThat(nbDedent).isOne();
 
     astNode = p.parse("for foo in bar:\n  pass\nelse:\n  pass");
     forStatement = treeMaker.forStatement(astNode);
@@ -1116,9 +1116,9 @@ class PythonTreeMakerTest extends RuleTest {
     nbNewline = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     nbIndent = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
     nbDedent = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.DEDENT)).count();
-    assertThat(nbNewline).isEqualTo(1);
-    assertThat(nbIndent).isEqualTo(1);
-    assertThat(nbDedent).isEqualTo(1);
+    assertThat(nbNewline).isOne();
+    assertThat(nbIndent).isOne();
+    assertThat(nbDedent).isOne();
 
     assertThat(forStatement.forKeyword().value()).isEqualTo("for");
     assertThat(forStatement.inKeyword().value()).isEqualTo("in");
@@ -1144,9 +1144,9 @@ class PythonTreeMakerTest extends RuleTest {
     long nbNewline = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     long nbIndent = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
     long nbDedent = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.DEDENT)).count();
-    assertThat(nbNewline).isEqualTo(0);
-    assertThat(nbIndent).isEqualTo(0);
-    assertThat(nbDedent).isEqualTo(0);
+    assertThat(nbNewline).isZero();
+    assertThat(nbIndent).isZero();
+    assertThat(nbDedent).isZero();
 
     astNode = p.parse("while foo:\n  pass\n");
     whileStatement = treeMaker.whileStatement(astNode);
@@ -1158,9 +1158,9 @@ class PythonTreeMakerTest extends RuleTest {
     nbNewline = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     nbIndent = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
     nbDedent = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.DEDENT)).count();
-    assertThat(nbNewline).isEqualTo(1);
-    assertThat(nbIndent).isEqualTo(1);
-    assertThat(nbDedent).isEqualTo(1);
+    assertThat(nbNewline).isOne();
+    assertThat(nbIndent).isOne();
+    assertThat(nbDedent).isOne();
 
     astNode = p.parse("while foo:\n  pass\nelse:\n  pass");
     whileStatement = treeMaker.whileStatement(astNode);
@@ -1173,9 +1173,9 @@ class PythonTreeMakerTest extends RuleTest {
     nbNewline = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     nbIndent = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
     nbDedent = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.DEDENT)).count();
-    assertThat(nbNewline).isEqualTo(1);
-    assertThat(nbIndent).isEqualTo(1);
-    assertThat(nbDedent).isEqualTo(1);
+    assertThat(nbNewline).isOne();
+    assertThat(nbIndent).isOne();
+    assertThat(nbDedent).isOne();
 
     assertThat(whileStatement.whileKeyword().value()).isEqualTo("while");
     assertThat(whileStatement.colon().value()).isEqualTo(":");
@@ -1313,7 +1313,7 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(annAssign.variable().is(Kind.NAME)).isTrue();
     assertThat(((Name) annAssign.variable()).name()).isEqualTo("y");
     assertThat(annAssign.assignedValue().is(Kind.YIELD_EXPR)).isTrue();
-    assertThat(((YieldExpression) annAssign.assignedValue()).expressions().size()).isEqualTo(1);
+    assertThat(((YieldExpression) annAssign.assignedValue()).expressions()).hasSize(1);
     assertThat(((YieldExpression) annAssign.assignedValue()).expressions().get(0).is(Kind.CALL_EXPR)).isTrue();
 
     astNode = p.parse("y: Tuple = a, b, c");
@@ -1322,7 +1322,7 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(annAssign.variable().is(Kind.NAME)).isTrue();
     assertThat(((Name) annAssign.variable()).name()).isEqualTo("y");
     assertThat(annAssign.assignedValue().is(Kind.TUPLE)).isTrue();
-    assertThat(((Tuple) annAssign.assignedValue()).elements().size()).isEqualTo(3);
+    assertThat(((Tuple) annAssign.assignedValue()).elements()).hasSize(3);
   }
 
   @Test
@@ -1381,7 +1381,7 @@ class PythonTreeMakerTest extends RuleTest {
       treeMaker.expression(astNode);
       fail("Expected RecognitionException");
     } catch (RecognitionException e) {
-      assertThat(e.getLine()).isEqualTo(1);
+      assertThat(e.getLine()).isOne();
     }
   }
 
@@ -1869,7 +1869,7 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(subscriptionExpression.subscripts().expressions()).hasSize(1);
     AssignmentExpression assignmentExpression = ((AssignmentExpression) subscriptionExpression.subscripts().expressions().get(0));
     assertThat(assignmentExpression.lhsName().name()).isEqualTo("b");
-    assertThat(((NumericLiteral) assignmentExpression.expression()).valueAsLong()).isEqualTo(1);
+    assertThat(((NumericLiteral) assignmentExpression.expression()).valueAsLong()).isOne();
   }
 
   @Test
@@ -2312,7 +2312,7 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(parenthesized.expression().is(Tree.Kind.STRING_LITERAL)).isTrue();
     StringLiteral pyStringLiteralTree = (StringLiteral) parenthesized.expression();
     assertThat(pyStringLiteralTree.children()).hasSize(2);
-    assertThat(pyStringLiteralTree.stringElements().size()).isEqualTo(2);
+    assertThat(pyStringLiteralTree.stringElements()).hasSize(2);
     assertThat(pyStringLiteralTree.stringElements().get(0).value()).isEqualTo("\'Hello \\ '");
     StringElement firstElement = pyStringLiteralTree.stringElements().get(0);
     StringElement secondElement = pyStringLiteralTree.stringElements().get(1);
@@ -2588,7 +2588,7 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(element.getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(tree.lCurlyBrace().value()).isEqualTo("{");
     assertThat(tree.rCurlyBrace().value()).isEqualTo("}");
-    assertThat(tree.commas()).hasSize(0);
+    assertThat(tree.commas()).isEmpty();
     assertThat(tree.children()).hasSize(3).containsExactly(tree.lCurlyBrace(), tree.elements().get(0), tree.rCurlyBrace());
 
     tree = (SetLiteral) parse("{ x, y, }", treeMaker::expression);
@@ -2667,13 +2667,13 @@ class PythonTreeMakerTest extends RuleTest {
       p.parse("((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
       fail("Expected RecognitionException");
     } catch (RecognitionException e) {
-      assertThat(e.getLine()).isEqualTo(1);
+      assertThat(e.getLine()).isOne();
     }
     try {
       p.parse("````````````````````````````````````````````````````````````````````````````````");
       fail("Expected RecognitionException");
     } catch (RecognitionException e) {
-      assertThat(e.getLine()).isEqualTo(1);
+      assertThat(e.getLine()).isOne();
     }
   }
 
@@ -2724,7 +2724,7 @@ class PythonTreeMakerTest extends RuleTest {
     fileInput = parse("foo", treeMaker::fileInput);
     assertThat(fileInput.firstToken().value()).isEqualTo("foo");
     passToken = fileInput.firstToken();
-    assertThat(passToken.trivia()).hasSize(0);
+    assertThat(passToken.trivia()).isEmpty();
   }
 
   @Test

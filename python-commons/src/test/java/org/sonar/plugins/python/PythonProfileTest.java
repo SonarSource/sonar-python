@@ -47,7 +47,7 @@ class PythonProfileTest {
   void profile() {
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = getProfile();
     assertThat(profile.rules()).extracting("repoKey").containsOnly("python", "pythonsecurity");
-    assertThat(profile.rules().size()).isGreaterThan(25);
+    assertThat(profile.rules()).hasSizeGreaterThan(25);
     assertThat(profile.rules()).extracting(BuiltInActiveRule::ruleKey).contains("S100");
   }
 

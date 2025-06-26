@@ -82,10 +82,10 @@ public class MetricsTest {
     assertThat(getProjectMeasureAsInt(LINES)).isEqualTo(13);
     assertThat(getProjectMeasureAsInt(FILES)).isEqualTo(2);
     assertThat(getProjectMeasureAsInt(STATEMENTS)).isEqualTo(6);
-    assertThat(getProjectMeasureAsInt(FUNCTIONS)).isEqualTo(1);
-    assertThat(getProjectMeasureAsInt(CLASSES)).isEqualTo(0);
+    assertThat(getProjectMeasureAsInt(FUNCTIONS)).isOne();
+    assertThat(getProjectMeasureAsInt(CLASSES)).isZero();
     // Documentation
-    assertThat(getProjectMeasureAsInt(COMMENT_LINES)).isEqualTo(1);
+    assertThat(getProjectMeasureAsInt(COMMENT_LINES)).isOne();
     assertThat(getProjectMeasureAsDouble(COMMENT_LINES_DENSITY)).isEqualTo(14.3, OFFSET);
     // Complexity
     assertThat(getProjectMeasureAsDouble(COMPLEXITY)).isEqualTo(3.0, OFFSET);
@@ -109,10 +109,10 @@ public class MetricsTest {
     assertThat(getDirectoryMeasureAsInt(LINES)).isEqualTo(13);
     assertThat(getDirectoryMeasureAsInt(FILES)).isEqualTo(2);
     assertThat(getDirectoryMeasureAsInt(STATEMENTS)).isEqualTo(6);
-    assertThat(getDirectoryMeasureAsInt(FUNCTIONS)).isEqualTo(1);
-    assertThat(getDirectoryMeasureAsInt(CLASSES)).isEqualTo(0);
+    assertThat(getDirectoryMeasureAsInt(FUNCTIONS)).isOne();
+    assertThat(getDirectoryMeasureAsInt(CLASSES)).isZero();
     // Documentation
-    assertThat(getDirectoryMeasureAsInt(COMMENT_LINES)).isEqualTo(1);
+    assertThat(getDirectoryMeasureAsInt(COMMENT_LINES)).isOne();
     assertThat(getDirectoryMeasureAsDouble(COMMENT_LINES_DENSITY)).isEqualTo(14.3, OFFSET);
     // Complexity
     assertThat(getDirectoryMeasureAsDouble(COMPLEXITY)).isEqualTo(3.0, OFFSET);
@@ -129,14 +129,14 @@ public class MetricsTest {
   @Test
   void file_level() {
     // Size
-    assertThat(getFileMeasureAsInt(NCLOC)).isEqualTo(1);
+    assertThat(getFileMeasureAsInt(NCLOC)).isOne();
     assertThat(getFileMeasureAsInt(LINES)).isEqualTo(6);
-    assertThat(getFileMeasureAsInt(FILES)).isEqualTo(1);
+    assertThat(getFileMeasureAsInt(FILES)).isOne();
     assertThat(getFileMeasureAsInt(STATEMENTS)).isEqualTo(2);
-    assertThat(getFileMeasureAsInt(FUNCTIONS)).isEqualTo(1);
-    assertThat(getFileMeasureAsInt(CLASSES)).isEqualTo(0);
+    assertThat(getFileMeasureAsInt(FUNCTIONS)).isOne();
+    assertThat(getFileMeasureAsInt(CLASSES)).isZero();
     // Documentation
-    assertThat(getFileMeasureAsInt(COMMENT_LINES)).isEqualTo(1);
+    assertThat(getFileMeasureAsInt(COMMENT_LINES)).isOne();
     assertThat(getFileMeasureAsDouble(COMMENT_LINES_DENSITY)).isEqualTo(50.0, OFFSET);
     // Complexity
     assertThat(getFileMeasureAsDouble(COMPLEXITY)).isEqualTo(2.0, OFFSET);

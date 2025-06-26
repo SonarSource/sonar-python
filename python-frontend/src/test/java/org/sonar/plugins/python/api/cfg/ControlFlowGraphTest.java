@@ -635,14 +635,14 @@ class ControlFlowGraphTest {
   @Test
   void CFGBlock_toString() {
     PythonCfgEndBlock endBlock = new PythonCfgEndBlock();
-    assertThat(endBlock.toString()).isEqualTo("END");
+    assertThat(endBlock).hasToString("END");
     PythonCfgBlock pythonCfgBlock = new PythonCfgSimpleBlock(endBlock);
-    assertThat(pythonCfgBlock.toString()).isEqualTo("empty");
+    assertThat(pythonCfgBlock).hasToString("empty");
     ControlFlowGraph cfg = cfg(
      "pass",
      "assert 2"
     );
-    assertThat(cfg.start().toString()).isEqualTo("2:2:PASS_STMT;ASSERT_STMT");
+    assertThat(cfg.start()).hasToString("2:2:PASS_STMT;ASSERT_STMT");
   }
 
   @Test
@@ -673,7 +673,7 @@ class ControlFlowGraphTest {
       "    foo()",
       "    return 2"
     );
-    assertThat(cfg.toString()).isEqualTo("" +
+    assertThat(cfg).hasToString("" +
       "0[label=\"2:2:NAME\"];" +
       "1[label=\"3:6:RETURN_STMT\"];" +
       "2[label=\"5:6:EXPRESSION_STMT;RETURN_STMT\"];" +

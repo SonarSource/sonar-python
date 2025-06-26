@@ -34,12 +34,12 @@ class TestResultTest {
 
   @Test
   void newBornSuiteShouldHaveVirginStatistics() {
-    assertThat(testResult.getTests()).isEqualTo(0);
-    assertThat(testResult.getExecutedTests()).isEqualTo(0);
-    assertThat(testResult.getErrors()).isEqualTo(0);
-    assertThat(testResult.getFailures()).isEqualTo(0);
-    assertThat(testResult.getSkipped()).isEqualTo(0);
-    assertThat(testResult.getTime()).isEqualTo(0);
+    assertThat(testResult.getTests()).isZero();
+    assertThat(testResult.getExecutedTests()).isZero();
+    assertThat(testResult.getErrors()).isZero();
+    assertThat(testResult.getFailures()).isZero();
+    assertThat(testResult.getSkipped()).isZero();
+    assertThat(testResult.getTime()).isZero();
   }
 
   @Test
@@ -64,8 +64,8 @@ class TestResultTest {
 
     assertThat(testResult.getTests()).isEqualTo(5);
     assertThat(testResult.getExecutedTests()).isEqualTo(3);
-    assertThat(testResult.getErrors()).isEqualTo(1);
-    assertThat(testResult.getFailures()).isEqualTo(0);
+    assertThat(testResult.getErrors()).isOne();
+    assertThat(testResult.getFailures()).isZero();
     assertThat(testResult.getSkipped()).isEqualTo(2);
     assertThat(testResult.getTime()).isEqualTo(15);
   }

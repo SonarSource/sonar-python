@@ -246,17 +246,17 @@ class RuntimeTypeTest {
   @Test
   void test_hashCode() {
     RuntimeType aType = new RuntimeType(a);
-    assertThat(aType.hashCode()).isEqualTo(new RuntimeType(a).hashCode());
-    assertThat(aType.hashCode()).isNotEqualTo(new RuntimeType(b).hashCode());
+    assertThat(aType).hasSameHashCodeAs(new RuntimeType(a));
+    assertThat(aType).doesNotHaveSameHashCodeAs(new RuntimeType(b));
 
     RuntimeType x = new RuntimeType(new ClassSymbolImpl("X", null));
     RuntimeType y = new RuntimeType(new ClassSymbolImpl("Y", null));
-    assertThat(x.hashCode()).isNotEqualTo(y.hashCode());
+    assertThat(x).doesNotHaveSameHashCodeAs(y);
   }
 
   @Test
   void test_toString() {
-    assertThat(new RuntimeType(a).toString()).isEqualTo("RuntimeType(a)");
+    assertThat(new RuntimeType(a)).hasToString("RuntimeType(a)");
   }
 
   @Test

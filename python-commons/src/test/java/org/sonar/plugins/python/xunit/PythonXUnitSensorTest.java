@@ -74,14 +74,14 @@ class PythonXUnitSensorTest {
     assertThat(measure(testFile1, CoreMetrics.TESTS)).isEqualTo(3);
     assertThat(measure(testFile2, CoreMetrics.TESTS)).isEqualTo(3);
 
-    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isEqualTo(0);
-    assertThat(measure(testFile2, CoreMetrics.SKIPPED_TESTS)).isEqualTo(1);
+    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isZero();
+    assertThat(measure(testFile2, CoreMetrics.SKIPPED_TESTS)).isOne();
 
-    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isEqualTo(1);
-    assertThat(measure(testFile2, CoreMetrics.TEST_ERRORS)).isEqualTo(1);
+    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isOne();
+    assertThat(measure(testFile2, CoreMetrics.TEST_ERRORS)).isOne();
 
-    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isEqualTo(1);
-    assertThat(measure(testFile2, CoreMetrics.TEST_FAILURES)).isEqualTo(1);
+    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isOne();
+    assertThat(measure(testFile2, CoreMetrics.TEST_FAILURES)).isOne();
   }
 
   @Test
@@ -93,7 +93,7 @@ class PythonXUnitSensorTest {
 
     // includes test with not found file
     assertThat(moduleMeasure(CoreMetrics.TESTS)).isEqualTo(7);
-    assertThat(moduleMeasure(CoreMetrics.SKIPPED_TESTS)).isEqualTo(1);
+    assertThat(moduleMeasure(CoreMetrics.SKIPPED_TESTS)).isOne();
     assertThat(moduleMeasure(CoreMetrics.TEST_ERRORS)).isEqualTo(3);
     assertThat(moduleMeasure(CoreMetrics.TEST_FAILURES)).isEqualTo(2);
   }
@@ -133,14 +133,14 @@ class PythonXUnitSensorTest {
     assertThat(measure(testFile1, CoreMetrics.TESTS)).isEqualTo(2);
     assertThat(measure(testFile2, CoreMetrics.TESTS)).isEqualTo(8);
 
-    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isEqualTo(0);
+    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isZero();
     assertThat(measure(testFile2, CoreMetrics.SKIPPED_TESTS)).isEqualTo(2);
 
-    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isEqualTo(0);
-    assertThat(measure(testFile2, CoreMetrics.TEST_ERRORS)).isEqualTo(0);
+    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isZero();
+    assertThat(measure(testFile2, CoreMetrics.TEST_ERRORS)).isZero();
 
-    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isEqualTo(1);
-    assertThat(measure(testFile2, CoreMetrics.TEST_FAILURES)).isEqualTo(1);
+    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isOne();
+    assertThat(measure(testFile2, CoreMetrics.TEST_FAILURES)).isOne();
   }
 
   @Test
@@ -162,9 +162,9 @@ class PythonXUnitSensorTest {
     sensor.execute(context);
 
     assertThat(measure(testFile1, CoreMetrics.TESTS)).isEqualTo(2);
-    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isEqualTo(0);
-    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isEqualTo(0);
-    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isEqualTo(1);
+    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isZero();
+    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isZero();
+    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isOne();
   }
 
   @Test
@@ -175,9 +175,9 @@ class PythonXUnitSensorTest {
     sensor.execute(context);
 
     assertThat(measure(testFile1, CoreMetrics.TESTS)).isEqualTo(2);
-    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isEqualTo(0);
-    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isEqualTo(0);
-    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isEqualTo(0);
+    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isZero();
+    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isZero();
+    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isZero();
   }
 
   @Test

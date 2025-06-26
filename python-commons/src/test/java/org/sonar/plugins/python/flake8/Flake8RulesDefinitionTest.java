@@ -34,8 +34,8 @@ class Flake8RulesDefinitionTest {
     assertThat(repository).isNotNull();
     assertThat(repository.name()).isEqualTo("Flake8");
     assertThat(repository.language()).isEqualTo("py");
-    assertThat(repository.isExternal()).isEqualTo(true);
-    assertThat(repository.rules().size()).isEqualTo(116);
+    assertThat(repository.isExternal()).isTrue();
+    assertThat(repository.rules()).hasSize(116);
 
     RulesDefinition.Rule rule = repository.rule("F405");
     assertThat(rule).isNotNull();

@@ -86,7 +86,7 @@ class BanditSensorTest {
     assertThat(externalIssues).hasSize(4);
 
     ExternalIssue first = externalIssues.get(0);
-    assertThat(first.ruleKey().toString()).isEqualTo(BANDIT_B413);
+    assertThat(first.ruleKey()).hasToString(BANDIT_B413);
     assertThat(first.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(first.severity()).isEqualTo(Severity.CRITICAL);
     IssueLocation firstPrimaryLoc = first.primaryLocation();
@@ -98,7 +98,7 @@ class BanditSensorTest {
     assertThat(firstTextRange.start().line()).isEqualTo(2);
 
     ExternalIssue second = externalIssues.get(1);
-    assertThat(second.ruleKey().toString()).isEqualTo("external_bandit:B107");
+    assertThat(second.ruleKey()).hasToString("external_bandit:B107");
     assertThat(second.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(second.severity()).isEqualTo(Severity.MINOR);
     IssueLocation secondPrimaryLoc = second.primaryLocation();
@@ -109,7 +109,7 @@ class BanditSensorTest {
     assertThat(secondTextRange.start().line()).isEqualTo(5);
 
     ExternalIssue third = externalIssues.get(2);
-    assertThat(third.ruleKey().toString()).isEqualTo("external_bandit:B605");
+    assertThat(third.ruleKey()).hasToString("external_bandit:B605");
     assertThat(third.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(third.severity()).isEqualTo(Severity.BLOCKER);
     IssueLocation thirdPrimaryLoc = third.primaryLocation();
@@ -120,7 +120,7 @@ class BanditSensorTest {
     assertThat(thirdTextRange.start().line()).isEqualTo(6);
 
     ExternalIssue fourth = externalIssues.get(3);
-    assertThat(fourth.ruleKey().toString()).isEqualTo("external_bandit:B311");
+    assertThat(fourth.ruleKey()).hasToString("external_bandit:B311");
     assertThat(fourth.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(fourth.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation fourthPrimaryLoc = fourth.primaryLocation();
@@ -173,7 +173,7 @@ class BanditSensorTest {
 
     ExternalIssue first = externalIssues.get(0);
     assertThat(first.primaryLocation().inputComponent().key()).isEqualTo(BANDIT_FILE);
-    assertThat(first.ruleKey().toString()).isEqualTo(BANDIT_B413);
+    assertThat(first.ruleKey()).hasToString(BANDIT_B413);
     assertThat(first.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(first.severity()).isEqualTo(Severity.MINOR);
     assertThat(first.primaryLocation().message()).isEqualTo("A message");
@@ -197,7 +197,7 @@ class BanditSensorTest {
   @Test
   void issues_when_bandit_file_and_line_errors() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "bandit-report-with-file-and-line-errors.json");
-    assertThat(externalIssues).hasSize(0);
+    assertThat(externalIssues).isEmpty();
 
     assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
       .contains("100 is not a valid line for pointer. File bandit/file1.py has 8 line(s)");

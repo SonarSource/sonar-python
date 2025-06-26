@@ -90,16 +90,16 @@ class SymbolUtilsTest {
   @Test
   void first_parameter_offset() {
     FunctionSymbol functionSymbol = functionSymbol("class A:\n  def method(self, *args): pass");
-    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(0);
-    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(1);
+    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isZero();
+    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isOne();
 
     functionSymbol = functionSymbol("class A:\n  @staticmethod\n  def method(a, b): pass");
-    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(0);
-    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(0);
+    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isZero();
+    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isZero();
 
     functionSymbol = functionSymbol("class A:\n  @classmethod\n  def method(a, b): pass");
-    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(1);
-    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(1);
+    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isOne();
+    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isOne();
 
     functionSymbol = functionSymbol("class A:\n  @staticmethod\n  @another_decorator\n  def method(a, b): pass");
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(-1);
@@ -107,7 +107,7 @@ class SymbolUtilsTest {
 
     functionSymbol = functionSymbol("class A:\n  @abstractmethod\n  def method(self, b): pass");
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isZero();
-    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(1);
+    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isOne();
 
     functionSymbol = functionSymbol("class A:\n  @unknown_decorator\n  def method(self, *args): pass");
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(-1);
@@ -118,7 +118,7 @@ class SymbolUtilsTest {
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(-1);
 
     functionSymbol = functionSymbol("def function(): pass");
-    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(0);
+    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isZero();
   }
 
 
@@ -166,7 +166,7 @@ class SymbolUtilsTest {
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo4)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo5)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo5)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethod(foo5_override).get()).isEqualTo(foo5);
+    assertThat(SymbolUtils.getOverriddenMethod(foo5_override)).contains(foo5);
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo5_override)).isTrue();
     assertThat(SymbolUtils.getOverriddenMethod(foo6)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo6)).isFalse();
