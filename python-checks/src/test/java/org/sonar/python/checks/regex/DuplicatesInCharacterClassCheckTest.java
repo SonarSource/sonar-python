@@ -19,8 +19,6 @@ package org.sonar.python.checks.regex;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-import static org.junit.Assert.*;
-
 class DuplicatesInCharacterClassCheckTest {
 
   @Test

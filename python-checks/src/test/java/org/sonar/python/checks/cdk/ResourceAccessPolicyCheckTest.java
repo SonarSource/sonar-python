@@ -17,7 +17,6 @@
 package org.sonar.python.checks.cdk;
 
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class ResourceAccessPolicyCheckTest {

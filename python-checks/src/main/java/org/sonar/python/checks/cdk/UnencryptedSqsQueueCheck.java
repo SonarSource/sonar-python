@@ -21,13 +21,11 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 
 import static org.sonar.python.checks.cdk.CdkPredicate.isFalse;
-import static org.sonar.python.checks.cdk.CdkPredicate.isNone;
 import static org.sonar.python.checks.cdk.CdkUtils.getArgument;
 
 @Rule(key = "S6330")
 public class UnencryptedSqsQueueCheck extends AbstractCdkResourceCheck {
   private static final String SQS_MANAGED_DISABLED_MESSAGE = "Setting \"sqs_managed_sse_enabled\" to \"false\" disables SQS queues encryption. Make sure it is safe here.";
-  private static final String CFN_NONE_MESSAGE = "Setting \"kms_master_key_id\" to \"None\" disables SQS queues encryption. Make sure it is safe here.";
 
   @Override
   protected void registerFqnConsumer() {

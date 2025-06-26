@@ -17,10 +17,8 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-import static org.junit.Assert.*;
 
 class InvariantReturnCheckTest {
 

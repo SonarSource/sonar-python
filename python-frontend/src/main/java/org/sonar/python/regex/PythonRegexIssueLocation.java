@@ -18,7 +18,6 @@ package org.sonar.python.regex;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
 import org.sonarsource.analyzer.commons.regex.ast.IndexRange;
