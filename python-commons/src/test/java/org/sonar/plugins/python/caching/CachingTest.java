@@ -55,7 +55,7 @@ class CachingTest {
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  private final static String CACHE_VERSION = "dummyVersion";
+  private static final String CACHE_VERSION = "dummyVersion";
 
 
   @Test

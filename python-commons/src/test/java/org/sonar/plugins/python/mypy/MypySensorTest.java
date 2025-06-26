@@ -52,7 +52,7 @@ class MypySensorTest {
   private static final String MYPY_FILE = "python-project:mypy/type_hints_noncompliant.py";
   private static final String UNKNOWN_FILE_REPORT = "mypy_unknown_file_output.txt";
 
-  private final static MypySensor mypySensor = new MypySensor();
+  private static final MypySensor mypySensor = new MypySensor();
   private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
 
   @RegisterExtension
