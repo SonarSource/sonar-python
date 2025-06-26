@@ -172,7 +172,7 @@ public class FStringChannel extends Channel<Lexer> {
   }
 
   private static void addFStringMiddleToTokens(List<Token> tokens, StringBuilder sb, Lexer output, int line, int column) {
-    if (sb.length() != 0) {
+    if (!sb.isEmpty()) {
       Token fStringMiddleToken = buildToken(PythonTokenType.FSTRING_MIDDLE, sb.toString(), output, line, column);
       sb.setLength(0);
       tokens.add(fStringMiddleToken);

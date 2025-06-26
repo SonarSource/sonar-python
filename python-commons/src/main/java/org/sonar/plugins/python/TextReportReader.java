@@ -59,7 +59,7 @@ public class TextReportReader {
   }
 
   private Issue parseLine(String line) {
-    if (line.length() > 0) {
+    if (!line.isEmpty()) {
       Matcher m = TextReportReader.DEFAULT_PATTERN.matcher(line);
       if (m.matches()) {
         return extractDefaultStyleIssue(m);

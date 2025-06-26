@@ -28,7 +28,7 @@ public class MissingNewlineAtEndOfFileCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
       String fileContent = ctx.pythonFile().content();
-      if (fileContent.length() > 0 && !fileContent.endsWith("\n") && !fileContent.endsWith("\r")) {
+      if (!fileContent.isEmpty() && !fileContent.endsWith("\n") && !fileContent.endsWith("\r")) {
         ctx.addFileIssue(String.format(MESSAGE, ctx.pythonFile().fileName()));
       }
     });

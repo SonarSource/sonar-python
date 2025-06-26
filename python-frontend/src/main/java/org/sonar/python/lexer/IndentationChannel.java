@@ -72,7 +72,7 @@ public class IndentationChannel extends Channel<Lexer> {
     }
 
     processIndents(lexer, line, column, indentationLevel);
-    return buffer.length() != 0;
+    return !buffer.isEmpty();
   }
 
   private static int countTabReplacer(int indentationLevel) {

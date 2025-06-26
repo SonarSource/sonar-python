@@ -68,7 +68,7 @@ public class MypySensor extends ExternalIssuesSensor {
   }
 
   private static TextReportReader.Issue parseLine(String line) {
-    if (line.length() > 0) {
+    if (!line.isEmpty()) {
       Matcher m = PATTERN.matcher(line);
       if (m.matches()) {
         return extractIssue(m);

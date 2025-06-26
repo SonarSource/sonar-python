@@ -71,7 +71,7 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
     DeclarationType type = getType(tree);
     if (docstring == null) {
       raiseIssueNoDocstring(tree, type, ctx);
-    } else if (docstring.trimmedQuotesValue().trim().length() == 0) {
+    } else if (docstring.trimmedQuotesValue().isBlank()) {
       raiseIssue(tree, MESSAGE_EMPTY_DOCSTRING, type, ctx);
     }
   }
