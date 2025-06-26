@@ -216,9 +216,9 @@ public class PythonQuickFixVerifier {
         } else {
           // There is an intersection between edits, only need to check valid case
           if (reference.startLine() == toCheck.endLine()) {
-            return !(toCheck.endLineOffset() <= reference.startLineOffset());
+            return toCheck.endLineOffset() > reference.startLineOffset();
           } else if (reference.endLine() == toCheck.startLine()) {
-            return !(reference.endLineOffset() <= toCheck.startLineOffset());
+            return reference.endLineOffset() > toCheck.startLineOffset();
           }
         }
       }
