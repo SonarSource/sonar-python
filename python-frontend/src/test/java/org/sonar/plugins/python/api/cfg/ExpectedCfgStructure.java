@@ -347,7 +347,7 @@ class ExpectedCfgStructure {
 
     private static List<String> getStringList(Tree tree) {
       if (tree instanceof ListLiteral listLiteral) {
-        return listLiteral.elements().expressions().stream().map(e -> getValue(e)).toList();
+        return listLiteral.elements().expressions().stream().map(Parser::getValue).toList();
       } else {
         throw new UnsupportedOperationException("Expecting list literal, got '" + tree.toString() + "'");
       }

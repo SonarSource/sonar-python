@@ -2729,7 +2729,7 @@ public class TypeInferenceV2Test {
       .map(expressions -> expressions.get(0))
       .get();
     UnionType acosType1 = (UnionType) acosExpr1.typeV2();
-    assertThat(acosType1.candidates()).allMatch(p -> p instanceof FunctionType);
+    assertThat(acosType1.candidates()).allMatch(FunctionType.class::isInstance);
     assertThat(acosType1.candidates())
       .map(FunctionType.class::cast)
       .extracting(FunctionType::returnType)
@@ -2737,7 +2737,7 @@ public class TypeInferenceV2Test {
       .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN);
 
     UnionType acosType2 = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
-    assertThat(acosType2.candidates()).allMatch(p -> p instanceof FunctionType);
+    assertThat(acosType2.candidates()).allMatch(FunctionType.class::isInstance);
     assertThat(acosType2.candidates())
       .map(FunctionType.class::cast)
       .extracting(FunctionType::returnType)
