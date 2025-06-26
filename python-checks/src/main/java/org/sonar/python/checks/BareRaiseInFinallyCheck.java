@@ -50,6 +50,6 @@ public class BareRaiseInFinallyCheck extends PythonSubscriptionCheck {
 
   private static boolean isWithinExitFunction(RaiseStatement finallyClause) {
     return TreeUtils.firstAncestor(finallyClause, t -> t.is(Tree.Kind.FUNCDEF)
-      && ((FunctionDef) t).name().name().equals("__exit__")) != null;
+      && "__exit__".equals(((FunctionDef) t).name().name())) != null;
   }
 }

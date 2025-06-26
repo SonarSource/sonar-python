@@ -78,7 +78,7 @@ public class SymbolUtils {
 
   public static String fullyQualifiedModuleName(String packageName, String fileName) {
     String moduleName = getModuleFileName(fileName);
-    if (moduleName.equals("__init__")) {
+    if ("__init__".equals(moduleName)) {
       return packageName;
     }
     return packageName.isEmpty()
@@ -107,7 +107,7 @@ public class SymbolUtils {
   private static void addParentClass(PythonFile pythonFile, Map<String, Symbol> symbolsByName, ClassSymbolImpl classSymbol, RegularArgument regularArgument) {
     Name keyword = regularArgument.keywordArgument();
     if (keyword != null) {
-      if (keyword.name().equals("metaclass")) {
+      if ("metaclass".equals(keyword.name())) {
         classSymbol.setHasMetaClass();
         getSymbolFromTree(regularArgument.expression())
           .map(Symbol::fullyQualifiedName)

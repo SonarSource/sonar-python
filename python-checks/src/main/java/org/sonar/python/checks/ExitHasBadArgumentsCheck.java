@@ -37,7 +37,7 @@ public class ExitHasBadArgumentsCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef funcDef = (FunctionDef) ctx.syntaxNode();
-      if (!funcDef.name().name().equals("__exit__")) {
+      if (!"__exit__".equals(funcDef.name().name())) {
         return;
       }
       ParameterList parameters = funcDef.parameters();

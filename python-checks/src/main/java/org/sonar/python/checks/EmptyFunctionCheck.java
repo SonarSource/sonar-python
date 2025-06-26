@@ -74,7 +74,7 @@ public class EmptyFunctionCheck extends PythonSubscriptionCheck {
     issue.addQuickFix(PythonQuickFix.newQuickFix("Insert placeholder comment",
       insertLineBefore(passStatement, "# TODO document why this method is empty")));
 
-    if (functionType.equals("method") && BINARY_MAGIC_METHODS.contains(functionDef.name().name())) {
+    if ("method".equals(functionType) && BINARY_MAGIC_METHODS.contains(functionDef.name().name())) {
       issue.addQuickFix(PythonQuickFix.newQuickFix("Return NotImplemented constant",
         insertLineBefore(passStatement, "return NotImplemented")));
     } else {

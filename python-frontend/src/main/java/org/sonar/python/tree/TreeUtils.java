@@ -339,7 +339,7 @@ public class TreeUtils {
   public static boolean isBooleanLiteral(Tree tree) {
     if (tree.is(Kind.NAME)) {
       String name = ((Name) tree).name();
-      return name.equals("True") || name.equals("False");
+      return "True".equals(name) || "False".equals(name);
     }
     return false;
   }

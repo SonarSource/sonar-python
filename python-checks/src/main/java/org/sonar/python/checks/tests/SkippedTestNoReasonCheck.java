@@ -117,7 +117,7 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
 
     StringLiteral stringLiteral = (StringLiteral) regularArg.expression();
 
-    if (stringLiteral.trimmedQuotesValue().equals("")) {
+    if (stringLiteral.trimmedQuotesValue().isEmpty()) {
       ctx.addIssue(stringLiteral, MESSAGE);
     }
   }

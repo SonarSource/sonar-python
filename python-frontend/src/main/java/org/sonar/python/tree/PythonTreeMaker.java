@@ -564,7 +564,7 @@ public class PythonTreeMaker {
     AstNode defNode = astNode.getFirstChild(PythonKeyword.DEF);
     Token asyncToken = null;
     AstNode defPreviousSibling = defNode.getPreviousSibling();
-    if (defPreviousSibling != null && defPreviousSibling.getToken().getValue().equals("async")) {
+    if (defPreviousSibling != null && "async".equals(defPreviousSibling.getToken().getValue())) {
       asyncToken = toPyToken(defPreviousSibling.getToken());
     }
     Token lPar = toPyToken(astNode.getFirstChild(PythonPunctuator.LPARENTHESIS).getToken());
@@ -1556,7 +1556,7 @@ public class PythonTreeMaker {
     List<Argument> nonParenthesizedGeneratorExpressions = arguments.stream()
       .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
       .map(RegularArgument.class::cast)
-      .filter(arg -> arg.expression().is(Tree.Kind.GENERATOR_EXPR) && !arg.expression().firstToken().value().equals("("))
+      .filter(arg -> arg.expression().is(Tree.Kind.GENERATOR_EXPR) && !"(".equals(arg.expression().firstToken().value()))
       .collect(Collectors.toList());
     if (!nonParenthesizedGeneratorExpressions.isEmpty() && arguments.size() > 1) {
       int line = nonParenthesizedGeneratorExpressions.get(0).firstToken().line();

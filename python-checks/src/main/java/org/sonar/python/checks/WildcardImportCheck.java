@@ -101,7 +101,7 @@ public class WildcardImportCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
-      if (ctx.pythonFile().fileName().equals("__init__.py")) {
+      if ("__init__.py".equals(ctx.pythonFile().fileName())) {
         // Ignore __init__.py files, as wildcard imports are commonly used to populate those.
         return;
       }

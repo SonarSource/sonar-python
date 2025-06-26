@@ -127,7 +127,7 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
     @Override
     public void visitName(Name pyNameTree) {
       if (withinRaise > 0) {
-        hasNotImplementedError |= pyNameTree.name().equals("NotImplementedError");
+        hasNotImplementedError |= "NotImplementedError".equals(pyNameTree.name());
       }
     }
   }

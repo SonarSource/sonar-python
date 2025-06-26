@@ -52,7 +52,7 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
       cfg.blocks().forEach(block -> {
         var unnecessaryAssignments = DeadStoreUtils.findUnnecessaryAssignments(block, lva.getLiveVariables(block), functionDef);
         unnecessaryAssignments.stream()
-          .filter(assignment -> !assignment.symbol.name().equals("_"))
+          .filter(assignment -> !"_".equals(assignment.symbol.name()))
           .filter((assignment -> isParameter(assignment.element)))
           // symbols should have at least two binding usages
           .filter(assignment -> assignment.symbol.usages().stream().filter(Usage::isBindingUsage).count() > 1)

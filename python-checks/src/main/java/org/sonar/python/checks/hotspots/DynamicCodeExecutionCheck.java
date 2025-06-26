@@ -41,7 +41,7 @@ public class DynamicCodeExecutionCheck extends PythonSubscriptionCheck {
     Expression expr = call.callee();
     if (expr.is(Tree.Kind.NAME)) {
       String functionName = ((Name) expr).name();
-      return functionName.equals("exec") || functionName.equals("eval");
+      return "exec".equals(functionName) || "eval".equals(functionName);
     }
     return false;
   }

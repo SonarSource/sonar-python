@@ -126,7 +126,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
   private static boolean isParamOfClassMethod(Tree tree) {
     FunctionDef functionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF);
     return Optional.ofNullable(TreeUtils.getFunctionSymbolFromDef(functionDef))
-      .filter(functionSymbol -> functionSymbol.decorators().stream().anyMatch(dec -> dec.equals("classmethod")))
+      .filter(functionSymbol -> functionSymbol.decorators().stream().anyMatch("classmethod"::equals))
       .isPresent();
   }
 

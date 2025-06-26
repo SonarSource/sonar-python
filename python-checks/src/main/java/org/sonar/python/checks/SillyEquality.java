@@ -71,7 +71,7 @@ public abstract class SillyEquality extends PythonSubscriptionCheck {
   }
 
   private void raiseIssue(SubscriptionContext ctx, BinaryExpression binaryExpression, String operator) {
-    String result = operator.equals("==") ? "False" : "True";
+    String result = "==".equals(operator) ? "False" : "True";
     ctx.addIssue(binaryExpression.operator(), message(result));
   }
 

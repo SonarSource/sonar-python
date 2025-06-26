@@ -113,14 +113,14 @@ public class CorsCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkDjangoSettings(SubscriptionContext ctx) {
-    if (!ctx.pythonFile().fileName().equals("settings.py")) {
+    if (!"settings.py".equals(ctx.pythonFile().fileName())) {
       return;
     }
     AssignmentStatement assignment = (AssignmentStatement) ctx.syntaxNode();
 
     if (isVarAssignment(assignment, DJANGO_ALLOW_ALL)
       && assignment.assignedValue().is(NAME)
-      && ((Name) assignment.assignedValue()).name().equals("True")) {
+      && "True".equals(((Name) assignment.assignedValue()).name())) {
       ctx.addIssue(assignment, MESSAGE);
 
     } else if (isVarAssignment(assignment, DJANGO_WHITELIST)) {

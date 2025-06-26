@@ -186,10 +186,10 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
 
   private static boolean isOverwritingDjangoHashers(List<ExpressionList> lhsExpressions, String filename) {
     // checks for `PASSWORD_HASHERS = []` in a global_settings.py file
-    if (filename.equals("global_settings.py") &&
+    if ("global_settings.py".equals(filename) &&
       lhsExpressions.stream()
         .flatMap(pelt -> pelt.expressions().stream())
-        .anyMatch(expression -> expression.firstToken().value().equals("PASSWORD_HASHERS"))) {
+        .anyMatch(expression -> "PASSWORD_HASHERS".equals(expression.firstToken().value()))) {
 
       return true;
     }

@@ -206,7 +206,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isUnderscoreVariable(Symbol symbol) {
-    return symbol.name().equals("_");
+    return "_".equals(symbol.name());
   }
 
   private static boolean isLoopDeclarationSymbol(Symbol symbol, Tree element) {

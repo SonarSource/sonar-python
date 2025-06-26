@@ -69,7 +69,7 @@ public class LdapAuthenticationCheck extends PythonSubscriptionCheck {
       RegularArgument regularArgument = (RegularArgument) argList.arguments().get(i);
       Name keyword = regularArgument.keywordArgument();
       if ((keyword == null && i == 1) ||
-        (keyword != null && keyword.name().equals("cred"))) {
+        (keyword != null && "cred".equals(keyword.name()))) {
 
         if (isValidPassword(regularArgument.expression(), secondaries)) {
           return true;

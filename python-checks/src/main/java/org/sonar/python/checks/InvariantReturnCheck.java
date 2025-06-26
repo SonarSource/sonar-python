@@ -176,7 +176,7 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean identifierHaveTheSameValue(LatestExecutedBlock leftBlock, Name left, LatestExecutedBlock rightBlock, Name right) {
-    if (left.name().equals("True") || left.name().equals("False")) {
+    if ("True".equals(left.name()) || "False".equals(left.name())) {
       return right.name().equals(left.name());
     }
     Symbol leftSymbol = left.symbol();

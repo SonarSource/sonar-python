@@ -181,7 +181,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   private static boolean isInstanceMethod(FunctionDef functionDef) {
-    return !functionDef.name().name().equals("__new__") && functionDef.isMethodDefinition() && functionDef.decorators().stream()
+    return !"__new__".equals(functionDef.name().name()) && functionDef.isMethodDefinition() && functionDef.decorators().stream()
       .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
       .filter(Objects::nonNull)
       .noneMatch(decorator -> decorator.equals(STATIC_METHOD_DECORATOR) || decorator.equals(CLASS_METHOD_DECORATOR));

@@ -49,7 +49,7 @@ public class UndefinedSymbolsCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean importsManipulatedAllProperty(FileInput fileInput) {
-    return fileInput.globalVariables().stream().anyMatch(s -> s.name().equals("__all__") && s.fullyQualifiedName() != null);
+    return fileInput.globalVariables().stream().anyMatch(s -> "__all__".equals(s.name()) && s.fullyQualifiedName() != null);
   }
 
   private static void addNameIssues(Map<String, List<Name>> nameIssues, SubscriptionContext subscriptionContext) {
@@ -83,7 +83,7 @@ public class UndefinedSymbolsCheck extends PythonSubscriptionCheck {
     public void visitCallExpression(CallExpression callExpression) {
       if (callExpression.callee().is(Tree.Kind.NAME)) {
         String name = ((Name) callExpression.callee()).name();
-        callGlobalsOrLocals |= name.equals("globals") || name.equals("locals");
+        callGlobalsOrLocals |= "globals".equals(name) || "locals".equals(name);
       }
       super.visitCallExpression(callExpression);
     }

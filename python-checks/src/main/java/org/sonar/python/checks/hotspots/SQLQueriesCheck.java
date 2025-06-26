@@ -85,11 +85,11 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isSQLQueryFromDjangoModel(String functionName) {
-    return isUsingDjangoModel && (functionName.equals("raw") || functionName.equals("extra"));
+    return isUsingDjangoModel && ("raw".equals(functionName) || "extra".equals(functionName));
   }
 
   private boolean isSQLQueryFromDjangoDBConnection(String functionName) {
-    return isUsingDjangoDBConnection && functionName.equals("execute");
+    return isUsingDjangoDBConnection && "execute".equals(functionName);
   }
 
   private void checkCallExpression(SubscriptionContext context) {
@@ -149,7 +149,7 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean extraContainsFormattedSqlQueries(List<Argument> argListNode, String functionName) {
-    if (functionName.equals("extra")) {
+    if ("extra".equals(functionName)) {
       return argListNode.stream()
         .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
         .map(RegularArgument.class::cast)
@@ -185,7 +185,7 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
     public void visitCallExpression(CallExpression pyCallExpressionTree) {
       if (pyCallExpressionTree.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
         QualifiedExpression callee = (QualifiedExpression) pyCallExpressionTree.callee();
-        hasFormattedString |= callee.name().name().equals("format") && callee.qualifier().is(Tree.Kind.STRING_LITERAL);
+        hasFormattedString |= "format".equals(callee.name().name()) && callee.qualifier().is(Tree.Kind.STRING_LITERAL);
       }
       super.visitCallExpression(pyCallExpressionTree);
     }

@@ -447,7 +447,7 @@ public class StringFormat {
       String mapKey = matcher.group("mapkey");
       String conversionType = matcher.group("type");
 
-      if (conversionType.equals("%")) {
+      if ("%".equals(conversionType)) {
         // If the conversion type is '%', we are dealing with a '%%'
         continue;
       }

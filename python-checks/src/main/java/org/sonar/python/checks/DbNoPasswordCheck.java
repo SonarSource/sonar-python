@@ -75,7 +75,7 @@ public class DbNoPasswordCheck extends PythonSubscriptionCheck {
     if (matcher.find()) {
       String password = matcher.group(1);
 
-      if (password == null || password.equals(":")) {
+      if (password == null || ":".equals(password)) {
         ctx.addIssue(ctx.syntaxNode(), MESSAGE);
       }
     }
@@ -118,7 +118,7 @@ public class DbNoPasswordCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkDjangoSettings(SubscriptionContext ctx) {
-    if (!ctx.pythonFile().fileName().equals("settings.py")) {
+    if (!"settings.py".equals(ctx.pythonFile().fileName())) {
       return;
     }
     KeyValuePair keyValue = (KeyValuePair) ctx.syntaxNode();
@@ -159,6 +159,6 @@ public class DbNoPasswordCheck extends PythonSubscriptionCheck {
     List<ExpressionList> lhs = assignment.lhsExpressions();
     return lhs.size() == 1 && lhs.get(0).expressions().size() == 1
       && lhs.get(0).expressions().get(0).is(Kind.NAME)
-      && ((Name) lhs.get(0).expressions().get(0)).name().equals("DATABASES");
+      && "DATABASES".equals(((Name) lhs.get(0).expressions().get(0)).name());
   }
 }

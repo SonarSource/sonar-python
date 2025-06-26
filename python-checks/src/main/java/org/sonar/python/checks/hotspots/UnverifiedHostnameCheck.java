@@ -103,7 +103,7 @@ public class UnverifiedHostnameCheck extends PythonSubscriptionCheck {
     for (Usage usage : symbol.usages()) {
       if (usage.kind().equals(Usage.Kind.OTHER)) {
         QualifiedExpression qualifiedExpression = (QualifiedExpression) TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.QUALIFIED_EXPR);
-        if (qualifiedExpression != null && qualifiedExpression.name().name().equals("check_hostname")) {
+        if (qualifiedExpression != null && "check_hostname".equals(qualifiedExpression.name().name())) {
           AssignmentStatement assignmentStatement = (AssignmentStatement) TreeUtils.firstAncestorOfKind(qualifiedExpression, Tree.Kind.ASSIGNMENT_STMT);
           if (assignmentStatement != null) {
             return Expressions.isFalsy(assignmentStatement.assignedValue());

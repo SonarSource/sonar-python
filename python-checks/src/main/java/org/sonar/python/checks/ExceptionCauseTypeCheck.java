@@ -49,7 +49,7 @@ public class ExceptionCauseTypeCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isAccessToCause(Expression e) {
-    return e.is(Kind.QUALIFIED_EXPR) && ((QualifiedExpression) e).name().name().equals("__cause__");
+    return e.is(Kind.QUALIFIED_EXPR) && "__cause__".equals(((QualifiedExpression) e).name().name());
   }
 
   private static void check(@Nullable Expression cause, SubscriptionContext ctx) {

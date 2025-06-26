@@ -66,7 +66,7 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
         return;
       }
       Expression lhs = expressionList.expressions().get(0);
-      if (lhs.is(Tree.Kind.NAME) && ((Name) lhs).name().equals("__all__")) {
+      if (lhs.is(Tree.Kind.NAME) && "__all__".equals(((Name) lhs).name())) {
         checkAllProperty(ctx, assignmentStatement);
       }
     });
@@ -194,7 +194,7 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitFunctionDef(FunctionDef functionDef) {
-      hasGetAttrOrDirMethod |= functionDef.name().name().equals("__getattr__") || functionDef.name().name().equals("__dir__");
+      hasGetAttrOrDirMethod |= "__getattr__".equals(functionDef.name().name()) || "__dir__".equals(functionDef.name().name());
       // Only visiting module-level functions
     }
 

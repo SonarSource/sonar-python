@@ -114,7 +114,7 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
       ParameterList parameterList = functionDef.parameters();
-      if (!functionDef.name().name().equals("__exit__") || parameterList == null) {
+      if (!"__exit__".equals(functionDef.name().name()) || parameterList == null) {
         return;
       }
 

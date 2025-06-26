@@ -132,7 +132,7 @@ public class NotDiscoverableTestMethodCheck extends PythonSubscriptionCheck {
       .anyMatch(functionSymbol -> functionSymbol.hasDecorators() || !functionSymbol.parameters().stream()
         .map(FunctionSymbol.Parameter::name)
         .filter(Objects::nonNull)
-        .allMatch(name -> name.equals("self") || globalFixture.contains(name) || currentClassFixture.contains(name)));
+        .allMatch(name -> "self".equals(name) || globalFixture.contains(name) || currentClassFixture.contains(name)));
   }
 
   @Override

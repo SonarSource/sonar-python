@@ -97,7 +97,7 @@ public class DedicatedAssertionCheck extends PythonSubscriptionCheck {
         return;
       }
       QualifiedExpression qualifiedExpression = (QualifiedExpression) callee;
-      if (!qualifiedExpression.qualifier().is(Tree.Kind.NAME) || !((Name) qualifiedExpression.qualifier()).name().equals("self")) {
+      if (!qualifiedExpression.qualifier().is(Tree.Kind.NAME) || !"self".equals(((Name) qualifiedExpression.qualifier()).name())) {
         return;
       }
       String calledMethod = qualifiedExpression.name().name();
@@ -204,10 +204,10 @@ public class DedicatedAssertionCheck extends PythonSubscriptionCheck {
   private static String dedicatedAssertion(Expression expression, boolean isAssertEqual) {
     if (expression.is(Tree.Kind.NAME)) {
       String name = ((Name) expression).name();
-      if (name.equals("True")) {
+      if ("True".equals(name)) {
         return isAssertEqual ? ASSERT_TRUE : null;
       }
-      if (name.equals("False")) {
+      if ("False".equals(name)) {
         return isAssertEqual ? ASSERT_FALSE : null;
       }
     }

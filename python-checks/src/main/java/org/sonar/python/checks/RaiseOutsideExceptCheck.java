@@ -51,7 +51,7 @@ public class RaiseOutsideExceptCheck extends PythonSubscriptionCheck {
     while (parent != null) {
       if ((parent.is(FUNCDEF))) {
         // __exit__ special method is handled by S5706
-        return ((FunctionDef) parent).name().name().equals("__exit__") || isFunctionCalledInsideExceptBlock(((FunctionDef) parent));
+        return "__exit__".equals(((FunctionDef) parent).name().name()) || isFunctionCalledInsideExceptBlock(((FunctionDef) parent));
       }
       if (parent.is(EXCEPT_CLAUSE, EXCEPT_GROUP_CLAUSE, FINALLY_CLAUSE)) {
         return true;

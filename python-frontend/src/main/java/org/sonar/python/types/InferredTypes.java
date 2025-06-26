@@ -254,7 +254,7 @@ public class InferredTypes {
 
   @CheckForNull
   private static DeclaredType declaredTypeFromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols) {
-    if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
+    if (expression.is(Kind.NAME) && !"Any".equals(((Name) expression).name())) {
       Symbol symbol = ((Name) expression).symbol();
       if (symbol != null) {
         String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
@@ -312,7 +312,7 @@ public class InferredTypes {
   }
 
   private static InferredType runtimeTypefromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols) {
-    if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
+    if (expression.is(Kind.NAME) && !"Any".equals(((Name) expression).name())) {
       Symbol symbol = ((Name) expression).symbol();
       if (symbol != null) {
         if ("typing.Text".equals(symbol.fullyQualifiedName())) {

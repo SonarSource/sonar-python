@@ -57,7 +57,7 @@ public class NonStringInAllPropertyCheck extends PythonSubscriptionCheck {
         return;
       }
       Expression lhs = expressionList.expressions().get(0);
-      if (lhs.is(Tree.Kind.NAME) && ((Name) lhs).name().equals("__all__")) {
+      if (lhs.is(Tree.Kind.NAME) && "__all__".equals(((Name) lhs).name())) {
         checkAllProperty(ctx, assignmentStatement);
       }
     });
