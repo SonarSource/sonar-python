@@ -687,9 +687,9 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(aliasedNameTree1.alias().name()).isEqualTo("g");
     assertThat(aliasedNameTree1.dottedName().names().get(0).name()).isEqualTo("f");
     assertThat(importStatement.children()).hasSize(5);
-    List<Tree> aliasedNameChildren = aliasedNameTree1.children();
-    assertThat(aliasedNameChildren).hasSize(3);
-    assertThat(aliasedNameChildren).containsExactly(aliasedNameTree1.dottedName(), aliasedNameTree1.asKeyword(), aliasedNameTree1.alias());
+    assertThat(aliasedNameTree1.children())
+      .hasSize(3)
+      .containsExactly(aliasedNameTree1.dottedName(), aliasedNameTree1.asKeyword(), aliasedNameTree1.alias());
 
     AliasedName aliasedNameTree2 = importStatement.importedNames().get(1);
     assertThat(aliasedNameTree2.asKeyword()).isNull();

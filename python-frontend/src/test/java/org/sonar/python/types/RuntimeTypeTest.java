@@ -214,8 +214,9 @@ class RuntimeTypeTest {
     ClassSymbolImpl aWithSuperClass2 = new ClassSymbolImpl("a", "a");
     aWithSuperClass2.addSuperClass(b);
     RuntimeType aTypeWithSuperClass2 = new RuntimeType(aWithSuperClass2);
-    assertThat(aTypeWithSuperClass).isNotEqualTo(aType);
-    assertThat(aTypeWithSuperClass).isEqualTo(aTypeWithSuperClass2);
+    assertThat(aTypeWithSuperClass)
+      .isNotEqualTo(aType)
+      .isEqualTo(aTypeWithSuperClass2);
 
     ClassSymbolImpl aWithMember = new ClassSymbolImpl("a", "a");
     aWithMember.addMembers(Collections.singleton(new SymbolImpl("fn", "a.fn")));
@@ -223,8 +224,9 @@ class RuntimeTypeTest {
     ClassSymbolImpl aWithMember2 = new ClassSymbolImpl("a", "a");
     aWithMember2.addMembers(Collections.singleton(new SymbolImpl("fn", "a.fn")));
     RuntimeType aTypeWithMember2 = new RuntimeType(aWithMember2);
-    assertThat(aTypeWithMember).isNotEqualTo(aType);
-    assertThat(aTypeWithMember).isEqualTo(aTypeWithMember2);
+    assertThat(aTypeWithMember)
+      .isNotEqualTo(aType)
+      .isEqualTo(aTypeWithMember2);
 
     RuntimeType x = new RuntimeType(new ClassSymbolImpl("X", null));
     RuntimeType y = new RuntimeType(new ClassSymbolImpl("Y", null));
@@ -246,8 +248,9 @@ class RuntimeTypeTest {
   @Test
   void test_hashCode() {
     RuntimeType aType = new RuntimeType(a);
-    assertThat(aType).hasSameHashCodeAs(new RuntimeType(a));
-    assertThat(aType).doesNotHaveSameHashCodeAs(new RuntimeType(b));
+    assertThat(aType)
+      .hasSameHashCodeAs(new RuntimeType(a))
+      .doesNotHaveSameHashCodeAs(new RuntimeType(b));
 
     RuntimeType x = new RuntimeType(new ClassSymbolImpl("X", null));
     RuntimeType y = new RuntimeType(new ClassSymbolImpl("Y", null));

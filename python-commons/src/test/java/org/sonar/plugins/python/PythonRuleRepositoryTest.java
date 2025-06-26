@@ -42,8 +42,9 @@ class PythonRuleRepositoryTest {
     assertThat(repository.name()).isEqualTo("Sonar");
 
     List<RulesDefinition.Rule> rules = repository.rules();
-    assertThat(rules).isNotNull();
-    assertThat(rules).hasSameSizeAs(nonAbstractCheckFiles());
+    assertThat(rules)
+      .isNotNull()
+      .hasSameSizeAs(nonAbstractCheckFiles());
 
     RulesDefinition.Rule s1578 = repository.rule("S1578");
     assertThat(s1578).isNotNull();

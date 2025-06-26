@@ -77,8 +77,9 @@ class TypeInferenceProgramStateTest {
     other.setTypes(a, Collections.singleton(INT_TYPE));
     other.setTypes(b,  new HashSet<>(Arrays.asList(BOOL_TYPE, STR_TYPE)));
 
-    assertThat(typeInferenceProgramState).hasSameHashCodeAs(other.hashCode());
-    assertThat(typeInferenceProgramState.hashCode()).isNotEqualTo(new TypeInferenceProgramState().hashCode());
+    assertThat(typeInferenceProgramState)
+      .hasSameHashCodeAs(other)
+      .doesNotHaveSameHashCodeAs(new TypeInferenceProgramState());
   }
 
 }
