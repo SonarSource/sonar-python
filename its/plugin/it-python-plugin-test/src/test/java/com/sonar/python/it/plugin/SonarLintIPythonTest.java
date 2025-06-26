@@ -26,7 +26,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -111,7 +111,7 @@ public class SonarLintIPythonTest {
         new ActiveRule("ipython:BackticksUsage", SonarLanguage.IPYTHON.name()))
       .build();
 
-    var logsByLevel = new HashMap<Level, List<String>>();
+    Map<Level,List<String>> logsByLevel = new EnumMap<>(Level.class);
     var logOutput = createClientLogOutput(logsByLevel);
     var clientFileSystem = createClientFileSystem(inputFile);
     sonarlintEngine.post(new RegisterModuleCommand(new ClientModuleInfo("myModule", clientFileSystem)), progressMonitor).get();
