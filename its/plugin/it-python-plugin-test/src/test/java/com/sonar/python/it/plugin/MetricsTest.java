@@ -59,8 +59,6 @@ public class MetricsTest {
   @RegisterExtension
   public static final ConcurrentOrchestratorExtension orchestrator = TestsUtils.dynamicOrchestrator;
 
-  private static BuildResult buildResult;
-
   @BeforeAll
   static void startServer() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
@@ -72,7 +70,7 @@ public class MetricsTest {
       .setProjectVersion("1.0-SNAPSHOT")
       .setTestDirs("test")
       .setSourceDirs("src");
-    buildResult = orchestrator.executeBuild(build);
+    orchestrator.executeBuild(build);
   }
 
   @Test
