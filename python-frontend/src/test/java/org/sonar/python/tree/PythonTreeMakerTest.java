@@ -1569,7 +1569,7 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(withStatement.statements().statements()).hasSize(1);
     assertThat(withStatement.statements().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(withStatement.children()).hasSize(9);
-  };
+  }
 
   @Test
   void with_stmt_parenthesized_context_manager() {

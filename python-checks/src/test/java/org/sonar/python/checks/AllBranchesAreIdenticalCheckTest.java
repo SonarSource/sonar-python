@@ -220,10 +220,10 @@ class AllBranchesAreIdenticalCheckTest {
       "        doOneMoreThing()\n"+
       "    else:\n" +
       "        doSomething()\n"+
-      "        doOneMoreThing()\n";;
+      "        doOneMoreThing()\n";
     String fixed = "def func():\n" +
       "    doSomething()\n"+
-      "    doOneMoreThing()\n";;
+      "    doOneMoreThing()\n";
     PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
@@ -241,11 +241,11 @@ class AllBranchesAreIdenticalCheckTest {
       "    else:\n" +
       "        doSomething()\n"+
       "        doSomething()\n" +
-      "        doOneMoreThing()\n";;
+      "        doOneMoreThing()\n";
     String fixed = "def func():\n" +
       "    doSomething()\n"+
       "    doSomething()\n" +
-      "    doOneMoreThing()\n";;
+      "    doOneMoreThing()\n";
     PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
