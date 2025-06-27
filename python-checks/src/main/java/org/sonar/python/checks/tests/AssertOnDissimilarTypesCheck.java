@@ -59,7 +59,7 @@ public class AssertOnDissimilarTypesCheck extends PythonSubscriptionCheck {
       }
 
       QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
-      if ((!(qualifiedExpression.qualifier().is(Tree.Kind.NAME) && "self".equals(((Name) qualifiedExpression.qualifier()).name())))
+      if (!(qualifiedExpression.qualifier() instanceof Name qualifier && "self".equals(qualifier.name()))
        || !UnittestUtils.isWithinUnittestTestCase(qualifiedExpression)) {
         return;
       }

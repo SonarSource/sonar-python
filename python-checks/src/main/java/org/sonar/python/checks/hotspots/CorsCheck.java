@@ -119,8 +119,8 @@ public class CorsCheck extends PythonSubscriptionCheck {
     AssignmentStatement assignment = (AssignmentStatement) ctx.syntaxNode();
 
     if (isVarAssignment(assignment, DJANGO_ALLOW_ALL)
-      && assignment.assignedValue().is(NAME)
-      && "True".equals(((Name) assignment.assignedValue()).name())) {
+      && assignment.assignedValue() instanceof Name name
+      && "True".equals(name.name())) {
       ctx.addIssue(assignment, MESSAGE);
 
     } else if (isVarAssignment(assignment, DJANGO_WHITELIST)) {

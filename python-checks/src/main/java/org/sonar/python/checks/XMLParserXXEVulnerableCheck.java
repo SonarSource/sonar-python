@@ -163,10 +163,8 @@ public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isCallToSetFeature(CallExpression callExpression) {
-    if (!callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-      return false;
-    }
-    QualifiedExpression callee = (QualifiedExpression) callExpression.callee();
-    return callee.qualifier().is(Tree.Kind.NAME) && "setFeature".equals(callee.name().name());
+    return callExpression.callee() instanceof QualifiedExpression callee
+      && callee.qualifier().is(Tree.Kind.NAME)
+      && "setFeature".equals(callee.name().name());
   }
 }

@@ -107,8 +107,8 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
       .filter(call -> call.callee().is(Tree.Kind.QUALIFIED_EXPR))
       .map(call -> (QualifiedExpression) call.callee())
       .anyMatch(
-        callee -> callee.qualifier().is(Tree.Kind.NAME)
-        && "self".equals(((Name) callee.qualifier()).name())
+        callee -> callee.qualifier() instanceof Name qualifier
+        && "self".equals(qualifier.name())
         && UnittestUtils.RAISE_METHODS.contains(callee.name().name()))
       && isNotAssertionErrorArgument(TreeUtils.nthArgumentOrKeyword(0, UNITTEST_ARG_EXCEPTION, callExpression.arguments()));
   }
@@ -140,7 +140,7 @@ public class AssertAfterRaiseCheck extends PythonSubscriptionCheck {
   }
 
   public boolean isUnittestAssert(QualifiedExpression callee) {
-    return callee.qualifier().is(Tree.Kind.NAME) && "self".equals(((Name) callee.qualifier()).name())
+    return callee.qualifier() instanceof Name qualifier && "self".equals(qualifier.name())
        && UnittestUtils.allAssertMethods().contains(callee.name().name());
   }
 }

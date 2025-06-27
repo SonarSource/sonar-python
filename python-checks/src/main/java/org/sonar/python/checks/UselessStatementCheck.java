@@ -228,9 +228,9 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean couldBePython2PrintStatement(BinaryExpression binaryExpression) {
-    return TreeUtils.hasDescendant(binaryExpression, t -> t.is(Kind.CALL_EXPR)
-      && ((CallExpression) t).callee().is(Kind.NAME)
-      && "print".equals(((Name) ((CallExpression) t).callee()).name()));
+    return TreeUtils.hasDescendant(binaryExpression, t -> t instanceof CallExpression callExpression
+      && callExpression.callee() instanceof Name name
+      && "print".equals(name.name()));
   }
 
   private void checkUnaryExpression(SubscriptionContext ctx) {
