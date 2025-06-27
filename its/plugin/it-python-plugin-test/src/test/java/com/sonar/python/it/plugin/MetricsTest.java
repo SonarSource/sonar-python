@@ -16,7 +16,6 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.python.it.ConcurrentOrchestratorExtension;
 import com.sonar.python.it.TestsUtils;
