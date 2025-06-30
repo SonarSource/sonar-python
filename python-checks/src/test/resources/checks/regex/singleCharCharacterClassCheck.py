@@ -22,6 +22,9 @@ def non_compliant():
     #                      ^^
     changed = re.match(r'[b][c]', input, re.M) # Noncompliant 2
 
+    regex = r"agency_id=[a-zA-Z0-9_-]{3,18}[=]?" # Noncompliant 
+    matches = re.findall(regex, "")
+    matches = re.findall(regex, "") # This checks if adding twice the issue to the regex tree is safe
 
 def compliant():
     input = "abcdefghijklmnopqa"

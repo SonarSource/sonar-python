@@ -45,19 +45,18 @@ public class MultipleWhitespaceCheck extends AbstractRegexCheck {
   }
 
   @Override
-  public PreciseIssue addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
-    var issue = super.addIssue(regexTree, message, cost, secondaries);
-
-    var whitespacesCount = regexTree.getRange().getEndingOffset() - regexTree.getRange().getBeginningOffset() + 1;
-    var quickFixReplacement = String.format("{%d}", whitespacesCount);
-    var issueLocation = PythonRegexIssueLocation.preciseLocation(regexTree, null);
-    var textEdit = new PythonTextEdit(quickFixReplacement,
-      issueLocation.startLine(),
-      issueLocation.startLineOffset(),
-      issueLocation.endLine(),
-      issueLocation.endLineOffset());
-    issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
-    return issue;
+  public Optional<PreciseIssue> addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
+    return super.addIssue(regexTree, message, cost, secondaries).map(issue -> {
+      var whitespacesCount = regexTree.getRange().getEndingOffset() - regexTree.getRange().getBeginningOffset() + 1;
+      var quickFixReplacement = String.format("{%d}", whitespacesCount);
+      var issueLocation = PythonRegexIssueLocation.preciseLocation(regexTree, null);
+      var textEdit = new PythonTextEdit(quickFixReplacement,
+        issueLocation.startLine(),
+        issueLocation.startLineOffset(),
+        issueLocation.endLine(),
+        issueLocation.endLineOffset());
+      issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
+      return issue;
+    });
   }
 }
-

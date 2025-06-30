@@ -41,24 +41,23 @@ public class UnquantifiedNonCapturingGroupCheck extends AbstractRegexCheck {
   }
 
   @Override
-  public PreciseIssue addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
-    var issue = super.addIssue(regexTree, message, cost, secondaries);
-
-    Optional.of(regexTree)
-      .filter(NonCapturingGroupTree.class::isInstance)
-      .map(NonCapturingGroupTree.class::cast)
-      .filter(group -> Objects.nonNull(group.getElement()))
-      .map(group -> {
-        var quickFixReplacement = group.getElement().getText();
-        var issueLocation = PythonRegexIssueLocation.preciseLocation(group, null);
-        var textEdit = new PythonTextEdit(quickFixReplacement,
-          issueLocation.startLine(),
-          issueLocation.startLineOffset(),
-          issueLocation.endLine(),
-          issueLocation.endLineOffset());
-        return PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE, textEdit);
-      }).ifPresent(issue::addQuickFix);
-
-    return issue;
+  public Optional<PreciseIssue> addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
+    return super.addIssue(regexTree, message, cost, secondaries).map(issue -> {
+      Optional.of(regexTree)
+        .filter(NonCapturingGroupTree.class::isInstance)
+        .map(NonCapturingGroupTree.class::cast)
+        .filter(group -> Objects.nonNull(group.getElement()))
+        .map(group -> {
+          var quickFixReplacement = group.getElement().getText();
+          var issueLocation = PythonRegexIssueLocation.preciseLocation(group, null);
+          var textEdit = new PythonTextEdit(quickFixReplacement,
+            issueLocation.startLine(),
+            issueLocation.startLineOffset(),
+            issueLocation.endLine(),
+            issueLocation.endLineOffset());
+          return PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE, textEdit);
+        }).ifPresent(issue::addQuickFix);
+      return issue;
+    });
   }
 }

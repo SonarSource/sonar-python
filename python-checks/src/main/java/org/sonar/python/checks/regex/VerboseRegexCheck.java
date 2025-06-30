@@ -56,8 +56,8 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
     new PythonVerboseRegexRepetitionCheckVisitor().visit(regexParseResult);
   }
 
-  public PreciseIssue addIssueWithQuickFix(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
-    return Optional.ofNullable(addIssue(regexTree, message, cost, secondaries))
+  public Optional<PreciseIssue> addIssueWithQuickFix(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
+    return addIssue(regexTree, message, cost, secondaries)
       .map(issue -> {
         Matcher matcher = issueMessagePattern.matcher(message);
         String quickFixReplacement = matcher.replaceFirst("$1");
@@ -71,8 +71,7 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
           issueLocation.endLineOffset());
         issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
         return issue;
-      })
-      .orElse(null);
+      });
   }
 
   private class PythonVerboseRegexRangeCheckVisitor extends RegexBaseVisitor {
@@ -89,8 +88,9 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
           issueLocation.endLine(),
           issueLocation.endLineOffset());
 
-        var issue = addIssue(tree, String.format(REDUNDANT_RANGE_MESSAGE, quickFixReplacement, tree.getText()), null, Collections.emptyList());
-        issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
+        addIssue(tree, String.format(REDUNDANT_RANGE_MESSAGE, quickFixReplacement, tree.getText()), null, Collections.emptyList())
+          .ifPresent(issue -> issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit)));
+
       }
       super.visitCharacterRange(tree);
     }
@@ -120,9 +120,8 @@ public class VerboseRegexCheck extends AbstractRegexCheck {
               repetitionLocation.endLineOffset());
 
             var issueMessage = String.format(REDUNDANT_REPETITION_MESSAGE, treeText + quickFixReplacement, treeText + repetition.getText());
-            var issue = addIssue(repetition, issueMessage, null,
-              List.of(new RegexIssueLocation(tree, REDUNDANT_REPETITION_SECONDARY_LOCATION_MESSAGE)));
-            issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit));
+            addIssue(repetition, issueMessage, null, List.of(new RegexIssueLocation(tree, REDUNDANT_REPETITION_SECONDARY_LOCATION_MESSAGE)))
+              .ifPresent(issue -> issue.addQuickFix(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_FORMAT, quickFixReplacement), textEdit)));
           }
         });
       super.visit(tree);

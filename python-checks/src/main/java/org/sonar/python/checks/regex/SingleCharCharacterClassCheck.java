@@ -44,14 +44,15 @@ public class SingleCharCharacterClassCheck extends AbstractRegexCheck {
   }
 
   @Override
-  public PreciseIssue addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
-    var issue = super.addIssue(regexTree, message, cost, secondaries);
-    var quickFixReplacement = regexTree.getText();
-    var issueLocation = PythonRegexIssueLocation.preciseLocation(regexTree, null);
-    var textEdit = new PythonTextEdit(quickFixReplacement,
-      issueLocation.startLine(), issueLocation.startLineOffset() - 1,
-      issueLocation.endLine(), issueLocation.endLineOffset() + 1);
-    issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE, textEdit));
-    return issue;
+  public Optional<PreciseIssue> addIssue(RegexSyntaxElement regexTree, String message, @Nullable Integer cost, List<RegexIssueLocation> secondaries) {
+    return super.addIssue(regexTree, message, cost, secondaries).map(issue -> {
+      var quickFixReplacement = regexTree.getText();
+      var issueLocation = PythonRegexIssueLocation.preciseLocation(regexTree, null);
+      var textEdit = new PythonTextEdit(quickFixReplacement,
+        issueLocation.startLine(), issueLocation.startLineOffset() - 1,
+        issueLocation.endLine(), issueLocation.endLineOffset() + 1);
+      issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE, textEdit));
+      return issue;
+    });
   }
 }
