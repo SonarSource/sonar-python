@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -81,7 +82,7 @@ public class TextReportReader {
     columnNumber -= this.reportOffset;
     String ruleKey = m.group(4);
     String message = m.group(5);
-    return new Issue(filePath, ruleKey, message, lineNumber, columnNumber);
+    return new Issue(filePath, ruleKey, message, lineNumber, columnNumber, null, null);
   }
 
   private static Issue extractLegacyStyleIssue(Matcher m) {
@@ -93,7 +94,7 @@ public class TextReportReader {
       ruleKey = ruleKey.substring(0, keyLastIndex);
     }
     String message = m.group(4);
-    return new Issue(filePath, ruleKey, message, lineNumber, null);
+    return new Issue(filePath, ruleKey, message, lineNumber, null, null, null);
   }
 
   public static class Issue {
@@ -108,12 +109,20 @@ public class TextReportReader {
 
     public final Integer columnNumber;
 
-    public Issue(String filePath, String ruleKey, String message, Integer lineNumber, @Nullable Integer columnNumber) {
+    public final Optional<Integer> endLineNumber;
+
+    public final Optional<Integer> endColNumber;
+
+    public Issue(String filePath, String ruleKey, String message, Integer lineNumber, @Nullable Integer columnNumber, @Nullable Integer endLineNumber,
+      @Nullable Integer endColNumber) {
       this.filePath = filePath;
       this.ruleKey = ruleKey;
       this.message = message;
       this.lineNumber = lineNumber;
       this.columnNumber = columnNumber;
+      this.endLineNumber = Optional.ofNullable(endLineNumber);
+      this.endColNumber = Optional.ofNullable(endColNumber);
     }
+
   }
 }

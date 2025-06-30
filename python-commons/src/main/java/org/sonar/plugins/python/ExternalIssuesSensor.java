@@ -16,7 +16,6 @@
  */
 package org.sonar.plugins.python;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -104,7 +103,7 @@ public abstract class ExternalIssuesSensor implements Sensor {
       .message(issue.message)
       .on(inputFile);
     if (issue.columnNumber != null && issue.columnNumber < inputFile.selectLine(issue.lineNumber).end().lineOffset()) {
-      primaryLocation.at(inputFile.newRange(issue.lineNumber, issue.columnNumber, issue.lineNumber, issue.columnNumber + 1));
+      primaryLocation.at(inputFile.newRange(issue.lineNumber, issue.columnNumber, issue.endLineNumber.orElse(issue.lineNumber), issue.endColNumber.orElse(issue.columnNumber + 1)));
     } else {
       // Pylint formatted issues might not provide column information
       primaryLocation.at(inputFile.selectLine(issue.lineNumber));

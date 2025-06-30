@@ -135,11 +135,11 @@ class MypySensorTest {
     assertIssue(externalIssues.get(0),
       "arg-type",
       "Argument 1 to \"greet_all\" has incompatible type \"List[int]\"; expected \"List[str]\"",
-      11, 10, 11, 11);
+      11, 10, 11, 13);
     assertIssue(externalIssues.get(1),
       "no-untyped-def",
       "Function is missing a type annotation",
-      13, 0, 13, 1);
+      13, 0, 14, 13);
     assertIssue(externalIssues.get(2),
       "import",
       "Cannot find implementation or library stub for module named \"unknown\"",
@@ -147,7 +147,7 @@ class MypySensorTest {
     assertIssue(externalIssues.get(3),
       "no-untyped-call",
       "Call to untyped function \"no_type_hints\" in typed context",
-      19, 10, 19, 11);
+      19, 10, 19, 25);
     assertIssue(externalIssues.get(4),
       "unknown_mypy_rule",
       "Unused \"type: ignore\" comment",

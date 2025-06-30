@@ -44,9 +44,13 @@ public class MypySensor extends ExternalIssuesSensor {
   private static final String FALLBACK_RULE_KEY = "unknown_mypy_rule";
 
   // Pattern -> Location ': ' Severity ':' Message '['Code']'
-  // Location -> File ':' StartLine
-  private static final Pattern PATTERN =
-    Pattern.compile("^(?<file>[^:]+):(?<startLine>\\d+)(?::(?<startCol>\\d+))?(?::\\d+:\\d+)?: (?<severity>\\S+[^:]): (?<message>.*?)(?: \\[(?<code>.*)])?\\s*$");
+  // Location -> File ':' StartLine (':' StartCol (':' EndLine ':' EndCol))
+
+  private static final String START_LOCATION = "(?<startLine>\\d+)(?::(?<startCol>\\d+))?";
+  private static final String END_LOCATION = "(?::(?<endLine>\\d+):(?<endCol>\\d+))?";
+
+  private static final Pattern PATTERN = Pattern
+    .compile(String.format("^(?<file>[^:]+):%s%s: (?<severity>\\S+[^:]): (?<message>.*?)(?: \\[(?<code>.*)])?\\s*$", START_LOCATION, END_LOCATION));
 
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException {
@@ -99,7 +103,21 @@ public class MypySensor extends ExternalIssuesSensor {
       .map(i -> i - 1)
       .orElse(null);
 
-    return new TextReportReader.Issue(filePath, errorCode, message, lineNumber, columnNumber);
+    Integer endLineNumber = Optional.ofNullable(m.group("endLine"))
+      .map(Integer::parseInt)
+      .orElse(null);
+
+
+    //  Start and end column should be different as this is a requirement from our issue location. 
+    //  If they are the same ExternalIssuesSensor will use start column + 1 
+    Integer endColNumber = Optional.ofNullable(m.group("endCol"))
+      .map(Integer::parseInt)
+      .map(i -> i - 1)
+      .filter(i -> !i.equals(columnNumber))
+      .orElse(null);
+
+
+    return new TextReportReader.Issue(filePath, errorCode, message, lineNumber, columnNumber, endLineNumber, endColNumber);
   }
 
   @Override
