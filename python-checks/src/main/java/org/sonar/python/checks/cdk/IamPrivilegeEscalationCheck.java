@@ -32,8 +32,9 @@ import static org.sonar.python.checks.cdk.CdkPredicate.matches;
 @Rule(key = "S6317")
 public class IamPrivilegeEscalationCheck extends AbstractIamPolicyStatementCheck {
 
-  private static final String ISSUE_MESSAGE_FORMAT = "This policy is vulnerable to the \"%s\" privilege escalation vector. " +
-    "Remove permissions or restrict the set of resources they apply to.";
+  private static final String ISSUE_MESSAGE_FORMAT = """
+    This policy is vulnerable to the "%s" privilege escalation vector. \
+    Remove permissions or restrict the set of resources they apply to.""";
   private static final String SECONDARY_MESSAGE = "Permissions are granted on all resources.";
   private static final Pattern SENSITIVE_RESOURCE_PATTERN = Pattern.compile("(^\\*$)|(arn:.*:(role|user|group)/\\*)");
 

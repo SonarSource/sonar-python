@@ -38,14 +38,16 @@ class DeprecatedNumpyTypesCheckTest {
   @MethodSource("numpyTypeProvider")
   void quickFix(String numpyType, String parameter, String quickFixType) {
     String failure =
-      String.format("import numpy as np\n" +
-      "def foo():\n" +
-      "    b = %s%s", numpyType, parameter);
+      String.format("""
+      import numpy as np
+      def foo():
+          b = %s%s""", numpyType, parameter);
 
     String fixed =
-      String.format("import numpy as np\n" +
-      "def foo():\n" +
-      "    b = %s%s", quickFixType, parameter);
+      String.format("""
+      import numpy as np
+      def foo():
+          b = %s%s""", quickFixType, parameter);
 
     PythonQuickFixVerifier.verify(check, failure, fixed);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, failure, String.format("Replace with %s.", quickFixType));

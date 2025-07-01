@@ -40,8 +40,9 @@ class RuffRulesDefinitionTest {
     RulesDefinition.Rule rule = repository.rule("F405");
     assertThat(rule).isNotNull();
     assertThat(rule.name()).isEqualTo("undefined-local-with-import-star-usage");
-    assertThat(rule.htmlDescription()).isEqualTo("See description of Ruff rule <code>F405</code> at" +
-      " the <a href=\"https://beta.ruff.rs/docs/rules/undefined-local-with-import-star-usage\">Ruff website</a>.");
+    assertThat(rule.htmlDescription()).isEqualTo("""
+      See description of Ruff rule <code>F405</code> at\
+       the <a href="https://beta.ruff.rs/docs/rules/undefined-local-with-import-star-usage">Ruff website</a>.""");
     assertThat(rule.tags()).isEmpty();
 
     RulesDefinition.Rule unknownRule = repository.rule("ZZZ123");

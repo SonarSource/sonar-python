@@ -95,8 +95,12 @@ public class PythonQuickFixVerifier {
       .toList();
 
     assertThat(appliedQuickFix)
-      .as("The code with the quickfix applied is not the expected result.\n" +
-        "Applied QuickFixes are:\n%s\nExpected result:\n%s", appliedQuickFix, Arrays.asList(codesFixed))
+      .as("""
+        The code with the quickfix applied is not the expected result.
+        Applied QuickFixes are:
+        %s
+        Expected result:
+        %s""", appliedQuickFix, Arrays.asList(codesFixed))
       .isEqualTo(Arrays.asList(codesFixed));
   }
 

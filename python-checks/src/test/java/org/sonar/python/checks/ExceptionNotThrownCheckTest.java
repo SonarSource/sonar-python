@@ -31,10 +31,14 @@ class ExceptionNotThrownCheckTest {
 
   @Test
   void quick_fix_test() {
-    var input = "def func():\n" +
-      "  NotImplementedError()\n";
-    var expected = "def func():\n" +
-      "  raise NotImplementedError()\n";
+    var input = """
+      def func():
+        NotImplementedError()
+      """;
+    var expected = """
+      def func():
+        raise NotImplementedError()
+      """;
     PythonQuickFixVerifier.verify(new ExceptionNotThrownCheck(), input, expected);
     PythonQuickFixVerifier.verifyQuickFixMessages(new ExceptionNotThrownCheck(), input, ExceptionNotThrownCheck.QUICK_FIX_MESSAGE);
   }

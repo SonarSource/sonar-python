@@ -34,17 +34,20 @@ class NumpyIsNanCheckTest {
   @Test
   void quickFixTestEqual() {
 
-    final String nonCompliant1 = "import numpy as np\n" +
-      "def foo(x):\n" +
-      "    if x == np.nan: print(1)";
+    final String nonCompliant1 = """
+      import numpy as np
+      def foo(x):
+          if x == np.nan: print(1)""";
 
-    final String nonCompliant2 = "import numpy as np\n" +
-      "def foo(x):\n" +
-      "    if np.nan == x: print(1)";
+    final String nonCompliant2 = """
+      import numpy as np
+      def foo(x):
+          if np.nan == x: print(1)""";
 
-    final String compliant = "import numpy as np\n" +
-      "def foo(x):\n" +
-      "    if np.isnan(x): print(1)";
+    final String compliant = """
+      import numpy as np
+      def foo(x):
+          if np.isnan(x): print(1)""";
 
     performVerification(nonCompliant1, compliant, QUICK_FIX_MESSAGE_EQUALITY);
     performVerification(nonCompliant2, compliant, QUICK_FIX_MESSAGE_EQUALITY);
@@ -53,17 +56,20 @@ class NumpyIsNanCheckTest {
   @Test
   void quickFixTestNotEqual() {
 
-    final String nonCompliant1 = "import numpy as np\n" +
-      "def foo(x):\n" +
-      "    if x != np.nan: print(1)";
+    final String nonCompliant1 = """
+      import numpy as np
+      def foo(x):
+          if x != np.nan: print(1)""";
 
-    final String nonCompliant2 = "import numpy as np\n" +
-      "def foo(x):\n" +
-      "    if np.nan != x: print(1)";
+    final String nonCompliant2 = """
+      import numpy as np
+      def foo(x):
+          if np.nan != x: print(1)""";
 
-    final String compliant = "import numpy as np\n" +
-      "def foo(x):\n" +
-      "    if not np.isnan(x): print(1)";
+    final String compliant = """
+      import numpy as np
+      def foo(x):
+          if not np.isnan(x): print(1)""";
 
     performVerification(nonCompliant1, compliant, QUICK_FIX_MESSAGE_INEQUALITY);
     performVerification(nonCompliant2, compliant, QUICK_FIX_MESSAGE_INEQUALITY);
@@ -77,13 +83,15 @@ class NumpyIsNanCheckTest {
   @Test
   void quickFixTestQualifiedExpression() {
 
-    final String nonCompliant = "import numpy as np\n" +
-      "def foo(x):\n" +
-      "    if np.max(2,5) == np.nan: print(1)";
+    final String nonCompliant = """
+      import numpy as np
+      def foo(x):
+          if np.max(2,5) == np.nan: print(1)""";
 
-    final String compliant = "import numpy as np\n" +
-      "def foo(x):\n" +
-      "    if np.isnan(np.max(2,5)): print(1)";
+    final String compliant = """
+      import numpy as np
+      def foo(x):
+          if np.isnan(np.max(2,5)): print(1)""";
 
     performVerification(nonCompliant, compliant, QUICK_FIX_MESSAGE_EQUALITY);
   }
@@ -91,9 +99,10 @@ class NumpyIsNanCheckTest {
   @Test
   void noQuickFixTest() {
     // Here we offer no quick fixes, because we do not have a call to numpy.nan.
-    final String compliant = "from numpy import nan\n" +
-      "def foo(x):\n" +
-      "    if x != nan: print(1)";
+    final String compliant = """
+      from numpy import nan
+      def foo(x):
+          if x != nan: print(1)""";
     PythonQuickFixVerifier.verifyNoQuickFixes(check, compliant);
   }
 }

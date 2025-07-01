@@ -193,8 +193,9 @@ class PylintSensorTest {
   void no_issues_unknown_files() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_report_unknown_files.txt", false);
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(Level.WARN))).hasToString("Failed to resolve 1 file path(s) in Pylint report. " +
-      "No issues imported related to file(s): pylint/unknown_file.py");
+    assertThat(onlyOneLogElement(logTester.logs(Level.WARN))).hasToString("""
+      Failed to resolve 1 file path(s) in Pylint report. \
+      No issues imported related to file(s): pylint/unknown_file.py""");
   }
 
   @Test
@@ -210,8 +211,9 @@ class PylintSensorTest {
   void import_with_legacy_property() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_brackets.txt", true);
     assertThat(externalIssues).hasSize(10);
-    assertThat(onlyOneLogElement(logTester.logs())).hasToString("The use of 'sonar.python.pylint.reportPath' is deprecated." +
-      " Please use the 'sonar.python.pylint.reportPaths' property instead.");
+    assertThat(onlyOneLogElement(logTester.logs())).hasToString("""
+      The use of 'sonar.python.pylint.reportPath' is deprecated.\
+       Please use the 'sonar.python.pylint.reportPaths' property instead.""");
   }
 
   private static List<ExternalIssue> executeSensorImporting(int majorVersion, int minorVersion, @Nullable String fileName, boolean useLegacyKey) throws IOException {

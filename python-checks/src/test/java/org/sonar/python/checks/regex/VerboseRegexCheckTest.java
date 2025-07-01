@@ -29,10 +29,12 @@ class VerboseRegexCheckTest {
 
   @Test
   void dotReplacementQuickFixTest() {
-    var before = "import re\n" +
-      "re.match(r\"[\\s\\S]\", input, re.DOTALL)";
-    var after = "import re\n" +
-      "re.match(r\".\", input, re.DOTALL)";
+    var before = """
+      import re
+      re.match(r"[\\s\\S]", input, re.DOTALL)""";
+    var after = """
+      import re
+      re.match(r".", input, re.DOTALL)""";
     var check = new VerboseRegexCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \".\"");
@@ -40,10 +42,12 @@ class VerboseRegexCheckTest {
 
   @Test
   void digitReplacementQuickFixTest() {
-    var before = "import re\n" +
-      "re.match(r\"foo[0-9]barr\", input)";
-    var after = "import re\n" +
-      "re.match(r\"foo\\dbarr\", input)";
+    var before = """
+      import re
+      re.match(r"foo[0-9]barr", input)""";
+    var after = """
+      import re
+      re.match(r"foo\\dbarr", input)""";
     var check = new VerboseRegexCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"\\d\"");
@@ -51,10 +55,12 @@ class VerboseRegexCheckTest {
 
   @Test
   void plusReplacementQuickFixTest() {
-    var before = "import re\n" +
-      "re.match(r\"x{1,}\", input)";
-    var after = "import re\n" +
-      "re.match(r\"x+\", input)";
+    var before = """
+      import re
+      re.match(r"x{1,}", input)""";
+    var after = """
+      import re
+      re.match(r"x+", input)""";
     var check = new VerboseRegexCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"+\"");
@@ -62,10 +68,12 @@ class VerboseRegexCheckTest {
 
   @Test
   void redundantRange() {
-    var before = "import re\n" +
-      "re.match(r\"[ah-hz]\", input)";
-    var after = "import re\n" +
-      "re.match(r\"[ahz]\", input)";
+    var before = """
+      import re
+      re.match(r"[ah-hz]", input)""";
+    var after = """
+      import re
+      re.match(r"[ahz]", input)""";
     var check = new VerboseRegexCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"h\"");
@@ -73,10 +81,12 @@ class VerboseRegexCheckTest {
 
   @Test
   void repetition() {
-    var before = "import re\n" +
-      "re.match(r\"xx*\", input)";
-    var after = "import re\n" +
-      "re.match(r\"x+\", input)";
+    var before = """
+      import re
+      re.match(r"xx*", input)""";
+    var after = """
+      import re
+      re.match(r"x+", input)""";
     var check = new VerboseRegexCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"+\"");

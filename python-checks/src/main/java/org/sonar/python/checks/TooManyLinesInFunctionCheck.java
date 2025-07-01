@@ -34,8 +34,9 @@ import static org.sonar.python.metrics.FileLinesVisitor.tokenLineNumbers;
 @Rule(key = "S138")
 public class TooManyLinesInFunctionCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "This %1$s \"%2$s\" has %3$d lines of code, " +
-    "which is greater than the %4$d authorized. Split it into smaller %1$ss.";
+  private static final String MESSAGE = """
+    This %1$s "%2$s" has %3$d lines of code, \
+    which is greater than the %4$d authorized. Split it into smaller %1$ss.""";
 
   private static final int DEFAULT = 100;
 

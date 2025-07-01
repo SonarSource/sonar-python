@@ -328,8 +328,9 @@ public class PythonScanner extends Scanner {
 
   @Override
   protected void reportStatistics(int numSkippedFiles, int numTotalFiles) {
-    LOG.info("The Python analyzer was able to leverage cached data from previous analyses for {} out of {} files. These files were not " +
-             "parsed.",
+    LOG.info("""
+             The Python analyzer was able to leverage cached data from previous analyses for {} out of {} files. These files were not \
+             parsed.""",
       numSkippedFiles, numTotalFiles);
   }
 

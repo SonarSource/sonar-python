@@ -146,8 +146,9 @@ public class Caching {
         LOG.debug("Cache version still up to date: \"{}\".", cacheVersion);
         return true;
       }
-      LOG.info("The cache version has changed since the previous analysis, cached data will not be used during this analysis." +
-        " Retrieved: \"{}\". Current version: \"{}\".", retrievedVersion, cacheVersion);
+      LOG.info("""
+        The cache version has changed since the previous analysis, cached data will not be used during this analysis.\
+         Retrieved: "{}". Current version: "{}".""", retrievedVersion, cacheVersion);
     }
     return false;
   }

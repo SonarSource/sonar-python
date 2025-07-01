@@ -32,10 +32,12 @@ class IdentityComparisonWithCachedTypesCheckTest {
   @Test
   void testIsReplacementQuickfix() {
     var check = new IdentityComparisonWithCachedTypesCheck();
-    String codeWithIssue = "def literal_comparison(param):\n" +
-      "    3000 is param";
-    String codeFixed = "def literal_comparison(param):\n" +
-      "    3000 == param";
+    String codeWithIssue = """
+      def literal_comparison(param):
+          3000 is param""";
+    String codeFixed = """
+      def literal_comparison(param):
+          3000 == param""";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, IdentityComparisonWithCachedTypesCheck.IS_QUICK_FIX_MESSAGE);
   }
@@ -43,10 +45,12 @@ class IdentityComparisonWithCachedTypesCheckTest {
   @Test
   void testIsNotReplacementQuickfix() {
     var check = new IdentityComparisonWithCachedTypesCheck();
-    String codeWithIssue = "def literal_comparison(param):\n" +
-      "    3000 is not param";
-    String codeFixed = "def literal_comparison(param):\n" +
-      "    3000 != param";
+    String codeWithIssue = """
+      def literal_comparison(param):
+          3000 is not param""";
+    String codeFixed = """
+      def literal_comparison(param):
+          3000 != param""";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, IdentityComparisonWithCachedTypesCheck.IS_NOT_QUICK_FIX_MESSAGE);
   }

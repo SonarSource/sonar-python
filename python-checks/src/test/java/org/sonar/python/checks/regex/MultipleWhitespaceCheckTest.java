@@ -30,10 +30,12 @@ class MultipleWhitespaceCheckTest {
 
   @Test
   void quickFixTest() {
-    var before = "import re\n" +
-      "changed = re.match(r\"Hello,   world!\", input)";
-    var after = "import re\n" +
-      "changed = re.match(r\"Hello, {3}world!\", input)";
+    var before = """
+      import re
+      changed = re.match(r"Hello,   world!", input)""";
+    var after = """
+      import re
+      changed = re.match(r"Hello, {3}world!", input)""";
     var check = new MultipleWhitespaceCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace spaces with quantifier \"{3}\"");

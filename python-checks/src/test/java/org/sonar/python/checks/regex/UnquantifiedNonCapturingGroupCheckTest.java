@@ -29,10 +29,12 @@ class UnquantifiedNonCapturingGroupCheckTest {
 
   @Test
   void quickFixTest() {
-    var before = "import re\n" +
-      "re.match(r\"(?:number)abc\", input)";
-    var after = "import re\n" +
-      "re.match(r\"numberabc\", input)";
+    var before = """
+      import re
+      re.match(r"(?:number)abc", input)""";
+    var after = """
+      import re
+      re.match(r"numberabc", input)""";
     var check = new UnquantifiedNonCapturingGroupCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Unwrap subpattern");

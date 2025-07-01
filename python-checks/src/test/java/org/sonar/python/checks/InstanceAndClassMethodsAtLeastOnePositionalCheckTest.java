@@ -31,32 +31,32 @@ class InstanceAndClassMethodsAtLeastOnePositionalCheckTest {
 
   @Test
   void class_method_quickfix() {
-    String codeWithIssue = "" +
-      "class Foo():\n" +
-      "    @classmethod\n" +
-      "    def bar(): pass";
+    String codeWithIssue = """
+      class Foo():
+          @classmethod
+          def bar(): pass""";
 
-    String fixedCodeWithClassParameter = "" +
-      "class Foo():\n" +
-      "    @classmethod\n" +
-      "    def bar(cls): pass";
+    String fixedCodeWithClassParameter = """
+      class Foo():
+          @classmethod
+          def bar(cls): pass""";
 
     PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCodeWithClassParameter);
   }
 
   @Test
   void regular_method_quickfix() {
-    String codeWithIssue = "" +
-      "class Foo():\n" +
-      "    def bar(): pass";
+    String codeWithIssue = """
+      class Foo():
+          def bar(): pass""";
 
-    String fixedCodeWithSelfParameter = "" +
-      "class Foo():\n" +
-      "    def bar(cls): pass";
+    String fixedCodeWithSelfParameter = """
+      class Foo():
+          def bar(cls): pass""";
 
-    String fixedCodeWithClassParameter = "" +
-      "class Foo():\n" +
-      "    def bar(self): pass";
+    String fixedCodeWithClassParameter = """
+      class Foo():
+          def bar(self): pass""";
 
     PythonQuickFixVerifier.verify(check, codeWithIssue,
       fixedCodeWithSelfParameter,
@@ -68,15 +68,15 @@ class InstanceAndClassMethodsAtLeastOnePositionalCheckTest {
 
   @Test
   void no_pos_args_quickfix() {
-    String codeWithIssue = "" +
-      "class Foo():\n" +
-      "    @classmethod\n" +
-      "    def bar(*, param): pass";
+    String codeWithIssue = """
+      class Foo():
+          @classmethod
+          def bar(*, param): pass""";
 
-    String fixedCodeWithClassParameter = "" +
-      "class Foo():\n" +
-      "    @classmethod\n" +
-      "    def bar(cls, *, param): pass";
+    String fixedCodeWithClassParameter = """
+      class Foo():
+          @classmethod
+          def bar(cls, *, param): pass""";
 
     PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCodeWithClassParameter);
   }

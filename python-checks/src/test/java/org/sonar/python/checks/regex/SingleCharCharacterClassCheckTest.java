@@ -29,10 +29,12 @@ class SingleCharCharacterClassCheckTest {
 
   @Test
   void quickFixTest() {
-    var before = "import re\n" +
-      "changed = re.match(r\"[B]\", input)";
-    var after = "import re\n" +
-      "changed = re.match(r\"B\", input)";
+    var before = """
+      import re
+      changed = re.match(r"[B]", input)""";
+    var after = """
+      import re
+      changed = re.match(r"B", input)""";
     var check = new SingleCharCharacterClassCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace this character class with the character itself");

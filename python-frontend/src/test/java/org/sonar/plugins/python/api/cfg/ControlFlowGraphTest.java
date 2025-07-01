@@ -597,8 +597,8 @@ class ControlFlowGraphTest {
 
   @Test
   void match_statement() {
-    ControlFlowGraph cfg = cfg("" +
-      "foo()   ",
+    ControlFlowGraph cfg = cfg("""
+      foo()   """,
       "match x:",
       "  case \"1\": y()",
       "  case a.b if w(): z()",
@@ -647,38 +647,40 @@ class ControlFlowGraphTest {
 
   @Test
   void CFG_matchStatement() {
-    ControlFlowGraph cfg = cfg("" +
-      "foo()   ",
+    ControlFlowGraph cfg = cfg("""
+      foo()   """,
       "match x:",
       "  case \"1\": y()",
       "  case a.b: z()",
       "bar()"
     );
-    assertThat(cfg).hasToString("" +
-      "0[label=\"4:14:EXPRESSION_STMT\"];" +
-      "1[label=\"4:9:EXPRESSION_STMT;NAME;STRING_LITERAL_PATTERN\"];" +
-      "2[label=\"5:14:EXPRESSION_STMT\"];" +
-      "3[label=\"5:9:NAME;VALUE_PATTERN\"];" +
-      "4[label=\"6:2:EXPRESSION_STMT\"];" +
-      "5[label=\"END\"];" +
-      "0->4;1->0;1->3;2->4;3->2;3->4;4->5;");
+    assertThat(cfg).hasToString("""
+      0[label="4:14:EXPRESSION_STMT"];\
+      1[label="4:9:EXPRESSION_STMT;NAME;STRING_LITERAL_PATTERN"];\
+      2[label="5:14:EXPRESSION_STMT"];\
+      3[label="5:9:NAME;VALUE_PATTERN"];\
+      4[label="6:2:EXPRESSION_STMT"];\
+      5[label="END"];\
+      0->4;1->0;1->3;2->4;3->2;3->4;4->5;\
+      """);
   }
 
   @Test
   void CFG_toString() {
-    ControlFlowGraph cfg = cfg("" +
-      "if x:",
+    ControlFlowGraph cfg = cfg("""
+      if x:""",
       "    return 1",
       "else:",
       "    foo()",
       "    return 2"
     );
-    assertThat(cfg).hasToString("" +
-      "0[label=\"2:2:NAME\"];" +
-      "1[label=\"3:6:RETURN_STMT\"];" +
-      "2[label=\"5:6:EXPRESSION_STMT;RETURN_STMT\"];" +
-      "3[label=\"END\"];" +
-      "0->1;0->2;1->3;1->3[style=dotted];2->3;2->3[style=dotted];");
+    assertThat(cfg).hasToString("""
+      0[label="2:2:NAME"];\
+      1[label="3:6:RETURN_STMT"];\
+      2[label="5:6:EXPRESSION_STMT;RETURN_STMT"];\
+      3[label="END"];\
+      0->1;0->2;1->3;1->3[style=dotted];2->3;2->3[style=dotted];\
+      """);
   }
 
   @Test
@@ -706,8 +708,8 @@ class ControlFlowGraphTest {
    */
   @Test
   void if_stmt_test_predecessors() {
-    verifyCfg("" +
-      "before(succ = [if_body, after_if], pred = [])",
+    verifyCfg("""
+      before(succ = [if_body, after_if], pred = [])""",
       "foo()",
       "if a: ",
       "  if_body(succ = [after_if], pred = [before])",

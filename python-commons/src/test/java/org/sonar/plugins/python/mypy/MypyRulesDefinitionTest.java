@@ -40,8 +40,9 @@ class MypyRulesDefinitionTest {
     RulesDefinition.Rule rule = repository.rule("attr-defined");
     assertThat(rule).isNotNull();
     assertThat(rule.name()).isEqualTo("Check that attribute exists");
-    assertThat(rule.htmlDescription()).isEqualTo("See description of Mypy rule <code>attr-defined</code> at" +
-      " the <a href=\"https://mypy.readthedocs.io/en/stable/error_code_list.html#check-that-attribute-exists-attr-defined\">Mypy website</a>.");
+    assertThat(rule.htmlDescription()).isEqualTo("""
+      See description of Mypy rule <code>attr-defined</code> at\
+       the <a href="https://mypy.readthedocs.io/en/stable/error_code_list.html#check-that-attribute-exists-attr-defined">Mypy website</a>.""");
     assertThat(rule.tags()).isEmpty();
   }
 }

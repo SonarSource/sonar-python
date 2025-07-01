@@ -29,14 +29,16 @@ class IgnoredSystemExitCheckTest {
 
   @Test
   void quickFixTest() {
-    var before = "try:\n" +
-      "    open(\"foo.txt\", \"r\")\n" +
-      "except SystemExit:\n" +
-      "    pass";
-    var after = "try:\n" +
-      "    open(\"foo.txt\", \"r\")\n" +
-      "except SystemExit:\n" +
-      "    raise";
+    var before = """
+      try:
+          open("foo.txt", "r")
+      except SystemExit:
+          pass""";
+    var after = """
+      try:
+          open("foo.txt", "r")
+      except SystemExit:
+          raise""";
     IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
@@ -44,21 +46,23 @@ class IgnoredSystemExitCheckTest {
 
   @Test
   void addRaiseQuickFixTest() {
-    var before = "def bar():\n" +
-      "    try:\n" +
-      "        foo()\n" +
-      "    except SystemExit:\n" +
-      "        pass\n" +
-      "        a = 10\n" +
-      "        print(a)";
-    var after = "def bar():\n" +
-      "    try:\n" +
-      "        foo()\n" +
-      "    except SystemExit:\n" +
-      "        pass\n" +
-      "        a = 10\n" +
-      "        print(a)\n" +
-      "        raise";
+    var before = """
+      def bar():
+          try:
+              foo()
+          except SystemExit:
+              pass
+              a = 10
+              print(a)""";
+    var after = """
+      def bar():
+          try:
+              foo()
+          except SystemExit:
+              pass
+              a = 10
+              print(a)
+              raise""";
     IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
@@ -66,20 +70,22 @@ class IgnoredSystemExitCheckTest {
 
   @Test
   void replacePassWithRaiseQuickFixTest() {
-    var before = "def bar():\n" +
-      "    try:\n" +
-      "        foo()\n" +
-      "    except SystemExit:\n" +
-      "        a = 10\n" +
-      "        print(a)\n" +
-      "        pass";
-    var after = "def bar():\n" +
-      "    try:\n" +
-      "        foo()\n" +
-      "    except SystemExit:\n" +
-      "        a = 10\n" +
-      "        print(a)\n" +
-      "        raise";
+    var before = """
+      def bar():
+          try:
+              foo()
+          except SystemExit:
+              a = 10
+              print(a)
+              pass""";
+    var after = """
+      def bar():
+          try:
+              foo()
+          except SystemExit:
+              a = 10
+              print(a)
+              raise""";
     IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
@@ -87,20 +93,22 @@ class IgnoredSystemExitCheckTest {
 
   @Test
   void replaceEllipsisWithRaiseQuickFixTest() {
-    var before = "def bar():\n" +
-      "    try:\n" +
-      "        foo()\n" +
-      "    except SystemExit:\n" +
-      "        a = 10\n" +
-      "        print(a)\n" +
-      "        ...";
-    var after = "def bar():\n" +
-      "    try:\n" +
-      "        foo()\n" +
-      "    except SystemExit:\n" +
-      "        a = 10\n" +
-      "        print(a)\n" +
-      "        raise";
+    var before = """
+      def bar():
+          try:
+              foo()
+          except SystemExit:
+              a = 10
+              print(a)
+              ...""";
+    var after = """
+      def bar():
+          try:
+              foo()
+          except SystemExit:
+              a = 10
+              print(a)
+              raise""";
     IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
@@ -108,20 +116,22 @@ class IgnoredSystemExitCheckTest {
 
   @Test
   void baseExceptionQuickFixTest() {
-    var before = "def bar():\n" +
-      "    try:\n" +
-      "        foo()\n" +
-      "    except BaseException:\n" +
-      "        a = 10\n" +
-      "        print(a)\n" +
-      "        ...";
-    var after = "def bar():\n" +
-      "    try:\n" +
-      "        foo()\n" +
-      "    except BaseException:\n" +
-      "        a = 10\n" +
-      "        print(a)\n" +
-      "        raise";
+    var before = """
+      def bar():
+          try:
+              foo()
+          except BaseException:
+              a = 10
+              print(a)
+              ...""";
+    var after = """
+      def bar():
+          try:
+              foo()
+          except BaseException:
+              a = 10
+              print(a)
+              raise""";
     IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);
@@ -129,20 +139,22 @@ class IgnoredSystemExitCheckTest {
 
   @Test
   void bareExceptionQuickFixTest() {
-    var before = "def bar():\n" +
-      "    try:\n" +
-      "        foo()\n" +
-      "    except:\n" +
-      "        a = 10\n" +
-      "        print(a)\n" +
-      "        ...";
-    var after = "def bar():\n" +
-      "    try:\n" +
-      "        foo()\n" +
-      "    except:\n" +
-      "        a = 10\n" +
-      "        print(a)\n" +
-      "        raise";
+    var before = """
+      def bar():
+          try:
+              foo()
+          except:
+              a = 10
+              print(a)
+              ...""";
+    var after = """
+      def bar():
+          try:
+              foo()
+          except:
+              a = 10
+              print(a)
+              raise""";
     IgnoredSystemExitCheck check = new IgnoredSystemExitCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, IgnoredSystemExitCheck.QUICK_FIX_MESSAGE);

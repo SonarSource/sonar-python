@@ -114,8 +114,9 @@ public class PythonExtensions {
       PropertyDefinition.builder(PythonCoverageSensor.REPORT_PATHS_KEY)
         .index(20)
         .name("Path to coverage report(s)")
-        .description("List of paths pointing to coverage reports. Ant patterns are accepted for relative path. " +
-          "The reports have to conform to the Cobertura XML format.")
+        .description("""
+          List of paths pointing to coverage reports. Ant patterns are accepted for relative path. \
+          The reports have to conform to the Cobertura XML format.""")
         .category(PYTHON_CATEGORY)
         .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)
@@ -141,8 +142,9 @@ public class PythonExtensions {
       PropertyDefinition.builder(PythonXUnitSensor.SKIP_DETAILS)
         .index(23)
         .name("Skip the details when importing the Xunit reports")
-        .description("When enabled the test execution statistics is provided only on project level. Use this mode when paths in report " +
-          "are not found. Disabled by default.")
+        .description("""
+          When enabled the test execution statistics is provided only on project level. Use this mode when paths in report \
+          are not found. Disabled by default.""")
         .category(PYTHON_CATEGORY)
         .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)
@@ -152,8 +154,9 @@ public class PythonExtensions {
       PropertyDefinition.builder(PythonXUnitSensor.REPORT_PATH_KEY)
         .index(24)
         .name("Path to xunit report(s)")
-        .description("Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to " +
-          "conform to the junitreport XML format.")
+        .description("""
+          Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to \
+          conform to the junitreport XML format.""")
         .category(PYTHON_CATEGORY)
         .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)

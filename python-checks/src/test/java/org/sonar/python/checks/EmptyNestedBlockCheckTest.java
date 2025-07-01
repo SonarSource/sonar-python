@@ -31,13 +31,15 @@ class EmptyNestedBlockCheckTest {
   void quickFixTest() {
     var check = new EmptyNestedBlockCheck();
 
-    var before = "def foo():\n" +
-      "    for i in range(3):\n" +
-      "        pass";
-    var after = "def foo():\n" +
-      "    for i in range(3):\n" +
-      "        # TODO: Add implementation\n" +
-      "        pass";
+    var before = """
+      def foo():
+          for i in range(3):
+              pass""";
+    var after = """
+      def foo():
+          for i in range(3):
+              # TODO: Add implementation
+              pass""";
 
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, EmptyNestedBlockCheck.QUICK_FIX_MESSAGE);
@@ -47,13 +49,17 @@ class EmptyNestedBlockCheckTest {
   void inlineQuickFixTest() {
     var check = new EmptyNestedBlockCheck();
 
-    var before = "def foo():\n" +
-      "    if a < 3: pass\n";
+    var before = """
+      def foo():
+          if a < 3: pass
+      """;
 
-    var after = "def foo():\n" +
-      "    if a < 3: \n" +
-      "        # TODO: Add implementation\n" +
-      "        pass\n";
+    var after = """
+      def foo():
+          if a < 3:\s
+              # TODO: Add implementation
+              pass
+      """;
 
     PythonQuickFixVerifier.verify(check, before, after);
   }
@@ -62,17 +68,19 @@ class EmptyNestedBlockCheckTest {
   void rootInlineQuickFixTest() {
     var check = new EmptyNestedBlockCheck();
 
-    var before = "if a < 3: pass\n" +
-      "\n" +
-      "def foo(a):\n" +
-      "  print(a)";
+    var before = """
+      if a < 3: pass
+      
+      def foo(a):
+        print(a)""";
 
-    var after = "if a < 3: \n" +
-      "  # TODO: Add implementation\n" +
-      "  pass\n" +
-      "\n" +
-      "def foo(a):\n" +
-      "  print(a)";
+    var after = """
+      if a < 3:\s
+        # TODO: Add implementation
+        pass
+      
+      def foo(a):
+        print(a)""";
 
     PythonQuickFixVerifier.verify(check, before, after);
   }

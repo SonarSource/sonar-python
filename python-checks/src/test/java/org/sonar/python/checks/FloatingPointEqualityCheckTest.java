@@ -31,15 +31,17 @@ class FloatingPointEqualityCheckTest {
   @Test
   void quickfixEquality(){
     String noncompliant =
-      "import math\n" +
-      "def foo(a,b):\n" +
-      "    if a - 0.1 == b:\n" +
-      "        ...";
+      """
+      import math
+      def foo(a,b):
+          if a - 0.1 == b:
+              ...""";
     String compliant =
-      "import math\n" +
-      "def foo(a,b):\n" +
-      "    if math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
-      "        ...";
+      """
+      import math
+      def foo(a,b):
+          if math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"math.isclose()\".");
   }
@@ -47,30 +49,34 @@ class FloatingPointEqualityCheckTest {
   @Test
   void quickfixNoSpace(){
     String noncompliant =
-      "import math\n" +
-      "def foo(a,b):\n" +
-      "    if a - 0.1==b:\n" +
-      "        ...";
+      """
+      import math
+      def foo(a,b):
+          if a - 0.1==b:
+              ...""";
     String compliant =
-      "import math\n" +
-      "def foo(a,b):\n" +
-      "    if math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
-      "        ...";
+      """
+      import math
+      def foo(a,b):
+          if math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
   }
   
   @Test
   void quickfixInequality(){
     String noncompliant =
-      "import math\n" +
-      "def foo(a,b):\n" +
-      "    if a - 0.1 != b:\n" +
-      "        ...";
+      """
+      import math
+      def foo(a,b):
+          if a - 0.1 != b:
+              ...""";
     String compliant =
-      "import math\n" +
-      "def foo(a,b):\n" +
-      "    if not math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
-      "        ...";
+      """
+      import math
+      def foo(a,b):
+          if not math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"not math.isclose()\".");
   }
@@ -78,29 +84,33 @@ class FloatingPointEqualityCheckTest {
   @Test
   void quickfixRightOperand(){
     String noncompliant =
-      "import math\n" +
-      "def foo(a,b):\n" +
-      "    if a == .2 + b:\n" +
-      "        ...";
+      """
+      import math
+      def foo(a,b):
+          if a == .2 + b:
+              ...""";
     String compliant =
-      "import math\n" +
-      "def foo(a,b):\n" +
-      "    if math.isclose(a, .2 + b, rel_tol=1e-09, abs_tol=1e-09):\n" +
-      "        ...";
+      """
+      import math
+      def foo(a,b):
+          if math.isclose(a, .2 + b, rel_tol=1e-09, abs_tol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
   }
 
   @Test
   void quickfixMathImport(){
     String noncompliant =
-      "def foo(a,b):\n" +
-      "    if a - 0.1 == b:\n" +
-      "        ...";
+      """
+      def foo(a,b):
+          if a - 0.1 == b:
+              ...""";
     String compliant =
-      "import math\n" +
-      "def foo(a,b):\n" +
-      "    if math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
-      "        ...";
+      """
+      import math
+      def foo(a,b):
+          if math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
   }
 
@@ -108,15 +118,17 @@ class FloatingPointEqualityCheckTest {
   @Test
   void quickfixNumpyImport(){
     String noncompliant =
-      "import numpy\n" +
-      "def foo(a,b):\n" +
-      "    if a - 0.1 == b:\n" +
-      "        ...";
+      """
+      import numpy
+      def foo(a,b):
+          if a - 0.1 == b:
+              ...""";
     String compliant =
-      "import numpy\n" +
-      "def foo(a,b):\n" +
-      "    if numpy.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
-      "        ...";
+      """
+      import numpy
+      def foo(a,b):
+          if numpy.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"numpy.isclose()\".");
   }
@@ -124,15 +136,17 @@ class FloatingPointEqualityCheckTest {
   @Test
   void quickfixMultipleImport(){
     String noncompliant =
-      "import some_module, math\n" +
-      "def foo(a,b):\n" +
-      "    if a - 0.1 == b:\n" +
-      "        ...";
+      """
+      import some_module, math
+      def foo(a,b):
+          if a - 0.1 == b:
+              ...""";
     String compliant =
-      "import some_module, math\n" +
-      "def foo(a,b):\n" +
-      "    if math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
-      "        ...";
+      """
+      import some_module, math
+      def foo(a,b):
+          if math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"math.isclose()\".");
   }
@@ -140,17 +154,19 @@ class FloatingPointEqualityCheckTest {
   @Test
   void quickfixPrioritizeNumpyOverMath(){
     String noncompliant =
-      "import math\n" + 
-      "import numpy as np\n" +
-      "def foo(a,b):\n" +
-      "    if a - 0.1 == b:\n" +
-      "        ...";
+      """
+      import math
+      import numpy as np
+      def foo(a,b):
+          if a - 0.1 == b:
+              ...""";
     String compliant =
-      "import math\n" + 
-      "import numpy as np\n" +
-      "def foo(a,b):\n" +
-      "    if np.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
-      "        ...";
+      """
+      import math
+      import numpy as np
+      def foo(a,b):
+          if np.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"np.isclose()\".");
   }
@@ -158,15 +174,17 @@ class FloatingPointEqualityCheckTest {
   @Test
   void quickfixPrioritizeTorchOverMath(){
     String noncompliant =
-      "import math, torch\n" +
-      "def foo(a,b):\n" +
-      "    if a - 0.1 == b:\n" +
-      "        ...";
+      """
+      import math, torch
+      def foo(a,b):
+          if a - 0.1 == b:
+              ...""";
     String compliant =
-      "import math, torch\n" +
-      "def foo(a,b):\n" +
-      "    if torch.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
-      "        ...";
+      """
+      import math, torch
+      def foo(a,b):
+          if torch.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"torch.isclose()\".");
   }
@@ -174,15 +192,17 @@ class FloatingPointEqualityCheckTest {
   @Test
   void quickfixNumpyImportAlias(){
     String noncompliant =
-      "import numpy as np\n" +
-      "def foo(a,b):\n" +
-      "    if a - 0.1 == b:\n" +
-      "        ...";
+      """
+      import numpy as np
+      def foo(a,b):
+          if a - 0.1 == b:
+              ...""";
     String compliant =
-      "import numpy as np\n" +
-      "def foo(a,b):\n" +
-      "    if np.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
-      "        ...";
+      """
+      import numpy as np
+      def foo(a,b):
+          if np.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"np.isclose()\".");
   }
@@ -190,15 +210,17 @@ class FloatingPointEqualityCheckTest {
   @Test
   void quickfixPyTorchImport(){
     String noncompliant =
-      "import torch\n" +
-      "def foo(a,b):\n" +
-      "    if a - 0.1 == b:\n" +
-      "        ...";
+      """
+      import torch
+      def foo(a,b):
+          if a - 0.1 == b:
+              ...""";
     String compliant =
-      "import torch\n" +
-      "def foo(a,b):\n" +
-      "    if torch.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
-      "        ...";
+      """
+      import torch
+      def foo(a,b):
+          if torch.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"torch.isclose()\".");
   }
@@ -206,17 +228,19 @@ class FloatingPointEqualityCheckTest {
   @Test
   void quickfixTakeFirstImport(){
     String noncompliant =
-      "import torch\n" +
-      "import numpy\n" +
-      "def foo(a,b):\n" +
-      "    if a - 0.1 == b:\n" +
-      "        ...";
+      """
+      import torch
+      import numpy
+      def foo(a,b):
+          if a - 0.1 == b:
+              ...""";
     String compliant =
-      "import torch\n" +
-      "import numpy\n" +
-      "def foo(a,b):\n" +
-      "    if torch.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
-      "        ...";
+      """
+      import torch
+      import numpy
+      def foo(a,b):
+          if torch.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):
+              ...""";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"torch.isclose()\".");
   }

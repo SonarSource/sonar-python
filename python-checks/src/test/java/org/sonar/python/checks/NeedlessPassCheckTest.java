@@ -29,33 +29,45 @@ class NeedlessPassCheckTest {
 
   @Test
   void quick_fix_test() {
-    var expected = "def my_method():\n" +
-      "    print('foo')\n" +
-      "    print('foo')\n";
+    var expected = """
+      def my_method():
+          print('foo')
+          print('foo')
+      """;
 
-    var input = "def my_method():\n" +
-      "    print('foo')\n" +
-      "    print('foo')\n" +
-      "    pass\n";
+    var input = """
+      def my_method():
+          print('foo')
+          print('foo')
+          pass
+      """;
     PythonQuickFixVerifier.verify(new NeedlessPassCheck(), input, expected);
     PythonQuickFixVerifier.verifyQuickFixMessages(new NeedlessPassCheck(), input, NeedlessPassCheck.QUICK_FIX_MESSAGE);
 
-    input = "def my_method():\n" +
-      "    print('foo')\n" +
-      "    pass\n" +
-      "    print('foo')\n";
+    input = """
+      def my_method():
+          print('foo')
+          pass
+          print('foo')
+      """;
     PythonQuickFixVerifier.verify(new NeedlessPassCheck(), input, expected);
 
 
-    expected = "def my_method():\n" +
-      "    print('foo'); print('foo')\n";
+    expected = """
+      def my_method():
+          print('foo'); print('foo')
+      """;
 
-    input = "def my_method():\n" +
-      "    print('foo'); pass; print('foo')\n";
+    input = """
+      def my_method():
+          print('foo'); pass; print('foo')
+      """;
     PythonQuickFixVerifier.verify(new NeedlessPassCheck(), input, expected);
 
-    input = "def my_method():\n" +
-      "    print('foo'); print('foo'); pass\n";
+    input = """
+      def my_method():
+          print('foo'); print('foo'); pass
+      """;
     PythonQuickFixVerifier.verify(new NeedlessPassCheck(), input, expected);
   }
 

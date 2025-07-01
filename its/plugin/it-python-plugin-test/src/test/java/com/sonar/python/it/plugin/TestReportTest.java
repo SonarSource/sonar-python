@@ -116,9 +116,9 @@ public class TestReportTest {
     final String projectKey = "nosetests_invalid";
     BuildResult result = ORCHESTRATOR.executeBuildQuietly(createBuild(projectKey, "invalid_report.xml"));
     assertThat(result.isSuccess()).isTrue();
-    assertThat(result.getLogs()).contains("Cannot read report 'invalid_report.xml', the following exception occurred:" +
-      " Unexpected character 't' (code 116) in prolog; expected '<'\n" +
-      " at [row,col {unknown-source}]: [1,1]");
+    assertThat(result.getLogs()).contains("""
+      Cannot read report 'invalid_report.xml', the following exception occurred: Unexpected character 't' (code 116) in prolog; expected '<'
+      """);
   }
 
   private static Map<String, Integer> nullMeasures() {

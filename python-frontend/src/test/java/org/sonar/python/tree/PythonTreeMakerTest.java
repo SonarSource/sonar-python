@@ -131,13 +131,17 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(fileInput.statements()).isNull();
     assertThat(fileInput.docstring()).isNull();
 
-    fileInput = parse("\"\"\"\n" +
-      "This is a module docstring\n" +
-      "\"\"\"", treeMaker::fileInput);
+    fileInput = parse("""
+      ""\"
+      This is a module docstring
+      ""\"\
+      """, treeMaker::fileInput);
     assertThat(fileInput.docstring().stringElements()).hasSize(1);
-    assertThat(fileInput.docstring().stringElements().get(0).value()).isEqualTo("\"\"\"\n" +
-      "This is a module docstring\n" +
-      "\"\"\"");
+    assertThat(fileInput.docstring().stringElements().get(0).value()).isEqualTo("""
+      ""\"
+      This is a module docstring
+      ""\"\
+      """);
     assertThat(fileInput.children()).hasSize(2);
 
     fileInput = parse("if x:\n pass", treeMaker::fileInput);
@@ -751,19 +755,20 @@ class PythonTreeMakerTest extends RuleTest {
   @Test
   void funcdef_statement_type_params() {
     setRootRule(PythonGrammar.FUNCDEF);
-    var functionDef = parse("def overly_generic[\n" +
-      "   SimpleTypeVar,\n" +
-      "   TypeVarWithBound: int,\n" +
-      "   TypeVarWithConstraints: (str, bytes),\n" +
-      "   *SimpleTypeVarTuple,\n" +
-      "   **SimpleParamSpec\n" +
-      "](\n" +
-      "   a: SimpleTypeVar,\n" +
-      "   b: TypeVarWithBound,\n" +
-      "   c: Callable[SimpleParamSpec, TypeVarWithConstraints],\n" +
-      "   *d: SimpleTypeVarTuple,\n" +
-      "   e: *SimpleTypeVar\n" +
-      "): pass", treeMaker::funcDefStatement);
+    var functionDef = parse("""
+      def overly_generic[
+         SimpleTypeVar,
+         TypeVarWithBound: int,
+         TypeVarWithConstraints: (str, bytes),
+         *SimpleTypeVarTuple,
+         **SimpleParamSpec
+      ](
+         a: SimpleTypeVar,
+         b: TypeVarWithBound,
+         c: Callable[SimpleParamSpec, TypeVarWithConstraints],
+         *d: SimpleTypeVarTuple,
+         e: *SimpleTypeVar
+      ): pass""", treeMaker::funcDefStatement);
     assertThat(functionDef.name()).isNotNull();
     var typeParams = functionDef.typeParams();
     validateTypeParams(typeParams, functionDef);
@@ -893,12 +898,17 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(tupleParam.commas()).extracting(Token::value).containsExactly(",");
     assertThat(tupleParam.children()).hasSize(5);
 
-    functionDef = parse("def func(x : int, y):\n  \"\"\"\n" +
-      "This is a function docstring\n" +
-      "\"\"\"\n  pass", treeMaker::funcDefStatement);
-    assertThat(functionDef.docstring().stringElements().get(0).value()).isEqualTo("\"\"\"\n" +
-      "This is a function docstring\n" +
-      "\"\"\"");
+    functionDef = parse("""
+      def func(x : int, y):
+        ""\"
+      This is a function docstring
+      ""\"
+        pass""", treeMaker::funcDefStatement);
+    assertThat(functionDef.docstring().stringElements().get(0).value()).isEqualTo("""
+      ""\"
+      This is a function docstring
+      ""\"\
+      """);
     assertThat(functionDef.children()).hasSize(10);
 
     functionDef = parse("def __call__(self, *, manager):\n  pass", treeMaker::funcDefStatement);
@@ -1022,9 +1032,10 @@ class PythonTreeMakerTest extends RuleTest {
     funcDef = (FunctionDef) ((IfStatement) classDef.body().statements().get(0)).body().statements().get(0);
     assertThat(funcDef.isMethodDefinition()).isTrue();
 
-    astNode = p.parse("class ClassWithDocstring:\n" +
-      "\t\"\"\"This is a docstring\"\"\"\n" +
-      "\tpass");
+    astNode = p.parse("""
+      class ClassWithDocstring:
+      	""\"This is a docstring""\"
+      	pass""");
     classDef = treeMaker.classDefStatement(astNode);
     assertThat(classDef.docstring().stringElements()).hasSize(1);
     assertThat(classDef.docstring().stringElements().get(0).value()).isEqualTo("\"\"\"This is a docstring\"\"\"");
@@ -1034,13 +1045,14 @@ class PythonTreeMakerTest extends RuleTest {
   @Test
   void classdef_statement_type_params() {
     setRootRule(PythonGrammar.CLASSDEF);
-    var classDef = parse("class generic_class[\n" +
-      "   SimpleTypeVar,\n" +
-      "   TypeVarWithBound: int,\n" +
-      "   TypeVarWithConstraints: (str, bytes),\n" +
-      "   *SimpleTypeVarTuple,\n" +
-      "   **SimpleParamSpec\n" +
-      "]: pass", treeMaker::classDefStatement);
+    var classDef = parse("""
+      class generic_class[
+         SimpleTypeVar,
+         TypeVarWithBound: int,
+         TypeVarWithConstraints: (str, bytes),
+         *SimpleTypeVarTuple,
+         **SimpleParamSpec
+      ]: pass""", treeMaker::classDefStatement);
     assertThat(classDef.name()).isNotNull();
     var typeParams = classDef.typeParams();
     validateTypeParams(typeParams, classDef);
@@ -1343,8 +1355,9 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(assignmentExpression.children()).containsExactly(name, walrus, walrusExpression);
 
     setRootRule(PythonGrammar.IF_STMT);
-    astNode = p.parse("if a or (b := foo()):\n" +
-                                      "  print(b)");
+    astNode = p.parse("""
+                                      if a or (b := foo()):
+                                        print(b)""");
     IfStatement ifStatement = treeMaker.ifStatement(astNode);
     BinaryExpression condition = (BinaryExpression) ifStatement.condition();
     ParenthesizedExpression parenthesized = ((ParenthesizedExpression) condition.rightOperand());
@@ -1575,9 +1588,10 @@ class PythonTreeMakerTest extends RuleTest {
   void with_stmt_parenthesized_context_manager() {
     setRootRule(PythonGrammar.WITH_STMT);
     WithStatement withStatement = parse(
-      "with (open(\"a_really_long_foo\") as foo,\n" +
-      "      open(\"a_really_long_bar\") as bar):\n" +
-      "        pass", treeMaker::withStatement);
+      """
+      with (open("a_really_long_foo") as foo,
+            open("a_really_long_bar") as bar):
+              pass""", treeMaker::withStatement);
     assertThat(withStatement.children())
       .filteredOn(t -> t.is(Kind.TOKEN))
       .extracting(t -> ((Token) t).value()).contains("(", ")");
@@ -2097,8 +2111,9 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(elmt.isInterpolated()).isTrue();
     assertThat(elmt.formattedExpressions()).isEmpty();
 
-    exp = parse("f'Some nested {f\"string \\ \n" +
-                      "interpolation {x}\"}'", treeMaker::expression);
+    exp = parse("""
+                      f'Some nested {f"string \\\s
+                      interpolation {x}"}'""", treeMaker::expression);
     stringLiteral = (StringLiteral) exp;
     assertThat(stringLiteral.stringElements()).hasSize(1);
     elmt = stringLiteral.stringElements().get(0);
@@ -2822,62 +2837,70 @@ class PythonTreeMakerTest extends RuleTest {
    */
   @Test
   void except_group_invalid_instruction() {
-    String code1 = "try:pass\n" +
-      "except* OSError:\n" +
-      "  continue";
+    String code1 = """
+      try:pass
+      except* OSError:
+        continue""";
     assertThatThrownBy(() -> parse(code1, treeMaker::fileInput))
       .isInstanceOf(RecognitionException.class)
       .hasMessage("Parse error at line 3: continue statement cannot appear in except* block.");
 
-    String code2 = "try:pass\n" +
-      "except* OSError:\n" +
-      "  break";
+    String code2 = """
+      try:pass
+      except* OSError:
+        break""";
     assertThatThrownBy(() -> parse(code2, treeMaker::fileInput))
       .isInstanceOf(RecognitionException.class)
       .hasMessage("Parse error at line 3: break statement cannot appear in except* block.");
 
-    String code3 = "try:pass\n" +
-      "except* OSError:\n" +
-      "  return";
+    String code3 = """
+      try:pass
+      except* OSError:
+        return""";
     assertThatThrownBy(() -> parse(code3, treeMaker::fileInput))
       .isInstanceOf(RecognitionException.class)
       .hasMessage("Parse error at line 3: return statement cannot appear in except* block.");
 
     // should not return parse error if continue/break is in a loop
-    String code4 = "try:pass\n" +
-      "except* OSError:\n" +
-      "  while true:break";
+    String code4 = """
+      try:pass
+      except* OSError:
+        while true:break""";
     FileInput tree = parse(code4, treeMaker::fileInput);
     TryStatement tryStatement = (TryStatement) tree.statements().statements().get(0);
     assertThat(tryStatement.exceptClauses().get(0).getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
 
-    String code5 = "try:pass\n" +
-      "except* OSError:\n" +
-      "  for x in \"bob\":continue";
+    String code5 = """
+      try:pass
+      except* OSError:
+        for x in "bob":continue""";
     tree = parse(code5, treeMaker::fileInput);
     tryStatement = (TryStatement) tree.statements().statements().get(0);
     assertThat(tryStatement.exceptClauses().get(0).getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
 
     // should not return parse error if return is in a function
-    String code6 = "try:pass\n" +
-      "except* OSError:\n" +
-      "  def foo():return";
+    String code6 = """
+      try:pass
+      except* OSError:
+        def foo():return""";
     tree = parse(code6, treeMaker::fileInput);
     tryStatement = (TryStatement) tree.statements().statements().get(0);
     assertThat(tryStatement.exceptClauses().get(0).getKind()).isEqualTo(Kind.EXCEPT_GROUP_CLAUSE);
 
-    String code7 = "for x in range(42):\n" +
-      "  try:pass\n" +
-      "  except* OSError:\n" +
-      "    continue";
+    String code7 = """
+      for x in range(42):
+        try:pass
+        except* OSError:
+          continue""";
     assertThatThrownBy(() -> parse(code7, treeMaker::fileInput))
       .isInstanceOf(RecognitionException.class)
       .hasMessage("Parse error at line 4: continue statement cannot appear in except* block.");
 
-    String code8 = "def foo():\n" +
-      "  try:pass\n" +
-      "  except* OSError:\n" +
-      "    continue";
+    String code8 = """
+      def foo():
+        try:pass
+        except* OSError:
+          continue""";
     assertThatThrownBy(() -> parse(code8, treeMaker::fileInput))
       .isInstanceOf(RecognitionException.class)
       .hasMessage("Parse error at line 4: continue statement cannot appear in except* block.");

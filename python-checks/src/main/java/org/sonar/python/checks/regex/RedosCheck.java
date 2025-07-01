@@ -37,8 +37,9 @@ import org.sonarsource.analyzer.commons.regex.finders.RedosFinder;
 @Rule(key = "S5852")
 public class RedosCheck extends AbstractRegexCheck {
 
-  private static final String MESSAGE = "Make sure the regex used here, which is vulnerable to %s runtime due to backtracking," +
-    " cannot lead to denial of service.";
+  private static final String MESSAGE = """
+    Make sure the regex used here, which is vulnerable to %s runtime due to backtracking,\
+     cannot lead to denial of service.""";
   private static final String EXP = "exponential";
   private static final String POLY = "polynomial";
   private static final Set<String> FULL_MATCH_METHODS = Set.of("fullmatch");

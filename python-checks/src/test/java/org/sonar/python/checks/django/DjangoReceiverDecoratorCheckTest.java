@@ -41,33 +41,37 @@ class DjangoReceiverDecoratorCheckTest {
   @Test
   void quickFixTest() {
     var check = new DjangoReceiverDecoratorCheck();
-    var before = "from django.dispatch import receiver\n" +
-      "@csrf_exempt\n" +
-      "@receiver(some_signal)\n" +
-      "def my_handler(sender, **kwargs):\n" +
-      "    ...";
+    var before = """
+      from django.dispatch import receiver
+      @csrf_exempt
+      @receiver(some_signal)
+      def my_handler(sender, **kwargs):
+          ...""";
 
-    var after = "from django.dispatch import receiver\n" +
-      "@receiver(some_signal)\n" +
-      "@csrf_exempt\n" +
-      "def my_handler(sender, **kwargs):\n" +
-      "    ...";
+    var after = """
+      from django.dispatch import receiver
+      @receiver(some_signal)
+      @csrf_exempt
+      def my_handler(sender, **kwargs):
+          ...""";
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Move the '@receiver' decorator to the top");
 
-    before = "from django.dispatch import receiver\n" +
-      "@csrf_exempt\n" +
-      "@receiver(some_signal)\n" +
-      "@another_decorator\n" +
-      "def my_handler(sender, **kwargs):\n" +
-      "    ...";
+    before = """
+      from django.dispatch import receiver
+      @csrf_exempt
+      @receiver(some_signal)
+      @another_decorator
+      def my_handler(sender, **kwargs):
+          ...""";
 
-    after = "from django.dispatch import receiver\n" +
-      "@receiver(some_signal)\n" +
-      "@csrf_exempt\n" +
-      "@another_decorator\n" +
-      "def my_handler(sender, **kwargs):\n" +
-      "    ...";
+    after = """
+      from django.dispatch import receiver
+      @receiver(some_signal)
+      @csrf_exempt
+      @another_decorator
+      def my_handler(sender, **kwargs):
+          ...""";
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Move the '@receiver' decorator to the top");
   }

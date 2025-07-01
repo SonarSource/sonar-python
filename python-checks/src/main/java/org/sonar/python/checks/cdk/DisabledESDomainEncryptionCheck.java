@@ -37,8 +37,9 @@ import static org.sonar.python.checks.cdk.CdkUtils.getCall;
 
 @Rule(key = "S6308")
 public class DisabledESDomainEncryptionCheck extends AbstractCdkResourceCheck {
-  private static final String OMITTING_MESSAGE = "Omitting %s causes encryption of data at rest to be disabled for this %s domain." +
-    " Make sure it is safe here.";
+  private static final String OMITTING_MESSAGE = """
+    Omitting %s causes encryption of data at rest to be disabled for this %s domain.\
+     Make sure it is safe here.""";
   private static final String UNENCRYPTED_MESSAGE = "Make sure that using unencrypted %s domains is safe here.";
   private static final String ENABLED = "enabled";
   private static final String OPENSEARCH = "OpenSearch";

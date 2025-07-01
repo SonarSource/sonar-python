@@ -255,33 +255,35 @@ class FunctionSymbolTest {
   @Test
   void from_protobuf() throws TextFormat.ParseException {
     String protobuf =
-      "name: \"fn\"\n" +
-      "fully_qualified_name: \"mod.fn\"\n" +
-      "return_annotation {\n" +
-      "  pretty_printed_name: \"None\"\n" +
-      "  kind: NONE\n" +
-      "}\n" +
-      "parameters {\n" +
-      "  name: \"p1\"\n" +
-      "  kind: POSITIONAL_OR_KEYWORD\n" +
-      "  type_annotation {\n" +
-      "    pretty_printed_name: \"builtins.str\"\n" +
-      "    fully_qualified_name: \"builtins.str\"\n" +
-      "  }\n" +
-      "}\n" +
-      "parameters {\n" +
-      "  name: \"p2\"\n" +
-      "  kind: KEYWORD_ONLY\n" +
-      "}\n" +
-      "parameters {\n" +
-      "  name: \"p3\"\n" +
-      "  kind: KEYWORD_ONLY\n" +
-      "  has_default: true\n" +
-      "}\n" +
-      "parameters {\n" +
-      "  name: \"p4\"\n" +
-      "  kind: VAR_KEYWORD\n" +
-      "}";
+      """
+      name: "fn"
+      fully_qualified_name: "mod.fn"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "p1"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "p2"
+        kind: KEYWORD_ONLY
+      }
+      parameters {
+        name: "p3"
+        kind: KEYWORD_ONLY
+        has_default: true
+      }
+      parameters {
+        name: "p4"
+        kind: VAR_KEYWORD
+      }\
+      """;
     FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionSymbol(protobuf), "mod");
     assertThat(functionSymbol.name()).isEqualTo("fn");
     assertThat(functionSymbol.fullyQualifiedName()).isEqualTo("mod.fn");
@@ -329,8 +331,10 @@ class FunctionSymbolTest {
   @Test
   void from_protobuf_no_return_type() throws TextFormat.ParseException {
     String protobuf =
-      "name: \"fn\"\n" +
-      "fully_qualified_name: \"mod.fn\"\n";
+      """
+      name: "fn"
+      fully_qualified_name: "mod.fn"
+      """;
     FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionSymbol(protobuf), "mod");
     assertThat(functionSymbol.declaredReturnType()).isEqualTo(InferredTypes.anyType());
     assertThat(functionSymbol.annotatedReturnTypeName()).isNull();

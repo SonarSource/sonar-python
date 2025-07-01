@@ -81,8 +81,9 @@ class BinaryExpressionImplTest {
   @Test
   void long_sequence_binary_expressions() {
     InferredType type = lastExpression(
-      "'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' +" +
-      " 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g'"
+      """
+      'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' +\
+       'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g'"""
     ).type();
     assertThat(type.canOnlyBe("str")).isTrue();
   }

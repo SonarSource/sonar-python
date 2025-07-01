@@ -108,9 +108,10 @@ class CheckUtilsTest {
 
   @Test
   void no_parent_class() {
-    FileInput file = (FileInput) parse("" +
-      "def f():\n" +
-      "    pass\n");
+    FileInput file = (FileInput) parse("""
+      def f():
+          pass
+      """);
     FunctionDef f = descendantFunction(file, "f");
     assertThat(f).isNotNull();
     assertThat(CheckUtils.getParentClassDef(f)).isNull();
@@ -118,16 +119,17 @@ class CheckUtilsTest {
 
   @Test
   void parent_class() {
-    FileInput file = (FileInput) parse("" +
-      "class A:\n" +
-      "    def f():\n" +
-      "        def g():\n" +
-      "            pass\n" +
-      "        pass\n" +
-      "\n" +
-      "    if x:\n" +
-      "        def h():\n" +
-      "            pass\n");
+    FileInput file = (FileInput) parse("""
+      class A:
+          def f():
+              def g():
+                  pass
+              pass
+      
+          if x:
+              def h():
+                  pass
+      """);
     FunctionDef f = descendantFunction(file, "f");
     FunctionDef g = descendantFunction(file, "g");
     FunctionDef h = descendantFunction(file, "h");

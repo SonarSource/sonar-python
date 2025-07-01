@@ -90,13 +90,15 @@ public class FunctionUsingLoopVariableCheck extends PythonSubscriptionCheck {
     if (!problematicUsages.isEmpty() && !bindingUsages.isEmpty()) {
       PreciseIssue issue;
       if (functionLike.is(Tree.Kind.FUNCDEF)) {
-        issue = ctx.addIssue(problematicUsages.get(0), String.format("Add a parameter to function \"%s\" and use variable \"%s\" as its default value;" +
-          "The value of \"%s\" might change at the next loop iteration.", ((FunctionDef) functionLike).name().name(), symbolName, symbolName))
+        issue = ctx.addIssue(problematicUsages.get(0), String.format("""
+          Add a parameter to function "%s" and use variable "%s" as its default value;\
+          The value of "%s" might change at the next loop iteration.""", ((FunctionDef) functionLike).name().name(), symbolName, symbolName))
           .secondary(((FunctionDef) functionLike).name(), "Function capturing the variable");
       } else {
         issue = ctx.addIssue(problematicUsages.get(0),
-          String.format("Add a parameter to the parent lambda function and use variable \"%s\" as its default value; " +
-            "The value of \"%s\" might change at the next loop iteration.", symbolName, symbolName))
+          String.format("""
+            Add a parameter to the parent lambda function and use variable "%s" as its default value; \
+            The value of "%s" might change at the next loop iteration.""", symbolName, symbolName))
           .secondary(((LambdaExpression) functionLike).lambdaKeyword(), "Lambda capturing the variable");
       }
       for (Tree bindingUsage : bindingUsages) {

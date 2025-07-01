@@ -87,40 +87,46 @@ class BooleanCheckNotInvertedCheckTest {
 
   @Test
   void not_in_if() {
-    String codeWithIssue = "" +
-      "def func():\n" +
-      "    if not a == 2:\n" +
-      "        b = 10\n" +
-      "    return \"item1\" \"item2\"";
-    String codeFixed = "" +
-      "def func():\n" +
-      "    if a != 2:\n" +
-      "        b = 10\n" +
-      "    return \"item1\" \"item2\"";
+    String codeWithIssue = """
+      def func():
+          if not a == 2:
+              b = 10
+          return "item1" "item2"
+      """;
+    String codeFixed = """
+      def func():
+          if a != 2:
+              b = 10
+          return "item1" "item2"
+      """;
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
-    codeWithIssue = "" +
-      "def func():\n" +
-      "    if not a == 2 and b == 9:\n" +
-      "        b = 10\n" +
-      "    return \"item1\" \"item2\"";
-    codeFixed = "" +
-      "def func():\n" +
-      "    if a != 2 and b == 9:\n" +
-      "        b = 10\n" +
-      "    return \"item1\" \"item2\"";
+    codeWithIssue = """
+      def func():
+          if not a == 2 and b == 9:
+              b = 10
+          return "item1" "item2"
+      """;
+    codeFixed = """
+      def func():
+          if a != 2 and b == 9:
+              b = 10
+          return "item1" "item2"
+      """;
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
-    codeWithIssue = "" +
-      "def func():\n" +
-      "    if a != 2 and not b == 9:\n" +
-      "        b = 10\n" +
-      "    return \"item1\" \"item2\"";
-    codeFixed = "" +
-      "def func():\n" +
-      "    if a != 2 and b != 9:\n" +
-      "        b = 10\n" +
-      "    return \"item1\" \"item2\"";
+    codeWithIssue = """
+      def func():
+          if a != 2 and not b == 9:
+              b = 10
+          return "item1" "item2"
+      """;
+    codeFixed = """
+      def func():
+          if a != 2 and b != 9:
+              b = 10
+          return "item1" "item2"
+      """;
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
@@ -157,10 +163,12 @@ class BooleanCheckNotInvertedCheckTest {
 
   @Test
   void expression_list() {
-    String codeWithIssue = "a = not [] < (c,\n" +
-      "  d)";
-    String codeFixed = "a = [] >= (c,\n" +
-      "  d)";
+    String codeWithIssue = """
+      a = not [] < (c,
+        d)""";
+    String codeFixed = """
+      a = [] >= (c,
+        d)""";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
     codeWithIssue = "a = not [a, (a,b)] is c";
@@ -204,12 +212,14 @@ class BooleanCheckNotInvertedCheckTest {
 
   @Test
   void notInQuickFix(){
-    String codeWithIssue = "def foo(key, mapping):\n" +
-      "    if not key in mapping.keys():\n" +
-      "        pass";
-    String codeFixed = "def foo(key, mapping):\n" +
-      "    if key not in mapping.keys():\n" +
-      "        pass";
+    String codeWithIssue = """
+      def foo(key, mapping):
+          if not key in mapping.keys():
+              pass""";
+    String codeFixed = """
+      def foo(key, mapping):
+          if key not in mapping.keys():
+              pass""";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 }

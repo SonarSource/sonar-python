@@ -33,21 +33,25 @@ class MatchStatementTest extends RuleTest {
   @Test
   void basic_match_statement() {
     assertThat(p).matches(
-      "match command:\n" +
-        "    case \"quit\":\n" +
-        "        ...\n" +
-        "    case 42:\n" +
-        "        ...\n");
+      """
+      match command:
+          case "quit":
+              ...
+          case 42:
+              ...
+      """);
   }
 
   @Test
   void match_with_guards() {
     assertThat(p).matches(
-      "match command:\n" +
-        "    case \"quit\" if True:\n" +
-        "        ...\n" +
-        "    case \"foo\" if x:=cond:\n" +
-        "        ...\n");
+      """
+      match command:
+          case "quit" if True:
+              ...
+          case "foo" if x:=cond:
+              ...
+      """);
   }
 
   @Test

@@ -40,8 +40,14 @@ public class StringFormat {
 
   // See https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting
   private static final Pattern PRINTF_PARAMETER_PATTERN = Pattern.compile(
-    "%" + "(?<field>(?:\\((?<mapkey>.*?)\\))?" + "(?<flags>[#\\-+0 ]*)?" + "(?<width>[0-9]*|\\*)?" +
-      "(?:\\.(?<precision>[0-9]*|\\*))?" + "(?:[lLH])?" + "(?<type>[diueEfFgGoxXrsac]|%))?");
+    """
+    %\
+    (?<field>(?:\\((?<mapkey>.*?)\\))?\
+    (?<flags>[#\\-+0 ]*)?\
+    (?<width>[0-9]*|\\*)?\
+    (?:\\.(?<precision>[0-9]*|\\*))?\
+    (?:[lLH])?\
+    (?<type>[diueEfFgGoxXrsac]|%))?""");
 
   private static final Pattern FORMAT_FIELD_PATTERN = Pattern.compile("^(?<name>[^.\\[!:{}]+)?(?:(?:\\.[a-zA-Z0-9_]+)|(?:\\[[^]]+]))*");
   private static final Pattern FORMAT_NUMBER_PATTERN = Pattern.compile("^\\d+$");

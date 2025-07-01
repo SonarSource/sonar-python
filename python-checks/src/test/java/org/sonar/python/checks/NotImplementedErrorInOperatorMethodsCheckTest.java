@@ -29,12 +29,14 @@ class NotImplementedErrorInOperatorMethodsCheckTest {
   @Test
   void quickFixTest() {
     var check = new NotImplementedErrorInOperatorMethodsCheck();
-    String codeWithIssue = "class MyClass:\n" +
-      "    def __lt__(self, other):\n" +
-      "        raise NotImplementedError()";
-    String codeFixed = "class MyClass:\n" +
-      "    def __lt__(self, other):\n" +
-      "        return NotImplemented";
+    String codeWithIssue = """
+      class MyClass:
+          def __lt__(self, other):
+              raise NotImplementedError()""";
+    String codeFixed = """
+      class MyClass:
+          def __lt__(self, other):
+              return NotImplemented""";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, NotImplementedErrorInOperatorMethodsCheck.QUICK_FIX_MESSAGE);
   }
@@ -42,14 +44,16 @@ class NotImplementedErrorInOperatorMethodsCheckTest {
   @Test
   void quickFixOfExceptionAsVariableTest() {
     var check = new NotImplementedErrorInOperatorMethodsCheck();
-    String codeWithIssue = "class MyClass:\n" +
-      "    def __lt__(self, other):\n" +
-      "        ex = NotImplementedError()\n" +
-      "        raise ex";
-    String codeFixed = "class MyClass:\n" +
-      "    def __lt__(self, other):\n" +
-      "        ex = NotImplementedError()\n" +
-      "        return NotImplemented";
+    String codeWithIssue = """
+      class MyClass:
+          def __lt__(self, other):
+              ex = NotImplementedError()
+              raise ex""";
+    String codeFixed = """
+      class MyClass:
+          def __lt__(self, other):
+              ex = NotImplementedError()
+              return NotImplemented""";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, codeWithIssue, NotImplementedErrorInOperatorMethodsCheck.QUICK_FIX_MESSAGE);
   }

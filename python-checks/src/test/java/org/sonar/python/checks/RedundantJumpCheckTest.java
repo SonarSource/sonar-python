@@ -29,13 +29,16 @@ class RedundantJumpCheckTest {
 
   @Test
   void quickFixTest() {
-    String input = "def redundant_jump(x):\n" +
-      "  if x == 1:\n" +
-      "    print(True)\n" +
-      "    return";
-    String expected = "def redundant_jump(x):\n" +
-      "  if x == 1:\n" +
-      "    print(True)\n";
+    String input = """
+      def redundant_jump(x):
+        if x == 1:
+          print(True)
+          return""";
+    String expected = """
+      def redundant_jump(x):
+        if x == 1:
+          print(True)
+      """;
     PythonQuickFixVerifier.verify(new RedundantJumpCheck(), input, expected);
     PythonQuickFixVerifier.verifyQuickFixMessages(new RedundantJumpCheck(), input, RedundantJumpCheck.QUICK_FIX_DESCRIPTION);
   }

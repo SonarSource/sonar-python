@@ -40,8 +40,9 @@ class BanditRulesDefinitionTest {
     RulesDefinition.Rule rule = repository.rule("B101");
     assertThat(rule).isNotNull();
     assertThat(rule.name()).isEqualTo("B101: Test for use of assert");
-    assertThat(rule.htmlDescription()).isEqualTo("See description of Bandit rule <code>B101</code> at" +
-      " the <a href=\"https://bandit.readthedocs.io/en/latest/plugins/b101_assert_used.html\">Bandit website</a>.");
+    assertThat(rule.htmlDescription()).isEqualTo("""
+      See description of Bandit rule <code>B101</code> at\
+       the <a href="https://bandit.readthedocs.io/en/latest/plugins/b101_assert_used.html">Bandit website</a>.""");
     assertThat(rule.tags()).isEmpty();
   }
 

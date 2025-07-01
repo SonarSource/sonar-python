@@ -29,23 +29,27 @@ class BackticksUsageCheckTest {
 
   @Test
   void testQuickFix() {
-    String codeWithIssue = "def foo():\n" +
-            "    `num`\n" +
-            "    foo()";
-    String codeFixed = "def foo():\n" +
-            "    repr(num)\n" +
-            "    foo()";
+    String codeWithIssue = """
+            def foo():
+                `num`
+                foo()""";
+    String codeFixed = """
+            def foo():
+                repr(num)
+                foo()""";
     PythonQuickFixVerifier.verify(new BackticksUsageCheck(), codeWithIssue, codeFixed);
   }
 
   @Test
   void testQuickFixMultiline() {
-    String codeWithIssue = "def bar():\n" +
-            "    print(`1\n" +
-            "    + 2`)";
-    String codeFixed = "def bar():\n" +
-            "    print(repr(1\n" +
-            "    + 2))";
+    String codeWithIssue = """
+            def bar():
+                print(`1
+                + 2`)""";
+    String codeFixed = """
+            def bar():
+                print(repr(1
+                + 2))""";
     PythonQuickFixVerifier.verify(new BackticksUsageCheck(), codeWithIssue, codeFixed);
   }
 }

@@ -119,8 +119,9 @@ class SonarQubePythonIndexerTest {
       .contains("Cached information of global symbols will be used for 1 out of 2 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Fully optimized analysis can be performed for 1 out of 2 files.")
       .contains("1/1 source file has been analyzed");
-    assertThat(logTester.logs(Level.WARN)).contains("Implementation version of the Python plugin not found. Cached data may not be invalidated properly, " +
-      "which may lead to inaccurate analysis results.");
+    assertThat(logTester.logs(Level.WARN)).contains("""
+      Implementation version of the Python plugin not found. Cached data may not be invalidated properly, \
+      which may lead to inaccurate analysis results.""");
     assertThat(logTester.logs(Level.DEBUG))
       .contains("Cache version still up to date: \"unknownPluginVersion\".")
       .contains("Scanning global symbols in 2 threads");
@@ -302,8 +303,9 @@ class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
     assertThat(logTester.logs(Level.INFO))
-      .contains("The cache version has changed since the previous analysis, cached data will not be used during this analysis. " +
-        "Retrieved: \"outdatedVersion\". Current version: \"unknownPluginVersion\".")
+      .contains("""
+        The cache version has changed since the previous analysis, cached data will not be used during this analysis. \
+        Retrieved: "outdatedVersion". Current version: "unknownPluginVersion".""")
       .contains("2/2 source files have been analyzed");
   }
 
@@ -331,8 +333,9 @@ class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
     assertThat(logTester.logs(Level.INFO))
-      .contains("The cache version has changed since the previous analysis, cached data will not be used during this analysis. " +
-        "Retrieved: \"unknownPluginVersion\". Current version: \"unknownPluginVersion;3.11\".")
+      .contains("""
+        The cache version has changed since the previous analysis, cached data will not be used during this analysis. \
+        Retrieved: "unknownPluginVersion". Current version: "unknownPluginVersion;3.11".""")
       .contains("2/2 source files have been analyzed");
   }
 

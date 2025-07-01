@@ -22,13 +22,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.CfgValidator;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.PythonTestUtils;
-import org.sonar.plugins.python.api.symbols.Symbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -140,8 +140,7 @@ class LiveVariablesAnalysisTest {
 
   @Test
   void test_write_before_read() {
-    verifyLiveVariableAnalysis("" +
-      "condition( succ = [body, END], liveIn = [], liveOut = [], gen = [], kill = [_a])",
+    verifyLiveVariableAnalysis("condition( succ = [body, END], liveIn = [], liveOut = [], gen = [], kill = [_a])",
       "a = 1",
       "foo(a)",
       "if p:",

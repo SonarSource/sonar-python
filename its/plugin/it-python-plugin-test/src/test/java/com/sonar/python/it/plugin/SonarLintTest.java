@@ -102,9 +102,11 @@ public class SonarLintTest {
   @Test
   void should_raise_issues() throws IOException, InterruptedException, ExecutionException {
     ClientInputFile inputFile = prepareInputFile("foo.py",
-      "def fooBar():\n"
-        + "  `1` \n"
-        + "  `1` #NOSONAR\n",
+      """
+      def fooBar():
+        `1`
+        `1` #NOSONAR
+      """,
       false);
 
     List<Issue> issues = new ArrayList<>();

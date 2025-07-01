@@ -181,11 +181,12 @@ class BanditSensorTest {
 
     assertThat(logTester.logs(Level.ERROR)).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(Level.WARN)))
-      .isEqualTo("Failed to resolve 22 file path(s) in Bandit report. No issues imported related to file(s): " +
-        "bandit/unknown01.py;bandit/unknown02.py;bandit/unknown03py;bandit/unknown04.py;bandit/unknown05.py;" +
-        "bandit/unknown06.py;bandit/unknown07.py;bandit/unknown08.py;bandit/unknown09.py;bandit/unknown10.py;" +
-        "bandit/unknown11.py;bandit/unknown12.py;bandit/unknown13.py;bandit/unknown14.py;bandit/unknown15.py;" +
-        "bandit/unknown16.py;bandit/unknown17.py;bandit/unknown18.py;bandit/unknown19.py;bandit/unknown20.py;...");
+      .isEqualTo("""
+        Failed to resolve 22 file path(s) in Bandit report. No issues imported related to file(s): \
+        bandit/unknown01.py;bandit/unknown02.py;bandit/unknown03py;bandit/unknown04.py;bandit/unknown05.py;\
+        bandit/unknown06.py;bandit/unknown07.py;bandit/unknown08.py;bandit/unknown09.py;bandit/unknown10.py;\
+        bandit/unknown11.py;bandit/unknown12.py;bandit/unknown13.py;bandit/unknown14.py;bandit/unknown15.py;\
+        bandit/unknown16.py;bandit/unknown17.py;bandit/unknown18.py;bandit/unknown19.py;bandit/unknown20.py;...""");
     assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "Missing information for ruleKey:'null', filePath:'null', message:'null'",
       "Missing information for ruleKey:'B413', filePath:'null', message:'null'",

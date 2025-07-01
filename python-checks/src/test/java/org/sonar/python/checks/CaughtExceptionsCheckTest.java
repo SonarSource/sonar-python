@@ -30,23 +30,25 @@ class CaughtExceptionsCheckTest {
   @Test
   void quickFixTest() {
     var check = new CaughtExceptionsCheck();
-    var before = "class CustomException:\n" +
-      "  ...\n" +
-      "\n" +
-      "def foo():\n" +
-      "  try:\n" +
-      "    a = bar()\n" +
-      "  except CustomException:\n" +
-      "    print(\"Exception\")";
+    var before = """
+      class CustomException:
+        ...
+      
+      def foo():
+        try:
+          a = bar()
+        except CustomException:
+          print("Exception")""";
 
-    var after = "class CustomException(Exception):\n" +
-      "  ...\n" +
-      "\n" +
-      "def foo():\n" +
-      "  try:\n" +
-      "    a = bar()\n" +
-      "  except CustomException:\n" +
-      "    print(\"Exception\")";
+    var after = """
+      class CustomException(Exception):
+        ...
+      
+      def foo():
+        try:
+          a = bar()
+        except CustomException:
+          print("Exception")""";
 
     var expectedMessage = String.format(CaughtExceptionsCheck.QUICK_FIX_MESSAGE_FORMAT, "CustomException");
 
@@ -57,27 +59,29 @@ class CaughtExceptionsCheckTest {
   @Test
   void quickFixIPythonTest() {
     var check = new CaughtExceptionsCheck();
-    var before = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
-      "class CustomException:\n" +
-      "  ...\n" +
-      "\n" +
-      "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
-      "def foo():\n" +
-      "  try:\n" +
-      "    a = %time bar()\n" +
-      "  except CustomException:\n" +
-      "    ...";
+    var before = """
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      class CustomException:
+        ...
+      
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      def foo():
+        try:
+          a = %time bar()
+        except CustomException:
+          ...""";
 
-    var after = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
-      "class CustomException(Exception):\n" +
-      "  ...\n" +
-      "\n" +
-      "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
-      "def foo():\n" +
-      "  try:\n" +
-      "    a = %time bar()\n" +
-      "  except CustomException:\n" +
-      "    ...";
+    var after = """
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      class CustomException(Exception):
+        ...
+      
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      def foo():
+        try:
+          a = %time bar()
+        except CustomException:
+          ...""";
 
     var expectedMessage = String.format(CaughtExceptionsCheck.QUICK_FIX_MESSAGE_FORMAT, "CustomException");
 
@@ -88,23 +92,25 @@ class CaughtExceptionsCheckTest {
   @Test
   void exceptionWithEmptyParenthesisQuickFixTest() {
     var check = new CaughtExceptionsCheck();
-    var before = "class CustomException():\n" +
-      "  ...\n" +
-      "\n" +
-      "def foo():\n" +
-      "  try:\n" +
-      "    a = bar()\n" +
-      "  except CustomException:\n" +
-      "    print(\"Exception\")";
+    var before = """
+      class CustomException():
+        ...
+      
+      def foo():
+        try:
+          a = bar()
+        except CustomException:
+          print("Exception")""";
 
-    var after = "class CustomException(Exception):\n" +
-      "  ...\n" +
-      "\n" +
-      "def foo():\n" +
-      "  try:\n" +
-      "    a = bar()\n" +
-      "  except CustomException:\n" +
-      "    print(\"Exception\")";
+    var after = """
+      class CustomException(Exception):
+        ...
+      
+      def foo():
+        try:
+          a = bar()
+        except CustomException:
+          print("Exception")""";
 
     var expectedMessage = String.format(CaughtExceptionsCheck.QUICK_FIX_MESSAGE_FORMAT, "CustomException");
 
@@ -115,29 +121,31 @@ class CaughtExceptionsCheckTest {
   @Test
   void exceptionWithNotEmptyParenthesisQuickFixTest() {
     var check = new CaughtExceptionsCheck();
-    var before = "class AbcEx:\n" +
-      "    ...\n" +
-      "\n" +
-      "class Ex(AbcEx):\n" +
-      "    ...\n" +
-      "\n" +
-      "def someLogic():\n" +
-      "    try:\n" +
-      "        a = foo()\n" +
-      "    except Ex:\n" +
-      "        ...";
+    var before = """
+      class AbcEx:
+          ...
+      
+      class Ex(AbcEx):
+          ...
+      
+      def someLogic():
+          try:
+              a = foo()
+          except Ex:
+              ...""";
 
-    var after = "class AbcEx:\n" +
-      "    ...\n" +
-      "\n" +
-      "class Ex(AbcEx, Exception):\n" +
-      "    ...\n" +
-      "\n" +
-      "def someLogic():\n" +
-      "    try:\n" +
-      "        a = foo()\n" +
-      "    except Ex:\n" +
-      "        ...";
+    var after = """
+      class AbcEx:
+          ...
+      
+      class Ex(AbcEx, Exception):
+          ...
+      
+      def someLogic():
+          try:
+              a = foo()
+          except Ex:
+              ...""";
 
     var expectedMessage = String.format(CaughtExceptionsCheck.QUICK_FIX_MESSAGE_FORMAT, "Ex");
 

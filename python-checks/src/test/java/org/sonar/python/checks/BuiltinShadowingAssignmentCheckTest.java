@@ -29,15 +29,17 @@ class BuiltinShadowingAssignmentCheckTest {
 
   @Test
   void quickFixTest() {
-    var before = "def my_function():\n" +
-      "  int = 42\n" +
-      "  print(int)\n" +
-      "  return int";
+    var before = """
+      def my_function():
+        int = 42
+        print(int)
+        return int""";
 
-    var after = "def my_function():\n" +
-      "  _int = 42\n" +
-      "  print(_int)\n" +
-      "  return _int";
+    var after = """
+      def my_function():
+        _int = 42
+        print(_int)
+        return _int""";
     var check = new BuiltinShadowingAssignmentCheck();
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, String.format(BuiltinShadowingAssignmentCheck.QUICK_FIX_MESSAGE_FORMAT, "int"));
@@ -47,23 +49,26 @@ class BuiltinShadowingAssignmentCheckTest {
   void noQuickFixTest() {
     var check = new BuiltinShadowingAssignmentCheck();
 
-    var before = "def my_function():\n" +
-      "  _int = 22\n" +
-      "  int = 42\n" +
-      "  print(int)\n" +
-      "  return int";
+    var before = """
+      def my_function():
+        _int = 22
+        int = 42
+        print(int)
+        return int""";
     PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
 
-    before = "def my_function(_int = 22):\n" +
-      "  int = 42\n" +
-      "  print(int)\n" +
-      "  return int";
+    before = """
+      def my_function(_int = 22):
+        int = 42
+        print(int)
+        return int""";
     PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
 
-    before = "def my_function((_int, b)):\n" +
-      "  int = 42\n" +
-      "  print(int)\n" +
-      "  return int";
+    before = """
+      def my_function((_int, b)):
+        int = 42
+        print(int)
+        return int""";
     PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
   }
 

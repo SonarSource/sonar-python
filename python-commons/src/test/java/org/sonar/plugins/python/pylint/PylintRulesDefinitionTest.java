@@ -40,8 +40,9 @@ class PylintRulesDefinitionTest {
     RulesDefinition.Rule rule = repository.rule("C0121");
     assertThat(rule).isNotNull();
     assertThat(rule.name()).isEqualTo("Singleton comparison");
-    assertThat(rule.htmlDescription()).isEqualTo("See description of Pylint rule <code>C0121</code> at " +
-      "the <a href=\"https://pylint.pycqa.org/en/latest/technical_reference/features.html\">Pylint website</a>.");
+    assertThat(rule.htmlDescription()).isEqualTo("""
+      See description of Pylint rule <code>C0121</code> at \
+      the <a href="https://pylint.pycqa.org/en/latest/technical_reference/features.html">Pylint website</a>.""");
     assertThat(rule.debtRemediationFunction().type().name()).isEqualTo("CONSTANT_ISSUE");
     assertThat(rule.debtRemediationFunction().baseEffort()).isEqualTo("5min");
     assertThat(rule.tags()).isEmpty();

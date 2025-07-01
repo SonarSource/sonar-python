@@ -43,16 +43,18 @@ class AssertAfterRaiseCheckTest {
 
   @Test
   void quickFixTest() {
-    var before = "import pytest\n" +
-      "def test_base_case_multiple_statement():\n" +
-      "    with pytest.raises(ZeroDivisionError):\n" +
-      "        foo()\n" +
-      "        assert bar() == 42 ";
-    var after = "import pytest\n" +
-      "def test_base_case_multiple_statement():\n" +
-      "    with pytest.raises(ZeroDivisionError):\n" +
-      "        foo()\n" +
-      "    assert bar() == 42 ";
+    var before = """
+      import pytest
+      def test_base_case_multiple_statement():
+          with pytest.raises(ZeroDivisionError):
+              foo()
+              assert bar() == 42 """;
+    var after = """
+      import pytest
+      def test_base_case_multiple_statement():
+          with pytest.raises(ZeroDivisionError):
+              foo()
+          assert bar() == 42 """;
 
     var check = new AssertAfterRaiseCheck();
     PythonQuickFixVerifier.verify(check, before, after);
@@ -61,13 +63,15 @@ class AssertAfterRaiseCheckTest {
 
   @Test
   void inlineQuickFixTest() {
-    var before = "import pytest\n" +
-      "def test_base_case_multiple_statement():\n" +
-      "    with pytest.raises(ZeroDivisionError): foo(); assert bar() == 42 ";
-    var after = "import pytest\n" +
-      "def test_base_case_multiple_statement():\n" +
-      "    with pytest.raises(ZeroDivisionError): foo(); \n" +
-      "    assert bar() == 42 ";
+    var before = """
+      import pytest
+      def test_base_case_multiple_statement():
+          with pytest.raises(ZeroDivisionError): foo(); assert bar() == 42 """;
+    var after = """
+      import pytest
+      def test_base_case_multiple_statement():
+          with pytest.raises(ZeroDivisionError): foo();\s
+          assert bar() == 42 """;
 
     var check = new AssertAfterRaiseCheck();
     PythonQuickFixVerifier.verify(check, before, after);
@@ -76,19 +80,21 @@ class AssertAfterRaiseCheckTest {
 
   @Test
   void noQuickFixTest() {
-    var before = "import pytest\n" +
-      "def test_base_case_multiple_statement():\n" +
-      "    with pytest.raises(ZeroDivisionError):\n" +
-      "        assert bar() == 42 ";
+    var before = """
+      import pytest
+      def test_base_case_multiple_statement():
+          with pytest.raises(ZeroDivisionError):
+              assert bar() == 42 """;
 
     PythonQuickFixVerifier.verifyNoQuickFixes(new AssertAfterRaiseCheck(), before);
   }
 
   @Test
   void inlineNoQuickFixTest() {
-    var before = "import pytest\n" +
-      "def test_base_case_multiple_statement():\n" +
-      "    with pytest.raises(ZeroDivisionError): assert bar() == 42 ";
+    var before = """
+      import pytest
+      def test_base_case_multiple_statement():
+          with pytest.raises(ZeroDivisionError): assert bar() == 42 """;
 
     PythonQuickFixVerifier.verifyNoQuickFixes(new AssertAfterRaiseCheck(), before);
   }

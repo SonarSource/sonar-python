@@ -30,63 +30,69 @@ class PandasAddMergeParametersCheckTest {
 
   @Test
   void quickfix_test_1() {
-    final String non_compliant = "def non_compliant_merge_1():\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
-      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
-      "\n" +
-      "    _ = age_df.merge(name_df)";
+    final String non_compliant = """
+      def non_compliant_merge_1():
+          import pandas as pd
+      
+          age_df = pd.read_csv("age_csv.csv")
+          name_df = pd.read_csv("name_csv.csv")
+      
+          _ = age_df.merge(name_df)""";
 
-    final String compliant = "def non_compliant_merge_1():\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
-      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
-      "\n" +
-      "    _ = age_df.merge(name_df, how=\"inner\", on=None, validate=\"many_to_many\")";
+    final String compliant = """
+      def non_compliant_merge_1():
+          import pandas as pd
+      
+          age_df = pd.read_csv("age_csv.csv")
+          name_df = pd.read_csv("name_csv.csv")
+      
+          _ = age_df.merge(name_df, how="inner", on=None, validate="many_to_many")""";
     PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, non_compliant, "Add the missing parameters");
   }
 
   @Test
   void quickfix_test_2() {
-    final String non_compliant = "def non_compliant_merge_1():\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
-      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
-      "\n" +
-      "    _ = age_df.join(name_df)";
+    final String non_compliant = """
+      def non_compliant_merge_1():
+          import pandas as pd
+      
+          age_df = pd.read_csv("age_csv.csv")
+          name_df = pd.read_csv("name_csv.csv")
+      
+          _ = age_df.join(name_df)""";
 
-    final String compliant = "def non_compliant_merge_1():\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
-      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
-      "\n" +
-      "    _ = age_df.join(name_df, how=\"left\", on=None, validate=\"many_to_many\")";
+    final String compliant = """
+      def non_compliant_merge_1():
+          import pandas as pd
+      
+          age_df = pd.read_csv("age_csv.csv")
+          name_df = pd.read_csv("name_csv.csv")
+      
+          _ = age_df.join(name_df, how="left", on=None, validate="many_to_many")""";
     PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, non_compliant, "Add the missing parameters");
   }
 
   @Test
   void quickfix_test_3() {
-    final String non_compliant = "def non_compliant_merge_1():\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
-      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
-      "\n" +
-      "    _ = age_df.merge(name_df, on=\"user_id\")";
+    final String non_compliant = """
+      def non_compliant_merge_1():
+          import pandas as pd
+      
+          age_df = pd.read_csv("age_csv.csv")
+          name_df = pd.read_csv("name_csv.csv")
+      
+          _ = age_df.merge(name_df, on="user_id")""";
 
-    final String compliant = "def non_compliant_merge_1():\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
-      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
-      "\n" +
-      "    _ = age_df.merge(name_df, on=\"user_id\", how=\"inner\", validate=\"many_to_many\")";
+    final String compliant = """
+      def non_compliant_merge_1():
+          import pandas as pd
+      
+          age_df = pd.read_csv("age_csv.csv")
+          name_df = pd.read_csv("name_csv.csv")
+      
+          _ = age_df.merge(name_df, on="user_id", how="inner", validate="many_to_many")""";
 
     PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, non_compliant, "Add the missing parameters");
@@ -95,27 +101,29 @@ class PandasAddMergeParametersCheckTest {
 
   @Test
   void quickfix_test_4() {
-    final String non_compliant = "def non_compliant_merge_1():\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
-      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
-      "\n" +
-      "    _ = pd.merge(\n" +
-      "          age_df, \n" +
-      "          name_df, \n" +
-      "          on=\"user_id\")";
+    final String non_compliant = """
+      def non_compliant_merge_1():
+          import pandas as pd
 
-    final String compliant = "def non_compliant_merge_1():\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
-      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
-      "\n" +
-      "    _ = pd.merge(\n" +
-      "          age_df, \n" +
-      "          name_df, \n" +
-      "          on=\"user_id\", how=\"inner\", validate=\"many_to_many\")";
+          age_df = pd.read_csv("age_csv.csv")
+          name_df = pd.read_csv("name_csv.csv")
+
+          _ = pd.merge(
+                age_df,
+                name_df,
+                on="user_id")""";
+
+    final String compliant = """
+      def non_compliant_merge_1():
+          import pandas as pd
+
+          age_df = pd.read_csv("age_csv.csv")
+          name_df = pd.read_csv("name_csv.csv")
+
+          _ = pd.merge(
+                age_df,
+                name_df,
+                on="user_id", how="inner", validate="many_to_many")""";
 
     PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, non_compliant, "Add the missing parameters");

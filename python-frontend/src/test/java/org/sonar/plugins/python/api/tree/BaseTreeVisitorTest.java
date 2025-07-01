@@ -390,11 +390,13 @@ class BaseTreeVisitorTest extends RuleTest {
   @Test
   void match_stmt() {
     setRootRule(PythonGrammar.MATCH_STMT);
-    MatchStatement matchStatement = parse("match command:\n" +
-      "    case \"quit\" if True:\n" +
-      "        ...\n" +
-      "    case \"foo\" if x:=cond:\n" +
-      "        ...\n", treeMaker::matchStatement);
+    MatchStatement matchStatement = parse("""
+      match command:
+          case "quit" if True:
+              ...
+          case "foo" if x:=cond:
+              ...
+      """, treeMaker::matchStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     matchStatement.accept(visitor);
 

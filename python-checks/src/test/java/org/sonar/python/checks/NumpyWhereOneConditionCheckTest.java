@@ -34,15 +34,17 @@ class NumpyWhereOneConditionCheckTest {
 
     final String quickFixMessage = "Replace numpy.where with numpy.nonzero";
 
-    final String nonCompliant = "import numpy as np\n" +
-      "def bigger_than_two():\n" +
-      "  arr = np.array([1,2,3,4])\n" +
-      "  result = np.where(arr > 2)";
+    final String nonCompliant = """
+      import numpy as np
+      def bigger_than_two():
+        arr = np.array([1,2,3,4])
+        result = np.where(arr > 2)""";
 
-    final String compliant = "import numpy as np\n" +
-      "def bigger_than_two():\n" +
-      "  arr = np.array([1,2,3,4])\n" +
-      "  result = np.nonzero(arr > 2)";
+    final String compliant = """
+      import numpy as np
+      def bigger_than_two():
+        arr = np.array([1,2,3,4])
+        result = np.nonzero(arr > 2)""";
 
     PythonQuickFixVerifier.verify(check, nonCompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, nonCompliant, quickFixMessage);
@@ -53,10 +55,11 @@ class NumpyWhereOneConditionCheckTest {
 
     // Here we don't offer a quickfix, because the imports of the functions can be complicated to track (nonzero could be unimported)
 
-    final String compliant = "from numpy import array, where\n" +
-      "def bigger_than_two():\n" +
-      "  arr = array([1,2,3,4])\n" +
-      "  result = where(arr > 2)";
+    final String compliant = """
+      from numpy import array, where
+      def bigger_than_two():
+        arr = array([1,2,3,4])
+        result = where(arr > 2)""";
 
     PythonQuickFixVerifier.verifyNoQuickFixes(check, compliant);
   }

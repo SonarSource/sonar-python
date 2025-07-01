@@ -28,52 +28,59 @@ class BooleanExpressionInExceptCheckTest {
   }
   @Test
   void quickFixTest() {
-    var before = "try:\n" +
-      "    foo()\n" +
-      "except ValueError or TypeError and SomeError:\n" +
-      "    pass";
+    var before = """
+      try:
+          foo()
+      except ValueError or TypeError and SomeError:
+          pass""";
 
-    var after = "try:\n" +
-      "    foo()\n" +
-      "except (ValueError, TypeError, SomeError):\n" +
-      "    pass";
+    var after = """
+      try:
+          foo()
+      except (ValueError, TypeError, SomeError):
+          pass""";
     verifyQuickFix(before, after);
   }
 
   @Test
   void wrappedInParenthesisQuickFixTest() {
-    var before = "try:\n" +
-      "    foo()\n" +
-      "except (ValueError or TypeError and SomeError):\n" +
-      "    pass";
+    var before = """
+      try:
+          foo()
+      except (ValueError or TypeError and SomeError):
+          pass""";
 
-    var after = "try:\n" +
-      "    foo()\n" +
-      "except (ValueError, TypeError, SomeError):\n" +
-      "    pass";
+    var after = """
+      try:
+          foo()
+      except (ValueError, TypeError, SomeError):
+          pass""";
     verifyQuickFix(before, after);
   }
 
   @Test
   void nestedQuickFixTest() {
-    var before = "try:\n" +
-      "    foo()\n" +
-      "except ((ValueError or TypeError) and pkg.cstm.SomeError):\n" +
-      "    pass";
+    var before = """
+      try:
+          foo()
+      except ((ValueError or TypeError) and pkg.cstm.SomeError):
+          pass""";
 
-    var after = "try:\n" +
-      "    foo()\n" +
-      "except (ValueError, TypeError, pkg.cstm.SomeError):\n" +
-      "    pass";
+    var after = """
+      try:
+          foo()
+      except (ValueError, TypeError, pkg.cstm.SomeError):
+          pass""";
     verifyQuickFix(before, after);
   }
 
   @Test
   void noQuickFixTest() {
-    var before = "try:\n" +
-      "    foo()\n" +
-      "except (ValueError or pkg.cstm.SomeError()):\n" +
-      "    pass";
+    var before = """
+      try:
+          foo()
+      except (ValueError or pkg.cstm.SomeError()):
+          pass""";
 
     PythonQuickFixVerifier.verifyNoQuickFixes(new BooleanExpressionInExceptCheck(), before);
   }

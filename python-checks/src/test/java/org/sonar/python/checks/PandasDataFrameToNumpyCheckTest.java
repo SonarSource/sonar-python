@@ -31,60 +31,66 @@ class PandasDataFrameToNumpyCheckTest {
 
   @Test
   void quick_fix_test_1() {
-    final String non_compliant = "def non_compliant_1(xx):\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    df = pd.DataFrame({\n" +
-      "        'X': ['A', 'B', 'A', 'C'],\n" +
-      "        'Y': [10, 7, 12, 5]\n" +
-      "    })\n" +
-      "\n" +
-      "    _ = df.values";
-    final String compliant = "def non_compliant_1(xx):\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    df = pd.DataFrame({\n" +
-      "        'X': ['A', 'B', 'A', 'C'],\n" +
-      "        'Y': [10, 7, 12, 5]\n" +
-      "    })\n" +
-      "\n" +
-      "    _ = df.to_numpy()";
+    final String non_compliant = """
+      def non_compliant_1(xx):
+          import pandas as pd
+      
+          df = pd.DataFrame({
+              'X': ['A', 'B', 'A', 'C'],
+              'Y': [10, 7, 12, 5]
+          })
+      
+          _ = df.values""";
+    final String compliant = """
+      def non_compliant_1(xx):
+          import pandas as pd
+      
+          df = pd.DataFrame({
+              'X': ['A', 'B', 'A', 'C'],
+              'Y': [10, 7, 12, 5]
+          })
+      
+          _ = df.to_numpy()""";
     performVerification(non_compliant, compliant);
   }
 
   @Test
   void quick_fix_test_2() {
 
-    final String non_compliant = "def non_compliant_1(xx):\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    _ = pd.DataFrame({\n" +
-      "        'X': ['A', 'B', 'A', 'C'],\n" +
-      "        'Y': [10, 7, 12, 5]\n" +
-      "    }).values";
-    final String compliant = "def non_compliant_1(xx):\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    _ = pd.DataFrame({\n" +
-      "        'X': ['A', 'B', 'A', 'C'],\n" +
-      "        'Y': [10, 7, 12, 5]\n" +
-      "    }).to_numpy()";
+    final String non_compliant = """
+      def non_compliant_1(xx):
+          import pandas as pd
+      
+          _ = pd.DataFrame({
+              'X': ['A', 'B', 'A', 'C'],
+              'Y': [10, 7, 12, 5]
+          }).values""";
+    final String compliant = """
+      def non_compliant_1(xx):
+          import pandas as pd
+      
+          _ = pd.DataFrame({
+              'X': ['A', 'B', 'A', 'C'],
+              'Y': [10, 7, 12, 5]
+          }).to_numpy()""";
     performVerification(non_compliant, compliant);
   }
 
   @Test
   void quick_fix_test_3() {
 
-    final String non_compliant = "def dataframe_from_read_csv():\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    my_df = pd.read_csv(\"some_csv.csv\")\n" +
-      "    my_df.values.astype(str)";
-    final String compliant = "def dataframe_from_read_csv():\n" +
-      "    import pandas as pd\n" +
-      "\n" +
-      "    my_df = pd.read_csv(\"some_csv.csv\")\n" +
-      "    my_df.to_numpy().astype(str)";
+    final String non_compliant = """
+      def dataframe_from_read_csv():
+          import pandas as pd
+      
+          my_df = pd.read_csv("some_csv.csv")
+          my_df.values.astype(str)""";
+    final String compliant = """
+      def dataframe_from_read_csv():
+          import pandas as pd
+      
+          my_df = pd.read_csv("some_csv.csv")
+          my_df.to_numpy().astype(str)""";
     performVerification(non_compliant, compliant);
   }
 

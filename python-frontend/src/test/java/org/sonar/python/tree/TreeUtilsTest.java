@@ -58,9 +58,9 @@ class TreeUtilsTest {
 
   @Test
   void first_ancestor_of_kind() {
-    String code = "" +
-      "class A:\n" +
-      "  def foo(): pass";
+    String code = """
+      class A:
+        def foo(): pass""";
     FileInput root = parse(code);
     assertThat(TreeUtils.firstAncestorOfKind(root, Kind.CLASSDEF)).isNull();
     ClassDef classDef = (ClassDef) root.statements().statements().get(0);
@@ -69,10 +69,10 @@ class TreeUtilsTest {
     assertThat(TreeUtils.firstAncestorOfKind(funcDef, Kind.FILE_INPUT)).isEqualTo(root);
     assertThat(TreeUtils.firstAncestorOfKind(funcDef, Kind.CLASSDEF)).isEqualTo(classDef);
 
-    code = "" +
-      "while True:\n" +
-      "  while True:\n" +
-      "    pass";
+    code = """
+      while True:
+        while True:
+          pass""";
     WhileStatement outerWhile = (WhileStatement) parse(code).statements().statements().get(0);
     WhileStatement innerWhile = (WhileStatement) outerWhile.body().statements().get(0);
     PassStatement passStatement = (PassStatement) innerWhile.body().statements().get(0);
@@ -81,10 +81,10 @@ class TreeUtilsTest {
 
   @Test
   void first_ancestor() {
-    String code = "" +
-      "def outer():\n" +
-      "  def inner():\n" +
-      "    pass";
+    String code = """
+      def outer():
+        def inner():
+          pass""";
     FileInput root = parse(code);
     FunctionDef outerFunction = (FunctionDef) root.statements().statements().get(0);
     FunctionDef innerFunction = (FunctionDef) outerFunction.body().statements().get(0);
@@ -441,11 +441,12 @@ class TreeUtilsTest {
 
   @Test
   void test_groupAssignmentByParentStatementList() {
-    FileInput fileInput = PythonTestUtils.parse("def foo(a):\n" +
-      "    b = a\n" +
-      "    if a > 10:\n" +
-      "        b = 10\n" +
-      "    c = 3 ");
+    FileInput fileInput = PythonTestUtils.parse("""
+      def foo(a):
+          b = a
+          if a > 10:
+              b = 10
+          c = 3 """);
 
     var fooDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF) && ((FunctionDef) t).name().name().equals("foo"));
     var assignments = PythonTestUtils.getAllDescendant(fooDef, t -> t.is(Kind.ASSIGNMENT_STMT));
@@ -457,10 +458,12 @@ class TreeUtilsTest {
 
   @Test
   void test_getTreeByPositionComparator() {
-    FileInput fileInput = PythonTestUtils.parse("def foo(a):\n" +
-      "    b = a\n" +
-      "    if a > 10:\n" +
-      "        b = 10\n");
+    FileInput fileInput = PythonTestUtils.parse("""
+      def foo(a):
+          b = a
+          if a > 10:
+              b = 10
+      """);
 
     var fooDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF) && ((FunctionDef) t).name().name().equals("foo"));
     var assignments = PythonTestUtils.getAllDescendant(fooDef, t -> t.is(Kind.ASSIGNMENT_STMT));
@@ -570,17 +573,21 @@ class TreeUtilsTest {
 
   @Test
   void test_findIndentationSize() {
-    var fileInput = PythonTestUtils.parse("def foo():\n" +
-      "    if a < 3: pass\n");
+    var fileInput = PythonTestUtils.parse("""
+      def foo():
+          if a < 3: pass
+      """);
 
     var passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
 
     var indent = TreeUtils.findIndentationSize(passDef);
     assertThat(indent).isEqualTo(4);
 
-    fileInput = PythonTestUtils.parse("class A():\n" +
-      "    def foo(self):\n" +
-      "      if a < 3: pass\n");
+    fileInput = PythonTestUtils.parse("""
+      class A():
+          def foo(self):
+            if a < 3: pass
+      """);
 
     passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
 
@@ -591,21 +598,23 @@ class TreeUtilsTest {
 
   @Test
   void test_findIndentationSizeDownTree() {
-    var fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
-      "\n" +
-      "def foo(a):\n" +
-      "  print(a)");
+    var fileInput = PythonTestUtils.parse("""
+      if a < 3: pass
+      
+      def foo(a):
+        print(a)""");
 
     var passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
 
     var indent = TreeUtils.findIndentationSize(passDef);
     assertThat(indent).isEqualTo(2);
 
-    fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
-      "\n" +
-      "class A():\n" +
-      "    def foo(self, a):\n" +
-      "      print(a)");
+    fileInput = PythonTestUtils.parse("""
+      if a < 3: pass
+      
+      class A():
+          def foo(self, a):
+            print(a)""");
 
     passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
 
@@ -615,9 +624,10 @@ class TreeUtilsTest {
 
   @Test
   void test_findIndentationSizeZero() {
-    var fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
-      "\n" +
-      "def foo(a): pass");
+    var fileInput = PythonTestUtils.parse("""
+      if a < 3: pass
+      
+      def foo(a): pass""");
 
     var passDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.PASS_STMT));
 
@@ -651,8 +661,9 @@ class TreeUtilsTest {
 
   @Test
   void treeToStringTest() {
-    var input = "a = 1\n" +
-      "b = 2";
+    var input = """
+      a = 1
+      b = 2""";
     var fileInput = PythonTestUtils.parse(input);
     var statements = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.STATEMENT_LIST));
 

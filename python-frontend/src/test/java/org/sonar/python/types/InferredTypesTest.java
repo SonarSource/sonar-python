@@ -456,31 +456,39 @@ class InferredTypesTest {
   void test_type_from_protobuf() throws TextFormat.ParseException {
     assertThat(protobufType("")).isEqualTo(anyType());
     assertThat(protobufType(
-      "pretty_printed_name: \"None\"\n" +
-      "kind: NONE\n")).isEqualTo(NONE);
+      """
+      pretty_printed_name: "None"
+      kind: NONE
+      """)).isEqualTo(NONE);
     assertThat(protobufType("kind: TYPED_DICT")).isEqualTo(DICT);
     assertThat(protobufType("kind: TUPLE")).isEqualTo(TUPLE);
     assertThat(protobufType("kind: TYPE")).isEqualTo(TYPE);
     assertThat(protobufType(
-      "pretty_printed_name: \"builtins.str\"\n" +
-      "fully_qualified_name: \"builtins.str\"\n")).isEqualTo(STR);
+      """
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+      """)).isEqualTo(STR);
     assertThat(protobufType(
-      "kind: TYPE_ALIAS\n" +
-      "args {\n" +
-      "  kind: UNION\n" +
-      "  args {\n" +
-      "    fully_qualified_name: \"builtins.str\"\n" +
-      "  }\n" +
-      "  args {\n" +
-      "    fully_qualified_name: \"builtins.int\"\n" +
-      "  }\n" +
-      "}\n" +
-      "fully_qualified_name: \"mod.t\""
+      """
+      kind: TYPE_ALIAS
+      args {
+        kind: UNION
+        args {
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "mod.t"\
+      """
       ))
       .isEqualTo(InferredTypes.or(STR, INT));
     assertThat(protobufType(
-      "kind: INSTANCE\n" +
-      "fully_qualified_name: \"typing._SpecialForm\""
+      """
+      kind: INSTANCE
+      fully_qualified_name: "typing._SpecialForm"\
+      """
       )).isEqualTo(anyType());
     assertThat(protobufType("kind: CALLABLE")).isEqualTo(anyType());
   }

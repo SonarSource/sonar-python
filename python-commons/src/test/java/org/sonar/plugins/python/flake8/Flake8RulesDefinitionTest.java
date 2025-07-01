@@ -40,8 +40,9 @@ class Flake8RulesDefinitionTest {
     RulesDefinition.Rule rule = repository.rule("F405");
     assertThat(rule).isNotNull();
     assertThat(rule.name()).isEqualTo("name may be undefined, or defined from star imports: module");
-    assertThat(rule.htmlDescription()).isEqualTo("See description of Flake8 rule <code>F405</code> at" +
-      " the <a href=\"https://flake8.pycqa.org/en/latest/user/error-codes.html\">Flake8 website</a>.");
+    assertThat(rule.htmlDescription()).isEqualTo("""
+      See description of Flake8 rule <code>F405</code> at\
+       the <a href="https://flake8.pycqa.org/en/latest/user/error-codes.html">Flake8 website</a>.""");
     assertThat(rule.tags()).isEmpty();
   }
 }

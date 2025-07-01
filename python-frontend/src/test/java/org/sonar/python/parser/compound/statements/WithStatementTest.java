@@ -41,8 +41,9 @@ class WithStatementTest extends RuleTest {
   @Test
   void parenthesized_context_managers() {
     assertThat(p).matches(
-      "with (open(\"a_really_long_foo\") as foo,\n" +
-      "      open(\"a_really_long_bar\") as bar):\n" +
-      "        pass");
+      """
+      with (open("a_really_long_foo") as foo,
+            open("a_really_long_bar") as bar):
+              pass""");
   }
 }

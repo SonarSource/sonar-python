@@ -71,9 +71,10 @@ public final class PythonSensor implements Sensor {
   private final SonarLintCache sonarLintCache;
   private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = LoggerFactory.getLogger(PythonSensor.class);
-  static final String UNSET_VERSION_WARNING = "Your code is analyzed as compatible with all Python 3 versions by default." +
-    " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python"+
-    ".version\"";
+  static final String UNSET_VERSION_WARNING = """
+    Your code is analyzed as compatible with all Python 3 versions by default. \
+    You can get a more precise analysis by setting the exact Python version in your configuration via the parameter "sonar.python.version"\
+    """;
 
   private final SensorTelemetryStorage sensorTelemetryStorage;
 

@@ -377,22 +377,24 @@ class TypeShedTest {
   @Test
   void class_symbols_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
-      "fully_qualified_name: \"mod\"\n" +
-        "classes {\n" +
-        "  name: \"Base\"\n" +
-        "  fully_qualified_name: \"mod.Base\"\n" +
-        "  super_classes: \"builtins.object\"\n" +
-        "}\n" +
-        "classes {\n" +
-        "  name: \"C\"\n" +
-        "  fully_qualified_name: \"mod.C\"\n" +
-        "  super_classes: \"builtins.str\"\n" +
-        "}\n" +
-        "classes {\n" +
-        "  name: \"D\"\n" +
-        "  fully_qualified_name: \"mod.D\"\n" +
-        "  super_classes: \"NOT_EXISTENT\"\n" +
-        "}");
+      """
+      fully_qualified_name: "mod"
+      classes {
+        name: "Base"
+        fully_qualified_name: "mod.Base"
+        super_classes: "builtins.object"
+      }
+      classes {
+        name: "C"
+        fully_qualified_name: "mod.C"
+        super_classes: "builtins.str"
+      }
+      classes {
+        name: "D"
+        fully_qualified_name: "mod.D"
+        super_classes: "NOT_EXISTENT"
+      }\
+      """);
     Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
     assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(tuple(Kind.CLASS, "mod.Base"), tuple(Kind.CLASS, "mod.C"), tuple(Kind.CLASS, "mod.D"));
@@ -407,45 +409,47 @@ class TypeShedTest {
   @Test
   void function_symbols_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
-      "fully_qualified_name: \"mod\"\n" +
-        "functions {\n" +
-        "  name: \"foo\"\n" +
-        "  fully_qualified_name: \"mod.foo\"\n" +
-        "  parameters {\n" +
-        "    name: \"p\"\n" +
-        "    kind: POSITIONAL_OR_KEYWORD\n" +
-        "  }\n" +
-        "}\n" +
-        "overloaded_functions {\n" +
-        "  name: \"bar\"\n" +
-        "  fullname: \"mod.bar\"\n" +
-        "  definitions {\n" +
-        "    name: \"bar\"\n" +
-        "    fully_qualified_name: \"mod.bar\"\n" +
-        "    parameters {\n" +
-        "      name: \"x\"\n" +
-        "      kind: POSITIONAL_OR_KEYWORD\n" +
-        "    }\n" +
-        "    has_decorators: true\n" +
-        "    resolved_decorator_names: \"typing.overload\"\n" +
-        "    is_overload: true\n" +
-        "  }\n" +
-        "  definitions {\n" +
-        "    name: \"bar\"\n" +
-        "    fully_qualified_name: \"mod.bar\"\n" +
-        "    parameters {\n" +
-        "      name: \"x\"\n" +
-        "      kind: POSITIONAL_OR_KEYWORD\n" +
-        "    }\n" +
-        "    parameters {\n" +
-        "      name: \"y\"\n" +
-        "      kind: POSITIONAL_OR_KEYWORD\n" +
-        "    }\n" +
-        "    has_decorators: true\n" +
-        "    resolved_decorator_names: \"typing.overload\"\n" +
-        "    is_overload: true\n" +
-        "  }\n" +
-        "}\n");
+      """
+      fully_qualified_name: "mod"
+      functions {
+        name: "foo"
+        fully_qualified_name: "mod.foo"
+        parameters {
+          name: "p"
+          kind: POSITIONAL_OR_KEYWORD
+        }
+      }
+      overloaded_functions {
+        name: "bar"
+        fullname: "mod.bar"
+        definitions {
+          name: "bar"
+          fully_qualified_name: "mod.bar"
+          parameters {
+            name: "x"
+            kind: POSITIONAL_OR_KEYWORD
+          }
+          has_decorators: true
+          resolved_decorator_names: "typing.overload"
+          is_overload: true
+        }
+        definitions {
+          name: "bar"
+          fully_qualified_name: "mod.bar"
+          parameters {
+            name: "x"
+            kind: POSITIONAL_OR_KEYWORD
+          }
+          parameters {
+            name: "y"
+            kind: POSITIONAL_OR_KEYWORD
+          }
+          has_decorators: true
+          resolved_decorator_names: "typing.overload"
+          is_overload: true
+        }
+      }
+      """);
     Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
     assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(tuple(Kind.FUNCTION, "mod.foo"), tuple(Kind.AMBIGUOUS, "mod.bar"));
@@ -524,19 +528,21 @@ class TypeShedTest {
   @Test
   void variables_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
-      "fully_qualified_name: \"mod\"\n" +
-        "vars {\n" +
-        "  name: \"foo\"\n" +
-        "  fully_qualified_name: \"mod.foo\"\n" +
-        "  type_annotation {\n" +
-        "    pretty_printed_name: \"builtins.str\"\n" +
-        "    fully_qualified_name: \"builtins.str\"\n" +
-        "  }\n" +
-        "}\n" +
-        "vars {\n" +
-        "  name: \"bar\"\n" +
-        "  fully_qualified_name: \"mod.bar\"\n" +
-        "}\n");
+      """
+      fully_qualified_name: "mod"
+      vars {
+        name: "foo"
+        fully_qualified_name: "mod.foo"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      vars {
+        name: "bar"
+        fully_qualified_name: "mod.bar"
+      }
+      """);
     Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
     assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName, Symbol::annotatedTypeName)
       .containsExactlyInAnyOrder(tuple(Kind.OTHER, "mod.foo", "str"), tuple(Kind.OTHER, "mod.bar", null));

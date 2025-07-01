@@ -30,13 +30,15 @@ class DjangoModelStringFieldCheckTest {
   @Test
   void replaceQuickFixTest() {
     var check = new DjangoModelStringFieldCheck();
-    var before = "from django.db import models\n" +
-      "class NullFieldsModel(models.Model):\n" +
-      "    name = models.CharField(max_length=50, null=True)";
+    var before = """
+      from django.db import models
+      class NullFieldsModel(models.Model):
+          name = models.CharField(max_length=50, null=True)""";
 
-    var after = "from django.db import models\n" +
-      "class NullFieldsModel(models.Model):\n" +
-      "    name = models.CharField(max_length=50, blank=True)";
+    var after = """
+      from django.db import models
+      class NullFieldsModel(models.Model):
+          name = models.CharField(max_length=50, blank=True)""";
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"blank=True\"");
   }
@@ -44,40 +46,46 @@ class DjangoModelStringFieldCheckTest {
   @Test
   void removeQuickFixTest() {
     var check = new DjangoModelStringFieldCheck();
-    var before = "from django.db import models\n" +
-      "class NullFieldsModel(models.Model):\n" +
-      "    name = models.CharField(null=True, max_length=50, blank=True)";
+    var before = """
+      from django.db import models
+      class NullFieldsModel(models.Model):
+          name = models.CharField(null=True, max_length=50, blank=True)""";
 
-    var after = "from django.db import models\n" +
-      "class NullFieldsModel(models.Model):\n" +
-      "    name = models.CharField(max_length=50, blank=True)";
+    var after = """
+      from django.db import models
+      class NullFieldsModel(models.Model):
+          name = models.CharField(max_length=50, blank=True)""";
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove the \"null=true\" flag");
 
-    before = "from django.db import models\n" +
-      "class NullFieldsModel(models.Model):\n" +
-      "    name = models.CharField(max_length=50, null=True, blank=True)";
+    before = """
+      from django.db import models
+      class NullFieldsModel(models.Model):
+          name = models.CharField(max_length=50, null=True, blank=True)""";
     PythonQuickFixVerifier.verify(check, before, after);
 
-    before = "from django.db import models\n" +
-      "class NullFieldsModel(models.Model):\n" +
-      "    name = models.CharField(max_length=50, blank=True, null=True)";
+    before = """
+      from django.db import models
+      class NullFieldsModel(models.Model):
+          name = models.CharField(max_length=50, blank=True, null=True)""";
     PythonQuickFixVerifier.verify(check, before, after);
 
-    before = "from django.db import models\n" +
-      "class NullFieldsModel(models.Model):\n" +
-      "    name = models.CharField(\n" +
-      "        max_length=50,\n" +
-      "        null=True,\n" +
-      "        blank=True\n" +
-      "    )";
+    before = """
+      from django.db import models
+      class NullFieldsModel(models.Model):
+          name = models.CharField(
+              max_length=50,
+              null=True,
+              blank=True
+          )""";
 
-    after = "from django.db import models\n" +
-      "class NullFieldsModel(models.Model):\n" +
-      "    name = models.CharField(\n" +
-      "        max_length=50,\n" +
-      "        blank=True\n" +
-      "    )";
+    after = """
+      from django.db import models
+      class NullFieldsModel(models.Model):
+          name = models.CharField(
+              max_length=50,
+              blank=True
+          )""";
     PythonQuickFixVerifier.verify(check, before, after);
   }
 
