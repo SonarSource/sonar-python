@@ -62,7 +62,6 @@ public class TypeShed {
   private static Map<String, Symbol> builtins;
   private static final Map<String, Map<String, Symbol>> typeShedSymbols = new HashMap<>();
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
-  private static final Set<String> modulesInProgress = new HashSet<>();
 
   private static final String PROTOBUF_CUSTOM_STUBS = "custom_protobuf/";
   private static final String PROTOBUF = "stdlib_protobuf/";
@@ -76,6 +75,7 @@ public class TypeShed {
 
   // This is needed for some Python 2 modules whose name differ from their Python 3 counterpart by capitalization only.
   private static final Map<String, String> MODULES_TO_DISAMBIGUATE = new HashMap<>();
+
   static {
     MODULES_TO_DISAMBIGUATE.put("ConfigParser", "2@ConfigParser");
     MODULES_TO_DISAMBIGUATE.put("Queue", "2@Queue");
@@ -138,11 +138,15 @@ public class TypeShed {
    * Returns map of exported symbols by name for a given module
    */
   public static Map<String, Symbol> symbolsForModule(String moduleName) {
+    return symbolsForModule(moduleName, new HashSet<>());
+  }
+
+  private static Map<String, Symbol> symbolsForModule(String moduleName, Set<String> modulesInProgress) {
     if (searchedModuleMatchesCurrentProject(moduleName)) {
       return Collections.emptyMap();
     }
     if (!TypeShed.typeShedSymbols.containsKey(moduleName)) {
-      Map<String, Symbol> symbols = searchTypeShedForModule(moduleName);
+      Map<String, Symbol> symbols = searchTypeShedForModule(moduleName, modulesInProgress);
       typeShedSymbols.put(moduleName, symbols);
       return symbols;
     }
@@ -231,7 +235,7 @@ public class TypeShed {
     if (validForPythonVersions.isEmpty()) {
       return true;
     }
-    if(supportedPythonVersions == null) {
+    if (supportedPythonVersions == null) {
       throw new IllegalStateException("supportedPythonVersion is uninitialized. Call builtinSymbols() first");
     }
     HashSet<String> intersection = new HashSet<>(validForPythonVersions);
@@ -240,6 +244,11 @@ public class TypeShed {
   }
 
   public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, @Nullable String containerClassFqn, String moduleName, boolean isFromClass) {
+    return symbolsFromProtobufDescriptors(protobufDescriptors, containerClassFqn, moduleName, isFromClass, new HashSet<>());
+  }
+
+  private static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, @Nullable String containerClassFqn, String moduleName, boolean isFromClass,
+    Set<String> modulesInProgress) {
     Set<Symbol> symbols = new HashSet<>();
     for (Object descriptor : protobufDescriptors) {
       if (descriptor instanceof SymbolsProtos.ClassSymbol classSymbolProto) {
@@ -252,12 +261,12 @@ public class TypeShed {
         if (overloadedFunctionSymbol.getDefinitionsList().size() < 2) {
           throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
         }
-        symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), containerClassFqn, moduleName));
+        symbols.add(fromOverloadedFunction(overloadedFunctionSymbol, containerClassFqn, moduleName));
       }
       if (descriptor instanceof SymbolsProtos.VarSymbol varSymbol) {
         SymbolImpl symbol = new SymbolImpl(varSymbol, moduleName, isFromClass);
         if (varSymbol.getIsImportedModule()) {
-          Map<String, Symbol> moduleExportedSymbols = symbolsForModule(varSymbol.getFullyQualifiedName());
+          Map<String, Symbol> moduleExportedSymbols = symbolsForModule(varSymbol.getFullyQualifiedName(), modulesInProgress);
           moduleExportedSymbols.values().forEach(symbol::addChildSymbol);
         }
         symbols.add(symbol);
@@ -295,31 +304,30 @@ public class TypeShed {
     builtinSymbols();
   }
 
-  private static Map<String, Symbol> searchTypeShedForModule(String moduleName) {
+  private static Map<String, Symbol> searchTypeShedForModule(String moduleName, Set<String> modulesInProgress) {
     if (modulesInProgress.contains(moduleName)) {
       return new HashMap<>();
     }
     modulesInProgress.add(moduleName);
-    Map<String, Symbol> customSymbols = getSymbolsFromProtobufModule(moduleName, PROTOBUF_CUSTOM_STUBS);
-    if (!customSymbols.isEmpty()) {
-      modulesInProgress.remove(moduleName);
-      return customSymbols;
-    }
-    Map<String, Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName, PROTOBUF);
-    if (!symbolsFromProtobuf.isEmpty()) {
-      modulesInProgress.remove(moduleName);
-      return symbolsFromProtobuf;
-    }
+    try {
+      Map<String, Symbol> customSymbols = getSymbolsFromProtobufModule(moduleName, PROTOBUF_CUSTOM_STUBS, modulesInProgress);
+      if (!customSymbols.isEmpty()) {
+        return customSymbols;
+      }
+      Map<String, Symbol> symbolsFromProtobuf = getSymbolsFromProtobufModule(moduleName, PROTOBUF, modulesInProgress);
+      if (!symbolsFromProtobuf.isEmpty()) {
+        return symbolsFromProtobuf;
+      }
 
-    Map<String, Symbol> thirdPartySymbolsMypy = getSymbolsFromProtobufModule(moduleName, PROTOBUF_THIRD_PARTY_MYPY);
-    if (!thirdPartySymbolsMypy.isEmpty()) {
-      modulesInProgress.remove(moduleName);
-      return thirdPartySymbolsMypy;
-    }
+      Map<String, Symbol> thirdPartySymbolsMypy = getSymbolsFromProtobufModule(moduleName, PROTOBUF_THIRD_PARTY_MYPY, modulesInProgress);
+      if (!thirdPartySymbolsMypy.isEmpty()) {
+        return thirdPartySymbolsMypy;
+      }
 
-    Map<String, Symbol> thirdPartySymbols = getSymbolsFromProtobufModule(moduleName, PROTOBUF_THIRD_PARTY);
-    modulesInProgress.remove(moduleName);
-    return thirdPartySymbols;
+      return getSymbolsFromProtobufModule(moduleName, PROTOBUF_THIRD_PARTY, modulesInProgress);
+    } finally {
+      modulesInProgress.remove(moduleName);
+    }
   }
 
   /**
@@ -349,12 +357,16 @@ public class TypeShed {
   }
 
   private static Map<String, Symbol> getSymbolsFromProtobufModule(String moduleName, String dirName) {
+    return getSymbolsFromProtobufModule(moduleName, dirName, new HashSet<>());
+  }
+
+  private static Map<String, Symbol> getSymbolsFromProtobufModule(String moduleName, String dirName, Set<String> modulesInProgress) {
     String fileName = MODULES_TO_DISAMBIGUATE.getOrDefault(moduleName, moduleName);
     InputStream resource = TypeShed.class.getResourceAsStream(dirName + fileName + ".protobuf");
     if (resource == null) {
       return Collections.emptyMap();
     }
-    return getSymbolsFromProtobufModule(deserializedModule(moduleName, resource));
+    return getSymbolsFromProtobufModule(deserializedModule(moduleName, resource), modulesInProgress);
   }
 
   @CheckForNull
@@ -368,6 +380,10 @@ public class TypeShed {
   }
 
   static Map<String, Symbol> getSymbolsFromProtobufModule(@Nullable ModuleSymbol moduleSymbol) {
+    return getSymbolsFromProtobufModule(moduleSymbol, new HashSet<>());
+  }
+
+  private static Map<String, Symbol> getSymbolsFromProtobufModule(@Nullable ModuleSymbol moduleSymbol, Set<String> modulesInProgress) {
     if (moduleSymbol == null) {
       return Collections.emptyMap();
     }
@@ -391,7 +407,7 @@ public class TypeShed {
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByName.entrySet()) {
       String name = entry.getKey();
-      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), null, moduleSymbol.getFullyQualifiedName(), false);
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), null, moduleSymbol.getFullyQualifiedName(), false, modulesInProgress);
       Symbol disambiguatedSymbol = disambiguateSymbolsWithSameName(name, symbols, moduleSymbol.getFullyQualifiedName());
       deserializedSymbols.put(name, disambiguatedSymbol);
     }
