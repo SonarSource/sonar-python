@@ -18,6 +18,8 @@ package org.sonar.python.semantic.v2;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.LazyTypeWrapper;
@@ -32,10 +34,13 @@ public class ProjectLevelTypeTable implements TypeTable {
   private final PythonType rootModule;
   private final LazyTypesContext lazyTypesContext;
 
+  private final Lock createOrResolveSubModuleLock;
+
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
     this.lazyTypesContext = new LazyTypesContext(this);
     this.symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable, lazyTypesContext);
     this.rootModule = this.symbolsModuleTypeProvider.createBuiltinModule();
+    this.createOrResolveSubModuleLock = new ReentrantLock();
   }
 
   @Override
@@ -76,8 +81,7 @@ public class ProjectLevelTypeTable implements TypeTable {
 
           // The member of the module is a LazyType, which means it's a re-exported type from a submodule
           // We try to resolve the submodule instead
-          Optional<PythonType> subModule = moduleType.resolveSubmodule(part);
-          parent = subModule.orElseGet(() -> symbolsModuleTypeProvider.convertModuleType(moduleFqnParts, moduleType));
+          parent = createOrResolveSubModule(moduleFqnParts, moduleType);
           continue;
         }
       }
@@ -85,7 +89,7 @@ public class ProjectLevelTypeTable implements TypeTable {
       if (resolvedMember.isPresent()) {
         parent = resolvedMember.get();
       } else if (parent instanceof ModuleType module) {
-        parent = symbolsModuleTypeProvider.convertModuleType(moduleFqnParts, module);
+        parent = createOrResolveSubModule(moduleFqnParts, module);
       } else {
         return PythonType.UNKNOWN;
       }
@@ -106,17 +110,25 @@ public class ProjectLevelTypeTable implements TypeTable {
   public PythonType getModuleType(List<String> typeFqnParts) {
     var parent = rootModule;
     for (int i = 0; i < typeFqnParts.size(); i++) {
-      var part = typeFqnParts.get(i);
       var moduleFqnParts = IntStream.rangeClosed(0, i)
         .mapToObj(typeFqnParts::get)
         .toList();
       if (!(parent instanceof ModuleType moduleType)) {
         return PythonType.UNKNOWN;
       }
-      Optional<PythonType> resolvedSubmodule = moduleType.resolveSubmodule(part);
-      parent = resolvedSubmodule.orElseGet(() -> symbolsModuleTypeProvider.convertModuleType(moduleFqnParts, moduleType));
+      parent = createOrResolveSubModule(moduleFqnParts, moduleType);
     }
     return parent;
+  }
+
+  private PythonType createOrResolveSubModule(List<String> moduleFqn, ModuleType parent) {
+    try {
+      createOrResolveSubModuleLock.lock();
+      String part = moduleFqn.get(moduleFqn.size() - 1);
+      return parent.resolveSubmodule(part).orElseGet(() -> symbolsModuleTypeProvider.convertModuleType(moduleFqn, parent));
+    } finally {
+      createOrResolveSubModuleLock.unlock();
+    }
   }
 
   public LazyTypesContext lazyTypesContext() {

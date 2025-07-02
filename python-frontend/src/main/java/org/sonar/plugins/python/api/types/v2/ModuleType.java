@@ -19,6 +19,7 @@ package org.sonar.plugins.python.api.types.v2;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
@@ -39,7 +40,7 @@ public final class ModuleType implements PythonType {
     this.fullyQualifiedName = fullyQualifiedName;
     this.parent = parent;
     this.members = members;
-    this.subModules = new HashMap<>();
+    this.subModules = new ConcurrentHashMap<>();
     registerAsSubmoduleOfParent(parent);
   }
 
@@ -47,10 +48,7 @@ public final class ModuleType implements PythonType {
     if (parent == null) {
       return;
     }
-    TypeWrapper subModule = parent.subModules.get(this.name);
-    if (subModule == null) {
-      parent.subModules.put(this.name, TypeWrapper.of(this));
-    }
+    parent.subModules.putIfAbsent(this.name, TypeWrapper.of(this));
   }
 
   public ModuleType(@Nullable String name) {
