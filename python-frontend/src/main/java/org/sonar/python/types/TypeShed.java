@@ -16,6 +16,7 @@
  */
 package org.sonar.python.types;
 
+import com.google.common.annotations.VisibleForTesting;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -26,6 +27,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -59,9 +62,10 @@ import static org.sonar.plugins.python.api.types.BuiltinTypes.TUPLE;
 
 public class TypeShed {
 
-  private static Map<String, Symbol> builtins;
-  private static final Map<String, Map<String, Symbol>> typeShedSymbols = new HashMap<>();
-  private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
+  private static volatile Map<String, Symbol> builtins;
+  private static final Map<String, Map<String, Symbol>> typeShedSymbols = new ConcurrentHashMap<>();
+  private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new ConcurrentHashMap<>();
+  private static final ReentrantLock resolutionLock = new ReentrantLock();
 
   private static final String PROTOBUF_CUSTOM_STUBS = "custom_protobuf/";
   private static final String PROTOBUF = "stdlib_protobuf/";
@@ -87,8 +91,8 @@ public class TypeShed {
   }
 
   private static final Logger LOG = LoggerFactory.getLogger(TypeShed.class);
-  private static Set<String> supportedPythonVersions;
-  private static ProjectLevelSymbolTable projectLevelSymbolTable;
+  private static volatile Set<String> supportedPythonVersions;
+  private static volatile ProjectLevelSymbolTable projectLevelSymbolTable;
 
   private TypeShed() {
   }
@@ -102,18 +106,21 @@ public class TypeShed {
   }
 
   public static Map<String, Symbol> builtinSymbols() {
-    if ((TypeShed.builtins == null)) {
-      supportedPythonVersions = ProjectPythonVersion.currentVersions().stream().map(PythonVersionUtils.Version::serializedValue).collect(Collectors.toSet());
-      Map<String, Symbol> builtins = getSymbolsFromProtobufModule(BUILTINS_FQN, PROTOBUF);
-      builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
-      TypeShed.builtins = Collections.unmodifiableMap(builtins);
-      TypeShed.builtinGlobalSymbols.put("", new HashSet<>(builtins.values()));
+    if (builtins == null) {
+      resolutionLock.lock();
+      try {
+        if (builtins == null) {
+          supportedPythonVersions = ProjectPythonVersion.currentVersions().stream().map(PythonVersionUtils.Version::serializedValue).collect(Collectors.toSet());
+          Map<String, Symbol> builtinMap = getSymbolsFromProtobufModule(BUILTINS_FQN, PROTOBUF);
+          builtinMap.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
+          builtins = Collections.unmodifiableMap(builtinMap);
+          builtinGlobalSymbols.put("", new HashSet<>(builtinMap.values()));
+        }
+      } finally {
+        resolutionLock.unlock();
+      }
     }
     return builtins;
-  }
-
-  public static Map<String, Map<String, Symbol>> getLoadedTypeShedSymbols() {
-    return typeShedSymbols;
   }
 
   public static ClassSymbol typeShedClass(String fullyQualifiedName) {
@@ -138,19 +145,34 @@ public class TypeShed {
    * Returns map of exported symbols by name for a given module
    */
   public static Map<String, Symbol> symbolsForModule(String moduleName) {
-    return symbolsForModule(moduleName, new HashSet<>());
+    Map<String, Symbol> symbols = typeShedSymbols.get(moduleName);
+    if (symbols != null) {
+      return symbols;
+    }
+
+    resolutionLock.lock();
+    try {
+      symbols = typeShedSymbols.get(moduleName);
+      if (symbols != null) {
+        return symbols;
+      }
+      return symbolsForModule(moduleName, new HashSet<>());
+    } finally {
+      resolutionLock.unlock();
+    }
   }
 
-  private static Map<String, Symbol> symbolsForModule(String moduleName, Set<String> modulesInProgress) {
+  @VisibleForTesting
+  static Map<String, Symbol> symbolsForModule(String moduleName, Set<String> modulesInProgress) {
     if (searchedModuleMatchesCurrentProject(moduleName)) {
       return Collections.emptyMap();
     }
-    if (!TypeShed.typeShedSymbols.containsKey(moduleName)) {
+    if (!typeShedSymbols.containsKey(moduleName)) {
       Map<String, Symbol> symbols = searchTypeShedForModule(moduleName, modulesInProgress);
       typeShedSymbols.put(moduleName, symbols);
       return symbols;
     }
-    return TypeShed.typeShedSymbols.get(moduleName);
+    return typeShedSymbols.get(moduleName);
   }
 
   @CheckForNull
