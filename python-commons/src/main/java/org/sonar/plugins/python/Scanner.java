@@ -19,7 +19,9 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
@@ -57,21 +59,32 @@ public abstract class Scanner {
       getFilesStream(files).forEach(file -> processFile(context, file, progressReport, numScannedWithoutParsing));
       return;
     }
-    var pool = new ForkJoinPool(numberOfThreads);
+    var executor = Executors.newWorkStealingPool(numberOfThreads);
     try {
-      pool.submit(() -> getFilesStream(files).forEach(file -> processFile(context, file, progressReport, numScannedWithoutParsing)))
-        .join();
+      var allTasks = CompletableFuture.allOf(
+        files.stream()
+          .map(file -> CompletableFuture.runAsync(() -> processFile(context, file, progressReport, numScannedWithoutParsing), executor))
+          .toArray(CompletableFuture[]::new)
+      );
+      allTasks.join();
+    } catch (CompletionException e) {
+      var cause = e.getCause();
+      if (cause instanceof RuntimeException runtimeException) {
+        throw runtimeException;
+      } else if (cause instanceof Error error) {
+        throw error;
+      } else {
+        throw e;
+      }
     } finally {
-      pool.shutdown();
+      executor.shutdown();
     }
   }
 
   protected abstract void logStart(int numThreads);
 
   protected Stream<PythonInputFile> getFilesStream(List<PythonInputFile> files) {
-    return getNumberOfThreads(context) == 1
-      ? files.stream()
-      : files.parallelStream();
+    return files.stream();
   }
 
   private void processFile(SensorContext context, PythonInputFile file, MultiFileProgressReport progressReport, AtomicInteger numScannedWithoutParsing) {

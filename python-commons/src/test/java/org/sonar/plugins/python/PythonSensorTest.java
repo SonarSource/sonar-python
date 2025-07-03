@@ -693,10 +693,7 @@ class PythonSensorTest {
 
     assertThatThrownBy(() -> sensor.execute(context))
       .isInstanceOf(IllegalStateException.class)
-      .hasCauseInstanceOf(IllegalStateException.class)
-      .extracting(Throwable::getCause)
-      .extracting(Throwable::getCause)
-      .isInstanceOf(FileNotFoundException.class);
+      .hasCauseInstanceOf(FileNotFoundException.class);
   }
 
   @Test
