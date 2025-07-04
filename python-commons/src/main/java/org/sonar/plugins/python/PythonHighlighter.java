@@ -19,6 +19,8 @@ package org.sonar.plugins.python;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
@@ -85,14 +87,14 @@ import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
  */
 public class PythonHighlighter {
 
-  private final Object monitor;
+  private final Lock lock;
 
-  public PythonHighlighter(Object monitor) {
-    this.monitor = monitor;
+  public PythonHighlighter(Lock lock) {
+    this.lock = lock;
   }
 
   public PythonHighlighter() {
-    this(new Object());
+    this(new ReentrantLock());
   }
 
   public void highlight(SensorContext sensorContext, PythonVisitorContext visitorContext, PythonInputFile inputFile) {
@@ -102,8 +104,11 @@ public class PythonHighlighter {
   }
 
   private void save(NewHighlighting newHighlighting) {
-    synchronized (monitor) {
+    try {
+      lock.lock();
       newHighlighting.save();
+    } finally {
+      lock.unlock();
     }
   }
 

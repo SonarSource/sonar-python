@@ -21,6 +21,7 @@ import com.sonar.sslr.api.TokenType;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
@@ -43,11 +44,11 @@ public class PythonCpdAnalyzer {
   private static final Logger LOG = LoggerFactory.getLogger(PythonCpdAnalyzer.class);
 
   private final SensorContext context;
-  private final Object monitor;
+  private final Lock lock;
 
-  public PythonCpdAnalyzer(SensorContext context, Object monitor) {
+  public PythonCpdAnalyzer(SensorContext context, Lock lock) {
     this.context = context;
-    this.monitor = monitor;
+    this.lock = lock;
   }
 
   public void pushCpdTokens(InputFile inputFile, PythonVisitorContext visitorContext) {
@@ -116,22 +117,31 @@ public class PythonCpdAnalyzer {
   }
 
   private void save(NewCpdTokens cpdTokens) {
-    synchronized (monitor) {
+    try {
+      lock.lock();
       cpdTokens.save();
+    } finally {
+      lock.unlock();
     }
   }
 
   private void copyFromPrevious(CacheContext cacheContext, String dataKey, String tableKey) {
-    synchronized (monitor) {
+    try {
+      lock.lock();
       cacheContext.getWriteCache().copyFromPrevious(dataKey);
       cacheContext.getWriteCache().copyFromPrevious(tableKey);
+    } finally {
+      lock.unlock();
     }
   }
 
   private void writeToCache(CacheContext cacheContext, String fileKey, CpdSerializer.SerializationResult result) {
-    synchronized (monitor) {
+    try {
+      lock.lock();
       cacheContext.getWriteCache().write(stringTableCacheKey(fileKey), result.stringTable);
       cacheContext.getWriteCache().write(dataCacheKey(fileKey), result.data);
+    } finally {
+      lock.unlock();
     }
   }
 

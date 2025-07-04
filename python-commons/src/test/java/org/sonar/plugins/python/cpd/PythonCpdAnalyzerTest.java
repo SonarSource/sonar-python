@@ -20,6 +20,7 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -38,7 +39,7 @@ class PythonCpdAnalyzerTest {
 
   private static final String BASE_DIR = "src/test/resources/org/sonar/plugins/python";
   private SensorContextTester context = SensorContextTester.create(new File(BASE_DIR));
-  private PythonCpdAnalyzer cpdAnalyzer = new PythonCpdAnalyzer(context, new Object());
+  private PythonCpdAnalyzer cpdAnalyzer = new PythonCpdAnalyzer(context, new ReentrantLock());
 
   @Test
   void code_chunks_2() {

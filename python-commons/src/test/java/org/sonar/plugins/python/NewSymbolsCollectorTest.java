@@ -19,6 +19,7 @@ package org.sonar.plugins.python;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.concurrent.locks.ReentrantLock;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.TextRange;
@@ -50,7 +51,7 @@ class NewSymbolsCollectorTest {
     var newSymbolTable = context.newSymbolTable().onFile(inputFile);
     var visitorContext = TestPythonVisitorRunner.createContext(file);
     var fileInput = visitorContext.rootTree();
-    var newSymbolsCollector = new NewSymbolsCollector(new Object());
+    var newSymbolsCollector = new NewSymbolsCollector(new ReentrantLock());
     newSymbolsCollector.collect(newSymbolTable, fileInput);
   }
 

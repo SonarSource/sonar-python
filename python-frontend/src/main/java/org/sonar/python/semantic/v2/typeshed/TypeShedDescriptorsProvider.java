@@ -79,13 +79,19 @@ public class TypeShedDescriptorsProvider {
   // Public methods
   //================================================================================
 
-  public synchronized Map<String, Descriptor> builtinDescriptors() {
-    if (builtins == null) {
-      Map<String, Descriptor> symbols = getModuleDescriptors(BUILTINS_FQN, PROTOBUF);
-      symbols.put(NONE_TYPE, new ClassDescriptor.ClassDescriptorBuilder().withName(NONE_TYPE).withFullyQualifiedName(NONE_TYPE).build());
-      builtins = Collections.unmodifiableMap(symbols);
+  public Map<String, Descriptor> builtinDescriptors() {
+    var lock = descriptorsForModuleLocks.computeIfAbsent(BUILTINS_FQN, k -> new ReentrantLock());
+    try {
+      lock.lock();
+      if (builtins == null) {
+        Map<String, Descriptor> symbols = getModuleDescriptors(BUILTINS_FQN, PROTOBUF);
+        symbols.put(NONE_TYPE, new ClassDescriptor.ClassDescriptorBuilder().withName(NONE_TYPE).withFullyQualifiedName(NONE_TYPE).build());
+        builtins = Collections.unmodifiableMap(symbols);
+      }
+      return builtins;
+    } finally {
+      lock.unlock();
     }
-    return builtins;
   }
 
   /**

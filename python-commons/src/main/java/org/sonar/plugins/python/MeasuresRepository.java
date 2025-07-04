@@ -17,6 +17,7 @@
 package org.sonar.plugins.python;
 
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.measure.NewMeasure;
 import org.sonar.api.issue.NoSonarFilter;
@@ -33,17 +34,26 @@ public class MeasuresRepository {
   private final NoSonarFilter noSonarFilter;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final boolean isInSonarLint;
-  private final Object monitor;
+  private final Lock lock;
 
-  public MeasuresRepository(SensorContext context, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory, boolean isInSonarLint, Object monitor) {
+  public MeasuresRepository(SensorContext context, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory, boolean isInSonarLint, Lock lock) {
     this.context = context;
     this.noSonarFilter = noSonarFilter;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.isInSonarLint = isInSonarLint;
-    this.monitor = monitor;
+    this.lock = lock;
   }
 
-  public synchronized void save(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
+  public void save(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
+    try {
+      lock.lock();
+      saveInternal(inputFile, visitorContext);
+    } finally {
+      lock.unlock();
+    }
+  }
+
+  private void saveInternal(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
     FileMetrics fileMetrics = new FileMetrics(visitorContext, isNotebook(inputFile));
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
@@ -73,8 +83,11 @@ public class MeasuresRepository {
   }
 
   private void processNoSonarInFile(PythonInputFile inputFile, FileLinesVisitor fileLinesVisitor) {
-    synchronized (monitor) {
+    try {
+      lock.lock();
       noSonarFilter.noSonarInFile(inputFile.wrappedFile(), fileLinesVisitor.getLinesWithNoSonar());
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -91,14 +104,20 @@ public class MeasuresRepository {
   }
 
   private void save(FileLinesContext fileLinesContext) {
-    synchronized (monitor) {
+    try {
+      lock.lock();
       fileLinesContext.save();
+    } finally {
+      lock.unlock();
     }
   }
 
   private void save(NewMeasure<Integer> measure) {
-    synchronized (monitor) {
+    try {
+      lock.lock();
       measure.save();
+    } finally {
+      lock.unlock();
     }
   }
 }

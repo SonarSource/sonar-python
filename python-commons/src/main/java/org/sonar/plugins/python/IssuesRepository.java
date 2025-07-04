@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.locks.Lock;
 import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,14 +42,14 @@ public class IssuesRepository {
   private final PythonChecks checks;
   private final PythonIndexer indexer;
   private final boolean isInSonarLint;
-  private final Object monitor;
+  private final Lock lock;
 
-  public IssuesRepository(SensorContext context, PythonChecks checks, PythonIndexer indexer, boolean isInSonarLint, Object monitor) {
+  public IssuesRepository(SensorContext context, PythonChecks checks, PythonIndexer indexer, boolean isInSonarLint, Lock lock) {
     this.context = context;
     this.checks = checks;
     this.indexer = indexer;
     this.isInSonarLint = isInSonarLint;
-    this.monitor = monitor;
+    this.lock = lock;
   }
 
   public void save(PythonInputFile inputFile, List<PythonCheck.PreciseIssue> issues) {
@@ -94,8 +95,11 @@ public class IssuesRepository {
   }
 
   private void save(NewIssue newIssue) {
-    synchronized (monitor) {
+    try {
+      lock.lock();
       newIssue.save();
+    } finally {
+      lock.unlock();
     }
   }
 

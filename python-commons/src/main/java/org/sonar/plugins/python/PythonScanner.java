@@ -24,11 +24,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import org.slf4j.Logger;
@@ -44,6 +47,7 @@ import org.sonar.plugins.python.api.PythonFileConsumer;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.plugins.python.indexer.PythonIndexer;
@@ -68,18 +72,18 @@ public class PythonScanner extends Scanner {
   private final AtomicInteger recognitionErrorCount;
   private final AtomicBoolean foundDatabricks;
   private final PythonFileConsumer architectureCallback;
-  private final Map<String, Object> repositoryLocks;
+  private final Map<String, Lock> repositoryLocks;
   private final NewSymbolsCollector newSymbolsCollector;
   private final PythonHighlighter pythonHighlighter;
   private final IssuesRepository issuesRepository;
   private final MeasuresRepository measuresRepository;
+  private final Lock lock;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
     Supplier<PythonParser> parserSupplier, PythonIndexer indexer, PythonFileConsumer architectureCallback) {
     super(context);
     this.checks = checks;
-    this.cpdAnalyzer = new PythonCpdAnalyzer(context, this);
     this.parserSupplier = parserSupplier;
     this.indexer = indexer;
     this.indexer.buildOnce(context);
@@ -88,10 +92,12 @@ public class PythonScanner extends Scanner {
     this.recognitionErrorCount = new AtomicInteger(0);
     this.foundDatabricks = new AtomicBoolean(false);
     this.repositoryLocks = new ConcurrentHashMap<>();
-    this.newSymbolsCollector = new NewSymbolsCollector(this);
-    this.pythonHighlighter = new PythonHighlighter(this);
-    this.issuesRepository = new IssuesRepository(context, checks, indexer, isInSonarLint(context), this);
-    this.measuresRepository = new MeasuresRepository(context, noSonarFilter, fileLinesContextFactory, isInSonarLint(context), this);
+    this.lock = new ReentrantLock();
+    this.cpdAnalyzer = new PythonCpdAnalyzer(context, lock);
+    this.newSymbolsCollector = new NewSymbolsCollector(lock);
+    this.pythonHighlighter = new PythonHighlighter(lock);
+    this.issuesRepository = new IssuesRepository(context, checks, indexer, isInSonarLint(context), lock);
+    this.measuresRepository = new MeasuresRepository(context, noSonarFilter, fileLinesContextFactory, isInSonarLint(context), lock);
   }
 
   @Override
@@ -113,9 +119,8 @@ public class PythonScanner extends Scanner {
     executeChecks(visitorContext, checks.sonarPythonChecks(), fileType, inputFile);
     executeOtherChecks(inputFile, visitorContext, fileType);
 
-    synchronized (repositoryLocks.computeIfAbsent(ARCHITECTURE_CALLBACK_LOCK_KEY, k -> new Object())) {
-      architectureCallback.scanFile(visitorContext);
-    }
+
+    runLockedByRepository(ARCHITECTURE_CALLBACK_LOCK_KEY, () -> architectureCallback.scanFile(visitorContext));
 
     issuesRepository.save(inputFile, visitorContext.getIssues());
 
@@ -187,13 +192,8 @@ public class PythonScanner extends Scanner {
   }
 
   private void executeOtherChecks(PythonInputFile inputFile, PythonVisitorContext visitorContext, InputFile.Type fileType) {
-    checks.noSonarPythonChecks().forEach((repositoryKey, repositoryChecks) -> {
-        var lock = repositoryLocks.computeIfAbsent(repositoryKey, k -> new Object());
-        synchronized (lock) {
-          executeChecks(visitorContext, repositoryChecks, fileType, inputFile);
-        }
-      }
-    );
+    checks.noSonarPythonChecks()
+      .forEach((repositoryKey, repositoryChecks) -> runLockedByRepository(repositoryKey, () -> executeChecks(visitorContext, repositoryChecks, fileType, inputFile)));
   }
 
   private void searchForDataBricks(PythonVisitorContext visitorContext) {
@@ -229,17 +229,15 @@ public class PythonScanner extends Scanner {
 
     result = scanFileWithoutParsingSonarPython(inputFile, fileType, inputFileContext, result);
 
+    var atomicResult = new AtomicBoolean(result);
     var otherChecks = checks.noSonarPythonChecks();
-    for (var entry : otherChecks.entrySet()) {
-      var repositoryKey = entry.getKey();
-      var repositoryChecks = entry.getValue();
-      var lock = repositoryLocks.computeIfAbsent(repositoryKey, k -> new Object());
-      synchronized (lock) {
-        for (var check : repositoryChecks) {
-          result = scanFileWithoutParsingNotSonarPython(inputFile, check, fileType, result, inputFileContext);
-        }
+    otherChecks.forEach((repositoryKey, repositoryChecks) -> runLockedByRepository(repositoryKey, () -> {
+      for (var check : repositoryChecks) {
+        var scanResult = scanFileWithoutParsingNotSonarPython(inputFile, check, fileType, atomicResult.get(), inputFileContext);
+        atomicResult.set(scanResult);
       }
-    }
+    }));
+    result = atomicResult.get();
 
     result &= architectureCallback.scanWithoutParsing(inputFileContext);
     if (!result) {
@@ -293,14 +291,11 @@ public class PythonScanner extends Scanner {
   public void endOfAnalysis() {
     indexer.postAnalysis(context);
     checks.sonarPythonEndOfAnalyses().forEach(c -> c.endOfAnalysis(indexer.cacheContext()));
-    checks.noSonarPythonEndOfAnalyses().forEach(
-      (repositoryKey, endOfAnalyses) -> {
-        var lock = repositoryLocks.computeIfAbsent(repositoryKey, k -> new Object());
-        synchronized (lock) {
-          endOfAnalyses.forEach(c -> c.endOfAnalysis(indexer.cacheContext()));
-        }
-      }
-    );
+    checks.noSonarPythonEndOfAnalyses().forEach(this::endOfAnalysisForRepository);
+  }
+
+  private void endOfAnalysisForRepository(String repositoryKey, List<EndOfAnalysis> endOfAnalyses) {
+    runLockedByRepository(repositoryKey, () -> endOfAnalyses.forEach(c -> c.endOfAnalysis(indexer.cacheContext())));
   }
 
   boolean isCheckNotApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {
@@ -354,5 +349,15 @@ public class PythonScanner extends Scanner {
   protected int getNumberOfThreads(SensorContext context) {
     return context.config().getInt(THREADS_PROPERTY_NAME)
       .orElse(1);
+  }
+
+  private void runLockedByRepository(String repositoryKey, Runnable runnable) {
+    var repositoryLock = repositoryLocks.computeIfAbsent(repositoryKey, k -> new ReentrantLock());
+    try {
+      repositoryLock.lock();
+      runnable.run();
+    } finally {
+      repositoryLock.unlock();
+    }
   }
 }

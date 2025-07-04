@@ -19,6 +19,7 @@ package org.sonar.plugins.python;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
 import org.sonar.api.batch.sensor.symbol.NewSymbol;
 import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -33,10 +34,10 @@ import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 
 public class NewSymbolsCollector {
-  private final Object monitor;
+  private final Lock lock;
 
-  public NewSymbolsCollector(Object monitor) {
-    this.monitor = monitor;
+  public NewSymbolsCollector(Lock lock) {
+    this.lock = lock;
   }
 
   public void collect(NewSymbolTable newSymbolTable, FileInput fileInput) {
@@ -46,8 +47,11 @@ public class NewSymbolsCollector {
   }
 
   private void save(NewSymbolTable newSymbolTable) {
-    synchronized (monitor) {
+    try {
+      lock.lock();
       newSymbolTable.save();
+    } finally {
+      lock.unlock();
     }
   }
 
