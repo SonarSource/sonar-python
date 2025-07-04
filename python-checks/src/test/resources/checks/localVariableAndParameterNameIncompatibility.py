@@ -90,3 +90,13 @@ def type_variables_fp():
         ...
     MyClassAlias = MyClass  # OK
     MyTypeVariable: type = unknown_call()  # Noncompliant
+
+def ml_names():
+    X = [1, 2, 3]
+    Y = [0, 1, 0]
+    X_train = X
+    Y_train = Y
+    X_test = X
+    Y_test = Y
+
+    return X_train, Y_train, X_test, Y_test

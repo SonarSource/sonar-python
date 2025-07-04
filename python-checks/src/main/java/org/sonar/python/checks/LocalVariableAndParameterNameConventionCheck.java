@@ -19,6 +19,7 @@ package org.sonar.python.checks;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -51,7 +52,7 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
   public String format = DEFAULT;
   private Pattern constantPattern;
   private Pattern pattern;
-
+  private static final Set<String> ML_VARIABLE_NAMES = Set.of("X_train", "X_test", "Y_train", "Y_test", "X", "Y");
 
   @Override
   public void initialize(Context context) {
@@ -65,6 +66,9 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
 
   private void checkName(Symbol symbol, SubscriptionContext ctx) {
     String name = symbol.name();
+    if (ML_VARIABLE_NAMES.contains(name)) {
+      return;
+    }
     if (!pattern.matcher(name).matches()) {
       if (isType(symbol)) {
         // Type variables generally adhere to class naming conventions rather than regular variable naming conventions
