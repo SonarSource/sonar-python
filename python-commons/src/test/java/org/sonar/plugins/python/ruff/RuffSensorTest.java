@@ -16,9 +16,6 @@
  */
 package org.sonar.plugins.python.ruff;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,9 +23,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-
 import javax.annotation.Nullable;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
@@ -46,7 +41,9 @@ import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LoggerLevel;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class RuffSensorTest {
 
@@ -118,7 +115,7 @@ class RuffSensorTest {
     assertThat(secondTextRange.end().lineOffset()).isEqualTo(42);
 
     assertNoErrorWarnLogs(logTester);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
 
   }
 
@@ -144,7 +141,7 @@ class RuffSensorTest {
     assertThat(secondToLastPrimaryLoc.message()).isEqualTo("`try`-`except`-`pass` detected, consider logging the exception");
 
     assertNoErrorWarnLogs(logTester);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
 
   }
 
@@ -169,7 +166,7 @@ class RuffSensorTest {
     assertThat(lastTextRange.end().lineOffset()).isEqualTo(5);
 
     assertNoErrorWarnLogs(logTester);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
 
   }
 
@@ -220,7 +217,7 @@ class RuffSensorTest {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_REPORT_UNKNOWN_FILES);
     assertThat(externalIssues).hasSize(1);
 
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.WARN)))
       .isEqualTo(
         "Failed to resolve 1 file path(s) in Ruff report. No issues imported related to file(s): unknown/file.py");
   }
@@ -237,12 +234,12 @@ class RuffSensorTest {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "missing-fields.json");
     assertThat(externalIssues).hasSize(1);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(3);
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0))
+    assertThat(logTester.logs(Level.DEBUG)).hasSize(3);
+    assertThat(logTester.logs(Level.DEBUG).get(0))
       .startsWith("Missing information for ruleKey:'null',");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1))
+    assertThat(logTester.logs(Level.DEBUG).get(1))
       .contains("filePath:'null'");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(2))
+    assertThat(logTester.logs(Level.DEBUG).get(2))
       .contains("message:'null'");
   }
 
@@ -251,7 +248,7 @@ class RuffSensorTest {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.json");
     assertThat(externalIssues).isEmpty();
 
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
       .contains("invalid-path.json' can't be read.");
   }
@@ -264,7 +261,7 @@ class RuffSensorTest {
 
     externalIssues = executeSensorImporting(7, 9, "ruff-invalid-file.json");
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
       .contains("ruff-invalid-file.json' can't be read.");
   }
@@ -348,8 +345,8 @@ class RuffSensorTest {
   }
 
   public static void assertNoErrorWarnLogs(LogTesterJUnit5 logTester) {
-    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.ERROR)).isEmpty();
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
   }
 
 }
