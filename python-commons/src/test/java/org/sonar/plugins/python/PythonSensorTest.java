@@ -697,6 +697,30 @@ class PythonSensorTest {
   }
 
   @Test
+  void test_completion_exception_with_error() throws IOException {
+    activeRules = new ActiveRulesBuilder().build();
+
+    DefaultInputFile inputFile = spy(TestInputFileBuilder.create("moduleKey", FILE_1)
+      .setModuleBaseDir(baseDir.toPath())
+      .setCharset(UTF_8)
+      .setType(Type.MAIN)
+      .setLanguage(Python.KEY)
+      .initMetadata(TestUtils.fileContent(new File(baseDir, FILE_1), UTF_8))
+      .setStatus(InputFile.Status.ADDED)
+      .build());
+    when(inputFile.contents()).thenThrow(new OutOfMemoryError("Test out of memory error"));
+
+    context.fileSystem().add(inputFile);
+
+    context.setSettings(new MapSettings().setProperty("sonar.python.analysis.threads", "2"));
+    PythonSensor sensor = sensor();
+
+    assertThatThrownBy(() -> sensor.execute(context))
+      .isInstanceOf(OutOfMemoryError.class)
+      .hasMessage("Test out of memory error");
+  }
+
+  @Test
   void test_python_version_parameter_warning() {
     context.fileSystem().add(inputFile(FILE_1).wrappedFile());
 
