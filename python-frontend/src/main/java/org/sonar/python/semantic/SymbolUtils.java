@@ -242,16 +242,11 @@ public class SymbolUtils {
   }
 
   public static Optional<FunctionSymbol> getOverriddenMethod(FunctionSymbol functionSymbol) {
-    return getOverriddenMethod(functionSymbol, symbols -> Optional.of(symbols)
-      .filter(s -> s.size() == 1)
-      .map(Collection::stream)
-      .flatMap(Stream::findFirst)
-    );
-  }
-
-  public static Optional<FunctionSymbol> getOverriddenMethod(FunctionSymbol functionSymbol,
-    Function<List<FunctionSymbol>, Optional<FunctionSymbol>> symbolPicker) {
-    return symbolPicker.apply(getOverriddenMethods(functionSymbol));
+    var symbols = getOverriddenMethods(functionSymbol);
+    if(symbols.size() == 1){
+      return symbols.stream().findFirst();
+    }
+    return Optional.empty();
   }
 
   public static List<FunctionSymbol> getOverriddenMethods(FunctionSymbol functionSymbol) {

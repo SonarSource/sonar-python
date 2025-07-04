@@ -121,10 +121,9 @@ class SymbolUtilsTest {
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isZero();
   }
 
-
   @Test
   void get_overridden_method() {
-    FileInput file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+    FileInput file = PythonTestUtils.parse(new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "def foo(): pass",
       "def foo2():",
       "  def foo3(): pass",
@@ -142,15 +141,14 @@ class SymbolUtilsTest {
       "class E(foo2):",
       "  def foo8(): pass",
       "class MyStr(str):",
-      "  def capitalize(self): pass"
-    );
+      "  def capitalize(self): pass");
 
     FunctionSymbol foo = (FunctionSymbol) descendantFunction(file, "foo").name().symbol();
     FunctionSymbol foo2 = (FunctionSymbol) descendantFunction(file, "foo2").name().symbol();
     FunctionSymbol foo3 = (FunctionSymbol) descendantFunction(file, "foo3").name().symbol();
     FunctionSymbol foo4 = (FunctionSymbol) descendantFunction(file, "foo4").name().symbol();
     FunctionSymbol foo5 = (FunctionSymbol) descendantFunction(file, "foo5").name().symbol();
-    FunctionSymbol foo5_override = (FunctionSymbol) ((FunctionDef) ((ClassDefImpl)file.statements().statements().get(4)).body().statements().get(0)).name().symbol();
+    FunctionSymbol foo5_override = (FunctionSymbol) ((FunctionDef) ((ClassDefImpl) file.statements().statements().get(4)).body().statements().get(0)).name().symbol();
     FunctionSymbol foo6 = (FunctionSymbol) descendantFunction(file, "foo6").name().symbol();
     FunctionSymbol foo7 = (FunctionSymbol) descendantFunction(file, "foo7").name().symbol();
     FunctionSymbol foo8 = (FunctionSymbol) descendantFunction(file, "foo8").name().symbol();
@@ -176,8 +174,8 @@ class SymbolUtilsTest {
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo8)).isTrue();
     assertThat(SymbolUtils.getOverriddenMethod(foo_int)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo_int)).isTrue();
-    assertThat(SymbolUtils.getOverriddenMethod(capitalize, SymbolUtils::getFirstAlternativeIfEqualArgumentNames)).isNotEmpty();
-
+    List<FunctionSymbol> overriddenMethod = SymbolUtils.getOverriddenMethods(capitalize);
+    assertThat(SymbolUtils.getFirstAlternativeIfEqualArgumentNames(overriddenMethod)).isNotEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(null)).isTrue();
     String[] strings = {
       "class F:",
@@ -207,14 +205,12 @@ class SymbolUtilsTest {
   void getFunctionSymbolsTest() {
     assertThat(SymbolUtils.getFunctionSymbols(null)).isEmpty();
 
-    var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+    var file = PythonTestUtils.parse(new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class MyStr(str):",
-      "  def capitalize(self): pass"
-    );
+      "  def capitalize(self): pass");
     var capitalize = (FunctionSymbolImpl) descendantFunction(file, "capitalize").name().symbol();
     assertThat(capitalize).isNotNull();
     assertThat(SymbolUtils.getFunctionSymbols(capitalize)).isNotEmpty().contains(capitalize);
-
 
     var owner = (ClassSymbol) capitalize.owner();
     assertThat(SymbolUtils.getFunctionSymbols(owner)).isEmpty();
@@ -224,11 +220,11 @@ class SymbolUtilsTest {
 
   @Test
   void getFirstAlternativeIfEqualArgumentNamesTest() {
-    var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+    var file = PythonTestUtils.parse(new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       """
         class MyClass(dict):
           def get(self, key): ...
-        
+
         def foo1(a, b, c): ...
         def foo2(a, b, c): ...
         def bar(b, c, a): ...
@@ -250,7 +246,7 @@ class SymbolUtilsTest {
 
   @Test
   void isEqualParameterCountAndNamesTest() {
-    var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+    var file = PythonTestUtils.parse(new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class A:",
       "  def foo1(self, a):",
       "    ...",
@@ -259,8 +255,7 @@ class SymbolUtilsTest {
       "    ...",
       "class C:",
       "  def foo3(self, b):",
-      "    ..."
-    );
+      "    ...");
 
     FunctionSymbol foo1 = (FunctionSymbol) descendantFunction(file, "foo1").name().symbol();
     FunctionSymbol foo2 = (FunctionSymbol) descendantFunction(file, "foo2").name().symbol();
@@ -272,7 +267,6 @@ class SymbolUtilsTest {
     assertThat(SymbolUtils.isEqualParameterCountAndNames(List.of(foo1, foo2))).isTrue();
     assertThat(SymbolUtils.isEqualParameterCountAndNames(List.of(foo1, foo3))).isFalse();
   }
-
 
   @Nullable
   private static FunctionDef descendantFunction(Tree tree, String name) {
@@ -287,7 +281,6 @@ class SymbolUtilsTest {
       .filter(Objects::nonNull)
       .findFirst().orElse(null);
   }
-
 
   @Test
   void qualifiedNameOrEmpty() {

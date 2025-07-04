@@ -126,8 +126,12 @@ class ChildClassPosOnlyMovedBad1(ParentClass):
 class ChildClassPosOnlyMovedBad2(ParentClass):
     def positional_only(self, param1, /, param2, param3): ... # Noncompliant {{Make parameter param3 keyword only.}}
 #                                                ^^^^^^
+class ChildClassPosOnlyToKworPos(ParentClass):
+    def positional_only(self, param1, param2,*, param3): ... # OK The substitution is correct
+
 class ChildClassReorderingKW(ParentClass):
     def with_two_keyword_only(self, *, param2, param1): ...  # OK. Reordering keyword only parameters is ok
+
 
 class ChildClassReorderingAndExtra(ParentClass):
     def my_method(self, inserted, param1): ... # Noncompliant

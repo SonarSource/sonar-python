@@ -69,7 +69,8 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkMethodContract(SubscriptionContext ctx, FunctionSymbol method) {
-    SymbolUtils.getOverriddenMethod(method, SymbolUtils::getFirstAlternativeIfEqualArgumentNames)
+    var potentialSymbols = SymbolUtils.getOverriddenMethods(method);
+    SymbolUtils.getFirstAlternativeIfEqualArgumentNames(potentialSymbols)
       .ifPresent(overriddenMethod -> {
         if (overriddenMethod.hasVariadicParameter() || hasDecorators(overriddenMethod)) {
           // ignore function declarations with packed params
@@ -112,8 +113,7 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
 
   private static String getMissingParametersMessage(List<String> missingParameters) {
     if (missingParameters.contains(null)) {
-      return missingParameters.size() == 1 ?
-        "Add 1 missing parameter." : ("Add " + missingParameters.size() + " missing parameters.");
+      return missingParameters.size() == 1 ? "Add 1 missing parameter." : ("Add " + missingParameters.size() + " missing parameters.");
     }
     return "Add missing parameters " + String.join(" ", missingParameters).trim() + ".";
   }
@@ -138,7 +138,7 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
     method.parameters().stream()
       .filter(parameter -> !parameter.hasDefaultValue() && parameter.name() != null)
       .filter(parameter -> overriddenMethod.parameters().stream().noneMatch(p -> Objects.equals(parameter.name(), p.name())))
-      .forEach(parameter -> reportIssue(ctx,"Remove parameter " + parameter.name() + " or provide default value.", parameter.location(), overriddenMethod));
+      .forEach(parameter -> reportIssue(ctx, "Remove parameter " + parameter.name() + " or provide default value.", parameter.location(), overriddenMethod));
   }
 
 
@@ -170,16 +170,13 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkDefaultValueAndKeywordOnly(SubscriptionContext ctx, FunctionSymbol overriddenMethod, FunctionSymbol.Parameter overriddenParam,
-                                                      FunctionSymbol.Parameter parameter) {
+    FunctionSymbol.Parameter parameter) {
     String prefix = "Make parameter " + parameter.name();
     if (overriddenParam.hasDefaultValue() && !parameter.hasDefaultValue()) {
       reportIssue(ctx, "Add a default value to parameter " + parameter.name() + ".", parameter.location(), overriddenMethod);
     }
     if ((!overriddenParam.isKeywordOnly() && !overriddenParam.isPositionalOnly()) && (parameter.isKeywordOnly() || parameter.isPositionalOnly())) {
       reportIssue(ctx, prefix + " keyword-or-positional.", parameter.location(), overriddenMethod);
-    }
-    if (overriddenParam.isPositionalOnly() && !parameter.isPositionalOnly()) {
-      reportIssue(ctx, prefix + " positional only.", parameter.location(), overriddenMethod);
     }
     if (overriddenParam.isKeywordOnly() && !parameter.isKeywordOnly()) {
       reportIssue(ctx, prefix + " keyword only.", parameter.location(), overriddenMethod);
