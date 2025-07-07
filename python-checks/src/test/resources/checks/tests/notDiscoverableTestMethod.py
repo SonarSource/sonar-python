@@ -226,3 +226,36 @@ class EdgeCaseLookingLikeUnittest1(unittest.fake):
 
 class EdgeCaseLookingLikeUnittest2(fake.TestCase):
     def testMethod(): ...
+
+from unittest import IsolatedAsyncioTestCase
+
+class MyAsyncTest(IsolatedAsyncioTestCase):
+    async def asyncSetUp(self): 
+        self.data = "test_data"
+    
+    async def asyncTearDown(self): 
+        self.data = None
+
+    def asyncSetUp(self): 
+        self.data = "test_data"
+
+    def asyncTearDown(self): 
+        self.data = None
+        
+    async def test_something_async(self):
+        self.assertIsNotNone(self.data)
+        
+    async def helper_method_async(self): # Noncompliant
+#             ^^^^^^^^^^^^^^^^^^^
+        return "helper"
+        
+    async def async_setup(self): # Noncompliant
+#             ^^^^^^^^^^^
+        pass
+
+class MyNonIsolatedAsyncioTest(unittest.TestCase):
+    async def asyncSetUp(self): 
+        self.data = "test_data"
+    
+    async def asyncTearDown(self): 
+        self.data = None

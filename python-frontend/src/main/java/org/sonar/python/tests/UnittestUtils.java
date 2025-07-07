@@ -35,7 +35,7 @@ public class UnittestUtils {
   // https://docs.python.org/2/library/unittest.html#unittest.TestCase
   // https://docs.python.org/3/library/unittest.html#unittest.TestCase
   public static final Set<String> RUN_METHODS = Set.of("setUp", "tearDown", "setUpClass", "tearDownClass", "run", "skiptTest",
-    "subTest", "debug");
+    "subTest", "debug", "asyncSetUp", "asyncTearDown");
 
   public static final Set<String> RAISE_METHODS = Set.of("assertRaises", "assertRaisesRegexp", "assertRaisesRegex");
 
