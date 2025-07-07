@@ -16,6 +16,8 @@
  */
 package org.sonar.python.checks;
 
+import static org.sonar.python.tree.TreeUtils.toOptionalInstanceOfMapper;
+
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -30,6 +32,8 @@ import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
@@ -130,7 +134,8 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     if (isArgumentMissing(fullyQualifiedName, Keywords.HOW, callExpression.arguments())) {
       missingKeywords.add(Keywords.HOW);
     }
-    if (ON_KEYWORDS.stream().allMatch(keyword -> isArgumentMissing(fullyQualifiedName, keyword, callExpression.arguments()))) {
+    if (ON_KEYWORDS.stream()
+      .allMatch(keyword -> !isCrossJoin(fullyQualifiedName, callExpression) && isArgumentMissing(fullyQualifiedName, keyword, callExpression.arguments()))) {
       missingKeywords.add(Keywords.ON);
     }
     if (isArgumentMissing(fullyQualifiedName, Keywords.VALIDATE, callExpression.arguments())) {
@@ -144,6 +149,15 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
           TextEditUtils.insertBefore(callExpression.rightPar(), getReplacementText(fullyQualifiedName, missingKeywords)))
         .build());
     }
+  }
+
+  private static boolean isCrossJoin(String fullyQualifiedName, CallExpression callExpression) {
+    return TreeUtils.nthArgumentOrKeywordOptional(Keywords.HOW.getArgumentPosition(fullyQualifiedName), Keywords.HOW.getKeyword(), callExpression.arguments())
+      .map(RegularArgument::expression)
+      .flatMap(toOptionalInstanceOfMapper(StringLiteral.class))
+      .map(StringLiteral::trimmedQuotesValue)
+      .map("cross"::equals)
+      .orElse(false);
   }
 
   private static boolean isArgumentMissing(String fullyQualfiedName, Keywords keyword, List<Argument> arguments) {
