@@ -56,7 +56,7 @@ public class UnnecessaryComprehensionCheck extends PythonSubscriptionCheck {
     var valueExpression = comprehension.resultExpression();
     var loopExpression = Optional.of(comprehension)
       .map(ComprehensionExpression::comprehensionFor)
-      .filter(comprehensionFor -> Objects.isNull(comprehensionFor.nestedClause()))
+      .filter(comprehensionFor -> Objects.isNull(comprehensionFor.nestedClause()) && comprehensionFor.asyncToken() == null)
       .map(ComprehensionFor::loopExpression)
       .orElse(null);
 
@@ -75,7 +75,7 @@ public class UnnecessaryComprehensionCheck extends PythonSubscriptionCheck {
     var valueExpression = comprehension.valueExpression();
     var loopExpressions = Optional.of(comprehension)
       .map(DictCompExpression::comprehensionFor)
-      .filter(comprehensionFor -> Objects.isNull(comprehensionFor.nestedClause()))
+      .filter(comprehensionFor -> Objects.isNull(comprehensionFor.nestedClause()) && comprehensionFor.asyncToken() == null)
       .map(ComprehensionFor::loopExpression)
       .map(TreeUtils.toInstanceOfMapper(Tuple.class))
       .map(Tuple::elements)
