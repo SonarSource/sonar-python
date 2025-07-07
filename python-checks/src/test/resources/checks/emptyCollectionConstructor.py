@@ -49,3 +49,6 @@ def overwriting_collection_constructors():
     tuple()
     set()
     dict()
+
+def empty_collection_with_generic_type_hint():
+    list[int | None]()

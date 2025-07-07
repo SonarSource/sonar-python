@@ -25,6 +25,7 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.quickfix.TextEditUtils;
@@ -73,7 +74,7 @@ public class EmptyCollectionConstructorCheck extends PythonSubscriptionCheck {
 
   private boolean isCollectionConstructor(Expression calleeExpression) {
     var type = calleeExpression.typeV2();
-    return collectionConstructorTypeCheckers.getOptionalForType(type).isPresent();
+    return collectionConstructorTypeCheckers.getOptionalForType(type).isPresent() && !(calleeExpression instanceof SubscriptionExpression);
   }
 
   private static boolean isEmptyCall(CallExpression callExpression) {
