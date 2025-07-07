@@ -19,3 +19,9 @@ def case2():
 def case3():
     some_list = ["a/b", "c/d"]
     result = {q.split("/")[-1]: q for q in some_list}
+
+def case4(columns_to_save):
+    mapping = {col: f"new.{col}" for col in columns_to_save}
+    some_v = "v"
+    some_dict = {"a": "1", "b": "2"}
+    one_more = {k: f"{some_v}" for k, v in some_dict} # FN
