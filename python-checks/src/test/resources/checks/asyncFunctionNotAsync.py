@@ -142,7 +142,7 @@ class AsyncIterator:
 class AsyncResource:
     async def __aclose__(self):
         print("Releasing resources")
-        
+
 class AsyncAwaitableObject:
     async def __await__(self):
         yield "something"
@@ -183,3 +183,9 @@ class MyOtherClass(MyClass):
     async def my_method(self):
         # No issue on overriding methods
         do_something()
+
+async def async_comprehension():
+    return [something async for something in async_iterable()]
+
+async def sync_comprehension(): # Noncompliant
+    return [something for something in async_iterable()]

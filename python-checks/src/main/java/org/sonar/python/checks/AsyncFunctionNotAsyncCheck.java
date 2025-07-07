@@ -17,11 +17,13 @@
 package org.sonar.python.checks;
 
 import javax.annotation.Nullable;
+
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
@@ -148,6 +150,12 @@ public class AsyncFunctionNotAsyncCheck extends PythonSubscriptionCheck {
     @Override
     public void visitFunctionDef(FunctionDef functionDef) {
       // Skip nested functions
+    }
+
+    @Override
+    public void visitComprehensionFor(ComprehensionFor tree) {
+      asyncFeatureFound |= tree.asyncToken() != null;
+      super.visitComprehensionFor(tree);
     }
 
     @Override
