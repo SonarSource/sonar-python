@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.checks.utils.IsComprehensionTransformedChecker;
@@ -87,7 +88,7 @@ public class CollectionCreationWrappedInConstructorCheck extends PythonSubscript
     }
 
     var collectionType = collectionTypeCheckerMap.getForType(callee.typeV2());
-    if (collectionType == null) {
+    if (collectionType == null || callee instanceof SubscriptionExpression) {
       return;
     }
 

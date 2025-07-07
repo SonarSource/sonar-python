@@ -48,6 +48,8 @@ def test_list():
 
     l7 = list({x:x for x in [1,2]}) # Noncompliant {{Replace this list constructor call by a list literal.}}
 
+    l8 = list[int | None]([None]) # Compliant: list call is used to specify the list generic type
+
 def test_set():
     s = set(x * 2 for x in [1,2,3]) # Compliant
 
