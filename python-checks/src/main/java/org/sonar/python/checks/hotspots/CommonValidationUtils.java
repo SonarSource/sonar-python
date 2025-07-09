@@ -17,6 +17,7 @@
 package org.sonar.python.checks.hotspots;
 
 import java.util.function.BiConsumer;
+
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -99,13 +100,25 @@ public class CommonValidationUtils {
     }
   }
 
-  static String singleAssignedString(Expression expression) {
+  public static String singleAssignedString(Expression expression) {
     if (expression instanceof Name name) {
       return Expressions.singleAssignedNonNameValue(name)
         .map(CommonValidationUtils::singleAssignedString)
         .orElse("");
     }
     return expression.is(Tree.Kind.STRING_LITERAL) ? ((StringLiteral) expression).trimmedQuotesValue() : "";
+  }
+
+  public static boolean isStringEqualTo(Expression expression, String expected) {
+    if (expression instanceof Name name) {
+      return Expressions.singleAssignedNonNameValue(name)
+        .map(value -> isStringEqualTo(value, expected))
+        .orElse(false);
+    }
+    if (expression instanceof StringLiteral stringLiteral) {
+      return expected.equals(stringLiteral.trimmedQuotesValue());
+    }
+    return false;
   }
 
   interface CallValidator {

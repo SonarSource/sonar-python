@@ -53,8 +53,30 @@ class CommonValidationUtilsTest {
     }
   }
 
+  static class isStringEqualToTestCheck extends PythonSubscriptionCheck {
+    @Override
+    public void initialize(Context context) {
+      context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, isStringEqualToTestCheck::checkCallExpr);
+    }
+
+    private static void checkCallExpr(SubscriptionContext ctx) {
+      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+      TreeUtils.nthArgumentOrKeywordOptional(0, "arg", callExpression.arguments())
+        .ifPresent(argument -> {
+          if (CommonValidationUtils.isStringEqualTo(argument.expression(), "abc")) {
+            ctx.addIssue(argument, "Argument is abc");
+          }
+        });
+    }
+  }
+
   @Test
   void isLessThan() {
     PythonCheckVerifier.verify("src/test/resources/checks/commonValidationUtils.py", new isLessThanMoreThanTestCheck());
+  }
+
+  @Test
+  void isStringEqualTo() {
+    PythonCheckVerifier.verify("src/test/resources/checks/commonValidationUtilsString.py", new isStringEqualToTestCheck());
   }
 }

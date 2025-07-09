@@ -33,9 +33,13 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
+import org.sonar.python.checks.cdk.CdkPredicate;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.TypeCheckMap;
+
+import static org.sonar.python.checks.hotspots.CommonValidationUtils.singleAssignedString;
 
 @Rule(key = "S6709")
 public class RandomSeedCheck extends PythonSubscriptionCheck {
@@ -61,10 +65,44 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
 
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
+  private static Predicate<CallExpression> keywordAbsentOrNotIn(String keyword, String... restrictedValues) {
+    Set<String> restrictedValueSet = Set.of(restrictedValues);
+    return call -> {
+      var arg = TreeUtils.argumentByKeyword(keyword, call.arguments());
+      if (arg == null) {
+        return true;
+      }
+      String expressionString = singleAssignedString(arg.expression());
+      return restrictedValueSet.stream().noneMatch(expressionString::equals);
+    };
+  }
+  private static Predicate<CallExpression> probabilityArgAbsent() {
+    return call -> {
+      var probabilityArg = TreeUtils.argumentByKeyword("probability", call.arguments());
+      return probabilityArg == null || CdkPredicate.isFalse().test(probabilityArg.expression());
+    };
+  }
+
+  private static final Predicate<CallExpression> SOLVER_NOT_SAG_SAGA = keywordAbsentOrNotIn("solver", "sag", "saga");
+  private static final Predicate<CallExpression> SELECTION_NOT_RANDOM = keywordAbsentOrNotIn("selection", "random");
+
+  private static final Map<String, Predicate<CallExpression>> SKLEARN_EXCEPTIONS = Map.ofEntries(
+    Map.entry("sklearn.svm._classes.SVC", probabilityArgAbsent()),
+    Map.entry("sklearn.linear_model._logistic.LogisticRegression", SOLVER_NOT_SAG_SAGA),
+    Map.entry("sklearn.linear_model._ridge.Ridge", SOLVER_NOT_SAG_SAGA),
+    Map.entry("sklearn.linear_model._coordinate_descent.Lasso", SELECTION_NOT_RANDOM),
+    Map.entry("sklearn.linear_model._coordinate_descent.ElasticNet", SELECTION_NOT_RANDOM));
+
+  private TypeCheckMap<Predicate<CallExpression>> typeCheckMap;
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT,
-      ctx -> this.reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
+      ctx -> {
+        this.reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile());
+        this.typeCheckMap = new TypeCheckMap<>();
+        SKLEARN_EXCEPTIONS.forEach((fqn, predicate) -> this.typeCheckMap.put(ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn), predicate));
+      });
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkEmptySeedCall);
   }
 
@@ -82,6 +120,7 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
         .filter(symbol -> symbol.fullyQualifiedName() != null && symbol.fullyQualifiedName().startsWith(SKLEARN_FQN))
         .filter(RandomSeedCheck::hasRandomStateParameter)
         .filter(symbol -> isArgumentAbsentOrNone(TreeUtils.argumentByKeyword(SKLEARN_ARG_NAME, call.arguments())))
+        .filter(symbol -> !isSKLearnException(call))
         .map(symbol -> SKLEARN_MESSAGE))
       .ifPresent(message -> ctx.addIssue(call.callee(), message));
   }
@@ -127,5 +166,12 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
       .map(reachingDefinitionsAnalysis::valuesAtLocation)
       .filter(Predicate.not(Set::isEmpty))
       .filter(values -> values.stream().allMatch(value -> value.is(Tree.Kind.NONE))).isPresent();
+  }
+
+  private boolean isSKLearnException(CallExpression call) {
+    var calleeType = call.callee().typeV2();
+    return typeCheckMap.getOptionalForType(calleeType)
+      .map(predicate -> predicate.test(call))
+      .orElse(false);
   }
 }
