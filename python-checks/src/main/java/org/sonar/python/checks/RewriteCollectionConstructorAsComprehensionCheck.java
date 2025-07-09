@@ -21,12 +21,14 @@ import java.util.Map;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.checks.utils.IsComprehensionTransformedChecker;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeCheckMap;
@@ -41,36 +43,53 @@ public class RewriteCollectionConstructorAsComprehensionCheck extends PythonSubs
   );
 
   private TypeCheckMap<String> collectionTypeCheckerMap = null;
+  private TypeCheckBuilder tupleTypeCheck = null;
+  private TypeCheckBuilder dictTypeCheck = null;
+  private IsComprehensionTransformedChecker isComprehensionTransformedChecker = null;
+
 
   @Override
   public void initialize(Context context) {
-    IsComprehensionTransformedChecker isComprehensionTransformedChecker = new IsComprehensionTransformedChecker(context);
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
-      collectionTypeCheckerMap = new TypeCheckMap<>();
-      for (var collectionEntry : COLLECTION_MESSAGES.entrySet()) {
-        TypeCheckBuilder typeChecker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(collectionEntry.getKey());
-        collectionTypeCheckerMap.put(typeChecker, collectionEntry.getValue());
-      }
-    });
+    isComprehensionTransformedChecker = new IsComprehensionTransformedChecker(context);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::initTypeChecks);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
+  }
 
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-      List<Argument> arguments = callExpression.arguments();
+  private void initTypeChecks(SubscriptionContext ctx) {
+    collectionTypeCheckerMap = new TypeCheckMap<>();
+    for (var collectionEntry : COLLECTION_MESSAGES.entrySet()) {
+      TypeCheckBuilder typeChecker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(collectionEntry.getKey());
+      collectionTypeCheckerMap.put(typeChecker, collectionEntry.getValue());
+    }
+    tupleTypeCheck = ctx.typeChecker().typeCheckBuilder().isInstanceOf("tuple");
+    dictTypeCheck = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn("dict");
+  }
 
-      String message = getMessageForConstructor(callExpression).orElse(null);
-      if (message == null) {
-        return;
-      }
+  private void checkCallExpression(SubscriptionContext ctx) {
+    CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+    List<Argument> arguments = callExpression.arguments();
 
-      ComprehensionExpression generator = getSingleGeneratorArg(arguments).orElse(null);
-      if (generator == null) {
-        return;
-      }
+    String message = getMessageForConstructor(callExpression).orElse(null);
+    if (message == null) {
+      return;
+    }
 
-      if (isComprehensionTransformedChecker.isGeneratorTransformingData(generator, callExpression.callee().typeV2())) {
-        ctx.addIssue(callExpression.callee(), message);
-      }
-    });
+    ComprehensionExpression generator = getSingleGeneratorArg(arguments).orElse(null);
+    if (generator == null || isDictCallWithTuplesResultGenerator(callExpression, generator)) {
+      return;
+    }
+
+    if (isComprehensionTransformedChecker.isGeneratorTransformingData(generator, callExpression.callee().typeV2())) {
+      ctx.addIssue(callExpression.callee(), message);
+    }
+  }
+
+  private boolean isDictCallWithTuplesResultGenerator(CallExpression callExpression, ComprehensionExpression generatorArgument) {
+    return dictTypeCheck.check(callExpression.callee().typeV2()) == TriBool.TRUE && isCallReturningTuple(generatorArgument.resultExpression());
+  }
+
+  private boolean isCallReturningTuple(Expression expression) {
+    return expression instanceof CallExpression callExpression && tupleTypeCheck.check(callExpression.typeV2()) == TriBool.TRUE;
   }
 
   private Optional<String> getMessageForConstructor(CallExpression callExpression) {
