@@ -134,6 +134,11 @@ the future, for example if the input data frames came to change.</p>
 particular piece of code.</p>
 <p>This is why it is a good practice to provide the parameters <code>how</code>, <code>on</code> (or <code>left_on</code> and <code>right_on</code>)
 and <code>validate</code> to the pandas' <code>merge</code> and <code>join</code>.</p>
+<h3>Exceptions</h3>
+<p>When providing the <code>how</code> parameter with the value <code>cross</code> this rule will not raise an issue if the <code>on</code> (or
+<code>left_on</code> and <code>right_on</code>) parameter is missing.</p>
+<p>When using <code>cross</code> the resulting DataFrame will be the Cartesian product of the two other DataFrames, this means there is no need to
+specify a column to merge on.</p>
 <h2>How to fix it</h2>
 <p>To fix this issue provide the parameters <code>how</code>, <code>on</code> (or <code>left_on</code> and <code>right_on</code>) and
 <code>validate</code> to the <code>pd.merge</code> or <code>pd.join</code> methods.</p>

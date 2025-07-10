@@ -1,13 +1,15 @@
+<p>This rule raises an issue when a method in a test class is not discoverable as a test and is never used within its test class.</p>
 <h2>Why is this an issue?</h2>
-<p>Classes subclassing only <code>unittest.TestCase</code> are considered test cases, otherwise they might be mixins.</p>
-<p>As classes subclassing <code>unittest.TestCase</code> will be executed as tests, they should define test methods and not be used as "abstract"
-parent helper. Methods within the class will be discovered by the test runner if their name starts with <code>test</code>. If a method intended to be
-a test does not respect this convention, it will not be executed.</p>
-<p>This rule raises an issue when a method is not discoverable as a test and is never used within its test case class.</p>
+<p>As classes subclassing <code>unittest.TestCase</code> or <code>unittest.IsolatedAsyncioTestCase</code> will be executed as tests, they should
+define test methods and not be used as "abstract" parent helper. Methods within the class will be discovered by the test runner if their name starts
+with <code>test</code>. If a method intended to be a test does not respect this convention, it will not be executed.</p>
+<p>For a class to be considered a test case, it should subclass only <code>unittest.TestCase</code> or <code>unittest.IsolatedAsyncioTestCase</code>.
+If it subclasses other classes, it might be a mixin. This rule raises an issue when a method is not discoverable as a test and is never used within
+its test case class.</p>
 <p>This rule will not raise if:</p>
 <ul>
   <li> The method is called directly from another method. </li>
-  <li> The method overrides an existing one in <code>unittest.TestCase</code> (example: a <code>tearDown</code> method). </li>
+  <li> The method overrides an existing method in the parent class (example: a <code>tearDown</code> or <code>asyncSetUp</code> method). </li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre>
