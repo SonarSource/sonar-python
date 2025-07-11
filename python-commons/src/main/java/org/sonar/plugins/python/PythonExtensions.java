@@ -39,6 +39,7 @@ import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.mypy.MypyRulesDefinition;
 import org.sonar.plugins.python.mypy.MypySensor;
+import org.sonar.plugins.python.nosonar.NoSonarIssueFilter;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
 import org.sonar.plugins.python.pylint.PylintRulesDefinition;
 import org.sonar.plugins.python.pylint.PylintSensor;
@@ -69,6 +70,7 @@ public class PythonExtensions {
   public static void addCommonExtensions(Plugin.Context context) {
     context.addExtensions(
       NoSonarLineInfoCollector.class,
+      NoSonarIssueFilter.class,
       buildPythonSuffix(),
       buildIpynbPythonSuffix(),
       buildPythonVersion(),
