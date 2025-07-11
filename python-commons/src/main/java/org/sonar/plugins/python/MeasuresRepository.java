@@ -26,6 +26,7 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 
@@ -33,14 +34,21 @@ public class MeasuresRepository {
   private final SensorContext context;
   private final NoSonarFilter noSonarFilter;
   private final FileLinesContextFactory fileLinesContextFactory;
+  private final NoSonarLineInfoCollector noSonarLineInfoCollector;
   private final boolean isInSonarLint;
   private final Lock lock;
 
-  public MeasuresRepository(SensorContext context, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory, boolean isInSonarLint, Lock lock) {
+  public MeasuresRepository(SensorContext context,
+    NoSonarFilter noSonarFilter,
+    FileLinesContextFactory fileLinesContextFactory,
+    boolean isInSonarLint,
+    NoSonarLineInfoCollector noSonarLineInfoCollector,
+    Lock lock) {
     this.context = context;
     this.noSonarFilter = noSonarFilter;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.isInSonarLint = isInSonarLint;
+    this.noSonarLineInfoCollector = noSonarLineInfoCollector;
     this.lock = lock;
   }
 
@@ -57,7 +65,7 @@ public class MeasuresRepository {
     FileMetrics fileMetrics = new FileMetrics(visitorContext, isNotebook(inputFile));
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
-    processNoSonarInFile(inputFile, fileLinesVisitor);
+    processNoSonarInFile(inputFile);
 
     if (!isInSonarLint) {
       Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
@@ -82,10 +90,11 @@ public class MeasuresRepository {
     }
   }
 
-  private void processNoSonarInFile(PythonInputFile inputFile, FileLinesVisitor fileLinesVisitor) {
+  private void processNoSonarInFile(PythonInputFile inputFile) {
     try {
       lock.lock();
-      noSonarFilter.noSonarInFile(inputFile.wrappedFile(), fileLinesVisitor.getLinesWithNoSonar());
+      var linesWithEmptyNosonar = noSonarLineInfoCollector.getLinesWithEmptyNoSonar(inputFile.wrappedFile().key());
+      noSonarFilter.noSonarInFile(inputFile.wrappedFile(), linesWithEmptyNosonar);
     } finally {
       lock.unlock();
     }

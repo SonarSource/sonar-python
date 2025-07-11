@@ -53,7 +53,6 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     Tree.Kind.PASS_STMT, Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.RAISE_STMT, Tree.Kind.TRY_STMT, Tree.Kind.EXCEPT_CLAUSE,
     Tree.Kind.EXEC_STMT, Tree.Kind.ASSERT_STMT, Tree.Kind.DEL_STMT, Tree.Kind.GLOBAL_STMT, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF, Tree.Kind.FILE_INPUT);
 
-  private final Set<Integer> noSonar = new HashSet<>();
   private final Set<Integer> linesOfCode = new HashSet<>();
   private final Set<Integer> linesOfComments = new HashSet<>();
   private final Set<Integer> linesOfDocstring = new HashSet<>();
@@ -83,7 +82,6 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   }
 
   private void visitFile() {
-    noSonar.clear();
     linesOfCode.clear();
     linesOfComments.clear();
     linesOfDocstring.clear();
@@ -136,7 +134,7 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     linesOfCode.addAll(tokenLineNumbers(token));
 
     for (Trivia trivia : token.trivia()) {
-      visitComment(trivia, token);
+      visitComment(trivia);
     }
   }
 
@@ -153,12 +151,11 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     return lines;
   }
 
-  private void visitComment(Trivia trivia, Token parentToken) {
+  private void visitComment(Trivia trivia) {
     String commentLine = getContents(trivia.token().value());
     int line = trivia.token().line();
     if (containsNoSonarComment(trivia)) {
       linesOfComments.remove(line);
-      addNoSonarLines(trivia, parentToken);
     } else if (!isBlank(commentLine)) {
       linesOfComments.add(line);
     }
@@ -177,10 +174,6 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
       linesOfCode.remove(line);
       linesOfComments.add(line);
     }
-  }
-
-  public Set<Integer> getLinesWithNoSonar() {
-    return Collections.unmodifiableSet(noSonar);
   }
 
   public Set<Integer> getLinesOfCode() {
@@ -207,23 +200,6 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   private static String getContents(String comment) {
     // Comment always starts with "#"
     return comment.substring(comment.indexOf('#'));
-  }
-
-  private void addNoSonarLines(Trivia trivia, Token parentToken) {
-    int line = trivia.token().line();
-    if (parentToken.parent().is(Tree.Kind.EXPRESSION_STMT)) {
-      ExpressionStatement expressionStatement = (ExpressionStatement) parentToken.parent();
-      if (!expressionStatement.expressions().isEmpty() && expressionStatement.expressions().get(0).is(Tree.Kind.STRING_LITERAL)) {
-        // Count every line of a string literal as part of the "NOSONAR" scope
-        StringLiteral stringLiteral = (StringLiteral) expressionStatement.expressions().get(0);
-        int firstLine = stringLiteral.firstToken().line();
-        for (int i = firstLine; i < line + 1; i++) {
-          noSonar.add(i);
-        }
-        return;
-      }
-    }
-    noSonar.add(line);
   }
 
   public int getStatements() {

@@ -51,6 +51,7 @@ import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
 import org.sonar.python.IPythonLocation;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.parser.PythonParser;
@@ -77,15 +78,17 @@ public class PythonScanner extends Scanner {
   private final PythonHighlighter pythonHighlighter;
   private final IssuesRepository issuesRepository;
   private final MeasuresRepository measuresRepository;
+  private final NoSonarLineInfoCollector noSonarLineInfoCollector;
   private final Lock lock;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
-    Supplier<PythonParser> parserSupplier, PythonIndexer indexer, PythonFileConsumer architectureCallback) {
+    Supplier<PythonParser> parserSupplier, PythonIndexer indexer, PythonFileConsumer architectureCallback, NoSonarLineInfoCollector noSonarLineInfoCollector) {
     super(context);
     this.checks = checks;
     this.parserSupplier = parserSupplier;
     this.indexer = indexer;
+    this.noSonarLineInfoCollector = noSonarLineInfoCollector;
     this.indexer.buildOnce(context);
     this.architectureCallback = architectureCallback;
     this.checksExecutedWithoutParsingByFiles = new ConcurrentHashMap<>();
@@ -97,7 +100,7 @@ public class PythonScanner extends Scanner {
     this.newSymbolsCollector = new NewSymbolsCollector(lock);
     this.pythonHighlighter = new PythonHighlighter(lock);
     this.issuesRepository = new IssuesRepository(context, checks, indexer, isInSonarLint(context), lock);
-    this.measuresRepository = new MeasuresRepository(context, noSonarFilter, fileLinesContextFactory, isInSonarLint(context), lock);
+    this.measuresRepository = new MeasuresRepository(context, noSonarFilter, fileLinesContextFactory, isInSonarLint(context), noSonarLineInfoCollector, lock);
   }
 
   @Override
@@ -122,7 +125,16 @@ public class PythonScanner extends Scanner {
 
     runLockedByRepository(ARCHITECTURE_CALLBACK_LOCK_KEY, () -> architectureCallback.scanFile(visitorContext));
 
-    issuesRepository.save(inputFile, visitorContext.getIssues());
+
+    noSonarLineInfoCollector.collect(pythonFile.key(), visitorContext.rootTree());
+
+    if (fileType == InputFile.Type.MAIN && visitorContext.rootTree() != null) {
+      pushTokens(inputFile, visitorContext);
+      measuresRepository.save(inputFile, visitorContext);
+    }
+
+    var issues = visitorContext.getIssues();
+    issuesRepository.save(inputFile, issues);
 
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
       newSymbolsCollector.collect(context.newSymbolTable().onFile(inputFile.wrappedFile()), visitorContext.rootTree());
@@ -145,10 +157,7 @@ public class PythonScanner extends Scanner {
         indexer.projectLevelSymbolTable(),
         indexer.cacheContext(),
         context.runtime().getProduct());
-      if (fileType == InputFile.Type.MAIN) {
-        pushTokens(inputFile, visitorContext);
-        measuresRepository.save(inputFile, visitorContext);
-      }
+
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct());
 

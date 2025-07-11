@@ -38,6 +38,7 @@ import org.sonar.plugins.python.editions.RepositoryInfoProvider;
 import org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
+import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 
@@ -51,9 +52,13 @@ public final class IPynbSensor implements Sensor {
   private final PythonIndexer indexer;
   private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
   private final SensorTelemetryStorage sensorTelemetryStorage;
+  private final NoSonarLineInfoCollector noSonarLineInfoCollector;
 
-  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()});
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory,
+    CheckFactory checkFactory,
+    NoSonarFilter noSonarFilter,
+    NoSonarLineInfoCollector noSonarLineInfoCollector) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()}, noSonarLineInfoCollector);
   }
 
   public IPynbSensor(
@@ -61,7 +66,9 @@ public final class IPynbSensor implements Sensor {
     CheckFactory checkFactory,
     NoSonarFilter noSonarFilter,
     @Nullable PythonIndexer indexer,
-    RepositoryInfoProvider[] editionMetadataProviders) {
+    RepositoryInfoProvider[] editionMetadataProviders,
+    NoSonarLineInfoCollector noSonarLineInfoCollector) {
+    this.noSonarLineInfoCollector = noSonarLineInfoCollector;
 
     this.checks = createPythonChecks(checkFactory, editionMetadataProviders);
 
@@ -96,7 +103,7 @@ public final class IPynbSensor implements Sensor {
     }
     if (isInSonarLintRuntime(context)) {
       PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::createIPythonParser,
-        indexer, new DummyArchitectureCallback());
+        indexer, new DummyArchitectureCallback(), noSonarLineInfoCollector);
       scanner.execute(pythonFiles, context);
     } else {
       processNotebooksFiles(pythonFiles, context);
@@ -110,7 +117,7 @@ public final class IPynbSensor implements Sensor {
     CacheContext cacheContext = CacheContextImpl.dummyCache();
     PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::createIPythonParser,
-      pythonIndexer, new DummyArchitectureCallback());
+      pythonIndexer, new DummyArchitectureCallback(), noSonarLineInfoCollector);
     scanner.execute(pythonFiles, context);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY, scanner.getRecognitionErrorCount());
     updateDatabricksTelemetry(scanner);

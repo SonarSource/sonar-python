@@ -47,6 +47,7 @@ import org.sonar.plugins.python.editions.RepositoryInfoProviderWrapper;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
+import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
@@ -77,6 +78,7 @@ public final class PythonSensor implements Sensor {
     """;
 
   private final SensorTelemetryStorage sensorTelemetryStorage;
+  private final NoSonarLineInfoCollector noSonarLineInfoCollector;
 
   public PythonSensor(
     FileLinesContextFactory fileLinesContextFactory,
@@ -87,7 +89,8 @@ public final class PythonSensor implements Sensor {
     SonarLintCacheWrapper sonarLintCacheWrapper,
     AnalysisWarningsWrapper analysisWarnings,
     RepositoryInfoProviderWrapper editionMetadataProviderWrapper,
-    ArchitectureCallbackWrapper architectureUDGBuilderWrapper) {
+    ArchitectureCallbackWrapper architectureUDGBuilderWrapper, NoSonarLineInfoCollector noSonarLineInfoCollector) {
+    this.noSonarLineInfoCollector = noSonarLineInfoCollector;
 
     this.checks = createPythonChecks(checkFactory, editionMetadataProviderWrapper.infoProviders())
         .addCustomChecks(customRuleRepositoriesWrapper.customRuleRepositories());
@@ -134,7 +137,7 @@ public final class PythonSensor implements Sensor {
     pythonIndexer.setSonarLintCache(sonarLintCache);
     TypeShed.setProjectLevelSymbolTable(pythonIndexer.projectLevelSymbolTable());
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::create,
-      pythonIndexer, architectureCallback);
+      pythonIndexer, architectureCallback, noSonarLineInfoCollector);
     scanner.execute(pythonFiles, context);
 
     updateDatabricksTelemetry(scanner);
