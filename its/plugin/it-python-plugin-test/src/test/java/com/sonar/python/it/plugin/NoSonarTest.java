@@ -53,10 +53,38 @@ public class NoSonarTest {
   @Test
   void test_nosonar() {
     List<Issues.Issue> issues = issues(PROJECT_KEY);
-    assertThat(issues).hasSize(2);
-    assertThat(issues.get(0).getRule()).isEqualTo("python:PrintStatementUsage");
-    assertThat(issues.get(0).getLine()).isEqualTo(1);
-    assertThat(issues.get(1).getRule()).isEqualTo("python:NoSonar");
-    assertThat(issues.get(1).getLine()).isEqualTo(2);
+    assertThat(issues)
+      .hasSize(19)
+      // basic no-sonar examples
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:PrintStatementUsage", 1))
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 2))
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 3))
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 4))
+
+      // no-sonar with comments
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 6))
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 7))
+
+      // no-sonar with multiple rules
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:PrintStatementUsage", 9))
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:OneStatementPerLine", 9))
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 10))
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 11))
+
+      // invalid no-sonar
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 14))
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 15))
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:PrintStatementUsage", 16))
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 16))
+
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 19))
+
+      // no-sonar on the last line
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 20));
+  }
+
+  private static void assertIssueMatches(Issues.Issue issue, String expectedRule, int expectedLine) {
+    assertThat(issue.getRule()).isEqualTo(expectedRule);
+    assertThat(issue.getLine()).isEqualTo(expectedLine);
   }
 }
