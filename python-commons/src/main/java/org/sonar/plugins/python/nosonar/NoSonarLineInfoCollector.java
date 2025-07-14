@@ -45,7 +45,7 @@ public class NoSonarLineInfoCollector {
 
   private static final Logger LOG = LoggerFactory.getLogger(NoSonarLineInfoCollector.class);
 
-  public static final String NOSONAR_PATTERN_REGEX = "^#\\s*NOSONAR(?:\\(([^)]*)\\))?$";
+  public static final String NOSONAR_PATTERN_REGEX = "^#\\s*NOSONAR(?:\\(([^)]*)\\))?.*";
 
   private final Pattern noSonarPattern;
   private final Map<String, Map<Integer, NoSonarLineInfo>> componentKeyToNoSonarLineInfoMap;
@@ -61,7 +61,7 @@ public class NoSonarLineInfoCollector {
     }
     var result = scan(fileInput);
     if (!result.isEmpty()) {
-      LOG.debug("Component with key: {} has {} NOSONAR comments: {}", componentKey, result.size(), result);
+      LOG.debug("File with key: {} has {} NOSONAR comments: {}", componentKey, result.size(), result);
       componentKeyToNoSonarLineInfoMap.put(componentKey, result);
     }
   }
@@ -99,10 +99,6 @@ public class NoSonarLineInfoCollector {
   }
 
   private List<NoSonarLineInfo> visitToken(Token token) {
-    if (token.type() == GenericTokenType.EOF) {
-      return List.of();
-    }
-
     return token.trivia()
       .stream()
       .flatMap(trivia -> visitComment(trivia, token))
@@ -147,18 +143,14 @@ public class NoSonarLineInfoCollector {
 
   private Set<String> parseNoSonarRules(String noSonarCommentLine) {
     var rules = new HashSet<String>();
-
     var matcher = noSonarPattern.matcher(noSonarCommentLine);
 
-    // Check if the entire string matches the pattern
     if (matcher.matches()) {
       var contentInsideParentheses = matcher.group(1);
-
-      if (contentInsideParentheses != null && !contentInsideParentheses.isEmpty()) {
+      if (contentInsideParentheses != null) {
         var ruleArray = contentInsideParentheses.split(",");
         for (var rule : ruleArray) {
           var trimmedRule = rule.trim();
-          // Add only non-empty rules
           if (!trimmedRule.isEmpty()) {
             rules.add(trimmedRule);
           }

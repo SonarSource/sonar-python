@@ -33,8 +33,10 @@ class NoSonarIssueFilterTest {
   
   @ParameterizedTest
   @MethodSource("provideFilterParameters")
-  void test(
-    String componentKey, Map<Integer, NoSonarLineInfo> noSonarInfos, @Nullable Integer line, String ruleRepo, String ruleKey, boolean filterChainAcceptResult, boolean expectedResult) {
+  void test(Map<Integer, NoSonarLineInfo> noSonarInfos, @Nullable Integer line, boolean filterChainAcceptResult, boolean expectedResult) {
+    var componentKey = "foo.py";
+    var ruleRepo = "my_repo";
+    var ruleKey = "my_rule";
 
     var collector = Mockito.mock(NoSonarLineInfoCollector.class);
     Mockito.when(collector.get(componentKey))
@@ -55,11 +57,13 @@ class NoSonarIssueFilterTest {
 
   private static Stream<Arguments> provideFilterParameters() {
     return Stream.of(
-      Arguments.of("foo.py", Map.of(1, new NoSonarLineInfo(1, Set.of("my_rule"))), 1, "my_repo", "my_rule", true, false),
-      Arguments.of("foo.py", Map.of(1, new NoSonarLineInfo(1, Set.of("other_rule"))), 1, "my_repo", "my_rule", true, true),
-      Arguments.of("foo.py", Map.of(2, new NoSonarLineInfo(2, Set.of("my_rule"))), 1, "my_repo", "my_rule", true, true),
-      Arguments.of("foo.py", Map.of(1, new NoSonarLineInfo(1, Set.of("my_rule"))), null, "my_repo", "my_rule", true, true),
-      Arguments.of("foo.py", Map.of(1, new NoSonarLineInfo(1, Set.of("other_rule"))), 1, "my_repo", "my_rule", false, false)
+      Arguments.of(Map.of(1, new NoSonarLineInfo(1, Set.of("my_rule"))), 1, true, false),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(1, Set.of("other_rule"))), 1, true, true),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(1, Set.of())), 1, true, true),
+      Arguments.of(Map.of(2, new NoSonarLineInfo(2, Set.of("my_rule"))), 1, true, true),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(1, Set.of("my_rule"))), null, true, true),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(1, Set.of("other_rule"))), 1, false, false),
+      Arguments.of(Map.of(), 1, false, false)
     );
   }
 }
