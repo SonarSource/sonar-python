@@ -21,7 +21,6 @@ import com.sonar.python.it.ConcurrentOrchestratorExtension;
 import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Issues;
@@ -31,28 +30,39 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class NoSonarTest {
 
-  private static final String PROJECT_KEY = "nosonar";
+  private static final String NO_SONAR_PROJECT_KEY = "nosonar";
+  private static final String EXTERNAL_ISSUE_PROJECT_KEY = "external-issues";
+
   private static final String PROFILE_NAME = "nosonar";
 
   @RegisterExtension
   public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.dynamicOrchestrator;
 
-  @BeforeAll
-  static void startServer() {
-    ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
-    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", PROFILE_NAME);
-    SonarScanner build = ORCHESTRATOR.createSonarScanner()
-      .setProjectDir(new File("projects", PROJECT_KEY))
-      .setProjectKey(PROJECT_KEY)
-      .setProjectName(PROJECT_KEY)
-      .setProjectVersion("1.0-SNAPSHOT")
-      .setSourceDirs(".");
-    ORCHESTRATOR.executeBuild(build);
+  @Test
+  void test_externalIssues() {
+    SonarScanner build = createScanner(EXTERNAL_ISSUE_PROJECT_KEY, "projects/nosonar/external-issue-project")
+      .setProperty("sonar.python.flake8.reportPaths", "flake8-report.txt");
+    analyzeProject(build);
+
+    List<Issues.Issue> issues = issues(EXTERNAL_ISSUE_PROJECT_KEY);
+    assertThat(issues)
+      .hasSize(6)
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 1))
+      .anySatisfy(issue -> assertIssueMatches(issue, "external_flake8:E261", 1))
+
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 2))
+      .anySatisfy(issue -> assertIssueMatches(issue, "external_flake8:E261", 2))
+
+      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 3))
+      .anySatisfy(issue -> assertIssueMatches(issue, "external_flake8:E261", 3))
+      ;
   }
 
   @Test
   void test_nosonar() {
-    List<Issues.Issue> issues = issues(PROJECT_KEY);
+    analyzeProject(createScanner(NO_SONAR_PROJECT_KEY, "projects/nosonar/nosonar-project"));
+
+    List<Issues.Issue> issues = issues(NO_SONAR_PROJECT_KEY);
     assertThat(issues)
       .hasSize(19)
       // basic no-sonar examples
@@ -81,6 +91,22 @@ public class NoSonarTest {
 
       // no-sonar on the last line
       .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 20));
+  }
+
+  private void analyzeProject(SonarScanner scanner) {
+    String projectKey = scanner.getProperty("sonar.projectKey");
+    ORCHESTRATOR.getServer().provisionProject(projectKey, projectKey);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(projectKey, "py", PROFILE_NAME);
+    ORCHESTRATOR.executeBuild(scanner);
+  }
+
+  private SonarScanner createScanner(String projectKey, String projectDir) {
+    return ORCHESTRATOR.createSonarScanner()
+      .setProjectDir(new File(projectDir))
+      .setProjectKey(projectKey)
+      .setProjectName(projectKey)
+      .setProjectVersion("1.0-SNAPSHOT")
+      .setSourceDirs(".");
   }
 
   private static void assertIssueMatches(Issues.Issue issue, String expectedRule, int expectedLine) {
