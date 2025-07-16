@@ -47,7 +47,7 @@ public class NoSonarIssueFilter implements IssueFilter {
     var noSonarLineInfo = noSonarLineInfos.get(issueLine);
     var isNotFilteredOutByNoSonar = noSonarLineInfo == null || !noSonarLineInfo.suppressedRuleKeys().contains(issue.ruleKey().rule());
     if (!isNotFilteredOutByNoSonar) {
-      LOG.debug("Filtering out issue in the componen with key: {} for rule: {} on line: {} based on the file NoSonar infos {}",
+      LOG.debug("Filtering out issue in the component with key: {} for rule: {} on line: {} based on the file NoSonar infos {}",
         issueComponentKey,
         issue.ruleKey().rule(),
         issueLine,

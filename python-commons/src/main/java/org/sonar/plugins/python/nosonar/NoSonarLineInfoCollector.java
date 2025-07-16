@@ -16,21 +16,21 @@
  */
 package org.sonar.plugins.python.nosonar;
 
-import com.sonar.sslr.api.GenericTokenType;
 import java.util.ArrayDeque;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.scanner.ScannerSide;
+import org.sonar.plugins.python.api.nosonar.NoSonarInfoParser;
+import org.sonar.plugins.python.api.nosonar.NoSonarLineInfo;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -45,13 +45,11 @@ public class NoSonarLineInfoCollector {
 
   private static final Logger LOG = LoggerFactory.getLogger(NoSonarLineInfoCollector.class);
 
-  public static final String NOSONAR_PATTERN_REGEX = "^#\\s*NOSONAR(?:\\(([^)]*)\\))?.*";
-
-  private final Pattern noSonarPattern;
+  private final NoSonarInfoParser parser;
   private final Map<String, Map<Integer, NoSonarLineInfo>> componentKeyToNoSonarLineInfoMap;
 
   public NoSonarLineInfoCollector() {
-    this.noSonarPattern = Pattern.compile(NOSONAR_PATTERN_REGEX);
+    parser = new NoSonarInfoParser();
     this.componentKeyToNoSonarLineInfoMap = new ConcurrentHashMap<>();
   }
 
@@ -72,10 +70,10 @@ public class NoSonarLineInfoCollector {
 
   public Set<Integer> getLinesWithEmptyNoSonar(String key) {
     return get(key)
-      .values()
+      .entrySet()
       .stream()
-      .filter(NoSonarLineInfo::isSuppressedRuleKeysEmpty)
-      .map(NoSonarLineInfo::line)
+      .filter(entry -> entry.getValue().isSuppressedRuleKeysEmpty())
+      .map(Map.Entry::getKey)
       .collect(Collectors.toSet());
   }
 
@@ -86,8 +84,8 @@ public class NoSonarLineInfoCollector {
     while (!stack.isEmpty()) {
       var currentElement = stack.pop();
       if (currentElement instanceof Token token) {
-        visitToken(token)
-          .forEach(info -> result.put(info.line(), info));
+        var tokenResults = visitToken(token);
+        result.putAll(tokenResults);
       }
 
       currentElement.children()
@@ -98,21 +96,22 @@ public class NoSonarLineInfoCollector {
     return result;
   }
 
-  private List<NoSonarLineInfo> visitToken(Token token) {
-    return token.trivia()
-      .stream()
-      .flatMap(trivia -> visitComment(trivia, token))
-      .filter(Objects::nonNull)
-      .toList();
+  private Map<Integer, NoSonarLineInfo> visitToken(Token token) {
+    var result = new HashMap<Integer, NoSonarLineInfo>();
+    for (var trivia : token.trivia()) {
+      parseComment(trivia)
+        .ifPresent(info -> {
+          var commentLine = trivia.token().line();
+          calculateLines(commentLine, token).forEach(line -> result.put(line, info));
+        });
+    }
+
+    return result;
   }
 
-  private Stream<NoSonarLineInfo> visitComment(Trivia trivia, Token parentToken) {
-    String commentLine = getContents(trivia.token().value());
-    int line = trivia.token().line();
-    if (containsNoSonarComment(commentLine)) {
-      return parse(line, commentLine, parentToken);
-    }
-    return Stream.of();
+  private Optional<NoSonarLineInfo> parseComment(Trivia trivia) {
+    var commentString = getContents(trivia.token().value());
+    return parser.parse(commentString);
   }
 
   private static String getContents(String comment) {
@@ -120,44 +119,19 @@ public class NoSonarLineInfoCollector {
     return comment.substring(comment.indexOf('#'));
   }
 
-  private static boolean containsNoSonarComment(String commentLine) {
-    return commentLine.trim().contains("NOSONAR");
-  }
-
-  private Stream<NoSonarLineInfo> parse(int line, String noSonarCommentLine, Token parentToken) {
-    var rules = parseNoSonarRules(noSonarCommentLine);
+  private static Set<Integer> calculateLines(int commentLine, Token parentToken) {
     var lines = new HashSet<Integer>();
-    lines.add(line);
+    lines.add(commentLine);
 
     if (parentToken.parent() instanceof ExpressionStatement expressionStatement
         && !expressionStatement.expressions().isEmpty()
         && expressionStatement.expressions().get(0) instanceof StringLiteral stringLiteral) {
       var firstLine = stringLiteral.firstToken().line();
-      for (int i = firstLine; i < line + 1; i++) {
+      for (int i = firstLine; i < commentLine + 1; i++) {
         lines.add(i);
       }
     }
-
-    return lines.stream().map(l -> new NoSonarLineInfo(l, rules));
-  }
-
-  private Set<String> parseNoSonarRules(String noSonarCommentLine) {
-    var rules = new HashSet<String>();
-    var matcher = noSonarPattern.matcher(noSonarCommentLine);
-
-    if (matcher.matches()) {
-      var contentInsideParentheses = matcher.group(1);
-      if (contentInsideParentheses != null) {
-        var ruleArray = contentInsideParentheses.split(",");
-        for (var rule : ruleArray) {
-          var trimmedRule = rule.trim();
-          if (!trimmedRule.isEmpty()) {
-            rules.add(trimmedRule);
-          }
-        }
-      }
-    }
-    return rules;
+    return lines;
   }
 
   public String getSuppressedRuleIds(){

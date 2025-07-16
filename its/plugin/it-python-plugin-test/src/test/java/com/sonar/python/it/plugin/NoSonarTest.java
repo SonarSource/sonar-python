@@ -57,7 +57,7 @@ public class NoSonarTest {
     analyzeProject(createScanner(NO_SONAR_PROJECT_KEY, "projects/nosonar/nosonar-project"));
 
     IssueListAssert.assertThat(issues(NO_SONAR_PROJECT_KEY))
-        .hasSize(19)
+        .hasSize(21)
         // basic no-sonar checks
         .containsIssue(1, "python:PrintStatementUsage")
         .containsIssue(2, "python:NoSonar").doesNotContainIssue(2, "python:PrintStatementUsage")

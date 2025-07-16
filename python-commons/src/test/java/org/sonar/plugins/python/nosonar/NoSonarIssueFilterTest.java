@@ -28,6 +28,7 @@ import org.mockito.Mockito;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scan.issue.filter.FilterableIssue;
 import org.sonar.api.scan.issue.filter.IssueFilterChain;
+import org.sonar.plugins.python.api.nosonar.NoSonarLineInfo;
 
 class NoSonarIssueFilterTest {
   
@@ -57,12 +58,12 @@ class NoSonarIssueFilterTest {
 
   private static Stream<Arguments> provideFilterParameters() {
     return Stream.of(
-      Arguments.of(Map.of(1, new NoSonarLineInfo(1, Set.of("my_rule"))), 1, true, false),
-      Arguments.of(Map.of(1, new NoSonarLineInfo(1, Set.of("other_rule"))), 1, true, true),
-      Arguments.of(Map.of(1, new NoSonarLineInfo(1, Set.of())), 1, true, true),
-      Arguments.of(Map.of(2, new NoSonarLineInfo(2, Set.of("my_rule"))), 1, true, true),
-      Arguments.of(Map.of(1, new NoSonarLineInfo(1, Set.of("my_rule"))), null, true, true),
-      Arguments.of(Map.of(1, new NoSonarLineInfo(1, Set.of("other_rule"))), 1, false, false),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("my_rule"))), 1, true, false),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("other_rule"))), 1, true, true),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of())), 1, true, true),
+      Arguments.of(Map.of(2, new NoSonarLineInfo(Set.of("my_rule"))), 1, true, true),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("my_rule"))), null, true, true),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("other_rule"))), 1, false, false),
       Arguments.of(Map.of(), 1, false, false)
     );
   }

@@ -23,6 +23,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.sonar.plugins.python.api.nosonar.NoSonarLineInfo;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -37,9 +38,9 @@ class NoSonarLineInfoCollectorTest {
 
     var collector = new NoSonarLineInfoCollector();
     collector.collect("foo.py", fileInput);
-
     Assertions.assertThat(collector.get("foo.py")).isEqualTo(expectedLineInfos);
     Assertions.assertThat(collector.getLinesWithEmptyNoSonar("foo.py")).isEqualTo(expectedEmptyNoSonarLines);
+    Assertions.assertThat(collector.getSuppressedRuleIds()).isEqualTo(expectedSuppressedRuleIds);
   }
 
   private static Stream<Arguments> provideCollectorParameters() {
@@ -47,54 +48,76 @@ class NoSonarLineInfoCollectorTest {
       Arguments.of("""
           a = 1 # NOSONAR(something)
           """,
-        Map.of(1, new NoSonarLineInfo(1, Set.of("something"))),
+        Map.of(1, new NoSonarLineInfo(Set.of("something"))),
         Set.of(),
         "something"
       ),
       Arguments.of("""
           a = 1 # NOSONAR(one, two) some text
           """,
-        Map.of(1, new NoSonarLineInfo(1, Set.of("one", "two"))),
+        Map.of(1, new NoSonarLineInfo(Set.of("one", "two"))),
         Set.of(),
         "one,two"
       ),
       Arguments.of("""
           a = 1 # NOSONAR()
           """,
-        Map.of(1, new NoSonarLineInfo(1, Set.of())),
+        Map.of(1, new NoSonarLineInfo(Set.of())),
         Set.of(1),
         ""
       ),
       Arguments.of("""
           a = 1 # NOSONAR(something,)
           """,
-        Map.of(1, new NoSonarLineInfo(1, Set.of("something"))),
+        Map.of(1, new NoSonarLineInfo(Set.of("something"))),
+        Set.of(),
+        "something"
+      ),
+      Arguments.of("""
+          a = 1 # NOSONAR(something,) adsgvnbdfa;l
+          """,
+        Map.of(1, new NoSonarLineInfo(Set.of("something"))),
         Set.of(),
         "something"
       ),
       Arguments.of("""
           a = 1 # NOSONAR
           """,
-        Map.of(1, new NoSonarLineInfo(1, Set.of())),
+        Map.of(1, new NoSonarLineInfo(Set.of())),
         Set.of(1),
         ""
       ),
       Arguments.of("""
           a = 1 # NOSONAR some text
           """,
-        Map.of(1, new NoSonarLineInfo(1, Set.of())),
+        Map.of(1, new NoSonarLineInfo(Set.of())),
         Set.of(1),
         ""
       ),
       Arguments.of("a = 1 # NOSONAR some text",
-        Map.of(1, new NoSonarLineInfo(1, Set.of())),
+        Map.of(1, new NoSonarLineInfo(Set.of())),
         Set.of(1),
         ""
       ),
       Arguments.of("# NOSONAR some text",
-        Map.of(1, new NoSonarLineInfo(1, Set.of())),
+        Map.of(1, new NoSonarLineInfo(Set.of())),
         Set.of(1),
         ""
+      ),
+      Arguments.of("# noqa: some text",
+        Map.of(1, new NoSonarLineInfo(Set.of("some"))),
+        Set.of(),
+        "some"
+      ),
+      Arguments.of("# noqa: a,b",
+        Map.of(1, new NoSonarLineInfo(Set.of("a", "b"))),
+        Set.of(),
+        "a,b"
+      ),
+      Arguments.of("# noqa: a, b",
+        Map.of(1, new NoSonarLineInfo(Set.of("a"))),
+        Set.of(),
+        "a"
       ),
       Arguments.of("""
           ""\"
@@ -104,11 +127,11 @@ class NoSonarLineInfoCollectorTest {
           ""\" # NOSONAR
           """,
         Map.of(
-          1, new NoSonarLineInfo(1, Set.of()),
-          2, new NoSonarLineInfo(2, Set.of()),
-          3, new NoSonarLineInfo(3, Set.of()),
-          4, new NoSonarLineInfo(4, Set.of()),
-          5, new NoSonarLineInfo(5, Set.of())
+          1, new NoSonarLineInfo(Set.of()),
+          2, new NoSonarLineInfo(Set.of()),
+          3, new NoSonarLineInfo(Set.of()),
+          4, new NoSonarLineInfo(Set.of()),
+          5, new NoSonarLineInfo(Set.of())
         ),
         Set.of(1, 2, 3, 4, 5),
         ""
