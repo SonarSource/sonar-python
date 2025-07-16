@@ -16,17 +16,15 @@
  */
 package com.sonar.python.it.plugin;
 
+import static com.sonar.python.it.TestsUtils.issues;
+
 import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.python.it.ConcurrentOrchestratorExtension;
+import com.sonar.python.it.IssueListAssert;
 import com.sonar.python.it.TestsUtils;
 import java.io.File;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.sonarqube.ws.Issues;
-
-import static com.sonar.python.it.TestsUtils.issues;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class NoSonarTest {
 
@@ -41,56 +39,60 @@ public class NoSonarTest {
   @Test
   void test_externalIssues() {
     SonarScanner build = createScanner(EXTERNAL_ISSUE_PROJECT_KEY, "projects/nosonar/external-issue-project")
-      .setProperty("sonar.python.flake8.reportPaths", "flake8-report.txt");
+        .setProperty("sonar.python.flake8.reportPaths", "flake8-report.txt");
     analyzeProject(build);
 
-    List<Issues.Issue> issues = issues(EXTERNAL_ISSUE_PROJECT_KEY);
-    assertThat(issues)
-      .hasSize(6)
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 1))
-      .anySatisfy(issue -> assertIssueMatches(issue, "external_flake8:E261", 1))
-
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 2))
-      .anySatisfy(issue -> assertIssueMatches(issue, "external_flake8:E261", 2))
-
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 3))
-      .anySatisfy(issue -> assertIssueMatches(issue, "external_flake8:E261", 3))
-      ;
+    IssueListAssert.assertThat(issues(EXTERNAL_ISSUE_PROJECT_KEY))
+        .hasSize(6)
+        .containsIssue(1, "external_flake8:E261")
+        .containsIssue(1, "python:NoSonar")
+        .containsIssue(2, "external_flake8:E261")
+        .containsIssue(2, "python:NoSonar")
+        .containsIssue(3, "external_flake8:E261")
+        .containsIssue(3, "python:NoSonar");
   }
 
   @Test
   void test_nosonar() {
     analyzeProject(createScanner(NO_SONAR_PROJECT_KEY, "projects/nosonar/nosonar-project"));
 
-    List<Issues.Issue> issues = issues(NO_SONAR_PROJECT_KEY);
-    assertThat(issues)
-      .hasSize(19)
-      // basic no-sonar examples
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:PrintStatementUsage", 1))
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 2))
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 3))
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 4))
+    IssueListAssert.assertThat(issues(NO_SONAR_PROJECT_KEY))
+        .hasSize(19)
+        // basic no-sonar checks
+        .containsIssue(1, "python:PrintStatementUsage")
+        .containsIssue(2, "python:NoSonar").doesNotContainIssue(2, "python:PrintStatementUsage")
+        .containsIssue(3, "python:NoSonar").doesNotContainIssue(3, "python:PrintStatementUsage")
+        .containsIssue(4, "python:NoSonar").doesNotContainIssue(4, "python:PrintStatementUsage")
 
-      // no-sonar with comments
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 6))
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 7))
+        // no-sonar with comments
+        .containsIssue(6, "python:NoSonar").doesNotContainIssue(6, "python:PrintStatementUsage")
+        .containsIssue(7, "python:NoSonar").doesNotContainIssue(7, "python:PrintStatementUsage")
 
-      // no-sonar with multiple rules
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:PrintStatementUsage", 9))
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:OneStatementPerLine", 9))
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 10))
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 11))
+        // no-sonar with multiple rules
+        .containsIssue(9, "python:OneStatementPerLine")
+        .containsIssue(9, "python:PrintStatementUsage")
+        .containsIssue(9, "python:PrintStatementUsage")
 
-      // invalid no-sonar
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 14))
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 15))
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:PrintStatementUsage", 16))
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 16))
+        .containsIssue(10, "python:NoSonar")
+        .doesNotContainIssue(10, "python:PrintStatementUsage")
+        .doesNotContainIssue(10, "python:OneStatementPerLine")
 
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 19))
+        .containsIssue(11, "python:NoSonar")
+        .containsIssue(11, "python:OneStatementPerLine")
+        .doesNotContainIssue(11, "python:PrintStatementUsage")
 
-      // no-sonar on the last line
-      .anySatisfy(issue -> assertIssueMatches(issue, "python:NoSonar", 20));
+        // invalid no-sonar
+        .containsIssue(13, "python:NoSonar")
+        .containsIssue(14, "python:NoSonar")
+        .containsIssue(15, "python:NoSonar")
+        .containsIssue(16, "python:NoSonar")
+        .containsIssue(16, "python:PrintStatementUsage")
+
+        // no-sonar at the end of file
+        .containsIssue(19, "python:NoSonar")
+        .containsIssue(20, "python:NoSonar")
+        .doesNotContainIssue(20, "python:PrintStatementUsage")
+        .doesNotContainIssue(20, "python:OneStatementPerLine");
   }
 
   private void analyzeProject(SonarScanner scanner) {
@@ -102,15 +104,10 @@ public class NoSonarTest {
 
   private SonarScanner createScanner(String projectKey, String projectDir) {
     return ORCHESTRATOR.createSonarScanner()
-      .setProjectDir(new File(projectDir))
-      .setProjectKey(projectKey)
-      .setProjectName(projectKey)
-      .setProjectVersion("1.0-SNAPSHOT")
-      .setSourceDirs(".");
-  }
-
-  private static void assertIssueMatches(Issues.Issue issue, String expectedRule, int expectedLine) {
-    assertThat(issue.getRule()).isEqualTo(expectedRule);
-    assertThat(issue.getLine()).isEqualTo(expectedLine);
+        .setProjectDir(new File(projectDir))
+        .setProjectKey(projectKey)
+        .setProjectName(projectKey)
+        .setProjectVersion("1.0-SNAPSHOT")
+        .setSourceDirs(".");
   }
 }
