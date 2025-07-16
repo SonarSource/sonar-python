@@ -30,7 +30,7 @@ class NoSonarLineInfoCollectorTest {
 
   @ParameterizedTest
   @MethodSource("provideCollectorParameters")
-  void collector_test(String code, Map<Integer, NoSonarLineInfo> expectedLineInfos, Set<Integer> expectedEmptyNoSonarLines) {
+  void collector_test(String code, Map<Integer, NoSonarLineInfo> expectedLineInfos, Set<Integer> expectedEmptyNoSonarLines, String expectedSuppressedRuleIds) {
     var astNode = PythonParser.create().parse(code);
 
     var fileInput = new PythonTreeMaker().fileInput(astNode);
@@ -48,45 +48,53 @@ class NoSonarLineInfoCollectorTest {
           a = 1 # NOSONAR(something)
           """,
         Map.of(1, new NoSonarLineInfo(1, Set.of("something"))),
-        Set.of()
+        Set.of(),
+        "something"
       ),
       Arguments.of("""
           a = 1 # NOSONAR(one, two) some text
           """,
         Map.of(1, new NoSonarLineInfo(1, Set.of("one", "two"))),
-        Set.of()
+        Set.of(),
+        "one,two"
       ),
       Arguments.of("""
           a = 1 # NOSONAR()
           """,
         Map.of(1, new NoSonarLineInfo(1, Set.of())),
-        Set.of(1)
+        Set.of(1),
+        ""
       ),
       Arguments.of("""
           a = 1 # NOSONAR(something,)
           """,
         Map.of(1, new NoSonarLineInfo(1, Set.of("something"))),
-        Set.of()
+        Set.of(),
+        "something"
       ),
       Arguments.of("""
           a = 1 # NOSONAR
           """,
         Map.of(1, new NoSonarLineInfo(1, Set.of())),
-        Set.of(1)
+        Set.of(1),
+        ""
       ),
       Arguments.of("""
           a = 1 # NOSONAR some text
           """,
         Map.of(1, new NoSonarLineInfo(1, Set.of())),
-        Set.of(1)
+        Set.of(1),
+        ""
       ),
       Arguments.of("a = 1 # NOSONAR some text",
         Map.of(1, new NoSonarLineInfo(1, Set.of())),
-        Set.of(1)
+        Set.of(1),
+        ""
       ),
       Arguments.of("# NOSONAR some text",
         Map.of(1, new NoSonarLineInfo(1, Set.of())),
-        Set.of(1)
+        Set.of(1),
+        ""
       ),
       Arguments.of("""
           ""\"
@@ -102,7 +110,8 @@ class NoSonarLineInfoCollectorTest {
           4, new NoSonarLineInfo(4, Set.of()),
           5, new NoSonarLineInfo(5, Set.of())
         ),
-        Set.of(1, 2, 3, 4, 5)
+        Set.of(1, 2, 3, 4, 5),
+        ""
       )
     );
   }

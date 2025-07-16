@@ -108,6 +108,7 @@ public final class IPynbSensor implements Sensor {
     } else {
       processNotebooksFiles(pythonFiles, context);
     }
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEYS, noSonarLineInfoCollector.getSuppressedRuleIds());
     sensorTelemetryStorage.send(context);
   }
 

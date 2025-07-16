@@ -141,7 +141,7 @@ public final class PythonSensor implements Sensor {
     scanner.execute(pythonFiles, context);
 
     updateDatabricksTelemetry(scanner);
-
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEYS, noSonarLineInfoCollector.getSuppressedRuleIds());
     sensorTelemetryStorage.send(context);
     durationReport.stop();
   }

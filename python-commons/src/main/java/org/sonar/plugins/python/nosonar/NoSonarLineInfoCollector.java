@@ -160,4 +160,12 @@ public class NoSonarLineInfoCollector {
     return rules;
   }
 
+  public String getSuppressedRuleIds(){
+    return componentKeyToNoSonarLineInfoMap.values().stream()
+      .flatMap(map -> map.values().stream())
+      .flatMap(noSonarLineInfo -> noSonarLineInfo.suppressedRuleKeys().stream())
+      .distinct()
+      .sorted()
+      .collect(Collectors.joining(","));
+  }
 }
