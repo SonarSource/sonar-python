@@ -53,7 +53,7 @@ public class InefficientDictIterationCheck extends PythonSubscriptionCheck {
     if (forStatement.testExpressions().size() == 1
         && (hasIgnoredKey || hasIgnoredValue)
         && (isSensitiveMethodCall(forStatement.testExpressions().get(0)) || isAssignedToSensitiveMethodCall(forStatement.testExpressions().get(0)))) {
-      var message = hasIgnoredKey ? "Make this loop to iterate over the dict values." : "Make this loop to iterate directly over the dict.";
+      var message = hasIgnoredKey ? "Modify this loop to iterate over the dictionary's values." : "Modify this loop to iterate directly over the dictionary.";
       ctx.addIssue(forStatement.testExpressions().get(0), message);
     }
   }

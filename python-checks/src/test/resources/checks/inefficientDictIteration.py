@@ -1,10 +1,12 @@
 def case1():
     fruit = {'a': 'Apple', 'b': 'Banana'}
 
-    for _, value in fruit.items():  # Noncompliant
+    for _, value in fruit.items():  # Noncompliant {{Modify this loop to iterate over the dictionary's values.}}
+#                   ^^^^^^^^^^^^^
         ...
 
-    for key, _ in fruit.items():  # Noncompliant
+    for key, _ in fruit.items():  # Noncompliant {{Modify this loop to iterate directly over the dictionary.}}
+#                 ^^^^^^^^^^^^^
         ...
 
     items1 = fruit.items()
