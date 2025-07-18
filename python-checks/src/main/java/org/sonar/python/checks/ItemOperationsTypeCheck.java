@@ -16,7 +16,7 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -77,7 +78,25 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
     @Nullable String classRequiredMethod) {
     LocationInFile locationInFile = symbol.is(FUNCTION) ? ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation();
     secondaries.put(locationInFile, SECONDARY_MESSAGE.formatted(symbol.name()));
-    return isSubscriptionInClassArg(subscriptionObject) || canHaveMethod(symbol, requiredMethod, classRequiredMethod);
+    return isSubscriptionInClassArg(subscriptionObject) 
+      || canHaveMethod(symbol, requiredMethod, classRequiredMethod) 
+      || isValidGenericUsage(symbol, subscriptionObject, requiredMethod);
+  }
+
+  private static boolean isValidGenericUsage(Symbol symbol, Expression subscriptionObject, String requiredMethod) {
+    return "__getitem__".equals(requiredMethod) && symbol.is(CLASS) && !areSomeSubscriptsSuspicious(subscriptionObject);
+  }
+
+  private static boolean areSomeSubscriptsSuspicious(Expression subscriptionObject) {
+    var subscriptionExprTree = TreeUtils.firstAncestorOfKind(subscriptionObject, Tree.Kind.SUBSCRIPTION);
+    return subscriptionExprTree instanceof SubscriptionExpression subscriptionExpr 
+      && subscriptionExpr.subscripts().expressions().stream()
+        .allMatch(ItemOperationsTypeCheck::isSubscriptSuspicious);
+  }
+
+  private static boolean isSubscriptSuspicious(Expression expr) {
+    // a subscript used as a generic should be a name of a class, alias, or a class as a string literal; Anything else is suspicious
+    return !expr.is(Tree.Kind.NAME, Tree.Kind.STRING_LITERAL);
   }
 
   private static boolean isInvalidSubscriptionCallExpr(Expression expression, Map<LocationInFile, String> secondaries) {
@@ -91,14 +110,23 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
   }
 
   private static boolean isSubscriptionInClassArg(Expression subscriptionObject) {
-    return Optional.ofNullable(((ClassDef) TreeUtils.firstAncestorOfKind(subscriptionObject, Tree.Kind.CLASSDEF))).map(ClassDef::args).map(ArgList::arguments)
-      .stream()
-      .flatMap(Collection::stream)
+    var classDefOptional = Optional.ofNullable(TreeUtils.firstAncestorOfKind(subscriptionObject, Tree.Kind.CLASSDEF))
+      .map(ClassDef.class::cast);
+
+    List<Argument> classArguments = classDefOptional
+      .map(ClassDef::args)
+      .map(ArgList::arguments)
+      .orElse(List.of());
+
+    var onlyRegularArgumentExpressions = classArguments.stream()
       .flatMap(TreeUtils.toStreamInstanceOfMapper(RegularArgument.class))
-      .map(RegularArgument::expression)
+      .map(RegularArgument::expression);
+
+    var subscriptionObjectStream = onlyRegularArgumentExpressions
       .flatMap(TreeUtils.toStreamInstanceOfMapper(SubscriptionExpression.class))
-      .map(SubscriptionExpression::object)
-      .anyMatch(subscriptionObject::equals);
+      .map(SubscriptionExpression::object);
+
+    return subscriptionObjectStream.anyMatch(subscriptionObject::equals);
   }
 
   @Override

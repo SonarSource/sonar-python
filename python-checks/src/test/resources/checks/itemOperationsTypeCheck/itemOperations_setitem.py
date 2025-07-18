@@ -115,10 +115,6 @@ def custom_classes():
   a[0] = 42  # Noncompliant {{Fix this code; "a" does not have a "__setitem__" method.}}
 # ^^^^
 
-  class B: ...
-
-  B[0]  # Noncompliant
-
   class C:
       def __init__(self, values):
           self._values = values

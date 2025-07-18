@@ -107,13 +107,15 @@ def custom_classes():
           self._values = values
 
   a = A([0,1,2])
-
   a[0]  # Noncompliant
 # ^^^^
 
   class B: ...
-
   B[0]  # Noncompliant
+
+  @some_decorator
+  class ClassWithDecorator: ...
+  ClassWithDecorator[0]  # FN: decorator
 
 
   class C:
@@ -134,7 +136,7 @@ def custom_classes():
 
 
 def getitem(self, key):
-    print(f"getting {key}")
+  print(f"getting {key}")
 
 def meta_classes():
   class MyMetaClassWithGet(type):
@@ -218,6 +220,37 @@ def mocks():
         a = ExtendedMock()[42]
 
 
-class MyGenericClass[T]: ...
+def generic_cases(unknown_type):
+  class MyGenericClass[T]: ...
 
-class MyGenericSubType(MyGenericClass[str]): ...
+  class MyGenericSubType(MyGenericClass[str]): ...
+
+  class SomeOtherClass: ...
+  SomeOtherClassAlias = SomeOtherClass
+
+  T = TypeVar('T')
+  GenericAlias = MyGenericClass[T]  # OK
+  IntAlias = MyGenericClass[int]  # OK
+  IntLiteralAlias = MyGenericClass[0]  # Noncompliant
+  StrAlias = MyGenericClass[str]  # OK
+  StrLiteralAlias = MyGenericClass["str"]  # OK
+
+  a = MyGenericClass[int]()
+  a = MyGenericClass[SomeOtherClass]()
+  a = MyGenericClass[SomeOtherClassAlias]()
+  b = MyGenericClass[unknown_type]()
+  b = MyGenericClass[0]() # Noncompliant
+  b = MyGenericClass["str"]() # OK
+
+  c = SomeOtherClass()
+
+  c[0] # Noncompliant
+  c[int] # Noncompliant
+  c["int"] # Noncompliant
+
+  class Loader:
+    def __getitem__(self, item):
+      return self.loader[item] # Noncompliant
+    
+    def loader(self):
+      pass
