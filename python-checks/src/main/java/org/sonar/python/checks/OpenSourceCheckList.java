@@ -294,6 +294,7 @@ public class OpenSourceCheckList {
       NoPersonReferenceInTodoCheck.class,
       NoReRaiseInExitCheck.class,
       NoSonarCommentCheck.class,
+      NoSonarCommentFormatCheck.class,
       NotDiscoverableTestMethodCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,
       NumpyWeekMaskValidationCheck.class,

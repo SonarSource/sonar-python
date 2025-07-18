@@ -1,0 +1,47 @@
+<p>This rule raises an issue when issue suppression comments have an incorrect format or syntax.</p>
+<h2>Why is this an issue?</h2>
+<p>Issue suppression comments like <code># NOSONAR</code> and <code># noqa</code> are essential tools for controlling code analysis. When these
+comments have incorrect syntax, they may not work as expected, leading to confusion about which issues are actually suppressed.</p>
+<p>Python code analysis supports two main suppression formats: - <code># NOSONAR</code> - SonarQube’s suppression comment - <code># noqa</code> -
+Python’s standard "no quality assurance" comment</p>
+<p>Each format has specific syntax rules. When these rules are violated, the suppression might fail silently or behave unexpectedly, making it unclear
+whether issues are intentionally ignored or accidentally unsuppressed.</p>
+<h3>What is the potential impact?</h3>
+<p>Incorrectly formatted suppression comments can lead to unintended code analysis behavior. Issues that developers think are suppressed might still
+be reported, while malformed syntax might cause the analyzer to ignore more issues than intended. This creates confusion during code review and
+reduces confidence in the analysis results.</p>
+<h2>How to fix it</h2>
+<p>Fix the syntax of issue suppression comments to follow the correct format.</p>
+<p>For <code># NOSONAR</code>: - Use <code># NOSONAR</code> alone to suppress all issues on the line - Use <code># NOSONAR()</code> with empty
+parentheses to suppress all issues - Use <code># NOSONAR(rule1, rule2)</code> to suppress specific rules - Don’t use redundant commas in the
+parentheses, e.g. <code># NOSONAR(,)</code> - Close all parentheses properly</p>
+<p>For <code># noqa</code>: - Use <code># noqa</code> alone to suppress all issues on the line - Use <code># noqa: rule1,rule2</code> to suppress
+specific rules (with or without spaces after colon) - Don’t use redundant commas in the comma-separated lists, e.g. <code># noqa: ,rule1</code> -
+Don’t forget the colon (<code>:</code>) between <code>noqa</code> and the rule ID, and don’t use other punctuation</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def example():
+    x = 1  # NOSONAR(  # Noncompliant
+    y = 2  # NOSONAR(a,)  # Noncompliant
+    z = 3  # NOSONAR)(  # Noncompliant
+    a = 4  # noqa: ,rule1  # Noncompliant
+    b = 5  # noqa- rule1,rule2  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def example():
+    x = 1  # NOSONAR
+    y = 2  # NOSONAR(a)
+    z = 3  # NOSONAR
+    a = 4  # noqa: rule1
+    b = 5  # noqa: rule1,rule2
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> SonarQube documentation - <a href="https://docs.sonarqube.org/latest/user-guide/issues/#header-4">Managing your code issues</a> </li>
+  <li> Flake8 documentation - <a href="https://flake8.pycqa.org/en/latest/user/violations.html#in-line-ignoring-errors">In-line Ignoring Errors</a>
+  </li>
+</ul>
+

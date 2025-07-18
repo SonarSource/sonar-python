@@ -105,9 +105,9 @@ class NoSonarLineInfoCollectorTest {
         ""
       ),
       Arguments.of("# noqa: some text",
-        Map.of(1, new NoSonarLineInfo(Set.of("some"))),
+        Map.of(1, new NoSonarLineInfo(Set.of("some text"))),
         Set.of(),
-        "some"
+        "some text"
       ),
       Arguments.of("# noqa: a,b",
         Map.of(1, new NoSonarLineInfo(Set.of("a", "b"))),
@@ -115,9 +115,14 @@ class NoSonarLineInfoCollectorTest {
         "a,b"
       ),
       Arguments.of("# noqa: a, b",
-        Map.of(1, new NoSonarLineInfo(Set.of("a"))),
+        Map.of(1, new NoSonarLineInfo(Set.of("a", "b"))),
         Set.of(),
-        "a"
+        "a,b"
+      ),
+      Arguments.of("# noqa: a, b # Some text",
+        Map.of(1, new NoSonarLineInfo(Set.of("a", "b"))),
+        Set.of(),
+        "a,b"
       ),
       Arguments.of("""
           ""\"

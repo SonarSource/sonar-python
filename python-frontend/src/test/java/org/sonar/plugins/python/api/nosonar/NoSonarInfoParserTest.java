@@ -74,8 +74,20 @@ class NoSonarInfoParserTest {
         new NoSonarLineInfo(Set.of())
       ),
       Arguments.of(
+        "# NOSONAR(a) # NOSONAR(b,c) # Some text # NOSONAR(d,)",
+        new NoSonarLineInfo(Set.of("a", "b", "c", "d"))
+      ),
+      Arguments.of(
+        "# NOSONAR(a) # NOSONAR(b,c) # Some text # NOSONAR",
+        new NoSonarLineInfo(Set.of())
+      ),
+      Arguments.of(
+        "# some text # NOSONAR(a)",
+        new NoSonarLineInfo(Set.of("a"))
+      ),
+      Arguments.of(
         "# noqa: some text",
-        new NoSonarLineInfo(Set.of("some"))
+        new NoSonarLineInfo(Set.of("some text"))
       ),
       Arguments.of(
         "# noqa: a,b",
@@ -83,8 +95,60 @@ class NoSonarInfoParserTest {
       ),
       Arguments.of(
         "# noqa: a, b",
-        new NoSonarLineInfo(Set.of("a"))
+        new NoSonarLineInfo(Set.of("a", "b"))
+      ),
+      Arguments.of(
+        "# noqa: a, b # noqa: c # some text # noqa: d,e",
+        new NoSonarLineInfo(Set.of("a", "b", "c", "d", "e"))
+      ),
+      Arguments.of(
+        "# noqa: a, b # noqa: c # some text # noqa",
+        new NoSonarLineInfo(Set.of())
+      ),
+      Arguments.of(
+        "# noqa some text",
+        new NoSonarLineInfo(Set.of())
       )
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("provideValidationParameters")
+  void validationTest(String commentString, boolean expectedIsInvalid) {
+    var parser = new NoSonarInfoParser();
+    var isInvalid = parser.isInvalidIssueSuppressionComment(commentString);
+
+    Assertions.assertThat(isInvalid).isEqualTo(expectedIsInvalid);
+  }
+
+  private static Stream<Arguments> provideValidationParameters() {
+    return Stream.of(
+      Arguments.of("# NOSONAR", false),
+      Arguments.of("# NOSONAR()", false),
+      Arguments.of("# NOSONAR(a, b)", false),
+      Arguments.of("# NOSONAR with some text", false),
+      Arguments.of("# NOSONAR() with some text", false),
+      Arguments.of("# NOSONAR(a, b) with some text", false),
+      Arguments.of("# NOSONAR ()", false),
+      Arguments.of("# NOSONARa", false),
+      Arguments.of("# noqa", false),
+      Arguments.of("# noqa: one,two", false),
+      Arguments.of("# noqa:one,two", false),
+      Arguments.of("# noqa- one,two", false),
+
+      Arguments.of("# something unrelated", false),
+
+      Arguments.of("# NOSONAR(", true),
+      Arguments.of("# NOSONAR)", true),
+      Arguments.of("# NOSONAR)(", true),
+      Arguments.of("# NOSONAR(,)", true),
+      Arguments.of("# NOSONAR(a,)", true),
+      Arguments.of("# NOSONAR(a (b))", true),
+      Arguments.of("# noqa: one,", true),
+      Arguments.of("# noqa: ,two", true),
+      Arguments.of("# noqa: , ", true),
+      Arguments.of("# noqa: one,two some text", true),
+      Arguments.of("# noqa: one some text", true)
     );
   }
 
