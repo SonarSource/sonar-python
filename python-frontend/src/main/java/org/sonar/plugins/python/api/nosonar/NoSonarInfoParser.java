@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 
@@ -29,7 +30,7 @@ public class NoSonarInfoParser {
 
   private static final Integer MAX_COMMENT_LENGTH = 50;
   private static final String NOQA_PREFIX_REGEX = "#\\s*noqa([\\s:].*)?";
-  private static final String NOQA_PATTERN_REGEX = "^#\\s*noqa(?::\\s*(.+))?.*";
+  private static final String NOQA_PATTERN_REGEX = "^#\\s*noqa(?::\\s*(.+))?(?:[\\s;:].*)?";
   private static final String NOSONAR_PREFIX_REGEX = "^#\\s*NOSONAR(\\W.*)?";
   private static final String NOSONAR_PATTERN_REGEX = "^#\\s*NOSONAR(?:\\s*\\(([^)]*)\\))?($|\\s.*)";
 
@@ -65,7 +66,7 @@ public class NoSonarInfoParser {
     if (!isValidNoQa(comment)) {
       return true;
     }
-    var rules = parseNoQaRules(comment).toList();
+    var rules = parseNoQaRules(comment);
     return !rules.isEmpty() && rules.stream().anyMatch(r -> r.isBlank() || r.contains(" "));
   }
 
@@ -111,6 +112,7 @@ public class NoSonarInfoParser {
       comment = parseNoSonarComment(commentLine);
     } else if (isValidNoQa(commentLine)) {
       parseNoQaRules(commentLine)
+        .stream()
         .filter(Predicate.not(String::isEmpty))
         .forEach(rules::add);
       comment = parseNoQaComment(commentLine);
@@ -136,9 +138,20 @@ public class NoSonarInfoParser {
     return getTruncatedCommentString(noSonarPattern, noSonarCommentLine).strip();
   }
 
-  private Stream<String> parseNoQaRules(String noSonarCommentLine) {
-    var contentInsideParentheses = getParamsString(noQaPattern, noSonarCommentLine);
-    return parseParamsString(contentInsideParentheses);
+  private List<String> parseNoQaRules(String noSonarCommentLine) {
+    var paramsString = getParamsString(noQaPattern, noSonarCommentLine);
+    var paramsList = parseParamsString(paramsString).collect(Collectors.toList());
+    if (!paramsList.isEmpty()) {
+      // to get the last suppressed rule ID we need to split it to cut the trailing comment text.
+      // valid cases are:
+      // split by space: ruleID1, ruleID2 some comment
+      // or colon with space: ruleID1, ruleID2: some comment
+      var lastParamIndex = paramsList.size() - 1;
+      var lastParamRaw = paramsList.get(lastParamIndex);
+      var lastParam = lastParamRaw.split("(:?\\s)", 0)[0].trim();
+      paramsList.set(lastParamIndex, lastParam);
+    }
+    return paramsList;
   }
 
   private String parseNoQaComment(String noSonarCommentLine) {
@@ -169,7 +182,8 @@ public class NoSonarInfoParser {
       return Stream.of();
     }
 
-    return Stream.of(paramsString.split(",", -1))
+    var paramsArray = paramsString.split(",", -1);
+    return Stream.of(paramsArray)
       .map(String::trim);
   }
 }

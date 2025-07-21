@@ -27,5 +27,5 @@
 # noqa: a,,c
 # Noncompliant@+1
 # noqa: a,c,
-# Noncompliant@+1
+
 # noqa: a, some text

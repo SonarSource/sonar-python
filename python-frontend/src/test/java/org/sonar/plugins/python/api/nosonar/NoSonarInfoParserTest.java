@@ -31,6 +31,8 @@ class NoSonarInfoParserTest {
     var parser = new NoSonarInfoParser();
     var parsingResult = parser.parse("# comment string");
     Assertions.assertThat(parsingResult).isNotPresent();
+    parsingResult = parser.parse("# noqal");
+    Assertions.assertThat(parsingResult).isNotPresent();
   }
 
   @ParameterizedTest
@@ -95,7 +97,7 @@ class NoSonarInfoParserTest {
       ),
       Arguments.of(
         "# noqa: some text",
-        new NoSonarLineInfo(Set.of("some text"))
+        new NoSonarLineInfo(Set.of("some"))
       ),
       Arguments.of(
         "# noqa: a,b",
@@ -115,6 +117,18 @@ class NoSonarInfoParserTest {
       ),
       Arguments.of(
         "# noqa some text",
+        new NoSonarLineInfo(Set.of())
+      ),
+      Arguments.of(
+        "# noqa: rule1, rule2 some explanation",
+        new NoSonarLineInfo(Set.of("rule1", "rule2"))
+      ),
+      Arguments.of(
+        "# noqa: rule1, rule2: some explanation",
+        new NoSonarLineInfo(Set.of("rule1", "rule2"))
+      ),
+      Arguments.of(
+        "# noqa; noqa; noqa; noqa; noqa",
         new NoSonarLineInfo(Set.of())
       )
     );
@@ -143,6 +157,9 @@ class NoSonarInfoParserTest {
       Arguments.of("# noqa: one,two", false),
       Arguments.of("# noqa:one,two", false),
       Arguments.of("# noqa- one,two", false),
+      Arguments.of("# noqa: one,two some text", false),
+      Arguments.of("# noqa: one some text", false),
+      Arguments.of("# noqa:", false),
 
       Arguments.of("# something unrelated", false),
 
@@ -154,9 +171,7 @@ class NoSonarInfoParserTest {
       Arguments.of("# NOSONAR(a (b))", true),
       Arguments.of("# noqa: one,", true),
       Arguments.of("# noqa: ,two", true),
-      Arguments.of("# noqa: , ", true),
-      Arguments.of("# noqa: one,two some text", true),
-      Arguments.of("# noqa: one some text", true)
+      Arguments.of("# noqa: , ", true)
     );
   }
 

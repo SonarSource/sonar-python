@@ -101,7 +101,7 @@ public class NoSonarTest {
     analyzeProject(createScanner(NOQA_PROJECT_KEY, "projects/nosonar/noqa-project"));
 
     IssueListAssert.assertThat(issues(NOQA_PROJECT_KEY))
-        .hasSize(20)
+        .hasSize(19)
         // basic noqa checks
         .containsIssue(1, "python:PrintStatementUsage")
         .containsIssue(2, "python:S1309").doesNotContainIssue(2, "python:PrintStatementUsage")
