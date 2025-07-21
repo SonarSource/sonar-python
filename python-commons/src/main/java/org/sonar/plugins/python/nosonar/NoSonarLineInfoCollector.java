@@ -142,4 +142,12 @@ public class NoSonarLineInfoCollector {
       .sorted()
       .collect(Collectors.joining(","));
   }
+
+  public String getCommentWithExactlyOneRuleSuppressed(){
+    return componentKeyToNoSonarLineInfoMap.values().stream()
+      .flatMap(map -> map.values().stream())
+      .filter(noSonarLineInfo -> noSonarLineInfo.suppressedRuleKeys().size() == 1)
+      .map(noSonarLineInfo -> noSonarLineInfo.suppressedRuleKeys().stream().findFirst().get() +":"+ noSonarLineInfo.comment())
+      .collect(Collectors.joining(";;"));
+  }
 }

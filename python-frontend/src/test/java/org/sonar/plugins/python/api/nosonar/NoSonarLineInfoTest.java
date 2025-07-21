@@ -17,13 +17,24 @@
 package org.sonar.plugins.python.api.nosonar;
 
 import java.util.Set;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public record NoSonarLineInfo(Set<String> suppressedRuleKeys, String comment) {
-  public NoSonarLineInfo(Set<String> suppressedRuleKeys) {
-    this(suppressedRuleKeys, "");
+class NoSonarLineInfoTest {
+
+  @Test
+  void constructorWithDefaultValueTest() {
+    NoSonarLineInfo noSonarLineInfo = new NoSonarLineInfo(Set.of());
+    Assertions.assertThat(noSonarLineInfo.comment()).isEmpty();
   }
 
-  public boolean isSuppressedRuleKeysEmpty() {
-    return suppressedRuleKeys.isEmpty();
+  @Test
+  void isSuppressedRuleKeysEmptyTest() {
+    NoSonarLineInfo noSonarLineInfoEmpty = new NoSonarLineInfo(Set.of());
+    Assertions.assertThat(noSonarLineInfoEmpty.isSuppressedRuleKeysEmpty()).isTrue();
+
+    NoSonarLineInfo noSonarLineInfoNotEmpty = new NoSonarLineInfo(Set.of("rule1", "rule2"));
+    Assertions.assertThat(noSonarLineInfoNotEmpty.isSuppressedRuleKeysEmpty()).isFalse();
+
   }
 }

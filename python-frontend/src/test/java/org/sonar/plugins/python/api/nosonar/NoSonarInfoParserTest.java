@@ -51,7 +51,7 @@ class NoSonarInfoParserTest {
       ),
       Arguments.of(
         "# NOSONAR(one, two) some text",
-        new NoSonarLineInfo(Set.of("one", "two"))
+        new NoSonarLineInfo(Set.of("one", "two"),"some text")
       ),
       Arguments.of(
         "# NOSONAR()",
@@ -63,19 +63,23 @@ class NoSonarInfoParserTest {
       ),
       Arguments.of(
         "# NOSONAR(something,) abc",
-        new NoSonarLineInfo(Set.of("something"))
+        new NoSonarLineInfo(Set.of("something"),"abc")
       ),
       Arguments.of(
         "# NOSONAR",
-        new NoSonarLineInfo(Set.of())
+        new NoSonarLineInfo(Set.of(),"")
+      ),
+      Arguments.of(
+        "# NOSONAR a very long comment that I don't want to keep that long because there is more than 50 characters",
+        new NoSonarLineInfo(Set.of(),"a very long comment that I don't want to keep tha")
       ),
       Arguments.of(
         "# NOSONAR some text",
-        new NoSonarLineInfo(Set.of())
+        new NoSonarLineInfo(Set.of(), "some text")
       ),
       Arguments.of(
         "# NOSONAR(a) # NOSONAR(b,c) # Some text # NOSONAR(d,)",
-        new NoSonarLineInfo(Set.of("a", "b", "c", "d"))
+        new NoSonarLineInfo(Set.of("a", "b", "c", "d"), "# Some text")
       ),
       Arguments.of(
         "# NOSONAR(a) # NOSONAR(b,c) # Some text # NOSONAR",
@@ -83,7 +87,11 @@ class NoSonarInfoParserTest {
       ),
       Arguments.of(
         "# some text # NOSONAR(a)",
-        new NoSonarLineInfo(Set.of("a"))
+        new NoSonarLineInfo(Set.of("a"), "# some text")
+      ),
+      Arguments.of(
+        "# NOSONAR(a) # NOSONAR(b,c) # Some text # NOSONAR",
+        new NoSonarLineInfo(Set.of())
       ),
       Arguments.of(
         "# noqa: some text",
@@ -99,7 +107,7 @@ class NoSonarInfoParserTest {
       ),
       Arguments.of(
         "# noqa: a, b # noqa: c # some text # noqa: d,e",
-        new NoSonarLineInfo(Set.of("a", "b", "c", "d", "e"))
+        new NoSonarLineInfo(Set.of("a", "b", "c", "d", "e"), "# some text")
       ),
       Arguments.of(
         "# noqa: a, b # noqa: c # some text # noqa",

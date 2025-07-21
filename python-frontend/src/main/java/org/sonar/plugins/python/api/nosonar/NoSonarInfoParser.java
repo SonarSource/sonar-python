@@ -24,10 +24,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 
 public class NoSonarInfoParser {
 
+  private static final Integer MAX_COMMENT_LENGTH = 50;
   private static final String NOQA_PREFIX_REGEX = "#\\s*noqa([\\s:].*)?";
   private static final String NOQA_PATTERN_REGEX = "^#\\s*noqa(?::\\s*(.+))?.*";
   private static final String NOSONAR_PREFIX_REGEX = "^#\\s*NOSONAR(\\W.*)?";
@@ -79,6 +79,7 @@ public class NoSonarInfoParser {
 
   public Optional<NoSonarLineInfo> parse(String commentLine) {
     var rules = new HashSet<String>();
+    StringBuilder concatenatedCommentBuilder = new StringBuilder();
     var comments = splitInlineComments(commentLine);
     for (var comment : comments) {
       var noSonarLineInfo = parseComment(comment);
@@ -88,26 +89,35 @@ public class NoSonarInfoParser {
           return Optional.of(noSonarLineInfo);
         }
         rules.addAll(noSonarLineInfo.suppressedRuleKeys());
+        concatenatedCommentBuilder.append(noSonarLineInfo.comment());
+      } else {
+        concatenatedCommentBuilder.append(comment.strip());
       }
     }
-    return Optional.of(rules).filter(Predicate.not(HashSet::isEmpty)).map(NoSonarLineInfo::new);
+    if (rules.isEmpty()) {
+      return Optional.empty();
+    }
+    return Optional.of(new NoSonarLineInfo(rules, concatenatedCommentBuilder.toString()));
   }
 
   @CheckForNull
-  private NoSonarLineInfo parseComment(String comment) {
+  private NoSonarLineInfo parseComment(String commentLine) {
     var rules = new HashSet<String>();
-    if (isValidNoSonar(comment)) {
-      parseNoSonarRules(comment)
+    String comment = "";
+    if (isValidNoSonar(commentLine)) {
+      parseNoSonarRules(commentLine)
         .filter(Predicate.not(String::isEmpty))
         .forEach(rules::add);
-    } else if (isValidNoQa(comment)) {
-      parseNoQaRules(comment)
+      comment = parseNoSonarComment(commentLine);
+    } else if (isValidNoQa(commentLine)) {
+      parseNoQaRules(commentLine)
         .filter(Predicate.not(String::isEmpty))
         .forEach(rules::add);
+      comment = parseNoQaComment(commentLine);
     } else {
       return null;
     }
-    return new NoSonarLineInfo(rules);
+    return new NoSonarLineInfo(rules, comment);
   }
 
   private static List<String> splitInlineComments(String commentsLine) {
@@ -122,23 +132,40 @@ public class NoSonarInfoParser {
     return parseParamsString(contentInsideParentheses);
   }
 
+  private String parseNoSonarComment(String noSonarCommentLine) {
+    return getTruncatedCommentString(noSonarPattern, noSonarCommentLine).strip();
+  }
 
   private Stream<String> parseNoQaRules(String noSonarCommentLine) {
     var contentInsideParentheses = getParamsString(noQaPattern, noSonarCommentLine);
     return parseParamsString(contentInsideParentheses);
   }
 
-  @CheckForNull
+  private String parseNoQaComment(String noSonarCommentLine) {
+    return getTruncatedCommentString(noQaPattern, noSonarCommentLine).strip();
+  }
+
   private static String getParamsString(Pattern pattern, String noSonarCommentLine) {
+    return getPatternGroup(1, pattern, noSonarCommentLine);
+  }
+
+  private static String getTruncatedCommentString(Pattern pattern, String noSonarCommentLine) {
+    // Actually, group 1 could be the comment group if no rule is specified but we are only interested in comment with exactly one rule suppressed.
+    String commentString = getPatternGroup(2, pattern, noSonarCommentLine);
+    return commentString.length() > MAX_COMMENT_LENGTH ? commentString.substring(0, MAX_COMMENT_LENGTH) : commentString;
+  }
+
+  private static String getPatternGroup(int groupIndex, Pattern pattern, String noSonarCommentLine) {
     return Optional.of(noSonarCommentLine)
       .map(pattern::matcher)
       .filter(Matcher::matches)
-      .map(m -> m.group(1))
-      .orElse(null);
+      .filter(m -> m.groupCount() >= groupIndex)
+      .map(m -> m.group(groupIndex))
+      .orElse("");
   }
 
-  private static Stream<String> parseParamsString(@Nullable String paramsString) {
-    if (paramsString == null) {
+  private static Stream<String> parseParamsString(String paramsString) {
+    if (paramsString.isBlank()) {
       return Stream.of();
     }
 

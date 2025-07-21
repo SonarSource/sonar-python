@@ -31,7 +31,13 @@ class NoSonarLineInfoCollectorTest {
 
   @ParameterizedTest
   @MethodSource("provideCollectorParameters")
-  void collector_test(String code, Map<Integer, NoSonarLineInfo> expectedLineInfos, Set<Integer> expectedEmptyNoSonarLines, String expectedSuppressedRuleIds) {
+  void collector_test(
+    String code,
+    Map<Integer, NoSonarLineInfo> expectedLineInfos,
+    Set<Integer> expectedEmptyNoSonarLines,
+    String expectedSuppressedRuleIds,
+    String expectedComments
+  ) {
     var astNode = PythonParser.create().parse(code);
 
     var fileInput = new PythonTreeMaker().fileInput(astNode);
@@ -41,6 +47,7 @@ class NoSonarLineInfoCollectorTest {
     Assertions.assertThat(collector.get("foo.py")).isEqualTo(expectedLineInfos);
     Assertions.assertThat(collector.getLinesWithEmptyNoSonar("foo.py")).isEqualTo(expectedEmptyNoSonarLines);
     Assertions.assertThat(collector.getSuppressedRuleIds()).isEqualTo(expectedSuppressedRuleIds);
+    Assertions.assertThat(collector.getCommentWithExactlyOneRuleSuppressed()).isEqualTo(expectedComments);
   }
 
   private static Stream<Arguments> provideCollectorParameters() {
@@ -50,20 +57,23 @@ class NoSonarLineInfoCollectorTest {
           """,
         Map.of(1, new NoSonarLineInfo(Set.of("something"))),
         Set.of(),
-        "something"
+        "something",
+        "something:"
       ),
       Arguments.of("""
           a = 1 # NOSONAR(one, two) some text
           """,
-        Map.of(1, new NoSonarLineInfo(Set.of("one", "two"))),
+        Map.of(1, new NoSonarLineInfo(Set.of("one", "two"), "some text")),
         Set.of(),
-        "one,two"
+        "one,two",
+        ""
       ),
       Arguments.of("""
           a = 1 # NOSONAR()
           """,
         Map.of(1, new NoSonarLineInfo(Set.of())),
         Set.of(1),
+        "",
         ""
       ),
       Arguments.of("""
@@ -71,58 +81,92 @@ class NoSonarLineInfoCollectorTest {
           """,
         Map.of(1, new NoSonarLineInfo(Set.of("something"))),
         Set.of(),
-        "something"
+        "something",
+        "something:"
       ),
       Arguments.of("""
-          a = 1 # NOSONAR(something,) adsgvnbdfa;l
+          a = 1 # NOSONAR(something,) this is a comment on why I suppressed this rule
           """,
-        Map.of(1, new NoSonarLineInfo(Set.of("something"))),
+        Map.of(1, new NoSonarLineInfo(Set.of("something"), "this is a comment on why I suppressed this rule")),
         Set.of(),
-        "something"
+        "something",
+        "something:this is a comment on why I suppressed this rule"
       ),
       Arguments.of("""
           a = 1 # NOSONAR
           """,
-        Map.of(1, new NoSonarLineInfo(Set.of())),
+        Map.of(1, new NoSonarLineInfo(Set.of(), "")),
         Set.of(1),
+        "",
         ""
       ),
       Arguments.of("""
           a = 1 # NOSONAR some text
           """,
-        Map.of(1, new NoSonarLineInfo(Set.of())),
+        Map.of(1, new NoSonarLineInfo(Set.of(), "some text")),
         Set.of(1),
+        "",
         ""
       ),
-      Arguments.of("a = 1 # NOSONAR some text",
-        Map.of(1, new NoSonarLineInfo(Set.of())),
+      Arguments.of("""
+          a = 1 # NOSONAR(aRule) this is a very long comment and I don't want to send all these characters to sonarqube through telemetry
+          """,
+        Map.of(1, new NoSonarLineInfo(Set.of("aRule"), "this is a very long comment and I don't want to s")),
+        Set.of(),
+        "aRule",
+        "aRule:this is a very long comment and I don't want to s"
+      ),
+      Arguments.of("""
+          a = 1 # NOSONAR some comment
+          b = 2 # NOSONAR(bRule) b comment
+          c = 3 # NOSONAR(cRule) c comment
+          d, e = 4,5 # NOSONAR(dRule, eRule) d and e comment
+          """,
+        Map.of(
+          1, new NoSonarLineInfo(Set.of(), "some comment"),
+          2, new NoSonarLineInfo(Set.of("bRule"), "b comment"),
+          3, new NoSonarLineInfo(Set.of("cRule"), "c comment"),
+          4, new NoSonarLineInfo(Set.of("dRule", "eRule"), "d and e comment")
+        ),
         Set.of(1),
+        "bRule,cRule,dRule,eRule",
+        "bRule:b comment;;cRule:c comment"
+      ),
+      Arguments.of("a = 1 # NOSONAR some text",
+        Map.of(1, new NoSonarLineInfo(Set.of(), "some text")),
+        Set.of(1),
+        "",
         ""
       ),
       Arguments.of("# NOSONAR some text",
-        Map.of(1, new NoSonarLineInfo(Set.of())),
+        Map.of(1, new NoSonarLineInfo(Set.of(), "some text")),
         Set.of(1),
+        "",
         ""
       ),
       Arguments.of("# noqa: some text",
         Map.of(1, new NoSonarLineInfo(Set.of("some text"))),
         Set.of(),
-        "some text"
+        "some text",
+        "some text:"
       ),
       Arguments.of("# noqa: a,b",
         Map.of(1, new NoSonarLineInfo(Set.of("a", "b"))),
         Set.of(),
-        "a,b"
+        "a,b",
+        ""
       ),
       Arguments.of("# noqa: a, b",
         Map.of(1, new NoSonarLineInfo(Set.of("a", "b"))),
         Set.of(),
-        "a,b"
+        "a,b",
+        ""
       ),
       Arguments.of("# noqa: a, b # Some text",
-        Map.of(1, new NoSonarLineInfo(Set.of("a", "b"))),
+        Map.of(1, new NoSonarLineInfo(Set.of("a", "b"), "# Some text")),
         Set.of(),
-        "a,b"
+        "a,b",
+        ""
       ),
       Arguments.of("""
           ""\"
@@ -139,6 +183,7 @@ class NoSonarLineInfoCollectorTest {
           5, new NoSonarLineInfo(Set.of())
         ),
         Set.of(1, 2, 3, 4, 5),
+        "",
         ""
       )
     );
