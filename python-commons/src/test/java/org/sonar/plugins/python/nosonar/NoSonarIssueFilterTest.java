@@ -34,10 +34,9 @@ class NoSonarIssueFilterTest {
   
   @ParameterizedTest
   @MethodSource("provideFilterParameters")
-  void test(Map<Integer, NoSonarLineInfo> noSonarInfos, @Nullable Integer line, boolean filterChainAcceptResult, boolean expectedResult) {
+  void test(Map<Integer, NoSonarLineInfo> noSonarInfos, String ruleKey, @Nullable Integer line, boolean filterChainAcceptResult, boolean expectedResult) {
     var componentKey = "foo.py";
     var ruleRepo = "my_repo";
-    var ruleKey = "my_rule";
 
     var collector = Mockito.mock(NoSonarLineInfoCollector.class);
     Mockito.when(collector.get(componentKey))
@@ -53,18 +52,23 @@ class NoSonarIssueFilterTest {
     Mockito.when(filterChain.accept(issue)).thenReturn(filterChainAcceptResult);
 
     var result = filter.accept(issue, filterChain);
-    Assertions.assertThat(result).isEqualTo(expectedResult);
+    Assertions.assertThat(result)
+      .as("NoSonarIssueFilter filter result")
+      .isEqualTo(expectedResult);
   }
 
   private static Stream<Arguments> provideFilterParameters() {
     return Stream.of(
-      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("my_rule"))), 1, true, false),
-      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("other_rule"))), 1, true, true),
-      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of())), 1, true, true),
-      Arguments.of(Map.of(2, new NoSonarLineInfo(Set.of("my_rule"))), 1, true, true),
-      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("my_rule"))), null, true, true),
-      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("other_rule"))), 1, false, false),
-      Arguments.of(Map.of(), 1, false, false)
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("my_rule"))), "my_rule", 1, true, false),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of())), "my_rule", 1, true, false),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of())), "my_rule", 1, false, false),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("other_rule"))), "my_rule", 1, true, true),
+      Arguments.of(Map.of(2, new NoSonarLineInfo(Set.of("my_rule"))), "my_rule", 1, true, true),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("my_rule"))), "my_rule", null, true, true),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("other_rule"))), "my_rule", 1, false, false),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("S1309"))), "S1309", 1, true, true),
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of("S1309"))), "S1309", 1, false, false),
+      Arguments.of(Map.of(), "my_rule", 1, false, false)
     );
   }
 }

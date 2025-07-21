@@ -65,8 +65,6 @@ public class MeasuresRepository {
     FileMetrics fileMetrics = new FileMetrics(visitorContext, isNotebook(inputFile));
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
-    processNoSonarInFile(inputFile);
-
     if (!isInSonarLint) {
       Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
       saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
@@ -87,16 +85,6 @@ public class MeasuresRepository {
         fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
       }
       save(fileLinesContext);
-    }
-  }
-
-  private void processNoSonarInFile(PythonInputFile inputFile) {
-    try {
-      lock.lock();
-      var linesWithEmptyNosonar = noSonarLineInfoCollector.getLinesWithEmptyNoSonar(inputFile.wrappedFile().key());
-      noSonarFilter.noSonarInFile(inputFile.wrappedFile(), linesWithEmptyNosonar);
-    } finally {
-      lock.unlock();
     }
   }
 

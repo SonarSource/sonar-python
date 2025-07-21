@@ -292,6 +292,7 @@ public class OpenSourceCheckList {
       NonStringInAllPropertyCheck.class,
       NonSingletonTfVariableCheck.class,
       NoPersonReferenceInTodoCheck.class,
+      NoQaCommentCheck.class,
       NoReRaiseInExitCheck.class,
       NoSonarCommentCheck.class,
       NoSonarCommentFormatCheck.class,

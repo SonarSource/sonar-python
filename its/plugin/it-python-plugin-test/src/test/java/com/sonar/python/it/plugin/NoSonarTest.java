@@ -30,6 +30,7 @@ public class NoSonarTest {
 
   private static final String NO_SONAR_PROJECT_KEY = "nosonar";
   private static final String EXTERNAL_ISSUE_PROJECT_KEY = "external-issues";
+  private static final String NOQA_PROJECT_KEY = "noqa";
 
   private static final String PROFILE_NAME = "nosonar";
 
@@ -93,6 +94,42 @@ public class NoSonarTest {
         .containsIssue(20, "python:NoSonar")
         .doesNotContainIssue(20, "python:PrintStatementUsage")
         .doesNotContainIssue(20, "python:OneStatementPerLine");
+  }
+
+  @Test
+  void test_noqa() {
+    analyzeProject(createScanner(NOQA_PROJECT_KEY, "projects/nosonar/noqa-project"));
+
+    IssueListAssert.assertThat(issues(NOQA_PROJECT_KEY))
+        .hasSize(20)
+        // basic noqa checks
+        .containsIssue(1, "python:PrintStatementUsage")
+        .containsIssue(2, "python:S1309").doesNotContainIssue(2, "python:PrintStatementUsage")
+        .containsIssue(3, "python:S1309").doesNotContainIssue(3, "python:PrintStatementUsage")
+        .containsIssue(4, "python:S1309").doesNotContainIssue(4, "python:PrintStatementUsage")
+        
+        // noqa with specific rules
+        .containsIssue(6, "python:S1309")
+        .containsIssue(7, "python:S1309").doesNotContainIssue(6, "python:PrintStatementUsage")
+        .containsIssue(8, "python:S1309").doesNotContainIssue(7, "python:PrintStatementUsage")
+        
+        // noqa with multiple rules
+        .containsIssue(11, "python:OneStatementPerLine").containsIssue(11, "python:PrintStatementUsage")
+        .containsIssue(12, "python:S1309").doesNotContainIssue(12, "python:PrintStatementUsage")
+        .doesNotContainIssue(12, "python:OneStatementPerLine")
+        .containsIssue(13, "python:S1309").doesNotContainIssue(13, "python:PrintStatementUsage")
+        .doesNotContainIssue(13, "python:OneStatementPerLine")
+        .containsIssue(14, "python:S1309").doesNotContainIssue(14, "python:PrintStatementUsage")
+        .doesNotContainIssue(14, "python:OneStatementPerLine")
+
+        // invalid noqa
+        .containsIssue(17, "python:S1309").doesNotContainIssue(17, "python:PrintStatementUsage")
+        .containsIssue(18, "python:S1309").containsIssue(18, "python:PrintStatementUsage")
+        .containsIssue(19, "python:S1309").doesNotContainIssue(19, "python:PrintStatementUsage").doesNotContainIssue(19, "python:PrintStatementUsage")
+        
+        // noqa at the end of file
+        .containsIssue(21, "python:S1309")
+        .containsIssue(22, "python:S1309").doesNotContainIssue(22, "python:PrintStatementUsage");
   }
 
   private void analyzeProject(SonarScanner scanner) {

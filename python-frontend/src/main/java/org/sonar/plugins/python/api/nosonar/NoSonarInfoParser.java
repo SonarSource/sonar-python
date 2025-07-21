@@ -73,7 +73,7 @@ public class NoSonarInfoParser {
     return noSonarCommentLine.matches(NOSONAR_PATTERN_REGEX);
   }
 
-  private static boolean isValidNoQa(String noSonarCommentLine) {
+  public static boolean isValidNoQa(String noSonarCommentLine) {
     return noSonarCommentLine.matches(NOQA_PATTERN_REGEX);
   }
 

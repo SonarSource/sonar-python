@@ -16,6 +16,7 @@
  */
 package org.sonar.plugins.python.nosonar;
 
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.scan.issue.filter.FilterableIssue;
@@ -28,6 +29,8 @@ import org.sonarsource.api.sonarlint.SonarLintSide;
 @ScannerSide
 public class NoSonarIssueFilter implements IssueFilter {
   private static final Logger LOG = LoggerFactory.getLogger(NoSonarIssueFilter.class);
+
+  private static final Set<String> WHITELISTED_RULES = Set.of("S1309", "NoSonar");
 
   private final NoSonarLineInfoCollector noSonarLineInfoCollector;
 
@@ -45,7 +48,21 @@ public class NoSonarIssueFilter implements IssueFilter {
 
     var noSonarLineInfos = noSonarLineInfoCollector.get(issueComponentKey);
     var noSonarLineInfo = noSonarLineInfos.get(issueLine);
-    var isNotFilteredOutByNoSonar = noSonarLineInfo == null || !noSonarLineInfo.suppressedRuleKeys().contains(issue.ruleKey().rule());
+    String ruleId = issue.ruleKey().rule();
+
+    if(WHITELISTED_RULES.contains(ruleId)) {
+      LOG.debug("Rule {} cannot be filtered out as it is whitelisted (all whitelisted rules: {}) for component with key: {} on line: {}", 
+        ruleId, 
+        WHITELISTED_RULES,
+        issueComponentKey, 
+        issueLine);
+
+      // while whitelisted rules should never be filtered out, returning true here screws up the LITs plugin
+      return chain.accept(issue); 
+    }
+
+    var isNotFilteredOutByNoSonar = noSonarLineInfo == null || 
+      (!noSonarLineInfo.isSuppressedRuleKeysEmpty() && !noSonarLineInfo.suppressedRuleKeys().contains(ruleId));
     if (!isNotFilteredOutByNoSonar) {
       LOG.debug("Filtering out issue in the component with key: {} for rule: {} on line: {} based on the file NoSonar infos {}",
         issueComponentKey,
