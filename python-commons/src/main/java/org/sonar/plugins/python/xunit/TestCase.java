@@ -18,7 +18,7 @@ package org.sonar.plugins.python.xunit;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * Represents a unit test case. Has a couple of data items like name, status, time etc. associated. Reports testcase details in
@@ -109,8 +109,8 @@ public class TestCase {
     StringBuilder details = new StringBuilder();
     details.append("<testcase status=\"").append(status).append("\" time=\"").append(time).append("\" name=\"").append(name).append("\"");
     if (isError() || isFailure()) {
-      details.append(">").append(isError() ? "<error message=\"" : "<failure message=\"").append(StringEscapeUtils.escapeXml(errorMessage))
-          .append("\">").append("<![CDATA[").append(StringEscapeUtils.escapeXml(stackTrace)).append("]]>")
+      details.append(">").append(isError() ? "<error message=\"" : "<failure message=\"").append(StringEscapeUtils.escapeXml11(errorMessage))
+          .append("\">").append("<![CDATA[").append(StringEscapeUtils.escapeXml11(stackTrace)).append("]]>")
           .append(isError() ? "</error>" : "</failure>").append("</testcase>");
     } else {
       details.append("/>");

@@ -24,6 +24,7 @@ import java.util.Map;
 import javax.annotation.CheckForNull;
 import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputComponent;
 import org.sonar.api.batch.fs.InputFile;
@@ -136,13 +137,13 @@ public class PythonXUnitSensor extends PythonReportSensor {
 
   private InputFile findResourceUsingNoseTestsStrategy(String fileKey) {
     // a) check assuming the key doesnt contain the class name
-    String candidateKey = StringUtils.replace(fileKey, ".", "/") + ".py";
+    String candidateKey = Strings.CS.replace(fileKey, ".", "/") + ".py";
 
     InputFile unitTestFile = getSonarTestFile(new File(candidateKey));
 
     if (unitTestFile == null) {
       // b) check assuming the key *does* contain the class name
-      String candidateKey2 = StringUtils.replace(StringUtils.substringBeforeLast(fileKey, "."), ".", "/") + ".py";
+      String candidateKey2 = Strings.CS.replace(StringUtils.substringBeforeLast(fileKey, "."), ".", "/") + ".py";
       if ( !(candidateKey2.equals(candidateKey))) {
         unitTestFile = getSonarTestFile(new File(candidateKey2));
       }

@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.stream.XMLResolver;
 import javax.xml.stream.XMLStreamException;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.sonarsource.analyzer.commons.xml.SafeStaxParserFactory;
@@ -68,7 +68,7 @@ public class StaxParser {
     public Object resolveEntity(String arg0, String arg1, String fileName, String undeclaredEntity) throws XMLStreamException {
       String undeclared = undeclaredEntity;
       // avoid problems with XML docs containing undeclared entities.. return the entity under its raw form if not a Unicode expression
-      if (StringUtils.startsWithIgnoreCase(undeclaredEntity, "u") && undeclaredEntity.length() == 5) {
+      if (Strings.CI.startsWith(undeclaredEntity, "u") && undeclaredEntity.length() == 5) {
         int unicodeCharHexValue = Integer.parseInt(undeclaredEntity.substring(1), 16);
         if (Character.isDefined(unicodeCharHexValue)) {
           undeclared = new String(new char[] {(char) unicodeCharHexValue});
