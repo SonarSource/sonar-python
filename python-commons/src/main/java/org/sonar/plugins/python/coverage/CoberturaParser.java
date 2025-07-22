@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import javax.xml.stream.XMLStreamException;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;

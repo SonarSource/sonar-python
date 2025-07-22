@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.stream.XMLResolver;
 import javax.xml.stream.XMLStreamException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.sonarsource.analyzer.commons.xml.SafeStaxParserFactory;

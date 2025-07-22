@@ -34,7 +34,7 @@ import org.sonar.plugins.python.ExternalIssuesSensor;
 import org.sonar.plugins.python.bandit.BanditJsonReportReader.Issue;
 import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
 
-import static org.apache.commons.lang.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class BanditSensor extends ExternalIssuesSensor {
 

@@ -33,7 +33,7 @@ import org.sonar.api.rules.RuleType;
 import org.sonar.plugins.python.ExternalIssuesSensor;
 import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
 
-import static org.apache.commons.lang.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class RuffSensor extends ExternalIssuesSensor {
 
