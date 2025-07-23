@@ -31,6 +31,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
@@ -182,6 +183,11 @@ public class SubscriptionVisitor {
     @Override
     public TypeChecker typeChecker() {
       return pythonVisitorContext.typeChecker();
+    }
+
+    @Override
+    public ProjectConfiguration projectConfiguration() {
+      return pythonVisitorContext.projectConfiguration();
     }
 
     public RegexParseResult regexForStringElement(StringElement stringElement, FlagSet flagSet) {

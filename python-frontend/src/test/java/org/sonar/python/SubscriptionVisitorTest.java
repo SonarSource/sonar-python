@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.project.configuration.AwsLambdaHandlerInfo;
+import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -98,6 +100,31 @@ class SubscriptionVisitorTest {
 
     FileInput fileInput = PythonTestUtils.parse("class A:\n  def foo(self): ...");
     PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, "");
+    SubscriptionVisitor.analyze(Collections.singleton(check), context);
+  }
+
+  @Test
+  void projectConfiguration() {
+    var projectConfiguration = new ProjectConfiguration();
+    projectConfiguration.awsProjectConfiguration().awsLambdaHandlers().add(new AwsLambdaHandlerInfo("a.b.c"));
+
+    var check = new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
+          assertThat(ctx.projectConfiguration()).isSameAs(projectConfiguration);
+          assertThat(ctx.projectConfiguration().awsProjectConfiguration().awsLambdaHandlers())
+            .contains(new AwsLambdaHandlerInfo("a.b.c"));
+        });
+      }
+    };
+
+    var fileInput = PythonTestUtils.parse("def my_handler(event, context): ...");
+
+    var context = new PythonVisitorContext(fileInput,
+      PythonTestUtils.pythonFile("file"),
+      null,
+      "", projectConfiguration);
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
   }
 }

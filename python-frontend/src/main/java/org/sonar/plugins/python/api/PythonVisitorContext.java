@@ -26,6 +26,7 @@ import javax.annotation.Nullable;
 import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.python.caching.CacheContextImpl;
@@ -43,8 +44,13 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private final TypeChecker typeChecker;
   private ModuleType moduleType = null;
   private final List<PreciseIssue> issues;
+  private final ProjectConfiguration projectConfiguration;
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName) {
+    this(rootTree, pythonFile, workingDirectory, packageName, new ProjectConfiguration());
+  }
+
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName, ProjectConfiguration projectConfiguration) {
     super(pythonFile, workingDirectory, CacheContextImpl.dummyCache(), ProjectLevelSymbolTable.empty());
     buildSymbols(rootTree, pythonFile, packageName);
     var symbolTable = new SymbolTableBuilderV2(rootTree).build();
@@ -54,11 +60,17 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.parsingException = null;
     this.moduleType = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferModuleType(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
+    this.projectConfiguration = projectConfiguration;
     this.issues = new ArrayList<>();
   }
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
+    this(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, cacheContext, new ProjectConfiguration());
+  }
+
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, ProjectConfiguration projectConfiguration) {
     super(pythonFile, workingDirectory, cacheContext, projectLevelSymbolTable);
 
     buildSymbols(rootTree, pythonFile, packageName, projectLevelSymbolTable);
@@ -69,6 +81,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.parsingException = null;
     this.moduleType = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferModuleType(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
+    this.projectConfiguration = projectConfiguration;
     this.issues = new ArrayList<>();
   }
 
@@ -81,6 +94,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
     this.moduleType = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferModuleType(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
+    this.projectConfiguration = new ProjectConfiguration();
     this.rootTree = rootTree;
     this.parsingException = null;
     this.issues = new ArrayList<>();
@@ -100,6 +114,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.rootTree = null;
     this.parsingException = parsingException;
     this.typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    this.projectConfiguration = new ProjectConfiguration();
     this.issues = new ArrayList<>();
   }
 
@@ -108,6 +123,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.rootTree = null;
     this.parsingException = parsingException;
     this.typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    this.projectConfiguration = new ProjectConfiguration();
     this.issues = new ArrayList<>();
   }
 
@@ -135,5 +151,9 @@ public class PythonVisitorContext extends PythonInputFileContext {
   @Beta
   public ModuleType moduleType() {
     return moduleType;
+  }
+
+  public ProjectConfiguration projectConfiguration() {
+    return projectConfiguration;
   }
 }

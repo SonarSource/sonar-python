@@ -125,7 +125,7 @@ class PythonVisitorCheckTest {
       }
     };
     File tmpFile = Files.createTempFile("foo", "py").toFile();
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile, null);
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
     assertThat(context.workingDirectory()).isNull();
     assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
     check.scanFile(context);

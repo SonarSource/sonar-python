@@ -23,6 +23,7 @@ import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -67,4 +68,6 @@ public interface SubscriptionContext {
   CacheContext cacheContext();
 
   TypeChecker typeChecker();
+
+  ProjectConfiguration projectConfiguration();
 }

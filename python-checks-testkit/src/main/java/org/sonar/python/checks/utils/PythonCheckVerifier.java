@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.SubscriptionVisitor;
@@ -57,42 +58,59 @@ public class PythonCheckVerifier {
 
   public static void verifyNoIssue(String path, PythonCheck check) {
     File file = new File(path);
-    createVerifier(Collections.singletonList(file), check, ProjectLevelSymbolTable.empty(), null).assertNoIssues();
+    createVerifier(Collections.singletonList(file), check, ProjectLevelSymbolTable.empty(), null, new ProjectConfiguration())
+      .assertNoIssues();
   }
 
   public static void verify(List<String> paths, PythonCheck check) {
+    verify(paths, check, new ProjectConfiguration());
+  }
+
+  public static void verify(List<String> paths, PythonCheck check, ProjectConfiguration projectConfiguration) {
     List<File> files = paths.stream().map(File::new).toList();
     File baseDirFile = new File(files.get(0).getParent());
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
-    createVerifier(files, check, projectLevelSymbolTable, baseDirFile).assertOneOrMoreIssues();
+    createVerifier(files, check, projectLevelSymbolTable, baseDirFile, projectConfiguration).assertOneOrMoreIssues();
   }
 
   public static void verifyNoIssue(List<String> paths, PythonCheck check) {
     List<File> files = paths.stream().map(File::new).toList();
     File baseDirFile = new File(files.get(0).getParent());
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
-    createVerifier(files, check, projectLevelSymbolTable, baseDirFile).assertNoIssues();
+    createVerifier(files, check, projectLevelSymbolTable, baseDirFile, new ProjectConfiguration()).assertNoIssues();
   }
 
   public static List<PreciseIssue> issues(String path, PythonCheck check) {
     File file = new File(path);
-    PythonVisitorContext context = createContext(file, ProjectLevelSymbolTable.empty(), null);
+    PythonVisitorContext context = createContext(file, ProjectLevelSymbolTable.empty(), new ProjectConfiguration(), null);
     return scanFileForIssues(check, context);
   }
 
-  private static MultiFileVerifier createVerifier(List<File> files, PythonCheck check, ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable File baseDir) {
+  private static MultiFileVerifier createVerifier(List<File> files,
+    PythonCheck check,
+    ProjectLevelSymbolTable projectLevelSymbolTable,
+    @Nullable File baseDir,
+    ProjectConfiguration projectConfiguration) {
     MultiFileVerifier multiFileVerifier = MultiFileVerifier.create(files.get(0).toPath(), UTF_8);
     for (File file : files) {
-      PythonVisitorContext context = createContext(file, projectLevelSymbolTable, baseDir);
+      PythonVisitorContext context = createContext(file, projectLevelSymbolTable, projectConfiguration, baseDir);
       addFileIssues(check, multiFileVerifier, file, context);
     }
     return multiFileVerifier;
   }
 
-  private static PythonVisitorContext createContext(File file, ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable File baseDir) {
+  private static PythonVisitorContext createContext(File file,
+    ProjectLevelSymbolTable projectLevelSymbolTable,
+    ProjectConfiguration projectConfiguration,
+    @Nullable File baseDir) {
     return baseDir != null
-      ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir.getAbsolutePath()), projectLevelSymbolTable, CacheContextImpl.dummyCache())
-      : TestPythonVisitorRunner.createContext(file);
+      ? TestPythonVisitorRunner.createContext(file,
+      null,
+      pythonPackageName(file, baseDir.getAbsolutePath()),
+      projectLevelSymbolTable,
+      CacheContextImpl.dummyCache(),
+      projectConfiguration)
+      : TestPythonVisitorRunner.createContext(file, null, projectConfiguration);
   }
 
   private static void addFileIssues(PythonCheck check, MultiFileVerifier multiFileVerifier, File file, PythonVisitorContext context) {

@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
@@ -59,18 +60,27 @@ public class TestPythonVisitorRunner {
   }
 
   public static PythonVisitorContext createContext(File file) {
-    return createContext(file, null);
+    return createContext(file, null, new ProjectConfiguration());
   }
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory) {
-    return createContext(file, workingDirectory, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
+    return createContext(file, workingDirectory, new ProjectConfiguration());
+  }
+
+  public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, ProjectConfiguration projectConfiguration) {
+    return createContext(file, workingDirectory, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache(), projectConfiguration);
   }
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
+    return createContext(file, workingDirectory, packageName, projectLevelSymbolTable, cacheContext, new ProjectConfiguration());
+  }
+
+  public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName,
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, ProjectConfiguration projectConfiguration) {
     TestPythonFile pythonFile = new TestPythonFile(file);
     FileInput rootTree = parseFile(pythonFile);
-    return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, cacheContext);
+    return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, cacheContext, projectConfiguration);
   }
 
   public static PythonVisitorContext createContext(MockPythonFile file, @Nullable File workingDirectory, String packageName,
