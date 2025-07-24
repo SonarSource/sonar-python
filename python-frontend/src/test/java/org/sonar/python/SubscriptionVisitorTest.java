@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.PythonVisitorContext.Builder;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -61,7 +62,7 @@ class SubscriptionVisitorTest {
     };
 
     FileInput fileInput = PythonTestUtils.parse("'.*'");
-    PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, "");
+    PythonVisitorContext context = new PythonVisitorContext.Builder(fileInput, PythonTestUtils.pythonFile("file")).build();
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
   }
 
@@ -71,7 +72,10 @@ class SubscriptionVisitorTest {
     var cache = Mockito.mock(CacheContext.class);
 
     PythonFile pythonFile = PythonTestUtils.pythonFile("file");
-    PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "", ProjectLevelSymbolTable.empty(), cache);
+    PythonVisitorContext context = new PythonVisitorContext.Builder(fileInput, pythonFile)
+      .projectLevelSymbolTable(ProjectLevelSymbolTable.empty())
+      .cacheContext(cache)
+      .build();
 
     PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
       @Override
@@ -99,7 +103,7 @@ class SubscriptionVisitorTest {
     };
 
     FileInput fileInput = PythonTestUtils.parse("class A:\n  def foo(self): ...");
-    PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, "");
+    PythonVisitorContext context = new PythonVisitorContext.Builder(fileInput, PythonTestUtils.pythonFile("file")).build();
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
   }
 
@@ -121,10 +125,12 @@ class SubscriptionVisitorTest {
 
     var fileInput = PythonTestUtils.parse("def my_handler(event, context): ...");
 
-    var context = new PythonVisitorContext(fileInput,
-      PythonTestUtils.pythonFile("file"),
-      null,
-      "", projectConfiguration);
+    var context = new Builder(fileInput, PythonTestUtils.pythonFile("file"))
+      .projectConfiguration(projectConfiguration)
+      .workingDirectory(null)
+      .packageName("")
+      .build();
+
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
   }
 }

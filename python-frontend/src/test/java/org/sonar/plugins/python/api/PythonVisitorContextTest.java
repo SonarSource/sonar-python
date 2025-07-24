@@ -17,7 +17,6 @@
 package org.sonar.plugins.python.api;
 
 import com.sonar.sslr.api.RecognitionException;
-import java.io.File;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -47,21 +46,21 @@ class PythonVisitorContextTest {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
 
     PythonFile pythonFile = pythonFile("my_module.py");
-    var ctx = new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
+    var ctx = new PythonVisitorContext.Builder(fileInput, pythonFile).packageName("my_package").build();
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");
     assertThat(ctx.moduleType()).isNotNull()
       .hasFieldOrPropertyWithValue("fullyQualifiedName", "my_package.my_module");
 
     // no package
-    ctx = new PythonVisitorContext(fileInput, pythonFile, null, "");
+    ctx = new PythonVisitorContext.Builder(fileInput, pythonFile).build();
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_module.foo");
     assertThat(ctx.moduleType()).isNotNull()
       .hasFieldOrPropertyWithValue("fullyQualifiedName", "my_module");
 
     // file without extension
     Mockito.when(pythonFile.fileName()).thenReturn("my_module");
-    ctx = new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
+    ctx = new PythonVisitorContext.Builder(fileInput, pythonFile).packageName("my_package").build();
     functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");
     assertThat(ctx.moduleType()).isNotNull()
@@ -72,12 +71,12 @@ class PythonVisitorContextTest {
   void initModuleFullyQualifiedName() {
     FileInput fileInput = PythonTestUtils.parse("def fn(): pass");
     PythonFile pythonFile = pythonFile("__init__.py");
-    new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
+    new PythonVisitorContext.Builder(fileInput, pythonFile).packageName("foo.bar").build();
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("foo.bar.fn");
 
     // no package
-    new PythonVisitorContext(fileInput, pythonFile, null, "");
+    new PythonVisitorContext.Builder(fileInput, pythonFile).build();
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("fn");
   }
 
@@ -90,7 +89,11 @@ class PythonVisitorContextTest {
     Set<Descriptor> descriptors = Set.of(new VariableDescriptor("a", "mod.a", null), new VariableDescriptor("b", "mod.b", null));
     Map<String, Set<Descriptor>> globalDescriptors = Collections.singletonMap("mod", descriptors);
 
-    new PythonVisitorContext(fileInput, pythonFile, null, "my_package", ProjectLevelSymbolTable.from(globalDescriptors), CacheContextImpl.dummyCache());
+    new PythonVisitorContext.Builder(fileInput, pythonFile)
+      .packageName("my_package")
+      .projectLevelSymbolTable(ProjectLevelSymbolTable.from(globalDescriptors))
+      .cacheContext(CacheContextImpl.dummyCache())
+      .build();
     assertThat(fileInput.globalVariables()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b");
   }
 
@@ -99,21 +102,34 @@ class PythonVisitorContextTest {
     CacheContextImpl cacheContext = CacheContextImpl.dummyCache();
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     String myPackage = "my_package";
-    File workingDirectory = null;
     PythonFile pythonFile = pythonFile("my_module.py");
     FileInput fileInput = mock(FileInputImpl.class);
 
-    PythonVisitorContext pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext, SonarProduct.SONARLINT);
+    PythonVisitorContext pythonVisitorContext = new PythonVisitorContext.Builder(fileInput, pythonFile)
+      .packageName(myPackage)
+      .projectLevelSymbolTable(projectLevelSymbolTable)
+      .cacheContext(cacheContext)
+      .sonarProduct(SonarProduct.SONARLINT)
+      .build();
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARLINT);
 
-    pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext, SonarProduct.SONARQUBE);
+    pythonVisitorContext = new PythonVisitorContext.Builder(fileInput, pythonFile)
+      .packageName(myPackage)
+      .projectLevelSymbolTable(projectLevelSymbolTable)
+      .cacheContext(cacheContext)
+      .sonarProduct(SonarProduct.SONARQUBE)
+      .build();
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARQUBE);
 
-    pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext);
+    pythonVisitorContext = new PythonVisitorContext.Builder(fileInput, pythonFile)
+      .packageName(myPackage)
+      .projectLevelSymbolTable(projectLevelSymbolTable)
+      .cacheContext(cacheContext)
+      .build();
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARQUBE);
 
     RecognitionException parsingException = mock(RecognitionException.class);
-    pythonVisitorContext = new PythonVisitorContext(pythonFile, parsingException);
+    pythonVisitorContext = new PythonVisitorContext(pythonFile, parsingException, SonarProduct.SONARQUBE);
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARQUBE);
 
     pythonVisitorContext = new PythonVisitorContext(pythonFile, parsingException, SonarProduct.SONARLINT);

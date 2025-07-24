@@ -37,11 +37,10 @@ class IpynbNotebookParserScannerTest {
     var inputFile = createInputFile(baseDir, "notebook_trailing_whitespace.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
     var result = IpynbNotebookParser.parseNotebook(inputFile).get();
     var check = new TrailingWhitespaceCheck();
-    var context = new PythonVisitorContext(
+    var context = new PythonVisitorContext.Builder(
       TestPythonVisitorRunner.parseNotebookFile(result.locationMap(), result.contents()),
-      SonarQubePythonFile.create(result),
-      null,
-      "");
+      SonarQubePythonFile.create(result))
+      .build();
     check.scanFile(context);
 
     var issues = context.getIssues();
@@ -68,11 +67,10 @@ class IpynbNotebookParserScannerTest {
     var inputFile = createInputFile(baseDir, "notebook_trailing_whitespace_compressed.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
     var result = IpynbNotebookParser.parseNotebook(inputFile).get();
     var check = new TrailingWhitespaceCheck();
-    var context = new PythonVisitorContext(
+    var context = new PythonVisitorContext.Builder(
       TestPythonVisitorRunner.parseNotebookFile(result.locationMap(), result.contents()),
-      SonarQubePythonFile.create(result),
-      null,
-      "");
+      SonarQubePythonFile.create(result))
+      .build();
     check.scanFile(context);
 
     var issues = context.getIssues();

@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
+import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.parser.PythonParser;
 
@@ -41,7 +42,7 @@ class ParsingErrorCheckTest {
       parser.parse(fileContent);
       throw new IllegalStateException("Expected RecognitionException");
     } catch (RecognitionException e) {
-      context = new PythonVisitorContext(null, e);
+      context = new PythonVisitorContext(null, e, SonarProduct.SONARQUBE);
     }
 
     ParsingErrorCheck check = new ParsingErrorCheck();

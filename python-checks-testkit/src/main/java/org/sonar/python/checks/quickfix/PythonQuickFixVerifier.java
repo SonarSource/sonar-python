@@ -159,9 +159,11 @@ public class PythonQuickFixVerifier {
     var astNode = parser.parse(pythonFile.content());
     var fileInput = treeMaker.fileInput(astNode);
 
-    return new PythonVisitorContext(fileInput,
-      pythonFile, null, "",
-      ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache(), SonarProduct.SONARLINT);
+    return new PythonVisitorContext.Builder(fileInput, pythonFile)
+      .projectLevelSymbolTable(ProjectLevelSymbolTable.empty())
+      .cacheContext(CacheContextImpl.dummyCache())
+      .sonarProduct(SonarProduct.SONARLINT)
+      .build();
   }
 
   private static String applyQuickFix(String codeWithIssue, PythonQuickFix quickFix) {

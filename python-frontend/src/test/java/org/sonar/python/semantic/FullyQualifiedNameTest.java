@@ -470,7 +470,7 @@ class FullyQualifiedNameTest {
     PythonFile pythonFile = Mockito.mock(PythonFile.class, "__init__.py");
     when(pythonFile.fileName()).thenReturn("__init__.py");
     when(pythonFile.uri()).thenReturn(URI.create("mod/__init__.py"));
-    PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
+    PythonVisitorContext context = new PythonVisitorContext.Builder(fileInput, pythonFile).packageName("foo.bar").build();
     fileInput = context.rootTree();
     CallExpression callExpression = (CallExpression) getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR)).get(0);
     assertThat(callExpression.calleeSymbol().fullyQualifiedName()).isEqualTo("foo.fn");

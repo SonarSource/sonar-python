@@ -150,13 +150,13 @@ public class PythonScanner extends Scanner {
       AstNode astNode = parserSupplier.get().parse(inputFile.contents());
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
       FileInput parse = treeMaker.fileInput(astNode);
-      visitorContext = new PythonVisitorContext(parse,
-        pythonFile,
-        getWorkingDirectory(context),
-        indexer.packageName(inputFile),
-        indexer.projectLevelSymbolTable(),
-        indexer.cacheContext(),
-        context.runtime().getProduct());
+      visitorContext = new PythonVisitorContext.Builder(parse, pythonFile)
+        .workingDirectory(getWorkingDirectory(context))
+        .packageName(indexer.packageName(inputFile))
+        .projectLevelSymbolTable(indexer.projectLevelSymbolTable())
+        .cacheContext(indexer.cacheContext())
+        .sonarProduct(context.runtime().getProduct())
+        .build();
 
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct());

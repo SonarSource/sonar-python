@@ -80,20 +80,35 @@ public class TestPythonVisitorRunner {
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, ProjectConfiguration projectConfiguration) {
     TestPythonFile pythonFile = new TestPythonFile(file);
     FileInput rootTree = parseFile(pythonFile);
-    return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, cacheContext, projectConfiguration);
+    return new PythonVisitorContext.Builder(rootTree, pythonFile)
+      .workingDirectory(workingDirectory)
+      .packageName(packageName)
+      .projectLevelSymbolTable(projectLevelSymbolTable)
+      .cacheContext(cacheContext)
+      .projectConfiguration(projectConfiguration)
+      .build();
   }
 
   public static PythonVisitorContext createContext(MockPythonFile file, @Nullable File workingDirectory, String packageName,
                                                    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
     FileInput rootTree = parseFile(file);
-    return new PythonVisitorContext(rootTree, file, workingDirectory, packageName, projectLevelSymbolTable, cacheContext);
+    return new PythonVisitorContext.Builder(rootTree, file)
+      .workingDirectory(workingDirectory)
+      .packageName(packageName)
+      .projectLevelSymbolTable(projectLevelSymbolTable)
+      .cacheContext(cacheContext)
+      .build();
   }
 
   public static PythonVisitorContext createNotebookContext(File file, Map<Integer, IPythonLocation> locations, String content, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
     TestPythonFile pythonFile = new TestPythonFile(file);
     FileInput rootTree = parseNotebookFile(locations, content);
-    return new PythonVisitorContext(rootTree, pythonFile, null, packageName, projectLevelSymbolTable, cacheContext);
+    return new PythonVisitorContext.Builder(rootTree, pythonFile)
+      .packageName(packageName)
+      .projectLevelSymbolTable(projectLevelSymbolTable)
+      .cacheContext(cacheContext)
+      .build();
   }
 
   public static ProjectLevelSymbolTable globalSymbols(List<File> files, File baseDir) {
