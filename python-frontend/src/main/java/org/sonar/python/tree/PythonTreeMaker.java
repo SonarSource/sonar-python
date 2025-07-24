@@ -1584,8 +1584,11 @@ public class PythonTreeMaker {
     Expression arg = expression(astNode.getLastChild(PythonGrammar.TEST));
     if (assign != null) {
       // Keyword in argument list must be an identifier.
-      AstNode nameNode = astNode.getFirstChild(PythonGrammar.TEST).getFirstChild(PythonGrammar.ATOM).getFirstChild(PythonGrammar.NAME);
-      return new RegularArgumentImpl(name(nameNode), toPyToken(assign.getToken()), arg);
+      return Optional.ofNullable(astNode.getFirstChild(PythonGrammar.TEST))
+        .map(test -> test.getFirstChild(PythonGrammar.ATOM))
+        .map(atom -> atom.getFirstChild(PythonGrammar.NAME))
+        .map(nameNode -> new RegularArgumentImpl(name(nameNode), toPyToken(assign.getToken()), arg))
+        .orElseThrow(() -> new IllegalStateException("Keyword argument must be an identifier"));
     }
     return star == null ? new RegularArgumentImpl(arg) : new UnpackingExpressionImpl(star, arg);
   }

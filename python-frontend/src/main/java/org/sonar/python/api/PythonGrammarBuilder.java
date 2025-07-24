@@ -112,7 +112,7 @@ public class PythonGrammarBuilder {
       POWER)).skipIfOneChild();
     b.rule(POWER).is(b.firstOf(
       b.sequence(b.optional("await"), ATOM, b.zeroOrMore(TRAILER), b.optional("**", FACTOR)),
-      // matches "await" identifier
+      // before python 3.5 "await" can be used as an identifier
       "await")).skipIfOneChild();
 
     b.rule(ATOM).is(b.firstOf(

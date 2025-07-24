@@ -120,6 +120,7 @@ import org.sonar.python.parser.RuleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class PythonTreeMakerTest extends RuleTest {
 
@@ -1748,6 +1749,9 @@ class PythonTreeMakerTest extends RuleTest {
     name = (Name) argumentTree.expression();
     assertThat(name.name()).isEqualTo("foo");
     assertThat(argumentTree.children()).hasSize(3).containsExactly(argumentTree.keywordArgument(), argumentTree.equalToken(), argumentTree.expression());
+
+    IllegalStateException exception = assertThrowsExactly(IllegalStateException.class, () -> parse("obj.bar=foo", treeMaker::argument));
+    assertThat(exception.getMessage()).isEqualTo("Keyword argument must be an identifier");
   }
 
   @Test
