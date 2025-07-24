@@ -36,6 +36,7 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
+import org.sonar.python.semantic.v2.callgraph.CallGraph;
 import org.sonar.python.types.v2.TypeChecker;
 
 public class PythonVisitorContext extends PythonInputFileContext {
@@ -46,6 +47,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private ModuleType moduleType = null;
   private final List<PreciseIssue> issues;
   private final ProjectConfiguration projectConfiguration;
+  private final CallGraph callGraph;
 
   private PythonVisitorContext(FileInput rootTree, 
       PythonFile pythonFile, 
@@ -54,7 +56,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
       ProjectLevelSymbolTable projectLevelSymbolTable, 
       CacheContext cacheContext,
       SonarProduct sonarProduct,
-      ProjectConfiguration projectConfiguration) {
+      ProjectConfiguration projectConfiguration,
+      CallGraph callGraph) {
 
     super(pythonFile, workingDirectory, cacheContext, sonarProduct, projectLevelSymbolTable);
     var symbolTableBuilderV2 = new SymbolTableBuilderV2(rootTree);
@@ -64,6 +67,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.moduleType = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferModuleType(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
     this.projectConfiguration = projectConfiguration;
+    this.callGraph = callGraph;
     this.rootTree = rootTree;
     this.parsingException = null;
     this.issues = new ArrayList<>();
@@ -79,6 +83,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.parsingException = parsingException;
     this.typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
     this.projectConfiguration = new ProjectConfiguration();
+    this.callGraph = CallGraph.EMPTY;
     this.issues = new ArrayList<>();
   }
 
@@ -112,6 +117,10 @@ public class PythonVisitorContext extends PythonInputFileContext {
     return projectConfiguration;
   }
 
+  public CallGraph callGraph() {
+    return callGraph;
+  }
+
   public static class Builder {
     private final PythonFile pythonFile;
     private final FileInput rootTree;
@@ -121,6 +130,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     private Optional<SonarProduct> sonarProduct = Optional.empty();
     private Optional<File> workingDirectory = Optional.empty();
     private Optional<ProjectConfiguration> projectConfiguration = Optional.empty();
+    private Optional<CallGraph> callGraph = Optional.empty();
     private Optional<String> packageName = Optional.empty();
 
     public Builder(FileInput rootTree, PythonFile pythonFile) {
@@ -158,6 +168,11 @@ public class PythonVisitorContext extends PythonInputFileContext {
       return this;
     }
 
+    public Builder callGraph(CallGraph callGraph) {
+      this.callGraph = Optional.ofNullable(callGraph);
+      return this;
+    }
+
     public PythonVisitorContext build() {
       return new PythonVisitorContext(
         rootTree,
@@ -167,7 +182,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
         projectLevelSymbolTable.orElseGet(ProjectLevelSymbolTable::empty),
         cacheContext.orElseGet(CacheContextImpl::dummyCache),
         sonarProduct.orElse(SonarProduct.SONARQUBE),
-        projectConfiguration.orElse(new ProjectConfiguration())
+        projectConfiguration.orElse(new ProjectConfiguration()),
+        callGraph.orElse(CallGraph.EMPTY)
       );
     } 
   }

@@ -17,6 +17,7 @@
 package org.sonar.python;
 
 import java.util.Collections;
+import java.util.concurrent.CountDownLatch;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -34,6 +35,7 @@ import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.regex.RegexContext;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.callgraph.CallGraph;
 import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
@@ -112,6 +114,7 @@ class SubscriptionVisitorTest {
     var projectConfiguration = new ProjectConfiguration();
     projectConfiguration.awsProjectConfiguration().awsLambdaHandlers().add(new AwsLambdaHandlerInfo("a.b.c"));
 
+    var latch = new CountDownLatch(1);
     var check = new PythonSubscriptionCheck() {
       @Override
       public void initialize(Context context) {
@@ -119,11 +122,12 @@ class SubscriptionVisitorTest {
           assertThat(ctx.projectConfiguration()).isSameAs(projectConfiguration);
           assertThat(ctx.projectConfiguration().awsProjectConfiguration().awsLambdaHandlers())
             .contains(new AwsLambdaHandlerInfo("a.b.c"));
+          latch.countDown();
         });
       }
     };
 
-    var fileInput = PythonTestUtils.parse("def my_handler(event, context): ...");
+    var fileInput = PythonTestUtils.parse("class my_handler: ...");
 
     var context = new Builder(fileInput, PythonTestUtils.pythonFile("file"))
       .projectConfiguration(projectConfiguration)
@@ -132,5 +136,33 @@ class SubscriptionVisitorTest {
       .build();
 
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
+    assertThat(latch.getCount())
+      .withFailMessage("CallGraph was not accessed")
+      .isZero();
+  }
+
+  @Test
+  void callGraph() {
+    var callGraph = Mockito.mock(CallGraph.class);
+    var latch = new CountDownLatch(1);
+    var check = new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
+          assertThat(ctx.callGraph()).isSameAs(callGraph);
+          latch.countDown();
+        });
+      }
+    };
+
+    var fileInput = PythonTestUtils.parse("class my_handler: ...");
+    var context = new Builder(fileInput, PythonTestUtils.pythonFile("file"))
+      .callGraph(callGraph)
+      .build();
+
+    SubscriptionVisitor.analyze(Collections.singleton(check), context);
+    assertThat(latch.getCount())
+      .withFailMessage("CallGraph was not accessed")
+      .isZero();
   }
 }

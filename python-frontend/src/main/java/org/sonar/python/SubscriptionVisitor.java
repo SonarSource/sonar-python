@@ -49,6 +49,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.regex.PythonAnalyzerRegexSource;
 import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonar.python.regex.RegexContext;
+import org.sonar.python.semantic.v2.callgraph.CallGraph;
 import org.sonar.python.types.v2.TypeChecker;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.RegexParser;
@@ -190,6 +191,12 @@ public class SubscriptionVisitor {
       return pythonVisitorContext.projectConfiguration();
     }
 
+    @Override
+    public CallGraph callGraph() {
+      return pythonVisitorContext.callGraph();
+    }
+
+    @Override
     public RegexParseResult regexForStringElement(StringElement stringElement, FlagSet flagSet) {
       return regexCache.computeIfAbsent(stringElement.hashCode() + "-" + flagSet.getMask(),
         s -> new RegexParser(new PythonAnalyzerRegexSource(stringElement), flagSet).parse());

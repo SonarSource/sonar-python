@@ -16,22 +16,38 @@
  */
 package org.sonar.python.checks.utils;
 
+import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.TriBool;
+import org.sonar.python.semantic.v2.callgraph.CallGraph;
+import org.sonar.python.semantic.v2.callgraph.CallGraphWalker;
 
 public class AwsLambdaChecksUtils {
 
   private AwsLambdaChecksUtils() {
   }
 
-  public static boolean isLambdaHandler(ProjectConfiguration projectConfiguration, FunctionDef functionDef) {
-    return functionDef.name().typeV2() instanceof FunctionType functionType
-           && projectConfiguration.awsProjectConfiguration()
-             .awsLambdaHandlers()
-             .stream()
-             .anyMatch(handler -> handler.fullyQualifiedName().equals(functionType.fullyQualifiedName()));
+  public static boolean isLambdaHandler(PythonVisitorContext ctx, FunctionDef functionDef) {
+    if (functionDef.name().typeV2() instanceof FunctionType functionType) {
+      String fqn = functionType.fullyQualifiedName();
+      return isLambdaHandlerFqn(ctx.projectConfiguration(), fqn) 
+        || isFqnCalledFromLambdaHandler(ctx.callGraph(), ctx.projectConfiguration(), fqn);
+    }
+    return false;
   }
 
+  private static boolean isLambdaHandlerFqn(ProjectConfiguration projectConfiguration, String fqn) {
+    return projectConfiguration.awsProjectConfiguration()
+             .awsLambdaHandlers()
+             .stream()
+             .anyMatch(handler -> handler.fullyQualifiedName().equals(fqn));
+  }
 
+  private static boolean isFqnCalledFromLambdaHandler(CallGraph callGraph, ProjectConfiguration projectConfiguration, String fqn) {
+    return new CallGraphWalker(callGraph)
+      .isUsedFrom(fqn, node -> isLambdaHandlerFqn(projectConfiguration, node.fqn()))
+      .isTrue();
+  }
 }

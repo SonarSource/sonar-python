@@ -14,31 +14,8 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.python.api.types.v2;
+@ParametersAreNonnullByDefault
+package org.sonar.python.semantic.v2.callgraph;
 
-import org.sonar.api.Beta;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-@Beta
-public enum TriBool {
-  TRUE,
-  FALSE,
-  UNKNOWN;
-
-  public TriBool and(TriBool triBool) {
-    if (this.equals(triBool)) {
-      return this;
-    }
-    if (this.equals(UNKNOWN) || triBool.equals(UNKNOWN)) {
-      return UNKNOWN;
-    }
-    return FALSE;
-  }
-
-  public boolean isTrue() {
-    return this.equals(TRUE);
-  }
-
-  public boolean isFalse() {
-    return this.equals(FALSE);
-  }
-}
