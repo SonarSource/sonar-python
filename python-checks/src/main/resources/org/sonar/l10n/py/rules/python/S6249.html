@@ -1,0 +1,70 @@
+<p>By default, S3 buckets can be accessed through HTTP and HTTPs protocols.</p>
+<p>As HTTP is a clear-text protocol, it lacks the encryption of transported data, as well as the capability to build an authenticated connection. It
+means that a malicious actor who is able to intercept traffic from the network can read, modify or corrupt the transported content.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> The S3 bucket stores sensitive information. </li>
+  <li> The infrastructure has to comply with AWS Foundational Security Best Practices standard. </li>
+</ul>
+<p>There is a risk if you answered yes to any of those questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<p>It’s recommended to deny all HTTP requests:</p>
+<ul>
+  <li> for all objects (<code>*</code>) of the bucket </li>
+  <li> for all principals (<code>*</code>) </li>
+  <li> for all actions (<code>*</code>) </li>
+</ul>
+<h2>Sensitive Code Example</h2>
+<p>No secure policy is attached to this bucket:</p>
+<pre>
+import aws_cdk.aws_s3 as s3
+import aws_cdk.aws_iam as iam
+
+bucket = s3.Bucket(self, "bucket") # Sensitive
+</pre>
+<p>A policy is defined but forces only HTTPs communication for some users, some objects of the bucket and for some actions:</p>
+<pre>
+bucket = s3.Bucket(self, "bucket")
+bucket.add_to_resource_policy(iam.PolicyStatement(     # Sensitive
+    effect=iam.Effect.DENY,
+    resources=[bucket.bucket_arn],
+    actions=["s3:SomeAction"],
+    principals=[roles],
+    conditions=[{"Bool": {"aws:SecureTransport": False}}]
+    )
+)
+</pre>
+<h2>Compliant Solution</h2>
+<p>A bucket policy that complies with s3-bucket-ssl-requests-only rule should be used. To adhere to it, the bucket policies need to explicitly deny
+access to HTTP requests.</p>
+<p>A secure policy that enforces SSL on requests (default: False):</p>
+<pre>
+bucket = S3.Bucket(self,
+    "bucket",
+    enforce_ssl=True
+)
+</pre>
+<p>A secure policy that denies all HTTP requests is used:</p>
+<pre>
+bucket = s3.Bucket(self, "bucket")
+
+result = bucket.add_to_resource_policy(iam.PolicyStatement(
+    effect=iam.Effect.DENY,
+    resources=["*"],
+    actions=["s3:*"],
+    principals=["*"],
+    conditions=["SecureTransport:False"]
+    )
+)
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html#transit">AWS documentation</a> - Enforce encryption
+  of data in transit </li>
+  <li> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-s3-5">AWS Foundational Security
+  Best Practices controls</a> - S3 buckets should require requests to use Secure Socket Layer </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/319">CWE-319 - Cleartext Transmission of Sensitive Information</a> </li>
+  <li> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-s3-5">AWS Foundational Security
+  Best Practices controls</a> - S3 buckets should require requests to use Secure Socket Layer </li>
+</ul>
+

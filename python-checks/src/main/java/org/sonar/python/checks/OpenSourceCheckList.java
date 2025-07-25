@@ -29,6 +29,7 @@ import org.sonar.python.checks.cdk.PublicNetworkAccessToCloudResourcesCheck;
 import org.sonar.python.checks.cdk.ResourceAccessPolicyCheck;
 import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketGrantedAccessCheck;
+import org.sonar.python.checks.cdk.S3BucketHTTPCommunicationCheck;
 import org.sonar.python.checks.cdk.S3BucketServerEncryptionCheck;
 import org.sonar.python.checks.cdk.S3BucketVersioningCheck;
 import org.sonar.python.checks.cdk.UnencryptedEbsVolumeCheck;
@@ -343,6 +344,7 @@ public class OpenSourceCheckList {
       RobustCipherAlgorithmCheck.class,
       S3BucketBlockPublicAccessCheck.class,
       S3BucketGrantedAccessCheck.class,
+      S3BucketHTTPCommunicationCheck.class,
       S3BucketServerEncryptionCheck.class,
       S3BucketVersioningCheck.class,
       SameBranchCheck.class,
