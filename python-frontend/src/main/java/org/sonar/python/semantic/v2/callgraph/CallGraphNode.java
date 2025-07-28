@@ -19,3 +19,4 @@ package org.sonar.python.semantic.v2.callgraph;
 public record CallGraphNode(String fqn) {
 
 }
+
