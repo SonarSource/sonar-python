@@ -19,6 +19,7 @@ package org.sonar.plugins.python.api.types.v2;
 import java.util.Optional;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.TriBool;
 
 /**
  * PythonType

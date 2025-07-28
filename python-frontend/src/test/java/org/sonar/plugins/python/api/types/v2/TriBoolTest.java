@@ -17,6 +17,7 @@
 package org.sonar.plugins.python.api.types.v2;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.TriBool;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

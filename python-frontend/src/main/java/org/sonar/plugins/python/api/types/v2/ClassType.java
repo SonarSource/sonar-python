@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.TriBool;
 
 /**
  * ClassType

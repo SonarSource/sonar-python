@@ -21,7 +21,7 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
-import org.sonar.plugins.python.api.types.v2.TriBool;
+import org.sonar.plugins.python.api.TriBool;
 
 public class CallGraphWalker {
   private static final int DEFAULT_MAX_VISITED = 30;

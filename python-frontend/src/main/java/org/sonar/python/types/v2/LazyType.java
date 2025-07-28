@@ -22,8 +22,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Consumer;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 
@@ -54,6 +54,7 @@ public class LazyType implements PythonType, ResolvableType {
     return this;
   }
 
+  @Override
   public synchronized PythonType resolve() {
     PythonType resolvedType = lazyTypesContext.resolveLazyType(this);
     notifyConsumers(resolvedType);

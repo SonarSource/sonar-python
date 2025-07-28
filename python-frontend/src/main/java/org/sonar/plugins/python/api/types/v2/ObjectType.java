@@ -22,6 +22,7 @@ import java.util.Objects;
 import java.util.Optional;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.TriBool;
 
 @Beta
 public final class ObjectType implements PythonType {

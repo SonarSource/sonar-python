@@ -23,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
+import org.sonar.plugins.python.api.TriBool;
 
 @Beta
 public final class ModuleType implements PythonType {

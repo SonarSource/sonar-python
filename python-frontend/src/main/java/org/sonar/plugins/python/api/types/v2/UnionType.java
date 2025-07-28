@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.python.types.v2.LazyType;
 
 @Beta

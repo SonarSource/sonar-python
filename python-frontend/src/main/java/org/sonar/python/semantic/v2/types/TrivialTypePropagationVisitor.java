@@ -16,6 +16,7 @@
  */
 package org.sonar.python.semantic.v2.types;
 
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -27,7 +28,6 @@ import org.sonar.python.tree.UnaryExpressionImpl;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.python.types.v2.TypeUtils;

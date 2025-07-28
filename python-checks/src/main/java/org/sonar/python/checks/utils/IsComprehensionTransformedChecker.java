@@ -18,6 +18,7 @@ package org.sonar.python.checks.utils;
 
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.SubscriptionCheck;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.ComprehensionClause;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -25,7 +26,6 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 

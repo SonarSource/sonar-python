@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.PythonVisitorContext.Builder;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -36,7 +37,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.regex.RegexContext;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.callgraph.CallGraph;
-import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 

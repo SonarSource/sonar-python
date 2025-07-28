@@ -20,7 +20,6 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
-import org.sonar.plugins.python.api.types.v2.TriBool;
 import org.sonar.python.semantic.v2.callgraph.CallGraph;
 import org.sonar.python.semantic.v2.callgraph.CallGraphWalker;
 
