@@ -38,6 +38,7 @@ import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.semantic.v2.callgraph.CallGraph;
 import org.sonar.python.semantic.v2.TypeTable;
+import org.sonar.python.semantic.v2.callgraph.CallGraphCollector;
 import org.sonar.python.types.v2.TypeChecker;
 
 public class PythonVisitorContext extends PythonInputFileContext {
@@ -152,7 +153,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     }
     
     public Builder typeTable(TypeTable typeTable) {
-      this.typeTable = Optional.ofNullable(typeTable);
+      this.typeTable = Optional.of(typeTable);
       return this;
     }
 
@@ -177,7 +178,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     }
 
     public Builder callGraph(CallGraph callGraph) {
-      this.callGraph = Optional.ofNullable(callGraph);
+      this.callGraph = Optional.of(callGraph);
       return this;
     }
 
@@ -192,6 +193,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
         return new TypeInferenceV2(finalTypeTable, pythonFile, symbolTableV2, pkgName).inferModuleType(rootTree);
       });
 
+      var finalCallGraph = callGraph.orElseGet(() -> CallGraphCollector.collectCallGraph(rootTree));
+
       return new PythonVisitorContext(
         rootTree,
         pythonFile,
@@ -202,7 +205,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
         projectConfiguration.orElse(new ProjectConfiguration()),
         mt,
         new TypeChecker(finalTypeTable),
-        callGraph.orElse(CallGraph.EMPTY)
+        finalCallGraph
       );
     }
 

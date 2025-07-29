@@ -34,6 +34,8 @@ import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.callgraph.CallGraph;
+import org.sonar.python.semantic.v2.callgraph.CallGraphNode;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -96,6 +98,31 @@ class PythonVisitorContextTest {
       .cacheContext(CacheContextImpl.dummyCache())
       .build();
     assertThat(fileInput.globalVariables()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b");
+  }
+
+  @Test
+  void callGraph() {
+    String code = """
+        def bar():
+          pass
+
+        def foo():
+          bar()
+        """;
+    FileInput fileInput = new PythonTreeMaker().fileInput(PythonParser.create().parse(code));
+    PythonFile pythonFile = pythonFile("my_module.py");
+
+    var ctx = new PythonVisitorContext.Builder(fileInput, pythonFile)
+      .packageName("my_package")
+      .cacheContext(CacheContextImpl.dummyCache())
+      .build();
+
+    CallGraph callGraph = ctx.callGraph();
+
+    assertThat(callGraph.getUsages("my_package.my_module.foo")).isEmpty();
+    assertThat(callGraph.getUsages("my_package.my_module.bar")).extracting(CallGraphNode::fqn)
+      .containsExactly("my_package.my_module.foo");
+
   }
 
   @Test
