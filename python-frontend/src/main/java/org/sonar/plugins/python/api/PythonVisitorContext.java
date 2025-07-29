@@ -44,38 +44,33 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private final FileInput rootTree;
   private final RecognitionException parsingException;
   private final TypeChecker typeChecker;
-  private ModuleType moduleType = null;
+  private final ModuleType moduleType;
   private final List<PreciseIssue> issues;
   private final ProjectConfiguration projectConfiguration;
   private final CallGraph callGraph;
 
   private PythonVisitorContext(FileInput rootTree, 
       PythonFile pythonFile, 
-      @Nullable File workingDirectory, 
-      String packageName, 
+      @Nullable File workingDirectory,
       ProjectLevelSymbolTable projectLevelSymbolTable, 
       CacheContext cacheContext,
       SonarProduct sonarProduct,
       ProjectConfiguration projectConfiguration,
-      CallGraph callGraph) {
-
+      ModuleType moduleType,
+      TypeChecker typeChecker,
+      CallGraph callGraph
+    ) {
     super(pythonFile, workingDirectory, cacheContext, sonarProduct, projectLevelSymbolTable);
-    var symbolTableBuilderV2 = new SymbolTableBuilderV2(rootTree);
-    var symbolTable = symbolTableBuilderV2.build();
-    buildSymbols(rootTree, pythonFile, packageName, projectLevelSymbolTable);
-    var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
-    this.moduleType = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferModuleType(rootTree);
-    this.typeChecker = new TypeChecker(projectLevelTypeTable);
+    this.moduleType = moduleType;
+    this.typeChecker = typeChecker;
     this.projectConfiguration = projectConfiguration;
     this.callGraph = callGraph;
     this.rootTree = rootTree;
     this.parsingException = null;
     this.issues = new ArrayList<>();
   }
-  private static synchronized void buildSymbols(FileInput rootTree, PythonFile pythonFile, String packageName, ProjectLevelSymbolTable projectLevelSymbolTable) {
-    var symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable);
-    symbolTableBuilder.visitFileInput(rootTree);
-  }
+
+
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException, SonarProduct sonarProduct) {
     super(pythonFile, null, CacheContextImpl.dummyCache(), sonarProduct, ProjectLevelSymbolTable.empty());
@@ -85,6 +80,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.projectConfiguration = new ProjectConfiguration();
     this.callGraph = CallGraph.EMPTY;
     this.issues = new ArrayList<>();
+    this.moduleType = null;
   }
 
   public FileInput rootTree() {
@@ -132,6 +128,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
     private Optional<ProjectConfiguration> projectConfiguration = Optional.empty();
     private Optional<CallGraph> callGraph = Optional.empty();
     private Optional<String> packageName = Optional.empty();
+    private Optional<ProjectLevelTypeTable> projectLevelTypeTable = Optional.empty();
+    private Optional<ModuleType> moduleType = Optional.empty();
 
     public Builder(FileInput rootTree, PythonFile pythonFile) {
       this.rootTree = rootTree;
@@ -144,27 +142,37 @@ public class PythonVisitorContext extends PythonInputFileContext {
     }
     
     public Builder packageName(String packageName) {
-      this.packageName = Optional.ofNullable(packageName);
+      this.packageName = Optional.of(packageName);
       return this;
     }
 
     public Builder projectLevelSymbolTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
-      this.projectLevelSymbolTable = Optional.ofNullable(projectLevelSymbolTable);
+      this.projectLevelSymbolTable = Optional.of(projectLevelSymbolTable);
       return this;
     }
 
     public Builder cacheContext(CacheContext cacheContext) {
-      this.cacheContext = Optional.ofNullable(cacheContext);
+      this.cacheContext = Optional.of(cacheContext);
       return this;
     }
 
     public Builder sonarProduct(SonarProduct sonarProduct) {
-      this.sonarProduct = Optional.ofNullable(sonarProduct);
+      this.sonarProduct = Optional.of(sonarProduct);
       return this;
     }
 
     public Builder projectConfiguration(ProjectConfiguration projectConfiguration) {
-      this.projectConfiguration = Optional.ofNullable(projectConfiguration);
+      this.projectConfiguration = Optional.of(projectConfiguration);
+      return this;
+    }
+
+    public Builder projectLevelTypeTable(ProjectLevelTypeTable projectLevelTypeTable) {
+      this.projectLevelTypeTable = Optional.of(projectLevelTypeTable);
+      return this;
+    }
+
+    public Builder moduleType(ModuleType moduleType) {
+      this.moduleType = Optional.of(moduleType);
       return this;
     }
 
@@ -174,17 +182,33 @@ public class PythonVisitorContext extends PythonInputFileContext {
     }
 
     public PythonVisitorContext build() {
+      var symbolTable = projectLevelSymbolTable.orElseGet(ProjectLevelSymbolTable::empty);
+      var pkgName = packageName.orElse("");
+      buildSymbols(rootTree, pythonFile, pkgName, symbolTable);
+      var typeTable = this.projectLevelTypeTable.orElseGet(() -> new ProjectLevelTypeTable(symbolTable));
+      var mt = moduleType.orElseGet(() -> {
+        var symbolTableBuilderV2 = new SymbolTableBuilderV2(rootTree);
+        var symbolTableV2 = symbolTableBuilderV2.build();
+        return new TypeInferenceV2(typeTable, pythonFile, symbolTableV2, pkgName).inferModuleType(rootTree);
+      });
+
       return new PythonVisitorContext(
         rootTree,
         pythonFile,
         workingDirectory.orElse(null),
-        packageName.orElse(""),
-        projectLevelSymbolTable.orElseGet(ProjectLevelSymbolTable::empty),
+        symbolTable,
         cacheContext.orElseGet(CacheContextImpl::dummyCache),
         sonarProduct.orElse(SonarProduct.SONARQUBE),
         projectConfiguration.orElse(new ProjectConfiguration()),
+        mt,
+        new TypeChecker(typeTable),
         callGraph.orElse(CallGraph.EMPTY)
       );
-    } 
+    }
+
+    private static synchronized void buildSymbols(FileInput rootTree, PythonFile pythonFile, String packageName, ProjectLevelSymbolTable projectLevelSymbolTable) {
+      var symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable);
+      symbolTableBuilder.visitFileInput(rootTree);
+    }
   }
 }

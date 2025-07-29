@@ -151,6 +151,7 @@ public class PythonScanner extends Scanner {
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
       FileInput parse = treeMaker.fileInput(astNode);
       visitorContext = new PythonVisitorContext.Builder(parse, pythonFile)
+        .projectConfiguration(indexer.projectConfig())
         .workingDirectory(getWorkingDirectory(context))
         .packageName(indexer.packageName(inputFile))
         .projectLevelSymbolTable(indexer.projectLevelSymbolTable())

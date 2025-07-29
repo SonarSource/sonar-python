@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.PythonInputFileImpl;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.caching.PythonReadCacheImpl;
 import org.sonar.python.caching.PythonWriteCacheImpl;
@@ -52,7 +53,8 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   private static final long DEFAULT_MAX_LINES_FOR_INDEXING = 300_000;
   private static final String MAX_LINES_PROPERTY = "sonar.python.sonarlint.indexing.maxlines";
 
-  public SonarLintPythonIndexer(ModuleFileSystem moduleFileSystem) {
+  public SonarLintPythonIndexer(ModuleFileSystem moduleFileSystem, ProjectConfigurationBuilder projectConfigurationBuilder) {
+    super(projectConfigurationBuilder);
     this.moduleFileSystem = moduleFileSystem;
   }
 

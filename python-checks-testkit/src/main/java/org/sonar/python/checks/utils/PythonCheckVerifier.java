@@ -58,15 +58,15 @@ public class PythonCheckVerifier {
 
   public static void verifyNoIssue(String path, PythonCheck check) {
     File file = new File(path);
-    createVerifier(Collections.singletonList(file), check, ProjectLevelSymbolTable.empty(), null, new ProjectConfiguration())
+    createVerifier(Collections.singletonList(file), check, ProjectLevelSymbolTable.empty(), null, null)
       .assertNoIssues();
   }
 
   public static void verify(List<String> paths, PythonCheck check) {
-    verify(paths, check, new ProjectConfiguration());
+    verify(paths, check, null);
   }
 
-  public static void verify(List<String> paths, PythonCheck check, ProjectConfiguration projectConfiguration) {
+  public static void verify(List<String> paths, PythonCheck check, @Nullable ProjectConfiguration projectConfiguration) {
     List<File> files = paths.stream().map(File::new).toList();
     File baseDirFile = new File(files.get(0).getParent());
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
@@ -77,12 +77,12 @@ public class PythonCheckVerifier {
     List<File> files = paths.stream().map(File::new).toList();
     File baseDirFile = new File(files.get(0).getParent());
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
-    createVerifier(files, check, projectLevelSymbolTable, baseDirFile, new ProjectConfiguration()).assertNoIssues();
+    createVerifier(files, check, projectLevelSymbolTable, baseDirFile, null).assertNoIssues();
   }
 
   public static List<PreciseIssue> issues(String path, PythonCheck check) {
     File file = new File(path);
-    PythonVisitorContext context = createContext(file, ProjectLevelSymbolTable.empty(), new ProjectConfiguration(), null);
+    PythonVisitorContext context = createContext(file, ProjectLevelSymbolTable.empty(), null, null);
     return scanFileForIssues(check, context);
   }
 
@@ -90,7 +90,7 @@ public class PythonCheckVerifier {
     PythonCheck check,
     ProjectLevelSymbolTable projectLevelSymbolTable,
     @Nullable File baseDir,
-    ProjectConfiguration projectConfiguration) {
+    @Nullable ProjectConfiguration projectConfiguration) {
     MultiFileVerifier multiFileVerifier = MultiFileVerifier.create(files.get(0).toPath(), UTF_8);
     for (File file : files) {
       PythonVisitorContext context = createContext(file, projectLevelSymbolTable, projectConfiguration, baseDir);
@@ -101,7 +101,7 @@ public class PythonCheckVerifier {
 
   private static PythonVisitorContext createContext(File file,
     ProjectLevelSymbolTable projectLevelSymbolTable,
-    ProjectConfiguration projectConfiguration,
+    @Nullable ProjectConfiguration projectConfiguration,
     @Nullable File baseDir) {
     return baseDir != null
       ? TestPythonVisitorRunner.createContext(file,
@@ -145,7 +145,8 @@ public class PythonCheckVerifier {
     MultiFileVerifier.Issue issueBuilder = verifier.reportIssue(path, message)
       .onRange(location.startLine(), location.startLineOffset() + 1, location.endLine(), location.endLineOffset());
     for (IssueLocation secondary : preciseIssue.secondaryLocations()) {
-      issueBuilder.addSecondary(path, secondary.startLine(), secondary.startLineOffset() + 1, secondary.endLine(), secondary.endLineOffset(), secondary.message());
+      issueBuilder.addSecondary(path, secondary.startLine(), secondary.startLineOffset() + 1, secondary.endLine(),
+        secondary.endLineOffset(), secondary.message());
     }
     return issueBuilder;
   }

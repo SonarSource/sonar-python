@@ -48,6 +48,7 @@ import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
@@ -79,6 +80,7 @@ public final class PythonSensor implements Sensor {
 
   private final SensorTelemetryStorage sensorTelemetryStorage;
   private final NoSonarLineInfoCollector noSonarLineInfoCollector;
+  private final ProjectConfigurationBuilder projectConfigurationBuilder;
 
   public PythonSensor(
     FileLinesContextFactory fileLinesContextFactory,
@@ -89,8 +91,11 @@ public final class PythonSensor implements Sensor {
     SonarLintCacheWrapper sonarLintCacheWrapper,
     AnalysisWarningsWrapper analysisWarnings,
     RepositoryInfoProviderWrapper editionMetadataProviderWrapper,
-    ArchitectureCallbackWrapper architectureUDGBuilderWrapper, NoSonarLineInfoCollector noSonarLineInfoCollector) {
+    ArchitectureCallbackWrapper architectureUDGBuilderWrapper,
+    NoSonarLineInfoCollector noSonarLineInfoCollector,
+    ProjectConfigurationBuilder projectConfigurationBuilder) {
     this.noSonarLineInfoCollector = noSonarLineInfoCollector;
+    this.projectConfigurationBuilder = projectConfigurationBuilder;
 
     this.checks = createPythonChecks(checkFactory, editionMetadataProviderWrapper.infoProviders())
         .addCustomChecks(customRuleRepositoriesWrapper.customRuleRepositories());
@@ -133,7 +138,7 @@ public final class PythonSensor implements Sensor {
     }
     updatePythonVersionTelemetry(context, pythonVersionParameter);
     CacheContext cacheContext = CacheContextImpl.of(context);
-    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
+    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context, projectConfigurationBuilder);
     pythonIndexer.setSonarLintCache(sonarLintCache);
     TypeShed.setProjectLevelSymbolTable(pythonIndexer.projectLevelSymbolTable());
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::create,

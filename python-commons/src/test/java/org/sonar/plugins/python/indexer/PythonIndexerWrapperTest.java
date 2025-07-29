@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 
 class PythonIndexerWrapperTest {
 
@@ -33,7 +34,7 @@ class PythonIndexerWrapperTest {
   @Test
   void testConstructorWithParameter() {
     TestModuleFileSystem moduleFileSystem = new TestModuleFileSystem(new ArrayList<>());
-    PythonIndexerWrapper wrapper = new PythonIndexerWrapper(new SonarLintPythonIndexer(moduleFileSystem));
+    PythonIndexerWrapper wrapper = new PythonIndexerWrapper(new SonarLintPythonIndexer(moduleFileSystem, new ProjectConfigurationBuilder()));
     assertThat(wrapper.indexer()).isNotNull().isInstanceOf(PythonIndexer.class);
   }
 

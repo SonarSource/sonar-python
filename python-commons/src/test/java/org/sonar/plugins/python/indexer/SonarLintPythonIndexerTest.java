@@ -43,6 +43,7 @@ import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.caching.DummyCache;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
@@ -76,7 +77,7 @@ class SonarLintPythonIndexerTest {
     file2 = inputFile("mod.py");
     List<PythonInputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
-    pythonIndexer = new SonarLintPythonIndexer(moduleFileSystem);
+    pythonIndexer = new SonarLintPythonIndexer(moduleFileSystem, new ProjectConfigurationBuilder());
     pythonIndexer.buildOnce(context);
     projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
   }
@@ -182,7 +183,7 @@ class SonarLintPythonIndexerTest {
 
   @Test
   void test_sonarlint_cache() throws IOException {
-    PythonIndexer indexer = new SonarLintPythonIndexer(moduleFileSystem);
+    PythonIndexer indexer = new SonarLintPythonIndexer(moduleFileSystem, new ProjectConfigurationBuilder());
     CacheContext cacheContext = indexer.cacheContext();
     assertThat(cacheContext.isCacheEnabled()).isFalse();
     assertThat(cacheContext.getWriteCache()).isInstanceOf(DummyCache.class);

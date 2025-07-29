@@ -32,7 +32,12 @@ import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
+import org.sonar.python.project.config.SignatureBasedAwsLambdaHandlersCollector;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
+import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -60,32 +65,46 @@ public class TestPythonVisitorRunner {
   }
 
   public static PythonVisitorContext createContext(File file) {
-    return createContext(file, null, new ProjectConfiguration());
+    return createContext(file, null, null);
   }
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory) {
-    return createContext(file, workingDirectory, new ProjectConfiguration());
+    return createContext(file, workingDirectory, null);
   }
 
-  public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, ProjectConfiguration projectConfiguration) {
+  public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, @Nullable ProjectConfiguration projectConfiguration) {
     return createContext(file, workingDirectory, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache(), projectConfiguration);
   }
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
-    return createContext(file, workingDirectory, packageName, projectLevelSymbolTable, cacheContext, new ProjectConfiguration());
+    return createContext(file, workingDirectory, packageName, projectLevelSymbolTable, cacheContext, null);
   }
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName,
-    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, ProjectConfiguration projectConfiguration) {
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, @Nullable ProjectConfiguration projectConfiguration) {
     TestPythonFile pythonFile = new TestPythonFile(file);
     FileInput rootTree = parseFile(pythonFile);
+
+    var typeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var symbolTableBuilderV2 = new SymbolTableBuilderV2(rootTree);
+    var symbolTableV2 = symbolTableBuilderV2.build();
+    var moduleType = new TypeInferenceV2(typeTable, pythonFile, symbolTableV2, packageName).inferModuleType(rootTree);
+
+    if (projectConfiguration == null) {
+      var projectConfigurationBuilder = new ProjectConfigurationBuilder();
+      new SignatureBasedAwsLambdaHandlersCollector().collect(projectConfigurationBuilder, rootTree, packageName);
+      projectConfiguration = projectConfigurationBuilder.build();
+    }
+
     return new PythonVisitorContext.Builder(rootTree, pythonFile)
       .workingDirectory(workingDirectory)
       .packageName(packageName)
       .projectLevelSymbolTable(projectLevelSymbolTable)
       .cacheContext(cacheContext)
       .projectConfiguration(projectConfiguration)
+      .projectLevelTypeTable(typeTable)
+      .moduleType(moduleType)
       .build();
   }
 

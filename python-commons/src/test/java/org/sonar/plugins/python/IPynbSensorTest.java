@@ -53,6 +53,7 @@ import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -133,7 +134,13 @@ class IPynbSensorTest {
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()}, new NoSonarLineInfoCollector());
+    return new IPynbSensor(fileLinesContextFactory,
+      checkFactory,
+      mock(NoSonarFilter.class),
+      indexer,
+      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()},
+      new NoSonarLineInfoCollector(),
+      new ProjectConfigurationBuilder());
   }
 
   private PythonInputFile inputFile(String name) {
@@ -154,7 +161,7 @@ class IPynbSensorTest {
   }
 
   private SonarLintPythonIndexer pythonIndexer(List<PythonInputFile> files) {
-    return new SonarLintPythonIndexer(new TestModuleFileSystem(files));
+    return new SonarLintPythonIndexer(new TestModuleFileSystem(files), new ProjectConfigurationBuilder());
   }
 
   @Test
@@ -176,7 +183,11 @@ class IPynbSensorTest {
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), new NoSonarLineInfoCollector());
+    return new IPynbSensor(fileLinesContextFactory,
+      checkFactory,
+      mock(NoSonarFilter.class),
+      new NoSonarLineInfoCollector(),
+      new ProjectConfigurationBuilder());
   }
 
   @Test

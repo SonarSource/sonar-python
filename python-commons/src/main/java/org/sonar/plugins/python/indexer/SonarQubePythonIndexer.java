@@ -33,6 +33,7 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.caching.Caching;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.DependencyGraph;
 import org.sonar.python.semantic.SymbolUtils;
@@ -57,7 +58,8 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   private final List<PythonInputFile> inputFiles = new ArrayList<>();
   private final Map<PythonInputFile, String> inputFileToFQN = new HashMap<>();
 
-  public SonarQubePythonIndexer(List<PythonInputFile> inputFiles, CacheContext cacheContext, SensorContext context) {
+  public SonarQubePythonIndexer(List<PythonInputFile> inputFiles, CacheContext cacheContext, SensorContext context, ProjectConfigurationBuilder projectConfigurationBuilder) {
+    super(projectConfigurationBuilder);
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     this.caching = new Caching(cacheContext, getCacheVersion(context));
     inputFiles.forEach(f -> {

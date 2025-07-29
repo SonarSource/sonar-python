@@ -88,6 +88,7 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SonarLintCacheWrapper;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.internal.EndOfAnalysis;
+import org.sonar.plugins.python.api.project.configuration.AwsLambdaHandlerInfo;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.architecture.ArchitectureCallbackWrapper;
 import org.sonar.plugins.python.caching.Caching;
@@ -99,6 +100,7 @@ import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.caching.CpdSerializer;
@@ -361,6 +363,21 @@ class PythonSensorTest {
     verifyUsages(key, 5, 4, reference(6, 4, 6, 5), reference(7, 4, 7, 5),
       reference(8, 8, 8, 9), reference(13, 9, 13, 10));
     verifyUsages(key, 47, 5, reference(48, 14, 48, 17));
+  }
+
+  @Test
+  void test_project_config_builder() {
+    activeRules = new ActiveRulesBuilder().build();
+    inputFile("aws_lambdas.py");
+    var pythonProjectConfigBuilder = new ProjectConfigurationBuilder();
+    sensor(pythonProjectConfigBuilder).execute(context);
+
+    var projectConfiguration = pythonProjectConfigBuilder.build();
+    assertThat(projectConfiguration.awsProjectConfiguration().awsLambdaHandlers())
+      .containsOnly(
+        new AwsLambdaHandlerInfo("aws_lambdas.h1_handler"),
+        new AwsLambdaHandlerInfo("aws_lambdas.h2Handler")
+      );
   }
 
   @ParameterizedTest
@@ -1551,10 +1568,27 @@ class PythonSensorTest {
   }
 
   private PythonSensor sensor() {
-    return sensor(CUSTOM_RULES, null, analysisWarning, architectureUDGBuilderWrapper);
+    return sensor(new ProjectConfigurationBuilder());
   }
 
-  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings, ArchitectureCallbackWrapper architectureUDGBuilderWrapper) {
+  private PythonSensor sensor(ProjectConfigurationBuilder projectConfigurationBuilder) {
+    return sensor(CUSTOM_RULES, null, analysisWarning, architectureUDGBuilderWrapper, projectConfigurationBuilder);
+  }
+
+  private PythonSensor sensor(
+    @Nullable PythonCustomRuleRepository[] customRuleRepositories,
+    @Nullable PythonIndexer indexer,
+    AnalysisWarningsWrapper analysisWarnings,
+    ArchitectureCallbackWrapper architectureUDGBuilderWrapper) {
+    return sensor(customRuleRepositories, indexer, analysisWarnings, architectureUDGBuilderWrapper, new ProjectConfigurationBuilder());
+  }
+
+  private PythonSensor sensor(
+    @Nullable PythonCustomRuleRepository[] customRuleRepositories,
+    @Nullable PythonIndexer indexer,
+    AnalysisWarningsWrapper analysisWarnings,
+    ArchitectureCallbackWrapper architectureUDGBuilderWrapper,
+    ProjectConfigurationBuilder projectConfigurationBuilder) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
@@ -1569,12 +1603,13 @@ class PythonSensorTest {
       analysisWarnings,
       new RepositoryInfoProviderWrapper(),
       architectureUDGBuilderWrapper,
-      new NoSonarLineInfoCollector()
+      new NoSonarLineInfoCollector(),
+      projectConfigurationBuilder
     );
   }
 
   private SonarLintPythonIndexer pythonIndexer(List<PythonInputFile> files) {
-    return new SonarLintPythonIndexer(new TestModuleFileSystem(files));
+    return new SonarLintPythonIndexer(new TestModuleFileSystem(files), new ProjectConfigurationBuilder());
   }
 
   private PythonInputFile inputFile(String name) {

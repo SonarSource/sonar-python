@@ -39,6 +39,7 @@ import org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 
@@ -53,12 +54,20 @@ public final class IPynbSensor implements Sensor {
   private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
   private final SensorTelemetryStorage sensorTelemetryStorage;
   private final NoSonarLineInfoCollector noSonarLineInfoCollector;
+  private final ProjectConfigurationBuilder projectConfigurationBuilder;
 
   public IPynbSensor(FileLinesContextFactory fileLinesContextFactory,
     CheckFactory checkFactory,
     NoSonarFilter noSonarFilter,
-    NoSonarLineInfoCollector noSonarLineInfoCollector) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()}, noSonarLineInfoCollector);
+    NoSonarLineInfoCollector noSonarLineInfoCollector,
+    ProjectConfigurationBuilder projectConfigurationBuilder) {
+    this(fileLinesContextFactory,
+      checkFactory,
+      noSonarFilter,
+      null,
+      new RepositoryInfoProvider[]{new OpenSourceRepositoryInfoProvider()},
+      noSonarLineInfoCollector,
+      projectConfigurationBuilder);
   }
 
   public IPynbSensor(
@@ -67,8 +76,10 @@ public final class IPynbSensor implements Sensor {
     NoSonarFilter noSonarFilter,
     @Nullable PythonIndexer indexer,
     RepositoryInfoProvider[] editionMetadataProviders,
-    NoSonarLineInfoCollector noSonarLineInfoCollector) {
+    NoSonarLineInfoCollector noSonarLineInfoCollector,
+    ProjectConfigurationBuilder projectConfigurationBuilder) {
     this.noSonarLineInfoCollector = noSonarLineInfoCollector;
+    this.projectConfigurationBuilder = projectConfigurationBuilder;
 
     this.checks = createPythonChecks(checkFactory, editionMetadataProviders);
 
@@ -119,7 +130,7 @@ public final class IPynbSensor implements Sensor {
     pythonFiles = parseNotebooks(pythonFiles, context);
     // Disable caching for IPynb files for now see: SONARPY-2020
     CacheContext cacheContext = CacheContextImpl.dummyCache();
-    PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
+    PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context, projectConfigurationBuilder);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::createIPythonParser,
       pythonIndexer, new DummyArchitectureCallback(), noSonarLineInfoCollector);
     scanner.execute(pythonFiles, context);

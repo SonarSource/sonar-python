@@ -35,7 +35,10 @@ import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
+import org.sonar.python.project.config.SignatureBasedAwsLambdaHandlersCollector;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -51,9 +54,19 @@ public abstract class PythonIndexer {
   private final Map<URI, String> packageNames = new ConcurrentHashMap<>();
   private final Supplier<PythonParser> parserSupplier = PythonParser::create;
   private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+  private final SignatureBasedAwsLambdaHandlersCollector signatureBasedAwsLambdaHandlersCollector = new SignatureBasedAwsLambdaHandlersCollector();
+  private final ProjectConfigurationBuilder projectConfigurationBuilder;
+
+  protected PythonIndexer(ProjectConfigurationBuilder projectConfigurationBuilder) {
+    this.projectConfigurationBuilder = projectConfigurationBuilder;
+  }
 
   public ProjectLevelSymbolTable projectLevelSymbolTable() {
     return projectLevelSymbolTable;
+  }
+
+  public ProjectConfiguration projectConfig() {
+    return projectConfigurationBuilder.build();
   }
 
   public String packageName(PythonInputFile inputFile) {
@@ -81,6 +94,7 @@ public abstract class PythonIndexer {
     }
     packageNames.remove(inputFile.wrappedFile().uri());
     projectLevelSymbolTable.removeModule(packageName, filename);
+    projectConfigurationBuilder.removePackageAwsLambdaHandlers(packageName);
   }
 
   void addFile(PythonInputFile inputFile) throws IOException {
@@ -91,6 +105,7 @@ public abstract class PythonIndexer {
     projectLevelSymbolTable.addProjectPackage(packageName);
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
     projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
+    signatureBasedAwsLambdaHandlersCollector.collect(projectConfigurationBuilder, astRoot, packageName);
   }
 
   public abstract void buildOnce(SensorContext context);
