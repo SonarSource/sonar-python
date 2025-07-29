@@ -33,6 +33,7 @@ import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -101,6 +102,7 @@ class PythonVisitorContextTest {
   void sonar_product() {
     CacheContextImpl cacheContext = CacheContextImpl.dummyCache();
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+    var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
     String myPackage = "my_package";
     PythonFile pythonFile = pythonFile("my_module.py");
     FileInput fileInput = mock(FileInputImpl.class);
@@ -108,6 +110,7 @@ class PythonVisitorContextTest {
     PythonVisitorContext pythonVisitorContext = new PythonVisitorContext.Builder(fileInput, pythonFile)
       .packageName(myPackage)
       .projectLevelSymbolTable(projectLevelSymbolTable)
+      .typeTable(projectLevelTypeTable)
       .cacheContext(cacheContext)
       .sonarProduct(SonarProduct.SONARLINT)
       .build();
@@ -116,6 +119,7 @@ class PythonVisitorContextTest {
     pythonVisitorContext = new PythonVisitorContext.Builder(fileInput, pythonFile)
       .packageName(myPackage)
       .projectLevelSymbolTable(projectLevelSymbolTable)
+      .typeTable(projectLevelTypeTable)
       .cacheContext(cacheContext)
       .sonarProduct(SonarProduct.SONARQUBE)
       .build();
@@ -124,6 +128,7 @@ class PythonVisitorContextTest {
     pythonVisitorContext = new PythonVisitorContext.Builder(fileInput, pythonFile)
       .packageName(myPackage)
       .projectLevelSymbolTable(projectLevelSymbolTable)
+      .typeTable(projectLevelTypeTable)
       .cacheContext(cacheContext)
       .build();
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARQUBE);
@@ -133,6 +138,14 @@ class PythonVisitorContextTest {
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARQUBE);
 
     pythonVisitorContext = new PythonVisitorContext(pythonFile, parsingException, SonarProduct.SONARLINT);
+    assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARLINT);
+
+    pythonVisitorContext = new PythonVisitorContext.Builder(fileInput, pythonFile)
+      .packageName(myPackage)
+      .projectLevelSymbolTable(projectLevelSymbolTable)
+      .cacheContext(cacheContext)
+      .sonarProduct(SonarProduct.SONARLINT)
+      .build();
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARLINT);
   }
 }

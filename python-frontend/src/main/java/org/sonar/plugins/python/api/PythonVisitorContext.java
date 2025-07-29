@@ -37,6 +37,7 @@ import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.semantic.v2.callgraph.CallGraph;
+import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.types.v2.TypeChecker;
 
 public class PythonVisitorContext extends PythonInputFileContext {
@@ -69,7 +70,6 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.parsingException = null;
     this.issues = new ArrayList<>();
   }
-
 
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException, SonarProduct sonarProduct) {
@@ -122,13 +122,13 @@ public class PythonVisitorContext extends PythonInputFileContext {
     private final FileInput rootTree;
 
     private Optional<ProjectLevelSymbolTable> projectLevelSymbolTable = Optional.empty();
+    private Optional<TypeTable> typeTable = Optional.empty();
     private Optional<CacheContext> cacheContext = Optional.empty();
     private Optional<SonarProduct> sonarProduct = Optional.empty();
     private Optional<File> workingDirectory = Optional.empty();
     private Optional<ProjectConfiguration> projectConfiguration = Optional.empty();
     private Optional<CallGraph> callGraph = Optional.empty();
     private Optional<String> packageName = Optional.empty();
-    private Optional<ProjectLevelTypeTable> projectLevelTypeTable = Optional.empty();
     private Optional<ModuleType> moduleType = Optional.empty();
 
     public Builder(FileInput rootTree, PythonFile pythonFile) {
@@ -150,6 +150,11 @@ public class PythonVisitorContext extends PythonInputFileContext {
       this.projectLevelSymbolTable = Optional.of(projectLevelSymbolTable);
       return this;
     }
+    
+    public Builder typeTable(TypeTable typeTable) {
+      this.typeTable = Optional.ofNullable(typeTable);
+      return this;
+    }
 
     public Builder cacheContext(CacheContext cacheContext) {
       this.cacheContext = Optional.of(cacheContext);
@@ -163,11 +168,6 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
     public Builder projectConfiguration(ProjectConfiguration projectConfiguration) {
       this.projectConfiguration = Optional.of(projectConfiguration);
-      return this;
-    }
-
-    public Builder projectLevelTypeTable(ProjectLevelTypeTable projectLevelTypeTable) {
-      this.projectLevelTypeTable = Optional.of(projectLevelTypeTable);
       return this;
     }
 
@@ -185,11 +185,11 @@ public class PythonVisitorContext extends PythonInputFileContext {
       var symbolTable = projectLevelSymbolTable.orElseGet(ProjectLevelSymbolTable::empty);
       var pkgName = packageName.orElse("");
       buildSymbols(rootTree, pythonFile, pkgName, symbolTable);
-      var typeTable = this.projectLevelTypeTable.orElseGet(() -> new ProjectLevelTypeTable(symbolTable));
+      var finalTypeTable = this.typeTable.orElseGet(() -> new ProjectLevelTypeTable(symbolTable));
       var mt = moduleType.orElseGet(() -> {
         var symbolTableBuilderV2 = new SymbolTableBuilderV2(rootTree);
         var symbolTableV2 = symbolTableBuilderV2.build();
-        return new TypeInferenceV2(typeTable, pythonFile, symbolTableV2, pkgName).inferModuleType(rootTree);
+        return new TypeInferenceV2(finalTypeTable, pythonFile, symbolTableV2, pkgName).inferModuleType(rootTree);
       });
 
       return new PythonVisitorContext(
@@ -201,7 +201,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
         sonarProduct.orElse(SonarProduct.SONARQUBE),
         projectConfiguration.orElse(new ProjectConfiguration()),
         mt,
-        new TypeChecker(typeTable),
+        new TypeChecker(finalTypeTable),
         callGraph.orElse(CallGraph.EMPTY)
       );
     }

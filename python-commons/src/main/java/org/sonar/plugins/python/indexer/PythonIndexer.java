@@ -41,6 +41,8 @@ import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.project.config.SignatureBasedAwsLambdaHandlersCollector;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
@@ -53,7 +55,10 @@ public abstract class PythonIndexer {
 
   private final Map<URI, String> packageNames = new ConcurrentHashMap<>();
   private final Supplier<PythonParser> parserSupplier = PythonParser::create;
+
   private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+  private final ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+
   private final SignatureBasedAwsLambdaHandlersCollector signatureBasedAwsLambdaHandlersCollector = new SignatureBasedAwsLambdaHandlersCollector();
   private final ProjectConfigurationBuilder projectConfigurationBuilder;
 
@@ -67,6 +72,10 @@ public abstract class PythonIndexer {
 
   public ProjectConfiguration projectConfig() {
     return projectConfigurationBuilder.build();
+  }
+
+  public TypeTable projectLevelTypeTable() {
+    return projectLevelTypeTable;
   }
 
   public String packageName(PythonInputFile inputFile) {

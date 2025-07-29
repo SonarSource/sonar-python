@@ -155,6 +155,7 @@ public class PythonScanner extends Scanner {
         .workingDirectory(getWorkingDirectory(context))
         .packageName(indexer.packageName(inputFile))
         .projectLevelSymbolTable(indexer.projectLevelSymbolTable())
+        .typeTable(indexer.projectLevelTypeTable())
         .cacheContext(indexer.cacheContext())
         .sonarProduct(context.runtime().getProduct())
         .build();

@@ -103,7 +103,7 @@ public class TestPythonVisitorRunner {
       .projectLevelSymbolTable(projectLevelSymbolTable)
       .cacheContext(cacheContext)
       .projectConfiguration(projectConfiguration)
-      .projectLevelTypeTable(typeTable)
+      .typeTable(typeTable)
       .moduleType(moduleType)
       .build();
   }
