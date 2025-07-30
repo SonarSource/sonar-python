@@ -16,7 +16,6 @@
  */
 package org.sonar.python.checks.utils;
 
-import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.tree.FunctionDef;
