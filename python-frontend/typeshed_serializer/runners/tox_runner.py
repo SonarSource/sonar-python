@@ -157,6 +157,8 @@ if __name__ == '__main__':
     parser.add_argument('--skip_tests')
     parser.add_argument('--fail_fast')
     args = parser.parse_args()
+    logger.info(f'skip_tests: {args.skip_tests}')
+    logger.info(f'fail_fast: {args.fail_fast}')
     skip_tests = args.skip_tests == "true"
     fail_fast = args.fail_fast == "true"
     main(skip_tests, fail_fast)

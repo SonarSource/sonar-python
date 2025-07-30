@@ -17,6 +17,7 @@
 
 import logging
 import os
+import tempfile
 from unittest.mock import Mock, patch
 
 from serializer import symbols, serializers
@@ -25,6 +26,7 @@ from serializer.serializers import (
     MicrosoftStubsSerializer,
     TypeshedSerializer,
     ImporterSerializer,
+    get_sources,
 )
 from tests import conftest
 from tests.conftest import MOCK_THIRD_PARTY_STUBS_LIST
@@ -72,7 +74,7 @@ def test_custom_stubs_serializer(typeshed_custom_stubs):
         custom_stubs_serializer.serialize()
         assert custom_stubs_serializer.get_build_result.call_count == 1
         # Not every files from "typeshed_custom_stubs" build are serialized, as some are builtins
-        assert symbols.save_module.call_count == 159
+        assert symbols.save_module.call_count == 162
 
 
 def test_importer_serializer():
@@ -125,3 +127,46 @@ def test_save_merged_symbols():
         ts_serializer.serialize_merged_modules()
         assert symbols.save_module.call_count == 1
         assert symbols.save_module.mock_calls[0].args[0] == merged_module_symbol
+
+def test_get_sources():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        file_test_structure = {
+            "module1.pyi": "# Module 1 stub",
+            "module2.pyi": "# Module 2 stub", 
+            "regular_file.py": "# Not a stub file",
+            "text_file.txt": "# Text file",
+            "subpackage/__init__.pyi": "# Subpackage init",
+            "subpackage/submodule.pyi": "# Submodule stub",
+            "subpackage/python2/old_module.pyi": "# Python 2 stub (should be excluded)",
+            "excluded_module.pyi": "# Module to be excluded by filter",
+        }
+        
+        for file_path, content in file_test_structure.items():
+            full_path = os.path.join(temp_dir, file_path)
+            os.makedirs(os.path.dirname(full_path), exist_ok=True)
+            with open(full_path, 'w') as f:
+                f.write(content)
+                 
+        source_list, source_paths = get_sources(temp_dir)
+        assert len(source_list) == 5
+        assert len(source_paths) == 5
+
+        module_names = [source.module for source in source_list]
+        expected_modules = {
+            "module1", "module2", "excluded_module", "subpackage", "subpackage.submodule"
+        }
+        assert set(module_names) == expected_modules
+        
+        def exclude_filter(root, file_str, file_path, fq_module_name):
+            return "excluded" not in file_str and "excluded" not in fq_module_name
+        
+        source_list_filtered, source_paths_filtered = get_sources(temp_dir, exclude_filter)
+        
+        assert len(source_list_filtered) == 4
+        assert len(source_paths_filtered) == 4
+        
+        filtered_module_names = [source.module for source in source_list_filtered]
+        expected_filtered_modules = {
+            "module1", "module2", "subpackage", "subpackage.submodule"
+        }
+        assert set(filtered_module_names) == expected_filtered_modules

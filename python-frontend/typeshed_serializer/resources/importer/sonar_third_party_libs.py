@@ -59,3 +59,4 @@ import WerkZeug
 import xxhash
 import yaml
 import fastapi
+import boto3

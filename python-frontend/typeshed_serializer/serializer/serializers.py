@@ -66,8 +66,19 @@ def walk_typeshed_third_parties(opt: options.Options = get_options()):
     build_result = build.build(source_list, opt)
     return build_result, source_paths
 
+def get_fq_module_name(file, package_name):
+    module_name = file.replace(".pyi", "")
+    fq_module_name = (
+        f"{package_name}.{module_name}" if package_name != "" else module_name
+    )
+    if module_name == "__init__":
+        fq_module_name = package_name
+    return fq_module_name
 
-def get_sources(relative_path: str):
+def do_nothing_file_filter(root, file, file_path, fq_module_name):
+    return True
+
+def get_sources(relative_path: str, file_filter = do_nothing_file_filter):
     source_list = []
     source_paths = set()
     path = os.path.join(CURRENT_PATH, relative_path)
@@ -82,13 +93,11 @@ def get_sources(relative_path: str):
             if not file.endswith(".pyi"):
                 # Only consider actual stubs
                 continue
-            module_name = file.replace(".pyi", "")
-            fq_module_name = (
-                f"{package_name}.{module_name}" if package_name != "" else module_name
-            )
-            if module_name == "__init__":
-                fq_module_name = package_name
             file_path = f"{root}/{file}"
+            fq_module_name = get_fq_module_name(file, package_name)
+            if not file_filter(root, file, file_path, fq_module_name):
+                continue
+
             source = build.BuildSource(file_path, module=fq_module_name)
             source_list.append(source)
             source_paths.add(source.path)
@@ -225,9 +234,14 @@ class MicrosoftStubsSerializer(Serializer):
     output_folder = f"{FolderManager.output_folder}/{save_location}"
 
     def get_build_result(self, opt=get_options()):
-        src_list, src_paths = get_sources(SKLEARN_STUBS_PATH)
+        src_list, src_paths = get_sources(SKLEARN_STUBS_PATH, self.filter_get_sources_result)
+
         build_result = build.build(src_list, opt)
         return build_result, src_paths
+
+
+    def filter_get_sources_result(self, root, file, file_path, fq_module_name):
+        return "matplotlib" not in fq_module_name
 
     def is_exception(self, file, build_result, source_paths):
         file_path = build_result.files[file].path

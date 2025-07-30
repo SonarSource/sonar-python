@@ -1,0 +1,3 @@
+from botocore.client import BaseClient
+
+def client(*args, **kwargs) -> BaseClient: ...
