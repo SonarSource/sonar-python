@@ -1,0 +1,42 @@
+<p>Reserved environment variable names should not be overridden in Lambda functions</p>
+<h2>Why is this an issue?</h2>
+<p>AWS Lambda reserves certain environment variable names for its internal operations and runtime management. These reserved variables, such as
+'_HANDLER', '_X_AMZN_TRACE_ID', 'AWS_REGION', and others, are automatically set by the Lambda service and contain critical information about the
+function’s execution context. When application code overrides these reserved environment variables by assigning new values to them, it can disrupt the
+Lambda runtime’s ability to function correctly. The Lambda service relies on these variables to manage function execution, implement tracing, handle
+authentication, and maintain proper communication with other AWS services.</p>
+<h3>What is the potential impact?</h3>
+<p>Overriding reserved environment variables can lead to unpredictable Lambda function behavior, runtime failures, broken tracing and monitoring
+capabilities, authentication issues with AWS services, and difficulty in debugging production problems. This can result in service outages and
+degraded system reliability.</p>
+<h2>How to fix it</h2>
+<p>Avoid modifying any environment variable names that are reserved by AWS Lambda. Use custom environment variable names that do not conflict with AWS
+Lambda’s reserved names. Always prefix your custom environment variables with a unique identifier or use descriptive names that clearly indicate they
+are application-specific.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import os
+
+def lambda_handler(event, context):
+  os.environ['AWS_REGION'] = "us-west-2"  # Noncompliant: overriding AWS Lambda reserved environment variable
+  return {"statusCode": 200}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import os
+
+def lambda_handler(event, context):
+  os.environ['APP_REGION'] = "us-west-2" # Compliant: using custom environment variable names
+  return {"statusCode": 200}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> AWS documentation - <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">AWS Lambda environment variables
+  documentation</a> </li>
+  <li> AWS documentation - <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html">AWS Lambda Python handler documentation</a>
+  </li>
+</ul>
+<h3>Standards</h3>
+<p>CWE-20: Improper Input Validation</p>
+

@@ -1,0 +1,24 @@
+{
+  "title": "Reserved environment variable names should not be overridden in Lambda functions",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "aws"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7617",
+  "sqKey": "S7617",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH",
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}

@@ -17,6 +17,7 @@
 package org.sonar.python.checks.utils;
 
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
@@ -29,10 +30,18 @@ public class AwsLambdaChecksUtils {
   }
 
   public static boolean isLambdaHandler(PythonVisitorContext ctx, FunctionDef functionDef) {
+    return isLambdaHandler(ctx.projectConfiguration(), ctx.callGraph(), functionDef);
+  }
+
+  public static boolean isLambdaHandler(SubscriptionContext ctx, FunctionDef functionDef) {
+    return isLambdaHandler(ctx.projectConfiguration(), ctx.callGraph(), functionDef);
+  }
+
+  public static boolean isLambdaHandler(ProjectConfiguration config, CallGraph cg, FunctionDef functionDef) {
     if (functionDef.name().typeV2() instanceof FunctionType functionType) {
       String fqn = functionType.fullyQualifiedName();
-      return isLambdaHandlerFqn(ctx.projectConfiguration(), fqn) 
-        || isFqnCalledFromLambdaHandler(ctx.callGraph(), ctx.projectConfiguration(), fqn);
+      return isLambdaHandlerFqn(config, fqn)
+        || isFqnCalledFromLambdaHandler(cg, config, fqn);
     }
     return false;
   }

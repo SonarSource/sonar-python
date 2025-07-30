@@ -127,6 +127,7 @@ public class OpenSourceCheckList {
       AsyncioTaskNotStoredCheck.class,
       AsyncLongSleepCheck.class,
       AsyncWithContextManagerCheck.class,
+      AWSLambdaReservedEnvironmentVariableCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
       BareRaiseInFinallyCheck.class,
