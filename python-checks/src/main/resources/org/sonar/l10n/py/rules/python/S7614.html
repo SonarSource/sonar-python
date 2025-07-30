@@ -1,0 +1,36 @@
+<p>This rule raises an issue when the AWS Lambda handler function is declared with <code>async</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>The standard AWS Lambda Python runtime is designed to invoke a synchronous handler function. While Python’s <code>asyncio</code> library can be
+used inside a synchronous handler, by calling <code>asyncio.run()</code>, the handler function itself cannot be declared with <code>async def</code>.
+Doing so will lead to a runtime error.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, remove the <code>async</code> keyword from the handler function definition. The asynchronous part of the code can be moved to
+its own <code>async</code> function.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def some_logic():
+  ...
+
+async def lambda_handler(event, context): # Noncompliant: the handler is defined with async
+  result = some_logic()
+  return {"status": result}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import asyncio
+
+async def some_logic():
+  ...
+
+def lambda_handler(event, context):
+  result = asyncio.run(some_logic())
+  return {"status": result}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> AWS Documentation - <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html#python-handler-signature">Valid handler
+  signatures for Python handlers</a> </li>
+</ul>
+

@@ -37,12 +37,14 @@ public class ProjectConfigurationBuilder {
     awsLambdaHandlersByPackage = new ConcurrentHashMap<>();
   }
 
-  public void addAwsLambdaHandler(String packageName, String fullyQualifiedName) {
+  public ProjectConfigurationBuilder addAwsLambdaHandler(String packageName, String fullyQualifiedName) {
     awsLambdaHandlersByPackage.computeIfAbsent(packageName, k -> new HashSet<>()).add(fullyQualifiedName);
+    return this;
   }
 
-  public void removePackageAwsLambdaHandlers(String packageName) {
+  public ProjectConfigurationBuilder removePackageAwsLambdaHandlers(String packageName) {
     awsLambdaHandlersByPackage.remove(packageName);
+    return this;
   }
 
   public ProjectConfiguration build() {

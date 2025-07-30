@@ -28,11 +28,6 @@ public class AwsLambdaChecksUtils {
 
   private AwsLambdaChecksUtils() {
   }
-
-  public static boolean isLambdaHandler(PythonVisitorContext ctx, FunctionDef functionDef) {
-    return isLambdaHandler(ctx.projectConfiguration(), ctx.callGraph(), functionDef);
-  }
-
   public static boolean isLambdaHandler(SubscriptionContext ctx, FunctionDef functionDef) {
     return isLambdaHandler(ctx.projectConfiguration(), ctx.callGraph(), functionDef);
   }
@@ -44,6 +39,11 @@ public class AwsLambdaChecksUtils {
         || isFqnCalledFromLambdaHandler(cg, config, fqn);
     }
     return false;
+  }
+
+  public static boolean isOnlyLambdaHandler(SubscriptionContext ctx, FunctionDef functionDef) {
+    return functionDef.name().typeV2() instanceof FunctionType functionType
+      && isLambdaHandlerFqn(ctx.projectConfiguration(), functionType.fullyQualifiedName());
   }
 
   private static boolean isLambdaHandlerFqn(ProjectConfiguration projectConfiguration, String fqn) {

@@ -125,6 +125,7 @@ public class OpenSourceCheckList {
       AsyncFunctionNotAsyncCheck.class,
       AsyncFunctionWithTimeoutCheck.class,
       AsyncioTaskNotStoredCheck.class,
+      AsyncAwsLambdaHandlerCheck.class,
       AsyncLongSleepCheck.class,
       AsyncWithContextManagerCheck.class,
       AWSLambdaReservedEnvironmentVariableCheck.class,
