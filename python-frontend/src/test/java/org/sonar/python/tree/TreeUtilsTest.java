@@ -16,6 +16,13 @@
  */
 package org.sonar.python.tree;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.PythonTestUtils.pythonFile;
+
 import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +37,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
@@ -44,15 +52,15 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.sonar.python.PythonTestUtils.lastExpression;
-import static org.sonar.python.PythonTestUtils.pythonFile;
+import org.sonar.python.types.v2.TypesTestUtils;
 
 class TreeUtilsTest {
 
@@ -724,6 +732,115 @@ class TreeUtilsTest {
     // Binary expression - should return empty
     expression = lastExpression("a + b");
     assertThat(TreeUtils.stringValueFromNameOrQualifiedExpression(expression)).isEmpty();
+  }
+
+
+  @Test
+  void testGetTypeOfSingleAssignedName() {
+    var tree = TypesTestUtils.parseAndInferTypes("""
+      a = 1 
+      def foo():
+        a
+      """);
+
+    FunctionDef functionDef = PythonTestUtils.getFirstChild(tree, t -> t.is(Tree.Kind.FUNCDEF));
+    Name name = PythonTestUtils.getFirstChild(functionDef.body(), t -> t.is(Tree.Kind.NAME));
+
+    assertThat(name.name()).isEqualTo("a");
+
+    assertThat(TreeUtils.inferSingleAssignedExpressionType(name))
+      .isInstanceOfSatisfying(ObjectType.class, nameType -> 
+        assertThat(nameType.unwrappedType()).isSameAs(TypesTestUtils.INT_TYPE));
+  }
+
+  @Test
+  void testGetTypeOfSingleAssignedName_qualifiedExpr() {
+    var tree = TypesTestUtils.parseAndInferTypes("""
+      import requests
+      session = requests.Session() 
+      def foo():
+        session.get
+        session.cookies.copy
+        Session().get
+        requests.get
+        requests.get()
+      """);
+
+    FunctionDef functionDef = PythonTestUtils.getFirstChild(tree, t -> t.is(Tree.Kind.FUNCDEF));
+    List<Expression> expressions = functionDef.body().statements().stream()
+      .map(statement -> ((ExpressionStatement) statement).expressions().get(0))
+      .toList();
+
+
+    QualifiedExpression sessionGetExpr = (QualifiedExpression) expressions.get(0);
+    assertThat(TreeUtils.inferSingleAssignedExpressionType(sessionGetExpr))
+      .isInstanceOfSatisfying(FunctionType.class, functionType -> 
+        assertThat(functionType.name()).isEqualTo("get"));
+
+    QualifiedExpression cookiesCopyExpr = (QualifiedExpression) expressions.get(1);
+    assertThat(TreeUtils.inferSingleAssignedExpressionType(cookiesCopyExpr))
+      .isInstanceOfSatisfying(FunctionType.class, functionType ->
+        assertThat(functionType.name()).isEqualTo("copy"));
+
+    QualifiedExpression sessionInstanceGet = (QualifiedExpression) expressions.get(2);
+    assertThat(TreeUtils.inferSingleAssignedExpressionType(sessionInstanceGet))
+      .isSameAs(PythonType.UNKNOWN);
+
+    QualifiedExpression requestGetExpr = (QualifiedExpression) expressions.get(3);
+    assertThat(TreeUtils.inferSingleAssignedExpressionType(requestGetExpr))
+      .isInstanceOfSatisfying(FunctionType.class, functionType ->
+        assertThat(functionType.name()).isEqualTo("get"));
+
+    CallExpression requestsGetCallExpr = (CallExpression) expressions.get(4);
+    assertThat(TreeUtils.inferSingleAssignedExpressionType(requestsGetCallExpr))
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOfSatisfying(ClassType.class, classType ->
+        assertThat(classType.name()).isEqualTo("Response"));
+  }
+
+
+  @Test
+  void testGetTypeOfSingleAssignedName_multipleAssignment() {
+    var tree = TypesTestUtils.parseAndInferTypes("""
+      a = 1 
+      def foo():
+        a
+      a = 12
+      """);
+
+    FunctionDef functionDef = PythonTestUtils.getFirstChild(tree, t -> t.is(Tree.Kind.FUNCDEF));
+    Name name = PythonTestUtils.getFirstChild(functionDef.body(), t -> t.is(Tree.Kind.NAME));
+
+    assertThat(name.name()).isEqualTo("a");
+
+    assertThat(TreeUtils.inferSingleAssignedExpressionType(name))
+      .isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void testGetTypeOfSingleAssignedName_sameScope() {
+    var tree = TypesTestUtils.parseAndInferTypes("""
+      a = 1 
+      a
+      """);
+
+    Name name = PythonTestUtils.getLastDescendant(tree, t -> t.is(Tree.Kind.NAME));
+    assertThat(name.name()).isEqualTo("a");
+
+    assertThat(TreeUtils.inferSingleAssignedExpressionType(name))
+      .isInstanceOfSatisfying(ObjectType.class, nameType -> 
+        assertThat(nameType.unwrappedType()).isSameAs(TypesTestUtils.INT_TYPE));
+  }
+
+  @Test
+  void testGetTypeOfSingleAssignedName_noSymbol() {
+    var name = mock(Name.class);
+    when(name.symbolV2()).thenReturn(null);
+    when(name.typeV2()).thenReturn(PythonType.UNKNOWN);
+
+    assertThat(TreeUtils.inferSingleAssignedExpressionType(name))
+      .isSameAs(PythonType.UNKNOWN);
   }
 
   private static boolean isOuterFunction(Tree tree) {

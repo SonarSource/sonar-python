@@ -58,7 +58,10 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.UsageV2;
 
 public class TreeUtils {
   private TreeUtils() {
@@ -553,4 +556,54 @@ public class TreeUtils {
     return Optional.empty();
   }
 
+  /**
+   * <p>
+   * This method returns the type of an expression. 
+   * </p>
+   * 
+   * <p> 
+   * If the expression is a name, the function will find  where the name was assigned and return the type of the assigned expression.
+   * If the expression is a qualified expression, it will resolve the type of the qualifier and then resolve the member type on that type.
+   * The function will do that recursively until it finds a name or resolves something to an {@link PythonType#UNKNOWN} type.
+   * If the expression is neither a name nor a qualified expression, it will return {@link Expression#typeV2()}.
+   * </p>
+   *
+   * <p>
+   * This function is intended to used with variables that are defined in the global scope, and then used in a function. Since
+   * type inference does not propagate types from global scope to function scope, this would leave the name of the variable in the function
+   * without a type.
+   * </p>
+   *
+   * <p>
+   * See SONARPY-3218 and SONARPY-3219 for more details.
+   * </p>
+   *
+   * @param name the name of a variable that is assigned in the global scope
+   * @return the type of the name, or `UNKNOWN` if it cannot be determined
+   */
+  public static PythonType inferSingleAssignedExpressionType(Expression expr) {
+    if(expr.typeV2() != PythonType.UNKNOWN) {
+      return expr.typeV2();
+    } 
+    
+    if(expr instanceof Name name) {
+      return inferSingleAssignedNameType(name);
+    } else if (expr instanceof QualifiedExpression qualifiedExpr) {
+      PythonType qualifierType = inferSingleAssignedExpressionType(qualifiedExpr.qualifier());
+      return qualifierType.resolveMember(qualifiedExpr.name().name()).orElse(PythonType.UNKNOWN);
+    } else {
+      return PythonType.UNKNOWN;
+    }
+  }
+
+  private static PythonType inferSingleAssignedNameType(Name name) { 
+    Optional<Name> bindingName = Optional.ofNullable(name.symbolV2())
+      .flatMap(SymbolV2::getSingleBindingUsage)
+      .map(UsageV2::tree)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class));
+
+    return bindingName
+      .map(Name::typeV2)
+      .orElse(PythonType.UNKNOWN);
+  }
 }

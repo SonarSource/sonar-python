@@ -18,6 +18,7 @@ package org.sonar.python.semantic.v2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.tree.NameImpl;
@@ -47,7 +48,20 @@ public class SymbolV2 {
 
   @Beta
   public boolean hasSingleBindingUsage() {
-    return usages.stream().filter(UsageV2::isBindingUsage).toList().size() == 1;
+    return getSingleBindingUsage().isPresent();
+  }
+
+  @Beta
+  public Optional<UsageV2> getSingleBindingUsage() {
+    List<UsageV2> bindingUsages = usages().stream()
+      .filter(UsageV2::isBindingUsage)
+      .toList();
+    
+    if(bindingUsages.size() == 1) {
+      return Optional.of(bindingUsages.get(0));
+    }
+
+    return Optional.empty();
   }
 
   public String name() {
