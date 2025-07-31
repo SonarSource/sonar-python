@@ -3,6 +3,7 @@ applyTo: "**/*checks*/**/*.java"
 ---
 Here is some information about basic rule implementation:
 
+- When implementing a new rule, the rule has to be added to [OpenSourceCheckList.java](../../python-checks/src/main/java/org/sonar/python/checks/OpenSourceCheckList.java).
 - The class name ends in `Check`, for example `SleepZeroInAsyncCheck`
 - Annotate the class with @Rule(key = "YourRuleKey"):
 Replace "YourRuleKey" with a unique identifier for your rule (e.g., "S1234").
