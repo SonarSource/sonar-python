@@ -1,0 +1,44 @@
+<p>This rule reports an issue when a lambda invokes another lambda synchronously.</p>
+<h2>Why is this an issue?</h2>
+<p>Invoking other Lambdas synchronously from a Lambda is a scalability anti-pattern. Lambdas have a maximum execution time before they timeout (15
+minutes as of June 2025). Having to wait for another Lambda to finish its execution could lead to a timeout.</p>
+<p>A better solution is to generate events that can be consumed asynchronously by other Lambdas.</p>
+<h3>Noncompliant code example</h3>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import boto3
+</pre>
+<p>client = boto3.client('lambda')</p>
+<p>def lambda_handler(event, context): response = client.invoke( FunctionName='target-lambda-function-name', InvocationType='RequestResponse' #
+Noncompliant <code>RequestResponse</code> InvocationType means that the lambda call is synchronous Payload=json.dumps(event) )</p>
+<pre>
+return response['Payload'].read()
+</pre>
+<h3>Compliant code example</h3>
+<pre data-diff-id="1" data-diff-type="compliant">
+import boto3
+</pre>
+<p>client = boto3.client('lambda')</p>
+<p>def lambda_handler(event, context):</p>
+<pre>
+response = client.invoke(
+  FunctionName='target-lambda-function-name',
+  InvocationType='Event' # Compliant `Event` InvocationType means that the lambda call is asynchronous
+  Payload=json.dumps(event)
+)
+</pre>
+<pre>
+return response['Payload'].read()
+</pre>
+<h2>How to fix it in boto3</h2>
+<p>Using the <code>client.invoke()</code> function, the parameter <code>InvocationType</code> should be set to <code>Event</code> to invoke the
+function asynchronously by sending events.</p>
+<h2>Resources</h2>
+<ul>
+  <li> AWS docs - <a href="https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html">Best practices for working with AWS Lambda functions</a>
+  </li>
+  <li> AWS docs - <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html">Understanding the Lambda execution
+  environment lifecycle</a> </li>
+  <li> boto3 - <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda/client/invoke.html">client.invoke()</a>
+  </li>
+</ul>
+
