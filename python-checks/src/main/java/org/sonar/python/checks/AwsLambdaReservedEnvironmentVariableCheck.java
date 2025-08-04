@@ -35,7 +35,7 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 
 @Rule(key = "S7617")
-public class AWSLambdaReservedEnvironmentVariableCheck extends PythonSubscriptionCheck {
+public class AwsLambdaReservedEnvironmentVariableCheck extends PythonSubscriptionCheck {
 
   private static final Set<String> AWS_RESERVED_ENVIRONMENT_VARIABLES = Set.of(
     "_HANDLER",

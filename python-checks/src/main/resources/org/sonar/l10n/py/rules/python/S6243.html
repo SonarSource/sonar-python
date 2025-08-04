@@ -1,0 +1,47 @@
+<p>This rule raises an issue when resources are recreated on every Lambda function invocation instead of being reused.</p>
+<h2>Why is this an issue?</h2>
+<p>Resources that can be reused across multiple invocations of the Lambda function should be initialized at module level, outside the handler
+function. When the same Lambda container is reused for multiple function invocations, existing instances including SDK clients and database
+connections can be reused without recreating them. It is a good practice to initialize AWS clients, like boto3, and database connections outside the
+handler function to avoid recreating them on every Lambda invocation. Failing to do so can lead to performance degradation, increased latency, and
+even higher AWS costs.</p>
+<h3>What is the potential impact?</h3>
+<p>Performance degradation is the primary concern, as recreating resources adds significant latency to each Lambda invocation. This can result in
+slower response times and higher costs due to increased execution duration.</p>
+<p>Availability risks may also emerge under high load scenarios, as the additional overhead from resource recreation can cause functions to timeout
+more frequently or hit concurrency limits sooner than necessary.</p>
+<p>Increased API throttling is another potential issue, as recreating resources may lead to more frequent authentication requests and connection
+establishments, potentially triggering rate limits.</p>
+<h3>Exceptions</h3>
+<p>If the resource contains sensitive information that should not be shared across invocations, it may be necessary to initialize it within the
+handler function. However, this should be done cautiously and only when absolutely necessary.</p>
+<h2>How to fix it</h2>
+<p>Move the resource initialization outside the Lambda handler function to the module level. This ensures resources are created once when the Lambda
+environment is initialized and reused across invocations.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import boto3
+
+def lambda_handler(event, context):
+    s3_client = boto3.client('s3')  # Noncompliant: Client created inside handler
+
+    response = s3_client.get_object(Bucket='my-bucket', Key='my-key')
+    return response['Body'].read()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import boto3
+
+s3_client = boto3.client('s3')  # Compliant
+
+def lambda_handler(event, context):
+    response = s3_client.get_object(Bucket='my-bucket', Key='my-key')
+    return response['Body'].read()
+</pre>
+<h2>Resources</h2>
+<ul>
+  <li> AWS Documentation - <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html#python-handler-best-practices">Python handler
+  best practices</a> </li>
+</ul>
+

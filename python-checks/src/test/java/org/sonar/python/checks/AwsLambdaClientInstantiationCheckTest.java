@@ -19,10 +19,10 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-class AWSLambdaReservedEnvironmentVariableCheckTest {
+class AwsLambdaClientInstantiationCheckTest {
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/awsLambdaReservedEnvironmentVariable.py", new AWSLambdaReservedEnvironmentVariableCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/awsLambdaClientInstantiation.py", new AwsLambdaClientInstantiationCheck());
   }
 
 }
