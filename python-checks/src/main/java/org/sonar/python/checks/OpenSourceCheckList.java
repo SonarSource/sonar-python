@@ -130,6 +130,7 @@ public class OpenSourceCheckList {
       AsyncWithContextManagerCheck.class,
       AwsLambdaCrossCallCheck.class,
       AWSLambdaReservedEnvironmentVariableCheck.class,
+      AwsLambdaReturnValueAreSerializableCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
       BareRaiseInFinallyCheck.class,

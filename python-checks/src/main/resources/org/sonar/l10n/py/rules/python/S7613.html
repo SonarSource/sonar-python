@@ -1,0 +1,71 @@
+<p>This rule raises an issue when AWS Lambda handlers return values that are not JSON serializable.</p>
+<h2>Why is this an issue?</h2>
+<p>For synchronous AWS Lambda invocations, like via API Gateway or direct SDK calls, the value returned by the handler is automatically serialized
+into a JSON string before being sent back in the response. If the return value contains objects that are not native JSON types like
+<code>datetime</code> objects, sets, or custom class instances, the serialization will fail, causing a <code>TypeError</code>. This will prevent the
+Lambda from returning a valid response to the client.</p>
+<h2>How to fix it</h2>
+<p>Convert non-JSON-serializable objects to their string representation or to JSON-serializable types before returning them:</p>
+<ul>
+  <li> For <code>datetime</code> objects: Convert to ISO format strings using <code>.isoformat()</code> </li>
+  <li> For sets: Convert to lists using <code>list(set_object)</code> </li>
+  <li> For custom objects: convert them to dictionaries using the <code>__dict__</code> field, <code>dataclasses.asdict(…​)</code> for dataclasses or
+  a custom <code>todict()</code> method. </li>
+</ul>
+<p>See the following examples for more details on how to handle custom classes:</p>
+<pre>
+import json
+import dataclasses
+
+# A custom class representing a user
+@dataclasses.dataclass
+class User:
+    name: str
+    age: int
+
+    def to_dict(self) -&gt; dict:
+        return { "name": self.name, "age": self.age }
+
+user = User("Alice", 30)
+
+# Method 1: Using __dict__ field
+json.dumps(user.__dict__)
+
+# Method 2: Using dataclasses.asdict()
+json.dumps(dataclasses.asdict(user))
+
+# Method 3: Using custom to_dict() method
+json.dumps(user.to_dict())
+</pre>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import datetime
+
+def lambda_handler(event, context):
+    return {
+        "message": "Request processed successfully",
+        "timestamp": datetime.datetime.now()  # Noncompliant: not JSON serializable
+    }
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import datetime
+
+def lambda_handler(event, context):
+    return {
+        "message": "Request processed successfully",
+        "timestamp": datetime.datetime.now().isoformat()  # Compliant: converted to string
+    }
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> AWS Documentation - <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html#python-handler-return">Define Lambda function
+  handler in Python </a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/json.html">json — JSON encoder and decoder</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#object.<em>dict</em>">object.__dict__ field</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/datetime.html#datetime.date.isoformat">datetime.date.isoformat()</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/dataclasses.html#dataclasses.asdict">dateclasses.asdict()</a> </li>
+</ul>
+

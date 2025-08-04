@@ -1,0 +1,22 @@
+{
+  "title": "AWS Lambda handlers should return only JSON serializable values",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7613",
+  "sqKey": "S7613",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW",
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}

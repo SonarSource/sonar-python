@@ -47,9 +47,9 @@ public class AwsLambdaChecksUtils {
 
   private static boolean isLambdaHandlerFqn(ProjectConfiguration projectConfiguration, String fqn) {
     return projectConfiguration.awsProjectConfiguration()
-             .awsLambdaHandlers()
-             .stream()
-             .anyMatch(handler -> handler.fullyQualifiedName().equals(fqn));
+      .awsLambdaHandlers()
+      .stream()
+      .anyMatch(handler -> handler.fullyQualifiedName().equals(fqn));
   }
 
   private static boolean isFqnCalledFromLambdaHandler(CallGraph callGraph, ProjectConfiguration projectConfiguration, String fqn) {
