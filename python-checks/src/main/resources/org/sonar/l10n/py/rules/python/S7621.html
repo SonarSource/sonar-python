@@ -1,0 +1,52 @@
+<p>This rule raises an issue when custom polling loops are used instead of AWS waiters for checking resource states.</p>
+<h2>Why is this an issue?</h2>
+<p>When working with AWS resources that require time to reach a desired state, such as EC2 instances starting up, S3 buckets being created, or
+DynamoDB tables becoming available, developers often implement custom polling loops to check the resource status repeatedly. However, this approach is
+inefficient and error-prone. Custom polling requires manual handling of timing intervals, retry logic, error conditions, and timeout scenarios. It
+also tends to be verbose and duplicates logic that AWS already provides in a more robust form. AWS SDK provides waiters, which are purpose-built
+abstractions specifically designed to poll AWS resources until they reach a desired state. Waiters handle the complexities of polling automatically,
+including appropriate delays, exponential backoff, maximum wait times, and proper error handling.</p>
+<h3>What is the potential impact?</h3>
+<p>Custom polling implementations can lead to inefficient resource usage due to inappropriate polling intervals, increased complexity and maintenance
+overhead, potential race conditions and timing issues, and unreliable error handling that may cause application failures or infinite loops.</p>
+<h2>How to fix it</h2>
+<p>Replace custom polling loops with AWS waiters. Identify the AWS resource you need to wait for, then use the appropriate waiter method from the
+boto3 client. Waiters are available for most AWS services and common state transitions. Use the <code>get_waiter()</code> method on your boto3 client
+to obtain the waiter, then call <code>wait()</code> with the appropriate parameters.</p>
+<h3>Noncompliant code example</h3>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import boto3
+import time
+
+ec2_client = boto3.client('ec2', region_name='us-east-1')
+
+while True:
+  response = ec2_client.describe_instance_status(  # Noncompliant
+    InstanceIds=[instance_id],
+    IncludeAllInstances=True
+  )
+
+  instance_status = response['Statuses'][0]['InstanceStatus']['Status']
+  if instance_status == 'ok':
+    break
+
+  time.sleep(10)
+</pre>
+<h3>Compliant solution</h3>
+<pre data-diff-id="1" data-diff-type="compliant">
+import boto3
+
+ec2_client = boto3.client('ec2', region_name='us-east-1')
+
+ec2_client.get_waiter('instance_status_ok').wait(
+    InstanceIds=[instance_id],
+    IncludeAllInstances=True
+)
+</pre>
+<h2>Resources</h2>
+<ul>
+  <li> boto3 Documentation - <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/clients.html#waiters">Waiters</a> </li>
+  <li> AWS Documentation - <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html#python-handler-best-practices">AWS Lambda Python
+  Handler Best Practices</a> </li>
+</ul>
+
