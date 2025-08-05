@@ -90,6 +90,12 @@ public class TreeUtils {
     return firstAncestor(tree, t -> t.is(kinds));
   }
 
+  @SuppressWarnings("unchecked")
+  @CheckForNull
+  public static <T extends Tree> T firstAncestorOfClass(Tree tree, Class<T> clazz) {
+    return (T) firstAncestor(tree, clazz::isInstance);
+  }
+
   public static Collector<Tree, ?, Map<Tree, Tree>> groupAssignmentByParentStatementList() {
     return Collectors.toMap(tree -> TreeUtils.firstAncestor(tree, parent -> parent.is(Tree.Kind.STATEMENT_LIST)),
       Function.identity(),

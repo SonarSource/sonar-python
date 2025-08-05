@@ -23,6 +23,7 @@ import org.sonar.python.checks.cdk.DisabledRDSEncryptionCheck;
 import org.sonar.python.checks.cdk.DisabledSNSTopicEncryptionCheck;
 import org.sonar.python.checks.cdk.IamPolicyPublicAccessCheck;
 import org.sonar.python.checks.cdk.IamPrivilegeEscalationCheck;
+import org.sonar.python.checks.cdk.NetworkCallsWithoutTimeoutsInLambdaCheck;
 import org.sonar.python.checks.cdk.PrivilegePolicyCheck;
 import org.sonar.python.checks.cdk.PublicApiIsSecuritySensitiveCheck;
 import org.sonar.python.checks.cdk.PublicNetworkAccessToCloudResourcesCheck;
@@ -380,6 +381,7 @@ public class OpenSourceCheckList {
       StrongCryptographicKeysCheck.class,
       SklearnCachedPipelineDontAccessTransformersCheck.class,
       MissingHyperParameterCheck.class,
+      NetworkCallsWithoutTimeoutsInLambdaCheck.class,
       SklearnPipelineSpecifyMemoryArgumentCheck.class,
       SklearnPipelineParameterAreCorrectCheck.class,
       SuperfluousCurlyBraceCheck.class,

@@ -1,0 +1,79 @@
+<p>This rule raises an issue when network calls in AWS Lambda functions are made without explicit timeout parameters.</p>
+<h2>Why is this an issue?</h2>
+<p>AWS Lambda functions are ephemeral, event-driven compute services that frequently interact with external systems including other AWS services via
+boto3, external APIs through HTTP requests, databases, and message brokers. When these network calls are made without explicit timeout parameters, the
+Lambda function becomes vulnerable to indefinite hanging if the remote service becomes unresponsive due to network issues, service overload, or
+connectivity problems. Unlike traditional server environments where hanging requests might affect only a single user session, Lambda functions that
+hang continue to consume billable compute time until the function’s maximum execution timeout is reached, which can be up to 15 minutes. This creates
+a cascading effect where network reliability issues directly translate to increased operational costs and unpredictable system behavior.</p>
+<h3>What is the potential impact?</h3>
+<p>Hanging executions lead to increased AWS costs due to wasted compute time while waiting for unresponsive services. The lack of explicit timeouts
+causes unpredictable failure behavior, making it difficult to distinguish between functional errors and network stalls, which complicates debugging
+and monitoring. When the Lambda function’s maximum timeout is reached, the execution is abruptly terminated, preventing graceful error handling,
+proper logging, and cleanup operations. In connection pooling scenarios, hanging requests can exhaust available connections, and the unpredictable
+delays can cause cascading failures in upstream services that depend on the Lambda function’s response.</p>
+<h2>How to fix it in requests</h2>
+<p>For HTTP requests using the requests library, always specify the timeout parameter. Use a tuple <code>(connect_timeout, read_timeout)</code> for
+granular control over connection establishment and data reading timeouts. Wrap the call in try-except blocks to handle timeout exceptions gracefully.
+Consider externalizing timeout values through environment variables for easier configuration management.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import requests
+
+def lambda_handler(event, context):
+    response = requests.get('https://api.example.com/data')  # Noncompliant
+    return response.json()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import requests
+import os
+
+def lambda_handler(event, context):
+    try:
+        timeout = (float(os.environ.get('CONNECT_TIMEOUT', 3)),
+                  float(os.environ.get('READ_TIMEOUT', 10)))
+        response = requests.get('https://api.example.com/data', timeout=timeout)
+        return response.json()
+    except requests.exceptions.Timeout:
+        return {'error': 'Request timed out'}
+</pre>
+<h2>How to fix it in boto3</h2>
+<p>For AWS service calls using boto3, configure timeouts using botocore.config.Config when creating clients. Set both <code>connect_timeout</code> and
+<code>read_timeout</code> parameters to prevent hanging on connection establishment and data reading respectively. Handle botocore timeout exceptions
+appropriately in your error handling logic.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import boto3
+
+def lambda_handler(event, context):
+    s3 = boto3.client('s3')  # Noncompliant
+    response = s3.get_object(Bucket='my-bucket', Key='my-key')
+    return response['Body'].read()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import boto3
+from botocore.config import Config
+from botocore.exceptions import ReadTimeoutError, ConnectTimeoutError
+
+def lambda_handler(event, context):
+    try:
+        config = Config(connect_timeout=5, read_timeout=10)
+        s3 = boto3.client('s3', config=config)
+        response = s3.get_object(Bucket='my-bucket', Key='my-key')
+        return response['Body'].read()
+    except (ReadTimeoutError, ConnectTimeoutError):
+        return {'error': 'AWS service call timed out'}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> requests Documentation - <a href="https://requests.readthedocs.io/en/latest/user/advanced/#timeouts">Timeouts</a> </li>
+  <li> boto3 Documentation - <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html">Configuration</a> </li>
+  <li> AWS Documentation - <a href="https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/">Timeouts, retries, and backoff
+  with jitter</a> </li>
+</ul>
+

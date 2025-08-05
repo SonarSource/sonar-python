@@ -17,7 +17,7 @@ def lambda_handler(event, context):
     s3_client = boto3.client('s3')  # Noncompliant {{Initialize this AWS client outside the Lambda handler function.}}
 #               ^^^^^^^^^^^^^^^^^^
 
-    s3 = boto3.resource('s3') # FN SONARPY-3224
+    s3 = boto3.resource('s3') # Noncompliant
     session = boto3.session.Session()  # FN SONARPY-3224
 
     pymysql_connection = pymysql.connect(host='localhost')  # Noncompliant {{Initialize this database connection outside the Lambda handler function.}}

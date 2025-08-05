@@ -16,13 +16,6 @@
  */
 package org.sonar.python.tree;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.sonar.python.PythonTestUtils.lastExpression;
-import static org.sonar.python.PythonTestUtils.pythonFile;
-
 import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +55,13 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.types.v2.TypesTestUtils;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.PythonTestUtils.pythonFile;
+
 class TreeUtilsTest {
 
   @Test
@@ -85,6 +85,31 @@ class TreeUtilsTest {
     WhileStatement innerWhile = (WhileStatement) outerWhile.body().statements().get(0);
     PassStatement passStatement = (PassStatement) innerWhile.body().statements().get(0);
     assertThat(TreeUtils.firstAncestorOfKind(passStatement, Kind.WHILE_STMT)).isEqualTo(innerWhile);
+  }
+
+  @Test
+  void first_ancestor_of_class() {
+    String code = """
+      class A:
+        def foo(): pass""";
+    FileInput root = parse(code);
+    assertThat(TreeUtils.firstAncestorOfClass(root, ClassDef.class)).isNull();
+
+    ClassDef classDef = (ClassDef) root.statements().statements().get(0);
+    assertThat(TreeUtils.firstAncestorOfClass(classDef, FileInput.class)).isEqualTo(root);
+
+    FunctionDef funcDef = (FunctionDef) classDef.body().statements().get(0);
+    assertThat(TreeUtils.firstAncestorOfClass(funcDef, FileInput.class)).isEqualTo(root);
+    assertThat(TreeUtils.firstAncestorOfClass(funcDef, ClassDef.class)).isEqualTo(classDef);
+
+    code = """
+      while True:
+        while True:
+          pass""";
+    WhileStatement outerWhile = (WhileStatement) parse(code).statements().statements().get(0);
+    WhileStatement innerWhile = (WhileStatement) outerWhile.body().statements().get(0);
+    PassStatement passStatement = (PassStatement) innerWhile.body().statements().get(0);
+    assertThat(TreeUtils.firstAncestorOfClass(passStatement, WhileStatement.class)).isEqualTo(innerWhile);
   }
 
   @Test

@@ -16,20 +16,60 @@
  */
 package org.sonar.python.checks.utils;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.project.configuration.AwsLambdaHandlerInfo;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
+import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.v2.callgraph.CallGraph;
+import org.sonar.python.tree.NameImpl;
+import org.sonar.python.tree.PythonTreeMaker;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class AwsLambdaChecksUtilsTest {
+  @Test
+  void isLambdaHandlerInThisFile_test() {
+    FileInput root = parse("""
+      def foo(): ...
+      def bar(event, context): ...
+      """);
+
+    var statements = root.statements().statements();
+
+    var fooFun = (FunctionDef) statements.get(0);
+    var fooFunName = (NameImpl) fooFun.name();
+    assertThat(fooFunName.name()).isEqualTo("foo");
+    fooFunName.typeV2(functionType("lambda.foo"));
+
+    var lambdaHandlerFun = (FunctionDef) statements.get(1);
+    var lambdaHandlerFunName = (NameImpl) lambdaHandlerFun.name();
+    assertThat(lambdaHandlerFunName.name()).isEqualTo("bar");
+    lambdaHandlerFunName.typeV2(functionType("lambda.bar"));
+
+    SubscriptionContext subscriptionContextWithBar = subscriptionContext(CallGraph.EMPTY);
+    subscriptionContextWithBar.projectConfiguration().awsProjectConfiguration().awsLambdaHandlers()
+      .add(new AwsLambdaHandlerInfo("lambda.bar"));
+
+    assertThat(AwsLambdaChecksUtils.isLambdaHandlerInThisFile(subscriptionContextWithBar, root)).isTrue();
+    assertThat(AwsLambdaChecksUtils.isLambdaHandlerInThisFile(subscriptionContextWithBar, fooFun)).isTrue();
+    assertThat(AwsLambdaChecksUtils.isLambdaHandlerInThisFile(subscriptionContextWithBar, lambdaHandlerFun)).isTrue();
+
+    SubscriptionContext subscriptionContextWithNonExistingFunction = subscriptionContext(CallGraph.EMPTY);
+    subscriptionContextWithNonExistingFunction.projectConfiguration().awsProjectConfiguration().awsLambdaHandlers()
+      .add(new AwsLambdaHandlerInfo("lambda.non_existing_function"));
+
+    assertThat(AwsLambdaChecksUtils.isLambdaHandlerInThisFile(subscriptionContextWithNonExistingFunction, root)).isFalse();
+    assertThat(AwsLambdaChecksUtils.isLambdaHandlerInThisFile(subscriptionContextWithNonExistingFunction, fooFun)).isFalse();
+    assertThat(AwsLambdaChecksUtils.isLambdaHandlerInThisFile(subscriptionContextWithNonExistingFunction, lambdaHandlerFun)).isFalse();
+  }
+
   @Test
   void isLambdaHandlerTest_direct() {
     var subscriptionContext = subscriptionContext(CallGraph.EMPTY);
@@ -93,9 +133,14 @@ class AwsLambdaChecksUtilsTest {
   }
 
   private static FunctionDef functionDef(String name) {
+    FunctionType functionNameType = functionType(name);
+    return functionDef(functionNameType);
+  }
+
+  private static FunctionType functionType(String name) {
     FunctionType functionNameType = Mockito.mock(FunctionType.class);
     Mockito.when(functionNameType.fullyQualifiedName()).thenReturn(name);
-    return functionDef(functionNameType);
+    return functionNameType;
   }
 
   private static FunctionDef functionDef(PythonType type) {
@@ -105,5 +150,9 @@ class AwsLambdaChecksUtilsTest {
     Mockito.when(functionName.typeV2()).thenReturn(type);
     Mockito.when(functionDef.name()).thenReturn(functionName);
     return functionDef;
+  }
+
+  private static FileInput parse(String code) {
+    return new PythonTreeMaker().fileInput(PythonParser.create().parse(code));
   }
 }
