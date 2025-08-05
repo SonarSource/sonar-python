@@ -44,5 +44,8 @@ class TypeCheckMapTest {
     Assertions.assertThat(map.getForType(strClassType)).isNull();
     Assertions.assertThat(map.getForType(fooClassType)).isEqualTo(2);
     Assertions.assertThat(map.getForType(PythonType.UNKNOWN)).isNull();
+    Assertions.assertThat(map.containsForType(intClassType)).isTrue();
+    Assertions.assertThat(map.containsForType(strClassType)).isFalse();
+    Assertions.assertThat(map.containsForType(fooClassType)).isTrue();
   }
 }

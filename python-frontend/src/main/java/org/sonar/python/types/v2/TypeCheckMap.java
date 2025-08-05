@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import javax.annotation.CheckForNull;
-import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class TypeCheckMap<V> {
@@ -55,8 +54,12 @@ public class TypeCheckMap<V> {
   public Optional<V> getOptionalForType(PythonType type) {
     return map.entrySet()
       .stream()
-      .filter(entry -> entry.getKey().check(type) == TriBool.TRUE)
+      .filter(entry -> entry.getKey().check(type).isTrue())
       .findFirst()
       .map(Map.Entry::getValue);
+  }
+
+  public boolean containsForType(PythonType type) {
+    return getOptionalForType(type).isPresent();
   }
 }

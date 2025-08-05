@@ -132,6 +132,7 @@ public class OpenSourceCheckList {
       AwsLambdaCrossCallCheck.class,
       AwsLambdaReservedEnvironmentVariableCheck.class,
       AwsLambdaReturnValueAreSerializableCheck.class,
+      AwsMissingPaginationCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
       BareRaiseInFinallyCheck.class,

@@ -1,0 +1,52 @@
+<p>This rule raises an issue when <code>boto3</code> operations that support pagination are called without using paginators or manual pagination
+handling.</p>
+<h2>Why is this an issue?</h2>
+<p>Many AWS services use pagination to limit the number of items returned in a single API call. For example, S3’s <code>list_objects_v2()</code>
+returns a maximum of <strong>1000</strong> objects per call, and DynamoDB’s <code>scan()</code> returns up to <strong>1MB</strong> of data per call.
+When you call these operations through boto3 without proper pagination handling, you only receive the first page of results. This means your
+application silently operates on incomplete data, which can lead to incorrect logic and missed operations on resources that exist beyond the first
+page.</p>
+<h3>What is the potential impact?</h3>
+<p>Operating on incomplete data can cause missing critical resources, incorrect business logic based on partial datasets, and security vulnerabilities
+where policies or access changes are not applied to the full resource set. These issues are often silent and difficult to detect in testing
+environments with smaller datasets.</p>
+<h2>How to fix it</h2>
+<p>Use <code>boto3’s</code> built-in paginators to automatically handle pagination and retrieve all results. Paginators provide a simple interface
+that handles the complexity of checking for continuation tokens and making multiple API calls. Replace direct service calls with
+<code>paginator.paginate()</code> calls and iterate through all pages.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import boto3
+s3 = boto3.client("s3")
+
+def lambda_handler(event, context):
+    keys = []
+    response = s3.list_objects_v2(Bucket="my-bucket")  # Noncompliant
+    for obj in response.get("Contents", []):
+        keys.append(obj["Key"])
+    return keys
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import boto3
+s3 = boto3.client("s3")
+
+def lambda_handler(event, context):
+    keys = []
+    paginator = s3.get_paginator("list_objects_v2")
+    for page in paginator.paginate(Bucket="my-bucket"):
+        for obj in page.get("Contents", []):
+            keys.append(obj["Key"])
+    return keys
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/paginators.html">Boto3 Paginators Guide</a> </li>
+  <li> <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/list_objects_v2.html">S3 list_objects_v2 API
+  Reference</a> </li>
+  <li> <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/paginator/Query.html">DynamoDB Query Paginator
+  Reference</a> </li>
+</ul>
+

@@ -1,0 +1,23 @@
+{
+  "title": "boto3 operations that support pagination should be performed using paginators or manual pagination handling",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "aws"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7622",
+  "sqKey": "S7622",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
