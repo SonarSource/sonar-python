@@ -1,0 +1,34 @@
+<p>This rule raises an issue when AWS Lambda handlers write to the /tmp directory without properly cleaning up temporary files before function
+completion.</p>
+<h2>Why is this an issue?</h2>
+<p>AWS Lambda provides a temporary file system at /tmp for each execution environment. However, the contents of /tmp can persist across multiple
+invocations of the same Lambda function instance during "warm starts." When temporary files are not cleaned up, they remain available to subsequent
+invocations of the same function instance.</p>
+<h3>What is the potential impact?</h3>
+<p>This can lead to serious security and reliability issues: sensitive data from one invocation might leak to unrelated subsequent invocations, disk
+space can be exhausted causing function failures, and stale data from previous runs can cause unexpected behavior and hard-to-debug issues.</p>
+<h3>Exceptions</h3>
+<ul>
+  <li> Writing to /tmp is recommended for caching data used by future lambda invocations. </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Always clean up temporary files before your Lambda function completes. It is possible to use the <code>tempfile</code> module to create temporary
+files that will be automatically deleted.</p>
+<p>Otherwise, use a <code>try…​finally</code> block to ensure cleanup happens even if errors occur during processing.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def lambda_handler(event, context):
+    file_path = '/tmp/temp_data.txt'  # Noncompliant
+    with open(file_path, 'w') as f:
+        f.write("Something")
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import tempfile
+
+def lambda_handler(event, context):
+    with tempfile.NamedTemporaryFile() as f:  # Compliant
+        f.write("Something")
+</pre>
+

@@ -1,0 +1,24 @@
+{
+  "title": "AWS Lambda handlers should clean up temporary files in \/tmp directory",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "aws",
+    "lambda"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7620",
+  "sqKey": "S7620",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "COMPLETE"
+  }
+}
