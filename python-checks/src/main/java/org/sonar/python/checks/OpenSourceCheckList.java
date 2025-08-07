@@ -132,6 +132,7 @@ public class OpenSourceCheckList {
       AwsLambdaClientInstantiationCheck.class,
       AwsLambdaCrossCallCheck.class,
       AwsLambdaReservedEnvironmentVariableCheck.class,
+      AwsCustomMetricNamespaceCheck.class,
       AwsLambdaReturnValueAreSerializableCheck.class,
       AwsLambdaTmpCleanupCheck.class,
       AwsMissingPaginationCheck.class,

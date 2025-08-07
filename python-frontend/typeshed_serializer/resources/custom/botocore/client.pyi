@@ -4,6 +4,8 @@ from typing import Any, Optional
 
 class BaseClient(CustomStubBase):
     def invoke(self, FunctionName: str, InvocationType: str, Payload: str) -> Any: ...
+    
+    def put_metric_data(self, **kwargs) -> None: ...
 
     def list_objects_v2(self, Bucket: str,
                         Delimiter: Optional[str] = ...,

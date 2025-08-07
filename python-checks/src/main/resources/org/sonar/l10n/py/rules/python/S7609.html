@@ -1,0 +1,95 @@
+<p>This rule raises and issue when AWS CloudWatch <code>put_metric_data</code> namespace begins with <code>AWS/</code></p>
+<h2>Why is this an issue?</h2>
+<p>AWS CloudWatch has reserved namespaces that begin with 'AWS/' for its own internal services and metrics. These namespaces are used by AWS to
+publish official service metrics such as EC2 instance metrics, Lambda function metrics, S3 bucket metrics, and others. When you attempt to publish
+custom metrics using a namespace that begins with 'AWS/', you are essentially trying to use a reserved namespace that conflicts with AWS’s own metric
+publishing system.</p>
+<h3>What is the potential impact?</h3>
+<p>Using AWS service namespaces can lead to metric publishing failures, data corruption, or unexpected behavior in CloudWatch dashboards. It may also
+cause confusion between your custom metrics and official AWS service metrics, making monitoring and troubleshooting more difficult. Additionally, AWS
+may reject such metric publications or they may interfere with existing service metrics.</p>
+<h2>How to fix it in boto3</h2>
+<p>Use a custom namespace that does not begin with 'AWS/' when publishing metrics with CloudWatch. Choose a meaningful namespace that reflects your
+application or service name, such as 'MyApp/', 'CustomService/', or your organization name.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import boto3
+
+cloudwatch = boto3.client('cloudwatch')
+
+# Publishing to AWS reserved namespace
+cloudwatch.put_metric_data(
+    Namespace='AWS/MyCustomService',  # Noncompliant
+    MetricData=[
+        {
+            'MetricName': 'CustomMetric',
+            'Value': 123.0
+        }
+    ]
+)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import boto3
+
+cloudwatch = boto3.client('cloudwatch')
+
+# Publishing to custom namespace
+cloudwatch.put_metric_data(
+    Namespace='MyApp/CustomService',  # Compliant
+    MetricData=[
+        {
+            'MetricName': 'CustomMetric',
+            'Value': 123.0
+        }
+    ]
+)
+</pre>
+<h2>How to fix it in aiobotocore</h2>
+<p>When using aiobotocore for asynchronous CloudWatch operations, ensure you use a custom namespace that does not start with 'AWS/' to avoid conflicts
+with AWS reserved namespaces.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import aiobotocore.session
+
+async def publish_metrics():
+    session = aiobotocore.session.get_session()
+    async with session.create_client('cloudwatch') as client:
+        await client.put_metric_data(
+            Namespace='AWS/Lambda/Custom',  # Noncompliant
+            MetricData=[
+                {
+                    'MetricName': 'ProcessingTime',
+                    'Value': 45.2
+                }
+            ]
+        )
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import aiobotocore.session
+
+async def publish_metrics():
+    session = aiobotocore.session.get_session()
+    async with session.create_client('cloudwatch') as client:
+        await client.put_metric_data(
+            Namespace='MyLambda/Custom',  # Compliant
+            MetricData=[
+                {
+                    'MetricName': 'ProcessingTime',
+                    'Value': 45.2
+                }
+            ]
+        )
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricData.html">AWS CloudWatch PutMetricData API
+  Reference</a> </li>
+  <li> <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace">CloudWatch Concepts -
+  Namespaces</a> </li>
+</ul>
+
