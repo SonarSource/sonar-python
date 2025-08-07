@@ -120,7 +120,7 @@ public class AwsLambdaReturnValueAreSerializableCheck extends PythonSubscription
     }
 
     FunctionDef function = (FunctionDef) parentFunction;
-    if (!AwsLambdaChecksUtils.isLambdaHandler(ctx, function)) {
+    if (!AwsLambdaChecksUtils.isOnlyLambdaHandler(ctx, function)) {
       return;
     }
 

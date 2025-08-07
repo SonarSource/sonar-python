@@ -161,6 +161,16 @@ def complex_compliant_lambda_handler(event, context):
         },
     }
 
+@dataclasses.dataclass
+class OrderOutput:
+  id: int
+  
+def process():
+  return OrderOutput(1) # Compliant the value is not returned
+
+def no_return_lambda_handler(event, ctx):
+  order_output = process()
+  return {1,2} # Noncompliant
 
 # Non-Lambda functions (should not trigger the rule)
 def regular_function_set():
