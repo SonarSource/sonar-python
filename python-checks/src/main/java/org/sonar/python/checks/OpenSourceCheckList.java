@@ -135,6 +135,7 @@ public class OpenSourceCheckList {
       AwsCustomMetricNamespaceCheck.class,
       AwsLambdaReturnValueAreSerializableCheck.class,
       AwsLambdaTmpCleanupCheck.class,
+      AwsLongTermAccessKeysCheck.class,
       AwsMissingPaginationCheck.class,
       AwsWaitersInsteadOfCustomPollingCheck.class,
       BackslashInStringCheck.class,
