@@ -1,0 +1,89 @@
+<p>This rule raises an issue when S3 operations are performed without verifying bucket ownership using the <code>ExpectedBucketOwner</code>
+parameter.</p>
+<h2>Why is this an issue?</h2>
+<p>When working with S3 buckets in AWS applications, it’s essential to verify that you’re accessing the correct bucket owned by the expected AWS
+account. Without proper bucket owner verification, applications may inadvertently interact with unintended S3 buckets due to configuration errors,
+naming conflicts, or security misconfigurations. This is particularly critical in multi-account AWS environments where bucket names might be similar
+across different accounts, or when bucket names are dynamically constructed based on configuration values. The <code>ExpectedBucketOwner</code>
+parameter provides a safety mechanism that ensures operations only proceed when the bucket is owned by the specified AWS account ID.</p>
+<h3>What is the potential impact?</h3>
+<p>Failing to verify bucket ownership exposes systems to security threats. Applications may process data in unintended locations, including test
+environments or malicious buckets.</p>
+<p>Data integrity suffers when operations target wrong buckets. Sensitive information could be exposed or corrupted without proper verification.</p>
+<h2>How to fix it in boto3</h2>
+<p>Add the <code>ExpectedBucketOwner</code> parameter to your S3 operations to verify the bucket owner before performing any operations. This
+parameter should contain the AWS account ID that owns the bucket you expect to access.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import boto3
+
+s3_client = boto3.client('s3')
+
+def lambda_handler(event, context):
+    bucket_name = 'my-production-bucket'
+
+    response = s3_client.get_object(  # Noncompliant
+        Bucket=bucket_name,
+        Key='data.json'
+    )
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import boto3
+
+s3_client = boto3.client('s3')
+
+def lambda_handler(event, context):
+    bucket_name = 'my-production-bucket'
+    expected_owner = '123456789012'
+
+    response = s3_client.get_object(
+        Bucket=bucket_name,
+        Key='data.json',
+        ExpectedBucketOwner=expected_owner  # Compliant
+    )
+</pre>
+<h2>How to fix it in aiobotocore</h2>
+<p>When using aiobotocore, include the <code>ExpectedBucketOwner</code> parameter in your S3 operations to ensure bucket ownership verification.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import aiobotocore.session
+
+
+async def lambda_handler(event, context):
+    async with session.create_client('s3') as s3_client:
+        bucket_name = 'my-production-bucket'
+
+        response = await s3_client.get_object(  # Noncompliant
+            Bucket=bucket_name,
+            Key='data.json'
+        )
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import aiobotocore.session
+
+session = aiobotocore.session.get_session()
+
+async def lambda_handler(event, context):
+    async with session.create_client('s3') as s3_client:
+        bucket_name = 'my-production-bucket'
+        expected_owner = '123456789012'
+
+        response = await s3_client.get_object(
+            Bucket=bucket_name,
+            Key='data.json',
+            ExpectedBucketOwner=expected_owner  # Compliant
+        )
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> boto3 Documentation - <a
+  href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_object">get_object</a> </li>
+  <li> AWS Documentation - <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-owner-condition.html">Verifying bucket ownership with
+  bucket owner condition</a> </li>
+</ul>
+

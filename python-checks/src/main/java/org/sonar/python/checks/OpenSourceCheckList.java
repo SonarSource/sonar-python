@@ -129,6 +129,7 @@ public class OpenSourceCheckList {
       AsyncAwsLambdaHandlerCheck.class,
       AsyncLongSleepCheck.class,
       AsyncWithContextManagerCheck.class,
+      AwsExpectedBucketOwnerCheck.class,
       AwsLambdaClientInstantiationCheck.class,
       AwsLambdaCrossCallCheck.class,
       AwsLambdaReservedEnvironmentVariableCheck.class,

@@ -1,0 +1,24 @@
+{
+  "title": "S3 operations should verify bucket ownership using ExpectedBucketOwner parameter",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "aws",
+    "s3"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7608",
+  "sqKey": "S7608",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "SECURITY": "HIGH"
+    },
+    "attribute": "COMPLETE"
+  }
+}
