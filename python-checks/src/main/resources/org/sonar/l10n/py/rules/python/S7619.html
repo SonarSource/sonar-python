@@ -1,0 +1,66 @@
+<p>This rule raises an issue when <code>botocore.exceptions.ClientError</code> can be thrown but are not explicitly caught and handled.</p>
+<h2>Why is this an issue?</h2>
+<p>AWS Lambda functions in Python use <code>boto3</code>, the AWS SDK, to communicate with other AWS services. <code>boto3</code> operations can fail
+due to service-specific reasons like:</p>
+<ul>
+  <li> A requested s3 object does not exist </li>
+  <li> Insufficient permissions </li>
+  <li> Service rate limit </li>
+  <li> Network glitches and other temporary service issues </li>
+</ul>
+<p>These errors are typically surfaced as <code>botocore.exceptions.ClientError</code>. Failing to handle these exceptions correctly by not catching
+them or using a broad <code>try/except</code> block can undermine the lambda function’s reliability and ease of debugging.</p>
+<h3>What is the potential impact?</h3>
+<p>Not catching and appropriately handling <code>botocore.exceptions.ClientError</code> in AWS Lambda functions can lead to:</p>
+<ul>
+  <li> Opaque dead letter queue messages </li>
+  <li> Suppressed retries </li>
+  <li> Unclear root causes in log messages </li>
+  <li> Poor API responses </li>
+  <li> Silent failures when errors are caught and ignored </li>
+  <li> Wasted resources by retrying operations that fail and are not properly handled </li>
+</ul>
+<h2>How to fix</h2>
+<p>Lambda functions should explicitly catch <code>botocore.exceptions.ClientError</code> around <code>boto3</code> calls. Inside the except block,
+<code>e.response[‘Error’][‘Code’]</code> should be inspected to determine the specific error and to be handled specifically.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import boto3
+
+s3 = boto3.client("s3")
+
+def lambda_handler(event, context):
+    return s3.get_object(Bucket="my_bucket", Key="somefile.txt") # Noncompliant: No error handling, crash on missing file or permissions error
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import boto3
+from botocore.exceptions import ClientError
+
+s3 = boto3.client("s3")
+
+def lambda_handler(event, context):
+    try:
+        response = s3.get_object(Bucket="my_bucket", Key="somefile.txt")
+    except ClientError as e: # Compliant: explicitly catching ClientError
+        error_code = e.response['Error']['Code']
+        if error_code == 'NoSuchKey':
+            return {"error":"File not found"}
+        elif ...:
+          ...
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> boto3 docs - <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/error-handling.html">Error handling</a> </li>
+  <li> boto3 docs - <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html">Retries</a> </li>
+  <li> boto3 docs - <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda/client/invoke.html">Lambda invoke</a>
+  </li>
+  <li> Medium - <a
+  href="https://medium.com/@python-javascript-php-html-css/automating-error-reporting-and-lambda-execution-in-aws-fab0aed3cbf0">Automating error
+  reporting</a> </li>
+  <li> Serverlessland - <a href="https://serverlessland.com/content/service/lambda/guides/aws-lambda-fundamentals/aws-lambda-logging">AWS Lambda
+  logging</a> </li>
+</ul>
+
