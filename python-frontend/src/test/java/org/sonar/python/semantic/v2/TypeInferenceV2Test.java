@@ -3006,7 +3006,7 @@ public class TypeInferenceV2Test {
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(empty);
     LazyTypesContext lazyTypesContext = projectLevelTypeTable.lazyTypesContext();
     SymbolsModuleTypeProvider symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(empty, lazyTypesContext);
-    ModuleType builtinModule = symbolsModuleTypeProvider.createBuiltinModule();
+    ModuleType builtinModule = symbolsModuleTypeProvider.getRootModule();
     symbolsModuleTypeProvider.convertModuleType(List.of("typing"), builtinModule);
 
     ClassSymbol symbol = Mockito.mock(ClassSymbolImpl.class);
@@ -3020,7 +3020,7 @@ public class TypeInferenceV2Test {
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(empty);
     LazyTypesContext lazyTypesContext = projectLevelTypeTable.lazyTypesContext();
     SymbolsModuleTypeProvider symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(empty, lazyTypesContext);
-    ModuleType builtinModule = symbolsModuleTypeProvider.createBuiltinModule();
+    ModuleType builtinModule = symbolsModuleTypeProvider.getRootModule();
     PythonType responses = symbolsModuleTypeProvider.convertModuleType(List.of("fastapi", "responses"), builtinModule);
     assertThat(responses.resolveMember("FileResponse")).containsInstanceOf(ClassType.class);
     PythonType concurrency = symbolsModuleTypeProvider.convertModuleType(List.of("fastapi", "concurrency"), builtinModule);

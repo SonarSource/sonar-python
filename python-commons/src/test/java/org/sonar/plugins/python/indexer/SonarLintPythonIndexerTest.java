@@ -43,8 +43,12 @@ import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.python.project.config.ProjectConfigurationBuilder;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.caching.DummyCache;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
 
@@ -130,7 +134,7 @@ class SonarLintPythonIndexerTest {
   }
 
   @Test
-  void test_indexer_added_file() throws IOException {
+  void test_indexer_added_file() {
     PythonInputFile file3 = createInputFile("added.py");
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.CREATED);
@@ -145,7 +149,7 @@ class SonarLintPythonIndexerTest {
   }
 
   @Test
-  void test_indexer_added_nonexistent_file() throws IOException {
+  void test_indexer_added_nonexistent_file() {
     InputFile nonExistentFile = TestInputFileBuilder.create("moduleKey", "nonexistent.py")
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(StandardCharsets.UTF_8)
@@ -163,7 +167,7 @@ class SonarLintPythonIndexerTest {
   }
 
   @Test
-  void test_indexer_modified_file() throws IOException {
+  void test_indexer_modified_file() {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.MODIFIED);
     when(moduleFileEvent.getTarget()).thenReturn(file2.wrappedFile());
@@ -179,6 +183,67 @@ class SonarLintPythonIndexerTest {
   void test_indexer_non_python_file() {
     testNonPythonFile("txt");
     testNonPythonFile(null);
+  }
+
+  @Test
+  void test_indexer_added_file_updates_type_table() {
+    
+    // Verify that the "added" module type is initially unknown
+    PythonType addedModuleTypeBefore = pythonIndexer.projectLevelTypeTable().getModuleType(List.of("added_type"));
+    assertThat(addedModuleTypeBefore).isInstanceOf(UnknownType.class);
+
+    // Create and add a new file
+    PythonInputFile file = inputFile("added_type.py");
+    ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
+    when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.CREATED);
+    when(moduleFileEvent.getTarget()).thenReturn(file.wrappedFile());
+    pythonIndexer.process(moduleFileEvent);
+
+    PythonType addedModuleTypeAfter = pythonIndexer.projectLevelTypeTable().getModuleType(List.of("added_type"));
+    assertThat(addedModuleTypeAfter).isInstanceOf(ModuleType.class);
+    assertThat(addedModuleTypeAfter.toString()).contains("added_type");
+
+    PythonType addedFunction = pythonIndexer.projectLevelTypeTable().getType("added_type.A.foo");
+    assertThat(addedFunction).isInstanceOf(FunctionType.class);
+    assertThat(addedFunction.toString()).contains("FunctionType[foo]");
+
+  }
+
+  @Test
+  void test_indexer_removed_file_updates_type_table() {
+    // Create and add a new file
+    PythonInputFile file = inputFile("removed_type.py");
+    ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
+    when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.CREATED);
+    when(moduleFileEvent.getTarget()).thenReturn(file.wrappedFile());
+    pythonIndexer.process(moduleFileEvent);
+
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("removed_type")).isNotNull();
+    PythonType addedModule = pythonIndexer.projectLevelTypeTable().getModuleType(List.of("removed_type"));
+    assertThat(addedModule).isInstanceOf(ModuleType.class);
+    assertThat(addedModule.toString()).contains("removed_type");
+
+    PythonType functionBar = pythonIndexer.projectLevelTypeTable().getType("removed_type.B.bar");
+    assertThat(functionBar).isInstanceOf(FunctionType.class);
+    assertThat(functionBar.toString()).contains("FunctionType[bar]");
+
+    when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.DELETED);
+    when(moduleFileEvent.getTarget()).thenReturn(file.wrappedFile());
+    pythonIndexer.process(moduleFileEvent);
+    
+    PythonType removedModule = pythonIndexer.projectLevelTypeTable().getModuleType(List.of("removed_type"));
+    assertThat(removedModule).isInstanceOf(UnknownType.class);
+    PythonType removedClass = pythonIndexer.projectLevelTypeTable().getType("removed_type.B");
+    assertThat(removedClass).isInstanceOf(UnknownType.class);
+
+    // Modifying the file here would act a simply recreating it
+    when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.MODIFIED);
+    when(moduleFileEvent.getTarget()).thenReturn(file.wrappedFile());
+    pythonIndexer.process(moduleFileEvent);
+
+    PythonType reAddedFun = pythonIndexer.projectLevelTypeTable().getType("removed_type.B.bar");
+    assertThat(reAddedFun).isInstanceOf(FunctionType.class);
+    assertThat(reAddedFun.toString()).contains("FunctionType[bar]");
   }
 
   @Test

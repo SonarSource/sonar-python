@@ -56,7 +56,7 @@ public class SymbolsModuleTypeProvider {
     this.rootModule = new ModuleType(null, null, null, rootModuleMembers);
   }
 
-  public ModuleType createBuiltinModule() {
+  public ModuleType getRootModule() {
     return rootModule;
   }
 

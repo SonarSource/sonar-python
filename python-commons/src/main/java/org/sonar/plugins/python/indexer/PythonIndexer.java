@@ -57,7 +57,7 @@ public abstract class PythonIndexer {
   private final Supplier<PythonParser> parserSupplier = PythonParser::create;
 
   private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
-  private final ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+  private ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
 
   private final SignatureBasedAwsLambdaHandlersCollector signatureBasedAwsLambdaHandlersCollector = new SignatureBasedAwsLambdaHandlersCollector();
   private final ProjectConfigurationBuilder projectConfigurationBuilder;
@@ -76,6 +76,10 @@ public abstract class PythonIndexer {
 
   public TypeTable projectLevelTypeTable() {
     return projectLevelTypeTable;
+  }
+
+  protected void recreateProjectLevelTypeTable(){
+    projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
   }
 
   public String packageName(PythonInputFile inputFile) {

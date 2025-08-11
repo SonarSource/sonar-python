@@ -39,7 +39,7 @@ public class ProjectLevelTypeTable implements TypeTable {
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
     this.lazyTypesContext = new LazyTypesContext(this);
     this.symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable, lazyTypesContext);
-    this.rootModule = this.symbolsModuleTypeProvider.createBuiltinModule();
+    this.rootModule = this.symbolsModuleTypeProvider.getRootModule();
     this.createOrResolveSubModuleLock = new ReentrantLock();
   }
 
