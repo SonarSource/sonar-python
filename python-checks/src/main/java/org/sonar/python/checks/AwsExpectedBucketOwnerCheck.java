@@ -169,11 +169,18 @@ public class AwsExpectedBucketOwnerCheck extends PythonSubscriptionCheck {
       return;
     }
 
+    if(hasArgsOrKwargsParams(callExpression)){
+      return;
+    }
+
     if (hasExpectedBucketOwnerParameter(callExpression)) {
       return;
     }
 
     ctx.addIssue(callExpression.callee(), MESSAGE);
+  }
+  private static boolean hasArgsOrKwargsParams(CallExpression callExpression){
+    return callExpression.arguments().stream().anyMatch(arg -> arg.is(Tree.Kind.UNPACKING_EXPR));
   }
 
   private static boolean hasExpectedBucketOwnerParameter(CallExpression callExpression) {

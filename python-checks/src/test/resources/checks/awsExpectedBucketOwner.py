@@ -73,6 +73,10 @@ def regular_function():
         Bucket=bucket_name, Key="data.json", ExpectedBucketOwner=None
     )
 
+def compliant_when_wrapped(*args, **kwargs):
+    s3_client.get_object(*args)
+    s3_client.get_object(**kwargs)
+    s3_client.get_object(*args, **kwargs)
 
 async def async_function():
     bucket_name = "my-production-bucket"
