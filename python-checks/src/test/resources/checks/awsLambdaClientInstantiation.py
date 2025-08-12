@@ -1,4 +1,4 @@
-import boto3
+import boto3.session
 
 import pymysql.connect
 import mysql.connector
@@ -14,20 +14,22 @@ from sqlalchemy.orm import sessionmaker
 
 
 def lambda_handler(event, context):
+    session = boto3.session.Session()  # Noncompliant
     s3_client = boto3.client('s3')  # Noncompliant {{Initialize this AWS client outside the Lambda handler function.}}
 #               ^^^^^^^^^^^^^^^^^^
 
     s3 = boto3.resource('s3') # Noncompliant
-    session = boto3.session.Session()  # FN SONARPY-3224
+    session = boto3.session.Session()  # Noncompliant
 
     pymysql_connection = pymysql.connect(host='localhost')  # Noncompliant {{Initialize this database connection outside the Lambda handler function.}}
     #                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     mysql_connection = mysql.connector.connect(host="localhost")  # Noncompliant
     mongo_client = pymongo.MongoClient()  # Noncompliant
     sqlite3_connection = sqlite3.connect("tutorial.db") # Noncompliant
-    # psycopg2_connection = psycopg2.connect("localhost") # FN SONARPY-3224
-    redis_client = redis.Redis(host='localhost', port=6379, db=0) # FN SONARPY-3224
-    strict_redis_client = redis.StrictRedis(host='localhost', port=6379, db=0) # FN SONARPY-3224
+    psycopg2_connection = psycopg2.connect("localhost") # Noncompliant
+
+    redis_client = redis.Redis(host='localhost', port=6379, db=0) # Noncompliant
+    strict_redis_client = redis.StrictRedis(host='localhost', port=6379, db=0) # Noncompliant
 
     engine = create_engine("postgresql+psycopg2://scott:tiger@localhost/")
     sqlalchemy_session = sessionmaker(engine)  # Noncompliant {{Initialize this ORM connection outside the Lambda handler function.}}

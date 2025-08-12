@@ -1,88 +1,0 @@
-
-redis.typing‹
-AsyncConnectionPool'redis.asyncio.connection.ConnectionPool"builtins.object*š
-from_url0redis.asyncio.connection.ConnectionPool.from_url"R
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*•
-cls‹
--Type[redis.asyncio.connection.ConnectionPool]R
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool"type*%
-url
-builtins.str"builtins.str*
-kwargs
-Any0:builtins.classmethodpz38z39z310z311z312z313*×
-__init__0redis.asyncio.connection.ConnectionPool.__init__"
-None*\
-selfR
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*—
-connection_class
-)Type[redis.asyncio.connection.Connection]J
-#redis.asyncio.connection.Connection"#redis.asyncio.connection.Connection"type *[
-max_connectionsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *
-connection_kwargs
-Anyz38z39z310z311z312z313*º
-reset-redis.asyncio.connection.ConnectionPool.reset"
-None*\
-selfR
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPoolz38z39z310z311z312z313*™
-get_connection6redis.asyncio.connection.ConnectionPool.get_connection*
-self*
-command_name*
-keys*
-optionsHz38z39z310z311z312z313*h
-get_encoder3redis.asyncio.connection.ConnectionPool.get_encoder*
-selfz38z39z310z311z312z313*p
-make_connection7redis.asyncio.connection.ConnectionPool.make_connection*
-selfz38z39z310z311z312z313*à
-release/redis.asyncio.connection.ConnectionPool.release"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*\
-selfR
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*Z
-
-connectionJ
-#redis.asyncio.connection.Connection"#redis.asyncio.connection.ConnectionHz38z39z310z311z312z313*©
-owns_connection7redis.asyncio.connection.ConnectionPool.owns_connection"
-Any*\
-selfR
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*Z
-
-connectionJ
-#redis.asyncio.connection.Connection"#redis.asyncio.connection.Connectionz38z39z310z311z312z313*Ã
-
-disconnect2redis.asyncio.connection.ConnectionPool.disconnect"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*\
-selfR
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*7
-inuse_connections
-builtins.bool"builtins.bool Hz38z39z310z311z312z313j38j39j310j311j312j313rq
-connection_class8redis.asyncio.connection.ConnectionPool.connection_class
-Any*38*39*310*311*312*313rs
-connection_kwargs9redis.asyncio.connection.ConnectionPool.connection_kwargs
-Any*38*39*310*311*312*313ro
-max_connections7redis.asyncio.connection.ConnectionPool.max_connections
-Any*38*39*310*311*312*313rk
-encoder_class5redis.asyncio.connection.ConnectionPool.encoder_class
-Any*38*39*310*311*312*313rW
-pid+redis.asyncio.connection.ConnectionPool.pid
-Any*38*39*310*311*312*313«
-CommandsProtocolredis.typing.CommandsProtocol"builtins.object*}
-execute_command-redis.typing.CommandsProtocol.execute_command*
-self*
-args*
-optionsz38z39z310z311z312z313Xj38j39j310j311j312j313rÉ
-connection_pool-redis.typing.CommandsProtocol.connection_poolê
-NUnion[redis.asyncio.connection.ConnectionPool,redis.connection.ConnectionPool]R
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPoolB
-redis.connection.ConnectionPool"redis.connection.ConnectionPool*38*39*310*311*312*313*¤
-__annotations__redis.typing.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*38*39*310*311*312*313

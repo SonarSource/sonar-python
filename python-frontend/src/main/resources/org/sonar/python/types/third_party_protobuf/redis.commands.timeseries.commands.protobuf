@@ -1,585 +1,0 @@
-
-"redis.commands.timeseries.commandsÓ~
-TimeSeriesCommands5redis.commands.timeseries.commands.TimeSeriesCommands"builtins.object*ƒ
-create<redis.commands.timeseries.commands.TimeSeriesCommands.create"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*°
-keyó
-ATypeAlias[Union[builtins.bytes,builtins.str,builtins.memoryview]]¶
-6Union[builtins.bytes,builtins.str,builtins.memoryview] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-builtins.memoryview"builtins.memoryview"'redis.commands.timeseries.commands._Key*[
-retention_msecsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *[
-uncompressedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *»
-labelsπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *V
-
-chunk_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *\
-duplicate_policyD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z38z39z310z311z312z313*Â
-alter;redis.commands.timeseries.commands.TimeSeriesCommands.alter"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*°
-keyó
-ATypeAlias[Union[builtins.bytes,builtins.str,builtins.memoryview]]¶
-6Union[builtins.bytes,builtins.str,builtins.memoryview] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-builtins.memoryview"builtins.memoryview"'redis.commands.timeseries.commands._Key*[
-retention_msecsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *»
-labelsπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *V
-
-chunk_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *\
-duplicate_policyD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z38z39z310z311z312z313*‹	
-add9redis.commands.timeseries.commands.TimeSeriesCommands.add"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*°
-keyó
-ATypeAlias[Union[builtins.bytes,builtins.str,builtins.memoryview]]¶
-6Union[builtins.bytes,builtins.str,builtins.memoryview] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-builtins.memoryview"builtins.memoryview"'redis.commands.timeseries.commands._Key*o
-	timestamp`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*+
-value 
-builtins.float"builtins.float*[
-retention_msecsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *[
-uncompressedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *»
-labelsπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *V
-
-chunk_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *\
-duplicate_policyD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z38z39z310z311z312z313*x
-madd:redis.commands.timeseries.commands.TimeSeriesCommands.madd*
-self*
-
-ktv_tuplesz38z39z310z311z312z313*ñ	
-incrby<redis.commands.timeseries.commands.TimeSeriesCommands.incrby"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*°
-keyó
-ATypeAlias[Union[builtins.bytes,builtins.str,builtins.memoryview]]¶
-6Union[builtins.bytes,builtins.str,builtins.memoryview] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-builtins.memoryview"builtins.memoryview"'redis.commands.timeseries.commands._Key*+
-value 
-builtins.float"builtins.float*Ä
-	timestampo
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *[
-retention_msecsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *[
-uncompressedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *»
-labelsπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *V
-
-chunk_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z38z39z310z311z312z313*ñ	
-decrby<redis.commands.timeseries.commands.TimeSeriesCommands.decrby"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*°
-keyó
-ATypeAlias[Union[builtins.bytes,builtins.str,builtins.memoryview]]¶
-6Union[builtins.bytes,builtins.str,builtins.memoryview] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-builtins.memoryview"builtins.memoryview"'redis.commands.timeseries.commands._Key*+
-value 
-builtins.float"builtins.float*Ä
-	timestampo
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *[
-retention_msecsD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *[
-uncompressedG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *»
-labelsπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *V
-
-chunk_sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z38z39z310z311z312z313*ë
-delete<redis.commands.timeseries.commands.TimeSeriesCommands.delete*
-self*
-key*
-	from_time*
-to_timez38z39z310z311z312z313*Ü
-
-createrule@redis.commands.timeseries.commands.TimeSeriesCommands.createrule"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*®
-
-source_keyó
-ATypeAlias[Union[builtins.bytes,builtins.str,builtins.memoryview]]¶
-6Union[builtins.bytes,builtins.str,builtins.memoryview] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-builtins.memoryview"builtins.memoryview"'redis.commands.timeseries.commands._Key*¶
-dest_keyó
-ATypeAlias[Union[builtins.bytes,builtins.str,builtins.memoryview]]¶
-6Union[builtins.bytes,builtins.str,builtins.memoryview] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-builtins.memoryview"builtins.memoryview"'redis.commands.timeseries.commands._Key*2
-aggregation_type
-builtins.str"builtins.str*2
-bucket_size_msec
-builtins.int"builtins.int*[
-align_timestampD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z38z39z310z311z312z313*í
-
-deleterule@redis.commands.timeseries.commands.TimeSeriesCommands.deleterule*
-self*
-
-source_key*
-dest_keyz38z39z310z311z312z313*⁄
-range;redis.commands.timeseries.commands.TimeSeriesCommands.range"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*°
-keyó
-ATypeAlias[Union[builtins.bytes,builtins.str,builtins.memoryview]]¶
-6Union[builtins.bytes,builtins.str,builtins.memoryview] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-builtins.memoryview"builtins.memoryview"'redis.commands.timeseries.commands._Key*o
-	from_time`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*m
-to_time`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *\
-aggregation_typeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *\
-bucket_size_msecD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ñ
-filter_by_tsÅ
-'Union[builtins.list[builtins.int],None]J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list
-None *_
-filter_by_min_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *_
-filter_by_max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *|
-aligno
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *U
-latestG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *\
-bucket_timestampD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-emptyG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z38z39z310z311z312z313*‡
-revrange>redis.commands.timeseries.commands.TimeSeriesCommands.revrange"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*°
-keyó
-ATypeAlias[Union[builtins.bytes,builtins.str,builtins.memoryview]]¶
-6Union[builtins.bytes,builtins.str,builtins.memoryview] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-builtins.memoryview"builtins.memoryview"'redis.commands.timeseries.commands._Key*o
-	from_time`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*m
-to_time`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *\
-aggregation_typeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *\
-bucket_size_msecD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ñ
-filter_by_tsÅ
-'Union[builtins.list[builtins.int],None]J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list
-None *_
-filter_by_min_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *_
-filter_by_max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *|
-aligno
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *U
-latestG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *\
-bucket_timestampD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-emptyG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z38z39z310z311z312z313*∞
-mrange<redis.commands.timeseries.commands.TimeSeriesCommands.mrange"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*o
-	from_time`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*m
-to_time`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*W
-filtersJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *\
-aggregation_typeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *\
-bucket_size_msecD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Z
-with_labelsG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *ñ
-filter_by_tsÅ
-'Union[builtins.list[builtins.int],None]J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list
-None *_
-filter_by_min_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *_
-filter_by_max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *S
-groupbyD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-reduceD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ó
-select_labelsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *|
-aligno
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *U
-latestG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *\
-bucket_timestampD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-emptyG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z38z39z310z311z312z313*∂
-	mrevrange?redis.commands.timeseries.commands.TimeSeriesCommands.mrevrange"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*o
-	from_time`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*m
-to_time`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*W
-filtersJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Q
-countD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *\
-aggregation_typeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *\
-bucket_size_msecD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Z
-with_labelsG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *ñ
-filter_by_tsÅ
-'Union[builtins.list[builtins.int],None]J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list
-None *_
-filter_by_min_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *_
-filter_by_max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *S
-groupbyD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-reduceD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ó
-select_labelsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *|
-aligno
-%Union[builtins.int,builtins.str,None]
-builtins.int"builtins.int
-builtins.str"builtins.str
-None *U
-latestG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *\
-bucket_timestampD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-emptyG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z38z39z310z311z312z313*⁄
-get9redis.commands.timeseries.commands.TimeSeriesCommands.get"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*°
-keyó
-ATypeAlias[Union[builtins.bytes,builtins.str,builtins.memoryview]]¶
-6Union[builtins.bytes,builtins.str,builtins.memoryview] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*
-builtins.memoryview"builtins.memoryview"'redis.commands.timeseries.commands._Key*U
-latestG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z38z39z310z311z312z313*á
-mget:redis.commands.timeseries.commands.TimeSeriesCommands.mget"
-Any*x
-selfn
-5redis.commands.timeseries.commands.TimeSeriesCommands"5redis.commands.timeseries.commands.TimeSeriesCommands*W
-filtersJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*Z
-with_labelsG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *ó
-select_labelsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *U
-latestG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z38z39z310z311z312z313*q
-info:redis.commands.timeseries.commands.TimeSeriesCommands.info*
-self*
-keyz38z39z310z311z312z313*Å
-
-queryindex@redis.commands.timeseries.commands.TimeSeriesCommands.queryindex*
-self*
-filtersz38z39z310z311z312z313j38j39j310j311j312j313*∫
-__annotations__2redis.commands.timeseries.commands.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*38*39*310*311*312*313*ä
-ADD_CMD*redis.commands.timeseries.commands.ADD_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*é
-	ALTER_CMD,redis.commands.timeseries.commands.ALTER_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*ò
-CREATERULE_CMD1redis.commands.timeseries.commands.CREATERULE_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*ê
-
-CREATE_CMD-redis.commands.timeseries.commands.CREATE_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*ê
-
-DECRBY_CMD-redis.commands.timeseries.commands.DECRBY_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*ò
-DELETERULE_CMD1redis.commands.timeseries.commands.DELETERULE_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*ä
-DEL_CMD*redis.commands.timeseries.commands.DEL_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*ä
-GET_CMD*redis.commands.timeseries.commands.GET_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*ê
-
-INCRBY_CMD-redis.commands.timeseries.commands.INCRBY_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*å
-INFO_CMD+redis.commands.timeseries.commands.INFO_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*å
-MADD_CMD+redis.commands.timeseries.commands.MADD_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*å
-MGET_CMD+redis.commands.timeseries.commands.MGET_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*ê
-
-MRANGE_CMD-redis.commands.timeseries.commands.MRANGE_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*ñ
-MREVRANGE_CMD0redis.commands.timeseries.commands.MREVRANGE_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*ò
-QUERYINDEX_CMD1redis.commands.timeseries.commands.QUERYINDEX_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*é
-	RANGE_CMD,redis.commands.timeseries.commands.RANGE_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313*î
-REVRANGE_CMD/redis.commands.timeseries.commands.REVRANGE_CMD7
-Literal[builtins.str]	
-builtins.str"builtins.str*38*39*310*311*312*313

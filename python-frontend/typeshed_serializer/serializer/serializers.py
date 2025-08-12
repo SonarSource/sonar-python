@@ -145,7 +145,7 @@ class Serializer(ABC):
 
 
 class TypeshedSerializer(Serializer):
-    EXCLUDED_PACKAGES = ["win32"]
+    EXCLUDED_PACKAGES = ["win32","redis"]
 
     def __init__(self, is_third_parties=False, is_debug=False):
         super().__init__(is_debug)

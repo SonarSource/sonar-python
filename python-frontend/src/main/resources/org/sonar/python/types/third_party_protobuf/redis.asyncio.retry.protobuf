@@ -1,41 +1,0 @@
-
-redis.asyncio.retryœ
-Retryredis.asyncio.retry.Retry"builtins.object*Ö
-__init__"redis.asyncio.retry.Retry.__init__"
-None*@
-self6
-redis.asyncio.retry.Retry"redis.asyncio.retry.Retry*K
-backoff>
-redis.backoff.AbstractBackoff"redis.backoff.AbstractBackoff*)
-retries
-builtins.int"builtins.int*Å
-supported_errors¬
-1builtins.tuple[Type[redis.exceptions.RedisError]]g
-!Type[redis.exceptions.RedisError]:
-redis.exceptions.RedisError"redis.exceptions.RedisError"type"builtins.tuple z38z39z310z311z312z313*ü
-update_supported_errors1redis.asyncio.retry.Retry.update_supported_errors"
-None*@
-self6
-redis.asyncio.retry.Retry"redis.asyncio.retry.Retry*Å
-specified_errors®
-2typing.Iterable[Type[redis.exceptions.RedisError]]g
-!Type[redis.exceptions.RedisError]:
-redis.exceptions.RedisError"redis.exceptions.RedisError"type"typing.Iterablez38z39z310z311z312z313*ò
-call_with_retry)redis.asyncio.retry.Retry.call_with_retry"§
-0typing.Coroutine[Any,Any,redis.asyncio.retry._T]
-Any
-AnyO
-redis.asyncio.retry._T"
-builtins.object"builtins.object"builtins.object"typing.Coroutine*@
-self6
-redis.asyncio.retry.Retry"redis.asyncio.retry.Retry*S
-doK
-CallableType[builtins.function]&
-builtins.function"builtins.function*U
-failK
-CallableType[builtins.function]&
-builtins.function"builtins.functionHz38z39z310z311z312z313j38j39j310j311j312j313*«
-__annotations__#redis.asyncio.retry.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*38*39*310*311*312*313
