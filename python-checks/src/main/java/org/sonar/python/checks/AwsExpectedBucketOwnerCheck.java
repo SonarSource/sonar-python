@@ -30,6 +30,7 @@ import org.sonar.python.types.v2.TypeCheckMap;
 public class AwsExpectedBucketOwnerCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Add the 'ExpectedBucketOwner' parameter to verify S3 bucket ownership.";
+  private static final String MESSAGE_EXTRA_ARGS = "Add the 'ExpectedBucketOwner' to the 'ExtraArgs' parameter to verify S3 bucket ownership.";
   private static final List<String> S3_CLIENT_FQN_PREFIX = List.of("botocore.client.BaseClient", "aiobotocore.client.AioBaseClient");
   private static final List<String> S3_METHODS_REQUIRING_EXPECTED_BUCKET_OWNER = List.of(
     "copy_object",
@@ -56,8 +57,6 @@ public class AwsExpectedBucketOwnerCheck extends PythonSubscriptionCheck {
     "delete_object_tagging",
     "delete_objects",
     "delete_public_access_block",
-    "download_file",
-    "download_fileobj",
     "get_bucket_accelerate_configuration",
     "get_bucket_acl",
     "get_bucket_analytics_configuration",
@@ -134,16 +133,25 @@ public class AwsExpectedBucketOwnerCheck extends PythonSubscriptionCheck {
     "select_object_content",
     "update_bucket_metadata_inventory_table_configuration",
     "update_bucket_metadata_journal_table_configuration",
-    "upload_file",
-    "upload_fileobj",
     "upload_part",
     "upload_part_copy");
+
+  private static final List<String> UPLOAD_DOWNLOAD_FILE_FQN = List.of(
+    "upload_file",
+    "upload_fileobj",
+    "download_file",
+    "download_fileobj");
 
   private static final List<String> FQN_TO_CHECK = S3_CLIENT_FQN_PREFIX.stream()
     .flatMap(prefix -> S3_METHODS_REQUIRING_EXPECTED_BUCKET_OWNER.stream().map(method -> prefix + "." + method))
     .toList();
 
+  private static final List<String> UPLOAD_DOWNLOAD_FQN_TO_CHECK = S3_CLIENT_FQN_PREFIX.stream()
+    .flatMap(prefix -> UPLOAD_DOWNLOAD_FILE_FQN.stream().map(method -> prefix + "." + method))
+    .toList();
+
   private TypeCheckMap<Object> isS3MethodCall;
+  private TypeCheckMap<Object> isUploadDownloadFileMethodCall;
 
   @Override
   public void initialize(Context context) {
@@ -154,10 +162,15 @@ public class AwsExpectedBucketOwnerCheck extends PythonSubscriptionCheck {
   private void setupTypeChecker(SubscriptionContext ctx) {
     Object object = new Object();
     isS3MethodCall = new TypeCheckMap<>();
+    isUploadDownloadFileMethodCall = new TypeCheckMap<>();
 
     for (var fqn : FQN_TO_CHECK) {
       var typeChecker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn);
       isS3MethodCall.put(typeChecker, object);
+    }
+    for (var fqn : UPLOAD_DOWNLOAD_FQN_TO_CHECK) {
+      var typeChecker = ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn);
+      isUploadDownloadFileMethodCall.put(typeChecker, object);
     }
   }
 
@@ -165,6 +178,12 @@ public class AwsExpectedBucketOwnerCheck extends PythonSubscriptionCheck {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
 
     PythonType type = TreeUtils.inferSingleAssignedExpressionType(callExpression.callee());
+
+    if(isUploadDownloadFileMethodCallWithoutExtraArgs(type, callExpression)){
+      ctx.addIssue(callExpression.callee(), MESSAGE_EXTRA_ARGS);
+      return;
+    }
+
     if (isS3MethodCall.getOptionalForType(type).isEmpty()) {
       return;
     }
@@ -179,9 +198,20 @@ public class AwsExpectedBucketOwnerCheck extends PythonSubscriptionCheck {
 
     ctx.addIssue(callExpression.callee(), MESSAGE);
   }
+
+  private boolean isUploadDownloadFileMethodCallWithoutExtraArgs(PythonType type, CallExpression callExpression){
+    return isUploadDownloadFileMethodCall.getOptionalForType(type)
+      .filter(obj -> !hasExtraArgsParameter(callExpression)).isPresent();
+  }
+
+  private static boolean hasExtraArgsParameter(CallExpression callExpression){
+    return TreeUtils.argumentByKeyword("ExtraArgs", callExpression.arguments()) != null;
+  }
+
   private static boolean hasArgsOrKwargsParams(CallExpression callExpression){
     return callExpression.arguments().stream().anyMatch(arg -> arg.is(Tree.Kind.UNPACKING_EXPR));
   }
+
 
   private static boolean hasExpectedBucketOwnerParameter(CallExpression callExpression) {
     return TreeUtils.argumentByKeyword("ExpectedBucketOwner", callExpression.arguments()) != null;

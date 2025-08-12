@@ -78,6 +78,25 @@ def compliant_when_wrapped(*args, **kwargs):
     s3_client.get_object(**kwargs)
     s3_client.get_object(*args, **kwargs)
 
+def upload_download_file():
+    bucket_name = "my-production-bucket"
+    s3_client.upload_file("name", bucket_name, "1") # Noncompliant {{Add the 'ExpectedBucketOwner' to the 'ExtraArgs' parameter to verify S3 bucket ownership.}}
+    s3_client.upload_fileobj("name", bucket_name, "1") # Noncompliant
+    s3_client.download_file("name", bucket_name, "1") # Noncompliant
+    s3_client.download_fileobj("name", bucket_name, "1") # Noncompliant
+
+    # ExpectedBucketOwner is not an argument download_fileobj
+    s3_client.download_fileobj("name", bucket_name, "1", ExpectedBucketOwner="") # Noncompliant 
+
+    s3_client.upload_file("name", bucket_name, "1", ExtraArgs={}) # Compliant
+    s3_client.upload_fileobj("name", bucket_name, "1", ExtraArgs=unknown()) # Compliant
+    dict_config = {}
+    s3_client.download_file("name", bucket_name, "1", ExtraArgs=dict_config) # Compliant
+    s3_client.download_fileobj("name", bucket_name, "1", ExtraArgs={"ExpectedBucketOwner":None}) # Compliant
+
+    # We should still raise on the other FQN
+    s3_client.get_object(Bucket=bucket_name, ExtraArgs={}) # Noncompliant 
+
 async def async_function():
     bucket_name = "my-production-bucket"
     expected_owner = "123456789012"
