@@ -162,6 +162,9 @@ class NoSonarInfoParserTest {
       Arguments.of("# noqa:", false),
 
       Arguments.of("# something unrelated", false),
+      Arguments.of("# something # NOSONAR", false),
+      Arguments.of("#NOSONAR", false),
+      Arguments.of("#   NOSONAR", false),
 
       Arguments.of("# NOSONAR(", true),
       Arguments.of("# NOSONAR)", true),
@@ -171,7 +174,12 @@ class NoSonarInfoParserTest {
       Arguments.of("# NOSONAR(a (b))", true),
       Arguments.of("# noqa: one,", true),
       Arguments.of("# noqa: ,two", true),
-      Arguments.of("# noqa: , ", true)
+      Arguments.of("# noqa: , ", true),
+      Arguments.of("# noqa: F123 NOSONAR ", true),
+      Arguments.of("# something before no pound symbol NOSONAR", true),
+      Arguments.of("# something before no pound symbol NOSONAR something after", true),
+      Arguments.of("# NOSONAR NOSONAR # NOSONAR ", true),
+      Arguments.of("#NOSONAR NOSONAR #   NOSONAR ", true)
     );
   }
 

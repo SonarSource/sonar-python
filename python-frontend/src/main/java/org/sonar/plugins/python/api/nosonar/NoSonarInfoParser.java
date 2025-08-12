@@ -49,6 +49,9 @@ public class NoSonarInfoParser {
   }
 
   private boolean isInvalidNoSonarComment(String comment) {
+    if (isNoSonarWithoutPound(comment)) {
+      return true;
+    }
     if (!Pattern.matches(NOSONAR_PREFIX_REGEX, comment)) {
       return false;
     }
@@ -57,6 +60,14 @@ public class NoSonarInfoParser {
     }
     var rules = parseNoSonarRules(comment).toList();
     return rules.size() > 1 && rules.stream().anyMatch(r -> r.isBlank() || r.contains(" "));
+  }
+
+  private static boolean isNoSonarWithoutPound(String comment) {
+    return countOccurences("#\\s*NOSONAR", comment) < countOccurences("NOSONAR", comment);
+  }
+
+  private static int countOccurences(String match, String inString) {
+    return inString.split(match, -1).length - 1;
   }
 
   private boolean isInvalidNoQaComment(String comment) {

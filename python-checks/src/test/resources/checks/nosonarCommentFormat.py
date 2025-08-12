@@ -29,3 +29,8 @@
 # noqa: a,c,
 
 # noqa: a, some text
+
+# Noncompliant@+1
+# noqa: F321 NOSONAR
+
+# noqa: F321 # NOSONAR
