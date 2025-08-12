@@ -60,6 +60,7 @@ public class AwsLambdaClientInstantiationCheck extends PythonSubscriptionCheck {
 
   private final TypeCheckMap<String> isClientOrResourceTypeCheckMap = new TypeCheckMap<>();
 
+  @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::setupTypeChecker);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCall);

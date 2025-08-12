@@ -39,6 +39,23 @@ def lambda_handler(event, context):
 
     mongoengine_connection = mongoengine.connect('project1')  # Noncompliant
 
+def fps_client_created_from_event_handler(event, context):
+    # FPs from SONARPY-3242
+
+    s3_client = boto3.client('s3', event) # Noncompliant
+
+    s3_client = boto3.client('s3', event['region']) # Noncompliant
+
+    s3_client = boto3.client('s3', context.get_remaining_time_in_millis()) # Noncompliant
+    s3_client = boto3.client('s3', context.function_name) # Noncompliant
+
+    region = get_region(event) 
+    s3_client = boto3.client('s3', region) # Noncompliant
+
+
+def get_region(event):
+    return event
+
 
 s3_client = boto3.client('s3')
 s3 = boto3.resource('s3')
