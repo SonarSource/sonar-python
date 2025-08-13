@@ -1,6 +1,6 @@
 import boto3.session
 
-import pymysql.connect
+import pymysql
 import mysql.connector
 import psycopg2
 import sqlite3

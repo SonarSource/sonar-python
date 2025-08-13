@@ -67,9 +67,9 @@ public class AwsLambdaClientInstantiationCheck extends PythonSubscriptionCheck {
   }
 
   private void setupTypeChecker(SubscriptionContext ctx) {
-    CLIENT_FQNS.forEach(fqn -> isClientOrResourceTypeCheckMap.put(ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn), CLIENT_ISSUE_MESSAGE));
-    DATABASE_FQNS.forEach(fqn -> isClientOrResourceTypeCheckMap.put(ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn), DATABASE_ISSUE_MESSAGE));
-    ORM_FQNS.forEach(fqn -> isClientOrResourceTypeCheckMap.put(ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn), ORM_ISSUE_MESSAGE));
+    CLIENT_FQNS.forEach(fqn -> isClientOrResourceTypeCheckMap.put(ctx.typeChecker().typeCheckBuilder().isTypeWithName(fqn), CLIENT_ISSUE_MESSAGE));
+    DATABASE_FQNS.forEach(fqn -> isClientOrResourceTypeCheckMap.put(ctx.typeChecker().typeCheckBuilder().isTypeWithName(fqn), DATABASE_ISSUE_MESSAGE));
+    ORM_FQNS.forEach(fqn -> isClientOrResourceTypeCheckMap.put(ctx.typeChecker().typeCheckBuilder().isTypeWithName(fqn), ORM_ISSUE_MESSAGE));
   }
 
   private void checkCall(SubscriptionContext ctx) {
