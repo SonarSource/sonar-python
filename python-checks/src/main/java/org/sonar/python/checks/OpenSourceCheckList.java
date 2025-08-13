@@ -135,6 +135,7 @@ public class OpenSourceCheckList {
       AwsLambdaCrossCallCheck.class,
       AwsLambdaReservedEnvironmentVariableCheck.class,
       AwsCustomMetricNamespaceCheck.class,
+      AwsHardcodedRegionCheck.class,
       AwsLambdaReturnValueAreSerializableCheck.class,
       AwsLambdaTmpCleanupCheck.class,
       AwsLongTermAccessKeysCheck.class,

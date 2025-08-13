@@ -1,0 +1,31 @@
+<p>This rule raises an issue when the region configuration of the AWS client is hardcoded.</p>
+<h2>Why is this an issue?</h2>
+<p>Hard-coding configuration values directly into your function code is an anti-pattern. This practice couples your code tightly to specific
+deployment environments and makes it brittle, difficult to manage, and prone to errors.</p>
+<h2>How to fix it</h2>
+<p>The solution involves externalizing these configurations using environment variables.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import boto3
+
+s3 = boto3.client("s3", region_name = "us-east-1") # Noncompliant region_name is hardcoded
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import os
+import boto3
+
+region = os.environ.get("AWS_REGION", "us-east-1")
+bucket_name = os.environ["MY_BUCKET_NAME"]
+s3 = boto3.client("s3", region_name = region) # Compliant region_name is set through an environment variable
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> AWS docs : <a href="https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/welcome.html">Operational Excellence
+  Pillar</a> </li>
+  <li> Stackoverflow : <a href="https://stackoverflow.com/questions/63538531/aws-lambda-how-to-get-environment-variables">Environment variables in
+  AWS</a> </li>
+</ul>
+
