@@ -12,7 +12,7 @@ causes unpredictable failure behavior, making it difficult to distinguish betwee
 and monitoring. When the Lambda function’s maximum timeout is reached, the execution is abruptly terminated, preventing graceful error handling,
 proper logging, and cleanup operations. In connection pooling scenarios, hanging requests can exhaust available connections, and the unpredictable
 delays can cause cascading failures in upstream services that depend on the Lambda function’s response.</p>
-<h2>How to fix it in requests</h2>
+<h2>How to fix it in Requests</h2>
 <p>For HTTP requests using the requests library, always specify the timeout parameter. Use a tuple <code>(connect_timeout, read_timeout)</code> for
 granular control over connection establishment and data reading timeouts. Wrap the call in try-except blocks to handle timeout exceptions gracefully.
 Consider externalizing timeout values through environment variables for easier configuration management.</p>
@@ -39,7 +39,7 @@ def lambda_handler(event, context):
     except requests.exceptions.Timeout:
         return {'error': 'Request timed out'}
 </pre>
-<h2>How to fix it in boto3</h2>
+<h2>How to fix it in Boto3</h2>
 <p>For AWS service calls using boto3, configure timeouts using botocore.config.Config when creating clients. Set both <code>connect_timeout</code> and
 <code>read_timeout</code> parameters to prevent hanging on connection establishment and data reading respectively. Handle botocore timeout exceptions
 appropriately in your error handling logic.</p>

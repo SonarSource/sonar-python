@@ -10,7 +10,7 @@ parameter provides a safety mechanism that ensures operations only proceed when 
 <p>Failing to verify bucket ownership exposes systems to security threats. Applications may process data in unintended locations, including test
 environments or malicious buckets.</p>
 <p>Data integrity suffers when operations target wrong buckets. Sensitive information could be exposed or corrupted without proper verification.</p>
-<h2>How to fix it in boto3</h2>
+<h2>How to fix it in Boto3</h2>
 <p>Add the <code>ExpectedBucketOwner</code> parameter to your S3 operations to verify the bucket owner before performing any operations. This
 parameter should contain the AWS account ID that owns the bucket you expect to access.</p>
 <h3>Code examples</h3>

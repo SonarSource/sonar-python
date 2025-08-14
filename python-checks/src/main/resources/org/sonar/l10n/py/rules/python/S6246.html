@@ -6,30 +6,35 @@ minutes as of June 2025). Having to wait for another Lambda to finish its execut
 <h3>Noncompliant code example</h3>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 import boto3
-</pre>
-<p>client = boto3.client('lambda')</p>
-<p>def lambda_handler(event, context): response = client.invoke( FunctionName='target-lambda-function-name', InvocationType='RequestResponse' #
-Noncompliant <code>RequestResponse</code> InvocationType means that the lambda call is synchronous Payload=json.dumps(event) )</p>
-<pre>
-return response['Payload'].read()
+
+client = boto3.client('lambda')
+
+def lambda_handler(event, context):
+    response = client.invoke(
+      FunctionName='target-lambda-function-name',
+      InvocationType='RequestResponse' # Noncompliant `RequestResponse` InvocationType means that the lambda call is synchronous
+      Payload=json.dumps(event)
+    )
+
+    return response['Payload'].read()
 </pre>
 <h3>Compliant code example</h3>
 <pre data-diff-id="1" data-diff-type="compliant">
 import boto3
+
+client = boto3.client('lambda')
+
+def lambda_handler(event, context):
+
+    response = client.invoke(
+      FunctionName='target-lambda-function-name',
+      InvocationType='Event' # Compliant `Event` InvocationType means that the lambda call is asynchronous
+      Payload=json.dumps(event)
+    )
+
+    return response['Payload'].read()
 </pre>
-<p>client = boto3.client('lambda')</p>
-<p>def lambda_handler(event, context):</p>
-<pre>
-response = client.invoke(
-  FunctionName='target-lambda-function-name',
-  InvocationType='Event' # Compliant `Event` InvocationType means that the lambda call is asynchronous
-  Payload=json.dumps(event)
-)
-</pre>
-<pre>
-return response['Payload'].read()
-</pre>
-<h2>How to fix it in boto3</h2>
+<h2>How to fix it in Boto3</h2>
 <p>Using the <code>client.invoke()</code> function, the parameter <code>InvocationType</code> should be set to <code>Event</code> to invoke the
 function asynchronously by sending events.</p>
 <h2>Resources</h2>

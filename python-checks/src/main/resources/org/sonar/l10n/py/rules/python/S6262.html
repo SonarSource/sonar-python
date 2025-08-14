@@ -17,7 +17,6 @@ import os
 import boto3
 
 region = os.environ.get("AWS_REGION", "us-east-1")
-bucket_name = os.environ["MY_BUCKET_NAME"]
 s3 = boto3.client("s3", region_name = region) # Compliant region_name is set through an environment variable
 </pre>
 <h2>Resources</h2>
