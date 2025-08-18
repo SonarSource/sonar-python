@@ -1,6 +1,8 @@
 def case1():
   iterable = (3, 1, 4, 1)
-  list(list(iterable)) # Noncompliant
+  list(list(iterable)) # Noncompliant {{Remove this redundant call.}}
+#      ^^^^ 
+# ^^^^@-1< {{A redundant call is done here.}}
   list(tuple(iterable)) # Noncompliant
   list(sorted(iterable)) # Noncompliant
 
@@ -35,8 +37,10 @@ def case5():
 
 def case6():
   iterable = (3, 1, 4, 1)
-  single_usage_assigned_list = list(iterable)
-  list_of_list = list(single_usage_assigned_list) # Noncompliant
+  single_usage_assigned_list = list(iterable) # Noncompliant
+  #                            ^^^^
+  list_of_list = list(single_usage_assigned_list) 
+  #              ^^^^< {{A redundant call is done here.}}
   single_usage_assigned_not_sensitive = something_else(iterable)
   list_of_list = list(single_usage_assigned_not_sensitive)
   multiple_usage_assigned_list = list(iterable)

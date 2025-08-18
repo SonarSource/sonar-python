@@ -43,6 +43,7 @@ import org.sonar.python.types.v2.TypeCheckMap;
 @Rule(key = "S7508")
 public class NestedCollectionsCreationCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Remove this redundant call.";
+  private static final String SECONDARY_MESSAGE = "A redundant call is done here.";
   private static final String QUICK_FIX_MESSAGE = MESSAGE;
 
   private static final String LIST_FQN = "list";
@@ -55,8 +56,7 @@ public class NestedCollectionsCreationCheck extends PythonSubscriptionCheck {
     Map.entry(LIST_FQN, Set.of(LIST_FQN, TUPLE_FQN, SORTED_FQN)),
     Map.entry(SET_FQN, Set.of(LIST_FQN, SET_FQN, TUPLE_FQN, REVERSED_FQN, SORTED_FQN)),
     Map.entry(SORTED_FQN, Set.of(LIST_FQN, TUPLE_FQN, SORTED_FQN)),
-    Map.entry(TUPLE_FQN, Set.of(LIST_FQN, TUPLE_FQN))
-  );
+    Map.entry(TUPLE_FQN, Set.of(LIST_FQN, TUPLE_FQN)));
 
   private TypeCheckMap<Set<TypeCheckBuilder>> sensitiveCallCombinationChecks;
 
@@ -82,20 +82,23 @@ public class NestedCollectionsCreationCheck extends PythonSubscriptionCheck {
     sensitiveCallCombinationChecks.getOptionalForType(callExpression.callee().typeV2())
       .ifPresent(nestedCallTypeChecks -> TreeUtils.nthArgumentOrKeywordOptional(0, "", callExpression.arguments())
         .map(RegularArgument::expression)
-        .ifPresent(argumentExpression -> {
-          findSensitiveMethodCall(argumentExpression, nestedCallTypeChecks)
-            .ifPresent(redundantCallExpression -> {
-              var issue = ctx.addIssue(callExpression, MESSAGE);
-              createQuickFix(redundantCallExpression).ifPresent(issue::addQuickFix);
-            });
-          findAssignedToSensitiveMethodCall(argumentExpression, nestedCallTypeChecks)
-            .ifPresent(argumentAssignedCall -> {
-              var issue = ctx.addIssue(callExpression, MESSAGE);
-              createAssignedQuickFix(argumentExpression, argumentAssignedCall).ifPresent(issue::addQuickFix);
-            });
+        .ifPresent(argumentExpression -> checkCallArgumentsForSensitiveMethods(callExpression, argumentExpression, nestedCallTypeChecks, ctx)));
+  }
 
-
-        }));
+  private static void checkCallArgumentsForSensitiveMethods(CallExpression callExpression, Expression argumentExpression, Set<TypeCheckBuilder> nestedCallTypeChecks,
+    SubscriptionContext ctx) {
+    findSensitiveMethodCall(argumentExpression, nestedCallTypeChecks)
+      .ifPresent(redundantCallExpression -> {
+        var issue = ctx.addIssue(redundantCallExpression.callee(), MESSAGE)
+          .secondary(callExpression.callee(), SECONDARY_MESSAGE);
+        createQuickFix(redundantCallExpression).ifPresent(issue::addQuickFix);
+      });
+    findAssignedToSensitiveMethodCall(argumentExpression, nestedCallTypeChecks)
+      .ifPresent(argumentAssignedCall -> {
+        var issue = ctx.addIssue(argumentAssignedCall.callee(), MESSAGE)
+          .secondary(callExpression.callee(), SECONDARY_MESSAGE);
+        createAssignedQuickFix(argumentExpression, argumentAssignedCall).ifPresent(issue::addQuickFix);
+      });
   }
 
   private static Optional<CallExpression> findSensitiveMethodCall(@Nullable Expression expression,
