@@ -21,11 +21,11 @@ import org.sonar.sslr.grammar.LexerfulGrammarBuilder;
 
 import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
+import static org.sonar.python.api.PythonGrammar.*;
 import static org.sonar.python.api.PythonTokenType.DEDENT;
 import static org.sonar.python.api.PythonTokenType.INDENT;
 import static org.sonar.python.api.PythonTokenType.NEWLINE;
 import static org.sonar.python.api.PythonTokenType.NUMBER;
-import static org.sonar.python.api.PythonGrammar.*;
 public class PythonGrammarBuilder {
 
   public static final String ASYNC = "async";
@@ -402,7 +402,18 @@ public class PythonGrammarBuilder {
       SUITE);
 
     b.rule(FUNCNAME).is(NAME);
-    b.rule(TYPE_PARAMS).is("[", TYPEDARGSLIST, "]");
+
+    b.rule(TYPE_PARAMS).is("[", TYPE_PARAM_SEQ, "]");
+    b.rule(TYPE_PARAM_SEQ).is(TYPE_PARAM, b.zeroOrMore(",", TYPE_PARAM), b.optional(","));
+    b.rule(TYPE_PARAM).is(b.firstOf(
+      b.sequence(NAME, b.optional(TYPE_PARAM_BOUND), b.optional(TYPE_PARAM_DEFAULT)),
+      b.sequence("*", NAME, b.optional(TYPE_PARAM_STARRED_DEFAULT)),
+      b.sequence("**", NAME, b.optional(TYPE_PARAM_DEFAULT))
+    ));
+    b.rule(TYPE_PARAM_BOUND).is(":", TEST);
+    b.rule(TYPE_PARAM_DEFAULT).is("=", TEST);
+    b.rule(TYPE_PARAM_STARRED_DEFAULT).is("=", b.firstOf(TEST, STAR_EXPR));
+
     b.rule(FUN_RETURN_ANNOTATION).is("-", ">", TEST);
 
     b.rule(DECORATORS).is(b.oneOrMore(DECORATOR));

@@ -600,14 +600,14 @@ public class PythonTreeMaker {
       .map(n -> {
         var lBracket = toPyToken(n.getFirstChild(PythonPunctuator.LBRACKET).getToken());
 
-        var parameters = Optional.of(n.getFirstChild(PythonGrammar.TYPEDARGSLIST))
-          .map(argList -> argList.getChildren(PythonGrammar.TFPDEF))
+        var parameters = Optional.of(n.getFirstChild(PythonGrammar.TYPE_PARAM_SEQ))
+          .map(argList -> argList.getChildren(PythonGrammar.TYPE_PARAM))
           .stream()
           .flatMap(Collection::stream)
           .map(this::typeParam)
           .toList();
 
-        var commas = Optional.of(n.getFirstChild(PythonGrammar.TYPEDARGSLIST))
+        var commas = Optional.of(n.getFirstChild(PythonGrammar.TYPE_PARAM_SEQ))
           .map(argList -> punctuators(argList, PythonPunctuator.COMMA))
           .stream()
           .flatMap(Collection::stream)
@@ -620,30 +620,27 @@ public class PythonTreeMaker {
   }
 
   private TypeParam typeParam(AstNode parameter) {
-    var starOrStarStar = Optional.of(parameter)
-      .map(AstNode::getPreviousSibling)
+    var starOrStarStar = Optional.of(parameter.getFirstChild())
       .filter(ps -> ps.is(PythonPunctuator.MUL, PythonPunctuator.MUL_MUL))
       .map(ps -> toPyToken(ps.getToken()))
       .orElse(null);
 
     Name name = name(parameter.getFirstChild(PythonGrammar.NAME));
-
-    var typeAnnotation = Optional.of(parameter)
-      .map(p -> p.getFirstChild(PythonGrammar.TYPE_ANNOTATION))
-      .map(typeAnnotationNode -> {
-        var colonNode = typeAnnotationNode.getFirstChild(PythonPunctuator.COLON);
-        var starNode = typeAnnotationNode.getFirstChild(PythonPunctuator.MUL);
-        var testNode = typeAnnotationNode.getFirstChild(PythonGrammar.TEST);
-        var colonToken = toPyToken(colonNode.getToken());
-        var starToken = Optional.ofNullable(starNode)
-          .map(AstNode::getToken)
-          .map(this::toPyToken)
-          .orElse(null);
-        var testExpression = expression(testNode);
-        return new TypeAnnotationImpl(colonToken, starToken, testExpression, Tree.Kind.TYPE_PARAM_TYPE_ANNOTATION);
-      }).orElse(null);
-
+    var typeAnnotation = typeAnnotationOfTypeParam(parameter);
     return new TypeParamImpl(starOrStarStar, name, typeAnnotation);
+  }
+
+  private @Nullable TypeAnnotation typeAnnotationOfTypeParam(AstNode typeParamAstNode) {
+    return Optional.ofNullable(typeParamAstNode.getFirstChild(PythonGrammar.TYPE_PARAM_BOUND))
+      .map(typeParamBoundNode -> {
+        var colonNode = typeParamBoundNode.getFirstChild(PythonPunctuator.COLON);
+        var colonToken = toPyToken(colonNode.getToken());
+
+        var testNode = typeParamBoundNode.getFirstChild(PythonGrammar.TEST);
+        var testExpr = expression(testNode);
+        return new TypeAnnotationImpl(colonToken, null, testExpr, Tree.Kind.TYPE_PARAM_TYPE_ANNOTATION);
+      }).orElse(null);
+    // the default value of TypeParameters are not parsed or represented in the AST
   }
 
   private Decorator decorator(AstNode astNode) {
