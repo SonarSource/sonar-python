@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
@@ -48,4 +49,12 @@ class UnusedFunctionParameterCheckTest {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/unusedFunctionParameter/test_something.py", new UnusedFunctionParameterCheck());
   }
 
+  @Test
+  void test_django() {
+    PythonCheckVerifier.verify(Arrays.asList(
+        "src/test/resources/checks/unusedFunctionParameter/django/urls.py",
+        "src/test/resources/checks/unusedFunctionParameter/django/views.py"
+      ),
+      new UnusedFunctionParameterCheck());
+  }
 }

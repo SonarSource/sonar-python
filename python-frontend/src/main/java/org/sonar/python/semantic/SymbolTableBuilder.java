@@ -159,7 +159,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
           if (bindingUsages.size() > 1 &&
             bindingUsages.stream().anyMatch(usage -> usage.kind() == Usage.Kind.FUNC_DECLARATION || usage.kind() == Usage.Kind.CLASS_DECLARATION)) {
 
-            Set<Symbol> alternativeDefinitions = getAlternativeDefinitions(symbol, bindingUsages);
+            Set<Symbol> alternativeDefinitions = createAlternativeDefinitions(symbol, bindingUsages);
             AmbiguousSymbol ambiguousSymbol = AmbiguousSymbolImpl.create(alternativeDefinitions);
             // update symbol and usage to newly created ambiguous symbol
             symbol.usages().forEach(usage -> ((SymbolImpl) ambiguousSymbol).addUsage(usage.tree(), usage.kind()));
@@ -171,7 +171,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
   }
 
-  private Set<Symbol> getAlternativeDefinitions(Symbol symbol, List<Usage> bindingUsages) {
+  private Set<Symbol> createAlternativeDefinitions(Symbol symbol, List<Usage> bindingUsages) {
     Set<Symbol> alternativeDefinitions = new HashSet<>();
     for (Usage bindingUsage : bindingUsages) {
       switch (bindingUsage.kind()) {

@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
@@ -68,6 +69,7 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
       .filter(UnusedFunctionParameterCheck::isUnused)
       .filter(symbol -> !isUsedInStringLiteralOrComment(symbol.name(), functionDef))
       .map(symbol -> (Parameter) symbol.usages().get(0).tree().parent())
+      .filter(param -> !isSpecialArgument(param))
       .forEach(param -> ctx.addIssue(param, String.format(MESSAGE, param.name().name())));
   }
 
@@ -88,6 +90,20 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
       comments.stream().anyMatch(str -> p.matcher(str).find());
   }
 
+  private static boolean isSpecialArgument(Parameter parameter) {
+    String starTokenValue = Optional.ofNullable(parameter.starToken())
+      .map(Token::value)
+      .orElse("");
+    String paramName = Optional.ofNullable(parameter.name())
+      .map(Name::name)
+      .orElse("");
+
+    boolean isArgsParam = "*".equals(starTokenValue) && "args".equals(paramName);
+    boolean isKwArgsParam = "**".equals(starTokenValue) && "kwargs".equals(paramName);
+
+    return isArgsParam || isKwArgsParam;
+  }
+
   private static boolean isIgnoredSymbolName(String symbolName) {
     return "self".equals(symbolName) || symbolName.startsWith("_") || AWS_LAMBDA_PARAMETERS.contains(symbolName);
   }
@@ -102,6 +118,7 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
       isSpecialMethod(functionDef) ||
       hasNonCallUsages(functionSymbol) ||
       isTestFunction(ctx, functionDef) ||
+      isDjangoView(functionDef) ||
       isAbstractClass(functionDef);
   }
 
@@ -177,5 +194,11 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
       }
     }
     return comments;
+  }
+
+  private static boolean isDjangoView(FunctionDef functionDef) {
+    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
+    FunctionSymbolImpl functionSymbolImpl = (FunctionSymbolImpl) functionSymbol;
+    return functionSymbolImpl != null && functionSymbolImpl.isDjangoView();
   }
 }

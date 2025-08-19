@@ -18,6 +18,24 @@ def g2(a):  # Noncompliant
     c = 2
     compute(b)
 
+def function_with_args_and_no_star(a, args): # Noncompliant
+    print(a)
+
+def function_with_args_and_star(a, *args): # Compliant, *args is often unused and acts as a catch-all
+    print(a)
+
+def function_with_args_and_two_star(a, **args): # Noncompliant
+    print(a)
+
+def function_with_kwargs_and_no_star(a, kwargs): # Noncompliant
+    print(a)
+
+def function_with_kwargs_and_star(a, *kwargs): # Noncompliant
+    print(a)
+
+def function_with_kwargs_and_two_star(a, **kwargs): # Compliant, **kwargs is often unused and acts as a catch-all
+    print(a)
+
 class MyInterface:
 
     def write_alignment(self, a):
