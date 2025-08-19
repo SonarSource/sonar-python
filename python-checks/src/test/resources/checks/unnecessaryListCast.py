@@ -31,6 +31,35 @@ from module import some_val
 for i in list(some_val): # Noncompliant
     print(i)
 
+def compliant_modifying_list_in_loop():
+    some_list = [1, 2, 3]
+    # Compliant, copying is necessary since the list is modified in the loop
+    for i in list(some_list): 
+        if i % 2 == 0:
+            some_list.remove(i) 
+
+    for i in list(some_list): some_list.append(5) 
+    for i in list(some_list): some_list.extend([1, 2]) 
+    for i in list(some_list): some_list.insert(0, 1) 
+    for i in list(some_list): some_list.remove(i) 
+    for i in list(some_list): some_list.pop() 
+    for i in list(some_list): some_list.clear() 
+    for i in list(some_list): some_list.sort() 
+    for i in list(some_list): some_list.reverse() 
+    for i in list(some_list): some_list.copy() # Noncompliant
+
+def noncompliant_modifying_list_outside_loop():
+    some_list = [1, 2, 3]
+    for i in list(some_list): # Noncompliant
+        print(i)
+    some_list.append(5)
+
+    [some_list.pop() for i in list(some_list)] # Noncompliant
+
+    some_other_list = [10, 20, 30]
+    for i in list(some_other_list): # Noncompliant
+        some_list.append(i)
+
 #=============== COVERAGE =============
 
 for i,y in list(range(3)), list(range(4)): 
@@ -46,3 +75,6 @@ from module import test
 
 for i in test("1"):
     print(i)
+
+for i in list(test): # Noncompliant
+    test().append(i)
