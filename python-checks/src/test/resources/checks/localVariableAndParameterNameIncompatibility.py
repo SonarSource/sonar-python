@@ -100,3 +100,16 @@ def ml_names():
     Y_test = Y
 
     return X_train, Y_train, X_test, Y_test
+
+def django_models():
+    from django.apps import AppConfig
+
+    class RockNRollConfig(AppConfig):
+        def ready(self):
+            # FP due to self not being resolved; will be fixed by SONARPY-1865
+            MyModel = self.get_model("MyModel") # Noncompliant 
+
+    MySecondModel = RockNRollConfig().get_model("MySecondModel")  
+
+    from django.apps import apps
+    Product = apps.get_model('shop', 'Product')

@@ -16,14 +16,23 @@
  */
 package org.sonar.python.tree;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.PythonTestUtils.pythonFile;
+
 import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -53,14 +62,9 @@ import org.sonar.python.PythonTestUtils;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
+import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
+import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.types.v2.TypesTestUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.sonar.python.PythonTestUtils.lastExpression;
-import static org.sonar.python.PythonTestUtils.pythonFile;
 
 class TreeUtilsTest {
 
@@ -866,6 +870,26 @@ class TreeUtilsTest {
 
     assertThat(TreeUtils.inferSingleAssignedExpressionType(name))
       .isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void testGetLocalVariableSymbols() {
+    PythonFile pythonFile = pythonFile("my_module.py");
+    FileInput file = PythonTestUtils.parse(new SymbolTableBuilder("my_package", pythonFile), 
+      """
+      def fun():
+        x = 1
+        def inner_fun(): other = "hi"
+        y = x
+      """
+    );
+    new SymbolTableBuilderV2(file).build();
+
+    FunctionDef outerFunction = PythonTestUtils.getFirstChild(file, t -> t instanceof FunctionDef funcDef && "fun".equals(funcDef.name().name()));
+    Set<SymbolV2> localVariableSymbols = TreeUtils.getLocalVariableSymbols(outerFunction);
+    assertThat(localVariableSymbols)
+      .extracting(SymbolV2::name)
+      .containsExactlyInAnyOrder("x", "inner_fun", "y");
   }
 
   private static boolean isOuterFunction(Tree tree) {

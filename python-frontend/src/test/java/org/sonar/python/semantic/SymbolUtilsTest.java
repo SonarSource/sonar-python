@@ -16,6 +16,22 @@
  */
 package org.sonar.python.semantic;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.sonar.python.PythonTestUtils.functionSymbol;
+import static org.sonar.python.PythonTestUtils.getLastDescendant;
+import static org.sonar.python.PythonTestUtils.lastFunctionSymbolWithName;
+import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.semantic.SymbolUtils.getFirstAlternativeIfEqualArgumentNames;
+import static org.sonar.python.semantic.SymbolUtils.isEqualParameterCountAndNames;
+import static org.sonar.python.semantic.SymbolUtils.pathOf;
+import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
+import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -35,22 +51,17 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.tree.ClassDefImpl;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.sonar.python.PythonTestUtils.functionSymbol;
-import static org.sonar.python.PythonTestUtils.getLastDescendant;
-import static org.sonar.python.PythonTestUtils.lastFunctionSymbolWithName;
-import static org.sonar.python.PythonTestUtils.parse;
-import static org.sonar.python.PythonTestUtils.pythonFile;
-import static org.sonar.python.semantic.SymbolUtils.getFirstAlternativeIfEqualArgumentNames;
-import static org.sonar.python.semantic.SymbolUtils.isEqualParameterCountAndNames;
-import static org.sonar.python.semantic.SymbolUtils.pathOf;
-import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
+import org.sonar.python.tree.TreeUtils;
 
 class SymbolUtilsTest {
 
@@ -300,5 +311,69 @@ class SymbolUtilsTest {
     when(callExpr3.calleeSymbol()).thenReturn(calleeSymbol3);
     when(calleeSymbol3.fullyQualifiedName()).thenReturn("test");
     assertThat(SymbolUtils.qualifiedNameOrEmpty(callExpr3)).isEqualTo("test");
+  }
+
+  @Test
+  void testGetPythonType() {
+    PythonFile pythonFile = pythonFile("my_module.py");
+    FileInput file = PythonTestUtils.parse(new SymbolTableBuilder("my_package", pythonFile), 
+      """
+      x = 1
+      x = True      
+      y = 3
+      """
+    );
+    var symbolTable = new SymbolTableBuilderV2(file)
+      .build();
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "my_package").inferTypes(file);
+
+    Name xName = (Name) TreeUtils.firstChild(file, child -> child instanceof Name name && "x".equals(name.name())).get();
+    Name yName = (Name) TreeUtils.firstChild(file, child -> child instanceof Name name && "y".equals(name.name())).get();
+    SymbolV2 xSymbol = xName.symbolV2();
+    SymbolV2 ySymbol = yName.symbolV2(); 
+
+    assertThat(SymbolUtils.getPythonType(xSymbol))
+    .isInstanceOfSatisfying(UnionType.class, unionType -> {
+      assertThat(unionType.candidates())
+        .hasSize(2)
+        .extracting(PythonType::unwrappedType)
+        .containsExactlyInAnyOrder(INT_TYPE, BOOL_TYPE);
+    });
+
+    assertThat(SymbolUtils.getPythonType(ySymbol))
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void testSymbolV2ToSymbolV1() {
+    PythonFile pythonFile = pythonFile("my_module.py");
+    FileInput file = PythonTestUtils.parse(new SymbolTableBuilder("my_package", pythonFile), 
+      """
+      x = 1
+      x = True      
+      y = x
+      """
+    );
+    var symbolTable = new SymbolTableBuilderV2(file)
+      .build();
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "my_package").inferTypes(file);
+
+    Name xName = (Name) TreeUtils.firstChild(file, child -> child instanceof Name name && "x".equals(name.name())).get();
+    Name yName = (Name) TreeUtils.firstChild(file, child -> child instanceof Name name && "y".equals(name.name())).get();
+    SymbolV2 xSymbolV2 = xName.symbolV2();
+    Symbol xSymbolV1 = xName.symbol();
+
+    SymbolV2 ySymbolV2 = yName.symbolV2(); 
+    Symbol ySymbolV1 = yName.symbol(); 
+
+    assertThat(SymbolUtils.symbolV2ToSymbolV1(xSymbolV2))
+      .get()
+      .isSameAs(xSymbolV1);
+
+    assertThat(SymbolUtils.symbolV2ToSymbolV1(ySymbolV2))
+      .get()
+      .isSameAs(ySymbolV1);
   }
 }

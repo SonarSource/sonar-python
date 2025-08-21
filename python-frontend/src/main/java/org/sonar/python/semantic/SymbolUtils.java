@@ -16,6 +16,9 @@
  */
 package org.sonar.python.semantic;
 
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
+import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
+
 import java.io.File;
 import java.net.URI;
 import java.nio.file.InvalidPathException;
@@ -56,12 +59,13 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
-
-import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
-import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
+import org.sonar.python.types.v2.TypeUtils;
 
 public class SymbolUtils {
 
@@ -356,5 +360,24 @@ public class SymbolUtils {
   public static String qualifiedNameOrEmpty(CallExpression callExpression) {
     Symbol symbol = callExpression.calleeSymbol();
     return symbol != null && symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
+  }
+
+  public static PythonType getPythonType(SymbolV2 symbol) {
+    return symbol.usages().stream()
+      .filter(UsageV2::isBindingUsage)
+      .map(UsageV2::tree)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(Expression.class))
+      .map(Expression::typeV2)
+      .collect(TypeUtils.toUnionType());
+  }
+
+  public static Optional<Symbol> symbolV2ToSymbolV1(SymbolV2 symbolV2) {
+    return symbolV2.usages().stream()
+      .filter(UsageV2::isBindingUsage)
+      .map(UsageV2::tree)
+      .filter(HasSymbol.class::isInstance)
+      .map(tree -> ((HasSymbol) tree).symbol())
+      .filter(Objects::nonNull)
+      .findFirst();
   }
 }

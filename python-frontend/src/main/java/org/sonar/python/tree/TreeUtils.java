@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -611,5 +612,15 @@ public class TreeUtils {
     return bindingName
       .map(Name::typeV2)
       .orElse(PythonType.UNKNOWN);
+  }
+
+  public static Set<SymbolV2> getLocalVariableSymbols(FunctionDef functionDef) {
+    return functionDef.localVariables().stream()
+      .flatMap(symbol -> symbol.usages().stream())
+      .map(Usage::tree)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(Name.class))
+      .map(Name::symbolV2)
+      .filter(Objects::nonNull)
+      .collect(Collectors.toSet());
   }
 }
