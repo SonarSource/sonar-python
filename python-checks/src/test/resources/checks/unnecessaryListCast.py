@@ -78,3 +78,9 @@ for i in test("1"):
 
 for i in list(test): # Noncompliant
     test().append(i)
+    object.__setattr__(test, k, v)
+
+for i in list(object): # Noncompliant
+    test().append(i)
+    object.__setattr__(test, k, v)
+

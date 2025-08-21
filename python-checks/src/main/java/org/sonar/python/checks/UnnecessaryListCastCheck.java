@@ -43,8 +43,8 @@ import org.sonar.python.types.v2.TypeCheckMap;
 public class UnnecessaryListCastCheck extends PythonSubscriptionCheck {
   private TypeCheckBuilder isListCallCheck;
 
-  private static final Set<String> MODIFYING_LIST_METHODS = Set.of("append", "extend", "insert", "remove", "pop", "clear",
-      "sort", "reverse");
+  private static final Set<String> MODIFYING_LIST_METHODS = Set.of("append", "extend", "insert", "remove", "pop",
+      "clear", "sort", "reverse");
   private TypeCheckMap<Object> typeCheckMap;
 
   @Override
@@ -144,16 +144,19 @@ public class UnnecessaryListCastCheck extends PythonSubscriptionCheck {
     public void visitCallExpression(CallExpression callExpr) {
       super.visitCallExpression(callExpr);
       var symbol = listName.symbolV2();
-      if(symbol != null) {
-        isModifyingListMethod |= isMethodReceiverInstanceOf(callExpr, symbol) 
-          && isModifyingListMethod(callExpr);
+      if (symbol != null) {
+        isModifyingListMethod |= isMethodReceiverInstanceOf(callExpr, symbol)
+            && isModifyingListMethod(callExpr);
       }
     }
 
     private static boolean isMethodReceiverInstanceOf(CallExpression callExpr, SymbolV2 listSymbol) {
-      return callExpr.callee() instanceof QualifiedExpression qualifiedExpression &&
-          qualifiedExpression.qualifier() instanceof Name name &&
-          name.symbolV2().equals(listSymbol);
+      if (callExpr.callee() instanceof QualifiedExpression qualifiedExpression &&
+          qualifiedExpression.qualifier() instanceof Name name) {
+        var symbolV2 = name.symbolV2();
+        return symbolV2 != null && symbolV2.equals(listSymbol);
+      }
+      return false;
     }
 
     private boolean isModifyingListMethod(CallExpression callExpression) {
