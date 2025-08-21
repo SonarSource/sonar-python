@@ -156,3 +156,9 @@ def undefined_generic_type[T: T](a: T) -> T:
     x: T = a
     a.foo()
 
+class TypeVarTest[T]:
+    def from_class_def(self):
+        a: list[T] = ...
+
+    def unknow_generic(self):
+        a: list[X] = ... # Noncompliant

@@ -20,15 +20,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TypeParams;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5953")
 public class UndefinedSymbolsCheck extends PythonSubscriptionCheck {
@@ -68,9 +72,27 @@ public class UndefinedSymbolsCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitName(Name name) {
-      if (name.isVariable() && name.symbol() == null && !name.name().startsWith("_")) {
+      if (name.isVariable() && name.symbol() == null && !name.name().startsWith("_") && !isTypeVar(name)) {
         nameIssues.computeIfAbsent(name.name(), k -> new ArrayList<>()).add(name);
       }
+    }
+
+    private static boolean isTypeVar(Name name) {
+      return TreeUtils.firstAncestor(name, tree -> classWithTypeVar(tree, name)) != null;
+    }
+
+    private static boolean classWithTypeVar(Tree tree, Name name) {
+      if (tree instanceof ClassDef classDef) {
+        return hasTypeVar(classDef.typeParams(), name);
+      }
+      return false;
+    }
+
+    private static boolean hasTypeVar(@Nullable TypeParams typeParams, Name name) {
+      if (typeParams != null && !typeParams.typeParamsList().isEmpty()) {
+        return typeParams.typeParamsList().stream().anyMatch(typeParam -> typeParam.name().name().equals(name.name()));
+      }
+      return false;
     }
 
     @Override
