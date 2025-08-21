@@ -140,13 +140,16 @@ class NoSonarInfoParserTest {
     var parser = new NoSonarInfoParser();
     var isInvalid = parser.isInvalidIssueSuppressionComment(commentString);
 
-    Assertions.assertThat(isInvalid).isEqualTo(expectedIsInvalid);
+    Assertions.assertThat(isInvalid)
+      .as(commentString)
+      .isEqualTo(expectedIsInvalid);
   }
 
   private static Stream<Arguments> provideValidationParameters() {
     return Stream.of(
       Arguments.of("# NOSONAR", false),
       Arguments.of("# NOSONAR()", false),
+      Arguments.of("# NOSONAR( )", false),
       Arguments.of("# NOSONAR(a, b)", false),
       Arguments.of("# NOSONAR with some text", false),
       Arguments.of("# NOSONAR() with some text", false),
@@ -179,7 +182,12 @@ class NoSonarInfoParserTest {
       Arguments.of("# something before no pound symbol NOSONAR", true),
       Arguments.of("# something before no pound symbol NOSONAR something after", true),
       Arguments.of("# NOSONAR NOSONAR # NOSONAR ", true),
-      Arguments.of("#NOSONAR NOSONAR #   NOSONAR ", true)
+      Arguments.of("#NOSONAR NOSONAR #   NOSONAR ", true),
+      Arguments.of("#NOSONAR(S3723)", false),
+      Arguments.of("#NOSONAR(S3)", false),
+      Arguments.of("#NOSONAR(python:S3723)", true),
+      Arguments.of("#NOSONAR(S-123)", true),
+      Arguments.of("#NOSONAR(NoSonar)", false)
     );
   }
 

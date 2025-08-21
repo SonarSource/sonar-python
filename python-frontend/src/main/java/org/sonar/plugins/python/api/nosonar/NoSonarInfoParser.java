@@ -33,6 +33,7 @@ public class NoSonarInfoParser {
   private static final String NOQA_PATTERN_REGEX = "^#\\s*noqa(?::\\s*(.+))?(?:[\\s;:].*)?";
   private static final String NOSONAR_PREFIX_REGEX = "^#\\s*NOSONAR(\\W.*)?";
   private static final String NOSONAR_PATTERN_REGEX = "^#\\s*NOSONAR(?:\\s*\\(([^)]*)\\))?($|\\s.*)";
+  private static final String RULE_KEY_PATTERN_REGEX = "^[a-zA-Z0-9]+$";
 
   private final Pattern noSonarPattern;
   private final Pattern noQaPattern;
@@ -59,14 +60,18 @@ public class NoSonarInfoParser {
       return true;
     }
     var rules = parseNoSonarRules(comment).toList();
-    return rules.size() > 1 && rules.stream().anyMatch(r -> r.isBlank() || r.contains(" "));
+    return !rules.isEmpty() && rules.stream().anyMatch(NoSonarInfoParser::isInvalidRuleKey);
   }
 
   private static boolean isNoSonarWithoutPound(String comment) {
-    return countOccurences("#\\s*NOSONAR", comment) < countOccurences("NOSONAR", comment);
+    return countOccurrences("#\\s*NOSONAR", comment) < countOccurrences("NOSONAR", comment);
   }
 
-  private static int countOccurences(String match, String inString) {
+  private static boolean isInvalidRuleKey(String ruleKey) {
+    return !ruleKey.matches(RULE_KEY_PATTERN_REGEX);
+  }
+
+  private static int countOccurrences(String match, String inString) {
     return inString.split(match, -1).length - 1;
   }
 

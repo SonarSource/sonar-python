@@ -34,3 +34,9 @@
 # noqa: F321 NOSONAR
 
 # noqa: F321 # NOSONAR
+
+# NOSONAR(S1234)
+# NOSONAR(S1)
+# NOSONAR(NoSonar)
+# Noncompliant@+1
+# NOSONAR(python:S1234)
