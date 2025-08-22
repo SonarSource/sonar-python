@@ -17,10 +17,8 @@
 package org.sonar.plugins.python;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.sonar.python.EscapeCharPositionInfo;
 import org.sonar.python.IPythonLocation;
 
 public class NotebookParsingData {
@@ -65,12 +63,9 @@ public class NotebookParsingData {
     return this;
   }
 
-  public void appendToSource(String str) {
-    aggregatedSource.append(str);
-  }
-
-  public void addLineToSource(String sourceLine, int lineNr, int columnNr, List<EscapeCharPositionInfo> colOffsets, boolean isCompressed) {
-    addLineToSource(sourceLine, new IPythonLocation(lineNr, columnNr, colOffsets, isCompressed));
+  public void addLineToSource(CellLine line, int offset, boolean isCompressed) {
+    addLineToSource(line.getContent(),
+      new IPythonLocation(line.getTokenLocation().getLineNr(), line.getTokenLocation().getColumnNr() + offset, line.getEscapedCharPositionInfo(), isCompressed));
   }
 
   private void appendLine(String line) {
