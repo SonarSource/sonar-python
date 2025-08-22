@@ -46,3 +46,8 @@ def abc_collections():
   async def async_iterable() -> AsyncIterable[int]:
     for i in range(5):
       yield i
+
+def http_status():
+  from http import HTTPStatus
+  def get_status() -> HTTPStatus:
+    return HTTPStatus.OK

@@ -3720,6 +3720,35 @@ public class TypeInferenceV2Test {
 
   }
 
+  @Test
+  void userDefinedEnumFieldType() {
+    var root = inferTypes("""
+      from enum import Enum
+      class Color(Enum):
+        RED = 1
+
+      Color.RED
+      """);
+
+    var qualifiedExpr = (QualifiedExpression) TreeUtils.firstChild(root, QualifiedExpression.class::isInstance).get();
+
+    assertThat(qualifiedExpr.typeV2())
+      .isSameAs(PythonType.UNKNOWN); // TODO SONARPY-3282: should be ObjectType[Color]
+  }
+
+  @Test
+  void typeshedDefinedEnumFieldType() {
+    var socketSockRawExpr = lastExpression("""
+      from socket import SocketKind
+      SocketKind.SOCK_RAW
+      """);
+
+    assertThat(socketSockRawExpr.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isSameAs(INT_TYPE); // TODO SONARPY-3283: should be ObjectType[SocketKind]
+  }
+
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
     FileInput root = parse(lines);
     var symbolTable = new SymbolTableBuilderV2(root).build();
@@ -3733,7 +3762,6 @@ public class TypeInferenceV2Test {
     var typeInferenceV2 = new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "");
     return typeInferenceV2.inferModuleType(root);
   }
-
 
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);

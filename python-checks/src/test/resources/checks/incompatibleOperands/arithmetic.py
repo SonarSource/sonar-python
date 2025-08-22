@@ -1,5 +1,5 @@
 ################################################
-# Case to cover: Detect whem custom types do not
+# Case to cover: Detect when custom types do not
 # have the right methods.
 ################################################
 
@@ -128,3 +128,7 @@ def type_symbols_try_except():
         x = some_variable * 42  # OK
     except:
         x = some_variable * 42  # OK
+
+def http_status_enum():
+   from http import HTTPStatus
+   HTTPStatus.OK + 1  # OK

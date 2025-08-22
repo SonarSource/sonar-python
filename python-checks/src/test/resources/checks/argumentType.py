@@ -278,3 +278,11 @@ data = dataclasses.replace(DecoratedDataClass(42))
 
 # FP SONARPY-2359
 decorated_dataclass_expected(data)  # Noncompliant
+
+
+def http_status():
+  from http import HTTPStatus
+  def set_status(status: HTTPStatus):
+    pass
+
+  set_status(HTTPStatus.OK)

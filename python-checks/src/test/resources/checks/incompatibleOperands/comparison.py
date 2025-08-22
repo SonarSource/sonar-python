@@ -108,3 +108,7 @@ def mocks():
     ExtendedMock() < 3 
     extended_mock = ExtendedMock()
     42 > extended_mock
+
+def http_status_enum():
+   from http import HTTPStatus
+   HTTPStatus.OK > 3  # OK
