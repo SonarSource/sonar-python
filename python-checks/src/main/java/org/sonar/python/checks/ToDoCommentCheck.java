@@ -27,12 +27,12 @@ import org.sonar.plugins.python.api.tree.Trivia;
 @Rule(key = "S1135")
 public class ToDoCommentCheck extends PythonSubscriptionCheck {
 
-  private static final String TODO_COMMENT_PATTERN = "^#[ ]*TODO.*";
+  private static final String TODO_COMMENT_PATTERN = "^#\\s*(?:TODO|todo|Todo)(?!\\w).*";
   private static final String MESSAGE = "Complete the task associated to this \"TODO\" comment.";
 
   @Override
   public void initialize(SubscriptionCheck.Context context) {
-    Pattern pattern = Pattern.compile(TODO_COMMENT_PATTERN, Pattern.CASE_INSENSITIVE);
+    Pattern pattern = Pattern.compile(TODO_COMMENT_PATTERN);
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
       Token token = (Token) ctx.syntaxNode();
       for (Trivia trivia : token.trivia()) {

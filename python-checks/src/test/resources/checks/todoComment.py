@@ -21,3 +21,23 @@ if True:
     # TODO: something
     for d in lib_dirs:
         pass
+
+# TODO_something
+#      TODO132
+
+# todos all in spanish
+# ToDo app
+
+# Noncompliant@+1
+#      TODO more spaces
+
+# Noncompliant@+1
+# Todo first capital
+
+# Noncompliant@+1
+# Todo-dash
+
+# Noncompliant@+1
+# TODO(FIX: parenthesis)
+
+
