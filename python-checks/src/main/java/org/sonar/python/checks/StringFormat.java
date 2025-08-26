@@ -44,12 +44,12 @@ public class StringFormat {
     %\
     (?<field>(?:\\((?<mapkey>.*?)\\))?\
     (?<flags>[#\\-+0 ]*)?\
-    (?<width>[0-9]*|\\*)?\
-    (?:\\.(?<precision>[0-9]*|\\*))?\
+    (?<width>\\d*|\\*)?\
+    (?:\\.(?<precision>\\d*|\\*))?\
     (?:[lLH])?\
     (?<type>[diueEfFgGoxXrsac]|%))?""");
 
-  private static final Pattern FORMAT_FIELD_PATTERN = Pattern.compile("^(?<name>[^.\\[!:{}]+)?(?:(?:\\.[a-zA-Z0-9_]+)|(?:\\[[^]]+]))*");
+  private static final Pattern FORMAT_FIELD_PATTERN = Pattern.compile("^(?<name>[^.\\[!:{}]+)?(?:(?:\\.\\w+)|(?:\\[[^]]+]))*");
   private static final Pattern FORMAT_NUMBER_PATTERN = Pattern.compile("^\\d+$");
   private static final Pattern FORMAT_UNICODE_PATTERN = Pattern.compile("^\\\\N\\{[a-zA-Z0-9-_\\s]*}");
 

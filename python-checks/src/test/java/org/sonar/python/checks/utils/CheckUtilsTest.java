@@ -234,7 +234,7 @@ class CheckUtilsTest {
     }
   }
 
-  private static FileInput parseFileWithSymbols(String path) throws IOException {
+  private static FileInput parseFileWithSymbols(String path) {
     return TestPythonVisitorRunner
       .createContext(new File(path))
       .rootTree();
@@ -260,6 +260,6 @@ class CheckUtilsTest {
     }
     return tree.children().stream()
       .flatMap(child -> descendantFunctions(child).stream())
-      .collect(Collectors.toUnmodifiableList());
+      .toList();
   }
 }

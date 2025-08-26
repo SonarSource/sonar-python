@@ -120,7 +120,7 @@ class PythonXUnitSensorTest {
       the following exception occurred: java.text.ParseException: Unparseable number: "brrrr"\
       """);
     verify(analysisWarnings, times(1))
-      .addUnique(eq("An error occurred while trying to import XUnit report(s): 'xunit-reports/invalid-time-xunit-report.xml'"));
+      .addUnique("An error occurred while trying to import XUnit report(s): 'xunit-reports/invalid-time-xunit-report.xml'");
   }
 
   @Test

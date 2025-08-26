@@ -49,7 +49,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S5332")
 public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static final List<String> SENSITIVE_PROTOCOLS = Arrays.asList("http://", "ftp://", "telnet://");
-  private static final Pattern LOOPBACK = Pattern.compile("localhost|127(?:\\.[0-9]+){0,2}\\.[0-9]+$|^(?:0*\\:)*?:?0*1", Pattern.CASE_INSENSITIVE);
+  private static final Pattern LOOPBACK = Pattern.compile("localhost|127(?:\\.\\d+){0,2}\\.\\d+$|^(?:0*\\:)*?:?0*1", Pattern.CASE_INSENSITIVE);
   private static final Map<String, String> ALTERNATIVES = Map.of(
     "http", "https",
     "ftp", "sftp, scp or ftps",

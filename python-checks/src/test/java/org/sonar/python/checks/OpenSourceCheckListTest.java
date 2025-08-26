@@ -130,7 +130,7 @@ class OpenSourceCheckListTest {
   }
 
   @Test
-  void test_locally_deprecated_rules_stay_deprecated() throws IOException, ParseException {
+  void test_locally_deprecated_rules_stay_deprecated() throws IOException {
     // Some rules have been deprecated only for Python. When executed, rule-api reverts those rule to "ready" status, which is incorrect.
     // This test is here to ensure it doesn't happen.
     List<String> locallyDeprecatedRules = Arrays.asList("S1523", "S4721");

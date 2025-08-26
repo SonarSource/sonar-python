@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RuffReportTest {
 
-  private final String PROJECT = "ruff_project";
+  private static final String PROJECT = "ruff_project";
 
   @RegisterExtension
   public static final ConcurrentOrchestratorExtension ORCHESTRATOR = TestsUtils.dynamicOrchestrator;

@@ -22,7 +22,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 class ReluctantQuantifierWithEmptyContinuationCheckTest {
 
   @Test
-  void test() throws Exception {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/reluctantQuantifierWithEmptyContinuationCheck.py", new ReluctantQuantifierWithEmptyContinuationCheck());
   }
 
