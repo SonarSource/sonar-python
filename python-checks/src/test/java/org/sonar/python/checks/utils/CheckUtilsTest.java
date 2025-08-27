@@ -24,7 +24,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -150,7 +149,7 @@ class CheckUtilsTest {
   }
 
   @Test
-  void mustBeAProtocolLikeTest() throws IOException {
+  void mustBeAProtocolLikeTest() {
     var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/mustBeAProtocolLikeTest.py");
 
     var statementList = fileInput.statements();
@@ -207,7 +206,7 @@ class CheckUtilsTest {
   }
 
   @Test
-  void findFirstParameterSymbolTest() throws IOException {
+  void findFirstParameterSymbolTest() {
     var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/findFirstParameterSymbolTest.py");
     var functionDefs = descendantFunctions(fileInput);
 
@@ -224,8 +223,7 @@ class CheckUtilsTest {
   private static FileInput parse(String content) {
     PythonParser parser = PythonParser.create();
     AstNode astNode = parser.parse(content);
-    FileInput parse = new PythonTreeMaker().fileInput(astNode);
-    return parse;
+    return new PythonTreeMaker().fileInput(astNode);
   }
 
   private static FileInput parseFile(String path) throws IOException {

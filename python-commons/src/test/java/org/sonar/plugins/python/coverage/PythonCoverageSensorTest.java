@@ -46,7 +46,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.contains;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -352,7 +351,7 @@ class PythonCoverageSensorTest {
 
     String absoluteSourcePath = new File(moduleBaseDir, "sources/file1.py").getAbsolutePath();
     Path report = new File(moduleBaseDir, "coverage_absolute_path.xml").toPath();
-    String reportContent = new String(Files.readAllBytes(report), UTF_8);
+    String reportContent = Files.readString(report, UTF_8);
     reportContent = reportContent.replace(ABSOLUTE_PATH_PLACEHOLDER, absoluteSourcePath);
 
     Path reportCopy = workDir.resolve("coverage_absolute_path.xml");

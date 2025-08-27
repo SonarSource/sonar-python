@@ -34,7 +34,6 @@ import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -44,10 +43,10 @@ class PythonXUnitSensorTest {
   private static final String FILE_SAMPLE1 = "test_sample1.py";
   private static final String FILE_SAMPLE2 = "tests/dir/test_sample2.py";
 
-  private File baseDir = new File("src/test/resources/org/sonar/plugins/python");
+  private static final File BASE_DIR = new File("src/test/resources/org/sonar/plugins/python");
   MapSettings settings = new MapSettings();
   PythonXUnitSensor sensor;
-  SensorContextTester context = SensorContextTester.create(baseDir);
+  SensorContextTester context = SensorContextTester.create(BASE_DIR);
   DefaultFileSystem fs;
   private final AnalysisWarningsWrapper analysisWarnings = spy(AnalysisWarningsWrapper.class);
 
@@ -57,9 +56,9 @@ class PythonXUnitSensorTest {
   @BeforeEach
   void setUp() {
     settings = new MapSettings();
-    context = SensorContextTester.create(baseDir);
+    context = SensorContextTester.create(BASE_DIR);
     settings.clear();
-    fs = new DefaultFileSystem(baseDir);
+    fs = new DefaultFileSystem(BASE_DIR);
     sensor = new PythonXUnitSensor(new ConfigurationBridge(settings), fs, analysisWarnings);
   }
 
