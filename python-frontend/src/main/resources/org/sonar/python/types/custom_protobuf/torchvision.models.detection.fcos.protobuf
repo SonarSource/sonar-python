@@ -1,5 +1,5 @@
 
-!torchvision.models.detection.fcosŽ
+!torchvision.models.detection.fcosê
 FCOSHead*torchvision.models.detection.fcos.FCOSHead"torch.nn.modules.module.Module*‘
 __init__3torchvision.models.detection.fcos.FCOSHead.__init__"
 None*b
@@ -14,37 +14,37 @@
 	num_convsD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *“
-compute_loss7torchvision.models.detection.fcos.FCOSHead.compute_loss"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*b
+None *³
+compute_loss7torchvision.models.detection.fcos.FCOSHead.compute_loss"u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict*b
 selfX
-*torchvision.models.detection.fcos.FCOSHead"*torchvision.models.detection.fcos.FCOSHead*¦
-targets˜
-.builtins.list[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.list*i
-head_outputsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*9
-anchors,
-builtins.list[Any]
-Any"builtins.list*>
-matched_idxs,
-builtins.list[Any]
-Any"builtins.list*¯
-forward2torchvision.models.detection.fcos.FCOSHead.forward"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*b
+*torchvision.models.detection.fcos.FCOSHead"*torchvision.models.detection.fcos.FCOSHead*Í
+targets¿
+7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict"builtins.list*‡
+head_outputsu
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict*W
+anchorsJ
+builtins.list[torch.Tensor]
+torch.Tensor"torch.Tensor"builtins.list*\
+matched_idxsJ
+builtins.list[torch.Tensor]
+torch.Tensor"torch.Tensor"builtins.list*ë
+forward2torchvision.models.detection.fcos.FCOSHead.forward"u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict*b
 selfX
-*torchvision.models.detection.fcos.FCOSHead"*torchvision.models.detection.fcos.FCOSHead*3
-x,
-builtins.list[Any]
-Any"builtins.listrV
+*torchvision.models.detection.fcos.FCOSHead"*torchvision.models.detection.fcos.FCOSHead*Q
+xJ
+builtins.list[torch.Tensor]
+torch.Tensor"torch.Tensor"builtins.listrV
 __annotations__:torchvision.models.detection.fcos.FCOSHead.__annotations__
 AnyrJ
 	box_coder4torchvision.models.detection.fcos.FCOSHead.box_coder
@@ -52,8 +52,7 @@
 classification_head>torchvision.models.detection.fcos.FCOSHead.classification_head
 AnyrV
 regression_head:torchvision.models.detection.fcos.FCOSHead.regression_head
-AnyÓ
-
+Any†
 FCOSClassificationHead8torchvision.models.detection.fcos.FCOSClassificationHead"torch.nn.modules.module.Module*ê
 __init__Atorchvision.models.detection.fcos.FCOSClassificationHead.__init__"
 None*~
@@ -74,14 +73,14 @@ norm_layer†
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None *‰
-forward@torchvision.models.detection.fcos.FCOSClassificationHead.forward"
-Any*~
+None *¼
+forward@torchvision.models.detection.fcos.FCOSClassificationHead.forward"
+torch.Tensor"torch.Tensor*~
 selft
-8torchvision.models.detection.fcos.FCOSClassificationHead"8torchvision.models.detection.fcos.FCOSClassificationHead*3
-x,
-builtins.list[Any]
-Any"builtins.listr\
+8torchvision.models.detection.fcos.FCOSClassificationHead"8torchvision.models.detection.fcos.FCOSClassificationHead*Q
+xJ
+builtins.list[torch.Tensor]
+torch.Tensor"torch.Tensor"builtins.listr\
 num_classesDtorchvision.models.detection.fcos.FCOSClassificationHead.num_classes
 Anyr\
 num_anchorsDtorchvision.models.detection.fcos.FCOSClassificationHead.num_anchors
@@ -90,7 +89,7 @@ norm_layer†
 AnyrZ
 
 cls_logitsCtorchvision.models.detection.fcos.FCOSClassificationHead.cls_logits
-Anyú
+AnyÔ	
 FCOSRegressionHead4torchvision.models.detection.fcos.FCOSRegressionHead"torch.nn.modules.module.Module*ô
 __init__=torchvision.models.detection.fcos.FCOSRegressionHead.__init__"
 None*v
@@ -107,22 +106,22 @@ norm_layer†
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None *š
-forward<torchvision.models.detection.fcos.FCOSRegressionHead.forward"$
-Tuple[Any,Any]
-Any
-Any*v
+None *ô
+forward<torchvision.models.detection.fcos.FCOSRegressionHead.forward"`
+ Tuple[torch.Tensor,torch.Tensor]
+torch.Tensor"torch.Tensor
+torch.Tensor"torch.Tensor*v
 selfl
-4torchvision.models.detection.fcos.FCOSRegressionHead"4torchvision.models.detection.fcos.FCOSRegressionHead*3
-x,
-builtins.list[Any]
-Any"builtins.listrJ
+4torchvision.models.detection.fcos.FCOSRegressionHead"4torchvision.models.detection.fcos.FCOSRegressionHead*Q
+xJ
+builtins.list[torch.Tensor]
+torch.Tensor"torch.Tensor"builtins.listrJ
 conv9torchvision.models.detection.fcos.FCOSRegressionHead.conv
 AnyrR
 bbox_reg=torchvision.models.detection.fcos.FCOSRegressionHead.bbox_reg
 AnyrZ
 bbox_ctrnessAtorchvision.models.detection.fcos.FCOSRegressionHead.bbox_ctrness
-Anyó)
+Any®.
 FCOS&torchvision.models.detection.fcos.FCOS"torch.nn.modules.module.Module*Õ
 
 __init__/torchvision.models.detection.fcos.FCOS.__init__"
@@ -168,90 +167,90 @@ nms_thresh
 topk_candidates
 builtins.int"builtins.int *
 kwargs
-Any*‚
-eager_outputs4torchvision.models.detection.fcos.FCOS.eager_outputs"Í
-UTuple[builtins.dict[builtins.str,Any],builtins.list[builtins.dict[builtins.str,Any]]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict˜
-.builtins.list[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.list*Z
+Any*Ÿ
+eager_outputs4torchvision.models.detection.fcos.FCOS.eager_outputs"¤
+gTuple[builtins.dict[builtins.str,torch.Tensor],builtins.list[builtins.dict[builtins.str,torch.Tensor]]]u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict¿
+7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict"builtins.list*Z
 selfP
-&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*c
-lossesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*©
+&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*
+lossesu
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict*Ð
 
-detections˜
-.builtins.list[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.list*®
-compute_loss3torchvision.models.detection.fcos.FCOS.compute_loss"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*Z
+detections¿
+7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict"builtins.list*°
+compute_loss3torchvision.models.detection.fcos.FCOS.compute_loss"u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict*Z
 selfP
-&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*¦
-targets˜
-.builtins.list[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.list*i
-head_outputsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*9
-anchors,
-builtins.list[Any]
-Any"builtins.list*e
+&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*Í
+targets¿
+7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict"builtins.list*‡
+head_outputsu
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict*W
+anchorsJ
+builtins.list[torch.Tensor]
+torch.Tensor"torch.Tensor"builtins.list*e
 num_anchors_per_levelJ
 builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*–
-postprocess_detections=torchvision.models.detection.fcos.FCOS.postprocess_detections"˜
-.builtins.list[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.list*Z
+builtins.int"builtins.int"builtins.list*
+postprocess_detections=torchvision.models.detection.fcos.FCOS.postprocess_detections"¿
+7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict"builtins.list*Z
 selfP
-&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*ž
-head_outputs‹
-.builtins.dict[builtins.str,builtins.list[Any]]
-builtins.str"builtins.str,
-builtins.list[Any]
-Any"builtins.list"builtins.dict*m
-anchors`
-!builtins.list[builtins.list[Any]],
-builtins.list[Any]
-Any"builtins.list"builtins.list*µ
+&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*Å
+head_outputs²
+7builtins.dict[builtins.str,builtins.list[torch.Tensor]]
+builtins.str"builtins.strJ
+builtins.list[torch.Tensor]
+torch.Tensor"torch.Tensor"builtins.list"builtins.dict*•
+anchors‡
+*builtins.list[builtins.list[torch.Tensor]]J
+builtins.list[torch.Tensor]
+torch.Tensor"torch.Tensor"builtins.list"builtins.list*µ
 image_shapes¢
 /builtins.list[Tuple[builtins.int,builtins.int]]`
  Tuple[builtins.int,builtins.int]
 builtins.int"builtins.int
-builtins.int"builtins.int"builtins.list*•
-forward.torchvision.models.detection.fcos.FCOS.forward"Í
-UTuple[builtins.dict[builtins.str,Any],builtins.list[builtins.dict[builtins.str,Any]]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict˜
-.builtins.list[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.list*Z
+builtins.int"builtins.int"builtins.list*º
+forward.torchvision.models.detection.fcos.FCOS.forward"¤
+gTuple[builtins.dict[builtins.str,torch.Tensor],builtins.list[builtins.dict[builtins.str,torch.Tensor]]]u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict¿
+7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict"builtins.list*Z
 selfP
-&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*8
-images,
-builtins.list[Any]
-Any"builtins.list*ó
-targetsã
-:Union[builtins.list[builtins.dict[builtins.str,Any]],None]˜
-.builtins.list[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.list
+&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*V
+imagesJ
+builtins.list[torch.Tensor]
+torch.Tensor"torch.Tensor"builtins.list*£
+targets“
+CUnion[builtins.list[builtins.dict[builtins.str,torch.Tensor]],None]¿
+7builtins.list[builtins.dict[builtins.str,torch.Tensor]]u
+(builtins.dict[builtins.str,torch.Tensor]
+builtins.str"builtins.str
+torch.Tensor"torch.Tensor"builtins.dict"builtins.list
 None rR
 __annotations__6torchvision.models.detection.fcos.FCOS.__annotations__
 AnyrD
@@ -306,6 +305,4 @@ GUnion[torchvision.models.detection.fcos.FCOS_ResNet50_FPN_Weights,None]z
 __annotations__1torchvision.models.detection.fcos.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*;
-Tensor(torchvision.models.detection.fcos.Tensor
-Any
+Any"builtins.dict
