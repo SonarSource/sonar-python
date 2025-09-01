@@ -229,6 +229,9 @@ public class TypeCheckBuilder {
         if (types.stream().anyMatch(t -> (t instanceof ClassType ct) && ct.fullyQualifiedName().equals(expectedFqnName))) {
           return TriBool.TRUE;
         }
+        if (expectedType instanceof UnknownType && types.stream().anyMatch(t -> new IsTypeWithFullyQualifiedNamePredicate(expectedFqnName).test(t).isTrue())) {
+          return TriBool.TRUE;
+        }
       }
       if (expectedType instanceof ClassType expectedClassType) {
         return isClassInheritedFrom(pythonType, expectedClassType);

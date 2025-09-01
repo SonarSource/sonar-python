@@ -1,0 +1,89 @@
+<p>This rule raises an issue when <code>super()</code> calls are used in methods that are decorated with TorchScript decorators like
+<code>@torch.jit.script_method</code> or within classes likely to be compiled with TorchScript.</p>
+<h2>Why is this an issue?</h2>
+<p>TorchScript has limited support for Python’s <code>super()</code> mechanism, which can lead to compilation errors when converting PyTorch models
+for deployment.</p>
+<p>TorchScript is PyTorch’s way to create serializable and optimizable models from PyTorch code. It allows you to run models independently from
+Python, which is essential for production deployment, mobile applications, and performance optimization.</p>
+<p>However, TorchScript operates with a subset of Python’s features. The <code>super()</code> function relies on Python’s method resolution order
+(MRO) and dynamic attribute lookup, which are not fully supported in TorchScript’s static compilation environment.</p>
+<p>When TorchScript encounters <code>super()</code> calls, it may fail to properly resolve the method calls during compilation, resulting in runtime
+errors or unexpected behavior. This is particularly problematic in <code>forward()</code> methods of neural network modules, where inheritance is
+commonly used.</p>
+<h3>What is the potential impact?</h3>
+<p>Using <code>super()</code> calls in TorchScript methods can cause:</p>
+<ul>
+  <li> Compilation failures when converting models to TorchScript format </li>
+  <li> Runtime errors in deployed models </li>
+  <li> Inconsistent behavior between eager mode and TorchScript execution </li>
+  <li> Deployment issues in production environments and mobile applications </li>
+</ul>
+<h3>How to fix in PyTorch?</h3>
+<p>Replace super() calls with direct method calls or refactor the inheritance structure to avoid super() usage in TorchScript methods.</p>
+<h4>Non-compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import torch
+import torch.nn as nn
+
+class MyModel(nn.Module):
+    @torch.jit.script_method
+    def forward(self, x):
+        return super().forward(x)  # Noncompliant
+</pre>
+<h4>Compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import torch
+import torch.nn as nn
+
+class MyModel(nn.Module):
+    def forward(self, x):
+        # Avoid super() in TorchScript methods
+        return self.process(x)
+
+    def process(self, x):
+        return x
+</pre>
+<p>For complex inheritance scenarios, explicitly call parent class methods by name instead of using super().</p>
+<h4>Non-compliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import torch
+import torch.nn as nn
+
+class BaseModel(nn.Module):
+    def forward(self, x):
+        return x * 2
+
+class DerivedModel(BaseModel):
+    @torch.jit.script_method
+    def forward(self, x):
+        result = super().forward(x)  # Noncompliant
+        return result + 1
+</pre>
+<h4>Compliant code example</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import torch
+import torch.nn as nn
+
+class BaseModel(nn.Module):
+    def forward(self, x):
+        return x * 2
+
+    def base_forward(self, x):
+        return x * 2
+
+class DerivedModel(BaseModel):
+    @torch.jit.script_method
+    def forward(self, x):
+        result = self.base_forward(x)
+        return result + 1
+</pre>
+<h3>Documentation</h3>
+<ul>
+  <li> TorchScript Language Reference - <a href="https://pytorch.org/docs/stable/jit_language_reference.html">Official documentation on TorchScript
+  language features and limitations</a> </li>
+  <li> TorchScript Unsupported Features - <a href="https://pytorch.org/docs/stable/jit_unsupported.html">List of Python features not supported in
+  TorchScript</a> </li>
+  <li> PyTorch JIT Tutorial - <a href="https://pytorch.org/tutorials/beginner/Intro_to_TorchScript_tutorial.html">Introduction to TorchScript and best
+  practices</a> </li>
+</ul>
+

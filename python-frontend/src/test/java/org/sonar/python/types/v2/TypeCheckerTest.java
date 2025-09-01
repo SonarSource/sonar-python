@@ -432,6 +432,24 @@ class TypeCheckerTest {
     assertThat(localTypeChecker.typeCheckBuilder().isSubtypeOf("my_package.unknown.Other").check(bType)).isEqualTo(TriBool.UNKNOWN);
     assertThat(localTypeChecker.typeCheckBuilder().isSubtypeOf("my_package.lib.LibClass").check(bType)).isEqualTo(TriBool.FALSE);
     assertThat(localTypeChecker.typeCheckBuilder().isSubtypeOf("my_package.lib.UnresolvedLibClass").check(bType)).isEqualTo(TriBool.UNKNOWN);
+  }
 
+  @Test
+  void isSubtypeOfUnresolvedTest() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+    PythonFile modFile = PythonTestUtils.pythonFile("mod.py");
+    String input = """
+      from unknown import UnresolvedBase
+      class A(UnresolvedBase): ...
+      A
+      """;
+    var modFileInput = parseWithoutSymbols(input);
+    projectLevelSymbolTable.addModule(modFileInput, "my_package", modFile);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+
+    var aType = ((ExpressionStatement) modFileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    TypeChecker checker = new TypeChecker(projectLevelTypeTable);
+    TypeCheckBuilder subtypeOf = checker.typeCheckBuilder().isSubtypeOf("unknown.UnresolvedBase");
+    assertThat(subtypeOf.check(aType).isTrue()).isTrue();
   }
 }

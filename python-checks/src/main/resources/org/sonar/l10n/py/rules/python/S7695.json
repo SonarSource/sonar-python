@@ -1,0 +1,26 @@
+{
+  "title": "\"super()\" calls should not be used in TorchScript methods",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30 min"
+  },
+  "tags": [
+    "pytorch",
+    "torchscript",
+    "deployment"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-7695",
+  "sqKey": "S7695",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "BLOCKER"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
