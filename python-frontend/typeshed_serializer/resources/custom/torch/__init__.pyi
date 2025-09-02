@@ -33,8 +33,7 @@ def tensor(
 
 
 def empty(
-    size: Union[int, Sequence[int]],
-    *,
+    *size: int,
     dtype: Optional[dtype] = ...,
     layout: Optional[layout] = ...,
     device: Optional[Union[str, device]] = ...,
@@ -43,8 +42,7 @@ def empty(
 ) -> Tensor: ...
 
 def zeros(
-    size: Union[int, Sequence[int]],
-    *,
+    *size: int,
     dtype: Optional[dtype] = ...,
     layout: Optional[layout] = ...,
     device: Optional[Union[str, device]] = ...,
@@ -53,8 +51,7 @@ def zeros(
 ) -> Tensor: ...
 
 def ones(
-    size: Union[int, Sequence[int]],
-    *,
+    *size: int,
     dtype: Optional[dtype] = ...,
     layout: Optional[layout] = ...,
     device: Optional[Union[str, device]] = ...,
