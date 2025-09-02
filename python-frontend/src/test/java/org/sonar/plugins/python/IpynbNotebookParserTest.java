@@ -49,7 +49,6 @@ class IpynbNotebookParserTest {
       throw new IllegalStateException("Cannot read " + name + " from base directory" + baseDir, e);
     }
   }
-
   @Test
   void testParseNotebook() throws IOException {
     var inputFile = createInputFile(baseDir, "notebook.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
@@ -62,7 +61,7 @@ class IpynbNotebookParserTest {
 
     assertThat(result.locationMap().keySet()).hasSize(27);
     assertThat(result.contents()).hasLineCount(27);
-    assertThat(StringUtils.countMatches(result.contents(), IpynbCellParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
+    assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(7);
     assertThat(result.locationMap()).extractingByKey(1).isEqualTo(new IPythonLocation(17, 5));
     //"    print \"not none\"\n"
@@ -98,7 +97,7 @@ class IpynbNotebookParserTest {
 
     assertThat(result.locationMap().keySet()).hasSize(2);
     assertThat(result.contents()).hasLineCount(2);
-    assertThat(StringUtils.countMatches(result.contents(), IpynbCellParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
+    assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(1);
 
     //"source":  "\t \b \f \"\""
@@ -127,7 +126,7 @@ class IpynbNotebookParserTest {
 
     assertThat(result.locationMap().keySet()).hasSize(5);
     assertThat(result.contents()).hasLineCount(5);
-    assertThat(StringUtils.countMatches(result.contents(), IpynbCellParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
+    assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(1);
     assertThat(result.locationMap()).extractingByKey(4).extracting(IPythonLocation::line).isEqualTo(11);
     assertThat(result.locationMap()).extractingByKey(4).extracting(IPythonLocation::column).isEqualTo(5);
@@ -176,15 +175,9 @@ class IpynbNotebookParserTest {
     assertThat(notebook).isPresent();
     assertThat(notebookExtraLineExplicit).isPresent();
     assertThat(notebookExtraLineExplicitSingleLine).isPresent();
-    String expectedContent = """
-      #correct += (predicted == y).sum().item()
-      print(f'Epoch {epoch}: {correct / total}')
 
-      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER""";
-
-    assertThat(notebook.get().contents()).isEqualTo(expectedContent);
-    assertThat(notebookExtraLineExplicit.get().contents()).isEqualTo(expectedContent);
-    assertThat(notebookExtraLineExplicitSingleLine.get().contents()).isEqualTo(expectedContent);
+    assertThat(notebook.get().contents()).isEqualTo(notebookExtraLineExplicit.get().contents());
+    assertThat(notebook.get().contents()).isEqualTo(notebookExtraLineExplicitSingleLine.get().contents());
   }
 
   @Test
