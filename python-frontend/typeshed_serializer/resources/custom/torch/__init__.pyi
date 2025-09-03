@@ -110,3 +110,29 @@ def eye(
     requires_grad: bool = ...,
     pin_memory: bool = ...,
 ) -> Tensor: ...
+
+# --- Mathematical Functions ---
+
+def log(
+    input: Tensor,
+    *,
+    out: Optional[Tensor] = ...,
+) -> Tensor: ...
+
+def exp(
+    input: Tensor,
+    *,
+    out: Optional[Tensor] = ...,
+) -> Tensor: ...
+
+def log1p(
+    input: Tensor,
+    *,
+    out: Optional[Tensor] = ...,
+) -> Tensor: ...
+
+def expm1(
+    input: Tensor,
+    *,
+    out: Optional[Tensor] = ...,
+) -> Tensor: ...
