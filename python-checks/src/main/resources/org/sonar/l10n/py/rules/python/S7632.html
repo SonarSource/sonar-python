@@ -16,8 +16,9 @@ reduces confidence in the analysis results.</p>
 <ul>
   <li> Use <code># NOSONAR</code> alone to suppress all issues on the line </li>
   <li> Use <code># NOSONAR()</code> with empty parentheses to suppress all issues </li>
-  <li> Use <code># NOSONAR(rule1, rule2)</code> to suppress specific rules </li>
+  <li> Use <code># NOSONAR(ruleKey1, ruleKey2)</code> to suppress specific rules </li>
   <li> Don’t use redundant commas in the parentheses, e.g. <code># NOSONAR(,)</code> </li>
+  <li> The rule keys should only consist of alphanumeric characters, like <code>S7632</code> or <code>NoSonar</code> </li>
   <li> Close all parentheses properly </li>
 </ul>
 <p>For <code># noqa</code>:</p>
@@ -34,8 +35,9 @@ def example():
     x = 1  # NOSONAR(  # Noncompliant
     y = 2  # NOSONAR(a,)  # Noncompliant
     z = 3  # NOSONAR)(  # Noncompliant
-    a = 4  # noqa: ,rule1  # Noncompliant
-    b = 5  # noqa- rule1,rule2  # Noncompliant
+    a = 4  # NOSONAR(python:S7632)  # Noncompliant
+    b = 5  # noqa: ,rule1  # Noncompliant
+    c = 6  # noqa- rule1,rule2  # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
@@ -43,8 +45,9 @@ def example():
     x = 1  # NOSONAR
     y = 2  # NOSONAR(a)
     z = 3  # NOSONAR
-    a = 4  # noqa: rule1
-    b = 5  # noqa: rule1,rule2
+    a = 4  # NOSONAR(S7632)
+    b = 5  # noqa: rule1
+    c = 6  # noqa: rule1,rule2
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
