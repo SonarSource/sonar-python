@@ -32,6 +32,7 @@ import org.sonar.api.batch.sensor.SensorContext;
 public abstract class Scanner {
   private static final Logger LOG = LoggerFactory.getLogger(Scanner.class);
   private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
+  public static final String THREADS_PROPERTY_NAME = "sonar.python.analysis.threads";
   protected final SensorContext context;
 
   protected Scanner(SensorContext context) {
@@ -141,6 +142,16 @@ public abstract class Scanner {
     return e instanceof RecognitionException && file.wrappedFile().type() == InputFile.Type.TEST;
   }
 
-  protected abstract int getNumberOfThreads(SensorContext context);
+  protected int getNumberOfThreads(SensorContext context) {
+    int minNumOfThreads = 1;
+    int maxNumOfThreads = 6;
+    int availableProcessors = (int) Math.round(Runtime.getRuntime().availableProcessors() * 0.9);
+
+    // Disabling parallelization if threads property is not setup properly
+    return context.config()
+      .getInt(THREADS_PROPERTY_NAME)
+      .map(threads -> threads < 1 ? 1 : threads)
+      .orElse(Math.max(minNumOfThreads, Math.min(availableProcessors, maxNumOfThreads)));
+  }
 
 }

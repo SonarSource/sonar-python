@@ -62,7 +62,6 @@ public class PythonScanner extends Scanner {
 
   private static final Logger LOG = LoggerFactory.getLogger(PythonScanner.class);
   private static final Pattern DATABRICKS_MAGIC_COMMAND_PATTERN = Pattern.compile("^\\h*#\\h*(MAGIC|COMMAND).*");
-  public static final String THREADS_PROPERTY_NAME = "sonar.python.analysis.threads";
   private static final String ARCHITECTURE_CALLBACK_LOCK_KEY = "architectureCallbackLock";
 
   private final Supplier<PythonParser> parserSupplier;
@@ -117,7 +116,7 @@ public class PythonScanner extends Scanner {
   protected void scanFile(PythonInputFile inputFile) throws IOException {
     var pythonFile = SonarQubePythonFile.create(inputFile);
     InputFile.Type fileType = inputFile.wrappedFile().type();
-    PythonVisitorContext visitorContext = createVisitorContext(inputFile, pythonFile, fileType);
+    PythonVisitorContext visitorContext = createVisitorContext(inputFile, pythonFile);
 
     executeChecks(visitorContext, checks.sonarPythonChecks(), fileType, inputFile);
     executeOtherChecks(inputFile, visitorContext, fileType);
@@ -144,7 +143,7 @@ public class PythonScanner extends Scanner {
     searchForDataBricks(visitorContext);
   }
 
-  private PythonVisitorContext createVisitorContext(PythonInputFile inputFile, PythonFile pythonFile, InputFile.Type fileType) throws IOException {
+  private PythonVisitorContext createVisitorContext(PythonInputFile inputFile, PythonFile pythonFile) throws IOException {
     PythonVisitorContext visitorContext;
     try {
       AstNode astNode = parserSupplier.get().parse(inputFile.contents());
@@ -354,12 +353,6 @@ public class PythonScanner extends Scanner {
 
   public boolean getFoundDatabricks() {
     return foundDatabricks.get();
-  }
-
-  @Override
-  protected int getNumberOfThreads(SensorContext context) {
-    return context.config().getInt(THREADS_PROPERTY_NAME)
-      .orElse(1);
   }
 
   private void runLockedByRepository(String repositoryKey, Runnable runnable) {

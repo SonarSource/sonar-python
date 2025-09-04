@@ -161,7 +161,6 @@ public abstract class PythonIndexer {
   public abstract CacheContext cacheContext();
 
   class GlobalSymbolsScanner extends Scanner {
-    private static final String THREADS_PROPERTY_NAME = "sonar.python.symbols.threads";
     protected GlobalSymbolsScanner(SensorContext context) {
       super(context);
     }
@@ -184,12 +183,6 @@ public abstract class PythonIndexer {
       if (inputFile.kind() == PythonInputFile.Kind.PYTHON) {
         addFile(inputFile);
       }
-    }
-
-    @Override
-    protected int getNumberOfThreads(SensorContext context) {
-      return context.config().getInt(THREADS_PROPERTY_NAME)
-        .orElse(Math.max(2, Math.min((int) Math.round(Runtime.getRuntime().availableProcessors() * 0.9), 6)));
     }
 
     @Override

@@ -83,7 +83,7 @@ class SonarQubePythonIndexerTest {
     Path workDir = Files.createTempDirectory("workDir");
     context.fileSystem().setWorkDir(workDir);
     context.settings().setProperty("sonar.python.skipUnchanged", true);
-    context.settings().setProperty("sonar.python.symbols.threads", 2);
+    context.settings().setProperty("sonar.python.analysis.threads", 2);
 
     writeCache = new TestWriteCache();
     readCache = new TestReadCache();
@@ -480,7 +480,7 @@ class SonarQubePythonIndexerTest {
   @Test
   void test_sensor_single_thread() throws IOException {
     var contextSingleThread = SensorContextTester.create(baseDir);
-    contextSingleThread.settings().setProperty("sonar.python.symbols.threads", 1);
+    contextSingleThread.settings().setProperty("sonar.python.analysis.threads", 1);
     contextSingleThread.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
 
     var inputFiles = List.of(createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN));
@@ -488,8 +488,6 @@ class SonarQubePythonIndexerTest {
     indexer.buildOnce(contextSingleThread);
 
     assertThat(indexer.projectLevelSymbolTable().getSymbolsFromModule("main")).isNotEmpty();
-
-
   }
 
   private byte[] importsAsByteArray(List<String> mod) {
