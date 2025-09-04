@@ -74,7 +74,6 @@ class ScannerTest {
   @Test
   void testGetNumberOfThreads_whenPropertySetToValidValue_shouldReturnConfiguredValue() {
     when(configuration.getInt("sonar.python.analysis.threads")).thenReturn(Optional.of(4));
-
     int numberOfThreads = scanner.getNumberOfThreads(context);
     assertThat(numberOfThreads).isEqualTo(4);
   }
@@ -86,5 +85,27 @@ class ScannerTest {
 
     int numberOfThreads = scanner.getNumberOfThreads(context);
     assertThat(numberOfThreads).isEqualTo(1);
+  }
+
+  @Test
+  void testGetNumberOfThreads_whenParallelPropertyIsFalse_shouldReturnOne() {
+    when(configuration.getInt("sonar.python.analysis.threads")).thenReturn(Optional.of(4));
+    when(configuration.getBoolean("sonar.python.analysis.parallel")).thenReturn(Optional.of(false));
+
+    int numberOfThreads = scanner.getNumberOfThreads(context);
+    assertThat(numberOfThreads).isEqualTo(1);
+  }
+
+  @Test
+  void testGetNumberOfThreads_whenParallelPropertyIsTrueOrNotSet_shouldReturnConfiguredValue() {
+    when(configuration.getInt("sonar.python.analysis.threads")).thenReturn(Optional.of(4));
+    when(configuration.getBoolean("sonar.python.analysis.parallel")).thenReturn(Optional.empty());
+    int numberOfThreads = scanner.getNumberOfThreads(context);
+    assertThat(numberOfThreads).isEqualTo(4);
+
+    when(configuration.getBoolean("sonar.python.analysis.parallel")).thenReturn(Optional.of(true));
+    numberOfThreads = scanner.getNumberOfThreads(context);
+    assertThat(numberOfThreads).isEqualTo(4);
+
   }
 }

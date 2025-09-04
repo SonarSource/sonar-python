@@ -32,7 +32,9 @@ import org.sonar.api.batch.sensor.SensorContext;
 public abstract class Scanner {
   private static final Logger LOG = LoggerFactory.getLogger(Scanner.class);
   private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
+  private static final int MAX_NUMBER_OF_THREADS = 6;
   public static final String THREADS_PROPERTY_NAME = "sonar.python.analysis.threads";
+  public static final String PARALLEL_PROPERTY_NAME = "sonar.python.analysis.parallel";
   protected final SensorContext context;
 
   protected Scanner(SensorContext context) {
@@ -65,8 +67,7 @@ public abstract class Scanner {
       var allTasks = CompletableFuture.allOf(
         files.stream()
           .map(file -> CompletableFuture.runAsync(() -> processFile(context, file, progressReport, numScannedWithoutParsing), executor))
-          .toArray(CompletableFuture[]::new)
-      );
+          .toArray(CompletableFuture[]::new));
       allTasks.join();
     } catch (CompletionException e) {
       var cause = e.getCause();
@@ -143,15 +144,18 @@ public abstract class Scanner {
   }
 
   protected int getNumberOfThreads(SensorContext context) {
-    int minNumOfThreads = 1;
-    int maxNumOfThreads = 6;
-    int availableProcessors = (int) Math.round(Runtime.getRuntime().availableProcessors() * 0.9);
+    boolean isParallelizationEnabled = context.config().getBoolean(PARALLEL_PROPERTY_NAME).orElse(true);
+    if (isParallelizationEnabled) {
+      int minNumOfThreads = 1;
+      int availableProcessors = (int) Math.round(Runtime.getRuntime().availableProcessors() * 0.9);
 
-    // Disabling parallelization if threads property is not setup properly
-    return context.config()
-      .getInt(THREADS_PROPERTY_NAME)
-      .map(threads -> threads < 1 ? 1 : threads)
-      .orElse(Math.max(minNumOfThreads, Math.min(availableProcessors, maxNumOfThreads)));
+      // Disabling parallelization if threads property is not setup properly
+      return context.config()
+        .getInt(THREADS_PROPERTY_NAME)
+        .map(threads -> threads < 1 ? 1 : threads)
+        .orElse(Math.max(minNumOfThreads, Math.min(availableProcessors, MAX_NUMBER_OF_THREADS)));
+    }
+    return 1;
   }
 
 }
