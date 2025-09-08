@@ -28,7 +28,13 @@ public enum TelemetryMetricKey {
   PYTHON_DEPENDENCIES("python.dependencies"),
   PYTHON_DEPENDENCIES_FORMAT_VERSION("python.dependencies.format_version"),
   NOSONAR_RULE_ID_KEYS("python.nosonar.rule_ids"),
-  NOSONAR_COMMENTS_KEYS("python.nosonar.comments");
+  NOSONAR_COMMENTS_KEYS("python.nosonar.comments"),
+  ANALYSIS_THREADS_PARAM_KEY("python.analysis.threads.parameter"),
+  ANALYSIS_THREADS_KEY("python.analysis.threads.actual"),
+  PARALLEL_ANALYSIS_KEY("python.analysis.parallel"),
+  ANALYSIS_DURATION_KEY("python.analysis.duration"),
+  NOTEBOOKS_ANALYSIS_DURATION_KEY("python.notebooks.analysis.duration"),
+  PYTHON_NUMBER_OF_FILES_KEY("python.files.count");
 
   private final String key;
 

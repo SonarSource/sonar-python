@@ -116,6 +116,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -1555,6 +1557,55 @@ class PythonSensorTest {
     var spyContext = spy(context);
     sensor().execute(spyContext);
     verify(spyContext, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_DATABRICKS_FOUND.key(), "0");
+  }
+
+  @Test
+  void send_telemetry_threads_and_files() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    inputFile(FILE_1);
+    inputFile(FILE_2);
+
+    context.setSettings(new MapSettings()
+      .setProperty("sonar.python.analysis.threads", "2")
+      .setProperty("sonar.python.analysis.parallel", true)
+    );
+    var contextSpy = spy(context);
+    PythonSensor sensor = sensor();
+    sensor.execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.ANALYSIS_THREADS_PARAM_KEY.key(), "2");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PARALLEL_ANALYSIS_KEY.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_NUMBER_OF_FILES_KEY.key(), "2");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(eq(TelemetryMetricKey.ANALYSIS_DURATION_KEY.key()), anyString());
+  }
+
+  @Test
+  void send_telemetry_threads_disabled() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    inputFile(FILE_1);
+    inputFile(FILE_2);
+
+    context.setSettings(new MapSettings()
+      .setProperty("sonar.python.analysis.threads", "2")
+      .setProperty("sonar.python.analysis.parallel", false)
+    );
+    var contextSpy = spy(context);
+    PythonSensor sensor = sensor();
+    sensor.execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.ANALYSIS_THREADS_PARAM_KEY.key(), "2");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.ANALYSIS_THREADS_KEY.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PARALLEL_ANALYSIS_KEY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_NUMBER_OF_FILES_KEY.key(), "2");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(eq(TelemetryMetricKey.ANALYSIS_DURATION_KEY.key()), anyString());
   }
 
   private com.sonar.sslr.api.Token passToken(URI uri) {

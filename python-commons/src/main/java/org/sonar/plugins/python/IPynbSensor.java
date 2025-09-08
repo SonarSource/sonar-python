@@ -16,6 +16,8 @@
  */
 package org.sonar.plugins.python;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -107,6 +109,7 @@ public final class IPynbSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
+    Instant sensorStartTime = Instant.now();
     List<PythonInputFile> pythonFiles = getInputFiles(context);
     var pythonVersions = context.config().getStringArray(PYTHON_VERSION_KEY);
     if (pythonVersions.length != 0) {
@@ -118,6 +121,8 @@ public final class IPynbSensor implements Sensor {
       scanner.execute(pythonFiles, context);
     } else {
       processNotebooksFiles(pythonFiles, context);
+      Duration sensorTime = Duration.between(sensorStartTime, Instant.now());
+      sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOKS_ANALYSIS_DURATION_KEY, sensorTime.getSeconds());
     }
 
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEYS, noSonarLineInfoCollector.getSuppressedRuleIds());

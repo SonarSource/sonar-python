@@ -51,7 +51,7 @@ public class SensorTelemetryStorage {
     data.put(key, value);
   }
 
-  public void updateMetric(TelemetryMetricKey key, int value) {
+  public void updateMetric(TelemetryMetricKey key, Number value) {
     data.put(key, String.valueOf(value));
   }
 

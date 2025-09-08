@@ -17,6 +17,8 @@
 package org.sonar.plugins.python;
 
 import java.io.File;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -55,6 +57,8 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.types.TypeShed;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
+import static org.sonar.plugins.python.PythonScanner.THREADS_PROPERTY_NAME;
+import static org.sonar.plugins.python.Scanner.PARALLEL_PROPERTY_NAME;
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
 
 @DependedUpon(value = "org.sonar.plugins.python.PythonSensor_before_com.sonarsource.dbd.SonarLintPythonBugDetectionSensor")
@@ -126,6 +130,7 @@ public final class PythonSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
+    Instant sensorStartTime = Instant.now();
     PerformanceMeasure.Duration durationReport = createPerformanceMeasureReport(context);
     List<PythonInputFile> pythonFiles = getInputFiles(context);
     String[] pythonVersionParameter = context.config().getStringArray(PYTHON_VERSION_KEY);
@@ -144,11 +149,21 @@ public final class PythonSensor implements Sensor {
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::create,
       pythonIndexer, architectureCallback, noSonarLineInfoCollector);
     scanner.execute(pythonFiles, context);
+    Duration sensorTime = Duration.between(sensorStartTime, Instant.now());
 
     updateDatabricksTelemetry(scanner);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEYS, noSonarLineInfoCollector.getSuppressedRuleIds());
+    updatePerformanceTelemetry(context, pythonFiles, scanner, sensorTime);
     sensorTelemetryStorage.send(context);
     durationReport.stop();
+  }
+
+  private void updatePerformanceTelemetry(SensorContext context, List<PythonInputFile> pythonFiles, PythonScanner scanner, Duration sensorTime) {
+    context.config().getInt(THREADS_PROPERTY_NAME).ifPresent(v -> sensorTelemetryStorage.updateMetric(TelemetryMetricKey.ANALYSIS_THREADS_PARAM_KEY, v));
+    context.config().getBoolean(PARALLEL_PROPERTY_NAME).ifPresent(v -> sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PARALLEL_ANALYSIS_KEY, v));
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_NUMBER_OF_FILES_KEY, pythonFiles.size());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.ANALYSIS_THREADS_KEY, scanner.getNumberOfThreads(context));
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.ANALYSIS_DURATION_KEY, sensorTime.toSeconds());
   }
 
   private static List<PythonInputFile> getInputFiles(SensorContext context) {

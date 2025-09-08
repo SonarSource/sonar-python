@@ -59,6 +59,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -235,6 +237,7 @@ class IPynbSensorTest {
     verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "0");
     verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
     verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
+    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(eq(TelemetryMetricKey.NOTEBOOKS_ANALYSIS_DURATION_KEY.key()), anyString());
   }
 
   @Test
