@@ -24,6 +24,10 @@
     <tag>HEAD</tag>
   </scm>
 
+  <properties>
+    <licenseDirectoryUri>${project.baseUri}/../license-resources</licenseDirectoryUri>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.sonarsource.api.plugin</groupId>
@@ -132,6 +136,134 @@
           </archive>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>2.6.0</version>
+        <configuration>
+          <errorRemedy>failFast</errorRemedy>
+          <writeVersions>false</writeVersions>
+          <socketTimeout>20000</socketTimeout>
+          <licensesOutputDirectory>${project.basedir}/src/main/resources/licenses/THIRD_PARTY_LICENSES</licensesOutputDirectory>
+          <licensesOutputFile>${project.build.directory}/licenses.xml</licensesOutputFile>
+          <organizeLicensesByDependencies>true</organizeLicensesByDependencies>
+          <excludedGroups>com.sonarsource|org.sonarsource.python|org.sonarsource.analyzer-commons|org.sonarsource.sslr|jaxen</excludedGroups>
+          <licenseUrlReplacements>
+            <licenseUrlReplacement>
+              <regexp>https://asm.ow2.io/license.html</regexp>
+              <replacement>${licenseDirectoryUri}/asm_ow2_bsd.txt</replacement>
+            </licenseUrlReplacement>
+            <licenseUrlReplacement>
+              <regexp>http://www.opensource.org/licenses/bsd-license.php</regexp>
+              <replacement>${licenseDirectoryUri}/bsd2_clause.txt</replacement>
+            </licenseUrlReplacement>
+            <licenseUrlReplacement>
+              <regexp>https://opensource.org/licenses/BSD-3-Clause</regexp>
+              <replacement>${licenseDirectoryUri}/bsd3_clause.txt</replacement>
+            </licenseUrlReplacement>
+            <licenseUrlReplacement>
+              <regexp>http://www.saxproject.org/copying.html</regexp>
+              <replacement>${licenseDirectoryUri}/sax.txt</replacement>
+            </licenseUrlReplacement>
+          </licenseUrlReplacements>
+          <licenseUrlFileNameSanitizers>
+            <LicenseUrlReplacement>
+              <regexp>.txt</regexp>
+            </LicenseUrlReplacement>
+            <!--                 Append .txt -->
+            <LicenseUrlReplacement>
+              <regexp>$</regexp>
+              <replacement>.txt</replacement>
+            </LicenseUrlReplacement>
+          </licenseUrlFileNameSanitizers>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <id>download-licenses</id>
+            <goals>
+              <goal>download-licenses</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.3.1</version>
+        <executions>
+          <execution>
+            <id>copy-main-license</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>..</directory>
+                  <includes>
+                    <include>LICENSE.txt</include>
+                  </includes>
+                </resource>
+              </resources>
+              <outputDirectory>${project.basedir}/src/main/resources/licenses</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>check-license-files</id>
+            <phase>verify</phase>
+            <configuration>
+              <target>
+                <fileset id="invalid.files" dir="${project.basedir}/src/main/resources/licenses">
+                  <exclude name="**/*.txt"/>
+                  <include name="**/*"/>
+                </fileset>
+                <condition property="has.invalid.files">
+                  <resourcecount refid="invalid.files" when="greater" count="0"/>
+                </condition>
+                <fail message="There are files in ${project.build.directory}/licenses/ that do not end with .txt">
+                  <condition>
+                    <isset property="has.invalid.files"/>
+                  </condition>
+                </fail>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.0</version> <executions>
+            <execution>
+                <id>add-resource</id>
+                <phase>generate-resources</phase>
+                <goals>
+                    <goal>add-resource</goal>
+                </goals>
+                <configuration>
+                    <resources>
+                        <resource>
+                            <directory>${project.build.directory}/generated-resources</directory>
+                        </resource>
+                    </resources>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
 
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
