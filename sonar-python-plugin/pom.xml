@@ -145,7 +145,7 @@
           <errorRemedy>failFast</errorRemedy>
           <writeVersions>false</writeVersions>
           <socketTimeout>20000</socketTimeout>
-          <licensesOutputDirectory>${project.basedir}/src/main/resources/licenses/THIRD_PARTY_LICENSES</licensesOutputDirectory>
+          <licensesOutputDirectory>${project.build.directory}/temp-licenses/THIRD_PARTY_LICENSES</licensesOutputDirectory>
           <licensesOutputFile>${project.build.directory}/licenses.xml</licensesOutputFile>
           <organizeLicensesByDependencies>true</organizeLicensesByDependencies>
           <excludedGroups>com.sonarsource|org.sonarsource.python|org.sonarsource.analyzer-commons|org.sonarsource.sslr|jaxen</excludedGroups>
@@ -208,62 +208,36 @@
                   </includes>
                 </resource>
               </resources>
-              <outputDirectory>${project.basedir}/src/main/resources/licenses</outputDirectory>
+              <outputDirectory>${project.build.directory}/temp-licenses</outputDirectory>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>3.1.0</version>
-        <executions>
-          <execution>
-            <id>check-license-files</id>
-            <phase>verify</phase>
-            <configuration>
-              <target>
-                <fileset id="invalid.files" dir="${project.basedir}/src/main/resources/licenses">
-                  <exclude name="**/*.txt"/>
-                  <include name="**/*"/>
-                </fileset>
-                <condition property="has.invalid.files">
-                  <resourcecount refid="invalid.files" when="greater" count="0"/>
-                </condition>
-                <fail message="There are files in ${project.build.directory}/licenses/ that do not end with .txt">
-                  <condition>
-                    <isset property="has.invalid.files"/>
-                  </condition>
-                </fail>
-              </target>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
           </execution>
         </executions>
       </plugin>
 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.6.0</version> <executions>
-            <execution>
-                <id>add-resource</id>
-                <phase>generate-resources</phase>
-                <goals>
-                    <goal>add-resource</goal>
-                </goals>
-                <configuration>
-                    <resources>
-                        <resource>
-                            <directory>${project.build.directory}/generated-resources</directory>
-                        </resource>
-                    </resources>
-                </configuration>
-            </execution>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.1</version>
+        <executions>
+          <execution>
+            <id>validate-license-files</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <skip>${skipLicenseValidation}</skip>
+              <executable>python</executable>
+              <arguments>
+                <argument>${project.basedir}/../tools/validate_licenses.py</argument>
+                <argument>--temp_licenses=${project.build.directory}/temp-licenses</argument>
+                <argument>--committed_licenses=${project.basedir}/src/main/resources/licenses</argument>
+              </arguments>
+              <useMavenLogger>true</useMavenLogger>
+            </configuration>
+          </execution>
         </executions>
-    </plugin>
+      </plugin>
 
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
@@ -328,5 +302,73 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>updateLicenses</id>
+      <build>
+        <plugins>
+          <!-- Clean existing licenses before regenerating -->
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <!-- Clean licenses directory first -->
+              <execution>
+                <id>clean-licenses</id>
+                <phase>initialize</phase>
+                <configuration>
+                  <target>
+                    <echo message="Cleaning existing license files before regeneration..."/>
+                    <delete dir="${project.basedir}/src/main/resources/licenses" failonerror="false"/>
+                    <mkdir dir="${project.basedir}/src/main/resources/licenses"/>
+                  </target>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- Disable license validation when updating -->
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>validate-license-files</id>
+                <phase>none</phase>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- Override license-maven-plugin to write to actual resource directory -->
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <configuration>
+              <!-- Override to write directly to resources when updating -->
+              <licensesOutputDirectory>${project.basedir}/src/main/resources/licenses/THIRD_PARTY_LICENSES</licensesOutputDirectory>
+            </configuration>
+          </plugin>
+
+          <!-- Override maven-resources-plugin to write to actual resource directory -->
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-main-license</id>
+                <configuration>
+                  <!-- Override to write directly to resources when updating -->
+                  <outputDirectory>${project.basedir}/src/main/resources/licenses</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
