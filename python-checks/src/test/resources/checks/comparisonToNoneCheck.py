@@ -1,4 +1,6 @@
+from typing import Any, Tuple, Dict
 import pydoc
+
 def identity_check(param):
     a = None
     b = 42
@@ -50,3 +52,10 @@ def equality_check(param):
     if obj == None: pass # FN
     if None == obj: pass # FN
 
+def kwargs_any(*args: Any, **some_dict:Any):
+    if args is not None: ...
+    if some_dict is not None: ...
+
+def kwargs(*some_args: Any, **kwargs: Any):
+    if kwargs is not None: ...
+    if some_args is not None: ...

@@ -19,12 +19,17 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IsExpression;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.utils.CheckUtils.isNone;
 
@@ -54,8 +59,12 @@ public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
   private static void checkIdentityComparison(SubscriptionContext ctx, IsExpression comparison) {
     InferredType left = comparison.leftOperand().type();
     InferredType right = comparison.rightOperand().type();
+
     // `isObject` Removes FP when the return type of a function is an object
-    if (!left.isIdentityComparableWith(right) && (isNone(left) || isNone(right)) && !(isObject(left) || isObject(right))) {
+    // `isArgsOrKwargs` Removes FP when *args or **kwargs are used as their type are tuple and dict when type hinted with `Any`.
+    var isIdentityComparableWith = left.isIdentityComparableWith(right);
+    var isOperandArgsOrKwargs = isArgsOrKwargs(comparison.leftOperand()) || isArgsOrKwargs(comparison.rightOperand());
+    if (!isIdentityComparableWith && (isNone(left) || isNone(right)) && !(isObject(left) || isObject(right)) && !isOperandArgsOrKwargs) {
       addIssue(ctx, comparison, "identity check", comparison.notToken() != null);
     } else if (isNone(left) && isNone(right)) {
       addIssue(ctx, comparison, "identity check", comparison.notToken() == null);
@@ -75,4 +84,12 @@ public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
     return type.canOnlyBe(BuiltinTypes.OBJECT_TYPE);
   }
 
+  private static boolean isArgsOrKwargs(Expression expr) {
+    return TreeUtils.getSymbolFromTree(expr).map(Symbol::usages)
+      .map(usages -> usages.stream().anyMatch(ComparisonToNoneCheck::isUsedAsArgsOrKwargs)).orElse(false);
+  }
+
+  private static boolean isUsedAsArgsOrKwargs(Usage usage) {
+    return usage.tree().parent() instanceof Parameter parameter && parameter.starToken() != null;
+  }
 }
