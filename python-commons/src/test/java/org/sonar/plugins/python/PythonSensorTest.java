@@ -142,6 +142,7 @@ class PythonSensorTest {
   private static final String FILE_QUICKFIX = "file_quickfix.py";
   private static final String FILE_TEST_FILE = "test_file.py";
   private static final String FILE_INVALID_SYNTAX = "invalid_syntax.py";
+  private static final String FILE_NO_SONAR_PY = "no_sonar.py";
   private static final String ONE_STATEMENT_PER_LINE_RULE_KEY = "OneStatementPerLine";
   private static final String FILE_COMPLEXITY_RULE_KEY = "FileComplexity";
   private static final String CUSTOM_REPOSITORY_KEY = "customKey";
@@ -1606,6 +1607,23 @@ class PythonSensorTest {
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PARALLEL_ANALYSIS_KEY.key(), "0");
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_NUMBER_OF_FILES_KEY.key(), "2");
     verify(contextSpy, Mockito.times(1)).addTelemetryProperty(eq(TelemetryMetricKey.ANALYSIS_DURATION_KEY.key()), anyString());
+  }
+
+  @Test
+  void send_telemetry_with_nosonar_info() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S1234"))
+        .build())
+      .build();
+
+    inputFile(FILE_NO_SONAR_PY);
+
+    PythonSensor sensor = sensor();
+    var contextSpy = spy(context);
+    sensor.execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOSONAR_RULE_ID_KEY.key(), "S4321");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOSONAR_COMMENTS_KEY.key(), "S4321:comment");
   }
 
   private com.sonar.sslr.api.Token passToken(URI uri) {

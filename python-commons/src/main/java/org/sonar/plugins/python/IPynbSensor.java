@@ -125,8 +125,8 @@ public final class IPynbSensor implements Sensor {
       sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOKS_ANALYSIS_DURATION_KEY, sensorTime.getSeconds());
     }
 
-    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEYS, noSonarLineInfoCollector.getSuppressedRuleIds());
-    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_COMMENTS_KEYS, noSonarLineInfoCollector.getCommentWithExactlyOneRuleSuppressed());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_NOTEBOOK_RULE_ID_KEY, noSonarLineInfoCollector.getSuppressedRuleIds());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_NOTEBOOK_COMMENTS_KEY, noSonarLineInfoCollector.getCommentWithExactlyOneRuleSuppressed());
 
     sensorTelemetryStorage.send(context);
   }

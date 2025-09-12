@@ -63,6 +63,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -74,6 +75,7 @@ class IPynbSensorTest {
 
   private static final String FILE_1 = "file1.ipynb";
   private static final String NOTEBOOK_FILE = "notebook.ipynb";
+  private static final String FILE_NO_SONAR_IPYNB = "no_sonar.ipynb";
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/ipynb/").getAbsoluteFile();
 
@@ -263,5 +265,22 @@ class IPynbSensorTest {
     verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "1");
     verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
     verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
+  }
+
+  @Test
+  void test_notebook_sensor_telemetry_with_nosonar_info() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S4321"))
+        .build())
+      .build();
+
+    inputFile(FILE_NO_SONAR_IPYNB);
+
+    var sensor = notebookSensor();
+    var contextSpy = spy(context);
+    sensor.execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOSONAR_NOTEBOOK_RULE_ID_KEY.key(), "S4321");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOSONAR_NOTEBOOK_COMMENTS_KEY.key(), "S4321:comment");
   }
 }

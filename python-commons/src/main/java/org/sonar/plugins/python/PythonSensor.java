@@ -152,7 +152,8 @@ public final class PythonSensor implements Sensor {
     Duration sensorTime = Duration.between(sensorStartTime, Instant.now());
 
     updateDatabricksTelemetry(scanner);
-    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEYS, noSonarLineInfoCollector.getSuppressedRuleIds());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEY, noSonarLineInfoCollector.getSuppressedRuleIds());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_COMMENTS_KEY, noSonarLineInfoCollector.getCommentWithExactlyOneRuleSuppressed());
     updatePerformanceTelemetry(context, pythonFiles, scanner, sensorTime);
     sensorTelemetryStorage.send(context);
     durationReport.stop();
