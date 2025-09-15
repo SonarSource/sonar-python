@@ -73,6 +73,9 @@ def regular_function():
         Bucket=bucket_name, Key="data.json", ExpectedBucketOwner=None
     )
 
+    # Compliant - No bucket owner to verify against when creating a bucket
+    s3_client.create_bucket(Bucket="new-bucket")
+
 def compliant_when_wrapped(*args, **kwargs):
     s3_client.get_object(*args)
     s3_client.get_object(**kwargs)

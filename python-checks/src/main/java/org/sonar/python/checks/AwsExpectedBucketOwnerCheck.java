@@ -34,7 +34,6 @@ public class AwsExpectedBucketOwnerCheck extends PythonSubscriptionCheck {
   private static final List<String> S3_CLIENT_FQN_PREFIX = List.of("botocore.client.BaseClient", "aiobotocore.client.AioBaseClient");
   private static final List<String> S3_METHODS_REQUIRING_EXPECTED_BUCKET_OWNER = List.of(
     "copy_object",
-    "create_bucket",
     "create_bucket_metadata_configuration",
     "create_bucket_metadata_table_configuration",
     "create_multipart_upload",
