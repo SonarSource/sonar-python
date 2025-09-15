@@ -1,6 +1,6 @@
 {
   "title": "Long-term AWS access keys should not be used directly in code",
-  "type": "CODE_SMELL",
+  "type": "VULNERABILITY",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -9,16 +9,15 @@
   "tags": [
     "aws"
   ],
-  "defaultSeverity": "Major",
+  "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-7625",
   "sqKey": "S7625",
   "scope": "All",
   "quickfix": "unknown",
   "code": {
     "impacts": {
-      "MAINTAINABILITY": "HIGH",
-      "SECURITY": "HIGH"
+      "SECURITY": "BLOCKER"
     },
-    "attribute": "CONVENTIONAL"
+    "attribute": "TRUSTWORTHY"
   }
 }
