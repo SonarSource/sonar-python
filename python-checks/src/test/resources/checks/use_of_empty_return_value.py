@@ -77,3 +77,15 @@ def smth():
     self.addCleanup(sys.settrace, sys.gettrace())
     self.assertEqual(sys.gettrace(), options.tracer.globaltrace)
 
+
+def no_fp_aws_elasticloadbalancing():
+    from aws_cdk.aws_elasticloadbalancingv2 import ApplicationLoadBalancer, NetworkLoadBalancer
+
+    app_lb = ApplicationLoadBalancer()
+    net_lb = NetworkLoadBalancer()
+
+    app_listener = app_lb.add_listener(...)  # OK
+    net_listener = net_lb.add_listener(...)  # OK
+
+    print(app_listener)
+    print(net_listener)
