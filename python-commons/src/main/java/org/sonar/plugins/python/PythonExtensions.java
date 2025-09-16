@@ -54,9 +54,6 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY
 public class PythonExtensions {
 
   private static final Logger LOG = LoggerFactory.getLogger(PythonExtensions.class);
-
-  public static final String PYTHON_FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
-  public static final String IPYNB_FILE_SUFFIXES_KEY = "sonar.ipynb.file.suffixes";
   static final String PYTHON_CATEGORY = "Python";
   // Subcategories
   static final String GENERAL = "General";
@@ -249,7 +246,7 @@ public class PythonExtensions {
   }
 
   private static PropertyDefinition buildIpynbPythonSuffix() {
-    return PropertyDefinition.builder(IPYNB_FILE_SUFFIXES_KEY)
+    return PropertyDefinition.builder(PythonExtensionKeys.IPYNB_FILE_SUFFIXES_KEY)
       .index(11)
       .name("IPython File Suffixes")
       .description("List of suffixes of IPython Notebooks files to analyze.")
@@ -262,7 +259,7 @@ public class PythonExtensions {
   }
 
   private static PropertyDefinition buildPythonSuffix() {
-    return PropertyDefinition.builder(PYTHON_FILE_SUFFIXES_KEY)
+    return PropertyDefinition.builder(PythonExtensionKeys.PYTHON_FILE_SUFFIXES_KEY)
       .index(10)
       .name("File Suffixes")
       .description("List of suffixes of Python files to analyze.")

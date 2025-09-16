@@ -35,8 +35,7 @@ class PythonTest {
   @Test
   void custom_file_suffixes() {
     MapSettings settings = new MapSettings();
-    settings.setProperty(PythonExtensions.PYTHON_FILE_SUFFIXES_KEY, "py,python");
-
+    settings.setProperty(PythonExtensionKeys.PYTHON_FILE_SUFFIXES_KEY, "py,python");
     Python language = new Python(new ConfigurationBridge(settings));
     assertThat(language.getFileSuffixes()).hasSize(2).contains("python");
   }
