@@ -21,6 +21,9 @@ class Tensor(CustomStubBase):
         requires_grad: Optional[bool] = ...,
         pin_memory: bool = ...,
     ) -> "Tensor": ...
+
+    def flatten(self, start_dim: int = ..., end_dim: int = ...) -> Tensor: ...
+
 # --- Common Tensor Creation Functions ---
 
 def tensor(
@@ -136,3 +139,7 @@ def expm1(
     *,
     out: Optional[Tensor] = ...,
 ) -> Tensor: ...
+
+# --- Tensor manipulation ---
+
+def flatten(intput:Tensor, start_dim: int = ..., end_dim: int = ...) -> Tensor: ...
