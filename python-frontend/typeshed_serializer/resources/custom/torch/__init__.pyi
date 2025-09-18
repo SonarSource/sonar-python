@@ -1,7 +1,7 @@
 from SonarPythonAnalyzerFakeStub import CustomStubBase
 import torch.nn as nn
 
-from typing import Any, Optional, Sequence, Union
+from typing import Any, IO, Optional, Sequence, Union
 
 class dtype(CustomStubBase): ...
 class layout(CustomStubBase): ...
@@ -113,6 +113,23 @@ def eye(
     requires_grad: bool = ...,
     pin_memory: bool = ...,
 ) -> Tensor: ...
+
+# --- Serialization Functions ---
+
+def save(
+    obj: Any,
+    f: Union[str, IO[bytes]],
+    pickle_module: Any = ...,
+    pickle_protocol: int = ...,
+    _use_new_zipfile_serialization: bool = ...,
+) -> None: ...
+
+def load(
+    f: Union[str, IO[bytes]],
+    map_location: Optional[Union[str, device]] = ...,
+    pickle_module: Any = ...,
+    **pickle_load_args: Any
+) -> Any: ...
 
 # --- Mathematical Functions ---
 
