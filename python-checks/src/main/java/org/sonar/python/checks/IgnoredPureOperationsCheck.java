@@ -18,6 +18,7 @@ package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,6 +35,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeCheckMap;
 
 @Rule(key = "S2201")
 public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
@@ -280,9 +282,47 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     ));
   }
 
+  // PyTorch Tensor pure operations that have in-place equivalents
+  private static final List<String> PYTORCH_TENSOR_PURE_METHODS = List.of(
+    "torch.Tensor.abs",
+    "torch.Tensor.add",
+    "torch.Tensor.sub",
+    "torch.Tensor.mul",
+    "torch.Tensor.div",
+    "torch.Tensor.pow",
+    "torch.Tensor.sqrt",
+    "torch.Tensor.neg",
+    "torch.Tensor.exp",
+    "torch.Tensor.log",
+    "torch.Tensor.sin",
+    "torch.Tensor.cos",
+    "torch.Tensor.tan",
+    "torch.Tensor.sinh",
+    "torch.Tensor.cosh",
+    "torch.Tensor.tanh",
+    "torch.Tensor.floor",
+    "torch.Tensor.ceil",
+    "torch.Tensor.round",
+    "torch.Tensor.trunc",
+    "torch.Tensor.frac",
+    "torch.Tensor.clamp",
+    "torch.Tensor.sigmoid",
+    "torch.Tensor.relu",
+    "torch.Tensor.leaky_relu",
+    "torch.Tensor.softmax",
+    "torch.Tensor.log_softmax",
+    "torch.Tensor.masked_fill",
+    "torch.Tensor.index_fill",
+    "torch.Tensor.scatter",
+    "torch.Tensor.copy",
+    "torch.Tensor.clone",
+    "torch.Tensor.detach"
+  );
+
   private Map<String, TypeCheckBuilder> pureFunctionsCheckers = null;
   private Set<TypeCheckBuilder> pureGetitemTypesCheckers = null;
   private Set<TypeCheckBuilder> pureContainsTypesCheckers = null;
+  private TypeCheckMap<String> pytorchTensorPureMethodsCheckers = null;
 
   @Override
   public void initialize(Context context) {
@@ -301,16 +341,25 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     pureFunctionsCheckers = PURE_FUNCTIONS.stream().collect(Collectors.toMap(f -> f, f -> ctx.typeChecker().typeCheckBuilder().isTypeWithName(f)));
     pureGetitemTypesCheckers = PURE_GETITEM_TYPES.stream().map(f -> ctx.typeChecker().typeCheckBuilder().isTypeOrInstanceWithName(f)).collect(Collectors.toSet());
     pureContainsTypesCheckers = PURE_CONTAINS_TYPES.stream().map(f -> ctx.typeChecker().typeCheckBuilder().isTypeOrInstanceWithName(f)).collect(Collectors.toSet());
+
+    pytorchTensorPureMethodsCheckers = new TypeCheckMap<>();
+    PYTORCH_TENSOR_PURE_METHODS.forEach(fqn ->
+      pytorchTensorPureMethodsCheckers.put(ctx.typeChecker().typeCheckBuilder().isTypeWithName(fqn), fqn));
   }
 
   private void checkExpression(SubscriptionContext ctx, Expression expression) {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       CallExpression callExpression = (CallExpression) expression;
       PythonType pythonType = callExpression.callee().typeV2();
+
       pureFunctionsCheckers.entrySet().stream()
         .filter(c -> c.getValue().check(pythonType).equals(TriBool.TRUE))
         .findFirst()
         .ifPresent(result -> ctx.addIssue(callExpression.callee(), String.format(MESSAGE_FORMAT, result.getKey())));
+
+      pytorchTensorPureMethodsCheckers.getOptionalForType(pythonType)
+        .ifPresent(methodName -> ctx.addIssue(callExpression.callee(), String.format(MESSAGE_FORMAT, methodName)));
+
     } else if (expression.is(Tree.Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
       PythonType pythonType = subscriptionExpression.object().typeV2();
