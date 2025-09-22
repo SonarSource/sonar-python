@@ -351,4 +351,18 @@ def expm1(
 
 # --- Tensor manipulation ---
 
+def cat(
+    tensors: Sequence[Tensor],
+    dim: int = 0,
+    *,
+    out: Optional[Tensor] = ...,
+) -> Tensor: ...
+
+def stack(
+    tensors: Sequence[Tensor],
+    dim: int = 0,
+    *,
+    out: Optional[Tensor] = ...,
+) -> Tensor: ...
+
 def flatten(intput:Tensor, start_dim: int = ..., end_dim: int = ...) -> Tensor: ...
