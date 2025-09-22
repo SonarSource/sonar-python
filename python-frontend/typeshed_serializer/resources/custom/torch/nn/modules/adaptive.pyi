@@ -1,0 +1,6 @@
+from typing import Any
+from .module import Module
+
+class AdaptiveLogSoftmaxWithLoss(Module):
+    def __init__(self, *args, **kwargs) -> None: ...
+    def forward(self, *args, **kwargs) -> Any: ...

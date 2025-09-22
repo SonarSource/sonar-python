@@ -16,13 +16,6 @@
  */
 package org.sonar.python.tree;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.sonar.python.PythonTestUtils.lastExpression;
-import static org.sonar.python.PythonTestUtils.pythonFile;
-
 import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,6 +58,13 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.types.v2.TypesTestUtils;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.PythonTestUtils.pythonFile;
 
 class TreeUtilsTest {
 
@@ -890,6 +890,37 @@ class TreeUtilsTest {
     assertThat(localVariableSymbols)
       .extracting(SymbolV2::name)
       .containsExactlyInAnyOrder("x", "inner_fun", "y");
+  }
+
+  @Test
+  void test_getEnclosingClassDef() {
+    FileInput fileInput = PythonTestUtils.parse("""
+      class A:
+        def foo(): pass
+      """);
+
+    ClassDef classDefA = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
+    FunctionDef funcDef = PythonTestUtils.getFirstChild(classDefA, t -> t.is(Kind.FUNCDEF));
+
+    assertThat(TreeUtils.getEnclosingClassDef(funcDef)).isEqualTo(classDefA);
+    assertThat(TreeUtils.getEnclosingClassDef(classDefA)).isNull();
+
+    fileInput = PythonTestUtils.parse("""
+      class A:
+        class B:
+          def bar(): pass
+        def foo():
+          def inner(): pass
+      """);
+
+    classDefA = PythonTestUtils.getFirstChild(fileInput, t -> t instanceof ClassDef cd && "A".equals(cd.name().name()));
+    ClassDef classDefB = PythonTestUtils.getFirstChild(classDefA, t -> t instanceof ClassDef cd && "B".equals(cd.name().name()));
+
+    FunctionDef funcDefBar = PythonTestUtils.getFirstChild(classDefB, t -> t instanceof FunctionDef fd && "bar".equals(fd.name().name()));
+    assertThat(TreeUtils.getEnclosingClassDef(funcDefBar)).isEqualTo(classDefB);
+
+    FunctionDef funcDefInner = PythonTestUtils.getFirstChild(fileInput, t -> t instanceof FunctionDef fd && "inner".equals(fd.name().name()));
+    assertThat(TreeUtils.getEnclosingClassDef(funcDefInner)).isNull();
   }
 
   private static boolean isOuterFunction(Tree tree) {

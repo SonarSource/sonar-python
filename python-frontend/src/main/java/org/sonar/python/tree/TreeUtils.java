@@ -168,6 +168,15 @@ public class TreeUtils {
     return null;
   }
 
+  @CheckForNull
+  public static ClassDef getEnclosingClassDef(Tree tree) {
+    Tree enclosingClass = firstAncestorOfKind(tree, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF);
+    if (enclosingClass instanceof ClassDef classDef) {
+      return classDef;
+    }
+    return null;
+  }
+
   public static List<String> getParentClassesFQN(ClassDef classDef) {
     return getParentClasses(TreeUtils.getClassSymbolFromDef(classDef), new HashSet<>()).stream()
       .map(Symbol::fullyQualifiedName)
