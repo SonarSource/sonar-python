@@ -47,7 +47,7 @@ class ToxRunnerTest(unittest.TestCase):
             mocked_listdir.return_value = ['folder1', 'folder2', 'file', 'file1.py', 'otherfile.cpp', 'file2.py']
             mocked_isfile.side_effect = [False, False, True, True, True, True]
             fns = tox_runner.fetch_python_file_names(folder)
-            expected = ['test/file1.py', 'test/file2.py']
+            expected = [os.path.join("test", "file1.py"), os.path.join("test", "file2.py")]
             self.assertListEqual(fns, expected)
 
     def test_fetching_resources(self):
@@ -58,7 +58,7 @@ class ToxRunnerTest(unittest.TestCase):
                                         ('folder1', '', ['file', f'__init__{extension}']),
                                         ('folder3', '', ['otherfile.cpp', 'file2.testother', 'filetest'])]
             fns = tox_runner.fetch_resource_file_names(folder_name, extension)
-            expected = [f'folder2/__init__{extension}', f'folder2/file1{extension}', f'folder1/__init__{extension}']
+            expected = [os.path.join("folder2", f'__init__{extension}'), os.path.join("folder2", f'file1{extension}'), os.path.join("folder1", f'__init__{extension}')]
             mocked_walk.assert_called_once_with(folder_name)
             self.assertListEqual(fns, expected)
 
