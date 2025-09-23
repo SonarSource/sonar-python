@@ -51,7 +51,7 @@ def main():
     differences = collect_differences(dcmp)
 
     if differences:
-        print("❌ License validation failed!")
+        print("[FAILURE] License validation failed!")
         print("Generated license files differ from committed files.")
         print()
         print("Differences found:")
@@ -64,7 +64,7 @@ def main():
         print("Note: This will completely regenerate all license files and remove any stale ones.")
         sys.exit(1)
 
-    print("✅ License validation passed - generated files match committed files")
+    print("[SUCCESS] License validation passed - generated files match committed files")
 
 
 def collect_differences(dcmp_obj, path_prefix=""):
