@@ -1,4 +1,5 @@
 from SonarPythonAnalyzerFakeStub import CustomStubBase
+
 import torch.nn as nn
 
 from typing import Any, IO, Optional, Sequence, Union, Tuple, List
@@ -307,14 +308,13 @@ def eye(
 ) -> Tensor: ...
 
 # --- Serialization Functions ---
-
 def save(
-    obj: Any,
-    f: Union[str, IO[bytes]],
-    pickle_module: Any = ...,
-    pickle_protocol: int = ...,
-    _use_new_zipfile_serialization: bool = ...,
-) -> None: ...
+        obj: object,
+        f: Union[str, PathLike[str], IO[bytes]],
+        pickle_module: Any = ...,
+        pickle_protocol: int = ...,
+        _use_new_zipfile_serialization: bool = ...
+) -> None : ...
 
 def load(
     f: Union[str, IO[bytes]],
