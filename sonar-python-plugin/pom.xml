@@ -169,12 +169,12 @@
           </licenseUrlReplacements>
           <licenseUrlFileNameSanitizers>
             <LicenseUrlReplacement>
-              <regexp>.txt</regexp>
+              <regexp>_.*</regexp>
             </LicenseUrlReplacement>
-            <!--                 Append .txt -->
+            <!--                 Append -LICENSE.txt -->
             <LicenseUrlReplacement>
               <regexp>$</regexp>
-              <replacement>.txt</replacement>
+              <replacement>-LICENSE.txt</replacement>
             </LicenseUrlReplacement>
           </licenseUrlFileNameSanitizers>
         </configuration>
