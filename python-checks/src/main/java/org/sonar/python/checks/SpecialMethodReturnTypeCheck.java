@@ -18,12 +18,14 @@ package org.sonar.python.checks;
 
 import java.util.List;
 import java.util.Map;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -32,6 +34,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
+import org.sonar.python.types.v2.TypeCheckBuilder;
 
 @Rule(key = "S935")
 public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
@@ -53,7 +56,8 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     "__hash__", BuiltinTypes.INT,
     "__format__", BuiltinTypes.STR,
     "__getnewargs__", BuiltinTypes.TUPLE,
-    "__getnewargs_ex__", BuiltinTypes.TUPLE);
+    "__getnewargs_ex__", BuiltinTypes.TUPLE,
+    "__len__", BuiltinTypes.INT);
 
   private static final String INVALID_RETURN_TYPE_MESSAGE = "Return a value of type `%s` here.";
   private static final String INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION = "Return a value of type `%s` in this method.";
@@ -65,18 +69,25 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static final String INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE = INVALID_GETNEWARGSEX_TUPLE_MESSAGE
     + " A tuple of two elements was expected but found tuple with %d element(s).";
 
+  private TypeCheckBuilder isTorchDataSetTypeCheck;
+
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::setupTypeChecks);
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> checkClassDefinition(ctx, (ClassDef) ctx.syntaxNode()));
   }
 
-  private static void checkClassDefinition(SubscriptionContext ctx, ClassDef classDef) {
+  private void setupTypeChecks(SubscriptionContext ctx) {
+    isTorchDataSetTypeCheck = ctx.typeChecker().typeCheckBuilder().isSubtypeOf("torch.utils.data.Dataset");
+  }
+
+  private void checkClassDefinition(SubscriptionContext ctx, ClassDef classDef) {
     for (var methodDef : TreeUtils.topLevelFunctionDefs(classDef)) {
       checkFunctionDefinition(ctx, methodDef, CheckUtils.mustBeAProtocolLike(classDef));
     }
   }
 
-  private static void checkFunctionDefinition(SubscriptionContext ctx, FunctionDef funDef, boolean classIsProtocolLike) {
+  private void checkFunctionDefinition(SubscriptionContext ctx, FunctionDef funDef, boolean classIsProtocolLike) {
     String funNameString = funDef.name().name();
     String expectedReturnType = METHOD_TO_RETURN_TYPE.get(funNameString);
     if (expectedReturnType == null) {
@@ -115,10 +126,15 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
    * {@code checkReturnStmt} inspects the expressions contained in a return statement against the given {@code expectedReturnType}.
    * Some additional checks are performed if {@code methodName} is {@code "__getnewargs_ex__"}.
    */
-  private static void checkReturnStmt(SubscriptionContext ctx, String methodName, String expectedReturnType, ReturnStatement returnStmt) {
+  private void checkReturnStmt(SubscriptionContext ctx, String methodName, String expectedReturnType, ReturnStatement returnStmt) {
     List<Expression> returnedExpressions = returnStmt.expressions();
     if (returnedExpressions.isEmpty()) {
       ctx.addIssue(returnStmt.returnKeyword(), String.format(INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION, expectedReturnType));
+      return;
+    }
+
+    if ("__len__".equals(methodName) && isDatasetLenNoncompliant(returnStmt)) {
+      ReturnCheckUtils.addIssueOnReturnedExpressions(ctx, returnStmt, String.format(INVALID_RETURN_TYPE_MESSAGE, expectedReturnType));
       return;
     }
 
@@ -178,5 +194,34 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
       !secondElement.type().canBeOrExtend(BuiltinTypes.DICT)) {
       ctx.addIssue(firstElement.firstToken(), secondElement.lastToken(), INVALID_GETNEWARGSEX_TUPLE_MESSAGE);
     }
+  }
+
+  private boolean isDatasetLenNoncompliant(ReturnStatement returnStatement) {
+    if (!isEnclosingClassExtendingDataset(returnStatement)) {
+      return false;
+    }
+
+    var returnExpression = returnStatement.expressions().get(0);
+    return isShape(returnExpression);
+  }
+
+  private boolean isEnclosingClassExtendingDataset(Tree tree) {
+    ClassDef enclosingClass = getEnclosingClass(tree);
+    return enclosingClass != null && isTorchDataSetTypeCheck.check(enclosingClass.name().typeV2()).isTrue();
+  }
+
+  @CheckForNull
+  private static ClassDef getEnclosingClass(Tree tree) {
+    Tree functionDef = TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF);
+    // defensive programming. ReturnCollector ensure that this shouldn't happen
+    if (functionDef == null) {
+      return null;
+    }
+
+    return TreeUtils.firstAncestorOfClass(functionDef, ClassDef.class);
+  }
+
+  private static boolean isShape(Expression expr) {
+    return expr instanceof QualifiedExpression qualifiedExpression && "shape".equals(qualifiedExpression.name().name());
   }
 }

@@ -302,6 +302,64 @@ class GetNewArgsEx10:
 
         x = (("Hello World", 42), x)
         return x # Compliant, but potential FN if unknown() evaluates to False
+
+class LenMethodClass01:
+    def __len__(self):
+        return 42 # Compliant
+
+class LenMethodClass02:
+    def __len__(self):
+        return "Hello" # Noncompliant {{Return a value of type `int` here.}}
+        #      ^^^^^^^
+
+class LenMethodClass03:
+    def __len__(self):
+        return NotImplemented # Compliant
+
+def pytorch_dataset():
+    from torch.utils.data import Dataset, IterableDataset, TensorDataset, StackDataset, ConcatDataset, ChainDataset
+
+    class LenMethodDataSetClass01(Dataset):
+        def __init__(self, data):
+            self.data = data
+
+        def __len__(self):
+            return self.data.shape[0] # Compliant
+
+    class LenMethodDataSetClass02(Dataset):
+        def __init__(self, data):
+            self.data = data
+
+        def __len__(self):
+            return self.data.shape # Noncompliant {{Return a value of type `int` here.}}
+            #      ^^^^^^^^^^^^^^^
+
+    class LenMethodDataSetClass03(IterableDataset):
+        def __len__(self):
+            return self.data.shape # Noncompliant
+
+    class LenMethodDataSetClass04(TensorDataset):
+        def __len__(self):
+            return self.data.shape # Noncompliant
+
+    class LenMethodDataSetClass05(StackDataset):
+        def __len__(self):
+            return self.data.shape # Noncompliant
+
+    class LenMethodDataSetClass06(ChainDataset):
+        def __len__(self):
+            return self.data.shape # Noncompliant
+
+    class LenMethodDataSetClass07(ConcatDataset):
+        def __len__(self):
+            return self.data.shape # Noncompliant
+
+    class LenMethodDataSetClass08(ConcatDataset):
+        def __len__(self):
+            return self.data.shape # Noncompliant
+            return self.data.not_shape # Compliant
+
+
 class RaisesException01:
     def __hash__(self): # Compliant
         raise TypeError("unhashable type: RaisesException01")
