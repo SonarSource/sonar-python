@@ -148,7 +148,7 @@
           <licensesOutputDirectory>${project.build.directory}/temp-licenses/THIRD_PARTY_LICENSES</licensesOutputDirectory>
           <licensesOutputFile>${project.build.directory}/licenses.xml</licensesOutputFile>
           <organizeLicensesByDependencies>true</organizeLicensesByDependencies>
-          <excludedGroups>com.sonarsource|org.sonarsource.python|org.sonarsource.analyzer-commons|org.sonarsource.sslr|jaxen</excludedGroups>
+          <excludedGroups>com.sonarsource|org.sonarsource.python|jaxen</excludedGroups>
           <licenseUrlReplacements>
             <licenseUrlReplacement>
               <regexp>https://asm.ow2.io/license.html</regexp>
@@ -165,6 +165,10 @@
             <licenseUrlReplacement>
               <regexp>http://www.saxproject.org/copying.html</regexp>
               <replacement>${licenseDirectoryUri}/sax.txt</replacement>
+            </licenseUrlReplacement>
+            <licenseUrlReplacement>
+              <regexp>http://www.gnu.org/licenses/lgpl.txt</regexp>
+              <replacement>${licenseDirectoryUri}/lgpl.txt</replacement>
             </licenseUrlReplacement>
           </licenseUrlReplacements>
           <licenseUrlFileNameSanitizers>
