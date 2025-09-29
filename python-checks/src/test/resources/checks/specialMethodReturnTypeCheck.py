@@ -500,3 +500,10 @@ class ZopeInterfaceClass(Interface):
 
 def __bool__():
     return 42 # Compliant: This function is not part of a class definition
+
+class ClassWithDocumentation:
+    def __bool__(self):
+        """this method is empty""" # Compliant: Docstrings do not count as implementation
+
+    def __len__(self):
+        "this method is also empty" # Compliant: empty string is counted as docstring

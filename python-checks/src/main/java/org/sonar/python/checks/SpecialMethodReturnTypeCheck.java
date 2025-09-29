@@ -24,9 +24,11 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
@@ -102,6 +104,10 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
       ctx.addIssue(yieldKeyword, String.format(GENERATOR_METHOD_MESSAGE, expectedReturnType));
     }
 
+    if (hasOnlyEllipsisOrDocStrBody(funDef)) {
+      return;
+    }
+
     List<ReturnStatement> returnStmts = returnStmtCollector.getReturnStmts();
     // If there are no return statements, we trigger this rule since this effectively means that the method is returning `None`.
     // However, there are exceptions to this:
@@ -120,6 +126,22 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     for (ReturnStatement returnStmt : returnStmts) {
       checkReturnStmt(ctx, funNameString, expectedReturnType, returnStmt);
     }
+  }
+
+  private static boolean hasOnlyEllipsisOrDocStrBody(FunctionDef funDef) {
+    var statements = funDef.body().statements();
+    if (statements.size() != 1) {
+      return false;
+    }
+
+    Statement statement = statements.get(0);
+    if (statement instanceof ExpressionStatement expressionStmnt) {
+      var expressions = expressionStmnt.expressions();
+      if (expressions.size() == 1) {
+        return expressions.get(0).is(Tree.Kind.ELLIPSIS, Tree.Kind.STRING_LITERAL);
+      }
+    }
+    return false;
   }
 
   /**
@@ -224,4 +246,5 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static boolean isShape(Expression expr) {
     return expr instanceof QualifiedExpression qualifiedExpression && "shape".equals(qualifiedExpression.name().name());
   }
+
 }
