@@ -1,0 +1,6 @@
+from SonarPythonAnalyzerFakeStub import CustomStubBase
+from typing import Optional, Dict
+
+class PythonREPL(CustomStubBase):
+    globals: Optional[Dict] = ...
+    locals: Optional[Dict] = ...
