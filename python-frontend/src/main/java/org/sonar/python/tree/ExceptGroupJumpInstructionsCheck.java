@@ -48,7 +48,7 @@ public class ExceptGroupJumpInstructionsCheck extends BaseTreeVisitor {
   private static void checkExceptGroupStatement(Tree statement, String message, Tree.Kind... possibleParents) {
     Tree parent = TreeUtils.firstAncestorOfKind(statement, possibleParents);
     if (parent != null && parent.is(Tree.Kind.EXCEPT_GROUP_CLAUSE)) {
-      PythonTreeMaker.recognitionException(statement.firstToken().line(), message);
+      PythonTreeMakerUtils.throwRecognitionException(statement.firstToken().line(), message);
     }
   }
 }

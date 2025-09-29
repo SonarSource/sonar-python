@@ -18,7 +18,6 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -119,10 +118,6 @@ public class PythonTreeMaker {
     setParents(pyFileInputTree);
     pyFileInputTree.accept(new ExceptGroupJumpInstructionsCheck());
     return pyFileInputTree;
-  }
-
-  public static void recognitionException(int line, String message) {
-    throw new RecognitionException(line, "Parse error at line " + line + ": " + message + ".");
   }
 
   protected Token toPyToken(@Nullable com.sonar.sslr.api.Token token) {
@@ -839,10 +834,10 @@ public class PythonTreeMaker {
     Tree.Kind firstExceptKind = excepts.get(0).getKind();
     for (ExceptClause except : excepts) {
       if (firstExceptKind != except.getKind()) {
-        recognitionException(except.exceptKeyword().line(), "Try statement cannot contain both except and except* clauses");
+        PythonTreeMakerUtils.throwRecognitionException(except.exceptKeyword().line(), "Try statement cannot contain both except and except* clauses");
       }
       if (except.is(Tree.Kind.EXCEPT_GROUP_CLAUSE) && except.exception() == null) {
-        recognitionException(except.exceptKeyword().line(), "except* clause must specify the type of the expected exception");
+        PythonTreeMakerUtils.throwRecognitionException(except.exceptKeyword().line(), "except* clause must specify the type of the expected exception");
       }
     }
   }
@@ -1010,7 +1005,7 @@ public class PythonTreeMaker {
         positionalArgs = false;
       } else if (!positionalArgs) {
         int line = pattern.firstToken().line();
-        recognitionException(line, "Positional patterns follow keyword patterns");
+        PythonTreeMakerUtils.throwRecognitionException(line, "Positional patterns follow keyword patterns");
       }
     }
   }
@@ -1295,7 +1290,7 @@ public class PythonTreeMaker {
     Expression nameExpression = expression(nameNode);
     if (!nameExpression.is(Tree.Kind.NAME)) {
       int line = nameNode.getTokenLine();
-      recognitionException(line, "The left-hand side of an assignment expression must be a name");
+      PythonTreeMakerUtils.throwRecognitionException(line, "The left-hand side of an assignment expression must be a name");
     }
     Name name = (Name) nameExpression;
     AstNode operatorNode = astNode.getFirstChild(PythonPunctuator.WALRUS_OPERATOR);
@@ -1557,7 +1552,7 @@ public class PythonTreeMaker {
       .collect(Collectors.toList());
     if (!nonParenthesizedGeneratorExpressions.isEmpty() && arguments.size() > 1) {
       int line = nonParenthesizedGeneratorExpressions.get(0).firstToken().line();
-      recognitionException(line, "Generator expression must be parenthesized if not sole argument");
+      PythonTreeMakerUtils.throwRecognitionException(line, "Generator expression must be parenthesized if not sole argument");
     }
   }
 

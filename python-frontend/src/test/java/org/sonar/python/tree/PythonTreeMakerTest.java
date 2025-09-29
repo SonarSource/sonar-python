@@ -120,6 +120,7 @@ import org.sonar.python.parser.RuleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class PythonTreeMakerTest extends RuleTest {
@@ -1520,6 +1521,15 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(children.get(children.size() - 2)).isSameAs(tryStatement.elseClause());
     assertThat(children.get(children.size() - 1)).isSameAs(tryStatement.finallyClause());
 
+    var ast = p.parse("try:\n    pass\nexcept* :\n    pass");
+    Exception exception = assertThrows(RecognitionException.class, () -> treeMaker.tryStatement(ast));
+
+    assertThat(exception.getMessage()).isEqualTo("Parse error at line 3: except* clause must specify the type of the expected exception.");
+
+    var astExcept = p.parse("try:\n    pass\nexcept Error:\n    pass\nexcept* Error:\n    pass");
+    exception = assertThrows(RecognitionException.class, () -> treeMaker.tryStatement(astExcept));
+
+    assertThat(exception.getMessage()).isEqualTo("Parse error at line 5: Try statement cannot contain both except and except* clauses.");
   }
 
   @Test
