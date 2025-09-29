@@ -27,13 +27,13 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.TypeCheckMap;
 
 @Rule(key = "S6984")
 public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
@@ -44,16 +44,26 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
   private static final String UNBALANCED_PARENTHESIS_MESSAGE = "parenthesis are unbalanced";
   private static final Set<String> FQN_TO_CHECK = Set.of("einops.repeat", "einops.reduce", "einops.rearrange");
   private static final Pattern ellipsisPattern = Pattern.compile("\\((.*)\\)");
+  private TypeCheckMap<Object> einopsCheck = null;
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, EinopsSyntaxCheck::checkEinopsSyntax);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::initializeState);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkEinopsSyntax);
   }
 
-  private static void checkEinopsSyntax(SubscriptionContext ctx) {
+  private void initializeState(SubscriptionContext ctx) {
+    einopsCheck = new TypeCheckMap<>();
+    for (String fqn : FQN_TO_CHECK) {
+      var check = ctx.typeChecker().typeCheckBuilder().isTypeWithName(fqn);
+      var marker = new Object();
+      einopsCheck.put(check, marker);
+    }
+  }
+
+  private void checkEinopsSyntax(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-    Symbol calleeSymbol = callExpression.calleeSymbol();
-    if (calleeSymbol != null && calleeSymbol.fullyQualifiedName() != null && FQN_TO_CHECK.contains(calleeSymbol.fullyQualifiedName())) {
+    if (einopsCheck.containsForType(callExpression.callee().typeV2())) {
       extractPatternFromCallExpr(callExpression).ifPresent(stringLiteral -> {
         var maybePattern = toEinopsPattern(stringLiteral);
         if (maybePattern.isPresent()) {

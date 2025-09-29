@@ -23,6 +23,7 @@ class EinopsSyntaxCheckTest {
 
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/einopsSyntaxCheck.py", new EinopsSyntaxCheck()); }
+    PythonCheckVerifier.verify("src/test/resources/checks/einopsSyntaxCheck.py", new EinopsSyntaxCheck()); 
+  }
 }
 
