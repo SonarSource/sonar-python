@@ -61,3 +61,7 @@ def custom_mock(extended_mock: MockExtention):
   a, *rest = extended_mock
   iter(extended_mock)
   for elem in extended_mock: ... # OK
+
+from torch.utils.data import Dataset, IterableDataset, TensorDataset, StackDataset, ConcatDataset, ChainDataset, Subset
+def torch_iterable_dataset(d:IterableDataset):
+  for elem in d: ... # OK

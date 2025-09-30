@@ -231,3 +231,7 @@ def bound_and_unbound_methods():
     unbound_method(1, 2, 3) # FN SONARPY-2285
     bound_method() # FN SONARPY-2285
     bound_method(1, 2) # FN SONARPY-2285
+
+def torch():
+    import torch
+    torch.cat(torch.Tensor(), axis=-1)

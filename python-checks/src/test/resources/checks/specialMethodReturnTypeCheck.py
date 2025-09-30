@@ -317,7 +317,7 @@ class LenMethodClass03:
         return NotImplemented # Compliant
 
 def pytorch_dataset():
-    from torch.utils.data import Dataset, IterableDataset, TensorDataset, StackDataset, ConcatDataset, ChainDataset
+    from torch.utils.data import Dataset, IterableDataset, TensorDataset, StackDataset, ConcatDataset, ChainDataset, Subset
 
     class LenMethodDataSetClass01(Dataset):
         def __init__(self, data):
@@ -353,12 +353,12 @@ def pytorch_dataset():
     class LenMethodDataSetClass07(ConcatDataset):
         def __len__(self):
             return self.data.shape # Noncompliant
+            return self.data.not_shape # Compliant
 
-    class LenMethodDataSetClass08(ConcatDataset):
+    class LenMethodDataSetClass08(Subset):
         def __len__(self):
             return self.data.shape # Noncompliant
             return self.data.not_shape # Compliant
-
 
 class RaisesException01:
     def __hash__(self): # Compliant

@@ -350,7 +350,7 @@ def expm1(
 ) -> Tensor: ...
 
 # --- Tensor manipulation ---
-
+@overload
 def cat(
     tensors: Sequence[Tensor],
     dim: int = 0,

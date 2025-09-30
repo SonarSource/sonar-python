@@ -1,5 +1,5 @@
 
-torch.utils.data.datasetö
+torch.utils.data.dataset¨
 Dataset torch.utils.data.dataset.Dataset"builtins.object*·
 __init__)torch.utils.data.dataset.Dataset.__init__"
 None*N
@@ -8,7 +8,15 @@
 args
 Any*
 kwargs
-Any¯
+Any*—
+__getitem__,torch.utils.data.dataset.Dataset.__getitem__"
+Any*FD
+ torch.utils.data.dataset.Dataset" torch.utils.data.dataset.Dataset*	
+Any*•
+__add__(torch.utils.data.dataset.Dataset.__add__"P
+&torch.utils.data.dataset.ConcatDataset"&torch.utils.data.dataset.ConcatDataset*FD
+ torch.utils.data.dataset.Dataset" torch.utils.data.dataset.Dataset*FD
+ torch.utils.data.dataset.Dataset" torch.utils.data.dataset.DatasetÝ
 IterableDataset(torch.utils.data.dataset.IterableDataset" torch.utils.data.dataset.Dataset*Ï
 __init__1torch.utils.data.dataset.IterableDataset.__init__"
 None*^
@@ -17,7 +25,11 @@
 args
 Any*
 kwargs
-Any¥
+Any*«
+__add__0torch.utils.data.dataset.IterableDataset.__add__"N
+%torch.utils.data.dataset.ChainDataset"%torch.utils.data.dataset.ChainDataset*VT
+(torch.utils.data.dataset.IterableDataset"(torch.utils.data.dataset.IterableDataset*FD
+ torch.utils.data.dataset.Dataset" torch.utils.data.dataset.Datasetÿ
 TensorDataset&torch.utils.data.dataset.TensorDataset" torch.utils.data.dataset.Dataset*É
 __init__/torch.utils.data.dataset.TensorDataset.__init__"
 None*Z
@@ -26,7 +38,14 @@
 args
 Any*
 kwargs
-Any 
+Any*©
+__getitem__2torch.utils.data.dataset.TensorDataset.__getitem__"
+Any*RP
+&torch.utils.data.dataset.TensorDataset"&torch.utils.data.dataset.TensorDataset*	
+Any*«
+__len__.torch.utils.data.dataset.TensorDataset.__len__"
+builtins.int"builtins.int*RP
+&torch.utils.data.dataset.TensorDataset"&torch.utils.data.dataset.TensorDataset×
 StackDataset%torch.utils.data.dataset.StackDataset" torch.utils.data.dataset.Dataset*Æ
 __init__.torch.utils.data.dataset.StackDataset.__init__"
 None*X
@@ -35,7 +54,21 @@
 args
 Any*
 kwargs
-Any¥
+Any*¦
+__getitem__1torch.utils.data.dataset.StackDataset.__getitem__"
+Any*PN
+%torch.utils.data.dataset.StackDataset"%torch.utils.data.dataset.StackDataset*	
+Any*à
+__getitems__2torch.utils.data.dataset.StackDataset.__getitems__"
+Any*X
+selfN
+%torch.utils.data.dataset.StackDataset"%torch.utils.data.dataset.StackDataset*9
+indices,
+builtins.list[Any]
+Any"builtins.list*¨
+__len__-torch.utils.data.dataset.StackDataset.__len__"
+builtins.int"builtins.int*PN
+%torch.utils.data.dataset.StackDataset"%torch.utils.data.dataset.StackDatasetÿ
 ConcatDataset&torch.utils.data.dataset.ConcatDataset" torch.utils.data.dataset.Dataset*É
 __init__/torch.utils.data.dataset.ConcatDataset.__init__"
 None*Z
@@ -44,7 +77,14 @@
 args
 Any*
 kwargs
-Any 
+Any*«
+__len__.torch.utils.data.dataset.ConcatDataset.__len__"
+builtins.int"builtins.int*RP
+&torch.utils.data.dataset.ConcatDataset"&torch.utils.data.dataset.ConcatDataset*©
+__getitem__2torch.utils.data.dataset.ConcatDataset.__getitem__"
+Any*RP
+&torch.utils.data.dataset.ConcatDataset"&torch.utils.data.dataset.ConcatDataset*	
+Any 
 ChainDataset%torch.utils.data.dataset.ChainDataset" torch.utils.data.dataset.Dataset*Æ
 __init__.torch.utils.data.dataset.ChainDataset.__init__"
 None*X
@@ -53,7 +93,36 @@
 args
 Any*
 kwargs
+Any*Ò
+__iter__.torch.utils.data.dataset.ChainDataset.__iter__"D
+ torch.utils.data.dataset.Dataset" torch.utils.data.dataset.Dataset*PN
+%torch.utils.data.dataset.ChainDataset"%torch.utils.data.dataset.ChainDataset*¨
+__len__-torch.utils.data.dataset.ChainDataset.__len__"
+builtins.int"builtins.int*PN
+%torch.utils.data.dataset.ChainDataset"%torch.utils.data.dataset.ChainDatasetƒ
+Subsettorch.utils.data.dataset.Subset" torch.utils.data.dataset.Dataset*´
+__init__(torch.utils.data.dataset.Subset.__init__"
+None*L
+selfB
+torch.utils.data.dataset.Subset"torch.utils.data.dataset.Subset*
+args
+Any*
+kwargs
 Any*”
+__getitem__+torch.utils.data.dataset.Subset.__getitem__"
+Any*DB
+torch.utils.data.dataset.Subset"torch.utils.data.dataset.Subset*	
+Any*Î
+__getitems__,torch.utils.data.dataset.Subset.__getitems__"
+Any*L
+selfB
+torch.utils.data.dataset.Subset"torch.utils.data.dataset.Subset*9
+indices,
+builtins.list[Any]
+Any"builtins.list*–
+__len__'torch.utils.data.dataset.Subset.__len__"
+builtins.int"builtins.int*DB
+torch.utils.data.dataset.Subset"torch.utils.data.dataset.Subset*”
 __annotations__(torch.utils.data.dataset.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

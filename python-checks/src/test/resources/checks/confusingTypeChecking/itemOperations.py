@@ -54,3 +54,13 @@ def custom_mock(extended_mock: MockExtention):
   del extended_mock[42]
   extended_mock[42] = 42
   a = extended_mock[42]
+
+from torch.utils.data import Dataset, IterableDataset, TensorDataset, StackDataset, ConcatDataset, ChainDataset, Subset
+def torch_datasets(d1:Dataset, d2:IterableDataset, d3:TensorDataset, d4:StackDataset, d5:ConcatDataset, d6:ChainDataset, d7:Subset):
+  d1[42]
+  d2[42]
+  d3[42]
+  d4[42]
+  d5[42]
+  d6[42]
+  d7[42]
