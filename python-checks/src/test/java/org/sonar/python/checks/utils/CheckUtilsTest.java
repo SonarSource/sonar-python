@@ -26,10 +26,13 @@ import java.util.Objects;
 import java.util.Scanner;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.parser.PythonParser;
@@ -166,6 +169,29 @@ class CheckUtilsTest {
         assertThat(mustBeProtocolLike)
           .isEqualTo(name.startsWith("ProtocolLike"));
       });
+  }
+
+  @Test
+  void hasStringLiteralValueTest() {
+    var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/hasStringLiteralValueTest.py");
+    List<Statement> statements = fileInput.statements().statements();
+    assertThat(statements.get(0)).isInstanceOfSatisfying(AssignmentStatement.class, assignmentStatement -> {
+      assertThat(CheckUtils.hasStringLiteralValue(assignmentStatement.assignedValue(), "hello")).isTrue();
+      assertThat(CheckUtils.hasStringLiteralValue(assignmentStatement.assignedValue(), "world")).isFalse();
+    });
+    assertThat(statements.get(1)).isInstanceOfSatisfying(ExpressionStatement.class, expressionStatement -> {
+      assertThat(CheckUtils.hasStringLiteralValue(expressionStatement.expressions().get(0), "hello")).isTrue();
+      assertThat(CheckUtils.hasStringLiteralValue(expressionStatement.expressions().get(0), "world")).isFalse();
+    });
+    assertThat(statements.get(3)).isInstanceOfSatisfying(ExpressionStatement.class, assignmentStatement -> {
+      assertThat(CheckUtils.hasStringLiteralValue(assignmentStatement.expressions().get(0), "hello")).isFalse();
+    });
+    assertThat(statements.get(4)).isInstanceOfSatisfying(ExpressionStatement.class, expressionStatement -> {
+      assertThat(CheckUtils.hasStringLiteralValue(expressionStatement.expressions().get(0), "anything")).isFalse();
+    });
+    assertThat(statements.get(5)).isInstanceOfSatisfying(ExpressionStatement.class, expressionStatement -> {
+      assertThat(CheckUtils.hasStringLiteralValue(expressionStatement.expressions().get(0), "anything")).isFalse();
+    });
   }
 
   @Test

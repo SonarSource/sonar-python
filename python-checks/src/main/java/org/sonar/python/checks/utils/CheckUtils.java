@@ -17,6 +17,7 @@
 package org.sonar.python.checks.utils;
 
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -34,6 +35,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
@@ -120,6 +122,26 @@ public class CheckUtils {
   private static boolean calleeHasNameLocals(CallExpression callExpression) {
     Expression callee = callExpression.callee();
     return callee.is(Tree.Kind.NAME) && "locals".equals(((Name) callee).name());
+  }
+
+  public static boolean hasStringLiteralValue(Expression expression, String value) {
+    return extractStringLiteral(expression)
+      .map(StringLiteral::trimmedQuotesValue)
+      .filter(value::equals)
+      .isPresent();
+  }
+
+  public static Optional<StringLiteral> extractStringLiteral(Tree tree) {
+    if (tree.is(STRING_LITERAL)) {
+      return Optional.of((StringLiteral) tree);
+    }
+    if (tree.is(NAME)) {
+      Expression assignedValue = Expressions.singleAssignedValue(((Name) tree));
+      if (assignedValue != null && assignedValue.is(STRING_LITERAL)) {
+        return Optional.of((StringLiteral) assignedValue);
+      }
+    }
+    return Optional.empty();
   }
 
   public static boolean isConstant(Expression condition) {
