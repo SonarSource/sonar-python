@@ -46,12 +46,12 @@ hash = hashlib.scrypt(password, salt=b"F3MdWpeHeeSjlUxvKBnzzA", n=2**17, r=8, p=
 import hashlib
 import secrets
 
-salt = secrets.token_bytes(32)
+salt = secrets.token_bytes(16)
 hash = hashlib.scrypt(password, salt=salt, n=2**17, r=8, p=1)
 </pre>
 <h3>How does this work?</h3>
 <p>This code ensures that each user’s password has a unique salt value associated with it. It generates a salt randomly and with a length that
-provides the required security level. It uses a salt length of at least 32 bytes (256 bits), as recommended by industry standards.</p>
+provides the required security level. It uses a salt length of at least 16 bytes (128 bits), as recommended by industry standards.</p>
 <p>Here, the compliant code example ensures the salt is random and has a sufficient length by calling the <code>secrets.token_bytes</code> function.
 This one internally uses a cryptographically secure pseudo random number generator.</p>
 <h2>How to fix it in pyca</h2>
@@ -70,12 +70,12 @@ import secrets
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
 
-salt = secrets.token_bytes(32)
+salt = secrets.token_bytes(16)
 digest = PBKDF2HMAC(hashes.SHA256(), length=32, salt=salt, iterations=100000).derive(password)
 </pre>
 <h3>How does this work?</h3>
 <p>This code ensures that each user’s password has a unique salt value associated with it. It generates a salt randomly and with a length that
-provides the required security level. It uses a salt length of at least 32 bytes (256 bits), as recommended by industry standards.</p>
+provides the required security level. It uses a salt length of at least 16 bytes (128 bits), as recommended by industry standards.</p>
 <p>Here, the compliant code example ensures the salt is random and has a sufficient length by calling the <code>secrets.token_bytes</code> function.
 This one internally uses a cryptographically secure pseudo random number generator.</p>
 <h2>How to fix it in Cryptodome</h2>
@@ -92,12 +92,12 @@ digest = scrypt(password, salt=b"F3MdWpeHeeSjlUxvKBnzzA", key_len=32, N=2**17, r
 import secrets
 from Crypto.Protocol.KDF import scrypt
 
-salt = secrets.token_bytes(32)
+salt = secrets.token_bytes(16)
 digest = scrypt(password, salt=salt, key_len=32, N=2**17, r=8, p=1)
 </pre>
 <h3>How does this work?</h3>
 <p>This code ensures that each user’s password has a unique salt value associated with it. It generates a salt randomly and with a length that
-provides the required security level. It uses a salt length of at least 32 bytes (256 bits), as recommended by industry standards.</p>
+provides the required security level. It uses a salt length of at least 16 bytes (128 bits), as recommended by industry standards.</p>
 <p>Here, the compliant code example ensures the salt is random and has a sufficient length by calling the <code>secrets.token_bytes</code> function.
 This function internally uses a cryptographically secure pseudo-random number generator.</p>
 <h2>Resources</h2>

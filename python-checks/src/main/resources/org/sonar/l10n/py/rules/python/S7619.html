@@ -1,4 +1,4 @@
-<p>This rule raises an issue when <code>botocore.exceptions.ClientError</code> can be thrown but are not explicitly caught and handled.</p>
+<p>This rule raises an issue when <code>botocore.exceptions.ClientError</code> can be thrown but is not explicitly caught and handled.</p>
 <h2>Why is this an issue?</h2>
 <p>AWS Lambda functions in Python use <code>boto3</code>, the AWS SDK, to communicate with other AWS services. <code>boto3</code> operations can fail
 due to service-specific reasons like:</p>
