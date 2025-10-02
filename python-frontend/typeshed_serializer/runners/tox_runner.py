@@ -61,7 +61,7 @@ def fetch_resource_file_names(folder_name: str, file_extension: str) -> list[str
 
 
 def fetch_config_file_names() -> list[str]:
-    return ['requirements.txt', 'tox.ini']
+    return [os.path.join(CURRENT_PATH, '../requirements.txt'), os.path.join(CURRENT_PATH, '../tox.ini')]
 
 
 def fetch_binary_file_names() -> list[str]:
@@ -76,7 +76,7 @@ def fetch_source_file_names(folder_path: str) -> list[str]:
 
 
 def normalize_text_files(file_name: str) -> bytes:
-    normalized_file = Path(file_name).read_text().strip().replace('\r\n', '\n').replace('\r', '\n')
+    normalized_file = Path(file_name).read_text(encoding='utf-8').strip().replace('\r\n', '\n').replace('\r', '\n')
     return bytes(normalized_file, 'utf-8')
 
 

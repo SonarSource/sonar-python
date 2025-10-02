@@ -64,8 +64,9 @@ class ToxRunnerTest(unittest.TestCase):
 
     def test_fetch_config_file_names(self):
         fns = tox_runner.fetch_config_file_names()
-        expected = ['requirements.txt', 'tox.ini']
-        self.assertListEqual(fns, expected)
+        self.assertEqual(len(fns), 2)
+        self.assertTrue(fns[0].endswith('requirements.txt'))
+        self.assertTrue(fns[1].endswith('tox.ini'))
 
     def test_fetch_source_file_names(self):
         folder = "test"
