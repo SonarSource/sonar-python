@@ -43,6 +43,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.tree.TreeUtils;
 
+import static org.sonar.plugins.python.api.tree.Tree.Kind.DICTIONARY_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.GENERATOR_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.LAMBDA;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
@@ -139,6 +140,19 @@ public class CheckUtils {
       Expression assignedValue = Expressions.singleAssignedValue(((Name) tree));
       if (assignedValue != null && assignedValue.is(STRING_LITERAL)) {
         return Optional.of((StringLiteral) assignedValue);
+      }
+    }
+    return Optional.empty();
+  }
+
+  public static Optional<DictionaryLiteral> extractDict(Tree tree) {
+    if (tree.is(DICTIONARY_LITERAL)) {
+      return Optional.of((DictionaryLiteral) tree);
+    }
+    if (tree.is(NAME)) {
+      Expression assignedValue = Expressions.singleAssignedValue(((Name) tree));
+      if (assignedValue != null && assignedValue.is(DICTIONARY_LITERAL)) {
+        return Optional.of((DictionaryLiteral) assignedValue);
       }
     }
     return Optional.empty();

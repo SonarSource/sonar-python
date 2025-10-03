@@ -195,6 +195,27 @@ class CheckUtilsTest {
   }
 
   @Test
+  void extractDictTest() {
+    var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/extractDictTest.py");
+    List<Statement> statements = fileInput.statements().statements();
+    assertThat(statements.get(0)).isInstanceOfSatisfying(AssignmentStatement.class, expressionStatement -> {
+      assertThat(CheckUtils.extractDict(expressionStatement.assignedValue())).isPresent();
+    });
+    assertThat(statements.get(1)).isInstanceOfSatisfying(ExpressionStatement.class, expressionStatement -> {
+      assertThat(CheckUtils.extractDict(expressionStatement.expressions().get(0))).isPresent();
+    });
+    assertThat(statements.get(2)).isInstanceOfSatisfying(ExpressionStatement.class, expressionStatement -> {
+      assertThat(CheckUtils.extractDict(expressionStatement.expressions().get(0))).isEmpty();
+    });
+    assertThat(statements.get(3)).isInstanceOfSatisfying(AssignmentStatement.class, expressionStatement -> {
+      assertThat(CheckUtils.extractDict(expressionStatement.assignedValue())).isEmpty();
+    });
+    assertThat(statements.get(4)).isInstanceOfSatisfying(ExpressionStatement.class, expressionStatement -> {
+      assertThat(CheckUtils.extractDict(expressionStatement.expressions().get(0))).isEmpty();
+    });
+  }
+
+  @Test
   void isAbstractTest() throws IOException {
     var fileInput = parseFile("src/test/resources/checks/checkUtils/isAbstractTest.py");
 
