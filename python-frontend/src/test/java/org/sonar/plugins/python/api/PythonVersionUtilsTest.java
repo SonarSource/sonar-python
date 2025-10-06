@@ -30,6 +30,7 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_311;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_312;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_313;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_314;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_38;
 
@@ -38,7 +39,7 @@ class PythonVersionUtilsTest {
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  private static final List<PythonVersionUtils.Version> allVersions = List.of(V_38, V_39, V_310, V_311, V_312, V_313);
+  private static final List<PythonVersionUtils.Version> allVersions = List.of(V_38, V_39, V_310, V_311, V_312, V_313, V_314);
 
   @Test
   void supportedVersions() {
@@ -47,19 +48,19 @@ class PythonVersionUtilsTest {
     assertThat(PythonVersionUtils.fromString("2.7")).hasSameElementsAs(allVersions);
     assertThat(PythonVersionUtils.fromString("2")).hasSameElementsAs(allVersions);
     assertThat(PythonVersionUtils.fromString("3")).hasSameElementsAs(allVersions);
-    assertThat(PythonVersionUtils.fromString("3.9, 3.10")).containsExactlyInAnyOrder(V_39, V_310);
+    assertThat(PythonVersionUtils.fromString("3.9, 3.10, 3.14")).containsExactlyInAnyOrder(V_39, V_310, V_314);
     assertThat(PythonVersionUtils.fromString("2.7, 3.9")).hasSameElementsAs(allVersions);
     assertThat(PythonVersionUtils.fromString("3.10")).containsExactlyInAnyOrder(V_310);
   }
 
   @Test
   void version_out_of_range() {
-    assertThat(PythonVersionUtils.fromString("4")).containsExactlyInAnyOrder(V_313);
-    assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 4. Python version has been set to 3.13.");
+    assertThat(PythonVersionUtils.fromString("4")).containsExactlyInAnyOrder(V_314);
+    assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 4. Python version has been set to 3.14.");
     assertThat(PythonVersionUtils.fromString("1")).hasSameElementsAs(allVersions);
     assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 1. Support for Python versions prior to 3 is deprecated.");
-    assertThat(PythonVersionUtils.fromString("3.14")).containsExactlyInAnyOrder(V_313);
-    assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 3.14. Python version has been set to 3.13.");
+    assertThat(PythonVersionUtils.fromString("3.15")).containsExactlyInAnyOrder(V_314);
+    assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 3.15. Python version has been set to 3.14.");
     assertThat(PythonVersionUtils.fromString("3.12")).containsExactlyInAnyOrder(V_312);
   }
 
@@ -83,9 +84,11 @@ class PythonVersionUtilsTest {
     assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(), V_39));
     assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_311, V_312), V_313));
     assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_310, V_312), V_311));
+    assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_313, V_312), V_314));
     assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_39), V_39));
     assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_39, V_310), V_39));
     assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_312, V_310), V_39));
+    assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_314), V_314));
   }
   
 }

@@ -26,6 +26,7 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_311;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_312;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_313;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_314;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_38;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 
@@ -37,7 +38,8 @@ public class PythonVersionUtils {
     V_310(3, 10, "310"),
     V_311(3, 11, "311"),
     V_312(3, 12, "312"),
-    V_313(3, 13, "313");
+    V_313(3, 13, "313"),
+    V_314(3, 14, "314");
 
     private final int major;
     private final int minor;
@@ -75,7 +77,7 @@ public class PythonVersionUtils {
   }
 
   private static final Version MIN_SUPPORTED_VERSION = V_38;
-  public static final Version MAX_SUPPORTED_VERSION = V_313;
+  public static final Version MAX_SUPPORTED_VERSION = V_314;
 
   /**
    * Note that versions between 3 and 3.8 are currently mapped to 3.8 because
@@ -95,7 +97,8 @@ public class PythonVersionUtils {
     Map.entry("3.10", V_310),
     Map.entry("3.11", V_311),
     Map.entry("3.12", V_312),
-    Map.entry("3.13", V_313));
+    Map.entry("3.13", V_313),
+    Map.entry("3.14", V_314));
   private static final Logger LOG = LoggerFactory.getLogger(PythonVersionUtils.class);
   public static final String PYTHON_VERSION_KEY = "sonar.python.version";
 
