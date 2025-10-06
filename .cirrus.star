@@ -31,6 +31,6 @@ def is_public_repo():
 
 def main(ctx):
     if is_public_repo():
-        return public_conf(ctx)
+        return {} 
     else:
         return private_conf(ctx)
