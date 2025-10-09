@@ -46,7 +46,7 @@ def test_serialize_typeshed_stdlib(typeshed_stdlib, caplog):
 
 def test_build_for_every_python_version(typeshed_stdlib, caplog):
     serializers.walk_typeshed_stdlib= Mock(return_value=(typeshed_stdlib, set()))
-    NUMBER_OF_PYTHON_VERSION_SUPPORTED = 6
+    NUMBER_OF_PYTHON_VERSION_SUPPORTED = 7
     with caplog.at_level(logging.INFO):
         modules = TypeshedSerializer().build_for_every_python_version()
         assert serializers.walk_typeshed_stdlib.call_count == NUMBER_OF_PYTHON_VERSION_SUPPORTED
