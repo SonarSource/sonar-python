@@ -1,0 +1,3 @@
+from SonarPythonAnalyzerFakeStub import CustomStubBase
+
+class ContentBlock(CustomStubBase): ...
