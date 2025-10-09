@@ -46,6 +46,7 @@ import org.sonar.python.tree.TreeUtils;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.DICTIONARY_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.GENERATOR_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.LAMBDA;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.LIST_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NONE;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NUMERIC_LITERAL;
@@ -132,27 +133,25 @@ public class CheckUtils {
       .isPresent();
   }
 
-  public static Optional<StringLiteral> extractStringLiteral(Tree tree) {
-    if (tree.is(STRING_LITERAL)) {
-      return Optional.of((StringLiteral) tree);
-    }
-    if (tree.is(NAME)) {
-      Expression assignedValue = Expressions.singleAssignedValue(((Name) tree));
-      if (assignedValue != null && assignedValue.is(STRING_LITERAL)) {
-        return Optional.of((StringLiteral) assignedValue);
-      }
-    }
-    return Optional.empty();
+  public static Optional<DictionaryLiteral> extractDict(Tree tree) {
+    return extract(DICTIONARY_LITERAL, tree);
   }
 
-  public static Optional<DictionaryLiteral> extractDict(Tree tree) {
-    if (tree.is(DICTIONARY_LITERAL)) {
-      return Optional.of((DictionaryLiteral) tree);
+  public static Optional<ListLiteral> extractList(Tree tree) {
+    return extract(LIST_LITERAL, tree);
+  }
+
+  public static Optional<StringLiteral> extractStringLiteral(Tree tree) {
+    return extract(STRING_LITERAL, tree);
+  }
+  public static <T> Optional<T> extract(Tree.Kind kind, Tree tree) {
+    if (tree.is(kind)) {
+      return Optional.of((T) tree);
     }
     if (tree.is(NAME)) {
       Expression assignedValue = Expressions.singleAssignedValue(((Name) tree));
-      if (assignedValue != null && assignedValue.is(DICTIONARY_LITERAL)) {
-        return Optional.of((DictionaryLiteral) assignedValue);
+      if (assignedValue != null && assignedValue.is(kind)) {
+        return Optional.of((T) assignedValue);
       }
     }
     return Optional.empty();

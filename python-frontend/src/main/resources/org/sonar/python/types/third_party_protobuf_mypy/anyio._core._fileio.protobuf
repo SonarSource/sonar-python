@@ -263,7 +263,7 @@ writelines(anyio._core._fileio.AsyncFile.writelines"N
 2builtins.dict[builtins.str,dataclasses.Field[Any]]
 builtins.str"builtins.str4
 dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dict˜•
+Any"dataclasses.Field"builtins.dictÔ
 Pathanyio._core._fileio.Path"builtins.object*œ
 __init__!anyio._core._fileio.Path.__init__"
 None*>
@@ -296,45 +296,31 @@ __fspath__#anyio._core._fileio.Path.__fspath__"
 __eq__anyio._core._fileio.Path.__eq__"
 builtins.bool"builtins.bool*64
 anyio._core._fileio.Path"anyio._core._fileio.Path*$"
-builtins.object"builtins.object*—
+builtins.object"builtins.object*¹
 __lt__anyio._core._fileio.Path.__lt__"
 builtins.bool"builtins.bool*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*“
-0Union[pathlib.PurePath,anyio._core._fileio.Path]$
-pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.Path*—
+anyio._core._fileio.Path"anyio._core._fileio.Path*64
+anyio._core._fileio.Path"anyio._core._fileio.Path*¹
 __le__anyio._core._fileio.Path.__le__"
 builtins.bool"builtins.bool*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*“
-0Union[pathlib.PurePath,anyio._core._fileio.Path]$
-pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.Path*—
+anyio._core._fileio.Path"anyio._core._fileio.Path*64
+anyio._core._fileio.Path"anyio._core._fileio.Path*¹
 __gt__anyio._core._fileio.Path.__gt__"
 builtins.bool"builtins.bool*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*“
-0Union[pathlib.PurePath,anyio._core._fileio.Path]$
-pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.Path*—
+anyio._core._fileio.Path"anyio._core._fileio.Path*64
+anyio._core._fileio.Path"anyio._core._fileio.Path*¹
 __ge__anyio._core._fileio.Path.__ge__"
 builtins.bool"builtins.bool*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*“
-0Union[pathlib.PurePath,anyio._core._fileio.Path]$
-pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¾
+anyio._core._fileio.Path"anyio._core._fileio.Path*64
+anyio._core._fileio.Path"anyio._core._fileio.Path*¬
 __truediv__$anyio._core._fileio.Path.__truediv__"4
 anyio._core._fileio.Path"anyio._core._fileio.Path*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*š—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*À
+anyio._core._fileio.Path"anyio._core._fileio.Path*	
+Any*®
 __rtruediv__%anyio._core._fileio.Path.__rtruediv__"4
 anyio._core._fileio.Path"anyio._core._fileio.Path*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*š—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*Ì
+anyio._core._fileio.Path"anyio._core._fileio.Path*	
+Any*Ì
 partsanyio._core._fileio.Path.parts"L
 builtins.tuple[builtins.str]
 builtins.str"builtins.str"builtins.tuple*>
@@ -407,7 +393,14 @@ __fspath__#anyio._core._fileio.Path.__fspath__"
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*˜
+builtins.str"builtins.str"os.PathLike*ä
+is_junction$anyio._core._fileio.Path.is_junction"m
+'typing.Coroutine[Any,Any,builtins.bool]
+Any
+Any
+builtins.bool"builtins.bool"typing.Coroutine*>
+self4
+anyio._core._fileio.Path"anyio._core._fileio.PathH*˜
 chmodanyio._core._fileio.Path.chmod"N
 typing.Coroutine[Any,Any,None]
 Any
@@ -455,22 +448,19 @@ expanduser#anyio._core._fileio.Path.expanduser"
 Any
 builtins.str"builtins.str"typing.Coroutine*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*‡
+anyio._core._fileio.Path"anyio._core._fileio.PathH*„
 hardlink_to$anyio._core._fileio.Path.hardlink_to"N
 typing.Coroutine[Any,Any,None]
 Any
 Any
 None"typing.Coroutine*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¿
-target²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLikeH*»
+anyio._core._fileio.Path"anyio._core._fileio.Path*¼
+target¯
+9Union[builtins.str,pathlib.Path,anyio._core._fileio.Path]
+builtins.str"builtins.str
+pathlib.Path"pathlib.Path4
+anyio._core._fileio.Path"anyio._core._fileio.PathH*»
 homeanyio._core._fileio.Path.home"
 2typing.Coroutine[Any,Any,anyio._core._fileio.Path]
 Any
@@ -690,20 +680,22 @@ read_bytes#anyio._core._fileio.Path.read_bytes"p
 Any
 None"typing.Coroutine*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*‰
+anyio._core._fileio.Path"anyio._core._fileio.PathH*ı
 samefile!anyio._core._fileio.Path.samefile"m
 'typing.Coroutine[Any,Any,builtins.bool]
 Any
 Any
 builtins.bool"builtins.bool"typing.Coroutine*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¨
+anyio._core._fileio.Path"anyio._core._fileio.Path*œ
 
-other_path—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeH*ú
+other_path‹
+UUnion[builtins.str,builtins.bytes,builtins.int,pathlib.Path,anyio._core._fileio.Path]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int
+pathlib.Path"pathlib.Path4
+anyio._core._fileio.Path"anyio._core._fileio.PathH*ú
 statanyio._core._fileio.Path.stat"Ù
 ³typing.Coroutine[Any,Any,TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]]]
 Any
@@ -723,7 +715,7 @@ other_path—
 self4
 anyio._core._fileio.Path"anyio._core._fileio.Path*5
 follow_symlinks
-builtins.bool"builtins.bool H*À
+builtins.bool"builtins.bool H*½
 
 symlink_to#anyio._core._fileio.Path.symlink_to"N
 typing.Coroutine[Any,Any,None]
@@ -731,15 +723,12 @@ symlink_to#anyio._core._fileio.Path.symlink_to"N
 Any
 None"typing.Coroutine*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¿
-target²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike*9
+anyio._core._fileio.Path"anyio._core._fileio.Path*¼
+target¯
+9Union[builtins.str,pathlib.Path,anyio._core._fileio.Path]
+builtins.str"builtins.str
+pathlib.Path"pathlib.Path4
+anyio._core._fileio.Path"anyio._core._fileio.Path*9
 target_is_directory
 builtins.bool"builtins.bool H*“
 touchanyio._core._fileio.Path.touch"N
@@ -780,16 +769,13 @@ missing_ok
 self4
 anyio._core._fileio.Path"anyio._core._fileio.Path*(
 suffix
-builtins.str"builtins.str*Ú
+builtins.str"builtins.str*İ
 with_segments&anyio._core._fileio.Path.with_segments"4
 anyio._core._fileio.Path"anyio._core._fileio.Path*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*ª
-pathsegments—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*
+anyio._core._fileio.Path"anyio._core._fileio.Path*.
+pathsegments
+builtins.str"builtins.str*
 write_bytes$anyio._core._fileio.Path.write_bytes"j
 &typing.Coroutine[Any,Any,builtins.int]
 Any

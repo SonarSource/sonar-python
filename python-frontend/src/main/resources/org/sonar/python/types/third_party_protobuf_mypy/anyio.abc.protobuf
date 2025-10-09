@@ -1,6 +1,6 @@
 
-	anyio.abc¬ 
-AsyncBackend!anyio.abc._eventloop.AsyncBackend"builtins.object*þ
+	anyio.abcÃ¥
+AsyncBackend!anyio.abc._eventloop.AsyncBackend"builtins.object*•
 run%anyio.abc._eventloop.AsyncBackend.run"V
 anyio.abc._eventloop.T_Retval"
 builtins.object"builtins.object"builtins.object*‚
@@ -9,11 +9,10 @@
 !anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*U
 funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function*!
-args
-
-Tuple[Any]
-Any*c
+builtins.function"builtins.function*8
+args.
+builtins.tuple[Any]
+Any"builtins.tuple*c
 kwargsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -96,34 +95,14 @@ checkpoint,anyio.abc._eventloop.AsyncBackend.checkpoint"N
 "anyio._core._synchronization.Event""anyio._core._synchronization.Event*‚
 clsy
 'Type[anyio.abc._eventloop.AsyncBackend]F
-!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type0:builtins.classmethod:abc.abstractmethod@p*ë
-create_lock-anyio.abc._eventloop.AsyncBackend.create_lock"F
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock*‚
-clsy
-'Type[anyio.abc._eventloop.AsyncBackend]F
-!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*0
-fast_acquire
-builtins.bool"builtins.bool0:builtins.classmethod:abc.abstractmethod@p*‰
-create_semaphore2anyio.abc._eventloop.AsyncBackend.create_semaphore"P
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore*‚
-clsy
-'Type[anyio.abc._eventloop.AsyncBackend]F
-!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*/
-initial_value
-builtins.int"builtins.int*U
-	max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *2
-fast_acquire
-builtins.bool"builtins.bool 0:builtins.classmethod:abc.abstractmethod@p*›
+!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type0:builtins.classmethod:abc.abstractmethod@p*›
 create_capacity_limiter9anyio.abc._eventloop.AsyncBackend.create_capacity_limiter"\
 ,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*‚
 clsy
 'Type[anyio.abc._eventloop.AsyncBackend]F
 !anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*2
 total_tokens 
-builtins.float"builtins.float0:builtins.classmethod:abc.abstractmethod@p*±
+builtins.float"builtins.float0:builtins.classmethod:abc.abstractmethod@p*È
 run_sync_in_worker_thread;anyio.abc._eventloop.AsyncBackend.run_sync_in_worker_thread"µ
 7typing.Coroutine[Any,Any,anyio.abc._eventloop.T_Retval]
 Any
@@ -135,11 +114,10 @@ checkpoint,anyio.abc._eventloop.AsyncBackend.checkpoint"N
 !anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*U
 funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function*!
-args
-
-Tuple[Any]
-Any*7
+builtins.function"builtins.function*8
+args.
+builtins.tuple[Any]
+Any"builtins.tuple*7
 abandon_on_cancel
 builtins.bool"builtins.bool *´
 limiter¤
@@ -165,7 +143,7 @@ Tuple[Any]
 Tuple[Any]
 Any*-
 token"
-builtins.object"builtins.object0:builtins.classmethod:abc.abstractmethod@p*„
+builtins.object"builtins.object0:builtins.classmethod:abc.abstractmethod@p*›
 run_sync_from_thread6anyio.abc._eventloop.AsyncBackend.run_sync_from_thread"V
 anyio.abc._eventloop.T_Retval"
 builtins.object"builtins.object"builtins.object*‚
@@ -174,57 +152,17 @@ Tuple[Any]
 !anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*U
 funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function*!
-args
-
-Tuple[Any]
-Any*-
+builtins.function"builtins.function*8
+args.
+builtins.tuple[Any]
+Any"builtins.tuple*-
 token"
 builtins.object"builtins.object0:builtins.classmethod:abc.abstractmethod@p*Í
 create_blocking_portal8anyio.abc._eventloop.AsyncBackend.create_blocking_portal"D
  anyio.from_thread.BlockingPortal" anyio.from_thread.BlockingPortal*‚
 clsy
 'Type[anyio.abc._eventloop.AsyncBackend]F
-!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type0:builtins.classmethod:abc.abstractmethod@p*Ó
-open_process.anyio.abc._eventloop.AsyncBackend.open_process"£
-9typing.Coroutine[Any,Any,anyio.abc._subprocesses.Process]
-Any
-AnyB
-anyio.abc._subprocesses.Process"anyio.abc._subprocesses.Process"typing.Coroutine*‚
-clsy
-'Type[anyio.abc._eventloop.AsyncBackend]F
-!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*‰
-commandû
-ƒUnion[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],typing.Sequence[Unknown]]Á
-cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
-XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLikeL
-os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"#anyio.abc._eventloop.StrOrBytesPath-
-typing.Sequence[Unknown] "typing.Sequence*„
-stdiny
-'Union[builtins.int,typing.IO[Any],None]
-builtins.int"builtins.int$
-typing.IO[Any]
-Any"	typing.IO
-None*…
-stdouty
-'Union[builtins.int,typing.IO[Any],None]
-builtins.int"builtins.int$
-typing.IO[Any]
-Any"	typing.IO
-None*…
-stderry
-'Union[builtins.int,typing.IO[Any],None]
-builtins.int"builtins.int$
-typing.IO[Any]
-Any"	typing.IO
-None*
-kwargs
-Any0:builtins.classmethod:abc.abstractmethod@Hp*½
+!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type0:builtins.classmethod:abc.abstractmethod@p*½
 #setup_process_pool_exit_at_shutdownEanyio.abc._eventloop.AsyncBackend.setup_process_pool_exit_at_shutdown"
 None*‚
 clsy
@@ -251,7 +189,7 @@ XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtin
  Tuple[builtins.str,builtins.int]
 builtins.str"builtins.str
 builtins.int"builtins.int"!anyio.abc._sockets.IPSockAddrType
-None 0:builtins.classmethod:abc.abstractmethod@Hp*™
+None 0:builtins.classmethod:abc.abstractmethod@Hp*Ï
 connect_unix.anyio.abc._eventloop.AsyncBackend.connect_unix"¯
 =typing.Coroutine[Any,Any,anyio.abc._sockets.UNIXSocketStream]
 Any
@@ -259,11 +197,9 @@ XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtin
 #anyio.abc._sockets.UNIXSocketStream"#anyio.abc._sockets.UNIXSocketStream"typing.Coroutine*‚
 clsy
 'Type[anyio.abc._eventloop.AsyncBackend]F
-!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*p
-pathf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes0:builtins.classmethod:abc.abstractmethod@Hp*ó
+!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*&
+path
+builtins.str"builtins.str0:builtins.classmethod:abc.abstractmethod@Hp*ó
 create_tcp_listener5anyio.abc._eventloop.AsyncBackend.create_tcp_listener"F
 !anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener*‚
 clsy
@@ -406,10 +342,10 @@ $typing.AsyncIterator[signal.Signals]
 anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo*‚
 clsy
 'Type[anyio.abc._eventloop.AsyncBackend]F
-!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type0:builtins.classmethod:abc.abstractmethod@p*
-get_running_tasks3anyio.abc._eventloop.AsyncBackend.get_running_tasks"
-.typing.Sequence[anyio._core._testing.TaskInfo]>
-anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo"typing.Sequence*‚
+!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type0:builtins.classmethod:abc.abstractmethod@p*ü
+get_running_tasks3anyio.abc._eventloop.AsyncBackend.get_running_tasks"}
+,builtins.list[anyio._core._testing.TaskInfo]>
+anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo"builtins.list*‚
 clsy
 'Type[anyio.abc._eventloop.AsyncBackend]F
 !anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type0:builtins.classmethod:abc.abstractmethod@p*Ù
@@ -429,8 +365,105 @@ $typing.AsyncIterator[signal.Signals]
 optionsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict0:builtins.classmethod:abc.abstractmethod@p2
-
+Any"builtins.dict0:builtins.classmethod:abc.abstractmethod@p2¸
+open_process.anyio.abc._eventloop.AsyncBackend.open_processÕ
+open_process.anyio.abc._eventloop.AsyncBackend.open_process"£
+9typing.Coroutine[Any,Any,anyio.abc._subprocesses.Process]
+Any
+AnyB
+anyio.abc._subprocesses.Process"anyio.abc._subprocesses.Process"typing.Coroutine*‚
+clsy
+'Type[anyio.abc._eventloop.AsyncBackend]F
+!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*s
+commandf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*E
+shell:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool*„
+stdiny
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None*…
+stdouty
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None*…
+stderry
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None*ã
+cwd×
+AUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike
+None *È
+env¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None *7
+start_new_session
+builtins.bool"builtins.bool 0:builtins.classmethod:typing.overloadHXpŸ
+open_process.anyio.abc._eventloop.AsyncBackend.open_process"£
+9typing.Coroutine[Any,Any,anyio.abc._subprocesses.Process]
+Any
+AnyB
+anyio.abc._subprocesses.Process"anyio.abc._subprocesses.Process"typing.Coroutine*‚
+clsy
+'Type[anyio.abc._eventloop.AsyncBackend]F
+!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*¼
+command®
+3typing.Sequence[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes"typing.Sequence*E
+shell:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool*„
+stdiny
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None*…
+stdouty
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None*…
+stderry
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None*ã
+cwd×
+AUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike
+None *È
+env¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None *7
+start_new_session
+builtins.bool"builtins.bool 0:builtins.classmethod:typing.overloadHXp2·	
 create_unix_datagram_socket=anyio.abc._eventloop.AsyncBackend.create_unix_datagram_socket“
 create_unix_datagram_socket=anyio.abc._eventloop.AsyncBackend.create_unix_datagram_socket"µ
 ?typing.Coroutine[Any,Any,anyio.abc._sockets.UNIXDatagramSocket]
@@ -444,7 +477,7 @@ $typing.AsyncIterator[signal.Signals]
 raw_socket
 socket.socket"socket.socket*
 remote_path
-None0:builtins.classmethod:typing.overloadHXpŒ
+None0:builtins.classmethod:typing.overloadHXpÂ
 create_unix_datagram_socket=anyio.abc._eventloop.AsyncBackend.create_unix_datagram_socket"Ð
 Htyping.Coroutine[Any,Any,anyio.abc._sockets.ConnectedUNIXDatagramSocket]
 Any
@@ -455,12 +488,9 @@ Htyping.Coroutine[Any,Any,anyio.abc._sockets.ConnectedUNIXDatagramSocket]
 !anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*.
 
 raw_socket
-socket.socket"socket.socket*w
-remote_pathf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes0:builtins.classmethod:typing.overloadHXp@babc.ABCMeta°
-
+socket.socket"socket.socket*-
+remote_path
+builtins.str"builtins.str0:builtins.classmethod:typing.overloadHXp@babc.ABCMetaè	
 AsyncResource"anyio.abc._resources.AsyncResource"builtins.object*Â
 
 __aenter__-anyio.abc._resources.AsyncResource.__aenter__"§
@@ -498,9 +528,7 @@ __aenter__-anyio.abc._resources.AsyncResource.__aenter__"§
 Any
 None"typing.Coroutine*R
 selfH
-"anyio.abc._resources.AsyncResource""anyio.abc._resources.AsyncResource0:abc.abstractmethod@H@babc.ABCMetarF
-	__slots__,anyio.abc._resources.AsyncResource.__slots__
-Tuple[]Š
+"anyio.abc._resources.AsyncResource""anyio.abc._resources.AsyncResource0:abc.abstractmethod@H@babc.ABCMetaŠ
 ConnectedUDPSocket%anyio.abc._sockets.ConnectedUDPSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProviderœ
 ConnectedUNIXDatagramSocket.anyio.abc._sockets.ConnectedUNIXDatagramSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProviderû
 
@@ -773,8 +801,8 @@ $anyio.abc._streams.ByteReceiveStream"$anyio.abc._streams.ByteReceiveStream
 $anyio.abc._streams.ByteReceiveStream"$anyio.abc._streams.ByteReceiveStream
 None*L
 selfB
-anyio.abc._subprocesses.Process"anyio.abc._subprocesses.Process0:builtins.property:abc.abstractmethod@`á
-	TaskGroupanyio.abc._tasks.TaskGroup"builtins.object*³
+anyio.abc._subprocesses.Process"anyio.abc._subprocesses.Process0:builtins.property:abc.abstractmethod@`ü
+	TaskGroupanyio.abc._tasks.TaskGroup"builtins.object*Î
 
 start_soon%anyio.abc._tasks.TaskGroup.start_soon"
 None*B
@@ -782,9 +810,9 @@ start_soon%anyio.abc._tasks.TaskGroup.start_soon"
 anyio.abc._tasks.TaskGroup"anyio.abc._tasks.TaskGroup*U
 funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any*.
+builtins.function"builtins.function*,
+args"
+builtins.object"builtins.object*.
 name"
 builtins.object"builtins.object 0:abc.abstractmethod@*Š
 start anyio.abc._tasks.TaskGroup.start"L
@@ -1121,15 +1149,12 @@ statistics1anyio._core._synchronization.Condition.statistics"d
 statistics-anyio._core._synchronization.Event.statistics"\
 ,anyio._core._synchronization.EventStatistics",anyio._core._synchronization.EventStatistics*R
 selfH
-"anyio._core._synchronization.Event""anyio._core._synchronization.EventÍ
-Lock!anyio._core._synchronization.Lock"builtins.object*µ
-__new__)anyio._core._synchronization.Lock.__new__"F
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock*‚
-clsy
-'Type[anyio._core._synchronization.Lock]F
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock"type*2
-fast_acquire
-builtins.bool"builtins.bool *Þ
+"anyio._core._synchronization.Event""anyio._core._synchronization.Eventå
+Lock!anyio._core._synchronization.Lock"builtins.object*’
+__init__*anyio._core._synchronization.Lock.__init__"
+None*P
+selfF
+!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock*Þ
 
 __aenter__,anyio._core._synchronization.Lock.__aenter__"N
 typing.Coroutine[Any,Any,None]
@@ -1181,21 +1206,17 @@ __aenter__,anyio._core._synchronization.Lock.__aenter__"N
 statistics,anyio._core._synchronization.Lock.statistics"Z
 +anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics*P
 selfF
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock¯
-	Semaphore&anyio._core._synchronization.Semaphore"builtins.object*Ü
-__new__.anyio._core._synchronization.Semaphore.__new__"P
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore*’
-clsˆ
-,Type[anyio._core._synchronization.Semaphore]P
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore"type*/
-initial_value
-builtins.int"builtins.int*U
-	max_valueD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *2
-fast_acquire
-builtins.bool"builtins.bool *Ý
+!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lockrµ
+_owner_task-anyio._core._synchronization.Lock._owner_taskw
+)Union[anyio._core._testing.TaskInfo,None]>
+anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo
+Noner€
+_waiters*anyio._core._synchronization.Lock._waitersÇ
+Zcollections.deque[Tuple[anyio._core._testing.TaskInfo,anyio._core._synchronization.Event]]Õ
+GTuple[anyio._core._testing.TaskInfo,anyio._core._synchronization.Event]>
+anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfoH
+"anyio._core._synchronization.Event""anyio._core._synchronization.Event"collections.dequeé
+	Semaphore&anyio._core._synchronization.Semaphore"builtins.object*©
 __init__/anyio._core._synchronization.Semaphore.__init__"
 None*Z
 selfP
@@ -1205,9 +1226,7 @@ statistics,anyio._core._synchronization.Lock.statistics"Z
 	max_valueD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *2
-fast_acquire
-builtins.bool"builtins.bool *Ø
+None *Ø
 
 __aenter__1anyio._core._synchronization.Semaphore.__aenter__"¸
 @typing.Coroutine[Any,Any,anyio._core._synchronization.Semaphore]
@@ -1265,9 +1284,17 @@ __aenter__1anyio._core._synchronization.Semaphore.__aenter__"¸
 statistics1anyio._core._synchronization.Semaphore.statistics"d
 0anyio._core._synchronization.SemaphoreStatistics"0anyio._core._synchronization.SemaphoreStatistics*Z
 selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphorere
-_fast_acquire4anyio._core._synchronization.Semaphore._fast_acquire
-builtins.bool"builtins.boolÛ
+&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.SemaphorerU
+_value-anyio._core._synchronization.Semaphore._value
+builtins.int"builtins.intr…
+
+_max_value1anyio._core._synchronization.Semaphore._max_valueD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerÒ
+_waiters/anyio._core._synchronization.Semaphore._waiters”
+5collections.deque[anyio._core._synchronization.Event]H
+"anyio._core._synchronization.Event""anyio._core._synchronization.Event"collections.dequeÛ
 CancelScopeanyio._core._tasks.CancelScope"builtins.object*Î
 __new__&anyio._core._tasks.CancelScope.__new__"@
 anyio._core._tasks.CancelScope"anyio._core._tasks.CancelScope*y
@@ -1329,7 +1356,7 @@ $Type[anyio._core._tasks.CancelScope]@
 self@
 anyio._core._tasks.CancelScope"anyio._core._tasks.CancelScope*)
 value
-builtins.bool"builtins.bool0:.setter‘6
+builtins.bool"builtins.bool0:.setteræ4
 BlockingPortal anyio.from_thread.BlockingPortal"builtins.object*ú
 __new__(anyio.from_thread.BlockingPortal.__new__"D
  anyio.from_thread.BlockingPortal" anyio.from_thread.BlockingPortal*
@@ -1389,7 +1416,7 @@ __aenter__+anyio.from_thread.BlockingPortal.__aenter__"¦
 selfD
  anyio.from_thread.BlockingPortal" anyio.from_thread.BlockingPortal*6
 cancel_remaining
-builtins.bool"builtins.bool H*ý
+builtins.bool"builtins.bool H*¯
 
 _call_func+anyio.from_thread.BlockingPortal._call_func"N
 typing.Coroutine[Any,Any,None]
@@ -1400,46 +1427,41 @@ _call_func+anyio.from_thread.BlockingPortal._call_func"N
  anyio.from_thread.BlockingPortal" anyio.from_thread.BlockingPortal*U
 funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function*!
-args
-
-Tuple[Any]
-Any*c
+builtins.function"builtins.function*8
+args.
+builtins.tuple[Any]
+Any"builtins.tuple*c
 kwargsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*À
-future³
-;concurrent.futures._base.Future[anyio.from_thread.T_Retval]S
-anyio.from_thread.T_Retval"
-builtins.object"builtins.object"builtins.object"concurrent.futures._base.FutureH*ý
+Any"builtins.dict*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.FutureH*¯
 _spawn_task_from_thread8anyio.from_thread.BlockingPortal._spawn_task_from_thread"
 None*N
 selfD
  anyio.from_thread.BlockingPortal" anyio.from_thread.BlockingPortal*U
 funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function*!
-args
-
-Tuple[Any]
-Any*c
+builtins.function"builtins.function*8
+args.
+builtins.tuple[Any]
+Any"builtins.tuple*c
 kwargsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
 Any"builtins.dict*,
 name"
-builtins.object"builtins.object*À
-future³
-;concurrent.futures._base.Future[anyio.from_thread.T_Retval]S
-anyio.from_thread.T_Retval"
-builtins.object"builtins.object"builtins.object"concurrent.futures._base.Future*Ê
+builtins.object"builtins.object*\
+futureP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Future*Ï
 
-start_task+anyio.from_thread.BlockingPortal.start_task"‰
-FTuple[concurrent.futures._base.Future[anyio.from_thread.T_Retval],Any]³
-;concurrent.futures._base.Future[anyio.from_thread.T_Retval]S
-anyio.from_thread.T_Retval"
-builtins.object"builtins.object"builtins.object"concurrent.futures._base.Future
+start_task+anyio.from_thread.BlockingPortal.start_task"Ž
+/Tuple[concurrent.futures._base.Future[Any],Any]P
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Future
 Any*N
 selfD
  anyio.from_thread.BlockingPortal" anyio.from_thread.BlockingPortal*U
@@ -1459,8 +1481,8 @@ FTuple[concurrent.futures._base.Future[anyio.from_thread.T_Retval],Any]³
 cm¹
 >contextlib.AbstractAsyncContextManager[anyio.from_thread.T_co]O
 anyio.from_thread.T_co"
-builtins.object"builtins.object"builtins.object"&contextlib.AbstractAsyncContextManager2Õ
-call%anyio.from_thread.BlockingPortal.callÑ
+builtins.object"builtins.object"builtins.object"&contextlib.AbstractAsyncContextManager2‹
+call%anyio.from_thread.BlockingPortal.callì
 call%anyio.from_thread.BlockingPortal.call"S
 anyio.from_thread.T_Retval"
 builtins.object"builtins.object"builtins.object*N
@@ -1468,9 +1490,9 @@ FTuple[concurrent.futures._base.Future[anyio.from_thread.T_Retval],Any]³
  anyio.from_thread.BlockingPortal" anyio.from_thread.BlockingPortal*U
 funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any0:typing.overloadXÑ
+builtins.function"builtins.function*,
+args"
+builtins.object"builtins.object0:typing.overloadXì
 call%anyio.from_thread.BlockingPortal.call"S
 anyio.from_thread.T_Retval"
 builtins.object"builtins.object"builtins.object*N
@@ -1478,10 +1500,10 @@ FTuple[concurrent.futures._base.Future[anyio.from_thread.T_Retval],Any]³
  anyio.from_thread.BlockingPortal" anyio.from_thread.BlockingPortal*U
 funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any0:typing.overloadX2¹
-start_task_soon0anyio.from_thread.BlockingPortal.start_task_soonø
+builtins.function"builtins.function*,
+args"
+builtins.object"builtins.object0:typing.overloadX2ï
+start_task_soon0anyio.from_thread.BlockingPortal.start_task_soon“
 start_task_soon0anyio.from_thread.BlockingPortal.start_task_soon"³
 ;concurrent.futures._base.Future[anyio.from_thread.T_Retval]S
 anyio.from_thread.T_Retval"
@@ -1490,11 +1512,11 @@ FTuple[concurrent.futures._base.Future[anyio.from_thread.T_Retval],Any]³
  anyio.from_thread.BlockingPortal" anyio.from_thread.BlockingPortal*U
 funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any*.
+builtins.function"builtins.function*,
+args"
+builtins.object"builtins.object*.
 name"
-builtins.object"builtins.object 0:typing.overloadXø
+builtins.object"builtins.object 0:typing.overloadX“
 start_task_soon0anyio.from_thread.BlockingPortal.start_task_soon"³
 ;concurrent.futures._base.Future[anyio.from_thread.T_Retval]S
 anyio.from_thread.T_Retval"
@@ -1503,9 +1525,9 @@ FTuple[concurrent.futures._base.Future[anyio.from_thread.T_Retval],Any]³
  anyio.from_thread.BlockingPortal" anyio.from_thread.BlockingPortal*U
 funcK
 CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any*.
+builtins.function"builtins.function*,
+args"
+builtins.object"builtins.object*.
 name"
 builtins.object"builtins.object 0:typing.overloadXr•
 _event_loop_thread_id6anyio.from_thread.BlockingPortal._event_loop_thread_idD

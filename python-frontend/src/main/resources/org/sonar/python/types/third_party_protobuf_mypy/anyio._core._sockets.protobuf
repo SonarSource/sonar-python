@@ -1,16 +1,15 @@
 
-anyio._core._sockets”
+anyio._core._socketsŠ
 connect_unix!anyio._core._sockets.connect_unix"¯
 =typing.Coroutine[Any,Any,anyio.abc._sockets.UNIXSocketStream]
 Any
 AnyJ
-#anyio.abc._sockets.UNIXSocketStream"#anyio.abc._sockets.UNIXSocketStream"typing.Coroutine*¬
-path¡
-3Union[builtins.str,builtins.bytes,os.PathLike[Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLikeH¾
+#anyio.abc._sockets.UNIXSocketStream"#anyio.abc._sockets.UNIXSocketStream"typing.Coroutine*¢
+path—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeH¾
 create_tcp_listener(anyio._core._sockets.create_tcp_listener"¶
 ^typing.Coroutine[Any,Any,anyio.streams.stapled.MultiListener[anyio.abc._sockets.SocketStream]]
 Any
@@ -42,18 +41,17 @@ kTypeAlias[Union[Literal[socket.AddressFamily],Literal[socket.AddressFamily],Lit
 builtins.int"builtins.int *0
 
 reuse_port
-builtins.bool"builtins.bool H
+builtins.bool"builtins.bool H“
 create_unix_listener)anyio._core._sockets.create_unix_listener"©
 ;typing.Coroutine[Any,Any,anyio.abc._sockets.SocketListener]
 Any
 AnyF
-!anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener"typing.Coroutine*¬
-path¡
-3Union[builtins.str,builtins.bytes,os.PathLike[Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike*P
+!anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener"typing.Coroutine*¢
+path—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike*P
 modeD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -125,44 +123,41 @@ local_port
 builtins.int"builtins.int *0
 
 reuse_port
-builtins.bool"builtins.bool H§
+builtins.bool"builtins.bool H
 create_unix_datagram_socket0anyio._core._sockets.create_unix_datagram_socket"µ
 ?typing.Coroutine[Any,Any,anyio.abc._sockets.UNIXDatagramSocket]
 Any
 AnyN
-%anyio.abc._sockets.UNIXDatagramSocket"%anyio.abc._sockets.UNIXDatagramSocket"typing.Coroutine*Ã
+%anyio.abc._sockets.UNIXDatagramSocket"%anyio.abc._sockets.UNIXDatagramSocket"typing.Coroutine*¹
 
-local_path°
-8Union[None,builtins.str,builtins.bytes,os.PathLike[Any]]
+local_path¦
+2Union[None,builtins.str,os.PathLike[builtins.str]]
 None
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike *V
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike *V
 
 local_modeD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None HŒ
+None Hø
 %create_connected_unix_datagram_socket:anyio._core._sockets.create_connected_unix_datagram_socket"Ð
 Htyping.Coroutine[Any,Any,anyio.abc._sockets.ConnectedUNIXDatagramSocket]
 Any
 Any`
-.anyio.abc._sockets.ConnectedUNIXDatagramSocket".anyio.abc._sockets.ConnectedUNIXDatagramSocket"typing.Coroutine*³
-remote_path¡
-3Union[builtins.str,builtins.bytes,os.PathLike[Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike*Ã
+.anyio.abc._sockets.ConnectedUNIXDatagramSocket".anyio.abc._sockets.ConnectedUNIXDatagramSocket"typing.Coroutine*©
+remote_path—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike*¹
 
-local_path°
-8Union[None,builtins.str,builtins.bytes,os.PathLike[Any]]
+local_path¦
+2Union[None,builtins.str,os.PathLike[builtins.str]]
 None
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike *V
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike *V
 
 local_modeD
 Union[builtins.int,None]
@@ -239,19 +234,18 @@ bUnion[Tuple[builtins.str,builtins.int,builtins.int,builtins.int],Tuple[builtins
 builtins.int"builtins.int`
  Tuple[builtins.str,builtins.int]
 builtins.str"builtins.str
-builtins.int"builtins.intò
+builtins.int"builtins.intè
 setup_unix_local_socket,anyio._core._sockets.setup_unix_local_socket"m
 'typing.Coroutine[Any,Any,socket.socket]
 Any
 Any
-socket.socket"socket.socket"typing.Coroutine*»
-path°
-8Union[None,builtins.str,builtins.bytes,os.PathLike[Any]]
+socket.socket"socket.socket"typing.Coroutine*±
+path¦
+2Union[None,builtins.str,os.PathLike[builtins.str]]
 None
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes(
-os.PathLike[Any]
-Any"os.PathLike*N
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike*N
 modeD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -426,9 +420,7 @@ JTypeAlias[Union[builtins.str,ipaddress.IPv4Address,ipaddress.IPv6Address]]Á
 __annotations__$anyio._core._sockets.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*>
-ExceptionGroup#anyio._core._sockets.ExceptionGroup
-Any*u
+Any"builtins.dict*u
 IPPROTO_IPV6!anyio._core._sockets.IPPROTO_IPV6B
 Union[Any,builtins.int]
 Any
