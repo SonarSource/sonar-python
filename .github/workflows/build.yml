@@ -26,6 +26,7 @@ jobs:
       id-token: write
       contents: write
     strategy:
+      fail-fast: false
       matrix:
         include:
           - name: "Analysis on SonarQube NEXT"
