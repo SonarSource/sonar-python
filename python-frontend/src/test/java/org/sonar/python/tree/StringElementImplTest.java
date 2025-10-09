@@ -34,6 +34,15 @@ class StringElementImplTest {
     assertThat(stringElement("rf'abc'").isInterpolated()).isTrue();
   }
 
+  @Test
+  void isTemplate() {
+    assertThat(stringElement("'abc'").isTemplate()).isFalse();
+    assertThat(stringElement("t'abc'").isTemplate()).isTrue();
+    assertThat(stringElement("T'abc'").isTemplate()).isTrue();
+    assertThat(stringElement("rt'abc'").isTemplate()).isTrue();
+    assertThat(stringElement("tr'abc'").isTemplate()).isTrue();
+  }
+
   private StringElement stringElement(String code) {
     return ((StringLiteral) PythonTestUtils.lastExpression(code)).stringElements().get(0);
   }

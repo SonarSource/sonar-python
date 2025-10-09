@@ -27,6 +27,8 @@ public enum PythonTokenType implements TokenType {
   FSTRING_MIDDLE,
   FSTRING_END,
 
+  TSTRING_START,
+
   INDENT,
   DEDENT,
   NEWLINE,

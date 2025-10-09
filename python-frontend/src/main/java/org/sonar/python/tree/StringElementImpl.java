@@ -115,6 +115,12 @@ public class StringElementImpl extends PyTree implements StringElement {
   }
 
   @Override
+  public boolean isTemplate() {
+    String prefix = prefix();
+    return prefix.indexOf('t') >= 0 || prefix.indexOf('T') >= 0;
+  }
+
+  @Override
   public List<FormattedExpression> formattedExpressions() {
     return fStringMiddles.stream().filter(FormattedExpression.class::isInstance).map(FormattedExpression.class::cast).toList();
   }

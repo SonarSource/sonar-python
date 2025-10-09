@@ -76,6 +76,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   FSTRING_REPLACEMENT_FIELD,
   FSTRING,
   FORMAT_SPECIFIER,
+  TSTRING,
   STRINGS,
 
   COMPARISON,

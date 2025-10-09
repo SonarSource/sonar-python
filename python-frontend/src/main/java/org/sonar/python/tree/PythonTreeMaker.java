@@ -1685,7 +1685,7 @@ public class PythonTreeMaker {
   }
 
   private Expression stringLiterals(AstNode astNode) {
-    List<StringElement> elements = astNode.getChildren(PythonTokenType.STRING, PythonGrammar.FSTRING).stream()
+    List<StringElement> elements = astNode.getChildren(PythonTokenType.STRING, PythonGrammar.FSTRING, PythonGrammar.TSTRING).stream()
       .map(this::stringLiteral)
       .filter(Objects::nonNull)
       .collect(Collectors.toList());
@@ -1697,7 +1697,7 @@ public class PythonTreeMaker {
     if (token == null) {
       return null;
     }
-    if (elementNode.is(PythonGrammar.FSTRING)) {
+    if (elementNode.is(PythonGrammar.FSTRING) || elementNode.is(PythonGrammar.TSTRING)) {
       Token fstringEnd = toPyToken(elementNode.getFirstChild(PythonTokenType.FSTRING_END).getToken());
       List<Tree> fStringMiddles = getFStringMiddles(elementNode);
       return new StringElementImpl(token, fStringMiddles, fstringEnd);

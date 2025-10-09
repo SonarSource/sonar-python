@@ -89,10 +89,9 @@ public class PythonGrammarBuilder {
 
     // https://docs.python.org/3.12/reference/lexical_analysis.html#formatted-string-literals
     b.rule(FSTRING).is(
-        PythonTokenType.FSTRING_START,
-        b.zeroOrMore(b.firstOf(FSTRING_REPLACEMENT_FIELD, PythonTokenType.FSTRING_MIDDLE)), 
-        PythonTokenType.FSTRING_END
-    );
+      PythonTokenType.FSTRING_START,
+      b.zeroOrMore(b.firstOf(FSTRING_REPLACEMENT_FIELD, PythonTokenType.FSTRING_MIDDLE)),
+      PythonTokenType.FSTRING_END);
     b.rule(FSTRING_REPLACEMENT_FIELD).is(
       PythonPunctuator.LCURLYBRACE,
       b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR),
@@ -100,12 +99,17 @@ public class PythonGrammarBuilder {
       b.optional("!", b.firstOf("s", "r", "a")),
       b.optional(FORMAT_SPECIFIER),
       PythonPunctuator.RCURLYBRACE);
+
     b.rule(FORMAT_SPECIFIER).is(
       ":",
-      b.zeroOrMore(b.firstOf(PythonTokenType.FSTRING_MIDDLE, FSTRING_REPLACEMENT_FIELD))
-    );
+      b.zeroOrMore(b.firstOf(PythonTokenType.FSTRING_MIDDLE, FSTRING_REPLACEMENT_FIELD)));
 
-    b.rule(STRINGS).is(b.oneOrMore(b.firstOf(FSTRING, PythonTokenType.STRING)));
+    b.rule(TSTRING).is(
+      PythonTokenType.TSTRING_START,
+      b.zeroOrMore(b.firstOf(FSTRING_REPLACEMENT_FIELD, PythonTokenType.FSTRING_MIDDLE)),
+      PythonTokenType.FSTRING_END);
+
+    b.rule(STRINGS).is(b.firstOf(b.oneOrMore(b.firstOf(FSTRING, PythonTokenType.STRING)), b.oneOrMore(TSTRING)));
 
     b.rule(FACTOR).is(b.firstOf(
       b.sequence(b.firstOf("+", "-", "~"), FACTOR),

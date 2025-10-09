@@ -39,6 +39,7 @@ public interface StringElement extends Tree {
 
   boolean isInterpolated();
 
+  boolean isTemplate();
   /**
    * @return Formatted expressions of an f-string.
    * Empty list if the string element is not an f-string.

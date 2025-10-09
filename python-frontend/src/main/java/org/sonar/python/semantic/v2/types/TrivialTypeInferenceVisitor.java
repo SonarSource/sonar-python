@@ -113,7 +113,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private final Map<String, TypeWrapper> wildcardImportedTypes = new HashMap<>();
 
-  private record Scope(PythonType type, String scopeFullyQualifiedName) {}
+  private record Scope(PythonType type, String scopeFullyQualifiedName) {
+  }
 
   public TrivialTypeInferenceVisitor(TypeTable projectLevelTypeTable, PythonFile pythonFile, String fullyQualifiedModuleName) {
     this.projectLevelTypeTable = projectLevelTypeTable;
@@ -138,8 +139,13 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitStringLiteral(StringLiteral stringLiteral) {
     var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     // TODO: SONARPY-1867 multiple object types to represent str instance?
-    PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
-    ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, new ArrayList<>(), new ArrayList<>()));
+    if (((StringLiteralImpl) stringLiteral).isTemplate()) {
+      // TODO: SONARPY-3427 once provided by typeshed the resolved type should be string.templatelib.Template
+      ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(PythonType.UNKNOWN, new ArrayList<>(), new ArrayList<>()));
+    } else {
+      PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
+      ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, new ArrayList<>(), new ArrayList<>()));
+    }
   }
 
   @Override
@@ -402,14 +408,14 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     importedModulesFQN.add(String.join(".", fromModuleFqn));
     setTypeToImportFromStatement(importFrom, fromModuleFqn);
 
-    if(importFrom.isWildcardImport()) {
+    if (importFrom.isWildcardImport()) {
       collectWildcardImportedSymbols(fromModuleFqn);
     }
   }
 
   private void collectWildcardImportedSymbols(List<String> moduleFqn) {
     PythonType resolvedModuleType = projectLevelTypeTable.getModuleType(moduleFqn);
-    if(resolvedModuleType instanceof ModuleType moduleType) {
+    if (resolvedModuleType instanceof ModuleType moduleType) {
       wildcardImportedTypes.putAll(moduleType.members());
     }
   }
@@ -442,7 +448,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
         .map(importedDottedName -> importedDottedName.names().get(importedDottedName.names().size() - 1))
         .ifPresent(lastImportedModuleName -> setTypeToName(lastImportedModuleName, moduleType));
     }
-    
+
   }
 
   private static UnknownType.UnresolvedImportType createUnresolvedImportType(List<String> moduleFqnList, Name name) {
@@ -604,7 +610,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitName(Name name) {
     SymbolV2 symbolV2 = name.symbolV2();
     if (symbolV2 == null) {
-//    This part could be affected by SONARPY-1802
+      //    This part could be affected by SONARPY-1802
       var builtInType = projectLevelTypeTable.getBuiltinsModule().resolveMember(name.name());
       if (builtInType.isPresent()) {
         setTypeToName(name, builtInType.get());
@@ -647,10 +653,10 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private static boolean shouldTypeBeEagerlyPropagated(PythonType t) {
     return (t instanceof ClassType)
-           || (t instanceof FunctionType)
-           || (t instanceof ModuleType)
-           || (t instanceof UnknownType.UnresolvedImportType)
-           || (t instanceof SpecialFormType);
+      || (t instanceof FunctionType)
+      || (t instanceof ModuleType)
+      || (t instanceof UnknownType.UnresolvedImportType)
+      || (t instanceof SpecialFormType);
   }
 
   private PythonType currentType() {

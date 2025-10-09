@@ -3305,6 +3305,32 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void assignmentTemplateString() {
+    var fileInput = inferTypes("""
+      def template():
+        a = t"test{name}"
+        b = ""
+        c = T"some {f'test{name}'}"
+        a
+        b
+        c
+      """);
+
+    var statements = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::body)
+      .map(StatementList::statements)
+      .orElseGet(List::of);
+
+    var aType = ((ExpressionStatement) statements.get(statements.size() - 3)).expressions().get(0).typeV2();
+    var bType = ((ExpressionStatement) statements.get(statements.size() - 2)).expressions().get(0).typeV2();
+    var cType = ((ExpressionStatement) statements.get(statements.size() - 1)).expressions().get(0).typeV2();
+    assertThat(aType).extracting(PythonType::unwrappedType).isSameAs(PythonType.UNKNOWN);
+    assertThat(bType).extracting(PythonType::unwrappedType).isEqualTo(STR_TYPE);
+    assertThat(cType).extracting(PythonType::unwrappedType).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
   void assignmentStatementLhsTypeTest() {
     var fileInput = inferTypes("""
       def foo():

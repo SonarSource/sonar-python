@@ -77,7 +77,7 @@ public final class PythonLexer {
       .withChannel(new StringLiteralsChannel())
 
       //https://docs.python.org/3.6/reference/lexical_analysis.html#formatted-string-literals
-      .withChannel(new FStringChannel(lexerState))
+      .withChannel(new FStringAndTStringChannel(lexerState))
 
       // http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
       .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + SINGLE_QUOTE_STRING))

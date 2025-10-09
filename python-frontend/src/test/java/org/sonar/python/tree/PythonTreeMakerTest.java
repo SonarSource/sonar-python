@@ -2097,6 +2097,7 @@ class PythonTreeMakerTest extends RuleTest {
       "He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.", "f");
     assertStringLiteral("f'some: {f\"nested interpolation: {u}\"}'", "some: {f\"nested interpolation: {u}\"}", "f");
     assertThat(((StringLiteral) parse("'ab' 'cd'", treeMaker::expression)).trimmedQuotesValue()).isEqualTo("abcd");
+    assertStringLiteral("t'He said his name is {name} and he is {age} years old.'", "He said his name is {name} and he is {age} years old.", "t");
   }
 
   @Test

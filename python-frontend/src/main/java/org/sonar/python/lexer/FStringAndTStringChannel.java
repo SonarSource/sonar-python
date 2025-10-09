@@ -30,10 +30,11 @@ import org.sonar.sslr.channel.Channel;
 import org.sonar.sslr.channel.CodeReader;
 
 /**
- * A channel to handle f-strings.
+ * A channel to handle f-strings and t-strings
  * See https://docs.python.org/3.12/reference/lexical_analysis.html#formatted-string-literals
+ * See https://docs.python.org/3.14/reference/lexical_analysis.html#template-string-literals
  */
-public class FStringChannel extends Channel<Lexer> {
+public class FStringAndTStringChannel extends Channel<Lexer> {
 
   private static final char EOF = (char) -1;
 
@@ -41,10 +42,10 @@ public class FStringChannel extends Channel<Lexer> {
   private final StringBuilder sb = new StringBuilder();
 
   private static final Set<Character> QUOTES = Set.of('\"', '\'');
-  private static final Set<Character> PREFIXES = Set.of('F', 'R');
+  private static final Set<Character> PREFIXES = Set.of('F', 'T');
   private static final Set<String> ESCAPED_CHARS = Set.of("{{", "}}");
 
-  public FStringChannel(LexerState lexerState) {
+  public FStringAndTStringChannel(LexerState lexerState) {
     this.lexerState = lexerState;
   }
 
@@ -58,13 +59,14 @@ public class FStringChannel extends Channel<Lexer> {
 
     if (canConsumeFStringPrefix(sb, code)) {
       char quote = code.charAt(0);
-      StringBuilder quotes = consumeFStringQuotes(code, quote);
+      var startToken = sb.indexOf("t") >= 0 || sb.indexOf("T") >= 0 ? PythonTokenType.TSTRING_START: PythonTokenType.FSTRING_START;
       boolean isRawString = sb.indexOf("r") >= 0 || sb.indexOf("R") >= 0;
+      StringBuilder quotes = consumeFStringQuotes(code, quote);
       FStringState newState = new FStringState(Mode.FSTRING_MODE, lexerState.brackets, isRawString);
       newState.setQuote(quote);
       newState.setNumberOfQuotes(quotes.length());
       lexerState.fStringStateStack.push(newState);
-      Token fStringStartToken = buildToken(PythonTokenType.FSTRING_START, sb.append(quotes).toString(), output, line, column);
+      Token fStringStartToken = buildToken(startToken, sb.append(quotes).toString(), output, line, column);
       sb.setLength(0);
       List<Token> tokens = new ArrayList<>();
       tokens.add(fStringStartToken);
@@ -141,11 +143,11 @@ public class FStringChannel extends Channel<Lexer> {
   private static boolean canConsumeFStringPrefix(StringBuilder sb, CodeReader code) {
     Character firstChar = Character.toUpperCase(code.charAt(0));
     Character secondChar = Character.toUpperCase(code.charAt(1));
-    if (firstChar == 'F' && QUOTES.contains(code.charAt(1))) {
+    if (PREFIXES.contains(firstChar) && QUOTES.contains(code.charAt(1))) {
       sb.append((char) code.pop());
       return true;
-    } else if (PREFIXES.contains(firstChar) && PREFIXES.contains(secondChar) &&
-      !firstChar.equals(secondChar) && QUOTES.contains(code.charAt(2))) {
+    } else if (((PREFIXES.contains(firstChar) && secondChar == 'R') ||
+      (PREFIXES.contains(secondChar) && firstChar == 'R')) && QUOTES.contains(code.charAt(2))) {
         sb.append((char) code.pop());
         sb.append((char) code.pop());
         return true;
