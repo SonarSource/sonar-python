@@ -17,10 +17,14 @@
 package org.sonar.plugins.python;
 
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.BiConsumer;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
@@ -43,12 +47,12 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldDisplayMessagePluralized() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
+
     report.start(3);
-    // Wait for start message
-    waitForMessage();
-    // Wait for at least one progress message
-    waitForMessage();
+    // Wait for start message and one progress message
+    logConsumer.awaitCount(2);
 
     report.stop();
 
@@ -61,12 +65,11 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldDisplayMessageSingular() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
     report.start(1);
-    // Wait for start message
-    waitForMessage();
-    // Wait for at least one progress message
-    waitForMessage();
+    // Wait for start message and one progress message
+    logConsumer.awaitCount(2);
 
     report.stop();
 
@@ -79,13 +82,12 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldDisplayMessageForOneCurrentlyAnalyzedFile() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
-    report.start(1);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
     report.startAnalysisFor("file1");
-    // Wait for start message
-    waitForMessage();
-    // Wait for at least one progress message
-    waitForMessage();
+    report.start(1);
+    // Wait for start message and one progress message
+    logConsumer.awaitCount(2);
 
     report.stop();
 
@@ -98,14 +100,13 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldDisplayMessageForTwoCurrentlyAnalyzedFiles() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
-    report.start(2);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
     report.startAnalysisFor("file1");
     report.startAnalysisFor("file2");
-    // Wait for start message
-    waitForMessage();
-    // Wait for at least one progress message
-    waitForMessage();
+    report.start(2);
+    // Wait for start message and one progress message
+    logConsumer.awaitCount(2);
 
     report.stop();
 
@@ -118,16 +119,18 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldDisplayMessageForTwoCurrentlyAnalyzedFilesWhenOneAlreadyFinished() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
+    logConsumer.setListener(1, () -> {
+      // runs on the logging thread after the first log message
+      report.startAnalysisFor("file1");
+      report.startAnalysisFor("file2");
+      report.startAnalysisFor("file3");
+      report.finishAnalysisFor("file2");
+    });
     report.start(3);
-    report.startAnalysisFor("file1");
-    report.startAnalysisFor("file2");
-    report.startAnalysisFor("file3");
-    report.finishAnalysisFor("file2");
-    // Wait for start message
-    waitForMessage();
-    // Wait for at least one progress message
-    waitForMessage();
+    // Wait for start message and one progress message
+    logConsumer.awaitCount(2);
 
     report.stop();
 
@@ -140,16 +143,15 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldAbbreviateLogMessageInInfoLogLevel() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
-    report.start(4);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
     report.startAnalysisFor("file1");
     report.startAnalysisFor("file2");
     report.startAnalysisFor("file3");
     report.startAnalysisFor("file4");
-    // Wait for start message
-    waitForMessage();
-    // Wait for at least one progress message
-    waitForMessage();
+    report.start(4);
+    // Wait for start message and one progress message
+    logConsumer.awaitCount(2);
 
     report.stop();
 
@@ -162,17 +164,17 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldNotAbbreviateLogMessageInInfoLogLevel() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
     logTester.setLevel(Level.DEBUG);
-    report.start(4);
     report.startAnalysisFor("file1");
     report.startAnalysisFor("file2");
     report.startAnalysisFor("file3");
     report.startAnalysisFor("file4");
-    // Wait for start message
-    waitForMessage();
-    // Wait for at least one progress message
-    waitForMessage();
+    report.start(4);
+
+    // Wait for start message and one progress message
+    logConsumer.awaitCount(2);
 
     report.stop();
 
@@ -185,19 +187,22 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldDisplayLogWhenExceedingInitialNumberOfAnalyzedFiles() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
     logTester.setLevel(Level.DEBUG);
+    logConsumer.setListener(1, () -> {
+      // runs on the logging thread after the first log message
+      report.startAnalysisFor("file1");
+      report.finishAnalysisFor("file1");
+      report.startAnalysisFor("file2");
+      report.finishAnalysisFor("file2");
+      report.startAnalysisFor("fileThatExceedsSize");
+      report.finishAnalysisFor("fileThatExceedsSize");
+    });
     report.start(2);
-    // Wait for start message
-    waitForMessage();
-    report.startAnalysisFor("file1");
-    report.finishAnalysisFor("file1");
-    report.startAnalysisFor("file2");
-    report.finishAnalysisFor("file2");
-    report.startAnalysisFor("fileThatExceedsSize");
-    report.finishAnalysisFor("fileThatExceedsSize");
-    // Wait for at least one progress message
-    waitForMessage();
+
+    // Wait for start message, debug message from finishAnalysisFor, and one progress message
+    logConsumer.awaitCount(3);
 
     report.stop();
 
@@ -211,14 +216,14 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldDisplayLogWhenFinishingAnalysisOnNotStartedFile() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
     logTester.setLevel(Level.DEBUG);
+    // sets up that finishAnalysisFor is called after the first log message on the same thread
+    logConsumer.setListener(1, () -> report.finishAnalysisFor("file1"));
     report.start(2);
-    report.finishAnalysisFor("file1");
-    // Wait for start message
-    waitForMessage();
-    // Wait for at least one progress message
-    waitForMessage();
+    // Wait for start message, debug message from finishAnalysisFor, and one progress message
+    logConsumer.awaitCount(3);
 
     report.stop();
 
@@ -232,10 +237,11 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldCancelCorrectly() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
     report.start(1);
     // Wait for start message
-    waitForMessage();
+    logConsumer.awaitCount(1);
 
     report.cancel();
 
@@ -248,10 +254,11 @@ class MultiFileProgressReportTest {
   @Test
   @Timeout(5)
   void shouldPreserveInterruptFlagOnStop() throws InterruptedException {
-    var report = new MultiFileProgressReport(100);
+    var logConsumer = new LogConsumer();
+    var report = new MultiFileProgressReport(100, logConsumer);
     report.start(1);
     // Wait for start message
-    waitForMessage();
+    logConsumer.awaitCount(1);
 
     AtomicBoolean interruptFlagPreserved = new AtomicBoolean(false);
 
@@ -271,7 +278,7 @@ class MultiFileProgressReportTest {
     t.start();
     t.interrupt();
     t.join(1000);
-    waitForMessage();
+    logConsumer.awaitCount(2);
     assertThat(interruptFlagPreserved.get()).isTrue();
 
     assertThat(logTester.logs()).contains("1/1 source file has been analyzed");
@@ -339,9 +346,37 @@ class MultiFileProgressReportTest {
     logTester.setLevel(Level.INFO);
   }
 
-  private static void waitForMessage() throws InterruptedException {
-    synchronized (LOG) {
-      LOG.wait(1000);
+  private static class LogConsumer implements BiConsumer<String, Boolean> {
+
+    private final AtomicInteger logCount = new AtomicInteger(0);
+
+    private Map<Integer, Runnable> logActions = new ConcurrentHashMap<>();
+
+    @Override
+    public void accept(@SuppressWarnings("null") String message, @SuppressWarnings("null") Boolean debug) {
+      if (debug) {
+        LOG.debug(message);
+      } else {
+        LOG.info(message);
+      }
+      synchronized (logCount) {
+        logCount.incrementAndGet();
+        logCount.notifyAll();
+        logActions.getOrDefault(logCount.get(), () -> {
+        }).run();
+      }
+    }
+
+    public void setListener(int count, Runnable listener) {
+      logActions.put(count, listener);
+    }
+
+    public void awaitCount(int count) throws InterruptedException {
+      synchronized (logCount) {
+        while (logCount.get() < count) {
+          logCount.wait(1000);
+        }
+      }
     }
   }
 }

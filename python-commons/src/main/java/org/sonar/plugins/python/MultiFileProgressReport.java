@@ -17,11 +17,13 @@
 package org.sonar.plugins.python;
 
 
+import com.google.common.annotations.VisibleForTesting;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +43,8 @@ public class MultiFileProgressReport implements Runnable {
   private boolean success;
   private Instant startInstant;
 
+  private BiConsumer<String, Boolean> logFunction = MultiFileProgressReport::defaultLogFunction;
+
   /**
    * The report loop can not rely only on Thread.interrupted() to end, according to
    * interrupted() javadoc, a thread interruption can be ignored because a thread was
@@ -50,6 +54,12 @@ public class MultiFileProgressReport implements Runnable {
    * Thread.interrupted() failed to be set to true.
    */
   private final AtomicBoolean interrupted = new AtomicBoolean();
+
+  @VisibleForTesting
+  MultiFileProgressReport(long progressUpdatePeriod, BiConsumer<String, Boolean> logFunction) {
+    this(progressUpdatePeriod, "default");
+    this.logFunction = logFunction;
+  }
 
   public MultiFileProgressReport(String stepName) {
     this(DEFAULT_PROGRESS_UPDATE_PERIOD_MILLIS, stepName);
@@ -112,13 +122,13 @@ public class MultiFileProgressReport implements Runnable {
 
   public synchronized void finishAnalysisFor(String fileName) {
     if (!currentFileNames.remove(fileName)) {
-      LOG.debug("Couldn't finish progress report of file \"{}\", as it was not in the list of files being analyzed", fileName);
+      log("Couldn't finish progress report of file \"%s\", as it was not in the list of files being analyzed".formatted(fileName), true);
       return;
     }
     if (numberOfFinishedFiles < size) {
       numberOfFinishedFiles++;
     } else {
-      LOG.debug("Reported finished analysis on more files than expected");
+      log("Reported finished analysis on more files than expected", true);
     }
   }
 
@@ -180,14 +190,15 @@ public class MultiFileProgressReport implements Runnable {
     log("Finished step " + thread.getName() + " in " + (Instant.now().toEpochMilli() - startInstant.toEpochMilli()) + "ms", false);
   }
 
-  private static void log(String message, boolean debug) {
-    synchronized (LOG) {
-      if (debug) {
-        LOG.debug(message);
-      } else {
-        LOG.info(message);
-      }
-      LOG.notifyAll();
+  private void log(String message, boolean debug) {
+    logFunction.accept(message, debug);
+  }
+
+  private static void defaultLogFunction(String message, boolean debug) {
+    if (debug) {
+      LOG.debug(message);
+    } else {
+      LOG.info(message);
     }
   }
 }
