@@ -26,7 +26,7 @@ class PythonV3Test extends RuleTest {
 
   @Test
   void ellipsis(){
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     assertThat(p).matches("...");
     assertThat(p).matches("x[...]");
   }
@@ -178,5 +178,16 @@ class PythonV3Test extends RuleTest {
       // dictionary
       .matches("{'x':b, **a}")
     ;
+  }
+
+  @Test
+  void except_clause() {
+    setRootRule(PythonGrammar.EXCEPT_CLAUSE);
+
+    assertThat(p)
+      .matches("except Error as a")
+      .matches("except (Error, EOFError)")
+      .matches("except* (Error, EOFError)")
+      .matches("except Error, EOFError");
   }
 }

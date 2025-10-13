@@ -42,7 +42,7 @@ import static org.sonar.python.api.PythonGrammar.RAISE_STMT;
 import static org.sonar.python.api.PythonGrammar.RETURN_STMT;
 import static org.sonar.python.api.PythonGrammar.SIMPLE_STMT;
 import static org.sonar.python.api.PythonGrammar.STATEMENT;
-import static org.sonar.python.api.PythonGrammar.TEST;
+import static org.sonar.python.api.PythonGrammar.EXPRESSION;
 import static org.sonar.python.api.PythonGrammar.TESTLIST_STAR_EXPR;
 import static org.sonar.python.api.PythonGrammar.YIELD_EXPR;
 import static org.sonar.python.api.PythonGrammar.YIELD_STMT;
@@ -78,12 +78,12 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
       b.sequence(
         QUESTION_MARK,
         b.optional(QUESTION_MARK),
-        TEST,
+        EXPRESSION,
         b.optional(QUESTION_MARK),
         b.optional(QUESTION_MARK)
       ),
       b.sequence(
-        TEST,
+        EXPRESSION,
         QUESTION_MARK,
         b.optional(QUESTION_MARK)
       ),

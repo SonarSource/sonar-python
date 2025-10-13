@@ -211,3 +211,9 @@ def local_dict_union_assignment():
 def local_not_dict_union_assignment():
     values = True #Noncompliant
     values |= False
+
+# FN with python 2 syntax for exception handling
+try:
+  ""
+except OSError, why: # FN
+      pass

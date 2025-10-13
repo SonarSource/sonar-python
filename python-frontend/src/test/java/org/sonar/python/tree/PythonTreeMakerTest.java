@@ -1502,17 +1502,18 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(exceptClause.exceptionInstance()).isNotNull();
     assertThat(tryStatement.children()).hasSize(4);
 
-    astNode = p.parse("try: pass\nexcept Error, e: pass");
+    astNode = p.parse("try: pass\nexcept Error, OtherError: pass");
     tryStatement = treeMaker.tryStatement(astNode);
     assertThat(tryStatement.tryKeyword().value()).isEqualTo("try");
     assertThat(tryStatement.exceptClauses()).hasSize(1);
     exceptClause = tryStatement.exceptClauses().get(0);
     assertThat(exceptClause.asKeyword()).isNull();
-    assertThat(exceptClause.commaToken().value()).isEqualTo(",");
-    assertThat(exceptClause.exceptionInstance()).isNotNull();
+    assertThat(exceptClause.commaToken()).isNull();
+    assertThat(exceptClause.exceptionInstance()).isNull();
+    assertThat(exceptClause.exception()).isNotNull();
+    assertThat(exceptClause.exception()).isInstanceOf(TupleImpl.class);
     assertThat(exceptClause.children())
-      .containsExactly(exceptClause.exceptKeyword(), exceptClause.exception(), exceptClause.commaToken(), exceptClause.exceptionInstance(),
-        /*colon token is not accessible through API*/ exceptClause.children().get(4), exceptClause.body());
+      .containsExactly(exceptClause.exceptKeyword(),exceptClause.exception(), exceptClause.colon(), exceptClause.body());
     assertThat(tryStatement.children()).hasSize(4);
 
     astNode = p.parse("try:\n    pass\nexcept Error:\n    pass\nelse:\n    pass\nfinally:\n    pass");
@@ -1677,13 +1678,13 @@ class PythonTreeMakerTest extends RuleTest {
   }
 
   private void assertCallExpression(String code) {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     assertThat(parse(code, treeMaker::expression)).isInstanceOf(CallExpression.class);
   }
 
   @Test
   void combinations_with_call_expressions() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
 
     CallExpression nestingCall = (CallExpression) parse("foo('a').bar(42)", treeMaker::expression);
     assertThat(nestingCall.argumentList().arguments()).extracting(t -> ((RegularArgument) t).expression().getKind()).containsExactly(Tree.Kind.NUMERIC_LITERAL);
@@ -1705,7 +1706,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void attributeRef_expression() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     QualifiedExpression qualifiedExpression = (QualifiedExpression) parse("foo.bar", treeMaker::expression);
     assertThat(qualifiedExpression.name().name()).isEqualTo("bar");
     Expression qualifier = qualifiedExpression.qualifier();
@@ -1766,7 +1767,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void binary_expressions() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
 
     BinaryExpression simplePlus = binaryExpression("a + b");
     assertThat(simplePlus.leftOperand()).isInstanceOf(Name.class);
@@ -1815,7 +1816,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void in_expressions() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
 
     InExpression in = (InExpression) binaryExpression("1 in [a]");
     assertThat(in.getKind()).isEqualTo(Tree.Kind.IN);
@@ -1833,7 +1834,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void is_expressions() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
 
     IsExpression is = (IsExpression) binaryExpression("a is 1");
     assertThat(is.getKind()).isEqualTo(Tree.Kind.IS);
@@ -1861,7 +1862,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void await_expression() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     AwaitExpression expr = (AwaitExpression) parse("await x", treeMaker::expression);
     assertThat(expr.getKind()).isEqualTo(Tree.Kind.AWAIT);
     assertThat(expr.awaitToken().value()).isEqualTo("await");
@@ -1876,7 +1877,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void subscription_expressions() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
 
     SubscriptionExpression expr = (SubscriptionExpression) parse("x[a]", treeMaker::expression);
     assertThat(expr.getKind()).isEqualTo(Tree.Kind.SUBSCRIPTION);
@@ -1902,7 +1903,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void subscription_expressions_with_unpacking_expr_subscript() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
 
     SubscriptionExpression expr = (SubscriptionExpression) parse("x[*a]", treeMaker::expression);
     assertThat(expr.getKind()).isEqualTo(Tree.Kind.SUBSCRIPTION);
@@ -1915,7 +1916,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void slice_expressions() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
 
     SliceExpression expr = (SliceExpression) parse("x[a:b:c]", treeMaker::expression);
     assertThat(expr.getKind()).isEqualTo(Tree.Kind.SLICE_EXPR);
@@ -1935,7 +1936,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void qualified_with_slice() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     QualifiedExpression qualifiedWithSlice = (QualifiedExpression) parse("x[a:b].foo", treeMaker::expression);
     assertThat(qualifiedWithSlice.qualifier().getKind()).isEqualTo(Tree.Kind.SLICE_EXPR);
   }
@@ -2373,7 +2374,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void list_comprehension() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("[x+y for x,y in [(42, 43)]]", treeMaker::expression);
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
@@ -2397,7 +2398,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void async_list_comprehension() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("[i async for i in aiter() if i % 2]", treeMaker::expression);
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
@@ -2408,7 +2409,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void list_comprehension_with_if() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("[x+1 for x in [42, 43] if x%2==0]", treeMaker::expression);
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
@@ -2423,7 +2424,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void list_comprehension_with_nested_for() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("[x+y for x in [42, 43] for y in ('a', 0)]", treeMaker::expression);
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
@@ -2434,7 +2435,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void parenthesized_expression() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     ParenthesizedExpression parenthesized = (ParenthesizedExpression) parse("(42)", treeMaker::expression);
     assertThat(parenthesized.getKind()).isEqualTo(Tree.Kind.PARENTHESIZED);
     assertThat(parenthesized.children()).hasSize(3);
@@ -2449,7 +2450,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void generator_expression() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     ComprehensionExpression generator = (ComprehensionExpression) parse("(x*x for x in range(10))", treeMaker::expression);
     assertThat(generator.getKind()).isEqualTo(Tree.Kind.GENERATOR_EXPR);
     assertThat(generator.children()).hasSize(4);
@@ -2516,7 +2517,7 @@ class PythonTreeMakerTest extends RuleTest {
   }
 
   private Tuple parseTuple(String code) {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     Tuple tuple = (Tuple) parse(code, treeMaker::expression);
     return tuple;
   }
@@ -2530,7 +2531,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void not() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     Expression exp = parse("not 1", treeMaker::expression);
     assertThat(exp).isInstanceOf(UnaryExpression.class);
     assertThat(exp.getKind()).isEqualTo(Tree.Kind.NOT);
@@ -2539,7 +2540,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void conditional_expression() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     ConditionalExpression tree = (ConditionalExpression) parse("1 if condition else 2", treeMaker::expression);
     assertThat(tree.firstToken().value()).isEqualTo("1");
     assertThat(tree.lastToken().value()).isEqualTo("2");
@@ -2591,7 +2592,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void dict_comprehension() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     DictCompExpression comprehension =
       (DictCompExpression) parse("{x-1:y+1 for x,y in [(42,43)]}", treeMaker::expression);
     assertThat(comprehension.firstToken().value()).isEqualTo("{");
@@ -2639,7 +2640,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void set_comprehension() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("{x-1 for x in [42, 43]}", treeMaker::expression);
     assertThat(comprehension.firstToken().value()).isEqualTo("{");
@@ -2653,7 +2654,7 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void set_comprehension_with_walrus_operator() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("{last := x-1 for x in [42, 43]}", treeMaker::expression);
     assertThat(comprehension.firstToken().value()).isEqualTo("{");

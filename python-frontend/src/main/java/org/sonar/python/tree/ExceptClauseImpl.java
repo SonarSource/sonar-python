@@ -42,7 +42,7 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
   private final Expression exceptionInstance;
 
   public ExceptClauseImpl(Token exceptKeyword, @Nullable Token starToken, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body,
-                          @Nullable Token dedent) {
+    @Nullable Token dedent) {
     this.exceptKeyword = exceptKeyword;
     this.starToken = starToken;
     this.colon = colon;
@@ -57,7 +57,7 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
   }
 
   public ExceptClauseImpl(Token exceptKeyword, @Nullable Token starToken, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body,
-                          @Nullable Token dedent, Expression exception, @Nullable Token asNode, @Nullable Token commaNode, Expression exceptionInstance) {
+    @Nullable Token dedent, Expression exception, @Nullable Token asNode, @Nullable Token commaNode, Expression exceptionInstance) {
     this.exceptKeyword = exceptKeyword;
     this.starToken = starToken;
     this.colon = colon;
@@ -72,7 +72,7 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
   }
 
   public ExceptClauseImpl(Token exceptKeyword, @Nullable Token starToken, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body,
-                          @Nullable Token dedent, Expression exception) {
+    @Nullable Token dedent, Expression exception) {
     this.exceptKeyword = exceptKeyword;
     this.starToken = starToken;
     this.colon = colon;
@@ -109,6 +109,7 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
   }
 
   @CheckForNull
+  @Deprecated(since="5.12")
   @Override
   public Token commaToken() {
     return commaToken;
@@ -146,4 +147,5 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
     return Stream.of(exceptKeyword, starToken, exception, asKeyword, commaToken, exceptionInstance, colon, newLine, indent, body, dedent)
       .filter(Objects::nonNull).toList();
   }
+
 }

@@ -29,7 +29,7 @@ class ExpressionTest extends RuleTest {
 
   @BeforeEach
   void init() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
   }
 
   @Test

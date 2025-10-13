@@ -58,30 +58,27 @@ public class PythonGrammarBuilder {
         TESTLIST_STAR_EXPR,
         b.firstOf(
           ANNASSIGN,
-          b.sequence(AUGASSIGN, b.firstOf(YIELD_EXPR, TESTLIST)),
-          b.zeroOrMore("=", ANNOTATED_RHS))
-      )
-    );
+          b.sequence(AUGASSIGN, b.firstOf(YIELD_EXPR, EXPRESSIONS)),
+          b.zeroOrMore("=", ANNOTATED_RHS))));
 
-    // https://github.com/python/cpython/blob/v3.8.0/Grammar/Grammar#L87
-    b.rule(ANNASSIGN).is(":", TEST, b.optional( "=", ANNOTATED_RHS));
+    // https://github.com/python/cpython/blob/v3.14.0/Grammar/python.gram#L151    
+    b.rule(ANNASSIGN).is(":", EXPRESSION, b.optional("=", ANNOTATED_RHS));
 
-    b.rule(TESTLIST_STAR_EXPR).is(b.firstOf(TEST, STAR_EXPR), b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","));
+    b.rule(TESTLIST_STAR_EXPR).is(b.firstOf(EXPRESSION, STAR_EXPR), b.zeroOrMore(",", b.firstOf(EXPRESSION, STAR_EXPR)), b.optional(","));
     b.rule(AUGASSIGN).is(b.firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|=", "@="));
 
     annotatedRhs(b);
 
-    b.rule(NAMED_EXPR_TEST).is(TEST, b.optional(PythonPunctuator.WALRUS_OPERATOR, TEST));
+    b.rule(NAMED_EXPR_TEST).is(EXPRESSION, b.optional(PythonPunctuator.WALRUS_OPERATOR, EXPRESSION));
     b.rule(STAR_NAMED_EXPRESSIONS).is(STAR_NAMED_EXPRESSION, b.zeroOrMore(",", STAR_NAMED_EXPRESSION), b.optional(","));
     b.rule(STAR_NAMED_EXPRESSION).is(b.firstOf(
       STAR_EXPR,
-      NAMED_EXPR_TEST
-    ));
-    b.rule(TEST).is(b.firstOf(
-      b.sequence(OR_TEST, b.optional("if", OR_TEST, "else", TEST)),
+      NAMED_EXPR_TEST));
+    b.rule(EXPRESSION).is(b.firstOf(
+      b.sequence(OR_TEST, b.optional("if", OR_TEST, "else", EXPRESSION)),
       LAMBDEF));
     b.rule(TEST_NOCOND).is(b.firstOf(OR_TEST, LAMBDEF_NOCOND));
-    b.rule(LAMBDEF).is("lambda", b.optional(VARARGSLIST), ":", TEST);
+    b.rule(LAMBDEF).is("lambda", b.optional(VARARGSLIST), ":", EXPRESSION);
     b.rule(LAMBDEF_NOCOND).is("lambda", b.optional(VARARGSLIST), ":", TEST_NOCOND);
 
     b.rule(STAR_EXPR).is("*", EXPR);
@@ -123,7 +120,7 @@ public class PythonGrammarBuilder {
       b.sequence("(", b.optional(b.firstOf(YIELD_EXPR, TESTLIST_COMP)), ")"),
       b.sequence("[", b.optional(TESTLIST_COMP), "]"),
       b.sequence("{", b.optional(DICTORSETMAKER), "}"),
-      b.sequence("`", TEST, b.zeroOrMore(",", TEST), "`"),
+      b.sequence("`", EXPRESSION, b.zeroOrMore(",", EXPRESSION), "`"),
       NAME,
       PythonTokenType.NUMBER,
       STRINGS,
@@ -137,44 +134,44 @@ public class PythonGrammarBuilder {
       b.sequence(".", NAME)));
     b.rule(SUBSCRIPTLIST).is(SUBSCRIPT, b.zeroOrMore(",", SUBSCRIPT), b.optional(","));
     b.rule(SUBSCRIPT).is(b.firstOf(
-      b.sequence(b.optional(TEST), ":", b.optional(TEST), b.optional(SLICEOP)),
+      b.sequence(b.optional(EXPRESSION), ":", b.optional(EXPRESSION), b.optional(SLICEOP)),
       b.firstOf(NAMED_EXPR_TEST, STAR_EXPR)));
-    b.rule(SLICEOP).is(":", b.optional(TEST));
+    b.rule(SLICEOP).is(":", b.optional(EXPRESSION));
     b.rule(EXPRLIST).is(b.firstOf(EXPR, STAR_EXPR), b.zeroOrMore(",", b.firstOf(EXPR, STAR_EXPR)), b.optional(","));
-    b.rule(TESTLIST).is(TEST, b.zeroOrMore(",", TEST), b.optional(","));
+    b.rule(EXPRESSIONS).is(EXPRESSION, b.zeroOrMore(",", EXPRESSION), b.optional(","));
     b.rule(DICTORSETMAKER).is(b.firstOf(
       b.sequence(
-        b.firstOf(b.sequence(TEST, ":", TEST), b.sequence("**", EXPR)),
-        b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(b.sequence(TEST, ":", TEST), b.sequence("**", EXPR))), b.optional(",")))),
+        b.firstOf(b.sequence(EXPRESSION, ":", EXPRESSION), b.sequence("**", EXPR)),
+        b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(b.sequence(EXPRESSION, ":", EXPRESSION), b.sequence("**", EXPR))), b.optional(",")))),
       b.sequence(STAR_NAMED_EXPRESSION, b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", STAR_NAMED_EXPRESSION), b.optional(","))))));
 
     b.rule(ARGLIST).is(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(","));
     b.rule(ARGUMENT).is(b.firstOf(
-      b.sequence("*", TEST),
-      b.sequence("**", TEST),
-      b.sequence(TEST, PythonPunctuator.WALRUS_OPERATOR, TEST),
-      b.sequence(TEST, "=", TEST),
-      b.sequence(TEST, b.optional(COMP_FOR))));
+      b.sequence("*", EXPRESSION),
+      b.sequence("**", EXPRESSION),
+      b.sequence(EXPRESSION, PythonPunctuator.WALRUS_OPERATOR, EXPRESSION),
+      b.sequence(EXPRESSION, "=", EXPRESSION),
+      b.sequence(EXPRESSION, b.optional(COMP_FOR))));
     b.rule(COMP_ITER).is(b.firstOf(COMP_FOR, COMP_IF));
-    b.rule(COMP_FOR).is(b.optional(ASYNC), "for", EXPRLIST, "in", TESTLIST, b.optional(COMP_ITER));
+    b.rule(COMP_FOR).is(b.optional(ASYNC), "for", EXPRLIST, "in", EXPRESSIONS, b.optional(COMP_ITER));
     b.rule(COMP_IF).is("if", TEST_NOCOND, b.optional(COMP_ITER));
 
     b.rule(YIELD_EXPR).is(b.firstOf(
-      b.sequence("yield", "from", TEST),
+      b.sequence("yield", "from", EXPRESSION),
       b.sequence("yield", b.optional(TESTLIST_STAR_EXPR))));
 
     b.rule(NAME).is(IDENTIFIER);
 
     b.rule(VARARGSLIST).is(b.firstOf(
       b.sequence("**", NAME),
-      b.sequence("*", b.optional(NAME), b.zeroOrMore(",", FPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME)),
-      b.sequence(FPDEF, b.optional("=", TEST),
-        b.zeroOrMore(",", FPDEF, b.optional("=", TEST)),
-        b.optional(",", "/", b.zeroOrMore(",", FPDEF, b.optional("=", TEST))),
+      b.sequence("*", b.optional(NAME), b.zeroOrMore(",", FPDEF, b.optional("=", EXPRESSION)), b.optional(",", "**", NAME)),
+      b.sequence(FPDEF, b.optional("=", EXPRESSION),
+        b.zeroOrMore(",", FPDEF, b.optional("=", EXPRESSION)),
+        b.optional(",", "/", b.zeroOrMore(",", FPDEF, b.optional("=", EXPRESSION))),
         b.optional(",", b.firstOf(
           b.sequence("**", NAME),
-          b.sequence("*", b.optional(NAME), b.zeroOrMore(",", FPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME))))
-      )), b.optional(","));
+          b.sequence("*", b.optional(NAME), b.zeroOrMore(",", FPDEF, b.optional("=", EXPRESSION)), b.optional(",", "**", NAME)))))),
+      b.optional(","));
     b.rule(FPDEF).is(b.firstOf(
       NAME,
       b.sequence("(", FPLIST, ")")));
@@ -182,19 +179,17 @@ public class PythonGrammarBuilder {
 
     b.rule(TYPEDARGSLIST).is(b.firstOf(
       b.sequence("**", TFPDEF, b.optional(",")),
-      b.sequence("*", b.optional(TFPDEF), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", TFPDEF), b.optional(",")),
-      b.sequence(TFPDEF, b.optional("=", TEST),
-        b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)),
-        b.optional(",", "/", b.zeroOrMore(",", TFPDEF, b.optional("=", TEST))),
+      b.sequence("*", b.optional(TFPDEF), b.zeroOrMore(",", TFPDEF, b.optional("=", EXPRESSION)), b.optional(",", "**", TFPDEF), b.optional(",")),
+      b.sequence(TFPDEF, b.optional("=", EXPRESSION),
+        b.zeroOrMore(",", TFPDEF, b.optional("=", EXPRESSION)),
+        b.optional(",", "/", b.zeroOrMore(",", TFPDEF, b.optional("=", EXPRESSION))),
         b.optional(",", b.optional(b.firstOf(
           b.sequence("**", TFPDEF),
-          b.sequence("*", b.optional(TFPDEF), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", TFPDEF))
-        ), b.optional(","))))
-    ));
+          b.sequence("*", b.optional(TFPDEF), b.zeroOrMore(",", TFPDEF, b.optional("=", EXPRESSION)), b.optional(",", "**", TFPDEF))), b.optional(","))))));
     b.rule(TFPDEF).is(b.firstOf(
       b.sequence(NAME, b.optional(TYPE_ANNOTATION)),
       b.sequence("(", TFPLIST, ")")));
-    b.rule(TYPE_ANNOTATION).is(":", b.optional("*"), TEST);
+    b.rule(TYPE_ANNOTATION).is(":", b.optional("*"), EXPRESSION);
     b.rule(TFPLIST).is(TFPDEF, b.zeroOrMore(",", TFPDEF), b.optional(","));
   }
 
@@ -240,20 +235,20 @@ public class PythonGrammarBuilder {
   protected void simpleStatements(LexerfulGrammarBuilder b) {
     simpleStatement(b);
 
-    b.rule(TYPE_ALIAS_STMT).is("type", NAME, b.optional(TYPE_PARAMS), "=", TEST);
+    b.rule(TYPE_ALIAS_STMT).is("type", NAME, b.optional(TYPE_PARAMS), "=", EXPRESSION);
     b.rule(PRINT_STMT).is("print", b.nextNot("="), b.nextNot("("), b.firstOf(
-      b.sequence(">>", TEST, b.optional(b.oneOrMore(",", TEST), b.optional(","))),
-      b.optional(TEST, b.zeroOrMore(",", TEST), b.optional(","))));
+      b.sequence(">>", EXPRESSION, b.optional(b.oneOrMore(",", EXPRESSION), b.optional(","))),
+      b.optional(EXPRESSION, b.zeroOrMore(",", EXPRESSION), b.optional(","))));
 
-    b.rule(EXEC_STMT).is("exec", b.nextNot("("), EXPR, b.optional("in", TEST, b.optional(",", TEST)));
+    b.rule(EXEC_STMT).is("exec", b.nextNot("("), EXPR, b.optional("in", EXPRESSION, b.optional(",", EXPRESSION)));
 
-    b.rule(ASSERT_STMT).is("assert", TEST, b.optional(",", TEST));
+    b.rule(ASSERT_STMT).is("assert", EXPRESSION, b.optional(",", EXPRESSION));
 
     b.rule(PASS_STMT).is("pass");
     b.rule(DEL_STMT).is("del", EXPRLIST);
     b.rule(RETURN_STMT).is("return", b.optional(TESTLIST_STAR_EXPR));
     b.rule(YIELD_STMT).is(YIELD_EXPR);
-    b.rule(RAISE_STMT).is("raise", b.optional(TEST, b.optional(b.firstOf(b.sequence("from", TEST), b.sequence(",", TEST, b.optional(",", TEST))))));
+    b.rule(RAISE_STMT).is("raise", b.optional(EXPRESSION, b.optional(b.firstOf(b.sequence("from", EXPRESSION), b.sequence(",", EXPRESSION, b.optional(",", EXPRESSION))))));
     b.rule(BREAK_STMT).is("break");
     b.rule(CONTINUE_STMT).is("continue");
     b.rule(IMPORT_STMT).is(b.firstOf(IMPORT_NAME, IMPORT_FROM));
@@ -291,8 +286,7 @@ public class PythonGrammarBuilder {
       CONTINUE_STMT,
       IMPORT_STMT,
       GLOBAL_STMT,
-      NONLOCAL_STMT
-      ));
+      NONLOCAL_STMT));
   }
 
   /**
@@ -327,13 +321,14 @@ public class PythonGrammarBuilder {
         b.optional("finally", ":", SUITE)),
       b.sequence("finally", ":", SUITE)));
 
-    b.rule(EXCEPT_CLAUSE).is("except", b.optional("*"), b.optional(TEST, b.optional(b.firstOf("as", ","), TEST)));
+    // Python 3.14 allows for multiple errors in clause
+    b.rule(EXCEPT_CLAUSE).is("except", b.optional("*"), b.optional(
+      b.firstOf(b.sequence(EXPRESSION,"as", EXPRESSION), EXPRESSIONS)));
 
     b.rule(WITH_STMT).is(b.firstOf(
       b.sequence("with", "(", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), b.optional(","), ")", ":", SUITE),
-      b.sequence("with", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), ":", SUITE)
-    ));
-    b.rule(WITH_ITEM).is(TEST, b.optional("as", EXPR));
+      b.sequence("with", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), ":", SUITE)));
+    b.rule(WITH_ITEM).is(EXPRESSION, b.optional("as", EXPR));
 
     b.rule(MATCH_STMT).is("match", SUBJECT_EXPR, ":", NEWLINE, INDENT, b.oneOrMore(CASE_BLOCK), DEDENT);
     b.rule(SUBJECT_EXPR).is(STAR_NAMED_EXPRESSIONS);
@@ -351,16 +346,14 @@ public class PythonGrammarBuilder {
       b.sequence("{", "}"),
       b.sequence("{", DOUBLE_STAR_PATTERN, b.optional(","), "}"),
       b.sequence("{", ITEMS_PATTERN, ",", DOUBLE_STAR_PATTERN, b.optional(","), "}"),
-      b.sequence("{", ITEMS_PATTERN, b.optional(","), "}")
-    ));
+      b.sequence("{", ITEMS_PATTERN, b.optional(","), "}")));
     b.rule(ITEMS_PATTERN).is(KEY_VALUE_PATTERN, b.zeroOrMore(",", KEY_VALUE_PATTERN));
     b.rule(KEY_VALUE_PATTERN).is(b.firstOf(LITERAL_PATTERN, VALUE_PATTERN), ":", PATTERN);
     b.rule(DOUBLE_STAR_PATTERN).is("**", CAPTURE_PATTERN);
 
     b.rule(SEQUENCE_PATTERN).is(b.firstOf(
-      b.sequence("[", b.optional(MAYBE_SEQUENCE_PATTERN) , "]"),
-      b.sequence("(", b.optional(OPEN_SEQUENCE_PATTERN), ")")
-    ));
+      b.sequence("[", b.optional(MAYBE_SEQUENCE_PATTERN), "]"),
+      b.sequence("(", b.optional(OPEN_SEQUENCE_PATTERN), ")")));
     b.rule(OPEN_SEQUENCE_PATTERN).is(MAYBE_STAR_PATTERN, ",", b.optional(MAYBE_SEQUENCE_PATTERN));
     b.rule(MAYBE_SEQUENCE_PATTERN).is(MAYBE_STAR_PATTERN, b.zeroOrMore(",", MAYBE_STAR_PATTERN), b.optional(","));
     b.rule(MAYBE_STAR_PATTERN).is(b.firstOf(STAR_PATTERN, PATTERN));
@@ -379,18 +372,15 @@ public class PythonGrammarBuilder {
       STRINGS,
       PythonKeyword.NONE,
       "True",
-      "False"
-    ));
+      "False"));
 
     b.rule(COMPLEX_NUMBER).is(b.firstOf(
-      b.sequence(SIGNED_NUMBER, "+" , NUMBER),
-      b.sequence(SIGNED_NUMBER, "-", NUMBER))
-    );
+      b.sequence(SIGNED_NUMBER, "+", NUMBER),
+      b.sequence(SIGNED_NUMBER, "-", NUMBER)));
 
     b.rule(SIGNED_NUMBER).is(b.firstOf(
       NUMBER,
-      b.sequence("-", NUMBER)
-    ));
+      b.sequence("-", NUMBER)));
 
     b.rule(WILDCARD_PATTERN).is("_");
     b.rule(GROUP_PATTERN).is("(", PATTERN, ")");
@@ -412,13 +402,12 @@ public class PythonGrammarBuilder {
     b.rule(TYPE_PARAM).is(b.firstOf(
       b.sequence(NAME, b.optional(TYPE_PARAM_BOUND), b.optional(TYPE_PARAM_DEFAULT)),
       b.sequence("*", NAME, b.optional(TYPE_PARAM_STARRED_DEFAULT)),
-      b.sequence("**", NAME, b.optional(TYPE_PARAM_DEFAULT))
-    ));
-    b.rule(TYPE_PARAM_BOUND).is(":", TEST);
-    b.rule(TYPE_PARAM_DEFAULT).is("=", TEST);
-    b.rule(TYPE_PARAM_STARRED_DEFAULT).is("=", b.firstOf(TEST, STAR_EXPR));
+      b.sequence("**", NAME, b.optional(TYPE_PARAM_DEFAULT))));
+    b.rule(TYPE_PARAM_BOUND).is(":", EXPRESSION);
+    b.rule(TYPE_PARAM_DEFAULT).is("=", EXPRESSION);
+    b.rule(TYPE_PARAM_STARRED_DEFAULT).is("=", b.firstOf(EXPRESSION, STAR_EXPR));
 
-    b.rule(FUN_RETURN_ANNOTATION).is("-", ">", TEST);
+    b.rule(FUN_RETURN_ANNOTATION).is("-", ">", EXPRESSION);
 
     b.rule(DECORATORS).is(b.oneOrMore(DECORATOR));
     b.rule(DECORATOR).is("@", NAMED_EXPR_TEST, NEWLINE);
@@ -426,7 +415,7 @@ public class PythonGrammarBuilder {
 
     b.rule(CLASSDEF).is(b.optional(DECORATORS), "class", CLASSNAME,
       b.optional(TYPE_PARAMS), b.optional("(", b.optional(ARGLIST), ")"), ":", SUITE);
-    
+
     b.rule(CLASSNAME).is(NAME);
 
     b.rule(ASYNC_STMT).is(ASYNC, b.firstOf(WITH_STMT, FOR_STMT));

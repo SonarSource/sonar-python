@@ -37,7 +37,8 @@ class BaseTreeVisitorTest extends RuleTest {
   private final PythonTreeMaker treeMaker = new PythonTreeMaker();
 
   private static class FirstLastTokenVerifierVisitor extends BaseTreeVisitor {
-    public FirstLastTokenVerifierVisitor() {}
+    public FirstLastTokenVerifierVisitor() {
+    }
 
     @Override
     protected void scan(@Nullable Tree tree) {
@@ -186,6 +187,13 @@ class BaseTreeVisitorTest extends RuleTest {
     verify(visitor).visitFinallyClause(tree.finallyClause());
     verify(visitor).visitExceptClause(tree.exceptClauses().get(0));
     verify(visitor).visitPassStatement((PassStatement) tree.body().statements().get(0));
+
+    tree = parse("try: pass\nexcept Error, OtherError: pass\nfinally: pass", treeMaker::tryStatement);
+    visitor = spy(FirstLastTokenVerifierVisitor.class);
+    visitor.visitTryStatement(tree);
+    verify(visitor).visitFinallyClause(tree.finallyClause());
+    verify(visitor).visitExceptClause(tree.exceptClauses().get(0));
+    verify(visitor).visitPassStatement((PassStatement) tree.body().statements().get(0));
   }
 
   @Test
@@ -224,7 +232,7 @@ class BaseTreeVisitorTest extends RuleTest {
 
   @Test
   void qualified_expr() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     QualifiedExpression tree = (QualifiedExpression) parse("a.b", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitQualifiedExpression(tree);
@@ -338,7 +346,7 @@ class BaseTreeVisitorTest extends RuleTest {
 
   @Test
   void cond_expression() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     ConditionalExpression expr = (ConditionalExpression) parse("1 if p else 2", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);
@@ -367,7 +375,7 @@ class BaseTreeVisitorTest extends RuleTest {
 
   @Test
   void dict_comprehension() {
-    setRootRule(PythonGrammar.TEST);
+    setRootRule(PythonGrammar.EXPRESSION);
     DictCompExpression expr = (DictCompExpression) parse("{x+1:y-1 for x,y in map}", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);

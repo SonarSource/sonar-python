@@ -73,6 +73,16 @@ except (KeyboardInterrupt, SystemExit): # Noncompliant
                           #^^^^^^^^^^
     pass
 
+# using the new python 3.14 syntax
+try:
+    foo()
+except KeyboardInterrupt, SystemExit: # Noncompliant
+                         #^^^^^^^^^^
+    pass
+except ValueError, TypeError: 
+    pass
+
+
 try:
     foo()
 except (KeyboardInterrupt, SystemExit) as e:
@@ -157,3 +167,4 @@ try:
     foo()
 except (KeyboardInterrupt, AnotherException):
     sys.exit(1)
+

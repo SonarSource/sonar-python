@@ -236,7 +236,7 @@ public class PythonTreeMaker {
     AstNode annAssign = astNode.getFirstChild(PythonGrammar.ANNASSIGN);
     AstNode colonTokenNode = annAssign.getFirstChild(PythonPunctuator.COLON);
     Expression variable = exprListOrTestList(astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR));
-    Expression annotation = expression(annAssign.getFirstChild(PythonGrammar.TEST));
+    Expression annotation = expression(annAssign.getFirstChild(PythonGrammar.EXPRESSION));
     AstNode equalTokenNode = annAssign.getFirstChild(PythonPunctuator.ASSIGN);
     Token equalToken = null;
     Expression assignedValue = null;
@@ -391,10 +391,10 @@ public class PythonTreeMaker {
     List<AstNode> expressions = new ArrayList<>();
     AstNode fromExpression = null;
     if (fromKeyword != null) {
-      expressions.add(astNode.getFirstChild(PythonGrammar.TEST));
-      fromExpression = astNode.getLastChild(PythonGrammar.TEST);
+      expressions.add(astNode.getFirstChild(PythonGrammar.EXPRESSION));
+      fromExpression = astNode.getLastChild(PythonGrammar.EXPRESSION);
     } else {
-      expressions = astNode.getChildren(PythonGrammar.TEST);
+      expressions = astNode.getChildren(PythonGrammar.EXPRESSION);
     }
     List<Expression> expressionTrees = expressions.stream()
       .map(this::expression)
@@ -631,7 +631,7 @@ public class PythonTreeMaker {
         var colonNode = typeParamBoundNode.getFirstChild(PythonPunctuator.COLON);
         var colonToken = toPyToken(colonNode.getToken());
 
-        var testNode = typeParamBoundNode.getFirstChild(PythonGrammar.TEST);
+        var testNode = typeParamBoundNode.getFirstChild(PythonGrammar.EXPRESSION);
         var testExpr = expression(testNode);
         return new TypeAnnotationImpl(colonToken, null, testExpr, Tree.Kind.TYPE_PARAM_TYPE_ANNOTATION);
       }).orElse(null);
@@ -730,7 +730,7 @@ public class PythonTreeMaker {
     AstNode astNode = statementWithSeparator.statement();
     Separators separators = statementWithSeparator.separator();
 
-    List<Expression> expressions = astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR).getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
+    List<Expression> expressions = astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR).getChildren(PythonGrammar.EXPRESSION, PythonGrammar.STAR_EXPR).stream()
       .map(this::expression)
       .toList();
     return new ExpressionStatementImpl(expressions, separators);
@@ -743,7 +743,7 @@ public class PythonTreeMaker {
     var name = name(astNode.getFirstChild(PythonGrammar.NAME));
     var typeParams = typeParams(astNode);
     var equalToken = toPyToken(astNode.getFirstChild(PythonPunctuator.ASSIGN).getToken());
-    var expression = expression(astNode.getFirstChild(PythonGrammar.TEST));
+    var expression = expression(astNode.getFirstChild(PythonGrammar.EXPRESSION));
     return new TypeAliasStatementImpl(typeDef, name, typeParams, equalToken, expression, separator);
   }
 
@@ -787,7 +787,7 @@ public class PythonTreeMaker {
 
   private ExpressionList expressionList(AstNode astNode) {
     if (astNode.is(PythonGrammar.TESTLIST_STAR_EXPR, PythonGrammar.TESTLIST_COMP)) {
-      List<Expression> expressions = astNode.getChildren(PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
+      List<Expression> expressions = astNode.getChildren(PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.EXPRESSION, PythonGrammar.STAR_EXPR).stream()
         .map(this::expression)
         .toList();
       List<Token> commas = punctuators(astNode, PythonPunctuator.COMMA);
@@ -867,7 +867,7 @@ public class PythonTreeMaker {
   }
 
   private WithItem withItem(AstNode withItem) {
-    AstNode testNode = withItem.getFirstChild(PythonGrammar.TEST);
+    AstNode testNode = withItem.getFirstChild(PythonGrammar.EXPRESSION);
     Expression test = expression(testNode);
     AstNode asNode = testNode.getNextSibling();
     Expression expr = null;
@@ -887,19 +887,20 @@ public class PythonTreeMaker {
     Token indent = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.INDENT).getToken());
     Token newLine = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.NEWLINE).getToken());
     Token dedent = suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
-    AstNode exceptionNode = except.getFirstChild(PythonGrammar.TEST);
-    if (exceptionNode == null) {
-      return new ExceptClauseImpl(exceptKeyword, star, colon, newLine, indent, body, dedent);
+    AstNode exceptionsNode = except.getFirstChild(PythonGrammar.EXPRESSIONS);
+    if (exceptionsNode != null) {
+      Expression exceptions = exprListOrTestList(exceptionsNode);
+      return new ExceptClauseImpl(exceptKeyword, star, colon, newLine, indent, body, dedent, exceptions);
     }
+    AstNode exceptionNode = except.getFirstChild(PythonGrammar.EXPRESSION);
     AstNode asNode = except.getFirstChild(PythonKeyword.AS);
-    AstNode commaNode = except.getFirstChild(PythonPunctuator.COMMA);
-    if (asNode != null || commaNode != null) {
-      Expression exceptionInstance = expression(except.getLastChild(PythonGrammar.TEST));
-      Token asNodeToken = asNode != null ? toPyToken(asNode.getToken()) : null;
-      Token commaNodeToken = commaNode != null ? toPyToken(commaNode.getToken()) : null;
-      return new ExceptClauseImpl(exceptKeyword, star, colon, newLine, indent, body, dedent, expression(exceptionNode), asNodeToken, commaNodeToken, exceptionInstance);
+    if (exceptionNode != null && asNode != null) {
+      Expression exceptionInstance = expression(except.getLastChild(PythonGrammar.EXPRESSION));
+      Token asNodeToken = toPyToken(asNode.getToken());
+      return new ExceptClauseImpl(exceptKeyword, star, colon, newLine, indent, body, dedent, expression(exceptionNode), asNodeToken, null, exceptionInstance);
     }
-    return new ExceptClauseImpl(exceptKeyword, star, colon, newLine, indent, body, dedent, expression(exceptionNode));
+    return new ExceptClauseImpl(exceptKeyword, star, colon, newLine, indent, body, dedent);
+
   }
 
   public MatchStatement matchStatement(AstNode matchStmt) {
@@ -1163,12 +1164,12 @@ public class PythonTreeMaker {
   // expressions
 
   private List<Expression> expressionsFromTest(AstNode astNode) {
-    return astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).toList();
+    return astNode.getChildren(PythonGrammar.EXPRESSION).stream().map(this::expression).toList();
   }
 
   private List<Expression> expressionsFromTestListStarExpr(AstNode astNode) {
     return astNode
-      .getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR)
+      .getChildren(PythonGrammar.EXPRESSION, PythonGrammar.STAR_EXPR)
       .stream().map(this::expression).toList();
   }
 
@@ -1180,7 +1181,7 @@ public class PythonTreeMaker {
 
   private Expression exprListOrTestList(AstNode exprListOrTestList) {
     List<Expression> expressions = exprListOrTestList
-      .getChildren(PythonGrammar.EXPR, PythonGrammar.STAR_EXPR, PythonGrammar.TEST).stream()
+      .getChildren(PythonGrammar.EXPR, PythonGrammar.STAR_EXPR, PythonGrammar.EXPRESSION).stream()
       .map(this::expression)
       .toList();
     List<AstNode> commas = exprListOrTestList.getChildren(PythonPunctuator.COMMA);
@@ -1210,7 +1211,7 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getChildren().size() == 1) {
       return expression(astNode.getFirstChild());
     }
-    if (astNode.is(PythonGrammar.TEST) && astNode.hasDirectChildren(PythonKeyword.IF)) {
+    if (astNode.is(PythonGrammar.EXPRESSION) && astNode.hasDirectChildren(PythonKeyword.IF)) {
       return conditionalExpression(astNode);
     }
     if (astNode.is(PythonTokenType.NUMBER)) {
@@ -1225,7 +1226,7 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.NAMED_EXPR_TEST) && astNode.hasDirectChildren(PythonPunctuator.WALRUS_OPERATOR)) {
       return assignmentExpression(astNode);
     }
-    if (astNode.is(PythonGrammar.EXPR, PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.TEST, PythonGrammar.TEST_NOCOND)) {
+    if (astNode.is(PythonGrammar.EXPR, PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.EXPRESSION, PythonGrammar.TEST_NOCOND)) {
       if (astNode.getChildren().size() == 1) {
         return expression(astNode.getFirstChild());
       } else {
@@ -1286,7 +1287,7 @@ public class PythonTreeMaker {
   }
 
   private Expression assignmentExpression(AstNode astNode) {
-    AstNode nameNode = astNode.getFirstChild(PythonGrammar.TEST);
+    AstNode nameNode = astNode.getFirstChild(PythonGrammar.EXPRESSION);
     Expression nameExpression = expression(nameNode);
     if (!nameExpression.is(Tree.Kind.NAME)) {
       int line = nameNode.getTokenLine();
@@ -1295,14 +1296,14 @@ public class PythonTreeMaker {
     Name name = (Name) nameExpression;
     AstNode operatorNode = astNode.getFirstChild(PythonPunctuator.WALRUS_OPERATOR);
     Token operatorToken = toPyToken(operatorNode.getToken());
-    Expression expression = expression(astNode.getLastChild(PythonGrammar.TEST));
+    Expression expression = expression(astNode.getLastChild(PythonGrammar.EXPRESSION));
     return new AssignmentExpressionImpl(name, operatorToken, expression);
   }
 
   private Expression repr(AstNode astNode) {
     Token openingBacktick = toPyToken(astNode.getFirstChild(PythonPunctuator.BACKTICK).getToken());
     Token closingBacktick = toPyToken(astNode.getLastChild(PythonPunctuator.BACKTICK).getToken());
-    List<Expression> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).toList();
+    List<Expression> expressions = astNode.getChildren(PythonGrammar.EXPRESSION).stream().map(this::expression).toList();
     List<Token> commas = punctuators(astNode, PythonPunctuator.COMMA);
     ExpressionList expressionListTree = new ExpressionListImpl(expressions, commas);
     return new ReprExpressionImpl(openingBacktick, expressionListTree, closingBacktick);
@@ -1324,8 +1325,8 @@ public class PythonTreeMaker {
       ComprehensionFor compFor = compFor(compForNode);
       AstNode colon = dictOrSetMaker.getFirstChild(PythonPunctuator.COLON);
       if (colon != null) {
-        Expression keyExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.TEST));
-        Expression valueExpression = expression(dictOrSetMaker.getLastChild(PythonGrammar.TEST));
+        Expression keyExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.EXPRESSION));
+        Expression valueExpression = expression(dictOrSetMaker.getLastChild(PythonGrammar.EXPRESSION));
         return new DictCompExpressionImpl(lCurlyBrace, keyExpression, toPyToken(colon.getToken()), valueExpression, compFor, rCurlyBrace);
       } else {
         Expression resultExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.STAR_NAMED_EXPRESSION));
@@ -1463,7 +1464,7 @@ public class PythonTreeMaker {
     AstNode strideNode = subscript.getFirstChild(PythonGrammar.SLICEOP);
     Token strideSeparator = strideNode == null ? null : toPyToken(strideNode.getToken());
     Expression stride = null;
-    if (strideNode != null && strideNode.hasDirectChildren(PythonGrammar.TEST)) {
+    if (strideNode != null && strideNode.hasDirectChildren(PythonGrammar.EXPRESSION)) {
       stride = expression(strideNode.getLastChild());
     }
     return new SliceItemImpl(lowerBound, toPyToken(boundSeparator.getToken()), upperBound, strideSeparator, stride);
@@ -1471,7 +1472,7 @@ public class PythonTreeMaker {
 
   @CheckForNull
   private Expression sliceBound(@Nullable AstNode node) {
-    if (node == null || !node.is(PythonGrammar.TEST)) {
+    if (node == null || !node.is(PythonGrammar.EXPRESSION)) {
       return null;
     }
     return expression(node);
@@ -1507,7 +1508,7 @@ public class PythonTreeMaker {
     }
     Token forToken = toPyToken(forSSLRToken.getToken());
     Token inToken = toPyToken(compFor.getFirstChild(PythonKeyword.IN).getToken());
-    Expression iterable = exprListOrTestList(compFor.getFirstChild(PythonGrammar.TESTLIST));
+    Expression iterable = exprListOrTestList(compFor.getFirstChild(PythonGrammar.EXPRESSIONS));
     ComprehensionClause nested = compClause(compFor.getFirstChild(PythonGrammar.COMP_ITER));
     return new ComprehensionForImpl(asyncToken, forToken, expression, inToken, iterable, nested);
   }
@@ -1573,10 +1574,10 @@ public class PythonTreeMaker {
     if (star == null) {
       star = astNode.getFirstChild(PythonPunctuator.MUL_MUL) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.MUL_MUL).getToken());
     }
-    Expression arg = expression(astNode.getLastChild(PythonGrammar.TEST));
+    Expression arg = expression(astNode.getLastChild(PythonGrammar.EXPRESSION));
     if (assign != null) {
       // Keyword in argument list must be an identifier.
-      return Optional.ofNullable(astNode.getFirstChild(PythonGrammar.TEST))
+      return Optional.ofNullable(astNode.getFirstChild(PythonGrammar.EXPRESSION))
         .map(test -> test.getFirstChild(PythonGrammar.ATOM))
         .map(atom -> atom.getFirstChild(PythonGrammar.NAME))
         .map(nameNode -> new RegularArgumentImpl(name(nameNode), toPyToken(assign.getToken()), arg))
@@ -1607,7 +1608,7 @@ public class PythonTreeMaker {
   public LambdaExpression lambdaExpression(AstNode astNode) {
     Token lambdaKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.LAMBDA).getToken());
     Token colonToken = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
-    Expression body = expression(astNode.getFirstChild(PythonGrammar.TEST, PythonGrammar.TEST_NOCOND));
+    Expression body = expression(astNode.getFirstChild(PythonGrammar.EXPRESSION, PythonGrammar.TEST_NOCOND));
     AstNode varArgsListNode = astNode.getFirstChild(PythonGrammar.VARARGSLIST);
     ParameterList argListTree = null;
     if (varArgsListNode != null) {
@@ -1668,7 +1669,7 @@ public class PythonTreeMaker {
     TypeAnnotation typeAnnotation = null;
     AstNode typeAnnotationNode = parameter.getFirstChild(PythonGrammar.TYPE_ANNOTATION);
     if (typeAnnotationNode != null) {
-      var testNode = typeAnnotationNode.getFirstChild(PythonGrammar.TEST);
+      var testNode = typeAnnotationNode.getFirstChild(PythonGrammar.EXPRESSION);
       Token colonToken = toPyToken(typeAnnotationNode.getFirstChild(PythonPunctuator.COLON).getToken());
       var starToken = Optional.ofNullable(typeAnnotationNode.getFirstChild(PythonPunctuator.MUL))
         .map(AstNode::getToken)

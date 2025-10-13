@@ -162,3 +162,9 @@ class TypeVarTest[T]:
 
     def unknow_generic(self):
         a: list[X] = ... # Noncompliant
+
+# FP with python 2 syntax for exception handling
+try:
+  ""
+except OSError, why: # Noncompliant
+      pass

@@ -46,6 +46,7 @@ public interface ExceptClause extends Tree {
   Token asKeyword();
 
   @CheckForNull
+  @Deprecated(since = "5.12")
   Token commaToken();
 
   @CheckForNull
@@ -55,5 +56,4 @@ public interface ExceptClause extends Tree {
   Token colon();
 
   StatementList body();
-
 }

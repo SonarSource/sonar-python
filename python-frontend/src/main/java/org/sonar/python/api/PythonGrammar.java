@@ -40,8 +40,8 @@ public enum PythonGrammar implements GrammarRuleKey {
   TFPDEF,
   TFPLIST,
 
-  TEST,
-  TESTLIST,
+  EXPRESSION,
+  EXPRESSIONS,
 
   COMP_FOR,
   COMP_ITER,
