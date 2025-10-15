@@ -1,3 +1,8 @@
+try:
+    raise ExceptionGroup("problem", []) # FP currently
+except Exception:
+    ...
+
 def f():
     print(a) # Noncompliant {{a is not defined. Change its name or define it before using it}}
 #         ^
