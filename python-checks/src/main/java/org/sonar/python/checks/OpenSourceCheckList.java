@@ -312,6 +312,7 @@ public class OpenSourceCheckList {
       NoSonarCommentCheck.class,
       NoSonarCommentFormatCheck.class,
       NotDiscoverableTestMethodCheck.class,
+      NotImplementedBooleanContextCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,
       NumpyWeekMaskValidationCheck.class,
       NumpyIsNanCheck.class,
