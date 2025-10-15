@@ -1,0 +1,49 @@
+name: 'Build Sonar Python'
+description: 'Build both public and private modules of sonar-python'
+outputs:
+  build-number:
+    description: 'The build number used'
+    value: ${{ steps.config.outputs.build-number }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Configure sonar-python project
+      uses: ./.github/actions/config-sonar-python
+      id: config
+
+    - name: Build public module with maven
+      uses: SonarSource/ci-github-actions/build-maven@c9d9e76cb397181094492386f0ca23cd4e6ad72f # master, 13.10.2025
+      with:
+        artifactory-deploy-repo: "sonarsource-public-qa"
+        maven-args: "-DskipTests=true -Dsonar.skip=true -P-typeshed_serializer"
+        deploy-pull-request: true
+        sonar-platform: none
+      env:
+        IS_COMMUNITY: true
+        BUILD_NUMBER: ${{ steps.config.outputs.build-number }}
+
+    - name: Remove .actions folder and make repository shallow for next steps
+      shell: bash
+      run: |
+        echo "Making repository shallow"
+        # BUILD-9065 will fix this, making this step redundant
+        # git pull fails because we're not on a branch, but it still makes the repo shallow again
+        git pull --depth 1 || true
+
+        # This step is needed because build-maven removes the .m2 folder, removing the built jar files of the public modules. 
+        # This re-builds the public modules so the private modules will find them. 
+        # See BUILD-9394 for details
+        echo "Build public module with maven as build-maven cleans up after itself"
+        IS_COMMUNITY=true mvn install -DskipTests -DskipTypeshed
+
+    - name: Build private module with maven
+      uses: SonarSource/ci-github-actions/build-maven@c9d9e76cb397181094492386f0ca23cd4e6ad72f # master, 13.10.2025 
+      with:
+        artifactory-deploy-repo: "sonarsource-private-qa"
+        maven-args: "-DskipTests=true -Dsonar.skip=true -P-typeshed_serializer"
+        deploy-pull-request: true
+        working-directory: private
+        sonar-platform: none
+      env:
+        BUILD_NUMBER: ${{ steps.config.outputs.build-number }}
+        MAVEN_ARGS: "-Dsonar.skip=true"

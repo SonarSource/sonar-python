@@ -1,0 +1,29 @@
+name: 'Config Sonar Python'
+description: 'Configure maven and update versions for sonar-python project'
+inputs:
+  build-number:
+    description: 'Build number to use for versioning. If not provided, will use the build number from config-maven action'
+    required: false
+
+outputs:
+  build-number:
+    description: 'The build number used'
+    value: ${{ steps.mvn-config.outputs.BUILD_NUMBER}}
+    
+runs:
+  using: 'composite'
+  steps:
+    - name: Configure private maven projects
+      uses: SonarSource/ci-github-actions/config-maven@1.1.2
+      id: mvn-config
+
+    - name: Update versions of public modules
+      shell: bash
+      run: |
+        # Because the pom.xml of private/ has com.sonarsource.parent:parent as a parent instead of org.sonarsource.python:python, 
+        # updating the build number doesn't propagate to private/. As such, the version needs to be updated specifically in the private/ folder
+        # See BUILD-9394 for details 
+        cd private
+        bash ${{ github.action_path }}/set_maven_version.sh
+      env:
+        BUILD_NUMBER: ${{ inputs.build-number || steps.mvn-config.outputs.BUILD_NUMBER }}
