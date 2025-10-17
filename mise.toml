@@ -2,4 +2,5 @@
 java = "17.0"
 maven = "3.9"
 python = "3.9"
-"pipx:tox" = "latest"
+uv = "latest" # required for pipx backend
+"pipx:tox" = { version = "latest", uvx = "true" }

@@ -90,6 +90,18 @@
                 </configuration>
               </execution>
             </executions>
+            <dependencies>
+              <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>sonar-python-plugin</artifactId>
+                <version>${project.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>python-custom-rules-example</artifactId>
+                <version>${project.version}</version>
+              </dependency>
+            </dependencies>
           </plugin>
         </plugins>
       </build>
