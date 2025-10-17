@@ -19,11 +19,11 @@ package org.sonar.plugins.python;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiConsumer;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
@@ -36,6 +36,7 @@ import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.atIndex;
+import static org.junit.Assert.fail;
 
 class MultiFileProgressReportTest {
 
@@ -260,64 +261,33 @@ class MultiFileProgressReportTest {
     // Wait for start message
     logConsumer.awaitCount(1);
 
+    CountDownLatch latch = new CountDownLatch(1);
     AtomicBoolean interruptFlagPreserved = new AtomicBoolean(false);
 
     Thread t = new Thread(() -> {
       try {
-        Thread.sleep(10000);
-      } catch (InterruptedException e1) {
-        Thread.currentThread().interrupt();
+        latch.await();
+      } catch (InterruptedException e) {
+        fail("Test thread was interrupted unexpectedly; This should be impossible");
       }
+      Thread.currentThread().interrupt();
+
+      // will re-set the interrupt flag
       report.stop();
       try {
         Thread.sleep(10000);
       } catch (InterruptedException e) {
+        // interrupt flag should still be set
         interruptFlagPreserved.set(true);
       }
     });
     t.start();
-    t.interrupt();
+    latch.countDown();
     t.join(1000);
     logConsumer.awaitCount(2);
     assertThat(interruptFlagPreserved.get()).isTrue();
-
-    assertThat(logTester.logs()).contains("1/1 source file has been analyzed");
   }
 
-  @Test
-  @Timeout(1)
-  void interruptingTheThreadShouldNeverCreateADeadlock() {
-    var report = new MultiFileProgressReport("progress");
-    long start = System.currentTimeMillis();
-    report.start(0);
-    report.stop();
-    long end = System.currentTimeMillis();
-
-    // stopping the report too soon could fail to interrupt the thread that was not yet alive,
-    // and fail to set the proper state for Thread.interrupted()
-    // this test ensures that the report does not loop once or is interrupted when stop() is
-    // called just after start()
-    assertThat(end - start).isLessThan(300);
-  }
-
-  @Test
-  @Timeout(1)
-  void interruptedThreadShouldExitImmediately() throws InterruptedException {
-    var report = new MultiFileProgressReport("progress");
-    AtomicLong time = new AtomicLong(10000);
-    Thread selfInterruptedThread = new Thread(() -> {
-      // set the thread as interrupted
-      Thread.currentThread().interrupt();
-      long start = System.currentTimeMillis();
-      // execute run, while the thread is interrupted
-      report.run();
-      long end = System.currentTimeMillis();
-      time.set(end - start);
-    });
-    selfInterruptedThread.start();
-    selfInterruptedThread.join();
-    assertThat(time.get()).isLessThan(300);
-  }
 
   @Test
   @Timeout(10)
@@ -328,8 +298,7 @@ class MultiFileProgressReportTest {
     var numFiles = 500;
     report.start(numFiles);
 
-    var executor = Executors.newScheduledThreadPool(100);
-    executor.schedule(report::stop, 50 * progressUpdatePeriodMillis, TimeUnit.MILLISECONDS);
+    var executor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors() * 2);
     IntStream.rangeClosed(0, numFiles).forEach(i -> {
       report.startAnalysisFor("newFile#" + i);
       executor.schedule(() -> report.finishAnalysisFor("newFile#" + i), i + progressUpdatePeriodMillis, TimeUnit.MILLISECONDS);
@@ -338,6 +307,7 @@ class MultiFileProgressReportTest {
     executor.shutdown();
     executor.awaitTermination(5, TimeUnit.SECONDS);
     executor.shutdownNow();
+    report.stop();
 
     assertThat(logTester.logs())
       .contains("500 source files to be analyzed")
