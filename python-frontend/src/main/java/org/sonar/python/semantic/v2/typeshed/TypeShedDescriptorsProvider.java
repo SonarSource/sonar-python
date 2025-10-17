@@ -50,6 +50,8 @@ public class TypeShedDescriptorsProvider {
   private static final String PROTOBUF = PROTOBUF_BASE_RESOURCE_PATH + "stdlib_protobuf/";
   private static final String PROTOBUF_THIRD_PARTY = PROTOBUF_BASE_RESOURCE_PATH + "third_party_protobuf/";
   private static final String PROTOBUF_THIRD_PARTY_MYPY = PROTOBUF_BASE_RESOURCE_PATH + "third_party_protobuf_mypy/";
+  private static final String PROTOBUF_THIRD_PARTY_MS = PROTOBUF_BASE_RESOURCE_PATH + "third_party_protobuf_microsoft/";
+  
   public static final String BUILTINS_FQN = "builtins";
   // This is needed for some Python 2 modules whose name differ from their Python 3 counterpart by capitalization only.
   private static final Map<String, String> MODULES_TO_DISAMBIGUATE = Map.of(
@@ -123,7 +125,7 @@ public class TypeShedDescriptorsProvider {
   }
 
   private Map<String, Descriptor> searchTypeShedForModule(String moduleName) {
-    return Stream.of(PROTOBUF_CUSTOM_STUBS, PROTOBUF, PROTOBUF_THIRD_PARTY_MYPY)
+    return Stream.of(PROTOBUF_CUSTOM_STUBS, PROTOBUF, PROTOBUF_THIRD_PARTY_MYPY, PROTOBUF_THIRD_PARTY_MS)
       .map(dirName -> getModuleDescriptors(moduleName, dirName))
       .filter(Predicate.not(Map::isEmpty))
       .findFirst()

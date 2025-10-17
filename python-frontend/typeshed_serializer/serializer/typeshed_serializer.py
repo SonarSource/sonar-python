@@ -15,16 +15,47 @@
 # along with this program; if not, see https://sonarsource.com/license/ssal/
 #
 
-from serializer.serializers import MicrosoftStubsSerializer, TypeshedSerializer, CustomStubsSerializer, ImporterSerializer
+import sys
+from typing import List, Optional
+from serializer.serializers import (
+    MicrosoftStubsSerializer,
+    TypeshedSerializer,
+    CustomStubsSerializer,
+    ImporterSerializer,
+)
 
 
-def main():
-    TypeshedSerializer().serialize_merged_modules()
-    TypeshedSerializer(is_third_parties=True).serialize_merged_modules()
-    CustomStubsSerializer().serialize()
-    ImporterSerializer().serialize()
-    MicrosoftStubsSerializer().serialize()
+def main(serializers: Optional[List[str]] = None):
+    """
+    Run typeshed serialization for specified serializers.
+
+    Args:
+        serializers: List of serializer names to run. If None, run all serializers.
+                    Valid names: 'stdlib', 'third_party', 'custom', 'importer', 'microsoft'
+    """
+    if serializers is None:
+        serializers = ["stdlib", "third_party", "custom", "importer", "microsoft"]
+
+    if "stdlib" in serializers:
+        TypeshedSerializer().serialize_merged_modules()
+
+    if "third_party" in serializers:
+        TypeshedSerializer(is_third_parties=True).serialize_merged_modules()
+
+    if "custom" in serializers:
+        CustomStubsSerializer().serialize()
+
+    if "importer" in serializers:
+        ImporterSerializer().serialize()
+
+    if "microsoft" in serializers:
+        MicrosoftStubsSerializer().serialize()
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    # Parse command line arguments for selective execution
+    if len(sys.argv) > 1:
+        serializers = sys.argv[1].split(",")
+        main(serializers)
+    else:
+        main()

@@ -145,7 +145,7 @@ class Serializer(ABC):
 
 
 class TypeshedSerializer(Serializer):
-    EXCLUDED_PACKAGES = ["win32","redis"]
+    EXCLUDED_PACKAGES = ["win32", "redis"]
 
     def __init__(self, is_third_parties=False, is_debug=False):
         super().__init__(is_debug)
@@ -230,7 +230,7 @@ class ImporterSerializer(Serializer):
 
 
 class MicrosoftStubsSerializer(Serializer):
-    save_location = "third_party_protobuf"
+    save_location = "third_party_protobuf_microsoft"
     output_folder = f"{FolderManager.output_folder}/{save_location}"
 
     def get_build_result(self, opt=get_options()):
@@ -238,7 +238,6 @@ class MicrosoftStubsSerializer(Serializer):
 
         build_result = build.build(src_list, opt)
         return build_result, src_paths
-
 
     def filter_get_sources_result(self, root, file, file_path, fq_module_name):
         return "matplotlib" not in fq_module_name
