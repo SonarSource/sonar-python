@@ -65,14 +65,6 @@ jobs:
         with:
           version: 2025.7.12
 
-      - name: Install tox
-        run: |
-          uv python install ${{ env.PYTHON_VERSION }} --default --preview
-          uv venv
-          uv pip install tox
-          source .venv/bin/activate
-          echo "$(pwd)/.venv/bin" >> $GITHUB_PATH
-
       - name: Remove private directory
         run: rm -rf private
 

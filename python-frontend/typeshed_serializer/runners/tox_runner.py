@@ -252,12 +252,12 @@ def get_serialize_command_to_run(previous_source_checksum: Optional[str], curren
     if previous_source_checksum != current_sources_checksum:
         # Serializer code has changed - run full serialization
         logger.info('SERIALIZER CODE HAS CHANGED - STARTING FULL TYPESHED SERIALIZATION')
-        return ['python', '-m', 'tox', '-e', 'serialize']
+        return ['tox', '-e', 'serialize']
     elif changed_serializers:
         logger.info(f"STARTING SELECTIVE TYPESHED SERIALIZATION FOR: {','.join(changed_serializers)}")
         # Run selective serialization through tox environment
         serializers_arg = ','.join(changed_serializers)
-        return ['python', '-m', 'tox', '-e', 'selective-serialize', '--', serializers_arg]
+        return ['tox', '-e', 'selective-serialize', '--', serializers_arg]
     else:
         logger.info('SKIPPING TYPESHED SERIALIZATION')
         return None
@@ -302,7 +302,7 @@ def main(skip_tests=False, fail_fast=False, dry_run=False):
         if dry_run:
             logger.info('DRY RUN: Would run test')
         else:
-            _ = subprocess.run(['python', '-m', 'tox', '-e', 'py39'], check=True)
+            _ = subprocess.run(['tox', '-e', 'py39'], check=True)
 
 
 if __name__ == '__main__':

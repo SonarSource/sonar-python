@@ -208,7 +208,7 @@ class ToxRunnerTest(unittest.TestCase):
             mocks.prev_checksum.assert_any_call(tox_runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
             mocks.checksum.assert_any_call(self.FILE_NAMES, tox_runner.normalize_text_files)
             mocks.subprocess.run.assert_called_with(
-                ["python", "-m", "tox", "-e", "py39"], check=True
+                ["tox", "-e", "py39"], check=True
             )
 
     def test_tox_runner_modified_checksum(self):
@@ -224,8 +224,8 @@ class ToxRunnerTest(unittest.TestCase):
             mocks.prev_checksum.assert_called_with(tox_runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
             mocks.checksum.assert_called_with(self.FILE_NAMES, tox_runner.normalize_text_files)
             expected_calls = [
-                mock.call(['python', '-m', 'tox', '-e', 'serialize'], check=True),
-                mock.call(['python', '-m', 'tox', '-e', 'py39'], check=True)
+                mock.call(['tox', '-e', 'serialize'], check=True),
+                mock.call(['tox', '-e', 'py39'], check=True)
             ]
             mocks.subprocess.run.assert_has_calls(expected_calls)
 
@@ -392,7 +392,7 @@ class ToxRunnerTest(unittest.TestCase):
 
             # Should only run tests
             mocks.subprocess.run.assert_called_with(
-                ["python", "-m", "tox", "-e", "py39"], check=True
+                ["tox", "-e", "py39"], check=True
             )
 
             # Should not update any checksums
@@ -750,8 +750,8 @@ class ToxRunnerTest(unittest.TestCase):
             tox_runner.main()
 
             expected_calls = [
-                mock.call(['python', '-m', 'tox', '-e', 'selective-serialize', '--', 'custom'], check=True),
-                mock.call(['python', '-m', 'tox', '-e', 'py39'], check=True)
+                mock.call(['tox', '-e', 'selective-serialize', '--', 'custom'], check=True),
+                mock.call(['tox', '-e', 'py39'], check=True)
             ]
             mocks.subprocess.run.assert_has_calls(expected_calls)
             mocks.update_folder_checksums_for_changed_serializers.assert_any_call(["custom"])
@@ -768,8 +768,8 @@ class ToxRunnerTest(unittest.TestCase):
             tox_runner.main()
 
             expected_calls = [
-                mock.call(['python', '-m', 'tox', '-e', 'selective-serialize', '--', 'custom,import'], check=True),
-                mock.call(['python', '-m', 'tox', '-e', 'py39'], check=True)
+                mock.call(['tox', '-e', 'selective-serialize', '--', 'custom,import'], check=True),
+                mock.call(['tox', '-e', 'py39'], check=True)
             ]
             mocks.subprocess.run.assert_has_calls(expected_calls)
             mocks.update_folder_checksums_for_changed_serializers.assert_any_call(["custom", "import"])
@@ -816,13 +816,13 @@ class ToxRunnerTest(unittest.TestCase):
     def test_get_serialize_command_to_run_source_changed(self):
         # Test when source checksum has changed
         command = tox_runner.get_serialize_command_to_run("old_checksum", "new_checksum", [])
-        expected = ['python', '-m', 'tox', '-e', 'serialize']
+        expected = ['tox', '-e', 'serialize']
         self.assertEqual(command, expected)
 
     def test_get_serialize_command_to_run_serializers_changed(self):
         # Test when serializers have changed but source is the same
         command = tox_runner.get_serialize_command_to_run("same_checksum", "same_checksum", ["custom", "stdlib"])
-        expected = ['python', '-m', 'tox', '-e', 'selective-serialize', '--', 'custom,stdlib']
+        expected = ['tox', '-e', 'selective-serialize', '--', 'custom,stdlib']
         self.assertEqual(command, expected)
 
     def test_get_serialize_command_to_run_no_changes(self):
@@ -833,7 +833,7 @@ class ToxRunnerTest(unittest.TestCase):
     def test_get_serialize_command_to_run_source_priority(self):
         # Test that source changes take priority over serializer changes
         command = tox_runner.get_serialize_command_to_run("old_checksum", "new_checksum", ["custom"])
-        expected = ['python', '-m', 'tox', '-e', 'serialize']
+        expected = ['tox', '-e', 'serialize']
         self.assertEqual(command, expected)
 
     def test_fetch_resources_subfolder_files(self):
