@@ -2,12 +2,13 @@ from typing import Optional, Dict, Any, List, Callable, Literal, Mapping, Sequen
 
 from langchain_core.caches import BaseCache
 from langchain_core.callbacks import BaseCallbackManager, Callbacks
+from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.rate_limiters import BaseRateLimiter
 from pydantic import SecretStr
 
 from SonarPythonAnalyzerFakeStub import CustomStubBase
 
-class ChatBedrockConverse(CustomStubBase):
+class ChatBedrockConverse(BaseChatModel):
     additional_model_request_fields: Dict[str, Any] | None = None
     additional_model_response_field_paths: List[str] | None = None
     aws_access_key_id: SecretStr | None
