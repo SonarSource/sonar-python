@@ -5,8 +5,8 @@ or explicit boolean conversion.</p>
 prevent confusion and bugs that could arise from the implicit boolean evaluation of <code>NotImplemented</code>.</p>
 <p>Previously, <code>NotImplemented</code> would evaluate to <code>True</code> in boolean contexts, which could lead to unexpected behavior in code
 that was meant to check whether an operation was actually implemented. The <code>NotImplemented</code> singleton is specifically designed to be
-returned by binary special methods (like <code><em>eq</em></code>, <code><em>lt</em></code>, etc.) to indicate that the operation is not supported for
-the given operand types, and should be compared explicitly using identity checks.</p>
+returned by binary special methods (like <code>__eq__</code>, <code>__lt__</code>, etc.) to indicate that the operation is not supported for the given
+operand types, and should be compared explicitly using identity checks.</p>
 <p>This breaking change was preceded by a <code>DeprecationWarning</code> since Python 3.9, giving developers time to update their code. The change
 ensures that <code>NotImplemented</code> is used correctly and prevents subtle bugs in comparison operations and other contexts where boolean
 evaluation might occur unintentionally.</p>

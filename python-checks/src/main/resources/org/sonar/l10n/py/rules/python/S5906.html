@@ -3,35 +3,132 @@
 the dedicated one will provide a better error message, simplifying the debugging process.</p>
 <p>This rule reports an issue when an assertion can be simplified by using a more specific function. The array below gives a list of assertions on
 which an issue will be raised, and which function should be used instead:</p>
-<p>||Original||Dedicated||</p>
-<p>|<code>assertTrue(x == y)</code>|<code>assertEqual(x, y)</code>|</p>
-<p>|<code>assertTrue(x != y)</code>|<code>assertNotEqual(x, y)</code>|</p>
-<p>|<code>assertFalse(x == y)</code>|<code>assertNotEqual(x, y)</code>|</p>
-<p>|<code>assertFalse(x != y)</code>|<code>assertEqual(x, y)</code>|</p>
-<p>|<code>assertTrue(x &lt; y)</code>|<code>assertLess(x, y)</code>|</p>
-<p>|<code>assertTrue(x &lt;= y)</code>|<code>assertLessEqual(x, y)</code>|</p>
-<p>|<code>assertTrue(x &gt; y)</code>|<code>assertGreater(x, y)</code>|</p>
-<p>|<code>assertTrue(x &gt;= y)</code>|<code>assertGreaterEqual(x, y)</code>|</p>
-<p>|<code>assertTrue(x is y)</code>|<code>assertIs(x, y)</code>|</p>
-<p>|<code>assertTrue(x is not y)</code>|<code>assertIsNot(x, y)</code>|</p>
-<p>|<code>assertFalse(x is y)</code>|<code>assertIsNot(x, y)</code>|</p>
-<p>|<code>assertFalse(x is not y)</code>|<code>assertIs(x, y)</code>|</p>
-<p>|<code>assertTrue(x in y)</code>|<code>assertIn(x, y)</code>|</p>
-<p>|<code>assertFalse(x in y)</code>|<code>assertNotIn(x, y)</code>|</p>
-<p>|<code>assertTrue(isinstance(x, y))</code>|<code>assertIsInstance(x, y)</code>|</p>
-<p>|<code>assertFalse(isinstance(x, y))</code>|<code>assertNotIsInstance(x, y)</code>|</p>
-<p>|<code>assertEqual(x, round(y, z))</code>|<code>assertAlmostEqual(x, y, z)</code>|</p>
-<p>|<code>assertAlmostEqual(x, round(y, z))</code>|<code>assertAlmostEqual(x, y, z)</code>|</p>
-<p>|<code>assertNotEqual(x, round(y, z))</code>|<code>assertNotAlmostEqual(x, y, z)</code>|</p>
-<p>|<code>assertNotAlmostEqual(x, round(y, z))</code>|<code>assertNotAlmostEqual(x, y, z)</code>|</p>
-<p>|<code>assertEqual(x, None)</code>|<code>assertIsNone(x)</code>|</p>
-<p>|<code>assertNotEqual(x, None)</code>|<code>assertIsNotNone(x)</code>|</p>
-<p>|<code>assertTrue(x is None)</code>|<code>assertIsNone(x)</code>|</p>
-<p>|<code>assertTrue(x is not None)</code>|<code>assertIsNotNone(x)</code>|</p>
-<p>|<code>assertFalse(x is None)</code>|<code>assertIsNotNone(x)</code>|</p>
-<p>|<code>assertFalse(x is not None)</code>|<code>assertIsNone(x)</code>|</p>
-<p>|<code>assertEqual(x, True)</code>|<code>assertTrue(x)</code>|</p>
-<p>|<code>assertEqual(x, False)</code>|<code>assertFalse(x)</code>|</p>
+<table>
+  <colgroup>
+    <col style="width: 50%;">
+    <col style="width: 50%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Original</th>
+      <th>Dedicated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p><code>assertTrue(x == y)</code></p></td>
+      <td><p><code>assertEqual(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(x != y)</code></p></td>
+      <td><p><code>assertNotEqual(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertFalse(x == y)</code></p></td>
+      <td><p><code>assertNotEqual(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertFalse(x != y)</code></p></td>
+      <td><p><code>assertEqual(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(x &lt; y)</code></p></td>
+      <td><p><code>assertLess(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(x &lt;= y)</code></p></td>
+      <td><p><code>assertLessEqual(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(x &gt; y)</code></p></td>
+      <td><p><code>assertGreater(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(x &gt;= y)</code></p></td>
+      <td><p><code>assertGreaterEqual(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(x is y)</code></p></td>
+      <td><p><code>assertIs(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(x is not y)</code></p></td>
+      <td><p><code>assertIsNot(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertFalse(x is y)</code></p></td>
+      <td><p><code>assertIsNot(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertFalse(x is not y)</code></p></td>
+      <td><p><code>assertIs(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(x in y)</code></p></td>
+      <td><p><code>assertIn(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertFalse(x in y)</code></p></td>
+      <td><p><code>assertNotIn(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(isinstance(x, y))</code></p></td>
+      <td><p><code>assertIsInstance(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertFalse(isinstance(x, y))</code></p></td>
+      <td><p><code>assertNotIsInstance(x, y)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertEqual(x, round(y, z))</code></p></td>
+      <td><p><code>assertAlmostEqual(x, y, z)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertAlmostEqual(x, round(y, z))</code></p></td>
+      <td><p><code>assertAlmostEqual(x, y, z)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertNotEqual(x, round(y, z))</code></p></td>
+      <td><p><code>assertNotAlmostEqual(x, y, z)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertNotAlmostEqual(x, round(y, z))</code></p></td>
+      <td><p><code>assertNotAlmostEqual(x, y, z)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertEqual(x, None)</code></p></td>
+      <td><p><code>assertIsNone(x)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertNotEqual(x, None)</code></p></td>
+      <td><p><code>assertIsNotNone(x)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(x is None)</code></p></td>
+      <td><p><code>assertIsNone(x)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertTrue(x is not None)</code></p></td>
+      <td><p><code>assertIsNotNone(x)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertFalse(x is None)</code></p></td>
+      <td><p><code>assertIsNotNone(x)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertFalse(x is not None)</code></p></td>
+      <td><p><code>assertIsNone(x)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertEqual(x, True)</code></p></td>
+      <td><p><code>assertTrue(x)</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>assertEqual(x, False)</code></p></td>
+      <td><p><code>assertFalse(x)</code></p></td>
+    </tr>
+  </tbody>
+</table>
 <h3>Noncompliant code example</h3>
 <pre>
 import unittest
