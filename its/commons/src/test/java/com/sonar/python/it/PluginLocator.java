@@ -22,39 +22,37 @@ import java.io.File;
 
 public class PluginLocator {
 
-  public static final String SQ_PLUGIN_TARGET_PROPERTY = "sonar.targetPlugin";
-  public static final String DEFAULT_PLUGIN_TARGET = "OPEN_SOURCE";
-
-  record Plugin(String localLocation, String localWildcard) {
+  record LocalPlugin(String localLocation, String localWildcard) {
   }
 
   public enum Plugins {
-    PYTHON_OSS("../../../sonar-python-plugin/target", "sonar-python-plugin-*.jar"),
-    PYTHON_ENTERPRISE("../../sonar-python-enterprise-plugin/target",
-      "sonar-python-enterprise-plugin-*.jar");
+    PYTHON(
+      new LocalPlugin("../../../sonar-python-plugin/target", "sonar-python-plugin-*.jar"),
+      new LocalPlugin("../../sonar-python-enterprise-plugin/target", "sonar-python-enterprise-plugin-*.jar")),
+    PYTHON_CUSTOM_RULES(
+      new LocalPlugin("../python-custom-rules-plugin/target", "python-custom-rules-plugin-*.jar"),
+      new LocalPlugin("../../../its/plugin/python-custom-rules-plugin/target", "python-custom-rules-plugin-*.jar")),
+    PYTHON_CUSTOM_RULES_EXAMPLE(
+      new LocalPlugin("../../docs/python-custom-rules-example/target", "python-custom-rules-example-*.jar"),
+      new LocalPlugin("../../../docs/python-custom-rules-example/target", "python-custom-rules-example-*.jar"));
 
-    private final Plugin plugin;
+    private final LocalPlugin ossPlugin;
+    private final LocalPlugin enterprisePlugin;
 
-    Plugins(String localLocation, String localWildcard) {
-      this.plugin = new Plugin(localLocation, localWildcard);
+    Plugins(LocalPlugin ossPlugin, LocalPlugin enterprisePlugin) {
+      this.ossPlugin = ossPlugin;
+      this.enterprisePlugin = enterprisePlugin;
     }
 
-    public Location get() {
-      return FileLocation.byWildcardMavenFilename(new File(plugin.localLocation), plugin.localWildcard);
+    public Location get(boolean useEnterprise) {
+      LocalPlugin plugin = useEnterprise ? enterprisePlugin : ossPlugin;
+      return FileLocation.byWildcardMavenFilename(new File(plugin.localLocation()).getAbsoluteFile(), plugin.localWildcard());
     }
   }
 
-  public static Plugins pythonPlugin() {
-    var targetPlugin = System.getProperty(SQ_PLUGIN_TARGET_PROPERTY, DEFAULT_PLUGIN_TARGET);
-    if (DEFAULT_PLUGIN_TARGET.equals(targetPlugin)) {
-      return Plugins.PYTHON_OSS;
-    } else {
-      return Plugins.PYTHON_ENTERPRISE;
-    }
-  }
-
-  public static Location pythonPluginLocation() {
-    return pythonPlugin().get();
+  public static boolean isEnterpriseTest() {
+    var currentWorkingDirectory = new File(System.getProperty("user.dir"));
+    return currentWorkingDirectory.getParentFile().getName().equals("its-enterprise");
   }
 
   private PluginLocator() {

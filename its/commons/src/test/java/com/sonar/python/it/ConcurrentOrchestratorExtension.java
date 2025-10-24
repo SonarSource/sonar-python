@@ -22,18 +22,23 @@ import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.orchestrator.build.SonarScannerInstaller;
 import com.sonar.orchestrator.config.Configuration;
 import com.sonar.orchestrator.container.SonarDistribution;
+import com.sonar.orchestrator.locator.Locators;
 import com.sonar.orchestrator.server.StartupLogWatcher;
 import com.sonar.orchestrator.util.System2;
 import com.sonar.orchestrator.version.Version;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 public class ConcurrentOrchestratorExtension extends Orchestrator implements BeforeAllCallback {
-  private static final AtomicInteger REQUESTED_ORCHESTRATORS_KEY = new AtomicInteger();
-  private static final CountDownLatch IS_ORCHESTRATOR_READY = new CountDownLatch(1);
+  private static final Lock DOWNLOAD_LOCK = new ReentrantLock();
+
+  private final AtomicInteger requestOrchestratorKey = new AtomicInteger();
+  private final CountDownLatch isOrchestratorReady = new CountDownLatch(1);
 
   ConcurrentOrchestratorExtension(Configuration config, SonarDistribution distribution, @Nullable StartupLogWatcher startupLogWatcher) {
     super(config, distribution, startupLogWatcher);
@@ -41,15 +46,29 @@ public class ConcurrentOrchestratorExtension extends Orchestrator implements Bef
 
   @Override
   public void beforeAll(ExtensionContext context) throws InterruptedException {
-    if (REQUESTED_ORCHESTRATORS_KEY.getAndIncrement() == 0) {
+    if (requestOrchestratorKey.getAndIncrement() == 0) {
       start();
 
-      new SonarScannerInstaller(getConfiguration().locators()).install(Version.create(SonarScanner.DEFAULT_SCANNER_VERSION), getConfiguration().fileSystem().workspace());
-      IS_ORCHESTRATOR_READY.countDown();
-
+      prepareOrchestrator();
     } else {
       waitUntilReady();
     }
+  }
+
+  private void prepareOrchestrator() {
+    DOWNLOAD_LOCK.lock();
+    try {
+      installSonarScanner();
+      isOrchestratorReady.countDown();
+    } finally {
+      DOWNLOAD_LOCK.unlock();
+    }
+  }
+
+  private void installSonarScanner() {
+    Locators locators = getConfiguration().locators();
+    Version version = Version.create(SonarScanner.DEFAULT_SCANNER_VERSION);
+    new SonarScannerInstaller(locators).install(version, getConfiguration().fileSystem().workspace());
   }
 
 
@@ -58,13 +77,14 @@ public class ConcurrentOrchestratorExtension extends Orchestrator implements Bef
       .setProperty("sonar.scanner.skipJreProvisioning", "true");
   }
 
+  public void waitUntilReady() throws InterruptedException {
+    isOrchestratorReady.await();
+  }
+
   public static ConcurrentOrchestratorExtensionBuilder builderEnv() {
     return new ConcurrentOrchestratorExtensionBuilder(Configuration.createEnv());
   }
 
-  public static void waitUntilReady() throws InterruptedException {
-    IS_ORCHESTRATOR_READY.await();
-  }
 
   public static class ConcurrentOrchestratorExtensionBuilder extends OrchestratorBuilder<ConcurrentOrchestratorExtensionBuilder, ConcurrentOrchestratorExtension> {
     ConcurrentOrchestratorExtensionBuilder(Configuration initialConfig) {

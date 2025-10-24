@@ -16,12 +16,9 @@
  */
 package com.sonar.python.it;
 
-import com.sonar.orchestrator.config.Configuration;
 import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.locator.FileLocation;
-import com.sonar.orchestrator.locator.Location;
-import com.sonar.orchestrator.locator.Locators;
-import java.io.File;
+import com.sonar.python.it.PluginLocator.Plugins;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,18 +42,18 @@ public final class TestsUtils {
   private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
 
   public static final ConcurrentOrchestratorExtension dynamicOrchestrator = makeDynamicOrchestrator();
-  public static final Locators ORCHESTRATOR_LOCATORS = Configuration.createEnv().locators();
 
   private static ConcurrentOrchestratorExtension makeDynamicOrchestrator() {
-    var currentWorkingDirectory = new File(System.getProperty("user.dir"));
-    if (currentWorkingDirectory.getParentFile().getName().equals("its-enterprise")) {
-      return orchestratorBuilder(Edition.ENTERPRISE_LW, PluginLocator.Plugins.PYTHON_ENTERPRISE.get()).build();
+    if (PluginLocator.isEnterpriseTest()) {
+      return orchestratorBuilder(Edition.ENTERPRISE_LW).build();
     } else {
-      return orchestratorBuilder(Edition.COMMUNITY, PluginLocator.Plugins.PYTHON_OSS.get()).build();
+      return orchestratorBuilder(Edition.COMMUNITY).build();
     }
   }
 
-  public static ConcurrentOrchestratorExtension.ConcurrentOrchestratorExtensionBuilder orchestratorBuilder(Edition edition, Location pluginLocation) {
+  private static ConcurrentOrchestratorExtension.ConcurrentOrchestratorExtensionBuilder orchestratorBuilder(Edition edition) {
+    boolean isEnterprise = edition != Edition.COMMUNITY;
+
     var builder = ConcurrentOrchestratorExtension.builderEnv()
       .useDefaultAdminCredentialsForBuilds(true)
       .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
@@ -64,8 +61,8 @@ public final class TestsUtils {
       .setServerProperty("sonar.telemetry.enable", "false")
 
       // Custom rules plugin
-      .addPlugin(FileLocation.byWildcardMavenFilename(new File("../python-custom-rules-plugin/target"), "python-custom-rules-plugin-*.jar"))
-      .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../../docs/python-custom-rules-example/target"), "python-custom-rules-example-*.jar"))
+      .addPlugin(Plugins.PYTHON_CUSTOM_RULES.get(isEnterprise))
+      .addPlugin(Plugins.PYTHON_CUSTOM_RULES_EXAMPLE.get(isEnterprise))
       .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-custom-rules-example.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-custom-rules.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-test-rules.xml"))
@@ -73,12 +70,12 @@ public final class TestsUtils {
       .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/nosonar.xml"));
 
-    if (!edition.equals(Edition.COMMUNITY)) {
+    if (isEnterprise) {
       builder.setEdition(edition)
         .activateLicense();
     }
 
-    builder.addPlugin(pluginLocation);
+    builder.addPlugin(Plugins.PYTHON.get(isEnterprise));
 
     return builder;
   }

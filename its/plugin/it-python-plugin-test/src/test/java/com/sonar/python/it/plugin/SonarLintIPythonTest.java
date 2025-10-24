@@ -82,7 +82,8 @@ public class SonarLintIPythonTest {
       }
     };
     SonarLintLogger.setTarget(logOutput);
-    var pluginJarLocation = Set.of(TestsUtils.dynamicOrchestrator.getConfiguration().locators().locate(PluginLocator.pythonPluginLocation()).toPath());
+    var pluginJarLocation = Set
+      .of(TestsUtils.dynamicOrchestrator.getConfiguration().locators().locate(PluginLocator.Plugins.PYTHON.get(PluginLocator.isEnterpriseTest())).toPath());
     var enabledLanguages = Set.of(SonarLanguage.IPYTHON);
     var pluginConfiguration = new PluginsLoader.Configuration(pluginJarLocation, enabledLanguages, false, Optional.empty());
     var pluginLoader = new PluginsLoader().load(pluginConfiguration, Set.of());

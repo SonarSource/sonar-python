@@ -1,0 +1,26 @@
+name: 'Setup Orchestrator Cache'
+description: 'Sets up orchestrator cache with dynamic key based on SQ version, and current month'
+
+inputs:
+  sq-version:
+    description: 'SonarQube version to use in cache key'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Calculate orchestrator cache key
+      id: set-paths
+      shell: bash
+      run: |
+        # Get current month for cache rotation
+        CURRENT_MONTH=$(date +"%B")
+
+        CACHE_KEY="orchestrator-${{ github.workflow }}-${{ inputs.sq-version }}-${CURRENT_MONTH}"
+        echo "cache-key=${CACHE_KEY}" >> $GITHUB_OUTPUT
+
+    - name: Setup orchestrator cache
+      uses: SonarSource/ci-github-actions/cache@v1
+      with:
+        path: "~/.sonar/orchestrator/"
+        key: "${{ steps.set-paths.outputs.cache-key }}"
