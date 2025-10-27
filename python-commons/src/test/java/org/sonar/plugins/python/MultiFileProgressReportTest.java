@@ -286,6 +286,10 @@ class MultiFileProgressReportTest {
     t.join(1000);
     logConsumer.awaitCount(2);
     assertThat(interruptFlagPreserved.get()).isTrue();
+
+    // since the interrupt flag was set before calling stop(), stop() didn't wait for the report thread to finish
+    // As such, stop() is called again, to prevent logs from it to affect other tests
+    report.stop();
   }
 
 
