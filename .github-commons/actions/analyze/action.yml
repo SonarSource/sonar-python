@@ -1,8 +1,8 @@
 name: 'Analyze Sonar Python'
 description: 'Run SonarQube analysis for sonar-python project'
 inputs:
-  sonar-host-url:
-    description: 'SonarQube host URL'
+  sonarqube-instance:
+    description: 'SonarQube instance, can be next, sqc-eu, sqc-us'
     required: true
   sonar-project-key:
     description: 'SonarQube project key'
@@ -14,12 +14,35 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Set SonarQube configuration
+      id: sonar-config
+      shell: bash
+      run: |
+        case "${{ inputs.sonarqube-instance }}" in
+          "next")
+            echo "sonar_token_path=development/kv/data/next" >> $GITHUB_OUTPUT
+            echo "sonar_host_url=https://next.sonarqube.com/sonarqube" >> $GITHUB_OUTPUT
+            ;;
+          "sqc-eu")
+            echo "sonar_token_path=development/kv/data/sonarcloud" >> $GITHUB_OUTPUT
+            echo "sonar_host_url=https://sonarcloud.io" >> $GITHUB_OUTPUT
+            ;;
+          "sqc-us")
+            echo "sonar_token_path=development/kv/data/sonarqube-us" >> $GITHUB_OUTPUT
+            echo "sonar_host_url=https://sonarqube.us" >> $GITHUB_OUTPUT
+            ;;
+          *)
+            echo "Error: Unknown sonarqube-instance '${{ inputs.sonarqube-instance }}'. Valid values are: next, sqc-eu, sqc-us" >&2
+            exit 1
+            ;;
+        esac
+    
     - name: Get sonar token
       id: secrets
       uses: SonarSource/vault-action-wrapper@v3
       with:
         secrets: |
-          development/kv/data/next token | SONAR_TOKEN;
+          ${{ steps.sonar-config.outputs.sonar_token_path }} token | SONAR_TOKEN;
 
     # This step uses a custom script instead of the SonarSource/ci-github-actions/build-maven action because this step should not deploy anything to Artifactory. 
     # Unfortunately, this currently cannot be disabled in the build-maven action. See BUILD-9394 for details
@@ -28,7 +51,7 @@ runs:
       run: bash ${{ github.action_path }}/analyze.sh
       env:
         SONAR_TOKEN: ${{ fromJson(steps.secrets.outputs.vault).SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ inputs.sonar-host-url }}
+        SONAR_HOST_URL: ${{ steps.sonar-config.outputs.sonar_host_url }}
         SONAR_PROJECT_KEY: ${{ inputs.sonar-project-key }}
         BUILD_NUMBER: ${{ inputs.build-number }}
         GIT_SHA1: ${{ github.sha }}
