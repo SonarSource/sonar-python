@@ -1,0 +1,45 @@
+<p>This rule raises an issue when template strings are used for simple string formatting instead of f-strings.</p>
+<h2>Why is this an issue?</h2>
+<p>Template strings (t-strings) were introduced in Python 3.14 as a powerful feature for custom string processing. They evaluate to a
+<code>Template</code> object that can be processed by specialized functions for tasks like HTML templating, SQL query building, or structured
+logging.</p>
+<p>However, when you only need simple string formatting without custom processing, f-strings are the more appropriate choice. F-strings directly
+evaluate to strings and are specifically designed for this use case.</p>
+<p>Using template strings for simple formatting has several drawbacks:</p>
+<ul>
+  <li> <strong>Unnecessary complexity</strong>: Template strings require explicit conversion to strings (using <code>str()</code> or a processing
+  function), while f-strings produce strings directly. </li>
+  <li> <strong>Performance overhead</strong>: Creating a <code>Template</code> object and then converting it to a string is less efficient than using
+  an f-string. </li>
+  <li> <strong>Reduced readability</strong>: The intent is less clear when using template strings for simple cases. </li>
+  <li> <strong>Inconsistent with Python conventions</strong>: F-strings are the established standard for string interpolation in Python. </li>
+</ul>
+<p>Template strings should be reserved for cases where you need to process the interpolated values in a custom way, such as HTML escaping, SQL
+parameter binding, or structured logging.</p>
+<h3>What is the potential impact?</h3>
+<p>Using template strings unnecessarily makes code less readable and maintainable. It also introduces a small performance overhead due to the creation
+of intermediate <code>Template</code> objects. While not a security issue, it represents a misuse of language features that can confuse other
+developers.</p>
+<h3>How to fix?</h3>
+<p>Replace the template string with an f-string. Remove any explicit string conversion calls like <code>str()</code> since f-strings already evaluate
+to strings.</p>
+<h4>Non-compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+name = "World"
+result = str(t"Hello {name}")  # Noncompliant
+</pre>
+<h4>Compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+name = "World"
+result = f"Hello {name}"
+</pre>
+<h3>Documentation</h3>
+<ul>
+  <li> PEP 750 – Template Strings - <a href="https://peps.python.org/pep-0750/">The official specification for template strings in Python 3.14</a>
+  </li>
+  <li> Python Template Strings Documentation - <a href="https://docs.python.org/3.14/library/string.templatelib.html#template-strings">Official
+  documentation for template strings and the templatelib module</a> </li>
+  <li> PEP 498 – Literal String Interpolation - <a href="https://peps.python.org/pep-0498/">The specification for f-strings, the recommended approach
+  for simple string formatting</a> </li>
+</ul>
+

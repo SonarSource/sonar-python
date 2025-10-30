@@ -309,6 +309,7 @@ public class OpenSourceCheckList {
       NoPersonReferenceInTodoCheck.class,
       NoQaCommentCheck.class,
       NoReRaiseInExitCheck.class,
+      NoSimpleTemplateStringsCheck.class,
       NoSonarCommentCheck.class,
       NoSonarCommentFormatCheck.class,
       NotDiscoverableTestMethodCheck.class,
