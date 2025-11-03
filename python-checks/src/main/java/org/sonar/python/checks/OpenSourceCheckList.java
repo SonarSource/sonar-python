@@ -176,6 +176,7 @@ public class OpenSourceCheckList {
       ControlFlowInTaskGroupCheck.class,
       CorsCheck.class,
       CsrfDisabledCheck.class,
+      CustomLoggingFormatterCheck.class,
       DataEncryptionCheck.class,
       DbNoPasswordCheck.class,
       DeadStoreCheck.class,
