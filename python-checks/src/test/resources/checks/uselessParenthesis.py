@@ -111,7 +111,7 @@ platform = ((sys.platform in ('win32', 'Pocket PC'))) # Noncompliant
 
 try:
     x = 1
-except ((ValueError)):                 # Noncompliant
+except ((ValueError)):                 # Noncompliant 2
     pass
 
 try:
@@ -153,3 +153,37 @@ for x, ((y, z)) in range(0, 3):        # Noncompliant
 req_path = (parsed.path or '/') + (('?' + parsed.query) if parsed.query else '')
 
 encode = lambda k, v: '%s=%s' % ((quote(k, safe), quote(v, safe)))   # Noncompliant
+
+try:
+    x = 1
+except (ValueError):      # Noncompliant
+#      ^
+#                 ^@-1<
+    pass
+
+try:
+    x = 1
+except* (RuntimeError):      # Noncompliant
+#       ^
+#                    ^@-1<
+    pass
+
+try:
+    x = 1
+except ValueError:                      # Compliant
+    pass
+
+try:
+    x = 1
+except (ValueError, KeyError):          # Compliant
+    pass
+
+try:
+    x = 1
+except* RuntimeError:                   # Compliant
+    pass
+
+try:
+    x = 1
+except* (ValueError, KeyError):         # Compliant
+    pass

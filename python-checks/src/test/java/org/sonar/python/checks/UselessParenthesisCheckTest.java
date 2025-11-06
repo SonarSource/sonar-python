@@ -16,15 +16,30 @@
  */
 package org.sonar.python.checks;
 
+import java.util.EnumSet;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.junit.Assert.assertEquals;
 
 class UselessParenthesisCheckTest {
 
   @Test
   void test() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_314));
     PythonCheckVerifier.verify("src/test/resources/checks/uselessParenthesis.py", new UselessParenthesisCheck());
+  }
+    
+  @Test
+  void test_older_python_version() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_313, PythonVersionUtils.Version.V_314));
+    var issues313 = PythonCheckVerifier.issues("src/test/resources/checks/uselessParenthesis.py", new UselessParenthesisCheck());
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_314));
+    var issues314 = PythonCheckVerifier.issues("src/test/resources/checks/uselessParenthesis.py", new UselessParenthesisCheck());
+    assertEquals(issues314.size(), issues313.size() + 3);
   }
 
   @Test
