@@ -1,0 +1,58 @@
+<p>This rule raises an issue when <code>return</code>, <code>break</code>, or <code>continue</code> statements are used in a way that exits a
+<code>finally</code> block.</p>
+<h2>Why is this an issue?</h2>
+<p>Using <code>return</code>, <code>break</code>, or <code>continue</code> statements that exit a <code>finally</code> block can lead to confusing
+control flow and unexpected behavior. When these statements exit a <code>finally</code> block, they can mask exceptions that were raised in the
+corresponding <code>try</code> or <code>except</code> blocks, making debugging difficult.</p>
+<p>Starting with Python 3.14, this pattern emits a <code>SyntaxWarning</code> as specified in PEP 765, indicating that this usage is discouraged and
+may become a syntax error in future Python versions. The <code>finally</code> block is intended for cleanup code that should always execute,
+regardless of how the <code>try</code> block exits. When control flow statements exit the <code>finally</code> block, they can interfere with this
+guarantee.</p>
+<p>Additionally, this pattern can make code harder to understand and maintain, as the actual exit point becomes unclear when reading the code.</p>
+<h3>What is the potential impact?</h3>
+<p>Using control flow statements that exit <code>finally</code> blocks can lead to:</p>
+<ul>
+  <li> <strong>Exception masking</strong>: Exceptions raised in <code>try</code> or <code>except</code> blocks may be suppressed unexpectedly </li>
+  <li> <strong>Debugging difficulties</strong>: The actual cause of issues may be hidden when exceptions are masked </li>
+  <li> <strong>Future compatibility issues</strong>: Code may break in future Python versions when this becomes a syntax error </li>
+  <li> <strong>Reduced code maintainability</strong>: Control flow becomes harder to follow and understand </li>
+  <li> <strong>Unexpected behavior</strong>: The program may not behave as intended when exceptions occur </li>
+</ul>
+<h3>How to fix?</h3>
+<p>Move the return statement outside the finally block and use a variable to store the return value if needed.</p>
+<h4>Non-compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def risky_function():
+    try:
+        do_something()
+    finally:
+        cleanup()
+        return "done"  # Noncompliant
+</pre>
+<h4>Compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def safe_function():
+    result = None
+    try:
+        do_something()
+        result = "done"
+    finally:
+        cleanup()
+    return result
+</pre>
+<h3>Documentation</h3>
+<ul>
+  <li> PEP 765 - Disallow return/break/continue that exit a finally block - <a href="https://peps.python.org/pep-0765/">The Python Enhancement
+  Proposal that specifies this change</a> </li>
+  <li> Python 3.14 What’s New - PEP 765 - <a
+  href="https://docs.python.org/3.14/whatsnew/3.14.html#pep-765-disallow-return-break-continue-that-exit-a-finally-block">Documentation of the
+  SyntaxWarning introduced in Python 3.14</a> </li>
+  <li> Python try statement documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">Official documentation
+  for try statements and finally blocks</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> PEP 765 - <a href="https://peps.python.org/pep-0765/">Python Enhancement Proposal defining the deprecation of control flow statements exiting
+  finally blocks</a> </li>
+</ul>
+

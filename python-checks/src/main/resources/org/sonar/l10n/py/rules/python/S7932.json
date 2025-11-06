@@ -1,0 +1,26 @@
+{
+  "title": "Return, break, or continue statements should not exit finally blocks",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10 min"
+  },
+  "tags": [
+    "python",
+    "exception-handling",
+    "control-flow"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-7932",
+  "sqKey": "S7932",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "BLOCKER"
+    },
+    "attribute": "LOGICAL"
+  }
+}

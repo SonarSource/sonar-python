@@ -224,6 +224,7 @@ public class OpenSourceCheckList {
       FileComplexityCheck.class,
       FilePermissionsCheck.class,
       FileHeaderCopyrightCheck.class,
+      FinallyBlockExitStatementCheck.class,
       FixmeCommentCheck.class,
       FlaskHardCodedJWTSecretKeyCheck.class,
       FlaskHardCodedSecretKeyCheck.class,
