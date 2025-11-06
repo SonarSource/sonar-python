@@ -3793,7 +3793,7 @@ public class TypeInferenceV2Test {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
   }
 
-  private static FileInput inferTypes(String lines, ProjectLevelTypeTable projectLevelTypeTable) {
+  public static FileInput inferTypes(String lines, ProjectLevelTypeTable projectLevelTypeTable) {
     FileInput root = parse(lines);
 
     var symbolTable = new SymbolTableBuilderV2(root)
@@ -3822,31 +3822,5 @@ public class TypeInferenceV2Test {
   private static Statement lastStatement(StatementList statementList) {
     List<Statement> statements = statementList.statements();
     return statements.get(statements.size() - 1);
-  }
-
-  private static class TestProject {
-    private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
-
-    public TestProject addModule(String moduleName, String code) {
-      FileInput tree = parseWithoutSymbols(code);
-      projectLevelSymbolTable.addModule(tree, "", pythonFile(moduleName));
-      return this;
-    }
-
-    public Expression lastExpression(String code) {
-      ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
-      return TypeInferenceV2Test.lastExpression(code, projectLevelTypeTable);
-    }
-
-    public TupleImpl lastExpressionAsTuple(String code) {
-      Expression lastExpr = lastExpression(code);
-      assertThat(lastExpr).isInstanceOf(TupleImpl.class);
-      return (TupleImpl) lastExpr;
-    }
-
-    public FileInput inferTypes(String code) {
-      ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
-      return TypeInferenceV2Test.inferTypes(code, projectLevelTypeTable);
-    }
   }
 }

@@ -100,11 +100,11 @@ import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
-import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.caching.CpdSerializer;
 import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.tree.TokenImpl;
 import org.sonar.python.types.TypeShed;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
@@ -997,7 +997,7 @@ class PythonSensorTest {
     assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder(
       "typing", "math",
       "django", "django.urls.conf", "django.urls",
-      "fastapi", "fastapi.responses");
+      "fastapi", "fastapi.responses", "fastapi.responses.HTMLResponse");
   }
 
   @Test

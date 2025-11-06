@@ -20,6 +20,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.TriBool;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.types.v2.ClassType;
@@ -139,83 +140,82 @@ class ProjectLevelTypeTableTest {
 
   @Test
   void importingSubmodulesTest() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
-
-    FileInput libTree = parseWithoutSymbols(
-      """
+    var project = new TestProject();
+    project.addModule("my_package/lib.py", """
       class A: ...
-      """
-    );
-    PythonFile pythonFile = pythonFile("lib.py");
-    projectLevelSymbolTable.addModule(libTree, "my_package", pythonFile);
-    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+      """);
 
-    FileInput initTree = parseWithoutSymbols("");
-    PythonFile initFile = pythonFile("__init__.py");
-    projectLevelSymbolTable.addModule(initTree, "my_package", initFile);
+    project.addModule("my_package/__init__.py", "");
 
-    PythonFile mainFile = pythonFile("main.py");
-    var fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+    Expression libExpr = project.lastExpression("""
       from my_package import lib
       lib
-      """
-    );
-    var libType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
-    // SONARPY-2230: lib should be registered as a member/submodule of "my_package" in project table and we should fall back to it when failing to find the member declared in "my_package"
-    assertThat(libType).isInstanceOf(UnknownType.UnresolvedImportType.class);
-    assertThat(((UnknownType.UnresolvedImportType) libType).importPath()).isEqualTo("my_package.lib");
+      """);
 
+    var libType = libExpr.typeV2();
+    var libTypeChecker = project.typeCheckBuilder().isTypeOrInstanceWithName("my_package.lib");
+    assertThat(libTypeChecker.check(libType)).isEqualTo(TriBool.TRUE);
 
-    mainFile = pythonFile("main.py");
-    fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+    Expression mylibExpr = project.lastExpression("""
       import my_package.lib as mylib
       mylib
-      """
-    );
-    ModuleType moduleLibType = (ModuleType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+      """);
+    ModuleType moduleLibType = (ModuleType) mylibExpr.typeV2();
     assertThat(moduleLibType.name()).isEqualTo("lib");
     assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).extracting(PythonType::name).containsExactly("A");
     assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).allMatch(ClassType.class::isInstance);
   }
 
   @Test
-  void importingRedefinedSubmodulesTest() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
-
-    FileInput libTree = parseWithoutSymbols(
-      """
+  void usingUnimportedSubmodulesTest() {
+    var project = new TestProject();
+    project.addModule("my_package/lib.py", """
       class A: ...
-      """
-    );
-    PythonFile pythonFile = pythonFile("lib.py");
-    projectLevelSymbolTable.addModule(libTree, "my_package", pythonFile);
-    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+      """);
 
-    FileInput initTree = parseWithoutSymbols("""
+    project.addModule("my_package/__init__.py", "");
+
+    Expression libExpr = project.lastExpression("""
+      import my_package
+      my_package.lib
+      """);
+
+    var libType = libExpr.typeV2();
+    // SONARPY-2230: lib should be stored as a submodule of my_package in the ProjectLevelSymbolTable
+    assertThat(libType).isInstanceOf(UnknownType.class);
+  }
+
+  @Test
+  void importingRedefinedSubmodulesTest() {
+    var project = new TestProject();
+    project.addModule("my_package/lib.py", """
+      class A: ...
+      """);
+
+    project.addModule("my_package/__init__.py", """
       from my_package.lib import A as lib
       """);
-    PythonFile initFile = pythonFile("__init__.py");
-    projectLevelSymbolTable.addModule(initTree, "my_package", initFile);
 
-    PythonFile mainFile = pythonFile("main.py");
-    var fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+    Expression libExpr = project.lastExpression("""
       from my_package import lib
       lib
-      """
-    );
-    var libType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
-    // SONARPY-2230 lib should be resolved as the renamed class "A" here (but not present in project table at all)
-    assertThat(libType).isInstanceOf(UnknownType.UnresolvedImportType.class);
-    assertThat(((UnknownType.UnresolvedImportType) libType).importPath()).isEqualTo("my_package.lib");
+      """);
+
+    var libType = libExpr.typeV2();
+    assertThat(libType)
+      .isInstanceOfSatisfying(ModuleType.class, moduleLibType -> {
+        assertThat(moduleLibType.name()).isEqualTo("lib");
+        // SONARPY-2176 lib should be resolved as the renamed class "A" here
+        assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).extracting(PythonType::name).containsExactly("A");
+        assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).allMatch(ClassType.class::isInstance);
+      });
 
 
-    mainFile = pythonFile("main.py");
-    fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+    Expression mylibExpr = project.lastExpression("""
       import my_package.lib as mylib
       mylib
-      """
-    );
-    ModuleType moduleLibType = (ModuleType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+      """);
+    ModuleType moduleLibType = (ModuleType) mylibExpr.typeV2();
     assertThat(moduleLibType.name()).isEqualTo("lib");
     // SONARPY-2176 lib should be resolved as the renamed class "A" here
     assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).extracting(PythonType::name).containsExactly("A");
@@ -460,4 +460,37 @@ class ProjectLevelTypeTableTest {
     var resolvedThird = projectLevelTypeTable.getType("dateutil.parser.isoparser.isoparser");
     assertThat(resolvedThird).isEqualTo(PythonType.UNKNOWN);
   }
+
+  @Test
+  void importResolutionWithRelativeAndAbsoluteImportsTest() {
+    // Reproduces SONARPY-3472: When dealing with "from" imports, we should make sure that the nested submodules have been resolved first
+    var project = new TestProject();
+    project.addModule("anchore_engine/analyzers/__init__.py", "");
+    project.addModule("anchore_engine/analyzers/utils.py", "");
+    project.addModule("anchore_engine/__init__.py", "");
+    project.addModule("anchore_engine/utils.py", "");
+
+    FileInput binaryFileInput = project.inferTypes("anchore_engine/analyzers/binary.py", """
+      import anchore_engine.utils
+      from . import utils
+
+      anchore_engine.utils
+      utils
+      """);
+
+    var statements = binaryFileInput.statements().statements();
+
+    var anchoreEngineUtilsName = ((ExpressionStatement) statements.get(2)).expressions().get(0);
+    var utilsName = ((ExpressionStatement) statements.get(3)).expressions().get(0);
+
+    var anchoreEngineUtilsType = anchoreEngineUtilsName.typeV2(); // anchore_engine.utils
+    var localUtilsType = utilsName.typeV2(); // utils (from . import utils)
+
+    var anchoreEngineUtilsChecker = project.typeCheckBuilder().isTypeOrInstanceWithName("anchore_engine.utils");
+    var analyzersUtilsChecker = project.typeCheckBuilder().isTypeOrInstanceWithName("anchore_engine.analyzers.utils");
+
+    assertThat(anchoreEngineUtilsChecker.check(anchoreEngineUtilsType)).isEqualTo(TriBool.TRUE);
+    assertThat(analyzersUtilsChecker.check(localUtilsType)).isEqualTo(TriBool.TRUE);
+  }
+
 }

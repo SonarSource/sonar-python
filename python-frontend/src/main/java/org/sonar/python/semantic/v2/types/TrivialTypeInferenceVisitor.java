@@ -434,6 +434,13 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
         .stream()
         .findFirst()
         .ifPresent(name -> {
+          // Ensures that in case "name" is a submodule it has registered itself to the parent module
+          // Otherwise resolveMember(...) below won't resolve "name".
+          // SONARPY-2230 would introduce a proper fix
+          var fullFqn = new ArrayList<>(fqn);
+          fullFqn.add(name.name());
+          projectLevelTypeTable.getModuleType(fullFqn);
+
           var type = module.resolveMember(name.name()).orElseGet(() -> createUnresolvedImportType(fqn, name));
 
           var boundName = Optional.ofNullable(aliasedName.alias())
