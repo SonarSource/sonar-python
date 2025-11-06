@@ -1,0 +1,56 @@
+<p>This rule raises an issue when <code>isinstance()</code> checks are used to differentiate between string parts and <code>Interpolation</code>
+objects while processing template strings, instead of using structural pattern matching with <code>match</code>/<code>case</code> statements.</p>
+<h2>Why is this an issue?</h2>
+<p>When processing template strings introduced in PEP 750, using <code>isinstance()</code> checks to handle different types of template components
+results in verbose and less readable code. PEP 750 specifically recommends using structural pattern matching as the best practice for template
+processing.</p>
+<p>Structural pattern matching with <code>match</code>/<code>case</code> statements provides several advantages:</p>
+<ul>
+  <li> <strong>Cleaner syntax</strong>: The pattern matching syntax is more concise and expressive than multiple <code>isinstance()</code> checks
+  </li>
+  <li> <strong>Better readability</strong>: The intent is clearer when using pattern matching to handle different types </li>
+  <li> <strong>Follows PEP recommendations</strong>: PEP 750 explicitly recommends this approach as the expected best practice </li>
+  <li> <strong>More Pythonic</strong>: Pattern matching is the modern Python way to handle type-based dispatching </li>
+</ul>
+<p>Using <code>isinstance()</code> checks makes the code more verbose and harder to maintain, especially when processing complex templates with
+multiple types of components.</p>
+<h3>What is the potential impact?</h3>
+<p>Using <code>isinstance()</code> checks instead of structural pattern matching when processing template strings results in more verbose, less
+readable code that doesn’t follow the recommended patterns from PEP 750. While functionally equivalent, it makes the codebase harder to maintain and
+understand.</p>
+<h3>How to fix?</h3>
+<p>Replace <code>isinstance()</code> checks with structural pattern matching using <code>match</code>/<code>case</code> statements. Use type patterns
+like <code>str()</code> and <code>Interpolation()</code> to handle different template components.</p>
+<h4>Non-compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def process_template(template):
+    result = []
+    for item in template:
+        if isinstance(item, str):  # Noncompliant
+            result.append(item.lower())
+        elif isinstance(item, Interpolation):  # Noncompliant
+            result.append(str(item.value).upper())
+    return ''.join(result)
+</pre>
+<h4>Compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def process_template(template):
+    result = []
+    for item in template:
+        match item:
+            case str() as s:
+                result.append(s.lower())
+            case Interpolation() as interp:
+                result.append(str(interp.value).upper())
+    return ''.join(result)
+</pre>
+<h3>Documentation</h3>
+<ul>
+  <li> PEP 750 - Template Strings - <a href="https://peps.python.org/pep-0750/">The official PEP introducing template strings and recommending
+  structural pattern matching for processing</a> </li>
+  <li> PEP 634 - Structural Pattern Matching - <a href="https://peps.python.org/pep-0634/">The PEP that introduced structural pattern matching to
+  Python</a> </li>
+  <li> Python Pattern Matching Documentation - <a href="https://docs.python.org/3/tutorial/controlflow.html#match-statements">Official Python
+  documentation on match statements and pattern matching</a> </li>
+</ul>
+

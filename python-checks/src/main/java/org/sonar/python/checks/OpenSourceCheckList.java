@@ -403,6 +403,7 @@ public class OpenSourceCheckList {
       TempFileCreationCheck.class,
       ImplicitlySkippedTestCheck.class,
       TaskGroupNurseryUsedOnlyOnceCheck.class,
+      TemplateStringStructuralPatternMatchingCheck.class,
       TimeSleepInAsyncCheck.class,
       ToDoCommentCheck.class,
       TooManyLinesInFileCheck.class,
