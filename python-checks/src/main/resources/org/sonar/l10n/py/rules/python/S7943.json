@@ -1,0 +1,25 @@
+{
+  "title": "Template and str should not be concatenated directly",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "pep750",
+    "concatenation"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-7943",
+  "sqKey": "S7943",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "BLOCKER"
+    },
+    "attribute": "CLEAR"
+  }
+}

@@ -314,6 +314,7 @@ public class OpenSourceCheckList {
       NoSimpleTemplateStringsCheck.class,
       NoSonarCommentCheck.class,
       NoSonarCommentFormatCheck.class,
+      TemplateAndStrConcatenationCheck.class,
       NotDiscoverableTestMethodCheck.class,
       NotImplementedBooleanContextCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,

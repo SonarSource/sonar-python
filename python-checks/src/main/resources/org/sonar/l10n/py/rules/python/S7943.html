@@ -1,0 +1,37 @@
+<p>This rule raises an issue when a Template object is concatenated directly with a str object using the <code>+</code> operator.</p>
+<h2>Why is this an issue?</h2>
+<p>Direct concatenation between Template and str objects is prohibited in Python because it creates ambiguity about how the string should be
+interpreted.</p>
+<p>When you concatenate a Template with a str, it’s unclear whether the str should be:</p>
+<ul>
+  <li> Treated as a static string part of the template </li>
+  <li> Treated as an interpolation value that should be processed dynamically </li>
+</ul>
+<p>This ambiguity can lead to unexpected behavior and makes the code’s intent unclear. Python’s PEP 750 specification explicitly prohibits this
+operation to force developers to be explicit about their intentions.</p>
+<p>The Template type is designed to clearly separate static string parts from dynamic interpolations, and allowing direct concatenation with str would
+undermine this design principle.</p>
+<h3>What is the potential impact?</h3>
+<p>Direct concatenation of Template and str objects will result in a runtime error, causing the application to fail. Additionally, even if it were
+allowed, the ambiguous nature of such operations could lead to security vulnerabilities or incorrect string processing, especially in contexts like
+HTML templating or SQL query construction where the distinction between static and dynamic content is critical.</p>
+<h3>How to fix?</h3>
+<p>If the string should be treated as static text, wrap it in a Template constructor before concatenation.</p>
+<h4>Non-compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+name = "World"
+template = t"Hello " + name  # Noncompliant
+</pre>
+<h4>Compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+name = "World"
+template = t"Hello " + Template(name)
+</pre>
+<h3>Documentation</h3>
+<ul>
+  <li> PEP 750 – Template Strings - <a href="https://peps.python.org/pep-0750/">Official specification for Python template strings including
+  concatenation rules</a> </li>
+  <li> Template String Concatenation - <a href="https://peps.python.org/pep-0750/#template-string-concatenation">Detailed explanation of template
+  string concatenation behavior and restrictions</a> </li>
+</ul>
+
