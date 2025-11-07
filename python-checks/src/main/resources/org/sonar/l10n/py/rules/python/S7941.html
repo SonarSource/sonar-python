@@ -1,0 +1,43 @@
+<p>This rule raises an issue when code imports from legacy compression modules (<code>lzma</code>, <code>bz2</code>, <code>gzip</code>,
+<code>zlib</code>) instead of using the new compression namespace imports in Python 3.14+.</p>
+<h2>Why is this an issue?</h2>
+<p>Starting with Python 3.14, PEP 784 introduces a new <code>compression</code> namespace that provides canonical import names for compression
+modules. The new imports like <code>compression.lzma</code>, <code>compression.bz2</code>, <code>compression.gzip</code>, and
+<code>compression.zlib</code> are now the preferred way to import these modules.</p>
+<p>Using the legacy top-level module names is still supported for backwards compatibility, but the new namespace imports offer several advantages:</p>
+<ul>
+  <li> They provide a unified interface for all compression-related functionality </li>
+  <li> They follow Python’s evolving standard library organization </li>
+  <li> They prevent potential name collisions with third-party packages </li>
+  <li> They make code more explicit about using compression functionality </li>
+</ul>
+<p>While the legacy imports continue to work, adopting the new canonical names helps keep your code aligned with Python’s current best practices and
+prepares it for future developments in the standard library.</p>
+<h3>What is the potential impact?</h3>
+<p>Using legacy compression imports does not cause functional issues, but it means your code is not following the current Python standards. This can
+make the codebase appear outdated and may require updates in the future if the legacy imports are eventually deprecated.</p>
+<h3>How to fix?</h3>
+<p>Replace legacy compression module imports with the new compression namespace imports. Update all import statements to use the canonical names
+introduced in Python 3.14.</p>
+<h4>Non-compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from lzma import LZMAFile
+from bz2 import BZ2File
+from gzip import GzipFile
+from zlib import compress
+</pre>
+<h4>Compliant code example</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from compression.lzma import LZMAFile
+from compression.bz2 import BZ2File
+from compression.gzip import GzipFile
+from compression.zlib import compress
+</pre>
+<h3>Documentation</h3>
+<ul>
+  <li> PEP 784 – Adding Zstandard to the standard library - <a href="https://peps.python.org/pep-0784/">The official PEP that introduces the
+  compression namespace and explains the rationale behind the new import structure</a> </li>
+  <li> Python 3.14 compression module documentation - <a href="https://docs.python.org/3.14/library/compression.html">Official documentation for the
+  new compression namespace modules</a> </li>
+</ul>
+

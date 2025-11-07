@@ -168,6 +168,7 @@ public class OpenSourceCheckList {
       CommentedCodeCheck.class,
       CommentRegularExpressionCheck.class,
       ComparisonToNoneCheck.class,
+      CompressionModulesFromNamespaceCheck.class,
       ConfusingTypeCheckingCheck.class,
       ConfusingWalrusCheck.class,
       ConsistentReturnCheck.class,

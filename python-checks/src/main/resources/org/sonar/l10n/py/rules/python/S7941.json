@@ -1,0 +1,25 @@
+{
+  "title": "Compression modules should be imported from the compression namespace",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2 min"
+  },
+  "tags": [
+    "python3.14",
+    "pep784",
+    "imports"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-7941",
+  "sqKey": "S7941",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
