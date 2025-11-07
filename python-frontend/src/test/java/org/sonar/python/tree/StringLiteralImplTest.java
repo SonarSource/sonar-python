@@ -24,17 +24,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class StringLiteralImplTest {
 
   @Test
-  void isInterpolated() {
-    assertThat(stringLiteral("''").isInterpolated()).isFalse();
-    assertThat(stringLiteral("'abc'").isInterpolated()).isFalse();
-    assertThat(stringLiteral("f'abc'").isInterpolated()).isTrue();
-    assertThat(stringLiteral("F'abc'").isInterpolated()).isTrue();
-    assertThat(stringLiteral("rf'abc'").isInterpolated()).isTrue();
-    assertThat(stringLiteral("fr'abc'").isInterpolated()).isTrue();
-    assertThat(stringLiteral("'{food}'").isInterpolated()).isFalse();
-  }
-
-  @Test
   void isTemplate() {
     assertThat(stringLiteral("''").isTemplate()).isFalse();
     assertThat(stringLiteral("'abc'").isTemplate()).isFalse();

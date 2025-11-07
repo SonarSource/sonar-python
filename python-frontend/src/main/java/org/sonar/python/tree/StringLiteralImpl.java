@@ -90,8 +90,4 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
   public boolean isTemplate() {
     return !stringElements.isEmpty() && stringElements.stream().anyMatch(StringElement::isTemplate);
   }
-
-  public boolean isInterpolated() {
-    return !stringElements.isEmpty() && stringElements.stream().anyMatch(StringElement::isInterpolated);
-  }
 }
