@@ -439,6 +439,7 @@ public class OpenSourceCheckList {
       UnnecessaryReversedCallCheck.class,
       UnnecessarySortInsideSetCheck.class,
       UnnecessarySubscriptReversalCheck.class,
+      UnprocessedTemplateStringCheck.class,
       UnquantifiedNonCapturingGroupCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,
