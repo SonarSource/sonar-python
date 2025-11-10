@@ -35,6 +35,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -3773,6 +3774,30 @@ public class TypeInferenceV2Test {
       .isInstanceOf(ObjectType.class)
       .extracting(PythonType::unwrappedType)
       .isSameAs(INT_TYPE); // TODO SONARPY-3283: should be ObjectType[SocketKind]
+  }
+
+  @Test
+  void importResolutionWithRelativeImportInInitFileTest() {
+    // Reproduce case SONARPY-3470: Relative import in __init__.py should resolve correctly (account for the fact module FQN already truncates __init__.py)
+    var project = new TestProject();
+    project.addModule("anchore_engine/__init__.py", "");
+    project.addModule("anchore_engine/db/__init__.py", "");
+    project.addModule("anchore_engine/db/entities/__init__.py", "");
+    project.addModule("anchore_engine/db/entities/common.py", """
+      def session_scope(): ...
+      """);
+
+    FileInput dbInitFileInput = project.inferTypes("anchore_engine/db/__init__.py", """
+      from .entities.common import session_scope
+      session_scope
+      """);
+
+    var statements = dbInitFileInput.statements().statements();
+    var sessionScopeType = ((ExpressionStatement) statements.get(1)).expressions().get(0).typeV2();
+
+    var sessionScopeChecker = project.typeCheckBuilder().isTypeOrInstanceWithName("anchore_engine.db.entities.common.session_scope");
+
+    assertThat(sessionScopeChecker.check(sessionScopeType)).isEqualTo(TriBool.TRUE);
   }
 
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {

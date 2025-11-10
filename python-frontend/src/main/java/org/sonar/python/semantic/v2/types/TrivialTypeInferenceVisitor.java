@@ -395,22 +395,34 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitImportFrom(ImportFrom importFrom) {
-    List<String> fromModuleFqn = Optional.ofNullable(importFrom.module())
-      .map(TrivialTypeInferenceVisitor::dottedNameToPartFqn)
-      .orElse(new ArrayList<>());
-    List<Token> dotPrefixTokens = importFrom.dottedPrefixForModule();
-    if (!dotPrefixTokens.isEmpty()) {
-      // Relative import: we start from the current module FQN and go up as many levels as there are dots in the import statement
-      List<String> moduleFqnElements = List.of(fullyQualifiedModuleName.split("\\."));
-      int sizeLimit = Math.max(0, moduleFqnElements.size() - dotPrefixTokens.size());
-      fromModuleFqn = Stream.concat(moduleFqnElements.stream().limit(sizeLimit), fromModuleFqn.stream()).toList();
-    }
+    List<String> fromModuleFqn = getFromImportModuleFqn(importFrom);
     importedModulesFQN.add(String.join(".", fromModuleFqn));
     setTypeToImportFromStatement(importFrom, fromModuleFqn);
 
     if (importFrom.isWildcardImport()) {
       collectWildcardImportedSymbols(fromModuleFqn);
     }
+  }
+
+  private List<String> getFromImportModuleFqn(ImportFrom importFrom) {
+    List<String> fromModuleFqn = Optional.ofNullable(importFrom.module())
+      .map(TrivialTypeInferenceVisitor::dottedNameToPartFqn)
+      .orElse(new ArrayList<>());
+    List<Token> dotPrefixTokens = importFrom.dottedPrefixForModule();
+    if (!dotPrefixTokens.isEmpty()) {
+      List<String> moduleFqnElements = List.of(fullyQualifiedModuleName.split("\\."));
+
+      int dotPrefixTokensSize = dotPrefixTokens.size();
+      if ("__init__.py".equals(moduleName)) {
+        // if current module is a __init__.py file, the first "." of dottedPrefixForModule() already refers to moduleFqnElements.
+        // Therefore, "." should result in moduleFqnElements, ".." should result in moduleFqnElements - 1, etc.
+        dotPrefixTokensSize--;
+      }
+
+      int sizeLimit = Math.max(0, moduleFqnElements.size() - dotPrefixTokensSize);
+      fromModuleFqn = Stream.concat(moduleFqnElements.stream().limit(sizeLimit), fromModuleFqn.stream()).toList();
+    }
+    return fromModuleFqn;
   }
 
   private void collectWildcardImportedSymbols(List<String> moduleFqn) {
