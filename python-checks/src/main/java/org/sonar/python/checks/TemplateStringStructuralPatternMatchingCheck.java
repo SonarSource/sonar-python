@@ -78,11 +78,9 @@ public class TemplateStringStructuralPatternMatchingCheck extends PythonSubscrip
     }
 
     List<IsInstanceCallAndType> isInstanceChecks = findIsInstanceChecks(body.statements(), iterationVariables);
-    if (isInstanceChecks.size() >= 2) {
-      if (hasTemplateTypeChecks(isInstanceChecks)) {
-        PreciseIssue issue = ctx.addIssue(isInstanceChecks.get(0).callExpr.callee(), MESSAGE);
-        isInstanceChecks.stream().skip(1).forEach(isInstance -> issue.secondary(isInstance.callExpr.callee(), SECONDARY_MESSAGE));
-      }
+    if (isInstanceChecks.size() >= 2 && hasTemplateTypeChecks(isInstanceChecks)) {
+      PreciseIssue issue = ctx.addIssue(isInstanceChecks.get(0).callExpr.callee(), MESSAGE);
+      isInstanceChecks.stream().skip(1).forEach(isInstance -> issue.secondary(isInstance.callExpr.callee(), SECONDARY_MESSAGE));
     }
   }
 
