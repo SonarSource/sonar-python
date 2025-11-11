@@ -36,7 +36,11 @@ public enum TelemetryMetricKey {
   PARALLEL_ANALYSIS_KEY("python.analysis.parallel"),
   ANALYSIS_DURATION_KEY("python.analysis.duration"),
   NOTEBOOKS_ANALYSIS_DURATION_KEY("python.notebooks.analysis.duration"),
-  PYTHON_NUMBER_OF_FILES_KEY("python.files.count");
+  PYTHON_NUMBER_OF_FILES_KEY("python.files.count"),
+  PYTHON_PACKAGES_WITH_INIT("python.packages.with_init"),
+  PYTHON_PACKAGES_WITHOUT_INIT("python.packages.without_init"),
+  PYTHON_DUPLICATE_PACKAGES_WITHOUT_INIT("python.packages.duplicate_without_init"),
+  PYTHON_NAMESPACE_PACKAGES_IN_REGULAR_PACKAGE("python.packages.namespace_packages_in_regular_package");
 
   private final String key;
 

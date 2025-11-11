@@ -37,9 +37,9 @@ import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.parser.PythonParser;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.project.config.SignatureBasedAwsLambdaHandlersCollector;
-import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.TypeTable;
@@ -61,6 +61,7 @@ public abstract class PythonIndexer {
 
   private final SignatureBasedAwsLambdaHandlersCollector signatureBasedAwsLambdaHandlersCollector = new SignatureBasedAwsLambdaHandlersCollector();
   private final ProjectConfigurationBuilder projectConfigurationBuilder;
+  private @Nullable NamespacePackageTelemetry namespacePackageTelemetry;
 
   protected PythonIndexer(ProjectConfigurationBuilder projectConfigurationBuilder) {
     this.projectConfigurationBuilder = projectConfigurationBuilder;
@@ -97,6 +98,21 @@ public abstract class PythonIndexer {
       projectLevelSymbolTable.addProjectPackage(packageName);
     }
   }
+
+  protected void analyzeNamespacePackages(ProjectTree projectTree) {
+    try {
+      this.namespacePackageTelemetry = new NamespacePackageAnalyzer().analyze(projectTree);
+    } catch (Exception e) {
+      // Ensures that telemetry cannot crash the analysis
+      LOG.warn("Failed to analyze namespace packages", e);
+    }
+  }
+
+  @CheckForNull
+  public NamespacePackageTelemetry namespacePackageTelemetry() {
+    return namespacePackageTelemetry;
+  }
+
 
   void removeFile(PythonInputFile inputFile) {
     String packageName = packageNames.get(inputFile.wrappedFile().uri());

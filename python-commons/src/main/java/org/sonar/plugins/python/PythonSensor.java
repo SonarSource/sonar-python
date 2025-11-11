@@ -46,19 +46,20 @@ import org.sonar.plugins.python.architecture.ArchitectureCallbackWrapper;
 import org.sonar.plugins.python.editions.RepositoryInfoProvider;
 import org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
 import org.sonar.plugins.python.editions.RepositoryInfoProviderWrapper;
+import org.sonar.plugins.python.indexer.NamespacePackageTelemetry;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
-import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.types.TypeShed;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
-import static org.sonar.plugins.python.PythonScanner.THREADS_PROPERTY_NAME;
 import static org.sonar.plugins.python.Scanner.PARALLEL_PROPERTY_NAME;
+import static org.sonar.plugins.python.Scanner.THREADS_PROPERTY_NAME;
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
 
 @DependedUpon(value = "org.sonar.plugins.python.PythonSensor_before_com.sonarsource.dbd.SonarLintPythonBugDetectionSensor")
@@ -154,6 +155,7 @@ public final class PythonSensor implements Sensor {
     updateDatabricksTelemetry(scanner);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEY, noSonarLineInfoCollector.getSuppressedRuleIds());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_COMMENTS_KEY, noSonarLineInfoCollector.getCommentWithExactlyOneRuleSuppressed());
+    updateNamespacePackageTelemetry(pythonIndexer);
     updatePerformanceTelemetry(context, pythonFiles, scanner, sensorTime);
     sensorTelemetryStorage.send(context);
     durationReport.stop();
@@ -177,6 +179,16 @@ public final class PythonSensor implements Sensor {
 
   private void updateDatabricksTelemetry(PythonScanner scanner) {
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_DATABRICKS_FOUND, scanner.getFoundDatabricks());
+  }
+
+  private void updateNamespacePackageTelemetry(PythonIndexer pythonIndexer) {
+    NamespacePackageTelemetry telemetry = pythonIndexer.namespacePackageTelemetry();
+    if (telemetry != null) {
+      sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGES_WITH_INIT, telemetry.packagesWithInit());
+      sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGES_WITHOUT_INIT, telemetry.packagesWithoutInit());
+      sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_DUPLICATE_PACKAGES_WITHOUT_INIT, telemetry.duplicatePackagesWithoutInit());
+      sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_NAMESPACE_PACKAGES_IN_REGULAR_PACKAGE, telemetry.namespacePackagesInRegularPackage());
+    }
   }
 
   private void updatePythonVersionTelemetry(SensorContext context, String[] pythonVersionParameter) {

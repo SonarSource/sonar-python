@@ -33,8 +33,8 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.caching.Caching;
-import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.index.Descriptor;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.semantic.DependencyGraph;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
@@ -72,6 +72,10 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   public void buildOnce(SensorContext context) {
     LOG.debug("Input files for indexing: {}", inputFiles);
     collectPackageNames(inputFiles);
+
+    ProjectTree projectTree = new ProjectTreeBuilder().build(inputFiles);
+    analyzeNamespacePackages(projectTree);
+
     if (shouldOptimizeAnalysis(context)) {
       computeGlobalSymbolsUsingCache(context);
       return;
