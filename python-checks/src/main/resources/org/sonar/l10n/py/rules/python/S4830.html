@@ -21,26 +21,26 @@ system.</p>
 <h3>Code examples</h3>
 <p>The following code contains examples of disabled certificate validation.</p>
 <p>Certificate validation is not enabled by default when <code>_create_unverified_context</code> is used. It is recommended to use
-<code>_create_default_https_context</code> instead to create a secure context that validates certificates.</p>
+<code>create_default_context</code> instead. This method creates secure contexts that will verify certificates and check server hostnames (see
+{rule:python:S5527} for more information) by default.</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="21" data-diff-type="noncompliant">
 import ssl
 
 ctx1 = ssl._create_unverified_context() # Noncompliant
-ctx2 = ssl._create_stdlib_context() # Noncompliant
 
-ctx3 = ssl.create_default_context()
-ctx3.verify_mode = ssl.CERT_NONE # Noncompliant
+ctx2 = ssl.create_default_context()
+ctx2.verify_mode = ssl.CERT_NONE # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="21" data-diff-type="compliant">
 import ssl
 
-ctx = ssl.create_default_context()
-ctx.verify_mode = ssl.CERT_REQUIRED
-
 # By default, certificate validation is enabled
-ctx = ssl._create_default_https_context()
+ctx1 = ssl.create_default_context()
+
+# The context can be specified for client or server use
+ctx2 = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
 </pre>
 <h3>How does this work?</h3>
 <p>Addressing the vulnerability of disabled TLS certificate validation primarily involves re-enabling the default validation.</p>
@@ -55,25 +55,41 @@ roots. Rather than disabling certificate validation in your code, you can add th
 <h2>How to fix it in OpenSSL</h2>
 <h3>Code examples</h3>
 <p>The following code contains examples of disabled certificate validation.</p>
-<p>Certificate validation is not enabled by default and has to be explicitly enabled through <code>set_verify</code>.</p>
+<p>Certificate validation is not enabled by default and has to be explicitly enabled through <code>set_verify</code>. By setting
+<code>SSL.VERIFY_NONE</code>, no certificate validation will occur.</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 from OpenSSL import SSL
+from OpenSSL.crypto import X509
 
-ctx1 = SSL.Context(SSL.TLSv1_2_METHOD) # Noncompliant
+ctx1 = SSL.Context(SSL.TLSv1_2_METHOD)  # Noncompliant
 
-ctx2 = SSL.Context(SSL.TLSv1_2_METHOD)
-ctx2.set_verify(SSL.VERIFY_NONE, verify_callback) # Noncompliant
+ctx2 = SSL.Context(SSL.TLSv1_3_METHOD)
+ctx2.set_verify(SSL.VERIFY_NONE, verify_callback)  # Noncompliant
+
+def bad_callback(
+    conn: SSL.Connection, cert: X509, errnum: int, depth: int, ok: int
+) -&gt; bool:
+    return True
+
+ctx3 = SSL.Context(SSL.TLS_CLIENT_METHOD)
+ctx3.set_verify(SSL.VERIFY_PEER, bad_callback)  # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 from OpenSSL import SSL
 
-ctx = SSL.Context(SSL.TLSv1_2_METHOD)
-ctx.set_verify(SSL.VERIFY_PEER, verify_callback)
-ctx.set_verify(SSL.VERIFY_PEER | SSL.VERIFY_FAIL_IF_NO_PEER_CERT, verify_callback)
-ctx.set_verify(SSL.VERIFY_PEER | SSL.VERIFY_FAIL_IF_NO_PEER_CERT | SSL.VERIFY_CLIENT_ONCE, verify_callback)
+ctx1 = SSL.Context(SSL.TLSv1_2_METHOD)
+ctx1.set_verify(SSL.VERIFY_PEER)
+
+ctx2 = SSL.Context(SSL.TLSv1_3_METHOD)
+ctx2.set_verify(SSL.VERIFY_PEER | SSL.VERIFY_FAIL_IF_NO_PEER_CERT)
+
+ctx3 = SSL.Context(SSL.TLS_CLIENT_METHOD)
+ctx3.set_verify(SSL.VERIFY_PEER | SSL.VERIFY_FAIL_IF_NO_PEER_CERT | SSL.VERIFY_CLIENT_ONCE, verify_callback)
 </pre>
+<p>By omitting the <code>verify_callback</code> argument, OpenSSL will use its built-in verification process. This can be trusted to be secure by
+default (if the correct flags are set.)</p>
 <h3>How does this work?</h3>
 <p>Addressing the vulnerability of disabled TLS certificate validation primarily involves re-enabling the default validation.</p>
 <p>To avoid running into problems with invalid certificates, consider the following sections.</p>
@@ -89,6 +105,7 @@ roots. Rather than disabling certificate validation in your code, you can add th
 <p>The following code contains examples of disabled certificate validation.</p>
 <p>The certificate validation gets disabled by setting <code>verify</code> to <code>False</code>. To enable validation set the value to
 <code>True</code> or do not set <code>verify</code> at all to use the secure default value.</p>
+<p>As part of its certification validation, Requests also verifies the server hostname with the certificate chain.</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="11" data-diff-type="noncompliant">
 import requests
@@ -117,6 +134,7 @@ roots. Rather than disabling certificate validation in your code, you can add th
 <p>The following code contains examples of disabled certificate validation.</p>
 <p>The certificate validation gets disabled by setting <code>verify_ssl</code> to <code>False</code>. To enable validation set the value to
 <code>True</code> or do not set <code>verify_ssl</code> at all to use the secure default value.</p>
+<p>As part of its certification validation, aiohttp also verifies the server hostname with the certificate chain.</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="41" data-diff-type="noncompliant">
 import aiohttp
@@ -150,6 +168,7 @@ roots. Rather than disabling certificate validation in your code, you can add th
 <p>The following code contains examples of disabled certificate validation.</p>
 <p>The certificate validation gets disabled by setting <code>verify</code> to <code>False</code>. To enable validation set the value to
 <code>True</code> or do not set <code>verify</code> at all to use the secure default value.</p>
+<p>As part of its certification validation, HTTPX also verifies the server hostname with the certificate chain.</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="31" data-diff-type="noncompliant">
 import httpx

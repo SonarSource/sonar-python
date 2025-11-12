@@ -9,7 +9,6 @@ modules. The new imports like <code>compression.lzma</code>, <code>compression.b
   <li> They provide a unified interface for all compression-related functionality </li>
   <li> They follow Python’s evolving standard library organization </li>
   <li> They prevent potential name collisions with third-party packages </li>
-  <li> They make code more explicit about using compression functionality </li>
 </ul>
 <p>While the legacy imports continue to work, adopting the new canonical names helps keep your code aligned with Python’s current best practices and
 prepares it for future developments in the standard library.</p>
@@ -35,9 +34,8 @@ from compression.zlib import compress
 </pre>
 <h3>Documentation</h3>
 <ul>
-  <li> PEP 784 – Adding Zstandard to the standard library - <a href="https://peps.python.org/pep-0784/">The official PEP that introduces the
-  compression namespace and explains the rationale behind the new import structure</a> </li>
-  <li> Python 3.14 compression module documentation - <a href="https://docs.python.org/3.14/library/compression.html">Official documentation for the
-  new compression namespace modules</a> </li>
+  <li> PEP 784 - <a href="https://peps.python.org/pep-0784/">The official PEP that introduces the compression namespace</a> </li>
+  <li> Python 3.14 - <a href="https://docs.python.org/3.14/library/compression.html">Official documentation for the new compression namespace
+  modules</a> </li>
 </ul>
 

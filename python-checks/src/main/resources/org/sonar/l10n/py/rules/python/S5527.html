@@ -19,24 +19,75 @@ your system sends to them, potentially leading to significant data breaches.</p>
 <h3>Code examples</h3>
 <p>The following code contains examples of disabled hostname validation.</p>
 <p>Certificate validation is not enabled by default when <code>_create_unverified_context</code> or <code>_create_stdlib_context</code> is used. It is
-recommended to use <code>create_default_context</code>, without explicitly setting <code>check_hostname</code> to <code>False</code>.<br> Doing so
-creates a secure context that validates both hostnames and certificates.</p>
+recommended to use <code>create_default_context</code> instead. This method creates secure contexts that will check server hostnames and verify
+certificates (see {rule:python:S4830} for more information) by default.<br> If <code>create_default_context</code> cannot be used, then the
+<code>check_hostname</code> property must be set to <code>True</code> on the <code>SSLContext</code>. Doing so also automatically enables certificate
+verification for this context.</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 import ssl
 
-example = ssl._create_stdlib_context() # Noncompliant
+ctx1 = ssl.create_default_context()
+ctx1.check_hostname = False  # Noncompliant
 
-example = ssl._create_default_https_context()
-example.check_hostname = False # Noncompliant
+ctx2 = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)  # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 import ssl
 
-example = ssl.create_default_context()
+# By default, hostname verification is enabled
+ctx1 = ssl.create_default_context()
 
-example = ssl._create_default_https_context()
+ctx2 = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+ctx2.check_hostname = True
+</pre>
+<h3>How does this work?</h3>
+<p>To fix the vulnerability of disabled hostname validation, it is strongly recommended to first re-enable the default validation and fix the root
+cause: the validity of the certificate.</p>
+<h4>Use valid certificates</h4>
+<p>If a hostname validation failure prevents connecting to the target server, keep in mind that <strong>one system’s code should not work around
+another system’s problems</strong>, as this creates unnecessary dependencies and can lead to reliability issues.</p>
+<p>Therefore, the first solution is to change the remote host’s certificate to match its identity. If the remote host is not under your control,
+consider replicating its service to a server whose certificate you can change yourself.</p>
+<p>In case the contacted host is located on a development machine, and if there is no other choice, try following this solution:</p>
+<ul>
+  <li> Create a self-signed certificate for that machine. </li>
+  <li> Add this self-signed certificate to the system’s trust store. </li>
+  <li> If the hostname is not <code>localhost</code>, add the hostname in the <code>/etc/hosts</code> file. </li>
+</ul>
+<h2>How to fix it in OpenSSL</h2>
+<h3>Code examples</h3>
+<p>Currently, pyOpenSSL does not provide any public method to enable hostname verification. Therefore, it is recommended to use another SSL library.
+The <code>ssl</code> module of the Python standard library can be a great replacement for several use cases.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="11" data-diff-type="noncompliant">
+import socket
+from OpenSSL import SSL
+
+ctx = SSL.Context(SSL.TLSv1_2_METHOD)  # Noncompliant
+ctx.set_verify(SSL.VERIFY_PEER)
+
+conn = SSL.Connection(ctx, socket.socket(socket.AF_INET, socket.SOCK_STREAM))
+conn.connect(("www.example.com", 443))
+conn.send("GET / HTTP/1.0\r\nHost: www.example.com\r\n\r\n".encode())
+result = conn.recv(1024)
+
+conn.shutdown()
+conn.close()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="11" data-diff-type="compliant">
+import ssl
+import socket
+
+# By default, hostname verification is enabled
+ctx = ssl.create_default_context()
+
+with socket.create_connection(("www.example.com", 443)) as sock:
+    with ctx.wrap_socket(sock, server_hostname="www.example.com") as conn:
+        conn.send(f"GET / HTTP/1.0\r\nHost: www.example.com\r\n\r\n".encode())
+        conn.recv(1024)
 </pre>
 <h3>How does this work?</h3>
 <p>To fix the vulnerability of disabled hostname validation, it is strongly recommended to first re-enable the default validation and fix the root

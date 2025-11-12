@@ -1,6 +1,6 @@
-<p>This rule raises an issue when a template string (t-string) is used without being processed by a template processing function.</p>
+<p>This rule raises an issue when a template string is used without being processed by a template processing function.</p>
 <h2>Why is this an issue?</h2>
-<p>Template strings (t-strings) are a Python 3.14+ feature that creates <code>Template</code> objects, not regular strings. Unlike f-strings that
+<p>Template strings, or t-strings, are a Python 3.14+ feature that creates <code>Template</code> objects, not regular strings. Unlike f-strings that
 immediately evaluate to strings, t-strings require explicit processing by a template processing function to be useful.</p>
 <p>When you use a t-string without processing it, you get a <code>Template</code> object that doesn’t have a meaningful string representation. This is
 almost always unintentional, as developers typically expect string-like behavior similar to f-strings.</p>
@@ -9,10 +9,6 @@ security checks, and domain-specific language implementations. However, to get t
 function.</p>
 <p>Using an unprocessed template string can lead to unexpected behavior in your application, such as printing object representations instead of
 formatted strings, or passing the wrong type to functions that expect strings.</p>
-<h3>What is the potential impact?</h3>
-<p>Using unprocessed template strings can cause runtime errors when the code expects a string but receives a <code>Template</code> object instead.
-This can lead to incorrect output, failed string operations, or type errors in downstream code. The application may display object representations
-like <code>&lt;Template object at 0x…​&gt;</code> instead of the intended formatted content.</p>
 <h3>How to fix?</h3>
 <p>Process the template string using a template processing function. You can create a simple processing function that mimics f-string behavior, or use
 more sophisticated processing for advanced use cases.</p>
@@ -28,30 +24,13 @@ name = "World"
 template = t"Hello {name}"
 print(process_template(template))  # Process the template first
 
-# Or define a simple f-string-like processor:
-def f_like(template):
-    from string.templatelib import Interpolation
-    parts = []
-    for item in template:
-        if isinstance(item, Interpolation):
-            value = item.value
-            if item.conversion == 'r':
-                value = repr(value)
-            elif item.conversion == 's':
-                value = str(value)
-            elif item.conversion == 'a':
-                value = ascii(value)
-            parts.append(format(value, item.format_spec))
-        else:
-            parts.append(item)
-    return ''.join(parts)
-
-print(f_like(template))
+def process_template(template):
+    from my_lib import html
+    return html(template)
 </pre>
 <h3>Documentation</h3>
 <ul>
-  <li> PEP 750 – Template Strings - <a href="https://peps.python.org/pep-0750/">Official specification for template strings in Python</a> </li>
-  <li> Template strings documentation - <a href="https://docs.python.org/3.14/library/string.templatelib.html#template-strings">Python documentation
-  for template strings and the templatelib module</a> </li>
+  <li> Python documentation - <a href="https://peps.python.org/pep-0750/">PEP 750</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3.14/library/string.templatelib.html#template-strings">Template strings</a> </li>
 </ul>
 

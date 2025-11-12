@@ -6,18 +6,17 @@ results in verbose and less readable code. PEP 750 specifically recommends using
 processing.</p>
 <p>Structural pattern matching with <code>match</code>/<code>case</code> statements provides several advantages:</p>
 <ul>
-  <li> <strong>Cleaner syntax</strong>: The pattern matching syntax is more concise and expressive than multiple <code>isinstance()</code> checks
+  <li> <strong>Better readability</strong>: The pattern matching syntax is more concise and expressive than multiple <code>isinstance()</code> checks
   </li>
-  <li> <strong>Better readability</strong>: The intent is clearer when using pattern matching to handle different types </li>
   <li> <strong>Follows PEP recommendations</strong>: PEP 750 explicitly recommends this approach as the expected best practice </li>
   <li> <strong>More Pythonic</strong>: Pattern matching is the modern Python way to handle type-based dispatching </li>
 </ul>
-<p>Using <code>isinstance()</code> checks makes the code more verbose and harder to maintain, especially when processing complex templates with
-multiple types of components.</p>
 <h3>What is the potential impact?</h3>
 <p>Using <code>isinstance()</code> checks instead of structural pattern matching when processing template strings results in more verbose, less
 readable code that doesn’t follow the recommended patterns from PEP 750. While functionally equivalent, it makes the codebase harder to maintain and
 understand.</p>
+<h3>Exceptions</h3>
+<p>This rule raises issues only on Python 3.14 code.</p>
 <h3>How to fix?</h3>
 <p>Replace <code>isinstance()</code> checks with structural pattern matching using <code>match</code>/<code>case</code> statements. Use type patterns
 like <code>str()</code> and <code>Interpolation()</code> to handle different template components.</p>
@@ -46,11 +45,8 @@ def process_template(template):
 </pre>
 <h3>Documentation</h3>
 <ul>
-  <li> PEP 750 - Template Strings - <a href="https://peps.python.org/pep-0750/">The official PEP introducing template strings and recommending
-  structural pattern matching for processing</a> </li>
-  <li> PEP 634 - Structural Pattern Matching - <a href="https://peps.python.org/pep-0634/">The PEP that introduced structural pattern matching to
-  Python</a> </li>
-  <li> Python Pattern Matching Documentation - <a href="https://docs.python.org/3/tutorial/controlflow.html#match-statements">Official Python
-  documentation on match statements and pattern matching</a> </li>
+  <li> PEP Documentation - <a href="https://peps.python.org/pep-0750/">PEP 750 - Template Strings</a> </li>
+  <li> PEP Documentation - <a href="https://peps.python.org/pep-0634/">PEP 634 - Structural Pattern Matching</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/controlflow.html#match-statements">Match Statements</a> </li>
 </ul>
 
