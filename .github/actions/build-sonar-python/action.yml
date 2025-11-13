@@ -10,6 +10,8 @@ runs:
     - name: Configure sonar-python project
       uses: ./.github/actions/config-sonar-python
       id: config
+      with:
+        build-number: ${{ inputs.build-number }}
 
     - name: Build public module with maven
       uses: SonarSource/ci-github-actions/build-maven@c9d9e76cb397181094492386f0ca23cd4e6ad72f # master, 13.10.2025
