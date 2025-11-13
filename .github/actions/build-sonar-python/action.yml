@@ -14,7 +14,7 @@ runs:
         build-number: ${{ inputs.build-number }}
 
     - name: Build public module with maven
-      uses: SonarSource/ci-github-actions/build-maven@c9d9e76cb397181094492386f0ca23cd4e6ad72f # master, 13.10.2025
+      uses: SonarSource/ci-github-actions/build-maven@7fea21c7155e8f0d5d429c1af625d851a6fadc3d # master, 13.10.2025
       with:
         artifactory-deploy-repo: "sonarsource-public-qa"
         maven-args: "-DskipTests=true -Dsonar.skip=true -P-typeshed_serializer"
@@ -39,7 +39,7 @@ runs:
         IS_COMMUNITY=true mvn install -DskipTests -DskipTypeshed
 
     - name: Build private module with maven
-      uses: SonarSource/ci-github-actions/build-maven@c9d9e76cb397181094492386f0ca23cd4e6ad72f # master, 13.10.2025 
+      uses: SonarSource/ci-github-actions/build-maven@7fea21c7155e8f0d5d429c1af625d851a6fadc3d # master, 13.10.2025 
       with:
         artifactory-deploy-repo: "sonarsource-private-qa"
         maven-args: "-DskipTests=true -Dsonar.skip=true -P-typeshed_serializer"
