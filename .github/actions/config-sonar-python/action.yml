@@ -1,23 +1,11 @@
 name: 'Config Sonar Python'
 description: 'Configure maven and update versions for sonar-python project'
-inputs:
-  build-number:
-    description: 'Build number to use for versioning. If not provided, will use the build number from config-maven action'
-    required: false
 
-outputs:
-  build-number:
-    description: 'The build number used'
-    value: ${{ steps.mvn-config.outputs.BUILD_NUMBER}}
-    
 runs:
   using: 'composite'
   steps:
     - name: Configure private maven projects
       uses: SonarSource/ci-github-actions/config-maven@1.1.2
-      id: mvn-config
-      env:
-        BUILD_NUMBER: ${{ inputs.build-number }}
 
     - name: Update versions of public modules
       shell: bash
@@ -27,5 +15,3 @@ runs:
         # See BUILD-9394 for details 
         cd private
         bash ${GITHUB_ACTION_PATH}/set_maven_version.sh
-      env:
-        BUILD_NUMBER: ${{ inputs.build-number || steps.mvn-config.outputs.BUILD_NUMBER }}

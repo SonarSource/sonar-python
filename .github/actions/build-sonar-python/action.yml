@@ -1,51 +1,41 @@
 name: 'Build Sonar Python'
 description: 'Build both public and private modules of sonar-python'
-outputs:
-  build-number:
-    description: 'The build number used'
-    value: ${{ steps.config.outputs.build-number }}
+
 runs:
   using: 'composite'
   steps:
     - name: Configure sonar-python project
       uses: ./.github/actions/config-sonar-python
-      id: config
-      with:
-        build-number: ${{ inputs.build-number }}
 
-    - name: Build public module with maven
-      uses: SonarSource/ci-github-actions/build-maven@7fea21c7155e8f0d5d429c1af625d851a6fadc3d # master, 13.10.2025
+    - name: Build public and private modules
+      uses: SonarSource/ci-github-actions/build-maven@f1d7e9107578478801454495c63078f85f9f5615 # 1.2.1-BUILD-9723
+      id: build
       with:
-        artifactory-deploy-repo: "sonarsource-public-qa"
-        maven-args: "-DskipTests=true -Dsonar.skip=true -P-typeshed_serializer"
+        artifactory-deploy-repo: 'sonarsource-public-qa'
+        maven-args: '-DskipTests=true -Dsonar.skip=true -P-typeshed_serializer -Dartifactory.publish.artifacts=false'
         deploy-pull-request: true
         sonar-platform: none
-      env:
-        IS_COMMUNITY: true
-        BUILD_NUMBER: ${{ steps.config.outputs.build-number }}
+        cache-cleanup: false
 
-    - name: Remove .actions folder and make repository shallow for next steps
+    - uses: SonarSource/vault-action-wrapper@320bd31b03e5dacaac6be51bbbb15adf7caccc32 # 3.1.0
+      id: secrets
+      with:
+        secrets: |
+          development/artifactory/token/{REPO_OWNER_NAME_DASH}-public-deployer access_token | ARTIFACTORY_DEPLOY_ACCESS_TOKEN;
+          development/artifactory/token/{REPO_OWNER_NAME_DASH}-qa-deployer access_token | ARTIFACTORY_PRIVATE_DEPLOY_ACCESS_TOKEN;
+    - name: Artifacts upload
+      shell: bash
+      env:
+        ARTIFACTORY_DEPLOY_REPO: 'sonarsource-public-qa'
+        ARTIFACTORY_PRIVATE_DEPLOY_REPO: 'sonarsource-private-qa'
+        ARTIFACTORY_DEPLOY_ACCESS_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_DEPLOY_ACCESS_TOKEN }}
+        ARTIFACTORY_PRIVATE_DEPLOY_ACCESS_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_PRIVATE_DEPLOY_ACCESS_TOKEN }}
+        INSTALLED_ARTIFACTS: ${{ steps.build.outputs.installed-artifacts }}
+      run: ${GITHUB_ACTION_PATH}/deploy-artifacts.sh
+
+    - name: Cleanup Maven repository before caching
       shell: bash
       run: |
-        echo "Making repository shallow"
-        # BUILD-9065 will fix this, making this step redundant
-        # git pull fails because we're not on a branch, but it still makes the repo shallow again
-        git pull --depth 1 || true
-
-        # This step is needed because build-maven removes the .m2 folder, removing the built jar files of the public modules. 
-        # This re-builds the public modules so the private modules will find them. 
-        # See BUILD-9394 for details
-        echo "Build public module with maven as build-maven cleans up after itself"
-        IS_COMMUNITY=true mvn install -DskipTests -DskipTypeshed
-
-    - name: Build private module with maven
-      uses: SonarSource/ci-github-actions/build-maven@7fea21c7155e8f0d5d429c1af625d851a6fadc3d # master, 13.10.2025 
-      with:
-        artifactory-deploy-repo: "sonarsource-private-qa"
-        maven-args: "-DskipTests=true -Dsonar.skip=true -P-typeshed_serializer"
-        deploy-pull-request: true
-        working-directory: private
-        sonar-platform: none
-      env:
-        BUILD_NUMBER: ${{ steps.config.outputs.build-number }}
-        MAVEN_ARGS: "-Dsonar.skip=true"
+        rm -rf "$MAVEN_CONFIG/repository/org/sonarsource/"
+        rm -rf "$MAVEN_CONFIG/repository/com/sonarsource/"
+        /usr/bin/find "$MAVEN_CONFIG/repository" -name resolver-status.properties -delete

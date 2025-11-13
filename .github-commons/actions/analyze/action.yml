@@ -7,9 +7,6 @@ inputs:
   sonar-project-key:
     description: 'SonarQube project key'
     required: true
-  build-number:
-    description: 'Build number for analysis'
-    required: true
 
 runs:
   using: 'composite'
@@ -53,10 +50,9 @@ runs:
         SONAR_TOKEN: ${{ fromJson(steps.secrets.outputs.vault).SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ steps.sonar-config.outputs.sonar_host_url }}
         SONAR_PROJECT_KEY: ${{ inputs.sonar-project-key }}
-        BUILD_NUMBER: ${{ inputs.build-number }}
         GIT_SHA1: ${{ github.sha }}
         GITHUB_REPO: ${{ github.repository }}
         GITHUB_BRANCH: ${{ github.head_ref || github.ref_name }}
         GITHUB_BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
         PULL_REQUEST: ${{ github.event.pull_request.number || 'false' }}
-        PIPELINE_ID: ${{ inputs.build-number }}
+        PIPELINE_ID: ${{ env.BUILD_NUMBER }}
