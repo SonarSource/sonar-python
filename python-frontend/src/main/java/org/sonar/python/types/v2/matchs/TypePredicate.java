@@ -14,45 +14,16 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.python.api;
+package org.sonar.python.types.v2.matchs;
 
 import org.sonar.api.Beta;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.TriBool;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 @Beta
-public enum TriBool {
-  TRUE,
-  FALSE,
-  UNKNOWN;
+public interface TypePredicate {
 
-  public TriBool and(TriBool triBool) {
-    if (this.equals(triBool)) {
-      return this;
-    }
-    if (this.equals(UNKNOWN) || triBool.equals(UNKNOWN)) {
-      return UNKNOWN;
-    }
-    return FALSE;
-  }
+  TriBool check(PythonType type, SubscriptionContext ctx);
 
-  public TriBool or(TriBool triBool) {
-    if (this.equals(TRUE) || triBool.equals(TRUE)) {
-      return TRUE;
-    }
-    if (this.equals(UNKNOWN) || triBool.equals(UNKNOWN)) {
-      return UNKNOWN;
-    }
-    return FALSE;
-  }
-
-  public boolean isTrue() {
-    return this.equals(TRUE);
-  }
-
-  public boolean isFalse() {
-    return this.equals(FALSE);
-  }
-
-  public boolean isUnknown() {
-    return this.equals(UNKNOWN);
-  }
 }
