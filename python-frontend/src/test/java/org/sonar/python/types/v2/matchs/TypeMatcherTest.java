@@ -119,7 +119,7 @@ class TypeMatcherTest {
     assertThat(typeMatcher.isFor(unknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
     assertThat(typeMatcher.isFor(objectExpr, null)).isEqualTo(TriBool.FALSE);
     assertThat(typeMatcher.isFor(unionWithFunctionAndObjectExpr, null)).isEqualTo(TriBool.FALSE);
-    assertThat(typeMatcher.isFor(unionWithObjectAndUnknownExpr, null)).isEqualTo(TriBool.FALSE);
+    assertThat(typeMatcher.isFor(unionWithObjectAndUnknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
     assertThat(typeMatcher.isFor(unionWithFunctionAndUnknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
     assertThat(typeMatcher.isFor(unionOfFunctionExpr, null)).isEqualTo(TriBool.TRUE);
   }

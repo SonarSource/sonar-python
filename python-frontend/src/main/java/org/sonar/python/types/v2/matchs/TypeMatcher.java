@@ -41,7 +41,7 @@ public class TypeMatcher {
     TriBool result = TriBool.TRUE;
     for (PythonType candidate : candidates) {
       result = result.and(predicate.check(candidate, ctx));
-      if (result.isFalse() || result.isUnknown()) {
+      if (result.isUnknown()) {
         break;
       }
     }
