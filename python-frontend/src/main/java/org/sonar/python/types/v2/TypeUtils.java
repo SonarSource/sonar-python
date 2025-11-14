@@ -19,14 +19,18 @@ package org.sonar.python.types.v2;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 
 public class TypeUtils {
 
   private TypeUtils() {
-
   }
 
   public static PythonType resolved(PythonType pythonType) {
@@ -53,5 +57,21 @@ public class TypeUtils {
 
   public static Collector<PythonType, ?, PythonType> toUnionType() {
     return Collectors.collectingAndThen(Collectors.toSet(), UnionType::or);
+  }
+
+  @CheckForNull
+  public static String getFullyQualifiedName(PythonType type) {
+    if (type instanceof FunctionType functionType) {
+      return functionType.fullyQualifiedName();
+    } else if (type instanceof ClassType classType) {
+      return classType.fullyQualifiedName();
+    } else if (type instanceof ModuleType moduleType) {
+      return moduleType.fullyQualifiedName();
+    } else if (type instanceof SpecialFormType specialFormType) {
+      return specialFormType.fullyQualifiedName();
+    } else if (type instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
+      return unresolvedImportType.importPath();
+    }
+    return null;
   }
 }
