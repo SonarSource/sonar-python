@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2.matchs;
+package org.sonar.python.types.v2.matchers;
 
 import java.util.Set;
 import org.jspecify.annotations.NonNull;
@@ -32,7 +32,7 @@ import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.types.v2.matchs.TypeMatcher.extractCandidates;
+import static org.sonar.python.types.v2.matchers.TypeMatcher.extractCandidates;
 
 class TypeMatcherTest {
 

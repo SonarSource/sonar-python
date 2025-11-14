@@ -14,16 +14,17 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2.matchs;
+package org.sonar.python.types.v2.matchers;
 
 import org.sonar.api.Beta;
-import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.TriBool;
-import org.sonar.plugins.python.api.types.v2.PythonType;
 
 @Beta
-public interface TypePredicate {
+public final class TypeMatchers {
 
-  TriBool check(PythonType type, SubscriptionContext ctx);
+  private TypeMatchers() {
+  }
 
+  public static TypeMatcher withFQN(String fqn) {
+    return new TypeMatcher(new HasFQNPredicate(fqn));
+  }
 }

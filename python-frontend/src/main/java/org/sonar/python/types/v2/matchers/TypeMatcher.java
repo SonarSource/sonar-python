@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2.matchs;
+package org.sonar.python.types.v2.matchers;
 
 import com.google.common.annotations.VisibleForTesting;
 import java.util.Set;

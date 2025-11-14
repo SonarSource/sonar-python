@@ -14,14 +14,22 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2.matchs;
+package org.sonar.python.types.v2.matchers;
 
-import org.sonar.api.Beta;
+import java.util.Objects;
+import java.util.Optional;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.TriBool;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeUtils;
 
-@Beta
-public final class TypeMatchers {
-
-  private TypeMatchers() {
+public record HasFQNPredicate(String fullyQualifiedName) implements TypePredicate {
+  @Override
+  public TriBool check(PythonType type, SubscriptionContext ctx) {
+    return Optional.of(type)
+      .map(TypeUtils::getFullyQualifiedName)
+      .map(typeFqn -> Objects.equals(fullyQualifiedName, typeFqn) ? TriBool.TRUE : TriBool.FALSE)
+      .orElse(TriBool.UNKNOWN);
   }
-
 }
+
