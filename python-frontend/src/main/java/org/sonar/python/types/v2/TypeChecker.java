@@ -29,4 +29,8 @@ public class TypeChecker {
   public TypeCheckBuilder typeCheckBuilder() {
     return new TypeCheckBuilder(projectLevelTypeTable);
   }
+
+  public TypeTable getProjectLevelTypeTable() {
+    return projectLevelTypeTable;
+  }
 }

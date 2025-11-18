@@ -28,18 +28,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
-class TestProject {
+public class TestProject {
   private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
   private final ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
-
-  public TestProject addModule(String modulePath, String code) {
-    String fileName = toFileName(modulePath);
-    String packageName = toPackageName(modulePath);
-
-    FileInput tree = parseWithoutSymbols(code);
-    projectLevelSymbolTable.addModule(tree, packageName, pythonFile(fileName));
-    return this;
-  }
 
   private static String toFileName(String modulePath) {
     int lastSlashIndex = modulePath.lastIndexOf("/");
@@ -53,9 +44,18 @@ class TestProject {
   private static String toPackageName(String modulePath) {
     int lastSlashIndex = modulePath.lastIndexOf("/");
     if (lastSlashIndex == -1) {
-      return ""; 
+      return "";
     }
     return modulePath.substring(0, lastSlashIndex).replace("/", ".");
+  }
+
+  public TestProject addModule(String modulePath, String code) {
+    String fileName = toFileName(modulePath);
+    String packageName = toPackageName(modulePath);
+
+    FileInput tree = parseWithoutSymbols(code);
+    projectLevelSymbolTable.addModule(tree, packageName, pythonFile(fileName));
+    return this;
   }
 
   public Expression lastExpression(String code) {
@@ -81,5 +81,9 @@ class TestProject {
 
   public TypeCheckBuilder typeCheckBuilder() {
     return new TypeChecker(projectLevelTypeTable).typeCheckBuilder();
+  }
+
+  public ProjectLevelTypeTable projectLevelTypeTable() {
+    return projectLevelTypeTable;
   }
 }

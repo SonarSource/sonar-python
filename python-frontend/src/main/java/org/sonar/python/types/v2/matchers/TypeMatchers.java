@@ -27,4 +27,9 @@ public final class TypeMatchers {
   public static TypeMatcher withFQN(String fqn) {
     return new TypeMatcher(new HasFQNPredicate(fqn));
   }
+
+  public static TypeMatcher isObjectOfType(String fqn) {
+    return new TypeMatcher(new IsObjectOfTypePredicate(fqn));
+  }
+
 }

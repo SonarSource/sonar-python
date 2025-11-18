@@ -19,6 +19,7 @@ package org.sonar.python.types.v2.matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
@@ -50,6 +51,9 @@ class HasFQNPredicateTest {
 
     UnknownType.UnknownTypeImpl unknownType = Mockito.mock(UnknownType.UnknownTypeImpl.class);
 
+    Expression func1Expression = Mockito.mock(Expression.class);
+    Mockito.when(func1Expression.typeV2()).thenReturn(function1);
+
     Mockito.when(function1.fullyQualifiedName()).thenReturn("foo.bar.func1");
     Mockito.when(function2.fullyQualifiedName()).thenReturn("foo.bar.func2");
     Mockito.when(nullFunctionType.fullyQualifiedName()).thenReturn(null);
@@ -74,6 +78,7 @@ class HasFQNPredicateTest {
     HasFQNPredicate hasFQNPredicateSpecialFormList = new HasFQNPredicate("typing.List");
 
     assertThat(hasFQNPredicateFunction1.check(function1, null)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeMatchers.withFQN("foo.bar.func1").isFor(func1Expression, null)).isEqualTo(TriBool.TRUE);
     assertThat(hasFQNPredicateFunction1.check(function1, null)).isEqualTo(TriBool.TRUE);
     // Type is different but FQN is the same, we consider it as TRUE
     assertThat(hasFQNPredicateFunction1.check(classWithSameFQNAsFunction, null)).isEqualTo(TriBool.TRUE);

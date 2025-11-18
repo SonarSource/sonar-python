@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.semantic.v2.callgraph.CallGraph;
 import org.sonar.python.types.v2.TypeChecker;
 
@@ -69,6 +70,8 @@ public interface SubscriptionContext {
   CacheContext cacheContext();
 
   TypeChecker typeChecker();
+
+  TypeTable typeTable();
 
   ProjectConfiguration projectConfiguration();
 
