@@ -28,6 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class IsObjectOfTypePredicateTest {
 
+
   @Test
   void testCheckForObjectType() {
     var project = new TestProject();

@@ -36,6 +36,11 @@ public final class TypeMatchers {
     return new TypeMatcher(new HasFQNPredicate(fqn));
   }
 
+  public static TypeMatcher isObjectSatisfying(TypeMatcher matcher) {
+    TypePredicate predicate = matcher.predicate();
+    return new TypeMatcher(new IsObjectSatisfyingPredicate(predicate));
+  }
+
   public static TypeMatcher isObjectOfType(String fqn) {
     return new TypeMatcher(new IsObjectOfTypePredicate(fqn));
   }
