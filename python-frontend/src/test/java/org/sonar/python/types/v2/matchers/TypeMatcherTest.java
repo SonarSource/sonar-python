@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.semantic.v2.TestProject;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.v2.matchers.TypeMatcher.extractCandidates;
@@ -156,6 +157,79 @@ class TypeMatcherTest {
     assertThat(typeMatcher.canBeTrueFor(unionWithObjectAndUnknownExpr, null)).isFalse();
     assertThat(typeMatcher.canBeTrueFor(unionWithFunctionAndUnknownExpr, null)).isTrue();
     assertThat(typeMatcher.canBeTrueFor(unionOfObjectExpr, null)).isFalse();
+  }
+
+  @Test
+  void testCheckForObjectType() {
+    var project = new TestProject();
+    project.addModule("my_file.py", """
+      class A :
+        def __init__(self):
+          pass
+      class B :
+        def __init__(self):
+          pass
+      """);
+    Expression objectTypeExpression = project.lastExpression("""
+      from my_file import A
+      a = A()
+      a
+      """);
+
+    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
+    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+
+    assertThat(TypeMatchers.isObjectOfType("my_file.A").isFor(objectTypeExpression, ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeMatchers.isObjectOfType("my_file.B").isTrueFor(objectTypeExpression, ctx)).isFalse();
+
+    assertThat(objectTypeExpression.typeV2()).isNotInstanceOf(UnknownType.class);
+  }
+
+  @Test
+  void testCheckForFunctionType() {
+    var project = new TestProject();
+    project.addModule("my_file.py", """
+      def func1(): pass
+      """);
+    Expression func1Expression = project.lastExpression("""
+      from my_file import func1
+      func1
+      """);
+
+    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
+    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+
+    assertThat(TypeMatchers.isObjectOfType("my_file.func1").isFor(func1Expression, ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(func1Expression.typeV2()).isNotInstanceOf(UnknownType.class);
+  }
+
+  @Test
+  void testCheckForUnknownType() {
+    var project = new TestProject();
+    project.addModule("my_file.py", """
+      class A :
+        def __init__(self):
+         pass
+      a = A()
+      """);
+    Expression unknownTypeExpression = project.lastExpression("""
+      from nonexistent import something
+      something
+      """);
+    Expression knownTypeExpression = project.lastExpression("""
+      from my_file import A
+      a = A()
+      a
+      """);
+
+    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
+    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+
+    assertThat(unknownTypeExpression.typeV2()).isInstanceOf(UnknownType.class);
+    assertThat(knownTypeExpression.typeV2()).isInstanceOf(ObjectType.class);
+
+    assertThat(TypeMatchers.isObjectOfType("my_file.A").isFor(unknownTypeExpression, ctx)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(TypeMatchers.isObjectOfType("my_file.B").isFor(knownTypeExpression, ctx)).isEqualTo(TriBool.UNKNOWN);
   }
 }
 

@@ -41,8 +41,12 @@ public final class TypeMatchers {
     return new TypeMatcher(new IsObjectSatisfyingPredicate(predicate));
   }
 
+  public static TypeMatcher isType(String fqn) {
+    return new TypeMatcher(new IsTypePredicate(fqn));
+  }
+
   public static TypeMatcher isObjectOfType(String fqn) {
-    return new TypeMatcher(new IsObjectOfTypePredicate(fqn));
+    return isObjectSatisfying(isType(fqn));
   }
 
 }

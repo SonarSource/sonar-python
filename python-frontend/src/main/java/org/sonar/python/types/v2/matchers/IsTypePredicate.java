@@ -18,22 +18,25 @@ package org.sonar.python.types.v2.matchers;
 
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
-import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 
-public record IsObjectOfTypePredicate(String fullyQualifiedName) implements TypePredicate {
+public class IsTypePredicate implements TypePredicate {
+  private final String fullyQualifiedName;
+
+  public IsTypePredicate(String fullyQualifiedName) {
+    this.fullyQualifiedName = fullyQualifiedName;
+  }
 
   @Override
   public TriBool check(PythonType type, SubscriptionContext ctx) {
     PythonType expectedType = ctx.typeTable().getType(fullyQualifiedName);
+    
     if (type instanceof UnknownType || expectedType instanceof UnknownType) {
       return TriBool.UNKNOWN;
-    } else if ((type instanceof ObjectType objectType)) {
-      type = objectType.unwrappedType();
-      return type.equals(expectedType) ? TriBool.TRUE : TriBool.FALSE;
     }
-    return TriBool.FALSE;
+    
+    return type.equals(expectedType) ? TriBool.TRUE : TriBool.FALSE;
   }
 }
 
