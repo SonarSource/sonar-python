@@ -24,7 +24,13 @@ public enum TriBool {
   FALSE,
   UNKNOWN;
 
-  public TriBool and(TriBool triBool) {
+
+  /**
+   * This method performs a conservative AND of TriBool results
+   * It is meant to be used when collapsing the results of testing a single predicate against candidates of a UnionType
+   * Therefore, this variation will return UNKNOWN whenever one of the operands is UNKNOWN
+   */
+  public TriBool conservativeAnd(TriBool triBool) {
     if (this.equals(triBool)) {
       return this;
     }
@@ -34,14 +40,29 @@ public enum TriBool {
     return FALSE;
   }
 
+  /**
+   * This method performs a logical AND of TriBool results
+   * It is meant to be used when performing the logical combination of ANDed predicates against a given type
+   * Therefore, this variation behaves like a standard logical "AND" and will return FALSE whenever one of the operands is FALSE
+   */
+  public TriBool logicalAnd(TriBool triBool) {
+    if (this.equals(triBool)) {
+      return this;
+    }
+    if (this.equals(FALSE) || triBool.equals(FALSE)) {
+      return FALSE;
+    }
+    return UNKNOWN;
+  }
+
   public TriBool or(TriBool triBool) {
+    if (this.equals(triBool)) {
+      return this;
+    }
     if (this.equals(TRUE) || triBool.equals(TRUE)) {
       return TRUE;
     }
-    if (this.equals(UNKNOWN) || triBool.equals(UNKNOWN)) {
-      return UNKNOWN;
-    }
-    return FALSE;
+    return UNKNOWN;
   }
 
   public boolean isTrue() {

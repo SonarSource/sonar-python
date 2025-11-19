@@ -40,7 +40,7 @@ public class TypeMatcher {
 
     TriBool result = TriBool.TRUE;
     for (PythonType candidate : candidates) {
-      result = result.and(predicate.check(candidate, ctx));
+      result = result.conservativeAnd(predicate.check(candidate, ctx));
       if (result.isUnknown()) {
         break;
       }
@@ -75,5 +75,9 @@ public class TypeMatcher {
       return unionType.candidates();
     }
     return Set.of(type);
+  }
+
+  TypePredicate predicate() {
+    return predicate;
   }
 }

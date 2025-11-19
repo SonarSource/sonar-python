@@ -90,7 +90,7 @@ public class TypeCheckBuilder {
     TriBool result = TriBool.TRUE;
     for (TypePredicate predicate : predicates) {
       TriBool partialResult = predicate.test(pythonType);
-      result = result.and(partialResult);
+      result = result.conservativeAnd(partialResult);
       if (result == TriBool.UNKNOWN) {
         return TriBool.UNKNOWN;
       }

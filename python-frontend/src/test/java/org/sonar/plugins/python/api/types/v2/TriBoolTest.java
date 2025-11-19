@@ -24,16 +24,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 class TriBoolTest {
 
   @Test
-  void andTest() {
-    assertThat(TriBool.TRUE.and(TriBool.TRUE)).isEqualTo(TriBool.TRUE);
-    assertThat(TriBool.TRUE.and(TriBool.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(TriBool.TRUE.and(TriBool.FALSE)).isEqualTo(TriBool.FALSE);
-    assertThat(TriBool.FALSE.and(TriBool.TRUE)).isEqualTo(TriBool.FALSE);
-    assertThat(TriBool.FALSE.and(TriBool.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(TriBool.FALSE.and(TriBool.FALSE)).isEqualTo(TriBool.FALSE);
-    assertThat(TriBool.UNKNOWN.and(TriBool.TRUE)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(TriBool.UNKNOWN.and(TriBool.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(TriBool.UNKNOWN.and(TriBool.FALSE)).isEqualTo(TriBool.UNKNOWN);
+  void conservativeAndTest() {
+    assertThat(TriBool.TRUE.conservativeAnd(TriBool.TRUE)).isEqualTo(TriBool.TRUE);
+    assertThat(TriBool.TRUE.conservativeAnd(TriBool.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(TriBool.TRUE.conservativeAnd(TriBool.FALSE)).isEqualTo(TriBool.FALSE);
+    assertThat(TriBool.FALSE.conservativeAnd(TriBool.TRUE)).isEqualTo(TriBool.FALSE);
+    assertThat(TriBool.FALSE.conservativeAnd(TriBool.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(TriBool.FALSE.conservativeAnd(TriBool.FALSE)).isEqualTo(TriBool.FALSE);
+    assertThat(TriBool.UNKNOWN.conservativeAnd(TriBool.TRUE)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(TriBool.UNKNOWN.conservativeAnd(TriBool.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(TriBool.UNKNOWN.conservativeAnd(TriBool.FALSE)).isEqualTo(TriBool.UNKNOWN);
   }
 
   @Test
