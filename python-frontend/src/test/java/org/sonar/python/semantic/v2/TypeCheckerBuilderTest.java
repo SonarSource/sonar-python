@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType.UnresolvedImportType;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 
 import static org.mockito.Mockito.spy;

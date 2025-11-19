@@ -34,11 +34,11 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.cfg.fixpoint.ForwardAnalysis;
 import org.sonar.python.cfg.fixpoint.ProgramState;
 import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.semantic.v2.TypeTable;
-import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 public class FlowSensitiveTypeInference extends ForwardAnalysis {
   private final Set<SymbolV2> trackedVars;

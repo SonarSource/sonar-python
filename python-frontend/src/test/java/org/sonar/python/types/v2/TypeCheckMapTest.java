@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 
 class TypeCheckMapTest {
   @Test

@@ -33,9 +33,9 @@ import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.callgraph.CallGraph;
 import org.sonar.python.semantic.v2.callgraph.CallGraphNode;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 

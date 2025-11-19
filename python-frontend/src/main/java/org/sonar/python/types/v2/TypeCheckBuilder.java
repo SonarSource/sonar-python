@@ -33,7 +33,7 @@ import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
-import org.sonar.python.semantic.v2.TypeTable;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 public class TypeCheckBuilder {
 

@@ -33,12 +33,12 @@ import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.semantic.v2.callgraph.CallGraph;
-import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.semantic.v2.callgraph.CallGraphCollector;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.types.v2.TypeChecker;
 
 public class PythonVisitorContext extends PythonInputFileContext {

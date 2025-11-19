@@ -35,9 +35,9 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.project.config.SignatureBasedAwsLambdaHandlersCollector;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 

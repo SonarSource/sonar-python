@@ -14,19 +14,21 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.semantic.v2;
+package org.sonar.python.semantic.v2.typetable;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.LazyTypesContext;
+import org.sonar.python.semantic.v2.SymbolsModuleTypeProvider;
+import org.sonar.python.types.v2.LazyTypeWrapper;
 
 public class ProjectLevelTypeTable implements TypeTable {
 

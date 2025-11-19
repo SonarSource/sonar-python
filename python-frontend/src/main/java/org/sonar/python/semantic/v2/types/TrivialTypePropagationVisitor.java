@@ -22,16 +22,16 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
-import org.sonar.python.semantic.v2.TypeTable;
-import org.sonar.python.tree.BinaryExpressionImpl;
-import org.sonar.python.tree.UnaryExpressionImpl;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
-import org.sonar.python.types.v2.TypeUtils;
 import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
+import org.sonar.python.tree.BinaryExpressionImpl;
+import org.sonar.python.tree.UnaryExpressionImpl;
+import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeUtils;
 
 public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
   private final TypeCheckBuilder isBooleanTypeCheck;

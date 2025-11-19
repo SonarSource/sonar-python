@@ -23,11 +23,11 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
-import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 public class IsInstanceVisitor extends BaseTreeVisitor {
   private final PythonType isInstanceFunctionType;

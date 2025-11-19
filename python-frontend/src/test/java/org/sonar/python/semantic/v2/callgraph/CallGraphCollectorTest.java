@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.TypesTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;

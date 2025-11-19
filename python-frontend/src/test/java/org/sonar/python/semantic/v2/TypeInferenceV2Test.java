@@ -73,6 +73,7 @@ import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolUtils;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.tree.ExpressionStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;

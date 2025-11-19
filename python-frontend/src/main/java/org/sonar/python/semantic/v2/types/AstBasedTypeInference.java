@@ -29,14 +29,14 @@ import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.semantic.v2.SymbolV2Utils;
-import org.sonar.python.semantic.v2.TypeTable;
-import org.sonar.python.semantic.v2.UsageV2;
-import org.sonar.python.tree.NameImpl;
-import org.sonar.python.tree.TreeUtils;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.SymbolV2Utils;
+import org.sonar.python.semantic.v2.UsageV2;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
+import org.sonar.python.tree.NameImpl;
+import org.sonar.python.tree.TreeUtils;
 
 public class AstBasedTypeInference {
   private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;

@@ -16,7 +16,7 @@
  */
 package org.sonar.python.types.v2;
 
-import org.sonar.python.semantic.v2.TypeTable;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 public class TypeChecker {
 

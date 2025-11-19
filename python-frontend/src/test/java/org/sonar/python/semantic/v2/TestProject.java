@@ -19,6 +19,7 @@ package org.sonar.python.semantic.v2;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeChecker;

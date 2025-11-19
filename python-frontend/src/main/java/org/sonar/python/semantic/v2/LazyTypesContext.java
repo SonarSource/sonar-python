@@ -20,6 +20,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyTypeWrapper;
 

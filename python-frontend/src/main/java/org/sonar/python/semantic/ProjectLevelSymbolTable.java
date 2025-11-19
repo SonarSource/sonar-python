@@ -41,13 +41,13 @@ import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
-import org.sonar.python.semantic.v2.BasicTypeTable;
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
+import org.sonar.python.semantic.v2.typetable.BasicTypeTable;
+import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeChecker;
 
