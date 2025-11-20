@@ -34,7 +34,7 @@ public class TypeMatcher {
     this.predicate = predicate;
   }
 
-  public TriBool isFor(Expression expr, SubscriptionContext ctx) {
+  public TriBool evaluateFor(Expression expr, SubscriptionContext ctx) {
     PythonType type = expr.typeV2();
     Set<PythonType> candidates = extractCandidates(type);
 
@@ -48,25 +48,8 @@ public class TypeMatcher {
     return result;
   }
 
-  public TriBool canBeFor(Expression expr, SubscriptionContext ctx) {
-    PythonType type = expr.typeV2();
-    Set<PythonType> candidates = extractCandidates(type);
-    TriBool result = TriBool.FALSE;
-    for (PythonType candidate : candidates) {
-      result = result.or(predicate.check(candidate, ctx));
-      if (result.isTrue()) {
-        break;
-      }
-    }
-    return result;
-  }
-
   public boolean isTrueFor(Expression expr, SubscriptionContext ctx) {
-    return isFor(expr, ctx).isTrue();
-  }
-
-  public boolean canBeTrueFor(Expression expr, SubscriptionContext ctx) {
-    return canBeFor(expr, ctx).isTrue();
+    return evaluateFor(expr, ctx).isTrue();
   }
 
   @VisibleForTesting

@@ -116,26 +116,14 @@ class TypeMatcherTest {
 
   @Test
   void testIsFor() {
-    assertThat(typeMatcher.isFor(functionExpr, null)).isEqualTo(TriBool.TRUE);
-    assertThat(typeMatcher.isFor(unknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(typeMatcher.isFor(objectExpr, null)).isEqualTo(TriBool.FALSE);
-    assertThat(typeMatcher.isFor(unionWithFunctionAndObjectExpr, null)).isEqualTo(TriBool.FALSE);
-    assertThat(typeMatcher.isFor(unionWithObjectAndUnknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(typeMatcher.isFor(unionWithFunctionAndUnknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(typeMatcher.isFor(unionOfFunctionExpr, null)).isEqualTo(TriBool.TRUE);
+    assertThat(typeMatcher.evaluateFor(functionExpr, null)).isEqualTo(TriBool.TRUE);
+    assertThat(typeMatcher.evaluateFor(unknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeMatcher.evaluateFor(objectExpr, null)).isEqualTo(TriBool.FALSE);
+    assertThat(typeMatcher.evaluateFor(unionWithFunctionAndObjectExpr, null)).isEqualTo(TriBool.FALSE);
+    assertThat(typeMatcher.evaluateFor(unionWithObjectAndUnknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeMatcher.evaluateFor(unionWithFunctionAndUnknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeMatcher.evaluateFor(unionOfFunctionExpr, null)).isEqualTo(TriBool.TRUE);
   }
-
-  @Test
-  void testCanBeFor() {
-    assertThat(typeMatcher.canBeFor(functionExpr, null)).isEqualTo(TriBool.TRUE);
-    assertThat(typeMatcher.canBeFor(unknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(typeMatcher.canBeFor(objectExpr, null)).isEqualTo(TriBool.FALSE);
-    assertThat(typeMatcher.canBeFor(unionWithFunctionAndObjectExpr, null)).isEqualTo(TriBool.TRUE);
-    assertThat(typeMatcher.canBeFor(unionWithObjectAndUnknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(typeMatcher.canBeFor(unionWithFunctionAndUnknownExpr, null)).isEqualTo(TriBool.TRUE);
-    assertThat(typeMatcher.canBeFor(unionOfObjectExpr, null)).isEqualTo(TriBool.FALSE);
-  }
-
 
   @Test
   void testIsTrueFor() {
@@ -146,17 +134,6 @@ class TypeMatcherTest {
     assertThat(typeMatcher.isTrueFor(unionWithObjectAndUnknownExpr, null)).isFalse();
     assertThat(typeMatcher.isTrueFor(unionWithFunctionAndUnknownExpr, null)).isFalse();
     assertThat(typeMatcher.isTrueFor(unionOfFunctionExpr, null)).isTrue();
-  }
-
-  @Test
-  void testCanBeTrueFor() {
-    assertThat(typeMatcher.canBeTrueFor(functionExpr, null)).isTrue();
-    assertThat(typeMatcher.canBeTrueFor(unknownExpr, null)).isFalse();
-    assertThat(typeMatcher.canBeTrueFor(objectExpr, null)).isFalse();
-    assertThat(typeMatcher.canBeTrueFor(unionWithFunctionAndObjectExpr, null)).isTrue();
-    assertThat(typeMatcher.canBeTrueFor(unionWithObjectAndUnknownExpr, null)).isFalse();
-    assertThat(typeMatcher.canBeTrueFor(unionWithFunctionAndUnknownExpr, null)).isTrue();
-    assertThat(typeMatcher.canBeTrueFor(unionOfObjectExpr, null)).isFalse();
   }
 
   @Test
@@ -179,7 +156,7 @@ class TypeMatcherTest {
     SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
     Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
 
-    assertThat(TypeMatchers.isObjectOfType("my_file.A").isFor(objectTypeExpression, ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeMatchers.isObjectOfType("my_file.A").evaluateFor(objectTypeExpression, ctx)).isEqualTo(TriBool.TRUE);
     assertThat(TypeMatchers.isObjectOfType("my_file.B").isTrueFor(objectTypeExpression, ctx)).isFalse();
 
     assertThat(objectTypeExpression.typeV2()).isNotInstanceOf(UnknownType.class);
@@ -199,7 +176,7 @@ class TypeMatcherTest {
     SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
     Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
 
-    assertThat(TypeMatchers.isObjectOfType("my_file.func1").isFor(func1Expression, ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(TypeMatchers.isObjectOfType("my_file.func1").evaluateFor(func1Expression, ctx)).isEqualTo(TriBool.FALSE);
     assertThat(func1Expression.typeV2()).isNotInstanceOf(UnknownType.class);
   }
 
@@ -228,8 +205,8 @@ class TypeMatcherTest {
     assertThat(unknownTypeExpression.typeV2()).isInstanceOf(UnknownType.class);
     assertThat(knownTypeExpression.typeV2()).isInstanceOf(ObjectType.class);
 
-    assertThat(TypeMatchers.isObjectOfType("my_file.A").isFor(unknownTypeExpression, ctx)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(TypeMatchers.isObjectOfType("my_file.B").isFor(knownTypeExpression, ctx)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(TypeMatchers.isObjectOfType("my_file.A").evaluateFor(unknownTypeExpression, ctx)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(TypeMatchers.isObjectOfType("my_file.B").evaluateFor(knownTypeExpression, ctx)).isEqualTo(TriBool.UNKNOWN);
   }
 }
 

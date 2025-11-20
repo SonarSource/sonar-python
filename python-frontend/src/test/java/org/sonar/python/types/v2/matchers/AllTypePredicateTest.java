@@ -47,27 +47,27 @@ class AllTypePredicateTest {
     TypeMatcher unknownMatcher = new TypeMatcher(unknownPredicate);
 
     TypeMatcher singleTrue = TypeMatchers.all(trueMatcher);
-    assertThat(singleTrue.isFor(expression1, Mockito.mock())).isEqualTo(TriBool.TRUE);
+    assertThat(singleTrue.evaluateFor(expression1, Mockito.mock())).isEqualTo(TriBool.TRUE);
 
     TypeMatcher bothTrue = TypeMatchers.all(trueMatcher, trueMatcher);
-    assertThat(bothTrue.isFor(expression1, Mockito.mock())).isEqualTo(TriBool.TRUE);
+    assertThat(bothTrue.evaluateFor(expression1, Mockito.mock())).isEqualTo(TriBool.TRUE);
 
     TypeMatcher trueFalse = TypeMatchers.all(trueMatcher, falseMatcher);
-    assertThat(trueFalse.isFor(expression1, Mockito.mock())).isEqualTo(TriBool.FALSE);
+    assertThat(trueFalse.evaluateFor(expression1, Mockito.mock())).isEqualTo(TriBool.FALSE);
 
     TypeMatcher trueUnknown = TypeMatchers.all(trueMatcher, unknownMatcher);
-    assertThat(trueUnknown.isFor(expression1, Mockito.mock())).isEqualTo(TriBool.UNKNOWN);
+    assertThat(trueUnknown.evaluateFor(expression1, Mockito.mock())).isEqualTo(TriBool.UNKNOWN);
 
     TypeMatcher bothUnknown = TypeMatchers.all(unknownMatcher, unknownMatcher);
-    assertThat(bothUnknown.isFor(expression1, Mockito.mock())).isEqualTo(TriBool.UNKNOWN);
+    assertThat(bothUnknown.evaluateFor(expression1, Mockito.mock())).isEqualTo(TriBool.UNKNOWN);
 
     TypeMatcher falseTrue = TypeMatchers.all(falseMatcher, trueMatcher);
-    assertThat(falseTrue.isFor(expression1, Mockito.mock())).isEqualTo(TriBool.FALSE);
+    assertThat(falseTrue.evaluateFor(expression1, Mockito.mock())).isEqualTo(TriBool.FALSE);
 
     TypeMatcher falseUnknown = TypeMatchers.all(falseMatcher, unknownMatcher);
-    assertThat(falseUnknown.isFor(expression1, Mockito.mock())).isEqualTo(TriBool.FALSE);
+    assertThat(falseUnknown.evaluateFor(expression1, Mockito.mock())).isEqualTo(TriBool.FALSE);
 
     TypeMatcher unknownFalse = TypeMatchers.all(falseMatcher, unknownMatcher);
-    assertThat(unknownFalse.isFor(expression1, Mockito.mock())).isEqualTo(TriBool.FALSE);
+    assertThat(unknownFalse.evaluateFor(expression1, Mockito.mock())).isEqualTo(TriBool.FALSE);
   }
 }

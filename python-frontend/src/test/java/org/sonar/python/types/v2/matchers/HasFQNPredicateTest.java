@@ -78,7 +78,7 @@ class HasFQNPredicateTest {
     HasFQNPredicate hasFQNPredicateSpecialFormList = new HasFQNPredicate("typing.List");
 
     assertThat(hasFQNPredicateFunction1.check(function1, null)).isEqualTo(TriBool.TRUE);
-    assertThat(TypeMatchers.withFQN("foo.bar.func1").isFor(func1Expression, null)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeMatchers.withFQN("foo.bar.func1").evaluateFor(func1Expression, null)).isEqualTo(TriBool.TRUE);
     assertThat(hasFQNPredicateFunction1.check(function1, null)).isEqualTo(TriBool.TRUE);
     // Type is different but FQN is the same, we consider it as TRUE
     assertThat(hasFQNPredicateFunction1.check(classWithSameFQNAsFunction, null)).isEqualTo(TriBool.TRUE);

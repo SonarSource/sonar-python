@@ -164,7 +164,7 @@ class IsTypePredicateTest {
     Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     // isType(fqn) resolves the FQN like "import package.A.A" which will prefer the class A defined in __init__.py
-    assertThat(TypeMatchers.isType("package.A.A").isFor(classTypeExpression, ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(TypeMatchers.isType("package.A.A").evaluateFor(classTypeExpression, ctx)).isEqualTo(TriBool.FALSE);
   }
 }
 
