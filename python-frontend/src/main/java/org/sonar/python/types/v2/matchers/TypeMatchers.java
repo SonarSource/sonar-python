@@ -32,6 +32,14 @@ public final class TypeMatchers {
     return new TypeMatcher(new AllTypePredicate(predicates));
   }
 
+  public static TypeMatcher any(TypeMatcher... checkers) {
+    TypePredicate[] predicates = new TypePredicate[checkers.length];
+    for (int i = 0; i < checkers.length; i++) {
+      predicates[i] = checkers[i].predicate();
+    }
+    return new TypeMatcher(new AnyTypePredicate(predicates));
+  }
+
   public static TypeMatcher withFQN(String fqn) {
     return new TypeMatcher(new HasFQNPredicate(fqn));
   }
