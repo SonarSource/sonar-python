@@ -17,6 +17,7 @@
 package org.sonar.python.types.v2.matchers;
 
 import org.sonar.api.Beta;
+import org.sonar.plugins.python.api.types.v2.TypeSource;
 
 @Beta
 public final class TypeMatchers {
@@ -59,5 +60,9 @@ public final class TypeMatchers {
 
   public static TypeMatcher isObjectOfSubType(String fqn) {
     return new TypeMatcher(new IsObjectSubtypeOfPredicate(fqn));
+  }
+
+  public static TypeMatcher hasTypeSource(TypeSource typeSource) {
+    return new TypeMatcher(new TypeSourcePredicate(typeSource));
   }
 }
