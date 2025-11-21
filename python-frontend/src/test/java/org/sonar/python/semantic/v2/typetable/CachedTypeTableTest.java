@@ -14,13 +14,11 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.semantic.v2;
+package org.sonar.python.semantic.v2.typetable;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.python.semantic.v2.typetable.CachedTypeTable;
-import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

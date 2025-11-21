@@ -14,16 +14,14 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.semantic.v2;
+package org.sonar.python.semantic.v2.typetable;
 
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.v2.typetable.BasicTypeTable;
-import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
