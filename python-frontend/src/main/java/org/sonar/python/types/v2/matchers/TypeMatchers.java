@@ -16,6 +16,9 @@
  */
 package org.sonar.python.types.v2.matchers;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 
@@ -25,19 +28,42 @@ public final class TypeMatchers {
   private TypeMatchers() {
   }
 
-  public static TypeMatcher all(TypeMatcher... matchers) {
-    TypePredicate[] predicates = new TypePredicate[matchers.length];
-    for (int i = 0; i < matchers.length; i++) {
-      predicates[i] = matchers[i].predicate();
-    }
+  public static TypeMatcher all(Stream<TypeMatcher> matchers) {
+    List<TypePredicate> predicates = matchers.map(TypeMatcher::predicate)
+      .toList();
     return new TypeMatcher(new AllTypePredicate(predicates));
   }
 
-  public static TypeMatcher any(TypeMatcher... checkers) {
-    TypePredicate[] predicates = new TypePredicate[checkers.length];
-    for (int i = 0; i < checkers.length; i++) {
-      predicates[i] = checkers[i].predicate();
-    }
+  public static TypeMatcher all(List<TypeMatcher> matchers) {
+    List<TypePredicate> predicates = matchers.stream()
+      .map(TypeMatcher::predicate)
+      .toList();
+    return new TypeMatcher(new AllTypePredicate(predicates));
+  }
+
+  public static TypeMatcher all(TypeMatcher... matchers) {
+    List<TypePredicate> predicates = Arrays.stream(matchers)
+      .map(TypeMatcher::predicate)
+      .toList();
+    return new TypeMatcher(new AllTypePredicate(predicates));
+  }
+
+  public static TypeMatcher any(Stream<TypeMatcher> matchers) {
+    List<TypePredicate> predicates = matchers.map(TypeMatcher::predicate)
+      .toList();
+    return new TypeMatcher(new AnyTypePredicate(predicates));
+  }
+
+  public static TypeMatcher any(List<TypeMatcher> matchers) {
+    List<TypePredicate> predicates = matchers.stream()
+      .map(TypeMatcher::predicate)
+      .toList();
+    return new TypeMatcher(new AnyTypePredicate(predicates));
+  }
+
+  public static TypeMatcher any(TypeMatcher... matchers) {
+    List<TypePredicate> predicates = Arrays.stream(matchers)
+      .map(TypeMatcher::predicate).toList();
     return new TypeMatcher(new AnyTypePredicate(predicates));
   }
 

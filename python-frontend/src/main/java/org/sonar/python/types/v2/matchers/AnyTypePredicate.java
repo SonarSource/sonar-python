@@ -16,7 +16,6 @@
  */
 package org.sonar.python.types.v2.matchers;
 
-import java.util.Arrays;
 import java.util.List;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
@@ -30,8 +29,8 @@ class AnyTypePredicate implements TypePredicate {
 
   private final List<TypePredicate> predicates;
 
-  AnyTypePredicate(TypePredicate... predicates) {
-    this.predicates = Arrays.asList(predicates);
+  AnyTypePredicate(List<TypePredicate> predicates) {
+    this.predicates = predicates;
   }
 
   @Override
