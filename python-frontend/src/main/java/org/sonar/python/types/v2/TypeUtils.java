@@ -16,6 +16,9 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -25,6 +28,7 @@ import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 
@@ -73,5 +77,26 @@ public class TypeUtils {
       return unresolvedImportType.importPath();
     }
     return null;
+  }
+
+  public static Set<PythonType> collectTypes(PythonType type) {
+    var result = new HashSet<PythonType>();
+    var queue = new ArrayDeque<PythonType>();
+    queue.add(type);
+    while (!queue.isEmpty()) {
+      var currentType = queue.pop();
+      if (result.contains(currentType)) {
+        continue;
+      }
+      result.add(currentType);
+      if (currentType instanceof UnionType) {
+        result.clear();
+        result.add(PythonType.UNKNOWN);
+        queue.clear();
+      } else if (currentType instanceof ClassType classType) {
+        queue.addAll(classType.superClasses().stream().map(TypeWrapper::type).toList());
+      }
+    }
+    return result;
   }
 }

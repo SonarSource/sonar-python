@@ -35,6 +35,8 @@ import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 
+import static org.sonar.python.types.v2.TypeUtils.collectTypes;
+
 public class TypeCheckBuilder {
 
   TypeTable projectLevelTypeTable;
@@ -342,26 +344,7 @@ public class TypeCheckBuilder {
     }
   }
 
-  private static Set<PythonType> collectTypes(PythonType type) {
-    var result = new HashSet<PythonType>();
-    var queue = new ArrayDeque<PythonType>();
-    queue.add(type);
-    while (!queue.isEmpty()) {
-      var currentType = queue.pop();
-      if (result.contains(currentType)) {
-        continue;
-      }
-      result.add(currentType);
-      if (currentType instanceof UnionType) {
-        result.clear();
-        result.add(PythonType.UNKNOWN);
-        queue.clear();
-      } else if (currentType instanceof ClassType classType) {
-        queue.addAll(classType.superClasses().stream().map(TypeWrapper::type).toList());
-      }
-    }
-    return result;
-  }
+
 
   private static boolean containsUnknown(Set<PythonType> types) {
     return types.stream().anyMatch(UnknownType.class::isInstance);

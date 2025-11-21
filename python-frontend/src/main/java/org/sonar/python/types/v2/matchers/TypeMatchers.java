@@ -57,4 +57,7 @@ public final class TypeMatchers {
     return isObjectSatisfying(isType(fqn));
   }
 
+  public static TypeMatcher isObjectOfSubType(String fqn) {
+    return new TypeMatcher(new IsObjectSubtypeOfPredicate(fqn));
+  }
 }
