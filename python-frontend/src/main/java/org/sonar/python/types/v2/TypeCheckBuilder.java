@@ -16,9 +16,7 @@
  */
 package org.sonar.python.types.v2;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -30,7 +28,6 @@ import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
-import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
