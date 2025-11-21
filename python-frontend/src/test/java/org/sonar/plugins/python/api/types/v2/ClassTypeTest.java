@@ -19,8 +19,10 @@ package org.sonar.plugins.python.api.types.v2;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.TriBool;
@@ -83,7 +85,35 @@ public class ClassTypeTest {
     );
 
     assertThat(classType.instancesHaveMember("foo")).isEqualTo(TriBool.TRUE);
+    assertThat(classType.hasMember("foo")).isEqualTo(TriBool.TRUE);
     assertThat(classType.instancesHaveMember("bar")).isEqualTo(TriBool.FALSE);
+    assertThat(classType.hasMember("bar")).isEqualTo(TriBool.UNKNOWN);
+  }
+
+  @Test
+  void members() {
+    FunctionType barMember = Mockito.mock(FunctionType.class);
+    Member bar = new Member("bar", barMember);
+    Member qix = new Member("qix", PythonType.UNKNOWN);
+    ClassType classType = new ClassType(
+      "foo",
+      "mod.foo",
+      Set.of(bar, qix),
+      List.of(),
+      List.of(),
+      List.of(),
+      false,
+      false,
+      null
+    );
+
+    assertThat(classType.hasMember("bar").isTrue()).isTrue();
+    assertThat(classType.hasMember("qix").isUnknown()).isTrue();
+    assertThat(classType.hasMember("missing").isUnknown()).isTrue();
+
+    assertThat(classType.resolveMember("bar")).contains(barMember);
+    assertThat(classType.resolveMember("qix")).contains(PythonType.UNKNOWN);
+    assertThat(classType.resolveMember("missing")).isEmpty();
   }
 
   @Test

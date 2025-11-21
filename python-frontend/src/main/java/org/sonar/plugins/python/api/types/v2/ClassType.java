@@ -181,6 +181,9 @@ public final class ClassType implements PythonType {
     if ("__call__".equals(memberName)) {
       return TriBool.TRUE;
     }
+    if (resolveMember(memberName).filter(t -> t != PythonType.UNKNOWN).isPresent()) {
+      return TriBool.TRUE;
+    }
     if (hasUnresolvedHierarchy()) {
       return TriBool.UNKNOWN;
     }

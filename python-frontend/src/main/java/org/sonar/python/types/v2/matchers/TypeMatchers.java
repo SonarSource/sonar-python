@@ -65,4 +65,12 @@ public final class TypeMatchers {
   public static TypeMatcher hasTypeSource(TypeSource typeSource) {
     return new TypeMatcher(new TypeSourcePredicate(typeSource));
   }
+
+  public static TypeMatcher hasMember(String memberName) {
+    return new TypeMatcher(new HasMemberPredicate(memberName));
+  }
+
+  public static TypeMatcher hasMemberSatisfying(String memberName, TypeMatcher matcher) {
+    return new TypeMatcher(new HasMemberSatisfyingPredicate(memberName, matcher.predicate()));
+  }
 }

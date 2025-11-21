@@ -53,6 +53,11 @@ public interface PythonType {
     return name();
   }
 
+
+  /**
+   * Attempts to resolve a PythonType's member
+   * It should return Optional.empty() when the member doesn't exist, and PythonType.UNKNOWN when the member may exist but can't be resolved
+   */
   @Beta
   default Optional<PythonType> resolveMember(String memberName) {
     return Optional.empty();
