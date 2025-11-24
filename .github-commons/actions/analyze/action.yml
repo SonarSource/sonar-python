@@ -7,6 +7,9 @@ inputs:
   sonar-project-key:
     description: 'SonarQube project key'
     required: true
+  sonar-project-version:
+    description: 'SonarQube project version'
+    required: true
 
 runs:
   using: 'composite'
@@ -56,3 +59,4 @@ runs:
         GITHUB_BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
         PULL_REQUEST: ${{ github.event.pull_request.number || 'false' }}
         PIPELINE_ID: ${{ env.BUILD_NUMBER }}
+        SONAR_PROJECT_VERSION: ${{ inputs.sonar-project-version }}

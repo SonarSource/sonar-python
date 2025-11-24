@@ -1,10 +1,16 @@
 name: 'Config Sonar Python'
 description: 'Configure maven and update versions for sonar-python project'
 
+outputs:
+  current-version:
+    description: 'Current version of the project'
+    value: ${{ steps.config-maven.outputs.current-version }}
+
 runs:
   using: 'composite'
   steps:
     - name: Configure private maven projects
+      id: config-maven
       uses: SonarSource/ci-github-actions/config-maven@1.1.2
 
     - name: Update versions of public modules

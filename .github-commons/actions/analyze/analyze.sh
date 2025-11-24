@@ -1,4 +1,5 @@
 #!/bin/bash
+
 function run_maven {
   # No need for Maven phase "install" as the generated JAR files do not need to be installed
   # in Maven local repository. Phase "verify" is enough.
@@ -16,6 +17,7 @@ function run_maven {
     -Dsonar.analysisCache.enabled=true \
     -Dsonar.sca.recursiveManifestSearch=true \
     -Dsonar.sca.exclusions=python-frontend/typeshed_serializer/**,its/plugin/it-python-plugin-test/projects/**,private/its-enterprise/sources_ruling/**,private/its-enterprise/it-python-enterprise-plugin/projects/**,**/test/resources/** \
+    -Dsonar.project.version="$SONAR_PROJECT_VERSION" \
     -DfailStubGenerationFast=true \
     -Dskip.its=true \
     --batch-mode --errors --show-version \
