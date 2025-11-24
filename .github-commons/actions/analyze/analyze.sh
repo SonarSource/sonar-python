@@ -17,7 +17,8 @@ function run_maven {
     -Dsonar.analysisCache.enabled=true \
     -Dsonar.sca.recursiveManifestSearch=true \
     -Dsonar.sca.exclusions=python-frontend/typeshed_serializer/**,its/plugin/it-python-plugin-test/projects/**,private/its-enterprise/sources_ruling/**,private/its-enterprise/it-python-enterprise-plugin/projects/**,**/test/resources/** \
-    -Dsonar.project.version="$SONAR_PROJECT_VERSION" \
+    -Dsonar.projectName="$SONAR_PROJECT_NAME" \
+    -Dsonar.projectVersion="$SONAR_PROJECT_VERSION" \
     -DfailStubGenerationFast=true \
     -Dskip.its=true \
     --batch-mode --errors --show-version \
