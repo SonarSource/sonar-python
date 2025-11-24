@@ -106,7 +106,6 @@ class SubscriptionVisitorTest {
 
     FileInput fileInput = PythonTestUtils.parse("class A:\n  def foo(self): ...");
     PythonVisitorContext context = new PythonVisitorContext.Builder(fileInput, PythonTestUtils.pythonFile("file")).build();
-    assertThat(context.typeChecker().getProjectLevelTypeTable()).isNotNull();
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
   }
 

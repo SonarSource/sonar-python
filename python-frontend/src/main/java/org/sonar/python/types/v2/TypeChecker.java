@@ -20,7 +20,7 @@ import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 public class TypeChecker {
 
-  private TypeTable projectLevelTypeTable;
+  private final TypeTable projectLevelTypeTable;
 
   public TypeChecker(TypeTable projectLevelTypeTable) {
     this.projectLevelTypeTable = projectLevelTypeTable;
@@ -28,9 +28,5 @@ public class TypeChecker {
 
   public TypeCheckBuilder typeCheckBuilder() {
     return new TypeCheckBuilder(projectLevelTypeTable);
-  }
-
-  public TypeTable getProjectLevelTypeTable() {
-    return projectLevelTypeTable;
   }
 }

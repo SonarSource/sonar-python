@@ -50,6 +50,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private final List<PreciseIssue> issues;
   private final ProjectConfiguration projectConfiguration;
   private final CallGraph callGraph;
+  private final TypeTable typeTable;
 
   private PythonVisitorContext(FileInput rootTree, 
       PythonFile pythonFile, 
@@ -59,25 +60,26 @@ public class PythonVisitorContext extends PythonInputFileContext {
       SonarProduct sonarProduct,
       ProjectConfiguration projectConfiguration,
       ModuleType moduleType,
-      TypeChecker typeChecker,
-      CallGraph callGraph
+      CallGraph callGraph,
+      TypeTable typeTable
     ) {
     super(pythonFile, workingDirectory, cacheContext, sonarProduct, projectLevelSymbolTable);
     this.moduleType = moduleType;
-    this.typeChecker = typeChecker;
     this.projectConfiguration = projectConfiguration;
     this.callGraph = callGraph;
     this.rootTree = rootTree;
     this.parsingException = null;
+    this.typeTable = typeTable;
+    this.typeChecker = new TypeChecker(typeTable);
     this.issues = new ArrayList<>();
   }
-
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException, SonarProduct sonarProduct) {
     super(pythonFile, null, CacheContextImpl.dummyCache(), sonarProduct, ProjectLevelSymbolTable.empty());
     this.rootTree = null;
     this.parsingException = parsingException;
-    this.typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    this.typeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
+    this.typeChecker = new TypeChecker(this.typeTable);
     this.projectConfiguration = new ProjectConfiguration();
     this.callGraph = CallGraph.EMPTY;
     this.issues = new ArrayList<>();
@@ -90,6 +92,10 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
   public TypeChecker typeChecker() {
     return typeChecker;
+  }
+
+  public TypeTable typeTable() {
+    return typeTable;
   }
 
   public RecognitionException parsingException() {
@@ -204,8 +210,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
         sonarProduct.orElse(SonarProduct.SONARQUBE),
         projectConfiguration.orElse(new ProjectConfiguration()),
         mt,
-        new TypeChecker(finalTypeTable),
-        finalCallGraph
+        finalCallGraph,
+        finalTypeTable
       );
     }
 

@@ -189,7 +189,7 @@ public class SubscriptionVisitor {
 
     @Override
     public TypeTable typeTable() {
-      return pythonVisitorContext.typeChecker().getProjectLevelTypeTable();
+      return pythonVisitorContext.typeTable();
     }
 
     @Override
