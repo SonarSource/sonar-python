@@ -27,6 +27,9 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.api.types.v2.matchers.MatchersTestUtils;
+import org.sonar.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.python.api.types.v2.matchers.TypeMatchers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -77,12 +80,12 @@ class IsObjectSatisfyingPredicateTest {
     ObjectType objectType = new ObjectType(wrappedType);
 
     TypePredicate innerPredicate = MatchersTestUtils.mockPredicateReturning(wrappedType, TriBool.TRUE);
-    TypeMatcher innerMatcher = new TypeMatcher(innerPredicate);
+    TypeMatcher innerMatcher = MatchersTestUtils.createTypeMatcher(innerPredicate);
 
     TypeMatcher objectThatMatcher = TypeMatchers.isObjectSatisfying(innerMatcher);
 
     SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    TriBool result = objectThatMatcher.predicate().check(objectType, ctx);
+    TriBool result = MatchersTestUtils.getPredicate(objectThatMatcher).check(objectType, ctx);
 
     assertThat(result).isEqualTo(TriBool.TRUE);
   }

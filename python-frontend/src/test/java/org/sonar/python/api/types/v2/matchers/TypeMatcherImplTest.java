@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2.matchers;
+package org.sonar.python.api.types.v2.matchers;
 
 import java.util.Set;
 import org.jspecify.annotations.NonNull;
@@ -31,11 +31,12 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.TestProject;
+import org.sonar.python.types.v2.matchers.TypePredicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.types.v2.matchers.TypeMatcher.extractCandidates;
+import static org.sonar.python.api.types.v2.matchers.MatchersTestUtils.createTypeMatcher;
 
-class TypeMatcherTest {
+class TypeMatcherImplTest {
 
   TypePredicate isFunctionType = new TypePredicate() {
     @Override
@@ -47,7 +48,7 @@ class TypeMatcherTest {
     }
   };
 
-  TypeMatcher typeMatcher = new TypeMatcher(isFunctionType);
+  TypeMatcher typeMatcher = createTypeMatcher(isFunctionType);
 
   PythonType functionType = Mockito.mock(FunctionType.class);
   PythonType functionType2 = Mockito.mock(FunctionType.class);
@@ -103,14 +104,14 @@ class TypeMatcherTest {
 
   @Test
   void testExtractCandidates() {
-    Set<PythonType> objectCandidates = extractCandidates(objectType);
+    Set<PythonType> objectCandidates = TypeMatcherImpl.extractCandidates(objectType);
     assertThat(objectCandidates).hasSize(1).first().isEqualTo(objectType);
 
-    Set<PythonType> functionCandidates = extractCandidates(functionType);
+    Set<PythonType> functionCandidates = TypeMatcherImpl.extractCandidates(functionType);
     assertThat(functionCandidates).hasSize(1).first().isEqualTo(functionType);
 
     PythonType unionType = UnionType.or(Set.of(objectType, functionType));
-    Set<PythonType> unionCandidates = extractCandidates(unionType);
+    Set<PythonType> unionCandidates = TypeMatcherImpl.extractCandidates(unionType);
     assertThat(unionCandidates).hasSize(2).contains(objectType, functionType);
   }
 

@@ -21,6 +21,9 @@ import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.python.api.types.v2.matchers.MatchersTestUtils;
+import org.sonar.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.python.api.types.v2.matchers.TypeMatchers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,9 +45,9 @@ class AllTypePredicateTest {
     TypePredicate unknownPredicate = Mockito.mock(TypePredicate.class);
     Mockito.when(unknownPredicate.check(Mockito.any(), Mockito.any())).thenReturn(TriBool.UNKNOWN);
 
-    TypeMatcher trueMatcher = new TypeMatcher(truePredicate);
-    TypeMatcher falseMatcher = new TypeMatcher(falsePredicate);
-    TypeMatcher unknownMatcher = new TypeMatcher(unknownPredicate);
+    TypeMatcher trueMatcher = MatchersTestUtils.createTypeMatcher(truePredicate);
+    TypeMatcher falseMatcher = MatchersTestUtils.createTypeMatcher(falsePredicate);
+    TypeMatcher unknownMatcher = MatchersTestUtils.createTypeMatcher(unknownPredicate);
 
     TypeMatcher singleTrue = TypeMatchers.all(trueMatcher);
     assertThat(singleTrue.evaluateFor(expression1, Mockito.mock())).isEqualTo(TriBool.TRUE);

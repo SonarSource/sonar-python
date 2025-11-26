@@ -24,7 +24,7 @@ public class HasMemberPredicate implements TypePredicate {
 
   private final String memberName;
 
-  HasMemberPredicate(String memberName) {
+  public HasMemberPredicate(String memberName) {
     this.memberName = memberName;
   }
 

@@ -24,9 +24,9 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.TestProject;
+import org.sonar.python.api.types.v2.matchers.TypeMatchers;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.types.v2.matchers.TypeMatchers.isObjectOfSubType;
 
 class IsObjectOfSubtypePredicateTest {
 
@@ -58,7 +58,7 @@ class IsObjectOfSubtypePredicateTest {
     IsObjectSubtypeOfPredicate isObjectOfSubtypeCPredicate = new IsObjectSubtypeOfPredicate("my_file.C");
 
     assertThat(isObjectOfSubtypeAPredicate.check(objectTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.TRUE);
-    assertThat(isObjectOfSubType("my_file.A").evaluateFor(objectTypeExpression, ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeMatchers.isObjectOfSubType("my_file.A").evaluateFor(objectTypeExpression, ctx)).isEqualTo(TriBool.TRUE);
     assertThat(isObjectOfSubtypeBPredicate.check(objectTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.TRUE);
 
     assertThat(isObjectOfSubtypeCPredicate.check(objectTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.FALSE);

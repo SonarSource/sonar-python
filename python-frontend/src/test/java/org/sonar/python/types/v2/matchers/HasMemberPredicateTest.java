@@ -23,6 +23,9 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.api.types.v2.matchers.MatchersTestUtils;
+import org.sonar.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.semantic.v2.TestProject;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -66,9 +69,9 @@ class HasMemberPredicateTest {
     Mockito.when(falsePredicate.check(Mockito.any(), Mockito.any())).thenReturn(TriBool.FALSE);
     Mockito.when(unknownPredicate.check(Mockito.any(), Mockito.any())).thenReturn(TriBool.UNKNOWN);
 
-    TypeMatcher trueMatcher = new TypeMatcher(truePredicate);
-    TypeMatcher falseMatcher = new TypeMatcher(falsePredicate);
-    TypeMatcher unknownMatcher = new TypeMatcher(unknownPredicate);
+    TypeMatcher trueMatcher = MatchersTestUtils.createTypeMatcher(truePredicate);
+    TypeMatcher falseMatcher = MatchersTestUtils.createTypeMatcher(falsePredicate);
+    TypeMatcher unknownMatcher = MatchersTestUtils.createTypeMatcher(unknownPredicate);
 
     assertThat(TypeMatchers.hasMemberSatisfying("foo", trueMatcher).isTrueFor(objectTypeExpression, ctx)).isTrue();
     assertThat(TypeMatchers.hasMemberSatisfying("foo", falseMatcher).isTrueFor(objectTypeExpression, ctx)).isFalse();

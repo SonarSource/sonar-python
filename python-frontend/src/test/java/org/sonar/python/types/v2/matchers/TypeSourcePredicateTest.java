@@ -27,6 +27,8 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
+import org.sonar.python.api.types.v2.matchers.MatchersTestUtils;
+import org.sonar.python.api.types.v2.matchers.TypeMatchers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -56,10 +58,10 @@ class TypeSourcePredicateTest {
     PythonType typeWithTypeHintSource = createTypeWithSource(TypeSource.TYPE_HINT);
     SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
 
-    assertThat(TypeMatchers.hasTypeSource(TypeSource.EXACT).predicate().check(typeWithExactSource, ctx)).isEqualTo(TriBool.TRUE);
-    assertThat(TypeMatchers.hasTypeSource(TypeSource.EXACT).predicate().check(typeWithTypeHintSource, ctx)).isEqualTo(TriBool.FALSE);
-    assertThat(TypeMatchers.hasTypeSource(TypeSource.TYPE_HINT).predicate().check(typeWithTypeHintSource, ctx)).isEqualTo(TriBool.TRUE);
-    assertThat(TypeMatchers.hasTypeSource(TypeSource.TYPE_HINT).predicate().check(typeWithExactSource, ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(MatchersTestUtils.getPredicate(TypeMatchers.hasTypeSource(TypeSource.EXACT)).check(typeWithExactSource, ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(MatchersTestUtils.getPredicate(TypeMatchers.hasTypeSource(TypeSource.EXACT)).check(typeWithTypeHintSource, ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(MatchersTestUtils.getPredicate(TypeMatchers.hasTypeSource(TypeSource.TYPE_HINT)).check(typeWithTypeHintSource, ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(MatchersTestUtils.getPredicate(TypeMatchers.hasTypeSource(TypeSource.TYPE_HINT)).check(typeWithExactSource, ctx)).isEqualTo(TriBool.FALSE);
   }
 
   @Test

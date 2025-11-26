@@ -25,11 +25,11 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
  * TypePredicate implementation that requires at least one provided type predicate to pass (OR logic).
  * Returns TRUE if any predicate returns TRUE, FALSE if all return FALSE, UNKNOWN otherwise.
  */
-class AnyTypePredicate implements TypePredicate {
+public class AnyTypePredicate implements TypePredicate {
 
   private final List<TypePredicate> predicates;
 
-  AnyTypePredicate(List<TypePredicate> predicates) {
+  public AnyTypePredicate(List<TypePredicate> predicates) {
     this.predicates = predicates;
   }
 

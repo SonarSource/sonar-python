@@ -25,11 +25,11 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
  * TypePredicate implementation that requires all provided type predicates to pass (AND logic).
  * Combines results using TriBool.and() semantics.
  */
-class AllTypePredicate implements TypePredicate {
+public class AllTypePredicate implements TypePredicate {
 
   private final List<TypePredicate> predicates;
 
-  AllTypePredicate(List<TypePredicate> predicates) {
+  public AllTypePredicate(List<TypePredicate> predicates) {
     this.predicates = predicates;
   }
 

@@ -14,12 +14,13 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2.matchers;
+package org.sonar.python.api.types.v2.matchers;
 
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.types.v2.matchers.TypePredicate;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -32,5 +33,13 @@ public class MatchersTestUtils {
     TypePredicate predicate = Mockito.mock(TypePredicate.class);
     Mockito.when(predicate.check(eq(expectedType), any(SubscriptionContext.class))).thenReturn(result);
     return predicate;
+  }
+
+  public static TypeMatcher createTypeMatcher(TypePredicate predicate) {
+    return new TypeMatcherImpl(predicate);
+  }
+
+  public static TypePredicate getPredicate(TypeMatcher matcher) {
+    return TypeMatchers.getTypePredicate(matcher);
   }
 }

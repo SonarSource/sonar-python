@@ -20,14 +20,14 @@ import java.util.Objects;
 import java.util.Optional;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeUtils;
 
 public record HasFQNPredicate(String fullyQualifiedName) implements TypePredicate {
   @Override
   public TriBool check(PythonType type, SubscriptionContext ctx) {
     return Optional.of(type)
-      .map(TypeUtils::getFullyQualifiedName)
+      .flatMap(FullyQualifiedNameHelper::getFullyQualifiedName)
       .map(typeFqn -> Objects.equals(fullyQualifiedName, typeFqn) ? TriBool.TRUE : TriBool.FALSE)
       .orElse(TriBool.UNKNOWN);
   }

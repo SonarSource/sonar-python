@@ -14,18 +14,16 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2;
+package org.sonar.plugins.python.api.types.v2;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.sonar.plugins.python.api.types.v2.ClassType;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
-import org.sonar.plugins.python.api.types.v2.ModuleType;
-import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.types.v2.SpecialFormType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TypesUtilsTest {
+class FullyQualifiedNameHelperTest {
+  
   @Test
   void testGetFullyQualifiedName() {
     FunctionType function1 = Mockito.mock(FunctionType.class);
@@ -43,12 +41,12 @@ class TypesUtilsTest {
     Mockito.when(specialFormType1.fullyQualifiedName()).thenReturn("typing.List");
     Mockito.when(unresolvedImport.importPath()).thenReturn("imported.module1");
 
-    assertThat(TypeUtils.getFullyQualifiedName(function1)).isEqualTo("foo.bar.func1");
-    assertThat(TypeUtils.getFullyQualifiedName(nullFunctionType)).isNull();
-    assertThat(TypeUtils.getFullyQualifiedName(class1)).isEqualTo("foo.bar.class1");
-    assertThat(TypeUtils.getFullyQualifiedName(module1)).isEqualTo("mod.module1");
-    assertThat(TypeUtils.getFullyQualifiedName(specialFormType1)).isEqualTo("typing.List");
-    assertThat(TypeUtils.getFullyQualifiedName(unresolvedImport)).isEqualTo("imported.module1");
-    assertThat(TypeUtils.getFullyQualifiedName(unknownType)).isNull();
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(function1)).contains("foo.bar.func1");
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(nullFunctionType)).isEmpty();
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(class1)).contains("foo.bar.class1");
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(module1)).contains("mod.module1");
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(specialFormType1)).contains("typing.List");
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(unresolvedImport)).contains("imported.module1");
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(unknownType)).isEmpty();
   }
 }

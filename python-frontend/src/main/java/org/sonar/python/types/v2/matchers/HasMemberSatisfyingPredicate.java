@@ -25,7 +25,7 @@ public class HasMemberSatisfyingPredicate implements TypePredicate {
   private final String memberName;
   private final TypePredicate memberTypePredicate;
 
-  HasMemberSatisfyingPredicate(String memberName, TypePredicate memberTypePredicate) {
+  public HasMemberSatisfyingPredicate(String memberName, TypePredicate memberTypePredicate) {
     this.memberName = memberName;
     this.memberTypePredicate = memberTypePredicate;
   }

@@ -25,7 +25,7 @@ import org.sonar.plugins.python.api.types.v2.UnknownType;
 public class IsObjectSatisfyingPredicate implements TypePredicate {
   private final TypePredicate wrappedPredicate;
 
-  IsObjectSatisfyingPredicate(TypePredicate wrappedPredicate) {
+  public IsObjectSatisfyingPredicate(TypePredicate wrappedPredicate) {
     this.wrappedPredicate = wrappedPredicate;
   }
 
