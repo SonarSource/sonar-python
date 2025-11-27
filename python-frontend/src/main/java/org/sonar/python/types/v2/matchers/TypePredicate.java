@@ -17,13 +17,12 @@
 package org.sonar.python.types.v2.matchers;
 
 import org.sonar.api.Beta;
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 
 @Beta
 public interface TypePredicate {
 
-  TriBool check(PythonType type, SubscriptionContext ctx);
+  TriBool check(PythonType type, TypePredicateContext ctx);
 
 }

@@ -14,31 +14,36 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.api.types.v2.matchers;
+package org.sonar.python.semantic.v2.types;
 
-import org.sonar.api.Beta;
-import org.sonar.plugins.python.api.SubscriptionContext;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.python.types.v2.matchers.TypePredicate;
+import org.sonar.python.semantic.v2.TestProject;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
-import org.sonar.python.types.v2.matchers.TypePredicateUtils;
 
-// This record is package-private
-@Beta
-record TypeMatcherImpl(TypePredicate predicate) implements TypeMatcher {
+import static org.assertj.core.api.Assertions.assertThat;
 
-  @Override
-  public TriBool evaluateFor(Expression expr, SubscriptionContext ctx) {
-    PythonType type = expr.typeV2();
-    TypePredicateContext predicateContext = TypePredicateContext.of(ctx.typeTable());
-    return TypePredicateUtils.evaluate(predicate, type, predicateContext);
+class TypeInferenceMatchersTest {
+
+  @Test
+  void test() {
+    var project = new TestProject();
+    project.addModule("test/__init__.py", "");
+    project.addModule("test/my_file.py", "class A: pass");
+
+    Expression objectTypeExpression = project.lastExpression("""
+      from test.my_file import A
+      a = A()
+      a
+      """);
+
+    var ctx = TypePredicateContext.of(project.projectLevelTypeTable());
+
+    var result = TypeInferenceMatcher.of(
+      TypeInferenceMatchers.isObjectOfType("test.my_file.A")
+    ).evaluate(objectTypeExpression.typeV2(), ctx);
+
+    assertThat(result).isEqualTo(TriBool.TRUE);
   }
-
-  @Override
-  public boolean isTrueFor(Expression expr, SubscriptionContext ctx) {
-    return evaluateFor(expr, ctx).isTrue();
-  }
-
 }

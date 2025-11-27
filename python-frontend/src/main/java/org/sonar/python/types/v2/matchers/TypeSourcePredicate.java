@@ -16,7 +16,6 @@
  */
 package org.sonar.python.types.v2.matchers;
 
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
@@ -29,7 +28,7 @@ public class TypeSourcePredicate implements TypePredicate {
   }
 
   @Override
-  public TriBool check(PythonType type, SubscriptionContext ctx) {
+  public TriBool check(PythonType type, TypePredicateContext ctx) {
     return typeSource.equals(type.typeSource()) ? TriBool.TRUE : TriBool.FALSE;
   }
 }

@@ -14,32 +14,26 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.types.v2.matchers;
+package org.sonar.python.semantic.v2.types;
 
 import org.sonar.plugins.python.api.TriBool;
-import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.types.v2.matchers.TypePredicate;
+import org.sonar.python.types.v2.matchers.TypePredicateContext;
+import org.sonar.python.types.v2.matchers.TypePredicateUtils;
 
-public class IsObjectSatisfyingPredicate implements TypePredicate {
-  private final TypePredicate wrappedPredicate;
+class TypeInferenceMatcher {
+  private final TypePredicate predicate;
 
-  public IsObjectSatisfyingPredicate(TypePredicate wrappedPredicate) {
-    this.wrappedPredicate = wrappedPredicate;
+  private TypeInferenceMatcher(TypePredicate predicate) {
+    this.predicate = predicate;
   }
 
-  @Override
-  public TriBool check(PythonType type, TypePredicateContext ctx) {
-    if (type instanceof UnknownType) {
-      return TriBool.UNKNOWN;
-    }
-    
-    if (!(type instanceof ObjectType objectType)) {
-      return TriBool.FALSE;
-    }
-    
-    PythonType unwrapped = objectType.unwrappedType();
-    return wrappedPredicate.check(unwrapped, ctx);
+  public TriBool evaluate(PythonType type, TypePredicateContext ctx) {
+    return TypePredicateUtils.evaluate(predicate, type, ctx);
+  }
+
+  public static TypeInferenceMatcher of(TypePredicate predicate) {
+    return new TypeInferenceMatcher(predicate);
   }
 }
-

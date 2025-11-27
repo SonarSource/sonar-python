@@ -24,8 +24,9 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
-import org.sonar.python.semantic.v2.TestProject;
 import org.sonar.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.semantic.v2.TestProject;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,12 +51,13 @@ class IsTypePredicateTest {
 
     SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
     Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    TypePredicateContext predicateContext = TypePredicateContext.of(project.projectLevelTypeTable());
 
     IsTypePredicate isTypeAPredicate = new IsTypePredicate("my_file.A");
     IsTypePredicate isTypeBPredicate = new IsTypePredicate("my_file.B");
 
-    assertThat(isTypeAPredicate.check(objectTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.FALSE);
-    assertThat(isTypeBPredicate.check(objectTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(isTypeAPredicate.check(objectTypeExpression.typeV2(), predicateContext)).isEqualTo(TriBool.FALSE);
+    assertThat(isTypeBPredicate.check(objectTypeExpression.typeV2(), predicateContext)).isEqualTo(TriBool.FALSE);
     
     assertThat(objectTypeExpression.typeV2()).isNotInstanceOf(UnknownType.class);
   }
@@ -78,14 +80,15 @@ class IsTypePredicateTest {
 
     SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
     Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    TypePredicateContext predicateContext = TypePredicateContext.of(project.projectLevelTypeTable());
 
     IsTypePredicate isTypeAPredicate = new IsTypePredicate("my_file.A");
     IsTypePredicate isTypeBPredicate = new IsTypePredicate("my_file.B");
 
 
-    assertThat(isTypeAPredicate.check(classTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(isTypeAPredicate.check(classTypeExpression.typeV2(), predicateContext)).isEqualTo(TriBool.TRUE);
     assertThat(TypeMatchers.isType("my_file.A").isTrueFor(classTypeExpression, ctx)).isTrue();
-    assertThat(isTypeBPredicate.check(classTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(isTypeBPredicate.check(classTypeExpression.typeV2(), predicateContext)).isEqualTo(TriBool.FALSE);
 
     assertThat(classTypeExpression.typeV2()).isNotInstanceOf(UnknownType.class);
   }
@@ -111,6 +114,7 @@ class IsTypePredicateTest {
 
     SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
     Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    TypePredicateContext predicateContext = TypePredicateContext.of(project.projectLevelTypeTable());
 
     IsTypePredicate isTypeAPredicate = new IsTypePredicate("my_file.A");
     IsTypePredicate isTypeBPredicate = new IsTypePredicate("my_file.B");
@@ -118,8 +122,8 @@ class IsTypePredicateTest {
     assertThat(unknownTypeExpression.typeV2()).isInstanceOf(UnknownType.class);
     assertThat(knownTypeExpression.typeV2()).isInstanceOf(ObjectType.class);
 
-    assertThat(isTypeAPredicate.check(unknownTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(isTypeBPredicate.check(knownTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(isTypeAPredicate.check(unknownTypeExpression.typeV2(), predicateContext)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(isTypeBPredicate.check(knownTypeExpression.typeV2(), predicateContext)).isEqualTo(TriBool.UNKNOWN);
   }
 
   @Test
@@ -181,18 +185,18 @@ class IsTypePredicateTest {
       A
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    var ctx = TypePredicateContext.of(project.projectLevelTypeTable());
 
     var selfType = SelfType.of(classTypeExpression.typeV2());
     IsTypePredicate isTypePredicate = new IsTypePredicate("my_file.A");
     
     assertThat(isTypePredicate.check(selfType, ctx)).isEqualTo(TriBool.UNKNOWN);
     
-    var mockTypeTable = Mockito.mock(org.sonar.python.semantic.v2.typetable.TypeTable.class);
+    var mockTypeTable = Mockito.mock(TypeTable.class);
     // mocking this to improve coverage, should normally never happen
     Mockito.when(mockTypeTable.getType("my_file.A")).thenReturn(selfType);
-    Mockito.when(ctx.typeTable()).thenReturn(mockTypeTable);
+
+    ctx = TypePredicateContext.of(mockTypeTable);
     assertThat(isTypePredicate.check(classTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.UNKNOWN);
   }
 }

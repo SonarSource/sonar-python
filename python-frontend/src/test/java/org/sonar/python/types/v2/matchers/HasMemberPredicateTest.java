@@ -48,14 +48,15 @@ class HasMemberPredicateTest {
 
     SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
     Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    TypePredicateContext predicateContext = TypePredicateContext.of(project.projectLevelTypeTable());
 
     HasMemberPredicate hasFooTypePredicate = new HasMemberPredicate("foo");
     HasMemberPredicate hasBarTypePredicate = new HasMemberPredicate("bar");
 
     PythonType objectType = objectTypeExpression.typeV2();
 
-    assertThat(hasFooTypePredicate.check(objectType, ctx)).isEqualTo(TriBool.TRUE);
-    assertThat(hasBarTypePredicate.check(objectType, ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(hasFooTypePredicate.check(objectType, predicateContext)).isEqualTo(TriBool.TRUE);
+    assertThat(hasBarTypePredicate.check(objectType, predicateContext)).isEqualTo(TriBool.FALSE);
 
     assertThat(TypeMatchers.hasMember("foo").isTrueFor(objectTypeExpression, ctx)).isTrue();
     assertThat(TypeMatchers.hasMember("bar").isTrueFor(objectTypeExpression, ctx)).isFalse();

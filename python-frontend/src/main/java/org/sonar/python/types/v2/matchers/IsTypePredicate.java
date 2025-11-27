@@ -16,7 +16,6 @@
  */
 package org.sonar.python.types.v2.matchers;
 
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
@@ -30,7 +29,7 @@ public class IsTypePredicate implements TypePredicate {
   }
 
   @Override
-  public TriBool check(PythonType type, SubscriptionContext ctx) {
+  public TriBool check(PythonType type, TypePredicateContext ctx) {
     PythonType expectedType = ctx.typeTable().getType(fullyQualifiedName);
     
     if (type instanceof UnknownType || expectedType instanceof UnknownType

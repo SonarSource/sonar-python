@@ -17,8 +17,8 @@
 package org.sonar.python.api.types.v2.matchers;
 
 import java.util.Set;
+import javax.annotation.Nullable;
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -31,7 +31,9 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.TestProject;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.types.v2.matchers.TypePredicate;
+import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.api.types.v2.matchers.MatchersTestUtils.createTypeMatcher;
@@ -40,7 +42,7 @@ class TypeMatcherImplTest {
 
   TypePredicate isFunctionType = new TypePredicate() {
     @Override
-    public TriBool check(@NonNull PythonType type, @Nullable SubscriptionContext ctx) {
+    public TriBool check(@NonNull PythonType type, @Nullable TypePredicateContext ctx) {
       if (type instanceof UnknownType) {
         return TriBool.UNKNOWN;
       }
@@ -103,38 +105,29 @@ class TypeMatcherImplTest {
   }
 
   @Test
-  void testExtractCandidates() {
-    Set<PythonType> objectCandidates = TypeMatcherImpl.extractCandidates(objectType);
-    assertThat(objectCandidates).hasSize(1).first().isEqualTo(objectType);
-
-    Set<PythonType> functionCandidates = TypeMatcherImpl.extractCandidates(functionType);
-    assertThat(functionCandidates).hasSize(1).first().isEqualTo(functionType);
-
-    PythonType unionType = UnionType.or(Set.of(objectType, functionType));
-    Set<PythonType> unionCandidates = TypeMatcherImpl.extractCandidates(unionType);
-    assertThat(unionCandidates).hasSize(2).contains(objectType, functionType);
-  }
-
-  @Test
   void testIsFor() {
-    assertThat(typeMatcher.evaluateFor(functionExpr, null)).isEqualTo(TriBool.TRUE);
-    assertThat(typeMatcher.evaluateFor(unknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(typeMatcher.evaluateFor(objectExpr, null)).isEqualTo(TriBool.FALSE);
-    assertThat(typeMatcher.evaluateFor(unionWithFunctionAndObjectExpr, null)).isEqualTo(TriBool.FALSE);
-    assertThat(typeMatcher.evaluateFor(unionWithObjectAndUnknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(typeMatcher.evaluateFor(unionWithFunctionAndUnknownExpr, null)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(typeMatcher.evaluateFor(unionOfFunctionExpr, null)).isEqualTo(TriBool.TRUE);
+    SubscriptionContext ctx = Mockito.mock();
+    Mockito.when(ctx.typeTable()).thenReturn(Mockito.mock(TypeTable.class));
+    assertThat(typeMatcher.evaluateFor(functionExpr, ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(typeMatcher.evaluateFor(unknownExpr, ctx)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeMatcher.evaluateFor(objectExpr, ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(typeMatcher.evaluateFor(unionWithFunctionAndObjectExpr, ctx)).isEqualTo(TriBool.FALSE);
+    assertThat(typeMatcher.evaluateFor(unionWithObjectAndUnknownExpr, ctx)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeMatcher.evaluateFor(unionWithFunctionAndUnknownExpr, ctx)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeMatcher.evaluateFor(unionOfFunctionExpr, ctx)).isEqualTo(TriBool.TRUE);
   }
 
   @Test
   void testIsTrueFor() {
-    assertThat(typeMatcher.isTrueFor(functionExpr, null)).isTrue();
-    assertThat(typeMatcher.isTrueFor(unknownExpr, null)).isFalse();
-    assertThat(typeMatcher.isTrueFor(objectExpr, null)).isFalse();
-    assertThat(typeMatcher.isTrueFor(unionWithFunctionAndObjectExpr, null)).isFalse();
-    assertThat(typeMatcher.isTrueFor(unionWithObjectAndUnknownExpr, null)).isFalse();
-    assertThat(typeMatcher.isTrueFor(unionWithFunctionAndUnknownExpr, null)).isFalse();
-    assertThat(typeMatcher.isTrueFor(unionOfFunctionExpr, null)).isTrue();
+    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
+    Mockito.when(ctx.typeTable()).thenReturn(Mockito.mock(TypeTable.class));
+    assertThat(typeMatcher.isTrueFor(functionExpr, ctx)).isTrue();
+    assertThat(typeMatcher.isTrueFor(unknownExpr, ctx)).isFalse();
+    assertThat(typeMatcher.isTrueFor(objectExpr, ctx)).isFalse();
+    assertThat(typeMatcher.isTrueFor(unionWithFunctionAndObjectExpr, ctx)).isFalse();
+    assertThat(typeMatcher.isTrueFor(unionWithObjectAndUnknownExpr, ctx)).isFalse();
+    assertThat(typeMatcher.isTrueFor(unionWithFunctionAndUnknownExpr, ctx)).isFalse();
+    assertThat(typeMatcher.isTrueFor(unionOfFunctionExpr, ctx)).isTrue();
   }
 
   @Test

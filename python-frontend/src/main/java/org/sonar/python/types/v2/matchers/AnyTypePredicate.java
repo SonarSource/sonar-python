@@ -17,7 +17,6 @@
 package org.sonar.python.types.v2.matchers;
 
 import java.util.List;
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 
@@ -34,7 +33,7 @@ public class AnyTypePredicate implements TypePredicate {
   }
 
   @Override
-  public TriBool check(PythonType type, SubscriptionContext ctx) {
+  public TriBool check(PythonType type, TypePredicateContext ctx) {
     TriBool result = TriBool.FALSE;
 
     for (TypePredicate predicate : predicates) {

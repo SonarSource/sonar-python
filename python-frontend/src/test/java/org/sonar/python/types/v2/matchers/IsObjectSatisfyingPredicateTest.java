@@ -22,7 +22,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -30,6 +29,7 @@ import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.api.types.v2.matchers.MatchersTestUtils;
 import org.sonar.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -84,7 +84,7 @@ class IsObjectSatisfyingPredicateTest {
 
     TypeMatcher objectThatMatcher = TypeMatchers.isObjectSatisfying(innerMatcher);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
+    TypePredicateContext ctx = Mockito.mock(TypePredicateContext.class);
     TriBool result = MatchersTestUtils.getPredicate(objectThatMatcher).check(objectType, ctx);
 
     assertThat(result).isEqualTo(TriBool.TRUE);
@@ -92,7 +92,7 @@ class IsObjectSatisfyingPredicateTest {
 
   private static TriBool checkType(PythonType type, TypePredicate wrappedPredicate) {
     IsObjectSatisfyingPredicate predicate = new IsObjectSatisfyingPredicate(wrappedPredicate);
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
+    TypePredicateContext ctx = TypePredicateContext.of(Mockito.mock(TypeTable.class));
     return predicate.check(type, ctx);
   }
 }

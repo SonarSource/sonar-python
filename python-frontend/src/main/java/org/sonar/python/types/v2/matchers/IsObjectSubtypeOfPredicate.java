@@ -17,7 +17,6 @@
 package org.sonar.python.types.v2.matchers;
 
 import java.util.Set;
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 
@@ -32,7 +31,7 @@ public class IsObjectSubtypeOfPredicate implements TypePredicate {
   }
 
   @Override
-  public TriBool check(PythonType type, SubscriptionContext ctx) {
+  public TriBool check(PythonType type, TypePredicateContext ctx) {
     return isObjectSatisfyingPredicate.check(type, ctx);
   }
 
@@ -44,7 +43,7 @@ public class IsObjectSubtypeOfPredicate implements TypePredicate {
     }
 
     @Override
-    public TriBool check(PythonType type, SubscriptionContext ctx) {
+    public TriBool check(PythonType type, TypePredicateContext ctx) {
       PythonType expectedType = ctx.typeTable().getType(fullyQualifiedName);
       Set<PythonType> types = collectTypes(type);
       if (types.stream().anyMatch(t -> t.equals(expectedType))) {

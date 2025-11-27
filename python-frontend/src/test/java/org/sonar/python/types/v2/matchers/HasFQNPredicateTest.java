@@ -18,14 +18,15 @@ package org.sonar.python.types.v2.matchers;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
-import org.sonar.python.types.v2.SpecialFormType;
 import org.sonar.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.types.v2.SpecialFormType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -78,28 +79,31 @@ class HasFQNPredicateTest {
     HasFQNPredicate hasFQNPredicateModule1 = new HasFQNPredicate("mod.module1");
     HasFQNPredicate hasFQNPredicateSpecialFormList = new HasFQNPredicate("typing.List");
 
-    assertThat(hasFQNPredicateFunction1.check(function1, null)).isEqualTo(TriBool.TRUE);
-    assertThat(TypeMatchers.withFQN("foo.bar.func1").evaluateFor(func1Expression, null)).isEqualTo(TriBool.TRUE);
-    assertThat(hasFQNPredicateFunction1.check(function1, null)).isEqualTo(TriBool.TRUE);
+    TypePredicateContext predicateContext = TypePredicateContext.of(Mockito.mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
+    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
+
+    assertThat(hasFQNPredicateFunction1.check(function1, predicateContext)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeMatchers.withFQN("foo.bar.func1").evaluateFor(func1Expression, subscriptionContext)).isEqualTo(TriBool.TRUE);
+    assertThat(hasFQNPredicateFunction1.check(function1, predicateContext)).isEqualTo(TriBool.TRUE);
     // Type is different but FQN is the same, we consider it as TRUE
-    assertThat(hasFQNPredicateFunction1.check(classWithSameFQNAsFunction, null)).isEqualTo(TriBool.TRUE);
-    assertThat(hasFQNPredicateFunction1.check(class1, null)).isEqualTo(TriBool.FALSE);
+    assertThat(hasFQNPredicateFunction1.check(classWithSameFQNAsFunction, predicateContext)).isEqualTo(TriBool.TRUE);
+    assertThat(hasFQNPredicateFunction1.check(class1, predicateContext)).isEqualTo(TriBool.FALSE);
 
-    assertThat(hasFQNPredicateClass1.check(class1, null)).isEqualTo(TriBool.TRUE);
-    assertThat(hasFQNPredicateClass1.check(function1, null)).isEqualTo(TriBool.FALSE);
-    assertThat(hasFQNPredicateClass1.check(class2, null)).isEqualTo(TriBool.FALSE);
+    assertThat(hasFQNPredicateClass1.check(class1, predicateContext)).isEqualTo(TriBool.TRUE);
+    assertThat(hasFQNPredicateClass1.check(function1, predicateContext)).isEqualTo(TriBool.FALSE);
+    assertThat(hasFQNPredicateClass1.check(class2, predicateContext)).isEqualTo(TriBool.FALSE);
 
-    assertThat(hasFQNPredicateModule1.check(module1, null)).isEqualTo(TriBool.TRUE);
-    assertThat(hasFQNPredicateModule1.check(module2, null)).isEqualTo(TriBool.FALSE);
+    assertThat(hasFQNPredicateModule1.check(module1, predicateContext)).isEqualTo(TriBool.TRUE);
+    assertThat(hasFQNPredicateModule1.check(module2, predicateContext)).isEqualTo(TriBool.FALSE);
 
-    assertThat(hasFQNPredicateSpecialFormList.check(specialFormType1, null)).isEqualTo(TriBool.TRUE);
-    assertThat(hasFQNPredicateSpecialFormList.check(specialFormType2, null)).isEqualTo(TriBool.FALSE);
+    assertThat(hasFQNPredicateSpecialFormList.check(specialFormType1, predicateContext)).isEqualTo(TriBool.TRUE);
+    assertThat(hasFQNPredicateSpecialFormList.check(specialFormType2, predicateContext)).isEqualTo(TriBool.FALSE);
 
-    assertThat(hasFQNPredicateImport1.check(unresolvedImport, null)).isEqualTo(TriBool.TRUE);
-    assertThat(hasFQNPredicateImport1.check(unresolvedImport2, null)).isEqualTo(TriBool.FALSE);
+    assertThat(hasFQNPredicateImport1.check(unresolvedImport, predicateContext)).isEqualTo(TriBool.TRUE);
+    assertThat(hasFQNPredicateImport1.check(unresolvedImport2, predicateContext)).isEqualTo(TriBool.FALSE);
 
-    assertThat(hasFQNPredicateFunction1.check(nullFunctionType, null)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(hasFQNPredicateFunction1.check(unknownType, null)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(hasFQNPredicateFunction1.check(nullFunctionType, predicateContext)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(hasFQNPredicateFunction1.check(unknownType, predicateContext)).isEqualTo(TriBool.UNKNOWN);
   }
 }
 

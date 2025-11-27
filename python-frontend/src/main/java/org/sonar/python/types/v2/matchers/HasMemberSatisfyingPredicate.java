@@ -16,7 +16,6 @@
  */
 package org.sonar.python.types.v2.matchers;
 
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 
@@ -31,7 +30,7 @@ public class HasMemberSatisfyingPredicate implements TypePredicate {
   }
 
   @Override
-  public TriBool check(PythonType type, SubscriptionContext ctx) {
+  public TriBool check(PythonType type, TypePredicateContext ctx) {
     return type.resolveMember(memberName)
       .map(member -> memberTypePredicate.check(member, ctx))
       .orElse(TriBool.FALSE);

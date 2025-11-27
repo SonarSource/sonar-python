@@ -16,19 +16,12 @@
  */
 package org.sonar.python.types.v2.matchers;
 
-import org.sonar.plugins.python.api.TriBool;
-import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
 
-public class HasMemberPredicate implements TypePredicate {
+public interface TypePredicateContext {
+  TypeTable typeTable();
 
-  private final String memberName;
-
-  public HasMemberPredicate(String memberName) {
-    this.memberName = memberName;
-  }
-
-  @Override
-  public TriBool check(PythonType type, TypePredicateContext ctx) {
-    return type.hasMember(memberName);
+  static TypePredicateContext of(TypeTable typeTable) {
+    return new TypePredicateContextImpl(typeTable);
   }
 }

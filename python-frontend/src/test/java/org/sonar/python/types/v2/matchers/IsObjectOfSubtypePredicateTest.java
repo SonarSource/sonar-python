@@ -23,8 +23,8 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
-import org.sonar.python.semantic.v2.TestProject;
 import org.sonar.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.semantic.v2.TestProject;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,15 +50,17 @@ class IsObjectOfSubtypePredicateTest {
       b
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    TypePredicateContext ctx = TypePredicateContext.of(project.projectLevelTypeTable());
+
+    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
+    Mockito.when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     IsObjectSubtypeOfPredicate isObjectOfSubtypeBPredicate = new IsObjectSubtypeOfPredicate("my_file.B");
     IsObjectSubtypeOfPredicate isObjectOfSubtypeAPredicate = new IsObjectSubtypeOfPredicate("my_file.A");
     IsObjectSubtypeOfPredicate isObjectOfSubtypeCPredicate = new IsObjectSubtypeOfPredicate("my_file.C");
 
     assertThat(isObjectOfSubtypeAPredicate.check(objectTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.TRUE);
-    assertThat(TypeMatchers.isObjectOfSubType("my_file.A").evaluateFor(objectTypeExpression, ctx)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeMatchers.isObjectOfSubType("my_file.A").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.TRUE);
     assertThat(isObjectOfSubtypeBPredicate.check(objectTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.TRUE);
 
     assertThat(isObjectOfSubtypeCPredicate.check(objectTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.FALSE);
@@ -80,10 +82,13 @@ class IsObjectOfSubtypePredicateTest {
       B
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    var ctx = TypePredicateContext.of(project.projectLevelTypeTable());
     IsObjectSubtypeOfPredicate isObjectOfSubtypeAPredicate = new IsObjectSubtypeOfPredicate("my_file.A");
     assertThat(isObjectOfSubtypeAPredicate.check(classTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.FALSE);
+
+    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
+    Mockito.when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
+    assertThat(TypeMatchers.isObjectOfSubType("my_file.A").evaluateFor(classTypeExpression, subscriptionContext)).isEqualTo(TriBool.FALSE);
   }
 
   @Test
@@ -104,8 +109,7 @@ class IsObjectOfSubtypePredicateTest {
       a
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    var ctx = TypePredicateContext.of(project.projectLevelTypeTable());
 
     IsObjectSubtypeOfPredicate isObjectOfSubtypeAPredicate = new IsObjectSubtypeOfPredicate("my_file.A");
     IsObjectSubtypeOfPredicate isObjectOfSubtypeBPredicate = new IsObjectSubtypeOfPredicate("my_file.B");

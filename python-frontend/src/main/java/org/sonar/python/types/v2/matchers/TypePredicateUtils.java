@@ -16,30 +16,32 @@
  */
 package org.sonar.python.types.v2.matchers;
 
+import java.util.Set;
 import org.sonar.plugins.python.api.TriBool;
-import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.UnionType;
 
-public class IsObjectSatisfyingPredicate implements TypePredicate {
-  private final TypePredicate wrappedPredicate;
-
-  public IsObjectSatisfyingPredicate(TypePredicate wrappedPredicate) {
-    this.wrappedPredicate = wrappedPredicate;
+public class TypePredicateUtils {
+  private TypePredicateUtils() {
   }
 
-  @Override
-  public TriBool check(PythonType type, TypePredicateContext ctx) {
-    if (type instanceof UnknownType) {
-      return TriBool.UNKNOWN;
+  public static TriBool evaluate(TypePredicate predicate, PythonType type, TypePredicateContext ctx) {
+    Set<PythonType> candidates = extractCandidates(type);
+
+    TriBool result = TriBool.TRUE;
+    for (PythonType candidate : candidates) {
+      result = result.conservativeAnd(predicate.check(candidate, ctx));
+      if (result.isUnknown()) {
+        break;
+      }
     }
-    
-    if (!(type instanceof ObjectType objectType)) {
-      return TriBool.FALSE;
+    return result;
+  }
+
+  private static Set<PythonType> extractCandidates(PythonType type) {
+    if (type instanceof UnionType unionType) {
+      return unionType.candidates();
     }
-    
-    PythonType unwrapped = objectType.unwrappedType();
-    return wrappedPredicate.check(unwrapped, ctx);
+    return Set.of(type);
   }
 }
-
