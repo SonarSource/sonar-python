@@ -83,7 +83,9 @@ public final class SelfType implements PythonType {
     if (type instanceof ObjectType objectType) {
       PythonType innerType = objectType.unwrappedType();
       SelfType selfType = new SelfType(innerType);
-      return new ObjectType(selfType, objectType.attributes(), objectType.members(), objectType.typeSource());
+      return ObjectType.Builder.fromType(objectType)
+        .withType(selfType)
+        .build();
     }
     
     if (type instanceof UnionType unionType) {

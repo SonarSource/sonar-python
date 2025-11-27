@@ -166,7 +166,7 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(variableDescriptor.fullyQualifiedName()).isEqualTo("foo.myModulSymbol");
     assertThat(variableDescriptor.annotatedType()).isNull();
 
-    ObjectType objectType = new ObjectType(lazyType);
+    ObjectType objectType = ObjectType.fromType(lazyType);
     descriptor = converter.convert("foo", new SymbolV2("myObjectSymbol"), Set.of(objectType));
     assertThat(descriptor).isInstanceOf(VariableDescriptor.class);
     variableDescriptor = (VariableDescriptor) descriptor;

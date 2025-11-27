@@ -17,13 +17,13 @@
 package org.sonar.python.semantic.v2.converter;
 
 import java.util.Optional;
-import org.sonar.python.index.FunctionDescriptor;
-import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.ParameterV2;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.python.types.v2.SimpleTypeWrapper;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.types.v2.LazyTypeWrapper;
+import org.sonar.python.types.v2.SimpleTypeWrapper;
 
 public class ParameterConverter {
 
@@ -33,7 +33,7 @@ public class ParameterConverter {
       .map(lt -> (TypeWrapper) new LazyTypeWrapper(lt))
       .orElseGet(() -> new SimpleTypeWrapper(PythonType.UNKNOWN));
 
-    var type = new ObjectType(typeWrapper);
+    var type = ObjectType.Builder.fromTypeWrapper(typeWrapper).build();
 
     return new ParameterV2(parameter.name(),
       new SimpleTypeWrapper(type),

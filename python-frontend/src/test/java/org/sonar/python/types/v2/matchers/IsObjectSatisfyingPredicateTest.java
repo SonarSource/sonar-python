@@ -39,7 +39,7 @@ class IsObjectSatisfyingPredicateTest {
   @MethodSource("objectTypeWithWrappedPredicateResults")
   void testObjectTypeUnwrapsAndDelegatesToWrappedPredicate(TriBool wrappedPredicateResult, TriBool expectedResult) {
     PythonType wrappedType = Mockito.mock(PythonType.class);
-    ObjectType objectType = new ObjectType(wrappedType);
+    ObjectType objectType = ObjectType.fromType(wrappedType);
     TypePredicate wrappedPredicate = MatchersTestUtils.mockPredicateReturning(wrappedType, wrappedPredicateResult);
 
     TriBool result = checkType(objectType, wrappedPredicate);
@@ -77,7 +77,7 @@ class IsObjectSatisfyingPredicateTest {
   @Test
   void testTypeMatchersIsObjectSatisfyingIntegration() {
     PythonType wrappedType = Mockito.mock(PythonType.class);
-    ObjectType objectType = new ObjectType(wrappedType);
+    ObjectType objectType = ObjectType.fromType(wrappedType);
 
     TypePredicate innerPredicate = MatchersTestUtils.mockPredicateReturning(wrappedType, TriBool.TRUE);
     TypeMatcher innerMatcher = MatchersTestUtils.createTypeMatcher(innerPredicate);

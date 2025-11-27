@@ -95,11 +95,22 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.v2.SpecialFormType;
 import org.sonar.python.types.v2.TypeChecker;
+import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 
 public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
+  private static final TypeInferenceMatcher IS_NONE_TYPE = TypeInferenceMatcher.of(TypeInferenceMatchers.isObjectOfType("NoneType"));
+
+  private static final TypeInferenceMatcher IS_PRIMITIVE_TYPE = TypeInferenceMatcher.of(
+    TypeInferenceMatchers.any(
+      TypeInferenceMatchers.isObjectOfType("int"),
+      TypeInferenceMatchers.isObjectOfType("float"),
+      TypeInferenceMatchers.isObjectOfType("bool"),
+      TypeInferenceMatchers.isObjectOfType("str"),
+      TypeInferenceMatchers.isObjectOfType("bytes"),
+      TypeInferenceMatchers.isObjectOfType("complex")));
 
   private final TypeTable projectLevelTypeTable;
   private final String fileId;
@@ -113,6 +124,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private final Map<String, TypeWrapper> wildcardImportedTypes = new HashMap<>();
 
+  private final TypePredicateContext typePredicateContext;
+
   private record Scope(PythonType type, String scopeFullyQualifiedName) {
   }
 
@@ -123,6 +136,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     this.fileId = path != null ? path.toString() : pythonFile.toString();
     this.fullyQualifiedModuleName = fullyQualifiedModuleName;
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
+    this.typePredicateContext = TypePredicateContext.of(projectLevelTypeTable);
   }
 
   public Set<String> importedModulesFQN() {
@@ -141,10 +155,10 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     // TODO: SONARPY-1867 multiple object types to represent str instance?
     if (((StringLiteralImpl) stringLiteral).isTemplate()) {
       // TODO: SONARPY-3427 once provided by typeshed the resolved type should be string.templatelib.Template
-      ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(PythonType.UNKNOWN, new ArrayList<>(), new ArrayList<>()));
+      ((StringLiteralImpl) stringLiteral).typeV2(ObjectType.fromType(PythonType.UNKNOWN));
     } else {
       PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
-      ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, new ArrayList<>(), new ArrayList<>()));
+      ((StringLiteralImpl) stringLiteral).typeV2(ObjectType.fromType(strType));
     }
   }
 
@@ -158,7 +172,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
     var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     PythonType tupleType = builtins.resolveMember("tuple").orElse(PythonType.UNKNOWN);
-    ((TupleImpl) tuple).typeV2(new ObjectType(tupleType, attributes, new ArrayList<>()));
+    ((TupleImpl) tuple).typeV2(ObjectType.Builder.fromType(tupleType).withAttributes(attributes).build());
   }
 
   @Override
@@ -166,7 +180,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     super.visitDictionaryLiteral(dictionaryLiteral);
     var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
-    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType, new ArrayList<>(), new ArrayList<>()));
+    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(ObjectType.fromType(dictType));
   }
 
   @Override
@@ -174,7 +188,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     super.visitSetLiteral(setLiteral);
     var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     PythonType setType = builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
-    ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType, new ArrayList<>(), new ArrayList<>()));
+    ((SetLiteralImpl) setLiteral).typeV2(ObjectType.fromType(setType));
   }
 
   @Override
@@ -183,7 +197,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     NumericLiteralImpl numericLiteralImpl = (NumericLiteralImpl) numericLiteral;
     NumericLiteralImpl.NumericKind numericKind = numericLiteralImpl.numericKind();
     PythonType pythonType = builtins.resolveMember(numericKind.value()).orElse(PythonType.UNKNOWN);
-    numericLiteralImpl.typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
+    numericLiteralImpl.typeV2(ObjectType.fromType(pythonType));
   }
 
   @Override
@@ -191,7 +205,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     // TODO: SONARPY-1867 multiple object types to represent str instance?
     PythonType noneType = builtins.resolveMember("NoneType").orElse(PythonType.UNKNOWN);
-    ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, new ArrayList<>(), new ArrayList<>()));
+    ((NoneExpressionImpl) noneExpression).typeV2(ObjectType.fromType(noneType));
   }
 
   @Override
@@ -211,7 +225,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     var attributes = new ArrayList<PythonType>();
     attributes.add(elementsType);
     PythonType listType = builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
-    ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, attributes, new ArrayList<>()));
+    ((ListLiteralImpl) listLiteral).typeV2(ObjectType.Builder.fromType(listType).withAttributes(attributes).build());
   }
 
   @Override
@@ -223,7 +237,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       case SET_COMPREHENSION -> builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
       default -> PythonType.UNKNOWN;
     };
-    ((ComprehensionExpressionImpl) comprehensionExpression).typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
+    ((ComprehensionExpressionImpl) comprehensionExpression).typeV2(ObjectType.fromType(pythonType));
   }
 
   @Override
@@ -231,7 +245,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     super.visitDictCompExpression(dictCompExpression);
     var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     var dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
-    ((DictCompExpressionImpl) dictCompExpression).typeV2(new ObjectType(dictType, new ArrayList<>(), new ArrayList<>()));
+    ((DictCompExpressionImpl) dictCompExpression).typeV2(ObjectType.fromType(dictType));
   }
 
   @Override
@@ -341,7 +355,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
     if (typeAnnotation != null) {
       PythonType returnType = typeAnnotation.expression().typeV2();
-      functionTypeBuilder.withReturnType(returnType instanceof UnknownType ? returnType : new ObjectType(returnType, TypeSource.TYPE_HINT));
+      functionTypeBuilder.withReturnType(returnType instanceof UnknownType ? returnType : ObjectType.Builder.fromType(returnType).withTypeSource(TypeSource.TYPE_HINT).build());
       functionTypeBuilder.withTypeOrigin(TypeOrigin.LOCAL);
     }
     FunctionType functionType = functionTypeBuilder.build();
@@ -500,7 +514,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
             .map(TypeAnnotation::expression)
             .map(Expression::typeV2)
             .filter(Predicate.not(PythonType.UNKNOWN::equals))
-            .map(t -> new ObjectType(t, TypeSource.TYPE_HINT))
+            .map(t -> ObjectType.Builder.fromType(t).withTypeSource(TypeSource.TYPE_HINT).build())
             .ifPresent(lhsName::typeV2);
           addStaticFieldToClass(lhsName, lhsName.typeV2());
         }
@@ -579,7 +593,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private static PythonType resolveTypeAnnotationExpressionType(Expression expression) {
     if (expression instanceof Name name && name.typeV2() != PythonType.UNKNOWN) {
-      return new ObjectType(name.typeV2(), TypeSource.TYPE_HINT);
+      return ObjectType.Builder.fromType(name.typeV2()).withTypeSource(TypeSource.TYPE_HINT).build();
     } else if (expression instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
       var candidateTypes = subscriptionExpression.subscripts()
         .expressions()
@@ -591,8 +605,11 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       var elementsType = UnionType.or(candidateTypes);
 
       var attributes = new ArrayList<PythonType>();
-      attributes.add(new ObjectType(elementsType, TypeSource.TYPE_HINT));
-      return new ObjectType(subscriptionExpression.object().typeV2(), attributes, new ArrayList<>(), TypeSource.TYPE_HINT);
+      attributes.add(ObjectType.Builder.fromType(elementsType).withTypeSource(TypeSource.TYPE_HINT).build());
+      return ObjectType.Builder.fromType(subscriptionExpression.object().typeV2())
+        .withAttributes(attributes)
+        .withTypeSource(TypeSource.TYPE_HINT)
+        .build();
     } else if (expression instanceof BinaryExpression binaryExpression) {
       var left = resolveTypeAnnotationExpressionType(binaryExpression.leftOperand());
       var right = resolveTypeAnnotationExpressionType(binaryExpression.rightOperand());
@@ -600,7 +617,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       //  ATM it is blocked by the generic types resolution redesign
       return UnionType.or(left, right);
     } else if (expression.typeV2() instanceof ClassType classType) {
-      return new ObjectType(classType, TypeSource.TYPE_HINT);
+      return ObjectType.Builder.fromType(classType).withTypeSource(TypeSource.TYPE_HINT).build();
     }
     return PythonType.UNKNOWN;
   }
@@ -665,17 +682,32 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .map(Expression.class::cast)
       .map(Expression::typeV2)
       // TODO: classes (SONARPY-1829) and functions should be propagated like other types
-      .filter(TrivialTypeInferenceVisitor::shouldTypeBeEagerlyPropagated)
+      .filter(t -> shouldTypeBeEagerlyPropagated(t, name))
       .ifPresent(type -> setTypeToName(name, type));
 
   }
 
-  private static boolean shouldTypeBeEagerlyPropagated(PythonType t) {
+  private boolean shouldTypeBeEagerlyPropagated(PythonType t, Name name) {
     return (t instanceof ClassType)
       || (t instanceof FunctionType)
       || (t instanceof ModuleType)
       || (t instanceof UnknownType.UnresolvedImportType)
-      || (t instanceof SpecialFormType);
+      || (t instanceof SpecialFormType)
+      || (t instanceof ObjectType && shouldObjectTypeBeEagerlyPropagated(t, name));
+  }
+
+  private boolean shouldObjectTypeBeEagerlyPropagated(PythonType type, Name name) {
+    // variables with None assigned to them are most likely lazily initialized and we don't want to eagerly propagate None type
+    boolean isNoneType = IS_NONE_TYPE.evaluate(type, typePredicateContext).isTrue();
+
+    if (isNoneType) {
+      return false;
+    }
+
+    // primitive types should not be eagerly propagated for non-constant names as they are likely to be updated later
+    boolean isPrimitiveType = IS_PRIMITIVE_TYPE.evaluate(type, typePredicateContext).isTrue();
+    boolean isConstant = TreeUtils.isConstantName(name.name());
+    return isConstant || !isPrimitiveType;
   }
 
   private PythonType currentType() {

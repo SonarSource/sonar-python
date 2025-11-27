@@ -1,4 +1,4 @@
-from typing import Set, FrozenSet, Union, Coroutine, Callable
+from typing import Set, FrozenSet, Union, Coroutine, Callable, TypeVar
 import asyncio
 
 def empty_union(x: Union['A', 'B']):
@@ -59,3 +59,11 @@ def local_function() -> int:
 def calling_local_function():
     x = local_function()
     x() # Noncompliant
+
+T = TypeVar("T", bound=Callable)
+def calling_type_var(function: T):
+  function()
+
+T2 = TypeVar("T2", bound=int)
+def calling_type_var(function: T2):
+  function() # FN: We don't preserve the bound type of the TypeVar

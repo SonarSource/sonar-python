@@ -134,9 +134,9 @@ class TypeCheckerTest {
 
   @Test
   void isInstanceOfSimpleTest() {
-    var listObject = new ObjectType(LIST_TYPE);
-    var setObject = new ObjectType(SET_TYPE);
-    var listOrSetObject = new ObjectType(UnionType.or(LIST_TYPE, SET_TYPE));
+    var listObject = ObjectType.fromType(LIST_TYPE);
+    var setObject = ObjectType.fromType(SET_TYPE);
+    var listOrSetObject = ObjectType.fromType(UnionType.or(LIST_TYPE, SET_TYPE));
 
     var checker = typeChecker.typeCheckBuilder().isInstanceOf("list");
     assertThat(checker.check(listObject)).isEqualTo(TriBool.TRUE);
@@ -344,11 +344,11 @@ class TypeCheckerTest {
     var intType = table.getType("int");
     var floatType = table.getType("float");
 
-    var unionOfAllObjects = UnionType.or(new ObjectType(intType), new ObjectType(floatType));
-    var unionOfSomeObjects = UnionType.or(new ObjectType(intType), floatType);
+    var unionOfAllObjects = UnionType.or(ObjectType.fromType(intType), ObjectType.fromType(floatType));
+    var unionOfSomeObjects = UnionType.or(ObjectType.fromType(intType), floatType);
     var unionOfNoObjects = UnionType.or(intType, floatType);
 
-    assertThat(builder.check(new ObjectType(intType)))
+    assertThat(builder.check(ObjectType.fromType(intType)))
       .isEqualTo(TriBool.TRUE);
 
     assertThat(builder.check(intType))

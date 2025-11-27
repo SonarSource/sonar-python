@@ -39,12 +39,6 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.semantic.ClassSymbolImpl;
-import org.sonar.python.semantic.FunctionSymbolImpl;
-import org.sonar.python.semantic.v2.ObjectTypeBuilder;
-import org.sonar.python.types.DeclaredType;
-import org.sonar.python.types.HasTypeDependencies;
-import org.sonar.python.types.InferredTypes;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
@@ -53,6 +47,11 @@ import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.types.DeclaredType;
+import org.sonar.python.types.HasTypeDependencies;
+import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
@@ -193,7 +192,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
     TypeSource typeSource = computeTypeSource(calleeType);
     PythonType pythonType = returnTypeOfCall(calleeType);
     if (pythonType instanceof ObjectType objectType) {
-      return ObjectTypeBuilder.fromObjectType(objectType)
+      return ObjectType.Builder.fromType(objectType)
         .withTypeSource(typeSource)
         .build();
     }
@@ -219,7 +218,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
 
   static PythonType returnTypeOfCall(PythonType calleeType) {
     if (calleeType instanceof ClassType classType) {
-      return new ObjectType(classType);
+      return ObjectType.fromType(classType);
     }
     if (calleeType instanceof FunctionType functionType) {
       return functionType.returnType();

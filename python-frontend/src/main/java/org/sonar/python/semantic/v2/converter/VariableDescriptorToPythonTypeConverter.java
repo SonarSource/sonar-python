@@ -16,12 +16,12 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
-import org.sonar.python.index.Descriptor;
-import org.sonar.python.index.VariableDescriptor;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.python.types.v2.SpecialFormType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.types.v2.SpecialFormType;
 
 public class VariableDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
@@ -37,7 +37,7 @@ public class VariableDescriptorToPythonTypeConverter implements DescriptorToPyth
         return new SpecialFormType(fullyQualifiedName);
       }
       TypeWrapper typeWrapper = ctx.lazyTypesContext().getOrCreateLazyTypeWrapper(annotatedType);
-      return new ObjectType(typeWrapper);
+      return ObjectType.Builder.fromTypeWrapper(typeWrapper).build();
     }
     return PythonType.UNKNOWN;
   }

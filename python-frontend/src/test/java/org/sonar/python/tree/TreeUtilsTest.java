@@ -923,6 +923,25 @@ class TreeUtilsTest {
     assertThat(TreeUtils.getEnclosingClassDef(funcDefInner)).isNull();
   }
 
+  @Test
+  void testIsConstantName() {
+    assertThat(TreeUtils.isConstantName("_FOO")).isTrue();
+    assertThat(TreeUtils.isConstantName("FOO_BAR")).isTrue();
+    assertThat(TreeUtils.isConstantName("A1_B2")).isTrue();
+    assertThat(TreeUtils.isConstantName("_A_1234")).isTrue();
+
+    assertThat(TreeUtils.isConstantName("foo")).isFalse();
+    assertThat(TreeUtils.isConstantName("Foo")).isFalse();
+    assertThat(TreeUtils.isConstantName("foo_BAR")).isFalse();
+    assertThat(TreeUtils.isConstantName("FOO_bar")).isFalse();
+    assertThat(TreeUtils.isConstantName("__foo")).isFalse();
+
+    assertThat(TreeUtils.isConstantName("")).isFalse();
+    assertThat(TreeUtils.isConstantName("_")).isTrue();
+    assertThat(TreeUtils.isConstantName("A")).isTrue();
+    assertThat(TreeUtils.isConstantName("A_")).isTrue();
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }

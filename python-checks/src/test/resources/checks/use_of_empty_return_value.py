@@ -89,3 +89,14 @@ def no_fp_aws_elasticloadbalancing():
 
     print(app_listener)
     print(net_listener)
+
+
+def locally_defined_function():
+    def foo() -> None:
+        ...
+
+    def bar() -> int:
+        return 42
+
+    a = foo() # Noncompliant
+    b = bar() # OK

@@ -16,8 +16,10 @@
  */
 package org.sonar.python.semantic.v2.types;
 
+import java.util.Arrays;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.types.v2.matchers.AnyTypePredicate;
 import org.sonar.python.types.v2.matchers.IsObjectSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsTypePredicate;
 import org.sonar.python.types.v2.matchers.TypePredicate;
@@ -32,6 +34,10 @@ import org.sonar.python.types.v2.matchers.TypePredicate;
  */
 class TypeInferenceMatchers {
   private TypeInferenceMatchers() {
+  }
+
+  public static TypePredicate any(TypePredicate... predicates) {
+    return new AnyTypePredicate(Arrays.asList(predicates));
   }
 
   public static TypePredicate isType(String fqn) {

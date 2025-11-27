@@ -42,7 +42,7 @@ public class TypeUtils {
 
   public static PythonType ensureWrappedObjectType(PythonType pythonType) {
     if (!(pythonType instanceof ObjectType)) {
-      return new ObjectType(pythonType);
+      return ObjectType.fromType(pythonType);
     }
     return pythonType;
   }

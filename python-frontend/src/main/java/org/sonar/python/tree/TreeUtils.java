@@ -28,6 +28,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -631,5 +632,11 @@ public class TreeUtils {
       .map(Name::symbolV2)
       .filter(Objects::nonNull)
       .collect(Collectors.toSet());
+  }
+
+  private static final Pattern CONSTANT_NAME_PATTERN = Pattern.compile("^[_A-Z][A-Z0-9_]*$");
+
+  public static boolean isConstantName(String name) {
+    return CONSTANT_NAME_PATTERN.matcher(name).matches();
   }
 }

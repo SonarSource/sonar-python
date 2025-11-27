@@ -169,7 +169,10 @@ class SelfTypeTest {
     List<Member> members = List.of(
       new Member("foo", new FunctionTypeBuilder("foo").build())
     );
-    ObjectType objectType = new ObjectType(classType, attributes, members);
+    ObjectType objectType = ObjectType.Builder.fromType(classType)
+      .withAttributes(attributes)
+      .withMembers(members)
+      .build();
     
     PythonType result = SelfType.of(objectType);
     

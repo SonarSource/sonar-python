@@ -38,9 +38,9 @@ class TypeCheckerBuilderTest {
   @Test
   void typeSourceTest() {
     var builder = new TypeCheckBuilder(null).isTypeHintTypeSource();
-    Assertions.assertThat(builder.check(new ObjectType(PythonType.UNKNOWN, TypeSource.TYPE_HINT)))
+    Assertions.assertThat(builder.check(ObjectType.Builder.fromType(PythonType.UNKNOWN).withTypeSource(TypeSource.TYPE_HINT).build()))
       .isEqualTo(TriBool.TRUE);
-    Assertions.assertThat(builder.check(new ObjectType(PythonType.UNKNOWN, TypeSource.EXACT)))
+    Assertions.assertThat(builder.check(ObjectType.fromType(PythonType.UNKNOWN)))
       .isEqualTo(TriBool.FALSE);
   }
 
@@ -79,20 +79,20 @@ class TypeCheckerBuilderTest {
 
     var unresolvedType = new UnresolvedImportType("unknown");
 
-    var intObjectType = new ObjectType(intClassType);
-    var strObjectType = new ObjectType(strClassType);
-    var aObject = new ObjectType(aClassType);
-    var bObject = new ObjectType(bClassType);
-    var cObject = new ObjectType(cClassType);
-    var dObject = new ObjectType(dClassType);
-    var eObject = new ObjectType(UnionType.or(intClassType, strClassType));
-    var fObject = UnionType.or(new ObjectType(intClassType), new ObjectType(strClassType));
-    var gObject = new ObjectType(UnionType.or(intClassType, aClassType));
-    var hObject = UnionType.or(new ObjectType(intClassType), new ObjectType(aClassType));
-    var iObject = new ObjectType(iClassType);
-    var jObject = new ObjectType(jClassType);
-    var unresolvedObject = new ObjectType(unresolvedType);
-    var unresolvedUnionObject = new ObjectType(UnionType.or(intClassType, unresolvedType));
+    var intObjectType = ObjectType.fromType(intClassType);
+    var strObjectType = ObjectType.fromType(strClassType);
+    var aObject = ObjectType.fromType(aClassType);
+    var bObject = ObjectType.fromType(bClassType);
+    var cObject = ObjectType.fromType(cClassType);
+    var dObject = ObjectType.fromType(dClassType);
+    var eObject = ObjectType.fromType(UnionType.or(intClassType, strClassType));
+    var fObject = UnionType.or(ObjectType.fromType(intClassType), ObjectType.fromType(strClassType));
+    var gObject = ObjectType.fromType(UnionType.or(intClassType, aClassType));
+    var hObject = UnionType.or(ObjectType.fromType(intClassType), ObjectType.fromType(aClassType));
+    var iObject = ObjectType.fromType(iClassType);
+    var jObject = ObjectType.fromType(jClassType);
+    var unresolvedObject = ObjectType.fromType(unresolvedType);
+    var unresolvedUnionObject = ObjectType.fromType(UnionType.or(intClassType, unresolvedType));
 
     Assertions.assertThat(
       List.of(
@@ -143,7 +143,7 @@ class TypeCheckerBuilderTest {
     var fooClassType = new ClassTypeBuilder("foo", "mod.foo").build();
     var fooFunctionType = new FunctionTypeBuilder("foo").withFullyQualifiedName("mod.foo").build();
     var fooUnresolvedImportType = new UnresolvedImportType("mod.foo");
-    var fooObjectType = new ObjectType(fooClassType);
+    var fooObjectType = ObjectType.fromType(fooClassType);
     var fooUnionType = UnionType.or(fooClassType, fooFunctionType);
     var barClassType = new ClassTypeBuilder("bar", "mod.bar").build();
 
@@ -212,7 +212,7 @@ class TypeCheckerBuilderTest {
 
   @Test
   void objectTypeThrowsOnDefinitionLocation() {
-    var objectTypeBuilder = new ObjectTypeBuilder();
+    var objectTypeBuilder = ObjectType.Builder.fromType(PythonType.UNKNOWN);
     Assertions.assertThatThrownBy(() -> objectTypeBuilder.withDefinitionLocation(null))
       .isInstanceOf(IllegalStateException.class)
       .hasMessage("Object type does not have definition location");
@@ -231,7 +231,7 @@ class TypeCheckerBuilderTest {
     Assertions.assertThat(new TypeCheckBuilder(table).isInstanceOf("int").check(selfType))
       .isEqualTo(TriBool.UNKNOWN);
     
-    var objectIntType = new ObjectType(intType);
+    var objectIntType = ObjectType.fromType(intType);
     var selfWrappedInObject = SelfType.of(objectIntType);
     Assertions.assertThat(new TypeCheckBuilder(table).isInstance().check(selfWrappedInObject))
       .isEqualTo(TriBool.TRUE);

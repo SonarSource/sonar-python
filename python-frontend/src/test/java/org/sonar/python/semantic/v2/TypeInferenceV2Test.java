@@ -975,8 +975,8 @@ public class TypeInferenceV2Test {
 
     CallExpression callExpressionSpy = Mockito.spy(callExpression);
     Expression calleeSpy = Mockito.spy(callExpression.callee());
-    FunctionType functionType = new FunctionType("foo", "my_package.foo", List.of(), List.of(), List.of(), new SimpleTypeWrapper(new ObjectType(INT_TYPE)), TypeOrigin.STUB,
-      false, false, false, false, null, null);
+    FunctionType functionType = new FunctionType("foo", "my_package.foo", List.of(), List.of(), List.of(), new SimpleTypeWrapper(ObjectType.fromType(INT_TYPE)), TypeOrigin.STUB,
+        false, false, false, false, null, null);
     Mockito.when(calleeSpy.typeV2()).thenReturn(functionType);
     Mockito.when(callExpressionSpy.callee()).thenReturn(calleeSpy);
 
@@ -1600,21 +1600,54 @@ public class TypeInferenceV2Test {
   }
 
   @Test
-  void variable_outside_function() {
+  void primitive_variable_outside_function() {
     assertThat(lastExpression("a = 42; a").typeV2().unwrappedType()).isEqualTo(INT_TYPE);
   }
 
-  @Test
-  void variable_outside_function_2() {
-    assertThat(lastExpression(
+  static Stream<Arguments> primitiveVariableOutsideFunctionNotPropagatedTestSource() {
+    return Stream.of(
+      Arguments.of("a = 42"),
+      Arguments.of("a = 3.14"),
+      Arguments.of("a = 'hello'"),
+      Arguments.of("a = True"),
+      Arguments.of("a = None"),
+      Arguments.of("a = 1j"),
+      Arguments.of("a = bytes(1)"),
+      Arguments.of("a = b'hello'"));
+  }
+
+  @MethodSource("primitiveVariableOutsideFunctionNotPropagatedTestSource")
+  @ParameterizedTest
+  void primitive_variable_outside_function_not_propagated(String code) {
+    var fileInput = inferTypes(
       """
-        a = 42
+        %s
         def foo(): a
-        """).typeV2()).isEqualTo(PythonType.UNKNOWN);
+        """.formatted(code));
+
+    // check initial assignment is not UNKNOWN
+    var assignment = TreeUtils.firstChild(fileInput, AssignmentStatement.class::isInstance);
+    assertThat(assignment)
+      .isPresent()
+      .map(AssignmentStatement.class::cast)
+      .map(smnt -> smnt.assignedValue().typeV2())
+      .containsInstanceOf(ObjectType.class);
+
+    // check propagated value is UNKNOWN
+    var optionalFoo = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance);
+    assertThat(optionalFoo).isPresent();
+    var foo = (FunctionDef) optionalFoo.get();
+    var aName = TreeUtils.firstChild(foo.body(), tree -> tree instanceof Name name && "a".equals(name.name()));
+
+    assertThat(aName)
+      .isPresent()
+      .map(Name.class::cast)
+      .map(Name::typeV2)
+      .contains(PythonType.UNKNOWN);
   }
 
   @Test
-  void variable_outside_function_3() {
+  void primitive_variable_outside_function_3() {
     assertThat(lastExpression(
       """
         def foo():
@@ -1624,7 +1657,7 @@ public class TypeInferenceV2Test {
   }
 
   @Test
-  void variable_outside_function_4() {
+  void primitive_variable_outside_function_4() {
     assertThat(lastExpression(
       """
         a = 42
@@ -1632,6 +1665,62 @@ public class TypeInferenceV2Test {
           a = 'hello'
         a
         """).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void class_instance_outside_function_5() {
+    assertThat(lastExpression(
+      """
+        class A: ...
+        a = A()
+        def foo():
+          a
+        """).typeV2())
+        .isInstanceOf(ObjectType.class)
+        .extracting(PythonType::unwrappedType)
+        .isInstanceOf(ClassType.class);
+  }
+
+  @Test
+  void constant_outside_function() {
+    var expr = lastExpression(
+      """
+        PI = 3.14
+        def foo():
+          PI
+        """);
+    assertThat(expr.typeV2().unwrappedType()).isEqualTo(FLOAT_TYPE);
+  }
+
+  @Test
+  void typeVar_outside_function() {
+    var expr = lastExpression(
+      """
+        from typing import TypeVar
+        _T = TypeVar("_T")
+        def foo(function: _T):
+          function
+        """);
+    assertThat(expr.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOf(ClassType.class);
+  }
+
+  @Test
+  void constant_after_usage_function() {
+    var fileInput = inferTypes(
+      """
+        def foo():
+          PI
+        PI = 3.14
+        """);
+
+    var expr = TreeUtils.firstChild(fileInput, tree -> tree instanceof Name name && "PI".equals(name.name()));
+    assertThat(expr)
+      .map(Name.class::cast)
+      .map(Name::typeV2)
+      .contains(PythonType.UNKNOWN); // should be object[float], see SONARPY-3528
   }
 
   @Test
@@ -1744,7 +1833,7 @@ public class TypeInferenceV2Test {
       MyClass()
       """);
 
-    PythonType nonePythonType = new ObjectType(NONE_TYPE, List.of(), List.of());
+    PythonType nonePythonType = ObjectType.fromType(NONE_TYPE);
     PythonType myClassPythonType = ((ClassDef) fileInput.statements().statements().get(0)).name().typeV2();
 
     List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
@@ -3164,20 +3253,20 @@ public class TypeInferenceV2Test {
     return Stream.of(
       Arguments.of("""
         1 + 2
-        """, new ObjectType(INT_TYPE)),
-      Arguments.of("""
+        """, ObjectType.fromType(INT_TYPE)),
+        Arguments.of("""
         1 - 2
-        """, new ObjectType(INT_TYPE)),
-      Arguments.of("""
+        """, ObjectType.fromType(INT_TYPE)),
+        Arguments.of("""
         1 * 2
-        """, new ObjectType(INT_TYPE)),
-      Arguments.of("""
+        """, ObjectType.fromType(INT_TYPE)),
+        Arguments.of("""
         1 / 2
-        """, new ObjectType(INT_TYPE)),
-      Arguments.of("""
+        """, ObjectType.fromType(INT_TYPE)),
+        Arguments.of("""
         '1' + '2'
-        """, new ObjectType(STR_TYPE)),
-      Arguments.of("""
+        """, ObjectType.fromType(STR_TYPE)),
+        Arguments.of("""
         1 + '2'
         """, PythonType.UNKNOWN),
       Arguments.of("""
@@ -3187,14 +3276,14 @@ public class TypeInferenceV2Test {
         a = 1
         b = 2
         a + b
-        """, new ObjectType(INT_TYPE)),
-      Arguments.of("""
+        """, ObjectType.fromType(INT_TYPE)),
+        Arguments.of("""
         a = 1
         b = 2
         c = a - b
         c
-        """, new ObjectType(INT_TYPE)),
-      Arguments.of("""
+        """, ObjectType.fromType(INT_TYPE)),
+        Arguments.of("""
         try:
           ...
         except:
@@ -3203,7 +3292,7 @@ public class TypeInferenceV2Test {
         b = 2
         c = a - b
         c
-        """, new ObjectType(INT_TYPE))
+        """, ObjectType.fromType(INT_TYPE))
     );
   }
 

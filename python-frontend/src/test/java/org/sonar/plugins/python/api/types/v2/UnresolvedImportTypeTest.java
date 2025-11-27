@@ -170,7 +170,7 @@ class UnresolvedImportTypeTest {
     assertThat(iType.candidates()).containsExactlyInAnyOrder(
       new UnresolvedImportType("a"),
       new UnresolvedImportType("b"),
-      new ObjectType(new SimpleTypeWrapper(TypesTestUtils.INT_TYPE))
+      ObjectType.Builder.fromTypeWrapper(new SimpleTypeWrapper(TypesTestUtils.INT_TYPE)).build()
     );
   }
 
@@ -188,7 +188,7 @@ class UnresolvedImportTypeTest {
     assertThat(iType.candidates()).containsExactlyInAnyOrder(
       new UnresolvedImportType("a.aa"),
       new UnresolvedImportType("b.bb"),
-      new ObjectType(new SimpleTypeWrapper(TypesTestUtils.INT_TYPE))
+      ObjectType.Builder.fromTypeWrapper(new SimpleTypeWrapper(TypesTestUtils.INT_TYPE)).build()
     );
   }
 

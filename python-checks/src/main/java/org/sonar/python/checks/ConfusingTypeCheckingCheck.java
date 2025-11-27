@@ -34,10 +34,10 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
-import org.sonar.plugins.python.api.types.v2.PythonType;
 
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
@@ -211,7 +211,8 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     @Override
     protected boolean isException(SubscriptionContext ctx, PythonType calleeType) {
       var isCoroutine = ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.Coroutine").check(calleeType) == TriBool.TRUE;
-      return super.isException(ctx, calleeType) || isCoroutine;
+      var isTypeVar = ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.TypeVar").check(calleeType) == TriBool.TRUE;
+      return super.isException(ctx, calleeType) || isCoroutine || isTypeVar;
     }
   }
 

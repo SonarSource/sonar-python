@@ -85,7 +85,9 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
         && rightOperand.typeV2() instanceof ObjectType rightObjectType
         && rightObjectType.unwrappedType() instanceof ClassType rightClassType
         && leftClassType == rightClassType) {
-      return new ObjectType(leftClassType, TypeSource.min(leftObjectType.typeSource(), rightObjectType.typeSource()));
+      return ObjectType.Builder.fromType(leftClassType)
+        .withTypeSource(TypeSource.min(leftObjectType.typeSource(), rightObjectType.typeSource()))
+        .build();
     }
     return PythonType.UNKNOWN;
   }
@@ -131,8 +133,12 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     if (type == PythonType.UNKNOWN) {
       return type;
     } else if (type instanceof ObjectType objectType) {
-      return new ObjectType(objectType.typeWrapper(), objectType.attributes(), objectType.members(), objectType.typeSource());
+      return ObjectType.Builder.fromType(objectType.type())
+        .withAttributes(objectType.attributes())
+        .withMembers(objectType.members())
+        .withTypeSource(objectType.typeSource())
+        .build();
     }
-    return new ObjectType(type);
+    return ObjectType.fromType(type);
   }
 }

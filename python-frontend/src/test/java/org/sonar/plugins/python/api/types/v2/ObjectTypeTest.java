@@ -16,7 +16,6 @@
  */
 package org.sonar.plugins.python.api.types.v2;
 
-import java.util.List;
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -180,7 +179,7 @@ class ObjectTypeTest {
   @Test
   void objectType_of_unknown() {
     // TODO SONARPY-1875: Ensure this is the behavior we want (do we even want it possible to have object of unknown? Maybe replace with UnionType when implemented
-    ObjectType objectType = new ObjectType(PythonType.UNKNOWN, List.of(), List.of());
+    ObjectType objectType = ObjectType.fromType(PythonType.UNKNOWN);
     assertThat(objectType.hasMember("foo")).isEqualTo(TriBool.UNKNOWN);
   }
 }

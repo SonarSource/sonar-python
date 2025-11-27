@@ -16,13 +16,13 @@
  */
 package org.sonar.plugins.python.api.types.v2;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.TriBool;
+import org.sonar.python.semantic.v2.TypeBuilder;
 
 @Beta
 public final class ObjectType implements PythonType {
@@ -31,32 +31,13 @@ public final class ObjectType implements PythonType {
   private final List<Member> members;
   private final TypeSource typeSource;
 
-  public ObjectType(TypeWrapper typeWrapper, List<PythonType> attributes, List<Member> members, TypeSource typeSource) {
+  private ObjectType(TypeWrapper typeWrapper, List<PythonType> attributes, List<Member> members, TypeSource typeSource) {
     this.typeWrapper = typeWrapper;
     this.attributes = attributes;
     this.members = members;
     this.typeSource = typeSource;
   }
 
-  public ObjectType(PythonType type, List<PythonType> attributes, List<Member> members, TypeSource typeSource) {
-    this(TypeWrapper.of(type), attributes, members, typeSource);
-  }
-
-  public ObjectType(PythonType type) {
-    this(type, TypeSource.EXACT);
-  }
-
-  public ObjectType(TypeWrapper typeWrapper) {
-    this(typeWrapper, new ArrayList<>(), new ArrayList<>(), TypeSource.EXACT);
-  }
-
-  public ObjectType(PythonType type, TypeSource typeSource) {
-    this(type, new ArrayList<>(), new ArrayList<>(), typeSource);
-  }
-
-  public ObjectType(PythonType type, List<PythonType> attributes, List<Member> members) {
-    this(type, attributes, members, TypeSource.EXACT);
-  }
 
   @Override
   public Optional<String> displayName() {
@@ -147,4 +128,62 @@ public final class ObjectType implements PythonType {
       "typeSource=" + typeSource + ']';
   }
 
+  public static class Builder implements TypeBuilder<ObjectType> {
+    private TypeWrapper typeWrapper;
+    private List<PythonType> attributes = List.of();
+    private List<Member> members = List.of();
+    private TypeSource typeSource = TypeSource.EXACT;
+
+    private Builder(TypeWrapper typeWrapper) {
+      this.typeWrapper = typeWrapper;
+    }
+
+    public static Builder fromTypeWrapper(TypeWrapper typeWrapper) {
+      return new Builder(typeWrapper);
+    }
+
+    public static Builder fromType(PythonType type) {
+      if (type instanceof ObjectType objectType) {
+        return new Builder(objectType.typeWrapper())
+          .withAttributes(objectType.attributes())
+          .withMembers(objectType.members())
+          .withTypeSource(objectType.typeSource());
+      }
+      return new Builder(TypeWrapper.of(type));
+    }
+
+    @Override
+    public ObjectType build() {
+      return new ObjectType(typeWrapper, attributes, members, typeSource);
+    }
+
+    @Override
+    public TypeBuilder<ObjectType> withDefinitionLocation(LocationInFile definitionLocation) {
+      throw new IllegalStateException("Object type does not have definition location");
+    }
+
+    public Builder withType(PythonType type) {
+      this.typeWrapper = TypeWrapper.of(type);
+      return this;
+    }
+
+    public Builder withAttributes(List<PythonType> attributes) {
+      this.attributes = attributes;
+      return this;
+    }
+
+    public Builder withMembers(List<Member> members) {
+      this.members = members;
+      return this;
+    }
+
+    public Builder withTypeSource(TypeSource typeSource) {
+      this.typeSource = typeSource;
+      return this;
+    }
+  }
+
+  public static ObjectType fromType(PythonType type) {
+    return Builder.fromType(type).build();
+  }
 }
