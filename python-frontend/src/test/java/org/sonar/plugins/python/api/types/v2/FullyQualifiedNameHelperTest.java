@@ -48,5 +48,8 @@ class FullyQualifiedNameHelperTest {
     assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(specialFormType1)).contains("typing.List");
     assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(unresolvedImport)).contains("imported.module1");
     assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(unknownType)).isEmpty();
+    
+    var selfType = SelfType.of(class1);
+    assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(selfType)).contains("foo.bar.class1");
   }
 }

@@ -87,6 +87,9 @@ public final class ClassType implements PythonType {
 
   @Override
   public boolean isCompatibleWith(PythonType another) {
+    if (another instanceof SelfType selfType) {
+      return this.isCompatibleWith(selfType.innerType());
+    }
     if (another instanceof ObjectType objectType) {
       return this.isCompatibleWith(objectType.type());
     }

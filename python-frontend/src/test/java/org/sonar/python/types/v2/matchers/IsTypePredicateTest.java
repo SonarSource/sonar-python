@@ -22,6 +22,7 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.TestProject;
 import org.sonar.python.api.types.v2.matchers.TypeMatchers;
@@ -166,6 +167,33 @@ class IsTypePredicateTest {
 
     // isType(fqn) resolves the FQN like "import package.A.A" which will prefer the class A defined in __init__.py
     assertThat(TypeMatchers.isType("package.A.A").evaluateFor(classTypeExpression, ctx)).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void testCheckForSelfType() {
+    var project = new TestProject();
+    project.addModule("my_file.py", """
+      class A:
+        pass
+      """);
+    Expression classTypeExpression = project.lastExpression("""
+      from my_file import A
+      A
+      """);
+
+    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
+    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+
+    var selfType = SelfType.of(classTypeExpression.typeV2());
+    IsTypePredicate isTypePredicate = new IsTypePredicate("my_file.A");
+    
+    assertThat(isTypePredicate.check(selfType, ctx)).isEqualTo(TriBool.UNKNOWN);
+    
+    var mockTypeTable = Mockito.mock(org.sonar.python.semantic.v2.typetable.TypeTable.class);
+    // mocking this to improve coverage, should normally never happen
+    Mockito.when(mockTypeTable.getType("my_file.A")).thenReturn(selfType);
+    Mockito.when(ctx.typeTable()).thenReturn(mockTypeTable);
+    assertThat(isTypePredicate.check(classTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.UNKNOWN);
   }
 }
 

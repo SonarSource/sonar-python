@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
@@ -208,6 +209,9 @@ public class TypeCheckBuilder {
       if ((pythonType instanceof ObjectType objectType) && !isStrictCheck) {
         pythonType = objectType.unwrappedType();
       }
+      if (pythonType instanceof SelfType || expectedType instanceof SelfType) {
+        return TriBool.UNKNOWN;
+      }
       if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedPythonType && expectedType instanceof UnknownType.UnresolvedImportType unresolvedExpectedType) {
         return unresolvedPythonType.importPath().equals(unresolvedExpectedType.importPath()) ? TriBool.TRUE : TriBool.UNKNOWN;
       }
@@ -243,12 +247,16 @@ public class TypeCheckBuilder {
 
     @Override
     public TriBool test(PythonType pythonType) {
+      if (pythonType instanceof SelfType || expectedType instanceof SelfType) {
+        return TriBool.UNKNOWN;
+      }
       if (expectedType instanceof ClassType expectedClassType) {
         if (pythonType instanceof ObjectType objectType) {
-          if (objectType.type() instanceof ClassType classType) {
+          PythonType unwrappedType = objectType.type();
+          if (unwrappedType instanceof ClassType classType) {
             // when the checking type is an ObjectType of a ClassType
             return isClassInheritedFrom(classType, expectedClassType);
-          } else if (objectType.type() instanceof UnionType unionType) {
+          } else if (unwrappedType instanceof UnionType unionType) {
             // when the checking type is an ObjectType of a UnionType
             return isObjectOfUnionTypeInstanceOf(expectedClassType, unionType);
           }
@@ -293,11 +301,11 @@ public class TypeCheckBuilder {
 
     @Override
     public TriBool test(PythonType pythonType) {
-      Set<PythonType> candiates = Set.of(pythonType);
+      Set<PythonType> candidates = Set.of(pythonType);
       if (pythonType instanceof UnionType unionType) {
-        candiates = unionType.candidates();
+        candidates = unionType.candidates();
       }
-      if (candiates.stream().allMatch(ObjectType.class::isInstance)) {
+      if (candidates.stream().allMatch(ObjectType.class::isInstance)) {
         return TriBool.TRUE;
       }
       return TriBool.FALSE;

@@ -28,7 +28,9 @@ public class FullyQualifiedNameHelper {
 
   @Beta
   public static Optional<String> getFullyQualifiedName(PythonType type) {
-    if (type instanceof FunctionType functionType) {
+    if (type instanceof SelfType selfType) {
+      return getFullyQualifiedName(selfType.innerType());
+    } else if (type instanceof FunctionType functionType) {
       return Optional.ofNullable(functionType.fullyQualifiedName());
     } else if (type instanceof ClassType classType) {
       return Optional.ofNullable(classType.fullyQualifiedName());

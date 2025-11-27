@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType.UnresolvedImportType;
@@ -215,6 +216,35 @@ class TypeCheckerBuilderTest {
     Assertions.assertThatThrownBy(() -> objectTypeBuilder.withDefinitionLocation(null))
       .isInstanceOf(IllegalStateException.class)
       .hasMessage("Object type does not have definition location");
+  }
+
+  @Test
+  void selfTypeHandlingTest() {
+    var symbolTable = ProjectLevelSymbolTable.empty();
+    var table = new ProjectLevelTypeTable(symbolTable);
+    var intType = table.getType("int");
+    var selfType = (SelfType) SelfType.of(intType);
+    
+    Assertions.assertThat(new TypeCheckBuilder(table).isTypeOrInstanceWithName("int").check(selfType))
+      .isEqualTo(TriBool.UNKNOWN);
+
+    Assertions.assertThat(new TypeCheckBuilder(table).isInstanceOf("int").check(selfType))
+      .isEqualTo(TriBool.UNKNOWN);
+    
+    var objectIntType = new ObjectType(intType);
+    var selfWrappedInObject = SelfType.of(objectIntType);
+    Assertions.assertThat(new TypeCheckBuilder(table).isInstance().check(selfWrappedInObject))
+      .isEqualTo(TriBool.TRUE);
+    
+    Assertions.assertThat(new TypeCheckBuilder(table).isInstance().check(selfType))
+      .isEqualTo(TriBool.FALSE);
+    
+    var mockTable = spy(table);
+    when(mockTable.getType("int")).thenReturn(selfType);
+    Assertions.assertThat(new TypeCheckBuilder(mockTable).isTypeOrInstanceWithName("int").check(intType))
+      .isEqualTo(TriBool.UNKNOWN);
+    Assertions.assertThat(new TypeCheckBuilder(mockTable).isInstanceOf("int").check(objectIntType))
+      .isEqualTo(TriBool.UNKNOWN);
   }
 
 }
