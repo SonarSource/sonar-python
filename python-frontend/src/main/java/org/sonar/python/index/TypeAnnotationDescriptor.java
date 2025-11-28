@@ -26,12 +26,14 @@ public class TypeAnnotationDescriptor {
   TypeKind kind;
   List<TypeAnnotationDescriptor> args;
   String fullyQualifiedName;
+  Boolean isSelf;
 
-  public TypeAnnotationDescriptor(String prettyPrintedName, TypeKind kind, List<TypeAnnotationDescriptor> args, @Nullable String fullyQualifiedName) {
+  public TypeAnnotationDescriptor(String prettyPrintedName, TypeKind kind, List<TypeAnnotationDescriptor> args, @Nullable String fullyQualifiedName, Boolean isSelf) {
     this.prettyPrintedName = prettyPrintedName;
     this.kind = kind;
     this.args = args;
     this.fullyQualifiedName = fullyQualifiedName;
+    this.isSelf = isSelf;
   }
 
   public String prettyPrintedName() {
@@ -49,6 +51,10 @@ public class TypeAnnotationDescriptor {
   @CheckForNull
   public String fullyQualifiedName() {
     return fullyQualifiedName;
+  }
+
+  public Boolean isSelf(){
+    return isSelf;
   }
 
   public enum TypeKind {

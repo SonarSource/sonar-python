@@ -32,6 +32,7 @@ public class TypeSymbolToDescriptorConverter {
       type.getPrettyPrintedName(),
       kind,
       args,
-      normalizedFqn);
+      normalizedFqn,
+      type.getIsSelf());
   }
 }

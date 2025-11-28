@@ -35,6 +35,7 @@ message Type {
   TypeKind kind = 2;
   repeated Type args = 3;
   optional string fully_qualified_name = 4;
+  bool is_self = 5;
 }
 
 message ParameterSymbol {

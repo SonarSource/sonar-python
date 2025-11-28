@@ -78,7 +78,7 @@ public class TypeAnnotationToPythonTypeConverter {
   public static boolean filterTypeVar(TypeAnnotationDescriptor type) {
     return Optional.of(type)
       // Filtering self returning methods until the SONARPY-1472 will be solved
-      .filter(Predicate.not(t -> t.prettyPrintedName().endsWith(".Self")))
+      .filter(Predicate.not(TypeAnnotationDescriptor::isSelf))
       .map(TypeAnnotationDescriptor::fullyQualifiedName)
       .filter(Predicate.not(String::isEmpty))
       // We ignore TypeVar referencing "builtins.object" or "object" to avoid false positives

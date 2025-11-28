@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_EXPORTED_VARS = ["__name__", "__doc__", "__file__", "__package__"]
 SONAR_CUSTOM_BASE_CLASS = "SonarPythonAnalyzerFakeStub.CustomStubBase"
-
+SELF_TYPE_ID = 0
 
 class ParamKind(Enum):
     POSITIONAL_ONLY = 0
@@ -66,6 +66,7 @@ class TypeDescriptor:
         self.kind = None
         self.is_unknown = False
         self.pretty_printed_name = "Unknown"
+        self.is_self = False
         # kind, fqn, pretty printed name, arguments
         if isinstance(_type, mpt.Instance):
             self.kind = TypeKind.INSTANCE
@@ -106,6 +107,7 @@ class TypeDescriptor:
             upper_bound = TypeDescriptor(_type.upper_bound)
             self.args.append(upper_bound)
             self.fully_qualified_name = upper_bound.fully_qualified_name
+            self.is_self = _type.id.raw_id == SELF_TYPE_ID
         elif isinstance(_type, mpt.AnyType):
             self.kind = TypeKind.ANY
             self.pretty_printed_name = "Any"
@@ -165,6 +167,7 @@ class TypeDescriptor:
             pb_type.fully_qualified_name = self.fully_qualified_name
         for arg in self.args:
             pb_type.args.append(arg.to_proto())
+        pb_type.is_self = self.is_self
         return pb_type
 
 

@@ -1,6 +1,6 @@
 
 ioV
-UnsupportedOperationio.UnsupportedOperation"builtins.OSError"builtins.ValueErrorﬂ
+UnsupportedOperationio.UnsupportedOperation"builtins.OSError"builtins.ValueError„
 IOBase	io.IOBase"builtins.object*é
 __iter__io.IOBase.__iter__"T
 typing.Iterator[builtins.bytes] 
@@ -9,12 +9,12 @@
 __next__io.IOBase.__next__" 
 builtins.bytes"builtins.bytes* 
 self
-	io.IOBase"	io.IOBase*ê
-	__enter__io.IOBase.__enter__"5
+	io.IOBase"	io.IOBase*î
+	__enter__io.IOBase.__enter__"7
 io.IOBase.Self
-	io.IOBase"	io.IOBase"	io.IOBase*75
+	io.IOBase"	io.IOBase"	io.IOBase(*97
 io.IOBase.Self
-	io.IOBase"	io.IOBase"	io.IOBase*õ
+	io.IOBase"	io.IOBase"	io.IOBase(*õ
 __exit__io.IOBase.__exit__"
 None*
 	io.IOBase"	io.IOBase*ìê
@@ -230,7 +230,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 io.BufferedIOBase"io.BufferedIOBase* 
 builtins.int"builtins.int r:
 rawio.BufferedIOBase.raw
-io.RawIOBase"io.RawIOBaseœ
+io.RawIOBase"io.RawIOBase”
 FileIO	io.FileIO"io.RawIOBase"typing.BinaryIO*ç	
 __init__io.FileIO.__init__"
 None* 
@@ -283,12 +283,12 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 builtins.bytes"builtins.bytes* 
 self
 	io.FileIO"	io.FileIO* 
-builtins.int"builtins.int *ê
-	__enter__io.FileIO.__enter__"5
+builtins.int"builtins.int *î
+	__enter__io.FileIO.__enter__"7
 io.FileIO.Self
-	io.FileIO"	io.FileIO"	io.FileIO*75
+	io.FileIO"	io.FileIO"	io.FileIO(*97
 io.FileIO.Self
-	io.FileIO"	io.FileIO"	io.FileIOr4
+	io.FileIO"	io.FileIO"	io.FileIO(r4
 modeio.FileIO.mode
 builtins.str"builtins.strrï
 nameio.FileIO.name¸
@@ -302,7 +302,7 @@ XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtin
 os.PathLike[builtins.str]
 builtins.str"builtins.str"os.PathLikeL
 os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath"_typeshed.FileDescriptorOrPathº
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath"_typeshed.FileDescriptorOrPath¿
 BytesIO
 io.BytesIO"io.BufferedIOBase"typing.BinaryIO*º
 __init__io.BytesIO.__init__"
@@ -323,18 +323,18 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Any"array.array
 	mmap.mmap"	mmap.mmap
 ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer *ô
-	__enter__io.BytesIO.__enter__"9
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer *ù
+	__enter__io.BytesIO.__enter__";
 io.BytesIO.Self
 
 io.BytesIO"
 io.BytesIO"
-io.BytesIO*;9
+io.BytesIO(*=;
 io.BytesIO.Self
 
 io.BytesIO"
 io.BytesIO"
-io.BytesIO*e
+io.BytesIO(*e
 getvalueio.BytesIO.getvalue" 
 builtins.bytes"builtins.bytes*"
 self
@@ -357,13 +357,13 @@ io.BytesIO*HD
 builtins.int"builtins.int
 None r 
 nameio.BytesIO.name
-Anyˆ
-BufferedReaderio.BufferedReader"io.BufferedIOBase"typing.BinaryIO*ÿ
-	__enter__io.BufferedReader.__enter__"U
+Any˙
+BufferedReaderio.BufferedReader"io.BufferedIOBase"typing.BinaryIO*‹
+	__enter__io.BufferedReader.__enter__"W
 io.BufferedReader.Self&
-io.BufferedReader"io.BufferedReader"io.BufferedReader*WU
+io.BufferedReader"io.BufferedReader"io.BufferedReader(*YW
 io.BufferedReader.Self&
-io.BufferedReader"io.BufferedReader"io.BufferedReader*∫
+io.BufferedReader"io.BufferedReader"io.BufferedReader(*∫
 __init__io.BufferedReader.__init__"
 None*0
 self&
@@ -376,13 +376,13 @@ io.BytesIO*HD
 builtins.bytes"builtins.bytes*0
 self&
 io.BufferedReader"io.BufferedReader* 
-builtins.int"builtins.int Æ
-BufferedWriterio.BufferedWriter"io.BufferedIOBase"typing.BinaryIO*ÿ
-	__enter__io.BufferedWriter.__enter__"U
+builtins.int"builtins.int ≤
+BufferedWriterio.BufferedWriter"io.BufferedIOBase"typing.BinaryIO*‹
+	__enter__io.BufferedWriter.__enter__"W
 io.BufferedWriter.Self&
-io.BufferedWriter"io.BufferedWriter"io.BufferedWriter*WU
+io.BufferedWriter"io.BufferedWriter"io.BufferedWriter(*YW
 io.BufferedWriter.Self&
-io.BufferedWriter"io.BufferedWriter"io.BufferedWriter*∫
+io.BufferedWriter"io.BufferedWriter"io.BufferedWriter(*∫
 __init__io.BufferedWriter.__init__"
 None*0
 self&
@@ -406,13 +406,13 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Any"array.array
 	mmap.mmap"	mmap.mmap
 ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer◊
-BufferedRandomio.BufferedRandom"io.BufferedReader"io.BufferedWriter*ÿ
-	__enter__io.BufferedRandom.__enter__"U
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer€
+BufferedRandomio.BufferedRandom"io.BufferedReader"io.BufferedWriter*‹
+	__enter__io.BufferedRandom.__enter__"W
 io.BufferedRandom.Self&
-io.BufferedRandom"io.BufferedRandom"io.BufferedRandom*WU
+io.BufferedRandom"io.BufferedRandom"io.BufferedRandom(*YW
 io.BufferedRandom.Self&
-io.BufferedRandom"io.BufferedRandom"io.BufferedRandom*∞
+io.BufferedRandom"io.BufferedRandom"io.BufferedRandom(*∞
 seekio.BufferedRandom.seek"
 builtins.int"builtins.int*0
 self&
@@ -490,7 +490,7 @@ writelinesio.TextIOBase.writelines"
 builtins.str"builtins.strL
 builtins.tuple[builtins.str]
 builtins.str"builtins.str"builtins.tuple
-NoneÇ
+NoneÜ
 TextIOWrapperio.TextIOWrapper"io.TextIOBase"typing.TextIO*ü
 __init__io.TextIOWrapper.__init__"
 None*.
@@ -554,12 +554,12 @@ writelinesio.TextIOBase.writelines"
 write_throughG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None *œ
-	__enter__io.TextIOWrapper.__enter__"Q
+None *”
+	__enter__io.TextIOWrapper.__enter__"S
 io.TextIOWrapper.Self$
-io.TextIOWrapper"io.TextIOWrapper"io.TextIOWrapper*SQ
+io.TextIOWrapper"io.TextIOWrapper"io.TextIOWrapper(*US
 io.TextIOWrapper.Self$
-io.TextIOWrapper"io.TextIOWrapper"io.TextIOWrapper*ù
+io.TextIOWrapper"io.TextIOWrapper"io.TextIOWrapper(*ù
 __iter__io.TextIOWrapper.__iter__"N
 typing.Iterator[builtins.str]
 builtins.str"builtins.str"typing.Iterator*&$
