@@ -43,9 +43,9 @@ import org.sonar.plugins.python.api.TriBool;
  */
 @Beta
 public final class SelfType implements PythonType {
-  private final PythonType innerType;
+  private final ClassType innerType;
 
-  private SelfType(PythonType innerType) {
+  private SelfType(ClassType innerType) {
     this.innerType = innerType;
   }
 
@@ -62,14 +62,15 @@ public final class SelfType implements PythonType {
    * <p>
    * This factory method ensures the following invariants:
    * <ul>
+   * <li>If the type is null, UNKNOWN, or not a supported type, it returns UNKNOWN</li>
    * <li>If the type is already a SelfType, it returns it unchanged</li>
-   * <li>If the type is an ObjectType, it unwraps it and wraps the inner type in a SelfType, then wraps the result back in an ObjectType</li>
-   * <li>If the type is a UnionType, it wraps each candidate in a SelfType and returns a new UnionType</li>
-   * <li>Otherwise, it creates a new SelfType wrapping the given type</li>
+   * <li>The type <code>ObjectType[ClassType[A]]</code> is converted to <code>ObjectType[SelfType[ClassType[A]]]</code></li>
+   * <li>The type ObjectType[UnionType[ClassType[A], ClassType[B]]] is converted to ObjectType[UnionType[SelfType[ClassType[A]], SelfType[ClassType[B]]]]</li>
+   * <li>The type ClassType[A] is converted to SelfType[ClassType[A]]</li>
    * </ul>
    *
    * @param type the type to wrap in a SelfType (can be null, in which case UNKNOWN is returned)
-   * @return a PythonType representing Self[type], with proper structure maintained
+   * @return a PythonType representing Self[type], with proper structure maintained, or UNKNOWN if the type is not supported
    */
   public static PythonType of(@Nullable PythonType type) {
     if (type == null || type == PythonType.UNKNOWN) {
@@ -80,24 +81,32 @@ public final class SelfType implements PythonType {
       return type;
     }
     
-    if (type instanceof ObjectType objectType) {
-      PythonType innerType = objectType.unwrappedType();
-      SelfType selfType = new SelfType(innerType);
-      return ObjectType.Builder.fromType(objectType)
-        .withType(selfType)
-        .build();
+    if (type instanceof ClassType classType) {
+      return new SelfType(classType);
     }
     
     if (type instanceof UnionType unionType) {
       return UnionType.or(unionType.candidates().stream()
-        .<PythonType>map(SelfType::new)
+        .map(SelfType::of)
         .toList());
     }
     
-    return new SelfType(type);
+    if (type instanceof ObjectType objectType) {
+      PythonType unwrapped = objectType.unwrappedType();
+      PythonType wrappedType = of(unwrapped);
+
+      if (wrappedType != PythonType.UNKNOWN) {
+        return ObjectType.Builder.fromType(objectType)
+          .withType(wrappedType)
+          .build();
+      }
+      return PythonType.UNKNOWN;
+    }
+
+    return PythonType.UNKNOWN;
   }
 
-  public PythonType innerType() {
+  public ClassType innerType() {
     return innerType;
   }
 

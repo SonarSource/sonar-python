@@ -213,4 +213,70 @@ class SelfTypeTest {
     assertThat(innerTypes).containsExactlyInAnyOrder(classTypeA, classTypeB);
   }
 
+  @Test
+  void selfTypeOfUnsupportedTypeReturnsUnknown() {
+    FunctionType functionType = new FunctionTypeBuilder("myFunction").build();
+
+    PythonType result = SelfType.of(functionType);
+
+    assertThat(result).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void selfTypeOfUnionWithNonClassTypeReturnsUnknown() {
+    ClassType classType = (ClassType) INT_TYPE;
+    FunctionType functionType = new FunctionTypeBuilder("myFunction").build();
+
+    UnionType unionType = (UnionType) UnionType.or(classType, functionType);
+
+    PythonType result = SelfType.of(unionType);
+
+    assertThat(result).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void selfTypeOfObjectTypeWrappingUnionOfClassTypes() {
+    ClassType classTypeA = (ClassType) INT_TYPE;
+    ClassType classTypeB = (ClassType) STR_TYPE;
+    UnionType unionType = (UnionType) UnionType.or(classTypeA, classTypeB);
+
+    ObjectType objectType = ObjectType.Builder.fromType(classTypeA)
+      .withType(unionType)
+      .build();
+
+    PythonType result = SelfType.of(objectType);
+
+    // Should return ObjectType[Union[Self[A], Self[B]]]
+    assertThat(result).isInstanceOf(ObjectType.class);
+    ObjectType resultObjectType = (ObjectType) result;
+
+    assertThat(resultObjectType.unwrappedType()).isInstanceOf(UnionType.class);
+    UnionType resultUnionType = (UnionType) resultObjectType.unwrappedType();
+
+    assertThat(resultUnionType.candidates()).hasSize(2);
+    assertThat(resultUnionType.candidates()).allMatch(SelfType.class::isInstance);
+
+    Set<PythonType> innerTypes = resultUnionType.candidates().stream()
+      .map(SelfType.class::cast)
+      .map(SelfType::innerType)
+      .collect(java.util.stream.Collectors.toSet());
+
+    assertThat(innerTypes).containsExactlyInAnyOrder(classTypeA, classTypeB);
+  }
+
+  @Test
+  void selfTypeOfObjectTypeWrappingUnionWithNonClassTypeReturnsUnknown() {
+    ClassType classType = (ClassType) INT_TYPE;
+    FunctionType functionType = new FunctionTypeBuilder("myFunction").build();
+    UnionType unionType = (UnionType) UnionType.or(classType, functionType);
+
+    ObjectType objectType = ObjectType.Builder.fromType(classType)
+      .withType(unionType)
+      .build();
+
+    PythonType result = SelfType.of(objectType);
+
+    assertThat(result).isEqualTo(PythonType.UNKNOWN);
+  }
+
 }
