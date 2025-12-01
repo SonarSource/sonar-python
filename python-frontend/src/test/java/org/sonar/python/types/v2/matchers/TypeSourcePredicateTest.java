@@ -22,7 +22,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -58,7 +57,6 @@ class TypeSourcePredicateTest {
   void testThroughTypeMatchers() {
     PythonType typeWithExactSource = createTypeWithSource(TypeSource.EXACT);
     PythonType typeWithTypeHintSource = createTypeWithSource(TypeSource.TYPE_HINT);
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
     TypePredicateContext predicateContext = TypePredicateContext.of(Mockito.mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
 
     assertThat(MatchersTestUtils.getPredicate(TypeMatchers.hasTypeSource(TypeSource.EXACT)).check(typeWithExactSource, predicateContext)).isEqualTo(TriBool.TRUE);
