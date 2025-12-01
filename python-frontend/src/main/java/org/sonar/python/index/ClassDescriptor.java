@@ -36,10 +36,11 @@ public class ClassDescriptor implements Descriptor {
   private final boolean hasMetaClass;
   private final String metaclassFQN;
   private final boolean supportsGenerics;
+  private final boolean isSelf;
 
-  public ClassDescriptor(String name, String fullyQualifiedName, Collection<String> superClasses, Set<Descriptor> members,
+  private ClassDescriptor(String name, String fullyQualifiedName, Collection<String> superClasses, Set<Descriptor> members,
     boolean hasDecorators, @Nullable LocationInFile definitionLocation, boolean hasSuperClassWithoutDescriptor, boolean hasMetaClass,
-    @Nullable String metaclassFQN, boolean supportsGenerics) {
+      @Nullable String metaclassFQN, boolean supportsGenerics, boolean isSelf) {
 
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
@@ -51,6 +52,7 @@ public class ClassDescriptor implements Descriptor {
     this.hasMetaClass = hasMetaClass;
     this.metaclassFQN = metaclassFQN;
     this.supportsGenerics = supportsGenerics;
+    this.isSelf = isSelf;
   }
 
   @Override
@@ -102,6 +104,10 @@ public class ClassDescriptor implements Descriptor {
     return supportsGenerics;
   }
 
+  public boolean isSelf() {
+    return isSelf;
+  }
+
   public static class ClassDescriptorBuilder {
 
     private String name;
@@ -114,6 +120,7 @@ public class ClassDescriptor implements Descriptor {
     private boolean hasMetaClass = false;
     private String metaclassFQN = null;
     private boolean supportsGenerics = false;
+    private boolean isSelf = false;
 
     public ClassDescriptorBuilder withName(String name) {
       this.name = name;
@@ -165,9 +172,14 @@ public class ClassDescriptor implements Descriptor {
       return this;
     }
 
+    public ClassDescriptorBuilder withIsSelf(boolean isSelf) {
+      this.isSelf = isSelf;
+      return this;
+    }
+
     public ClassDescriptor build() {
       return new ClassDescriptor(name, fullyQualifiedName, superClasses, members, hasDecorators, definitionLocation,
-        hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, supportsGenerics);
+        hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, supportsGenerics, isSelf);
     }
   }
 }

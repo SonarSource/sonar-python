@@ -23,6 +23,18 @@ import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.Member;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.ParameterV2;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.SelfType;
+import org.sonar.plugins.python.api.types.v2.TypeOrigin;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
@@ -32,20 +44,9 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
-import org.sonar.plugins.python.api.types.v2.ClassType;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyUnionType;
-import org.sonar.plugins.python.api.types.v2.Member;
-import org.sonar.plugins.python.api.types.v2.ModuleType;
-import org.sonar.plugins.python.api.types.v2.ObjectType;
-import org.sonar.plugins.python.api.types.v2.ParameterV2;
-import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.TypeOrigin;
-import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.TypesTestUtils;
-import org.sonar.plugins.python.api.types.v2.UnionType;
-import org.sonar.plugins.python.api.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -268,5 +269,19 @@ class PythonTypeToDescriptorConverterTest {
     assertThatThrownBy(() -> converter.convert("foo", symbol, emptySet))
       .isInstanceOf(IllegalStateException.class)
       .hasMessage("No candidate found for descriptor mySymbol");
+  }
+
+  @Test
+  void testConvertSelfType() {
+    ClassType classType = new ClassType("MyClass", "my_package.MyClass", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    PythonType selfType = SelfType.of(classType);
+
+    Descriptor descriptor = converter.convert("foo", new SymbolV2("mySelfSymbol"), Set.of(selfType));
+
+    assertThat(descriptor).isInstanceOf(ClassDescriptor.class);
+    ClassDescriptor classDescriptor = (ClassDescriptor) descriptor;
+    assertThat(classDescriptor.isSelf()).isTrue();
+    assertThat(classDescriptor.name()).isEqualTo("mySelfSymbol");
+    assertThat(classDescriptor.fullyQualifiedName()).isEqualTo("foo.mySelfSymbol");
   }
 }

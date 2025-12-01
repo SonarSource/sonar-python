@@ -23,6 +23,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
+import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.ParameterV2;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.SelfType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
@@ -30,14 +39,6 @@ import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
-import org.sonar.plugins.python.api.types.v2.ClassType;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
-import org.sonar.plugins.python.api.types.v2.ObjectType;
-import org.sonar.plugins.python.api.types.v2.ParameterV2;
-import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.TypeWrapper;
-import org.sonar.plugins.python.api.types.v2.UnionType;
-import org.sonar.plugins.python.api.types.v2.UnknownType;
 
 public class PythonTypeToDescriptorConverter {
 
@@ -69,8 +70,11 @@ public class PythonTypeToDescriptorConverter {
       }
       return convert(moduleFqn, functionType);
     }
+    if (type instanceof SelfType selfType) {
+      return convert(moduleFqn, parentFqn, symbolName, selfType);
+    }
     if (type instanceof ClassType classType) {
-      return convert(moduleFqn, parentFqn, symbolName, classType);
+      return convert(moduleFqn, parentFqn, symbolName, classType, false);
     }
     if (type instanceof UnionType unionType) {
       return convert(moduleFqn, parentFqn, symbolName, unionType);
@@ -116,7 +120,12 @@ public class PythonTypeToDescriptorConverter {
     );
   }
 
-  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ClassType type) {
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, SelfType selfType) {
+    var innerType = selfType.innerType();
+    return convert(moduleFqn, parentFqn, symbolName, innerType, true);
+  }
+
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ClassType type, boolean isSelf) {
     var symbolFqn = symbolFqn(parentFqn, symbolName);
     var memberDescriptors = type.members()
       .stream()
@@ -141,16 +150,19 @@ public class PythonTypeToDescriptorConverter {
       .findFirst()
       .orElse(null);
 
-    return new ClassDescriptor(symbolName, symbolFqn,
-      superClasses,
-      memberDescriptors,
-      type.hasDecorators(),
-      type.definitionLocation().orElse(null),
-      hasSuperClassWithoutDescriptor,
-      type.hasMetaClass(),
-      metaclassFQN,
-      type.isGeneric()
-    );
+    return new ClassDescriptor.ClassDescriptorBuilder()
+      .withName(symbolName)
+      .withFullyQualifiedName(symbolFqn)
+      .withSuperClasses(superClasses)
+      .withMembers(memberDescriptors)
+      .withHasDecorators(type.hasDecorators())
+      .withDefinitionLocation(type.definitionLocation().orElse(null))
+      .withHasSuperClassWithoutDescriptor(hasSuperClassWithoutDescriptor)
+      .withHasMetaClass(type.hasMetaClass())
+      .withMetaclassFQN(metaclassFQN)
+      .withSupportsGenerics(type.isGeneric())
+      .withIsSelf(isSelf)
+      .build();
   }
 
   private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, UnionType type) {

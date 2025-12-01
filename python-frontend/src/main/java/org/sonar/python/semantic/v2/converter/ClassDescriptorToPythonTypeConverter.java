@@ -16,12 +16,13 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import org.sonar.plugins.python.api.types.v2.Member;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.SelfType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
-import org.sonar.plugins.python.api.types.v2.Member;
-import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 
 public class ClassDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
@@ -40,14 +41,18 @@ public class ClassDescriptorToPythonTypeConverter implements DescriptorToPythonT
       .map(TypeWrapper::of)
       .forEach(typeBuilder::addSuperClass);
 
-    var type = typeBuilder.build();
-    ctx.pushParent(type);
+    var classType = typeBuilder.build();
+    ctx.pushParent(classType);
     from.members()
       .stream()
       .map(d -> new Member(d.name(), ctx.convert(d)))
-      .forEach(type.members()::add);
+      .forEach(classType.members()::add);
     ctx.pollParent();
-    return type;
+
+    if (from.isSelf()) {
+      return SelfType.of(classType);
+    }
+    return classType;
   }
 
   @Override

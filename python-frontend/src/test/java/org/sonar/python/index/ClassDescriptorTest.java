@@ -17,14 +17,13 @@
 package org.sonar.python.index;
 
 
-import java.util.Collections;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
-import org.sonar.plugins.python.api.types.v2.ClassType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
@@ -126,19 +125,21 @@ class ClassDescriptorTest {
 
   @Test
   void protobufSerializationWithoutLocationNorFQN() {
-    ClassDescriptor classDescriptor = new ClassDescriptor(
-      "foo",
-      "mod.foo",
-      Collections.emptyList(),
-      Collections.emptySet(),
-      false,
-      null,
-      false,
-      false,
-      null,
-      false
-    );
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("foo")
+      .withFullyQualifiedName("mod.foo")
+      .build();
     assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void classDescriptorBuilderWithIsSelf() {
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyClass")
+      .withFullyQualifiedName("mod.MyClass")
+      .withIsSelf(true)
+      .build();
+    assertThat(classDescriptor.isSelf()).isTrue();
   }
 
   public static ClassDescriptor lastClassDescriptor(String... code) {

@@ -17,7 +17,6 @@
 package org.sonar.python.types;
 
 import java.util.Collections;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -389,16 +388,13 @@ class RuntimeTypeTest {
   }
 
   ClassDescriptor generateDescriptor(boolean hasDecorators, boolean hasMetaClass, boolean hasUnresolvedHierarchy) {
-    return new ClassDescriptor("a",
-      "a",
-      Set.of(),
-      Set.of(),
-      hasDecorators,
-      null,
-      hasUnresolvedHierarchy,
-      hasMetaClass,
-      null,
-      false);
+    return new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("a")
+      .withFullyQualifiedName("a")
+      .withHasDecorators(hasDecorators)
+      .withHasMetaClass(hasMetaClass)
+      .withHasSuperClassWithoutDescriptor(hasUnresolvedHierarchy)
+      .build();
   }
 
   @Test

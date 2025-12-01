@@ -214,18 +214,18 @@ public class DescriptorsToProtobuf {
     classDescriptorProto.getFunctionMembersList().forEach(proto -> members.add(fromProtobuf(proto)));
     classDescriptorProto.getAmbiguousMembersList().forEach(proto -> members.add(fromProtobuf(proto)));
     classDescriptorProto.getVarMembersList().forEach(proto -> members.add(fromProtobuf(proto)));
-    return new ClassDescriptor(
-      classDescriptorProto.getName(),
-      fullyQualifiedName,
-      new ArrayList<>(classDescriptorProto.getSuperClassesList()),
-      members,
-      classDescriptorProto.getHasDecorators(),
-      definitionLocation,
-      classDescriptorProto.getHasSuperClassWithoutDescriptor(),
-      classDescriptorProto.getHasMetaClass(),
-      metaclassFQN,
-      classDescriptorProto.getSupportsGenerics()
-    );
+    return new ClassDescriptor.ClassDescriptorBuilder()
+      .withName(classDescriptorProto.getName())
+      .withFullyQualifiedName(fullyQualifiedName)
+      .withSuperClasses(new ArrayList<>(classDescriptorProto.getSuperClassesList()))
+      .withMembers(members)
+      .withHasDecorators(classDescriptorProto.getHasDecorators())
+      .withDefinitionLocation(definitionLocation)
+      .withHasSuperClassWithoutDescriptor(classDescriptorProto.getHasSuperClassWithoutDescriptor())
+      .withHasMetaClass(classDescriptorProto.getHasMetaClass())
+      .withMetaclassFQN(metaclassFQN)
+      .withSupportsGenerics(classDescriptorProto.getSupportsGenerics())
+      .build();
   }
 
   public static FunctionDescriptor fromProtobuf(DescriptorsProtos.FunctionDescriptor functionDescriptorProto) {

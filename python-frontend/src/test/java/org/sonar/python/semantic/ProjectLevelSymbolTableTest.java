@@ -260,7 +260,11 @@ class ProjectLevelSymbolTableTest {
 
   @Test
   void not_class_symbol_in_super_class() {
-    var classADescriptor = new ClassDescriptor("A", "mod1.A", Collections.singleton("mod1.foo"), Set.of(), false, null, false, false, null, false);
+    var classADescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("A")
+      .withFullyQualifiedName("mod1.A")
+      .withSuperClasses(Collections.singleton("mod1.foo"))
+      .build();
     Map<String, Set<Descriptor>> globalDescriptors = Collections.singletonMap("mod1", Set.of(classADescriptor));
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalDescriptors)),
@@ -277,7 +281,13 @@ class ProjectLevelSymbolTableTest {
 
   @Test
   void metaclass_in_imported_symbol() {
-    var aClassDescriptor = new ClassDescriptor("A", "mod1.A", Collections.singleton("abc.ABCMeta"), Set.of(), false, null, false, true, "abc.ABCMeta", false);
+    var aClassDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("A")
+      .withFullyQualifiedName("mod1.A")
+      .withSuperClasses(Collections.singleton("abc.ABCMeta"))
+      .withHasMetaClass(true)
+      .withMetaclassFQN("abc.ABCMeta")
+      .build();
     Map<String, Set<Descriptor>> globalDescriptors = Collections.singletonMap("mod1", Set.of(aClassDescriptor));
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalDescriptors)),
@@ -968,7 +978,10 @@ class ProjectLevelSymbolTableTest {
     ProjectLevelSymbolTable projectLevelSymbolTable = empty();
     Set<Descriptor> descriptors = new HashSet<>();
     VariableDescriptor variableDescriptor = new VariableDescriptor("Ambiguous", "foo.Ambiguous", null);
-    ClassDescriptor classDescriptor = new ClassDescriptor("Ambiguous", "foo.Ambiguous", List.of(), Set.of(), false, null, false, false, null, false);
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("Ambiguous")
+      .withFullyQualifiedName("foo.Ambiguous")
+      .build();
     AmbiguousDescriptor ambiguousDescriptor = new AmbiguousDescriptor("Ambiguous", "foo.Ambiguous", Set.of(variableDescriptor, classDescriptor));
     descriptors.add(ambiguousDescriptor);
 
