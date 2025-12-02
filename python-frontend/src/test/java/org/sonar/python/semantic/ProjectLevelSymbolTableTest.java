@@ -1123,8 +1123,7 @@ class ProjectLevelSymbolTableTest {
       """;
     ProjectLevelSymbolTable projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(content), "my_package", pythonFile("mod.py"));
-    // SONARPY-2322: should be true
-    assertThat(projectSymbolTable.isDjangoView("my_package.mod.ClassWithViews.view_method")).isFalse();
+    assertThat(projectSymbolTable.isDjangoView("my_package.mod.ClassWithViews.view_method")).isTrue();
   }
 
   /**

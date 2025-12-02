@@ -106,8 +106,7 @@ def django_models():
 
     class RockNRollConfig(AppConfig):
         def ready(self):
-            # FP due to self not being resolved; will be fixed by SONARPY-1865
-            MyModel = self.get_model("MyModel") # Noncompliant 
+            MyModel = self.get_model("MyModel") 
 
     MySecondModel = RockNRollConfig().get_model("MySecondModel")  
 

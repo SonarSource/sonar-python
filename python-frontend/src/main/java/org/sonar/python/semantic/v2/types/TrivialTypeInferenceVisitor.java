@@ -71,6 +71,7 @@ import org.sonar.plugins.python.api.types.v2.Member;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
@@ -336,6 +337,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       // TODO: check scope accuracy
       scan(functionDef.typeParams());
       scan(functionDef.parameters());
+      setSelfParameterType(functionDef);
       scan(functionDef.body());
     });
   }
@@ -368,6 +370,38 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       }
     }
     return functionType;
+  }
+
+  private void setSelfParameterType(FunctionDef functionDef) {
+    // currentType() is always FunctionType here since we are called from inTypeScope(functionType, ...)
+    var functionType = (FunctionType) currentType();
+    // defensive code, should never be true during normal operation
+    if (!(functionType.owner() instanceof ClassType classType)) {
+      return;
+    }
+
+    if (!functionType.isInstanceMethod()) {
+      return;
+    }
+
+    var parameterList = functionDef.parameters();
+    if (parameterList == null) {
+      return;
+    }
+
+    var parameters = parameterList.nonTuple();
+    if (parameters.isEmpty()) {
+      return;
+    }
+
+    var firstParam = parameters.get(0);
+    var paramName = firstParam.name();
+    // Set the type to ObjectType[SelfType[ClassType]]
+    if (paramName != null) {
+      var classObjectType = ObjectType.fromType(classType);
+      var selfType = SelfType.of(classObjectType);
+      setTypeToName(paramName, selfType);
+    }
   }
 
   @Override

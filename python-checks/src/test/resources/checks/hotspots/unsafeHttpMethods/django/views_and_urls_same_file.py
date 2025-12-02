@@ -2,7 +2,7 @@ from django.urls import path
 
 
 class ClassWithViews:
-  def view_method(self):  # FN SONARPY-2322
+  def view_method(self):  # Noncompliant
     ...
 
   def get_urlpatterns(self):

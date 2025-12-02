@@ -62,6 +62,7 @@ import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.ParameterV2;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
@@ -3937,5 +3938,135 @@ public class TypeInferenceV2Test {
   private static Statement lastStatement(StatementList statementList) {
     List<Statement> statements = statementList.statements();
     return statements.get(statements.size() - 1);
+  }
+
+  @Test
+  void selfParameterTypeInMethod() {
+    FileInput root = inferTypes("""
+      class MyClass:
+        def foo(self, x):
+          self
+        def bar(self):
+          ...
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(0);
+    var fooMethodDef = (FunctionDef) classDef.body().statements().get(0);
+    var selfExpressionStatement = (ExpressionStatement) fooMethodDef.body().statements().get(0);
+    var selfExpression = selfExpressionStatement.expressions().get(0);
+    var selfType = selfExpression.typeV2();
+
+    // The self parameter should have type ObjectType[SelfType[MyClass]]
+    assertThat(selfType).isInstanceOf(ObjectType.class);
+    var objectType = (ObjectType) selfType;
+    assertThat(objectType.unwrappedType()).isInstanceOf(SelfType.class);
+    
+    var selfTypeInner = (SelfType) objectType.unwrappedType();
+    var myClassType = classDef.name().typeV2();
+    assertThat(selfTypeInner.innerType()).isEqualTo(myClassType);
+  }
+
+  @Test
+  void selfParameterTypeInMethodWithNonStandardName() {
+    FileInput root = inferTypes("""
+      class MyClass:
+        def foo(this):
+          this
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(0);
+    var fooMethodDef = (FunctionDef) classDef.body().statements().get(0);
+    var thisExpressionStatement = (ExpressionStatement) fooMethodDef.body().statements().get(0);
+    var thisExpression = thisExpressionStatement.expressions().get(0);
+
+    assertThat(thisExpression.typeV2()).isInstanceOf(ObjectType.class);
+    var objectType = (ObjectType) thisExpression.typeV2();
+    assertThat(objectType.unwrappedType()).isInstanceOf(SelfType.class);
+  }
+
+  @Test
+  void selfParameterTypeOverwritesExplicitAnnotation() {
+    FileInput root = inferTypes("""
+      class MyClass:
+        def foo(self: int):
+          self
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(0);
+    var fooMethodDef = (FunctionDef) classDef.body().statements().get(0);
+    var selfExpressionStatement = (ExpressionStatement) fooMethodDef.body().statements().get(0);
+    var selfExpression = selfExpressionStatement.expressions().get(0);
+
+    // SelfType overwrites the explicit type annotation
+    assertThat(selfExpression.typeV2()).isInstanceOf(ObjectType.class);
+    var objectType = (ObjectType) selfExpression.typeV2();
+    assertThat(objectType.unwrappedType()).isInstanceOf(SelfType.class);
+  }
+
+  @Test
+  void classMethodFirstParameterType() {
+    FileInput root = inferTypes("""
+      class MyClass:
+        @classmethod
+        def foo(cls):
+          cls
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(0);
+    var fooMethodDef = (FunctionDef) classDef.body().statements().get(0);
+    var clsExpressionStatement = (ExpressionStatement) fooMethodDef.body().statements().get(0);
+    var clsExpression = clsExpressionStatement.expressions().get(0);
+
+    assertThat(clsExpression.typeV2()).isNotInstanceOf(SelfType.class);
+    assertThat(clsExpression.typeV2())
+      .extracting(PythonType::unwrappedType)
+      .isNotInstanceOf(SelfType.class);
+  }
+
+  @Test
+  void staticMethodHasNoImplicitSelfParameter() {
+    FileInput root = inferTypes("""
+      class MyClass:
+        @staticmethod
+        def foo(x):
+          x
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(0);
+    var fooMethodDef = (FunctionDef) classDef.body().statements().get(0);
+    var xExpressionStatement = (ExpressionStatement) fooMethodDef.body().statements().get(0);
+    var xExpression = xExpressionStatement.expressions().get(0);
+
+    assertThat(xExpression.typeV2()).isNotInstanceOf(SelfType.class);
+    assertThat(xExpression.typeV2())
+      .extracting(PythonType::unwrappedType)
+      .isNotInstanceOf(SelfType.class);
+  }
+
+  @Test
+  void setSelfParameterTypeWithNoParameters() {
+    FileInput root = inferTypes("""
+      class MyClass:
+        def foo():
+          pass
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(0);
+    var fooMethodDef = (FunctionDef) classDef.body().statements().get(0);
+    assertThat(fooMethodDef.name().typeV2()).isInstanceOf(FunctionType.class);
+  }
+
+  @Test
+  void setSelfParameterTypeWithOnlyTupleParameters() {
+    // Python 2 syntax: tuple parameters are allowed
+    FileInput root = inferTypes("""
+      class MyClass:
+        def foo((a, b)):
+          pass
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(0);
+    var fooMethodDef = (FunctionDef) classDef.body().statements().get(0);
+    assertThat(fooMethodDef.name().typeV2()).isInstanceOf(FunctionType.class);
   }
 }
