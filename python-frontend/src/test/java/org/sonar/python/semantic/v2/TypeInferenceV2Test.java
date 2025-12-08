@@ -775,6 +775,40 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void conflictBetweenFunctionAndStaticField() {
+    var code = """
+      class A:
+        something: int = 42
+        def something(self): ...
+      A
+      """;
+    Expression expr = lastExpression(code);
+    assertThat(expr.typeV2())
+      .isInstanceOfSatisfying(ClassType.class, classType -> {
+        assertThat(classType.members())
+          .containsExactlyInAnyOrder(
+            new Member("something", ObjectType.fromType(INT_TYPE)),
+            new Member("something", PythonType.UNKNOWN));
+        // There should be a FunctionType, see SONARPY-3553 and SONARPY-3554
+      });
+  }
+
+  @Test
+  void conflictBetweenFunctionDefinitions() {
+    var code = """
+      class A:
+        def a(self): ...
+        def a(self): ...
+      A
+      """;
+    Expression expr = lastExpression(code);
+    assertThat(expr.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      assertThat(classType.members()).containsExactly(new Member("a", PythonType.UNKNOWN));
+      // should resolve to the FunctionType, see SONARPY-3554 and SONARPY-3553
+    });
+  }
+
+  @Test
   void staticFieldsInInheritedClasses() {
     Expression exprWithInheritance = lastExpression("""
       class A:
