@@ -4069,4 +4069,22 @@ public class TypeInferenceV2Test {
     var fooMethodDef = (FunctionDef) classDef.body().statements().get(0);
     assertThat(fooMethodDef.name().typeV2()).isInstanceOf(FunctionType.class);
   }
+
+  @Test
+  void anyResolvesToUnknown() {
+    Expression anyExpression = lastExpression("""
+      from typing import Any
+      Any
+      """);
+    assertThat(anyExpression.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void typingExtensionsAnyResolvesToUnknown() {
+    Expression anyExpression = lastExpression("""
+      from typing_extensions import Any
+      Any
+      """);
+    assertThat(anyExpression.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
 }

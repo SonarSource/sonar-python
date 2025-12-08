@@ -20,13 +20,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.sonar.python.index.Descriptor;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.v2.converter.AnyDescriptorToPythonTypeConverter;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.converter.AnyDescriptorToPythonTypeConverter;
+import org.sonar.python.semantic.v2.dynamicstubs.DynamicStubsProvider;
 
 public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
@@ -94,6 +95,7 @@ public class SymbolsModuleTypeProvider {
   }
 
   private ModuleType createModuleType(String moduleName, String moduleFqn, ModuleType parent, Map<String, TypeWrapper> members) {
+    members.putAll(DynamicStubsProvider.createDynamicStubs(moduleFqn));
     addTypingAliases(moduleFqn, members);
     return new ModuleType(moduleName, moduleFqn, parent, members);
   }
