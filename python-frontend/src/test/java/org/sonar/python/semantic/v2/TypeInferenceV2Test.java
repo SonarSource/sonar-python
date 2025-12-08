@@ -4105,6 +4105,213 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void inferParameterTypeHintedWithTypingSelf() {
+    FileInput root = inferTypes("""
+      from typing import Self
+      class A:
+        def foo(self, other: Self) -> Self:
+          ...
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(1);
+    var classType = (ClassType) classDef.name().typeV2();
+    var functionDef = (FunctionDef) classDef.body().statements().get(0);
+    var functionType = (FunctionType) functionDef.name().typeV2();
+
+    var otherParamType = functionType.parameters().get(1).declaredType().type();
+    assertThat(otherParamType).isInstanceOf(ObjectType.class);
+    var otherParamUnwrapped = otherParamType.unwrappedType();
+    assertThat(otherParamUnwrapped).isInstanceOf(SelfType.class);
+    assertThat(((SelfType) otherParamUnwrapped).innerType()).isEqualTo(classType);
+
+    var returnType = functionType.returnType();
+    assertThat(returnType).isInstanceOf(ObjectType.class);
+    var returnTypeUnwrapped = returnType.unwrappedType();
+    assertThat(returnTypeUnwrapped).isInstanceOf(SelfType.class);
+    assertThat(((SelfType) returnTypeUnwrapped).innerType()).isEqualTo(classType);
+  }
+
+  @Test
+  void parameterTypeHintedWithNonSelfUnresolvedImport() {
+    FileInput root = inferTypes("""
+      from unknown_module import SomeType
+      class A:
+        def foo(self, x: SomeType) -> None:
+          ...
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(1);
+    var functionDef = (FunctionDef) classDef.body().statements().get(0);
+    var functionType = (FunctionType) functionDef.name().typeV2();
+
+    var xParamType = functionType.parameters().get(1).declaredType().type();
+    assertThat(xParamType).isInstanceOf(ObjectType.class);
+    assertThat(xParamType.unwrappedType()).isInstanceOf(UnknownType.UnresolvedImportType.class);
+    assertThat(xParamType.unwrappedType()).isNotInstanceOf(SelfType.class);
+  }
+
+  @Test
+  void parameterTypeHintedWithNonSelfSpecialForm() {
+    FileInput root = inferTypes("""
+      from typing import Final
+      class A:
+        def foo(self, x: Final) -> None:
+          ...
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(1);
+    var functionDef = (FunctionDef) classDef.body().statements().get(0);
+    var functionType = (FunctionType) functionDef.name().typeV2();
+
+    var xParamType = functionType.parameters().get(1).declaredType().type();
+    assertThat(xParamType).isInstanceOf(ObjectType.class);
+    assertThat(xParamType.unwrappedType()).isNotInstanceOf(SelfType.class);
+  }
+
+  @Test
+  void selfReturnTypeWithoutEnclosingClass() {
+    FileInput root = inferTypes("""
+      from typing import Self
+      def foo() -> Self:
+        ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(1);
+    var functionType = (FunctionType) functionDef.name().typeV2();
+
+    var returnType = functionType.returnType();
+    assertThat(returnType).isNotInstanceOf(SelfType.class);
+    assertThat(returnType.unwrappedType()).isNotInstanceOf(SelfType.class);
+  }
+
+  @Test
+  void selfReturnTypeInNestedFunctionWithoutEnclosingClass() {
+    FileInput root = inferTypes("""
+      from typing import Self
+      def foo():
+        def bar() -> Self:
+          pass
+      """);
+
+    var outerFunctionDef = (FunctionDef) root.statements().statements().get(1);
+    var innerFunctionDef = (FunctionDef) outerFunctionDef.body().statements().get(0);
+    var innerFunctionType = (FunctionType) innerFunctionDef.name().typeV2();
+
+    var returnType = innerFunctionType.returnType();
+    assertThat(returnType).isNotInstanceOf(SelfType.class);
+    assertThat(returnType.unwrappedType()).isNotInstanceOf(SelfType.class);
+  }
+
+  @Test
+  void selfReturnTypeInNestedFunctionInsideMethod() {
+    FileInput root = inferTypes("""
+      from typing import Self
+      class A:
+        def foo(self):
+          def bar() -> Self:
+            pass
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(1);
+    var methodDef = (FunctionDef) classDef.body().statements().get(0);
+    var innerFunctionDef = (FunctionDef) methodDef.body().statements().get(0);
+    var innerFunctionType = (FunctionType) innerFunctionDef.name().typeV2();
+
+    // bar's return type should NOT be resolved to SelfType(A) because bar is not directly owned by class A
+    var returnType = innerFunctionType.returnType();
+    assertThat(returnType).isNotInstanceOf(SelfType.class);
+    assertThat(returnType.unwrappedType()).isNotInstanceOf(SelfType.class);
+  }
+
+  @Test
+  void stringLiteralTypeInference() {
+    Expression root = lastExpression("""
+      def bar(param: "MyParameterType") -> "MyReturnType":
+        return param
+      bar
+      """);
+
+    assertThat(root.typeV2()).isInstanceOf(FunctionType.class);
+    FunctionType functionType = (FunctionType) root.typeV2();
+    assertThat(functionType.parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+    assertThat(functionType.returnType().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void selfInUnionReturnType() {
+    FileInput root = inferTypes("""
+      from typing import Self
+      class A:
+        def foo(self) -> Self | None:
+          ...
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(1);
+    var classType = (ClassType) classDef.name().typeV2();
+    var functionDef = (FunctionDef) classDef.body().statements().get(0);
+    var functionType = (FunctionType) functionDef.name().typeV2();
+
+    var returnType = functionType.returnType();
+    assertThat(returnType).isInstanceOf(ObjectType.class);
+    var unwrappedReturnType = returnType.unwrappedType();
+    assertThat(unwrappedReturnType).isInstanceOf(UnionType.class);
+
+    var unionType = (UnionType) unwrappedReturnType;
+    var candidates = unionType.candidates();
+    assertThat(candidates).hasSize(2);
+
+    var selfCandidate = candidates.stream()
+      .filter(c -> c.unwrappedType() instanceof SelfType)
+      .findFirst();
+    assertThat(selfCandidate).isPresent();
+    var selfType = (SelfType) selfCandidate.get().unwrappedType();
+    assertThat(selfType.innerType()).isEqualTo(classType);
+
+    var noneCandidate = candidates.stream()
+      .filter(c -> !(c.unwrappedType() instanceof SelfType))
+      .findFirst();
+    assertThat(noneCandidate).isPresent();
+  }
+
+  @Test
+  void selfInUnionReturnTypeWithoutEnclosingClass() {
+    FileInput root = inferTypes("""
+      from typing import Self
+      def foo() -> Self | None:
+        ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(1);
+    var functionType = (FunctionType) functionDef.name().typeV2();
+
+    var returnType = functionType.returnType();
+    assertThat(returnType).isInstanceOf(ObjectType.class);
+    var unwrappedReturnType = returnType.unwrappedType();
+    assertThat(unwrappedReturnType).isInstanceOf(UnionType.class);
+
+    var unionType = (UnionType) unwrappedReturnType;
+    assertThat(unionType.candidates()).noneMatch(c -> c.unwrappedType() instanceof SelfType);
+  }
+
+  @Test
+  void selfOrNoneTypeAlias() {
+    FileInput root = inferTypes("""
+      from typing import Self
+      SelfOrNone = Self | None
+      class A:
+        def foo(self) -> SelfOrNone:
+          ...
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(2);
+    var functionDef = (FunctionDef) classDef.body().statements().get(0);
+    var functionType = (FunctionType) functionDef.name().typeV2();
+
+    var returnType = functionType.returnType();
+    assertThat(returnType).isSameAs(PythonType.UNKNOWN); // SONARPY-3559 should change this to correctly resolve to a union type of Self and None
+  }
+
+  @Test  
   void anyResolvesToUnknown() {
     Expression anyExpression = lastExpression("""
       from typing import Any

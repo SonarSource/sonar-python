@@ -29,6 +29,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.TriBool;
@@ -49,6 +50,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.FunctionLike;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.ListLiteral;
@@ -112,6 +114,11 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       TypeInferenceMatchers.isObjectOfType("str"),
       TypeInferenceMatchers.isObjectOfType("bytes"),
       TypeInferenceMatchers.isObjectOfType("complex")));
+
+  private static final TypeInferenceMatcher IS_TYPING_SELF = TypeInferenceMatcher.of(
+    TypeInferenceMatchers.any(
+      TypeInferenceMatchers.isType("typing.Self"),
+      TypeInferenceMatchers.isType("typing_extensions.Self")));
 
   private final TypeTable projectLevelTypeTable;
   private final String fileId;
@@ -347,17 +354,15 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     FunctionTypeBuilder functionTypeBuilder = new FunctionTypeBuilder()
       .fromFunctionDef(functionDef, fullyQualifiedName, fileId, projectLevelTypeTable)
       .withDefinitionLocation(locationInFile(functionDef.name(), fileId));
-    ClassType owner = null;
-    if (currentType() instanceof ClassType classType) {
-      owner = classType;
-    }
+    ClassType owner = computeDirectClassOwner();
     if (owner != null) {
       functionTypeBuilder.withOwner(owner);
     }
     TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
     if (typeAnnotation != null) {
-      PythonType returnType = typeAnnotation.expression().typeV2();
-      functionTypeBuilder.withReturnType(returnType instanceof UnknownType ? returnType : ObjectType.Builder.fromType(returnType).withTypeSource(TypeSource.TYPE_HINT).build());
+      PythonType returnType = resolveTypeAnnotationExpressionType(typeAnnotation.expression(), owner);
+      functionTypeBuilder.withReturnType(returnType instanceof UnknownType ? returnType : 
+                                         ObjectType.Builder.fromType(returnType).withTypeSource(TypeSource.TYPE_HINT).build());
       functionTypeBuilder.withTypeOrigin(TypeOrigin.LOCAL);
     }
     FunctionType functionType = functionTypeBuilder.build();
@@ -618,16 +623,37 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitParameter(Parameter parameter) {
     scan(parameter.typeAnnotation());
     scan(parameter.defaultValue());
+    ClassType owner = computeOwnerForParameter(parameter);
     Optional.ofNullable(parameter.typeAnnotation())
       .map(TypeAnnotation::expression)
-      .map(TrivialTypeInferenceVisitor::resolveTypeAnnotationExpressionType)
+      .map(expr -> resolveTypeAnnotationExpressionType(expr, owner))
       .ifPresent(type -> setTypeToName(parameter.name(), type));
     scan(parameter.name());
   }
 
-  private static PythonType resolveTypeAnnotationExpressionType(Expression expression) {
+  @CheckForNull
+  private ClassType computeOwnerForParameter(Parameter parameter) {
+    FunctionLike enclosingFunction = TreeUtils.firstAncestorOfClass(parameter, FunctionLike.class);
+    if (enclosingFunction instanceof FunctionDef functionDef) {
+      // During the second scan of the function, the FunctionType has already been built
+      // and we can retrieve the owner directly from it.
+      PythonType funcType = functionDef.name().typeV2();
+      if (funcType instanceof FunctionType ft) {
+        return ft.owner() instanceof ClassType ct ? ct : null;
+      }
+    }
+    return computeDirectClassOwner();
+  }
+
+  @CheckForNull
+  private ClassType computeDirectClassOwner() {
+    return currentType() instanceof ClassType classType ? classType : null;
+  }
+
+  private PythonType resolveTypeAnnotationExpressionType(Expression expression, @Nullable ClassType enclosingClassType) {
     if (expression instanceof Name name && name.typeV2() != PythonType.UNKNOWN) {
-      return ObjectType.Builder.fromType(name.typeV2()).withTypeSource(TypeSource.TYPE_HINT).build();
+      PythonType resolvedType = resolveSelfType(name.typeV2(), enclosingClassType);
+      return ObjectType.Builder.fromType(resolvedType).withTypeSource(TypeSource.TYPE_HINT).build();
     } else if (expression instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
       var candidateTypes = subscriptionExpression.subscripts()
         .expressions()
@@ -645,15 +671,30 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
         .withTypeSource(TypeSource.TYPE_HINT)
         .build();
     } else if (expression instanceof BinaryExpression binaryExpression) {
-      var left = resolveTypeAnnotationExpressionType(binaryExpression.leftOperand());
-      var right = resolveTypeAnnotationExpressionType(binaryExpression.rightOperand());
+      var left = resolveTypeAnnotationExpressionType(binaryExpression.leftOperand(), enclosingClassType);
+      var right = resolveTypeAnnotationExpressionType(binaryExpression.rightOperand(), enclosingClassType);
       // TODO: we need to make a decision on should here be a union type of object types or an object type of a union type.
       //  ATM it is blocked by the generic types resolution redesign
       return UnionType.or(left, right);
     } else if (expression.typeV2() instanceof ClassType classType) {
       return ObjectType.Builder.fromType(classType).withTypeSource(TypeSource.TYPE_HINT).build();
+    } else if (expression instanceof NoneExpression noneExpression) {
+      return noneExpression.typeV2();
     }
     return PythonType.UNKNOWN;
+  }
+
+  private PythonType resolveSelfType(PythonType type, @Nullable ClassType enclosingClassType) {
+    if (isTypingSelf(type)) {
+      return Optional.ofNullable(enclosingClassType)
+        .map(SelfType::of)
+        .orElse(type);
+    }
+    return type;
+  }
+
+  private boolean isTypingSelf(PythonType type) {
+    return IS_TYPING_SELF.evaluate(type, typePredicateContext).isTrue();
   }
 
   @Override
