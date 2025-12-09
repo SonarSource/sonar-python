@@ -20,6 +20,7 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.plugins.python.dependency.DependencyTelemetry;
+import org.sonar.plugins.python.telemetry.SensorTelemetryStorage;
 
 public class DependencyTelemetrySensor implements Sensor {
   private final SensorTelemetryStorage sensorTelemetryStorage = new SensorTelemetryStorage();

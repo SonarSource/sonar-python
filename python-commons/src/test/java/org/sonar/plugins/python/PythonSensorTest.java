@@ -100,6 +100,7 @@ import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
+import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.caching.CpdSerializer;

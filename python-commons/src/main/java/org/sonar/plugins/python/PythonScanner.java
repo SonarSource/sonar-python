@@ -52,6 +52,10 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
+import org.sonar.plugins.python.telemetry.collectors.TestFileTelemetry;
+import org.sonar.plugins.python.telemetry.collectors.TestFileTelemetryCollector;
+import org.sonar.plugins.python.telemetry.collectors.TypeInferenceTelemetry;
+import org.sonar.plugins.python.telemetry.collectors.TypeInferenceTelemetryCollector;
 import org.sonar.python.IPythonLocation;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.parser.PythonParser;
@@ -80,6 +84,7 @@ public class PythonScanner extends Scanner {
   private final NoSonarLineInfoCollector noSonarLineInfoCollector;
   private final Lock lock;
   private final TypeInferenceTelemetryCollector typeInferenceTelemetryCollector;
+  private final TestFileTelemetryCollector testFileTelemetryCollector;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
@@ -102,6 +107,7 @@ public class PythonScanner extends Scanner {
     this.issuesRepository = new IssuesRepository(context, checks, indexer, isInSonarLint(context), lock);
     this.measuresRepository = new MeasuresRepository(context, noSonarFilter, fileLinesContextFactory, isInSonarLint(context), noSonarLineInfoCollector, lock);
     this.typeInferenceTelemetryCollector = new TypeInferenceTelemetryCollector();
+    this.testFileTelemetryCollector = new TestFileTelemetryCollector();
   }
 
   @Override
@@ -141,6 +147,7 @@ public class PythonScanner extends Scanner {
       newSymbolsCollector.collect(context.newSymbolTable().onFile(inputFile.wrappedFile()), visitorContext.rootTree());
       pythonHighlighter.highlight(context, visitorContext, inputFile);
       typeInferenceTelemetryCollector.collect(visitorContext.rootTree());
+      testFileTelemetryCollector.collect(visitorContext.rootTree(), fileType);
     }
 
     searchForDataBricks(visitorContext);
@@ -360,6 +367,10 @@ public class PythonScanner extends Scanner {
 
   public TypeInferenceTelemetry getTypeInferenceTelemetry() {
     return typeInferenceTelemetryCollector.getTelemetry();
+  }
+
+  public TestFileTelemetry getTestFileTelemetry() {
+    return testFileTelemetryCollector.getTelemetry();
   }
 
   private void runLockedByRepository(String repositoryKey, Runnable runnable) {

@@ -47,12 +47,13 @@ import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
-import org.sonar.plugins.python.editions.RepositoryInfoProvider;
 import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
+import org.sonar.plugins.python.editions.RepositoryInfoProvider;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
+import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
 
 import static java.nio.charset.StandardCharsets.UTF_8;

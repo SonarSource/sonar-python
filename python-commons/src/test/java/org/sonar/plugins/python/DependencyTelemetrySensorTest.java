@@ -20,6 +20,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.spy;

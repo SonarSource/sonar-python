@@ -51,6 +51,10 @@ import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
+import org.sonar.plugins.python.telemetry.SensorTelemetryStorage;
+import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
+import org.sonar.plugins.python.telemetry.collectors.TestFileTelemetry;
+import org.sonar.plugins.python.telemetry.collectors.TypeInferenceTelemetry;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
@@ -154,6 +158,7 @@ public final class PythonSensor implements Sensor {
 
     updateDatabricksTelemetry(scanner);
     updateTypeInferenceTelemetry(scanner);
+    updateTestFileTelemetry(scanner);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEY, noSonarLineInfoCollector.getSuppressedRuleIds());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_COMMENTS_KEY, noSonarLineInfoCollector.getCommentWithExactlyOneRuleSuppressed());
     updateNamespacePackageTelemetry(pythonIndexer);
@@ -191,6 +196,12 @@ public final class PythonSensor implements Sensor {
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TYPES_IMPORTS_UNKNOWN, telemetry.importsWithUnknownType());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TYPES_SYMBOLS_UNIQUE, telemetry.uniqueSymbols());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TYPES_SYMBOLS_UNKNOWN, telemetry.unknownSymbols());
+  }
+
+  private void updateTestFileTelemetry(PythonScanner scanner) {
+    TestFileTelemetry telemetry = scanner.getTestFileTelemetry();
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_TOTAL, telemetry.totalMainFiles());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_MISCLASSIFIED_TEST, telemetry.misclassifiedTestFiles());
   }
 
   private void updateNamespacePackageTelemetry(PythonIndexer pythonIndexer) {

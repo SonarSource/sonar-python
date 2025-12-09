@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.telemetry;
 
 import java.io.File;
 import org.junit.jupiter.api.Assertions;

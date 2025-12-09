@@ -41,9 +41,11 @@ import org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
-import org.sonar.python.project.config.ProjectConfigurationBuilder;
+import org.sonar.plugins.python.telemetry.SensorTelemetryStorage;
+import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.project.config.ProjectConfigurationBuilder;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
 

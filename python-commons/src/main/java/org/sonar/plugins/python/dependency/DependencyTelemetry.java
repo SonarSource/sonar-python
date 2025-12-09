@@ -22,10 +22,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.plugins.python.SensorTelemetryStorage;
-import org.sonar.plugins.python.TelemetryMetricKey;
 import org.sonar.plugins.python.dependency.model.Dependencies;
 import org.sonar.plugins.python.dependency.model.Dependency;
+import org.sonar.plugins.python.telemetry.SensorTelemetryStorage;
+import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
 
 public class DependencyTelemetry {
   /**

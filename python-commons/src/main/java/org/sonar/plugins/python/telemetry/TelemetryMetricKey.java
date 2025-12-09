@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.telemetry;
 
 public enum TelemetryMetricKey {
   NOTEBOOK_PRESENT_KEY("python.notebook.present"),
@@ -47,7 +47,9 @@ public enum TelemetryMetricKey {
   PYTHON_TYPES_IMPORTS_TOTAL("python.types.imports.total"),
   PYTHON_TYPES_IMPORTS_UNKNOWN("python.types.imports.unknown"),
   PYTHON_TYPES_SYMBOLS_UNIQUE("python.types.symbols.unique"),
-  PYTHON_TYPES_SYMBOLS_UNKNOWN("python.types.symbols.unknown");
+  PYTHON_TYPES_SYMBOLS_UNKNOWN("python.types.symbols.unknown"),
+  PYTHON_MAIN_FILES_TOTAL("python.files.main.total"),
+  PYTHON_MAIN_FILES_MISCLASSIFIED_TEST("python.files.main.misclassified_test");
 
   private final String key;
 

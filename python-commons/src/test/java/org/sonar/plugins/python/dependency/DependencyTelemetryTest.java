@@ -27,8 +27,8 @@ import org.mockito.ArgumentMatcher;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.plugins.python.SensorTelemetryStorage;
-import org.sonar.plugins.python.TelemetryMetricKey;
+import org.sonar.plugins.python.telemetry.SensorTelemetryStorage;
+import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
 
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
