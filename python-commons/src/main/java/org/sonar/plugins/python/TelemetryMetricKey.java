@@ -40,7 +40,14 @@ public enum TelemetryMetricKey {
   PYTHON_PACKAGES_WITH_INIT("python.packages.with_init"),
   PYTHON_PACKAGES_WITHOUT_INIT("python.packages.without_init"),
   PYTHON_DUPLICATE_PACKAGES_WITHOUT_INIT("python.packages.duplicate_without_init"),
-  PYTHON_NAMESPACE_PACKAGES_IN_REGULAR_PACKAGE("python.packages.namespace_packages_in_regular_package");
+  PYTHON_NAMESPACE_PACKAGES_IN_REGULAR_PACKAGE("python.packages.namespace_packages_in_regular_package"),
+  PYTHON_TYPES_NAMES_TOTAL("python.types.names.total"),
+  PYTHON_TYPES_NAMES_UNKNOWN("python.types.names.unknown"),
+  PYTHON_TYPES_NAMES_UNRESOLVED_IMPORT("python.types.names.unresolved_import"),
+  PYTHON_TYPES_IMPORTS_TOTAL("python.types.imports.total"),
+  PYTHON_TYPES_IMPORTS_UNKNOWN("python.types.imports.unknown"),
+  PYTHON_TYPES_SYMBOLS_UNIQUE("python.types.symbols.unique"),
+  PYTHON_TYPES_SYMBOLS_UNKNOWN("python.types.symbols.unknown");
 
   private final String key;
 

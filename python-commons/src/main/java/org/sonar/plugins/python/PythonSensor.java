@@ -153,6 +153,7 @@ public final class PythonSensor implements Sensor {
     Duration sensorTime = Duration.between(sensorStartTime, Instant.now());
 
     updateDatabricksTelemetry(scanner);
+    updateTypeInferenceTelemetry(scanner);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEY, noSonarLineInfoCollector.getSuppressedRuleIds());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_COMMENTS_KEY, noSonarLineInfoCollector.getCommentWithExactlyOneRuleSuppressed());
     updateNamespacePackageTelemetry(pythonIndexer);
@@ -179,6 +180,17 @@ public final class PythonSensor implements Sensor {
 
   private void updateDatabricksTelemetry(PythonScanner scanner) {
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_DATABRICKS_FOUND, scanner.getFoundDatabricks());
+  }
+
+  private void updateTypeInferenceTelemetry(PythonScanner scanner) {
+    TypeInferenceTelemetry telemetry = scanner.getTypeInferenceTelemetry();
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TYPES_NAMES_TOTAL, telemetry.totalNames());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TYPES_NAMES_UNKNOWN, telemetry.unknownTypeNames());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TYPES_NAMES_UNRESOLVED_IMPORT, telemetry.unresolvedImportTypeNames());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TYPES_IMPORTS_TOTAL, telemetry.totalImports());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TYPES_IMPORTS_UNKNOWN, telemetry.importsWithUnknownType());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TYPES_SYMBOLS_UNIQUE, telemetry.uniqueSymbols());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TYPES_SYMBOLS_UNKNOWN, telemetry.unknownSymbols());
   }
 
   private void updateNamespacePackageTelemetry(PythonIndexer pythonIndexer) {

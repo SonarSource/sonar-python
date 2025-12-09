@@ -79,6 +79,7 @@ public class PythonScanner extends Scanner {
   private final MeasuresRepository measuresRepository;
   private final NoSonarLineInfoCollector noSonarLineInfoCollector;
   private final Lock lock;
+  private final TypeInferenceTelemetryCollector typeInferenceTelemetryCollector;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
@@ -100,6 +101,7 @@ public class PythonScanner extends Scanner {
     this.pythonHighlighter = new PythonHighlighter(lock);
     this.issuesRepository = new IssuesRepository(context, checks, indexer, isInSonarLint(context), lock);
     this.measuresRepository = new MeasuresRepository(context, noSonarFilter, fileLinesContextFactory, isInSonarLint(context), noSonarLineInfoCollector, lock);
+    this.typeInferenceTelemetryCollector = new TypeInferenceTelemetryCollector();
   }
 
   @Override
@@ -138,6 +140,7 @@ public class PythonScanner extends Scanner {
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
       newSymbolsCollector.collect(context.newSymbolTable().onFile(inputFile.wrappedFile()), visitorContext.rootTree());
       pythonHighlighter.highlight(context, visitorContext, inputFile);
+      typeInferenceTelemetryCollector.collect(visitorContext.rootTree());
     }
 
     searchForDataBricks(visitorContext);
@@ -353,6 +356,10 @@ public class PythonScanner extends Scanner {
 
   public boolean getFoundDatabricks() {
     return foundDatabricks.get();
+  }
+
+  public TypeInferenceTelemetry getTypeInferenceTelemetry() {
+    return typeInferenceTelemetryCollector.getTelemetry();
   }
 
   private void runLockedByRepository(String repositoryKey, Runnable runnable) {
