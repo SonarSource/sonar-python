@@ -16,6 +16,7 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import com.google.common.annotations.VisibleForTesting;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -116,13 +117,16 @@ public class PythonTypeToDescriptorConverter {
       type.hasDecorators(),
       type.definitionLocation().orElse(null),
       null,
-      null
-    );
+      null);
   }
 
-  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, SelfType selfType) {
+  @VisibleForTesting
+  static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, SelfType selfType) {
     var innerType = selfType.innerType();
-    return convert(moduleFqn, parentFqn, symbolName, innerType, true);
+    if (!(innerType instanceof ClassType classType)) {
+      throw new IllegalStateException("SelfType's innerType is not a ClassType " + selfType.name());
+    }
+    return convert(moduleFqn, parentFqn, symbolName, classType, true);
   }
 
   private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ClassType type, boolean isSelf) {
@@ -171,15 +175,13 @@ public class PythonTypeToDescriptorConverter {
       .collect(Collectors.toSet());
     return new AmbiguousDescriptor(symbolName,
       symbolFqn(moduleFqn, symbolName),
-      candidates
-    );
+      candidates);
   }
 
   private static Descriptor convert(String parentFqn, String symbolName, UnknownType.UnresolvedImportType type) {
     return new VariableDescriptor(symbolName,
       symbolFqn(parentFqn, symbolName),
-      type.importPath()
-    );
+      type.importPath());
   }
 
   private static FunctionDescriptor.Parameter convert(String moduleFqn, ParameterV2 parameter) {

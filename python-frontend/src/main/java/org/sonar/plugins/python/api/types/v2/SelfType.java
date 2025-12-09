@@ -43,10 +43,10 @@ import org.sonar.plugins.python.api.TriBool;
  */
 @Beta
 public final class SelfType implements PythonType {
-  private final ClassType innerType;
+  private final TypeWrapper typeWrapper;
 
-  private SelfType(ClassType innerType) {
-    this.innerType = innerType;
+  private SelfType(TypeWrapper typeWrapper) {
+    this.typeWrapper = typeWrapper;
   }
 
   private static String formatWithBrackets(String prefix, String content) {
@@ -76,21 +76,21 @@ public final class SelfType implements PythonType {
     if (type == null || type == PythonType.UNKNOWN) {
       return PythonType.UNKNOWN;
     }
-    
+
     if (type instanceof SelfType) {
       return type;
     }
-    
+
     if (type instanceof ClassType classType) {
-      return new SelfType(classType);
+      return new SelfType(TypeWrapper.of(classType));
     }
-    
+
     if (type instanceof UnionType unionType) {
       return UnionType.or(unionType.candidates().stream()
         .map(SelfType::of)
         .toList());
     }
-    
+
     if (type instanceof ObjectType objectType) {
       PythonType unwrapped = objectType.unwrappedType();
       PythonType wrappedType = of(unwrapped);
@@ -102,82 +102,92 @@ public final class SelfType implements PythonType {
       }
       return PythonType.UNKNOWN;
     }
-
     return PythonType.UNKNOWN;
   }
 
-  public ClassType innerType() {
-    return innerType;
+  public PythonType innerType() {
+    var type = typeWrapper.type();
+    if (type instanceof ClassType) {
+      return type;
+    }
+    return PythonType.UNKNOWN;
+  }
+
+  public TypeWrapper typeWrapper() {
+    return typeWrapper;
   }
 
   @Override
   public String name() {
-    return formatAsSelf(innerType.name());
+    return formatAsSelf(typeWrapper.type().name());
   }
 
   @Override
   public Optional<String> displayName() {
-    return innerType.displayName()
+    return typeWrapper.type().displayName()
       .map(SelfType::formatAsSelf);
   }
 
   @Override
   public Optional<String> instanceDisplayName() {
-    return innerType.instanceDisplayName()
+    return typeWrapper.type().instanceDisplayName()
       .map(SelfType::formatAsSelf);
   }
 
   @Override
   public boolean isCompatibleWith(PythonType another) {
-    return innerType.isCompatibleWith(another);
+    return typeWrapper.type().isCompatibleWith(another);
   }
 
   @Override
   public String key() {
-    return formatAsSelf(innerType.key());
+    return formatAsSelf(typeWrapper.type().key());
   }
 
   @Override
   public Optional<PythonType> resolveMember(String memberName) {
-    return innerType.resolveMember(memberName);
+    return typeWrapper.type().resolveMember(memberName);
   }
 
   @Override
   public TriBool hasMember(String memberName) {
-    return innerType.hasMember(memberName);
+    return typeWrapper.type().hasMember(memberName);
   }
 
   @Override
   public Optional<LocationInFile> definitionLocation() {
-    return innerType.definitionLocation();
+    return typeWrapper.type().definitionLocation();
   }
 
   @Override
   public PythonType unwrappedType() {
-    return innerType.unwrappedType();
+    return typeWrapper.type().unwrappedType();
   }
 
   @Override
   public TypeSource typeSource() {
-    return innerType.typeSource();
+    return typeWrapper.type().typeSource();
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     SelfType selfType = (SelfType) o;
-    return Objects.equals(innerType, selfType.innerType);
+    return Objects.equals(typeWrapper, selfType.typeWrapper);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(SelfType.class, innerType);
+    return Objects.hash(SelfType.class, typeWrapper);
   }
 
   @Override
   public String toString() {
-    return formatWithBrackets("SelfType", innerType.toString());
+    return formatWithBrackets("SelfType", typeWrapper.toString());
   }
 }
-

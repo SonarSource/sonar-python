@@ -20,9 +20,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.types.v2.LazyUnionType;
-import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class TypeAnnotationToPythonTypeConverter {
 
@@ -58,6 +59,13 @@ public class TypeAnnotationToPythonTypeConverter {
         // SONARPY-2179: This case only makes sense for parameter types, which are not supported yet
         return context.lazyTypesContext().getOrCreateLazyType("dict");
       case TYPE_VAR:
+        if(Boolean.TRUE.equals(type.isSelf())){
+          if(type.args().size() != 1){
+            return PythonType.UNKNOWN;
+          }
+          PythonType innerType = convert(context, type.args().get(0));
+          return SelfType.of(innerType);
+        }
         return Optional.of(type)
           .filter(TypeAnnotationToPythonTypeConverter::filterTypeVar)
           .map(TypeAnnotationDescriptor::fullyQualifiedName)
@@ -78,7 +86,6 @@ public class TypeAnnotationToPythonTypeConverter {
   public static boolean filterTypeVar(TypeAnnotationDescriptor type) {
     return Optional.of(type)
       // Filtering self returning methods until the SONARPY-1472 will be solved
-      .filter(Predicate.not(TypeAnnotationDescriptor::isSelf))
       .map(TypeAnnotationDescriptor::fullyQualifiedName)
       .filter(Predicate.not(String::isEmpty))
       // We ignore TypeVar referencing "builtins.object" or "object" to avoid false positives

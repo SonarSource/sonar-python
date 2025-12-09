@@ -190,6 +190,16 @@ class SelfTypeTest {
   }
 
   @Test
+  void selfTypetypeWrapper() {
+    ClassType classType = (ClassType) INT_TYPE;
+    SelfType selfType = (SelfType) SelfType.of(classType);
+
+    TypeWrapper wrappedType = selfType.typeWrapper();
+    assertThat(wrappedType).isNotNull();
+    assertThat(wrappedType.type()).isEqualTo(classType.unwrappedType());
+  }
+
+  @Test
   void selfTypeOfUnionType() {
     ClassType classTypeA = (ClassType) INT_TYPE;
     ClassType classTypeB = (ClassType) STR_TYPE;
