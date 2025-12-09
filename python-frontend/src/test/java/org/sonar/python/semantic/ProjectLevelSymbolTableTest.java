@@ -367,14 +367,14 @@ class ProjectLevelSymbolTableTest {
     var ambiguousDescriptor = AmbiguousDescriptor.create(
       new FunctionDescriptor.FunctionDescriptorBuilder().withName("foo").withFullyQualifiedName("mod.foo").withParameters(
         List.of(
-          new FunctionDescriptor.Parameter("a", null, false, false, false, false, false, null),
-          new FunctionDescriptor.Parameter("b", null, false, false, false, false, false, null)))
+          new FunctionDescriptor.Parameter("a", null, null, false, false, false, false, false, null),
+          new FunctionDescriptor.Parameter("b", null, null, false, false, false, false, false, null)))
         .build(),
       new FunctionDescriptor.FunctionDescriptorBuilder().withName("foo").withFullyQualifiedName("mod.foo").withParameters(
         List.of(
-          new FunctionDescriptor.Parameter("a", null, false, false, false, false, false, null),
-          new FunctionDescriptor.Parameter("b", null, false, false, false, false, false, null),
-          new FunctionDescriptor.Parameter("c", null, false, false, false, false, false, null)))
+          new FunctionDescriptor.Parameter("a", null, null, false, false, false, false, false, null),
+          new FunctionDescriptor.Parameter("b", null, null, false, false, false, false, false, null),
+          new FunctionDescriptor.Parameter("c", null, null, false, false, false, false, false, null)))
         .build());
     Map<String, Set<Descriptor>> globalDescriptors = Collections.singletonMap("mod", Set.of(ambiguousDescriptor));
 

@@ -116,6 +116,7 @@ public class FunctionDescriptor implements Descriptor {
 
     private final String name;
     private final String annotatedType;
+    private final TypeAnnotationDescriptor descriptor;
     private final boolean hasDefaultValue;
     private final boolean isKeywordVariadic;
     private final boolean isPositionalVariadic;
@@ -123,10 +124,11 @@ public class FunctionDescriptor implements Descriptor {
     private final boolean isPositionalOnly;
     private final LocationInFile location;
 
-    public Parameter(@Nullable String name, @Nullable String annotatedType, boolean hasDefaultValue,
+    public Parameter(@Nullable String name, @Nullable String annotatedType, @Nullable TypeAnnotationDescriptor descriptor, boolean hasDefaultValue,
                      boolean isKeywordOnly, boolean isPositionalOnly, boolean isPositionalVariadic, boolean isKeywordVariadic, @Nullable LocationInFile location) {
       this.name = name;
       this.annotatedType = annotatedType;
+      this.descriptor = descriptor;
       this.hasDefaultValue = hasDefaultValue;
       this.isKeywordVariadic = isKeywordVariadic;
       this.isPositionalVariadic = isPositionalVariadic;
@@ -171,6 +173,11 @@ public class FunctionDescriptor implements Descriptor {
     @CheckForNull
     public LocationInFile location() {
       return location;
+    }
+
+    @CheckForNull
+    public TypeAnnotationDescriptor descriptor() {
+      return descriptor;
     }
   }
 

@@ -16,16 +16,19 @@
  */
 package org.sonar.python.index;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
@@ -123,11 +126,10 @@ class FunctionDescriptorTest {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor(
       """
         def bar(): ...
-        
+
         @bar
         def foo(x): ...
-        """
-    );
+        """);
     assertThat(functionDescriptor.hasDecorators()).isTrue();
     assertThat(functionDescriptor.decorators()).containsExactly("my_package.mod.bar");
     assertDescriptorToProtobuf(functionDescriptor);
@@ -153,7 +155,7 @@ class FunctionDescriptorTest {
   void protobufSerializationWithoutLocationAndWithAnnotatedReturnType() {
     // FIXME: Annotated type name is never set for regular project decorators (only Typeshed) - SONARPY-1202
     List<FunctionDescriptor.Parameter> parameters = new ArrayList<>();
-    parameters.add(new FunctionDescriptor.Parameter(null, "str", false, false, false, false, false, null));
+    parameters.add(new FunctionDescriptor.Parameter(null, "str", null, false, false, false, false, false, null));
     FunctionDescriptor functionDescriptor = new FunctionDescriptor(
       "foo",
       "mod.foo",
@@ -163,9 +165,44 @@ class FunctionDescriptorTest {
       Collections.emptyList(),
       false,
       null,
-      "str"
-    );
+      "str");
     assertDescriptorToProtobuf(functionDescriptor);
+  }
+
+  @ParameterizedTest
+  @MethodSource("typeKindTestCases")
+  void protobufFunctionParameterShouldHandleAllTypeKinds(TypeAnnotationDescriptor.TypeKind expectedTypeKind) {
+    List<FunctionDescriptor.Parameter> parameters = new ArrayList<>();
+    TypeAnnotationDescriptor descriptor = new TypeAnnotationDescriptor("MyType", expectedTypeKind, List.of(), "mytype", false);
+    parameters.add(new FunctionDescriptor.Parameter(null, null, descriptor, false, false, false, false, false, null));
+    FunctionDescriptor functionDescriptor = new FunctionDescriptor(
+      "foo",
+      "mod.foo",
+      parameters,
+      false,
+      false,
+      Collections.emptyList(),
+      false,
+      null,
+      null);
+    assertDescriptorToProtobuf(functionDescriptor);
+  }
+
+  static Stream<Arguments> typeKindTestCases() {
+    return Stream.of(
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.INSTANCE),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.UNION),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.TYPE),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.TUPLE),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.TYPE_VAR),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.ANY),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.NONE),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.TYPE_ALIAS),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.CALLABLE),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.LITERAL),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.UNINHABITED),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.UNBOUND),
+      Arguments.of(TypeAnnotationDescriptor.TypeKind.TYPED_DICT));
   }
 
   public static FunctionDescriptor lastFunctionDescriptor(String... code) {

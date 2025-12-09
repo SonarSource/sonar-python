@@ -23,8 +23,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.index.TypeAnnotationDescriptor.TypeKind;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
@@ -32,6 +34,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.sonar.python.semantic.SymbolUtils.typeshedSymbolWithFQN;
 import static org.sonar.python.types.InferredTypes.anyType;
@@ -194,5 +197,17 @@ public class DescriptorUtils {
       declaredType = typeSymbol == null ? anyType() : new DeclaredType(typeSymbol, Collections.emptyList());
     }
     parameter.setDeclaredType(declaredType);
+  }
+
+  public static SymbolsProtos.TypeKind typeAnnotationKindToSymbolKind(TypeAnnotationDescriptor.TypeKind kind){
+    return SymbolsProtos.TypeKind.valueOf(kind.name());
+  }
+
+  @CheckForNull
+  public static TypeKind symbolTypeKindToTypeAnnotationKind(SymbolsProtos.TypeKind kind){
+    if(kind == SymbolsProtos.TypeKind.UNRECOGNIZED){
+      return null;
+    }
+    return TypeKind.valueOf(kind.name());
   }
 }

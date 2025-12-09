@@ -74,6 +74,7 @@ class DescriptorToPythonTypeConverterTest {
       new FunctionDescriptor.Parameter(
         "p1",
         "Returned",
+        null,
         false,
         false,
         true,
@@ -90,6 +91,7 @@ class DescriptorToPythonTypeConverterTest {
       new FunctionDescriptor.Parameter(
         "p2",
         "Returned",
+        null,
         false,
         false,
         true,
@@ -176,6 +178,7 @@ class DescriptorToPythonTypeConverterTest {
       new FunctionDescriptor.Parameter(
         "p1",
         "Returned",
+        null,
         false,
         false,
         true,

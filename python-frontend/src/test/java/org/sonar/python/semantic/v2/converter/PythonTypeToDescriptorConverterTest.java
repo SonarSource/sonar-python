@@ -39,6 +39,7 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
@@ -46,6 +47,7 @@ import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyUnionType;
+import org.sonar.python.types.v2.SpecialFormType;
 import org.sonar.python.types.v2.TypesTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -104,11 +106,14 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(parameter.isKeywordVariadic()).isFalse();
     assertThat(parameter.isPositionalVariadic()).isFalse();
     assertThat(parameter.location()).isEqualTo(location);
+    assertThat(parameter.descriptor()).isNotNull();
+    assertThat(parameter.descriptor().fullyQualifiedName()).isEqualTo("int");
   }
 
   @Test
   void testConvertClassType() {
-    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
+    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper),
+      List.of(intTypeWrapper.type()), true, false, location);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myClass"), Set.of(classType));
 
     assertThat(descriptor).isInstanceOf(ClassDescriptor.class);
@@ -186,8 +191,10 @@ class PythonTypeToDescriptorConverterTest {
 
   @Test
   void testConvertUnionType() {
-    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
-    ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
+    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper),
+      List.of(intTypeWrapper.type()), true, false, location);
+    ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper),
+      List.of(intTypeWrapper.type()), true, false, location);
     PythonType unionType = UnionType.or(classType, anotherClassType);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(unionType));
 
@@ -204,8 +211,10 @@ class PythonTypeToDescriptorConverterTest {
 
   @Test
   void testConvertManyTypes() {
-    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
-    FunctionType functionType = new FunctionType("functionType", "my_package.functionType", List.of(new ModuleType("bar")), List.of(), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, true, false, true, false, null, location);
+    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper),
+      List.of(intTypeWrapper.type()), true, false, location);
+    FunctionType functionType = new FunctionType("functionType", "my_package.functionType", List.of(new ModuleType("bar")), List.of(), List.of(), floatTypeWrapper,
+      TypeOrigin.LOCAL, true, false, true, false, null, location);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(functionType, classType));
 
     assertThat(descriptor).isInstanceOf(AmbiguousDescriptor.class);
@@ -219,8 +228,10 @@ class PythonTypeToDescriptorConverterTest {
 
   @Test
   void testConvertManyTypesWithUnionType() {
-    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
-    ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
+    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper),
+      List.of(intTypeWrapper.type()), true, false, location);
+    ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper),
+      List.of(intTypeWrapper.type()), true, false, location);
 
     PythonType unionType = UnionType.or(classType, anotherClassType);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(unionType, classType));
@@ -283,5 +294,122 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(classDescriptor.isSelf()).isTrue();
     assertThat(classDescriptor.name()).isEqualTo("mySelfSymbol");
     assertThat(classDescriptor.fullyQualifiedName()).isEqualTo("foo.mySelfSymbol");
+  }
+
+  @Test
+  void testConvertFunctionParametersWithTypeAnnotationDescriptors() {
+    ClassType stringClassType = new ClassType("str", "builtins.str", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ClassType myClassType = new ClassType("MyClass", "my_package.MyClass", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    PythonType selfType = SelfType.of(myClassType);
+    ObjectType objectType = ObjectType.fromType(stringClassType);
+    FunctionType callableType = new FunctionType("my_function", "my_package.my_function", List.of(), List.of(), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, false, false, false,
+      false, null, location);
+
+    List<ParameterV2> parameters = List.of(
+      new ParameterV2("self_param", TypeWrapper.of(selfType), false, false, false, false, false, location),
+      new ParameterV2("class_param", TypeWrapper.of(stringClassType), false, false, false, false, false, location),
+      new ParameterV2("object_param", TypeWrapper.of(objectType), false, false, false, false, false, location),
+      new ParameterV2("callable_param", TypeWrapper.of(callableType), false, false, false, false, false, location));
+
+    FunctionType functionType = new FunctionType("test_function",
+      "my_package.test_function",
+      List.of(),
+      parameters,
+      List.of(),
+      floatTypeWrapper,
+      TypeOrigin.LOCAL,
+      false,
+      false,
+      false,
+      false,
+      null,
+      location);
+
+    Descriptor descriptor = converter.convert("foo", new SymbolV2("test_function"), Set.of(functionType));
+
+    assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
+    FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
+    assertThat(functionDescriptor.parameters()).hasSize(4);
+
+    FunctionDescriptor.Parameter selfParam = functionDescriptor.parameters().get(0);
+    assertThat(selfParam.name()).isEqualTo("self_param");
+    assertThat(selfParam.descriptor()).isNotNull();
+    assertThat(selfParam.descriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(selfParam.descriptor().isSelf()).isTrue();
+    assertThat(selfParam.descriptor().fullyQualifiedName()).isEqualTo("my_package.MyClass");
+
+    FunctionDescriptor.Parameter classParam = functionDescriptor.parameters().get(1);
+    assertThat(classParam.name()).isEqualTo("class_param");
+    assertThat(classParam.descriptor()).isNotNull();
+    assertThat(classParam.descriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(classParam.descriptor().isSelf()).isFalse();
+    assertThat(classParam.descriptor().fullyQualifiedName()).isEqualTo("builtins.str");
+
+    FunctionDescriptor.Parameter objectParam = functionDescriptor.parameters().get(2);
+    assertThat(objectParam.name()).isEqualTo("object_param");
+    assertThat(objectParam.descriptor()).isNotNull();
+    assertThat(objectParam.descriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(objectParam.descriptor().isSelf()).isFalse();
+    assertThat(objectParam.descriptor().fullyQualifiedName()).isEqualTo("builtins.str");
+
+    FunctionDescriptor.Parameter callableParam = functionDescriptor.parameters().get(3);
+    assertThat(callableParam.name()).isEqualTo("callable_param");
+    assertThat(callableParam.descriptor()).isNotNull();
+    assertThat(callableParam.descriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.CALLABLE);
+    assertThat(callableParam.descriptor().isSelf()).isFalse();
+    assertThat(callableParam.descriptor().fullyQualifiedName()).isEqualTo("my_package.my_function");
+  }
+
+  @Test
+  void testConvertParameterTypesWithEdgeCases() {
+
+    ModuleType moduleType = new ModuleType("my_module", "my_package.my_module", null, java.util.Map.of());
+    UnknownType.UnresolvedImportType unresolvedImportType = new UnknownType.UnresolvedImportType("unresolved.import.path");
+    
+    SpecialFormType specialFormType = new SpecialFormType("special_form_type");
+    List<ParameterV2> parameters = List.of(
+      new ParameterV2("module_param", TypeWrapper.of(moduleType), false, false, false, false, false, location),
+      new ParameterV2("unresolved_param", TypeWrapper.of(unresolvedImportType), false, false, false, false, false, location),
+      new ParameterV2("special_form", TypeWrapper.of(specialFormType), false, false, false, false, false, location)
+    );
+
+    FunctionType testFunction = new FunctionType("test_function",
+      "my_package.test_function",
+      List.of(),
+      parameters,
+      List.of(),
+      floatTypeWrapper,
+      TypeOrigin.LOCAL,
+      false,
+      false,
+      false,
+      false,
+      null,
+      location);
+
+    Descriptor descriptor = converter.convert("foo", new SymbolV2("test_function"), Set.of(testFunction));
+
+    assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
+    FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
+    assertThat(functionDescriptor.parameters()).hasSize(3);
+
+
+    // ModuleType case - should return FQN but TypeAnnotationDescriptor is null (not supported in createTypeAnnotationDescriptor)
+    FunctionDescriptor.Parameter moduleParam = functionDescriptor.parameters().get(0);
+    assertThat(moduleParam.name()).isEqualTo("module_param");
+    assertThat(moduleParam.annotatedType()).isEqualTo("my_package.my_module");
+    assertThat(moduleParam.descriptor()).isNull();
+
+    FunctionDescriptor.Parameter unresolvedParam = functionDescriptor.parameters().get(1);
+    assertThat(unresolvedParam.name()).isEqualTo("unresolved_param");
+    assertThat(unresolvedParam.annotatedType()).isEqualTo("unresolved.import.path");
+    assertThat(unresolvedParam.descriptor()).isNotNull();
+    assertThat(unresolvedParam.descriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(unresolvedParam.descriptor().fullyQualifiedName()).isEqualTo("unresolved.import.path");
+
+    FunctionDescriptor.Parameter specialFormParam = functionDescriptor.parameters().get(2);
+    assertThat(specialFormParam.name()).isEqualTo("special_form");
+    assertThat(specialFormParam.annotatedType()).isEqualTo("special_form_type");
+    assertThat(specialFormParam.descriptor()).isNull();
   }
 }

@@ -16,16 +16,20 @@
  */
 package org.sonar.python.index;
 
+import com.google.common.annotations.VisibleForTesting;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.types.protobuf.DescriptorsProtos;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
 public class DescriptorsToProtobuf {
 
-  private DescriptorsToProtobuf() {}
+  private DescriptorsToProtobuf() {
+  }
 
   public static DescriptorsProtos.ModuleDescriptor toProtobufModuleDescriptor(Set<Descriptor> descriptors) {
     List<DescriptorsProtos.ClassDescriptor> classDescriptors = new ArrayList<>();
@@ -52,7 +56,7 @@ public class DescriptorsToProtobuf {
       .build();
   }
 
-  public static DescriptorsProtos.AmbiguousDescriptor toProtobuf(AmbiguousDescriptor ambiguousDescriptor) {
+  private static DescriptorsProtos.AmbiguousDescriptor toProtobuf(AmbiguousDescriptor ambiguousDescriptor) {
     List<DescriptorsProtos.FunctionDescriptor> functionDescriptors = new ArrayList<>();
     List<DescriptorsProtos.VarDescriptor> variableDescriptors = new ArrayList<>();
     List<DescriptorsProtos.ClassDescriptor> classDescriptors = new ArrayList<>();
@@ -78,7 +82,7 @@ public class DescriptorsToProtobuf {
     return builder.build();
   }
 
-  public static DescriptorsProtos.ClassDescriptor toProtobuf(ClassDescriptor classDescriptor) {
+  private static DescriptorsProtos.ClassDescriptor toProtobuf(ClassDescriptor classDescriptor) {
     List<DescriptorsProtos.FunctionDescriptor> functionMembers = new ArrayList<>();
     List<DescriptorsProtos.VarDescriptor> variableMembers = new ArrayList<>();
     List<DescriptorsProtos.AmbiguousDescriptor> ambiguousMembers = new ArrayList<>();
@@ -118,7 +122,7 @@ public class DescriptorsToProtobuf {
     return builder.build();
   }
 
-  public static DescriptorsProtos.FunctionDescriptor toProtobuf(FunctionDescriptor functionDescriptor) {
+  private static DescriptorsProtos.FunctionDescriptor toProtobuf(FunctionDescriptor functionDescriptor) {
     DescriptorsProtos.FunctionDescriptor.Builder builder = DescriptorsProtos.FunctionDescriptor.newBuilder()
       .setName(functionDescriptor.name())
       .setFullyQualifiedName(functionDescriptor.fullyQualifiedName())
@@ -138,7 +142,7 @@ public class DescriptorsToProtobuf {
     return builder.build();
   }
 
-  public static DescriptorsProtos.ParameterDescriptor toProtobuf(FunctionDescriptor.Parameter parameterDescriptor) {
+  private static DescriptorsProtos.ParameterDescriptor toProtobuf(FunctionDescriptor.Parameter parameterDescriptor) {
     DescriptorsProtos.ParameterDescriptor.Builder builder = DescriptorsProtos.ParameterDescriptor.newBuilder()
       .setHasDefaultValue(parameterDescriptor.hasDefaultValue())
       .setIsKeywordVariadic(parameterDescriptor.isKeywordVariadic())
@@ -152,6 +156,10 @@ public class DescriptorsToProtobuf {
     if (annotatedType != null) {
       builder.setAnnotatedType(annotatedType);
     }
+    TypeAnnotationDescriptor typeDescriptor = parameterDescriptor.descriptor();
+    if (typeDescriptor != null) {
+      builder.setTypeAnnotationDescriptor(toProtobuf(typeDescriptor));
+    }
     LocationInFile location = parameterDescriptor.location();
     if (location != null) {
       builder.setDefinitionLocation(toProtobuf(location));
@@ -159,7 +167,8 @@ public class DescriptorsToProtobuf {
     return builder.build();
   }
 
-  public static DescriptorsProtos.VarDescriptor toProtobuf(VariableDescriptor variableDescriptor) {
+  @VisibleForTesting
+  static DescriptorsProtos.VarDescriptor toProtobuf(VariableDescriptor variableDescriptor) {
     DescriptorsProtos.VarDescriptor.Builder builder = DescriptorsProtos.VarDescriptor.newBuilder();
     builder.setName(variableDescriptor.name());
     String fullyQualifiedName = variableDescriptor.fullyQualifiedName();
@@ -173,7 +182,7 @@ public class DescriptorsToProtobuf {
     return builder.build();
   }
 
-  public static DescriptorsProtos.LocationInFile toProtobuf(LocationInFile locationInFile) {
+  private static DescriptorsProtos.LocationInFile toProtobuf(LocationInFile locationInFile) {
     return DescriptorsProtos.LocationInFile.newBuilder()
       .setFileId(locationInFile.fileId())
       .setStartLine(locationInFile.startLine())
@@ -181,6 +190,19 @@ public class DescriptorsToProtobuf {
       .setEndLine(locationInFile.endLine())
       .setEndLineOffset(locationInFile.endLineOffset())
       .build();
+  }
+
+  private static SymbolsProtos.Type toProtobuf(TypeAnnotationDescriptor typeAnnotationDescriptor) {
+    SymbolsProtos.Type.Builder builder = SymbolsProtos.Type.newBuilder()
+      .setPrettyPrintedName(typeAnnotationDescriptor.prettyPrintedName())
+      .setKind(DescriptorUtils.typeAnnotationKindToSymbolKind(typeAnnotationDescriptor.kind()))
+      .addAllArgs(typeAnnotationDescriptor.args().stream().map(DescriptorsToProtobuf::toProtobuf).toList())
+      .setIsSelf(typeAnnotationDescriptor.isSelf());
+    String fullyQualifiedName = typeAnnotationDescriptor.fullyQualifiedName();
+    if (fullyQualifiedName != null) {
+      builder.setFullyQualifiedName(fullyQualifiedName);
+    }
+    return builder.build();
   }
 
   public static Set<Descriptor> fromProtobuf(DescriptorsProtos.ModuleDescriptor moduleDescriptorProto) {
@@ -192,7 +214,7 @@ public class DescriptorsToProtobuf {
     return descriptors;
   }
 
-  public static AmbiguousDescriptor fromProtobuf(DescriptorsProtos.AmbiguousDescriptor ambiguousDescriptor) {
+  private static AmbiguousDescriptor fromProtobuf(DescriptorsProtos.AmbiguousDescriptor ambiguousDescriptor) {
     String fullyQualifiedName = ambiguousDescriptor.hasFullyQualifiedName() ? ambiguousDescriptor.getFullyQualifiedName() : null;
     Set<Descriptor> descriptors = new HashSet<>();
     ambiguousDescriptor.getClassDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
@@ -201,11 +223,10 @@ public class DescriptorsToProtobuf {
     return new AmbiguousDescriptor(
       ambiguousDescriptor.getName(),
       fullyQualifiedName,
-      descriptors
-    );
+      descriptors);
   }
 
-  public static ClassDescriptor fromProtobuf(DescriptorsProtos.ClassDescriptor classDescriptorProto) {
+  private static ClassDescriptor fromProtobuf(DescriptorsProtos.ClassDescriptor classDescriptorProto) {
     String metaclassFQN = classDescriptorProto.hasMetaClassFQN() ? classDescriptorProto.getMetaClassFQN() : null;
     LocationInFile definitionLocation = classDescriptorProto.hasDefinitionLocation() ? fromProtobuf(classDescriptorProto.getDefinitionLocation()) : null;
     String fullyQualifiedName = classDescriptorProto.getFullyQualifiedName();
@@ -228,7 +249,7 @@ public class DescriptorsToProtobuf {
       .build();
   }
 
-  public static FunctionDescriptor fromProtobuf(DescriptorsProtos.FunctionDescriptor functionDescriptorProto) {
+  private static FunctionDescriptor fromProtobuf(DescriptorsProtos.FunctionDescriptor functionDescriptorProto) {
     String fullyQualifiedName = functionDescriptorProto.getFullyQualifiedName();
     List<FunctionDescriptor.Parameter> parameters = new ArrayList<>();
     functionDescriptorProto.getParametersList().forEach(proto -> parameters.add(fromProtobuf(proto)));
@@ -243,43 +264,63 @@ public class DescriptorsToProtobuf {
       new ArrayList<>(functionDescriptorProto.getDecoratorsList()),
       functionDescriptorProto.getHasDecorators(),
       definitionLocation,
-      annotatedReturnTypeName
-    );
+      annotatedReturnTypeName,
+      // TypeAnnotationDescriptor is not serialized in protobuf
+      null);
   }
 
-  public static FunctionDescriptor.Parameter fromProtobuf(DescriptorsProtos.ParameterDescriptor parameterDescriptorProto) {
+  private static FunctionDescriptor.Parameter fromProtobuf(DescriptorsProtos.ParameterDescriptor parameterDescriptorProto) {
     String name = parameterDescriptorProto.hasName() ? parameterDescriptorProto.getName() : null;
     String annotatedType = parameterDescriptorProto.hasAnnotatedType() ? parameterDescriptorProto.getAnnotatedType() : null;
     LocationInFile location = parameterDescriptorProto.hasDefinitionLocation() ? fromProtobuf(parameterDescriptorProto.getDefinitionLocation()) : null;
+    TypeAnnotationDescriptor typeAnnotationDescriptor = parameterDescriptorProto.hasTypeAnnotationDescriptor()
+      ? fromProtobuf(parameterDescriptorProto.getTypeAnnotationDescriptor())
+      : null;
     return new FunctionDescriptor.Parameter(
       name,
       annotatedType,
+      typeAnnotationDescriptor,
       parameterDescriptorProto.getHasDefaultValue(),
       parameterDescriptorProto.getIsKeywordOnly(),
       parameterDescriptorProto.getIsPositionalOnly(),
       parameterDescriptorProto.getIsPositionalVariadic(),
       parameterDescriptorProto.getIsKeywordVariadic(),
-      location
-    );
+      location);
   }
 
-  public static VariableDescriptor fromProtobuf(DescriptorsProtos.VarDescriptor varDescriptorProto) {
+  @VisibleForTesting
+  static VariableDescriptor fromProtobuf(DescriptorsProtos.VarDescriptor varDescriptorProto) {
     String fullyQualifiedName = varDescriptorProto.hasFullyQualifiedName() ? varDescriptorProto.getFullyQualifiedName() : null;
     String annotatedType = varDescriptorProto.hasAnnotatedType() ? varDescriptorProto.getAnnotatedType() : null;
     return new VariableDescriptor(
       varDescriptorProto.getName(),
       fullyQualifiedName,
-      annotatedType
-    );
+      annotatedType);
   }
 
-  public static LocationInFile fromProtobuf(DescriptorsProtos.LocationInFile locationInFileProto) {
+  private static LocationInFile fromProtobuf(DescriptorsProtos.LocationInFile locationInFileProto) {
     return new LocationInFile(
       locationInFileProto.getFileId(),
       locationInFileProto.getStartLine(),
       locationInFileProto.getStartLineOffset(),
       locationInFileProto.getEndLine(),
-      locationInFileProto.getEndLineOffset()
-    );
+      locationInFileProto.getEndLineOffset());
+  }
+
+  @CheckForNull
+  private static TypeAnnotationDescriptor fromProtobuf(SymbolsProtos.Type typeProto) {
+    String fullyQualifiedName = typeProto.hasFullyQualifiedName() ? typeProto.getFullyQualifiedName() : null;
+    var kind = DescriptorUtils.symbolTypeKindToTypeAnnotationKind(typeProto.getKind());
+    if (kind == null) {
+      return null;
+    }
+    List<TypeAnnotationDescriptor> args = new ArrayList<>();
+    typeProto.getArgsList().forEach(proto -> args.add(fromProtobuf(proto)));
+    return new TypeAnnotationDescriptor(
+      typeProto.getPrettyPrintedName(),
+      kind,
+      args,
+      fullyQualifiedName,
+      typeProto.getIsSelf());
   }
 }

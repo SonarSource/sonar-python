@@ -17,32 +17,39 @@
 package org.sonar.python.semantic.v2.converter;
 
 import java.util.Optional;
-import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.ParameterV2;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.python.index.FunctionDescriptor;
-import org.sonar.python.types.v2.LazyTypeWrapper;
-import org.sonar.python.types.v2.SimpleTypeWrapper;
 
 public class ParameterConverter {
 
-  public ParameterV2 convert(ConversionContext ctx, FunctionDescriptor.Parameter parameter) {
-    var typeWrapper = Optional.ofNullable(parameter.annotatedType())
-      .map(fqn -> (PythonType) ctx.lazyTypesContext().getOrCreateLazyType(fqn))
-      .map(lt -> (TypeWrapper) new LazyTypeWrapper(lt))
-      .orElseGet(() -> new SimpleTypeWrapper(PythonType.UNKNOWN));
+  private final TypeAnnotationToPythonTypeConverter typeAnnotationConverter = new TypeAnnotationToPythonTypeConverter();
 
-    var type = ObjectType.Builder.fromTypeWrapper(typeWrapper).build();
+  public ParameterV2 convert(ConversionContext ctx, FunctionDescriptor.Parameter parameter) {
+    // Prefer TypeAnnotationDescriptor if available, otherwise use legacy string-based approach
+    var type = getTypeFromDescriptor(ctx, parameter)
+      .or(() -> getTypeFromFqn(ctx, parameter))
+      .orElseGet(() -> PythonType.UNKNOWN);
 
     return new ParameterV2(parameter.name(),
-      new SimpleTypeWrapper(type),
+      TypeWrapper.of(type),
       parameter.hasDefaultValue(),
       parameter.isKeywordOnly(),
       parameter.isPositionalOnly(),
       parameter.isKeywordVariadic(),
       parameter.isPositionalVariadic(),
       parameter.location());
+  }
+
+  private Optional<PythonType> getTypeFromDescriptor(ConversionContext ctx, FunctionDescriptor.Parameter parameter) {
+    return Optional.ofNullable(parameter.descriptor())
+      .map(typeAnnotationDescriptor -> typeAnnotationConverter.convert(ctx, typeAnnotationDescriptor));
+  }
+
+  private static Optional<PythonType> getTypeFromFqn(ConversionContext ctx, FunctionDescriptor.Parameter parameter) {
+    return Optional.ofNullable(parameter.annotatedType())
+      .map(fqn -> (PythonType) ctx.lazyTypesContext().getOrCreateLazyType(fqn));
   }
 
 }

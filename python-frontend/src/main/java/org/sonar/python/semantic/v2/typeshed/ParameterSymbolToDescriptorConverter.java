@@ -21,8 +21,12 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 
 public class ParameterSymbolToDescriptorConverter {
 
+  private final TypeSymbolToDescriptorConverter typeConverter = new TypeSymbolToDescriptorConverter();
+
   FunctionDescriptor.Parameter convert(SymbolsProtos.ParameterSymbol parameter) {
     var annotatedType = TypeShedUtils.getTypesNormalizedFqn(parameter.getTypeAnnotation());
+    var typeAnnotationDescriptor = parameter.hasTypeAnnotation() ?
+      typeConverter.convert(parameter.getTypeAnnotation()) : null;
     var isKeywordOnly = parameter.getKind() == SymbolsProtos.ParameterKind.KEYWORD_ONLY;
     var isPositionalOnly = parameter.getKind() == SymbolsProtos.ParameterKind.POSITIONAL_ONLY;
     var isPositionalVariadic = parameter.getKind() == SymbolsProtos.ParameterKind.VAR_POSITIONAL;
@@ -31,6 +35,7 @@ public class ParameterSymbolToDescriptorConverter {
     return new FunctionDescriptor.Parameter(
       parameter.getName(),
       annotatedType,
+      typeAnnotationDescriptor,
       parameter.getHasDefault(),
       isKeywordOnly,
       isPositionalOnly,

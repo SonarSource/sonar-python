@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.ParameterV2;
@@ -37,6 +38,7 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
@@ -90,7 +92,7 @@ public class PythonTypeToDescriptorConverter {
   }
 
   private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ObjectType objectType) {
-    return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), typeFqn(moduleFqn, objectType.unwrappedType()));
+    return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), FullyQualifiedNameHelper.getFullyQualifiedName(objectType.unwrappedType()).orElse(null));
   }
 
   private static Descriptor convert(String moduleFqn, FunctionType type) {
@@ -103,7 +105,7 @@ public class PythonTypeToDescriptorConverter {
     var decorators = type.decorators()
       .stream()
       .map(TypeWrapper::type)
-      .map(decorator -> typeFqn(moduleFqn, decorator))
+      .map(decorator -> FullyQualifiedNameHelper.getFullyQualifiedName(decorator).orElse(null))
       .filter(Objects::nonNull)
       .toList();
 
@@ -139,9 +141,9 @@ public class PythonTypeToDescriptorConverter {
     var hasSuperClassWithoutDescriptor = false;
     var superClasses = new ArrayList<String>();
     for (var superClassWrapper : type.superClasses()) {
-      var superClassFqn = typeFqn(moduleFqn, superClassWrapper.type());
-      if (superClassFqn != null) {
-        superClasses.add(superClassFqn);
+      var superClassFqn = FullyQualifiedNameHelper.getFullyQualifiedName(superClassWrapper.type());
+      if (superClassFqn.isPresent()) {
+        superClasses.add(superClassFqn.get());
       } else {
         hasSuperClassWithoutDescriptor = true;
       }
@@ -149,7 +151,7 @@ public class PythonTypeToDescriptorConverter {
 
     var metaclassFQN = type.metaClasses()
       .stream()
-      .map(metaClass -> typeFqn(moduleFqn, metaClass))
+      .map(metaClass -> FullyQualifiedNameHelper.getFullyQualifiedName(metaClass).orElse(null))
       .filter(Objects::nonNull)
       .findFirst()
       .orElse(null);
@@ -185,11 +187,15 @@ public class PythonTypeToDescriptorConverter {
   }
 
   private static FunctionDescriptor.Parameter convert(String moduleFqn, ParameterV2 parameter) {
-    var type = parameter.declaredType().type().unwrappedType();
-    var annotatedType = typeFqn(moduleFqn, type);
+    var type = parameter.declaredType().type();
+    var isSelf = type instanceof SelfType;
+    var unwrappedType = type.unwrappedType();
+    var annotatedType = FullyQualifiedNameHelper.getFullyQualifiedName(unwrappedType).orElse(null);
+    var typeAnnotationDescriptor = createTypeAnnotationDescriptor(unwrappedType, isSelf);
 
     return new FunctionDescriptor.Parameter(parameter.name(),
       annotatedType,
+      typeAnnotationDescriptor,
       parameter.hasDefaultValue(),
       parameter.isKeywordOnly(),
       parameter.isPositionalOnly(),
@@ -198,23 +204,24 @@ public class PythonTypeToDescriptorConverter {
       parameter.location());
   }
 
-  @CheckForNull
-  private static String typeFqn(String moduleFqn, PythonType type) {
-    if (type instanceof UnknownType.UnresolvedImportType importType) {
-      return importType.importPath();
-    } else if (type instanceof ClassType classType) {
-      return classType.fullyQualifiedName();
-    } else if (type instanceof FunctionType functionType) {
-      return functionType.fullyQualifiedName();
-    }
-    return null;
-  }
-
   private static String symbolFqn(String moduleFqn, String symbolName) {
     return moduleFqn + "." + symbolName;
   }
 
   private static boolean usagesContainAssignment(List<UsageV2> symbolUsages) {
     return symbolUsages.stream().anyMatch(u -> u.kind().equals(UsageV2.Kind.ASSIGNMENT_LHS));
+  }
+
+  @CheckForNull
+  private static TypeAnnotationDescriptor createTypeAnnotationDescriptor(PythonType type, boolean isSelf) {
+    if (type instanceof ClassType classType) {
+      return new TypeAnnotationDescriptor(classType.name(), TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), classType.fullyQualifiedName(), isSelf);
+    } else if (type instanceof FunctionType functionType) {
+      return new TypeAnnotationDescriptor(functionType.name(), TypeAnnotationDescriptor.TypeKind.CALLABLE, List.of(), functionType.fullyQualifiedName(), false);
+    } else if (type instanceof UnknownType.UnresolvedImportType importType) {
+      return new TypeAnnotationDescriptor(importType.importPath(), TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), 
+          FullyQualifiedNameHelper.getFullyQualifiedName(importType).orElse(null), false);
+    }
+    return null;
   }
 }
