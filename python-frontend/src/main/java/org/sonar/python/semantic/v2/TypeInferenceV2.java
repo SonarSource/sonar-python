@@ -35,20 +35,19 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.ModuleType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.types.AstBasedTypeInference;
 import org.sonar.python.semantic.v2.types.FlowSensitiveTypeInference;
 import org.sonar.python.semantic.v2.types.Propagation;
 import org.sonar.python.semantic.v2.types.PropagationVisitor;
 import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
-import org.sonar.python.semantic.v2.types.TrivialTypePropagationVisitor;
 import org.sonar.python.semantic.v2.types.TryStatementVisitor;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.plugins.python.api.types.v2.ModuleType;
-import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.TypeWrapper;
-import org.sonar.plugins.python.api.types.v2.UnionType;
 
 public class TypeInferenceV2 {
 
@@ -107,7 +106,6 @@ public class TypeInferenceV2 {
     var trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile, fullyQualifiedModuleName);
     this.importedModulesFQN = trivialTypeInferenceVisitor.importedModulesFQN();
     fileInput.accept(trivialTypeInferenceVisitor);
-    fileInput.accept(new TrivialTypePropagationVisitor(projectLevelTypeTable));
     return inferTypesAndMemberAccessSymbols(fileInput);
   }
 
