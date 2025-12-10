@@ -18,7 +18,6 @@ package org.sonar.python.tree;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,14 +38,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.plugins.python.api.types.v2.ClassType;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
-import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.plugins.python.api.types.v2.TypeOrigin;
-import org.sonar.plugins.python.api.types.v2.TypeSource;
-import org.sonar.plugins.python.api.types.v2.UnionType;
-import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.types.DeclaredType;
@@ -62,12 +54,18 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
   private final ArgList argumentList;
   private final Token leftPar;
   private final Token rightPar;
+  @Nullable
+  private PythonType overriddenTypeV2 = null;
 
   public CallExpressionImpl(Expression callee, @Nullable ArgList argumentList, Token leftPar, Token rightPar) {
     this.callee = callee;
     this.argumentList = argumentList;
     this.leftPar = leftPar;
     this.rightPar = rightPar;
+  }
+
+  public void typeV2(PythonType type) {
+    this.overriddenTypeV2 = type;
   }
 
   @Override
@@ -188,63 +186,6 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
 
   @Override
   public PythonType typeV2() {
-    PythonType calleeType = callee().typeV2();
-    TypeSource typeSource = computeTypeSource(calleeType);
-    PythonType pythonType = returnTypeOfCall(calleeType);
-    if (pythonType instanceof ObjectType objectType) {
-      return ObjectType.Builder.fromType(objectType)
-        .withTypeSource(typeSource)
-        .build();
-    }
-    return pythonType;
-  }
-
-  private TypeSource computeTypeSource(PythonType calleeType) {
-    if (isCalleeLocallyDefinedFunction(calleeType)) {
-      return TypeSource.TYPE_HINT;
-    }
-    return calleeTypeSource();
-  }
-
-  boolean isCalleeLocallyDefinedFunction(PythonType pythonType) {
-    if (pythonType instanceof FunctionType functionType) {
-      return functionType.typeOrigin() == TypeOrigin.LOCAL;
-    }
-    if (pythonType instanceof UnionType unionType) {
-      return unionType.candidates().stream().anyMatch(this::isCalleeLocallyDefinedFunction);
-    }
-    return false;
-  }
-
-  static PythonType returnTypeOfCall(PythonType calleeType) {
-    if (calleeType instanceof ClassType classType) {
-      return ObjectType.fromType(classType);
-    }
-    if (calleeType instanceof FunctionType functionType) {
-      return functionType.returnType();
-    }
-    if (calleeType instanceof UnionType unionType) {
-      Set<PythonType> types = new HashSet<>();
-      for (PythonType candidate : unionType.candidates()) {
-        PythonType typeOfCandidate = returnTypeOfCall(candidate);
-        if (typeOfCandidate instanceof UnknownType) {
-          return PythonType.UNKNOWN;
-        }
-        types.add(typeOfCandidate);
-      }
-      return UnionType.or(types);
-    }
-    if (calleeType instanceof ObjectType objectType) {
-      Optional<PythonType> pythonType = objectType.resolveMember("__call__");
-      return pythonType.map(CallExpressionImpl::returnTypeOfCall).orElse(PythonType.UNKNOWN);
-    }
-    return PythonType.UNKNOWN;
-  }
-
-  TypeSource calleeTypeSource() {
-    if (callee() instanceof QualifiedExpression qualifiedExpression) {
-      return qualifiedExpression.qualifier().typeV2().typeSource();
-    }
-    return callee().typeV2().typeSource();
+    return overriddenTypeV2 != null ? overriddenTypeV2 : PythonType.UNKNOWN;
   }
 }

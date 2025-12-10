@@ -19,6 +19,7 @@ package org.sonar.python.semantic.v2.types;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
@@ -29,9 +30,11 @@ import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.tree.BinaryExpressionImpl;
+import org.sonar.python.tree.CallExpressionImpl;
 import org.sonar.python.tree.UnaryExpressionImpl;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeUtils;
+import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
   private final TypeCheckBuilder isBooleanTypeCheck;
@@ -42,6 +45,8 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
   private final PythonType intType;
   private final PythonType boolType;
 
+  private final TypePredicateContext typePredicateContext;
+
   public TrivialTypePropagationVisitor(TypeTable typeTable) {
     this.isBooleanTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.BOOL);
     this.isIntTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.INT);
@@ -51,6 +56,8 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     var builtins = typeTable.getBuiltinsModule();
     this.intType = builtins.resolveMember(BuiltinTypes.INT).orElse(PythonType.UNKNOWN);
     this.boolType = builtins.resolveMember(BuiltinTypes.BOOL).orElse(PythonType.UNKNOWN);
+
+    this.typePredicateContext = TypePredicateContext.of(typeTable);
   }
 
   @Override
@@ -69,6 +76,15 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     if (binaryExpression instanceof BinaryExpressionImpl binaryExpressionImpl) {
       var type = calculateBinaryExpressionType(binaryExpression);
       binaryExpressionImpl.typeV2(type);
+    }
+  }
+
+  @Override
+  public void visitCallExpression(CallExpression callExpr) {
+    super.visitCallExpression(callExpr);
+    if (callExpr instanceof CallExpressionImpl callExprImpl) {
+      PythonType type = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+      callExprImpl.typeV2(type);
     }
   }
 
@@ -141,4 +157,5 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     }
     return ObjectType.fromType(type);
   }
+
 }

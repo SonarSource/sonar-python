@@ -79,7 +79,6 @@ import org.sonar.python.tree.ExpressionStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.v2.LazyType;
-import org.sonar.python.types.v2.SimpleTypeWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
@@ -1003,20 +1002,13 @@ public class TypeInferenceV2Test {
 
   @Test
   void typeSourceIsExactByDefault() {
-    FileInput fileInput = inferTypes("""
-      random[2]()
+    // Test that when calling a function from stub, the return type is computed correctly
+    FileInput root = inferTypes("""
+      def foo() -> int: ...
+      foo()
       """);
-    CallExpression callExpression = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0));
-
-    CallExpression callExpressionSpy = Mockito.spy(callExpression);
-    Expression calleeSpy = Mockito.spy(callExpression.callee());
-    FunctionType functionType = new FunctionType("foo", "my_package.foo", List.of(), List.of(), List.of(), new SimpleTypeWrapper(ObjectType.fromType(INT_TYPE)), TypeOrigin.STUB,
-        false, false, false, false, null, null);
-    Mockito.when(calleeSpy.typeV2()).thenReturn(functionType);
-    Mockito.when(callExpressionSpy.callee()).thenReturn(calleeSpy);
-
-    var resultType = callExpressionSpy.typeV2();
-    assertThat(resultType.typeSource()).isEqualTo(TypeSource.EXACT);
+    CallExpression callExpression = ((CallExpression) ((ExpressionStatement) root.statements().statements().get(1)).expressions().get(0));
+    var resultType = callExpression.typeV2();
     assertThat(resultType).isInstanceOf(ObjectType.class);
     assertThat(resultType.unwrappedType()).isEqualTo(INT_TYPE);
   }
@@ -1626,7 +1618,20 @@ public class TypeInferenceV2Test {
       def f(): pass
       f()
       """).typeV2()).isEqualTo(PythonType.UNKNOWN);
-
+    assertThat(lastExpression("""
+      def f() -> int: pass
+      f()
+      """).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("""
+      try: # try-catch activates the AstBasedTypeInference
+        pass
+      except:
+        pass
+      class A:
+        def bar(self) -> int: pass
+      def f() -> A: pass
+      f().bar()
+      """).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
     assertThat(lastExpression(
       """
         class A: pass
@@ -2999,28 +3004,6 @@ public class TypeInferenceV2Test {
 
     assertThat(callExpressionSpy.typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
-
-  @Test
-  void return_type_of_call_expression_inconsistent_3() {
-    FileInput fileInput = inferTypes(
-      """
-        foo()
-        """
-    );
-    CallExpression callExpression = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0));
-    CallExpression callExpressionSpy = Mockito.spy(callExpression);
-
-    // Inconsistent union type, should not happen
-    UnionType unionType = Mockito.mock(UnionType.class);
-    Mockito.when(unionType.candidates()).thenReturn(Set.of(INT_TYPE));
-
-    Name mock = Mockito.mock(Name.class);
-    Mockito.when(mock.typeV2()).thenReturn(unionType);
-    Mockito.doReturn(mock).when(callExpressionSpy).callee();
-
-    assertThat(callExpressionSpy.typeV2().unwrappedType()).isEqualTo(INT_TYPE);
-  }
-
 
   @Test
   void imported_symbol_call_return_type() {

@@ -41,6 +41,7 @@ import org.sonar.python.semantic.v2.types.FlowSensitiveTypeInference;
 import org.sonar.python.semantic.v2.types.Propagation;
 import org.sonar.python.semantic.v2.types.PropagationVisitor;
 import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
+import org.sonar.python.semantic.v2.types.TrivialTypePropagationVisitor;
 import org.sonar.python.semantic.v2.types.TryStatementVisitor;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.tree.TreeUtils;
@@ -106,6 +107,7 @@ public class TypeInferenceV2 {
     var trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile, fullyQualifiedModuleName);
     this.importedModulesFQN = trivialTypeInferenceVisitor.importedModulesFQN();
     fileInput.accept(trivialTypeInferenceVisitor);
+    fileInput.accept(new TrivialTypePropagationVisitor(projectLevelTypeTable));
     return inferTypesAndMemberAccessSymbols(fileInput);
   }
 

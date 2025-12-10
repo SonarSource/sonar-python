@@ -84,6 +84,7 @@ import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
+import org.sonar.python.tree.CallExpressionImpl;
 import org.sonar.python.tree.ComprehensionExpressionImpl;
 import org.sonar.python.tree.DictCompExpressionImpl;
 import org.sonar.python.tree.DictionaryLiteralImpl;
@@ -563,6 +564,10 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   @Override
   public void visitCallExpression(CallExpression callExpression) {
     super.visitCallExpression(callExpression);
+    if (callExpression instanceof CallExpressionImpl callExpressionImpl) {
+      PythonType type = CallReturnTypeCalculator.computeCallExpressionType(callExpression, typePredicateContext);
+      callExpressionImpl.typeV2(type);
+    }
     assignPossibleTypeVar(callExpression);
   }
 
