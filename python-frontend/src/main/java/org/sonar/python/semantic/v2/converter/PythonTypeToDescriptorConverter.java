@@ -71,7 +71,7 @@ public class PythonTypeToDescriptorConverter {
         // Avoid possible FPs in case of assigned bound method (SONARPY-2285)
         return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), null);
       }
-      return convert(moduleFqn, functionType);
+      return convert(functionType);
     }
     if (type instanceof SelfType selfType) {
       return convert(moduleFqn, parentFqn, symbolName, selfType);
@@ -86,20 +86,20 @@ public class PythonTypeToDescriptorConverter {
       return convert(parentFqn, symbolName, unresolvedImportType);
     }
     if (type instanceof ObjectType objectType && !moduleFqn.equals(parentFqn)) {
-      return convert(moduleFqn, parentFqn, symbolName, objectType);
+      return convert(parentFqn, symbolName, objectType);
     }
     return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), null);
   }
 
-  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ObjectType objectType) {
+  private static Descriptor convert(String parentFqn, String symbolName, ObjectType objectType) {
     return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), FullyQualifiedNameHelper.getFullyQualifiedName(objectType.unwrappedType()).orElse(null));
   }
 
-  private static Descriptor convert(String moduleFqn, FunctionType type) {
+  private static Descriptor convert(FunctionType type) {
 
     var parameters = type.parameters()
       .stream()
-      .map(parameter -> convert(moduleFqn, parameter))
+      .map(PythonTypeToDescriptorConverter::convert)
       .toList();
 
     var decorators = type.decorators()
@@ -186,7 +186,7 @@ public class PythonTypeToDescriptorConverter {
       type.importPath());
   }
 
-  private static FunctionDescriptor.Parameter convert(String moduleFqn, ParameterV2 parameter) {
+  private static FunctionDescriptor.Parameter convert(ParameterV2 parameter) {
     var type = parameter.declaredType().type();
     var isSelf = type instanceof SelfType;
     var unwrappedType = type.unwrappedType();
