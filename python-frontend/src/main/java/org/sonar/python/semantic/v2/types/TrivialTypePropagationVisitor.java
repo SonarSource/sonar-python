@@ -17,6 +17,7 @@
 package org.sonar.python.semantic.v2.types;
 
 import org.sonar.plugins.python.api.TriBool;
+import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -29,6 +30,7 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
+import org.sonar.python.tree.AwaitExpressionImpl;
 import org.sonar.python.tree.BinaryExpressionImpl;
 import org.sonar.python.tree.CallExpressionImpl;
 import org.sonar.python.tree.UnaryExpressionImpl;
@@ -46,6 +48,7 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
   private final PythonType boolType;
 
   private final TypePredicateContext typePredicateContext;
+  private final AwaitedTypeCalculator awaitedTypeCalculator;
 
   public TrivialTypePropagationVisitor(TypeTable typeTable) {
     this.isBooleanTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.BOOL);
@@ -58,6 +61,7 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     this.boolType = builtins.resolveMember(BuiltinTypes.BOOL).orElse(PythonType.UNKNOWN);
 
     this.typePredicateContext = TypePredicateContext.of(typeTable);
+    this.awaitedTypeCalculator = new AwaitedTypeCalculator(typeTable);
   }
 
   @Override
@@ -85,6 +89,16 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     if (callExpr instanceof CallExpressionImpl callExprImpl) {
       PythonType type = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
       callExprImpl.typeV2(type);
+    }
+  }
+
+  @Override
+  public void visitAwaitExpression(AwaitExpression awaitExpression) {
+    super.visitAwaitExpression(awaitExpression);
+    PythonType awaitedType = awaitExpression.expression().typeV2();
+    PythonType resultType = awaitedTypeCalculator.calculate(awaitedType);
+    if (awaitExpression instanceof AwaitExpressionImpl awaitExpressionImpl) {
+      awaitExpressionImpl.typeV2(resultType);
     }
   }
 

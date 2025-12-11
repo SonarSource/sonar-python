@@ -39,6 +39,7 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -4356,4 +4357,85 @@ public class TypeInferenceV2Test {
       """);
     assertThat(anyExpression.typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
+
+  @Test
+  void asyncFunctionCallReturnsCoroutineType() {
+    FileInput root = inferTypes("""
+      async def foo() -> int:
+        return 3
+      foo()
+      """);
+
+    CallExpression callExpression = PythonTestUtils.getFirstChild(root, t -> t.is(Tree.Kind.CALL_EXPR));
+
+    assertThat(callExpression.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOfSatisfying(ClassType.class, classType -> assertThat(classType.fullyQualifiedName()).isEqualTo("typing.Coroutine"));
+
+    assertThat(((ObjectType) callExpression.typeV2()).attributes())
+      .containsExactly(ObjectType.fromType(INT_TYPE));
+  }
+
+  @Test
+  void awaitExpressionUnpacksCoroutineType() {
+    FileInput root = inferTypes("""
+      async def foo() -> int:
+        return 3
+      await foo()
+      """);
+
+    AwaitExpression awaitExpression = PythonTestUtils.getFirstChild(root, t -> t.is(Tree.Kind.AWAIT));
+
+    assertThat(awaitExpression.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(INT_TYPE);
+  }
+
+  static Stream<Arguments> awaitExpressionReturnsUnknownTestCases() {
+    return Stream.of(
+      Arguments.of("non-coroutine return type", """
+        def regular_function() -> int:
+          return 3
+        await regular_function()
+        """),
+      Arguments.of("async function without return type annotation", """
+        async def foo():
+          return 3
+        await foo()
+        """),
+      Arguments.of("non-object type (class)", """
+        class MyClass: ...
+        await MyClass
+        """)
+    );
+  }
+
+  @ParameterizedTest(name = "await on {0} returns UNKNOWN")
+  @MethodSource("awaitExpressionReturnsUnknownTestCases")
+  void awaitExpressionReturnsUnknown(String description, String code) {
+    FileInput root = inferTypes(code);
+
+    AwaitExpression awaitExpression = PythonTestUtils.getFirstChild(root, t -> t.is(Tree.Kind.AWAIT));
+
+    assertThat(awaitExpression.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void asyncFunctionWithoutReturnTypeAnnotation() {
+    FileInput root = inferTypes("""
+      async def foo():
+        return 3
+      foo()
+      """);
+
+    CallExpression callExpression = PythonTestUtils.getFirstChild(root, t -> t.is(Tree.Kind.CALL_EXPR));
+
+    assertThat(callExpression.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOfSatisfying(ClassType.class, classType -> assertThat(classType.fullyQualifiedName()).isEqualTo("typing.Coroutine"));
+  }
+
 }

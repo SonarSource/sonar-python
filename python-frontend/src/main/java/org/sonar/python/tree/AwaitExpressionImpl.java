@@ -24,15 +24,26 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class AwaitExpressionImpl extends PyTree implements AwaitExpression {
 
   private final Token awaitToken;
   private final Expression expression;
+  private PythonType type = PythonType.UNKNOWN;
 
   public AwaitExpressionImpl(Token await, Expression expression) {
     this.awaitToken = await;
     this.expression = expression;
+  }
+
+  public void typeV2(PythonType type) {
+    this.type = type;
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return type;
   }
 
   @Override

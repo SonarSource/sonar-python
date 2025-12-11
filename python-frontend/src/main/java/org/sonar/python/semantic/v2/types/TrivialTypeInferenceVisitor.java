@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -84,6 +85,7 @@ import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
+import org.sonar.python.tree.AwaitExpressionImpl;
 import org.sonar.python.tree.CallExpressionImpl;
 import org.sonar.python.tree.ComprehensionExpressionImpl;
 import org.sonar.python.tree.DictCompExpressionImpl;
@@ -135,6 +137,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private final TypePredicateContext typePredicateContext;
 
+  private final AwaitedTypeCalculator awaitedTypeCalculator;
+
   private record Scope(PythonType type, String scopeFullyQualifiedName) {
   }
 
@@ -146,6 +150,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     this.fullyQualifiedModuleName = fullyQualifiedModuleName;
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
     this.typePredicateContext = TypePredicateContext.of(projectLevelTypeTable);
+    this.awaitedTypeCalculator = new AwaitedTypeCalculator(projectLevelTypeTable);
   }
 
   public Set<String> importedModulesFQN() {
@@ -360,10 +365,16 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       functionTypeBuilder.withOwner(owner);
     }
     TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
-    if (typeAnnotation != null) {
-      PythonType returnType = resolveTypeAnnotationExpressionType(typeAnnotation.expression(), owner);
-      functionTypeBuilder.withReturnType(returnType instanceof UnknownType ? returnType : 
-                                         ObjectType.Builder.fromType(returnType).withTypeSource(TypeSource.TYPE_HINT).build());
+    if (typeAnnotation != null || functionDef.asyncKeyword() != null) {
+      PythonType returnType = PythonType.UNKNOWN;
+      if (typeAnnotation != null) {
+        returnType = resolveTypeAnnotationExpressionType(typeAnnotation.expression(), owner);
+        if (!(returnType instanceof UnknownType)) {
+          returnType = ObjectType.Builder.fromType(returnType).withTypeSource(TypeSource.TYPE_HINT).build();
+        }
+      }
+      returnType = wrapInCoroutineIfAsync(functionDef, returnType);
+      functionTypeBuilder.withReturnType(returnType);
       functionTypeBuilder.withTypeOrigin(TypeOrigin.LOCAL);
     }
     FunctionType functionType = functionTypeBuilder.build();
@@ -376,6 +387,21 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       }
     }
     return functionType;
+  }
+
+  private PythonType wrapInCoroutineIfAsync(FunctionDef functionDef, PythonType returnType) {
+    if (functionDef.asyncKeyword() == null) {
+      return returnType;
+    }
+    PythonType coroutineType = projectLevelTypeTable.getType("typing.Coroutine");
+    if (coroutineType == PythonType.UNKNOWN) {
+      return PythonType.UNKNOWN;
+    }
+    List<PythonType> attributes = returnType == PythonType.UNKNOWN ? List.of() : List.of(returnType);
+    return ObjectType.Builder.fromType(coroutineType)
+      .withAttributes(attributes)
+      .withTypeSource(TypeSource.TYPE_HINT)
+      .build();
   }
 
   private void setSelfParameterType(FunctionDef functionDef) {
@@ -720,6 +746,14 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     if (typeChecker.typeCheckBuilder().isGeneric().check(pythonType) == TriBool.TRUE) {
       ((SubscriptionExpressionImpl) subscriptionExpression).typeV2(pythonType);
     }
+  }
+
+  @Override
+  public void visitAwaitExpression(AwaitExpression awaitExpression) {
+    super.visitAwaitExpression(awaitExpression);
+    PythonType awaitedType = awaitExpression.expression().typeV2();
+    PythonType resultType = awaitedTypeCalculator.calculate(awaitedType);
+    ((AwaitExpressionImpl) awaitExpression).typeV2(resultType);
   }
 
   @Override
