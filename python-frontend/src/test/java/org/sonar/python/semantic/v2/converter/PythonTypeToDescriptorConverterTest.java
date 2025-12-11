@@ -86,11 +86,11 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(functionDescriptor.isAsynchronous()).isTrue();
     assertThat(functionDescriptor.isInstanceMethod()).isTrue();
 
-    // SONARPY-2306 support for return type is missing in FunctionType
-    assertThat(functionDescriptor.annotatedReturnTypeName()).isNull();
-
-    // SONARPY-2306 support for type annotation is missing in FunctionType
-    assertThat(functionDescriptor.typeAnnotationDescriptor()).isNull();
+    assertThat(functionDescriptor.annotatedReturnTypeName()).isEqualTo("float");
+    assertThat(functionDescriptor.typeAnnotationDescriptor()).isNotNull();
+    assertThat(functionDescriptor.typeAnnotationDescriptor().fullyQualifiedName()).isEqualTo("float");
+    assertThat(functionDescriptor.typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(functionDescriptor.typeAnnotationDescriptor().isSelf()).isFalse();
 
     assertThat(functionDescriptor.hasDecorators()).isTrue();
     assertThat(functionDescriptor.decorators()).isNotEmpty().containsOnly("abc.abstractmethod");
@@ -411,5 +411,184 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(specialFormParam.name()).isEqualTo("special_form");
     assertThat(specialFormParam.annotatedType()).isEqualTo("special_form_type");
     assertThat(specialFormParam.descriptor()).isNull();
+  }
+
+  @Test
+  void testConvertFunctionReturnTypeWithClassType() {
+    ClassType stringClassType = new ClassType("str", "builtins.str", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    
+    FunctionType funcWithClassReturn = new FunctionType("func1",
+      "my_package.func1",
+      List.of(),
+      List.of(),
+      List.of(),
+      TypeWrapper.of(stringClassType),
+      TypeOrigin.LOCAL,
+      false,
+      false,
+      false,
+      false,
+      null,
+      location);
+
+    Descriptor descriptor = converter.convert("foo", new SymbolV2("func1"), Set.of(funcWithClassReturn));
+    
+    assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
+    FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
+    assertThat(funcDesc.annotatedReturnTypeName()).isEqualTo("builtins.str");
+    assertThat(funcDesc.typeAnnotationDescriptor()).isNotNull();
+    assertThat(funcDesc.typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(funcDesc.typeAnnotationDescriptor().fullyQualifiedName()).isEqualTo("builtins.str");
+    assertThat(funcDesc.typeAnnotationDescriptor().isSelf()).isFalse();
+  }
+
+  @Test
+  void testConvertFunctionReturnTypeWithSelfType() {
+    ClassType myClassType = new ClassType("MyClass", "my_package.MyClass", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    PythonType selfType = SelfType.of(myClassType);
+
+    FunctionType funcWithSelfReturn = new FunctionType("func2",
+      "my_package.func2",
+      List.of(),
+      List.of(),
+      List.of(),
+      TypeWrapper.of(selfType),
+      TypeOrigin.LOCAL,
+      false,
+      false,
+      false,
+      false,
+      null,
+      location);
+
+    Descriptor descriptor = converter.convert("foo", new SymbolV2("func2"), Set.of(funcWithSelfReturn));
+    
+    assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
+    FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
+    assertThat(funcDesc.annotatedReturnTypeName()).isEqualTo("my_package.MyClass");
+    assertThat(funcDesc.typeAnnotationDescriptor()).isNotNull();
+    assertThat(funcDesc.typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(funcDesc.typeAnnotationDescriptor().fullyQualifiedName()).isEqualTo("my_package.MyClass");
+    assertThat(funcDesc.typeAnnotationDescriptor().isSelf()).isTrue();
+  }
+
+  @Test
+  void testConvertFunctionReturnTypeWithCallableType() {
+    FunctionType callableType = new FunctionType("my_function", "my_package.my_function", List.of(), List.of(), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, false, false, false,
+      false, null, location);
+
+    FunctionType funcWithCallableReturn = new FunctionType("func3",
+      "my_package.func3",
+      List.of(),
+      List.of(),
+      List.of(),
+      TypeWrapper.of(callableType),
+      TypeOrigin.LOCAL,
+      false,
+      false,
+      false,
+      false,
+      null,
+      location);
+
+    Descriptor descriptor = converter.convert("foo", new SymbolV2("func3"), Set.of(funcWithCallableReturn));
+    
+    assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
+    FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
+    assertThat(funcDesc.annotatedReturnTypeName()).isEqualTo("my_package.my_function");
+    assertThat(funcDesc.typeAnnotationDescriptor()).isNotNull();
+    assertThat(funcDesc.typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.CALLABLE);
+    assertThat(funcDesc.typeAnnotationDescriptor().fullyQualifiedName()).isEqualTo("my_package.my_function");
+    assertThat(funcDesc.typeAnnotationDescriptor().isSelf()).isFalse();
+  }
+
+  @Test
+  void testConvertFunctionReturnTypeWithUnresolvedImportType() {
+    UnknownType.UnresolvedImportType unresolvedImportType = new UnknownType.UnresolvedImportType("unresolved.import.path");
+
+    FunctionType funcWithUnresolvedReturn = new FunctionType("func4",
+      "my_package.func4",
+      List.of(),
+      List.of(),
+      List.of(),
+      TypeWrapper.of(unresolvedImportType),
+      TypeOrigin.LOCAL,
+      false,
+      false,
+      false,
+      false,
+      null,
+      location);
+
+    Descriptor descriptor = converter.convert("foo", new SymbolV2("func4"), Set.of(funcWithUnresolvedReturn));
+    
+    assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
+    FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
+    assertThat(funcDesc.annotatedReturnTypeName()).isEqualTo("unresolved.import.path");
+    assertThat(funcDesc.typeAnnotationDescriptor()).isNotNull();
+    assertThat(funcDesc.typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(funcDesc.typeAnnotationDescriptor().fullyQualifiedName()).isEqualTo("unresolved.import.path");
+    assertThat(funcDesc.typeAnnotationDescriptor().isSelf()).isFalse();
+  }
+
+  @Test
+  void testConvertFunctionReturnTypeWithObjectTypeOfClassType() {
+    ClassType stringClassType = new ClassType("str", "builtins.str", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ObjectType objectType = ObjectType.fromType(stringClassType);
+    
+    FunctionType funcWithObjectReturn = new FunctionType("func5",
+      "my_package.func5",
+      List.of(),
+      List.of(),
+      List.of(),
+      TypeWrapper.of(objectType),
+      TypeOrigin.LOCAL,
+      false,
+      false,
+      false,
+      false,
+      null,
+      location);
+
+    Descriptor descriptor = converter.convert("foo", new SymbolV2("func5"), Set.of(funcWithObjectReturn));
+    
+    assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
+    FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
+    assertThat(funcDesc.annotatedReturnTypeName()).isEqualTo("builtins.str");
+    assertThat(funcDesc.typeAnnotationDescriptor()).isNotNull();
+    assertThat(funcDesc.typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(funcDesc.typeAnnotationDescriptor().fullyQualifiedName()).isEqualTo("builtins.str");
+    assertThat(funcDesc.typeAnnotationDescriptor().isSelf()).isFalse();
+  }
+
+  @Test
+  void testConvertFunctionReturnTypeWithObjectTypeOfSelfType() {
+    ClassType myClassType = new ClassType("MyClass", "my_package.MyClass", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    PythonType selfType = SelfType.of(myClassType);
+    ObjectType objectTypeOfSelfType = ObjectType.fromType(selfType);
+    
+    FunctionType funcWithObjectSelfReturn = new FunctionType("func6",
+      "my_package.func6",
+      List.of(),
+      List.of(),
+      List.of(),
+      TypeWrapper.of(objectTypeOfSelfType),
+      TypeOrigin.LOCAL,
+      false,
+      false,
+      false,
+      false,
+      null,
+      location);
+
+    Descriptor descriptor = converter.convert("foo", new SymbolV2("func6"), Set.of(funcWithObjectSelfReturn));
+    
+    assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
+    FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
+    assertThat(funcDesc.annotatedReturnTypeName()).isEqualTo("my_package.MyClass");
+    assertThat(funcDesc.typeAnnotationDescriptor()).isNotNull();
+    assertThat(funcDesc.typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(funcDesc.typeAnnotationDescriptor().fullyQualifiedName()).isEqualTo("my_package.MyClass");
+    assertThat(funcDesc.typeAnnotationDescriptor().isSelf()).isTrue();
   }
 }

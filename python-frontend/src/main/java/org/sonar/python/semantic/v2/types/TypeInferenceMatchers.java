@@ -20,6 +20,7 @@ import java.util.Arrays;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.types.v2.matchers.AnyTypePredicate;
+import org.sonar.python.types.v2.matchers.HasFQNPredicate;
 import org.sonar.python.types.v2.matchers.IsObjectSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsSelfTypePredicate;
 import org.sonar.python.types.v2.matchers.IsTypePredicate;
@@ -55,5 +56,9 @@ class TypeInferenceMatchers {
 
   public static TypePredicate isSelf() {
     return new IsSelfTypePredicate();
+  }
+
+  public static TypePredicate withFQN(String fqn) {
+    return new HasFQNPredicate(fqn);
   }
 }

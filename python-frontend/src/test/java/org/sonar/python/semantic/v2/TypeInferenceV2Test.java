@@ -2912,6 +2912,7 @@ public class TypeInferenceV2Test {
     projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
 
+    PythonType intType = projectLevelTypeTable.getBuiltinsModule().resolveMember("int").get();
     var lines = """
       from mod import foo
       foo
@@ -2922,8 +2923,52 @@ public class TypeInferenceV2Test {
     FunctionType fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(fooType.typeOrigin()).isEqualTo(TypeOrigin.LOCAL);
     PythonType xType = ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
-    // Declared return types of local functions are currently not stored in the project level symbol table
-    assertThat(xType).isEqualTo(PythonType.UNKNOWN);
+    assertThat(xType.unwrappedType()).isEqualTo(intType);
+  }
+
+
+  @Test
+  void type_project_function_with_self_return_type() {
+    FileInput tree = parseWithoutSymbols("""
+      from typing import Self
+      class A:
+        def foo(self) -> Self: ...
+      """);
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+
+    var lines = """
+      from mod import A
+
+      a = A()
+      a
+      result = a.foo()
+      result
+      """;
+    FileInput fileInput = inferTypes(lines, projectLevelTypeTable);
+
+    PythonType aType = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(aType).isInstanceOf(ObjectType.class);
+    assertThat(aType.unwrappedType()).isInstanceOf(ClassType.class);
+    ClassType classType = (ClassType) aType.unwrappedType();
+    assertThat(classType.name()).isEqualTo("A");
+    assertThat(classType.fullyQualifiedName()).isEqualTo("mod.A");
+
+    CallExpression callExpression = PythonTestUtils.getFirstChild(fileInput, t -> t  instanceof CallExpression fooCall && fooCall.callee() instanceof QualifiedExpression);
+    assertThat(callExpression.callee().typeV2())
+      .isInstanceOfSatisfying(FunctionType.class,
+        functionType -> assertThat(functionType.returnType())
+          .isInstanceOf(ObjectType.class)
+          .extracting(PythonType::unwrappedType)
+          .isInstanceOf(SelfType.class)
+          .extracting(SelfType.class::cast)
+          .extracting(SelfType::innerType)
+          .isEqualTo(classType)
+          );
+    PythonType resultType = ((ExpressionStatement) fileInput.statements().statements().get(4)).expressions().get(0).typeV2();
+    assertThat(resultType.unwrappedType()).isInstanceOf(ClassType.class);
+    assertThat(resultType.unwrappedType()).isEqualTo(classType);
   }
 
   @Test

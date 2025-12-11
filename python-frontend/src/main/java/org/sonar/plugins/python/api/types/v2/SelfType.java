@@ -105,6 +105,10 @@ public final class SelfType implements PythonType {
     return PythonType.UNKNOWN;
   }
 
+  public static PythonType fromTypeWrapper(TypeWrapper typeWrapper){
+    return new SelfType(typeWrapper);
+  }
+
   public PythonType innerType() {
     var type = typeWrapper.type();
     if (type instanceof ClassType) {

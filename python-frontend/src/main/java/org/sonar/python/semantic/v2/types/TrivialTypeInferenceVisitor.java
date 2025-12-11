@@ -118,8 +118,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private static final TypeInferenceMatcher IS_TYPING_SELF = TypeInferenceMatcher.of(
     TypeInferenceMatchers.any(
-      TypeInferenceMatchers.isType("typing.Self"),
-      TypeInferenceMatchers.isType("typing_extensions.Self")));
+      TypeInferenceMatchers.withFQN("typing.Self"),
+      TypeInferenceMatchers.withFQN("typing_extensions.Self")));
 
   private final TypeTable projectLevelTypeTable;
   private final String fileId;

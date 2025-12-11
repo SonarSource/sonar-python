@@ -139,6 +139,10 @@ public class DescriptorsToProtobuf {
     if (definitionLocation != null) {
       builder.setDefinitionLocation(toProtobuf(definitionLocation));
     }
+    TypeAnnotationDescriptor returnTypeAnnotationDescriptor = functionDescriptor.typeAnnotationDescriptor();
+    if (returnTypeAnnotationDescriptor != null) {
+      builder.setReturnTypeAnnotationDescriptor(toProtobuf(returnTypeAnnotationDescriptor));
+    }
     return builder.build();
   }
 
@@ -255,6 +259,9 @@ public class DescriptorsToProtobuf {
     functionDescriptorProto.getParametersList().forEach(proto -> parameters.add(fromProtobuf(proto)));
     LocationInFile definitionLocation = functionDescriptorProto.hasDefinitionLocation() ? fromProtobuf(functionDescriptorProto.getDefinitionLocation()) : null;
     String annotatedReturnTypeName = functionDescriptorProto.hasAnnotatedReturnType() ? functionDescriptorProto.getAnnotatedReturnType() : null;
+    TypeAnnotationDescriptor returnTypeAnnotationDescriptor = functionDescriptorProto.hasReturnTypeAnnotationDescriptor()
+      ? fromProtobuf(functionDescriptorProto.getReturnTypeAnnotationDescriptor())
+      : null;
     return new FunctionDescriptor(
       functionDescriptorProto.getName(),
       fullyQualifiedName,
@@ -265,8 +272,7 @@ public class DescriptorsToProtobuf {
       functionDescriptorProto.getHasDecorators(),
       definitionLocation,
       annotatedReturnTypeName,
-      // TypeAnnotationDescriptor is not serialized in protobuf
-      null);
+      returnTypeAnnotationDescriptor);
   }
 
   private static FunctionDescriptor.Parameter fromProtobuf(DescriptorsProtos.ParameterDescriptor parameterDescriptorProto) {

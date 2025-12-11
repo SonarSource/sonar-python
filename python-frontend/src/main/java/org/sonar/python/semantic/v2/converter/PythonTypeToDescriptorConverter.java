@@ -109,6 +109,12 @@ public class PythonTypeToDescriptorConverter {
       .filter(Objects::nonNull)
       .toList();
 
+    var returnType = type.returnType();
+    var unwrappedReturnType = returnType.unwrappedType();
+    var isSelfReturnType = containsSelfType(returnType);
+    var annotatedReturnTypeName = FullyQualifiedNameHelper.getFullyQualifiedName(unwrappedReturnType).orElse(null);
+    var returnTypeAnnotationDescriptor = createTypeAnnotationDescriptor(unwrappedReturnType, isSelfReturnType);
+
     // Using FunctionType#name and FunctionType#fullyQualifiedName instead of symbol is only accurate if the function has not been reassigned
     // This logic should be revisited when tackling SONARPY-2285
     return new FunctionDescriptor(type.name(), type.fullyQualifiedName(),
@@ -118,8 +124,12 @@ public class PythonTypeToDescriptorConverter {
       decorators,
       type.hasDecorators(),
       type.definitionLocation().orElse(null),
-      null,
-      null);
+      annotatedReturnTypeName,
+      returnTypeAnnotationDescriptor);
+  }
+
+  private static boolean containsSelfType(PythonType returnType){
+    return returnType instanceof SelfType || returnType.unwrappedType() instanceof SelfType;
   }
 
   @VisibleForTesting
@@ -188,7 +198,7 @@ public class PythonTypeToDescriptorConverter {
 
   private static FunctionDescriptor.Parameter convert(ParameterV2 parameter) {
     var type = parameter.declaredType().type();
-    var isSelf = type instanceof SelfType;
+    var isSelf = containsSelfType(type);
     var unwrappedType = type.unwrappedType();
     var annotatedType = FullyQualifiedNameHelper.getFullyQualifiedName(unwrappedType).orElse(null);
     var typeAnnotationDescriptor = createTypeAnnotationDescriptor(unwrappedType, isSelf);
@@ -214,7 +224,9 @@ public class PythonTypeToDescriptorConverter {
 
   @CheckForNull
   private static TypeAnnotationDescriptor createTypeAnnotationDescriptor(PythonType type, boolean isSelf) {
-    if (type instanceof ClassType classType) {
+    if (type instanceof SelfType selfType) {
+      return createTypeAnnotationDescriptor(selfType.innerType(), isSelf);
+    }else if (type instanceof ClassType classType) {
       return new TypeAnnotationDescriptor(classType.name(), TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), classType.fullyQualifiedName(), isSelf);
     } else if (type instanceof FunctionType functionType) {
       return new TypeAnnotationDescriptor(functionType.name(), TypeAnnotationDescriptor.TypeKind.CALLABLE, List.of(), functionType.fullyQualifiedName(), false);

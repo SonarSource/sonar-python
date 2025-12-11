@@ -169,6 +169,89 @@ class FunctionDescriptorTest {
     assertDescriptorToProtobuf(functionDescriptor);
   }
 
+  @Test
+  void protobufSerializationWithReturnTypeAnnotationDescriptor() {
+    TypeAnnotationDescriptor returnTypeDescriptor = new TypeAnnotationDescriptor(
+      "str",
+      TypeAnnotationDescriptor.TypeKind.INSTANCE,
+      List.of(),
+      "builtins.str",
+      false);
+    List<FunctionDescriptor.Parameter> parameters = new ArrayList<>();
+    FunctionDescriptor functionDescriptor = new FunctionDescriptor(
+      "foo",
+      "mod.foo",
+      parameters,
+      false,
+      false,
+      Collections.emptyList(),
+      false,
+      null,
+      "str",
+      returnTypeDescriptor);
+    assertDescriptorToProtobuf(functionDescriptor);
+  }
+
+  @Test
+  void protobufSerializationWithReturnTypeAnnotationDescriptorWithComplexType() {
+    // Test with a union type: int | str
+    TypeAnnotationDescriptor intType = new TypeAnnotationDescriptor(
+      "int",
+      TypeAnnotationDescriptor.TypeKind.INSTANCE,
+      List.of(),
+      "builtins.int",
+      false);
+    TypeAnnotationDescriptor strType = new TypeAnnotationDescriptor(
+      "str",
+      TypeAnnotationDescriptor.TypeKind.INSTANCE,
+      List.of(),
+      "builtins.str",
+      false);
+    TypeAnnotationDescriptor returnTypeDescriptor = new TypeAnnotationDescriptor(
+      "int | str",
+      TypeAnnotationDescriptor.TypeKind.UNION,
+      List.of(intType, strType),
+      null,
+      false);
+    List<FunctionDescriptor.Parameter> parameters = new ArrayList<>();
+    FunctionDescriptor functionDescriptor = new FunctionDescriptor(
+      "foo",
+      "mod.foo",
+      parameters,
+      false,
+      false,
+      Collections.emptyList(),
+      false,
+      null,
+      "int | str",
+      returnTypeDescriptor);
+    assertDescriptorToProtobuf(functionDescriptor);
+  }
+
+  @ParameterizedTest
+  @MethodSource("typeKindTestCases")
+  void protobufFunctionReturnTypeShouldHandleAllTypeKinds(TypeAnnotationDescriptor.TypeKind expectedTypeKind) {
+    TypeAnnotationDescriptor returnTypeDescriptor = new TypeAnnotationDescriptor(
+      "MyType",
+      expectedTypeKind,
+      List.of(),
+      "mytype",
+      false);
+    List<FunctionDescriptor.Parameter> parameters = new ArrayList<>();
+    FunctionDescriptor functionDescriptor = new FunctionDescriptor(
+      "foo",
+      "mod.foo",
+      parameters,
+      false,
+      false,
+      Collections.emptyList(),
+      false,
+      null,
+      null,
+      returnTypeDescriptor);
+    assertDescriptorToProtobuf(functionDescriptor);
+  }
+
   @ParameterizedTest
   @MethodSource("typeKindTestCases")
   void protobufFunctionParameterShouldHandleAllTypeKinds(TypeAnnotationDescriptor.TypeKind expectedTypeKind) {

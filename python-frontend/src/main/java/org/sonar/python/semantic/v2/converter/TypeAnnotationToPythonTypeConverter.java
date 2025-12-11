@@ -22,6 +22,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
+import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.types.v2.LazyUnionType;
 
@@ -34,6 +35,10 @@ public class TypeAnnotationToPythonTypeConverter {
         if (fullyQualifiedName == null) {
           return PythonType.UNKNOWN;
         }
+        if (Boolean.TRUE.equals(type.isSelf())) {
+
+          return SelfType.fromTypeWrapper(TypeWrapper.of(typeFromFQN(fullyQualifiedName, context)));
+        }
         // _SpecialForm is the type used for some special types, like Callable, Union, TypeVar, ...
         // It comes from CPython impl: https://github.com/python/cpython/blob/e39ae6bef2c357a88e232dcab2e4b4c0f367544b/Lib/typing.py#L439
         // This doesn't seem to be very precisely specified in typeshed, because it has special semantic.
@@ -41,7 +46,7 @@ public class TypeAnnotationToPythonTypeConverter {
         if ("typing._SpecialForm".equals(fullyQualifiedName)) {
           return PythonType.UNKNOWN;
         }
-        return fullyQualifiedName.isEmpty() ? PythonType.UNKNOWN : context.lazyTypesContext().getOrCreateLazyType(fullyQualifiedName);
+        return typeFromFQN(fullyQualifiedName, context);
       case TYPE:
         return context.lazyTypesContext().getOrCreateLazyType("type");
       case TYPE_ALIAS:
@@ -59,8 +64,8 @@ public class TypeAnnotationToPythonTypeConverter {
         // SONARPY-2179: This case only makes sense for parameter types, which are not supported yet
         return context.lazyTypesContext().getOrCreateLazyType("dict");
       case TYPE_VAR:
-        if(Boolean.TRUE.equals(type.isSelf())){
-          if(type.args().size() != 1){
+        if (Boolean.TRUE.equals(type.isSelf())) {
+          if (type.args().size() != 1) {
             return PythonType.UNKNOWN;
           }
           PythonType innerType = convert(context, type.args().get(0));
@@ -75,6 +80,10 @@ public class TypeAnnotationToPythonTypeConverter {
       default:
         return PythonType.UNKNOWN;
     }
+  }
+
+  private static PythonType typeFromFQN(String fullyQualifiedName, ConversionContext context) {
+    return fullyQualifiedName.isEmpty() ? PythonType.UNKNOWN : context.lazyTypesContext().getOrCreateLazyType(fullyQualifiedName);
   }
 
   private static final Set<String> EXCLUDING_TYPE_VAR_FQN_PATTERNS = Set.of(
