@@ -38,6 +38,7 @@ public final class FunctionType implements PythonType {
   private final boolean isAsynchronous;
   private final boolean hasDecorators;
   private final boolean isInstanceMethod;
+  private final boolean isClassMethod;
   private final boolean hasVariadicParameter;
   private final PythonType owner;
   private final LocationInFile locationInFile;
@@ -56,6 +57,7 @@ public final class FunctionType implements PythonType {
     boolean isAsynchronous,
     boolean hasDecorators,
     boolean isInstanceMethod,
+    boolean isClassMethod,
     boolean hasVariadicParameter,
     @Nullable PythonType owner,
     @Nullable LocationInFile locationInFile
@@ -70,6 +72,7 @@ public final class FunctionType implements PythonType {
     this.isAsynchronous = isAsynchronous;
     this.hasDecorators = hasDecorators;
     this.isInstanceMethod = isInstanceMethod;
+    this.isClassMethod = isClassMethod;
     this.hasVariadicParameter = hasVariadicParameter;
     this.owner = owner;
     this.locationInFile = locationInFile;
@@ -121,6 +124,10 @@ public final class FunctionType implements PythonType {
 
   public boolean isInstanceMethod() {
     return isInstanceMethod;
+  }
+
+  public boolean isClassMethod() {
+    return isClassMethod;
   }
 
   public boolean hasVariadicParameter() {

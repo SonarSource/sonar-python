@@ -117,18 +117,23 @@ class FunctionTypeTest {
 
     functionType = functionType("class A:\n  def method(self, p1): pass");
     assertThat(functionType.isInstanceMethod()).isTrue();
+    assertThat(functionType.isClassMethod()).isFalse();
 
     functionType = functionType("class A:\n  def method(*args, p1): pass");
     assertThat(functionType.isInstanceMethod()).isTrue();
+    assertThat(functionType.isClassMethod()).isFalse();
 
     functionType = functionType("class A:\n  @staticmethod\n  def method((a, b), c): pass");
     assertThat(functionType.isInstanceMethod()).isFalse();
+    assertThat(functionType.isClassMethod()).isFalse();
 
     functionType = functionType("class A:\n  @staticmethod\n  def method(p1, p2): pass");
     assertThat(functionType.isInstanceMethod()).isFalse();
+    assertThat(functionType.isClassMethod()).isFalse();
 
     functionType = functionType("class A:\n  @classmethod\n  def method(self, p1): pass");
     assertThat(functionType.isInstanceMethod()).isFalse();
+    assertThat(functionType.isClassMethod()).isTrue();
     assertThat(functionType.hasDecorators()).isTrue();
 
     functionType = functionType("class A:\n  @dec\n  def method(self, p1): pass");

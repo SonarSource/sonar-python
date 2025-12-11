@@ -121,6 +121,7 @@ public class PythonTypeToDescriptorConverter {
       parameters,
       type.isAsynchronous(),
       type.isInstanceMethod(),
+      type.isClassMethod(),
       decorators,
       type.hasDecorators(),
       type.definitionLocation().orElse(null),

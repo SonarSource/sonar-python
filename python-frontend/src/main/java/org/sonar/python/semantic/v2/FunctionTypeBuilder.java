@@ -31,14 +31,14 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.semantic.v2.typetable.TypeTable;
-import org.sonar.python.tree.TreeUtils;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ParameterV2;
 import org.sonar.plugins.python.api.types.v2.PythonType;
-import org.sonar.python.types.v2.SimpleTypeWrapper;
 import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.python.semantic.v2.typetable.TypeTable;
+import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.SimpleTypeWrapper;
 
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 
@@ -53,6 +53,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   private boolean isAsynchronous;
   private boolean hasDecorators;
   private boolean isInstanceMethod;
+  private boolean isClassMethod;
   private PythonType owner;
   private TypeWrapper returnType = TypeWrapper.UNKNOWN_TYPE_WRAPPER;
   private TypeOrigin typeOrigin = TypeOrigin.STUB;
@@ -75,6 +76,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
       .map(TypeWrapper::of)
       .toList();
     isInstanceMethod = isInstanceMethod(functionDef);
+    isClassMethod = isClassMethod(functionDef);
     ParameterList parameterList = functionDef.parameters();
     if (parameterList != null) {
       createParameterNames(parameterList.all(), fileId,  projectLevelTypeTable);
@@ -134,6 +136,11 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     return this;
   }
 
+  public FunctionTypeBuilder withClassMethod(boolean classMethod) {
+    isClassMethod = classMethod;
+    return this;
+  }
+
   public FunctionTypeBuilder withReturnType(PythonType returnType) {
     withReturnType(TypeWrapper.of(returnType));
     return this;
@@ -155,10 +162,11 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     return this;
   }
 
+  @Override
   public FunctionType build() {
     return new FunctionType(
       name, fullyQualifiedName, attributes, parameters, decorators, returnType, typeOrigin,
-      isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter, owner, definitionLocation
+      isAsynchronous, hasDecorators, isInstanceMethod, isClassMethod, hasVariadicParameter, owner, definitionLocation
     );
   }
 
@@ -167,6 +175,13 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
       .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
       .filter(Objects::nonNull)
       .noneMatch(decorator -> decorator.equals(STATIC_METHOD_DECORATOR) || decorator.equals(CLASS_METHOD_DECORATOR));
+  }
+
+  private static boolean isClassMethod(FunctionDef functionDef) {
+    return functionDef.isMethodDefinition() && functionDef.decorators().stream()
+      .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
+      .filter(Objects::nonNull)
+      .anyMatch(CLASS_METHOD_DECORATOR::equals);
   }
 
   public FunctionTypeBuilder withOwner(PythonType owner) {

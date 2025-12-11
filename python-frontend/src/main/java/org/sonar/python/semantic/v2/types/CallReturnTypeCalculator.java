@@ -20,6 +20,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
@@ -81,38 +83,50 @@ public final class CallReturnTypeCalculator {
       return returnType;
     }
 
-    // Methods not called as instance methods don't have a receiver from which the return type can be inferred
-    PythonType receiverType = getReceiverType(callExpr);
-    if (!isInstanceMethodCall(callExpr) || receiverType == PythonType.UNKNOWN) {
-      return PythonType.UNKNOWN;
+    if (isInstanceOrClassMethodCall(callExpr, typePredicateContext)) {
+      PythonType receiverType = getReceiverType(callExpr);
+      if (receiverType == PythonType.UNKNOWN) {
+        return PythonType.UNKNOWN;
+      }
+      return collapseSelfType(returnType, receiverType);
     }
 
-    return collapseSelfType(returnType, receiverType);
+    return PythonType.UNKNOWN;
   }
 
   private static boolean containsSelfType(PythonType type, TypePredicateContext typePredicateContext) {
-    return TypeInferenceMatcher.of(
-      TypeInferenceMatchers.any(
-        TypeInferenceMatchers.isSelf(),
-        TypeInferenceMatchers.isObjectSatisfying(TypeInferenceMatchers.isSelf())))
+    return TypeInferenceMatcher.of(TypeInferenceMatchers.isObjectSatisfying(TypeInferenceMatchers.isSelf()))
       .evaluate(type, typePredicateContext).isTrue();
   }
 
-  private static boolean isInstanceMethodCall(CallExpression callExpr) {
+  private static boolean isInstanceOrClassMethodCall(CallExpression callExpr, TypePredicateContext typePredicateContext) {
     PythonType calleeType = callExpr.callee().typeV2();
     if (calleeType instanceof FunctionType functionType) {
-      return functionType.isInstanceMethod();
+      return functionType.isInstanceMethod() || functionType.isClassMethod();
     }
-    return false;
+    return hasCallableMember(calleeType, typePredicateContext);
+  }
+
+  private static boolean hasCallableMember(PythonType calleeType, TypePredicateContext typePredicateContext) {
+    return TypeInferenceMatcher.of(TypeInferenceMatchers.isObjectSatisfying(TypeInferenceMatchers.hasMember("__call__")))
+      .evaluate(calleeType, typePredicateContext).isTrue();
   }
 
   private static PythonType getReceiverType(CallExpression callExpr) {
-    if (callExpr.callee() instanceof QualifiedExpression qualifiedExpr) {
+    Expression callee = callExpr.callee();
+    if (callee instanceof QualifiedExpression qualifiedExpr) {
       PythonType qualifierType = qualifiedExpr.qualifier().typeV2();
+      if (qualifierType instanceof ClassType classType) {
+        return classType;
+      }
       if (qualifierType instanceof ObjectType objectType) {
         return objectType.type();
       }
+    } else if (callee instanceof Name name && name.typeV2() instanceof ObjectType objectType) {
+      // This covers a class with a __call__ member than returns Self
+      return objectType.unwrappedType();
     }
+
     return PythonType.UNKNOWN;
   }
 

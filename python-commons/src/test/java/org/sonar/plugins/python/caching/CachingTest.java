@@ -69,7 +69,7 @@ class CachingTest {
     Caching caching = new Caching(cacheContext, CACHE_VERSION);
     Set<Descriptor> initialDescriptors = Set.of(
       new ClassDescriptor.ClassDescriptorBuilder().withName("C").withFullyQualifiedName("mod.C").build(),
-        new FunctionDescriptor("foo", "mod.foo", Collections.emptyList(), false, false, Collections.emptyList(), false, null, null),
+      new FunctionDescriptor("foo", "mod.foo", Collections.emptyList(), false, false, false, Collections.emptyList(), false, null, null),
       new VariableDescriptor("x", "mod.x", null)
     );
     caching.writeProjectLevelSymbolTableEntry("mod", initialDescriptors);
@@ -92,7 +92,7 @@ class CachingTest {
     Caching caching = new Caching(cacheContext, CACHE_VERSION);
     Set<Descriptor> initialDescriptors = Set.of(
       new ClassDescriptor.ClassDescriptorBuilder().withName("C").withFullyQualifiedName("mod.C").build(),
-        new FunctionDescriptor("foo", "mod.foo", Collections.emptyList(), false, false, Collections.emptyList(), false, null, null),
+      new FunctionDescriptor("foo", "mod.foo", Collections.emptyList(), false, false, false, Collections.emptyList(), false, null, null),
       new VariableDescriptor("x", "mod.x", null)
     );
     String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod";

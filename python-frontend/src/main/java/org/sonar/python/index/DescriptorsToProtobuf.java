@@ -129,6 +129,7 @@ public class DescriptorsToProtobuf {
       .addAllParameters(functionDescriptor.parameters().stream().map(DescriptorsToProtobuf::toProtobuf).toList())
       .setIsAsynchronous(functionDescriptor.isAsynchronous())
       .setIsInstanceMethod(functionDescriptor.isInstanceMethod())
+      .setIsClassMethod(functionDescriptor.isClassMethod())
       .addAllDecorators(functionDescriptor.decorators())
       .setHasDecorators(functionDescriptor.hasDecorators());
     String annotatedReturnTypeName = functionDescriptor.annotatedReturnTypeName();
@@ -262,17 +263,19 @@ public class DescriptorsToProtobuf {
     TypeAnnotationDescriptor returnTypeAnnotationDescriptor = functionDescriptorProto.hasReturnTypeAnnotationDescriptor()
       ? fromProtobuf(functionDescriptorProto.getReturnTypeAnnotationDescriptor())
       : null;
-    return new FunctionDescriptor(
-      functionDescriptorProto.getName(),
-      fullyQualifiedName,
-      parameters,
-      functionDescriptorProto.getIsAsynchronous(),
-      functionDescriptorProto.getIsInstanceMethod(),
-      new ArrayList<>(functionDescriptorProto.getDecoratorsList()),
-      functionDescriptorProto.getHasDecorators(),
-      definitionLocation,
-      annotatedReturnTypeName,
-      returnTypeAnnotationDescriptor);
+    return new FunctionDescriptor.FunctionDescriptorBuilder()
+      .withName(functionDescriptorProto.getName())
+      .withFullyQualifiedName(fullyQualifiedName)
+      .withParameters(parameters)
+      .withIsAsynchronous(functionDescriptorProto.getIsAsynchronous())
+      .withIsInstanceMethod(functionDescriptorProto.getIsInstanceMethod())
+      .withIsClassMethod(functionDescriptorProto.getIsClassMethod())
+      .withDecorators(new ArrayList<>(functionDescriptorProto.getDecoratorsList()))
+      .withHasDecorators(functionDescriptorProto.getHasDecorators())
+      .withDefinitionLocation(definitionLocation)
+      .withAnnotatedReturnTypeName(annotatedReturnTypeName)
+      .withTypeAnnotationDescriptor(returnTypeAnnotationDescriptor)
+      .build();
   }
 
   private static FunctionDescriptor.Parameter fromProtobuf(DescriptorsProtos.ParameterDescriptor parameterDescriptorProto) {

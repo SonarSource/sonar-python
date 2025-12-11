@@ -51,6 +51,7 @@ class FunctionSymbolToDescriptorConverterTest {
     Assertions.assertThat(descriptor.fullyQualifiedName()).isEqualTo("module.foo");
     Assertions.assertThat(descriptor.isAsynchronous()).isFalse();
     Assertions.assertThat(descriptor.isInstanceMethod()).isFalse();
+    Assertions.assertThat(descriptor.isClassMethod()).isFalse();
     Assertions.assertThat(descriptor.hasDecorators()).isTrue();
     Assertions.assertThat(descriptor.annotatedReturnTypeName()).isEqualTo("int");
     Assertions.assertThat(descriptor.parameters()).hasSize(1);
@@ -67,6 +68,7 @@ class FunctionSymbolToDescriptorConverterTest {
       .build();
     var descriptor = converter.convert(symbol, true);
     Assertions.assertThat(descriptor.isInstanceMethod()).isTrue();
+    Assertions.assertThat(descriptor.isClassMethod()).isFalse();
 
     symbol = SymbolsProtos.FunctionSymbol.newBuilder()
       .setIsClassMethod(true)
@@ -74,6 +76,7 @@ class FunctionSymbolToDescriptorConverterTest {
       .build();
     descriptor = converter.convert(symbol, true);
     Assertions.assertThat(descriptor.isInstanceMethod()).isFalse();
+    Assertions.assertThat(descriptor.isClassMethod()).isTrue();
 
     symbol = SymbolsProtos.FunctionSymbol.newBuilder()
       .setIsClassMethod(false)
@@ -81,6 +84,7 @@ class FunctionSymbolToDescriptorConverterTest {
       .build();
     descriptor = converter.convert(symbol, true);
     Assertions.assertThat(descriptor.isInstanceMethod()).isFalse();
+    Assertions.assertThat(descriptor.isClassMethod()).isFalse();
 
     symbol = SymbolsProtos.FunctionSymbol.newBuilder()
       .setIsClassMethod(true)
@@ -88,6 +92,7 @@ class FunctionSymbolToDescriptorConverterTest {
       .build();
     descriptor = converter.convert(symbol, true);
     Assertions.assertThat(descriptor.isInstanceMethod()).isFalse();
+    Assertions.assertThat(descriptor.isClassMethod()).isFalse();
 
     symbol = SymbolsProtos.FunctionSymbol.newBuilder()
       .setIsClassMethod(true)
@@ -95,6 +100,7 @@ class FunctionSymbolToDescriptorConverterTest {
       .build();
     descriptor = converter.convert(symbol, false);
     Assertions.assertThat(descriptor.isInstanceMethod()).isFalse();
+    Assertions.assertThat(descriptor.isClassMethod()).isFalse();
   }
 
 }

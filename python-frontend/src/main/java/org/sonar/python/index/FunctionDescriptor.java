@@ -30,6 +30,7 @@ public class FunctionDescriptor implements Descriptor {
   private final List<Parameter> parameters;
   private final boolean isAsynchronous;
   private final boolean isInstanceMethod;
+  private final boolean isClassMethod;
   private final List<String> decorators;
   private final boolean hasDecorators;
   @Nullable
@@ -41,19 +42,21 @@ public class FunctionDescriptor implements Descriptor {
 
 
   public FunctionDescriptor(String name, String fullyQualifiedName, List<Parameter> parameters, boolean isAsynchronous,
-    boolean isInstanceMethod, List<String> decorators, boolean hasDecorators, @Nullable LocationInFile definitionLocation, @Nullable String annotatedReturnTypeName) {
-    this(name, fullyQualifiedName, parameters, isAsynchronous, isInstanceMethod, decorators, hasDecorators, definitionLocation, annotatedReturnTypeName, null);
+    boolean isInstanceMethod, boolean isClassMethod, List<String> decorators, boolean hasDecorators,
+    @Nullable LocationInFile definitionLocation, @Nullable String annotatedReturnTypeName) {
+    this(name, fullyQualifiedName, parameters, isAsynchronous, isInstanceMethod, isClassMethod, decorators, hasDecorators, definitionLocation, annotatedReturnTypeName, null);
   }
 
   public FunctionDescriptor(String name, String fullyQualifiedName, List<Parameter> parameters, boolean isAsynchronous,
-    boolean isInstanceMethod, List<String> decorators, boolean hasDecorators, @Nullable LocationInFile definitionLocation,
-    @Nullable String annotatedReturnTypeName, @Nullable TypeAnnotationDescriptor typeAnnotationDescriptor) {
+    boolean isInstanceMethod, boolean isClassMethod, List<String> decorators, boolean hasDecorators, @Nullable LocationInFile definitionLocation,
+      @Nullable String annotatedReturnTypeName, @Nullable TypeAnnotationDescriptor typeAnnotationDescriptor) {
 
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.parameters = parameters;
     this.isAsynchronous = isAsynchronous;
     this.isInstanceMethod = isInstanceMethod;
+    this.isClassMethod = isClassMethod;
     this.decorators = decorators;
     this.hasDecorators = hasDecorators;
     this.definitionLocation = definitionLocation;
@@ -87,6 +90,10 @@ public class FunctionDescriptor implements Descriptor {
 
   public boolean isInstanceMethod() {
     return isInstanceMethod;
+  }
+
+  public boolean isClassMethod() {
+    return isClassMethod;
   }
 
   public List<String> decorators() {
@@ -188,6 +195,7 @@ public class FunctionDescriptor implements Descriptor {
     private List<Parameter> parameters = new ArrayList<>();
     private boolean isAsynchronous = false;
     private boolean isInstanceMethod = false;
+    private boolean isClassMethod = false;
     private List<String> decorators = new ArrayList<>();
     private boolean hasDecorators = false;
     private LocationInFile definitionLocation = null;
@@ -219,6 +227,11 @@ public class FunctionDescriptor implements Descriptor {
       return this;
     }
 
+    public FunctionDescriptorBuilder withIsClassMethod(boolean isClassMethod) {
+      this.isClassMethod = isClassMethod;
+      return this;
+    }
+
     public FunctionDescriptorBuilder withDecorators(List<String> decorators) {
       this.decorators = decorators;
       return this;
@@ -245,8 +258,8 @@ public class FunctionDescriptor implements Descriptor {
     }
 
     public FunctionDescriptor build() {
-      return new FunctionDescriptor(name, fullyQualifiedName, parameters, isAsynchronous, isInstanceMethod, decorators,
-        hasDecorators, definitionLocation, annotatedReturnTypeName, typeAnnotationDescriptor);
+      return new FunctionDescriptor(name, fullyQualifiedName, parameters, isAsynchronous, isInstanceMethod, isClassMethod, decorators,
+          hasDecorators, definitionLocation, annotatedReturnTypeName, typeAnnotationDescriptor);
     }
   }
 }

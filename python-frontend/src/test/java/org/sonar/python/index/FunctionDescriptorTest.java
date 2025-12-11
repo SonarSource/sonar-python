@@ -43,6 +43,7 @@ class FunctionDescriptorTest {
     assertThat(functionDescriptor.hasDecorators()).isFalse();
     assertThat(functionDescriptor.annotatedReturnTypeName()).isNull();
     assertThat(functionDescriptor.isInstanceMethod()).isFalse();
+    assertThat(functionDescriptor.isClassMethod()).isFalse();
     assertThat(functionDescriptor.isAsynchronous()).isFalse();
     assertThat(functionDescriptor.parameters()).hasSize(1);
     assertDescriptorToProtobuf(functionDescriptor);
@@ -148,6 +149,29 @@ class FunctionDescriptorTest {
       "class A:",
       "  def foo(self): ...");
     assertThat(functionDescriptor.isInstanceMethod()).isTrue();
+    assertThat(functionDescriptor.isClassMethod()).isFalse();
+    assertDescriptorToProtobuf(functionDescriptor);
+  }
+
+  @Test
+  void classMethod() {
+    FunctionDescriptor functionDescriptor = lastFunctionDescriptor(
+      "class A:",
+      "  @classmethod",
+      "  def foo(cls): ...");
+    assertThat(functionDescriptor.isInstanceMethod()).isFalse();
+    assertThat(functionDescriptor.isClassMethod()).isTrue();
+    assertDescriptorToProtobuf(functionDescriptor);
+  }
+
+  @Test
+  void staticMethod() {
+    FunctionDescriptor functionDescriptor = lastFunctionDescriptor(
+      "class A:",
+      "  @staticmethod",
+      "  def foo(): ...");
+    assertThat(functionDescriptor.isInstanceMethod()).isFalse();
+    assertThat(functionDescriptor.isClassMethod()).isFalse();
     assertDescriptorToProtobuf(functionDescriptor);
   }
 
@@ -162,7 +186,8 @@ class FunctionDescriptorTest {
       parameters,
       false,
       false,
-      Collections.emptyList(),
+      false,
+        Collections.emptyList(),
       false,
       null,
       "str");
@@ -184,7 +209,8 @@ class FunctionDescriptorTest {
       parameters,
       false,
       false,
-      Collections.emptyList(),
+      false,
+        Collections.emptyList(),
       false,
       null,
       "str",
@@ -220,7 +246,8 @@ class FunctionDescriptorTest {
       parameters,
       false,
       false,
-      Collections.emptyList(),
+      false,
+        Collections.emptyList(),
       false,
       null,
       "int | str",
@@ -244,6 +271,7 @@ class FunctionDescriptorTest {
       parameters,
       false,
       false,
+      false,
       Collections.emptyList(),
       false,
       null,
@@ -262,6 +290,7 @@ class FunctionDescriptorTest {
       "foo",
       "mod.foo",
       parameters,
+      false,
       false,
       false,
       Collections.emptyList(),

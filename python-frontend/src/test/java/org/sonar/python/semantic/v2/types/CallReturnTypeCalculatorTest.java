@@ -157,7 +157,10 @@ class CallReturnTypeCalculatorTest {
     CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
 
     PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
-    assertThat(result).isSameAs(PythonType.UNKNOWN);
+    assertThat(result)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOf(ClassType.class);
   }
 
   @Test
@@ -234,6 +237,91 @@ class CallReturnTypeCalculatorTest {
     PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
     assertThat(result).isInstanceOf(ObjectType.class);
     assertThat(result.unwrappedType()).isEqualTo(TypesTestUtils.INT_TYPE);
+  }
+
+  @Test
+  void computeCallExpressionType_selfType_collapsedForClassMethod() {
+    FileInput fileInput = parseAndInferTypes("""
+      from typing import Self
+      class A:
+        @classmethod
+        def foo(cls) -> Self: return cls()
+      A.foo()
+      """);
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+    ClassDef classDef = getFirstDescendant(fileInput, ClassDef.class::isInstance);
+    ClassType classA = (ClassType) classDef.name().typeV2();
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+
+    assertThat(result).isInstanceOf(ObjectType.class);
+    ObjectType objectType = (ObjectType) result;
+    assertThat(objectType.type()).isEqualTo(classA);
+    assertThat(objectType.type()).isNotInstanceOf(SelfType.class);
+  }
+
+  @Test
+  void computeCallExpressionType_selfType_collapsedForClassMethodWithInheritance() {
+    FileInput fileInput = parseAndInferTypes("""
+      from typing import Self
+      class A:
+        @classmethod
+        def foo(cls) -> Self: return cls()
+      class B(A): ...
+      B.foo()
+      """);
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+    ClassDef classDefB = getFirstDescendant(fileInput, tree -> tree instanceof ClassDef classDef && classDef.name().name().equals("B"));
+    ClassType classB = (ClassType) classDefB.name().typeV2();
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+
+    assertThat(result).isInstanceOf(ObjectType.class);
+    ObjectType objectType = (ObjectType) result;
+    assertThat(objectType.type()).isEqualTo(classB);
+  }
+
+  @Test
+  void computeCallExpressionType_selfType_classMethodCalledOnInstance() {
+    FileInput fileInput = parseAndInferTypes("""
+      from typing import Self
+      class A:
+        @classmethod
+        def foo(cls) -> Self: return cls()
+      a = A()
+      a.foo()
+      """);
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+    ClassDef classDef = getFirstDescendant(fileInput, ClassDef.class::isInstance);
+    ClassType classA = (ClassType) classDef.name().typeV2();
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+
+    assertThat(result).isInstanceOf(ObjectType.class);
+    ObjectType objectType = (ObjectType) result;
+    assertThat(objectType.type()).isEqualTo(classA);
+  }
+
+  @Test
+  void callNonCallableExpression() {
+    FileInput fileInput = parseAndInferTypes("""
+      from typing import Self
+      class MyClass:
+        def __call__(self) -> Self: ...
+      obj = MyClass()
+      obj()
+      """);
+    ClassDef classDef = getFirstDescendant(fileInput, ClassDef.class::isInstance);
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+    assertThat(result)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(classDef.name().typeV2());
   }
 }
 

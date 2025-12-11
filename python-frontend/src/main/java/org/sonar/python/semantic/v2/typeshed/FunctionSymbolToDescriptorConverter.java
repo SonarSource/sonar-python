@@ -54,11 +54,13 @@ public class FunctionSymbolToDescriptorConverter {
       .map(parameterConverter::convert)
       .toList();
     var isInstanceMethod = isParentIsAClass && !functionSymbol.getIsStatic() && !functionSymbol.getIsClassMethod();
+    var isClassMethod = isParentIsAClass && !functionSymbol.getIsStatic() && functionSymbol.getIsClassMethod();
     return new FunctionDescriptor.FunctionDescriptorBuilder()
       .withName(functionSymbol.getName())
       .withFullyQualifiedName(fullyQualifiedName)
       .withIsAsynchronous(functionSymbol.getIsAsynchronous())
       .withIsInstanceMethod(isInstanceMethod)
+      .withIsClassMethod(isClassMethod)
       .withHasDecorators(functionSymbol.getHasDecorators())
       .withAnnotatedReturnTypeName(returnType)
       .withTypeAnnotationDescriptor(typeAnnotationDescriptor)

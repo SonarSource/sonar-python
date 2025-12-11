@@ -279,11 +279,15 @@ class TrivialTypePropagationVisitorTest {
       A.foo()
       """);
     CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+    ClassDef aClassDef = getFirstDescendant(fileInput, ClassDef.class::isInstance);
 
     callExpr.accept(trivialTypePropagationVisitor);
 
     PythonType resultType = callExpr.typeV2();
-    assertThat(resultType).isSameAs(PythonType.UNKNOWN);
+    assertThat(resultType)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(aClassDef.name().typeV2());
   }
 
   @Test
@@ -332,6 +336,45 @@ class TrivialTypePropagationVisitorTest {
     PythonType resultType = callExpr.typeV2();
     assertThat(resultType).isInstanceOf(ObjectType.class);
     assertThat(((ObjectType) resultType).unwrappedType()).isEqualTo(TypesTestUtils.INT_TYPE);
+  }
+
+  @Test
+  void selfType_classMethodCall() {
+    FileInput fileInput = parseAndInferTypes("""
+      from typing import Self
+      class A:
+        @classmethod
+        def foo(cls) -> Self: ...
+      A.foo()
+      """);
+
+    ClassDef classDef = getFirstDescendant(fileInput, ClassDef.class::isInstance);
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+    callExpr.accept(trivialTypePropagationVisitor);
+
+    PythonType resultType = callExpr.typeV2();
+    assertThat(resultType)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(classDef.name().typeV2());
+  }
+
+  @Test
+  void selfType_staticMethodCall() {
+    FileInput fileInput = parseAndInferTypes("""
+      from typing import Self
+      class A:
+        @staticmethod
+        def foo() -> Self: ...
+      A.foo()
+      """);
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+    callExpr.accept(trivialTypePropagationVisitor);
+
+    PythonType resultType = callExpr.typeV2();
+    assertThat(resultType).isSameAs(PythonType.UNKNOWN);
   }
 
   @Test

@@ -74,6 +74,7 @@ class PythonTypeToDescriptorConverterTest {
       true,
       true,
       false,
+      false,
       null,
       location);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myFunction"), Set.of(functionType));
@@ -214,7 +215,7 @@ class PythonTypeToDescriptorConverterTest {
     ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper),
       List.of(intTypeWrapper.type()), true, false, location);
     FunctionType functionType = new FunctionType("functionType", "my_package.functionType", List.of(new ModuleType("bar")), List.of(), List.of(), floatTypeWrapper,
-      TypeOrigin.LOCAL, true, false, true, false, null, location);
+      TypeOrigin.LOCAL, true, false, true, false, false, null, location);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(functionType, classType));
 
     assertThat(descriptor).isInstanceOf(AmbiguousDescriptor.class);
@@ -303,7 +304,7 @@ class PythonTypeToDescriptorConverterTest {
     PythonType selfType = SelfType.of(myClassType);
     ObjectType objectType = ObjectType.fromType(stringClassType);
     FunctionType callableType = new FunctionType("my_function", "my_package.my_function", List.of(), List.of(), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, false, false, false,
-      false, null, location);
+      false, false, null, location);
 
     List<ParameterV2> parameters = List.of(
       new ParameterV2("self_param", TypeWrapper.of(selfType), false, false, false, false, false, location),
@@ -318,6 +319,7 @@ class PythonTypeToDescriptorConverterTest {
       List.of(),
       floatTypeWrapper,
       TypeOrigin.LOCAL,
+      false,
       false,
       false,
       false,
@@ -384,6 +386,7 @@ class PythonTypeToDescriptorConverterTest {
       false,
       false,
       false,
+      false,
       null,
       location);
 
@@ -428,7 +431,8 @@ class PythonTypeToDescriptorConverterTest {
       false,
       false,
       false,
-      null,
+      false,
+        null,
       location);
 
     Descriptor descriptor = converter.convert("foo", new SymbolV2("func1"), Set.of(funcWithClassReturn));
@@ -458,7 +462,8 @@ class PythonTypeToDescriptorConverterTest {
       false,
       false,
       false,
-      null,
+      false,
+        null,
       location);
 
     Descriptor descriptor = converter.convert("foo", new SymbolV2("func2"), Set.of(funcWithSelfReturn));
@@ -475,7 +480,7 @@ class PythonTypeToDescriptorConverterTest {
   @Test
   void testConvertFunctionReturnTypeWithCallableType() {
     FunctionType callableType = new FunctionType("my_function", "my_package.my_function", List.of(), List.of(), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, false, false, false,
-      false, null, location);
+      false, false, null, location);
 
     FunctionType funcWithCallableReturn = new FunctionType("func3",
       "my_package.func3",
@@ -484,6 +489,7 @@ class PythonTypeToDescriptorConverterTest {
       List.of(),
       TypeWrapper.of(callableType),
       TypeOrigin.LOCAL,
+      false,
       false,
       false,
       false,
@@ -513,6 +519,7 @@ class PythonTypeToDescriptorConverterTest {
       List.of(),
       TypeWrapper.of(unresolvedImportType),
       TypeOrigin.LOCAL,
+      false,
       false,
       false,
       false,
@@ -547,6 +554,7 @@ class PythonTypeToDescriptorConverterTest {
       false,
       false,
       false,
+      false,
       null,
       location);
 
@@ -574,6 +582,7 @@ class PythonTypeToDescriptorConverterTest {
       List.of(),
       TypeWrapper.of(objectTypeOfSelfType),
       TypeOrigin.LOCAL,
+      false,
       false,
       false,
       false,

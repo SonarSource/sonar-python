@@ -70,6 +70,7 @@ message FunctionDescriptor {
     LocationInFile definitionLocation = 8;
     optional string annotatedReturnType = 9;
     optional Type returnTypeAnnotationDescriptor = 10;
+    bool isClassMethod = 11;
 }
 
 message VarDescriptor {
