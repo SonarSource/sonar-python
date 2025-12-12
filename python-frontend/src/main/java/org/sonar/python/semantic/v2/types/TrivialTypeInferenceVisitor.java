@@ -68,6 +68,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.Member;
@@ -86,6 +87,7 @@ import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.tree.AwaitExpressionImpl;
+import org.sonar.python.tree.BinaryExpressionImpl;
 import org.sonar.python.tree.CallExpressionImpl;
 import org.sonar.python.tree.ComprehensionExpressionImpl;
 import org.sonar.python.tree.DictCompExpressionImpl;
@@ -107,7 +109,11 @@ import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 
 public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
-  private static final TypeInferenceMatcher IS_NONE_TYPE = TypeInferenceMatcher.of(TypeInferenceMatchers.isObjectOfType("NoneType"));
+  private static final TypeInferenceMatcher IS_NONE_TYPE = TypeInferenceMatcher.of(
+    TypeInferenceMatchers.isObjectOfType(BuiltinTypes.NONE_TYPE));
+
+  private static final TypeInferenceMatcher IS_NONE_OBJECT_TYPE = TypeInferenceMatcher.of(
+    TypeInferenceMatchers.isObjectSatisfying(TypeInferenceMatchers.withFQN(BuiltinTypes.NONE_TYPE)));
 
   private static final TypeInferenceMatcher IS_PRIMITIVE_TYPE = TypeInferenceMatcher.of(
     TypeInferenceMatchers.any(
@@ -236,7 +242,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitNone(NoneExpression noneExpression) {
     var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     // TODO: SONARPY-1867 multiple object types to represent str instance?
-    PythonType noneType = builtins.resolveMember("NoneType").orElse(PythonType.UNKNOWN);
+    PythonType noneType = builtins.resolveMember(BuiltinTypes.NONE_TYPE).orElse(PythonType.UNKNOWN);
     ((NoneExpressionImpl) noneExpression).typeV2(ObjectType.fromType(noneType));
   }
 
@@ -278,6 +284,30 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     var dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
     ((DictCompExpressionImpl) dictCompExpression).typeV2(ObjectType.fromType(dictType));
+  }
+
+  @Override
+  public void visitBinaryExpression(BinaryExpression binaryExpression) {
+    super.visitBinaryExpression(binaryExpression);
+    if (binaryExpression.is(Tree.Kind.BITWISE_OR) && binaryExpression instanceof BinaryExpressionImpl binaryExpressionImpl) {
+      var leftType = binaryExpression.leftOperand().typeV2();
+      var rightType = binaryExpression.rightOperand().typeV2();
+      if (isTypeExpression(leftType) && isTypeExpression(rightType)) {
+        binaryExpressionImpl.typeV2(UnionType.or(leftType, rightType));
+      }
+    }
+  }
+
+  private boolean isTypeExpression(PythonType type) {
+    if (type instanceof ClassType || type instanceof SpecialFormType) {
+      return true;
+    }
+    if (type instanceof UnionType unionType) {
+      return unionType.candidates().stream().allMatch(this::isTypeExpression);
+    }
+    // None literals have type ObjectType[NoneType], not ClassType, so we need to handle them explicitly
+    // to support type expressions like `int | None`
+    return IS_NONE_OBJECT_TYPE.evaluate(type, typePredicateContext).isTrue();
   }
 
   @Override
@@ -734,6 +764,12 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   }
 
   private PythonType resolveSelfType(PythonType type, @Nullable ClassType enclosingClassType) {
+    if (type instanceof UnionType unionType && enclosingClassType != null) {
+      var resolvedCandidates = unionType.candidates().stream()
+        .map(candidate -> isTypingSelf(candidate) ? SelfType.of(enclosingClassType) : candidate)
+        .toList();
+      return UnionType.or(resolvedCandidates);
+    }
     if (isTypingSelf(type)) {
       return Optional.ofNullable(enclosingClassType)
         .map(SelfType::of)
@@ -825,7 +861,15 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       || (t instanceof ModuleType)
       || (t instanceof UnknownType.UnresolvedImportType)
       || (t instanceof SpecialFormType)
+      || (t instanceof UnionType unionType && shouldUnionTypeBeEagerlyPropagated(unionType, name))
       || (t instanceof ObjectType && shouldObjectTypeBeEagerlyPropagated(t, name));
+  }
+
+  private boolean shouldUnionTypeBeEagerlyPropagated(UnionType unionType, Name name) {
+    return unionType.candidates().stream()
+      .filter(ObjectType.class::isInstance)
+      .filter(candidate -> !IS_NONE_TYPE.evaluate(candidate, typePredicateContext).isTrue())
+      .allMatch(candidate -> shouldObjectTypeBeEagerlyPropagated(candidate, name));
   }
 
   private boolean shouldObjectTypeBeEagerlyPropagated(PythonType type, Name name) {

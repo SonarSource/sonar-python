@@ -40,6 +40,7 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -82,6 +83,7 @@ import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.v2.LazyType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.getFirstDescendant;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
@@ -4531,12 +4533,70 @@ public class TypeInferenceV2Test {
           ...
       """);
 
-    var classDef = (ClassDef) root.statements().statements().get(2);
-    var functionDef = (FunctionDef) classDef.body().statements().get(0);
+    ClassDef classDef = getFirstDescendant(root, t -> t instanceof ClassDef cd && "A".equals(cd.name().name()));
+    var classType = (ClassType) classDef.name().typeV2();
+    FunctionDef functionDef = getFirstDescendant(root, t -> t instanceof FunctionDef fd && "foo".equals(fd.name().name()));
     var functionType = (FunctionType) functionDef.name().typeV2();
 
-    var returnType = functionType.returnType();
-    assertThat(returnType).isSameAs(PythonType.UNKNOWN); // SONARPY-3559 should change this to correctly resolve to a union type of Self and None
+    assertThat(functionType.returnType())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOfSatisfying(UnionType.class, unionType ->
+        assertThat(unionType.candidates())
+          .hasSize(2)
+          .anyMatch(c -> c instanceof SelfType st && st.innerType().equals(classType))
+          .anyMatch(ObjectType.class::isInstance)
+      );
+  }
+
+  @Test
+  void selfOrNoneTypeAliasWithoutEnclosingClass() {
+    FileInput root = inferTypes("""
+      from typing import Self
+      SelfOrNone = Self | None
+      def foo() -> SelfOrNone:
+        ...
+      """);
+
+    FunctionDef functionDef = getFirstDescendant(root, t -> t instanceof FunctionDef fd && "foo".equals(fd.name().name()));
+    var functionType = (FunctionType) functionDef.name().typeV2();
+
+    assertThat(functionType.returnType())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOfSatisfying(UnionType.class, unionType ->
+        assertThat(unionType.candidates()).noneMatch(SelfType.class::isInstance)
+      );
+  }
+
+  @Test
+  void nestedUnionTypeAlias() {
+    FileInput root = inferTypes("""
+      from typing import Self
+      MyType = Self | int | None
+      """);
+
+    BinaryExpression outerUnion = getFirstDescendant(root,
+      t -> t instanceof BinaryExpression be && be.leftOperand() instanceof BinaryExpression);
+    assertThat(outerUnion.leftOperand().typeV2()).isInstanceOf(UnionType.class);
+    assertThat(outerUnion.typeV2())
+      .isInstanceOfSatisfying(UnionType.class, union ->
+        assertThat(union.candidates()).hasSize(3)
+      );
+  }
+
+  @Test
+  void bitwiseOrOnValuesDoesNotCreateUnionType() {
+    FileInput root = inferTypes("""
+      a = True
+      b = False
+      result = a | b
+      """);
+
+    AssignmentStatement assignment = getFirstDescendant(root,
+      t -> t instanceof AssignmentStatement as && as.assignedValue().is(Tree.Kind.BITWISE_OR));
+
+    assertThat(assignment.assignedValue().typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test  

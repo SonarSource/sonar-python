@@ -109,6 +109,10 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     if (binaryExpression.is(Tree.Kind.AND, Tree.Kind.OR)) {
       return UnionType.or(leftOperand.typeV2(), rightOperand.typeV2());
     }
+    // preserve union types set by TrivialTypeInferenceVisitor
+    if (binaryExpression.is(Tree.Kind.BITWISE_OR) && binaryExpression.typeV2() instanceof UnionType) {
+      return binaryExpression.typeV2();
+    }
     if (TypeDependenciesCalculator.SAME_TYPE_PRODUCING_BINARY_EXPRESSION_KINDS.contains(kind)
         && leftOperand.typeV2() instanceof ObjectType leftObjectType
         && leftObjectType.unwrappedType() instanceof ClassType leftClassType
