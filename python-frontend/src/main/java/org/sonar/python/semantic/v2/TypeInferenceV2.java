@@ -106,6 +106,7 @@ public class TypeInferenceV2 {
     var trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile, fullyQualifiedModuleName);
     this.importedModulesFQN = trivialTypeInferenceVisitor.importedModulesFQN();
     fileInput.accept(trivialTypeInferenceVisitor);
+    trivialTypeInferenceVisitor.processDeferredTrees();
     return inferTypesAndMemberAccessSymbols(fileInput);
   }
 

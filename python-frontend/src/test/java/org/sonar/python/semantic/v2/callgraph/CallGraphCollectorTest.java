@@ -54,9 +54,10 @@ class CallGraphCollectorTest {
           print('hello')
       """);
     CallGraph callGraph = CallGraphCollector.collectCallGraph(fileInput);
-    
-    // wrong function order leads to unknown type of caller()
-    assertThat(callGraph.getUsages("my_package.mod.caller")).isEmpty();
+
+    assertThat(callGraph.getUsages("my_package.mod.caller"))
+      .extracting(CallGraphNode::fqn)
+      .containsExactly("my_package.mod.main");
   }
 
   @Test

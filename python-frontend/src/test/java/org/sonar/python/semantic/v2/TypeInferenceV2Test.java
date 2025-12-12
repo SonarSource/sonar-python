@@ -1761,7 +1761,33 @@ public class TypeInferenceV2Test {
     assertThat(expr)
       .map(Name.class::cast)
       .map(Name::typeV2)
-      .contains(PythonType.UNKNOWN); // should be object[float], see SONARPY-3528
+      .hasValueSatisfying(name -> {
+        assertThat(name)
+          .isInstanceOf(ObjectType.class)
+          .extracting(PythonType::unwrappedType)
+          .isEqualTo(FLOAT_TYPE);
+      });
+  }
+
+  @Test
+  void constant_after_usage_lambda() {
+    var fileInput = inferTypes(
+      """
+        stored_lambda = lambda: PI
+        PI = 3.14
+        """);
+
+    var piExprInLambda = TreeUtils.firstChild(fileInput, tree -> tree instanceof Name name && "PI".equals(name.name()));
+    assertThat(piExprInLambda)
+      .map(Name.class::cast)
+      .map(Name::typeV2)
+      .hasValue(PythonType.UNKNOWN);
+
+    var storedLambda = TreeUtils.firstChild(fileInput, tree -> tree instanceof Name name && "stored_lambda".equals(name.name()));
+    assertThat(storedLambda)
+      .map(Name.class::cast)
+      .map(Name::typeV2)
+      .hasValue(PythonType.UNKNOWN);
   }
 
   @Test
@@ -3204,6 +3230,16 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void import_in_function() {
+    Expression fcntlExpr = lastExpression("""
+      def foo():
+        import fcntl
+      fcntl
+      """);
+    assertThat(fcntlExpr.typeV2()).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
   void basic_imported_symbols() {
     FileInput fileInput = inferTypes(
       """
@@ -3803,8 +3839,25 @@ public class TypeInferenceV2Test {
         foo
         """);
 
-    // foo should be UNKNOWN, but is resolved to foo because wildcard imports don't respect scoping. See SONARPY-2357
-    assertThat(fooExpr.typeV2()).isNotEqualTo(PythonType.UNKNOWN);
+    assertThat(fooExpr.typeV2()).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void wildCardInInnerScopeMultiFileWithSameFunctionDefinitionConflict() {
+    FileInput fileInput = new TestProject()
+      .addModule("mod.py", "def foo(): pass")
+      .inferTypes("""
+        def bar():
+          from mod import *
+          foo
+        def foo(): pass
+        """);
+
+    FunctionDef barFunctionDef = PythonTestUtils.getFirstDescendant(fileInput, tree -> tree instanceof FunctionDef functionDef && "bar".equals(functionDef.name().name()));
+    FunctionDef fooFunctionDef = PythonTestUtils.getFirstDescendant(fileInput, tree -> tree instanceof FunctionDef functionDef && "foo".equals(functionDef.name().name()));
+    Name fooExpr = PythonTestUtils.getFirstDescendant(barFunctionDef.body(), tree -> tree instanceof Name name && "foo".equals(name.name()));
+    // fooExpr should be mod.foo, but is resolved to foo because wildcard imports are only applied to names without a symbol. See SONARPY-2357
+    assertThat(fooExpr.typeV2()).isEqualTo(fooFunctionDef.name().typeV2());
   }
 
   @Test

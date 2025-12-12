@@ -123,6 +123,11 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       TypeInferenceMatchers.withFQN("typing.Self"),
       TypeInferenceMatchers.withFQN("typing_extensions.Self")));
 
+  private record DeferredTree(Tree tree, Scope scope) {
+  }
+
+  private final List<DeferredTree> deferredTrees = new ArrayList<>();
+
   private final TypeTable projectLevelTypeTable;
   private final String fileId;
   private final String fullyQualifiedModuleName;
@@ -151,6 +156,19 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
     this.typePredicateContext = TypePredicateContext.of(projectLevelTypeTable);
     this.awaitedTypeCalculator = new AwaitedTypeCalculator(projectLevelTypeTable);
+  }
+
+  private void deferTree(Tree tree) {
+    deferredTrees.add(new DeferredTree(tree, typeStack.peek()));
+  }
+
+  public void processDeferredTrees() {
+    while (!deferredTrees.isEmpty()) {
+      var deferredTree = deferredTrees.remove(0);
+      typeStack.push(deferredTree.scope());
+      deferredTree.tree().accept(this);
+      typeStack.pop();
+    }
   }
 
   public Set<String> importedModulesFQN() {
@@ -351,7 +369,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       scan(functionDef.typeParams());
       scan(functionDef.parameters());
       setSelfParameterType(functionDef);
-      scan(functionDef.body());
+      deferTree(functionDef.body());
     });
   }
 
