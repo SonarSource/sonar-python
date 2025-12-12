@@ -69,7 +69,7 @@ public class TypeAnnotationToPythonTypeConverter {
             return PythonType.UNKNOWN;
           }
           PythonType innerType = convert(context, type.args().get(0));
-          return SelfType.of(innerType);
+          return SelfType.fromTypeWrapper(TypeWrapper.of(innerType));
         }
         return Optional.of(type)
           .filter(TypeAnnotationToPythonTypeConverter::filterTypeVar)

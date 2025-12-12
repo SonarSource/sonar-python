@@ -20,6 +20,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.python.index.ClassDescriptor;
+import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.types.v2.SpecialFormType;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class VariableDescriptorToPythonTypeConverterTest {
   @Test
@@ -30,5 +34,22 @@ class VariableDescriptorToPythonTypeConverterTest {
     Assertions.assertThatThrownBy(() -> converter.convert(ctx, descriptor))
       .isInstanceOf(IllegalArgumentException.class)
       .hasMessage("Unsupported Descriptor");
+  }
+
+  @Test
+  void testSpecialFormTypeConversion() {
+    var ctx = Mockito.mock(ConversionContext.class);
+    var converter = new VariableDescriptorToPythonTypeConverter();
+
+    var typingSelfDescriptor = new VariableDescriptor("Self", "typing.Self", "typing._SpecialForm");
+    var typingExtensionsSelfDescriptor = new VariableDescriptor("Self", "typing_extensions.Self", "typing_extensions._SpecialForm");
+
+    Assertions.assertThat(converter.convert(ctx, typingSelfDescriptor))
+      .isInstanceOfSatisfying(SpecialFormType.class,
+        specialFormType -> assertThat(specialFormType.fullyQualifiedName()).isEqualTo("typing.Self"));
+
+    Assertions.assertThat(converter.convert(ctx, typingExtensionsSelfDescriptor))
+      .isInstanceOfSatisfying(SpecialFormType.class,
+        specialFormType -> assertThat(specialFormType.fullyQualifiedName()).isEqualTo("typing_extensions.Self"));
   }
 }

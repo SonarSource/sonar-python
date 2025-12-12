@@ -4214,6 +4214,152 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void inferParameterTypeHintedWithTypingExtensionsSelf() {
+    FileInput root = inferTypes("""
+      from typing_extensions import Self
+      class A:
+        def foo(self, other: Self) -> Self:
+          ...
+      """);
+
+    var classType = TreeUtils.firstChild(root, tree -> tree instanceof ClassDef cd && "A".equals(cd.name().name()))
+      .map(ClassDef.class::cast)
+      .map(cd -> cd.name().typeV2())
+      .get();
+
+    var functionType = TreeUtils.firstChild(root, tree -> tree instanceof FunctionDef fd && "foo".equals(fd.name().name()))
+      .map(FunctionDef.class::cast)
+      .map(fd -> (FunctionType) fd.name().typeV2())
+      .get();
+
+    assertThat(functionType.parameters().get(1).declaredType().type())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOfSatisfying(SelfType.class, selfType -> assertThat(selfType.innerType()).isEqualTo(classType));
+
+    assertThat(functionType.returnType())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOfSatisfying(SelfType.class, selfType -> assertThat(selfType.innerType()).isEqualTo(classType));
+  }
+
+  @Test
+  void inferTypingExtensionsSelfAcrossModules() {
+    TestProject testProject = new TestProject()
+      .addModule("mod1.py", """
+        from typing_extensions import Self
+        class A:
+          def foo(self) -> Self:
+            ...
+        """);
+    FileInput root = testProject.inferTypes("""
+        from mod1 import A
+        class B(A): pass
+        bar = B().foo()
+        """);
+
+    var barType = TreeUtils.firstChild(root, tree -> tree instanceof Name name && "bar".equals(name.name()))
+      .map(Name.class::cast)
+      .map(Name::typeV2)
+      .get();
+
+    assertThat(barType)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOfSatisfying(ClassType.class, classType -> assertThat(classType.name()).isEqualTo("B"));
+  }
+
+  @Test
+  void inferTypeshedSelfReturnType() {
+    var root = inferTypes("""
+      import datetime
+      dateFromordinal = datetime.date.fromordinal(1)
+      datetimeFromordinal = datetime.datetime.fromordinal(1)
+
+      class A(datetime.date): pass
+      aFromordinal = A.fromordinal(1)
+
+      class B(datetime.datetime): pass
+      bFromordinal = B.fromordinal(1)
+      """);
+
+    Name dateFromordinal = PythonTestUtils.getFirstChild(root, t -> t.is(Tree.Kind.NAME) && "dateFromordinal".equals(((Name) t).name()));
+    Name datetimeFromordinal = PythonTestUtils.getFirstChild(root, t -> t.is(Tree.Kind.NAME) && "datetimeFromordinal".equals(((Name) t).name()));
+    Name aFromordinal = PythonTestUtils.getFirstChild(root, t -> t.is(Tree.Kind.NAME) && "aFromordinal".equals(((Name) t).name()));
+    Name bFromordinal = PythonTestUtils.getFirstChild(root, t -> t.is(Tree.Kind.NAME) && "bFromordinal".equals(((Name) t).name()));
+
+    PythonType dateType = PROJECT_LEVEL_TYPE_TABLE.getType("datetime.date");
+    PythonType datetimeType = PROJECT_LEVEL_TYPE_TABLE.getType("datetime.datetime");
+    PythonType aType = PythonTestUtils.<ClassDef>getFirstChild(root, t -> t instanceof ClassDef cd && "A".equals(cd.name().name())).name().typeV2();
+    PythonType bType = PythonTestUtils.<ClassDef>getFirstChild(root, t -> t instanceof ClassDef cd && "B".equals(cd.name().name())).name().typeV2();
+
+    assertThat(dateFromordinal.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(dateType);
+
+    assertThat(datetimeFromordinal.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(datetimeType);
+
+    assertThat(aFromordinal.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(aType);
+
+    assertThat(bFromordinal.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(bType);
+  }
+
+  @Test
+  void self_type_as_return_type_on_inherited_methods() {
+    FileInput fileInput = inferTypes("""
+      from typing import Self
+      class A:
+        def foo() -> Self: ...
+
+      class B(A):
+        ...
+
+      a = A()
+      b = B()
+      resultA = a.foo()
+      resultB = b.foo()
+      """);
+
+    PythonType a = PythonTestUtils.<Name>getFirstChild(fileInput, t -> t instanceof Name name && "a".equals(name.name())).typeV2();
+    PythonType b = PythonTestUtils.<Name>getFirstChild(fileInput, t -> t instanceof Name name && "b".equals(name.name())).typeV2();
+    PythonType resultA = PythonTestUtils.<Name>getFirstChild(fileInput, t -> t instanceof Name name && "resultA".equals(name.name())).typeV2();
+    PythonType resultB = PythonTestUtils.<Name>getFirstChild(fileInput, t -> t instanceof Name name && "resultB".equals(name.name())).typeV2();
+
+    PythonType classTypeA = PythonTestUtils.<ClassDef>getFirstChild(fileInput, t -> t instanceof ClassDef cd && "A".equals(cd.name().name())).name().typeV2();
+    PythonType classTypeB = PythonTestUtils.<ClassDef>getFirstChild(fileInput, t -> t instanceof ClassDef cd && "B".equals(cd.name().name())).name().typeV2();
+
+    assertThat(a)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(classTypeA);
+
+    assertThat(b)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(classTypeB);
+
+    assertThat(resultA)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(classTypeA);
+
+    assertThat(resultB)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(classTypeB);
+  }
+
+  @Test
   void parameterTypeHintedWithNonSelfUnresolvedImport() {
     FileInput root = inferTypes("""
       from unknown_module import SomeType

@@ -16,6 +16,7 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.Set;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
@@ -24,6 +25,7 @@ import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.v2.SpecialFormType;
 
 public class VariableDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
+  private static final Set<String> SPECIAL_FORM_FQNS = Set.of("typing._SpecialForm", "typing_extensions._SpecialForm");
 
   public PythonType convert(ConversionContext ctx, VariableDescriptor from) {
     String fullyQualifiedName = from.fullyQualifiedName();
@@ -32,7 +34,7 @@ public class VariableDescriptorToPythonTypeConverter implements DescriptorToPyth
     }
     String annotatedType = from.annotatedType();
     if (annotatedType != null) {
-      if ("typing._SpecialForm".equals(annotatedType) && fullyQualifiedName != null) {
+      if (SPECIAL_FORM_FQNS.contains(annotatedType) && fullyQualifiedName != null) {
         // Defensive null check on fullyQualifiedName: it should never be null for SpecialForm
         return new SpecialFormType(fullyQualifiedName);
       }

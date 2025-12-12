@@ -19,6 +19,7 @@ package org.sonar.python.semantic.v2.dynamicstubs;
 import java.util.Map;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
+import org.sonar.python.types.v2.SpecialFormType;
 
 public class DynamicStubsProvider {
 
@@ -28,6 +29,7 @@ public class DynamicStubsProvider {
   public static Map<String, TypeWrapper> createDynamicStubs(String moduleFqn) {
     return switch (moduleFqn) {
       case "typing" -> typingDynamicStubs();
+      case "typing_extensions" -> typingExtensionsDynamicStubs();
       default -> Map.of();
     };
   }
@@ -44,5 +46,12 @@ public class DynamicStubsProvider {
     return Map.of(
       // Every type is compatible with Any, and Any is compatible with every type. This is represented as UNKNOWN in PythonType
       "Any", TypeWrapper.of(PythonType.UNKNOWN));
+  }
+
+  private static Map<String, TypeWrapper> typingExtensionsDynamicStubs() {
+    return Map.of(
+      // see typingDynamicStubs()
+      "Any", TypeWrapper.of(PythonType.UNKNOWN),
+      "Self", TypeWrapper.of(new SpecialFormType("typing_extensions.Self")));
   }
 }
