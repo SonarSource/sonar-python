@@ -36,9 +36,9 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
-import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -730,8 +730,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   }
 
   private PythonType resolveTypeAnnotationExpressionType(Expression expression, @Nullable ClassType enclosingClassType) {
-    if (expression instanceof Name name && name.typeV2() != PythonType.UNKNOWN) {
-      PythonType resolvedType = resolveSelfType(name.typeV2(), enclosingClassType);
+    if ((expression instanceof Name || expression instanceof QualifiedExpression) && expression.typeV2() != PythonType.UNKNOWN) {
+      PythonType resolvedType = resolveSelfType(expression.typeV2(), enclosingClassType);
       return ObjectType.Builder.fromType(resolvedType).withTypeSource(TypeSource.TYPE_HINT).build();
     } else if (expression instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
       var candidateTypes = subscriptionExpression.subscripts()

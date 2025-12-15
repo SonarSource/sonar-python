@@ -4317,6 +4317,27 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void self_type_as_return_type_on_inherited_methods_with_qualified_expression() {
+    FileInput fileInput = inferTypes("""
+      import typing
+      class A:
+        def foo() -> typing.Self: ...
+
+      class B(A):
+        ...
+      resultB = B().foo()
+      """);
+
+    PythonType resultB = PythonTestUtils.<Name>getFirstChild(fileInput, t -> t instanceof Name name && "resultB".equals(name.name())).typeV2();
+    PythonType classTypeB = PythonTestUtils.<ClassDef>getFirstChild(fileInput, t -> t instanceof ClassDef cd && "B".equals(cd.name().name())).name().typeV2();
+
+    assertThat(resultB)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(classTypeB);
+  }
+
+  @Test
   void self_type_as_return_type_on_inherited_methods() {
     FileInput fileInput = inferTypes("""
       from typing import Self
