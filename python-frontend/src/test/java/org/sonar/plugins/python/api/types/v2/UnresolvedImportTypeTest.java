@@ -17,7 +17,6 @@
 package org.sonar.plugins.python.api.types.v2;
 
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -35,7 +34,6 @@ import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 class UnresolvedImportTypeTest {
   @Test
-  @Disabled("SONARPY-2213 unknown.submodule is not correctly resolved")
   void imported_unknown_submodule() {
     FileInput fileInput = inferTypesWithNoResolution("""
       import unknown.submodule
@@ -44,7 +42,6 @@ class UnresolvedImportTypeTest {
     var unknownSubmoduleType = ((UnresolvedImportType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
     assertThat(unknownSubmoduleType.importPath()).isEqualTo("unknown.submodule");
   }
-
 
   @Test
   void imported_unknown() {
