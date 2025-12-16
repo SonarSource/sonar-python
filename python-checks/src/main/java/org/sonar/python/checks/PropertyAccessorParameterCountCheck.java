@@ -168,7 +168,7 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
 
     return parameterList.all().stream()
       .filter(p -> p.is(Tree.Kind.TUPLE_PARAMETER)
-        || (p.is(Tree.Kind.PARAMETER) && ((Parameter) p).defaultValue() == null))
+        || (p instanceof Parameter parameter && parameter.defaultValue() == null && parameter.starToken() == null))
       .count();
   }
 

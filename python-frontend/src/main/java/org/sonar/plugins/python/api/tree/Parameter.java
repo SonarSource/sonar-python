@@ -30,12 +30,12 @@ import javax.annotation.CheckForNull;
  *   {@link #starToken()} {@link #name()}
  * </pre>
  *
- * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-parameter
+ * See https://docs.python.org/3/reference/compound_stmts.html#function-definitions
  */
 public interface Parameter extends AnyParameter {
 
   /**
-   * Represents both '*' and '**'
+   * Represents both '*' and '**' as well as the '/'
    */
   @CheckForNull
   Token starToken();

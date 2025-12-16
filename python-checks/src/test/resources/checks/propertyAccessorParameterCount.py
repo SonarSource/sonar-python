@@ -108,3 +108,38 @@ class EdgeCase:
         return self._foo
 
     p = property({}.__getitem__)
+
+class TestPositionalOnlyMarker:
+    @property
+    def foo(self, /): # Compliant - only self with positional-only marker
+        return self._foo
+
+    @foo.setter
+    def foo(self, value, /): # Compliant - self and value with positional-only marker
+        self._foo = value
+
+    @foo.deleter
+    def foo(self, /): # Compliant - only self with positional-only marker
+        del self._foo
+
+class TestKeywordOnlyMarker:
+    @property
+    def bar(self, *): # Compliant - only self with keyword-only marker
+        return self._bar
+
+    @bar.setter
+    def bar(self, *, value): # Compliant - self and value with keyword-only marker
+        self._bar = value
+
+    @bar.deleter
+    def bar(self, *): # Compliant - only self with keyword-only marker
+        del self._bar
+
+class TestMixedMarkers:
+    @property
+    def baz(self, /, *): # Compliant - only self with both markers
+        return self._baz
+
+    @baz.setter
+    def baz(self, value, /, *): # Compliant - self and value with both markers
+        self._baz = value
