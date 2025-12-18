@@ -51,3 +51,6 @@ async def task_group_example():
         # Compliant - TaskGroup manages the tasks
         tg.create_task(some_coroutine())
         tg.create_task(another_coroutine())
+
+def task_with_type_hint() :
+    task: asyncio.Task[int] = asyncio.create_task(some_coroutine())  # Compliant
