@@ -89,12 +89,14 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
       Optional.of(argExp)
         .filter(StringLiteral.class::isInstance)
         .map(StringLiteral.class::cast)
+        .filter(Predicate.not(HardcodedCredentialsCallCheck::containsFormattedExpressions))
         .filter(HardcodedCredentialsCallCheck::isNotEmpty)
         .ifPresent(string -> ctx.addIssue(argument, MESSAGE));
     } else if (argExp.is(Tree.Kind.NAME)) {
       findAssignment((Name) argExp, 0)
         .filter(StringLiteral.class::isInstance)
         .map(StringLiteral.class::cast)
+        .filter(Predicate.not(HardcodedCredentialsCallCheck::containsFormattedExpressions))
         .filter(HardcodedCredentialsCallCheck::isNotEmpty)
         .ifPresent(assignedValue -> ctx.addIssue(argument, MESSAGE).secondary(assignedValue, MESSAGE));
     }
@@ -104,7 +106,12 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
     return Optional.of(stringLiteral)
       .map(StringLiteral::trimmedQuotesValue)
       .filter(Predicate.not(String::isEmpty))
-      .isPresent();
+      .isPresent(); 
+  }
+
+  private static boolean containsFormattedExpressions(StringLiteral stringLiteral) {
+    return stringLiteral.stringElements().stream()
+      .anyMatch(element -> !element.formattedExpressions().isEmpty());
   }
 
   private static Optional<Tree> findAssignment(Name name, int depth) {

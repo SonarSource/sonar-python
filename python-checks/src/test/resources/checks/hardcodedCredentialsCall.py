@@ -112,7 +112,7 @@ import psycopg2
 import pgdb
 import pg
 
-def db_connect(pwd):
+def db_connect(pwd, PASS):
     mysql.connector.connect(host='localhost', user='sonarsource', password='')
     mysql.connector.connect(host='localhost', password='', user='sonarsource')
     mysql.connector.connect('localhost', 'sonarsource', '')
@@ -120,6 +120,9 @@ def db_connect(pwd):
     mysql.connector.connection.MySQLConnection(host='localhost', user='sonarsource', password='')
     pymysql.connect(host='localhost', user='sonarsource', password='')
     pymysql.connections.Connection(host='localhost', user='sonarsource', password='abc') # Noncompliant
+    pymysql.connections.Connection(host='localhost', user='sonarsource', password=f'{PASS}') # Compliant
+    pymysql.connections.Connection(host='localhost', user='sonarsource', password=f'') # Compliant
+    pymysql.connections.Connection(host='localhost', user='sonarsource', password=f'pass') # Noncompliant
     psycopg2.connect(host='localhost', user='postgres', password='')
     pgdb.connect(host='localhost', user='postgres', password='')
 
