@@ -58,7 +58,7 @@ class ObjectTypeTest {
     assertThat(objectType.unwrappedType()).isEqualTo(classType);
 
     assertThat(objectType.displayName()).contains("A");
-    assertThat(objectType.isCompatibleWith(classType)).isTrue();
+    assertThat(objectType.isCompatibleWith(classType)).isEqualTo(TriBool.TRUE);
     assertThat(objectType.hasMember("foo")).isEqualTo(TriBool.FALSE);
     String fileId = SymbolUtils.pathOf(pythonFile).toString();
     assertThat(objectType.definitionLocation()).contains(new LocationInFile(fileId, 1, 6, 1, 7));
@@ -78,7 +78,7 @@ class ObjectTypeTest {
     ObjectType objectType = (ObjectType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
 
     assertThat(objectType.displayName()).contains("A");
-    assertThat(objectType.isCompatibleWith(classType)).isTrue();
+    assertThat(objectType.isCompatibleWith(classType)).isEqualTo(TriBool.TRUE);
     assertThat(objectType.hasMember("foo")).isEqualTo(TriBool.TRUE);
   }
 
@@ -96,7 +96,7 @@ class ObjectTypeTest {
     PythonType aType = ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
 
     assertThat(aType).isEqualTo(PythonType.UNKNOWN);
-    assertThat(aType.isCompatibleWith(classType)).isTrue();
+    assertThat(aType.isCompatibleWith(classType)).isEqualTo(TriBool.UNKNOWN);
     assertThat(aType.hasMember("foo")).isEqualTo(TriBool.UNKNOWN);
   }
 

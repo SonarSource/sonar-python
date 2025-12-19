@@ -44,8 +44,8 @@ public interface PythonType {
   }
 
   @Beta
-  default boolean isCompatibleWith(PythonType another) {
-    return true;
+  default TriBool isCompatibleWith(PythonType another) {
+    return TriBool.UNKNOWN;
   }
 
   @Beta

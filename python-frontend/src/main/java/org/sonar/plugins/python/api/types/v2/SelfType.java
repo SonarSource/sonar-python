@@ -139,7 +139,7 @@ public final class SelfType implements PythonType {
   }
 
   @Override
-  public boolean isCompatibleWith(PythonType another) {
+  public TriBool isCompatibleWith(PythonType another) {
     return typeWrapper.type().isCompatibleWith(another);
   }
 

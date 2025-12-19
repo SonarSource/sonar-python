@@ -1909,8 +1909,8 @@ public class TypeInferenceV2Test {
     for (CallExpression call : calls) {
       PythonType calleeType = call.callee().typeV2();
       assertThat(calleeType).isInstanceOf(UnionType.class);
-      assertThat(calleeType.isCompatibleWith(nonePythonType)).isTrue();
-      assertThat(calleeType.isCompatibleWith(myClassPythonType)).isTrue();
+      assertThat(calleeType.isCompatibleWith(nonePythonType)).isEqualTo(TriBool.UNKNOWN);
+      assertThat(calleeType.isCompatibleWith(myClassPythonType)).isEqualTo(TriBool.UNKNOWN);
     }
   }
 

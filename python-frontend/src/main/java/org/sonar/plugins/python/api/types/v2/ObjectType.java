@@ -45,7 +45,7 @@ public final class ObjectType implements PythonType {
   }
 
   @Override
-  public boolean isCompatibleWith(PythonType another) {
+  public TriBool isCompatibleWith(PythonType another) {
     return this.typeWrapper.type().isCompatibleWith(another);
   }
 

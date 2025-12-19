@@ -631,6 +631,84 @@ public class ClassTypeTest {
   }
 
   @Test
+  void isCompatibleWith_classes_without_decorators_can_be_incompatible() {
+    List<ClassType> classTypes = classTypes(
+      """
+        class A:
+          def foo(): ...
+        class B:
+          def bar(): ...
+        """
+    );
+    ClassType classA = classTypes.get(0);
+    ClassType classB = classTypes.get(1);
+
+    assertThat(classA.hasDecorators()).isFalse();
+    assertThat(classB.hasDecorators()).isFalse();
+    assertThat(classA.isCompatibleWith(classB)).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void isCompatibleWith_decorated_actual_type_is_compatible() {
+    List<ClassType> classTypes = classTypes(
+      """
+        @dataclass
+        class Decorated:
+          x: int
+        class Expected:
+          def some_method(): ...
+        """
+    );
+    ClassType decoratedClass = classTypes.get(0);
+    ClassType expectedClass = classTypes.get(1);
+
+    assertThat(decoratedClass.hasDecorators()).isTrue();
+    assertThat(expectedClass.hasDecorators()).isFalse();
+    assertThat(decoratedClass.isCompatibleWith(expectedClass)).isEqualTo(TriBool.UNKNOWN);
+  }
+
+  @Test
+  void isCompatibleWith_decorated_expected_type_is_compatible() {
+    List<ClassType> classTypes = classTypes(
+      """
+        class Actual:
+          x: int
+        @decorator
+        class DecoratedExpected:
+          def some_method(): ...
+        """
+    );
+    ClassType actualClass = classTypes.get(0);
+    ClassType decoratedExpectedClass = classTypes.get(1);
+
+    assertThat(actualClass.hasDecorators()).isFalse();
+    assertThat(decoratedExpectedClass.hasDecorators()).isTrue();
+    assertThat(actualClass.isCompatibleWith(decoratedExpectedClass)).isEqualTo(TriBool.UNKNOWN);
+  }
+
+  @Test
+  void is_compatible_with_union_type() {
+    List<ClassType> classTypes = classTypes(
+      """
+        class A: ...
+        class B: ...
+        """
+    );
+    ClassType classA = classTypes.get(0);
+    ClassType classB = classTypes.get(1);
+    UnionType unionType = (UnionType) UnionType.or(classA, classB);
+
+    assertThat(classA.isCompatibleWith(unionType)).isEqualTo(TriBool.TRUE);
+    assertThat(classB.isCompatibleWith(unionType)).isEqualTo(TriBool.TRUE);
+  }
+
+  @Test
+  void is_compatible_with_unknown_type() {
+    ClassType classA = classType("class A: ...");
+    assertThat(classA.isCompatibleWith(PythonType.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
+  }
+
+  @Test
   void type_annotations_scope() {
     FileInput fileInput = PythonTestUtils.parse(
       "class Foo:",

@@ -88,7 +88,7 @@ public class LazyType implements PythonType, ResolvableType {
   }
 
   @Override
-  public boolean isCompatibleWith(PythonType another) {
+  public TriBool isCompatibleWith(PythonType another) {
     throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 

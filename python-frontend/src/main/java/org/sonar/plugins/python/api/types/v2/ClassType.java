@@ -86,7 +86,7 @@ public final class ClassType implements PythonType {
   }
 
   @Override
-  public boolean isCompatibleWith(PythonType another) {
+  public TriBool isCompatibleWith(PythonType another) {
     if (another instanceof SelfType selfType) {
       return this.isCompatibleWith(selfType.innerType());
     }
@@ -94,31 +94,37 @@ public final class ClassType implements PythonType {
       return this.isCompatibleWith(objectType.type());
     }
     if (another instanceof UnionType unionType) {
-      return unionType.candidates().stream().anyMatch(this::isCompatibleWith);
+      return unionType.candidates().stream()
+        .map(this::isCompatibleWith)
+        .reduce(TriBool.FALSE, TriBool::or);
     }
     if (another instanceof FunctionType functionType) {
       return this.isCompatibleWith(functionType.returnType());
     }
     if (another instanceof ClassType classType) {
+      if (this.hasDecorators || classType.hasDecorators) {
+        return TriBool.UNKNOWN;
+      }
       var isASubClass = this.isASubClassFrom(classType);
       var areAttributeCompatible = this.areAttributesCompatible(classType);
       var isDuckTypeCompatible = !this.members.isEmpty() && this.members.containsAll(classType.members);
-      return Objects.equals(this, another)
+      boolean isCompatible = Objects.equals(this, another)
         || "builtins.object".equals(classType.name())
         || isDuckTypeCompatible
         || (isASubClass && areAttributeCompatible);
+      return isCompatible ? TriBool.TRUE : TriBool.FALSE;
     }
-    return true;
+    return TriBool.UNKNOWN;
   }
 
   @Beta
   public boolean isASubClassFrom(ClassType other) {
-    return superClasses().stream().anyMatch(superClass -> superClass.type().isCompatibleWith(other));
+    return superClasses().stream().anyMatch(superClass -> superClass.type().isCompatibleWith(other).isTrue());
   }
 
   @Beta
   public boolean areAttributesCompatible(ClassType other) {
-    return attributes.stream().allMatch(attr -> other.attributes.stream().anyMatch(attr::isCompatibleWith));
+    return attributes.stream().allMatch(attr -> other.attributes.stream().anyMatch(otherAttr -> attr.isCompatibleWith(otherAttr).isTrue()));
   }
 
   @Override

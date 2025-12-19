@@ -34,6 +34,7 @@ import org.sonar.python.types.v2.LazyType;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.BUILTINS;
 import static org.sonar.python.types.v2.TypesTestUtils.FLOAT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
@@ -50,8 +51,8 @@ class UnionTypeTest {
 
     PythonType unionType = UnionType.or(intType, strType);
 
-    assertThat(unionType.isCompatibleWith(intType)).isTrue();
-    assertThat(unionType.isCompatibleWith(strType)).isTrue();
+    assertThat(unionType.isCompatibleWith(intType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(unionType.isCompatibleWith(strType)).isEqualTo(TriBool.UNKNOWN);
 
     assertThat(unionType.displayName()).contains("Union[int, str]");
     assertThat(unionType.unwrappedType()).isEqualTo(unionType);
@@ -195,5 +196,12 @@ class UnionTypeTest {
     assertThat(union1)
       .isEqualTo(union2)
       .hasSameHashCodeAs(union2);
+  }
+
+  @Test
+  void is_compatible_with_object() {
+    var unionType = UnionType.or(INT_TYPE, STR_TYPE);
+    var objectType = BUILTINS.resolveMember("object").get();
+    assertThat(unionType.isCompatibleWith(objectType)).isEqualTo(TriBool.TRUE);
   }
 }

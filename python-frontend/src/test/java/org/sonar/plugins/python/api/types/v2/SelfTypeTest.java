@@ -65,10 +65,10 @@ class SelfTypeTest {
     SelfType selfTypeA = (SelfType) SelfType.of(classTypeA);
     SelfType selfTypeB = (SelfType) SelfType.of(classTypeB);
     
-    assertThat(selfTypeA.isCompatibleWith(selfTypeA)).isTrue();
-    assertThat(selfTypeA.isCompatibleWith(classTypeA)).isTrue();
-    assertThat(selfTypeA.isCompatibleWith(selfTypeB)).isFalse();
-    assertThat(selfTypeA.isCompatibleWith(classTypeB)).isFalse();
+    assertThat(selfTypeA.isCompatibleWith(selfTypeA)).isEqualTo(TriBool.TRUE);
+    assertThat(selfTypeA.isCompatibleWith(classTypeA)).isEqualTo(TriBool.TRUE);
+    assertThat(selfTypeA.isCompatibleWith(selfTypeB)).isEqualTo(TriBool.FALSE);
+    assertThat(selfTypeA.isCompatibleWith(classTypeB)).isEqualTo(TriBool.FALSE);
   }
 
   @Test

@@ -71,9 +71,11 @@ public class UnionType implements PythonType {
   }
 
   @Override
-  public boolean isCompatibleWith(PythonType another) {
-    return candidates.isEmpty() || candidates.stream()
-      .anyMatch(candidate -> candidate.isCompatibleWith(another));
+  public TriBool isCompatibleWith(PythonType another) {
+    Set<TriBool> results = candidates.stream()
+      .map(candidate -> candidate.isCompatibleWith(another))
+      .collect(Collectors.toSet());
+    return results.size() == 1 ? results.iterator().next() : TriBool.UNKNOWN;
   }
 
   @Override

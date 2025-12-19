@@ -40,13 +40,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.api.Beta;
+import org.sonar.plugins.python.api.TriBool;
 
 @Beta
 public sealed interface UnknownType extends PythonType {
 
   @Override
-  default boolean isCompatibleWith(PythonType another) {
-    return true;
+  default TriBool isCompatibleWith(PythonType another) {
+    return TriBool.UNKNOWN;
   }
 
   final class UnknownTypeImpl implements UnknownType {

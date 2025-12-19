@@ -19,6 +19,7 @@ package org.sonar.plugins.python.api.types.v2;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -239,6 +240,13 @@ class FunctionTypeTest {
     assertThat(functionType.definitionLocation()).contains(new LocationInFile(fileId, 1, 4, 1, 6));
     assertThat(functionType.parameters().get(0).location()).isEqualTo(new LocationInFile(fileId, 1, 7, 1, 17));
     assertThat(functionType.parameters().get(1).location()).isEqualTo(new LocationInFile(fileId, 1, 19, 1, 30));
+  }
+
+  @Test
+  void is_compatible_with_uses_default_implementation() {
+    FunctionType fn1 = functionType("def fn1(): pass");
+    FunctionType fn2 = functionType("def fn2(): pass");
+    assertThat(fn1.isCompatibleWith(fn2)).isEqualTo(TriBool.UNKNOWN);
   }
 
   public static FunctionType functionType(String... code) {
