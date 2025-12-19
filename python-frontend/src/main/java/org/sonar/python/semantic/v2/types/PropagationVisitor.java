@@ -94,7 +94,9 @@ public class PropagationVisitor extends BaseTreeVisitor {
     Optional.ofNullable(parameter.name())
       .ifPresent(name -> {
         var symbol = name.symbolV2();
-        var parametedDefinition = new ParameterDefinition(symbol, name);
+        // using type inferred in the TrivialTypeInferenceVisitor for the parameter
+        var type = name.typeV2();
+        var parametedDefinition = new ParameterDefinition(symbol, name, type);
         propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(parametedDefinition);
       });
   }

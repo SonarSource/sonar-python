@@ -16,35 +16,25 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.semantic.FunctionSymbolImpl;
-import org.sonar.python.semantic.SymbolUtils;
-import org.sonar.python.tree.TreeUtils;
-
-import static org.sonar.plugins.python.api.symbols.Usage.Kind.PARAMETER;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.ParameterV2;
+import org.sonar.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S930")
 public class ArgumentNumberCheck extends PythonSubscriptionCheck {
@@ -56,31 +46,27 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
 
-      Optional.of(callExpression)
-        .map(CallExpression::calleeSymbol)
-        .map(SymbolUtils::getFunctionSymbols)
-        .filter(SymbolUtils::isEqualParameterCountAndNames)
-        .map(Collection::stream)
-        .flatMap(Stream::findFirst)
-        .ifPresent(functionSymbol -> checkFunctionSymbol(ctx, callExpression, functionSymbol));
+      if (callExpression.callee().typeV2() instanceof FunctionType functionType) {
+        checkFunctionType(ctx, callExpression, functionType);
+      }
     });
   }
 
-  private static void checkFunctionSymbol(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol) {
-    if (isException(callExpression, functionSymbol)) {
+  private static void checkFunctionType(SubscriptionContext ctx, CallExpression callExpression, FunctionType functionType) {
+    if (isException(ctx, callExpression, functionType)) {
       return;
     }
-    checkPositionalParameters(ctx, callExpression, functionSymbol);
-    checkKeywordArguments(ctx, callExpression, functionSymbol, callExpression.callee());
+    checkPositionalParameters(ctx, callExpression, functionType);
+    checkKeywordArguments(ctx, callExpression, functionType, callExpression.callee());
   }
 
-  private static void checkPositionalParameters(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol) {
+  private static void checkPositionalParameters(SubscriptionContext ctx, CallExpression callExpression, FunctionType functionType) {
     int self = 0;
-    if (functionSymbol.isInstanceMethod() && callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR) && !isCalledAsClassMethod((QualifiedExpression) callExpression.callee())) {
+    if (isCalledAsInstanceMethod(callExpression, functionType) && functionHasSelfParameter(functionType)) {
       self = 1;
     }
-    Map<String, FunctionSymbol.Parameter> positionalParamsWithoutDefault = positionalParamsWithoutDefault(functionSymbol);
-    long nbPositionalParamsWithDefault = functionSymbol.parameters().stream()
+    Map<String, ParameterV2> positionalParamsWithoutDefault = positionalParamsWithoutDefault(functionType);
+    long nbPositionalParamsWithDefault = functionType.parameters().stream()
       .filter(parameterName -> !parameterName.isKeywordOnly() && parameterName.hasDefaultValue())
       .count();
 
@@ -101,42 +87,33 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       if (nbPositionalParamsWithDefault > 0) {
         expected = "at least " + expected;
       }
-      addPositionalIssue(ctx, callExpression.callee(), functionSymbol, message, expected);
+      addPositionalIssue(ctx, callExpression.callee(), functionType, message, expected);
     } else if (nbMissingArgs + nbPositionalParamsWithDefault + nbNonKeywordOnlyPassedWithKeyword < 0) {
       String message = "Remove " + (- nbMissingArgs - nbPositionalParamsWithDefault) + " unexpected arguments; ";
       if (nbPositionalParamsWithDefault > 0) {
         expected = "at most " + (minimumPositionalArgs - self + nbPositionalParamsWithDefault);
       }
-      addPositionalIssue(ctx, callExpression.callee(), functionSymbol, message, expected);
+      addPositionalIssue(ctx, callExpression.callee(), functionType, message, expected);
     }
   }
 
-  private static boolean isCalledAsClassMethod(QualifiedExpression callee) {
-    return TreeUtils.getSymbolFromTree(callee.qualifier())
-      .filter(ArgumentNumberCheck::isParamOfClassMethod)
-      .isPresent();
+  private static boolean isCalledAsInstanceMethod(CallExpression callExpression, FunctionType functionType) {
+    return functionType.isInstanceMethod()
+      && callExpression.callee() instanceof QualifiedExpression qualifiedExpression
+      && qualifiedExpression.qualifier().typeV2() instanceof ObjectType;
   }
 
-  // no need to check that's the first parameter (i.e. cls)
-  // the assumption is that another method can be called only using the first parameter of a class method
-  private static boolean isParamOfClassMethod(Symbol symbol) {
-    return symbol.usages().stream().anyMatch(usage -> usage.kind() == PARAMETER && isParamOfClassMethod(usage.tree()));
+  private static boolean functionHasSelfParameter(FunctionType functionType) {
+    return !functionType.parameters().isEmpty();
   }
 
-  private static boolean isParamOfClassMethod(Tree tree) {
-    FunctionDef functionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF);
-    return Optional.ofNullable(TreeUtils.getFunctionSymbolFromDef(functionDef))
-      .filter(functionSymbol -> functionSymbol.decorators().stream().anyMatch("classmethod"::equals))
-      .isPresent();
-  }
-
-  private static Map<String, FunctionSymbol.Parameter> positionalParamsWithoutDefault(FunctionSymbol functionSymbol) {
+  private static Map<String, ParameterV2> positionalParamsWithoutDefault(FunctionType functionType) {
     int unnamedIndex = 0;
-    Map<String, FunctionSymbol.Parameter> result = new HashMap<>();
-    for (FunctionSymbol.Parameter parameter : functionSymbol.parameters()) {
+    Map<String, ParameterV2> result = new HashMap<>();
+    for (ParameterV2 parameter : functionType.parameters()) {
       if (!parameter.isKeywordOnly() && !parameter.hasDefaultValue()) {
         String name = parameter.name();
-        if (name == null) {
+        if (name == null || name.isEmpty()) {
           result.put("!unnamed" + unnamedIndex, parameter);
           unnamedIndex++;
         } else {
@@ -147,46 +124,51 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     return result;
   }
 
-  private static void addPositionalIssue(SubscriptionContext ctx, Tree tree, FunctionSymbol functionSymbol, String message, String expected) {
-    String msg = message + "'" + functionSymbol.name() + "' expects " + expected + " positional arguments.";
+  private static void addPositionalIssue(SubscriptionContext ctx, Tree tree, FunctionType functionType, String message, String expected) {
+    String msg = message + "'" + functionType.name() + "' expects " + expected + " positional arguments.";
     PreciseIssue preciseIssue = ctx.addIssue(tree, msg);
-    addSecondary(functionSymbol, preciseIssue);
+    addSecondary(functionType, preciseIssue);
   }
 
-  private static boolean isReceiverClassSymbol(QualifiedExpression qualifiedExpression) {
-    return TreeUtils.getSymbolFromTree(qualifiedExpression.qualifier())
-      .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
-      .isPresent();
-  }
-
-  private static boolean isException(CallExpression callExpression, FunctionSymbol functionSymbol) {
-    return functionSymbol.hasDecorators()
-      || functionSymbol.hasVariadicParameter()
+  private static boolean isException(SubscriptionContext ctx, CallExpression callExpression, FunctionType functionType) {
+    return functionType.hasDecorators()
+      || functionType.hasVariadicParameter()
       || callExpression.arguments().stream().anyMatch(argument -> argument.is(Tree.Kind.UNPACKING_EXPR))
-      || extendsZopeInterface(((FunctionSymbolImpl) functionSymbol).owner())
-      // TODO: distinguish between class methods (new and old style) from other methods
-      || (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR) && isReceiverClassSymbol(((QualifiedExpression) callExpression.callee())));
+      || extendsZopeInterface(ctx, callExpression)
+      || isCalledAsBoundInstanceMethod(callExpression)
+      || isSuperCall(ctx, callExpression);
   }
 
-  private static boolean extendsZopeInterface(@Nullable Symbol symbol) {
-    if (symbol != null && symbol.kind() == Symbol.Kind.CLASS) {
-      return ((ClassSymbol) symbol).isOrExtends("zope.interface.Interface");
+  private static boolean extendsZopeInterface(SubscriptionContext ctx, CallExpression callExpression) {
+    var matcher = TypeMatchers.isFunctionOwnerSatisfying(
+      TypeMatchers.isOrExtendsType("zope.interface.Interface")
+    );
+    return matcher.isTrueFor(callExpression.callee(), ctx);
+  }
+
+  private static boolean isCalledAsBoundInstanceMethod(CallExpression callExpression) {
+    if (callExpression.callee().typeV2() instanceof FunctionType functionType) {
+      return functionType.isInstanceMethod() && !callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR);
     }
     return false;
   }
 
-  private static void addSecondary(FunctionSymbol functionSymbol, PreciseIssue preciseIssue) {
-    LocationInFile definitionLocation = functionSymbol.definitionLocation();
-    if (definitionLocation != null) {
-      preciseIssue.secondary(definitionLocation, FUNCTION_DEFINITION);
+  private static boolean isSuperCall(SubscriptionContext ctx, CallExpression callExpression) {
+    if (callExpression.callee() instanceof QualifiedExpression qualifiedExpression) {
+      return TypeMatchers.isObjectOfType("super").isTrueFor(qualifiedExpression.qualifier(), ctx);
     }
+    return false;
   }
 
-  private static void checkKeywordArguments(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol, Expression callee) {
-    List<FunctionSymbol.Parameter> parameters = functionSymbol.parameters();
+  private static void addSecondary(FunctionType functionType, PreciseIssue preciseIssue) {
+    functionType.definitionLocation().ifPresent(location -> preciseIssue.secondary(location, FUNCTION_DEFINITION));
+  }
+
+  private static void checkKeywordArguments(SubscriptionContext ctx, CallExpression callExpression, FunctionType functionType, Expression callee) {
+    List<ParameterV2> parameters = functionType.parameters();
     Set<String> mandatoryParamNamesKeywordOnly = parameters.stream()
       .filter(parameterName -> parameterName.isKeywordOnly() && !parameterName.hasDefaultValue())
-      .map(FunctionSymbol.Parameter::name).collect(Collectors.toSet());
+      .map(ParameterV2::name).collect(Collectors.toSet());
 
     for (Argument argument : callExpression.arguments()) {
       RegularArgument arg = (RegularArgument) argument;
@@ -194,7 +176,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       if (keyword != null) {
         if (parameters.stream().noneMatch(parameter -> keyword.name().equals(parameter.name()) && !parameter.isPositionalOnly())) {
           PreciseIssue preciseIssue = ctx.addIssue(argument, "Remove this unexpected named argument '" + keyword.name() + "'.");
-          addSecondary(functionSymbol, preciseIssue);
+          addSecondary(functionType, preciseIssue);
         } else {
           mandatoryParamNamesKeywordOnly.remove(keyword.name());
         }
@@ -206,7 +188,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
         message.append("'").append(param).append("' ");
       }
       PreciseIssue preciseIssue = ctx.addIssue(callee, message.toString().trim());
-      addSecondary(functionSymbol, preciseIssue);
+      addSecondary(functionType, preciseIssue);
     }
   }
 }

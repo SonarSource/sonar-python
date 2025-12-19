@@ -79,23 +79,31 @@ def functions():
     python2_tuple_params2(x, y, z) # Noncompliant
 
 def methods():
-    def meth(p1, p2): pass
+    def meth(p1, p2, p3, p4): pass
     class A:
-      def __new__(cls, a, b):
-          cls.__new__(A, 1, 2)
-      def meth(self, p1, p2):
-        meth(1, 2) # OK
-        meth(1, 2, 3) # Noncompliant
-      @classmethod
-      def class_meth(cls, p1, p2): pass
-      @staticmethod
-      def static_meth(p1, p2): pass
-      def foo(p1): pass
-      foo(42)
-      @classmethod
-      def bar_class_method(cls):
-        cls.bar_instance_method(cls)
-      def bar_instance_method(self): pass
+        def __new__(cls, a, b):
+            cls.__new__(A, 1, 2)
+        def meth(self, p1, p2):
+            meth(1, 2) # Noncompliant 
+            meth(1, 2, 3, 5) # oK
+
+        def bar(self, p1, p2): pass
+
+        def other_method(self):
+            self.bar(1, 2) 
+            self.other_method()
+
+        @classmethod
+        def class_meth(cls, p1, p2): pass
+        @staticmethod
+        def static_meth(p1, p2): pass
+        def foo(): pass
+
+        @classmethod
+        def bar_class_method(cls):
+            cls.bar_instance_method(cls)
+            cls.bar_instance_method(cls, 1) # FN
+        def bar_instance_method(self): pass
 
     A.class_meth(42) # FN {{'class_meth' expects 2 positional arguments, but 1 was provided}}
 
@@ -103,13 +111,23 @@ def methods():
     A.static_meth(42) # FN {{'static_meth' expects 2 positional arguments, but 1 was provided}}
 
     A.static_meth(1, 2) # OK
+
     a = A()
     a.meth(42, 43)
     a.meth(42) # Noncompliant {{Add 1 missing arguments; 'meth' expects 2 positional arguments.}}
     a.meth(42, 43, 44) # Noncompliant {{Remove 1 unexpected arguments; 'meth' expects 2 positional arguments.}}
 
-    A.foo() # FN
-    A.foo(42)
+    a.other_method() # OK
+
+    A.bar(42, 43) # Noncompliant {{Add 1 missing arguments; 'bar' expects 3 positional arguments.}}
+    A.bar(a, 42, 53)
+
+
+    A.foo() 
+    A.foo(42) # Noncompliant {{Remove 1 unexpected arguments; 'foo' expects 0 positional arguments.}}
+
+    a.foo()
+    a.foo(42) # Noncompliant {{Remove 1 unexpected arguments; 'foo' expects 0 positional arguments.}}
 
     m = a.meth
     m(42, 43) # OK
@@ -142,6 +160,40 @@ def methods():
     class B2(B1):
       def foo(self):
         super().__reduce__(1, 2) # OK, __reduce__ is not 'object.__reduce__' but B1.__reduce__
+        super().__reduce__(1, 2, 3) # FN
+
+    class MethodsWithKeywordArguments:
+        @classmethod
+        def from_dict(cls, **kwargs):
+            kwargs.items() 
+            kwargs.items(1) # FN
+
+
+     
+    class MethodsWithTryExcept(object):
+        def get_all_config(self):
+            pass
+
+        def replace(self, config):
+            try:
+                pass
+            except Exception as e:
+                pass
+            self.get_all_config() 
+            self.get_all_config(3) # Noncompliant
+
+            self.replace(3) # OK
+            self.replace(3, 4) # Noncompliant
+            MethodsWithTryExcept.replace(self, 4) # OK
+            MethodsWithTryExcept.replace(4) # Noncompliant
+
+    class MethodsWithControlFlow:
+        def something(self, importing=None):
+            if importing is None:
+                importing = set()
+            importing.discard(1)
+            importing.discard(1, 2) # FN
+   
 
 def builtin_method():
     myList = list(42, 43)
@@ -212,7 +264,7 @@ def logging_api():
     logging.basicConfig(format="42", force=True)  # OK
 
 def foo(day, tz):
-    b = datetime.date.fromordinal(day).replace(tzinfo=tz) # FN SONARPY-1472
+    b = datetime.date.fromordinal(day).replace(tzinfo=tz) # Noncompliant
     a = datetime.datetime.fromordinal(day).replace(tzinfo=tz) # OK
 
 

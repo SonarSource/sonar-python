@@ -1915,6 +1915,36 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void try_except_method_parameters() {
+    FileInput fileInput = inferTypes("""
+      class MyClass:
+        def method(self, x:int):
+          try:
+            pass
+          except:
+            pass
+          self.method()
+          x
+      """);
+
+    CallExpression selfMethodCall = PythonTestUtils.getFirstChild(fileInput, CallExpression.class::isInstance);
+    Name xName = PythonTestUtils.getFirstChild(fileInput, tree -> tree instanceof Name name && "x".equals(name.name()));
+    Name selfName = PythonTestUtils.getFirstChild(fileInput, tree -> tree instanceof Name name && "self".equals(name.name()));
+
+    assertThat(selfMethodCall.callee().typeV2()).isInstanceOf(FunctionType.class);
+
+    assertThat(selfName.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOf(SelfType.class);
+
+    assertThat(xName.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(INT_TYPE);
+  }
+
+  @Test
   void flow_insensitive_when_try_except() {
     FileInput fileInput = inferTypes("""
       try:
@@ -1935,6 +1965,45 @@ public class TypeInferenceV2Test {
     assertThat(((UnionType) firstX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
     assertThat(((UnionType) secondX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
     assertThat(((UnionType) thirdX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+  }
+
+  @Test
+  void ast_based_type_inference_when_try_except_with_qualified_expression() {
+    FileInput fileInput = inferTypes("""
+      class MyClass:
+        def foo(self, x):
+          try:
+            pass
+          except:
+            pass
+
+          if ...:
+            x = set()
+
+          x.discard(1)
+      """);
+
+    QualifiedExpression xDiscardCallee = PythonTestUtils.getFirstChild(fileInput,
+      tree -> tree instanceof QualifiedExpression qualifiedExpression && "discard".equals(qualifiedExpression.name().name()));
+    CallExpression discardCall = PythonTestUtils.getFirstChild(fileInput, tree -> tree instanceof CallExpression call && call.callee() == xDiscardCallee);
+    assertThat(discardCall.callee().typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void flow_insensitive_when_try_except_with_qualified_expression() {
+    FileInput fileInput = inferTypes("""
+      class MyClass:
+        def foo(self, x):
+          if ...:
+            x = set()
+
+          x.discard(1)
+      """);
+
+    QualifiedExpression xDiscardCallee = PythonTestUtils.getFirstChild(fileInput,
+      tree -> tree instanceof QualifiedExpression qualifiedExpression && "discard".equals(qualifiedExpression.name().name()));
+    CallExpression discardCall = PythonTestUtils.getFirstChild(fileInput, tree -> tree instanceof CallExpression call && call.callee() == xDiscardCallee);
+    assertThat(discardCall.callee().typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test

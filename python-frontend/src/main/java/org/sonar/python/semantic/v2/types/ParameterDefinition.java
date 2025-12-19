@@ -17,19 +17,20 @@
 package org.sonar.python.semantic.v2.types;
 
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.semantic.v2.SymbolV2;
 
 public class ParameterDefinition extends Propagation {
+  private final PythonType parameterType;
 
-  protected ParameterDefinition(SymbolV2 lhsSymbol, Name lhsName) {
+  protected ParameterDefinition(SymbolV2 lhsSymbol, Name lhsName, PythonType parameterType) {
     super(lhsSymbol, lhsName);
+    this.parameterType = parameterType;
   }
 
 
   @Override
   public PythonType rhsType() {
-//    TODO: process type calculation based on default value assignment or type hint
-    return PythonType.UNKNOWN;
+    return parameterType;
   }
 }

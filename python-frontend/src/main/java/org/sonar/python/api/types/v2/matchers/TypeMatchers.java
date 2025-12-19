@@ -26,8 +26,10 @@ import org.sonar.python.types.v2.matchers.AnyTypePredicate;
 import org.sonar.python.types.v2.matchers.HasFQNPredicate;
 import org.sonar.python.types.v2.matchers.HasMemberPredicate;
 import org.sonar.python.types.v2.matchers.HasMemberSatisfyingPredicate;
+import org.sonar.python.types.v2.matchers.IsFunctionOwnerSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsObjectSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsObjectSubtypeOfPredicate;
+import org.sonar.python.types.v2.matchers.IsTypeOrSuperTypeSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsTypePredicate;
 import org.sonar.python.types.v2.matchers.TypePredicate;
 import org.sonar.python.types.v2.matchers.TypeSourcePredicate;
@@ -95,6 +97,24 @@ public final class TypeMatchers {
 
   public static TypeMatcher isObjectOfSubType(String fqn) {
     return new TypeMatcherImpl(new IsObjectSubtypeOfPredicate(fqn));
+  }
+
+  public static TypeMatcher isOrExtendsType(String fqn) {
+    return isTypeOrSuperTypeSatisfying(isType(fqn));
+  }
+
+  public static TypeMatcher isTypeOrSuperTypeWithFQN(String fqn) {
+    return isTypeOrSuperTypeSatisfying(withFQN(fqn));
+  }
+
+  public static TypeMatcher isTypeOrSuperTypeSatisfying(TypeMatcher matcher) {
+    TypePredicate predicate = getTypePredicate(matcher);
+    return new TypeMatcherImpl(new IsTypeOrSuperTypeSatisfyingPredicate(predicate));
+  }
+
+  public static TypeMatcher isFunctionOwnerSatisfying(TypeMatcher matcher) {
+    TypePredicate predicate = getTypePredicate(matcher);
+    return new TypeMatcherImpl(new IsFunctionOwnerSatisfyingPredicate(predicate));
   }
 
   public static TypeMatcher hasTypeSource(TypeSource typeSource) {

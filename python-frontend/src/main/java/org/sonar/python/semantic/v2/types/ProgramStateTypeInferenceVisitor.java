@@ -18,16 +18,11 @@ package org.sonar.python.semantic.v2.types;
 
 import java.util.Optional;
 import java.util.Set;
-import org.sonar.plugins.python.api.TriBool;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.tree.NameImpl;
-import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeUtils;
 
 /**
@@ -35,12 +30,10 @@ import org.sonar.python.types.v2.TypeUtils;
  */
 public class ProgramStateTypeInferenceVisitor extends TrivialTypePropagationVisitor {
   private final TypeInferenceProgramState state;
-  private final TypeCheckBuilder isPropertyTypeCheck;
 
   public ProgramStateTypeInferenceVisitor(TypeInferenceProgramState state, TypeTable typeTable) {
     super(typeTable);
     this.state = state;
-    this.isPropertyTypeCheck = new TypeCheckBuilder(typeTable).isSubtypeOf("property");
   }
 
   @Override
@@ -59,26 +52,6 @@ public class ProgramStateTypeInferenceVisitor extends TrivialTypePropagationVisi
     // skip inner functions
   }
 
-  @Override
-  public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
-    scan(qualifiedExpression.qualifier());
-    if (qualifiedExpression.name() instanceof NameImpl name) {
-      Optional<PythonType> pythonType = Optional.of(qualifiedExpression.qualifier())
-        .map(Expression::typeV2)
-        .flatMap(t -> t.resolveMember(name.name()));
-      if (pythonType.isPresent()) {
-        var type = pythonType.get();
-        if (type instanceof FunctionType functionType) {
-          // If a member access is a method with a "property" annotation, we consider the resulting type to be the return type of the method
-          boolean isProperty = functionType.decorators().stream().anyMatch(t -> isPropertyTypeCheck.check(t.type()) == TriBool.TRUE);
-          if (isProperty) {
-            type = functionType.returnType();
-          }
-        }
-        name.typeV2(type);
-      }
-    }
-  }
 
   private static PythonType union(Set<PythonType> types) {
     return types.stream().collect(TypeUtils.toUnionType());
