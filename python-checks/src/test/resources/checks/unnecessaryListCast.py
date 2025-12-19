@@ -60,6 +60,43 @@ def noncompliant_modifying_list_outside_loop():
     for i in list(some_other_list): # Noncompliant
         some_list.append(i)
 
+def noncompliant_not_modifying_dict_in_loop():
+    some_dict = {1: "a", 2: "b", 3: "c"}
+    for k in list(some_dict.keys()): # Noncompliant
+        print(k)
+    
+    for k in list(some_dict.items()): # Noncompliant
+        print(k)
+    
+    other_dict = {}
+    for k in list(some_dict.keys()): # Noncompliant
+        other_dict[k] = 1
+
+def compliant_modifying_dict_in_loop():
+    some_dict = {}
+    for i in list(some_dict.keys()): 
+        if i % 2 == 0:
+            del some_dict[i]
+
+    
+    for k in list(some_dict.keys()): 
+        some_dict[k] = 42
+    
+    for k in list(some_dict.items()): 
+        del some_dict[k[0]]
+    
+    for k in list(some_dict.keys()): 
+        some_dict.update({k: 123})
+    
+    for k in list(some_dict.keys()): 
+        some_dict.clear()
+    
+    for k in list(some_dict.keys()): 
+        some_dict.popitem()
+    
+    for k in list(some_dict.keys()): 
+        some_dict.setdefault(k, 0)
+
 #=============== COVERAGE =============
 
 for i,y in list(range(3)), list(range(4)): 
@@ -83,4 +120,3 @@ for i in list(test): # Noncompliant
 for i in list(object): # Noncompliant
     test().append(i)
     object.__setattr__(test, k, v)
-
