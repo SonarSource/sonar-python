@@ -4204,10 +4204,9 @@ public class TypeInferenceV2Test {
     var clsExpressionStatement = (ExpressionStatement) fooMethodDef.body().statements().get(0);
     var clsExpression = clsExpressionStatement.expressions().get(0);
 
-    assertThat(clsExpression.typeV2()).isNotInstanceOf(SelfType.class);
     assertThat(clsExpression.typeV2())
-      .extracting(PythonType::unwrappedType)
-      .isNotInstanceOf(SelfType.class);
+      .isInstanceOfSatisfying(SelfType.class, selfType -> assertThat(selfType.innerType())
+        .isEqualTo(classDef.name().typeV2()));
   }
 
   @Test

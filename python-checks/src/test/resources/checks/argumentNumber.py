@@ -102,7 +102,7 @@ def methods():
         @classmethod
         def bar_class_method(cls):
             cls.bar_instance_method(cls)
-            cls.bar_instance_method(cls, 1) # FN
+            cls.bar_instance_method(cls, 1) # Noncompliant
         def bar_instance_method(self): pass
 
     A.class_meth(42) # FN {{'class_meth' expects 2 positional arguments, but 1 was provided}}

@@ -460,10 +460,6 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       return;
     }
 
-    if (!functionType.isInstanceMethod()) {
-      return;
-    }
-
     var parameterList = functionDef.parameters();
     if (parameterList == null) {
       return;
@@ -476,10 +472,15 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
     var firstParam = parameters.get(0);
     var paramName = firstParam.name();
-    // Set the type to ObjectType[SelfType[ClassType]]
-    if (paramName != null) {
-      var classObjectType = ObjectType.fromType(classType);
-      var selfType = SelfType.of(classObjectType);
+    if (paramName == null) {
+      return;
+    }
+
+    var selfType = SelfType.of(classType);
+    if (functionType.isInstanceMethod()) {
+      var selfObjectType = ObjectType.fromType(selfType);
+      setTypeToName(paramName, selfObjectType);
+    } else if (functionType.isClassMethod()) {
       setTypeToName(paramName, selfType);
     }
   }
