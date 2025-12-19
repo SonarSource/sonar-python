@@ -11,7 +11,7 @@ runs:
   steps:
     - name: Configure private maven projects
       id: config-maven
-      uses: SonarSource/ci-github-actions/config-maven@1.1.2
+      uses: SonarSource/ci-github-actions/config-maven@v1
 
     - name: Update versions of public modules
       shell: bash

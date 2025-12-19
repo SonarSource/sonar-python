@@ -61,9 +61,9 @@ jobs:
           secrets: |
             ${{ matrix.sonar_token_path }} token | SONAR_TOKEN;
 
-      - uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
+      - uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
         with:
-          version: 2025.7.12
+          version: 2025.12.12
 
       - name: Remove private directory
         run: rm -rf private
