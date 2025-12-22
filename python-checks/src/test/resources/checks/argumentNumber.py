@@ -166,7 +166,7 @@ def methods():
         @classmethod
         def from_dict(cls, **kwargs):
             kwargs.items() 
-            kwargs.items(1) # FN
+            kwargs.items(1) # Noncompliant
 
 
      

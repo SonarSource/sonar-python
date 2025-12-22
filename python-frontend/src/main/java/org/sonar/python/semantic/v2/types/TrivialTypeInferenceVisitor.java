@@ -718,11 +718,36 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     scan(parameter.typeAnnotation());
     scan(parameter.defaultValue());
     ClassType owner = computeOwnerForParameter(parameter);
-    Optional.ofNullable(parameter.typeAnnotation())
+    var type = Optional.ofNullable(parameter.typeAnnotation())
       .map(TypeAnnotation::expression)
       .map(expr -> resolveTypeAnnotationExpressionType(expr, owner))
-      .ifPresent(type -> setTypeToName(parameter.name(), type));
+      .orElse(PythonType.UNKNOWN);
+
+    setTypeToParameter(parameter, type);
     scan(parameter.name());
+  }
+
+  private void setTypeToParameter(Parameter parameter, PythonType type) {
+    var starToken = parameter.starToken();
+    if (starToken == null) {
+      setTypeToName(parameter.name(), type);
+    } else {
+      var starParameterType = getStarParameterType(starToken);
+      var starParameterObjectType = ObjectType.Builder
+        .fromType(starParameterType)
+        .withTypeSource(TypeSource.TYPE_HINT)
+        .build();
+      setTypeToName(parameter.name(), starParameterObjectType);
+    }
+  }
+
+  private PythonType getStarParameterType(Token starToken) {
+    if ("*".equals(starToken.value())) {
+      return projectLevelTypeTable.getType("tuple");
+    } else if ("**".equals(starToken.value())) {
+      return projectLevelTypeTable.getType("dict");
+    }
+    return PythonType.UNKNOWN;
   }
 
   @CheckForNull

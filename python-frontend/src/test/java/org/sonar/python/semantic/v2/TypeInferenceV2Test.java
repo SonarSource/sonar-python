@@ -26,6 +26,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import org.assertj.core.api.InstanceOfAssertFactories;
+import org.assertj.core.data.Index;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -52,6 +53,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SliceExpression;
@@ -4830,4 +4832,50 @@ public class TypeInferenceV2Test {
     assertThat(sliceExpression.typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
+  void argsAndKwargsParameterType() {
+    FileInput root = inferTypes("""
+      def foo(*args, **kwargs):
+        return kwargs
+      """);
+
+    FunctionDef functionDef = PythonTestUtils.getFirstChild(root, FunctionDef.class::isInstance);
+    assertThat(functionDef.parameters().all())
+      .map(Parameter.class::cast)
+      .satisfies(
+        p -> assertThat(p.name().typeV2())
+          .isInstanceOf(ObjectType.class)
+          .extracting(PythonType::unwrappedType)
+          .isEqualTo(TUPLE_TYPE),
+        Index.atIndex(0))
+      .satisfies(
+        p -> assertThat(p.name().typeV2())
+          .isInstanceOf(ObjectType.class)
+          .extracting(PythonType::unwrappedType)
+          .isEqualTo(DICT_TYPE),
+        Index.atIndex(1));
+  }
+
+  @Test
+  void argsAndKwargsParameterWithTypeHintsType() {
+    FileInput root = inferTypes("""
+      def foo(*args: int, **kwargs: str):
+        return kwargs
+      """);
+
+    FunctionDef functionDef = PythonTestUtils.getFirstChild(root, FunctionDef.class::isInstance);
+    assertThat(functionDef.parameters().all())
+      .map(Parameter.class::cast)
+      .satisfies(
+        p -> assertThat(p.name().typeV2())
+          .isInstanceOf(ObjectType.class)
+          .satisfies(type -> assertThat(type.unwrappedType()).isEqualTo(TUPLE_TYPE))
+          .isInstanceOfSatisfying(ObjectType.class, objectType -> assertThat(objectType.attributes()).isEmpty()),
+        Index.atIndex(0))
+      .satisfies(
+        p -> assertThat(p.name().typeV2())
+          .isInstanceOf(ObjectType.class)
+          .satisfies(type -> assertThat(type.unwrappedType()).isEqualTo(DICT_TYPE))
+          .isInstanceOfSatisfying(ObjectType.class, objectType -> assertThat(objectType.attributes()).isEmpty()),
+        Index.atIndex(1));
+  }
 }
