@@ -193,6 +193,37 @@ def methods():
                 importing = set()
             importing.discard(1)
             importing.discard(1, 2) # FN
+
+def methods_on_types():
+    class Test: pass
+
+    sys_type = type(Test)
+    sys_type.__setattr__(sys, key,  "42") # Ok
+    sys_type.__setattr__(key, "42") # FN see SONARPY-3591
+
+    type.mro() # Noncompliant
+    type.mro(type) # Ok
+
+    sys_type.mro() # FN see SONARPY-3591
+    sys_type.mro(Test) # Ok
+
+    test_instance = Test()
+    test_instance_type = type(test_instance)
+    test_instance_type.mro() # Ok
+    test_instance_type.mro(test_instance) #  see SONARPY-3591
+
+
+    import typing
+    _T = typing.TypeVar('_T')
+
+    class GenericTest(typing.Generic[_T]):
+        cls: _T
+        def __new__(cls): 
+            pass
+
+        def test(self):
+            GenericTest.cls.__new__(self.cls) # Ok
+            GenericTest.cls.__new__(self.cls, 1) # FN
    
 
 def builtin_method():

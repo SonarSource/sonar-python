@@ -136,7 +136,9 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       || callExpression.arguments().stream().anyMatch(argument -> argument.is(Tree.Kind.UNPACKING_EXPR))
       || extendsZopeInterface(ctx, callExpression)
       || isCalledAsBoundInstanceMethod(callExpression)
-      || isSuperCall(ctx, callExpression);
+      || isSuperCall(ctx, callExpression)
+      || isReceiverTypeVar(ctx, callExpression)
+      || isReceiverTypeInstance(ctx, callExpression);
   }
 
   private static boolean extendsZopeInterface(SubscriptionContext ctx, CallExpression callExpression) {
@@ -149,6 +151,23 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
   private static boolean isCalledAsBoundInstanceMethod(CallExpression callExpression) {
     if (callExpression.callee().typeV2() instanceof FunctionType functionType) {
       return functionType.isInstanceMethod() && !callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR);
+    }
+    return false;
+  }
+
+  private static boolean isReceiverTypeVar(SubscriptionContext ctx, CallExpression callExpression) {
+    if (callExpression.callee() instanceof QualifiedExpression qualifiedExpression) {
+      return TypeMatchers.isObjectSatisfying(TypeMatchers.isOrExtendsType("typing.TypeVar"))
+        .isTrueFor(qualifiedExpression.qualifier(), ctx);
+    }
+    return false;
+  }
+
+  private static boolean isReceiverTypeInstance(SubscriptionContext ctx, CallExpression callExpression) {
+    // see SONARPY-3591
+    if (callExpression.callee() instanceof QualifiedExpression qualifiedExpression) {
+      return TypeMatchers.isObjectSatisfying(TypeMatchers.isOrExtendsType("type"))
+        .isTrueFor(qualifiedExpression.qualifier(), ctx);
     }
     return false;
   }
