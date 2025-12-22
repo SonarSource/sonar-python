@@ -27,12 +27,14 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -168,7 +170,52 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
       if (name.length() <= 1) {
         return;
       }
+    } else if (kind == UsageV2.Kind.PARAMETER && isParameterNameFromOverriddenMethod(usage, name)) {
+      return;
     }
     ctx.addIssue(usage.tree(), String.format(MESSAGE, type, name, format));
+  }
+
+  private static boolean isParameterNameFromOverriddenMethod(UsageV2 usage, String parameterName) {
+    Tree functionLikeAncestor = TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA);
+    if (functionLikeAncestor == null || functionLikeAncestor.is(Tree.Kind.LAMBDA)) {
+      return false;
+    }
+    FunctionDef functionDef = (FunctionDef) functionLikeAncestor;
+
+    int parameterIndex = getParameterIndex(functionDef, parameterName);
+    if (parameterIndex < 0) {
+      return false;
+    }
+
+    FunctionSymbol functionSymbol = TreeUtils.getFunctionSymbolFromDef(functionDef);
+    if (functionSymbol == null) {
+      return false;
+    }
+
+    List<FunctionSymbol> overriddenMethods = SymbolUtils.getOverriddenMethods(functionSymbol);
+    for (FunctionSymbol overriddenMethod : overriddenMethods) {
+      List<FunctionSymbol.Parameter> overriddenParams = overriddenMethod.parameters();
+      // parameterIndex is based on positional parameters only, while overriddenParams contains all parameters.
+      // This comparison works because positional parameters are always a prefix of the full parameter list.
+      if (parameterIndex < overriddenParams.size()) {
+        String overriddenParamName = overriddenParams.get(parameterIndex).name();
+        if (parameterName.equals(overriddenParamName)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private static int getParameterIndex(FunctionDef functionDef, String parameterName) {
+    List<Parameter> parameters = TreeUtils.positionalParameters(functionDef);
+    for (int i = 0; i < parameters.size(); i++) {
+      Name paramName = parameters.get(i).name();
+      if (paramName != null && parameterName.equals(paramName.name())) {
+        return i;
+      }
+    }
+    return -1;
   }
 }

@@ -112,3 +112,36 @@ def django_models():
 
     from django.apps import apps
     Product = apps.get_model('shop', 'Product')
+
+
+import json
+from typing import Any
+
+class CustomJSONEncoder(json.JSONEncoder):
+
+    def default(self, o: Any) -> dict[str, Any]:  # Compliant: `o` parameter name comes from json.JSONEncoder.default
+        return {"value": str(o)}
+
+
+class EdgeCase:
+    method = None
+    
+    def method(self, ID):  # Noncompliant
+        pass
+
+
+class BaseClass:
+    def process(self, data_input):
+        pass
+
+class DerivedClass(BaseClass):
+    def process(self, ID):  # Noncompliant
+        pass
+
+class BaseShortSignature:
+    def execute(self):
+        pass
+
+class DerivedLongerSignature(BaseShortSignature):
+    def execute(self, ExtraParam):  # Noncompliant
+        pass
