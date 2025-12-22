@@ -100,3 +100,12 @@ def locally_defined_function():
 
     a = foo() # Noncompliant
     b = bar() # OK
+
+
+def async_function_with_create_task():
+    import asyncio
+
+    async def foo() -> None:
+        ...
+
+    asyncio.create_task(foo())  # Compliant
