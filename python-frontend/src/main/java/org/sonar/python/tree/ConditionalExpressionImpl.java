@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 
@@ -35,6 +36,7 @@ public class ConditionalExpressionImpl extends PyTree implements ConditionalExpr
   private final Expression condition;
   private final Token elseToken;
   private final Expression falseExpression;
+  private PythonType typeV2 = PythonType.UNKNOWN;
 
   public ConditionalExpressionImpl(Expression trueExpression,
                                    Token ifToken, Expression condition, Token elseToken, Expression falseExpression) {
@@ -88,6 +90,15 @@ public class ConditionalExpressionImpl extends PyTree implements ConditionalExpr
   @Override
   public InferredType type() {
     return InferredTypes.or(trueExpression.type(), falseExpression.type());
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return typeV2;
+  }
+
+  public void typeV2(PythonType type) {
+    this.typeV2 = type;
   }
 
   @Override

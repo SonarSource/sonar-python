@@ -24,6 +24,8 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.ConditionalExpression;
+import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
@@ -38,12 +40,20 @@ import org.sonar.python.tree.AwaitExpressionImpl;
 import org.sonar.python.tree.BinaryExpressionImpl;
 import org.sonar.python.tree.CallExpressionImpl;
 import org.sonar.python.tree.NameImpl;
+import org.sonar.python.tree.ConditionalExpressionImpl;
+import org.sonar.python.tree.SliceExpressionImpl;
 import org.sonar.python.tree.UnaryExpressionImpl;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeUtils;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
+  private static final TypeInferenceMatcher IS_SLICEABLE_TYPE = TypeInferenceMatcher.of(
+    TypeInferenceMatchers.any(
+      TypeInferenceMatchers.isObjectOfType(BuiltinTypes.LIST),
+      TypeInferenceMatchers.isObjectOfType(BuiltinTypes.TUPLE),
+      TypeInferenceMatchers.isObjectOfType(BuiltinTypes.STR)));
+
   private final TypeCheckBuilder isBooleanTypeCheck;
   private final TypeCheckBuilder isIntTypeCheck;
   private final TypeCheckBuilder isFloatTypeCheck;
@@ -130,6 +140,32 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     if (awaitExpression instanceof AwaitExpressionImpl awaitExpressionImpl) {
       awaitExpressionImpl.typeV2(resultType);
     }
+  }
+
+  @Override
+  public void visitConditionalExpression(ConditionalExpression conditionalExpression) {
+    super.visitConditionalExpression(conditionalExpression);
+    if (conditionalExpression instanceof ConditionalExpressionImpl conditionalExpressionImpl) {
+      PythonType trueType = conditionalExpression.trueExpression().typeV2();
+      PythonType falseType = conditionalExpression.falseExpression().typeV2();
+      conditionalExpressionImpl.typeV2(UnionType.or(trueType, falseType));
+    }
+  }
+
+  @Override
+  public void visitSliceExpression(SliceExpression sliceExpression) {
+    super.visitSliceExpression(sliceExpression);
+    if (sliceExpression instanceof SliceExpressionImpl sliceExpressionImpl) {
+      PythonType objectType = sliceExpression.object().typeV2();
+      sliceExpressionImpl.typeV2(calculateSliceExpressionType(objectType));
+    }
+  }
+
+  private PythonType calculateSliceExpressionType(PythonType objectType) {
+    if (IS_SLICEABLE_TYPE.evaluate(objectType, typePredicateContext) == TriBool.TRUE) {
+      return objectType;
+    }
+    return PythonType.UNKNOWN;
   }
 
   private static PythonType calculateBinaryExpressionType(BinaryExpression binaryExpression) {

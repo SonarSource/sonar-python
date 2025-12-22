@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 
@@ -41,6 +42,7 @@ public class SliceExpressionImpl extends PyTree implements SliceExpression, HasT
   private final Token leftBracket;
   private final SliceList sliceList;
   private final Token rightBracket;
+  private PythonType typeV2 = PythonType.UNKNOWN;
 
   public SliceExpressionImpl(Expression object, Token leftBracket, SliceList sliceList, Token rightBracket) {
     this.object = object;
@@ -100,6 +102,15 @@ public class SliceExpressionImpl extends PyTree implements SliceExpression, HasT
       return objectType;
     }
     return InferredTypes.anyType();
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return typeV2;
+  }
+
+  public void typeV2(PythonType type) {
+    this.typeV2 = type;
   }
 
   @Override

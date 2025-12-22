@@ -43,6 +43,7 @@ import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -53,6 +54,7 @@ import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -4784,6 +4786,82 @@ public class TypeInferenceV2Test {
       .isInstanceOf(ObjectType.class)
       .extracting(PythonType::unwrappedType)
       .isInstanceOfSatisfying(ClassType.class, classType -> assertThat(classType.fullyQualifiedName()).isEqualTo("typing.Coroutine"));
+  }
+
+  @Test
+  void conditionalExpressionTypeV2_sameTypes() {
+    ConditionalExpression conditionalExpression = PythonTestUtils.getFirstChild(
+      inferTypes("1 if True else 2"),
+      t -> t.is(Tree.Kind.CONDITIONAL_EXPR)
+    );
+
+    assertThat(conditionalExpression.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void conditionalExpressionTypeV2_differentTypes() {
+    ConditionalExpression conditionalExpression = PythonTestUtils.getFirstChild(
+      inferTypes("1 if True else 'hello'"),
+      t -> t.is(Tree.Kind.CONDITIONAL_EXPR)
+    );
+
+    assertThat(conditionalExpression.typeV2()).isInstanceOfSatisfying(UnionType.class, unionType ->
+      assertThat(unionType.candidates())
+        .extracting(PythonType::unwrappedType)
+        .containsExactlyInAnyOrder(INT_TYPE, STR_TYPE)
+    );
+  }
+
+  @Test
+  void sliceExpressionTypeV2_list() {
+    SliceExpression sliceExpression = PythonTestUtils.getFirstChild(
+      inferTypes("[1, 2, 3][0:2]"),
+      t -> t.is(Tree.Kind.SLICE_EXPR)
+    );
+
+    assertThat(sliceExpression.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(LIST_TYPE);
+  }
+
+  @Test
+  void sliceExpressionTypeV2_tuple() {
+    SliceExpression sliceExpression = PythonTestUtils.getFirstChild(
+      inferTypes("(1, 2, 3)[0:2]"),
+      t -> t.is(Tree.Kind.SLICE_EXPR)
+    );
+
+    assertThat(sliceExpression.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(TUPLE_TYPE);
+  }
+
+  @Test
+  void sliceExpressionTypeV2_string() {
+    SliceExpression sliceExpression = PythonTestUtils.getFirstChild(
+      inferTypes("'hello'[0:2]"),
+      t -> t.is(Tree.Kind.SLICE_EXPR)
+    );
+
+    assertThat(sliceExpression.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(STR_TYPE);
+  }
+
+  @Test
+  void sliceExpressionTypeV2_unknown() {
+    SliceExpression sliceExpression = PythonTestUtils.getFirstChild(
+      inferTypes("unknown_var[0:2]"),
+      t -> t.is(Tree.Kind.SLICE_EXPR)
+    );
+
+    assertThat(sliceExpression.typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
 }
