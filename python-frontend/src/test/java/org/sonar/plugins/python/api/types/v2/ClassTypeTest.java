@@ -20,8 +20,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
@@ -530,14 +534,109 @@ public class ClassTypeTest {
   }
 
   @Test
-  void classTypeAmbiguousMember() {
+  void class_type_member_with_same_name() {
     ClassType classType = classType("""
       class MyClass:
         def foo(param): ...
         def foo(param, other_param): ...
       """);
-    assertThat(classType.resolveMember("foo")).contains(PythonType.UNKNOWN);
+
+    assertThat(classType.resolveMember("foo"))
+      .isPresent()
+      .get()
+      .isInstanceOfSatisfying(FunctionType.class, fooType ->
+        assertThat(fooType.parameters()).hasSize(2));
+
     assertThat(classType.resolveMember("bar")).isEmpty();
+  }
+
+  @Test
+  void conflicting_class_members_function_then_variable() {
+    ClassType classType = classType("""
+      class A:
+        def a(self): ...
+        a: int = 42
+      """);
+
+    assertThat(classType.resolveMember("a"))
+      .isPresent()
+      .get()
+      .isInstanceOf(ObjectType.class)
+      .extracting(type -> type.unwrappedType().name())
+      .isEqualTo("int");
+  }
+
+  @Test
+  void conflicting_class_members_variable_then_function() {
+    ClassType classType = classType("""
+      class A:
+        a: int = 42
+        def a(self): ...
+      """);
+
+    assertThat(classType.resolveMember("a"))
+      .isPresent()
+      .get()
+      .isInstanceOf(FunctionType.class);
+  }
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("decoratorConflictTestCases")
+  void decorator_involvement_resolves_to_unknown(String testName, String classCode) {
+    ClassType classType = classType(classCode);
+
+    assertThat(classType.resolveMember("foo"))
+      .hasValue(PythonType.UNKNOWN);
+  }
+
+  private static Stream<Arguments> decoratorConflictTestCases() {
+    return Stream.of(
+      Arguments.of("first function decorated", """
+        class A:
+          @some_decorator
+          def foo(self): ...
+          def foo(self): ...
+        """),
+      Arguments.of("second function decorated", """
+        class A:
+          def foo(self): ...
+          @some_decorator
+          def foo(self): ...
+        """),
+      Arguments.of("both functions decorated", """
+        class A:
+          @decorator1
+          def foo(self): ...
+          @decorator2
+          def foo(self): ...
+        """),
+      Arguments.of("variable shadowing decorated function", """
+        class A:
+          @some_decorator
+          def foo(self): ...
+          foo: int = 42
+        """),
+      Arguments.of("decorated function shadowing variable", """
+        class A:
+          foo: int = 42
+          @some_decorator
+          def foo(self): ...
+        """),
+      Arguments.of("three functions with decorator in middle", """
+        class A:
+          def foo(self): ...
+          @decorator
+          def foo(self): ...
+          def foo(self): ...
+        """),
+      Arguments.of("three functions with first decorated", """
+        class A:
+          @decorator
+          def foo(self): ...
+          def foo(self): ...
+          def foo(self): ...
+        """)
+    );
   }
 
   @Test

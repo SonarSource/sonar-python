@@ -333,11 +333,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     ClassType classType = classTypeBuilder.build();
 
     if (currentType() instanceof ClassType ownerClass) {
-      SymbolV2 symbolV2 = className.symbolV2();
-      if (symbolV2 != null) {
-        PythonType memberType = symbolV2.hasSingleBindingUsage() ? classType : PythonType.UNKNOWN;
-        ownerClass.members().add(new Member(classType.name(), memberType));
-      }
+      addMemberToClass(ownerClass, classType.name(), classType);
     }
     return classType;
   }
@@ -426,13 +422,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       functionTypeBuilder.withTypeOrigin(TypeOrigin.LOCAL);
     }
     FunctionType functionType = functionTypeBuilder.build();
-    SymbolV2 symbolV2 = functionDef.name().symbolV2();
-    if (owner != null && symbolV2 != null) {
-      if (symbolV2.hasSingleBindingUsage()) {
-        owner.members().add(new Member(functionType.name(), functionType));
-      } else {
-        owner.members().add(new Member(functionType.name(), PythonType.UNKNOWN));
-      }
+    if (owner != null) {
+      addFunctionMemberToClass(owner, functionType);
     }
     return functionType;
   }
@@ -613,7 +604,9 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     getFirstAssignmentName(assignmentStatement).ifPresent(lhsName -> {
       var assignedValueType = assignmentStatement.assignedValue().typeV2();
       lhsName.typeV2(assignedValueType);
-      addStaticFieldToClass(lhsName, PythonType.UNKNOWN);
+      if (currentType() instanceof ClassType ownerClass) {
+        addStaticFieldToClass(ownerClass, lhsName.name(), PythonType.UNKNOWN);
+      }
     });
   }
 
@@ -624,14 +617,14 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .filter(NameImpl.class::isInstance)
       .map(NameImpl.class::cast)
       .ifPresent(lhsName -> {
-        if (currentType() instanceof ClassType) {
+        if (currentType() instanceof ClassType ownerClass) {
           Optional.ofNullable(assignmentStatement.annotation())
             .map(TypeAnnotation::expression)
             .map(Expression::typeV2)
             .filter(Predicate.not(PythonType.UNKNOWN::equals))
             .map(t -> ObjectType.Builder.fromType(t).withTypeSource(TypeSource.TYPE_HINT).build())
             .ifPresent(lhsName::typeV2);
-          addStaticFieldToClass(lhsName, lhsName.typeV2());
+          addStaticFieldToClass(ownerClass, lhsName.name(), lhsName.typeV2());
         }
       });
   }
@@ -690,13 +683,34 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .map(NameImpl.class::cast);
   }
 
-  private void addStaticFieldToClass(Name name, PythonType type) {
-    if (currentType() instanceof ClassType ownerClass) {
-      var memberName = name.name();
-      var toRemove = ownerClass.members().stream().filter(member -> memberName.equals(member.name())).toList();
-      ownerClass.members().removeAll(toRemove);
-      ownerClass.members().add(new Member(memberName, type));
+  private static void addMemberToClass(ClassType ownerClass, String memberName, PythonType memberType) {
+    ownerClass.members().removeIf(member -> memberName.equals(member.name()));
+    ownerClass.members().add(new Member(memberName, memberType));
+  }
+
+  private static void addFunctionMemberToClass(ClassType ownerClass, FunctionType functionType) {
+    addMemberWithDecoratorCheck(ownerClass, functionType.name(), functionType);
+  }
+
+  private static void addStaticFieldToClass(ClassType ownerClass, String memberName, PythonType fieldType) {
+    addMemberWithDecoratorCheck(ownerClass, memberName, fieldType);
+  }
+
+  private static void addMemberWithDecoratorCheck(ClassType ownerClass, String memberName, PythonType memberType) {
+    var hasDecoratorInvolvement = ownerClass.members().stream()
+      .filter(member -> memberName.equals(member.name()))
+      .anyMatch(member -> hasDecoratorInvolvement(memberType) || hasDecoratorInvolvement(member.type()));
+
+    PythonType typeToAdd = hasDecoratorInvolvement ? PythonType.UNKNOWN : memberType;
+    addMemberToClass(ownerClass, memberName, typeToAdd);
+  }
+
+  private static boolean hasDecoratorInvolvement(PythonType type) {
+    if (type instanceof FunctionType ft) {
+      return ft.hasDecorators();
     }
+    // If the existing type is UNKNOWN, a previous conflict occurred - keep it as UNKNOWN
+    return type instanceof UnknownType;
   }
 
   @Override
