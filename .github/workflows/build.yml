@@ -5,6 +5,7 @@ on:
       - master
       - branch-*
       - dogfood-*
+      - sz/fix-public-ci
   workflow_dispatch:
   schedule:
     # Nightly build at 2 AM UTC for shadow analysis
@@ -66,6 +67,38 @@ jobs:
           version: 2025.12.12
         env:
           MISE_ENV: test-and-analyze
+          MISE_HTTP_TIMEOUT: 120
+
+      - uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
+        with:
+          version: 2025.12.12
+
+      - name: Test Tox
+        run: |
+          set +e          
+          uv python ls
+
+          echo /home/runner/.local/share/uv
+          ls -la /home/runner/.local/share/uv/
+
+          echo /home/runner/.local/share/uv/python/
+          ls -la /home/runner/.local/share/uv/python/
+
+          echo show linked python version
+          ls -la /home/runner/.local/share/uv/python/cpython-3.10.19-linux-x86_64-gnu/bin/python3.10
+
+          echo run actualy binary
+          /home/runner/.local/share/mise/installs/pipx-tox/4.32.0/tox/bin/tox
+
+
+          echo which tox
+          which tox
+
+          echo run tox
+          tox 
+        env:
+          MISE_VERBOSE: 1
+          MISE_DEBUG: 1
 
       - name: Remove private directory
         run: rm -rf private
