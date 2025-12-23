@@ -64,6 +64,8 @@ jobs:
       - uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
         with:
           version: 2025.12.12
+        env:
+          MISE_ENV: test-and-analyze
 
       - name: Remove private directory
         run: rm -rf private
