@@ -26,8 +26,8 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
-import org.sonar.python.api.types.v2.matchers.MatchersTestUtils;
-import org.sonar.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.plugins.python.api.types.v2.matchers.MatchersTestUtils;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

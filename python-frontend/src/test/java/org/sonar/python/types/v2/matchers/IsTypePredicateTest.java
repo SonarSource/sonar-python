@@ -24,7 +24,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
-import org.sonar.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.semantic.v2.TestProject;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 

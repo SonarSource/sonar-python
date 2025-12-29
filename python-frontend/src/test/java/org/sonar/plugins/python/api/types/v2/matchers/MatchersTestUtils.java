@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.api.types.v2.matchers;
+package org.sonar.plugins.python.api.types.v2.matchers;
 
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;

@@ -21,9 +21,9 @@ import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
-import org.sonar.python.api.types.v2.matchers.MatchersTestUtils;
-import org.sonar.python.api.types.v2.matchers.TypeMatcher;
-import org.sonar.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.plugins.python.api.types.v2.matchers.MatchersTestUtils;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

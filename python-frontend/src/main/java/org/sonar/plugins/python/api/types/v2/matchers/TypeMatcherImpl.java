@@ -14,18 +14,31 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.api.types.v2.matchers;
+package org.sonar.plugins.python.api.types.v2.matchers;
 
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.types.v2.matchers.TypePredicate;
+import org.sonar.python.types.v2.matchers.TypePredicateContext;
+import org.sonar.python.types.v2.matchers.TypePredicateUtils;
 
+// This record is package-private
 @Beta
-public sealed interface TypeMatcher permits TypeMatcherImpl {
-  @Beta
-  TriBool evaluateFor(Expression expr, SubscriptionContext ctx);
+record TypeMatcherImpl(TypePredicate predicate) implements TypeMatcher {
 
-  @Beta
-  boolean isTrueFor(Expression expr, SubscriptionContext ctx);
+  @Override
+  public TriBool evaluateFor(Expression expr, SubscriptionContext ctx) {
+    PythonType type = expr.typeV2();
+    TypePredicateContext predicateContext = TypePredicateContext.of(ctx.typeTable());
+    return TypePredicateUtils.evaluate(predicate, type, predicateContext);
+  }
+
+  @Override
+  public boolean isTrueFor(Expression expr, SubscriptionContext ctx) {
+    return evaluateFor(expr, ctx).isTrue();
+  }
+
 }

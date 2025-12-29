@@ -15,7 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 @ParametersAreNonnullByDefault
-package org.sonar.python.api.types.v2.matchers;
+package org.sonar.plugins.python.api.types.v2.matchers;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
