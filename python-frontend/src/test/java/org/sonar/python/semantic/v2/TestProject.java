@@ -84,6 +84,10 @@ public class TestProject {
     return new TypeChecker(projectLevelTypeTable).typeCheckBuilder();
   }
 
+  public ProjectLevelSymbolTable projectLevelSymbolTable() {
+    return projectLevelSymbolTable;
+  }
+
   public ProjectLevelTypeTable projectLevelTypeTable() {
     return projectLevelTypeTable;
   }
