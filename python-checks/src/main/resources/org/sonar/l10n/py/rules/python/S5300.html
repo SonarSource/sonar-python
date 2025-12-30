@@ -58,7 +58,7 @@ app = Flask(__name__)
 def send(subject, msg, from_email, to_email):
     mail = Mail(app)
     msg = Message(subject, [to_email], body, sender=from_email)
-    mail.send(msg) # Sensitive{code}
+    mail.send(msg) # Sensitive
 </pre>
 <h2>See</h2>
 <ul>
