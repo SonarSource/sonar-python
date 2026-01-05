@@ -66,10 +66,13 @@ public class SymbolsModuleTypeProvider {
     var moduleFqnString = getModuleFqnString(moduleFqn);
     Optional<ModuleType> result =  createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)
       .or(() -> createModuleTypeFromTypeShed(moduleName, moduleFqnString, parent));
+
     if (result.isEmpty()) {
       return PythonType.UNKNOWN;
     }
-    return result.get();
+    var moduleType = result.get();
+    parent.registerSubmodule(moduleType);
+    return moduleType;
   }
 
   private static String getModuleFqnString(List<String> moduleFqn) {

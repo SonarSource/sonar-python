@@ -86,7 +86,7 @@ import org.sonar.python.tree.ExpressionStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.v2.LazyType;
-import org.sonar.python.types.v2.SimpleTypeWrapper;
+import org.sonar.python.types.v2.LazyTypeWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getFirstDescendant;
@@ -4891,6 +4891,7 @@ public class TypeInferenceV2Test {
       class AClass(SuperClass):
         ...
       """;
+    project.addModule("package/finalModule.py", finalModuleCode);
     PythonFile finalModulePythonFile = pythonFile("finalModule.py");
     new PythonVisitorContext.Builder(project.inferTypes(finalModuleCode), finalModulePythonFile)
       .typeTable(project.projectLevelTypeTable())
@@ -4902,10 +4903,7 @@ public class TypeInferenceV2Test {
     assertThat(bType).isInstanceOfSatisfying(ClassType.class, classType -> {
       assertThat(classType.superClasses())
         .satisfies(typeWrapper -> assertThat(typeWrapper)
-          // This should be a LazyTypeWrapper because the ClassDescriptorToPythonTypeConverter
-          // will create a LazyTypeWrapper for the super class.
-          // See SONARPY-3600
-          .isInstanceOf(SimpleTypeWrapper.class), Index.atIndex(0));
+          .isInstanceOf(LazyTypeWrapper.class), Index.atIndex(0));
     });
   }
 }

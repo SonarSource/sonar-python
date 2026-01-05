@@ -42,14 +42,6 @@ public final class ModuleType implements PythonType {
     this.parent = parent;
     this.members = members;
     this.subModules = new ConcurrentHashMap<>();
-    registerAsSubmoduleOfParent(parent);
-  }
-
-  private void registerAsSubmoduleOfParent(@Nullable ModuleType parent) {
-    if (parent == null) {
-      return;
-    }
-    parent.subModules.putIfAbsent(this.name, TypeWrapper.of(this));
   }
 
   public ModuleType(@Nullable String name) {
@@ -64,6 +56,10 @@ public final class ModuleType implements PythonType {
     @Nullable ModuleType parent,
     Map<String, TypeWrapper> members) {
     this(name, null, parent, members);
+  }
+
+  public void registerSubmodule(ModuleType submodule) {
+    subModules.putIfAbsent(submodule.name(), TypeWrapper.of(submodule));
   }
 
   @Override
