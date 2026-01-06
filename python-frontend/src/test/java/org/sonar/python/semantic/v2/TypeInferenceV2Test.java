@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
+import org.assertj.core.api.Condition;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.assertj.core.data.Index;
 import org.assertj.core.groups.Tuple;
@@ -4906,4 +4907,69 @@ public class TypeInferenceV2Test {
           .isInstanceOf(LazyTypeWrapper.class), Index.atIndex(0));
     });
   }
+
+  @Test
+  void testParametersWithAttributes() {
+    FileInput root = inferTypes("""
+      from typing import Annotated
+      def test(a: Annotated[int, "foo"]) -> Annotated[int, "bar"]:
+        pass
+      """);
+
+    FunctionDef functionDef = PythonTestUtils.getFirstChild(root, FunctionDef.class::isInstance);
+    FunctionType functionType = (FunctionType) functionDef.name().typeV2();
+
+    assertThat(functionType.parameters()).hasSize(1);
+
+    ParameterV2 parameter = functionType.parameters().get(0);
+    assertThat(parameter.declaredType().type())
+      .isInstanceOfSatisfying(ObjectType.class, objType -> assertThat(objType.attributes())
+        .satisfies(intAttribute -> assertThat(intAttribute).is(objectTypeOf(INT_TYPE)), Index.atIndex(0))
+        .satisfies(strAttribute -> assertThat(strAttribute).is(objectTypeOf(STR_TYPE)), Index.atIndex(1)));
+
+    PythonType returnType = functionType.returnType();
+    assertThat(returnType)
+      .isInstanceOfSatisfying(ObjectType.class, objType -> assertThat(objType.attributes())
+        .satisfies(intAttribute -> assertThat(intAttribute).is(objectTypeOf(INT_TYPE)), Index.atIndex(0))
+        .satisfies(strAttribute -> assertThat(strAttribute).is(objectTypeOf(STR_TYPE)), Index.atIndex(1)));
+  }
+
+  @Test
+  void testParametersWithAttributesWithLocalClassTypes() {
+    FileInput root = inferTypes("""
+      from typing import Annotated
+      class MyClass: ...
+      def test(a: Annotated[int, MyClass()]) -> Annotated[int, MyClass()]:
+        pass
+      """);
+
+    FunctionDef functionDef = PythonTestUtils.getFirstChild(root, FunctionDef.class::isInstance);
+    FunctionType functionType = (FunctionType) functionDef.name().typeV2();
+
+    ClassType myClass = (ClassType) PythonTestUtils.<ClassDef>getFirstChild(root, ClassDef.class::isInstance).name().typeV2();
+
+    assertThat(functionType.parameters()).hasSize(1);
+
+    ParameterV2 parameter = functionType.parameters().get(0);
+    assertThat(parameter.declaredType().type())
+      .isInstanceOfSatisfying(ObjectType.class, objType -> assertThat(objType.attributes())
+        .satisfies(intAttribute -> assertThat(intAttribute).is(objectTypeOf(INT_TYPE)), Index.atIndex(0))
+        .satisfies(myClassAttribute -> assertThat(myClassAttribute).is(objectTypeOf(myClass)), Index.atIndex(1)));
+
+    PythonType returnType = functionType.returnType();
+    assertThat(returnType)
+      .isInstanceOfSatisfying(ObjectType.class, objType -> assertThat(objType.attributes())
+        .satisfies(intAttribute -> assertThat(intAttribute).is(objectTypeOf(INT_TYPE)), Index.atIndex(0))
+        .satisfies(myClassAttribute -> assertThat(myClassAttribute).is(objectTypeOf(myClass)), Index.atIndex(1)));
+  }
+
+  private static Condition<PythonType> objectTypeOf(PythonType type) {
+    return new Condition<PythonType>("is object type of " + type) {
+      @Override
+      public boolean matches(PythonType value) {
+        return value instanceof ObjectType objectType && objectType.unwrappedType().equals(type);
+      }
+    };
+  }
+
 }

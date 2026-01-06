@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -774,17 +775,13 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       PythonType resolvedType = resolveSelfType(expression.typeV2(), enclosingClassType);
       return ObjectType.Builder.fromType(resolvedType).withTypeSource(TypeSource.TYPE_HINT).build();
     } else if (expression instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
-      var candidateTypes = subscriptionExpression.subscripts()
+      List<PythonType> attributes = subscriptionExpression.subscripts()
         .expressions()
         .stream()
         .map(Expression::typeV2)
-        .distinct()
-        .toList();
+        .map(type -> ObjectType.Builder.fromType(type).withTypeSource(TypeSource.TYPE_HINT).build())
+        .collect(Collectors.toList());
 
-      var elementsType = UnionType.or(candidateTypes);
-
-      var attributes = new ArrayList<PythonType>();
-      attributes.add(ObjectType.Builder.fromType(elementsType).withTypeSource(TypeSource.TYPE_HINT).build());
       return ObjectType.Builder.fromType(subscriptionExpression.object().typeV2())
         .withAttributes(attributes)
         .withTypeSource(TypeSource.TYPE_HINT)
