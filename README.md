@@ -76,7 +76,7 @@ and needs to be unique in the whole project.
 
 Please check if all files have a license header.
 If not, the `mvn install` will fail with the `Some files do not have the expected license header` message.
-To fix that please execute: `mvn license:format`.
+To fix that please execute: `mvn com.mycila:license-maven-plugin:format`.
 
 ## License
 
