@@ -8,34 +8,10 @@ runs:
       uses: ./.github/actions/config-sonar-python
 
     - name: Build public and private modules
-      uses: SonarSource/ci-github-actions/build-maven@f1d7e9107578478801454495c63078f85f9f5615 # 1.2.1-BUILD-9723
+      uses: SonarSource/ci-github-actions/build-maven@v1
       id: build
       with:
-        artifactory-deploy-repo: 'sonarsource-public-qa'
-        maven-args: '-DskipTests=true -Dsonar.skip=true -P-typeshed_serializer -Dartifactory.publish.artifacts=false'
+        maven-args: '-DskipTests=true -Dsonar.skip=true -P-typeshed_serializer'
         deploy-pull-request: true
         sonar-platform: none
-        cache-cleanup: false
-
-    - uses: SonarSource/vault-action-wrapper@320bd31b03e5dacaac6be51bbbb15adf7caccc32 # 3.1.0
-      id: secrets
-      with:
-        secrets: |
-          development/artifactory/token/{REPO_OWNER_NAME_DASH}-public-deployer access_token | ARTIFACTORY_DEPLOY_ACCESS_TOKEN;
-          development/artifactory/token/{REPO_OWNER_NAME_DASH}-qa-deployer access_token | ARTIFACTORY_PRIVATE_DEPLOY_ACCESS_TOKEN;
-    - name: Artifacts upload
-      shell: bash
-      env:
-        ARTIFACTORY_DEPLOY_REPO: 'sonarsource-public-qa'
-        ARTIFACTORY_PRIVATE_DEPLOY_REPO: 'sonarsource-private-qa'
-        ARTIFACTORY_DEPLOY_ACCESS_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_DEPLOY_ACCESS_TOKEN }}
-        ARTIFACTORY_PRIVATE_DEPLOY_ACCESS_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_PRIVATE_DEPLOY_ACCESS_TOKEN }}
-        INSTALLED_ARTIFACTS: ${{ steps.build.outputs.installed-artifacts }}
-      run: ${GITHUB_ACTION_PATH}/deploy-artifacts.sh
-
-    - name: Cleanup Maven repository before caching
-      shell: bash
-      run: |
-        rm -rf "$MAVEN_CONFIG/repository/org/sonarsource/"
-        rm -rf "$MAVEN_CONFIG/repository/com/sonarsource/"
-        /usr/bin/find "$MAVEN_CONFIG/repository" -name resolver-status.properties -delete
+        mixed-privacy: true

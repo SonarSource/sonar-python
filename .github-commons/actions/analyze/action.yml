@@ -7,59 +7,17 @@ inputs:
   sonar-project-key:
     description: 'SonarQube project key'
     required: true
-  sonar-project-name:
-    description: 'SonarQube project name'
-    required: true
-  sonar-project-version:
-    description: 'SonarQube project version'
-    required: true
 
 runs:
   using: 'composite'
   steps:
-    - name: Set SonarQube configuration
-      id: sonar-config
-      shell: bash
-      run: |
-        case "${{ inputs.sonarqube-instance }}" in
-          "next")
-            echo "sonar_token_path=development/kv/data/next" >> $GITHUB_OUTPUT
-            echo "sonar_host_url=https://next.sonarqube.com/sonarqube" >> $GITHUB_OUTPUT
-            ;;
-          "sqc-eu")
-            echo "sonar_token_path=development/kv/data/sonarcloud" >> $GITHUB_OUTPUT
-            echo "sonar_host_url=https://sonarcloud.io" >> $GITHUB_OUTPUT
-            ;;
-          "sqc-us")
-            echo "sonar_token_path=development/kv/data/sonarqube-us" >> $GITHUB_OUTPUT
-            echo "sonar_host_url=https://sonarqube.us" >> $GITHUB_OUTPUT
-            ;;
-          *)
-            echo "Error: Unknown sonarqube-instance '${{ inputs.sonarqube-instance }}'. Valid values are: next, sqc-eu, sqc-us" >&2
-            exit 1
-            ;;
-        esac
-    
-    - name: Get sonar token
-      id: secrets
-      uses: SonarSource/vault-action-wrapper@v3
-      with:
-        secrets: |
-          ${{ steps.sonar-config.outputs.sonar_token_path }} token | SONAR_TOKEN;
-
-    # This step uses a custom script instead of the SonarSource/ci-github-actions/build-maven action because this step should not deploy anything to Artifactory. 
-    # Unfortunately, this currently cannot be disabled in the build-maven action. See BUILD-9394 for details
     - name: Run Analysis
-      shell: bash
-      run: bash ${{ github.action_path }}/analyze.sh
-      env:
-        SONAR_TOKEN: ${{ fromJson(steps.secrets.outputs.vault).SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ steps.sonar-config.outputs.sonar_host_url }}
-        SONAR_PROJECT_KEY: ${{ inputs.sonar-project-key }}
-        GIT_SHA1: ${{ github.sha }}
-        GITHUB_REPO: ${{ github.repository }}
-        GITHUB_BRANCH: ${{ github.head_ref || github.ref_name }}
-        GITHUB_BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
-        PULL_REQUEST: ${{ github.event.pull_request.number || 'false' }}
-        PIPELINE_ID: ${{ env.BUILD_NUMBER }}
-        SONAR_PROJECT_VERSION: ${{ inputs.sonar-project-version }}
+      uses: SonarSource/ci-github-actions/build-maven@v1
+      with:
+        maven-args: >-
+          -Dsonar.organization=sonarsource -Dsonar.projectKey=${{ inputs.sonar-project-key }}
+          -Dsonar.analysisCache.enabled=true -Dsonar.sca.recursiveManifestSearch=true -DfailStubGenerationFast=true -Dskip.its=true
+          -Dsonar.sca.exclusions='python-frontend/typeshed_serializer/**,its/plugin/it-python-plugin-test/projects/**,private/its-enterprise/sources_ruling/**,private/its-enterprise/it-python-enterprise-plugin/projects/**,**/test/resources/**'
+        deploy: false
+        sonar-platform: ${{ inputs.sonarqube-instance }}
+        scanner-java-opts: '-Xmx1G'

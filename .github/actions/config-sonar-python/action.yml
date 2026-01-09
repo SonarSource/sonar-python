@@ -9,15 +9,16 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Configure private maven projects
+    - name: Configure public Maven project
       id: config-maven
       uses: SonarSource/ci-github-actions/config-maven@v1
 
-    - name: Update versions of public modules
-      shell: bash
-      run: |
-        # Because the pom.xml of private/ has com.sonarsource.parent:parent as a parent instead of org.sonarsource.python:python, 
-        # updating the build number doesn't propagate to private/. As such, the version needs to be updated specifically in the private/ folder
-        # See BUILD-9394 for details 
-        cd private
-        bash ${GITHUB_ACTION_PATH}/set_maven_version.sh
+    - name: Configure Private Maven project
+      uses: SonarSource/ci-github-actions/config-maven@v1
+      with:
+        working-directory: private
+      env:
+        CONFIG_MAVEN_COMPLETED: ''
+        #SKIP: 'false'
+        CURRENT_VERSION: ''
+        PROJECT_VERSION: ''
