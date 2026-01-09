@@ -82,9 +82,8 @@ public class AstBasedTypeInference {
           assignment.addVariableDependency(symbol);
           propagationsByLhs.get(symbol).forEach(propagation -> propagation.addDependent(assignment));
         }
-      } else if (typeDependenciesCalculator.hasTypeDependencies(e)) {
-        workList.addAll(typeDependenciesCalculator.getTypeDependencies(e));
       }
+      workList.addAll(typeDependenciesCalculator.getTypeDependencies(e));
     }
   }
 

@@ -16,32 +16,21 @@
  */
 package org.sonar.python.semantic.v2.types;
 
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
+import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.python.types.HasTypeDependencies;
 
 public class TypeDependenciesCalculator {
-  static final Set<Tree.Kind> SAME_TYPE_PRODUCING_BINARY_EXPRESSION_KINDS = EnumSet.of(
-    Tree.Kind.PLUS,
-    Tree.Kind.MINUS,
-    Tree.Kind.MULTIPLICATION,
-    Tree.Kind.DIVISION,
-    Tree.Kind.FLOOR_DIVISION,
-    Tree.Kind.MODULO,
-    Tree.Kind.POWER
-  );
-
-  public boolean hasTypeDependencies(Expression expression) {
-    return expression instanceof HasTypeDependencies;
-  }
-
   public List<Expression> getTypeDependencies(Expression expression) {
     if (expression instanceof BinaryExpression binaryExpression) {
-      return calculateBinaryExpressionTypeDependencies(binaryExpression);
+      return List.of(binaryExpression.leftOperand(), binaryExpression.rightOperand());
+    } else if (expression instanceof QualifiedExpression qualifiedExpression) {
+      return List.of(qualifiedExpression.qualifier());
+    } else if (expression instanceof AwaitExpression awaitExpression) {
+      return List.of(awaitExpression.expression());
     } else if (expression instanceof HasTypeDependencies hasTypeDependencies) {
       // SONARPY-2417 Once we get rid of v1 type inference -
       // we won’t need a HasTypeDependencies interface implemented by a tree model classes.
@@ -52,14 +41,5 @@ public class TypeDependenciesCalculator {
     }
     return List.of();
   }
-
-  private static List<Expression> calculateBinaryExpressionTypeDependencies(BinaryExpression binaryExpression) {
-    if (SAME_TYPE_PRODUCING_BINARY_EXPRESSION_KINDS.contains(binaryExpression.getKind())
-        || binaryExpression.is(Tree.Kind.AND, Tree.Kind.OR)) {
-      return List.of(binaryExpression.leftOperand(), binaryExpression.rightOperand());
-    }
-    return List.of();
-  }
-
 
 }

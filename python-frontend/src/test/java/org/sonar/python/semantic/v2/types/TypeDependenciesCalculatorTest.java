@@ -17,31 +17,16 @@
 package org.sonar.python.semantic.v2.types;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.python.tree.BinaryExpressionImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 
 class TypeDependenciesCalculatorTest {
-
-
-  @Test
-  void hasTypeDependenciesTest() {
-    var calculator = new TypeDependenciesCalculator();
-    var expression = lastExpression("a or b");
-    var hasTypeDependencies = calculator.hasTypeDependencies(expression);
-    assertThat(hasTypeDependencies).isTrue();
-
-    expression = lastExpression("a()");
-    hasTypeDependencies = calculator.hasTypeDependencies(expression);
-    assertThat(hasTypeDependencies).isTrue();
-
-    expression = lastExpression("a");
-    hasTypeDependencies = calculator.hasTypeDependencies(expression);
-    assertThat(hasTypeDependencies).isFalse();
-  }
 
   @Test
   void getTypeDependenciesTest() {
@@ -55,10 +40,6 @@ class TypeDependenciesCalculatorTest {
     dependencies = calculator.getTypeDependencies(binaryExpression);
     assertThat(dependencies).containsExactly(binaryExpression.leftOperand(), binaryExpression.rightOperand());
 
-    binaryExpression = (BinaryExpressionImpl) lastExpression("a @ b");
-    dependencies = calculator.getTypeDependencies(binaryExpression);
-    assertThat(dependencies).isEmpty();
-
     var callExpression = (CallExpression) lastExpression("a()");
     dependencies = calculator.getTypeDependencies(callExpression);
     assertThat(dependencies).containsExactly(callExpression.callee());
@@ -66,6 +47,14 @@ class TypeDependenciesCalculatorTest {
     var expression = lastExpression("a");
     dependencies = calculator.getTypeDependencies(expression);
     assertThat(dependencies).isEmpty();
+
+    var qualifiedExpression = (QualifiedExpression) lastExpression("a.b");
+    dependencies = calculator.getTypeDependencies(qualifiedExpression);
+    assertThat(dependencies).containsExactly(qualifiedExpression.qualifier());
+
+    var awaitExpression = (AwaitExpression) lastExpression("await a");
+    dependencies = calculator.getTypeDependencies(awaitExpression);
+    assertThat(dependencies).containsExactly(awaitExpression.expression());
   }
 
 

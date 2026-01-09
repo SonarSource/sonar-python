@@ -16,15 +16,17 @@
  */
 package org.sonar.python.semantic.v2.types;
 
+import java.util.EnumSet;
 import java.util.Optional;
+import java.util.Set;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
@@ -39,8 +41,8 @@ import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.tree.AwaitExpressionImpl;
 import org.sonar.python.tree.BinaryExpressionImpl;
 import org.sonar.python.tree.CallExpressionImpl;
-import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.ConditionalExpressionImpl;
+import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.SliceExpressionImpl;
 import org.sonar.python.tree.UnaryExpressionImpl;
 import org.sonar.python.types.v2.TypeCheckBuilder;
@@ -48,6 +50,15 @@ import org.sonar.python.types.v2.TypeUtils;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
+  private static final Set<Tree.Kind> SAME_TYPE_PRODUCING_BINARY_EXPRESSION_KINDS = EnumSet.of(
+    Tree.Kind.PLUS,
+    Tree.Kind.MINUS,
+    Tree.Kind.MULTIPLICATION,
+    Tree.Kind.DIVISION,
+    Tree.Kind.FLOOR_DIVISION,
+    Tree.Kind.MODULO,
+    Tree.Kind.POWER);
+
   private static final TypeInferenceMatcher IS_SLICEABLE_TYPE = TypeInferenceMatcher.of(
     TypeInferenceMatchers.any(
       TypeInferenceMatchers.isObjectOfType(BuiltinTypes.LIST),
@@ -179,7 +190,7 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     if (binaryExpression.is(Tree.Kind.BITWISE_OR) && binaryExpression.typeV2() instanceof UnionType) {
       return binaryExpression.typeV2();
     }
-    if (TypeDependenciesCalculator.SAME_TYPE_PRODUCING_BINARY_EXPRESSION_KINDS.contains(kind)
+    if (TrivialTypePropagationVisitor.SAME_TYPE_PRODUCING_BINARY_EXPRESSION_KINDS.contains(kind)
         && leftOperand.typeV2() instanceof ObjectType leftObjectType
         && leftObjectType.unwrappedType() instanceof ClassType leftClassType
         && rightOperand.typeV2() instanceof ObjectType rightObjectType
