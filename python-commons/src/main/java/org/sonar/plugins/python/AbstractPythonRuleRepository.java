@@ -16,7 +16,9 @@
  */
 package org.sonar.plugins.python;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.server.rule.RulesDefinition;
@@ -29,6 +31,7 @@ public abstract class AbstractPythonRuleRepository implements RulesDefinition {
   private final String resourceFolder;
   private final String languageKey;
 
+  private static final Map<String, String> INTERNAL_KEYS = Collections.singletonMap("NoSonar", "S1291");
   private final SonarRuntime sonarRuntime;
 
   protected AbstractPythonRuleRepository(String repositoryKey, String resourceFolder, String languageKey, SonarRuntime sonarRuntime) {
@@ -44,13 +47,19 @@ public abstract class AbstractPythonRuleRepository implements RulesDefinition {
       .createRepository(repositoryKey, languageKey)
       .setName(REPOSITORY_NAME);
 
-
     RuleMetadataLoader loader = new RuleMetadataLoader(resourceFolder, resourceFolder + "/Sonar_way_profile.json", sonarRuntime);
     loader.addRulesByAnnotatedClass(repository, getCheckClasses());
 
     repository.rules().stream()
       .filter(rule -> getTemplateRuleKeys().contains(rule.key()))
       .forEach(rule -> rule.setTemplate(true));
+
+    INTERNAL_KEYS.forEach((ruleKey, internalKey) -> {
+      var rule = repository.rule(ruleKey);
+      if (rule != null) {
+        rule.setInternalKey(internalKey);
+      }
+    });
 
     repository.rules().stream()
       .filter(rule -> getDisabledRules().contains(rule.key()))

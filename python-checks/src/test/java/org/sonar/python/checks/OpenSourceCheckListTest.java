@@ -54,7 +54,7 @@ class OpenSourceCheckListTest {
   @Test
   void count() {
     int count = 0;
-    List<File> files = (List<File>) FileUtils.listFiles(new File("src/main/java/org/sonar/python/checks/"), new String[]{"java"}, true);
+    List<File> files = (List<File>) FileUtils.listFiles(new File("src/main/java/org/sonar/python/checks/"), new String[] {"java"}, true);
     for (File file : files) {
       if (file.getName().endsWith("Check.java") && !file.getName().startsWith("Abstract")) {
         count++;
@@ -86,17 +86,16 @@ class OpenSourceCheckListTest {
         .sorted()
         .toList();
 
-      List<String> fileNames = jsonList.stream()
-        .map(Path::getFileName)
-        .map(Path::toString)
-        .map(name -> name.replaceAll("\\.json$", ""))
-        .toList();
-
-      List<String> sqKeys = jsonList.stream()
-        .map(OpenSourceCheckListTest::extractSqKey)
-        .toList();
-
-      assertThat(fileNames).isEqualTo(sqKeys);
+      jsonList.forEach(item -> {
+        var name = item.getFileName().toString().replaceAll("\\.json$", "");
+        var sqKey = extractSqKey(item);
+        // NoSonar key can't be changed to RSPEC key
+        if (name.equals("NoSonar")) {
+          assertThat(sqKey).isEqualTo("S1291");
+        } else {
+          assertThat(name).isEqualTo(sqKey);
+        }
+      });
     }
   }
 

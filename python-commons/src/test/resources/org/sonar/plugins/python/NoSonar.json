@@ -1,0 +1,23 @@
+{
+  "title": "Dummy NoSonar rule",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "dummy"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-6985",
+  "sqKey": "S1291",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "SECURITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}

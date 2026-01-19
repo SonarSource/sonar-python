@@ -63,9 +63,23 @@ class AbstractPythonRuleRepositoryTest {
     assertThat(rules).extracting(RulesDefinition.Rule::activatedByDefault).containsExactly(false);
   }
 
+  @Test
+  void noSonarInternalKey() {
+    var repo = createDummy(List.of(DummyNoSonarCheck.class), Set.of("S1291"), Set.of());
+    var rules = repo.rules();
+    assertThat(rules).extracting(RulesDefinition.Rule::internalKey).containsExactly("S1291");
+  }
+
   @Rule(key = "S9999")
   private static class DummyRuleCheck extends PythonChecks {
     DummyRuleCheck(CheckFactory checkFactory) {
+      super(checkFactory);
+    }
+  }
+
+  @Rule(key = "NoSonar")
+  private static class DummyNoSonarCheck extends PythonChecks {
+    DummyNoSonarCheck(CheckFactory checkFactory) {
       super(checkFactory);
     }
   }
