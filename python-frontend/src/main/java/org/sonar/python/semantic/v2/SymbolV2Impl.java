@@ -20,35 +20,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.sonar.api.Beta;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.tree.NameImpl;
 
 @Beta
-public class SymbolV2 {
+public class SymbolV2Impl implements SymbolV2 {
 
   private final String name;
   private final List<UsageV2> usages;
 
-  public SymbolV2(String name, List<UsageV2> usages) {
+  public SymbolV2Impl(String name, List<UsageV2> usages) {
     this.name = name;
     this.usages = usages;
   }
 
-  public SymbolV2(String name) {
+  public SymbolV2Impl(String name) {
     this(name, new ArrayList<>());
   }
 
   void addUsage(Name name, UsageV2.Kind kind) {
-    UsageV2 usage = new UsageV2(name, kind);
+    UsageV2 usage = new UsageV2Impl(name, kind);
     usages.add(usage);
     if (name instanceof NameImpl ni) {
       ni.symbolV2(this);
     }
-  }
-
-  @Beta
-  public boolean hasSingleBindingUsage() {
-    return getSingleBindingUsage().isPresent();
   }
 
   @Beta

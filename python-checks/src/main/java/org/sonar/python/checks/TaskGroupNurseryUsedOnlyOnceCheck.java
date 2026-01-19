@@ -23,13 +23,13 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
-import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 

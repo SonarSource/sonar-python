@@ -21,18 +21,20 @@ import static org.mockito.Mockito.mock;
 
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.Name;
 
-class SymbolV2Test {
+class SymbolV2ImplTest {
   @Test
   void getSingleBindingUsage_should_return_empty_for_no_usages() {
-    SymbolV2 symbol = new SymbolV2("testSymbol");
+    SymbolV2 symbol = new SymbolV2Impl("testSymbol");
     assertThat(symbol.getSingleBindingUsage()).isEmpty();
   }
 
   @Test
   void getSingleBindingUsage_should_return_empty_for_multiple_binding_usages() {
-    SymbolV2 symbol = new SymbolV2("testSymbol");
+    SymbolV2Impl symbol = new SymbolV2Impl("testSymbol");
     Name name1 = mock(Name.class);
     Name name2 = mock(Name.class);
 
@@ -44,7 +46,7 @@ class SymbolV2Test {
 
   @Test
   void getSingleBindingUsage_should_return_binding_usage_when_exactly_one_exists() {
-    SymbolV2 symbol = new SymbolV2("testSymbol");
+    SymbolV2Impl symbol = new SymbolV2Impl("testSymbol");
     Name name1 = mock(Name.class);
     Name name2 = mock(Name.class);
 
@@ -55,45 +57,5 @@ class SymbolV2Test {
     assertThat(singleBindingUsage).isPresent();
     assertThat(singleBindingUsage.get().kind()).isEqualTo(UsageV2.Kind.IMPORT);
     assertThat(singleBindingUsage.get().tree()).isEqualTo(name1);
-  }
-
-  @Test
-  void hasSingleBindingUsage_should_return_false_for_no_usages() {
-    SymbolV2 symbol = new SymbolV2("testSymbol");
-    assertThat(symbol.hasSingleBindingUsage()).isFalse();
-  }
-
-  @Test
-  void hasSingleBindingUsage_should_return_false_for_multiple_binding_usages() {
-    SymbolV2 symbol = new SymbolV2("testSymbol");
-    Name name1 = mock(Name.class);
-    Name name2 = mock(Name.class);
-
-    symbol.addUsage(name1, UsageV2.Kind.IMPORT);
-    symbol.addUsage(name2, UsageV2.Kind.ASSIGNMENT_LHS);
-
-    assertThat(symbol.hasSingleBindingUsage()).isFalse();
-  }
-
-  @Test
-  void hasSingleBindingUsage_should_return_true_for_single_binding_usage() {
-    SymbolV2 symbol = new SymbolV2("testSymbol");
-    Name name1 = mock(Name.class);
-    Name name2 = mock(Name.class);
-
-    symbol.addUsage(name1, UsageV2.Kind.IMPORT);
-    symbol.addUsage(name2, UsageV2.Kind.OTHER);
-
-    assertThat(symbol.hasSingleBindingUsage()).isTrue();
-  }
-
-  @Test
-  void hasSingleBindingUsage_should_return_false_for_only_non_binding_usages() {
-    SymbolV2 symbol = new SymbolV2("testSymbol");
-    Name name = mock(Name.class);
-
-    symbol.addUsage(name, UsageV2.Kind.OTHER);
-
-    assertThat(symbol.hasSingleBindingUsage()).isFalse();
   }
 }

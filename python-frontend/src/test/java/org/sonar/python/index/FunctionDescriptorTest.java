@@ -25,9 +25,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
-import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 
 import static org.assertj.core.api.Assertions.assertThat;

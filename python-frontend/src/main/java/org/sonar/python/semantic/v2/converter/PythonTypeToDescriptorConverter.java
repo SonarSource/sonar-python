@@ -24,6 +24,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
@@ -40,8 +42,6 @@ import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.index.VariableDescriptor;
-import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.semantic.v2.UsageV2;
 
 public class PythonTypeToDescriptorConverter {
 

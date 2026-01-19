@@ -40,6 +40,8 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -62,8 +64,6 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.semantic.v2.UsageV2;
 
 public class TreeUtils {
   private TreeUtils() {

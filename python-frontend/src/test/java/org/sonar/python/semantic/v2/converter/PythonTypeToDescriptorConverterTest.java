@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
@@ -43,7 +44,7 @@ import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
-import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.SymbolV2Impl;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyUnionType;
@@ -77,7 +78,7 @@ class PythonTypeToDescriptorConverterTest {
       false,
       null,
       location);
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("myFunction"), Set.of(functionType));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("myFunction"), Set.of(functionType));
 
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
     FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
@@ -115,7 +116,7 @@ class PythonTypeToDescriptorConverterTest {
   void testConvertClassType() {
     ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper),
       List.of(intTypeWrapper.type()), true, false, location);
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("myClass"), Set.of(classType));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("myClass"), Set.of(classType));
 
     assertThat(descriptor).isInstanceOf(ClassDescriptor.class);
     ClassDescriptor classDescriptor = (ClassDescriptor) descriptor;
@@ -146,7 +147,7 @@ class PythonTypeToDescriptorConverterTest {
   @Test
   void testConvertUnresolvedImportType() {
     UnknownType.UnresolvedImportType unresolvedImportType = new UnknownType.UnresolvedImportType("anImport");
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("myImportedType"), Set.of(unresolvedImportType));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("myImportedType"), Set.of(unresolvedImportType));
 
     assertThat(descriptor).isInstanceOf(VariableDescriptor.class);
     VariableDescriptor variableDescriptor = (VariableDescriptor) descriptor;
@@ -158,7 +159,7 @@ class PythonTypeToDescriptorConverterTest {
   @Test
   void testConvertOtherType() {
     LazyType lazyType = new LazyType("foo", new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("myLazySymbol"), Set.of(lazyType));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("myLazySymbol"), Set.of(lazyType));
     assertThat(descriptor).isInstanceOf(VariableDescriptor.class);
     VariableDescriptor variableDescriptor = (VariableDescriptor) descriptor;
     assertThat(variableDescriptor.name()).isEqualTo("myLazySymbol");
@@ -166,7 +167,7 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(variableDescriptor.annotatedType()).isNull();
 
     ModuleType moduleType = new ModuleType("myModule");
-    descriptor = converter.convert("foo", new SymbolV2("myModulSymbol"), Set.of(moduleType));
+    descriptor = converter.convert("foo", new SymbolV2Impl("myModulSymbol"), Set.of(moduleType));
     assertThat(descriptor).isInstanceOf(VariableDescriptor.class);
     variableDescriptor = (VariableDescriptor) descriptor;
     assertThat(variableDescriptor.name()).isEqualTo("myModulSymbol");
@@ -174,7 +175,7 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(variableDescriptor.annotatedType()).isNull();
 
     ObjectType objectType = ObjectType.fromType(lazyType);
-    descriptor = converter.convert("foo", new SymbolV2("myObjectSymbol"), Set.of(objectType));
+    descriptor = converter.convert("foo", new SymbolV2Impl("myObjectSymbol"), Set.of(objectType));
     assertThat(descriptor).isInstanceOf(VariableDescriptor.class);
     variableDescriptor = (VariableDescriptor) descriptor;
     assertThat(variableDescriptor.name()).isEqualTo("myObjectSymbol");
@@ -182,7 +183,7 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(variableDescriptor.annotatedType()).isNull();
 
     LazyUnionType lazyUnionType = new LazyUnionType(Set.of(lazyType, objectType));
-    descriptor = converter.convert("foo", new SymbolV2("myLazyUnionSymbol"), Set.of(lazyUnionType));
+    descriptor = converter.convert("foo", new SymbolV2Impl("myLazyUnionSymbol"), Set.of(lazyUnionType));
     assertThat(descriptor).isInstanceOf(VariableDescriptor.class);
     variableDescriptor = (VariableDescriptor) descriptor;
     assertThat(variableDescriptor.name()).isEqualTo("myLazyUnionSymbol");
@@ -197,7 +198,7 @@ class PythonTypeToDescriptorConverterTest {
     ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper),
       List.of(intTypeWrapper.type()), true, false, location);
     PythonType unionType = UnionType.or(classType, anotherClassType);
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(unionType));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("myUnionType"), Set.of(unionType));
 
     assertThat(descriptor).isInstanceOf(AmbiguousDescriptor.class);
     AmbiguousDescriptor ambiguousDescriptor = (AmbiguousDescriptor) descriptor;
@@ -216,7 +217,7 @@ class PythonTypeToDescriptorConverterTest {
       List.of(intTypeWrapper.type()), true, false, location);
     FunctionType functionType = new FunctionType("functionType", "my_package.functionType", List.of(new ModuleType("bar")), List.of(), List.of(), floatTypeWrapper,
       TypeOrigin.LOCAL, true, false, true, false, false, null, location);
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(functionType, classType));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("myUnionType"), Set.of(functionType, classType));
 
     assertThat(descriptor).isInstanceOf(AmbiguousDescriptor.class);
     AmbiguousDescriptor ambiguousDescriptor = (AmbiguousDescriptor) descriptor;
@@ -235,7 +236,7 @@ class PythonTypeToDescriptorConverterTest {
       List.of(intTypeWrapper.type()), true, false, location);
 
     PythonType unionType = UnionType.or(classType, anotherClassType);
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(unionType, classType));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("myUnionType"), Set.of(unionType, classType));
 
     assertThat(descriptor).isInstanceOf(AmbiguousDescriptor.class);
     AmbiguousDescriptor ambiguousDescriptor = (AmbiguousDescriptor) descriptor;
@@ -276,7 +277,7 @@ class PythonTypeToDescriptorConverterTest {
 
   @Test
   void testMissingCandidatesThrowsException() {
-    SymbolV2 symbol = new SymbolV2("mySymbol");
+    SymbolV2 symbol = new SymbolV2Impl("mySymbol");
     Set<PythonType> emptySet = Set.of();
     assertThatThrownBy(() -> converter.convert("foo", symbol, emptySet))
       .isInstanceOf(IllegalStateException.class)
@@ -288,7 +289,7 @@ class PythonTypeToDescriptorConverterTest {
     ClassType classType = new ClassType("MyClass", "my_package.MyClass", Set.of(), List.of(), List.of(), List.of(), false, false, location);
     PythonType selfType = SelfType.of(classType);
 
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("mySelfSymbol"), Set.of(selfType));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("mySelfSymbol"), Set.of(selfType));
 
     assertThat(descriptor).isInstanceOf(ClassDescriptor.class);
     ClassDescriptor classDescriptor = (ClassDescriptor) descriptor;
@@ -327,7 +328,7 @@ class PythonTypeToDescriptorConverterTest {
       null,
       location);
 
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("test_function"), Set.of(functionType));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("test_function"), Set.of(functionType));
 
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
     FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
@@ -390,7 +391,7 @@ class PythonTypeToDescriptorConverterTest {
       null,
       location);
 
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("test_function"), Set.of(testFunction));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("test_function"), Set.of(testFunction));
 
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
     FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
@@ -435,7 +436,7 @@ class PythonTypeToDescriptorConverterTest {
         null,
       location);
 
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("func1"), Set.of(funcWithClassReturn));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("func1"), Set.of(funcWithClassReturn));
     
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
     FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
@@ -466,7 +467,7 @@ class PythonTypeToDescriptorConverterTest {
         null,
       location);
 
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("func2"), Set.of(funcWithSelfReturn));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("func2"), Set.of(funcWithSelfReturn));
     
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
     FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
@@ -497,7 +498,7 @@ class PythonTypeToDescriptorConverterTest {
       null,
       location);
 
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("func3"), Set.of(funcWithCallableReturn));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("func3"), Set.of(funcWithCallableReturn));
     
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
     FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
@@ -527,7 +528,7 @@ class PythonTypeToDescriptorConverterTest {
       null,
       location);
 
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("func4"), Set.of(funcWithUnresolvedReturn));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("func4"), Set.of(funcWithUnresolvedReturn));
     
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
     FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
@@ -558,7 +559,7 @@ class PythonTypeToDescriptorConverterTest {
       null,
       location);
 
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("func5"), Set.of(funcWithObjectReturn));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("func5"), Set.of(funcWithObjectReturn));
     
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
     FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;
@@ -590,7 +591,7 @@ class PythonTypeToDescriptorConverterTest {
       null,
       location);
 
-    Descriptor descriptor = converter.convert("foo", new SymbolV2("func6"), Set.of(funcWithObjectSelfReturn));
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("func6"), Set.of(funcWithObjectSelfReturn));
     
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
     FunctionDescriptor funcDesc = (FunctionDescriptor) descriptor;

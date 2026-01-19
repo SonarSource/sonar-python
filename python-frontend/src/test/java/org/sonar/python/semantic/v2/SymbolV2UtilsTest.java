@@ -17,6 +17,7 @@
 package org.sonar.python.semantic.v2;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;

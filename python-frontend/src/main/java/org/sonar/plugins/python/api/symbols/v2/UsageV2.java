@@ -14,23 +14,38 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.semantic.v2.types;
+package org.sonar.plugins.python.api.symbols.v2;
 
-import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.api.Beta;
+import org.sonar.plugins.python.api.tree.Tree;
 
-public class ParameterDefinition extends Propagation {
-  private final PythonType parameterType;
+@Beta
+public interface UsageV2 {
+  @Beta
+  Tree tree();
 
-  protected ParameterDefinition(SymbolV2 lhsSymbol, Name lhsName, PythonType parameterType) {
-    super(lhsSymbol, lhsName);
-    this.parameterType = parameterType;
-  }
+  @Beta
+  Kind kind();
 
+  @Beta
+  boolean isBindingUsage();
 
-  @Override
-  public PythonType rhsType() {
-    return parameterType;
+  enum Kind {
+    ASSIGNMENT_LHS,
+    COMPOUND_ASSIGNMENT_LHS,
+    IMPORT,
+    LOOP_DECLARATION,
+    COMP_DECLARATION,
+    OTHER,
+    PARAMETER,
+    FUNC_DECLARATION,
+    CLASS_DECLARATION,
+    EXCEPTION_INSTANCE,
+    WITH_INSTANCE,
+    GLOBAL_DECLARATION,
+    NONLOCAL_DECLARATION,
+    PATTERN_DECLARATION,
+    TYPE_PARAM_DECLARATION,
+    TYPE_ALIAS_DECLARATION,
   }
 }

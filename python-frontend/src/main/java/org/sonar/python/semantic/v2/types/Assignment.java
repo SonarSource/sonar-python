@@ -16,9 +16,9 @@
  */
 package org.sonar.python.semantic.v2.types;
 
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class Assignment extends Propagation {

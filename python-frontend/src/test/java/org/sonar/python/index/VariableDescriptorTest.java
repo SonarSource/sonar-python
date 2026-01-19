@@ -19,8 +19,8 @@ package org.sonar.python.index;
 
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 

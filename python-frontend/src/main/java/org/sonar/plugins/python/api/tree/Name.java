@@ -18,7 +18,7 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 import org.sonar.api.Beta;
-import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 
 /**
  * See https://docs.python.org/3/reference/expressions.html#atom-identifiers

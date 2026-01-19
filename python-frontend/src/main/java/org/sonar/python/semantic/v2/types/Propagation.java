@@ -18,9 +18,9 @@ package org.sonar.python.semantic.v2.types;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 

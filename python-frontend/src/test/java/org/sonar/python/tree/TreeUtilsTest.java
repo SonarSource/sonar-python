@@ -27,6 +27,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -56,7 +57,6 @@ import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
-import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.types.v2.TypesTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;

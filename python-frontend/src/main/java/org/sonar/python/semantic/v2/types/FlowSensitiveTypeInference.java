@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -37,7 +38,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.cfg.fixpoint.ForwardAnalysis;
 import org.sonar.python.cfg.fixpoint.ProgramState;
-import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 public class FlowSensitiveTypeInference extends ForwardAnalysis {

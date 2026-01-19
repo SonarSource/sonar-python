@@ -21,13 +21,13 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 

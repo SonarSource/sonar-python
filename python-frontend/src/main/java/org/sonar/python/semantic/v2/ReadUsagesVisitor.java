@@ -17,6 +17,7 @@
 package org.sonar.python.semantic.v2;
 
 import java.util.Map;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
@@ -138,13 +139,13 @@ public class ReadUsagesVisitor extends ScopeVisitor {
   private void addSymbolUsage(Name name) {
     var scope = currentScope();
     var symbol = scope.resolve(name.name());
-    if (symbol != null && symbol.usages().stream().noneMatch(usage -> usage.tree().equals(name))) {
+    if (symbol instanceof SymbolV2Impl symbolV2 && symbolV2.usages().stream().noneMatch(usage -> usage.tree().equals(name))) {
       if (name.parent().is(Tree.Kind.GLOBAL_STMT)) {
-        symbol.addUsage(name, UsageV2.Kind.GLOBAL_DECLARATION);
+        symbolV2.addUsage(name, UsageV2.Kind.GLOBAL_DECLARATION);
       } else if (name.parent().is(Tree.Kind.NONLOCAL_STMT)) {
-        symbol.addUsage(name, UsageV2.Kind.NONLOCAL_DECLARATION);
+        symbolV2.addUsage(name, UsageV2.Kind.NONLOCAL_DECLARATION);
       } else {
-        symbol.addUsage(name, UsageV2.Kind.OTHER);
+        symbolV2.addUsage(name, UsageV2.Kind.OTHER);
       }
     }
   }

@@ -17,32 +17,14 @@
 package org.sonar.python.semantic.v2;
 
 import org.sonar.api.Beta;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.Tree;
 
 @Beta
-public record UsageV2(Tree tree, Kind kind) {
+public record UsageV2Impl(Tree tree, UsageV2.Kind kind) implements UsageV2 {
 
   @Beta
   public boolean isBindingUsage() {
     return kind() != UsageV2.Kind.OTHER && kind() != UsageV2.Kind.GLOBAL_DECLARATION;
-  }
-
-  public enum Kind {
-    ASSIGNMENT_LHS,
-    COMPOUND_ASSIGNMENT_LHS,
-    IMPORT,
-    LOOP_DECLARATION,
-    COMP_DECLARATION,
-    OTHER,
-    PARAMETER,
-    FUNC_DECLARATION,
-    CLASS_DECLARATION,
-    EXCEPTION_INSTANCE,
-    WITH_INSTANCE,
-    GLOBAL_DECLARATION,
-    NONLOCAL_DECLARATION,
-    PATTERN_DECLARATION,
-    TYPE_PARAM_DECLARATION,
-    TYPE_ALIAS_DECLARATION,
   }
 }

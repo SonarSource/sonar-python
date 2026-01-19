@@ -20,8 +20,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.python.cfg.fixpoint.ProgramState;
-import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.SymbolV2Impl;
 import org.sonar.python.semantic.v2.types.TypeInferenceProgramState;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,8 +32,8 @@ import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 
 class TypeInferenceProgramStateTest {
 
-  private final SymbolV2 a = new SymbolV2("a");
-  private final SymbolV2 b = new SymbolV2("b");
+  private final SymbolV2 a = new SymbolV2Impl("a");
+  private final SymbolV2 b = new SymbolV2Impl("b");
   private final ProgramState otherProgramState = new ProgramState() {
     @Override
     public ProgramState join(ProgramState programState) {

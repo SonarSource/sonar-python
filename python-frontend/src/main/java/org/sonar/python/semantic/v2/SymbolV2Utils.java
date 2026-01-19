@@ -16,6 +16,8 @@
  */
 package org.sonar.python.semantic.v2;
 
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
+
 public class SymbolV2Utils {
 
   private SymbolV2Utils() {}

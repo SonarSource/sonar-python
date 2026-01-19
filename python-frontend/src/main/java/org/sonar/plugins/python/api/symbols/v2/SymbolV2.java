@@ -14,23 +14,20 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.semantic.v2.types;
+package org.sonar.plugins.python.api.symbols.v2;
 
-import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.types.v2.PythonType;
+import java.util.List;
+import java.util.Optional;
+import org.sonar.api.Beta;
 
-public class ParameterDefinition extends Propagation {
-  private final PythonType parameterType;
+@Beta
+public interface SymbolV2 {
+  @Beta
+  Optional<UsageV2> getSingleBindingUsage();
 
-  protected ParameterDefinition(SymbolV2 lhsSymbol, Name lhsName, PythonType parameterType) {
-    super(lhsSymbol, lhsName);
-    this.parameterType = parameterType;
-  }
+  @Beta
+  String name();
 
-
-  @Override
-  public PythonType rhsType() {
-    return parameterType;
-  }
+  @Beta
+  List<UsageV2> usages();
 }

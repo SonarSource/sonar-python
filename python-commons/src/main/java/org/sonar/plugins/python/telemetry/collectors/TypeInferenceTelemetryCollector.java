@@ -19,6 +19,8 @@ package org.sonar.plugins.python.telemetry.collectors;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -27,8 +29,6 @@ import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
-import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.semantic.v2.UsageV2;
 
 /**
  * Collects telemetry metrics about type inference quality.

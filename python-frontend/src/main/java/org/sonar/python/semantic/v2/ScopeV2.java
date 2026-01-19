@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -54,13 +56,13 @@ public class ScopeV2 {
   void addBindingUsage(Name nameTree, UsageV2.Kind kind) {
     String symbolName = nameTree.name();
     if (!isExistingSymbol(symbolName)) {
-      SymbolV2 symbol = new SymbolV2(symbolName);
+      SymbolV2 symbol = new SymbolV2Impl(symbolName);
       symbols.add(symbol);
       symbolsByName.put(symbolName, symbol);
     }
     SymbolV2 symbol = resolve(symbolName);
-    if (symbol != null) {
-      symbol.addUsage(nameTree, kind);
+    if (symbol instanceof SymbolV2Impl symbolV2) {
+      symbolV2.addUsage(nameTree, kind);
     }
   }
 
@@ -88,7 +90,7 @@ public class ScopeV2 {
     }
     String symbolName = nameTree.name();
     //TODO: SONARPY-1865 Represent "self"
-    SymbolV2 symbol = new SymbolV2(symbolName);
+    SymbolV2Impl symbol = new SymbolV2Impl(symbolName);
     symbols.add(symbol);
     symbolsByName.put(symbolName, symbol);
     symbol.addUsage(nameTree, UsageV2.Kind.PARAMETER);

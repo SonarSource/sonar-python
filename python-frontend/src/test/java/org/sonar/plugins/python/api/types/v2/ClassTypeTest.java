@@ -30,6 +30,8 @@ import org.mockito.Mockito;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.TriBool;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -40,9 +42,7 @@ import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
-import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
-import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
