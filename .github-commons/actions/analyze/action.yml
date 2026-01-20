@@ -17,7 +17,6 @@ runs:
         maven-args: >-
           -Dsonar.organization=sonarsource -Dsonar.projectKey=${{ inputs.sonar-project-key }}
           -Dsonar.analysisCache.enabled=true -Dsonar.sca.recursiveManifestSearch=true -DfailStubGenerationFast=true -Dskip.its=true
-          -Dsonar.sca.exclusions='python-frontend/typeshed_serializer/**,its/plugin/it-python-plugin-test/projects/**,private/its-enterprise/sources_ruling/**,private/its-enterprise/it-python-enterprise-plugin/projects/**,**/test/resources/**'
         deploy: false
         sonar-platform: ${{ inputs.sonarqube-instance }}
         scanner-java-opts: '-Xmx1G'

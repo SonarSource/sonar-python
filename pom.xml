@@ -104,7 +104,9 @@
     <sonar.api.version>13.0.0.3026</sonar.api.version>
     <sonar.orchestrator.version>5.6.2.2625</sonar.orchestrator.version>
     <sonar-analyzer-commons.version>2.20.0.4607</sonar-analyzer-commons.version>
-    <sonar.sca.exclusions>its/**,private/its-enterprise/**</sonar.sca.exclusions>
+    <sonar.sca.exclusions>
+      its/**,private/its-enterprise/**,python-frontend/typeshed-serializer/**,**/test/resources/**
+    </sonar.sca.exclusions>
     <sonarlint-core.version>10.13.0.79996</sonarlint-core.version>
     <sslr.version>1.24.0.633</sslr.version>
     <protobuf.version>4.29.0</protobuf.version>
