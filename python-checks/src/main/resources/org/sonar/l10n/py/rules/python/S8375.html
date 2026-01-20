@@ -1,0 +1,47 @@
+<p>This rule raises an issue when Flask’s <code>preprocess_request()</code> method is called without capturing or checking its return value.</p>
+<h2>Why is this an issue?</h2>
+<p>Flask’s <code>preprocess_request()</code> method runs all registered before-request handlers and may return a response object when one of these
+handlers wants to short-circuit the normal request processing flow.</p>
+<p>Before-request handlers commonly return responses for scenarios like:</p>
+<ul>
+  <li> Authentication failures that should redirect to a login page </li>
+  <li> Authorization checks that should return 403 Forbidden responses </li>
+  <li> Rate limiting that should return 429 Too Many Requests </li>
+  <li> Maintenance mode that should return 503 Service Unavailable </li>
+</ul>
+<p>When you ignore the return value of <code>preprocess_request()</code>, these important early responses are lost. The application continues with
+normal request processing instead of returning the intended response, leading to incorrect behavior.</p>
+<p>For example, if a before-request handler detects an unauthenticated user and returns a redirect to the login page, ignoring this response means the
+user will see the protected content instead of being redirected to authenticate.</p>
+<h3>What is the potential impact?</h3>
+<p>Ignoring the return value can lead to security vulnerabilities where authentication and authorization checks are bypassed. It can also cause
+functional issues where important redirects, error responses, or maintenance messages are not delivered to users.</p>
+<h2>How to fix it</h2>
+<p>Capture the return value of <code>preprocess_request()</code> and check if it contains a response object. If it does, return that response
+immediately to respect the before-request handler’s decision.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+app.preprocess_request()  # Noncompliant
+# Continue with normal request processing
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+response = app.preprocess_request()
+if response is not None:
+    return response
+# Continue with normal request processing
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Flask preprocess_request documentation - <a href="https://flask.palletsprojects.com/en/stable/api/#flask.Flask.preprocess_request">Official
+  Flask documentation for the preprocess_request method</a> </li>
+  <li> Flask Request Hooks - <a href="https://flask.palletsprojects.com/en/stable/reqcontext/#request-hooks">Documentation about Flask’s
+  before-request and after-request hooks</a> </li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:python:S899} - Return values from functions without side effects should not be ignored (Java) </li>
+</ul>
+
