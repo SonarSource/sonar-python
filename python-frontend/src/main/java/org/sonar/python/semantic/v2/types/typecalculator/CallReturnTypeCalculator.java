@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.semantic.v2.types;
+package org.sonar.python.semantic.v2.types.typecalculator;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -32,6 +32,8 @@ import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.python.semantic.v2.types.TypeInferenceMatcher;
+import org.sonar.python.semantic.v2.types.TypeInferenceMatchers;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 public final class CallReturnTypeCalculator {

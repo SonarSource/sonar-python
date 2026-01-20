@@ -28,7 +28,7 @@ import org.sonar.python.types.v2.matchers.HasMemberPredicate;
 import org.sonar.python.types.v2.matchers.HasMemberSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsFunctionOwnerSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsObjectSatisfyingPredicate;
-import org.sonar.python.types.v2.matchers.IsObjectSubtypeOfPredicate;
+import org.sonar.python.types.v2.matchers.IsSubtypeOfPredicate;
 import org.sonar.python.types.v2.matchers.IsTypeOrSuperTypeSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsTypePredicate;
 import org.sonar.python.types.v2.matchers.TypePredicate;
@@ -95,8 +95,12 @@ public final class TypeMatchers {
     return isObjectSatisfying(isType(fqn));
   }
 
+  public static TypeMatcher isSubtypeOf(String fqn) {
+    return new TypeMatcherImpl(new IsSubtypeOfPredicate(fqn));
+  }
+
   public static TypeMatcher isObjectOfSubType(String fqn) {
-    return new TypeMatcherImpl(new IsObjectSubtypeOfPredicate(fqn));
+    return isObjectSatisfying(isSubtypeOf(fqn));
   }
 
   public static TypeMatcher isOrExtendsType(String fqn) {
@@ -131,7 +135,7 @@ public final class TypeMatchers {
 
   @VisibleForTesting
   static TypePredicate getTypePredicate(TypeMatcher matcher) {
-    if(matcher instanceof TypeMatcherImpl typeMatcherImpl) {
+    if (matcher instanceof TypeMatcherImpl typeMatcherImpl) {
       return typeMatcherImpl.predicate();
     }
     throw new IllegalArgumentException("Unsupported type matcher: " + matcher.getClass().getName());

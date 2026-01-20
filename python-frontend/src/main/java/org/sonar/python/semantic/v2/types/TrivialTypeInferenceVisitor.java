@@ -86,6 +86,9 @@ import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
+import org.sonar.python.semantic.v2.types.typecalculator.AwaitedTypeCalculator;
+import org.sonar.python.semantic.v2.types.typecalculator.CallReturnTypeCalculator;
+import org.sonar.python.semantic.v2.types.typecalculator.QualifiedExpressionCalculator;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.tree.AwaitExpressionImpl;
 import org.sonar.python.tree.BinaryExpressionImpl;
@@ -821,12 +824,10 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
-    scan(qualifiedExpression.qualifier());
+    super.visitQualifiedExpression(qualifiedExpression);
+    PythonType type = new QualifiedExpressionCalculator(typePredicateContext).calculate(qualifiedExpression);
     if (qualifiedExpression.name() instanceof NameImpl name) {
-      var nameType = qualifiedExpression.qualifier().typeV2()
-        .resolveMember(qualifiedExpression.name().name())
-        .orElse(PythonType.UNKNOWN);
-      name.typeV2(nameType);
+      name.typeV2(type);
     }
   }
 

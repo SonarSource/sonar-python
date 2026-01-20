@@ -22,7 +22,7 @@ import org.sonar.python.types.v2.matchers.TypePredicate;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 import org.sonar.python.types.v2.matchers.TypePredicateUtils;
 
-class TypeInferenceMatcher {
+public class TypeInferenceMatcher {
   private final TypePredicate predicate;
 
   private TypeInferenceMatcher(TypePredicate predicate) {

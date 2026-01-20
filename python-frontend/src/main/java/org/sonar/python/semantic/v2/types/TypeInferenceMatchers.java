@@ -24,6 +24,7 @@ import org.sonar.python.types.v2.matchers.HasFQNPredicate;
 import org.sonar.python.types.v2.matchers.HasMemberPredicate;
 import org.sonar.python.types.v2.matchers.IsObjectSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsSelfTypePredicate;
+import org.sonar.python.types.v2.matchers.IsSubtypeOfPredicate;
 import org.sonar.python.types.v2.matchers.IsTypePredicate;
 import org.sonar.python.types.v2.matchers.TypePredicate;
 
@@ -35,7 +36,7 @@ import org.sonar.python.types.v2.matchers.TypePredicate;
  * 
  * @see TypeInferenceMatcher
  */
-class TypeInferenceMatchers {
+public class TypeInferenceMatchers {
   private TypeInferenceMatchers() {
   }
 
@@ -53,6 +54,10 @@ class TypeInferenceMatchers {
 
   public static TypePredicate isObjectOfType(String fqn) {
     return isObjectSatisfying(isType(fqn));
+  }
+
+  public static TypePredicate isSubtypeOf(String fqn) {
+    return new IsSubtypeOfPredicate(fqn);
   }
 
   public static TypePredicate hasMember(String memberName) {

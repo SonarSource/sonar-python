@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.semantic.v2.types;
+package org.sonar.python.semantic.v2.types.typecalculator;
 
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.CallExpression;

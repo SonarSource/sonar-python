@@ -19,39 +19,30 @@ package org.sonar.python.types.v2.matchers;
 import java.util.Set;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 
 import static org.sonar.python.types.v2.TypeUtils.collectTypes;
 
-public class IsObjectSubtypeOfPredicate implements TypePredicate {
+public class IsSubtypeOfPredicate implements TypePredicate {
+  String fullyQualifiedName;
 
-  private final IsObjectSatisfyingPredicate isObjectSatisfyingPredicate;
-
-  public IsObjectSubtypeOfPredicate(String fullyQualifiedName) {
-    this.isObjectSatisfyingPredicate = new IsObjectSatisfyingPredicate(new IsSubtypeOfPredicate(fullyQualifiedName));
+  public IsSubtypeOfPredicate(String fullyQualifiedName) {
+    this.fullyQualifiedName = fullyQualifiedName;
   }
 
   @Override
   public TriBool check(PythonType type, TypePredicateContext ctx) {
-    return isObjectSatisfyingPredicate.check(type, ctx);
-  }
+    PythonType expectedType = ctx.typeTable().getType(fullyQualifiedName);
 
-  private static class IsSubtypeOfPredicate implements TypePredicate {
-    String fullyQualifiedName;
-
-    public IsSubtypeOfPredicate(String fullyQualifiedName) {
-      this.fullyQualifiedName = fullyQualifiedName;
+    if (type instanceof UnknownType || expectedType instanceof UnknownType) {
+      return TriBool.UNKNOWN;
     }
 
-    @Override
-    public TriBool check(PythonType type, TypePredicateContext ctx) {
-      PythonType expectedType = ctx.typeTable().getType(fullyQualifiedName);
-      Set<PythonType> types = collectTypes(type);
-      if (types.stream().anyMatch(t -> t.equals(expectedType))) {
-        return TriBool.TRUE;
-      } else {
-        return TriBool.FALSE;
-      }
+    Set<PythonType> types = collectTypes(type);
+    if (types.stream().anyMatch(t -> t.equals(expectedType))) {
+      return TriBool.TRUE;
+    } else {
+      return TriBool.FALSE;
     }
   }
 }
-

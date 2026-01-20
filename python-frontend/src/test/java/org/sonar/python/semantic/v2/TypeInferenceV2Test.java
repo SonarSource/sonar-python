@@ -92,6 +92,7 @@ import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyTypeWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.type;
 import static org.sonar.python.PythonTestUtils.getFirstDescendant;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
@@ -1962,6 +1963,28 @@ public class TypeInferenceV2Test {
       tree -> tree instanceof QualifiedExpression qualifiedExpression && "discard".equals(qualifiedExpression.name().name()));
     CallExpression discardCall = PythonTestUtils.getFirstChild(fileInput, tree -> tree instanceof CallExpression call && call.callee() == xDiscardCallee);
     assertThat(discardCall.callee().typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void test_ast_based_type_inference_when_function_has_no_local_variables() {
+    FileInput fileInput = inferTypes("""
+      from flask import request
+      def test():
+        request.args.get('hostname')
+        try: ...
+        except: ...
+      """);
+
+    Name getName = PythonTestUtils.getFirstChild(fileInput, tree -> tree instanceof Name name && "get".equals(name.name()));
+
+    assertThat(getName.typeV2())
+      .asInstanceOf(type(UnionType.class))
+      .extracting(UnionType::candidates, InstanceOfAssertFactories.SET)
+      .isNotEmpty()
+      .allSatisfy(type -> assertThat(type)
+        .asInstanceOf(type(FunctionType.class))
+        .extracting(FunctionType::name)
+        .isEqualTo("get"));
   }
 
   @Test

@@ -17,7 +17,6 @@
 package org.sonar.python.semantic.v2.types;
 
 import java.util.EnumSet;
-import java.util.Optional;
 import java.util.Set;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
@@ -25,18 +24,19 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.v2.ClassType;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.python.semantic.v2.types.typecalculator.AwaitedTypeCalculator;
+import org.sonar.python.semantic.v2.types.typecalculator.CallReturnTypeCalculator;
+import org.sonar.python.semantic.v2.types.typecalculator.QualifiedExpressionCalculator;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.tree.AwaitExpressionImpl;
 import org.sonar.python.tree.BinaryExpressionImpl;
@@ -96,22 +96,8 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
   public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
     scan(qualifiedExpression.qualifier());
     if (qualifiedExpression.name() instanceof NameImpl name) {
-      Optional<PythonType> pythonType = Optional.of(qualifiedExpression.qualifier())
-        .map(Expression::typeV2)
-        .flatMap(t -> t.resolveMember(name.name()));
-      if (pythonType.isPresent()) {
-        var type = pythonType.get();
-        if (type instanceof FunctionType functionType) {
-          // If a member access is a method with a "property" annotation, we consider the resulting type to be the return type of the method
-          boolean isProperty = functionType.decorators().stream().anyMatch(t -> isPropertyTypeCheck.check(t.type()) == TriBool.TRUE);
-          if (isProperty) {
-            type = functionType.returnType();
-          }
-        }
-        name.typeV2(type);
-      } else {
-        name.typeV2(PythonType.UNKNOWN);
-      }
+      PythonType type = new QualifiedExpressionCalculator(typePredicateContext).calculate(qualifiedExpression);
+      name.typeV2(type);
     }
   }
 
