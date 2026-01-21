@@ -69,7 +69,6 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
   private final TypeCheckBuilder isIntTypeCheck;
   private final TypeCheckBuilder isFloatTypeCheck;
   private final TypeCheckBuilder isComplexTypeCheck;
-  private final TypeCheckBuilder isPropertyTypeCheck;
 
   private final PythonType intType;
   private final PythonType boolType;
@@ -82,7 +81,6 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     this.isIntTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.INT);
     this.isFloatTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.FLOAT);
     this.isComplexTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.COMPLEX);
-    this.isPropertyTypeCheck = new TypeCheckBuilder(typeTable).isSubtypeOf("property");
 
     var builtins = typeTable.getBuiltinsModule();
     this.intType = builtins.resolveMember(BuiltinTypes.INT).orElse(PythonType.UNKNOWN);
