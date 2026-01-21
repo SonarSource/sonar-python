@@ -1,0 +1,27 @@
+{
+  "title": "TestClient requests should use \"content\" parameter for bytes or text",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "tests",
+    "starlette",
+    "fastapi",
+    "httpx"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8405",
+  "sqKey": "S8405",
+  "scope": "Tests",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "BLOCKER"
+    },
+    "attribute": "CLEAR"
+  }
+}

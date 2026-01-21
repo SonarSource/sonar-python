@@ -1,0 +1,137 @@
+<p>This is an issue when using Starlette or FastAPI’s <code>TestClient</code> with the <code>data</code> parameter to send raw bytes or text strings
+in HTTP requests. The <code>data</code> parameter should only be used for form data (dictionaries), while raw content should use the
+<code>content</code> parameter.</p>
+<h2>Why is this an issue?</h2>
+<p>Starlette version 0.21.0 introduced a breaking change by replacing the underlying HTTP client from <code>requests</code> to <code>httpx</code>.
+These two libraries have different parameter conventions for sending request bodies.</p>
+<p>In the <code>requests</code> library, the <code>data</code> parameter accepts various types including bytes, strings, and dictionaries. However, in
+<code>httpx</code>, the parameter naming is more specific:</p>
+<ul>
+  <li> The <code>data</code> parameter is reserved for form data (dictionaries that will be encoded as <code>application/x-www-form-urlencoded</code>)
+  </li>
+  <li> The <code>content</code> parameter should be used for raw bytes or text strings </li>
+</ul>
+<p>When you use <code>data</code> with bytes or text in an httpx-based <code>TestClient</code>, the request may not behave as expected. The library
+might attempt to process the raw content as form data, leading to incorrect encoding or Content-Type headers.</p>
+<p>This issue commonly appears when upgrading Starlette or FastAPI applications, causing previously working tests to fail or behave unexpectedly. The
+parameter mismatch can result in:</p>
+<ul>
+  <li> Incorrect request body encoding </li>
+  <li> Wrong Content-Type headers being set </li>
+  <li> Test failures that are difficult to diagnose </li>
+  <li> API endpoints receiving malformed data in tests </li>
+</ul>
+<h3>What is the potential impact?</h3>
+<p>Using the wrong parameter can cause tests to fail or pass incorrectly, masking real issues in the application code. This reduces the reliability of
+the test suite and may allow bugs to reach production.</p>
+<p>The incorrect parameter usage may also cause confusion during debugging, as the test behavior differs from what the code suggests.</p>
+<h2>How to fix it in Starlette</h2>
+<p>Replace the <code>data</code> parameter with <code>content</code> when passing bytes to a TestClient request method. This ensures the raw bytes are
+sent correctly as the request body.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from starlette.testclient import TestClient
+from starlette.applications import Starlette
+
+app = Starlette()
+client = TestClient(app)
+
+response = client.post('/api/endpoint', data=b'raw bytes')  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from starlette.testclient import TestClient
+from starlette.applications import Starlette
+
+app = Starlette()
+client = TestClient(app)
+
+response = client.post('/api/endpoint', content=b'raw bytes')
+</pre>
+<p>Replace the <code>data</code> parameter with <code>content</code> when passing text strings to a TestClient request method. This ensures the text
+is sent correctly as the request body.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from starlette.testclient import TestClient
+from starlette.applications import Starlette
+
+app = Starlette()
+client = TestClient(app)
+
+response = client.put('/api/resource', data='text content')  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from starlette.testclient import TestClient
+from starlette.applications import Starlette
+
+app = Starlette()
+client = TestClient(app)
+
+response = client.put('/api/resource', content='text content')
+</pre>
+<h2>How to fix it in FastAPI</h2>
+<p>Replace the <code>data</code> parameter with <code>content</code> when passing bytes to a FastAPI TestClient request. This is necessary because
+FastAPI’s TestClient uses httpx, which requires the <code>content</code> parameter for raw bytes.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+
+app = FastAPI()
+client = TestClient(app)
+
+response = client.post('/upload', data=b'\x89PNG\r\n\x1a\n')  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+
+app = FastAPI()
+client = TestClient(app)
+
+response = client.post('/upload', content=b'\x89PNG\r\n\x1a\n')
+</pre>
+<p>Replace the <code>data</code> parameter with <code>content</code> when passing JSON strings to a FastAPI TestClient request. Note that for JSON
+data, you should typically use the <code>json</code> parameter instead, but if you’re sending a pre-serialized JSON string, use
+<code>content</code>.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+import json
+
+app = FastAPI()
+client = TestClient(app)
+
+payload = json.dumps({"key": "value"})
+response = client.post('/api/data', data=payload)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="4" data-diff-type="compliant">
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+import json
+
+app = FastAPI()
+client = TestClient(app)
+
+payload = json.dumps({"key": "value"})
+response = client.post('/api/data', content=payload)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> HTTPX - Request Parameters - <a href="https://www.python-httpx.org/quickstart/#sending-data">Official HTTPX documentation explaining the
+  difference between 'data' and 'content' parameters</a> </li>
+  <li> Starlette TestClient Documentation - <a href="https://www.starlette.io/testclient/">Official Starlette documentation for the TestClient</a>
+  </li>
+  <li> FastAPI Testing Documentation - <a href="https://fastapi.tiangolo.com/tutorial/testing/">Official FastAPI documentation on testing
+  applications</a> </li>
+  <li> bump-testclient Migration Tool - <a href="https://pypi.org/project/bump-testclient/">Automated tool to help migrate TestClient code from
+  requests to httpx API</a> </li>
+</ul>
+

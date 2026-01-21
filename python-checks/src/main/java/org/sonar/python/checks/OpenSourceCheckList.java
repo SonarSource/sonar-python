@@ -410,6 +410,7 @@ public class OpenSourceCheckList {
       ImplicitlySkippedTestCheck.class,
       TaskGroupNurseryUsedOnlyOnceCheck.class,
       TemplateStringStructuralPatternMatchingCheck.class,
+      TestClientContentParameterCheck.class,
       TimeSleepInAsyncCheck.class,
       ToDoCommentCheck.class,
       TooManyLinesInFileCheck.class,
