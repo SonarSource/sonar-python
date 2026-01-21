@@ -323,14 +323,14 @@ class TypeCheckerTest {
     var aType = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
     var bType = ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
 
-    // SONARPY-2423, the types for A and B should be identical, since fastapi.responses.Response is an alias to starlette.responses.Response
+    // the types for A and B should be identical, since fastapi.responses.Response is an alias to starlette.responses.Response
     assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("fastapi.responses.Response").check(aType)).isEqualTo(TriBool.TRUE);
-    assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("fastapi.responses.Response").check(bType)).isEqualTo(TriBool.FALSE);
+    assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("fastapi.responses.Response").check(bType)).isEqualTo(TriBool.TRUE);
 
-    assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("starlette.responses.Response").check(aType)).isEqualTo(TriBool.FALSE);
+    assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("starlette.responses.Response").check(aType)).isEqualTo(TriBool.TRUE);
     assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("starlette.responses.Response").check(bType)).isEqualTo(TriBool.TRUE);
 
-    assertThat(aType).isNotEqualTo(bType);
+    assertThat(aType).isEqualTo(bType);
   }
 
 

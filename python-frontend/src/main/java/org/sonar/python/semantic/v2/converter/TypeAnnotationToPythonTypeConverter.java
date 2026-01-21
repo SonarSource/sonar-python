@@ -55,7 +55,7 @@ public class TypeAnnotationToPythonTypeConverter {
         // this should be handled as a function type - see SONARPY-953
         return context.lazyTypesContext().getOrCreateLazyType("function");
       case UNION:
-        return new LazyUnionType(type.args().stream().map(t -> convert(context, t)).collect(Collectors.toSet()));
+        return LazyUnionType.or(type.args().stream().map(t -> convert(context, t)).collect(Collectors.toSet()));
       case TUPLE:
         return context.lazyTypesContext().getOrCreateLazyType("tuple");
       case NONE:

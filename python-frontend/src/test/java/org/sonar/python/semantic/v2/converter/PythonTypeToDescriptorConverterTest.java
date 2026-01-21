@@ -182,7 +182,7 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(variableDescriptor.fullyQualifiedName()).isEqualTo("foo.myObjectSymbol");
     assertThat(variableDescriptor.annotatedType()).isNull();
 
-    LazyUnionType lazyUnionType = new LazyUnionType(Set.of(lazyType, objectType));
+    LazyUnionType lazyUnionType = (LazyUnionType) LazyUnionType.or(Set.of(lazyType, objectType));
     descriptor = converter.convert("foo", new SymbolV2Impl("myLazyUnionSymbol"), Set.of(lazyUnionType));
     assertThat(descriptor).isInstanceOf(VariableDescriptor.class);
     variableDescriptor = (VariableDescriptor) descriptor;

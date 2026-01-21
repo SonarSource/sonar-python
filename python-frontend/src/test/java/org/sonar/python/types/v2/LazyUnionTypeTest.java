@@ -19,6 +19,7 @@ package org.sonar.python.types.v2;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -37,7 +38,7 @@ class LazyUnionTypeTest {
     LazyTypesContext lazyTypesContext = Mockito.mock(LazyTypesContext.class);
     when(lazyTypesContext.resolveLazyType(Mockito.any())).thenReturn(INT_TYPE);
     LazyType lazyType = new LazyType("random", lazyTypesContext);
-    LazyUnionType lazyUnionType = new LazyUnionType(Set.of(lazyType, FLOAT_TYPE));
+    LazyUnionType lazyUnionType = (LazyUnionType) LazyUnionType.or(Set.of(lazyType, FLOAT_TYPE));
     UnionType unionType = (UnionType) lazyUnionType.resolve();
     assertThat(unionType.candidates()).containsExactlyInAnyOrder(INT_TYPE, FLOAT_TYPE);
   }
@@ -50,9 +51,14 @@ class LazyUnionTypeTest {
     var lazyType2 = lazyTypeUnresolved("lazy2", lazyTypesContext);
     var lazyType3 = lazyTypeUnresolved("lazy3", lazyTypesContext);
 
-    var lazyUnionType1 = new LazyUnionType(Set.of(lazyType1, lazyType2, lazyType3));
-    var lazyUnionType2 = new LazyUnionType(Set.of(lazyType1, lazyType2, lazyType3, lazyUnionType1));
+    var lazyUnionType1 = LazyUnionType.or(Set.of(lazyType1, lazyType2, lazyType3));
+    var lazyUnionType2 = (LazyUnionType) LazyUnionType.or(Set.of(lazyType1, lazyType2, lazyType3, lazyUnionType1));
     assertThat(lazyUnionType2.candidates()).containsExactlyInAnyOrder(lazyType1, lazyType2, lazyType3);
+  }
+
+  @Test
+  void emptyLazyUnionType() {
+    assertThat(LazyUnionType.or(Set.of())).isEqualTo(PythonType.UNKNOWN);
   }
 
   LazyType lazyTypeUnresolved(String name, LazyTypesContext lazyTypesContext) {

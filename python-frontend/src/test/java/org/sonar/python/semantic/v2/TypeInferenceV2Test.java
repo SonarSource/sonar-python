@@ -4988,6 +4988,22 @@ public class TypeInferenceV2Test {
         .satisfies(myClassAttribute -> assertThat(myClassAttribute).is(objectTypeOf(myClass)), Index.atIndex(1)));
   }
 
+  @Test
+  void testRexportEquality() {
+    FileInput root = inferTypes("""
+      from fastapi.responses import Response as A
+      from starlette.responses import Response as B
+      """);
+
+    Name aName = PythonTestUtils.getFirstChild(root, t -> t instanceof Name name && "A".equals(name.name()));
+    Name bName = PythonTestUtils.getFirstChild(root, t -> t instanceof Name name && "B".equals(name.name()));
+
+    PythonType aType = aName.typeV2();
+    PythonType bType = bName.typeV2();
+
+    assertThat(aType).isEqualTo(bType);
+  }
+
   private static Condition<PythonType> objectTypeOf(PythonType type) {
     return new Condition<PythonType>("is object type of " + type) {
       @Override

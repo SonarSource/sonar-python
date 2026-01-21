@@ -16,17 +16,28 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.Set;
 import java.util.stream.Collectors;
-import org.sonar.python.index.AmbiguousDescriptor;
-import org.sonar.python.index.Descriptor;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.python.index.AmbiguousDescriptor;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.types.v2.LazyType;
+import org.sonar.python.types.v2.LazyUnionType;
 
 public class AmbiguousDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
   public PythonType convert(ConversionContext ctx, AmbiguousDescriptor from) {
     var candidates = from.alternatives().stream().map(ctx::convert).collect(Collectors.toSet());
-    return UnionType.or(candidates);
+    if (containsLazyType(candidates)) {
+      return LazyUnionType.or(candidates);
+    } else {
+      return UnionType.or(candidates);
+    }
+  }
+
+  private static boolean containsLazyType(Set<PythonType> types) {
+    return types.stream().anyMatch(type -> type instanceof LazyType || (type instanceof UnionType unionType && containsLazyType(unionType.candidates())));
   }
 
   @Override

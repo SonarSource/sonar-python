@@ -998,7 +998,7 @@ class PythonSensorTest {
     assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder(
       "typing", "math",
       "django", "django.urls.conf", "django.urls",
-      "fastapi", "fastapi.responses", "fastapi.responses.HTMLResponse");
+      "fastapi", "fastapi.responses", "fastapi.responses.HTMLResponse", "starlette.responses", "starlette");
   }
 
   @Test

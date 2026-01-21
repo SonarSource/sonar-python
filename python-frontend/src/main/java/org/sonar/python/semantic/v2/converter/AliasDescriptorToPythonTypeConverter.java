@@ -16,14 +16,18 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.index.AliasDescriptor;
 import org.sonar.python.index.Descriptor;
-import org.sonar.plugins.python.api.types.v2.PythonType;
 
 public class AliasDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
   @Override
   public PythonType convert(ConversionContext ctx, Descriptor from) {
-    // SONARPY-2423: We should try to retrieve the original type if possible, instead of recreating it
+    AliasDescriptor aliasDescriptor = (AliasDescriptor) from;
+    String originalFqn = aliasDescriptor.originalDescriptor().fullyQualifiedName();
+    if (originalFqn != null && !originalFqn.startsWith(ctx.moduleFqn())) {
+      return ctx.lazyTypesContext().getOrCreateLazyType(originalFqn);
+    }
     return ctx.convert(((AliasDescriptor) from).originalDescriptor());
   }
 }

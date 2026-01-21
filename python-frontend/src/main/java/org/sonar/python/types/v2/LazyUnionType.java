@@ -17,8 +17,10 @@
 package org.sonar.python.types.v2;
 
 import com.google.common.annotations.VisibleForTesting;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,10 +31,11 @@ public class LazyUnionType implements PythonType, ResolvableType {
 
   private final Set<PythonType> candidates;
 
-  public LazyUnionType(Set<PythonType> candidates) {
-    this.candidates = candidates.stream().flatMap(LazyUnionType::flattenLazyUnionTypes).collect(Collectors.toCollection(HashSet::new));
+  private LazyUnionType(Set<PythonType> candidates) {
+    this.candidates = candidates;
   }
 
+  @Override
   public PythonType resolve() {
     Set<PythonType> resolvedCandidates = new HashSet<>();
     for (PythonType candidate : candidates) {
@@ -54,5 +57,21 @@ public class LazyUnionType implements PythonType, ResolvableType {
   @VisibleForTesting
   protected Set<PythonType> candidates() {
     return Collections.unmodifiableSet(candidates);
+  }
+
+  public static PythonType or(Collection<PythonType> types) {
+    types = types.stream().filter(Objects::nonNull).collect(Collectors.toSet());
+    if (types.isEmpty()) {
+      return PythonType.UNKNOWN;
+    }
+    if (types.size() == 1) {
+      return types.iterator().next();
+    }
+
+    Set<PythonType> flatTypes = types.stream().flatMap(LazyUnionType::flattenLazyUnionTypes).collect(Collectors.toSet());
+    if (flatTypes.stream().anyMatch(type -> type == PythonType.UNKNOWN)) {
+      return PythonType.UNKNOWN;
+    }
+    return new LazyUnionType(flatTypes);
   }
 }
