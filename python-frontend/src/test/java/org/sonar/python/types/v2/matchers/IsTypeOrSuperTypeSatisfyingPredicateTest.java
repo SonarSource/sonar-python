@@ -32,6 +32,50 @@ import static org.assertj.core.api.Assertions.assertThat;
 class IsTypeOrSuperTypeSatisfyingPredicateTest {
 
   @Test
+  void testObjectInstanceOf() {
+    var project = new TestProject();
+    project.addModule("my_file.py", """
+      class A:
+        pass
+      """);
+    Expression objectTypeExpression = project.lastExpression("""
+      from my_file import A
+      A()
+      """);
+
+    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
+    Mockito.when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
+
+    assertThat(TypeMatchers.isObjectInstanceOf("my_file.A").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeMatchers.isObjectInstanceOf("str").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void testObjectInstanceOfWithSubclasses() {
+    var project = new TestProject();
+    project.addModule("my_file.py", """
+      class A:
+        pass
+      class B(A):
+        pass
+      class C(A):
+        pass
+      """);
+    Expression objectTypeExpression = project.lastExpression("""
+      from my_file import B
+      B()
+      """);
+
+    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
+    Mockito.when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
+
+    assertThat(TypeMatchers.isObjectInstanceOf("my_file.A").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeMatchers.isObjectInstanceOf("my_file.B").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeMatchers.isObjectInstanceOf("my_file.C").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.FALSE);
+    assertThat(TypeMatchers.isObjectInstanceOf("str").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
   void testDirectTypeMatchWithIsTypePredicate() {
     var project = new TestProject();
     project.addModule("my_file.py", """

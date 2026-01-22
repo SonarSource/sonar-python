@@ -28,7 +28,7 @@ import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 public class QualifiedExpressionCalculator {
   private static final TypeInferenceMatcher IS_PROPERTY_TYPE = TypeInferenceMatcher.of(
-    TypeInferenceMatchers.isSubtypeOf("property"));
+    TypeInferenceMatchers.isOrExtendsType("property"));
 
   private final TypePredicateContext typePredicateContext;
 

@@ -28,7 +28,6 @@ import org.sonar.python.types.v2.matchers.HasMemberPredicate;
 import org.sonar.python.types.v2.matchers.HasMemberSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsFunctionOwnerSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsObjectSatisfyingPredicate;
-import org.sonar.python.types.v2.matchers.IsSubtypeOfPredicate;
 import org.sonar.python.types.v2.matchers.IsTypeOrSuperTypeSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsTypePredicate;
 import org.sonar.python.types.v2.matchers.TypePredicate;
@@ -95,12 +94,13 @@ public final class TypeMatchers {
     return isObjectSatisfying(isType(fqn));
   }
 
-  public static TypeMatcher isSubtypeOf(String fqn) {
-    return new TypeMatcherImpl(new IsSubtypeOfPredicate(fqn));
-  }
-
-  public static TypeMatcher isObjectOfSubType(String fqn) {
-    return isObjectSatisfying(isSubtypeOf(fqn));
+  /**
+   * Checks if the type of the expression is an object type and if its nested type, or its supertypes, matches the given type by equality.
+   * @param fqn The FQN of the type to match by equality
+   * @return a type matcher
+   */
+  public static TypeMatcher isObjectInstanceOf(String fqn) {
+    return isObjectSatisfying(isOrExtendsType(fqn));
   }
 
   public static TypeMatcher isOrExtendsType(String fqn) {

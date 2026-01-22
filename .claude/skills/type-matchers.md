@@ -130,22 +130,13 @@ TypeMatchers.isObjectOfType("builtins.str")
 // TypeMatchers.isObjectSatisfying(TypeMatchers.isType("builtins.str"))
 ```
 
-### Subtype Matching
-
-#### `isSubtypeOf(String fqn)`
-Checks if the type is a subtype of the type resolved from the FQN.
+#### `isObjectInstanceOf(String fqn)`
+Checks if the type is an object type and if its nested type or supertypes match the given type by equality. Useful for checking if an instance is of a type or extends it.
 
 ```java
-TypeMatchers.isSubtypeOf("typing.Mapping")
-```
-
-#### `isObjectOfSubType(String fqn)`
-Convenience method for object instances of subtypes.
-
-```java
-TypeMatchers.isObjectOfSubType("typing.Mapping")
+TypeMatchers.isObjectInstanceOf("builtins.Exception")
 // Equivalent to:
-// TypeMatchers.isObjectSatisfying(TypeMatchers.isSubtypeOf("typing.Mapping"))
+// TypeMatchers.isObjectSatisfying(TypeMatchers.isOrExtendsType("builtins.Exception"))
 ```
 
 ### Type Hierarchy Matching
@@ -225,9 +216,7 @@ TypeMatchers.any(
 ### Checking for Dict-like Types
 
 ```java
-TypeMatchers.isObjectSatisfying(
-  TypeMatchers.isSubtypeOf("typing.Mapping")
-)
+TypeMatchers.isObjectInstanceOf("typing.Mapping")
 ```
 
 ### Checking Method Owner
