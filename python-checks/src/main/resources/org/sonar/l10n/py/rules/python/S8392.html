@@ -1,0 +1,85 @@
+<p>This is an issue when a FastAPI application uses <code>uvicorn.run()</code> with <code>host="0.0.0.0"</code>, which binds the application to all
+available network interfaces on the host machine.</p>
+<h2>Why is this an issue?</h2>
+<p>When you start a FastAPI application, you need to specify which network interface it should listen on. A network interface is a connection point
+between your computer and a network.</p>
+<p>The special IP address <code>0.0.0.0</code> tells the application to bind to <strong>all</strong> network interfaces on the machine. This means the
+application becomes accessible from:</p>
+<ul>
+  <li> The local machine (localhost) </li>
+  <li> The local network (LAN) </li>
+  <li> Any public-facing network interfaces </li>
+  <li> Virtual network interfaces </li>
+</ul>
+<p>This broad exposure violates the principle of least privilege, which states that a system should only have access to the resources it needs to
+function. By binding to all interfaces, you’re making your application accessible from networks where it shouldn’t be reachable.</p>
+<p>In development environments, this is particularly risky because:</p>
+<ul>
+  <li> Development servers often lack production security measures </li>
+  <li> Debug mode may be enabled, exposing sensitive information </li>
+  <li> Authentication and authorization might not be fully implemented </li>
+  <li> The application may contain test data or incomplete features </li>
+</ul>
+<p>Even in production environments, binding to <code>0.0.0.0</code> should be a deliberate choice made with proper security controls in place, such
+as:</p>
+<ul>
+  <li> Firewalls restricting access to specific IP addresses </li>
+  <li> Reverse proxies handling TLS/SSL termination </li>
+  <li> Network segmentation isolating the application </li>
+  <li> Container orchestration platforms managing network access </li>
+</ul>
+<p>When these controls are absent, binding to all interfaces creates an unnecessarily large attack surface.</p>
+<h3>What is the potential impact?</h3>
+<p>Binding to all network interfaces can lead to several security risks:</p>
+<ul>
+  <li> <strong>Unauthorized access</strong>: Attackers on the same network or the internet can reach your application, potentially exploiting
+  vulnerabilities or accessing sensitive data. </li>
+  <li> <strong>Information disclosure</strong>: Debug endpoints, error messages, or development features may leak sensitive information about your
+  application’s structure, dependencies, or data. </li>
+  <li> <strong>Lateral movement</strong>: If an attacker compromises your network, an exposed development server can serve as an entry point to other
+  systems. </li>
+  <li> <strong>Data breaches</strong>: Unprotected applications may expose user data, API keys, database credentials, or other confidential
+  information. </li>
+</ul>
+<p>The severity depends on the environment and what security controls are in place, but the risk is highest in development environments where security
+measures are typically minimal.</p>
+<h2>How to fix it</h2>
+<p>For development and local testing, bind to localhost (<code>127.0.0.1</code> or <code>localhost</code>) instead of all interfaces. This ensures the
+application is only accessible from your local machine.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import uvicorn
+from fastapi import FastAPI
+
+app = FastAPI()
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import uvicorn
+from fastapi import FastAPI
+
+app = FastAPI()
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> FastAPI Documentation - Deployment Concepts - <a href="https://fastapi.tiangolo.com/deployment/concepts/">Official FastAPI documentation on
+  deployment concepts, including network binding considerations</a> </li>
+  <li> Uvicorn Documentation - Deployment - <a href="https://www.uvicorn.org/deployment/">Uvicorn server documentation on deployment and configuration
+  options</a> </li>
+  <li> FastAPI CLI Documentation - <a href="https://fastapi.tiangolo.com/fastapi-cli/">Documentation explaining the difference between development
+  (127.0.0.1) and production (0.0.0.0) binding</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> CWE 668 - <a href="https://cwe.mitre.org/data/definitions/668.html">Exposure of Resource to Wrong Sphere</a> </li>
+  <li> CIS 6.6.1 - <a href="https://www.cisecurity.org/controls/">CIS Controls - Network Security</a> </li>
+</ul>
+

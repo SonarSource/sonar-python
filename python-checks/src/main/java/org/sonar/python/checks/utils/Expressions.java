@@ -110,6 +110,22 @@ public class Expressions {
   }
 
   @CheckForNull
+  public static StringLiteral extractStringLiteral(Tree tree) {
+    if (tree.is(Tree.Kind.STRING_LITERAL)) {
+      return (StringLiteral) tree;
+    }
+
+    if (tree.is(Tree.Kind.NAME)) {
+      Expression assignedValue = Expressions.singleAssignedValue(((Name) tree));
+      if (assignedValue != null && assignedValue.is(Tree.Kind.STRING_LITERAL)) {
+        return ((StringLiteral) assignedValue);
+      }
+    }
+
+    return null;
+  }
+
+  @CheckForNull
   public static Expression singleAssignedValue(Name name) {
     return singleAssignedValue(name, new HashSet<>());
   }

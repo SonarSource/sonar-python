@@ -218,6 +218,7 @@ public class OpenSourceCheckList {
       ExecStatementUsageCheck.class,
       ExitHasBadArgumentsCheck.class,
       ExpandingArchiveCheck.class,
+      FastAPIBindToAllNetworkInterfacesCheck.class,
       FastHashingOrPlainTextCheck.class,
       FieldDuplicatesClassNameCheck.class,
       FieldNameCheck.class,

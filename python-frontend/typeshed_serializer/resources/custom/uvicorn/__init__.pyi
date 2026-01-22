@@ -1,0 +1,60 @@
+import asyncio
+import os
+import ssl
+from collections.abc import Callable
+from configparser import RawConfigParser
+from typing import IO, Any
+
+
+def run(
+        app: Callable[..., Any] | str,
+        *,
+        host: str = "127.0.0.1",
+        port: int = 8000,
+        uds: str | None = None,
+        fd: int | None = None,
+        loop: str = "auto",
+        http: type[asyncio.Protocol] | str = "auto",
+        ws: type[asyncio.Protocol] | str = "auto",
+        ws_max_size: int = 16777216,
+        ws_max_queue: int = 32,
+        ws_ping_interval: float | None = 20.0,
+        ws_ping_timeout: float | None = 20.0,
+        ws_per_message_deflate: bool = True,
+        lifespan = "auto",
+        interface = "auto",
+        reload: bool = False,
+        reload_dirs: list[str] | str | None = None,
+        reload_includes: list[str] | str | None = None,
+        reload_excludes: list[str] | str | None = None,
+        reload_delay: float = 0.25,
+        workers: int | None = None,
+        env_file: str | os.PathLike[str] | None = None,
+        log_config: dict[str, Any] | str | RawConfigParser | IO[Any] | None,
+        log_level: str | int | None = None,
+        access_log: bool = True,
+        proxy_headers: bool = True,
+        server_header: bool = True,
+        date_header: bool = True,
+        forwarded_allow_ips: list[str] | str | None = None,
+        root_path: str = "",
+        limit_concurrency: int | None = None,
+        backlog: int = 2048,
+        limit_max_requests: int | None = None,
+        timeout_keep_alive: int = 5,
+        timeout_graceful_shutdown: int | None = None,
+        timeout_worker_healthcheck: int = 5,
+        ssl_keyfile: str | os.PathLike[str] | None = None,
+        ssl_certfile: str | os.PathLike[str] | None = None,
+        ssl_keyfile_password: str | None = None,
+        ssl_version: int,
+        ssl_cert_reqs: int = ssl.CERT_NONE,
+        ssl_ca_certs: str | os.PathLike[str] | None = None,
+        ssl_ciphers: str = "TLSv1",
+        headers: list[tuple[str, str]] | None = None,
+        use_colors: bool | None = None,
+        app_dir: str | None = None,
+        factory: bool = False,
+        h11_max_incomplete_event_size: int | None = None,
+) -> None:
+    ...

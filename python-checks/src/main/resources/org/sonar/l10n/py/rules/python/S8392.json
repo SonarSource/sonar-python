@@ -1,0 +1,35 @@
+{
+  "title": "FastAPI applications should not bind to all network interfaces",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "fastapi",
+    "uvicorn",
+    "network",
+    "deployment",
+    "least-privilege"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8392",
+  "sqKey": "S8392",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "SECURITY": "BLOCKER"
+    },
+    "attribute": "CONVENTIONAL"
+  },
+  "securityStandards": {
+    "CWE": [
+      668
+    ],
+    "CIS": [
+      "6.6.1"
+    ]
+  }
+}

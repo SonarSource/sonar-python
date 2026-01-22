@@ -292,6 +292,36 @@ class ExpressionsTest {
     assertThat(lastNameNonNameValue("x = 42; y")).isNull();
   }
 
+  @Test
+  void extract_string_literal_from_direct_literal() {
+    StringLiteral direct = Expressions.extractStringLiteral(exp("'aStringLiteral'"));
+    assertThat(direct).isNotNull();
+    assertThat(direct.trimmedQuotesValue()).isEqualTo("aStringLiteral");
+  }
+
+  @Test
+  void extract_string_literal_from_assigned_literal() {
+    // name assigned to a string literal
+    FileInput root = parse("x = 'aStringLiteralAssignedToAVariable'; x");
+    new SymbolTableBuilder(null).visitFileInput(root);
+    NameVisitor nameVisitor = new NameVisitor();
+    root.accept(nameVisitor);
+    Name lastName = nameVisitor.names.get(nameVisitor.names.size() - 1);
+    StringLiteral assigned = Expressions.extractStringLiteral(lastName);
+    assertThat(assigned).isNotNull();
+    assertThat(assigned.trimmedQuotesValue()).isEqualTo("aStringLiteralAssignedToAVariable");
+  }
+
+  @Test
+  void extract_string_literal_from_non_literal_return_null() {
+    FileInput root = parse("y = 42; y");
+    new SymbolTableBuilder(null).visitFileInput(root);
+    NameVisitor nameVisitor = new NameVisitor();
+    root.accept(nameVisitor);
+    Name lastY = nameVisitor.names.get(nameVisitor.names.size() - 1);
+    assertThat(Expressions.extractStringLiteral(lastY)).isNull();
+  }
+
   private Expression lastNameNonNameValue(String code) {
     FileInput root = parse(code);
     new SymbolTableBuilder(null).visitFileInput(root);
