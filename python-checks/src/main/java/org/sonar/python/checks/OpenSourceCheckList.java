@@ -345,6 +345,7 @@ public class OpenSourceCheckList {
       PublicApiIsSecuritySensitiveCheck.class,
       PubliclyWritableDirectoriesCheck.class,
       PublicNetworkAccessToCloudResourcesCheck.class,
+      PydanticOptionalFieldDefaultCheck.class,
       PyTorchDataLoaderNumWorkersCheck.class,
       PytzTimeZoneInDatetimeConstructorCheck.class,
       RaiseOutsideExceptCheck.class,

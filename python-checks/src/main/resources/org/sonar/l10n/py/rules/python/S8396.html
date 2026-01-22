@@ -1,0 +1,66 @@
+<p>This is an issue when a Pydantic model field uses <code>Optional[Type]</code> or <code>Type | None</code> type hints without providing an explicit
+default value, or when using <code>Field(…​)</code> with the ellipsis operator.</p>
+<h2>Why is this an issue?</h2>
+<p>In Pydantic models, there is a common misconception about what <code>Optional[Type]</code> means. Many developers assume that marking a field as
+<code>Optional[Type]</code> makes it optional during validation, but this is not the case.</p>
+<p>The <code>Optional[Type]</code> type hint only indicates that a field can accept either a value of <code>Type</code> or <code>None</code>. It does
+not affect whether the field is required during validation. Without an explicit default value, Pydantic will still raise a validation error if the
+field is missing from the input data.</p>
+<p>To make a field truly optional (meaning it doesn’t need to be provided during validation), you must assign a default value. This is typically
+<code>None</code> for optional fields, but can be any appropriate default value.</p>
+<p>A particularly problematic pattern is using <code>Field(…​)</code> with <code>Optional[Type]</code>. The ellipsis (<code>…​</code>) is Pydantic’s
+way of explicitly marking a field as required. This creates a direct contradiction: the type hint says the field can be <code>None</code>, but the
+<code>Field(…​)</code> says it must be provided. In this case, Pydantic prioritizes the ellipsis, making the field required despite the
+<code>Optional</code> annotation.</p>
+<p>This mismatch between developer intent and actual behavior leads to unexpected validation errors in production, confusing API consumers who receive
+"field required" errors for fields they reasonably expected to be optional based on the type hints.</p>
+<h3>What is the potential impact?</h3>
+<p>When optional fields lack explicit default values, the application will reject valid requests where users omit fields they believe to be optional.
+This leads to:</p>
+<ul>
+  <li> Poor user experience with confusing "field required" validation errors </li>
+  <li> API contract violations where the schema suggests fields are optional but validation requires them </li>
+  <li> Increased support burden as users struggle to understand why optional fields are being rejected </li>
+  <li> Potential data quality issues if developers work around the problem by sending placeholder values instead of omitting fields </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Add an explicit default value (typically <code>None</code>) to fields with <code>Optional</code> type hints. This makes the field truly optional
+during validation while maintaining the type safety that allows <code>None</code> values.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from typing import Optional
+from pydantic import BaseModel
+
+class TwitterAccount(BaseModel):
+    username: str
+    followers: int
+
+class UserRead(BaseModel):
+    name: str
+    twitter_account: Optional[TwitterAccount]  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from typing import Optional
+from pydantic import BaseModel
+
+class TwitterAccount(BaseModel):
+    username: str
+    followers: int
+
+class UserRead(BaseModel):
+    name: str
+    twitter_account: Optional[TwitterAccount] = None
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Pydantic - Required fields - <a href="https://docs.pydantic.dev/latest/concepts/models/#required-fields">Official Pydantic documentation
+  explaining required vs optional fields</a> </li>
+  <li> Pydantic - Field function - <a href="https://docs.pydantic.dev/latest/concepts/fields/">Documentation on using the Field() function for field
+  customization</a> </li>
+  <li> Python typing - Optional - <a href="https://docs.python.org/3/library/typing.html#typing.Optional">Python’s typing module documentation for
+  Optional type hints</a> </li>
+</ul>
+

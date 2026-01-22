@@ -1,0 +1,26 @@
+{
+  "title": "Optional Pydantic fields should have explicit default values",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "pydantic",
+    "type-hint",
+    "validation"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8396",
+  "sqKey": "S8396",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "BLOCKER"
+    },
+    "attribute": "CLEAR"
+  }
+}
