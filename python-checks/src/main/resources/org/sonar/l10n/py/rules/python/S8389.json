@@ -1,0 +1,28 @@
+{
+  "title": "FastAPI file upload endpoints should use \"Form()\" with Pydantic validators instead of \"Body()\" or \"Depends()\"",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10 min"
+  },
+  "tags": [
+    "fastapi",
+    "security",
+    "file-upload",
+    "pydantic"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8389",
+  "sqKey": "S8389",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "SECURITY": "BLOCKER",
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
