@@ -32,14 +32,14 @@ import org.sonar.python.tree.TreeUtils;
 public class FastAPIBindToAllNetworkInterfacesCheck extends PythonSubscriptionCheck {
 
   private static final String ALL_NETWORK_INTERFACES = "0.0.0.0";
-  private final static TypeMatcher UVICORN_RUN_FUNCTION_TYPE_MATCHER = TypeMatchers.isType("uvicorn.run");
+  private static final TypeMatcher UVICORN_RUN_FUNCTION_TYPE_MATCHER = TypeMatchers.isType("uvicorn.run");
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkUvicornRunFunctionCalls);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, FastAPIBindToAllNetworkInterfacesCheck::checkUvicornRunFunctionCalls);
   }
 
-  private void checkUvicornRunFunctionCalls(SubscriptionContext ctx) {
+  private static void checkUvicornRunFunctionCalls(SubscriptionContext ctx) {
     CallExpression callExpr = ((CallExpression) ctx.syntaxNode());
 
     if (!UVICORN_RUN_FUNCTION_TYPE_MATCHER.isTrueFor(callExpr.callee(), ctx)) {
