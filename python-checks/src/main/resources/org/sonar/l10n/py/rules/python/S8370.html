@@ -1,0 +1,58 @@
+<p>This rule raises an issue when a Flask route handles POST requests and accesses query parameters using <code>request.args</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>Using query parameters in POST requests violates REST principles and creates poorly designed APIs.</p>
+<p>In RESTful design, POST requests should use:</p>
+<ul>
+  <li> Path parameters to identify resources (e.g., <code>/users/123</code>) </li>
+  <li> Request body to send data payload </li>
+</ul>
+<p>Query parameters in POST requests have several problems:</p>
+<ul>
+  <li> They expose internal implementation details in the URL </li>
+  <li> They make APIs less intuitive and harder to understand </li>
+  <li> They can reveal sensitive information in server logs, browser history, and referrer headers </li>
+  <li> They violate the principle that POST data should be in the request body </li>
+</ul>
+<p>For example, using <code>POST /resource?key=listOfUsers/user1</code> exposes the internal XPath structure. This tight coupling between the URL and
+internal data structure makes the API fragile and harder to maintain.</p>
+<p>Proper RESTful design keeps resource identification in the path and data in the body, creating cleaner, more maintainable APIs.</p>
+<h3>What is the potential impact?</h3>
+<p>This design flaw can lead to:</p>
+<ul>
+  <li> Poor API usability and developer experience </li>
+  <li> Exposure of internal implementation details </li>
+  <li> Security risks from sensitive data in URLs </li>
+  <li> Maintenance difficulties due to tight coupling </li>
+  <li> Violation of REST principles affecting API consistency </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Use path parameters for resource identification and request body for data. Replace query parameters with proper RESTful URL design.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@app.route('/resource', methods=['POST'])
+def update_text():
+    key = request.args.get('key')  # Noncompliant
+    data = request.get_data()
+    # Process using key from query parameter
+    return 'Updated'
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@app.route('/users/&lt;user_id&gt;', methods=['POST'])
+def update_user(user_id):
+    data = request.get_json()  # Get data from request body
+    # Process user_id from path parameter
+    return 'Updated'
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Flask URL Route Registrations - <a href="https://flask.palletsprojects.com/en/2.3.x/api/#url-route-registrations">Official Flask documentation
+  on URL routing and path parameters</a> </li>
+  <li> RESTful API Design Best Practices - <a href="https://restfulapi.net/rest-api-design-tutorial-with-example/">Comprehensive guide to RESTful API
+  design principles</a> </li>
+  <li> Flask Request Object - <a href="https://flask.palletsprojects.com/en/2.3.x/api/#flask.Request">Documentation for Flask’s request object and
+  data access methods</a> </li>
+</ul>
+

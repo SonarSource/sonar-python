@@ -229,6 +229,7 @@ public class OpenSourceCheckList {
       FixmeCommentCheck.class,
       FlaskHardCodedJWTSecretKeyCheck.class,
       FlaskHardCodedSecretKeyCheck.class,
+      FlaskPostWithQueryParameterCheck.class,
       FlaskPreprocessRequestCheck.class,
       FloatingPointEqualityCheck.class,
       FStringNestingLevelCheck.class,
