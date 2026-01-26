@@ -1,0 +1,54 @@
+<p>This is an issue when decorators are applied directly to Flask View classes instead of using the <code>decorators</code> class attribute.</p>
+<h2>Why is this an issue?</h2>
+<p>In Flask, class-based views work differently from regular view functions. When you create a class-based view, the actual view function is generated
+by calling the <code>as_view()</code> method.</p>
+<p>Decorators applied directly to the view class are not applied to this generated view function. This means your decorators will have no effect -
+they won’t be executed when requests are handled.</p>
+<p>This can lead to serious problems:</p>
+<ul>
+  <li> Authentication decorators like <code>@login_required</code> won’t protect your endpoints </li>
+  <li> Caching decorators won’t cache responses </li>
+  <li> Rate limiting decorators won’t limit requests </li>
+  <li> Custom decorators for logging, validation, or other functionality won’t work </li>
+</ul>
+<p>Flask provides the <code>decorators</code> class attribute specifically to handle this. When you list decorators in this attribute, Flask applies
+them to the view function returned by <code>as_view()</code>, ensuring they work correctly.</p>
+<h3>What is the potential impact?</h3>
+<p>Decorators applied directly to Flask view classes are silently ignored, which can lead to:</p>
+<ul>
+  <li> Security vulnerabilities if authentication or authorization decorators are bypassed </li>
+  <li> Performance issues if caching decorators don’t work </li>
+  <li> Missing functionality if custom decorators for logging, validation, or rate limiting are ignored </li>
+  <li> Difficult-to-debug issues since the decorators appear to be applied but have no effect </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Move decorators from the class definition to the <code>decorators</code> class attribute. List them in the order they should be applied (innermost
+decorator first).</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@login_required
+@cache(minutes=2)
+class UserList(View):
+    def dispatch_request(self):
+        users = User.query.all()
+        return render_template('users.html', users=users)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+class UserList(View):
+    decorators = [cache(minutes=2), login_required]
+
+    def dispatch_request(self):
+        users = User.query.all()
+        return render_template('users.html', users=users)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Flask Class-based Views - View Decorators - <a href="https://flask.palletsprojects.com/en/stable/views/#view-decorators">Official Flask
+  documentation explaining how to properly apply decorators to class-based views</a> </li>
+  <li> Flask Views API Reference - <a href="https://flask.palletsprojects.com/en/stable/api/#flask.views.View.decorators">API documentation for the
+  View.decorators attribute</a> </li>
+</ul>
+

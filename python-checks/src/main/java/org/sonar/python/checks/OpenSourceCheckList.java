@@ -232,6 +232,7 @@ public class OpenSourceCheckList {
       FlaskHeadersDictAccessCheck.class,
       FlaskPostWithQueryParameterCheck.class,
       FlaskPreprocessRequestCheck.class,
+      FlaskViewDecoratorCheck.class,
       FloatingPointEqualityCheck.class,
       FStringNestingLevelCheck.class,
       FunctionComplexityCheck.class,
