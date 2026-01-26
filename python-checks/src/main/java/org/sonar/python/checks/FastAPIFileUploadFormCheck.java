@@ -25,6 +25,7 @@ import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -78,7 +79,11 @@ public class FastAPIFileUploadFormCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    List<Parameter> parameters = functionDef.parameters().nonTuple();
+    ParameterList parameterList = functionDef.parameters();
+    if (parameterList == null) {
+      return;
+    }
+    List<Parameter> parameters = parameterList.nonTuple();
 
     boolean hasFileParameter = parameters.stream()
       .anyMatch(param -> hasFileParam(param, ctx));

@@ -230,3 +230,13 @@ def empty_depends_with_annotation(
     file: UploadFile = File(...)
 ):
     pass
+
+def null_parameterlist():
+    from fastapi import APIRouter
+
+    router = APIRouter()
+
+
+    @router.post("/")
+    async def update_admin():
+        ...
