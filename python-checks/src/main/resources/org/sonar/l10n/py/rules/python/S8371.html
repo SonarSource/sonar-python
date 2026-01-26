@@ -1,0 +1,51 @@
+<p>This rule raises an issue when reading HTTP headers using dictionary-style syntax in Flask applications, e.g. <code>request.headers['key']</code>,
+which throws a KeyError if the header is missing.</p>
+<h2>Why is this an issue?</h2>
+<p>HTTP headers are optional by nature, and clients may not always send the headers your application expects. When you read from a header using
+dictionary-style access like <code>request.headers['Authorization']</code>, Flask raises a KeyError if the header is missing.</p>
+<p>This can cause your application to crash unexpectedly, especially when dealing with optional headers like authentication tokens, custom headers, or
+headers that vary between different clients and browsers.</p>
+<p>The <code>.get()</code> method provides a safer alternative by returning <code>None</code> (or a default value) when a header is missing, allowing
+your code to handle the absence gracefully instead of crashing.</p>
+<h3>What is the potential impact?</h3>
+<p>A missing header will cause a KeyError exception, potentially crashing the request handler and returning a 500 Internal Server Error to the client.
+This creates a poor user experience and can make your application appear unreliable.</p>
+<p>In security-sensitive contexts, unexpected crashes might also expose error information that could be useful to attackers.</p>
+<h2>How to fix it</h2>
+<p>Replace dictionary-style header read access with the <code>.get()</code> method. This returns <code>None</code> for missing headers instead of
+raising an exception. Add appropriate checks to handle missing headers gracefully.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from flask import request
+
+@app.route('/api')
+def api_endpoint():
+    auth_header = request.headers['Authorization']  # Noncompliant
+    user_agent = request.headers['User-Agent']     # Noncompliant
+    return process_request(auth_header, user_agent)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from flask import request
+
+@app.route('/api')
+def api_endpoint():
+    auth_header = request.headers.get('Authorization')
+    user_agent = request.headers.get('User-Agent', 'Unknown')
+
+    if not auth_header:
+        return 'Authorization required', 401
+
+    return process_request(auth_header, user_agent)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Flask Request Headers Documentation - <a href="https://flask.palletsprojects.com/en/2.3.x/api/#flask.Request.headers">Official Flask
+  documentation for accessing request headers</a> </li>
+  <li> Werkzeug Headers Documentation - <a
+  href="https://werkzeug.palletsprojects.com/en/2.3.x/datastructures/#werkzeug.datastructures.Headers">Documentation for the Headers class used by
+  Flask’s request.headers</a> </li>
+</ul>
+

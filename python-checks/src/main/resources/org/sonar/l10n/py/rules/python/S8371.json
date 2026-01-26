@@ -1,0 +1,25 @@
+{
+  "title": "HTTP headers should be accessed safely to avoid KeyError exceptions",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "flask",
+    "error-handling"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8371",
+  "sqKey": "S8371",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "BLOCKER"
+    },
+    "attribute": "COMPLETE"
+  }
+}
