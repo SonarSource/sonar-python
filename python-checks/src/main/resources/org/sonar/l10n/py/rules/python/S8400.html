@@ -1,0 +1,89 @@
+<p>This is an issue when a FastAPI endpoint is configured with <code>status_code=204</code> but does not explicitly return <code>None</code> or use
+the <code>Response</code> class to ensure an empty body.</p>
+<h2>Why is this an issue?</h2>
+<p>The HTTP 204 (No Content) status code indicates that the server successfully processed the request but is not returning any content. According to
+<a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">RFC 7231</a>, a 204 response must not contain a message body.</p>
+<p>In FastAPI, if you define an endpoint with <code>status_code=204</code> but don’t explicitly handle the response, the framework may send a small
+response body (typically 4 bytes containing <code>null</code>). This violates the HTTP specification and can cause issues with:</p>
+<ul>
+  <li> HTTP clients that strictly validate response formats </li>
+  <li> Proxies and caching layers that expect empty bodies for 204 responses </li>
+  <li> API consumers relying on standard HTTP behavior </li>
+</ul>
+<p>The problem occurs because FastAPI’s default serialization behavior attempts to serialize the return value, even when the status code indicates no
+content should be sent.</p>
+<h3>What is the potential impact?</h3>
+<p>This issue can lead to:</p>
+<ul>
+  <li> <strong>Protocol violations</strong>: The response doesn’t comply with HTTP specifications, which may cause unexpected behavior in strict HTTP
+  clients </li>
+  <li> <strong>Interoperability problems</strong>: Some clients, proxies, or middleware may reject or mishandle responses that have a body with a 204
+  status code </li>
+  <li> <strong>Confusion for API consumers</strong>: Developers using your API may be confused by receiving content when the status code explicitly
+  indicates there should be none </li>
+</ul>
+<h2>How to fix it in FastAPI</h2>
+<p>Return <code>None</code> explicitly from the endpoint function. This ensures FastAPI sends an empty response body.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.delete("/resource/{id}", status_code=204)
+def delete_resource(id: int):
+    # Delete the resource
+    ...  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.delete("/resource/{id}", status_code=204)
+def delete_resource(id: int):
+    # Delete the resource
+    return None
+</pre>
+<p>Use the <code>Response</code> class with <code>status_code=204</code>. This gives you explicit control over the response and guarantees no content
+is sent.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.put("/resource/{id}/archive", status_code=204)
+def archive_resource(id: int):
+    # Archive the resource
+    ...  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from fastapi import FastAPI, Response
+
+app = FastAPI()
+
+@app.put("/resource/{id}/archive", status_code=204)
+def archive_resource(id: int):
+    # Archive the resource
+    return Response(status_code=204)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> FastAPI Response Status Code - <a href="https://fastapi.tiangolo.com/advanced/response-change-status-code/">Official FastAPI documentation on
+  changing response status codes</a> </li>
+  <li> FastAPI Custom Response - <a href="https://fastapi.tiangolo.com/advanced/custom-response/">Official FastAPI documentation on custom
+  responses</a> </li>
+  <li> RFC 7231 - HTTP/1.1 Semantics: 204 No Content - <a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">HTTP specification defining the 204
+  No Content status code</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> CWE 1004 - <a href="https://cwe.mitre.org/data/definitions/1004.html">Sensitive Cookie Without 'HttpOnly' Flag (related to HTTP protocol
+  compliance)</a> </li>
+</ul>
+

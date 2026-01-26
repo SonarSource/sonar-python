@@ -253,6 +253,7 @@ public class OpenSourceCheckList {
       HardcodedIPCheck.class,
       HashMethodCheck.class,
       HashingDataCheck.class,
+      HttpNoContentNonEmptyBodyCheck.class,
       HttpOnlyCookieCheck.class,
       IamPolicyPublicAccessCheck.class,
       IamPrivilegeEscalationCheck.class,

@@ -1,0 +1,30 @@
+{
+  "title": "Endpoints returning 204 status should have an empty response body",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "fastapi",
+    "http",
+    "api"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8400",
+  "sqKey": "S8400",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER"
+    },
+    "attribute": "LOGICAL"
+  },
+  "securityStandards": {
+    "CWE": [
+      1004
+    ]
+  }
+}
