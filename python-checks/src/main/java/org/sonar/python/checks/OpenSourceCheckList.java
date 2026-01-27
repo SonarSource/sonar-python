@@ -220,6 +220,7 @@ public class OpenSourceCheckList {
       ExpandingArchiveCheck.class,
       FastAPIBindToAllNetworkInterfacesCheck.class,
       FastAPIFileUploadFormCheck.class,
+      FastApiImportStringCheck.class,
       FastHashingOrPlainTextCheck.class,
       FieldDuplicatesClassNameCheck.class,
       FieldNameCheck.class,
