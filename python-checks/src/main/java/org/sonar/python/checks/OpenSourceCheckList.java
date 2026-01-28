@@ -155,6 +155,7 @@ public class OpenSourceCheckList {
       CancellationReraisedInAsyncCheck.class,
       ChangeMethodContractCheck.class,
       ChildAndParentExceptionCaughtCheck.class,
+      ChildRouterBeforeParentRegistrationCheck.class,
       CipherBlockChainingCheck.class,
       ClassComplexityCheck.class,
       ClassMethodFirstArgumentNameCheck.class,

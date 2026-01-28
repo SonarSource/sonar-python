@@ -1,0 +1,26 @@
+{
+  "title": "Child routers should be included before parent router registration",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "fastapi",
+    "router",
+    "api"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8401",
+  "sqKey": "S8401",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "BLOCKER"
+    },
+    "attribute": "LOGICAL"
+  }
+}
