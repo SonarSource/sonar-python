@@ -1,6 +1,6 @@
 ---
 name: typeshed-stub-manager
-description: Use this agent when the user needs to create, modify, or organize Python stub files (.pyi) in the python-frontend/typeshed_serializer/resources/custom/ directory. This includes: adding new type stubs for classes, modules, or packages; updating existing stub files; ensuring proper package structure with __init__.pyi files; or resolving issues with stub file organization. Examples: 'Add a stub for the Foo class in the bar package', 'Create type stubs for mypackage.utils.Helper', 'Update the existing stubs in the data module', 'I need to add type hints for the Controller class in api.v2'.
+description: "Use this agent when the user needs to create, modify, or organize Python stub files (.pyi) in the python-frontend/typeshed_serializer/resources/custom/ directory. This includes: adding new type stubs for classes, modules, or packages; updating existing stub files; ensuring proper package structure with __init__.pyi files; or resolving issues with stub file organization. Examples: 'Add a stub for the Foo class in the bar package', 'Create type stubs for mypackage.utils.Helper', 'Update the existing stubs in the data module', 'I need to add type hints for the Controller class in api.v2'."
 model: sonnet
 color: red
 ---
