@@ -222,6 +222,7 @@ public class OpenSourceCheckList {
       FastAPIBindToAllNetworkInterfacesCheck.class,
       FastAPIFileUploadFormCheck.class,
       FastApiImportStringCheck.class,
+      FastAPIRedundantResponseModelCheck.class,
       FastHashingOrPlainTextCheck.class,
       FieldDuplicatesClassNameCheck.class,
       FieldNameCheck.class,
