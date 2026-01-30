@@ -239,6 +239,7 @@ public class OpenSourceCheckList {
       FlaskPostWithQueryParameterCheck.class,
       FlaskPreprocessRequestCheck.class,
       FlaskRouteMethodsCheck.class,
+      FlaskSendFileMimeTypeCheck.class,
       FlaskViewDecoratorCheck.class,
       FloatingPointEqualityCheck.class,
       FStringNestingLevelCheck.class,

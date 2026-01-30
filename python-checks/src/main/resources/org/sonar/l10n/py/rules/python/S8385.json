@@ -1,0 +1,25 @@
+{
+  "title": "\"send_file\" should specify \"mimetype\" or \"download_name\" when used with file-like objects",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "flask",
+    "web"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8385",
+  "sqKey": "S8385",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "BLOCKER"
+    },
+    "attribute": "LOGICAL"
+  }
+}
