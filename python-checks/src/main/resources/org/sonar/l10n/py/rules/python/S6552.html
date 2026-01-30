@@ -1,26 +1,30 @@
-<p>This rule enforces that the '@receiver' decorator is placed on top of all other decorators in Django functions.</p>
+<p>This rule enforces that the <code>@receiver</code> decorator in Django and the <code>@route</code> decorator in Flask are placed on top of all
+other decorators.</p>
 <h2>Why is this an issue?</h2>
-<p>In Django, the '@receiver' decorator is used to register signal handlers. These handlers are used to respond to events that occur in the
-application, such as a user logging in or a database record being saved.</p>
-<p>The order in which decorators are applied can have a significant impact on their behavior. In the case of the @receiver decorator, it is important
-that it is applied first, before any other decorators, in order to ensure that the signal handler is registered correctly.</p>
-<p>If the '@receiver' decorator is not applied first, the decorators placed above it will be ignored, which can result in unexpected behavior or even
-errors in the application.</p>
-<h2>How to fix it</h2>
-<p>To fix this issue, simply move the '@receiver' decorator to the top of the list of decorators used to decorate the function.</p>
+<p>The order in which decorators are applied can have a significant impact on their behavior. When decorators are applied in Python, they are
+processed from bottom to top. The outermost decorator (the one written first) is applied last and receives the result of all inner decorators.</p>
+<p>In Django, the <code>@receiver</code> decorator is used to register signal handlers. It must be the outermost decorator (written at the top) so
+that all other decorators are applied to the function before it gets registered as a signal handler. If <code>@receiver</code> is not outermost, it
+registers the original function, and the decorators written above it will not affect the signal handler, resulting in unexpected behavior or
+errors.</p>
+<p>In Flask, the <code>@app.route()</code> or <code>@blueprint.route()</code> decorator must be the outermost decorator for view functions. If other
+decorators are placed outside the route decorator, the route may not be registered correctly, leading to 404 errors or routes that don’t respond to
+requests as expected.</p>
+<h2>How to fix it in Django</h2>
+<p>Move the <code>@receiver</code> decorator to the top of the list of decorators used to decorate the function.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from django.dispatch import receiver
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-@receiver(some_signal)
+@receiver(some_signal)  # Noncompliant: @receiver should be the outermost decorator
 def my_handler(sender, **kwargs):
     ...
 </pre>
 <h4>Compliant solution</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 from django.dispatch import receiver
 from django.views.decorators.csrf import csrf_exempt
 
@@ -28,10 +32,29 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def my_handler(sender, **kwargs):
     ...
+</pre>
+<h2>How to fix it in Flask</h2>
+<p>Move the <code>@app.route()</code> or <code>@blueprint.route()</code> decorator to be the outermost (first) decorator.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+@login_required
+@app.route('/secret_page')  # Noncompliant: @route should be the outermost decorator
+def secret_page():
+    return "Secret content"
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+@app.route('/secret_page')
+@login_required
+def secret_page():
+    return "Secret content"
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li> <a href="https://docs.djangoproject.com/en/4.1/topics/signals/">Django signals</a> </li>
+  <li> <a href="https://flask.palletsprojects.com/en/stable/patterns/viewdecorators/">Flask View Decorators</a> </li>
+  <li> <a href="https://flask.palletsprojects.com/en/stable/quickstart/#routing">Flask Routing</a> </li>
 </ul>
 

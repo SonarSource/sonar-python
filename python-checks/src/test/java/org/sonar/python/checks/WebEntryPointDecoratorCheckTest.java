@@ -14,33 +14,34 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.checks.django;
+package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-class DjangoReceiverDecoratorCheckTest {
+class WebEntryPointDecoratorCheckTest {
+
   @Test
-  void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/django/djangoReceiverDecoratorCheck.py", new DjangoReceiverDecoratorCheck());
+  void testDjangoReceiver() {
+    PythonCheckVerifier.verify("src/test/resources/checks/webEntryPointDecorator/djangoReceiverDecorator.py", new WebEntryPointDecoratorCheck());
   }
 
   @Test
-  void testRenamedImport() {
-    PythonCheckVerifier.verify("src/test/resources/checks/django/djangoReceiverDecoratorCheck_renamed_import.py",
-      new DjangoReceiverDecoratorCheck());
+  void testDjangoReceiverRenamedImport() {
+    PythonCheckVerifier.verify("src/test/resources/checks/webEntryPointDecorator/djangoReceiverDecoratorRenamedImport.py",
+      new WebEntryPointDecoratorCheck());
   }
 
   @Test
-  void testWrongImport() {
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/django/djangoReceiverDecoratorCheck_wrong_import.py",
-      new DjangoReceiverDecoratorCheck());
+  void testDjangoReceiverWrongImport() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/webEntryPointDecorator/djangoReceiverDecoratorWrongImport.py",
+      new WebEntryPointDecoratorCheck());
   }
 
   @Test
-  void quickFixTest() {
-    var check = new DjangoReceiverDecoratorCheck();
+  void djangoReceiverQuickFixTest() {
+    var check = new WebEntryPointDecoratorCheck();
     var before = """
       from django.dispatch import receiver
       @csrf_exempt
@@ -76,4 +77,31 @@ class DjangoReceiverDecoratorCheckTest {
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Move the '@receiver' decorator to the top");
   }
 
+  @Test
+  void testFlaskRoute() {
+    PythonCheckVerifier.verify("src/test/resources/checks/webEntryPointDecorator/flaskRouteDecorator.py", new WebEntryPointDecoratorCheck());
+  }
+
+  @Test
+  void flaskRouteQuickFixTest() {
+    var check = new WebEntryPointDecoratorCheck();
+    var before = """
+      from flask import Flask
+      app = Flask(__name__)
+      @login_required
+      @app.route('/secret')
+      def secret_page():
+          return "Secret" """;
+
+    var after = """
+      from flask import Flask
+      app = Flask(__name__)
+      @app.route('/secret')
+      @login_required
+      def secret_page():
+          return "Secret" """;
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Move the '@route' decorator to the top");
+  }
 }
+

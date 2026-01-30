@@ -10,3 +10,4 @@ def my_handler(sender, **kwargs):
 @csrf_exempt
 def my_handler(sender, **kwargs):
     ...
+
