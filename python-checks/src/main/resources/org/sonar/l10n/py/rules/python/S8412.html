@@ -1,0 +1,93 @@
+<p>An issue is raised when a FastAPI endpoint uses the generic <code>@app.route()</code> or <code>@router.route()</code> decorator with a
+<code>methods</code> parameter.</p>
+<h2>Why is this an issue?</h2>
+<p>FastAPI provides specific decorators for each HTTP method (<code>@app.get()</code>, <code>@app.post()</code>, <code>@app.put()</code>,
+<code>@app.delete()</code>, etc.) that are more explicit and idiomatic than using the generic <code>@app.route()</code> decorator with a
+<code>methods</code> parameter.</p>
+<p>The generic <code>route()</code> decorator comes from Flask, where it’s the standard way to define endpoints. However, FastAPI was designed with a
+different approach that emphasizes clarity and explicitness.</p>
+<p>Using specific HTTP method decorators offers several advantages:</p>
+<ul>
+  <li> <strong>Immediate clarity</strong>: The HTTP method is visible at a glance without needing to read the decorator’s parameters </li>
+  <li> <strong>Less verbose</strong>: The specific decorators require less code and fewer parameters </li>
+  <li> <strong>Framework conventions</strong>: This is the standard, documented way to define endpoints in FastAPI </li>
+  <li> <strong>Better tooling support</strong>: IDEs and linters can provide better autocomplete and validation with the specific decorators </li>
+</ul>
+<p>While both approaches work functionally, using the generic <code>route()</code> decorator in FastAPI code suggests unfamiliarity with the
+framework’s conventions and can make the codebase harder to read for developers who expect idiomatic FastAPI patterns.</p>
+<h3>What is the potential impact?</h3>
+<p>Using the generic route decorator instead of specific HTTP method decorators reduces code readability and makes the codebase less maintainable.
+Developers need to read decorator parameters to understand what HTTP method an endpoint accepts, rather than seeing it immediately in the decorator
+name.</p>
+<p>This pattern also signals to other developers that the code may not follow FastAPI best practices, potentially leading to inconsistent coding
+styles across the project.</p>
+<h2>How to fix it in FastAPI</h2>
+<p>Replace the generic <code>@app.route()</code> decorator with the specific HTTP method decorator that matches the method specified in the
+<code>methods</code> parameter. FastAPI provides decorators for all standard HTTP methods: <code>@app.get()</code>, <code>@app.post()</code>,
+<code>@app.put()</code>, <code>@app.delete()</code>, <code>@app.patch()</code>, <code>@app.options()</code>, <code>@app.head()</code>, and
+<code>@app.trace()</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@app.route("/users", methods=["GET"])  # Noncompliant
+def get_users():
+    return {"users": []}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@app.get("/users")
+def get_users():
+    return {"users": []}
+</pre>
+<p>The same principle applies to POST endpoints. Replace <code>@app.route()</code> with <code>@app.post()</code>.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+@app.route("/users", methods=["POST"])  # Noncompliant
+def create_user(user: User):
+    return {"user": user}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+@app.post("/users")
+def create_user(user: User):
+    return {"user": user}
+</pre>
+<p>For PUT, DELETE, and other HTTP methods, use the corresponding specific decorator.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+@app.route("/items/{item_id}", methods=["DELETE"])  # Noncompliant
+def delete_item(item_id: int):
+    return {"deleted": item_id}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+@app.delete("/items/{item_id}")
+def delete_item(item_id: int):
+    return {"deleted": item_id}
+</pre>
+<p>The same pattern applies when using <code>APIRouter</code> instead of the main <code>FastAPI</code> app instance.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+router = APIRouter()
+
+@router.route("/items", methods=["GET"])  # Noncompliant
+def list_items():
+    return {"items": []}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="4" data-diff-type="compliant">
+router = APIRouter()
+
+@router.get("/items")
+def list_items():
+    return {"items": []}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> FastAPI - Path Operation Decorators - <a href="https://fastapi.tiangolo.com/tutorial/first-steps/#define-a-path-operation-decorator">Official
+  FastAPI documentation explaining the use of specific HTTP method decorators</a> </li>
+  <li> flake8-fastapi - CF001 Rule - <a href="https://pypi.org/project/flake8-fastapi/#cf001---route-decorator-error">Documentation for the
+  flake8-fastapi plugin rule that detects this pattern</a> </li>
+</ul>
+
