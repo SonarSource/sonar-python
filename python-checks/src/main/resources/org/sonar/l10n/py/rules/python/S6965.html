@@ -1,0 +1,57 @@
+<p>This is an issue when a Flask route decorator does not specify the methods parameter, especially if the route handler checks request.method for
+methods other than GET.</p>
+<h2>Why is this an issue?</h2>
+<p>Flask routes only accept GET requests by default when no methods parameter is specified. This can cause unexpected "Method Not Allowed" errors at
+runtime.</p>
+<p>When developers write route handlers that check request.method for POST, PUT, DELETE, or other HTTP methods, they often forget to explicitly allow
+these methods in the route decorator. This creates a mismatch between what the code expects and what Flask actually allows.</p>
+<p>For example, if a route handler checks for POST requests but the decorator doesn’t include POST in the methods list, any POST request to that
+endpoint will result in a 405 Method Not Allowed error before the handler code even runs.</p>
+<p>Explicitly specifying allowed methods makes the code more readable and prevents these runtime errors. It also serves as documentation, clearly
+showing which HTTP methods the endpoint supports.</p>
+<h3>What is the potential impact?</h3>
+<p>This issue can cause runtime errors that prevent users from successfully submitting forms or making API calls. The "Method Not Allowed" errors can
+be confusing to debug, especially for developers who are new to Flask. In production, this can lead to broken functionality and poor user
+experience.</p>
+<h2>How to fix it in Flask</h2>
+<p>Add the methods parameter to the route decorator and specify all HTTP methods that the route should accept. Include all methods that are checked
+within the handler function.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@app.route('/api/users')  # Noncompliant
+def handle_users():
+    if request.method == 'POST':
+        return create_user()
+    return get_users()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@app.route('/api/users', methods=['GET', 'POST'])
+def handle_users():
+    if request.method == 'POST':
+        return create_user()
+    return get_users()
+</pre>
+<p>For routes that only handle GET requests, explicitly specify methods=['GET'] to make the intent clear, even though GET is the default.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+@app.route('/dashboard')
+def dashboard():  # Noncompliant
+    return render_template('dashboard.html')
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    return render_template('dashboard.html')
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<p>Flask Routing Documentation - <a
+href="https://flask.palletsprojects.com/en/2.3.x/quickstart/#routing%5BOfficial">https://flask.palletsprojects.com/en/2.3.x/quickstart/#routing%5BOfficial</a>
+Flask documentation on URL routing and HTTP methods]</p>
+<p>Flask HTTP Methods - <a
+href="https://flask.palletsprojects.com/en/2.3.x/quickstart/#http-methods%5BFlask">https://flask.palletsprojects.com/en/2.3.x/quickstart/#http-methods%5BFlask</a>
+documentation specifically about handling different HTTP methods]</p>
+
