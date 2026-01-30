@@ -93,7 +93,7 @@ def api_router_instead_of_app():
 # Testing following calls
 def helper_with_exception(item_id: int):
     if ...:
-        raise HTTPException(status_code=400, detail="Invalid ID")  # FN
+        raise HTTPException(status_code=400, detail="Invalid ID")  # Noncompliant
 
 
 @app.get("/items/{item_id}")
@@ -102,12 +102,12 @@ def endpoint_calling_helper(item_id: int):
 
 
 def nested_helper_level_2():
-    raise HTTPException(status_code=403, detail="Forbidden")  # FN
+    raise HTTPException(status_code=403, detail="Forbidden")  # Noncompliant
 
 
 def nested_helper_level_1(id: int):
     if ...:
-        raise HTTPException(status_code=400, detail="Bad ID")  # FN
+        raise HTTPException(status_code=400, detail="Bad ID")  # Noncompliant
     nested_helper_level_2()
 
 
@@ -268,15 +268,27 @@ def exception_without_status_code():
     raise HTTPException(detail="Missing status code")  # Compliant (no status_code to analyze)
 
 @app.get("/no-status-code")
-def exception_without_status_code():
+def exception_with_inner_function():
     def inner_function():
         raise HTTPException(detail="Missing status code")  # Compliant
 
     def inner_function2():
-        raise HTTPException(status_code=500, detail="Missing status code")  # FN
+        raise HTTPException(status_code=500, detail="Missing status code")  # Noncompliant
     
     inner_function2()
 
+
+@app.get("/no-status-code")
+def call_same_function_twice_first_call():
+    called_function()
+
+@app.get("/no-status-code")
+def call_same_function_twice_second_call():
+    called_function()
+
+
+def called_function():
+    raise HTTPException(status_code=500, detail="Missing status code")  # Noncompliant
 
 
 base_responses = {500: {"description": "Server error"}}
@@ -287,3 +299,4 @@ def responses_with_dict_unpacking():
 # Dummy decorator for test
 def some_other_decorator(func):
     return func
+

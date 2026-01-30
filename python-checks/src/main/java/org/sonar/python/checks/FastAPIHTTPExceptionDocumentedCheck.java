@@ -38,12 +38,13 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.RegularArgument;
-import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.semantic.v2.callgraph.CallGraph;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S8415")
@@ -65,14 +66,21 @@ public class FastAPIHTTPExceptionDocumentedCheck extends PythonSubscriptionCheck
     TypeMatchers.isType("fastapi.exceptions.HTTPException"),
     TypeMatchers.isType("fastapi.HTTPException"));
 
-  private static final int MAX_RECURSION_DEPTH = 5;
+  private static final int MAX_FUNCTION_CALLS = 100;
+
+  private final Set<Expression> reportedHttpExceptionCalls = new HashSet<>();
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, FastAPIHTTPExceptionDocumentedCheck::checkFunctionDef);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::init);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, this::checkFunctionDef);
   }
 
-  private static void checkFunctionDef(SubscriptionContext ctx) {
+  private void init(SubscriptionContext ctx) {
+    reportedHttpExceptionCalls.clear();
+  }
+
+  private void checkFunctionDef(SubscriptionContext ctx) {
     FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
 
     DecoratorAnalysisResult analysisResult = new DecoratorAnalysis(ctx, functionDef).analyze();
@@ -146,16 +154,16 @@ public class FastAPIHTTPExceptionDocumentedCheck extends PythonSubscriptionCheck
 
       return statusCodes;
     }
-
   }
 
-  private static void reportUndocumentedExceptions(
+  private void reportUndocumentedExceptions(
     SubscriptionContext ctx,
     List<RaiseInfo> httpExceptions,
     Set<Integer> documentedStatusCodes) {
     for (RaiseInfo raiseInfo : httpExceptions) {
-      if (!documentedStatusCodes.contains(raiseInfo.statusCode)) {
+      if (!documentedStatusCodes.contains(raiseInfo.statusCode) && !reportedHttpExceptionCalls.contains(raiseInfo.httpExceptionExpression)) {
         ctx.addIssue(raiseInfo.httpExceptionExpression, String.format(MESSAGE, raiseInfo.statusCode));
+        reportedHttpExceptionCalls.add(raiseInfo.httpExceptionExpression);
       }
     }
   }
@@ -169,7 +177,6 @@ public class FastAPIHTTPExceptionDocumentedCheck extends PythonSubscriptionCheck
   private static class RaiseInfoCollector {
     private final SubscriptionContext ctx;
     private final FunctionDef functionDef;
-    private final Set<FunctionDef> visited = new HashSet<>();
 
     RaiseInfoCollector(SubscriptionContext ctx, FunctionDef functionDef) {
       this.ctx = ctx;
@@ -177,25 +184,20 @@ public class FastAPIHTTPExceptionDocumentedCheck extends PythonSubscriptionCheck
     }
 
     public List<RaiseInfo> collect() {
-      return collect(functionDef, 0);
-    }
+      List<RaiseInfo> result = new ArrayList<>(HTTPExceptionVisitor.collect(ctx, functionDef));
 
-    private List<RaiseInfo> collect(FunctionDef functionDef, int depth) {
-      List<RaiseInfo> result = new ArrayList<>();
-
-      if (visited.contains(functionDef) || depth > MAX_RECURSION_DEPTH) {
-        return result;
-      }
-      visited.add(functionDef);
-
-      StatementList body = functionDef.body();
-      if (body == null) {
+      String fqn = FullyQualifiedNameHelper.getFullyQualifiedName(functionDef.name().typeV2()).orElse(null);
+      if (fqn == null) {
         return result;
       }
 
-      HTTPExceptionVisitor visitor = new HTTPExceptionVisitor(ctx);
-      body.accept(visitor);
-      result.addAll(visitor.httpExceptions);
+      CallGraph callGraph = ctx.callGraph();
+
+      callGraph.forwardStream(fqn)
+        .limit(MAX_FUNCTION_CALLS)
+        .forEach(node -> node.tree()
+          .flatMap(TreeUtils.toOptionalInstanceOfMapper(FunctionDef.class))
+          .ifPresent(calledFunction -> result.addAll(HTTPExceptionVisitor.collect(ctx, calledFunction))));
 
       return result;
     }
@@ -243,6 +245,12 @@ public class FastAPIHTTPExceptionDocumentedCheck extends PythonSubscriptionCheck
     @Override
     public void visitLambda(LambdaExpression pyLambdaExpressionTree) {
       // don't decend into nested lambdas
+    }
+
+    public static List<RaiseInfo> collect(SubscriptionContext ctx, FunctionDef tree) {
+      HTTPExceptionVisitor visitor = new HTTPExceptionVisitor(ctx);
+      tree.body().accept(visitor);
+      return visitor.httpExceptions;
     }
   }
 
