@@ -1,0 +1,136 @@
+<p>This is an issue when a FastAPI route decorator declares path parameters (e.g., <code>@app.get("/items/{item_id}")</code>) but the corresponding
+function signature does not include those parameters as arguments. It is also an issue when path parameters are declared as positional-only arguments
+(using <code>/</code> in the signature).</p>
+<h2>Why is this an issue?</h2>
+<p>FastAPI is a modern web framework that uses Python type hints and function signatures to automatically extract, validate, and inject request
+parameters into route handler functions. When you define a route with path parameters in the decorator (e.g.,
+<code>@app.get("/items/{item_id}")</code>), FastAPI expects these parameters to be present in the function signature.</p>
+<p>Path parameters are segments of the URL path that are used to identify specific resources. For example, in the route <code>/items/{item_id}</code>,
+the <code>item_id</code> is a path parameter that would capture values like <code>123</code> from a request to <code>/items/123</code>.</p>
+<p>The framework works by inspecting the function signature at startup and creating a mapping between the route path parameters and the function
+arguments. When a request comes in, FastAPI extracts the values from the URL path and injects them into the function call.</p>
+<p>When path parameters are missing from the function signature, several problems occur:</p>
+<ul>
+  <li> The parameter values cannot be accessed in the function body, making it impossible to use them for business logic </li>
+  <li> FastAPI cannot perform automatic validation and type conversion on the parameter </li>
+  <li> The application will raise a runtime error when the route is accessed </li>
+  <li> The mismatch between the route definition and function signature indicates a programming error </li>
+</ul>
+<p>Additionally, if a path parameter is declared as a positional-only argument (using <code>/</code> in the function signature), FastAPI cannot inject
+it because the framework uses keyword arguments for parameter injection. This is a subtle but important constraint of how FastAPI’s dependency
+injection system works.</p>
+<p>This type of error is particularly problematic because it may not be caught during development if the specific route is not tested, leading to
+runtime failures in production.</p>
+<h3>What is the potential impact?</h3>
+<p>When path parameters are missing from the function signature, the application will fail at runtime when the route is accessed. This causes:</p>
+<ul>
+  <li> <strong>Service disruption</strong>: The endpoint becomes completely non-functional, returning HTTP 500 errors to clients </li>
+  <li> <strong>Poor user experience</strong>: Users receive error responses instead of the expected data or functionality </li>
+  <li> <strong>Debugging difficulty</strong>: The error may not be immediately obvious, especially if the route is not covered by tests </li>
+  <li> <strong>Maintenance burden</strong>: Developers must spend time investigating and fixing runtime errors that could have been prevented </li>
+</ul>
+<p>The impact is particularly severe because this is a complete failure of the endpoint - there is no graceful degradation or partial functionality.
+Every request to the affected route will fail until the code is corrected and redeployed.</p>
+<h2>How to fix it in FastAPI</h2>
+<p>Include all path parameters from the route decorator in the function signature. The parameter names in the function must exactly match the
+parameter names in the route path (enclosed in curly braces). Add type hints to enable FastAPI’s automatic validation and conversion.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+def read_item():  # Noncompliant: item_id is missing
+    return {"message": "Hello"}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int):
+    return {"item_id": item_id}
+</pre>
+<p>When you have multiple path parameters, include all of them in the function signature. The order of parameters in the function signature does not
+need to match the order in the path, but all path parameters must be present.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/users/{user_id}/items/{item_id}")
+def read_user_item(user_id: int):  # Noncompliant: item_id is missing
+    return {"user_id": user_id}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/users/{user_id}/items/{item_id}")
+def read_user_item(user_id: int, item_id: int):
+    return {"user_id": user_id, "item_id": item_id}
+</pre>
+<p>Avoid declaring path parameters as positional-only arguments (before the <code>/</code> separator). FastAPI injects parameters as keyword
+arguments, so positional-only parameters cannot be injected.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, /):  # Noncompliant: positional-only parameter
+    return {"item_id": item_id}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int):
+    return {"item_id": item_id}
+</pre>
+<p>Path parameters can be combined with query parameters and request body parameters. Ensure all path parameters are included in the signature,
+regardless of what other parameters are present.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/things/{thing_id}")
+async def read_thing(query: str):  # Noncompliant: thing_id is missing
+    return {"query": query}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="4" data-diff-type="compliant">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/things/{thing_id}")
+async def read_thing(thing_id: int, query: str):
+    return {"thing_id": thing_id, "query": query}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> FastAPI - Path Parameters - <a href="https://fastapi.tiangolo.com/tutorial/path-params/">Official FastAPI documentation on path parameters</a>
+  </li>
+  <li> Ruff - FAST003 Rule - <a href="https://docs.astral.sh/ruff/rules/fast-api-unused-path-parameter/">Ruff linter documentation for this rule</a>
+  </li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:python:S6856} - Similar rule for Java Spring framework path variables </li>
+</ul>
+

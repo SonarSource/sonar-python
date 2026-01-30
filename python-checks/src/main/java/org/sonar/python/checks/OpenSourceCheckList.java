@@ -225,6 +225,7 @@ public class OpenSourceCheckList {
       FastAPIGenericRouteDecoratorCheck.class,
       FastApiImportStringCheck.class,
       FastAPIRedundantResponseModelCheck.class,
+      FastAPIPathParametersCheck.class,
       FastHashingOrPlainTextCheck.class,
       FieldDuplicatesClassNameCheck.class,
       FieldNameCheck.class,
