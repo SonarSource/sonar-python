@@ -220,6 +220,7 @@ public class OpenSourceCheckList {
       ExitHasBadArgumentsCheck.class,
       ExpandingArchiveCheck.class,
       FastAPIBindToAllNetworkInterfacesCheck.class,
+      FastAPIDependencyAnnotatedCheck.class,
       FastAPIFileUploadFormCheck.class,
       FastApiImportStringCheck.class,
       FastAPIRedundantResponseModelCheck.class,
