@@ -78,7 +78,7 @@ class AwsLambdaChecksUtilsTest {
     assertThat(AwsLambdaChecksUtils.isLambdaHandler(subscriptionContext, functionDef)).isFalse();
 
     subscriptionContext.projectConfiguration().awsProjectConfiguration().awsLambdaHandlers()
-        .add(new AwsLambdaHandlerInfo("a.b.c"));
+      .add(new AwsLambdaHandlerInfo("a.b.c"));
     assertThat(AwsLambdaChecksUtils.isLambdaHandler(subscriptionContext, functionDef)).isTrue();
 
     var functionDefWithUnknownType = functionDef(PythonType.UNKNOWN);
@@ -88,9 +88,9 @@ class AwsLambdaChecksUtilsTest {
   @Test
   void isLambdaHandlerTest_callGraph() {
     var callGraph = new CallGraph.Builder()
-        .addUsage("lambda.handler", "a.b.c")
-        .addUsage("a.b.c", "e.f.g")
-        .build();
+      .addUsage("lambda.handler", "a.b.c", null, null)
+      .addUsage("a.b.c", "e.f.g", null, null)
+      .build();
 
     var subscriptionContext = subscriptionContext(callGraph);
 
@@ -99,19 +99,19 @@ class AwsLambdaChecksUtilsTest {
     assertThat(AwsLambdaChecksUtils.isLambdaHandler(subscriptionContext, functionDef)).isFalse();
 
     subscriptionContext.projectConfiguration().awsProjectConfiguration().awsLambdaHandlers()
-        .add(new AwsLambdaHandlerInfo("lambda.handler"));
+      .add(new AwsLambdaHandlerInfo("lambda.handler"));
     assertThat(AwsLambdaChecksUtils.isLambdaHandler(subscriptionContext, functionDef)).isTrue();
   }
 
   @Test
   void isOnlyLambdaHandlerTest() {
     var callGraph = new CallGraph.Builder()
-        .addUsage("lambda.handler", "a.b.c")
-        .build();
+      .addUsage("lambda.handler", "a.b.c", null, null)
+      .build();
 
     var subscriptionContext = subscriptionContext(callGraph);
     subscriptionContext.projectConfiguration().awsProjectConfiguration().awsLambdaHandlers()
-        .add(new AwsLambdaHandlerInfo("lambda.handler"));
+      .add(new AwsLambdaHandlerInfo("lambda.handler"));
 
     var handlerFunction = functionDef("lambda.handler");
     assertThat(AwsLambdaChecksUtils.isOnlyLambdaHandler(subscriptionContext, handlerFunction)).isTrue();

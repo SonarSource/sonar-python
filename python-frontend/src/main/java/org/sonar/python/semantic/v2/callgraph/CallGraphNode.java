@@ -16,7 +16,55 @@
  */
 package org.sonar.python.semantic.v2.callgraph;
 
-public record CallGraphNode(String fqn) {
+import java.lang.ref.WeakReference;
+import java.util.Objects;
+import java.util.Optional;
+import org.sonar.plugins.python.api.tree.Tree;
+
+public class CallGraphNode {
+  private final String fqn;
+  private final WeakReference<Tree> tree;
+
+  public CallGraphNode(String fqn, WeakReference<Tree> tree) {
+    this.fqn = fqn;
+    this.tree = tree;
+  }
+
+  public CallGraphNode(String fqn) {
+    this(fqn, new WeakReference<>(null));
+  }
+
+  public String fqn() {
+    return fqn;
+  }
+
+  public Optional<Tree> tree() {
+    return Optional.ofNullable(tree.get());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(fqn, tree());
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof CallGraphNode other)) {
+      return false;
+    }
+    return Objects.equals(fqn, other.fqn) && Objects.equals(tree(), other.tree());
+  }
+
+  @Override
+  public String toString() {
+    return "CallGraphNode{" +
+      "fqn='" + fqn + '\'' +
+      ", tree=" + tree.get() +
+      '}';
+  }
 
 }
 

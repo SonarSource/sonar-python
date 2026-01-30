@@ -16,6 +16,8 @@
  */
 package org.sonar.python.semantic.v2.callgraph;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,21 +38,46 @@ public class CallGraphCollector {
   }
 
   public static CallGraph collectCallGraph(FileInput rootTree) {
-    var visitor = new Visitor();
+    var functionDefs = FunctionFinderVisitor.findFunctionDefs(rootTree);
+
+    var visitor = new Visitor(functionDefs);
     rootTree.accept(visitor);
     return visitor.build();
   }
-    
+
+  private static class FunctionFinderVisitor extends BaseTreeVisitor {
+    private final Map<String, Tree> functionDefs = new HashMap<>();
+
+    @Override
+    public void visitFunctionDef(FunctionDef functionDef) {
+      CallGraphCollector.getFqn(functionDef.name().typeV2()).ifPresent(fqn -> functionDefs.put(fqn, functionDef));
+      super.visitFunctionDef(functionDef);
+    }
+
+    public static Map<String, Tree> findFunctionDefs(FileInput rootTree) {
+      var visitor = new FunctionFinderVisitor();
+      rootTree.accept(visitor);
+      return visitor.functionDefs;
+    }
+  }
+
   private static class Visitor extends BaseTreeVisitor {
+    private final Map<String, Tree> functionDefs;
     private final CallGraph.Builder callGraphBuilder = new CallGraph.Builder();
+
+    public Visitor(Map<String, Tree> functionDefs) {
+      this.functionDefs = functionDefs;
+    }
 
     @Override
     public void visitCallExpression(CallExpression callExpr) {
       super.visitCallExpression(callExpr);
       getCalledFunctionFqn(callExpr).ifPresent(calledFunctionFqn -> 
-        getEnclosedFunctionFqn(callExpr).ifPresent(enclosedFunctionFqn -> 
-          callGraphBuilder.addUsage(enclosedFunctionFqn, calledFunctionFqn)
-        )
+        getEnclosedFunctionFqn(callExpr).ifPresent(enclosedFunctionFqn -> {
+          Tree calledFunction = functionDefs.getOrDefault(calledFunctionFqn, null);
+          Tree callerFunction = getCallerFunction(callExpr);
+          callGraphBuilder.addUsage(enclosedFunctionFqn, calledFunctionFqn, callerFunction, calledFunction);
+        })
       );
     }
 
@@ -59,9 +86,13 @@ public class CallGraphCollector {
       return CallGraphCollector.getFqn(calleeType);
     }
 
+    private static Tree getCallerFunction(CallExpression callExpr) {
+      return TreeUtils.firstAncestorOfKind(callExpr, Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA);
+    }
+
     private static Optional<String> getEnclosedFunctionFqn(CallExpression callExpr) {
-      Tree enclosingFuncDefTree = TreeUtils.firstAncestorOfKind(callExpr, Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA);
-      if(enclosingFuncDefTree instanceof FunctionDef enclosingFunctionDef) {
+      Tree enclosingFuncDefTree = getCallerFunction(callExpr);
+      if (enclosingFuncDefTree instanceof FunctionDef enclosingFunctionDef) {
         return CallGraphCollector.getFqn(enclosingFunctionDef.name().typeV2());
       }
       // lambdas are not supported; thus returning empty
@@ -74,22 +105,22 @@ public class CallGraphCollector {
   }
 
   private static Optional<String> getFqn(PythonType type) {
-    if(type instanceof FunctionType functionType) {
+    if (type instanceof FunctionType functionType) {
       return Optional.of(functionType.fullyQualifiedName());
     } else if (type instanceof ModuleType moduleType) {
       return Optional.of(moduleType.fullyQualifiedName());
-    } else if(type instanceof UnresolvedImportType unresolvedImportType) {
+    } else if (type instanceof UnresolvedImportType unresolvedImportType) {
       return Optional.of(unresolvedImportType.importPath());
-    } else if(type instanceof UnionType unionType) {
+    } else if (type instanceof UnionType unionType) {
       Set<String> unionFqnSet = unionType.candidates().stream()
         .flatMap(candidate -> getFqn(candidate).stream())
         .collect(Collectors.toSet());
-      
+
       if (unionFqnSet.size() == 1) {
         return unionFqnSet.stream().findFirst();
       } else {
         // Multiple candidates, cannot determine a single FQN
-        return Optional.empty(); 
+        return Optional.empty();
       }
     } else {
       return Optional.empty();
