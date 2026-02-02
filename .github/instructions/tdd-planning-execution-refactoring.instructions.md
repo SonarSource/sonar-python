@@ -121,7 +121,7 @@ void test() {
 
 ### Test Execution Command
 ```bash
-mvn verify -DskipTypeshed -DskipObfuscation -f python-checks/pom.xml -Dtest=YourTestClass
+mvn verify -DskipObfuscation -f python-checks/pom.xml -Dtest=YourTestClass
 ```
 
 ## Key Success Practices

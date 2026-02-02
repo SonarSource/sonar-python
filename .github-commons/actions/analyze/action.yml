@@ -16,7 +16,7 @@ runs:
       with:
         maven-args: >-
           -Dsonar.organization=sonarsource -Dsonar.projectKey=${{ inputs.sonar-project-key }}
-          -Dsonar.analysisCache.enabled=true -Dsonar.sca.recursiveManifestSearch=true -DfailStubGenerationFast=true -Dskip.its=true
+          -Dsonar.analysisCache.enabled=true -Dsonar.sca.recursiveManifestSearch=true -DgenerateTypeshedStubs -DfailStubGenerationFast=true -Dskip.its=true
         deploy: false
         sonar-platform: ${{ inputs.sonarqube-instance }}
         scanner-java-opts: '-Xmx1G'

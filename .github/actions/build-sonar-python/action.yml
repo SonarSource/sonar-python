@@ -11,7 +11,7 @@ runs:
       uses: SonarSource/ci-github-actions/build-maven@v1
       id: build
       with:
-        maven-args: '-DskipTests=true -Dsonar.skip=true -P-typeshed_serializer'
+        maven-args: '-DskipTests=true -Dsonar.skip=true'
         deploy-pull-request: true
         sonar-platform: none
         mixed-privacy: true

@@ -3,6 +3,7 @@ function run_maven {
   # No need for Maven phase "install" as the generated JAR files do not need to be installed
   # in Maven local repository. Phase "verify" is enough.
   mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+    -DgenerateTypeshedStubs \
     -Pcoverage \
     -Dmaven.test.redirectTestOutputToFile=false \
     -Dsonar.projectName="Python" \
@@ -60,6 +61,7 @@ elif [ "$PULL_REQUEST" != "false" ]; then
 elif [[ "$GITHUB_BRANCH" == "dogfood-on-"* ]] && [ "$PULL_REQUEST" == "false" ]; then
   echo '======= Build dogfood branch'
   mvn verify \
+   -DgenerateTypeshedStubs \
    -DfailStubGenerationFast=true \
    -Dskip.its=true \
    --batch-mode \
@@ -74,6 +76,7 @@ else
   # in Maven local repository. Phase "verify" is enough.
 
   mvn verify \
+      -DgenerateTypeshedStubs \
       -Dmaven.test.redirectTestOutputToFile=false \
       --batch-mode \
        --errors \

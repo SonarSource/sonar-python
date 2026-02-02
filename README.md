@@ -20,10 +20,10 @@ Sonar's [integrated code quality and code security](https://www.sonarsource.com/
 
 The easiest way to build the Project is by running:
 
-`mvn clean install -DskipTypeshed -P-private`
+`mvn clean install -P-private`
 
 It builds only Java Maven modules, runs tests, and installs jar locally.
-The Python interpreter is not required in that case.
+The Python interpreter is not required in that case. Typeshed stub generation is skipped by default.
 
 ### Full build
 
@@ -46,10 +46,27 @@ To execute the full build just run:
 
 `mvn clean install -P-private`
 
-The full build executes [Typeshed](https://github.com/python/typeshed) serializer script. 
-It generates protobuf messages for Typeshed symbols (for standard Python API) and our customs symbols 
+The full build executes [Typeshed](https://github.com/python/typeshed) serializer script.
+It generates protobuf messages for Typeshed symbols (for standard Python API) and our customs symbols
 (for Python libraries, e.g. [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-python.html)).
-This helps with type inference and providing better rules.  
+This helps with type inference and providing better rules.
+
+### Typeshed Stub Generation
+
+By default, Maven builds skip typeshed stub generation for faster build times. The stubs are pre-generated and committed to the repository.
+
+To regenerate typeshed stubs, use the provided Docker script:
+```
+cd python-frontend/typeshed_serializer
+./build-with-docker.sh
+```
+
+Alternatively, you can generate stubs during a Maven build by adding the `-DgenerateTypeshedStubs` flag:
+```
+mvn clean install -DgenerateTypeshedStubs
+```
+
+Note: Stub generation requires Python 3.9+ and tox to be installed.
 
 ## How to contribute
 
