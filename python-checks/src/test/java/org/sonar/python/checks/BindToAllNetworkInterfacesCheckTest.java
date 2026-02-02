@@ -19,11 +19,11 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-class FastAPIBindToAllNetworkInterfacesCheckTest {
+class BindToAllNetworkInterfacesCheckTest {
 
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/fastAPIBindToAllNetworkInterfaces.py", new FastAPIBindToAllNetworkInterfacesCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/bindToAllNetworkInterfaces.py", new BindToAllNetworkInterfacesCheck());
   }
 
 }

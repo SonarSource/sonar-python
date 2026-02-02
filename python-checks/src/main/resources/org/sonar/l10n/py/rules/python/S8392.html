@@ -1,8 +1,8 @@
-<p>This is an issue when a FastAPI application uses <code>uvicorn.run()</code> with <code>host="0.0.0.0"</code>, which binds the application to all
-available network interfaces on the host machine.</p>
+<p>This is an issue when a web server uses <code>host="0.0.0.0"</code>, which binds the application to all available network interfaces on the host
+machine.</p>
 <h2>Why is this an issue?</h2>
-<p>When you start a FastAPI application, you need to specify which network interface it should listen on. A network interface is a connection point
-between your computer and a network.</p>
+<p>When you start a Web server, you need to specify which network interface it should listen on. A network interface is a connection point between
+your computer and a network.</p>
 <p>The special IP address <code>0.0.0.0</code> tells the application to bind to <strong>all</strong> network interfaces on the machine. This means the
 application becomes accessible from:</p>
 <ul>
@@ -43,7 +43,46 @@ as:</p>
 </ul>
 <p>The severity depends on the environment and what security controls are in place, but the risk is highest in development environments where security
 measures are typically minimal.</p>
-<h2>How to fix it</h2>
+<h2>How to fix it in Flask</h2>
+<p>For development, bind to localhost only. For production, use a proper WSGI server instead of app.run().</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def hello():
+    return 'Hello World!'
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def hello():
+    return 'Hello World!'
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=False)
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import os
+from flask import Flask
+app = Flask(__name__)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import os
+from flask import Flask
+app = Flask(__name__)
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5000, debug=True)
+</pre>
+<h2>How to fix it in FastAPI</h2>
 <p>For development and local testing, bind to localhost (<code>127.0.0.1</code> or <code>localhost</code>) instead of all interfaces. This ensures the
 application is only accessible from your local machine.</p>
 <h3>Code examples</h3>
@@ -76,6 +115,11 @@ if __name__ == "__main__":
   options</a> </li>
   <li> FastAPI CLI Documentation - <a href="https://fastapi.tiangolo.com/fastapi-cli/">Documentation explaining the difference between development
   (127.0.0.1) and production (0.0.0.0) binding</a> </li>
+  <li> Flask Deployment Options - <a href="https://flask.palletsprojects.com/en/2.3.x/deploying/">Official Flask documentation on secure deployment
+  practices</a> </li>
+  <li> Flask Security Considerations - <a href="https://flask.palletsprojects.com/en/2.3.x/security/">Flask security best practices and common
+  vulnerabilities</a> </li>
+  <li> Gunicorn Documentation - <a href="https://docs.gunicorn.org/en/stable/">Production WSGI server for Python web applications</a> </li>
 </ul>
 <h3>Standards</h3>
 <ul>

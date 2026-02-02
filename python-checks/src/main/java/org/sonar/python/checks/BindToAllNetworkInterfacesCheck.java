@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks;
 
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -29,30 +30,36 @@ import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S8392")
-public class FastAPIBindToAllNetworkInterfacesCheck extends PythonSubscriptionCheck {
+public class BindToAllNetworkInterfacesCheck extends PythonSubscriptionCheck {
 
   private static final String ALL_NETWORK_INTERFACES = "0.0.0.0";
-  private static final TypeMatcher UVICORN_RUN_FUNCTION_TYPE_MATCHER = TypeMatchers.isType("uvicorn.run");
+  private static final String MESSAGE = "Avoid binding the application to all network interfaces.";
+  private static final TypeMatcher UVICORN_APP_RUN_TYPE_MATCHER = TypeMatchers.isType("uvicorn.run");
+  private static final TypeMatcher FLASK_APP_RUN_TYPE_MATCHER = TypeMatchers.isType("flask.app.Flask.run");
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, FastAPIBindToAllNetworkInterfacesCheck::checkUvicornRunFunctionCalls);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, BindToAllNetworkInterfacesCheck::checkFunctionCalls);
+  }
+  private static void checkFunctionCalls(SubscriptionContext ctx) {
+    CallExpression callExpr = ((CallExpression) ctx.syntaxNode());
+    RegularArgument hostArgument = null;
+    if (UVICORN_APP_RUN_TYPE_MATCHER.isTrueFor(callExpr.callee(), ctx)) {
+      hostArgument = TreeUtils.argumentByKeyword("host", callExpr.arguments());
+    } else if (FLASK_APP_RUN_TYPE_MATCHER.isTrueFor(callExpr.callee(), ctx)) {
+      hostArgument = TreeUtils.nthArgumentOrKeyword(0, "host", callExpr.arguments());
+    }
+    if (isHostBoundToAll(hostArgument)) {
+      ctx.addIssue(callExpr.callee(), MESSAGE);
+    }
   }
 
-  private static void checkUvicornRunFunctionCalls(SubscriptionContext ctx) {
-    CallExpression callExpr = ((CallExpression) ctx.syntaxNode());
-
-    if (!UVICORN_RUN_FUNCTION_TYPE_MATCHER.isTrueFor(callExpr.callee(), ctx)) {
-      return;
-    }
-
-    RegularArgument hostArgument = TreeUtils.argumentByKeyword("host", callExpr.arguments());
-    if (hostArgument == null) {
-      return;
+  private static boolean isHostBoundToAll(@Nullable RegularArgument hostArgument) {
+    if (hostArgument==null){
+      return false;
     }
     StringLiteral hostValue = Expressions.extractStringLiteral(hostArgument.expression());
-    if (hostValue != null && ALL_NETWORK_INTERFACES.equals(hostValue.trimmedQuotesValue())) {
-      ctx.addIssue(hostArgument, "Avoid binding the FastAPI application to all network interfaces.");
-    }
+    return hostValue != null && ALL_NETWORK_INTERFACES.equals(hostValue.trimmedQuotesValue());
   }
 }
+
