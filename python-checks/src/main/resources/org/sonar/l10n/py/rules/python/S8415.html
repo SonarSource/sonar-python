@@ -1,0 +1,118 @@
+<p>This is an issue when a FastAPI endpoint raises <code>HTTPException</code> with specific status codes, but these status codes are not documented in
+the endpoint decorator’s <code>responses</code> parameter.</p>
+<h2>Why is this an issue?</h2>
+<p>FastAPI automatically generates OpenAPI (Swagger) documentation for your API endpoints. This documentation is crucial for API consumers to
+understand how to interact with your API, including what error responses they might encounter.</p>
+<p>When you raise <code>HTTPException</code> in your endpoint code, FastAPI will return the specified HTTP status code and error details at runtime.
+However, unless you explicitly document these exceptions in the <code>responses</code> parameter of your endpoint decorator, they won’t appear in the
+automatically generated API documentation.</p>
+<p>This creates a gap between what your API actually does and what the documentation says it does. API consumers looking at your OpenAPI specification
+will not see these error responses, making it harder for them to:</p>
+<ul>
+  <li> Understand all possible outcomes when calling the endpoint </li>
+  <li> Write proper error handling code in their applications </li>
+  <li> Debug issues when they encounter undocumented error responses </li>
+  <li> Trust the completeness of your API documentation </li>
+</ul>
+<p>The <code>responses</code> parameter in FastAPI endpoint decorators exists specifically to document all possible HTTP responses, including error
+cases. By documenting your <code>HTTPException</code> raises, you ensure that the OpenAPI specification accurately reflects your API’s behavior,
+improving the developer experience for anyone consuming your API.</p>
+<h3>What is the potential impact?</h3>
+<p>When HTTPException responses are not documented:</p>
+<ul>
+  <li> <strong>API documentation is incomplete</strong>: The automatically generated OpenAPI/Swagger documentation will not show all possible error
+  responses, misleading API consumers about the endpoint’s behavior. </li>
+  <li> <strong>Integration difficulties</strong>: Developers integrating with your API may be surprised by undocumented error responses, leading to
+  incomplete error handling and potential runtime failures. </li>
+  <li> <strong>Reduced trust</strong>: Incomplete documentation reduces confidence in the API and may lead developers to question what other behaviors
+  are undocumented. </li>
+  <li> <strong>Maintenance challenges</strong>: Without explicit documentation, it becomes harder to track what error responses an endpoint can
+  return, making refactoring and maintenance more difficult. </li>
+</ul>
+<h2>How to fix it in FastAPI</h2>
+<p>Add the <code>responses</code> parameter to your endpoint decorator, documenting each HTTPException status code that can be raised. The key should
+be the status code, and the value should be a dictionary with at least a <code>description</code> field explaining when this error occurs.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@app.get("/users/{user_id}")
+def get_user(user_id: int):
+    if user_id not in users:
+        raise HTTPException(status_code=404, detail="User not found")  # Noncompliant
+    return users[user_id]
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@app.get(
+    "/users/{user_id}",
+    responses={404: {"description": "User not found"}}
+)
+def get_user(user_id: int):
+    if user_id not in users:
+        raise HTTPException(status_code=404, detail="User not found")
+    return users[user_id]
+</pre>
+<p>For endpoints that can raise multiple different HTTPException status codes, document all of them in the <code>responses</code> parameter. Each
+status code should have a clear description of when it occurs.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+@app.post("/items")
+def create_item(item: Item):
+    if not item.name:
+        raise HTTPException(status_code=422, detail="Name is required")  # Noncompliant
+    if len(item.name) &gt; 100:
+        raise HTTPException(status_code=422, detail="Name too long")  # Noncompliant
+    return item
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+@app.post(
+    "/items",
+    responses={
+        422: {"description": "Validation error: Name is required or too long"}
+    }
+)
+def create_item(item: Item):
+    if not item.name:
+        raise HTTPException(status_code=422, detail="Name is required")
+    if len(item.name) &gt; 100:
+        raise HTTPException(status_code=422, detail="Name too long")
+    return item
+</pre>
+<p>You can provide more detailed response documentation by including a model or additional fields. This is especially useful for complex error
+responses.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+@app.get("/")
+def home():
+    raise HTTPException(status_code=400, detail="Bad Request")  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+@app.get(
+    "/",
+    responses={
+        400: {
+            "description": "Bad Request",
+            "content": {
+                "application/json": {
+                    "example": {"detail": "Bad Request"}
+                }
+            }
+        }
+    }
+)
+def home():
+    raise HTTPException(status_code=400, detail="Bad Request")
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> FastAPI - Additional Responses in OpenAPI - <a href="https://fastapi.tiangolo.com/advanced/additional-responses/">Official FastAPI
+  documentation on how to document additional responses including error responses</a> </li>
+  <li> FastAPI - Handling Errors - <a href="https://fastapi.tiangolo.com/tutorial/handling-errors/">Official FastAPI documentation on error handling
+  and HTTPException</a> </li>
+  <li> OpenAPI Specification - Responses Object - <a href="https://swagger.io/specification/#responses-object">OpenAPI specification for documenting
+  API responses</a> </li>
+</ul>
+

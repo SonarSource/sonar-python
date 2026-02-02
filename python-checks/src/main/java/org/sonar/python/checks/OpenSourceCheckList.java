@@ -222,6 +222,7 @@ public class OpenSourceCheckList {
       FastAPIDependencyAnnotatedCheck.class,
       FastAPIFileUploadFormCheck.class,
       FastAPIGenericRouteDecoratorCheck.class,
+      FastAPIHTTPExceptionDocumentedCheck.class,
       FastApiImportStringCheck.class,
       FastAPIRedundantResponseModelCheck.class,
       FastAPIPathParametersCheck.class,
