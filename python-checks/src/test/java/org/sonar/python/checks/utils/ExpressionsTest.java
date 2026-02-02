@@ -269,6 +269,7 @@ class ExpressionsTest {
     assertThat(lastNameValue("x = 42; import x; x")).isNull();
     assertThat(lastNameValue("x = 42; x = 43; x")).isNull();
     assertThat(lastNameValue("x = 42; y")).isNull();
+    assertThat(lastNameValue("x: int = 42; x").getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
   }
 
   private Expression lastNameValue(String code) {
@@ -290,6 +291,7 @@ class ExpressionsTest {
     assertThat(lastNameNonNameValue("x = 42; import x; x")).isNull();
     assertThat(lastNameNonNameValue("x = 42; x = 43; x")).isNull();
     assertThat(lastNameNonNameValue("x = 42; y")).isNull();
+    assertThat(lastNameNonNameValue("x: int = 42; x").getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
   }
 
   @Test

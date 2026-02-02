@@ -1,0 +1,56 @@
+<p>An issue is raised when a router prefix is defined in the <code>include_router()</code> call instead of in the <code>APIRouter()</code>
+initialization.</p>
+<h2>Why is this an issue?</h2>
+<p>In FastAPI applications, routers help organize endpoints into logical groups. Each router can have a URL prefix that gets prepended to all its
+routes.</p>
+<p>When you define the prefix in the <code>include_router()</code> call, the router’s URL structure is separated from its definition. This means
+developers need to search through the application setup code to understand where the router’s endpoints will be accessible.</p>
+<p>Modern FastAPI versions support defining the prefix directly in the <code>APIRouter()</code> constructor. This approach keeps the router’s
+configuration self-contained and makes the code easier to understand at a glance.</p>
+<p>By defining the prefix at initialization time, you create a single source of truth for the router’s configuration. Anyone reading the router file
+immediately knows its URL structure without having to trace through the application setup.</p>
+<h3>What is the potential impact?</h3>
+<p>This pattern reduces code maintainability and readability. In larger applications with multiple routers, it becomes increasingly difficult to
+understand the application’s URL structure without examining the main application file.</p>
+<p>When routers are defined in separate modules (a common practice), developers working on a specific router module cannot see its full URL path
+without switching to a different file. This cognitive overhead slows down development and increases the likelihood of mistakes when adding or
+modifying routes.</p>
+<h2>How to fix it</h2>
+<p>Move the <code>prefix</code> parameter from the <code>include_router()</code> call to the <code>APIRouter()</code> initialization. This makes the
+router’s URL structure immediately visible in its definition.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from fastapi import APIRouter, FastAPI
+
+router = APIRouter()  # Noncompliant
+
+@router.get("/users")
+def list_users():
+    return ["user1", "user2"]
+
+app = FastAPI()
+app.include_router(router, prefix="/api/v1")
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from fastapi import APIRouter, FastAPI
+
+router = APIRouter(prefix="/api/v1")
+
+@router.get("/users")
+def list_users():
+    return ["user1", "user2"]
+
+app = FastAPI()
+app.include_router(router)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> FastAPI - APIRouter - <a href="https://fastapi.tiangolo.com/tutorial/bigger-applications/">Official FastAPI documentation on using APIRouter
+  for larger applications</a> </li>
+  <li> FastAPI - APIRouter Reference - <a href="https://fastapi.tiangolo.com/reference/apirouter/">API reference for the APIRouter class and its
+  parameters</a> </li>
+</ul>
+

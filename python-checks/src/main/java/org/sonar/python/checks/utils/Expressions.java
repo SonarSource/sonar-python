@@ -29,6 +29,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -152,6 +153,8 @@ public class Expressions {
           parent.parent().is(Kind.ASSIGNMENT_STMT)) {
 
           result = ((AssignmentStatement) parent.parent()).assignedValue();
+        } else if (parent instanceof AnnotatedAssignment annotatedAssignment) {
+          result = annotatedAssignment.assignedValue();
         } else {
           return null;
         }

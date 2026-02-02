@@ -374,6 +374,7 @@ public class OpenSourceCheckList {
       ReturnAndYieldInOneFunctionCheck.class,
       ReturnYieldOutsideFunctionCheck.class,
       RobustCipherAlgorithmCheck.class,
+      RouterPrefixInIncludeRouterCheck.class,
       S3BucketBlockPublicAccessCheck.class,
       S3BucketGrantedAccessCheck.class,
       S3BucketHTTPCommunicationCheck.class,
