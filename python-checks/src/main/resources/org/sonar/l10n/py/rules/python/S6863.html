@@ -1,0 +1,62 @@
+<p>This is an issue when a Flask error handler returns a response without explicitly specifying the HTTP status code.</p>
+<h2>Why is this an issue?</h2>
+<p>Flask error handlers do not automatically set the HTTP status code based on the error type they handle. When you register an error handler with
+<code>@app.errorhandler(404)</code>, Flask does not automatically return a 404 status code from that handler.</p>
+<p>Instead, Flask will return a 200 OK status code by default, unless you explicitly specify the correct status code in the response. This creates a
+mismatch between the intended error condition and the actual HTTP response.</p>
+<p>This behavior can break client applications that rely on HTTP status codes to handle different error scenarios. For example, a client expecting a
+404 status code to handle "not found" cases will not work correctly if the server returns 200 OK instead.</p>
+<p>The Flask documentation explicitly states: "The status code of the response will not be set to the handler’s code. Make sure to provide the
+appropriate HTTP status code when returning a response from a handler."</p>
+<h3>What is the potential impact?</h3>
+<p>Client applications may not handle errors correctly, leading to unexpected behavior. API consumers might not recognize error conditions, and
+automated tools or frameworks that depend on proper HTTP status codes may malfunction.</p>
+<h2>How to fix it in Flask</h2>
+<p>Add the appropriate HTTP status code as a second element in the return tuple. The status code should match the error type handled by the
+decorator.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+</pre>
+<p>For error handlers returning JSON responses, also include the status code explicitly.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+@app.errorhandler(500)
+def internal_error(e):
+    return jsonify(error="Internal server error")  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+@app.errorhandler(500)
+def internal_error(e):
+    return jsonify(error="Internal server error"), 500
+</pre>
+<p>When using <code>register_error_handler()</code>, the same principle applies - always specify the status code.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+def handle_bad_request(e):
+    return 'Bad request!'  # Noncompliant
+
+app.register_error_handler(400, handle_bad_request)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+def handle_bad_request(e):
+    return 'Bad request!', 400
+
+app.register_error_handler(400, handle_bad_request)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<p>Flask Error Handling Documentation - <a href="https://flask.palletsprojects.com/en/stable/errorhandling/">Official Flask documentation on handling
+application errors and registering error handlers</a></p>
+
