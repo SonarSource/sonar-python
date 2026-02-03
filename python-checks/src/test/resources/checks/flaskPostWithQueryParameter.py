@@ -40,6 +40,7 @@ def getting_args():
 def update_resource():
     key = request.args.get('key')  # Noncompliant
     #     ^^^^^^^^^^^^
+    response.set_cookie(request.args.get("name"), request.args.get("value"))  # Noncompliant 2
     return 'Updated'
 
 @app.route('/data', methods=['GET','POST'])

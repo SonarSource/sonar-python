@@ -57,8 +57,16 @@ public class FlaskPostWithQueryParameterCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    TreeUtils.firstChild(functionDef, tree -> tree instanceof QualifiedExpression qe && isRequestArgs(qe, ctx))
-      .ifPresent(requestArgs -> ctx.addIssue(requestArgs, MESSAGE));
+    findRequestArgsRecursively(functionDef, ctx)
+      .forEach(requestArgs -> ctx.addIssue(requestArgs, MESSAGE));
+  }
+
+  private static Stream<Tree> findRequestArgsRecursively(Tree tree, SubscriptionContext ctx) {
+    if (tree instanceof QualifiedExpression qe && isRequestArgs(qe, ctx)) {
+      return Stream.of(tree);
+    }
+    return tree.children().stream()
+      .flatMap(child -> findRequestArgsRecursively(child, ctx));
   }
 
   private static boolean isPostRoute(FunctionDef functionDef, SubscriptionContext ctx) {
@@ -127,3 +135,4 @@ public class FlaskPostWithQueryParameterCheck extends PythonSubscriptionCheck {
     return TypeMatchers.isObjectOfType(REQUEST_FQN).isTrueFor(request, ctx);
   }
 }
+
