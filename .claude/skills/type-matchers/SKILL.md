@@ -202,6 +202,49 @@ Checks if the type has a specific TypeSource (e.g., EXACT, INFERRED, STUBBED).
 TypeMatchers.hasTypeSource(TypeSource.EXACT)
 ```
 
+### Union Type Matching
+
+#### `isAnyTypeInUnionSatisfying(TypeMatcher matcher)`
+Checks if **any** candidate in a UnionType satisfies the given matcher. Returns FALSE if the type is not a UnionType.
+
+**Important:** This matcher has **different semantics** than regular TypeMatchers for unions:
+- Regular matchers require **ALL** union candidates to match
+- This matcher requires **ANY** union candidate to match (OR logic)
+
+```java
+// Check if any type in Union[int, str, list] is a string
+InternalTypeMatchers.isAnyTypeInUnionSatisfying(
+  TypeMatchers.isType("builtins.str")
+)  // Returns TRUE
+```
+
+**Entry Point:** `org.sonar.python.types.v2.matchers.InternalTypeMatchers`
+
+**Behavior:**
+- Returns `TRUE` if at least one candidate satisfies the matcher
+- Returns `FALSE` if all candidates fail to satisfy the matcher
+- Returns `UNKNOWN` if no candidates match but at least one returns UNKNOWN
+- Returns `FALSE` for non-union types
+- Returns `UNKNOWN` for UnknownType
+
+**Use Case:** This is useful when you need to check if a union contains a specific type, such as checking if `Union[int, str, None]` contains `None`.
+
+**Example:**
+```java
+import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
+
+// Check if a union contains None
+private static final TypeMatcher CONTAINS_NONE =
+  InternalTypeMatchers.isAnyTypeInUnionSatisfying(
+    TypeMatchers.isType("builtins.NoneType")
+  );
+
+// Usage
+if (CONTAINS_NONE.isTrueFor(expression, ctx)) {
+  // The type is a union that includes None
+}
+```
+
 ## Common Patterns
 
 ### Checking for List or Tuple of Specific Type
@@ -235,6 +278,17 @@ TypeMatchers.all(
   TypeMatchers.isObjectOfType("builtins.dict"),
   TypeMatchers.hasMember("get"),
   TypeMatchers.hasMember("keys")
+)
+```
+
+### Checking if a Union Contains a Specific Type
+
+```java
+import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
+
+// Check if Union[int, str, None] contains None
+InternalTypeMatchers.isAnyTypeInUnionSatisfying(
+  TypeMatchers.isType("builtins.NoneType")
 )
 ```
 

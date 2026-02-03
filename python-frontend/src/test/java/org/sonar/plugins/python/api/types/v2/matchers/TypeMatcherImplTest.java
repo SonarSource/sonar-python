@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.TestProject;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
+import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
 import org.sonar.python.types.v2.matchers.TypePredicate;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
@@ -93,6 +94,7 @@ class TypeMatcherImplTest {
     unionWithFunctionAndObjectExpr = Mockito.mock(Expression.class);
     unionOfFunctionExpr = Mockito.mock(Expression.class);
     unionOfObjectExpr = Mockito.mock(Expression.class);
+
 
     Mockito.when(unknownExpr.typeV2()).thenReturn(unknownType);
     Mockito.when(objectExpr.typeV2()).thenReturn(objectType);
@@ -202,5 +204,26 @@ class TypeMatcherImplTest {
     assertThat(TypeMatchers.isObjectOfType("my_file.A").evaluateFor(unknownTypeExpression, ctx)).isEqualTo(TriBool.UNKNOWN);
     assertThat(TypeMatchers.isObjectOfType("my_file.B").evaluateFor(knownTypeExpression, ctx)).isEqualTo(TriBool.UNKNOWN);
   }
-}
 
+  @Test
+  void testIsAnyTypeInUnionSatisfying() {
+    var project = new TestProject();
+    project.addModule("my_file.py", """
+      class A :
+        def __init__(self):
+         pass
+      """);
+    Expression unionTypeExpression = project.lastExpression("""
+      from my_file import A
+      def foo(param: int | A | str):
+        param
+      """);
+
+    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
+    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+
+    assertThat(unionTypeExpression.typeV2()).isInstanceOf(UnionType.class);
+    assertThat(InternalTypeMatchers.isAnyTypeInUnionSatisfying(TypeMatchers.isObjectOfType("my_file.A")).isTrueFor(unionTypeExpression, ctx)).isTrue();
+
+  }
+}

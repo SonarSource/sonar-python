@@ -30,6 +30,7 @@ import org.sonar.python.types.v2.matchers.IsFunctionOwnerSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsObjectSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsTypeOrSuperTypeSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsTypePredicate;
+import org.sonar.python.types.v2.matchers.TypeMatcherImpl;
 import org.sonar.python.types.v2.matchers.TypePredicate;
 import org.sonar.python.types.v2.matchers.TypeSourcePredicate;
 

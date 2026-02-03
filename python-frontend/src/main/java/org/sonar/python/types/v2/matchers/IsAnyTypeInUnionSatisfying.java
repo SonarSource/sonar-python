@@ -16,35 +16,39 @@
  */
 package org.sonar.python.types.v2.matchers;
 
-import java.util.Set;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 
-public class TypePredicateUtils {
-  private TypePredicateUtils() {
+public class IsAnyTypeInUnionSatisfying implements TypePredicate {
+  private final TypePredicate wrappedPredicate;
+
+  public IsAnyTypeInUnionSatisfying(TypePredicate wrappedPredicate) {
+    this.wrappedPredicate = wrappedPredicate;
   }
 
-  public static TriBool evaluate(TypePredicate predicate, PythonType type, TypePredicateContext ctx) {
-    if(predicate.check(type, ctx).isTrue()){
-      return TriBool.TRUE;
+  @Override
+  public TriBool check(PythonType type, TypePredicateContext ctx) {
+    if (type instanceof UnknownType) {
+      return TriBool.UNKNOWN;
     }
-    Set<PythonType> candidates = extractCandidates(type);
-
-    TriBool result = TriBool.TRUE;
-    for (PythonType candidate : candidates) {
-      result = result.conservativeAnd(predicate.check(candidate, ctx));
-      if (result.isUnknown()) {
-        break;
+    
+    if (!(type instanceof UnionType unionType)) {
+      return TriBool.FALSE;
+    }
+    
+    boolean hasUnknown = false;
+    for (PythonType candidate : unionType.candidates()) {
+      TriBool result = wrappedPredicate.check(candidate, ctx);
+      if (result == TriBool.TRUE) {
+        return TriBool.TRUE;
+      }
+      if (result == TriBool.UNKNOWN) {
+        hasUnknown = true;
       }
     }
-    return result;
-  }
-
-  private static Set<PythonType> extractCandidates(PythonType type) {
-    if (type instanceof UnionType unionType) {
-      return unionType.candidates();
-    }
-    return Set.of(type);
+    
+    return hasUnknown ? TriBool.UNKNOWN : TriBool.FALSE;
   }
 }

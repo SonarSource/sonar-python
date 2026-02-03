@@ -14,18 +14,25 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.python.api.types.v2.matchers;
+package org.sonar.python.types.v2.matchers;
 
-import org.sonar.api.Beta;
-import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.TriBool;
-import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 
-@Beta
-public interface TypeMatcher {
-  @Beta
-  TriBool evaluateFor(Expression expr, SubscriptionContext ctx);
 
-  @Beta
-  boolean isTrueFor(Expression expr, SubscriptionContext ctx);
+public final class InternalTypeMatchers {
+
+  private InternalTypeMatchers() {
+  }
+
+  public static TypeMatcher isAnyTypeInUnionSatisfying(TypeMatcher matcher) {
+    TypePredicate predicate = getTypePredicate(matcher);
+    return new TypeMatcherImpl(new IsAnyTypeInUnionSatisfying(predicate));
+  }
+
+  private static TypePredicate getTypePredicate(TypeMatcher matcher) {
+    if (matcher instanceof TypeMatcherImpl typeMatcherImpl) {
+      return typeMatcherImpl.predicate();
+    }
+    throw new IllegalArgumentException("Unsupported type matcher: " + matcher.getClass().getName());
+  }
 }

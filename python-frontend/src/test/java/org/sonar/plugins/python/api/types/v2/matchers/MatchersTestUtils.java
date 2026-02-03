@@ -20,6 +20,7 @@ import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.v2.matchers.TypePredicate;
+import org.sonar.python.types.v2.matchers.TypeMatcherImpl;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 import static org.mockito.ArgumentMatchers.any;
