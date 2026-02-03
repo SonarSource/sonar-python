@@ -39,3 +39,4 @@ public record TypeMatcherImpl(TypePredicate predicate) implements TypeMatcher {
   }
 
 }
+
