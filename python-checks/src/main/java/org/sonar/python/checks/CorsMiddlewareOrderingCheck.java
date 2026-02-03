@@ -99,17 +99,6 @@ public class CorsMiddlewareOrderingCheck extends PythonSubscriptionCheck {
       .orElse(false);
   }
 
-  private static boolean isNameContainingCors(@Nullable Expression expr){
-    if(expr == null){
-      return false;
-    }
-    if(!(expr instanceof Name name)) {
-      return  false;
-    }
-    String simpleName = name.name();
-    return simpleName != null && (simpleName.contains("CORS") || simpleName.contains("Cors"));
-  }
-
   private static boolean hasSubsequentMiddlewareAddition(
     SubscriptionContext ctx,
     SymbolV2 receiverSymbol,
