@@ -1,0 +1,27 @@
+{
+  "title": "CORSMiddleware should be added last in the middleware chain",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "fastapi",
+    "cors",
+    "middleware",
+    "configuration"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8414",
+  "sqKey": "S8414",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "BLOCKER"
+    },
+    "attribute": "LOGICAL"
+  }
+}

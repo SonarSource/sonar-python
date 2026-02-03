@@ -177,6 +177,7 @@ public class OpenSourceCheckList {
       ConstantValueDictComprehensionCheck.class,
       ControlFlowInTaskGroupCheck.class,
       CorsCheck.class,
+      CorsMiddlewareOrderingCheck.class,
       CsrfDisabledCheck.class,
       DataEncryptionCheck.class,
       DbNoPasswordCheck.class,
