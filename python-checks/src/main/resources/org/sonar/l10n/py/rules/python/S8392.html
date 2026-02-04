@@ -87,7 +87,7 @@ if __name__ == '__main__':
 application is only accessible from your local machine.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="3" data-diff-type="noncompliant">
 import uvicorn
 from fastapi import FastAPI
 
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)  # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
+<pre data-diff-id="3" data-diff-type="compliant">
 import uvicorn
 from fastapi import FastAPI
 
