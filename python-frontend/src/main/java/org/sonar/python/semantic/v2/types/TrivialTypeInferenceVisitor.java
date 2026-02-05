@@ -865,32 +865,30 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       return;
     }
 
-    var bindingUsages = new ArrayList<UsageV2>();
-    for (var usage : symbolV2.usages()) {
-      if (usage.kind().equals(UsageV2.Kind.GLOBAL_DECLARATION)) {
-        // Don't infer type for global variables
-        return;
-      }
-      if (usage.isBindingUsage()) {
-        bindingUsages.add(usage);
-      }
-      if (bindingUsages.size() > 1) {
-        // no need to iterate over usages if there is more than one binding usage
-        return;
-      }
+    var bindingUsages = symbolV2.usages().stream()
+      .filter(UsageV2::isBindingUsage)
+      .toList();
+
+    boolean multipleBindingUsages = bindingUsages.size() > 1;
+    boolean onlyImportUsages = bindingUsages.stream().allMatch(usage -> UsageV2.Kind.IMPORT.equals(usage.kind()));
+    boolean hasGlobalStatementUsage = symbolV2.usages().stream().anyMatch(usage -> UsageV2.Kind.GLOBAL_DECLARATION.equals(usage.kind()));
+
+    if (hasGlobalStatementUsage || (multipleBindingUsages && !onlyImportUsages)) {
+      return;
     }
 
-    bindingUsages.stream()
-      .findFirst()
-      .filter(UsageV2::isBindingUsage)
+    var types = bindingUsages.stream()
       .map(UsageV2::tree)
-      .filter(Expression.class::isInstance)
-      .map(Expression.class::cast)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(Expression.class))
       .map(Expression::typeV2)
       // TODO: classes (SONARPY-1829) and functions should be propagated like other types
       .filter(t -> shouldTypeBeEagerlyPropagated(t, name))
-      .ifPresent(type -> setTypeToName(name, type));
+      .distinct()
+      .toList();
 
+    if (types.size() == 1) {
+      setTypeToName(name, types.get(0));
+    }
   }
 
   private boolean shouldTypeBeEagerlyPropagated(PythonType t, Name name) {

@@ -1362,6 +1362,20 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void global_variable_not_eagerly_propagated() {
+    FileInput fileInput = inferTypes("""
+      a = object()
+      def foo():
+        global a
+
+        a
+      """);
+    FunctionDef foo = PythonTestUtils.getFirstDescendant(fileInput, FunctionDef.class::isInstance);
+    Name aName = PythonTestUtils.getLastDescendant(foo.body(), Name.class::isInstance);
+    assertThat(aName.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
   void nonlocal_variable_in_nested_function() {
     FileInput fileInput = inferTypes("""
       def outer():
@@ -3343,6 +3357,76 @@ public class TypeInferenceV2Test {
       httpx.Client()
       """);
     assertThat(statement.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void duplicate_imports_in_from_import() {
+    var requestExpr = lastExpression("""
+      from flask import request, request
+      def test():
+        request
+      """);
+
+    PythonType requestType = PROJECT_LEVEL_TYPE_TABLE.getType("flask.request");
+    assertThat(requestType).isNotEqualTo(PythonType.UNKNOWN);
+
+    assertThat(requestExpr.typeV2()).isEqualTo(requestType);
+  }
+
+  static Stream<Arguments> duplicateImportsNotUnknownSource() {
+    return Stream.of(
+      Arguments.argumentSet("Duplicate from-import",
+          """
+        from flask import request
+        from flask import request
+        def test():
+          request
+        """, PROJECT_LEVEL_TYPE_TABLE.getType("flask.request")),
+      Arguments.argumentSet("Duplicate import-statement", """
+        import flask
+        import flask
+        def test():
+          flask
+        """, PROJECT_LEVEL_TYPE_TABLE.getType("flask")));
+  }
+
+  @ParameterizedTest()
+  @MethodSource("duplicateImportsNotUnknownSource")
+  void duplicate_imports_not_unknown(String code, PythonType expectedType) {
+    assertThat(expectedType).isNotEqualTo(PythonType.UNKNOWN);
+    assertThat(lastExpression(code).typeV2()).isEqualTo(expectedType);
+  }
+
+  static Stream<Arguments> duplicateImportsUnknownSource() {
+    return Stream.of(
+      Arguments.argumentSet("Duplicate from-import with different types",
+        """
+        if PY3:
+            from io import StringIO
+        else:
+            from cStringIO import StringIO
+        def test():
+          StringIO
+        """),
+      Arguments.argumentSet("Duplicate from-import with additional unrelated binding",
+        """
+        from flask import request, request
+        request = 1
+        def test():
+          request
+        """),
+      Arguments.argumentSet("Duplicate import-statement with additional unrelated binding", """
+        import flask
+        flask = 1
+        def test():
+          flask
+        """));
+  }
+
+  @ParameterizedTest
+  @MethodSource("duplicateImportsUnknownSource")
+  void duplicate_imports_unknown(String code) {
+    assertThat(lastExpression(code).typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test

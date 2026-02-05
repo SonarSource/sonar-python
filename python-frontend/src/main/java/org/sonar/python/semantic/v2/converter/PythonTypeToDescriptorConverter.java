@@ -44,7 +44,6 @@ import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 
 public class PythonTypeToDescriptorConverter {
-
   public Descriptor convert(String moduleFqn, SymbolV2 symbol, Set<PythonType> types) {
     var candidates = types.stream()
       .map(type -> convert(moduleFqn, moduleFqn, symbol.name(), type, symbol.usages()))
@@ -227,7 +226,7 @@ public class PythonTypeToDescriptorConverter {
   private static TypeAnnotationDescriptor createTypeAnnotationDescriptor(PythonType type, boolean isSelf) {
     if (type instanceof SelfType selfType) {
       return createTypeAnnotationDescriptor(selfType.innerType(), isSelf);
-    }else if (type instanceof ClassType classType) {
+    } else if (type instanceof ClassType classType) {
       return new TypeAnnotationDescriptor(classType.name(), TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), classType.fullyQualifiedName(), isSelf);
     } else if (type instanceof FunctionType functionType) {
       return new TypeAnnotationDescriptor(functionType.name(), TypeAnnotationDescriptor.TypeKind.CALLABLE, List.of(), functionType.fullyQualifiedName(), false);
