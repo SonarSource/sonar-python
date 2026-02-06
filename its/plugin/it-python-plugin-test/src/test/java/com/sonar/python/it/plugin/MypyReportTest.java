@@ -16,6 +16,7 @@
  */
 package com.sonar.python.it.plugin;
 
+import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.python.it.ConcurrentOrchestratorExtension;
 import com.sonar.python.it.TestsUtils;
 import java.io.File;
@@ -50,6 +51,34 @@ public class MypyReportTest {
     assertIssue(issues.get(2), "external_mypy:import", "Cannot find implementation or library stub for module named \"unknown\"");
     assertIssue(issues.get(3), "external_mypy:no-untyped-call", "Call to untyped function \"no_type_hints\" in typed context");
     assertIssue(issues.get(4), "external_mypy:unknown_mypy_rule", "Unused \"type: ignore\" comment");
+  }
+
+  @Test
+  void long_message_with_brackets_is_parsed_correctly() {
+    final String projectKey = "mypy_project_long_message";
+    ORCHESTRATOR.getServer().provisionProject(projectKey, projectKey);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(projectKey, "py", "no_rule");
+
+    BuildResult result = ORCHESTRATOR.executeBuild(
+      ORCHESTRATOR.createSonarScanner()
+        .setProjectDir(new File("projects/mypy_project"))
+        .setProjectKey(projectKey)
+        .setProjectName(projectKey)
+        .setProperty("sonar.python.mypy.reportPaths", "mypy_output_long_message.txt"));
+
+    assertThat(result.isSuccess()).isTrue();
+
+    List<Issues.Issue> importedIssues = issues(projectKey);
+    assertThat(importedIssues).hasSize(1);
+
+    Issues.Issue issue = importedIssues.get(0);
+    assertThat(issue.getRule()).isEqualTo("external_mypy:assignment");
+
+    // Message should be truncated to 500 characters + "..."
+    assertThat(issue.getMessage()).hasSize(503);
+    assertThat(issue.getMessage()).startsWith("Incompatible types in assignment");
+    assertThat(issue.getMessage()).contains("BaseClass");
+    assertThat(issue.getMessage()).endsWith("...");
   }
 
   private static void assertIssue(Issues.Issue issue, String rule, String message) {

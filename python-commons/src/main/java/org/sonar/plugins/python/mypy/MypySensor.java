@@ -42,6 +42,8 @@ public class MypySensor extends ExternalIssuesSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.mypy.reportPaths";
 
   private static final String FALLBACK_RULE_KEY = "unknown_mypy_rule";
+  private static final int MAX_RULE_KEY_LENGTH = 200;
+  private static final int MAX_MESSAGE_LENGTH = 500;
 
   // Pattern -> Location ': ' Severity ':' Message '['Code']'
   // Location -> File ':' StartLine (':' StartCol (':' EndLine ':' EndCol))
@@ -50,7 +52,7 @@ public class MypySensor extends ExternalIssuesSensor {
   private static final String END_LOCATION = "(?::(?<endLine>\\d+):(?<endCol>\\d+))?";
 
   private static final Pattern PATTERN = Pattern
-    .compile(String.format("^(?<file>[^:]+):%s%s: (?<severity>\\S+[^:]): (?<message>.*?)(?: \\[(?<code>.*)])?\\s*$", START_LOCATION, END_LOCATION));
+    .compile(String.format("^(?<file>[^:]+):%s%s: (?<severity>\\S+[^:]): (?<message>.*?)(?: \\[(?<code>[^\\]]+)])?\\s*$", START_LOCATION, END_LOCATION));
 
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException {
@@ -96,6 +98,20 @@ public class MypySensor extends ExternalIssuesSensor {
     if (errorCode == null) {
       // Sometimes mypy does not report an error code, however the API expects a non-null error code.
       errorCode = FALLBACK_RULE_KEY;
+    }
+
+    // Skip issues with rule keys that are too long (likely due to parsing errors)
+    if (errorCode.length() > MAX_RULE_KEY_LENGTH) {
+      LOG.warn("Skipping mypy issue with rule key longer than {} characters at {}:{}",
+        MAX_RULE_KEY_LENGTH, filePath, lineNumber);
+      return null;
+    }
+
+    // Mypy messages can be very long, which can cause problems in the UI.
+    if (message.length() > MAX_MESSAGE_LENGTH) {
+      LOG.debug("Truncating mypy message from {} to {} characters at {}:{}",
+        message.length(), MAX_MESSAGE_LENGTH, filePath, lineNumber);
+      message = message.substring(0, MAX_MESSAGE_LENGTH) + "...";
     }
 
     Integer columnNumber = Optional.ofNullable(m.group("startCol"))

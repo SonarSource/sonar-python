@@ -193,6 +193,34 @@ class MypySensorTest {
     assertThat(onlyOneLogElement(logTester.logs(Level.DEBUG))).isEqualTo("Cannot parse the line: this is not a mypy output");
   }
 
+  @Test
+  void very_long_rule_message() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting("mypy_output_long_message.txt");
+    assertThat(externalIssues).hasSize(1);
+
+    ExternalIssue issue = externalIssues.get(0);
+
+    assertThat(issue.ruleId()).isEqualTo("assignment");
+    assertThat(issue.ruleId().length()).isLessThan(20);
+
+    // Message should be truncated to 500 characters + "..."
+    String message = issue.primaryLocation().message();
+    assertThat(message)
+      .hasSize(503)
+      .startsWith("Incompatible types in assignment")
+      .contains("BaseClass")
+      .endsWith("...");
+  }
+
+  @Test
+  void rule_id_longer_than_limit_is_skipped() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting("mypy_output_long_rule_id.txt");
+    assertThat(externalIssues).isEmpty();
+
+    assertThat(onlyOneLogElement(logTester.logs(Level.WARN)))
+      .contains("Skipping mypy issue with rule key longer than 200 characters");
+  }
+
   private static void assertIssue(ExternalIssue issue, String key, String message, int startLine, int startColumn, int endLine, int endColumn) {
     IssueLocation location = issue.primaryLocation();
     assertThat(issue.type()).isEqualTo(RuleType.CODE_SMELL);
