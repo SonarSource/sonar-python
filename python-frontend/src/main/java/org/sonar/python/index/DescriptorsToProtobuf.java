@@ -81,9 +81,11 @@ public class DescriptorsToProtobuf {
       .setFullyQualifiedName(classDescriptor.fullyQualifiedName())
       .addAllSuperClasses(classDescriptor.superClasses())
       .setMembers(toProtobufDescriptorList(classDescriptor.members()))
+      .setAttributes(toProtobufDescriptorList(classDescriptor.attributes()))
       .setHasDecorators(classDescriptor.hasDecorators())
       .setHasSuperClassWithoutDescriptor(classDescriptor.hasSuperClassWithoutDescriptor())
       .setHasMetaClass(classDescriptor.hasMetaClass())
+      .setMetaClasses(toProtobufDescriptorList(classDescriptor.metaClasses()))
       .setSupportsGenerics(classDescriptor.supportsGenerics());
     LocationInFile definitionLocation = classDescriptor.definitionLocation();
     if (definitionLocation != null) {
@@ -222,16 +224,20 @@ public class DescriptorsToProtobuf {
     LocationInFile definitionLocation = classDescriptorProto.hasDefinitionLocation() ? fromProtobuf(classDescriptorProto.getDefinitionLocation()) : null;
     String fullyQualifiedName = classDescriptorProto.getFullyQualifiedName();
     Set<Descriptor> members = fromProtobufDescriptorList(classDescriptorProto.getMembers());
+    List<Descriptor> attributes = fromProtobufDescriptorListAsList(classDescriptorProto.getAttributes());
+    List<Descriptor> metaClasses = fromProtobufDescriptorListAsList(classDescriptorProto.getMetaClasses());
     return new ClassDescriptor.ClassDescriptorBuilder()
       .withName(classDescriptorProto.getName())
       .withFullyQualifiedName(fullyQualifiedName)
       .withSuperClasses(new ArrayList<>(classDescriptorProto.getSuperClassesList()))
       .withMembers(members)
+      .withAttributes(attributes)
       .withHasDecorators(classDescriptorProto.getHasDecorators())
       .withDefinitionLocation(definitionLocation)
       .withHasSuperClassWithoutDescriptor(classDescriptorProto.getHasSuperClassWithoutDescriptor())
       .withHasMetaClass(classDescriptorProto.getHasMetaClass())
       .withMetaclassFQN(metaclassFQN)
+      .withMetaClasses(metaClasses)
       .withSupportsGenerics(classDescriptorProto.getSupportsGenerics())
       .build();
   }

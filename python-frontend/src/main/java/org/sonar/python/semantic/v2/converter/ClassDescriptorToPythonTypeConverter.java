@@ -16,6 +16,7 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.List;
 import org.sonar.plugins.python.api.types.v2.Member;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
@@ -29,6 +30,7 @@ public class ClassDescriptorToPythonTypeConverter implements DescriptorToPythonT
   private static PythonType convert(ConversionContext ctx, ClassDescriptor from) {
     var typeBuilder = new ClassTypeBuilder(from.name(), from.fullyQualifiedName())
       .withIsGeneric(from.supportsGenerics())
+      .withHasDecorators(from.hasDecorators())
       .withDefinitionLocation(from.definitionLocation());
 
     from.superClasses().stream()
@@ -40,6 +42,16 @@ public class ClassDescriptorToPythonTypeConverter implements DescriptorToPythonT
       })
       .map(TypeWrapper::of)
       .forEach(typeBuilder::addSuperClass);
+
+    List<PythonType> attributes = from.attributes().stream()
+      .map(ctx::convert)
+      .toList();
+    typeBuilder.withAttributes(attributes);
+
+    List<PythonType> metaClasses = from.metaClasses().stream()
+      .map(ctx::convert)
+      .toList();
+    typeBuilder.withMetaClasses(metaClasses);
 
     var classType = typeBuilder.build();
     ctx.pushParent(classType);

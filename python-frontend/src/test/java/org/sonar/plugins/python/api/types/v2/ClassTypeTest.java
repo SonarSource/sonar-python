@@ -42,10 +42,12 @@ import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
+import org.sonar.python.semantic.v2.TestProject;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.type;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
@@ -805,6 +807,36 @@ public class ClassTypeTest {
   void is_compatible_with_unknown_type() {
     ClassType classA = classType("class A: ...");
     assertThat(classA.isCompatibleWith(PythonType.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
+  }
+
+  @Test
+  void is_compatible_with_ignore_has_decorators_for_stdlib_types() {
+    var collectionType = PROJECT_LEVEL_TYPE_TABLE.getType("typing.Collection");
+    var objectType = PROJECT_LEVEL_TYPE_TABLE.getType("object");
+
+    var collectionClassType = assertThat(collectionType).asInstanceOf(type(ClassType.class)).actual();
+    assertThat(objectType).isNotEqualTo(PythonType.UNKNOWN);
+
+    assertThat(collectionClassType.hasDecorators()).isTrue();
+    assertThat(collectionClassType.isCompatibleWith(objectType)).isEqualTo(TriBool.TRUE);
+  }
+
+  @Test
+  void is_compatible_with_ignore_has_decorators_for_user_defined_types() {
+    var project = new TestProject();
+    project.addModule("my_module.py", """
+      @decorator
+      class Test: ...
+      """);
+
+    var myClassType = project.projectLevelTypeTable().getType("my_module.Test");
+    var myClassClassType = assertThat(myClassType).asInstanceOf(type(ClassType.class)).actual();
+
+    var objectType = PROJECT_LEVEL_TYPE_TABLE.getType("object");
+    assertThat(objectType).isNotEqualTo(PythonType.UNKNOWN);
+
+    assertThat(myClassClassType.hasDecorators()).isTrue();
+    assertThat(myClassClassType.isCompatibleWith(objectType)).isEqualTo(TriBool.UNKNOWN);
   }
 
   @Test

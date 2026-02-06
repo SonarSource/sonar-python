@@ -84,4 +84,14 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   public List<PythonType> metaClasses() {
     return metaClasses;
   }
+
+  public ClassTypeBuilder withAttributes(List<PythonType> attributes) {
+    this.attributes.addAll(attributes);
+    return this;
+  }
+
+  public ClassTypeBuilder withMetaClasses(List<PythonType> metaClasses) {
+    this.metaClasses.addAll(metaClasses);
+    return this;
+  }
 }

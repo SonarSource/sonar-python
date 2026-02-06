@@ -189,6 +189,14 @@ public class PythonTypeToDescriptorConverter {
       }
     }
 
+    List<Descriptor> attributeDescriptors = type.attributes().stream()
+      .map(attr -> convertTypeParameter(moduleFqn, attr))
+      .toList();
+
+    List<Descriptor> metaClassDescriptors = type.metaClasses().stream()
+      .map(meta -> convertTypeParameter(moduleFqn, meta))
+      .toList();
+
     var metaclassFQN = type.metaClasses()
       .stream()
       .map(metaClass -> FullyQualifiedNameHelper.getFullyQualifiedName(metaClass).orElse(null))
@@ -201,11 +209,13 @@ public class PythonTypeToDescriptorConverter {
       .withFullyQualifiedName(symbolFqn)
       .withSuperClasses(superClasses)
       .withMembers(memberDescriptors)
+      .withAttributes(attributeDescriptors)
       .withHasDecorators(type.hasDecorators())
       .withDefinitionLocation(type.definitionLocation().orElse(null))
       .withHasSuperClassWithoutDescriptor(hasSuperClassWithoutDescriptor)
       .withHasMetaClass(type.hasMetaClass())
       .withMetaclassFQN(metaclassFQN)
+      .withMetaClasses(metaClassDescriptors)
       .withSupportsGenerics(type.isGeneric())
       .withIsSelf(isSelf)
       .build();

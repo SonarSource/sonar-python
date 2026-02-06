@@ -16,6 +16,7 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -24,9 +25,12 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 import org.sonar.python.index.ClassDescriptor;
+import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
+import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -81,5 +85,103 @@ class ClassDescriptorToPythonTypeConverterTest {
     ClassType classType = (ClassType) result;
     assertThat(classType.name()).isEqualTo("MyClass");
     assertThat(classType.fullyQualifiedName()).isEqualTo("mod.MyClass");
+  }
+
+  @Test
+  void classDescriptorWithHasDecoratorsRestoredToClassType() {
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyClass")
+      .withFullyQualifiedName("mod.MyClass")
+      .withHasDecorators(true)
+      .build();
+
+    var lazyTypesContext = new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    var ctx = new ConversionContext("mod", lazyTypesContext, (c, d) -> PythonType.UNKNOWN, TypeOrigin.STUB);
+    var converter = new ClassDescriptorToPythonTypeConverter();
+
+    PythonType result = converter.convert(ctx, classDescriptor);
+
+    assertThat(result).isInstanceOf(ClassType.class);
+    ClassType classType = (ClassType) result;
+    assertThat(classType.hasDecorators()).isTrue();
+  }
+
+  @Test
+  void classDescriptorWithoutDecoratorsRestoredToClassType() {
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyClass")
+      .withFullyQualifiedName("mod.MyClass")
+      .withHasDecorators(false)
+      .build();
+
+    var lazyTypesContext = new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    var ctx = new ConversionContext("mod", lazyTypesContext, (c, d) -> PythonType.UNKNOWN, TypeOrigin.STUB);
+    var converter = new ClassDescriptorToPythonTypeConverter();
+
+    PythonType result = converter.convert(ctx, classDescriptor);
+
+    assertThat(result).isInstanceOf(ClassType.class);
+    ClassType classType = (ClassType) result;
+    assertThat(classType.hasDecorators()).isFalse();
+  }
+
+  @Test
+  void classDescriptorWithAttributesRestoredToClassType() {
+    VariableDescriptor attrDescriptor = new VariableDescriptor("int", "builtins.int", "builtins.int");
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyGeneric")
+      .withFullyQualifiedName("mod.MyGeneric")
+      .withAttributes(java.util.List.of(attrDescriptor))
+      .build();
+
+    var lazyTypesContext = new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    var ctx = new ConversionContext("mod", lazyTypesContext, (c, d) -> PythonType.UNKNOWN, TypeOrigin.STUB);
+    var converter = new ClassDescriptorToPythonTypeConverter();
+
+    PythonType result = converter.convert(ctx, classDescriptor);
+
+    assertThat(result).isInstanceOf(ClassType.class);
+    ClassType classType = (ClassType) result;
+    assertThat(classType.attributes()).hasSize(1);
+  }
+
+  @Test
+  void classDescriptorWithMetaClassesRestoredToClassType() {
+    ClassDescriptor metaclassDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("ABCMeta")
+      .withFullyQualifiedName("abc.ABCMeta")
+      .build();
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyClass")
+      .withFullyQualifiedName("mod.MyClass")
+      .withHasMetaClass(true)
+      .withMetaClasses(java.util.List.of(metaclassDescriptor))
+      .build();
+
+    var lazyTypesContext = new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    var ctx = new ConversionContext("mod", lazyTypesContext, (c, d) -> PythonType.UNKNOWN, TypeOrigin.STUB);
+    var converter = new ClassDescriptorToPythonTypeConverter();
+
+    PythonType result = converter.convert(ctx, classDescriptor);
+
+    assertThat(result).isInstanceOf(ClassType.class);
+    ClassType classType = (ClassType) result;
+    assertThat(classType.metaClasses()).hasSize(1);
+    assertThat(classType.hasMetaClass()).isTrue();
+  }
+
+  @Test
+  void testDeserializingStrFromDescriptorToPythonType() {
+    TypeShedDescriptorsProvider descriptorsProvider = new TypeShedDescriptorsProvider(Set.of("mod"));
+    Descriptor strDescriptor = descriptorsProvider.builtinDescriptors().get("str");
+
+    LazyTypesContext lazyTypesContext = new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    AnyDescriptorToPythonTypeConverter converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
+
+    PythonType pythonType = converter.convert("mod", strDescriptor, TypeOrigin.STUB);
+
+    assertThat(pythonType).isInstanceOf(ClassType.class);
+    ClassType classType = (ClassType) pythonType;
+    assertThat(classType.name()).isEqualTo("str");
   }
 }

@@ -52,6 +52,8 @@ import org.sonar.python.types.v2.LazyUnionType;
 import org.sonar.python.types.v2.SpecialFormType;
 import org.sonar.python.types.v2.TypesTestUtils;
 
+import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -665,5 +667,172 @@ class PythonTypeToDescriptorConverterTest {
       .satisfies(member -> assertThat(member.name()).isEqualTo("value"), Index.atIndex(0))
       .satisfies(member -> assertThat(member.name()).isEqualTo("value2"), Index.atIndex(1))
       .hasSize(2);
+  }
+
+  @Test
+  void testConvertClassTypeWithAttributes() {
+    ClassType intType = new ClassType("int", "builtins.int", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ObjectType intAttr = ObjectType.fromType(intType);
+    ClassType classWithAttrs = new ClassType("MyGeneric", "mod.MyGeneric",
+      Set.of(), List.of(intAttr), List.of(), List.of(), false, true, location);
+
+    Descriptor descriptor = converter.convert("mod", new SymbolV2Impl("MyGeneric"), Set.of(classWithAttrs));
+
+    assertThat(descriptor).isInstanceOf(ClassDescriptor.class);
+    ClassDescriptor classDescriptor = (ClassDescriptor) descriptor;
+    assertThat(classDescriptor.attributes()).hasSize(1);
+    assertThat(classDescriptor.attributes().get(0)).isInstanceOf(VariableDescriptor.class);
+    assertThat(classDescriptor.attributes().get(0).fullyQualifiedName()).isEqualTo("builtins.int");
+  }
+
+  @Test
+  void testConvertClassTypeWithMultipleMetaClasses() {
+    ClassType metaclass1 = new ClassType("ABCMeta", "abc.ABCMeta", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ClassType metaclass2 = new ClassType("EnumMeta", "enum.EnumMeta", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ClassType classWithMetaClasses = new ClassType("MyClass", "mod.MyClass",
+      Set.of(), List.of(), List.of(), List.of(metaclass1, metaclass2), false, false, location);
+
+    Descriptor descriptor = converter.convert("mod", new SymbolV2Impl("MyClass"), Set.of(classWithMetaClasses));
+
+    assertThat(descriptor).isInstanceOf(ClassDescriptor.class);
+    ClassDescriptor classDescriptor = (ClassDescriptor) descriptor;
+    assertThat(classDescriptor.metaClasses()).hasSize(2);
+    assertThat(classDescriptor.hasMetaClass()).isTrue();
+    assertThat(classDescriptor.metaClasses().stream().map(Descriptor::fullyQualifiedName))
+      .containsExactlyInAnyOrder("abc.ABCMeta", "enum.EnumMeta");
+  }
+
+  // Round-trip tests: ClassType -> ClassDescriptor -> protobuf -> ClassDescriptor
+
+  @Test
+  void roundTripClassTypeWithAttributes() {
+    ClassType intType = new ClassType("int", "builtins.int", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ObjectType intAttr = ObjectType.fromType(intType);
+    ClassType original = new ClassType("MyGeneric", "mod.MyGeneric",
+      Set.of(), List.of(intAttr), List.of(), List.of(), false, true, location);
+
+    ClassDescriptor classDescriptor = (ClassDescriptor) converter.convert("mod", new SymbolV2Impl("MyGeneric"), Set.of(original));
+
+    assertThat(classDescriptor.attributes()).hasSize(1);
+    assertThat(classDescriptor.attributes().get(0).fullyQualifiedName()).isEqualTo("builtins.int");
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void roundTripClassTypeWithMetaClasses() {
+    ClassType metaclass = new ClassType("ABCMeta", "abc.ABCMeta", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ClassType original = new ClassType("MyClass", "mod.MyClass",
+      Set.of(), List.of(), List.of(), List.of(metaclass), false, false, location);
+
+    ClassDescriptor classDescriptor = (ClassDescriptor) converter.convert("mod", new SymbolV2Impl("MyClass"), Set.of(original));
+
+    assertThat(classDescriptor.metaClasses()).hasSize(1);
+    assertThat(classDescriptor.hasMetaClass()).isTrue();
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void roundTripClassTypeWithHasDecorators() {
+    ClassType original = new ClassType("MyClass", "mod.MyClass",
+      Set.of(), List.of(), List.of(), List.of(), true, false, location);
+
+    ClassDescriptor classDescriptor = (ClassDescriptor) converter.convert("mod", new SymbolV2Impl("MyClass"), Set.of(original));
+
+    assertThat(classDescriptor.hasDecorators()).isTrue();
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void roundTripClassTypeWithUnresolvedHierarchy() {
+    ClassType parent = new ClassType("Base", "mod.Base", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ClassType original = new ClassType("MyClass", "mod.MyClass",
+      Set.of(), List.of(), List.of(TypeWrapper.of(parent), TypeWrapper.of(PythonType.UNKNOWN)),
+      List.of(), false, false, location);
+
+    ClassDescriptor classDescriptor = (ClassDescriptor) converter.convert("mod", new SymbolV2Impl("MyClass"), Set.of(original));
+
+    assertThat(classDescriptor.hasSuperClassWithoutDescriptor()).isTrue();
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void roundTripClassTypePreservesAllFields() {
+    ClassType intType = new ClassType("int", "builtins.int", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ClassType metaclass = new ClassType("ABCMeta", "abc.ABCMeta", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ClassType parent = new ClassType("Base", "mod.Base", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ObjectType intAttr = ObjectType.fromType(intType);
+    Member member = new Member("value", ObjectType.fromType(intType));
+
+    ClassType original = new ClassType(
+      "MyClass", "mod.MyClass",
+      Set.of(member),
+      List.of(intAttr),
+      List.of(TypeWrapper.of(parent)),
+      List.of(metaclass),
+      true,
+      true,
+      location
+    );
+
+    ClassDescriptor classDescriptor = (ClassDescriptor) converter.convert("mod", new SymbolV2Impl("MyClass"), Set.of(original));
+
+    assertThat(classDescriptor.name()).isEqualTo("MyClass");
+    assertThat(classDescriptor.fullyQualifiedName()).isEqualTo("mod.MyClass");
+    assertThat(classDescriptor.members()).hasSize(1);
+    assertThat(classDescriptor.attributes()).hasSize(1);
+    assertThat(classDescriptor.superClasses()).hasSize(1);
+    assertThat(classDescriptor.metaClasses()).hasSize(1);
+    assertThat(classDescriptor.hasDecorators()).isTrue();
+    assertThat(classDescriptor.supportsGenerics()).isTrue();
+    assertThat(classDescriptor.hasMetaClass()).isTrue();
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void roundTripClassTypeToClassDescriptorToClassType() {
+    ClassType intType = new ClassType("int", "builtins.int", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ClassType metaclass = new ClassType("ABCMeta", "abc.ABCMeta", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ObjectType intAttr = ObjectType.fromType(intType);
+
+    ClassType original = new ClassType(
+      "MyClass", "mod.MyClass",
+      Set.of(),
+      List.of(intAttr),
+      List.of(),
+      List.of(metaclass),
+      true,
+      true,
+      location
+    );
+
+    // Step 1: ClassType -> ClassDescriptor
+    var symbol = new SymbolV2Impl("MyClass");
+    Descriptor descriptor = converter.convert("mod", symbol, Set.of(original));
+    assertThat(descriptor).isInstanceOf(ClassDescriptor.class);
+    ClassDescriptor classDescriptor = (ClassDescriptor) descriptor;
+
+    // Verify descriptor has all fields
+    assertThat(classDescriptor.attributes()).hasSize(1);
+    assertThat(classDescriptor.metaClasses()).hasSize(1);
+    assertThat(classDescriptor.hasDecorators()).isTrue();
+    assertThat(classDescriptor.supportsGenerics()).isTrue();
+
+    // Step 2: ClassDescriptor -> ClassType via converter
+    var lazyTypesContext = new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    var ctx = new ConversionContext("mod", lazyTypesContext, (c, d) -> PythonType.UNKNOWN, TypeOrigin.STUB);
+    var classConverter = new ClassDescriptorToPythonTypeConverter();
+    PythonType result = classConverter.convert(ctx, classDescriptor);
+
+    assertThat(result).isInstanceOf(ClassType.class);
+    ClassType restored = (ClassType) result;
+
+    // Verify restored ClassType has all fields
+    assertThat(restored.name()).isEqualTo("MyClass");
+    assertThat(restored.fullyQualifiedName()).isEqualTo("mod.MyClass");
+    assertThat(restored.attributes()).hasSize(1);
+    assertThat(restored.metaClasses()).hasSize(1);
+    assertThat(restored.hasDecorators()).isTrue();
+    assertThat(restored.isGeneric()).isTrue();
+    assertThat(restored.hasMetaClass()).isTrue();
   }
 }

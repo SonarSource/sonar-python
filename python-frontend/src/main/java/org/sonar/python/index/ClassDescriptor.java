@@ -16,8 +16,10 @@
  */
 package org.sonar.python.index;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -30,27 +32,31 @@ public class ClassDescriptor implements Descriptor {
   private final String fullyQualifiedName;
   private final Collection<String> superClasses;
   private final Set<Descriptor> members;
+  private final List<Descriptor> attributes;
   private final boolean hasDecorators;
   private final LocationInFile definitionLocation;
   private final boolean hasSuperClassWithoutDescriptor;
   private final boolean hasMetaClass;
   private final String metaclassFQN;
+  private final List<Descriptor> metaClasses;
   private final boolean supportsGenerics;
   private final boolean isSelf;
 
   private ClassDescriptor(String name, String fullyQualifiedName, Collection<String> superClasses, Set<Descriptor> members,
-    boolean hasDecorators, @Nullable LocationInFile definitionLocation, boolean hasSuperClassWithoutDescriptor, boolean hasMetaClass,
-      @Nullable String metaclassFQN, boolean supportsGenerics, boolean isSelf) {
+    List<Descriptor> attributes, boolean hasDecorators, @Nullable LocationInFile definitionLocation, boolean hasSuperClassWithoutDescriptor,
+    boolean hasMetaClass, @Nullable String metaclassFQN, List<Descriptor> metaClasses, boolean supportsGenerics, boolean isSelf) {
 
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.superClasses = superClasses;
     this.members = members;
+    this.attributes = attributes;
     this.hasDecorators = hasDecorators;
     this.definitionLocation = definitionLocation;
     this.hasSuperClassWithoutDescriptor = hasSuperClassWithoutDescriptor;
     this.hasMetaClass = hasMetaClass;
     this.metaclassFQN = metaclassFQN;
+    this.metaClasses = metaClasses;
     this.supportsGenerics = supportsGenerics;
     this.isSelf = isSelf;
   }
@@ -79,6 +85,10 @@ public class ClassDescriptor implements Descriptor {
     return members;
   }
 
+  public List<Descriptor> attributes() {
+    return attributes;
+  }
+
   public boolean hasDecorators() {
     return hasDecorators;
   }
@@ -87,6 +97,7 @@ public class ClassDescriptor implements Descriptor {
     return hasSuperClassWithoutDescriptor;
   }
 
+  @CheckForNull
   public LocationInFile definitionLocation() {
     return definitionLocation;
   }
@@ -98,6 +109,10 @@ public class ClassDescriptor implements Descriptor {
   @CheckForNull
   public String metaclassFQN() {
     return metaclassFQN;
+  }
+
+  public List<Descriptor> metaClasses() {
+    return metaClasses;
   }
 
   public boolean supportsGenerics() {
@@ -114,11 +129,13 @@ public class ClassDescriptor implements Descriptor {
     private String fullyQualifiedName;
     private Collection<String> superClasses = new HashSet<>();
     private Set<Descriptor> members = new HashSet<>();
+    private List<Descriptor> attributes = new ArrayList<>();
     private boolean hasDecorators = false;
     private LocationInFile definitionLocation = null;
     private boolean hasSuperClassWithoutDescriptor = false;
     private boolean hasMetaClass = false;
     private String metaclassFQN = null;
+    private List<Descriptor> metaClasses = new ArrayList<>();
     private boolean supportsGenerics = false;
     private boolean isSelf = false;
 
@@ -139,6 +156,11 @@ public class ClassDescriptor implements Descriptor {
 
     public ClassDescriptorBuilder withMembers(Set<Descriptor> members) {
       this.members = members;
+      return this;
+    }
+
+    public ClassDescriptorBuilder withAttributes(List<Descriptor> attributes) {
+      this.attributes = attributes;
       return this;
     }
 
@@ -167,6 +189,11 @@ public class ClassDescriptor implements Descriptor {
       return this;
     }
 
+    public ClassDescriptorBuilder withMetaClasses(List<Descriptor> metaClasses) {
+      this.metaClasses = metaClasses;
+      return this;
+    }
+
     public ClassDescriptorBuilder withSupportsGenerics(boolean supportsGenerics) {
       this.supportsGenerics = supportsGenerics;
       return this;
@@ -178,8 +205,8 @@ public class ClassDescriptor implements Descriptor {
     }
 
     public ClassDescriptor build() {
-      return new ClassDescriptor(name, fullyQualifiedName, superClasses, members, hasDecorators, definitionLocation,
-        hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, supportsGenerics, isSelf);
+      return new ClassDescriptor(name, fullyQualifiedName, superClasses, members, attributes, hasDecorators, definitionLocation,
+        hasSuperClassWithoutDescriptor, hasMetaClass, metaclassFQN, metaClasses, supportsGenerics, isSelf);
     }
   }
 }

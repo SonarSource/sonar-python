@@ -44,6 +44,8 @@ message ClassDescriptor {
     optional string metaClassFQN = 12;
     bool supportsGenerics = 13;
     DescriptorList members = 14;
+    DescriptorList attributes = 15;
+    DescriptorList metaClasses = 16;
 }
 
 message ParameterDescriptor {

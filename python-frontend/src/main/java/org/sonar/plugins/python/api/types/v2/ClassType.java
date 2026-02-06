@@ -102,7 +102,7 @@ public final class ClassType implements PythonType {
       return this.isCompatibleWith(functionType.returnType());
     }
     if (another instanceof ClassType classType) {
-      if (this.hasDecorators || classType.hasDecorators) {
+      if ((this.hasDecorators() && this.isUserDefinedType()) || (classType.hasDecorators() && classType.isUserDefinedType())) {
         return TriBool.UNKNOWN;
       }
       var isASubClass = this.isASubClassFrom(classType);
@@ -211,7 +211,7 @@ public final class ClassType implements PythonType {
   }
 
   public TriBool instancesHaveMember(String memberName) {
-    if (hasUnresolvedHierarchy() || hasMetaClass() || hasDecorators()) {
+    if (hasUnresolvedHierarchy() || hasMetaClass() || (hasDecorators() && isUserDefinedType())) {
       return TriBool.UNKNOWN;
     }
     if ("NamedTuple".equals(this.name)) {
@@ -228,6 +228,11 @@ public final class ClassType implements PythonType {
   @Override
   public Optional<LocationInFile> definitionLocation() {
     return Optional.ofNullable(this.locationInFile);
+  }
+
+  private boolean isUserDefinedType() {
+    // assumes if definedLocation is not present that the type is loaded from typeshed
+    return definitionLocation().isPresent();
   }
 
   @Override

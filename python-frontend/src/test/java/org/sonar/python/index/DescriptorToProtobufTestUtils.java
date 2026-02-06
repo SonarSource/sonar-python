@@ -22,9 +22,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
-class DescriptorToProtobufTestUtils {
+public class DescriptorToProtobufTestUtils {
 
-  static void assertDescriptorToProtobuf(Descriptor descriptor) {
+  public static void assertDescriptorToProtobuf(Descriptor descriptor) {
     // This asserts that a descriptor will be retrieved unaltered after being serialized and deserialized as a protobuf module descriptor.
     assertThat(fromProtobuf(toProtobufModuleDescriptor(Set.of(descriptor)))).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(Set.of(descriptor));
   }

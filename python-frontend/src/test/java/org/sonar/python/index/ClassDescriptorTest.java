@@ -142,6 +142,91 @@ class ClassDescriptorTest {
     assertThat(classDescriptor.isSelf()).isTrue();
   }
 
+  @Test
+  void classDescriptorWithAttributes() {
+    VariableDescriptor attrDescriptor = new VariableDescriptor("int", "builtins.int", "builtins.int");
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyGeneric")
+      .withFullyQualifiedName("mod.MyGeneric")
+      .withAttributes(java.util.List.of(attrDescriptor))
+      .build();
+    assertThat(classDescriptor.attributes()).hasSize(1);
+    assertThat(classDescriptor.attributes().get(0).fullyQualifiedName()).isEqualTo("builtins.int");
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void classDescriptorWithNestedAttributes() {
+    VariableDescriptor nestedAttr = new VariableDescriptor("str", "builtins.str", "builtins.str");
+    VariableDescriptor attrDescriptor = new VariableDescriptor("list", "builtins.list", "builtins.list", false, java.util.List.of(nestedAttr), java.util.List.of());
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyGeneric")
+      .withFullyQualifiedName("mod.MyGeneric")
+      .withAttributes(java.util.List.of(attrDescriptor))
+      .build();
+    assertThat(classDescriptor.attributes()).hasSize(1);
+    VariableDescriptor firstAttr = (VariableDescriptor) classDescriptor.attributes().get(0);
+    assertThat(firstAttr.attributes()).hasSize(1);
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void classDescriptorDefaultsToEmptyAttributes() {
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyClass")
+      .withFullyQualifiedName("mod.MyClass")
+      .build();
+    assertThat(classDescriptor.attributes()).isEmpty();
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void classDescriptorWithMetaClasses() {
+    ClassDescriptor metaclassDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("ABCMeta")
+      .withFullyQualifiedName("abc.ABCMeta")
+      .build();
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyClass")
+      .withFullyQualifiedName("mod.MyClass")
+      .withHasMetaClass(true)
+      .withMetaClasses(java.util.List.of(metaclassDescriptor))
+      .build();
+    assertThat(classDescriptor.metaClasses()).hasSize(1);
+    assertThat(classDescriptor.metaClasses().get(0).fullyQualifiedName()).isEqualTo("abc.ABCMeta");
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void classDescriptorWithMultipleMetaClasses() {
+    ClassDescriptor metaclass1 = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("ABCMeta")
+      .withFullyQualifiedName("abc.ABCMeta")
+      .build();
+    ClassDescriptor metaclass2 = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("EnumMeta")
+      .withFullyQualifiedName("enum.EnumMeta")
+      .build();
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyClass")
+      .withFullyQualifiedName("mod.MyClass")
+      .withHasMetaClass(true)
+      .withMetaClasses(java.util.List.of(metaclass1, metaclass2))
+      .build();
+    assertThat(classDescriptor.metaClasses()).hasSize(2);
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
+  void classDescriptorDefaultsToEmptyMetaClasses() {
+    ClassDescriptor classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
+      .withName("MyClass")
+      .withFullyQualifiedName("mod.MyClass")
+      .build();
+    assertThat(classDescriptor.metaClasses()).isEmpty();
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
   public static ClassDescriptor lastClassDescriptor(String... code) {
     return lastClassDescriptorWithName(null, code);
   }
