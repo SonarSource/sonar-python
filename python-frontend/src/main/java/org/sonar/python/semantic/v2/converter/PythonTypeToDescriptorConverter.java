@@ -85,13 +85,43 @@ public class PythonTypeToDescriptorConverter {
       return convert(parentFqn, symbolName, unresolvedImportType);
     }
     if (type instanceof ObjectType objectType && !moduleFqn.equals(parentFqn)) {
-      return convert(parentFqn, symbolName, objectType);
+      return convert(moduleFqn, parentFqn, symbolName, objectType);
     }
     return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), null);
   }
 
-  private static Descriptor convert(String parentFqn, String symbolName, ObjectType objectType) {
-    return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), FullyQualifiedNameHelper.getFullyQualifiedName(objectType.unwrappedType()).orElse(null));
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ObjectType objectType) {
+    String fqn = FullyQualifiedNameHelper.getFullyQualifiedName(objectType.unwrappedType()).orElse(null);
+    String symbolFqn = symbolFqn(parentFqn, symbolName);
+
+    List<Descriptor> attributeDescriptors = objectType.attributes().stream()
+      .map(attr -> convertTypeParameter(moduleFqn, attr))
+      .toList();
+
+    List<Descriptor> memberDescriptors = objectType.members().stream()
+      .map(m -> convert(moduleFqn, symbolFqn, m.name(), m.type(), List.of()))
+      .toList();
+
+    return new VariableDescriptor(symbolName, symbolFqn, fqn, false, attributeDescriptors, memberDescriptors);
+  }
+
+  private static Descriptor convertTypeParameter(String moduleFqn, PythonType type) {
+    String typeFqn = FullyQualifiedNameHelper.getFullyQualifiedName(type.unwrappedType()).orElse(null);
+    String typeName = type.unwrappedType().displayName().orElse("type_param");
+
+    if (type instanceof ObjectType objectType) {
+      List<Descriptor> nestedAttributes = objectType.attributes().stream()
+        .map(attr -> convertTypeParameter(moduleFqn, attr))
+        .toList();
+
+      List<Descriptor> nestedMembers = objectType.members().stream()
+        .map(m -> convert(moduleFqn, typeFqn != null ? typeFqn : moduleFqn, m.name(), m.type(), List.of()))
+        .toList();
+
+      return new VariableDescriptor(typeName, typeFqn, typeFqn, false, nestedAttributes, nestedMembers);
+    }
+
+    return new VariableDescriptor(typeName, typeFqn, typeFqn);
   }
 
   private static Descriptor convert(FunctionType type) {
@@ -231,7 +261,7 @@ public class PythonTypeToDescriptorConverter {
     } else if (type instanceof FunctionType functionType) {
       return new TypeAnnotationDescriptor(functionType.name(), TypeAnnotationDescriptor.TypeKind.CALLABLE, List.of(), functionType.fullyQualifiedName(), false);
     } else if (type instanceof UnknownType.UnresolvedImportType importType) {
-      return new TypeAnnotationDescriptor(importType.importPath(), TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), 
+      return new TypeAnnotationDescriptor(importType.importPath(), TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(),
           FullyQualifiedNameHelper.getFullyQualifiedName(importType).orElse(null), false);
     }
     return null;

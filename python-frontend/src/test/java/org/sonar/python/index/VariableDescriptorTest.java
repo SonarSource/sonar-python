@@ -17,6 +17,7 @@
 package org.sonar.python.index;
 
 
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
@@ -64,5 +65,68 @@ class VariableDescriptorTest {
     assertThat(first.name()).isEqualTo(second.name());
     assertThat(first.fullyQualifiedName()).isEqualTo(second.fullyQualifiedName());
     assertThat(first.annotatedType()).isEqualTo(second.annotatedType());
+  }
+
+  @Test
+  void variableDescriptorWithAttributes() {
+    VariableDescriptor intDescriptor = new VariableDescriptor("int", "builtins.int", "int");
+    VariableDescriptor variableDescriptor = new VariableDescriptor(
+      "x", "mod.x", "list",
+      false, List.of(intDescriptor), List.of()
+    );
+    assertThat(variableDescriptor.attributes()).containsExactly(intDescriptor);
+    assertThat(variableDescriptor.members()).isEmpty();
+    assertDescriptorToProtobuf(variableDescriptor);
+  }
+
+  @Test
+  void variableDescriptorWithMembers() {
+    VariableDescriptor memberDescriptor = new VariableDescriptor("value", "mod.x.value", "str");
+    VariableDescriptor variableDescriptor = new VariableDescriptor(
+      "x", "mod.x", "SomeClass",
+      false, List.of(), List.of(memberDescriptor)
+    );
+    assertThat(variableDescriptor.attributes()).isEmpty();
+    assertThat(variableDescriptor.members()).containsExactly(memberDescriptor);
+    assertDescriptorToProtobuf(variableDescriptor);
+  }
+
+  @Test
+  void variableDescriptorWithNestedAttributes() {
+    VariableDescriptor intDesc = new VariableDescriptor("int", "builtins.int", "int");
+    VariableDescriptor strDesc = new VariableDescriptor("str", "builtins.str", "str");
+    VariableDescriptor tupleDesc = new VariableDescriptor(
+      "tuple", "builtins.tuple", "tuple",
+      false, List.of(intDesc, strDesc), List.of()
+    );
+    VariableDescriptor listDesc = new VariableDescriptor(
+      "x", "mod.x", "list",
+      false, List.of(tupleDesc), List.of()
+    );
+    assertThat(listDesc.attributes()).hasSize(1);
+    assertThat(listDesc.attributes().get(0)).isInstanceOf(VariableDescriptor.class);
+    VariableDescriptor nestedTuple = (VariableDescriptor) listDesc.attributes().get(0);
+    assertThat(nestedTuple.attributes()).hasSize(2);
+    assertDescriptorToProtobuf(listDesc);
+  }
+
+  @Test
+  void variableDescriptorWithAttributesAndMembers() {
+    VariableDescriptor intDescriptor = new VariableDescriptor("int", "builtins.int", "int");
+    VariableDescriptor memberDescriptor = new VariableDescriptor("value", "mod.x.value", "str");
+    VariableDescriptor variableDescriptor = new VariableDescriptor(
+      "x", "mod.x", "list",
+      false, List.of(intDescriptor), List.of(memberDescriptor)
+    );
+    assertThat(variableDescriptor.attributes()).containsExactly(intDescriptor);
+    assertThat(variableDescriptor.members()).containsExactly(memberDescriptor);
+    assertDescriptorToProtobuf(variableDescriptor);
+  }
+
+  @Test
+  void variableDescriptorDefaultsToEmptyLists() {
+    VariableDescriptor variableDescriptor = new VariableDescriptor("x", "mod.x", "int");
+    assertThat(variableDescriptor.attributes()).isEmpty();
+    assertThat(variableDescriptor.members()).isEmpty();
   }
 }

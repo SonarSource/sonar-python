@@ -18,6 +18,7 @@ package org.sonar.python.semantic.v2.converter;
 
 import java.util.List;
 import java.util.Set;
+import org.assertj.core.data.Index;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
@@ -600,5 +601,69 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(funcDesc.typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
     assertThat(funcDesc.typeAnnotationDescriptor().fullyQualifiedName()).isEqualTo("my_package.MyClass");
     assertThat(funcDesc.typeAnnotationDescriptor().isSelf()).isTrue();
+  }
+
+  @Test
+  void testConvertObjectTypeWithAttributes() {
+    ClassType intType = new ClassType("int", "builtins.int", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ClassType listType = new ClassType("list", "builtins.list", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ObjectType listOfInt = ObjectType.Builder.fromType(listType)
+      .withAttributes(List.of(ObjectType.fromType(intType), intType))
+      .build();
+
+    ClassType containerType = new ClassType("Container", "mod.Container",
+      Set.of(new Member("items", listOfInt)), List.of(), List.of(), List.of(), false, false, location);
+
+    Descriptor descriptor = converter.convert("mod", new SymbolV2Impl("Container"), Set.of(containerType));
+
+    assertThat(descriptor).isInstanceOf(ClassDescriptor.class);
+    ClassDescriptor classDescriptor = (ClassDescriptor) descriptor;
+    assertThat(classDescriptor.members()).hasSize(1);
+
+    Descriptor memberDescriptor = classDescriptor.members().iterator().next();
+    assertThat(memberDescriptor).isInstanceOf(VariableDescriptor.class);
+    VariableDescriptor varDesc = (VariableDescriptor) memberDescriptor;
+    assertThat(varDesc.name()).isEqualTo("items");
+    assertThat(varDesc.annotatedType()).isEqualTo("builtins.list");
+    assertThat(varDesc.attributes())
+      .satisfies(attr -> assertThat(attr)
+        .isInstanceOf(VariableDescriptor.class)
+        .extracting(Descriptor::fullyQualifiedName)
+        .isEqualTo("builtins.int"), Index.atIndex(0))
+      .satisfies(attr -> assertThat(attr)
+        .isInstanceOf(VariableDescriptor.class)
+        .extracting(Descriptor::fullyQualifiedName)
+        .isEqualTo("builtins.int"), Index.atIndex(1))
+      .hasSize(2);
+  }
+
+  @Test
+  void testConvertObjectTypeWithMembers() {
+    ClassType strType = new ClassType("str", "builtins.str", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    ClassType baseType = new ClassType("MyClass", "mod.MyClass", Set.of(), List.of(), List.of(), List.of(), false, false, location);
+    Member valueMember = new Member("value", ObjectType.fromType(strType));
+    Member valueMember2 = new Member("value2", strType);
+    ObjectType objWithMembers = ObjectType.Builder.fromType(baseType)
+      .withMembers(List.of(valueMember, valueMember2))
+      .build();
+
+    ClassType containerType = new ClassType("Container", "mod.Container",
+      Set.of(new Member("instance", objWithMembers)), List.of(), List.of(), List.of(), false, false, location);
+
+    Descriptor descriptor = converter.convert("mod", new SymbolV2Impl("Container"), Set.of(containerType));
+
+    assertThat(descriptor).isInstanceOf(ClassDescriptor.class);
+    ClassDescriptor classDescriptor = (ClassDescriptor) descriptor;
+    assertThat(classDescriptor.members()).hasSize(1);
+
+    Descriptor memberDescriptor = classDescriptor.members().iterator().next();
+    assertThat(memberDescriptor).isInstanceOf(VariableDescriptor.class);
+    VariableDescriptor varDesc = (VariableDescriptor) memberDescriptor;
+    assertThat(varDesc.name()).isEqualTo("instance");
+    assertThat(varDesc.annotatedType()).isEqualTo("mod.MyClass");
+    assertThat(varDesc.members())
+      .satisfies(member -> assertThat(member.name()).isEqualTo("value"), Index.atIndex(0))
+      .satisfies(member -> assertThat(member.name()).isEqualTo("value2"), Index.atIndex(1))
+      .hasSize(2);
   }
 }

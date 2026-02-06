@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -622,13 +621,12 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .map(NameImpl.class::cast)
       .ifPresent(lhsName -> {
         if (currentType() instanceof ClassType ownerClass) {
-          Optional.ofNullable(assignmentStatement.annotation())
-            .map(TypeAnnotation::expression)
-            .map(Expression::typeV2)
-            .filter(Predicate.not(PythonType.UNKNOWN::equals))
-            .map(t -> ObjectType.Builder.fromType(t).withTypeSource(TypeSource.TYPE_HINT).build())
-            .ifPresent(lhsName::typeV2);
-          addStaticFieldToClass(ownerClass, lhsName.name(), lhsName.typeV2());
+          PythonType type = resolveTypeAnnotationExpressionType(assignmentStatement.annotation().expression(), ownerClass);
+          if (type != PythonType.UNKNOWN) {
+            var objectType = ObjectType.Builder.fromType(type).withTypeSource(TypeSource.TYPE_HINT).build();
+            lhsName.typeV2(objectType);
+            addStaticFieldToClass(ownerClass, lhsName.name(), objectType);
+          }
         }
       });
   }

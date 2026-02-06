@@ -5088,6 +5088,33 @@ public class TypeInferenceV2Test {
     assertThat(aType).isEqualTo(bType);
   }
 
+  @Test
+  void testObjectTypeAttributesInModuleFields() {
+    var project = new TestProject();
+    project.addModule("test_module.py", """
+      from typing import Annotated
+      class Foo:
+        FOO: Annotated[int, "bar"] = 1
+      """);
+
+    var root = project.inferTypes("""
+      from test_module import Foo
+      x = Foo.FOO
+      """);
+
+    Name xName = PythonTestUtils.getLastDescendant(root, tree -> tree instanceof Name name && "x".equals(name.name()));
+    ObjectType xType = assertThat(xName.typeV2())
+      .asInstanceOf(type(ObjectType.class))
+      .actual();
+
+    PythonType projectLevelIntType = project.projectLevelTypeTable().getType("builtins.int");
+    assertThat(projectLevelIntType).isNotEqualTo(PythonType.UNKNOWN);
+
+    assertThat(xType.attributes())
+      .element(0)
+      .is(objectTypeOf(projectLevelIntType));
+  }
+
   private static Condition<PythonType> objectTypeOf(PythonType type) {
     return new Condition<PythonType>("is object type of " + type) {
       @Override

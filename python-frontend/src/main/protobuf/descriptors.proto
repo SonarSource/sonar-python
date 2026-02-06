@@ -8,11 +8,15 @@ package protoblog;
 option java_outer_classname = "DescriptorsProtos";
 option java_package = "org.sonar.python.types.protobuf";
 
-message ModuleDescriptor {
+message DescriptorList {
     repeated ClassDescriptor classDescriptors = 1;
     repeated FunctionDescriptor functionDescriptors = 2;
     repeated VarDescriptor varDescriptors = 3;
     repeated AmbiguousDescriptor ambiguousDescriptors = 4;
+}
+
+message ModuleDescriptor {
+    DescriptorList descriptors = 1;
 }
 
 message LocationInFile {
@@ -26,25 +30,20 @@ message LocationInFile {
 message AmbiguousDescriptor {
     string name = 1;
     optional string fullyQualifiedName = 2;
-    repeated ClassDescriptor classDescriptors = 3;
-    repeated FunctionDescriptor functionDescriptors = 4;
-    repeated VarDescriptor varDescriptors = 5;
+    DescriptorList alternatives = 3;
 }
 
 message ClassDescriptor {
     string name = 1;
     string fullyQualifiedName = 2;
     repeated string superClasses = 3;
-    repeated FunctionDescriptor functionMembers = 4;
-    repeated VarDescriptor varMembers = 5;
-    repeated AmbiguousDescriptor ambiguousMembers = 6;
-    repeated ClassDescriptor classMembers = 7;
     bool hasDecorators = 8;
     LocationInFile definitionLocation = 9;
     bool hasSuperClassWithoutDescriptor = 10;
     bool hasMetaClass = 11;
     optional string metaClassFQN = 12;
     bool supportsGenerics = 13;
+    DescriptorList members = 14;
 }
 
 message ParameterDescriptor {
@@ -77,4 +76,6 @@ message VarDescriptor {
   string name = 1;
   optional string fully_qualified_name = 2;
   optional string annotatedType = 3;
+  DescriptorList attributes = 4;
+  DescriptorList members = 5;
 }

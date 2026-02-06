@@ -16,6 +16,7 @@
  */
 package org.sonar.python.index;
 
+import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
@@ -24,16 +25,21 @@ public class VariableDescriptor implements Descriptor {
   private final String fullyQualifiedName;
   private final String annotatedType;
   private final boolean isImportedModule;
+  private final List<Descriptor> attributes;
+  private final List<Descriptor> members;
 
-  public VariableDescriptor(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedType, boolean isImportedModule) {
+  public VariableDescriptor(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedType,
+                            boolean isImportedModule, List<Descriptor> attributes, List<Descriptor> members) {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.annotatedType = annotatedType;
     this.isImportedModule = isImportedModule;
+    this.attributes = attributes;
+    this.members = members;
   }
 
   public VariableDescriptor(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedType) {
-    this(name, fullyQualifiedName, annotatedType, false);
+    this(name, fullyQualifiedName, annotatedType, false, List.of(), List.of());
   }
 
   @Override
@@ -58,5 +64,13 @@ public class VariableDescriptor implements Descriptor {
 
   public boolean isImportedModule() {
     return isImportedModule;
+  }
+
+  public List<Descriptor> attributes() {
+    return attributes;
+  }
+
+  public List<Descriptor> members() {
+    return members;
   }
 }

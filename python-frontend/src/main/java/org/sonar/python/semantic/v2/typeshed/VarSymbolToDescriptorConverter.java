@@ -16,6 +16,8 @@
  */
 package org.sonar.python.semantic.v2.typeshed;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.VariableDescriptor;
@@ -29,9 +31,9 @@ public class VarSymbolToDescriptorConverter {
     var isImportedModule = varSymbol.getIsImportedModule();
     var typeAnnotation = TypeShedUtils.getTypesNormalizedFqn(protoTypeAnnotation);
     if (isTypeAnnotationKnownToBeIncorrect(fullyQualifiedName)) {
-      return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, null, isImportedModule);
+      return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, null, isImportedModule, List.of(), List.of());
     }
-    return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation, isImportedModule);
+    return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation, isImportedModule, List.of(), List.of());
   }
 
   private static boolean isTypeAnnotationKnownToBeIncorrect(@Nullable String fullyQualifiedName) {

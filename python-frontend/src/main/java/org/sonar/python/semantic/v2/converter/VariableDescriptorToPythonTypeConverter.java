@@ -16,7 +16,9 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.List;
 import java.util.Set;
+import org.sonar.plugins.python.api.types.v2.Member;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
@@ -39,7 +41,19 @@ public class VariableDescriptorToPythonTypeConverter implements DescriptorToPyth
         return new SpecialFormType(fullyQualifiedName);
       }
       TypeWrapper typeWrapper = ctx.lazyTypesContext().getOrCreateLazyTypeWrapper(annotatedType);
-      return ObjectType.Builder.fromTypeWrapper(typeWrapper).build();
+
+      List<PythonType> attributes = from.attributes().stream()
+        .map(ctx::convert)
+        .toList();
+
+      List<Member> members = from.members().stream()
+        .map(desc -> new Member(desc.name(), ctx.convert(desc)))
+        .toList();
+
+      return ObjectType.Builder.fromTypeWrapper(typeWrapper)
+        .withAttributes(attributes)
+        .withMembers(members)
+        .build();
     }
     return PythonType.UNKNOWN;
   }

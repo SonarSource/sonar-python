@@ -18,37 +18,45 @@ package org.sonar.python.index;
 
 import com.google.common.annotations.VisibleForTesting;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.CheckForNull;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.types.protobuf.DescriptorsProtos;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 public class DescriptorsToProtobuf {
+  private static final Logger LOG = LoggerFactory.getLogger(DescriptorsToProtobuf.class);
 
   private DescriptorsToProtobuf() {
   }
 
   public static DescriptorsProtos.ModuleDescriptor toProtobufModuleDescriptor(Set<Descriptor> descriptors) {
+    return DescriptorsProtos.ModuleDescriptor.newBuilder()
+      .setDescriptors(toProtobufDescriptorList(descriptors))
+      .build();
+  }
+
+  private static DescriptorsProtos.DescriptorList toProtobufDescriptorList(Collection<Descriptor> descriptors) {
     List<DescriptorsProtos.ClassDescriptor> classDescriptors = new ArrayList<>();
     List<DescriptorsProtos.FunctionDescriptor> functionDescriptors = new ArrayList<>();
     List<DescriptorsProtos.VarDescriptor> varDescriptors = new ArrayList<>();
     List<DescriptorsProtos.AmbiguousDescriptor> ambiguousDescriptors = new ArrayList<>();
     for (Descriptor descriptor : descriptors) {
-      Descriptor.Kind kind = descriptor.kind();
-      if (kind == Descriptor.Kind.CLASS) {
-        classDescriptors.add(toProtobuf(((ClassDescriptor) descriptor)));
-      } else if (kind == Descriptor.Kind.FUNCTION) {
-        functionDescriptors.add(toProtobuf((FunctionDescriptor) descriptor));
-      } else if (kind == Descriptor.Kind.VARIABLE) {
-        varDescriptors.add(toProtobuf((VariableDescriptor) descriptor));
-      } else {
-        ambiguousDescriptors.add(toProtobuf((AmbiguousDescriptor) descriptor));
+      switch (descriptor.kind()) {
+        case CLASS -> classDescriptors.add(toProtobuf((ClassDescriptor) descriptor));
+        case FUNCTION -> functionDescriptors.add(toProtobuf((FunctionDescriptor) descriptor));
+        case VARIABLE -> varDescriptors.add(toProtobuf((VariableDescriptor) descriptor));
+        case AMBIGUOUS -> ambiguousDescriptors.add(toProtobuf((AmbiguousDescriptor) descriptor));
+        default -> LOG.debug("Unknown descriptor kind: {}", descriptor.kind());
       }
     }
-    return DescriptorsProtos.ModuleDescriptor.newBuilder()
+    return DescriptorsProtos.DescriptorList.newBuilder()
       .addAllClassDescriptors(classDescriptors)
       .addAllFunctionDescriptors(functionDescriptors)
       .addAllVarDescriptors(varDescriptors)
@@ -57,24 +65,9 @@ public class DescriptorsToProtobuf {
   }
 
   private static DescriptorsProtos.AmbiguousDescriptor toProtobuf(AmbiguousDescriptor ambiguousDescriptor) {
-    List<DescriptorsProtos.FunctionDescriptor> functionDescriptors = new ArrayList<>();
-    List<DescriptorsProtos.VarDescriptor> variableDescriptors = new ArrayList<>();
-    List<DescriptorsProtos.ClassDescriptor> classDescriptors = new ArrayList<>();
-    for (Descriptor descriptor : ambiguousDescriptor.alternatives()) {
-      Descriptor.Kind kind = descriptor.kind();
-      if (kind == Descriptor.Kind.FUNCTION) {
-        functionDescriptors.add(toProtobuf((FunctionDescriptor) descriptor));
-      } else if (kind == Descriptor.Kind.VARIABLE) {
-        variableDescriptors.add(toProtobuf((VariableDescriptor) descriptor));
-      } else {
-        classDescriptors.add(toProtobuf((ClassDescriptor) descriptor));
-      }
-    }
-    DescriptorsProtos.AmbiguousDescriptor.Builder builder = DescriptorsProtos.AmbiguousDescriptor.newBuilder();
-    builder.setName(ambiguousDescriptor.name())
-      .addAllClassDescriptors(classDescriptors)
-      .addAllFunctionDescriptors(functionDescriptors)
-      .addAllVarDescriptors(variableDescriptors);
+    DescriptorsProtos.AmbiguousDescriptor.Builder builder = DescriptorsProtos.AmbiguousDescriptor.newBuilder()
+      .setName(ambiguousDescriptor.name())
+      .setAlternatives(toProtobufDescriptorList(ambiguousDescriptor.alternatives()));
     String fullyQualifiedName = ambiguousDescriptor.fullyQualifiedName();
     if (fullyQualifiedName != null) {
       builder.setFullyQualifiedName(fullyQualifiedName);
@@ -83,30 +76,11 @@ public class DescriptorsToProtobuf {
   }
 
   private static DescriptorsProtos.ClassDescriptor toProtobuf(ClassDescriptor classDescriptor) {
-    List<DescriptorsProtos.FunctionDescriptor> functionMembers = new ArrayList<>();
-    List<DescriptorsProtos.VarDescriptor> variableMembers = new ArrayList<>();
-    List<DescriptorsProtos.AmbiguousDescriptor> ambiguousMembers = new ArrayList<>();
-    List<DescriptorsProtos.ClassDescriptor> classMembers = new ArrayList<>();
-    for (Descriptor member : classDescriptor.members()) {
-      Descriptor.Kind kind = member.kind();
-      if (kind == Descriptor.Kind.FUNCTION) {
-        functionMembers.add(toProtobuf(((FunctionDescriptor) member)));
-      } else if (kind == Descriptor.Kind.VARIABLE) {
-        variableMembers.add(toProtobuf(((VariableDescriptor) member)));
-      } else if (kind == Descriptor.Kind.AMBIGUOUS) {
-        ambiguousMembers.add(toProtobuf((AmbiguousDescriptor) member));
-      } else {
-        classMembers.add(toProtobuf((ClassDescriptor) member));
-      }
-    }
     DescriptorsProtos.ClassDescriptor.Builder builder = DescriptorsProtos.ClassDescriptor.newBuilder()
       .setName(classDescriptor.name())
       .setFullyQualifiedName(classDescriptor.fullyQualifiedName())
       .addAllSuperClasses(classDescriptor.superClasses())
-      .addAllFunctionMembers(functionMembers)
-      .addAllVarMembers(variableMembers)
-      .addAllAmbiguousMembers(ambiguousMembers)
-      .addAllClassMembers(classMembers)
+      .setMembers(toProtobufDescriptorList(classDescriptor.members()))
       .setHasDecorators(classDescriptor.hasDecorators())
       .setHasSuperClassWithoutDescriptor(classDescriptor.hasSuperClassWithoutDescriptor())
       .setHasMetaClass(classDescriptor.hasMetaClass())
@@ -174,8 +148,10 @@ public class DescriptorsToProtobuf {
 
   @VisibleForTesting
   static DescriptorsProtos.VarDescriptor toProtobuf(VariableDescriptor variableDescriptor) {
-    DescriptorsProtos.VarDescriptor.Builder builder = DescriptorsProtos.VarDescriptor.newBuilder();
-    builder.setName(variableDescriptor.name());
+    DescriptorsProtos.VarDescriptor.Builder builder = DescriptorsProtos.VarDescriptor.newBuilder()
+      .setName(variableDescriptor.name())
+      .setAttributes(toProtobufDescriptorList(variableDescriptor.attributes()))
+      .setMembers(toProtobufDescriptorList(variableDescriptor.members()));
     String fullyQualifiedName = variableDescriptor.fullyQualifiedName();
     if (fullyQualifiedName != null) {
       builder.setFullyQualifiedName(fullyQualifiedName);
@@ -211,35 +187,41 @@ public class DescriptorsToProtobuf {
   }
 
   public static Set<Descriptor> fromProtobuf(DescriptorsProtos.ModuleDescriptor moduleDescriptorProto) {
+    return fromProtobufDescriptorList(moduleDescriptorProto.getDescriptors());
+  }
+
+  private static Set<Descriptor> fromProtobufDescriptorList(DescriptorsProtos.DescriptorList descriptorList) {
     Set<Descriptor> descriptors = new HashSet<>();
-    moduleDescriptorProto.getClassDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
-    moduleDescriptorProto.getFunctionDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
-    moduleDescriptorProto.getAmbiguousDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
-    moduleDescriptorProto.getVarDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    descriptorList.getClassDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    descriptorList.getFunctionDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    descriptorList.getAmbiguousDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    descriptorList.getVarDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    return descriptors;
+  }
+
+  private static List<Descriptor> fromProtobufDescriptorListAsList(DescriptorsProtos.DescriptorList descriptorList) {
+    List<Descriptor> descriptors = new ArrayList<>();
+    descriptorList.getClassDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    descriptorList.getFunctionDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    descriptorList.getAmbiguousDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    descriptorList.getVarDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
     return descriptors;
   }
 
   private static AmbiguousDescriptor fromProtobuf(DescriptorsProtos.AmbiguousDescriptor ambiguousDescriptor) {
     String fullyQualifiedName = ambiguousDescriptor.hasFullyQualifiedName() ? ambiguousDescriptor.getFullyQualifiedName() : null;
-    Set<Descriptor> descriptors = new HashSet<>();
-    ambiguousDescriptor.getClassDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
-    ambiguousDescriptor.getFunctionDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
-    ambiguousDescriptor.getVarDescriptorsList().forEach(proto -> descriptors.add(fromProtobuf(proto)));
+    Set<Descriptor> alternatives = fromProtobufDescriptorList(ambiguousDescriptor.getAlternatives());
     return new AmbiguousDescriptor(
       ambiguousDescriptor.getName(),
       fullyQualifiedName,
-      descriptors);
+      alternatives);
   }
 
   private static ClassDescriptor fromProtobuf(DescriptorsProtos.ClassDescriptor classDescriptorProto) {
     String metaclassFQN = classDescriptorProto.hasMetaClassFQN() ? classDescriptorProto.getMetaClassFQN() : null;
     LocationInFile definitionLocation = classDescriptorProto.hasDefinitionLocation() ? fromProtobuf(classDescriptorProto.getDefinitionLocation()) : null;
     String fullyQualifiedName = classDescriptorProto.getFullyQualifiedName();
-    Set<Descriptor> members = new HashSet<>();
-    classDescriptorProto.getClassMembersList().forEach(proto -> members.add(fromProtobuf(proto)));
-    classDescriptorProto.getFunctionMembersList().forEach(proto -> members.add(fromProtobuf(proto)));
-    classDescriptorProto.getAmbiguousMembersList().forEach(proto -> members.add(fromProtobuf(proto)));
-    classDescriptorProto.getVarMembersList().forEach(proto -> members.add(fromProtobuf(proto)));
+    Set<Descriptor> members = fromProtobufDescriptorList(classDescriptorProto.getMembers());
     return new ClassDescriptor.ClassDescriptorBuilder()
       .withName(classDescriptorProto.getName())
       .withFullyQualifiedName(fullyQualifiedName)
@@ -301,10 +283,15 @@ public class DescriptorsToProtobuf {
   static VariableDescriptor fromProtobuf(DescriptorsProtos.VarDescriptor varDescriptorProto) {
     String fullyQualifiedName = varDescriptorProto.hasFullyQualifiedName() ? varDescriptorProto.getFullyQualifiedName() : null;
     String annotatedType = varDescriptorProto.hasAnnotatedType() ? varDescriptorProto.getAnnotatedType() : null;
+    List<Descriptor> attributes = fromProtobufDescriptorListAsList(varDescriptorProto.getAttributes());
+    List<Descriptor> members = fromProtobufDescriptorListAsList(varDescriptorProto.getMembers());
     return new VariableDescriptor(
       varDescriptorProto.getName(),
       fullyQualifiedName,
-      annotatedType);
+      annotatedType,
+      false,
+      attributes,
+      members);
   }
 
   private static LocationInFile fromProtobuf(DescriptorsProtos.LocationInFile locationInFileProto) {

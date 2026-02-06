@@ -17,6 +17,7 @@
 package org.sonar.python.index;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
@@ -108,8 +109,8 @@ class AmbiguousDescriptorTest {
 
   @Test
   void ambiguous_descriptor_creation_different_name_same_fqn() {
-    Descriptor fooDesc = new VariableDescriptor("foo", "mod.bar", null, false);
-    Descriptor barDesc = new VariableDescriptor("bar", "mod.bar", null, false);
+    Descriptor fooDesc = new VariableDescriptor("foo", "mod.bar", null, false, List.of(), List.of());
+    Descriptor barDesc = new VariableDescriptor("bar", "mod.bar", null, false, List.of(), List.of());
     assertThatThrownBy(() -> AmbiguousDescriptor.create(fooDesc, barDesc)).isInstanceOf(IllegalArgumentException.class);
   }
 
