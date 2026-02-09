@@ -16,6 +16,8 @@
  */
 package org.sonar.python.semantic.v2.types.typecalculator;
 
+import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -33,8 +35,11 @@ import org.sonar.python.types.v2.TypesTestUtils;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.type;
 import static org.sonar.python.PythonTestUtils.getFirstDescendant;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
+import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
@@ -182,6 +187,96 @@ class CallReturnTypeCalculatorTest {
   }
 
   @Test
+  void computeCallExpressionType_selfType_unionWithSelfType() {
+    FileInput fileInput = parseAndInferTypes("""
+      from typing import Self
+      class A:
+        def foo(self) -> Self | int: ...
+
+      a = A()
+      a.foo()
+      """);
+
+    ClassDef classDef = getFirstDescendant(fileInput, ClassDef.class::isInstance);
+    ClassType classType = (ClassType) classDef.name().typeV2();
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+
+    Set<PythonType> candidates = assertThat(result)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .asInstanceOf(type(UnionType.class))
+      .extracting(UnionType::candidates)
+      .actual();
+
+    assertThat(candidates)
+      .satisfiesOnlyOnce(type -> assertThat(type).is(TypesTestUtils.objectTypeOf(classType)))
+      .satisfiesOnlyOnce(type -> assertThat(type).is(TypesTestUtils.objectTypeOf(INT_TYPE)))
+      .hasSize(2);
+  }
+
+  @Test
+  void computeCallExpressionType_selfType_unionWithSelfTypeInList() {
+    FileInput fileInput = parseAndInferTypes("""
+      from typing import Self
+      class A:
+        def foo(self) -> list[Self] | int: ...
+
+      a = A()
+      a.foo()
+      """);
+
+    ClassDef classDef = getFirstDescendant(fileInput, ClassDef.class::isInstance);
+    ClassType classType = (ClassType) classDef.name().typeV2();
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+
+    Set<PythonType> candidates = assertThat(result)
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .asInstanceOf(type(UnionType.class))
+      .extracting(UnionType::candidates)
+      .actual();
+    assertThat(candidates)
+      .satisfiesOnlyOnce(type -> assertThat(type).is(TypesTestUtils.objectTypeOf(INT_TYPE)))
+      .satisfiesOnlyOnce(type -> assertThat(type)
+        .is(TypesTestUtils.objectTypeOf(LIST_TYPE))
+        .asInstanceOf(type(ObjectType.class))
+        .extracting(ObjectType::attributes)
+        .isEqualTo(List.of(ObjectType.fromType(classType))))
+      .hasSize(2);
+  }
+
+  @Test
+  void computeCallExpressionType_selfType_listWithSelfType() {
+    FileInput fileInput = parseAndInferTypes("""
+      from typing import Self
+      class A:
+        def foo(self) -> list[Self]: ...
+
+      a = A()
+      a.foo()
+      """);
+
+    ClassDef classDef = getFirstDescendant(fileInput, ClassDef.class::isInstance);
+    ClassType classType = (ClassType) classDef.name().typeV2();
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+
+    assertThat(result)
+      .asInstanceOf(type(ObjectType.class))
+      .is(TypesTestUtils.objectTypeOf(LIST_TYPE))
+      .extracting(ObjectType::attributes)
+      .isEqualTo(List.of(ObjectType.fromType(classType)));
+  }
+
+  @Test
   void computeCallExpressionType_selfTypeInGenerator_typeshedFunction() {
     PythonType generatorType = PROJECT_LEVEL_TYPE_TABLE.getType("typing.Generator");
     assertThat(generatorType).isNotEqualTo(PythonType.UNKNOWN);
@@ -222,6 +317,23 @@ class CallReturnTypeCalculatorTest {
     assertThat(renamedSelfType).is(TypesTestUtils.objectTypeOf(pathType));
     ObjectType objectType = (ObjectType) renamedSelfType;
     assertThat(objectType.attributes()).isEmpty();
+  }
+
+  @Test
+  void computeCallExpressionType_selfTypeInOverloadedFunction_typeshedFunction() {
+    PythonType moduleType = PROJECT_LEVEL_TYPE_TABLE.getType("torch.nn.modules.Module");
+    assertThat(moduleType).isNotEqualTo(PythonType.UNKNOWN);
+
+    FileInput fileInput = parseAndInferTypes("""
+      from torch.nn.modules import Module
+      module = Module()
+      toModule = module.to(...)
+      """);
+
+    Name toModuleName = PythonTestUtils.getLastDescendant(fileInput, tree -> tree instanceof Name name && "toModule".equals(name.name()));
+    PythonType toModuleType = toModuleName.typeV2();
+
+    assertThat(toModuleType).is(TypesTestUtils.objectTypeOf(moduleType));
   }
 
   @Test

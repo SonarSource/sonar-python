@@ -4715,6 +4715,38 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void selfInSubscriptionExpressionReturnType() {
+    FileInput root = inferTypes("""
+      from typing import Self
+      class A:
+        def foo(self) -> list[Self] | None:
+          ...
+      """);
+
+    ClassDef classDef = getFirstDescendant(root, t -> t instanceof ClassDef cd && "A".equals(cd.name().name()));
+    var classType = (ClassType) classDef.name().typeV2();
+    FunctionDef functionDef = getFirstDescendant(root, t -> t instanceof FunctionDef fd && "foo".equals(fd.name().name()));
+    var functionType = (FunctionType) functionDef.name().typeV2();
+
+    var returnType = functionType.returnType();
+    assertThat(returnType).isInstanceOf(ObjectType.class);
+    var unwrappedReturnType = returnType.unwrappedType();
+    assertThat(unwrappedReturnType).isInstanceOf(UnionType.class);
+
+    var unionType = (UnionType) unwrappedReturnType;
+    var candidates = unionType.candidates();
+
+    assertThat(candidates)
+      .satisfiesOnlyOnce(type -> assertThat(type)
+        .is(TypesTestUtils.objectTypeOf(LIST_TYPE))
+        .asInstanceOf(type(ObjectType.class))
+        .extracting(ObjectType::attributes)
+        .isEqualTo(List.of(ObjectType.fromType(SelfType.of(classType)))))
+      .satisfiesOnlyOnce(type -> assertThat(type).is(TypesTestUtils.objectTypeOf(NONE_TYPE)))
+      .hasSize(2);
+  }
+
+  @Test
   void selfInUnionReturnTypeWithoutEnclosingClass() {
     FileInput root = inferTypes("""
       from typing import Self

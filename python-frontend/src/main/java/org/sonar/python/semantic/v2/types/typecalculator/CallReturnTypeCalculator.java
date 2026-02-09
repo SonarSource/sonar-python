@@ -85,7 +85,8 @@ public final class CallReturnTypeCalculator {
       return returnType;
     }
 
-    if (isInstanceOrClassMethodCall(callExpr, typePredicateContext)) {
+    PythonType calleeType = callExpr.callee().typeV2();
+    if (isInstanceOrClassMethodCall(calleeType, typePredicateContext)) {
       PythonType receiverType = getReceiverType(callExpr);
       if (receiverType == PythonType.UNKNOWN) {
         return PythonType.UNKNOWN;
@@ -99,19 +100,22 @@ public final class CallReturnTypeCalculator {
   private static boolean containsSelfType(PythonType type, TypePredicateContext typePredicateContext) {
     if (type instanceof SelfType || type.unwrappedType() instanceof SelfType) {
       return true;
-    }
-    if (type instanceof ObjectType objectType) {
-      return objectType.attributes().stream().anyMatch(t -> containsSelfType(t, typePredicateContext));
+    } else if (type instanceof ObjectType objectType) {
+      return objectType.attributes().stream().anyMatch(t -> containsSelfType(t, typePredicateContext)) || containsSelfType(objectType.unwrappedType(), typePredicateContext);
+    } else if (type instanceof UnionType unionType) {
+      return unionType.candidates().stream().anyMatch(t -> containsSelfType(t, typePredicateContext));
     }
 
     return false;
   }
 
-  private static boolean isInstanceOrClassMethodCall(CallExpression callExpr, TypePredicateContext typePredicateContext) {
-    PythonType calleeType = callExpr.callee().typeV2();
+  private static boolean isInstanceOrClassMethodCall(PythonType calleeType, TypePredicateContext typePredicateContext) {
     if (calleeType instanceof FunctionType functionType) {
       return functionType.isInstanceMethod() || functionType.isClassMethod();
+    } else if (calleeType instanceof UnionType unionType) {
+      return unionType.candidates().stream().allMatch(t -> isInstanceOrClassMethodCall(t, typePredicateContext));
     }
+
     return hasCallableMember(calleeType, typePredicateContext);
   }
 
@@ -140,17 +144,16 @@ public final class CallReturnTypeCalculator {
 
   private static PythonType collapseSelfType(PythonType returnType, PythonType receiverType) {
     if (returnType instanceof ObjectType objectType) {
-      var objectBuilder = ObjectType.Builder.fromType(objectType);
-      if (objectType.type() instanceof SelfType) {
-        objectBuilder.withType(receiverType);
-      }
-      return objectBuilder
+      return ObjectType.Builder.fromType(objectType)
+        .withType(collapseSelfType(objectType.unwrappedType(), receiverType))
         .withAttributes(objectType.attributes().stream().map(t -> collapseSelfType(t, receiverType)).toList())
         .build();
     } else if (returnType instanceof SelfType) {
       return receiverType;
+    } else if (returnType instanceof UnionType unionType) {
+      return UnionType.or(unionType.candidates().stream().map(t -> collapseSelfType(t, receiverType)).toList());
     }
-    return PythonType.UNKNOWN;
+    return returnType;
   }
 
   private static TypeSource computeTypeSource(PythonType calleeType, CallExpression callExpr) {

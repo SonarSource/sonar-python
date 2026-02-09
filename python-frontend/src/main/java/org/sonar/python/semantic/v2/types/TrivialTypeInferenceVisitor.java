@@ -780,6 +780,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
         .expressions()
         .stream()
         .map(Expression::typeV2)
+        .map(type -> resolveSelfType(type, enclosingClassType))
         .map(type -> ObjectType.Builder.fromType(type).withTypeSource(TypeSource.TYPE_HINT).build())
         .collect(Collectors.toList());
 
