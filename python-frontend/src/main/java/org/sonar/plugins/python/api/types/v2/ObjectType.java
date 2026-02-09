@@ -27,11 +27,11 @@ import org.sonar.python.semantic.v2.TypeBuilder;
 @Beta
 public final class ObjectType implements PythonType {
   private final TypeWrapper typeWrapper;
-  private final List<PythonType> attributes;
+  private final List<TypeWrapper> attributes;
   private final List<Member> members;
   private final TypeSource typeSource;
 
-  private ObjectType(TypeWrapper typeWrapper, List<PythonType> attributes, List<Member> members, TypeSource typeSource) {
+  private ObjectType(TypeWrapper typeWrapper, List<TypeWrapper> attributes, List<Member> members, TypeSource typeSource) {
     this.typeWrapper = typeWrapper;
     this.attributes = attributes;
     this.members = members;
@@ -86,16 +86,13 @@ public final class ObjectType implements PythonType {
     ObjectType that = (ObjectType) o;
     List<String> membersNames = members.stream().map(Member::name).toList();
     List<String> otherMembersNames = that.members.stream().map(Member::name).toList();
-    List<String> attributesNames = attributes.stream().map(PythonType::key).toList();
-    List<String> otherAttributesNames = that.attributes.stream().map(PythonType::key).toList();
-    return Objects.equals(typeWrapper, that.typeWrapper) && Objects.equals(membersNames, otherMembersNames) && Objects.equals(attributesNames, otherAttributesNames);
+    return Objects.equals(typeWrapper, that.typeWrapper) && Objects.equals(membersNames, otherMembersNames) && Objects.equals(attributes, that.attributes);
   }
 
   @Override
   public int hashCode() {
     List<String> membersNames = members.stream().map(Member::name).toList();
-    List<String> attributesNames = attributes.stream().map(PythonType::key).toList();
-    return Objects.hash(typeWrapper, attributesNames, membersNames);
+    return Objects.hash(typeWrapper, attributes, membersNames);
   }
 
   public PythonType type() {
@@ -107,7 +104,7 @@ public final class ObjectType implements PythonType {
   }
 
   public List<PythonType> attributes() {
-    return attributes;
+    return attributes.stream().map(TypeWrapper::type).toList();
   }
 
   public List<Member> members() {
@@ -130,7 +127,7 @@ public final class ObjectType implements PythonType {
 
   public static class Builder implements TypeBuilder<ObjectType> {
     private TypeWrapper typeWrapper;
-    private List<PythonType> attributes = List.of();
+    private List<TypeWrapper> attributes = List.of();
     private List<Member> members = List.of();
     private TypeSource typeSource = TypeSource.EXACT;
 
@@ -145,7 +142,7 @@ public final class ObjectType implements PythonType {
     public static Builder fromType(PythonType type) {
       if (type instanceof ObjectType objectType) {
         return new Builder(objectType.typeWrapper())
-          .withAttributes(objectType.attributes())
+          .withTypeWrapperAttributes(objectType.attributes)
           .withMembers(objectType.members())
           .withTypeSource(objectType.typeSource());
       }
@@ -168,6 +165,11 @@ public final class ObjectType implements PythonType {
     }
 
     public Builder withAttributes(List<PythonType> attributes) {
+      this.attributes = attributes.stream().map(TypeWrapper::of).toList();
+      return this;
+    }
+
+    public Builder withTypeWrapperAttributes(List<TypeWrapper> attributes) {
       this.attributes = attributes;
       return this;
     }

@@ -16,13 +16,10 @@
  */
 package org.sonar.python.semantic.v2.types;
 
-import java.util.Collection;
-import java.util.Optional;
-import java.util.stream.Stream;
-import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 
@@ -33,13 +30,25 @@ public class LoopAssignment extends Assignment {
 
   @Override
   public PythonType rhsType() {
-    return Optional.of(super.rhsType())
-      .filter(ObjectType.class::isInstance)
-      .map(ObjectType.class::cast)
-      .filter(t -> t.hasMember("__iter__") == TriBool.TRUE)
-      .map(ObjectType::attributes)
-      .map(Collection::stream)
-      .flatMap(Stream::findFirst)
-      .orElse(PythonType.UNKNOWN);
+    PythonType rhsType = super.rhsType();
+    if (rhsType instanceof ObjectType objectType && objectType.hasMember("__iter__").isTrue()) {
+      // depending on the origin (e.g. typeshed/user-defined), the attribute type may be wrapped in an ObjectType or not,
+      // independent of if the type is actually an instance or a class. As such, the logic in the map below assumes
+      // the rhsType contains instances of the attribute type, and forces the loop variable type to be an ObjectType.
+      var loopVarType = objectType.attributes().stream()
+        .findFirst()
+        .orElse(PythonType.UNKNOWN);
+
+      if (shouldBeWrappedInObjectType(loopVarType)) {
+        return ObjectType.fromType(loopVarType);
+      }
+
+      return loopVarType;
+    }
+    return PythonType.UNKNOWN;
+  }
+
+  private static boolean shouldBeWrappedInObjectType(PythonType type) {
+    return type instanceof ClassType classType && !"typing.Callable".equals(classType.fullyQualifiedName());
   }
 }

@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import javax.annotation.CheckForNull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -316,8 +316,11 @@ public class DescriptorsToProtobuf {
     if (kind == null) {
       return null;
     }
-    List<TypeAnnotationDescriptor> args = new ArrayList<>();
-    typeProto.getArgsList().forEach(proto -> args.add(fromProtobuf(proto)));
+    List<TypeAnnotationDescriptor> args = typeProto.getArgsList().stream()
+      .map(DescriptorsToProtobuf::fromProtobuf)
+      .filter(Objects::nonNull)
+      .toList();
+
     return new TypeAnnotationDescriptor(
       typeProto.getPrettyPrintedName(),
       kind,

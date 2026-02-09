@@ -20,9 +20,13 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
+import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.semantic.v2.LazyTypesContext;
-import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.types.v2.TypesTestUtils;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class TypeAnnotationToPythonTypeConverterTest {
 
@@ -62,8 +66,33 @@ class TypeAnnotationToPythonTypeConverterTest {
     );
      result = converter.convert(ctx, typeVarDescriptor);
 
-    Assertions.assertThat(result)
-      .as("TYPE_VAR with isSelf=true and args.size() == 0 should return UNKNOWN")
-      .isEqualTo(PythonType.UNKNOWN);
+     Assertions.assertThat(result)
+       .as("TYPE_VAR with isSelf=true and args.size() == 0 should return UNKNOWN")
+       .isEqualTo(PythonType.UNKNOWN);
+   }
+
+   @Test
+   void testListInstanceWithAttributes() {
+     var lazyTypesContext = new LazyTypesContext(TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE);
+     var ctx = Mockito.mock(ConversionContext.class);
+     var converter = new TypeAnnotationToPythonTypeConverter();
+
+     Mockito.when(ctx.lazyTypesContext()).thenReturn(lazyTypesContext);
+
+     // Create a INSTANCE TypeAnnotationDescriptor for list[int]
+     var intArg = new TypeAnnotationDescriptor("int", TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), "int", false);
+     var typeVarDescriptor = new TypeAnnotationDescriptor(
+       "list",
+       TypeAnnotationDescriptor.TypeKind.INSTANCE,
+       List.of(intArg),
+       "builtins.list",
+       true);
+
+     var result = converter.convert(ctx, typeVarDescriptor);
+
+     assertThat(result).isInstanceOf(ObjectType.class);
+     ObjectType objType = (ObjectType) result;
+     assertThat(objType.attributes()).hasSize(1);
+     assertThat(objType.attributes().get(0)).is(TypesTestUtils.objectTypeOf(TypesTestUtils.INT_TYPE));
   }
 }

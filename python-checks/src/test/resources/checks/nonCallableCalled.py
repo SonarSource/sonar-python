@@ -411,3 +411,12 @@ def object_typevar():
 def uncallable_inside_lambda_are_non_compliant():
     lambda_call = (lambda : print("something"))() # OK
     uncallable_inside_lambda = lambda:(print("something"))() # Noncompliant
+
+
+def fp_loop_of_class_list():
+    class MyClass: ... 
+
+    list_of_classes = [MyClass]
+
+    for clazz in list_of_classes:
+        clazz() # Noncompliant

@@ -16,10 +16,12 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
@@ -35,9 +37,13 @@ public class TypeAnnotationToPythonTypeConverter {
         if (fullyQualifiedName == null) {
           return PythonType.UNKNOWN;
         }
-        if (Boolean.TRUE.equals(type.isSelf())) {
+        List<PythonType> attributes = type.args().stream().map(t -> convert(context, t)).toList();
 
-          return SelfType.fromTypeWrapper(TypeWrapper.of(typeFromFQN(fullyQualifiedName, context)));
+        if (Boolean.TRUE.equals(type.isSelf())) {
+          var selfType = SelfType.fromTypeWrapper(TypeWrapper.of(typeFromFQN(fullyQualifiedName, context)));
+          return ObjectType.Builder.fromType(selfType)
+            .withAttributes(attributes)
+            .build();
         }
         // _SpecialForm is the type used for some special types, like Callable, Union, TypeVar, ...
         // It comes from CPython impl: https://github.com/python/cpython/blob/e39ae6bef2c357a88e232dcab2e4b4c0f367544b/Lib/typing.py#L439
@@ -46,7 +52,9 @@ public class TypeAnnotationToPythonTypeConverter {
         if ("typing._SpecialForm".equals(fullyQualifiedName)) {
           return PythonType.UNKNOWN;
         }
-        return typeFromFQN(fullyQualifiedName, context);
+        return ObjectType.Builder.fromType(typeFromFQN(fullyQualifiedName, context))
+          .withAttributes(attributes)
+          .build();
       case TYPE:
         return context.lazyTypesContext().getOrCreateLazyType("type");
       case TYPE_ALIAS:

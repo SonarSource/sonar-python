@@ -16,12 +16,14 @@
  */
 package org.sonar.python.types.v2;
 
+import org.assertj.core.api.Condition;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -86,6 +88,15 @@ public class TypesTestUtils {
     FileInput fileInput = parseAndInferTypes(code);
     Tree tree = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.NAME));
     return (Name) tree;
+  }
+
+  public static Condition<PythonType> objectTypeOf(PythonType type) {
+    return new Condition<PythonType>("is object type of " + type) {
+      @Override
+      public boolean matches(PythonType value) {
+        return value instanceof ObjectType objectType && objectType.unwrappedType().equals(type);
+      }
+    };
   }
 
 }

@@ -20,12 +20,14 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.CallExpressionImpl;
 import org.sonar.python.types.v2.TypesTestUtils;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
@@ -180,6 +182,49 @@ class CallReturnTypeCalculatorTest {
   }
 
   @Test
+  void computeCallExpressionType_selfTypeInGenerator_typeshedFunction() {
+    PythonType generatorType = PROJECT_LEVEL_TYPE_TABLE.getType("typing.Generator");
+    assertThat(generatorType).isNotEqualTo(PythonType.UNKNOWN);
+
+    PythonType pathType = PROJECT_LEVEL_TYPE_TABLE.getType("pathlib.Path");
+    assertThat(pathType).isNotEqualTo(PythonType.UNKNOWN);
+
+    FileInput fileInput = parseAndInferTypes("""
+      import pathlib
+      path = pathlib.Path(".")
+      globGenerator = path.glob("*.py")
+      """);
+
+    Name globGeneratorName = PythonTestUtils.getLastDescendant(fileInput, tree -> tree instanceof Name name && "globGenerator".equals(name.name()));
+    PythonType globGeneratorType = globGeneratorName.typeV2();
+
+    assertThat(globGeneratorType).is(TypesTestUtils.objectTypeOf(generatorType));
+    ObjectType objectType = (ObjectType) globGeneratorType;
+    assertThat(objectType.attributes())
+      .element(0)
+      .isEqualTo(pathType);
+  }
+
+  @Test
+  void computeCallExpressionType_selfType_typeshedFunction() {
+    PythonType pathType = PROJECT_LEVEL_TYPE_TABLE.getType("pathlib.Path");
+    assertThat(pathType).isNotEqualTo(PythonType.UNKNOWN);
+
+    FileInput fileInput = parseAndInferTypes("""
+      import pathlib
+      path = pathlib.Path(".")
+      renamedSelf = path.rename(...)
+      """);
+
+    Name renamedSelfName = PythonTestUtils.getLastDescendant(fileInput, tree -> tree instanceof Name name && "renamedSelf".equals(name.name()));
+    PythonType renamedSelfType = renamedSelfName.typeV2();
+
+    assertThat(renamedSelfType).is(TypesTestUtils.objectTypeOf(pathType));
+    ObjectType objectType = (ObjectType) renamedSelfType;
+    assertThat(objectType.attributes()).isEmpty();
+  }
+
+  @Test
   void computeCallExpressionType_methodCall() {
     FileInput fileInput = parseAndInferTypes("""
       class MyClass:
@@ -324,4 +369,3 @@ class CallReturnTypeCalculatorTest {
       .isEqualTo(classDef.name().typeV2());
   }
 }
-

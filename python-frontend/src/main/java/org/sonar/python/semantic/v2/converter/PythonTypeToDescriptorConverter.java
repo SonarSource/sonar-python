@@ -139,10 +139,8 @@ public class PythonTypeToDescriptorConverter {
       .toList();
 
     var returnType = type.returnType();
-    var unwrappedReturnType = returnType.unwrappedType();
-    var isSelfReturnType = containsSelfType(returnType);
-    var annotatedReturnTypeName = FullyQualifiedNameHelper.getFullyQualifiedName(unwrappedReturnType).orElse(null);
-    var returnTypeAnnotationDescriptor = createTypeAnnotationDescriptor(unwrappedReturnType, isSelfReturnType);
+    var annotatedReturnTypeName = FullyQualifiedNameHelper.getFullyQualifiedName(returnType.unwrappedType()).orElse(null);
+    var returnTypeAnnotationDescriptor = createTypeAnnotationDescriptor(returnType);
 
     // Using FunctionType#name and FunctionType#fullyQualifiedName instead of symbol is only accurate if the function has not been reassigned
     // This logic should be revisited when tackling SONARPY-2285
@@ -156,10 +154,6 @@ public class PythonTypeToDescriptorConverter {
       type.definitionLocation().orElse(null),
       annotatedReturnTypeName,
       returnTypeAnnotationDescriptor);
-  }
-
-  private static boolean containsSelfType(PythonType returnType){
-    return returnType instanceof SelfType || returnType.unwrappedType() instanceof SelfType;
   }
 
   @VisibleForTesting
@@ -238,10 +232,9 @@ public class PythonTypeToDescriptorConverter {
 
   private static FunctionDescriptor.Parameter convert(ParameterV2 parameter) {
     var type = parameter.declaredType().type();
-    var isSelf = containsSelfType(type);
     var unwrappedType = type.unwrappedType();
     var annotatedType = FullyQualifiedNameHelper.getFullyQualifiedName(unwrappedType).orElse(null);
-    var typeAnnotationDescriptor = createTypeAnnotationDescriptor(unwrappedType, isSelf);
+    var typeAnnotationDescriptor = createTypeAnnotationDescriptor(type);
 
     return new FunctionDescriptor.Parameter(parameter.name(),
       annotatedType,
@@ -263,17 +256,29 @@ public class PythonTypeToDescriptorConverter {
   }
 
   @CheckForNull
-  private static TypeAnnotationDescriptor createTypeAnnotationDescriptor(PythonType type, boolean isSelf) {
-    if (type instanceof SelfType selfType) {
-      return createTypeAnnotationDescriptor(selfType.innerType(), isSelf);
+  private static TypeAnnotationDescriptor createTypeAnnotationDescriptor(PythonType type) {
+    return createTypeAnnotationDescriptor(type, false, List.of());
+  }
+
+  @CheckForNull
+  private static TypeAnnotationDescriptor createTypeAnnotationDescriptor(PythonType type, boolean isSelf, List<TypeAnnotationDescriptor> args) {
+    if (type instanceof ObjectType objectType) {
+      List<TypeAnnotationDescriptor> objArgs = objectType.attributes().stream()
+        .map(PythonTypeToDescriptorConverter::createTypeAnnotationDescriptor)
+        .filter(Objects::nonNull)
+        .toList();
+      return createTypeAnnotationDescriptor(objectType.unwrappedType(), isSelf, objArgs);
+    } else if (type instanceof SelfType selfType) {
+      return createTypeAnnotationDescriptor(selfType.innerType(), true, args);
     } else if (type instanceof ClassType classType) {
-      return new TypeAnnotationDescriptor(classType.name(), TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), classType.fullyQualifiedName(), isSelf);
+      return new TypeAnnotationDescriptor(classType.name(), TypeAnnotationDescriptor.TypeKind.INSTANCE, args, classType.fullyQualifiedName(), isSelf);
     } else if (type instanceof FunctionType functionType) {
-      return new TypeAnnotationDescriptor(functionType.name(), TypeAnnotationDescriptor.TypeKind.CALLABLE, List.of(), functionType.fullyQualifiedName(), false);
+      return new TypeAnnotationDescriptor(functionType.name(), TypeAnnotationDescriptor.TypeKind.CALLABLE, args, functionType.fullyQualifiedName(), false);
     } else if (type instanceof UnknownType.UnresolvedImportType importType) {
-      return new TypeAnnotationDescriptor(importType.importPath(), TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(),
-          FullyQualifiedNameHelper.getFullyQualifiedName(importType).orElse(null), false);
+      return new TypeAnnotationDescriptor(importType.importPath(), TypeAnnotationDescriptor.TypeKind.INSTANCE, args,
+        FullyQualifiedNameHelper.getFullyQualifiedName(importType).orElse(null), false);
     }
     return null;
   }
+
 }

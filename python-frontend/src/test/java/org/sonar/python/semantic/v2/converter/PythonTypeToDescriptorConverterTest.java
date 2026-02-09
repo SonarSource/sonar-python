@@ -62,6 +62,7 @@ class PythonTypeToDescriptorConverterTest {
   private final PythonTypeToDescriptorConverter converter = new PythonTypeToDescriptorConverter();
   private final TypeWrapper intTypeWrapper = TypeWrapper.of(new UnknownType.UnresolvedImportType("int"));
   private final TypeWrapper floatTypeWrapper = TypeWrapper.of(new UnknownType.UnresolvedImportType("float"));
+  private final TypeWrapper listTypeWrapper = TypeWrapper.of(new UnknownType.UnresolvedImportType("list"));
   private final LocationInFile location = new LocationInFile("myFile", 1, 2, 3, 4);
 
   @Test
@@ -113,6 +114,57 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(parameter.location()).isEqualTo(location);
     assertThat(parameter.descriptor()).isNotNull();
     assertThat(parameter.descriptor().fullyQualifiedName()).isEqualTo("int");
+  }
+
+  @Test
+  void testConvertFunctionTypeWithAttributes() {
+    var intListObjType = ObjectType.Builder.fromTypeWrapper(listTypeWrapper)
+      .withAttributes(List.of(intTypeWrapper.type()))
+      .build();
+
+    var floatListObjType = ObjectType.Builder.fromTypeWrapper(listTypeWrapper)
+      .withAttributes(List.of(floatTypeWrapper.type()))
+      .build();
+
+    ParameterV2 parameterV2 = new ParameterV2("param", TypeWrapper.of(intListObjType), false, true, false, false, false, location);
+    FunctionType functionType = new FunctionType("functionType",
+      "my_package.foo.functionType",
+      List.of(new ModuleType("bar")),
+      List.of(parameterV2),
+      List.of(TypeWrapper.of(new UnknownType.UnresolvedImportType("abc.abstractmethod"))),
+      TypeWrapper.of(floatListObjType),
+      TypeOrigin.LOCAL,
+      true,
+      true,
+      true,
+      false,
+      false,
+      null,
+      location);
+    Descriptor descriptor = converter.convert("foo", new SymbolV2Impl("myFunction"), Set.of(functionType));
+
+    assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
+
+    FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
+    assertThat(functionDescriptor.annotatedReturnTypeName()).isEqualTo("list");
+    assertThat(functionDescriptor.typeAnnotationDescriptor()).isNotNull();
+    assertThat(functionDescriptor.typeAnnotationDescriptor().fullyQualifiedName()).isEqualTo("list");
+    assertThat(functionDescriptor.typeAnnotationDescriptor().kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(functionDescriptor.typeAnnotationDescriptor().args())
+      .satisfies(arg -> assertThat(arg.fullyQualifiedName()).isEqualTo("float"), Index.atIndex(0))
+      .hasSize(1);
+
+    assertThat(functionDescriptor.parameters()).hasSize(1);
+    FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
+    assertThat(parameter.name()).isEqualTo("param");
+    assertThat(parameter.descriptor()).isNotNull();
+
+    TypeAnnotationDescriptor parameterDescriptor = parameter.descriptor();
+    assertThat(parameterDescriptor.fullyQualifiedName()).isEqualTo("list");
+    assertThat(parameterDescriptor.kind()).isEqualTo(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    assertThat(parameterDescriptor.args())
+      .satisfies(arg -> assertThat(arg.fullyQualifiedName()).isEqualTo("int"), Index.atIndex(0))
+      .hasSize(1);
   }
 
   @Test

@@ -97,8 +97,14 @@ public final class CallReturnTypeCalculator {
   }
 
   private static boolean containsSelfType(PythonType type, TypePredicateContext typePredicateContext) {
-    return TypeInferenceMatcher.of(TypeInferenceMatchers.isObjectSatisfying(TypeInferenceMatchers.isSelf()))
-      .evaluate(type, typePredicateContext).isTrue();
+    if (type instanceof SelfType || type.unwrappedType() instanceof SelfType) {
+      return true;
+    }
+    if (type instanceof ObjectType objectType) {
+      return objectType.attributes().stream().anyMatch(t -> containsSelfType(t, typePredicateContext));
+    }
+
+    return false;
   }
 
   private static boolean isInstanceOrClassMethodCall(CallExpression callExpr, TypePredicateContext typePredicateContext) {
@@ -133,10 +139,16 @@ public final class CallReturnTypeCalculator {
   }
 
   private static PythonType collapseSelfType(PythonType returnType, PythonType receiverType) {
-    if (returnType instanceof ObjectType objectType && objectType.type() instanceof SelfType) {
-      return ObjectType.Builder.fromType(objectType)
-        .withType(receiverType)
+    if (returnType instanceof ObjectType objectType) {
+      var objectBuilder = ObjectType.Builder.fromType(objectType);
+      if (objectType.type() instanceof SelfType) {
+        objectBuilder.withType(receiverType);
+      }
+      return objectBuilder
+        .withAttributes(objectType.attributes().stream().map(t -> collapseSelfType(t, receiverType)).toList())
         .build();
+    } else if (returnType instanceof SelfType) {
+      return receiverType;
     }
     return PythonType.UNKNOWN;
   }

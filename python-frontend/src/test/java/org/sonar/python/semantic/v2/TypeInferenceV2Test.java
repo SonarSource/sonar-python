@@ -25,7 +25,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
-import org.assertj.core.api.Condition;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.assertj.core.data.Index;
 import org.assertj.core.groups.Tuple;
@@ -90,6 +89,7 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyTypeWrapper;
+import org.sonar.python.types.v2.TypesTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.InstanceOfAssertFactories.type;
@@ -4254,6 +4254,46 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void collapseSelfTypeInAttribute() {
+    FileInput root = inferTypes("""
+      from pathlib import Path
+      p: Path = Path(".")
+      x = p.glob("**/*.txt")
+      """);
+
+    var generatorType = PROJECT_LEVEL_TYPE_TABLE.getType("typing.Generator");
+    assertThat(generatorType).isNotEqualTo(PythonType.UNKNOWN);
+
+    var pathType = PROJECT_LEVEL_TYPE_TABLE.getType("pathlib.Path");
+    assertThat(pathType).isNotEqualTo(PythonType.UNKNOWN);
+
+    Name xName = PythonTestUtils.getLastDescendant(root, t -> t instanceof Name name && "x".equals(name.name()));
+    PythonType xType = xName.typeV2();
+    assertThat(xType).is(TypesTestUtils.objectTypeOf(generatorType));
+    ObjectType objectType = (ObjectType) xType;
+    assertThat(objectType.attributes())
+      .element(0)
+      .isEqualTo(pathType);
+  }
+
+  @Test
+  void listOfSelfType() {
+    FileInput root = inferTypes("""
+      from pathlib import Path
+      p = Path("some_dir/")
+      for file in p.glob("**/*.txt"):
+        file
+      """);
+
+    PythonType pathType = PROJECT_LEVEL_TYPE_TABLE.getType("pathlib.Path");
+    assertThat(pathType).isNotEqualTo(PythonType.UNKNOWN);
+
+    Name fileName = PythonTestUtils.getLastDescendant(root, t -> t instanceof Name name && "file".equals(name.name()));
+    PythonType fileType = fileName.typeV2();
+    assertThat(fileType).is(TypesTestUtils.objectTypeOf(pathType));
+  }
+
+  @Test
   void selfParameterTypeOverwritesExplicitAnnotation() {
     FileInput root = inferTypes("""
       class MyClass:
@@ -5033,14 +5073,14 @@ public class TypeInferenceV2Test {
     ParameterV2 parameter = functionType.parameters().get(0);
     assertThat(parameter.declaredType().type())
       .isInstanceOfSatisfying(ObjectType.class, objType -> assertThat(objType.attributes())
-        .satisfies(intAttribute -> assertThat(intAttribute).is(objectTypeOf(INT_TYPE)), Index.atIndex(0))
-        .satisfies(strAttribute -> assertThat(strAttribute).is(objectTypeOf(STR_TYPE)), Index.atIndex(1)));
+        .satisfies(intAttribute -> assertThat(intAttribute).is(TypesTestUtils.objectTypeOf(INT_TYPE)), Index.atIndex(0))
+        .satisfies(strAttribute -> assertThat(strAttribute).is(TypesTestUtils.objectTypeOf(STR_TYPE)), Index.atIndex(1)));
 
     PythonType returnType = functionType.returnType();
     assertThat(returnType)
       .isInstanceOfSatisfying(ObjectType.class, objType -> assertThat(objType.attributes())
-        .satisfies(intAttribute -> assertThat(intAttribute).is(objectTypeOf(INT_TYPE)), Index.atIndex(0))
-        .satisfies(strAttribute -> assertThat(strAttribute).is(objectTypeOf(STR_TYPE)), Index.atIndex(1)));
+        .satisfies(intAttribute -> assertThat(intAttribute).is(TypesTestUtils.objectTypeOf(INT_TYPE)), Index.atIndex(0))
+        .satisfies(strAttribute -> assertThat(strAttribute).is(TypesTestUtils.objectTypeOf(STR_TYPE)), Index.atIndex(1)));
   }
 
   @Test
@@ -5062,14 +5102,14 @@ public class TypeInferenceV2Test {
     ParameterV2 parameter = functionType.parameters().get(0);
     assertThat(parameter.declaredType().type())
       .isInstanceOfSatisfying(ObjectType.class, objType -> assertThat(objType.attributes())
-        .satisfies(intAttribute -> assertThat(intAttribute).is(objectTypeOf(INT_TYPE)), Index.atIndex(0))
-        .satisfies(myClassAttribute -> assertThat(myClassAttribute).is(objectTypeOf(myClass)), Index.atIndex(1)));
+        .satisfies(intAttribute -> assertThat(intAttribute).is(TypesTestUtils.objectTypeOf(INT_TYPE)), Index.atIndex(0))
+        .satisfies(myClassAttribute -> assertThat(myClassAttribute).is(TypesTestUtils.objectTypeOf(myClass)), Index.atIndex(1)));
 
     PythonType returnType = functionType.returnType();
     assertThat(returnType)
       .isInstanceOfSatisfying(ObjectType.class, objType -> assertThat(objType.attributes())
-        .satisfies(intAttribute -> assertThat(intAttribute).is(objectTypeOf(INT_TYPE)), Index.atIndex(0))
-        .satisfies(myClassAttribute -> assertThat(myClassAttribute).is(objectTypeOf(myClass)), Index.atIndex(1)));
+        .satisfies(intAttribute -> assertThat(intAttribute).is(TypesTestUtils.objectTypeOf(INT_TYPE)), Index.atIndex(0))
+        .satisfies(myClassAttribute -> assertThat(myClassAttribute).is(TypesTestUtils.objectTypeOf(myClass)), Index.atIndex(1)));
   }
 
   @Test
@@ -5112,16 +5152,6 @@ public class TypeInferenceV2Test {
 
     assertThat(xType.attributes())
       .element(0)
-      .is(objectTypeOf(projectLevelIntType));
+      .is(TypesTestUtils.objectTypeOf(projectLevelIntType));
   }
-
-  private static Condition<PythonType> objectTypeOf(PythonType type) {
-    return new Condition<PythonType>("is object type of " + type) {
-      @Override
-      public boolean matches(PythonType value) {
-        return value instanceof ObjectType objectType && objectType.unwrappedType().equals(type);
-      }
-    };
-  }
-
 }

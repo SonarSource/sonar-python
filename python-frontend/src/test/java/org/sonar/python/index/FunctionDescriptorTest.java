@@ -69,8 +69,25 @@ class FunctionDescriptorTest {
     assertDescriptorToProtobuf(functionDescriptor);
   }
 
+  @ParameterizedTest
+  @MethodSource("parameterWithTypeTestCases")
+  void parameterWithType(String code, String expectedAnnotatedType) {
+    FunctionDescriptor functionDescriptor = lastFunctionDescriptor(code);
+    FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
+    assertThat(parameter.annotatedType()).isEqualTo(expectedAnnotatedType);
+    assertDescriptorToProtobuf(functionDescriptor);
+  }
+
+  static Stream<Arguments> parameterWithTypeTestCases() {
+    return Stream.of(
+      Arguments.of("def foo(x: str): ...", "str"),
+      Arguments.of("def foo(x: list[something]): ...", "list"),
+      Arguments.of("def foo(x: str): ...", "str")
+    );
+  }
+
   @Test
-  void parameterWithType() {
+  void parameterWithPositional() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x: str): ...");
     FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
     assertThat(parameter.annotatedType()).isEqualTo("str");
@@ -90,14 +107,6 @@ class FunctionDescriptorTest {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x, *, y): ...");
     FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(1);
     assertThat(parameter.isKeywordOnly()).isTrue();
-    assertDescriptorToProtobuf(functionDescriptor);
-  }
-
-  @Test
-  void parameterWithPositional() {
-    FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x: str): ...");
-    FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
-    assertThat(parameter.annotatedType()).isEqualTo("str");
     assertDescriptorToProtobuf(functionDescriptor);
   }
 
