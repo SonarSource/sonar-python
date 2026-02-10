@@ -44,7 +44,7 @@ import org.sonar.api.batch.fs.InputFile;
  *   <li>Flit: auto-detects src/ layout by convention</li>
  * </ul>
  */
-public class BuildSystemSourceRoots {
+public class PyProjectTomlSourceRoots {
 
   private static final TomlMapper TOML_MAPPER = new TomlMapper();
 
@@ -52,7 +52,7 @@ public class BuildSystemSourceRoots {
     TOML_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
   }
 
-  private BuildSystemSourceRoots() {
+  private PyProjectTomlSourceRoots() {
   }
 
   /**
@@ -149,7 +149,7 @@ public class BuildSystemSourceRoots {
     // Fall back to parsing directory from packages
     if (!wheel.packages().isEmpty()) {
       return wheel.packages().stream()
-        .map(BuildSystemSourceRoots::extractDirectoryFromPackagePath)
+        .map(PyProjectTomlSourceRoots::extractDirectoryFromPackagePath)
         .filter(dir -> dir != null && !dir.isEmpty())
         .distinct()
         .toList();
