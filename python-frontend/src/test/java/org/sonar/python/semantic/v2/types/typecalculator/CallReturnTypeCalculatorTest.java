@@ -480,4 +480,58 @@ class CallReturnTypeCalculatorTest {
       .extracting(PythonType::unwrappedType)
       .isEqualTo(classDef.name().typeV2());
   }
+
+  @Test
+  void computeCallExpressionType_revealType_transparent() {
+    FileInput fileInput = parseAndInferTypes("""
+      x = 42
+      reveal_type(x)
+      """);
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+    assertThat(result).isInstanceOf(ObjectType.class);
+    assertThat(((ObjectType) result).unwrappedType()).isEqualTo(TypesTestUtils.INT_TYPE);
+  }
+
+  @Test
+  void computeCallExpressionType_revealType_inTypeAnnotation() {
+    FileInput fileInput = parseAndInferTypes("""
+      def foo(x: reveal_type(int)): ...
+      """);
+
+    CallExpressionImpl callExpr = getFirstDescendant(fileInput, CallExpression.class::isInstance);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+    assertThat(result).isEqualTo(TypesTestUtils.INT_TYPE);
+  }
+
+  @Test
+  void computeCallExpressionType_revealType_noArguments() {
+    FileInput fileInput = parseAndInferTypes("""
+      reveal_type()
+      """);
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+    assertThat(result).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void computeCallExpressionType_revealType_locallyDefined_notTransparent() {
+    FileInput fileInput = parseAndInferTypes("""
+      def reveal_type(x) -> str:
+        return str(type(x))
+      x = 42
+      reveal_type(x)
+      """);
+
+    CallExpressionImpl callExpr = getLastDescendant(fileInput, CallExpression.class::isInstance);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+    assertThat(result).isInstanceOf(ObjectType.class);
+    assertThat(((ObjectType) result).unwrappedType()).isEqualTo(TypesTestUtils.STR_TYPE);
+  }
 }

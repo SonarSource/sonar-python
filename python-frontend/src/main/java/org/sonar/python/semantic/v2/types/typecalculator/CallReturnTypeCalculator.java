@@ -19,10 +19,12 @@ package org.sonar.python.semantic.v2.types.typecalculator;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
@@ -34,14 +36,21 @@ import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.types.TypeInferenceMatcher;
 import org.sonar.python.semantic.v2.types.TypeInferenceMatchers;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 public final class CallReturnTypeCalculator {
+
+  private static final String REVEAL_TYPE_FQN = "typing.reveal_type";
 
   private CallReturnTypeCalculator() {
   }
 
   public static PythonType computeCallExpressionType(CallExpression callExpr, TypePredicateContext typePredicateContext) {
+    if (isRevealTypeCall(callExpr, typePredicateContext)) {
+      return getFirstArgumentType(callExpr);
+    }
+
     PythonType calleeType = callExpr.callee().typeV2();
     TypeSource typeSource = computeTypeSource(calleeType, callExpr);
     PythonType returnType = returnTypeOfCall(calleeType);
@@ -179,5 +188,28 @@ public final class CallReturnTypeCalculator {
     }
     return callExpr.callee().typeV2().typeSource();
   }
-}
 
+  private static boolean isRevealTypeCall(CallExpression callExpr, TypePredicateContext typePredicateContext) {
+    Expression callee = callExpr.callee();
+    if (!(callee instanceof Name name) || !"reveal_type".equals(name.name())) {
+      return false;
+    }
+
+    PythonType calleeType = callee.typeV2();
+
+    TriBool hasRevealTypeFqn = TypeInferenceMatcher.of(TypeInferenceMatchers.withFQN(REVEAL_TYPE_FQN))
+      .evaluate(calleeType, typePredicateContext);
+
+    boolean isLocallyDefined = calleeType != PythonType.UNKNOWN;
+
+    return hasRevealTypeFqn.isTrue() || !isLocallyDefined;
+  }
+
+  private static PythonType getFirstArgumentType(CallExpression callExpr) {
+    RegularArgument firstArg = TreeUtils.nthArgumentOrKeyword(0, "__obj", callExpr.arguments());
+    if (firstArg != null) {
+      return firstArg.expression().typeV2();
+    }
+    return PythonType.UNKNOWN;
+  }
+}
