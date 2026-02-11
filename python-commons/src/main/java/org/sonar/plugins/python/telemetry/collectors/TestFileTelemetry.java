@@ -20,20 +20,32 @@ package org.sonar.plugins.python.telemetry.collectors;
  * Telemetry data for tracking test file misclassification.
  *
  * @param totalMainFiles Total number of files classified as MAIN
- * @param misclassifiedTestFiles Number of MAIN files that import unittest or pytest (likely test files)
+ * @param misclassifiedTestFiles Number of MAIN files that appear to be test files (import unittest/pytest or follow pytest patterns)
+ * @param totalLines Total number of lines across all files (MAIN + TEST)
+ * @param totalMainLines Total number of lines across all MAIN files
+ * @param testLines Number of lines across all TEST files (as classified by the scanner engine)
+ * @param misclassifiedTestLines Number of lines across misclassified test files (subset of totalMainLines)
  */
 public record TestFileTelemetry(
   long totalMainFiles,
-  long misclassifiedTestFiles) {
+  long misclassifiedTestFiles,
+  long totalLines,
+  long totalMainLines,
+  long testLines,
+  long misclassifiedTestLines) {
 
   public static TestFileTelemetry empty() {
-    return new TestFileTelemetry(0, 0);
+    return new TestFileTelemetry(0, 0, 0, 0, 0, 0);
   }
 
   public TestFileTelemetry add(TestFileTelemetry other) {
     return new TestFileTelemetry(
       this.totalMainFiles + other.totalMainFiles,
-      this.misclassifiedTestFiles + other.misclassifiedTestFiles
+      this.misclassifiedTestFiles + other.misclassifiedTestFiles,
+      this.totalLines + other.totalLines,
+      this.totalMainLines + other.totalMainLines,
+      this.testLines + other.testLines,
+      this.misclassifiedTestLines + other.misclassifiedTestLines
     );
   }
 }

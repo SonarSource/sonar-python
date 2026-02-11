@@ -36,6 +36,22 @@ class TestFileTelemetryCollectorTest {
     return TestPythonVisitorRunner.createContext(mockFile, null, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
   }
 
+  @Test
+  void lineCountForSingleLineFile() {
+    var singleLine = createContext("x = 1");
+    assertThat(TestFileTelemetryCollector.lineCount(singleLine.rootTree())).isEqualTo(1);
+  }
+
+  @Test
+  void lineCountForMultiLineFile() {
+    var multiLine = createContext("""
+      x = 1
+      y = 2
+      z = 3
+      """);
+    assertThat(TestFileTelemetryCollector.lineCount(multiLine.rootTree())).isEqualTo(4);
+  }
+
   @ParameterizedTest
   @MethodSource("provideNotMisclassifiedTestCases")
   void mainFile_notMisclassified(String code) {
@@ -47,6 +63,10 @@ class TestFileTelemetryCollectorTest {
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isEqualTo(1);
     assertThat(telemetry.misclassifiedTestFiles()).isZero();
+    assertThat(telemetry.totalLines()).isPositive();
+    assertThat(telemetry.totalMainLines()).isEqualTo(telemetry.totalLines());
+    assertThat(telemetry.testLines()).isZero();
+    assertThat(telemetry.misclassifiedTestLines()).isZero();
   }
 
   private static Stream<Arguments> provideNotMisclassifiedTestCases() {
@@ -77,6 +97,10 @@ class TestFileTelemetryCollectorTest {
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isEqualTo(1);
     assertThat(telemetry.misclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.totalLines()).isPositive();
+    assertThat(telemetry.totalMainLines()).isEqualTo(telemetry.totalLines());
+    assertThat(telemetry.testLines()).isZero();
+    assertThat(telemetry.misclassifiedTestLines()).isEqualTo(telemetry.totalMainLines());
   }
 
   private static Stream<Arguments> provideMisclassifiedTestCases() {
@@ -123,7 +147,7 @@ class TestFileTelemetryCollectorTest {
 
   @ParameterizedTest
   @MethodSource("provideTestFileNotCountedCases")
-  void testFile_notCounted(String code) {
+  void testFile_countsLinesButNotMainMetrics(String code) {
     var context = createContext(code);
 
     var collector = new TestFileTelemetryCollector();
@@ -132,6 +156,10 @@ class TestFileTelemetryCollectorTest {
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isZero();
     assertThat(telemetry.misclassifiedTestFiles()).isZero();
+    assertThat(telemetry.totalLines()).isPositive();
+    assertThat(telemetry.totalMainLines()).isZero();
+    assertThat(telemetry.testLines()).isEqualTo(telemetry.totalLines());
+    assertThat(telemetry.misclassifiedTestLines()).isZero();
   }
 
   private static Stream<Arguments> provideTestFileNotCountedCases() {
@@ -189,6 +217,10 @@ class TestFileTelemetryCollectorTest {
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isEqualTo(3);
     assertThat(telemetry.misclassifiedTestFiles()).isEqualTo(2);
+    assertThat(telemetry.totalLines()).isEqualTo(6);
+    assertThat(telemetry.totalMainLines()).isEqualTo(6);
+    assertThat(telemetry.testLines()).isZero();
+    assertThat(telemetry.misclassifiedTestLines()).isEqualTo(4);
   }
 
   @Test
@@ -205,6 +237,10 @@ class TestFileTelemetryCollectorTest {
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isEqualTo(2);
     assertThat(telemetry.misclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.totalLines()).isEqualTo(3);
+    assertThat(telemetry.totalMainLines()).isEqualTo(2);
+    assertThat(telemetry.testLines()).isEqualTo(1);
+    assertThat(telemetry.misclassifiedTestLines()).isEqualTo(1);
   }
 
   @Test
@@ -222,8 +258,58 @@ class TestFileTelemetryCollectorTest {
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isEqualTo(1);
     assertThat(telemetry.misclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.totalLines()).isEqualTo(5);
+    assertThat(telemetry.totalMainLines()).isEqualTo(5);
+    assertThat(telemetry.testLines()).isZero();
+    assertThat(telemetry.misclassifiedTestLines()).isEqualTo(5);
   }
 
+  @Test
+  void lineCountAggregatesCorrectlyForDifferentFileSizes() {
+    var smallFile = createContext("x = 1");
+    var largerFile = createContext("""
+      import os
+      import sys
+      import json
+      
+      def foo():
+        pass
+      
+      def bar():
+        pass
+      """);
 
+    var collector = new TestFileTelemetryCollector();
+    collector.collect(smallFile.rootTree(), InputFile.Type.MAIN);
+    collector.collect(largerFile.rootTree(), InputFile.Type.MAIN);
+
+    var telemetry = collector.getTelemetry();
+    assertThat(telemetry.totalMainLines()).isEqualTo(11);
+    assertThat(telemetry.misclassifiedTestLines()).isZero();
+  }
+
+  @Test
+  void misclassifiedTestLinesOnlyCountsMisclassifiedFiles() {
+    var misclassifiedFile = createContext("""
+      import pytest
+      
+      def test_something():
+        assert True
+      """);
+    var regularFile = createContext("""
+      import os
+      
+      def helper():
+        pass
+      """);
+
+    var collector = new TestFileTelemetryCollector();
+    collector.collect(misclassifiedFile.rootTree(), InputFile.Type.MAIN);
+    collector.collect(regularFile.rootTree(), InputFile.Type.MAIN);
+
+    var telemetry = collector.getTelemetry();
+    assertThat(telemetry.totalMainLines()).isEqualTo(10);
+    assertThat(telemetry.misclassifiedTestLines()).isEqualTo(5);
+  }
 }
 

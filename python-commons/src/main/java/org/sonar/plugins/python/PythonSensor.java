@@ -202,6 +202,10 @@ public final class PythonSensor implements Sensor {
     TestFileTelemetry telemetry = scanner.getTestFileTelemetry();
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_TOTAL, telemetry.totalMainFiles());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_MISCLASSIFIED_TEST, telemetry.misclassifiedTestFiles());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_LINES_TOTAL, telemetry.totalLines());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_LINES, telemetry.totalMainLines());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TEST_LINES, telemetry.testLines());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_LINES_MISCLASSIFIED_TEST, telemetry.misclassifiedTestLines());
   }
 
   private void updateNamespacePackageTelemetry(PythonIndexer pythonIndexer) {

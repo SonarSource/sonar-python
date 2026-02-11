@@ -32,32 +32,53 @@ public class TestFileTelemetryCollector {
 
   private final AtomicLong totalMainFiles = new AtomicLong(0);
   private final AtomicLong misclassifiedTestFiles = new AtomicLong(0);
+  private final AtomicLong totalLines = new AtomicLong(0);
+  private final AtomicLong totalMainLines = new AtomicLong(0);
+  private final AtomicLong testLines = new AtomicLong(0);
+  private final AtomicLong misclassifiedTestLines = new AtomicLong(0);
 
   public void collect(FileInput rootTree, InputFile.Type fileType) {
-    if (fileType != InputFile.Type.MAIN) {
+    long lines = lineCount(rootTree);
+    totalLines.addAndGet(lines);
+
+    if (fileType == InputFile.Type.TEST) {
+      testLines.addAndGet(lines);
       return;
     }
 
     totalMainFiles.incrementAndGet();
+    totalMainLines.addAndGet(lines);
 
+    if (isMisclassifiedTestFile(rootTree)) {
+      misclassifiedTestFiles.incrementAndGet();
+      misclassifiedTestLines.addAndGet(lines);
+    }
+  }
+
+  private static boolean isMisclassifiedTestFile(FileInput rootTree) {
     var importVisitor = new TestImportVisitor();
     rootTree.accept(importVisitor);
-
     if (importVisitor.hasTestFrameworkImport) {
-      misclassifiedTestFiles.incrementAndGet();
-      return;
+      return true;
     }
 
     var pytestPatternVisitor = new PytestPatternVisitor();
     rootTree.accept(pytestPatternVisitor);
+    return pytestPatternVisitor.hasPytestPattern;
+  }
 
-    if (pytestPatternVisitor.hasPytestPattern) {
-      misclassifiedTestFiles.incrementAndGet();
-    }
+  static long lineCount(FileInput rootTree) {
+    return rootTree.lastToken().line();
   }
 
   public TestFileTelemetry getTelemetry() {
-    return new TestFileTelemetry(totalMainFiles.get(), misclassifiedTestFiles.get());
+    return new TestFileTelemetry(
+      totalMainFiles.get(),
+      misclassifiedTestFiles.get(),
+      totalLines.get(),
+      totalMainLines.get(),
+      testLines.get(),
+      misclassifiedTestLines.get());
   }
 
   private static class TestImportVisitor extends BaseTreeVisitor {
