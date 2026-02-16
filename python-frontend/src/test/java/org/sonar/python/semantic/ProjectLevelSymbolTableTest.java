@@ -1242,4 +1242,25 @@ class ProjectLevelSymbolTableTest {
     assertThat(projectLevelSymbolTable.projectBasePackages()).containsExactlyInAnyOrder("first", "second", "third");
   }
 
+  @Test
+  void hasModuleWithPrefix_detectsNamespacePackages() {
+    var symbolTable = empty();
+
+    // Add a nested module (simulating acme.math.advanced)
+    FileInput tree = parseWithoutSymbols("def foo(): pass");
+    symbolTable.addModule(tree, "acme.math.advanced", pythonFile("__init__.py"));
+
+    // "acme" prefix should be detected (namespace package)
+    assertThat(symbolTable.hasModuleWithPrefix("acme")).isTrue();
+    // "acme.math" prefix should be detected
+    assertThat(symbolTable.hasModuleWithPrefix("acme.math")).isTrue();
+    // "acme.math.advanced" has no submodules
+    assertThat(symbolTable.hasModuleWithPrefix("acme.math.advanced")).isFalse();
+    // Non-existent prefix
+    assertThat(symbolTable.hasModuleWithPrefix("nonexistent")).isFalse();
+    // Partial match should not work (must match full component)
+    assertThat(symbolTable.hasModuleWithPrefix("ac")).isFalse();
+    assertThat(symbolTable.hasModuleWithPrefix("acme.ma")).isFalse();
+  }
+
 }

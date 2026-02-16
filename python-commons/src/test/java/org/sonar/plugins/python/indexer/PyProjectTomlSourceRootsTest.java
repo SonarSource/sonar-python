@@ -30,10 +30,13 @@ class PyProjectTomlSourceRootsTest {
   @TempDir
   Path tempDir;
 
+  // === Error handling ===
+
   @Test
-  void extract_fileNotReadable_returnsEmptyList() {
+  void extractWithLocation_fileNotReadable_returnsEmptyRoots() {
     File nonExistentFile = new File(tempDir.toFile(), "nonexistent.toml");
-    assertThat(PyProjectTomlSourceRoots.extract(nonExistentFile)).isEmpty();
+    ConfigSourceRoots result = PyProjectTomlSourceRoots.extractWithLocation(nonExistentFile);
+    assertThat(result.relativeRoots()).isEmpty();
   }
 
   @Test
@@ -421,24 +424,83 @@ class PyProjectTomlSourceRootsTest {
       """)).containsExactly("src");
   }
 
-  // === File API ===
+  // === extractWithLocation API ===
 
   @Test
-  void extract_fromFile() throws IOException {
+  void extractWithLocation_returnsConfigSourceRoots() throws IOException {
     File file = tempDir.resolve("pyproject.toml").toFile();
     Files.writeString(file.toPath(), """
         [tool.setuptools.packages.find]
         where = ["src"]
         """);
 
-    assertThat(PyProjectTomlSourceRoots.extract(file)).containsExactly("src");
+    ConfigSourceRoots result = PyProjectTomlSourceRoots.extractWithLocation(file);
+
+    assertThat(result.configFile()).isEqualTo(file);
+    assertThat(result.relativeRoots()).containsExactly("src");
   }
 
   @Test
-  void extract_fromFile_invalidContent() throws IOException {
+  void extractWithLocation_resolvesAbsolutePathsRelativeToConfigFile() throws IOException {
+    // Create a subdirectory structure: tempDir/subproject/pyproject.toml
+    Path subprojectDir = tempDir.resolve("subproject");
+    Files.createDirectories(subprojectDir);
+    File file = subprojectDir.resolve("pyproject.toml").toFile();
+    Files.writeString(file.toPath(), """
+        [build-system]
+        build-backend = "uv_build"
+        """);
+
+    ConfigSourceRoots result = PyProjectTomlSourceRoots.extractWithLocation(file);
+
+    assertThat(result.configFile()).isEqualTo(file);
+    assertThat(result.relativeRoots()).containsExactly("src");
+    // The absolute path should be relative to the config file's directory, not tempDir
+    assertThat(result.toAbsolutePaths()).containsExactly(
+      subprojectDir.resolve("src").toFile().getAbsolutePath()
+    );
+  }
+
+  @Test
+  void extractWithLocation_emptyRootsWhenNoConfig() throws IOException {
+    File file = tempDir.resolve("pyproject.toml").toFile();
+    Files.writeString(file.toPath(), """
+        [project]
+        name = "myproject"
+        """);
+
+    ConfigSourceRoots result = PyProjectTomlSourceRoots.extractWithLocation(file);
+
+    assertThat(result.configFile()).isEqualTo(file);
+    assertThat(result.relativeRoots()).isEmpty();
+    assertThat(result.toAbsolutePaths()).isEmpty();
+  }
+
+  @Test
+  void extractWithLocation_multipleRoots() throws IOException {
+    Path subprojectDir = tempDir.resolve("app");
+    Files.createDirectories(subprojectDir);
+    File file = subprojectDir.resolve("pyproject.toml").toFile();
+    Files.writeString(file.toPath(), """
+        [tool.setuptools.packages.find]
+        where = ["src", "lib"]
+        """);
+
+    ConfigSourceRoots result = PyProjectTomlSourceRoots.extractWithLocation(file);
+
+    assertThat(result.toAbsolutePaths()).containsExactly(
+      subprojectDir.resolve("src").toFile().getAbsolutePath(),
+      subprojectDir.resolve("lib").toFile().getAbsolutePath()
+    );
+  }
+
+  @Test
+  void extractWithLocation_invalidContent() throws IOException {
     File file = tempDir.resolve("pyproject.toml").toFile();
     Files.writeString(file.toPath(), "[invalid");
 
-    assertThat(PyProjectTomlSourceRoots.extract(file)).isEmpty();
+    ConfigSourceRoots result = PyProjectTomlSourceRoots.extractWithLocation(file);
+
+    assertThat(result.relativeRoots()).isEmpty();
   }
 }

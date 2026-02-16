@@ -16,6 +16,7 @@
  */
 package org.sonar.python.semantic.v2;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -64,8 +65,9 @@ public class SymbolsModuleTypeProvider {
   public PythonType convertModuleType(List<String> moduleFqn, ModuleType parent) {
     var moduleName = moduleFqn.get(moduleFqn.size() - 1);
     var moduleFqnString = getModuleFqnString(moduleFqn);
-    Optional<ModuleType> result =  createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)
-      .or(() -> createModuleTypeFromTypeShed(moduleName, moduleFqnString, parent));
+    Optional<ModuleType> result = createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)
+      .or(() -> createModuleTypeFromTypeShed(moduleName, moduleFqnString, parent))
+      .or(() -> createNamespacePackageModuleType(moduleName, moduleFqnString, parent));
 
     if (result.isEmpty()) {
       return PythonType.UNKNOWN;
@@ -110,5 +112,17 @@ public class SymbolsModuleTypeProvider {
         members.put(alias, originalType);
       }
     });
+  }
+
+  /**
+   * Creates a synthetic ModuleType for namespace packages (PEP 420).
+   * A namespace package is a package without an __init__.py that contains subpackages.
+   * We detect this by checking if any module in the project has this FQN as a prefix.
+   */
+  private Optional<ModuleType> createNamespacePackageModuleType(String moduleName, String moduleFqn, ModuleType parent) {
+    if (projectLevelSymbolTable.hasModuleWithPrefix(moduleFqn)) {
+      return Optional.of(new ModuleType(moduleName, moduleFqn, parent, new HashMap<>()));
+    }
+    return Optional.empty();
   }
 }

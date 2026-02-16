@@ -134,14 +134,19 @@ public abstract class PythonIndexer {
   /**
    * Extracts source root directories from build configuration files (pyproject.toml and setup.py).
    *
+   * <p>Source roots are resolved to absolute paths relative to the configuration file's directory,
+   * not the project base directory. This correctly handles cases where config files are in
+   * subdirectories (e.g., monorepos with multiple Python projects).
+   *
    * @param fileSystem the file system to search for configuration files
-   * @return list of extracted source root paths (relative), or empty list if none found
+   * @return list of extracted source root absolute paths, or empty list if none found
    */
   private static List<String> extractSourceRoots(FileSystem fileSystem) {
-    List<String> pyprojectRoots = extractSourceRootsFromPyProjectToml(fileSystem);
-    List<String> setupPyRoots = extractSourceRootsFromSetupPy(fileSystem);
+    List<ConfigSourceRoots> pyprojectRoots = extractSourceRootsFromPyProjectToml(fileSystem);
+    List<ConfigSourceRoots> setupPyRoots = extractSourceRootsFromSetupPy(fileSystem);
 
     return Stream.concat(pyprojectRoots.stream(), setupPyRoots.stream())
+      .flatMap(csr -> csr.toAbsolutePaths().stream())
       .distinct()
       .toList();
   }
@@ -195,12 +200,12 @@ public abstract class PythonIndexer {
    * Extracts source root directories from pyproject.toml files in the project.
    *
    * @param fileSystem the file system to search for pyproject.toml
-   * @return list of extracted source root paths (relative), or empty list if none found
+   * @return list of ConfigSourceRoots containing config file locations and their relative roots
    */
-  private static List<String> extractSourceRootsFromPyProjectToml(FileSystem fileSystem) {
+  private static List<ConfigSourceRoots> extractSourceRootsFromPyProjectToml(FileSystem fileSystem) {
     return findFilesRecursively(fileSystem, "pyproject.toml")
-      .flatMap(file -> PyProjectTomlSourceRoots.extract(file).stream())
-      .distinct()
+      .map(PyProjectTomlSourceRoots::extractWithLocation)
+      .filter(csr -> !csr.relativeRoots().isEmpty())
       .toList();
   }
 
@@ -208,12 +213,12 @@ public abstract class PythonIndexer {
    * Extracts source root directories from setup.py files in the project.
    *
    * @param fileSystem the file system to search for setup.py
-   * @return list of extracted source root paths (relative), or empty list if none found
+   * @return list of ConfigSourceRoots containing config file locations and their relative roots
    */
-  private static List<String> extractSourceRootsFromSetupPy(FileSystem fileSystem) {
+  private static List<ConfigSourceRoots> extractSourceRootsFromSetupPy(FileSystem fileSystem) {
     return findFilesRecursively(fileSystem, "setup.py")
-      .flatMap(file -> SetupPySourceRoots.extract(file).stream())
-      .distinct()
+      .map(SetupPySourceRoots::extractWithLocation)
+      .filter(csr -> !csr.relativeRoots().isEmpty())
       .toList();
   }
 

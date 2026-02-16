@@ -244,34 +244,6 @@ class SetupPySourceRootsTest {
     """)).containsExactly("src");
   }
 
-  // === File API ===
-
-  @Test
-  void extract_fromFile() throws IOException {
-    File file = tempDir.resolve("setup.py").toFile();
-    Files.writeString(file.toPath(), """
-      from setuptools import setup
-      setup(package_dir={"": "src"})
-      """);
-
-    assertThat(SetupPySourceRoots.extract(file)).containsExactly("src");
-  }
-
-  @Test
-  void extract_fromFile_notReadable() {
-    File nonExistentFile = new File(tempDir.toFile(), "nonexistent.py");
-
-    assertThat(SetupPySourceRoots.extract(nonExistentFile)).isEmpty();
-  }
-
-  @Test
-  void extract_fromFile_malformedContent() throws IOException {
-    File file = tempDir.resolve("setup.py").toFile();
-    Files.writeString(file.toPath(), "[invalid python");
-
-    assertThat(SetupPySourceRoots.extract(file)).isEmpty();
-  }
-
   // === Dictionary unpacking support ===
 
   @Test
@@ -358,5 +330,94 @@ class SetupPySourceRootsTest {
       config2 = {"package_dir": {"pkg": "lib"}}
       setup(**config1, **config2)
       """)).containsExactly("src", "lib");
+  }
+
+  // === extractWithLocation API ===
+
+  @Test
+  void extractWithLocation_returnsConfigSourceRoots() throws IOException {
+    File file = tempDir.resolve("setup.py").toFile();
+    Files.writeString(file.toPath(), """
+      from setuptools import setup
+      setup(package_dir={"": "src"})
+      """);
+
+    ConfigSourceRoots result = SetupPySourceRoots.extractWithLocation(file);
+
+    assertThat(result.configFile()).isEqualTo(file);
+    assertThat(result.relativeRoots()).containsExactly("src");
+  }
+
+  @Test
+  void extractWithLocation_resolvesAbsolutePathsRelativeToConfigFile() throws IOException {
+    // Create a subdirectory structure: tempDir/subproject/setup.py
+    Path subprojectDir = tempDir.resolve("subproject");
+    Files.createDirectories(subprojectDir);
+    File file = subprojectDir.resolve("setup.py").toFile();
+    Files.writeString(file.toPath(), """
+      from setuptools import setup
+      setup(package_dir={"": "src"})
+      """);
+
+    ConfigSourceRoots result = SetupPySourceRoots.extractWithLocation(file);
+
+    assertThat(result.configFile()).isEqualTo(file);
+    assertThat(result.relativeRoots()).containsExactly("src");
+    // The absolute path should be relative to the config file's directory, not tempDir
+    assertThat(result.toAbsolutePaths()).containsExactly(
+      subprojectDir.resolve("src").toFile().getAbsolutePath()
+    );
+  }
+
+  @Test
+  void extractWithLocation_emptyRootsWhenNoConfig() throws IOException {
+    File file = tempDir.resolve("setup.py").toFile();
+    Files.writeString(file.toPath(), """
+      from setuptools import setup
+      setup(name="myproject")
+      """);
+
+    ConfigSourceRoots result = SetupPySourceRoots.extractWithLocation(file);
+
+    assertThat(result.configFile()).isEqualTo(file);
+    assertThat(result.relativeRoots()).isEmpty();
+    assertThat(result.toAbsolutePaths()).isEmpty();
+  }
+
+  @Test
+  void extractWithLocation_multipleRoots() throws IOException {
+    Path subprojectDir = tempDir.resolve("app");
+    Files.createDirectories(subprojectDir);
+    File file = subprojectDir.resolve("setup.py").toFile();
+    Files.writeString(file.toPath(), """
+      from setuptools import setup
+      setup(package_dir={"pkg1": "src", "pkg2": "lib"})
+      """);
+
+    ConfigSourceRoots result = SetupPySourceRoots.extractWithLocation(file);
+
+    assertThat(result.toAbsolutePaths()).containsExactly(
+      subprojectDir.resolve("src").toFile().getAbsolutePath(),
+      subprojectDir.resolve("lib").toFile().getAbsolutePath()
+    );
+  }
+
+  @Test
+  void extractWithLocation_fileNotReadable() {
+    File nonExistentFile = new File(tempDir.toFile(), "nonexistent.py");
+
+    ConfigSourceRoots result = SetupPySourceRoots.extractWithLocation(nonExistentFile);
+
+    assertThat(result.relativeRoots()).isEmpty();
+  }
+
+  @Test
+  void extractWithLocation_malformedContent() throws IOException {
+    File file = tempDir.resolve("setup.py").toFile();
+    Files.writeString(file.toPath(), "[invalid python");
+
+    ConfigSourceRoots result = SetupPySourceRoots.extractWithLocation(file);
+
+    assertThat(result.relativeRoots()).isEmpty();
   }
 }

@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
+import com.google.common.annotations.VisibleForTesting;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -62,7 +63,8 @@ public class PyProjectTomlSourceRoots {
    * @param tomlContent the content of a pyproject.toml file
    * @return list of source root paths (relative), empty if none found or on parse error
    */
-  public static List<String> extract(String tomlContent) {
+  @VisibleForTesting
+  static List<String> extract(String tomlContent) {
     try {
       PyProjectConfig config = TOML_MAPPER.readValue(tomlContent, PyProjectConfig.class);
       return extractFromConfig(config);
@@ -77,12 +79,27 @@ public class PyProjectTomlSourceRoots {
    * @param file the pyproject.toml file
    * @return list of source root paths (relative), empty if none found or on parse error
    */
-  public static List<String> extract(File file) {
+  private static List<String> extract(File file) {
     try {
       return extract(Files.readString(file.toPath()));
     } catch (IOException e) {
       return List.of();
     }
+  }
+
+  /**
+   * Extracts source root directories from a pyproject.toml File, preserving the config file location.
+   *
+   * <p>This method returns a {@link ConfigSourceRoots} that associates the extracted relative paths
+   * with the config file, allowing callers to resolve absolute paths relative to the config file's
+   * directory rather than the project base directory.
+   *
+   * @param file the pyproject.toml file
+   * @return ConfigSourceRoots containing the config file and its relative source roots
+   */
+  public static ConfigSourceRoots extractWithLocation(File file) {
+    List<String> roots = extract(file);
+    return new ConfigSourceRoots(file, roots);
   }
 
   private static List<String> extractFromConfig(PyProjectConfig config) {

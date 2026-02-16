@@ -231,6 +231,20 @@ public class ProjectLevelSymbolTable {
     return projectBasePackages;
   }
 
+  /**
+   * Checks if any registered module name starts with the given prefix followed by a dot.
+   * This is used to detect namespace packages (PEP 420) - packages without __init__.py
+   * that contain subpackages.
+   *
+   * @param prefix The module prefix to check (e.g., "acme")
+   * @return true if any module starts with "prefix." (e.g., "acme.math" exists)
+   */
+  public boolean hasModuleWithPrefix(String prefix) {
+    String prefixWithDot = prefix + ".";
+    return globalDescriptorsByModuleName.keySet().stream()
+      .anyMatch(moduleName -> moduleName.startsWith(prefixWithDot));
+  }
+
   public TypeShedDescriptorsProvider typeShedDescriptorsProvider() {
     if (typeShedDescriptorsProvider == null) {
       typeShedDescriptorsProvider = new TypeShedDescriptorsProvider(projectBasePackages);

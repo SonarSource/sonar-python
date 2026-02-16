@@ -494,4 +494,163 @@ class ProjectLevelTypeTableTest {
     assertThat(analyzersUtilsChecker.check(localUtilsType)).isEqualTo(TriBool.TRUE);
   }
 
+  /**
+   * Test for namespace packages (PEP 420) import resolution.
+   * 
+   * Structure (mimics namespace_basic IT):
+   *   acme/                           <- namespace package (no __init__.py)
+   *   acme/math/__init__.py           <- empty
+   *   acme/math/advanced/__init__.py  <- contains get_config() -> dict
+   *   mathapp/__init__.py             <- empty
+   *   mathapp/main.py                 <- imports from acme.math.advanced
+   * 
+   * When resolving `from acme.math.advanced import get_config`, the resolver
+   * should create a synthetic ModuleType for the "acme" namespace package
+   * (which has no __init__.py) and successfully resolve the import.
+   */
+  @Test
+  void namespacePackageImportResolution() {
+    var project = new TestProject();
+    
+    // Add the modules - note: no acme/__init__.py (namespace package per PEP 420)
+    project.addModule("acme/math/__init__.py", "");
+    project.addModule("acme/math/advanced/__init__.py", """
+      def get_config() -> dict:
+          return {"a": 1, "b": 2}
+      """);
+    project.addModule("mathapp/__init__.py", "");
+    
+    // Verify modules were added to the symbol table
+    var symbolTable = project.projectLevelSymbolTable();
+    var acmeDescriptors = symbolTable.getDescriptorsFromModule("acme");
+    var acmeMathDescriptors = symbolTable.getDescriptorsFromModule("acme.math");
+    var acmeMathAdvancedDescriptors = symbolTable.getDescriptorsFromModule("acme.math.advanced");
+    
+    // "acme" is a namespace package (no __init__.py), so it has no entry in the symbol table
+    assertThat(acmeDescriptors).as("acme is a namespace package with no __init__.py").isNull();
+    // But hasModuleWithPrefix should detect it as a namespace package
+    assertThat(symbolTable.hasModuleWithPrefix("acme")).as("acme should be detected as namespace package").isTrue();
+    // "acme.math" has an empty __init__.py, so it should have an empty entry
+    assertThat(acmeMathDescriptors).as("acme.math has an empty __init__.py").isEmpty();
+    // "acme.math.advanced" has get_config defined
+    assertThat(acmeMathAdvancedDescriptors).as("acme.math.advanced should have get_config").hasSize(1);
+    
+    // Verify type table resolution works with namespace packages
+    var typeTable = project.projectLevelTypeTable();
+    var acmeModuleType = typeTable.getModuleType(java.util.List.of("acme"));
+    var acmeMathModuleType = typeTable.getModuleType(java.util.List.of("acme", "math"));
+    var acmeMathAdvancedModuleType = typeTable.getModuleType(java.util.List.of("acme", "math", "advanced"));
+    
+    // "acme" namespace package should resolve to a synthetic ModuleType
+    assertThat(acmeModuleType)
+      .as("'acme' namespace package should resolve to ModuleType")
+      .isInstanceOf(ModuleType.class);
+    
+    // "acme.math" should resolve to ModuleType
+    assertThat(acmeMathModuleType)
+      .as("'acme.math' should resolve to ModuleType")
+      .isInstanceOf(ModuleType.class);
+    
+    // "acme.math.advanced" should resolve to ModuleType with get_config
+    assertThat(acmeMathAdvancedModuleType)
+      .as("'acme.math.advanced' should resolve to ModuleType")
+      .isInstanceOf(ModuleType.class);
+    
+    if (acmeMathAdvancedModuleType instanceof ModuleType moduleType) {
+      assertThat(moduleType.members()).containsKey("get_config");
+    }
+    
+    // Test: Verify get_config can be imported and has correct type
+    Expression getConfigExpr = project.lastExpression("""
+      from acme.math.advanced import get_config
+      get_config
+      """);
+    
+    assertThat(getConfigExpr.typeV2())
+      .as("get_config should be resolved as FunctionType")
+      .isInstanceOf(FunctionType.class);
+    assertThat(getConfigExpr.typeV2().name()).isEqualTo("get_config");
+    
+    // Test: Verify return type of get_config() is dict
+    FileInput fileInput = project.inferTypes("mathapp/main.py", """
+      from acme.math.advanced import get_config
+      config = get_config()
+      config
+      """);
+    
+    var statements = fileInput.statements().statements();
+    Expression configExpr = ((ExpressionStatement) statements.get(2)).expressions().get(0);
+    
+    var dictChecker = project.typeCheckBuilder().isInstanceOf("dict");
+    assertThat(dictChecker.check(configExpr.typeV2()))
+      .as("config should be typed as dict (return type of get_config)")
+      .isEqualTo(TriBool.TRUE);
+  }
+  
+  /**
+   * Contrast test: Same structure but with acme/__init__.py (regular package).
+   * This should work correctly.
+   */
+  @Test
+  void regularPackageImportResolution() {
+    var project = new TestProject();
+    
+    // Add the modules WITH acme/__init__.py (regular package)
+    project.addModule("acme/__init__.py", "");  // <-- This is the difference
+    project.addModule("acme/math/__init__.py", "");
+    project.addModule("acme/math/advanced/__init__.py", """
+      def get_config() -> dict:
+          return {"a": 1, "b": 2}
+      """);
+    project.addModule("mathapp/__init__.py", "");
+    
+    // Verify modules were added to the symbol table
+    var symbolTable = project.projectLevelSymbolTable();
+    var acmeDescriptors = symbolTable.getDescriptorsFromModule("acme");
+    var acmeMathAdvancedDescriptors = symbolTable.getDescriptorsFromModule("acme.math.advanced");
+    
+    // With __init__.py, "acme" should have an entry (even if empty)
+    assertThat(acmeDescriptors).as("acme now has an __init__.py").isEmpty();
+    assertThat(acmeMathAdvancedDescriptors).as("acme.math.advanced should have get_config").hasSize(1);
+    
+    // Verify type table resolution works
+    var typeTable = project.projectLevelTypeTable();
+    var acmeModuleType = typeTable.getModuleType(java.util.List.of("acme"));
+    var acmeMathAdvancedModuleType = typeTable.getModuleType(java.util.List.of("acme", "math", "advanced"));
+    
+    assertThat(acmeModuleType)
+      .as("'acme' should resolve to ModuleType")
+      .isInstanceOf(ModuleType.class);
+    
+    assertThat(acmeMathAdvancedModuleType)
+      .as("'acme.math.advanced' should resolve to ModuleType")
+      .isInstanceOf(ModuleType.class);
+    
+    // Test: Verify get_config can be imported and has correct type
+    Expression getConfigExpr = project.lastExpression("""
+      from acme.math.advanced import get_config
+      get_config
+      """);
+    
+    assertThat(getConfigExpr.typeV2())
+      .as("get_config should be resolved as FunctionType")
+      .isInstanceOf(FunctionType.class);
+    assertThat(getConfigExpr.typeV2().name()).isEqualTo("get_config");
+    
+    // Test: Verify return type of get_config() is dict
+    FileInput fileInput = project.inferTypes("mathapp/main.py", """
+      from acme.math.advanced import get_config
+      config = get_config()
+      config
+      """);
+    
+    var statements = fileInput.statements().statements();
+    Expression configExpr = ((ExpressionStatement) statements.get(2)).expressions().get(0);
+    
+    var dictChecker = project.typeCheckBuilder().isInstanceOf("dict");
+    assertThat(dictChecker.check(configExpr.typeV2()))
+      .as("config should be typed as dict (return type of get_config)")
+      .isEqualTo(TriBool.TRUE);
+  }
+
 }

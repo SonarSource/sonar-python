@@ -38,17 +38,19 @@ public class PackageRootResolver {
   /**
    * Resolves package root directories.
    *
-   * <p>If extracted roots from build system configuration are provided, resolves them to absolute paths.
+   * <p>If extracted roots from build system configuration are provided (already as absolute paths
+   * resolved relative to their config file locations), returns them directly.
    * Otherwise, applies a fallback chain to determine appropriate roots.
    *
-   * @param extractedRoots roots extracted from build system config (e.g., from BuildSystemSourceRoots.extract())
-   * @param config         the Sonar configuration to read sonar.sources property
-   * @param baseDir        the project base directory
+   * @param extractedRoots roots extracted from build system config, already as absolute paths
+   * @param config the Sonar configuration to read sonar.sources property
+   * @param baseDir the project base directory (used only for fallback resolution)
    * @return list of resolved package root absolute paths
    */
   public static List<String> resolve(List<String> extractedRoots, Configuration config, File baseDir) {
     if (!extractedRoots.isEmpty()) {
-      return toAbsolutePaths(extractedRoots, baseDir);
+      // Extracted roots are already absolute paths (resolved relative to config file location)
+      return extractedRoots;
     }
     return resolveFallback(config, baseDir);
   }

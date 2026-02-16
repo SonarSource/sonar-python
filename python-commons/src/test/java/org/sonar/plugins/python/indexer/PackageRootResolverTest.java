@@ -35,17 +35,23 @@ class PackageRootResolverTest {
   Path tempDir;
 
   @Test
-  void resolve_withExtractedRoots_returnsAbsolutePaths() {
+  void resolve_withExtractedRoots_returnsThemDirectly() {
+    // Extracted roots are now expected to be already absolute paths
+    // (resolved relative to the config file location by PythonIndexer)
     Configuration config = mock(Configuration.class);
     when(config.getStringArray("sonar.sources")).thenReturn(new String[0]);
 
     File baseDir = tempDir.toFile();
-    List<String> extractedRoots = List.of("src", "lib");
+    List<String> extractedRoots = List.of(
+      new File(baseDir, "subproject/src").getAbsolutePath(),
+      new File(baseDir, "subproject/lib").getAbsolutePath()
+    );
     List<String> result = PackageRootResolver.resolve(extractedRoots, config, baseDir);
 
+    // Should return the paths as-is since they're already absolute
     assertThat(result).containsExactly(
-      new File(baseDir, "src").getAbsolutePath(),
-      new File(baseDir, "lib").getAbsolutePath());
+      new File(baseDir, "subproject/src").getAbsolutePath(),
+      new File(baseDir, "subproject/lib").getAbsolutePath());
   }
 
   @Test
@@ -54,10 +60,12 @@ class PackageRootResolverTest {
     when(config.getStringArray("sonar.sources")).thenReturn(new String[]{"other"});
 
     File baseDir = tempDir.toFile();
-    List<String> extractedRoots = List.of("src");
+    // Extracted roots are already absolute paths
+    List<String> extractedRoots = List.of(new File(baseDir, "app/src").getAbsolutePath());
     List<String> result = PackageRootResolver.resolve(extractedRoots, config, baseDir);
 
-    assertThat(result).containsExactly(new File(baseDir, "src").getAbsolutePath());
+    // Should return the extracted root as-is, ignoring sonar.sources
+    assertThat(result).containsExactly(new File(baseDir, "app/src").getAbsolutePath());
   }
 
   @Test

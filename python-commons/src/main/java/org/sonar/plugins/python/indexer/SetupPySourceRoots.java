@@ -16,6 +16,7 @@
  */
 package org.sonar.plugins.python.indexer;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.sonar.sslr.api.AstNode;
 import java.io.File;
 import java.io.IOException;
@@ -58,7 +59,8 @@ public class SetupPySourceRoots {
    * @param setupPyContent the content of a setup.py file
    * @return list of source root paths (relative), empty if none found or on parse error
    */
-  public static List<String> extract(String setupPyContent) {
+  @VisibleForTesting
+  static List<String> extract(String setupPyContent) {
     try {
       PythonParser parser = PythonParser.create();
       AstNode astNode = parser.parse(setupPyContent);
@@ -86,6 +88,21 @@ public class SetupPySourceRoots {
     } catch (IOException e) {
       return List.of();
     }
+  }
+
+  /**
+   * Extracts source root directories from a setup.py File, preserving the config file location.
+   *
+   * <p>This method returns a {@link ConfigSourceRoots} that associates the extracted relative paths
+   * with the config file, allowing callers to resolve absolute paths relative to the config file's
+   * directory rather than the project base directory.
+   *
+   * @param file the setup.py file
+   * @return ConfigSourceRoots containing the config file and its relative source roots
+   */
+  public static ConfigSourceRoots extractWithLocation(File file) {
+    List<String> roots = extract(file);
+    return new ConfigSourceRoots(file, roots);
   }
 
   private static class SetupCallVisitor extends BaseTreeVisitor {
