@@ -31,19 +31,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class TestFileTelemetryCollectorTest {
 
+  private static final String NON_TEST_PATH = "src/main/module.py";
+
   private static PythonVisitorContext createContext(String code) {
     var mockFile = new TestPythonVisitorRunner.MockPythonFile("", "test.py", code);
     return TestPythonVisitorRunner.createContext(mockFile, null, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
   }
 
   @Test
-  void lineCountForSingleLineFile() {
+  void lineCount_singleLineFile() {
     var singleLine = createContext("x = 1");
     assertThat(TestFileTelemetryCollector.lineCount(singleLine.rootTree())).isEqualTo(1);
   }
 
   @Test
-  void lineCountForMultiLineFile() {
+  void lineCount_multiLineFile() {
     var multiLine = createContext("""
       x = 1
       y = 2
@@ -58,15 +60,17 @@ class TestFileTelemetryCollectorTest {
     var context = createContext(code);
 
     var collector = new TestFileTelemetryCollector();
-    collector.collect(context.rootTree(), InputFile.Type.MAIN);
+    collector.collect(context.rootTree(), InputFile.Type.MAIN, NON_TEST_PATH);
 
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isEqualTo(1);
-    assertThat(telemetry.misclassifiedTestFiles()).isZero();
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isZero();
     assertThat(telemetry.totalLines()).isPositive();
     assertThat(telemetry.totalMainLines()).isEqualTo(telemetry.totalLines());
     assertThat(telemetry.testLines()).isZero();
-    assertThat(telemetry.misclassifiedTestLines()).isZero();
+    assertThat(telemetry.importBasedMisclassifiedTestLines()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestLines()).isZero();
   }
 
   private static Stream<Arguments> provideNotMisclassifiedTestCases() {
@@ -92,15 +96,17 @@ class TestFileTelemetryCollectorTest {
     var context = createContext(code);
 
     var collector = new TestFileTelemetryCollector();
-    collector.collect(context.rootTree(), InputFile.Type.MAIN);
+    collector.collect(context.rootTree(), InputFile.Type.MAIN, NON_TEST_PATH);
 
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isEqualTo(1);
-    assertThat(telemetry.misclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isEqualTo(1);
     assertThat(telemetry.totalLines()).isPositive();
     assertThat(telemetry.totalMainLines()).isEqualTo(telemetry.totalLines());
     assertThat(telemetry.testLines()).isZero();
-    assertThat(telemetry.misclassifiedTestLines()).isEqualTo(telemetry.totalMainLines());
+    assertThat(telemetry.importBasedMisclassifiedTestLines()).isEqualTo(telemetry.totalMainLines());
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestLines()).isZero();
   }
 
   private static Stream<Arguments> provideMisclassifiedTestCases() {
@@ -151,15 +157,17 @@ class TestFileTelemetryCollectorTest {
     var context = createContext(code);
 
     var collector = new TestFileTelemetryCollector();
-    collector.collect(context.rootTree(), InputFile.Type.TEST);
+    collector.collect(context.rootTree(), InputFile.Type.TEST, "tests/test_module.py");
 
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isZero();
-    assertThat(telemetry.misclassifiedTestFiles()).isZero();
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isZero();
     assertThat(telemetry.totalLines()).isPositive();
     assertThat(telemetry.totalMainLines()).isZero();
     assertThat(telemetry.testLines()).isEqualTo(telemetry.totalLines());
-    assertThat(telemetry.misclassifiedTestLines()).isZero();
+    assertThat(telemetry.importBasedMisclassifiedTestLines()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestLines()).isZero();
   }
 
   private static Stream<Arguments> provideTestFileNotCountedCases() {
@@ -198,7 +206,7 @@ class TestFileTelemetryCollectorTest {
   }
 
   @Test
-  void aggregatesAcrossMultipleFiles() {
+  void importBasedMisclassification_aggregatesAcrossMultipleFiles() {
     var context1 = createContext("""
       import unittest
       """);
@@ -210,37 +218,41 @@ class TestFileTelemetryCollectorTest {
       """);
 
     var collector = new TestFileTelemetryCollector();
-    collector.collect(context1.rootTree(), InputFile.Type.MAIN);
-    collector.collect(context2.rootTree(), InputFile.Type.MAIN);
-    collector.collect(context3.rootTree(), InputFile.Type.MAIN);
+    collector.collect(context1.rootTree(), InputFile.Type.MAIN, "src/main/module1.py");
+    collector.collect(context2.rootTree(), InputFile.Type.MAIN, "src/main/module2.py");
+    collector.collect(context3.rootTree(), InputFile.Type.MAIN, "src/main/module3.py");
 
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isEqualTo(3);
-    assertThat(telemetry.misclassifiedTestFiles()).isEqualTo(2);
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isEqualTo(2);
     assertThat(telemetry.totalLines()).isEqualTo(6);
     assertThat(telemetry.totalMainLines()).isEqualTo(6);
     assertThat(telemetry.testLines()).isZero();
-    assertThat(telemetry.misclassifiedTestLines()).isEqualTo(4);
+    assertThat(telemetry.importBasedMisclassifiedTestLines()).isEqualTo(4);
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestLines()).isZero();
   }
 
   @Test
-  void mixedMainAndTestFiles() {
+  void mixedMainAndTestFiles_countsCorrectly() {
     var mainWithTest = createContext("import unittest");
     var mainWithoutTest = createContext("import os");
     var testFile = createContext("import pytest");
 
     var collector = new TestFileTelemetryCollector();
-    collector.collect(mainWithTest.rootTree(), InputFile.Type.MAIN);
-    collector.collect(mainWithoutTest.rootTree(), InputFile.Type.MAIN);
-    collector.collect(testFile.rootTree(), InputFile.Type.TEST);
+    collector.collect(mainWithTest.rootTree(), InputFile.Type.MAIN, "src/main/module1.py");
+    collector.collect(mainWithoutTest.rootTree(), InputFile.Type.MAIN, "src/main/module2.py");
+    collector.collect(testFile.rootTree(), InputFile.Type.TEST, "tests/test_module.py");
 
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isEqualTo(2);
-    assertThat(telemetry.misclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isEqualTo(1);
     assertThat(telemetry.totalLines()).isEqualTo(3);
     assertThat(telemetry.totalMainLines()).isEqualTo(2);
     assertThat(telemetry.testLines()).isEqualTo(1);
-    assertThat(telemetry.misclassifiedTestLines()).isEqualTo(1);
+    assertThat(telemetry.importBasedMisclassifiedTestLines()).isEqualTo(1);
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestLines()).isZero();
   }
 
   @Test
@@ -253,19 +265,21 @@ class TestFileTelemetryCollectorTest {
       """);
 
     var collector = new TestFileTelemetryCollector();
-    collector.collect(context.rootTree(), InputFile.Type.MAIN);
+    collector.collect(context.rootTree(), InputFile.Type.MAIN, NON_TEST_PATH);
 
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainFiles()).isEqualTo(1);
-    assertThat(telemetry.misclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isEqualTo(1);
     assertThat(telemetry.totalLines()).isEqualTo(5);
     assertThat(telemetry.totalMainLines()).isEqualTo(5);
     assertThat(telemetry.testLines()).isZero();
-    assertThat(telemetry.misclassifiedTestLines()).isEqualTo(5);
+    assertThat(telemetry.importBasedMisclassifiedTestLines()).isEqualTo(5);
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestLines()).isZero();
   }
 
   @Test
-  void lineCountAggregatesCorrectlyForDifferentFileSizes() {
+  void lineCount_aggregatesForDifferentFileSizes() {
     var smallFile = createContext("x = 1");
     var largerFile = createContext("""
       import os
@@ -280,16 +294,17 @@ class TestFileTelemetryCollectorTest {
       """);
 
     var collector = new TestFileTelemetryCollector();
-    collector.collect(smallFile.rootTree(), InputFile.Type.MAIN);
-    collector.collect(largerFile.rootTree(), InputFile.Type.MAIN);
+    collector.collect(smallFile.rootTree(), InputFile.Type.MAIN, "src/main/small.py");
+    collector.collect(largerFile.rootTree(), InputFile.Type.MAIN, "src/main/large.py");
 
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainLines()).isEqualTo(11);
-    assertThat(telemetry.misclassifiedTestLines()).isZero();
+    assertThat(telemetry.importBasedMisclassifiedTestLines()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestLines()).isZero();
   }
 
   @Test
-  void misclassifiedTestLinesOnlyCountsMisclassifiedFiles() {
+  void misclassifiedTestLines_onlyCountMisclassifiedFiles() {
     var misclassifiedFile = createContext("""
       import pytest
       
@@ -304,12 +319,144 @@ class TestFileTelemetryCollectorTest {
       """);
 
     var collector = new TestFileTelemetryCollector();
-    collector.collect(misclassifiedFile.rootTree(), InputFile.Type.MAIN);
-    collector.collect(regularFile.rootTree(), InputFile.Type.MAIN);
+    collector.collect(misclassifiedFile.rootTree(), InputFile.Type.MAIN, "src/main/module1.py");
+    collector.collect(regularFile.rootTree(), InputFile.Type.MAIN, "src/main/module2.py");
 
     var telemetry = collector.getTelemetry();
     assertThat(telemetry.totalMainLines()).isEqualTo(10);
-    assertThat(telemetry.misclassifiedTestLines()).isEqualTo(5);
+    assertThat(telemetry.importBasedMisclassifiedTestLines()).isEqualTo(5);
+    assertThat(telemetry.pathBasedMisclassifiedTestLines()).isZero();
   }
+
+  @Test
+  void pathBasedMisclassifiedTestLines_onlyCountMisclassifiedFiles() {
+    var misclassifiedFile = createContext("""
+      import os
+
+      def helper():
+        pass
+      """);
+    var regularFile = createContext("""
+      import os
+
+      def other():
+        pass
+      """);
+
+    var collector = new TestFileTelemetryCollector();
+    collector.collect(misclassifiedFile.rootTree(), InputFile.Type.MAIN, "tests/module1.py");
+    collector.collect(regularFile.rootTree(), InputFile.Type.MAIN, "src/main/module2.py");
+
+    var telemetry = collector.getTelemetry();
+    assertThat(telemetry.totalMainLines()).isEqualTo(10);
+    assertThat(telemetry.pathBasedMisclassifiedTestLines()).isEqualTo(5);
+    assertThat(telemetry.importBasedMisclassifiedTestLines()).isZero();
+  }
+
+  @Test
+  void pathBasedHeuristic_detectsTestDirectory() {
+    var context = createContext("import os");
+
+    var collector = new TestFileTelemetryCollector();
+    collector.collect(context.rootTree(), InputFile.Type.MAIN, "tests/test_module.py");
+
+    var telemetry = collector.getTelemetry();
+    assertThat(telemetry.totalMainFiles()).isEqualTo(1);
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.pathBasedMisclassifiedTestLines()).isEqualTo(1);
+    assertThat(telemetry.filesInPathBasedOnly()).isEqualTo(1);
+    assertThat(telemetry.linesInPathBasedOnly()).isEqualTo(1);
+  }
+
+  @ParameterizedTest
+  @MethodSource("providePathBasedHeuristicCases")
+  void pathBasedHeuristic_classifiesCorrectly(String filePath, boolean expected) {
+    assertThat(TestFileTelemetryCollector.isPathBasedMisclassifiedTestFile(filePath)).isEqualTo(expected);
+  }
+
+  private static Stream<Arguments> providePathBasedHeuristicCases() {
+    return Stream.of(
+      Arguments.of("src/tests/module.py", true),
+      Arguments.of("src/Test/module.py", true),
+      Arguments.of("C:\\project\\tests\\module.py", true),
+      Arguments.of("src/package/tests/unit/module.py", true),
+      Arguments.of("src/main/test_module.py", false),
+      Arguments.of("src/testing/module.py", false),
+      Arguments.of("", false)
+    );
+  }
+
+  @Test
+  void bothHeuristics_detectSameFile() {
+    var context = createContext("import unittest");
+
+    var collector = new TestFileTelemetryCollector();
+    collector.collect(context.rootTree(), InputFile.Type.MAIN, "tests/test_module.py");
+
+    var telemetry = collector.getTelemetry();
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.filesInImportBasedOnly()).isZero();
+    assertThat(telemetry.filesInPathBasedOnly()).isZero();
+    assertThat(telemetry.linesInImportBasedOnly()).isZero();
+    assertThat(telemetry.linesInPathBasedOnly()).isZero();
+  }
+
+  @Test
+  void importBasedOnly_detectsFile() {
+    var context = createContext("import pytest");
+
+    var collector = new TestFileTelemetryCollector();
+    collector.collect(context.rootTree(), InputFile.Type.MAIN, NON_TEST_PATH);
+
+    var telemetry = collector.getTelemetry();
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isZero();
+    assertThat(telemetry.filesInImportBasedOnly()).isEqualTo(1);
+    assertThat(telemetry.filesInPathBasedOnly()).isZero();
+    assertThat(telemetry.linesInImportBasedOnly()).isEqualTo(1);
+    assertThat(telemetry.linesInPathBasedOnly()).isZero();
+  }
+
+  @Test
+  void pathBasedOnly_detectsFile() {
+    var context = createContext("import os");
+
+    var collector = new TestFileTelemetryCollector();
+    collector.collect(context.rootTree(), InputFile.Type.MAIN, "tests/helper.py");
+
+    var telemetry = collector.getTelemetry();
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isZero();
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isEqualTo(1);
+    assertThat(telemetry.filesInImportBasedOnly()).isZero();
+    assertThat(telemetry.filesInPathBasedOnly()).isEqualTo(1);
+    assertThat(telemetry.linesInImportBasedOnly()).isZero();
+    assertThat(telemetry.linesInPathBasedOnly()).isEqualTo(1);
+  }
+
+  @Test
+  void heuristicComparison_aggregatesAcrossMultipleFiles() {
+    var importBased = createContext("import unittest");
+    var pathBased = createContext("import os");
+    var both = createContext("import pytest");
+    var neither = createContext("x = 1");
+
+    var collector = new TestFileTelemetryCollector();
+    collector.collect(importBased.rootTree(), InputFile.Type.MAIN, "src/main/module1.py");
+    collector.collect(pathBased.rootTree(), InputFile.Type.MAIN, "tests/helper.py");
+    collector.collect(both.rootTree(), InputFile.Type.MAIN, "tests/test_module.py");
+    collector.collect(neither.rootTree(), InputFile.Type.MAIN, "src/main/module2.py");
+
+    var telemetry = collector.getTelemetry();
+    assertThat(telemetry.totalMainFiles()).isEqualTo(4);
+    assertThat(telemetry.importBasedMisclassifiedTestFiles()).isEqualTo(2);
+    assertThat(telemetry.pathBasedMisclassifiedTestFiles()).isEqualTo(2);
+    assertThat(telemetry.filesInImportBasedOnly()).isEqualTo(1);
+    assertThat(telemetry.filesInPathBasedOnly()).isEqualTo(1); 
+    assertThat(telemetry.linesInImportBasedOnly()).isEqualTo(1);
+    assertThat(telemetry.linesInPathBasedOnly()).isEqualTo(1);
+  }
+
 }
 

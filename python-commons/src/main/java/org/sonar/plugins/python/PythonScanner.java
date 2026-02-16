@@ -147,7 +147,7 @@ public class PythonScanner extends Scanner {
       newSymbolsCollector.collect(context.newSymbolTable().onFile(inputFile.wrappedFile()), visitorContext.rootTree());
       pythonHighlighter.highlight(context, visitorContext, inputFile);
       typeInferenceTelemetryCollector.collect(visitorContext.rootTree());
-      testFileTelemetryCollector.collect(visitorContext.rootTree(), fileType);
+      testFileTelemetryCollector.collect(visitorContext.rootTree(), fileType, inputFile.wrappedFile().uri().getPath());
     }
 
     searchForDataBricks(visitorContext);

@@ -200,12 +200,22 @@ public final class PythonSensor implements Sensor {
 
   private void updateTestFileTelemetry(PythonScanner scanner) {
     TestFileTelemetry telemetry = scanner.getTestFileTelemetry();
+
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_TOTAL, telemetry.totalMainFiles());
-    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_MISCLASSIFIED_TEST, telemetry.misclassifiedTestFiles());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_LINES_TOTAL, telemetry.totalLines());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_LINES, telemetry.totalMainLines());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TEST_LINES, telemetry.testLines());
-    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_LINES_MISCLASSIFIED_TEST, telemetry.misclassifiedTestLines());
+
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_MISCLASSIFIED_IMPORT_BASED, telemetry.importBasedMisclassifiedTestFiles());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_LINES_MISCLASSIFIED_IMPORT_BASED, telemetry.importBasedMisclassifiedTestLines());
+
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_MISCLASSIFIED_PATH_BASED, telemetry.pathBasedMisclassifiedTestFiles());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_LINES_MISCLASSIFIED_PATH_BASED, telemetry.pathBasedMisclassifiedTestLines());
+
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_MISCLASSIFIED_IMPORT_BASED_ONLY, telemetry.filesInImportBasedOnly());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_LINES_MISCLASSIFIED_IMPORT_BASED_ONLY, telemetry.linesInImportBasedOnly());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_MISCLASSIFIED_PATH_BASED_ONLY, telemetry.filesInPathBasedOnly());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_LINES_MISCLASSIFIED_PATH_BASED_ONLY, telemetry.linesInPathBasedOnly());
   }
 
   private void updateNamespacePackageTelemetry(PythonIndexer pythonIndexer) {

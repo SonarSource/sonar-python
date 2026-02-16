@@ -26,39 +26,57 @@ class TestFileTelemetryTest {
   void emptyTelemetry() {
     var empty = TestFileTelemetry.empty();
     assertThat(empty.totalMainFiles()).isZero();
-    assertThat(empty.misclassifiedTestFiles()).isZero();
+    assertThat(empty.importBasedMisclassifiedTestFiles()).isZero();
     assertThat(empty.totalLines()).isZero();
     assertThat(empty.totalMainLines()).isZero();
     assertThat(empty.testLines()).isZero();
-    assertThat(empty.misclassifiedTestLines()).isZero();
+    assertThat(empty.importBasedMisclassifiedTestLines()).isZero();
+    assertThat(empty.pathBasedMisclassifiedTestFiles()).isZero();
+    assertThat(empty.pathBasedMisclassifiedTestLines()).isZero();
+    assertThat(empty.filesInImportBasedOnly()).isZero();
+    assertThat(empty.filesInPathBasedOnly()).isZero();
+    assertThat(empty.linesInImportBasedOnly()).isZero();
+    assertThat(empty.linesInPathBasedOnly()).isZero();
   }
 
   @Test
   void addTelemetry() {
-    var telemetry1 = new TestFileTelemetry(10, 3, 800, 500, 300, 150);
-    var telemetry2 = new TestFileTelemetry(5, 2, 350, 200, 150, 80);
+    var telemetry1 = new TestFileTelemetry(10, 3, 800, 500, 300, 150, 4, 200, 1, 2, 50, 100);
+    var telemetry2 = new TestFileTelemetry(5, 2, 350, 200, 150, 80, 3, 120, 0, 1, 0, 40);
 
     var combined = telemetry1.add(telemetry2);
     assertThat(combined.totalMainFiles()).isEqualTo(15);
-    assertThat(combined.misclassifiedTestFiles()).isEqualTo(5);
+    assertThat(combined.importBasedMisclassifiedTestFiles()).isEqualTo(5);
     assertThat(combined.totalLines()).isEqualTo(1150);
     assertThat(combined.totalMainLines()).isEqualTo(700);
     assertThat(combined.testLines()).isEqualTo(450);
-    assertThat(combined.misclassifiedTestLines()).isEqualTo(230);
+    assertThat(combined.importBasedMisclassifiedTestLines()).isEqualTo(230);
+    assertThat(combined.pathBasedMisclassifiedTestFiles()).isEqualTo(7);
+    assertThat(combined.pathBasedMisclassifiedTestLines()).isEqualTo(320);
+    assertThat(combined.filesInImportBasedOnly()).isEqualTo(1);
+    assertThat(combined.filesInPathBasedOnly()).isEqualTo(3);
+    assertThat(combined.linesInImportBasedOnly()).isEqualTo(50);
+    assertThat(combined.linesInPathBasedOnly()).isEqualTo(140);
   }
 
   @Test
   void addToEmpty() {
     var empty = TestFileTelemetry.empty();
-    var telemetry = new TestFileTelemetry(7, 1, 500, 300, 200, 50);
+    var telemetry = new TestFileTelemetry(7, 1, 500, 300, 200, 50, 2, 80, 0, 1, 0, 30);
 
     var combined = empty.add(telemetry);
     assertThat(combined.totalMainFiles()).isEqualTo(7);
-    assertThat(combined.misclassifiedTestFiles()).isEqualTo(1);
+    assertThat(combined.importBasedMisclassifiedTestFiles()).isEqualTo(1);
     assertThat(combined.totalLines()).isEqualTo(500);
     assertThat(combined.totalMainLines()).isEqualTo(300);
     assertThat(combined.testLines()).isEqualTo(200);
-    assertThat(combined.misclassifiedTestLines()).isEqualTo(50);
+    assertThat(combined.importBasedMisclassifiedTestLines()).isEqualTo(50);
+    assertThat(combined.pathBasedMisclassifiedTestFiles()).isEqualTo(2);
+    assertThat(combined.pathBasedMisclassifiedTestLines()).isEqualTo(80);
+    assertThat(combined.filesInImportBasedOnly()).isZero();
+    assertThat(combined.filesInPathBasedOnly()).isEqualTo(1);
+    assertThat(combined.linesInImportBasedOnly()).isZero();
+    assertThat(combined.linesInPathBasedOnly()).isEqualTo(30);
   }
 }
 

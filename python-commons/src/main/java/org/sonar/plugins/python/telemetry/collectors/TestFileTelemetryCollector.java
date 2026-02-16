@@ -16,6 +16,7 @@
  */
 package org.sonar.plugins.python.telemetry.collectors;
 
+import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 import org.sonar.api.batch.fs.InputFile;
@@ -31,13 +32,19 @@ public class TestFileTelemetryCollector {
   private static final Set<String> TEST_FRAMEWORK_MODULES = Set.of("unittest", "pytest");
 
   private final AtomicLong totalMainFiles = new AtomicLong(0);
-  private final AtomicLong misclassifiedTestFiles = new AtomicLong(0);
+  private final AtomicLong importBasedMisclassifiedTestFiles = new AtomicLong(0);
   private final AtomicLong totalLines = new AtomicLong(0);
   private final AtomicLong totalMainLines = new AtomicLong(0);
   private final AtomicLong testLines = new AtomicLong(0);
-  private final AtomicLong misclassifiedTestLines = new AtomicLong(0);
+  private final AtomicLong importBasedMisclassifiedTestLines = new AtomicLong(0);
+  private final AtomicLong pathBasedMisclassifiedTestFiles = new AtomicLong(0);
+  private final AtomicLong pathBasedMisclassifiedTestLines = new AtomicLong(0);
+  private final AtomicLong filesInImportBasedOnly = new AtomicLong(0);
+  private final AtomicLong filesInPathBasedOnly = new AtomicLong(0);
+  private final AtomicLong linesInImportBasedOnly = new AtomicLong(0);
+  private final AtomicLong linesInPathBasedOnly = new AtomicLong(0);
 
-  public void collect(FileInput rootTree, InputFile.Type fileType) {
+  public void collect(FileInput rootTree, InputFile.Type fileType, String filePath) {
     long lines = lineCount(rootTree);
     totalLines.addAndGet(lines);
 
@@ -49,13 +56,30 @@ public class TestFileTelemetryCollector {
     totalMainFiles.incrementAndGet();
     totalMainLines.addAndGet(lines);
 
-    if (isMisclassifiedTestFile(rootTree)) {
-      misclassifiedTestFiles.incrementAndGet();
-      misclassifiedTestLines.addAndGet(lines);
+    boolean isImportBasedMisclassified = isImportBasedMisclassifiedTestFile(rootTree);
+    boolean isPathBasedMisclassified = isPathBasedMisclassifiedTestFile(filePath);
+
+    if (isImportBasedMisclassified) {
+      importBasedMisclassifiedTestFiles.incrementAndGet();
+      importBasedMisclassifiedTestLines.addAndGet(lines);
+    }
+
+    if (isPathBasedMisclassified) {
+      pathBasedMisclassifiedTestFiles.incrementAndGet();
+      pathBasedMisclassifiedTestLines.addAndGet(lines);
+    }
+
+    // Track differences between heuristics
+    if (isImportBasedMisclassified && !isPathBasedMisclassified) {
+      filesInImportBasedOnly.incrementAndGet();
+      linesInImportBasedOnly.addAndGet(lines);
+    } else if (isPathBasedMisclassified && !isImportBasedMisclassified) {
+      filesInPathBasedOnly.incrementAndGet();
+      linesInPathBasedOnly.addAndGet(lines);
     }
   }
 
-  private static boolean isMisclassifiedTestFile(FileInput rootTree) {
+  private static boolean isImportBasedMisclassifiedTestFile(FileInput rootTree) {
     var importVisitor = new TestImportVisitor();
     rootTree.accept(importVisitor);
     if (importVisitor.hasTestFrameworkImport) {
@@ -67,6 +91,24 @@ public class TestFileTelemetryCollector {
     return pytestPatternVisitor.hasPytestPattern;
   }
 
+  static boolean isPathBasedMisclassifiedTestFile(String filePath) {
+    if (filePath.isEmpty()) {
+      return false;
+    }
+
+    String normalizedPath = filePath.replace('\\', '/');
+    String[] pathComponents = normalizedPath.split("/");
+    // The filename itself is not checked
+    for (int i = 0; i < pathComponents.length - 1; i++) {
+      String component = pathComponents[i].toLowerCase(Locale.ROOT);
+      if ("test".equals(component) || "tests".equals(component)) {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+
   static long lineCount(FileInput rootTree) {
     return rootTree.lastToken().line();
   }
@@ -74,11 +116,17 @@ public class TestFileTelemetryCollector {
   public TestFileTelemetry getTelemetry() {
     return new TestFileTelemetry(
       totalMainFiles.get(),
-      misclassifiedTestFiles.get(),
+      importBasedMisclassifiedTestFiles.get(),
       totalLines.get(),
       totalMainLines.get(),
       testLines.get(),
-      misclassifiedTestLines.get());
+      importBasedMisclassifiedTestLines.get(),
+      pathBasedMisclassifiedTestFiles.get(),
+      pathBasedMisclassifiedTestLines.get(),
+      filesInImportBasedOnly.get(),
+      filesInPathBasedOnly.get(),
+      linesInImportBasedOnly.get(),
+      linesInPathBasedOnly.get());
   }
 
   private static class TestImportVisitor extends BaseTreeVisitor {

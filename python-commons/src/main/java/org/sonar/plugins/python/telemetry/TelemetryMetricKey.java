@@ -49,11 +49,17 @@ public enum TelemetryMetricKey {
   PYTHON_TYPES_SYMBOLS_UNIQUE("python.types.symbols.unique"),
   PYTHON_TYPES_SYMBOLS_UNKNOWN("python.types.symbols.unknown"),
   PYTHON_MAIN_FILES_TOTAL("python.files.main.total"),
-  PYTHON_MAIN_FILES_MISCLASSIFIED_TEST("python.files.main.misclassified_test"),
   PYTHON_LINES_TOTAL("python.lines.total"),
   PYTHON_MAIN_LINES("python.lines.main"),
   PYTHON_TEST_LINES("python.lines.test"),
-  PYTHON_MAIN_LINES_MISCLASSIFIED_TEST("python.lines.main.misclassified_test");
+  PYTHON_MAIN_FILES_MISCLASSIFIED_IMPORT_BASED("python.files.main.misclassified_import_based"),
+  PYTHON_MAIN_LINES_MISCLASSIFIED_IMPORT_BASED("python.lines.main.misclassified_import_based"),
+  PYTHON_MAIN_FILES_MISCLASSIFIED_PATH_BASED("python.files.main.misclassified_path_based"),
+  PYTHON_MAIN_LINES_MISCLASSIFIED_PATH_BASED("python.lines.main.misclassified_path_based"),
+  PYTHON_MAIN_FILES_MISCLASSIFIED_IMPORT_BASED_ONLY("python.files.main.misclassified_import_based_only"),
+  PYTHON_MAIN_LINES_MISCLASSIFIED_IMPORT_BASED_ONLY("python.lines.main.misclassified_import_based_only"),
+  PYTHON_MAIN_FILES_MISCLASSIFIED_PATH_BASED_ONLY("python.files.main.misclassified_path_based_only"),
+  PYTHON_MAIN_LINES_MISCLASSIFIED_PATH_BASED_ONLY("python.lines.main.misclassified_path_based_only");
 
   private final String key;
 
