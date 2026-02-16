@@ -64,6 +64,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
       return;
     }
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
+    this.packageRoots = resolvePackageRoots(context);
     shouldBuildProjectSymbolTable = false;
     List<PythonInputFile> files = getInputFiles(moduleFileSystem);
     collectPackageNames(files);

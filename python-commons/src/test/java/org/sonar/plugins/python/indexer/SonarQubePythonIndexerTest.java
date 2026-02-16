@@ -493,4 +493,233 @@ class SonarQubePythonIndexerTest {
   private byte[] importsAsByteArray(List<String> mod) {
     return String.join(";", mod).getBytes(StandardCharsets.UTF_8);
   }
+
+  // === Package Root Resolution Tests ===
+
+  @Test
+  void test_package_roots_from_pyproject_toml_setuptools() throws IOException {
+    // Create a temp directory with pyproject.toml and source files
+    Path tempDir = Files.createTempDirectory("pyproject_test").toRealPath();
+    Path srcDir = tempDir.resolve(Path.of("src", "acme", "math", "stats"));
+    Files.createDirectories(srcDir);
+    Files.writeString(srcDir.resolve("__init__.py"), "");
+    Files.writeString(srcDir.resolve("mean.py"), "def mean(): pass");
+    Files.writeString(tempDir.resolve("pyproject.toml"), """
+      [tool.setuptools.packages.find]
+      where = ["src"]
+      """);
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+    tempContext.settings().setProperty("sonar.python.skipUnchanged", false);
+
+    // Add pyproject.toml as input file so it can be found
+    PythonInputFile pyprojectFile = createInputFile(tempDir.toFile(), "pyproject.toml", InputFile.Status.SAME, InputFile.Type.MAIN);
+    tempContext.fileSystem().add(pyprojectFile.wrappedFile());
+
+    PythonInputFile meanFile = createInputFile(srcDir.toFile(),
+      "mean.py",
+      InputFile.Status.ADDED, InputFile.Type.MAIN);
+    List<PythonInputFile> inputFiles = List.of(meanFile);
+
+    CacheContextImpl noCacheContext = new CacheContextImpl(false, new PythonWriteCacheImpl(new TestWriteCache()), new PythonReadCacheImpl(new TestReadCache()));
+    SonarQubePythonIndexer indexer = new SonarQubePythonIndexer(inputFiles, noCacheContext, tempContext, new ProjectConfigurationBuilder());
+    assertThat(indexer.packageRoots()).containsExactly(tempDir.resolve("src").toAbsolutePath().toString());
+
+    // FQN should be computed correctly for namespace packages
+    String packageName = indexer.packageName(meanFile);
+    assertThat(packageName).isEqualTo("acme.math.stats");
+
+    assertThat(logTester.logs(Level.DEBUG)).anyMatch(log -> log.contains("Resolved package roots from build configuration"));
+  }
+
+  @Test
+  void test_package_roots_fallback_to_src_folder() throws IOException {
+    // Create a temp directory with src folder but no pyproject.toml
+    Path tempDir = Files.createTempDirectory("src_fallback_test");
+    Path srcDir = tempDir.resolve(Path.of("src", "mypackage"));
+    Files.createDirectories(srcDir);
+    Files.writeString(srcDir.resolve("__init__.py"), "");
+    Files.writeString(srcDir.resolve("module.py"), "x = 1");
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+    tempContext.settings().setProperty("sonar.python.skipUnchanged", false);
+
+    PythonInputFile moduleFile = createInputFile(tempDir.toFile(),
+      "src/mypackage/module.py",
+      InputFile.Status.ADDED, InputFile.Type.MAIN);
+    List<PythonInputFile> inputFiles = List.of(moduleFile);
+
+    CacheContextImpl noCacheContext = new CacheContextImpl(false, new PythonWriteCacheImpl(new TestWriteCache()), new PythonReadCacheImpl(new TestReadCache()));
+    SonarQubePythonIndexer indexer = new SonarQubePythonIndexer(inputFiles, noCacheContext, tempContext, new ProjectConfigurationBuilder());
+
+    // Package roots should fall back to src folder
+    // Use File.getAbsolutePath() for both sides to ensure consistent path representation on Windows
+    String expectedRoot = new File(tempDir.toFile(), "src").getAbsolutePath();
+    assertThat(indexer.packageRoots()).containsExactly(expectedRoot);
+
+    // FQN should be computed correctly
+    String packageName = indexer.packageName(moduleFile);
+    assertThat(packageName).isEqualTo("mypackage");
+
+    assertThat(logTester.logs(Level.DEBUG)).anyMatch(log -> log.contains("Resolved package roots from fallback"));
+  }
+
+  @Test
+  void test_package_roots_fallback_to_base_dir() throws IOException {
+    // Create a temp directory without src folder or pyproject.toml
+    Path tempDir = Files.createTempDirectory("basedir_fallback_test");
+    Path pkgDir = Files.createDirectories(tempDir.resolve("mypackage"));
+    Files.writeString(pkgDir.resolve("__init__.py"), "");
+    Files.writeString(pkgDir.resolve("module.py"), "x = 1");
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+    tempContext.settings().setProperty("sonar.python.skipUnchanged", false);
+
+    PythonInputFile moduleFile = createInputFile(tempDir.toFile(),
+      "mypackage/module.py",
+      InputFile.Status.ADDED, InputFile.Type.MAIN);
+    List<PythonInputFile> inputFiles = List.of(moduleFile);
+
+    CacheContextImpl noCacheContext = new CacheContextImpl(false, new PythonWriteCacheImpl(new TestWriteCache()), new PythonReadCacheImpl(new TestReadCache()));
+    SonarQubePythonIndexer indexer = new SonarQubePythonIndexer(inputFiles, noCacheContext, tempContext, new ProjectConfigurationBuilder());
+
+    // Package roots should fall back to base dir (mypackage has __init__.py, so legacy detection works)
+    // Use File.getAbsolutePath() for both sides to ensure consistent path representation on Windows
+    String expectedRoot = tempDir.toFile().getAbsolutePath();
+    assertThat(indexer.packageRoots()).containsExactly(expectedRoot);
+
+    // FQN should be computed correctly using the base dir as root
+    String packageName = indexer.packageName(moduleFile);
+    assertThat(packageName).isEqualTo("mypackage");
+  }
+
+  @Test
+  void test_package_roots_from_sonar_sources() throws IOException {
+    // Create a temp directory with custom sources folder
+    Path tempDir = Files.createTempDirectory("sonar_sources_test");
+    Path libDir = tempDir.resolve(Path.of("lib", "mylib"));
+    Files.createDirectories(libDir);
+    Files.writeString(libDir.resolve("__init__.py"), "");
+    Files.writeString(libDir.resolve("utils.py"), "x = 1");
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+    tempContext.settings().setProperty("sonar.python.skipUnchanged", false);
+    tempContext.settings().setProperty("sonar.sources", "lib");
+
+    PythonInputFile utilsFile = createInputFile(tempDir.toFile(),
+      "lib/mylib/utils.py",
+      InputFile.Status.ADDED, InputFile.Type.MAIN);
+    List<PythonInputFile> inputFiles = List.of(utilsFile);
+
+    CacheContextImpl noCacheContext = new CacheContextImpl(false, new PythonWriteCacheImpl(new TestWriteCache()), new PythonReadCacheImpl(new TestReadCache()));
+    SonarQubePythonIndexer indexer = new SonarQubePythonIndexer(inputFiles, noCacheContext, tempContext, new ProjectConfigurationBuilder());
+
+    // Package roots should come from sonar.sources
+    // Use File.getAbsolutePath() for both sides to ensure consistent path representation on Windows
+    String expectedRoot = new File(tempDir.toFile(), "lib").getAbsolutePath();
+    assertThat(indexer.packageRoots()).containsExactly(expectedRoot);
+
+    // FQN should be computed correctly
+    String packageName = indexer.packageName(utilsFile);
+    assertThat(packageName).isEqualTo("mylib");
+  }
+
+  @Test
+  void test_package_roots_from_setup_py() throws IOException {
+    // Create a temp directory with setup.py and source files
+    Path tempDir = Files.createTempDirectory("setup_py_test").toRealPath();
+    Path srcDir = Files.createDirectories(tempDir.resolve(Path.of("src", "acme", "math", "stats")));
+    Files.writeString(srcDir.resolve("__init__.py"), "");
+    Files.writeString(srcDir.resolve("mean.py"), "def mean(): pass");
+    Files.writeString(tempDir.resolve("setup.py"), """
+      from setuptools import setup, find_packages
+      setup(
+          packages=find_packages(where="src"),
+          package_dir={"": "src"}
+      )
+      """);
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+    tempContext.settings().setProperty("sonar.python.skipUnchanged", false);
+
+    // Add setup.py as input file so it can be found
+    PythonInputFile setupPyFile = createInputFile(tempDir.toFile(), "setup.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    tempContext.fileSystem().add(setupPyFile.wrappedFile());
+
+    PythonInputFile meanFile = createInputFile(tempDir.toFile(),
+      Path.of("src", "acme", "math", "stats", "mean.py").toString(),
+      InputFile.Status.ADDED, InputFile.Type.MAIN);
+    List<PythonInputFile> inputFiles = List.of(meanFile);
+
+    CacheContextImpl noCacheContext = new CacheContextImpl(false, new PythonWriteCacheImpl(new TestWriteCache()), new PythonReadCacheImpl(new TestReadCache()));
+    SonarQubePythonIndexer indexer = new SonarQubePythonIndexer(inputFiles, noCacheContext, tempContext, new ProjectConfigurationBuilder());
+
+    // Package roots should be resolved from setup.py
+    assertThat(indexer.packageRoots()).containsExactly(tempDir.resolve("src").toAbsolutePath().toString());
+
+    // FQN should be computed correctly for namespace packages
+    String packageName = indexer.packageName(meanFile);
+    assertThat(packageName).isEqualTo("acme.math.stats");
+
+    assertThat(logTester.logs(Level.DEBUG)).anyMatch(log -> log.contains("Resolved package roots from build configuration"));
+  }
+
+  @Test
+  void test_package_roots_from_both_pyproject_and_setup_py() throws IOException {
+    // Create a temp directory with both pyproject.toml and setup.py
+    Path tempDir = Files.createTempDirectory("both_configs_test").toRealPath();
+    Path srcDir = Files.createDirectories(tempDir.resolve(Path.of("src", "mypackage")));
+    Path libDir = Files.createDirectories(tempDir.resolve(Path.of("lib", "otherpackage")));
+    Files.writeString(srcDir.resolve("__init__.py"), "");
+    Files.writeString(libDir.resolve("__init__.py"), "");
+    Files.writeString(srcDir.resolve("module.py"), "x = 1");
+    Files.writeString(libDir.resolve("utils.py"), "y = 2");
+
+    // pyproject.toml specifies src
+    Files.writeString(tempDir.resolve("pyproject.toml"), """
+      [tool.setuptools.packages.find]
+      where = ["src"]
+      """);
+
+    // setup.py specifies lib
+    Files.writeString(tempDir.resolve("setup.py"), """
+      from setuptools import setup
+      setup(package_dir={"": "lib"})
+      """);
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+    tempContext.settings().setProperty("sonar.python.skipUnchanged", false);
+
+    // Add both config files
+    PythonInputFile pyprojectFile = createInputFile(tempDir.toFile(), "pyproject.toml", InputFile.Status.SAME, InputFile.Type.MAIN);
+    PythonInputFile setupPyFile = createInputFile(tempDir.toFile(), "setup.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    tempContext.fileSystem().add(pyprojectFile.wrappedFile());
+    tempContext.fileSystem().add(setupPyFile.wrappedFile());
+
+    PythonInputFile moduleFile = createInputFile(tempDir.toFile(),
+      Path.of("src", "mypackage", "module.py").toString(),
+      InputFile.Status.ADDED, InputFile.Type.MAIN);
+    PythonInputFile utilsFile = createInputFile(tempDir.toFile(),
+      Path.of("lib", "otherpackage", "utils.py").toString(),
+      InputFile.Status.ADDED, InputFile.Type.MAIN);
+    List<PythonInputFile> inputFiles = List.of(moduleFile, utilsFile);
+
+    CacheContextImpl noCacheContext = new CacheContextImpl(false, new PythonWriteCacheImpl(new TestWriteCache()), new PythonReadCacheImpl(new TestReadCache()));
+    SonarQubePythonIndexer indexer = new SonarQubePythonIndexer(inputFiles, noCacheContext, tempContext, new ProjectConfigurationBuilder());
+
+    // Package roots should include both src and lib
+    assertThat(indexer.packageRoots()).containsExactlyInAnyOrder(
+      tempDir.resolve("src").toAbsolutePath().toString(),
+      tempDir.resolve("lib").toAbsolutePath().toString());
+
+    // FQN should be computed correctly for both
+    assertThat(indexer.packageName(moduleFile)).isEqualTo("mypackage");
+    assertThat(indexer.packageName(utilsFile)).isEqualTo("otherpackage");
+  }
 }

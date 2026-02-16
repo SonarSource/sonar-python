@@ -17,6 +17,9 @@
 package org.sonar.plugins.python.indexer;
 
 import com.sonar.sslr.api.AstNode;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -24,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -35,6 +39,7 @@ import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.tree.TreeUtils;
@@ -47,6 +52,12 @@ public class SetupPySourceRoots {
   private SetupPySourceRoots() {
   }
 
+  /**
+   * Extracts source root directories from setup.py content.
+   *
+   * @param setupPyContent the content of a setup.py file
+   * @return list of source root paths (relative), empty if none found or on parse error
+   */
   public static List<String> extract(String setupPyContent) {
     try {
       PythonParser parser = PythonParser.create();
@@ -59,6 +70,20 @@ public class SetupPySourceRoots {
 
       return new ArrayList<>(visitor.sourceRoots);
     } catch (Exception e) {
+      return List.of();
+    }
+  }
+
+  /**
+   * Extracts source root directories from a setup.py File.
+   *
+   * @param file the setup.py file
+   * @return list of source root paths (relative), empty if none found or on parse error
+   */
+  public static List<String> extract(File file) {
+    try {
+      return extract(Files.readString(file.toPath()));
+    } catch (IOException e) {
       return List.of();
     }
   }
@@ -81,26 +106,72 @@ public class SetupPySourceRoots {
       Expression callee = callExpression.callee();
 
       if (callee instanceof Name name && "setup".equals(name.name())) {
+        // First, check for dictionary unpacking arguments like setup(**config)
+        extractFromUnpackingArguments(callExpression);
+
+        // Then check for regular keyword arguments
         RegularArgument packagesArgument = TreeUtils.argumentByKeyword("packages", callExpression.arguments());
         if (packagesArgument != null) {
-          Expression packagesExpr = resolveExpression(packagesArgument.expression());
-          if (packagesExpr instanceof CallExpression call) {
-            extractFromFindPackages(call);
-          }
+          extractFromPackages(packagesArgument.expression());
         }
 
         RegularArgument packageDirArgument = TreeUtils.argumentByKeyword("package_dir", callExpression.arguments());
         if (packageDirArgument != null) {
-          Expression packageDirExpr = resolveExpression(packageDirArgument.expression());
-          if (packageDirExpr instanceof DictionaryLiteral dictLiteral) {
-            extractFromDictionary(dictLiteral);
-          } else if (packageDirExpr instanceof CallExpression call) {
-            extractFromFindPackages(call);
-          }
+          extractFromPackageDir(packageDirArgument.expression());
         }
       }
 
       super.visitCallExpression(callExpression);
+    }
+
+    /**
+     * Extracts source roots from dictionary unpacking arguments like setup(**config).
+     * Handles patterns such as:
+     * - setup(**{"package_dir": {"": "src"}})
+     * - config = {"package_dir": {"": "src"}}; setup(**config)
+     */
+    private void extractFromUnpackingArguments(CallExpression callExpression) {
+      for (Argument argument : callExpression.arguments()) {
+        if (argument instanceof UnpackingExpression unpacking && "**".equals(unpacking.starToken().value())) {
+          Expression unpackedExpr = resolveExpression(unpacking.expression());
+          if (unpackedExpr instanceof DictionaryLiteral dictLiteral) {
+            extractFromSetupConfigDict(dictLiteral);
+          }
+        }
+      }
+    }
+
+    /**
+     * Extracts source roots from a dictionary that represents setup() configuration.
+     * Looks for "packages" and "package_dir" keys.
+     */
+    private void extractFromSetupConfigDict(DictionaryLiteral configDict) {
+      for (var element : configDict.elements()) {
+        if (element instanceof KeyValuePair keyValuePair) {
+          String key = resolveToString(keyValuePair.key());
+          if ("package_dir".equals(key)) {
+            extractFromPackageDir(keyValuePair.value());
+          } else if ("packages".equals(key)) {
+            extractFromPackages(keyValuePair.value());
+          }
+        }
+      }
+    }
+
+    private void extractFromPackages(Expression keyValuePair) {
+      Expression valueExpr = resolveExpression(keyValuePair);
+      if (valueExpr instanceof CallExpression call) {
+        extractFromFindPackages(call);
+      }
+    }
+
+    private void extractFromPackageDir(Expression keyValuePair) {
+      Expression valueExpr = resolveExpression(keyValuePair);
+      if (valueExpr instanceof DictionaryLiteral dictLiteral) {
+        extractFromDictionary(dictLiteral);
+      } else if (valueExpr instanceof CallExpression call) {
+        extractFromFindPackages(call);
+      }
     }
 
     private void extractFromDictionary(DictionaryLiteral dictLiteral) {

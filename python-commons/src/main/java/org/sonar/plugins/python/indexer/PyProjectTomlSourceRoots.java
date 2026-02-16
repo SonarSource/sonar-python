@@ -21,7 +21,9 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -29,7 +31,6 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import org.sonar.api.batch.fs.InputFile;
 
 /**
  * Extracts source root directories from pyproject.toml build system configurations.
@@ -39,7 +40,7 @@ import org.sonar.api.batch.fs.InputFile;
  *   <li>setuptools: {@code [tool.setuptools.packages.find] where = ["src"]}</li>
  *   <li>Poetry: {@code [tool.poetry] packages = [{from = "src", include = "pkg"}]}</li>
  *   <li>Hatchling: {@code [tool.hatch.build.targets.wheel] sources = ["src"]}</li>
- *   <li>uv_build: {@code [tool.uv.build-backend] module-root = "src"} and by default detect src by convention</li>
+ *   <li>uv_build: {@code [build-system] build-backend = "uv_build"} or {@code [tool.uv.build-backend] module-root = "src"} - auto-detects src/ layout by convention</li>
  *   <li>PDM: {@code [tool.pdm] package-dir = "src"}</li>
  *   <li>Flit: auto-detects src/ layout by convention</li>
  * </ul>
@@ -71,35 +72,51 @@ public class PyProjectTomlSourceRoots {
   }
 
   /**
-   * Extracts source root directories from a pyproject.toml InputFile.
+   * Extracts source root directories from a pyproject.toml File.
    *
-   * @param inputFile the pyproject.toml file
+   * @param file the pyproject.toml file
    * @return list of source root paths (relative), empty if none found or on parse error
    */
-  public static List<String> extract(InputFile inputFile) {
+  public static List<String> extract(File file) {
     try {
-      return extract(inputFile.contents());
+      return extract(Files.readString(file.toPath()));
     } catch (IOException e) {
       return List.of();
     }
   }
 
   private static List<String> extractFromConfig(PyProjectConfig config) {
-    if (config.tool() == null) {
-      return List.of();
+    Set<String> sourceRoots = new LinkedHashSet<>();
+
+    // Check build-system.build-backend for uv_build
+    sourceRoots.addAll(extractFromBuildSystem(config.buildSystem()));
+
+    if (config.tool() != null) {
+      Tool tool = config.tool();
+      sourceRoots.addAll(extractFromSetuptools(tool.setuptools()));
+      sourceRoots.addAll(extractFromPoetry(tool.poetry()));
+      sourceRoots.addAll(extractFromHatchling(tool.hatch()));
+      sourceRoots.addAll(extractFromUvBuild(tool.uv()));
+      sourceRoots.addAll(extractFromPdm(tool.pdm()));
+      sourceRoots.addAll(extractFromFlit(tool.flit()));
     }
 
-    Set<String> sourceRoots = new LinkedHashSet<>();
-    Tool tool = config.tool();
-
-    sourceRoots.addAll(extractFromSetuptools(tool.setuptools()));
-    sourceRoots.addAll(extractFromPoetry(tool.poetry()));
-    sourceRoots.addAll(extractFromHatchling(tool.hatch()));
-    sourceRoots.addAll(extractFromUvBuild(tool.uv()));
-    sourceRoots.addAll(extractFromPdm(tool.pdm()));
-    sourceRoots.addAll(extractFromFlit(tool.flit()));
-
     return new ArrayList<>(sourceRoots);
+  }
+
+  // === Build System ===
+  // [build-system]
+  // build-backend = "uv_build"
+
+  private static List<String> extractFromBuildSystem(@Nullable BuildSystem buildSystem) {
+    if (buildSystem == null || buildSystem.buildBackend() == null) {
+      return List.of();
+    }
+    // uv_build auto-detects src/ layout by convention
+    if ("uv_build".equals(buildSystem.buildBackend())) {
+      return List.of("src");
+    }
+    return List.of();
   }
 
   // === Setuptools ===
@@ -135,7 +152,7 @@ public class PyProjectTomlSourceRoots {
 
   private static List<String> extractFromHatchling(@Nullable Hatch hatch) {
     if (hatch == null || hatch.build() == null || hatch.build().targets() == null
-        || hatch.build().targets().wheel() == null) {
+      || hatch.build().targets().wheel() == null) {
       return List.of();
     }
 
@@ -220,7 +237,8 @@ public class PyProjectTomlSourceRoots {
   private record PyProjectConfig(
     @JsonProperty("build-system") @Nullable BuildSystem buildSystem,
     @Nullable Tool tool
-  ) {}
+  ) {
+  }
 
   private record BuildSystem(
     @JsonProperty("build-backend") @Nullable String buildBackend,
@@ -238,16 +256,19 @@ public class PyProjectTomlSourceRoots {
     @Nullable Uv uv,
     @Nullable Pdm pdm,
     @Nullable Flit flit
-  ) {}
+  ) {
+  }
 
   // Setuptools records
   private record Setuptools(
     @Nullable SetuptoolsPackages packages
-  ) {}
+  ) {
+  }
 
   private record SetuptoolsPackages(
     @Nullable SetuptoolsFind find
-  ) {}
+  ) {
+  }
 
   private record SetuptoolsFind(
     @JsonSetter(nulls = Nulls.AS_EMPTY) @Nonnull List<String> where
@@ -271,20 +292,24 @@ public class PyProjectTomlSourceRoots {
   private record PoetryPackage(
     @Nullable String include,
     @Nullable String from
-  ) {}
+  ) {
+  }
 
   // Hatchling records
   private record Hatch(
     @Nullable HatchBuild build
-  ) {}
+  ) {
+  }
 
   private record HatchBuild(
     @Nullable HatchTargets targets
-  ) {}
+  ) {
+  }
 
   private record HatchTargets(
     @Nullable HatchWheel wheel
-  ) {}
+  ) {
+  }
 
   private record HatchWheel(
     @JsonSetter(nulls = Nulls.AS_EMPTY) @Nonnull List<String> sources,
@@ -299,24 +324,29 @@ public class PyProjectTomlSourceRoots {
   // uv_build records
   private record Uv(
     @JsonProperty("build-backend") @Nullable UvBuildBackend buildBackend
-  ) {}
+  ) {
+  }
 
   private record UvBuildBackend(
     @JsonProperty("module-root") @Nullable String moduleRoot
-  ) {}
+  ) {
+  }
 
   // PDM records
   private record Pdm(
     @JsonProperty("package-dir") @Nullable String packageDir
-  ) {}
+  ) {
+  }
 
   // Flit records
   private record Flit(
     @Nullable FlitModule module
-  ) {}
+  ) {
+  }
 
   private record FlitModule(
     @Nullable String name
-  ) {}
+  ) {
+  }
 }
 

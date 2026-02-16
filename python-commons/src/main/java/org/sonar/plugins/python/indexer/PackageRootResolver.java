@@ -29,7 +29,6 @@ import org.sonar.api.config.Configuration;
  * (e.g., pyproject.toml) and provides fallback resolution when no roots are configured.
  */
 public class PackageRootResolver {
-
   static final String SONAR_SOURCES_KEY = "sonar.sources";
   static final List<String> CONVENTIONAL_FOLDERS = List.of("src", "lib");
 
@@ -43,8 +42,8 @@ public class PackageRootResolver {
    * Otherwise, applies a fallback chain to determine appropriate roots.
    *
    * @param extractedRoots roots extracted from build system config (e.g., from BuildSystemSourceRoots.extract())
-   * @param config the Sonar configuration to read sonar.sources property
-   * @param baseDir the project base directory
+   * @param config         the Sonar configuration to read sonar.sources property
+   * @param baseDir        the project base directory
    * @return list of resolved package root absolute paths
    */
   public static List<String> resolve(List<String> extractedRoots, Configuration config, File baseDir) {
@@ -64,7 +63,7 @@ public class PackageRootResolver {
    *   <li>Project base directory absolute path as last resort</li>
    * </ol>
    *
-   * @param config the Sonar configuration
+   * @param config  the Sonar configuration
    * @param baseDir the project base directory
    * @return list of fallback package root absolute paths
    */

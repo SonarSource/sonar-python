@@ -16,22 +16,24 @@
  */
 package org.sonar.plugins.python.indexer;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.junit.jupiter.api.io.TempDir;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class PyProjectTomlSourceRootsTest {
 
+  @TempDir
+  Path tempDir;
+
   @Test
-  void extract_inputFileThrowsIOException_returnsEmptyList() throws IOException {
-    InputFile inputFile = mock(InputFile.class);
-    when(inputFile.contents()).thenThrow(new IOException("File not readable"));
-    assertThat(PyProjectTomlSourceRoots.extract(inputFile)).isEmpty();
+  void extract_fileNotReadable_returnsEmptyList() {
+    File nonExistentFile = new File(tempDir.toFile(), "nonexistent.toml");
+    assertThat(PyProjectTomlSourceRoots.extract(nonExistentFile)).isEmpty();
   }
 
   @Test
@@ -283,6 +285,32 @@ class PyProjectTomlSourceRootsTest {
       module-name = "mymodule"
       """)).containsExactly("src");
   }
+
+  @Test
+  void extract_uvBuild_fromBuildSystem() {
+    assertThat(PyProjectTomlSourceRoots.extract("""
+      [build-system]
+      build-backend = "uv_build"
+      """)).containsExactly("src");
+  }
+
+  @Test
+  void extract_uvBuild_fromBuildSystemWithRequires() {
+    assertThat(PyProjectTomlSourceRoots.extract("""
+      [build-system]
+      requires = ["uv>=0.5.15"]
+      build-backend = "uv_build"
+      """)).containsExactly("src");
+  }
+
+  @Test
+  void extract_otherBuildBackend_returnsEmpty() {
+    assertThat(PyProjectTomlSourceRoots.extract("""
+      [build-system]
+      build-backend = "setuptools.build_meta"
+      """)).isEmpty();
+  }
+
   // === PDM ===
 
   @Test
@@ -393,26 +421,24 @@ class PyProjectTomlSourceRootsTest {
       """)).containsExactly("src");
   }
 
-  // === InputFile API ===
+  // === File API ===
 
   @Test
-  void extract_fromInputFile() {
-    var inputFile = TestInputFileBuilder.create("modulekey", "pyproject.toml")
-      .setContents("""
+  void extract_fromFile() throws IOException {
+    File file = tempDir.resolve("pyproject.toml").toFile();
+    Files.writeString(file.toPath(), """
         [tool.setuptools.packages.find]
         where = ["src"]
-        """)
-      .build();
+        """);
 
-    assertThat(PyProjectTomlSourceRoots.extract(inputFile)).containsExactly("src");
+    assertThat(PyProjectTomlSourceRoots.extract(file)).containsExactly("src");
   }
 
   @Test
-  void extract_fromInputFile_invalidContent() {
-    var inputFile = TestInputFileBuilder.create("modulekey", "pyproject.toml")
-      .setContents("[invalid")
-      .build();
+  void extract_fromFile_invalidContent() throws IOException {
+    File file = tempDir.resolve("pyproject.toml").toFile();
+    Files.writeString(file.toPath(), "[invalid");
 
-    assertThat(PyProjectTomlSourceRoots.extract(inputFile)).isEmpty();
+    assertThat(PyProjectTomlSourceRoots.extract(file)).isEmpty();
   }
 }

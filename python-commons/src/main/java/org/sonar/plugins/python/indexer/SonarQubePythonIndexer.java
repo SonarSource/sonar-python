@@ -61,6 +61,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   public SonarQubePythonIndexer(List<PythonInputFile> inputFiles, CacheContext cacheContext, SensorContext context, ProjectConfigurationBuilder projectConfigurationBuilder) {
     super(projectConfigurationBuilder);
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
+    this.packageRoots = resolvePackageRoots(context);
     this.caching = new Caching(cacheContext, getCacheVersion(context));
     inputFiles.forEach(f -> {
       this.inputFiles.add(f);

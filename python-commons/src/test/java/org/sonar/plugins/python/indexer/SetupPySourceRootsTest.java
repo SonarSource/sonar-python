@@ -16,11 +16,19 @@
  */
 package org.sonar.plugins.python.indexer;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SetupPySourceRootsTest {
+
+  @TempDir
+  Path tempDir;
 
   @Test
   void extract_packageDirWithEmptyKey() {
@@ -234,5 +242,121 @@ class SetupPySourceRootsTest {
     from setuptools import setup
     setup(package_dir={"": "src", "pkg1": "", "pkg2": None})
     """)).containsExactly("src");
+  }
+
+  // === File API ===
+
+  @Test
+  void extract_fromFile() throws IOException {
+    File file = tempDir.resolve("setup.py").toFile();
+    Files.writeString(file.toPath(), """
+      from setuptools import setup
+      setup(package_dir={"": "src"})
+      """);
+
+    assertThat(SetupPySourceRoots.extract(file)).containsExactly("src");
+  }
+
+  @Test
+  void extract_fromFile_notReadable() {
+    File nonExistentFile = new File(tempDir.toFile(), "nonexistent.py");
+
+    assertThat(SetupPySourceRoots.extract(nonExistentFile)).isEmpty();
+  }
+
+  @Test
+  void extract_fromFile_malformedContent() throws IOException {
+    File file = tempDir.resolve("setup.py").toFile();
+    Files.writeString(file.toPath(), "[invalid python");
+
+    assertThat(SetupPySourceRoots.extract(file)).isEmpty();
+  }
+
+  // === Dictionary unpacking support ===
+
+  @Test
+  void extract_setupWithDictUnpacking() {
+    assertThat(SetupPySourceRoots.extract("""
+      from setuptools import setup
+      config = {"package_dir": {"": "src"}}
+      setup(**config)
+      """)).containsExactly("src");
+  }
+
+  @Test
+  void extract_setupWithDictUnpackingInline() {
+    assertThat(SetupPySourceRoots.extract("""
+      from setuptools import setup
+      setup(**{"package_dir": {"": "src"}})
+      """)).containsExactly("src");
+  }
+
+  @Test
+  void extract_setupWithDictUnpackingPackages() {
+    assertThat(SetupPySourceRoots.extract("""
+      from setuptools import setup, find_packages
+      config = {"packages": find_packages(where="src")}
+      setup(**config)
+      """)).containsExactly("src");
+  }
+
+  @Test
+  void extract_setupWithDictUnpackingBothPackagesAndPackageDir() {
+    assertThat(SetupPySourceRoots.extract("""
+      from setuptools import setup, find_packages
+      config = {
+          "packages": find_packages(where="src"),
+          "package_dir": {"": "lib"}
+      }
+      setup(**config)
+      """)).containsExactly("src", "lib");
+  }
+
+  @Test
+  void extract_setupWithDictUnpackingAndRegularArgs() {
+    assertThat(SetupPySourceRoots.extract("""
+      from setuptools import setup
+      base_config = {"package_dir": {"": "src"}}
+      setup(**base_config, name="myproject")
+      """)).containsExactly("src");
+  }
+
+  @Test
+  void extract_setupWithDictUnpackingChainedVariable() {
+    assertThat(SetupPySourceRoots.extract("""
+      from setuptools import setup
+      pkg_dir = {"": "src"}
+      config = {"package_dir": pkg_dir}
+      setup(**config)
+      """)).containsExactly("src");
+  }
+
+  @Test
+  void extract_setupWithDictUnpackingNoRelevantKeys() {
+    assertThat(SetupPySourceRoots.extract("""
+      from setuptools import setup
+      config = {"name": "myproject", "version": "1.0"}
+      setup(**config)
+      """)).isEmpty();
+  }
+
+  @Test
+  void extract_setupWithSingleStarUnpacking() {
+    // Single star unpacking (*args) should be ignored
+    assertThat(SetupPySourceRoots.extract("""
+      from setuptools import setup
+      args = ["myproject"]
+      setup(*args)
+      """)).isEmpty();
+  }
+
+  @Test
+  void extract_setupWithMultipleDictUnpacking() {
+    assertThat(SetupPySourceRoots.extract("""
+      from setuptools import setup
+      config1 = {"package_dir": {"": "src"}}
+      config2 = {"package_dir": {"pkg": "lib"}}
+      setup(**config1, **config2)
+      """)).containsExactly("src", "lib");
   }
 }

@@ -74,6 +74,176 @@ class SymbolUtilsTest {
   }
 
   @Test
+  void package_name_with_package_roots_namespace_packages() {
+    // Test namespace packages (PEP 420) with package roots
+    // src/acme/math/stats/mean.py should have FQN "acme.math.stats" when "src" is a package root
+    String baseDir = new File("src/test/resources/namespace_packages").getAbsoluteFile().getAbsolutePath();
+    String srcRoot = new File(baseDir, "src").getAbsolutePath();
+    List<String> packageRoots = List.of(srcRoot);
+
+    // File in namespace package (acme and math have no __init__.py, stats has __init__.py)
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("acme.math.stats");
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/mean.py"), packageRoots, baseDir))
+      .isEqualTo("acme.math.stats");
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/basic/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("acme.math.basic");
+
+    // File in regular package (mathlib has __init__.py)
+    assertThat(pythonPackageName(new File(srcRoot, "mathlib/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("mathlib");
+    assertThat(pythonPackageName(new File(srcRoot, "mathlib/utils/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("mathlib.utils");
+  }
+
+  @Test
+  void package_name_with_package_roots_file_at_root() {
+    String baseDir = new File("src/test/resources/namespace_packages").getAbsoluteFile().getAbsolutePath();
+    String srcRoot = new File(baseDir, "src").getAbsolutePath();
+    List<String> packageRoots = List.of(srcRoot);
+
+    // A file directly in the package root should have empty package name
+    File fileAtRoot = new File(srcRoot, "module.py");
+    assertThat(pythonPackageName(fileAtRoot, packageRoots, baseDir)).isEmpty();
+  }
+
+  @Test
+  void package_name_with_package_roots_fallback_to_legacy() {
+    // When file is not under any package root, should fall back to __init__.py detection
+    String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
+    String unrelatedRoot = new File(baseDir, "nonexistent").getAbsolutePath();
+    List<String> packageRoots = List.of(unrelatedRoot);
+
+    // File is not under the package root, so fallback to legacy detection
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("sound");
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/wavread.py"), packageRoots, baseDir))
+      .isEqualTo("sound.formats");
+  }
+
+  @Test
+  void package_name_with_empty_package_roots_uses_legacy() {
+    // Empty package roots should fall back to legacy __init__.py detection
+    String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
+    List<String> packageRoots = List.of();
+
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("sound");
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/wavread.py"), packageRoots, baseDir))
+      .isEqualTo("sound.formats");
+  }
+
+  @Test
+  void package_name_with_multiple_package_roots() {
+    String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
+    String packagesRoot = new File(baseDir, "packages").getAbsolutePath();
+    String namespaceRoot = new File(baseDir, "namespace_packages/src").getAbsolutePath();
+    List<String> packageRoots = List.of(packagesRoot, namespaceRoot);
+
+    // File in first root
+    assertThat(pythonPackageName(new File(packagesRoot, "sound/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("sound");
+
+    // File in second root
+    assertThat(pythonPackageName(new File(namespaceRoot, "acme/math/stats/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("acme.math.stats");
+  }
+
+  @Test
+  void package_name_with_package_roots_edge_case_single_directory() {
+    String baseDir = new File("src/test/resources/namespace_packages").getAbsoluteFile().getAbsolutePath();
+    String srcRoot = new File(baseDir, "src").getAbsolutePath();
+    List<String> packageRoots = List.of(srcRoot);
+
+    assertThat(pythonPackageName(new File(srcRoot, "mathlib/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("mathlib");
+
+    assertThat(pythonPackageName(new File(srcRoot, "mathlib/utils.py"), packageRoots, baseDir))
+      .isEqualTo("mathlib");
+  }
+
+  @Test
+  void package_name_with_package_roots_parent_not_under_root() {
+    String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
+    String unrelatedRoot = new File("/tmp/some/other/path").getAbsolutePath();
+    List<String> packageRoots = List.of(unrelatedRoot);
+
+    File fileOutsideRoot = new File(baseDir, "packages/sound/__init__.py");
+    assertThat(pythonPackageName(fileOutsideRoot, packageRoots, baseDir))
+      .isEqualTo("sound");
+  }
+
+  @Test
+  void package_name_with_package_roots_trailing_separator() {
+    String baseDir = new File("src/test/resources/namespace_packages").getAbsoluteFile().getAbsolutePath();
+    String srcRoot = new File(baseDir, "src").getAbsolutePath();
+    List<String> packageRootsWithSeparator = List.of(srcRoot + File.separator);
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/mean.py"), packageRootsWithSeparator, baseDir))
+      .isEqualTo("acme.math.stats");
+
+    List<String> packageRootsWithoutSeparator = List.of(srcRoot);
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/mean.py"), packageRootsWithoutSeparator, baseDir))
+      .isEqualTo("acme.math.stats");
+  }
+
+  @Test
+  void package_name_with_package_roots_nested_subdirectories() {
+    String baseDir = new File("src/test/resources/namespace_packages").getAbsoluteFile().getAbsolutePath();
+    String srcRoot = new File(baseDir, "src").getAbsolutePath();
+    List<String> packageRoots = List.of(srcRoot);
+
+    File deeplyNestedFile = new File(srcRoot, "acme/math/stats/mean.py");
+    assertThat(pythonPackageName(deeplyNestedFile, packageRoots, baseDir))
+      .isEqualTo("acme.math.stats");
+
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("acme.math.stats");
+    assertThat(pythonPackageName(new File(srcRoot, "mathlib/utils/__init__.py"), packageRoots, baseDir))
+      .isEqualTo("mathlib.utils");
+  }
+
+  @Test
+  void package_name_with_package_roots_various_path_separators() {
+    String baseDir = new File("src/test/resources/namespace_packages").getAbsoluteFile().getAbsolutePath();
+    String srcRoot = new File(baseDir, "src").getAbsolutePath();
+    List<String> packageRoots = List.of(srcRoot);
+
+    File fileWithSlash = new File(srcRoot, "acme/math/basic/__init__.py");
+    String packageName = pythonPackageName(fileWithSlash, packageRoots, baseDir);
+
+    assertThat(packageName).isEqualTo("acme.math.basic").doesNotContain("/").doesNotContain("\\");
+  }
+
+  @Test
+  void package_name_with_package_roots_empty_package_name_for_root_files() {
+    String baseDir = new File("src/test/resources/namespace_packages").getAbsoluteFile().getAbsolutePath();
+    String srcRoot = new File(baseDir, "src").getAbsolutePath();
+    List<String> packageRoots = List.of(srcRoot);
+
+    File rootFile1 = new File(srcRoot, "script.py");
+    File rootFile2 = new File(srcRoot, "main.py");
+
+    assertThat(pythonPackageName(rootFile1, packageRoots, baseDir)).isEmpty();
+    assertThat(pythonPackageName(rootFile2, packageRoots, baseDir)).isEmpty();
+  }
+
+  @Test
+  void package_name_with_package_roots_priority_order() {
+    String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
+    String packagesRoot = new File(baseDir, "packages").getAbsolutePath();
+    String soundRoot = new File(packagesRoot, "sound").getAbsolutePath();
+
+    List<String> packageRoots1 = List.of(soundRoot, packagesRoot);
+    File soundFormatFile = new File(soundRoot, "formats/__init__.py");
+    assertThat(pythonPackageName(soundFormatFile, packageRoots1, baseDir))
+      .isEqualTo("formats");
+
+    List<String> packageRoots2 = List.of(packagesRoot);
+    assertThat(pythonPackageName(soundFormatFile, packageRoots2, baseDir))
+      .isEqualTo("sound.formats");
+  }
+
+  @Test
   void fqn_by_package_with_subpackage() {
     assertThat(SymbolUtils.fullyQualifiedModuleName("", "foo.py")).isEqualTo("foo");
     assertThat(SymbolUtils.fullyQualifiedModuleName("foo", "__init__.py")).isEqualTo("foo");
