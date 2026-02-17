@@ -156,6 +156,7 @@ public final class PythonSensor implements Sensor {
     scanner.execute(pythonFiles, context);
     Duration sensorTime = Duration.between(sensorStartTime, Instant.now());
 
+    updateSonarTestsTelemetry(context);
     updateDatabricksTelemetry(scanner);
     updateTypeInferenceTelemetry(scanner);
     updateTestFileTelemetry(scanner);
@@ -226,6 +227,14 @@ public final class PythonSensor implements Sensor {
       sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_DUPLICATE_PACKAGES_WITHOUT_INIT, telemetry.duplicatePackagesWithoutInit());
       sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_NAMESPACE_PACKAGES_IN_REGULAR_PACKAGE, telemetry.namespacePackagesInRegularPackage());
     }
+  }
+
+  private void updateSonarTestsTelemetry(SensorContext context) {
+    if (context.runtime().getProduct() == SonarProduct.SONARLINT) {
+      return;
+    }
+    boolean sonarTestsSet = context.config().get("sonar.tests").isPresent();
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_SONAR_TESTS_SET, sonarTestsSet);
   }
 
   private void updatePythonVersionTelemetry(SensorContext context, String[] pythonVersionParameter) {

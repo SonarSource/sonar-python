@@ -1532,6 +1532,35 @@ class PythonSensorTest {
   }
 
   @Test
+  void send_telemetry_sonar_tests_set() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.tests", "tests"));
+    var contextSpy = spy(context);
+    PythonSensor sensor = sensor();
+    sensor.execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_SONAR_TESTS_SET.key(), "1");
+  }
+
+  @Test
+  void send_telemetry_sonar_tests_not_set() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    PythonSensor sensor = sensor();
+    var contextSpy = spy(context);
+    sensor.execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_SONAR_TESTS_SET.key(), "0");
+  }
+
+  @Test
   void detects_databricks() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()

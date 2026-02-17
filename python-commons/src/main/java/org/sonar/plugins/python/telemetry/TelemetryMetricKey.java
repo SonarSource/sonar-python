@@ -59,7 +59,8 @@ public enum TelemetryMetricKey {
   PYTHON_MAIN_FILES_MISCLASSIFIED_IMPORT_BASED_ONLY("python.files.main.misclassified_import_based_only"),
   PYTHON_MAIN_LINES_MISCLASSIFIED_IMPORT_BASED_ONLY("python.lines.main.misclassified_import_based_only"),
   PYTHON_MAIN_FILES_MISCLASSIFIED_PATH_BASED_ONLY("python.files.main.misclassified_path_based_only"),
-  PYTHON_MAIN_LINES_MISCLASSIFIED_PATH_BASED_ONLY("python.lines.main.misclassified_path_based_only");
+  PYTHON_MAIN_LINES_MISCLASSIFIED_PATH_BASED_ONLY("python.lines.main.misclassified_path_based_only"),
+  PYTHON_SONAR_TESTS_SET("python.sonar_tests.set");
 
   private final String key;
 
