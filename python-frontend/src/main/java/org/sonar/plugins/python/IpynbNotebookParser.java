@@ -27,10 +27,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.python.EscapeCharPositionInfo;
 import org.sonar.python.IPythonLocation;
 
 public class IpynbNotebookParser {
+
+  private static final Logger LOG = LoggerFactory.getLogger(IpynbNotebookParser.class);
 
   public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER";
 
@@ -53,25 +57,85 @@ public class IpynbNotebookParser {
   private int lastPythonLine = 0;
 
   public Optional<GeneratedIPythonFile> parse() throws IOException {
-    // If the language is not present, we assume it is a Python notebook
-    var isPythonNotebook = parseLanguage().map(ACCEPTED_LANGUAGE::contains).orElse(true);
+    var language = parseLanguage();
+    boolean isPythonNotebook = language.map(ACCEPTED_LANGUAGE::contains).orElse(true);
 
-    return Boolean.TRUE.equals(isPythonNotebook) ? Optional.of(parseNotebook()) : Optional.empty();
+    if (isPythonNotebook) {
+      return Optional.of(parseNotebook());
+    }
+
+    if(LOG.isDebugEnabled()){
+      LOG.debug("Skipping notebook '{}': unsupported language '{}'", inputFile.wrappedFile().filename(), language.orElse("unknown"));
+    }
+    return Optional.empty();
   }
 
+  /**
+   * Parses the notebook's top-level metadata to find the language.
+   * Only checks metadata.kernelspec.language and metadata.language_info.name,
+   * ignoring any language fields in cell metadata.
+   */
   public Optional<String> parseLanguage() throws IOException {
     String content = inputFile.wrappedFile().contents();
     JsonFactory factory = new JsonFactory();
+    List<String> foundLanguages = new ArrayList<>();
+
     try (JsonParser jParser = factory.createParser(content)) {
       while (!jParser.isClosed()) {
         JsonToken jsonToken = jParser.nextToken();
-        if (JsonToken.FIELD_NAME.equals(jsonToken) && "language".equals(jParser.currentName())) {
+        if (JsonToken.FIELD_NAME.equals(jsonToken) && "metadata".equals(jParser.currentName()) && jParser.getParsingContext().getParent().inRoot()) {
           jParser.nextToken();
-          return Optional.ofNullable(jParser.getValueAsString());
+          extractLanguagesFromMetadata(jParser, foundLanguages);
+          break;
         }
       }
     }
-    return Optional.empty();
+
+    // Return an accepted language if found, otherwise the first language found (for rejection), or empty
+    return foundLanguages.stream()
+      .filter(ACCEPTED_LANGUAGE::contains)
+      .findFirst()
+      .or(() -> foundLanguages.stream().findFirst());
+  }
+
+  /**
+   * Extracts language values from the top-level metadata object.
+   * Looks for kernelspec.language and language_info.name.
+   */
+  private static void extractLanguagesFromMetadata(JsonParser jParser, List<String> foundLanguages) throws IOException {
+    while (jParser.nextToken() != JsonToken.END_OBJECT) {
+      if (JsonToken.FIELD_NAME.equals(jParser.currentToken())) {
+        String fieldName = jParser.currentName();
+        if ("kernelspec".equals(fieldName)) {
+          jParser.nextToken();
+          extractFieldFromObject(jParser, "language", foundLanguages);
+        } else if ("language_info".equals(fieldName)) {
+          jParser.nextToken();
+          extractFieldFromObject(jParser, "name", foundLanguages);
+        } else {
+          jParser.nextToken();
+          skipNestedObjects(jParser);
+        }
+      }
+    }
+  }
+
+  /**
+   * Extracts the value of a specific field from a JSON object.
+   */
+  private static void extractFieldFromObject(JsonParser jParser, String targetField, List<String> foundValues) throws IOException {
+    while (jParser.nextToken() != JsonToken.END_OBJECT) {
+      if (JsonToken.FIELD_NAME.equals(jParser.currentToken()) && targetField.equals(jParser.currentName())) {
+        jParser.nextToken();
+        String value = jParser.getValueAsString();
+        if (value != null) {
+          foundValues.add(value);
+        }
+      } else {
+        jParser.nextToken();
+        skipNestedObjects(jParser);
+      }
+    }
   }
 
   public GeneratedIPythonFile parseNotebook() throws IOException {

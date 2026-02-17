@@ -23,9 +23,12 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.internal.apachecommons.lang3.StringUtils;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.python.IPythonLocation;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,6 +36,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.plugins.python.NotebookTestUtils.mapToColumnMappingList;
 
 class IpynbNotebookParserTest {
+
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
+
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python").getAbsoluteFile();
 
   public static PythonInputFile createInputFile(File baseDir, String name, InputFile.Status status, InputFile.Type type) {
@@ -151,6 +158,22 @@ class IpynbNotebookParserTest {
     var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
 
     assertThat(resultOptional).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).contains("Skipping notebook 'notebook_mojo.ipynb': unsupported language 'mojo'");
+  }
+
+  @Test
+  void testParseNotebookWithCellLanguage() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_with_cell_language.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    // Should be parsed as Python despite "sparksql" language in cell metadata
+    assertThat(resultOptional).isPresent();
+
+    var result = resultOptional.get();
+    // Should contain content from all code cells (including the SQL magic cell which is still a code cell)
+    assertThat(result.contents()).contains("x = 1");
+    assertThat(result.contents()).contains("y = 2");
   }
 
   @Test
