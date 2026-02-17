@@ -47,6 +47,7 @@ import org.sonar.plugins.python.editions.RepositoryInfoProvider;
 import org.sonar.plugins.python.editions.RepositoryInfoProvider.RepositoryInfo;
 import org.sonar.plugins.python.editions.RepositoryInfoProviderWrapper;
 import org.sonar.plugins.python.indexer.NamespacePackageTelemetry;
+import org.sonar.plugins.python.indexer.PackageResolutionResult;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
@@ -226,7 +227,53 @@ public final class PythonSensor implements Sensor {
       sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGES_WITHOUT_INIT, telemetry.packagesWithoutInit());
       sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_DUPLICATE_PACKAGES_WITHOUT_INIT, telemetry.duplicatePackagesWithoutInit());
       sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_NAMESPACE_PACKAGES_IN_REGULAR_PACKAGE, telemetry.namespacePackagesInRegularPackage());
+
+      updateResolutionMethodTelemetry(telemetry);
+      updateBuildSystemTelemetry(telemetry);
     }
+  }
+
+  private void updateResolutionMethodTelemetry(NamespacePackageTelemetry telemetry) {
+    PackageResolutionResult.ResolutionMethod method = telemetry.resolutionMethod();
+    if (method == null) {
+      return;
+    }
+
+    // Report boolean flags for each resolution method
+    boolean usedPyproject = method == PackageResolutionResult.ResolutionMethod.PYPROJECT_TOML
+      || method == PackageResolutionResult.ResolutionMethod.PYPROJECT_AND_SETUP_PY;
+    boolean usedSetupPy = method == PackageResolutionResult.ResolutionMethod.SETUP_PY
+      || method == PackageResolutionResult.ResolutionMethod.PYPROJECT_AND_SETUP_PY;
+    boolean usedSonarSources = method == PackageResolutionResult.ResolutionMethod.SONAR_SOURCES;
+    boolean usedConventionalFolders = method == PackageResolutionResult.ResolutionMethod.CONVENTIONAL_FOLDERS;
+    boolean usedBaseDir = method == PackageResolutionResult.ResolutionMethod.BASE_DIR;
+
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_PYPROJECT_TOML, usedPyproject ? 1 : 0);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SETUP_PY, usedSetupPy ? 1 : 0);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SONAR_SOURCES, usedSonarSources ? 1 : 0);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_CONVENTIONAL_FOLDERS, usedConventionalFolders ? 1 : 0);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_BASE_DIR, usedBaseDir ? 1 : 0);
+  }
+
+  private void updateBuildSystemTelemetry(NamespacePackageTelemetry telemetry) {
+    PackageResolutionResult.BuildSystem buildSystem = telemetry.buildSystem();
+    if (buildSystem == null) {
+      return;
+    }
+
+    // Report boolean flags for each build system
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_SETUPTOOLS,
+      buildSystem == PackageResolutionResult.BuildSystem.SETUPTOOLS ? 1 : 0);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_POETRY,
+      buildSystem == PackageResolutionResult.BuildSystem.POETRY ? 1 : 0);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_HATCHLING,
+      buildSystem == PackageResolutionResult.BuildSystem.HATCHLING ? 1 : 0);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_UV_BUILD,
+      buildSystem == PackageResolutionResult.BuildSystem.UV_BUILD ? 1 : 0);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_PDM,
+      buildSystem == PackageResolutionResult.BuildSystem.PDM ? 1 : 0);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_FLIT,
+      buildSystem == PackageResolutionResult.BuildSystem.FLIT ? 1 : 0);
   }
 
   private void updateSonarTestsTelemetry(SensorContext context) {

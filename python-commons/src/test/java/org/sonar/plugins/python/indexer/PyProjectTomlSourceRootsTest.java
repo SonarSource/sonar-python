@@ -20,15 +20,37 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 class PyProjectTomlSourceRootsTest {
 
   @TempDir
   Path tempDir;
+
+  // === Helper functions to simulate the toml file ===
+
+  public List<String> extract(String content) {
+    File file = tempDir.resolve("pyproject.toml").toFile();
+    try {
+      Files.writeString(file.toPath(), content);
+      return PyProjectTomlSourceRoots.extract(file);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public PyProjectExtractionResult extractWithBuildSystem(String content) {
+    File file = tempDir.resolve("pyproject.toml").toFile();
+    try {
+      Files.writeString(file.toPath(), content);
+      return PyProjectTomlSourceRoots.extractWithBuildSystem(file);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
   // === Error handling ===
 
@@ -41,18 +63,18 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_emptyContent_returnsEmptyList() {
-    assertThat(PyProjectTomlSourceRoots.extract("")).isEmpty();
+    assertThat(extract("")).isEmpty();
   }
 
   @Test
   void extract_invalidToml_returnsEmptyList() {
-    assertThat(PyProjectTomlSourceRoots.extract("[invalid")).isEmpty();
-    assertThat(PyProjectTomlSourceRoots.extract("not toml at all")).isEmpty();
+    assertThat(extract("[invalid")).isEmpty();
+    assertThat(extract("not toml at all")).isEmpty();
   }
 
   @Test
   void extract_noToolSection_returnsEmptyList() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [project]
       name = "myproject"
       """)).isEmpty();
@@ -60,7 +82,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_emptyToolSection_returnsEmptyList() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool]
       """)).isEmpty();
   }
@@ -69,7 +91,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_setuptools_singleWhere() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.setuptools.packages.find]
       where = ["src"]
       """)).containsExactly("src");
@@ -77,7 +99,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_setuptools_multipleWhere() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.setuptools.packages.find]
       where = ["src", "lib"]
       """)).containsExactly("src", "lib");
@@ -85,7 +107,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_setuptools_emptyWhere() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.setuptools.packages.find]
       where = []
       """)).isEmpty();
@@ -93,7 +115,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_setuptools_withOtherOptions() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.setuptools.packages.find]
       where = ["src"]
       include = ["mypackage*"]
@@ -104,7 +126,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_setuptools_noFindSection() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.setuptools]
       packages = ["mypackage"]
       """)).isEmpty();
@@ -114,7 +136,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_poetry_singlePackageWithFrom() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.poetry]
       packages = [
         { include = "mypackage", from = "src" }
@@ -124,7 +146,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_poetry_multiplePackagesFromDifferentDirs() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.poetry]
       packages = [
         { include = "package1", from = "src" },
@@ -135,7 +157,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_poetry_multiplePackagesSameDir() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.poetry]
       packages = [
         { include = "package1", from = "src" },
@@ -146,7 +168,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_poetry_packageWithoutFrom() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.poetry]
       packages = [
         { include = "mypackage" }
@@ -156,7 +178,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_poetry_emptyPackages() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.poetry]
       packages = []
       """)).isEmpty();
@@ -164,7 +186,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_poetry_onlyDependencies() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.poetry.dependencies]
       python = "^3.9"
       requests = "^2.28"
@@ -175,7 +197,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_hatchling_sources() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.hatch.build.targets.wheel]
       sources = ["src"]
       """)).containsExactly("src");
@@ -183,7 +205,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_hatchling_multipleSources() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.hatch.build.targets.wheel]
       sources = ["src", "lib"]
       """)).containsExactly("src", "lib");
@@ -191,7 +213,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_hatchling_packagesPath() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.hatch.build.targets.wheel]
       packages = ["src/mypackage"]
       """)).containsExactly("src");
@@ -199,7 +221,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_hatchling_packagesPathWindows(){
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.hatch.build.targets.wheel]
       packages = ["root\\\\mylibrary"]
       """)).containsExactly("root");
@@ -207,7 +229,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_hatchling_multiplePackagesPaths() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.hatch.build.targets.wheel]
       packages = ["src/package1", "lib/package2"]
       """)).containsExactly("src", "lib");
@@ -215,7 +237,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_hatchling_sourcesPreferredOverPackages() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.hatch.build.targets.wheel]
       sources = ["source"]
       packages = ["src/mypackage"]
@@ -224,7 +246,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_hatchling_packageWithoutSlash() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.hatch.build.targets.wheel]
       packages = ["mypackage"]
       """)).isEmpty();
@@ -232,7 +254,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_hatchling_emptySources() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.hatch.build.targets.wheel]
       sources = []
       """)).isEmpty();
@@ -240,7 +262,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_hatchling_noWheelTarget() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.hatch.build.targets.sdist]
       include = ["src/"]
       """)).isEmpty();
@@ -250,7 +272,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_uvBuild_moduleRoot() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.uv.build-backend]
       module-root = "src"
       """)).containsExactly("src");
@@ -258,7 +280,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_uvBuild_emptyModuleRoot() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.uv.build-backend]
       module-root = ""
       """)).containsExactly("src");
@@ -266,7 +288,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_uvBuild_noBuildBackend() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.uv]
       dev-dependencies = ["pytest"]
       """)).isEmpty();
@@ -274,7 +296,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_uvBuild_withOtherOptions() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.uv.build-backend]
       module-root = "src"
       module-name = "mymodule"
@@ -283,7 +305,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_uvBuild_no_root() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.uv.build-backend]
       module-name = "mymodule"
       """)).containsExactly("src");
@@ -291,7 +313,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_uvBuild_fromBuildSystem() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [build-system]
       build-backend = "uv_build"
       """)).containsExactly("src");
@@ -299,7 +321,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_uvBuild_fromBuildSystemWithRequires() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [build-system]
       requires = ["uv>=0.5.15"]
       build-backend = "uv_build"
@@ -308,7 +330,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_otherBuildBackend_returnsEmpty() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [build-system]
       build-backend = "setuptools.build_meta"
       """)).isEmpty();
@@ -318,7 +340,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_pdm_packageDir() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.pdm]
       package-dir = "src"
       """)).containsExactly("src");
@@ -326,7 +348,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_pdm_emptyPackageDir() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.pdm]
       package-dir = ""
       """)).isEmpty();
@@ -334,7 +356,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_pdm_noPackageDir() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.pdm]
       version = { source = "file", path = "src/mypackage/__init__.py" }
       """)).isEmpty();
@@ -344,7 +366,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_flit_withModuleName() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.flit.module]
       name = "mymodule"
       """)).containsExactly("src");
@@ -352,7 +374,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_flit_emptyModuleName() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.flit.module]
       name = ""
       """)).containsExactly("src");
@@ -360,7 +382,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_flit_absentModuleName() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.flit.module]
       other = ""
       """)).isEmpty();
@@ -368,7 +390,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_flit_noModuleSection() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.flit.metadata]
       module = "mymodule"
       """)).isEmpty();
@@ -378,7 +400,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_multipleBuildSystems_collectsAll() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.setuptools.packages.find]
       where = ["src"]
 
@@ -389,7 +411,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_multipleBuildSystems_deduplicates() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [tool.setuptools.packages.find]
       where = ["src"]
 
@@ -400,7 +422,7 @@ class PyProjectTomlSourceRootsTest {
 
   @Test
   void extract_completePyprojectToml() {
-    assertThat(PyProjectTomlSourceRoots.extract("""
+    assertThat(extract("""
       [build-system]
       requires = ["setuptools>=61.0"]
       build-backend = "setuptools.build_meta"
@@ -502,5 +524,128 @@ class PyProjectTomlSourceRootsTest {
     ConfigSourceRoots result = PyProjectTomlSourceRoots.extractWithLocation(file);
 
     assertThat(result.relativeRoots()).isEmpty();
+  }
+
+  // === Build System Detection Tests ===
+
+  @Test
+  void extractWithBuildSystem_setuptools_detectsBuildSystem() {
+    var result = extractWithBuildSystem("""
+      [tool.setuptools.packages.find]
+      where = ["src"]
+      """);
+
+    assertThat(result.relativeRoots()).containsExactly("src");
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.SETUPTOOLS);
+  }
+
+  @Test
+  void extractWithBuildSystem_poetry_detectsBuildSystem() {
+    var result = extractWithBuildSystem("""
+      [tool.poetry]
+      packages = [{ include = "mypackage", from = "src" }]
+      """);
+
+    assertThat(result.relativeRoots()).containsExactly("src");
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.POETRY);
+  }
+
+  @Test
+  void extractWithBuildSystem_hatchling_detectsBuildSystem() {
+    var result = extractWithBuildSystem("""
+      [tool.hatch.build.targets.wheel]
+      sources = ["src"]
+      """);
+
+    assertThat(result.relativeRoots()).containsExactly("src");
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.HATCHLING);
+  }
+
+  @Test
+  void extractWithBuildSystem_uvBuild_detectsBuildSystem() {
+    var result = extractWithBuildSystem("""
+      [tool.uv.build-backend]
+      module-root = "src"
+      """);
+
+    assertThat(result.relativeRoots()).containsExactly("src");
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.UV_BUILD);
+  }
+
+  @Test
+  void extractWithBuildSystem_pdm_detectsBuildSystem() {
+    var result = extractWithBuildSystem("""
+      [tool.pdm]
+      package-dir = "src"
+      """);
+
+    assertThat(result.relativeRoots()).containsExactly("src");
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.PDM);
+  }
+
+  @Test
+  void extractWithBuildSystem_flit_detectsBuildSystem() {
+    var result = extractWithBuildSystem("""
+      [tool.flit.module]
+      name = "mymodule"
+      """);
+
+    assertThat(result.relativeRoots()).containsExactly("src");
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.FLIT);
+  }
+
+  @Test
+  void extractWithBuildSystem_multipleBuildSystems_detectsMultiple() {
+    var result = extractWithBuildSystem("""
+      [tool.setuptools.packages.find]
+      where = ["src"]
+
+      [tool.pdm]
+      package-dir = "lib"
+      """);
+
+    assertThat(result.relativeRoots()).containsExactly("src", "lib");
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.MULTIPLE);
+  }
+
+  @Test
+  void extractWithBuildSystem_emptyContent_returnsNone() {
+    var result = extractWithBuildSystem("");
+
+    assertThat(result.relativeRoots()).isEmpty();
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.NONE);
+  }
+
+  @Test
+  void extractWithBuildSystem_noToolSection_returnsNone() {
+    var result = extractWithBuildSystem("""
+      [project]
+      name = "myproject"
+      """);
+
+    assertThat(result.relativeRoots()).isEmpty();
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.NONE);
+  }
+
+  @Test
+  void extractWithBuildSystem_fromFile() throws IOException {
+    File file = tempDir.resolve("pyproject.toml").toFile();
+    Files.writeString(file.toPath(), """
+        [tool.setuptools.packages.find]
+        where = ["src"]
+        """);
+
+    var result = PyProjectTomlSourceRoots.extractWithBuildSystem(file);
+
+    assertThat(result.relativeRoots()).containsExactly("src");
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.SETUPTOOLS);
+  }
+
+  @Test
+  void extractWithBuildSystem_fromFileThrowsIOException(){
+    File file = tempDir.resolve("pyproject.toml").toFile();
+    var result = PyProjectTomlSourceRoots.extractWithBuildSystem(file);
+    assertThat(result.relativeRoots()).isEmpty();
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.NONE);
   }
 }

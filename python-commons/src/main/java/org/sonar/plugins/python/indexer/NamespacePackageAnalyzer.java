@@ -57,7 +57,9 @@ public class NamespacePackageAnalyzer {
       packagesWithInit,
       packagesWithoutInit,
       duplicatePackagesWithoutInit,
-      namespacePackagesInRegularPackage);
+      namespacePackagesInRegularPackage,
+      null,
+      null);
   }
 
   private static boolean hasAnyParentWithInit(ProjectTree.ProjectTreeFolder folder) {

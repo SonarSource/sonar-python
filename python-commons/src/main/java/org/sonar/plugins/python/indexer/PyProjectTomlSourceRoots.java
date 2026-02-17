@@ -58,32 +58,46 @@ public class PyProjectTomlSourceRoots {
   }
 
   /**
-   * Extracts source root directories from pyproject.toml content.
+   * Extracts source root directories from a pyproject.toml File.
    *
-   * @param tomlContent the content of a pyproject.toml file
+   * @param file the pyproject.toml file
    * @return list of source root paths (relative), empty if none found or on parse error
    */
   @VisibleForTesting
-  static List<String> extract(String tomlContent) {
+  static List<String> extract(File file) {
     try {
-      PyProjectConfig config = TOML_MAPPER.readValue(tomlContent, PyProjectConfig.class);
-      return extractFromConfig(config);
+      return extractWithBuildSystem(Files.readString(file.toPath()), file).relativeRoots();
     } catch (IOException e) {
       return List.of();
     }
   }
 
   /**
-   * Extracts source root directories from a pyproject.toml File.
+   * Extracts source root directories from pyproject.toml content, including build system info.
+   *
+   * @param tomlContent the content of a pyproject.toml file
+   * @return extraction result with source roots and build system info
+   */
+  static PyProjectExtractionResult extractWithBuildSystem(String tomlContent, File file) {
+    try {
+      PyProjectConfig config = TOML_MAPPER.readValue(tomlContent, PyProjectConfig.class);
+      return extractFromConfig(config, file);
+    } catch (IOException e) {
+      return PyProjectExtractionResult.empty(file);
+    }
+  }
+
+  /**
+   * Extracts source root directories from a pyproject.toml File, including build system info.
    *
    * @param file the pyproject.toml file
-   * @return list of source root paths (relative), empty if none found or on parse error
+   * @return extraction result with source roots and build system info
    */
-  private static List<String> extract(File file) {
+  public static PyProjectExtractionResult extractWithBuildSystem(File file) {
     try {
-      return extract(Files.readString(file.toPath()));
+      return extractWithBuildSystem(Files.readString(file.toPath()), file);
     } catch (IOException e) {
-      return List.of();
+      return PyProjectExtractionResult.empty(file);
     }
   }
 
@@ -102,30 +116,79 @@ public class PyProjectTomlSourceRoots {
     return new ConfigSourceRoots(file, roots);
   }
 
-  private static List<String> extractFromConfig(PyProjectConfig config) {
+  private static PyProjectExtractionResult extractFromConfig(PyProjectConfig config, File file) {
     Set<String> sourceRoots = new LinkedHashSet<>();
+    List<PackageResolutionResult.BuildSystem> detectedBuildSystems = new ArrayList<>();
+    List<String> uvRoots = List.of();
+    Tool configTool = config.tool();
 
-    // Check build-system.build-backend for uv_build
-    sourceRoots.addAll(extractFromBuildSystem(config.buildSystem()));
+    if (configTool != null) {
+      List<String> setuptoolsRoots = extractFromSetuptools(configTool.setuptools());
 
-    if (config.tool() != null) {
-      Tool tool = config.tool();
-      sourceRoots.addAll(extractFromSetuptools(tool.setuptools()));
-      sourceRoots.addAll(extractFromPoetry(tool.poetry()));
-      sourceRoots.addAll(extractFromHatchling(tool.hatch()));
-      sourceRoots.addAll(extractFromUvBuild(tool.uv()));
-      sourceRoots.addAll(extractFromPdm(tool.pdm()));
-      sourceRoots.addAll(extractFromFlit(tool.flit()));
+      if (!setuptoolsRoots.isEmpty()) {
+        sourceRoots.addAll(setuptoolsRoots);
+        detectedBuildSystems.add(PackageResolutionResult.BuildSystem.SETUPTOOLS);
+      }
+
+      List<String> poetryRoots = extractFromPoetry(configTool.poetry());
+      if (!poetryRoots.isEmpty()) {
+        sourceRoots.addAll(poetryRoots);
+        detectedBuildSystems.add(PackageResolutionResult.BuildSystem.POETRY);
+      }
+
+      List<String> hatchlingRoots = extractFromHatchling(configTool.hatch());
+      if (!hatchlingRoots.isEmpty()) {
+        sourceRoots.addAll(hatchlingRoots);
+        detectedBuildSystems.add(PackageResolutionResult.BuildSystem.HATCHLING);
+      }
+
+      uvRoots = extractFromUvBuild(configTool.uv());
+      if (!uvRoots.isEmpty()) {
+        sourceRoots.addAll(uvRoots);
+        detectedBuildSystems.add(PackageResolutionResult.BuildSystem.UV_BUILD);
+      }
+
+      List<String> pdmRoots = extractFromPdm(configTool.pdm());
+      if (!pdmRoots.isEmpty()) {
+        sourceRoots.addAll(pdmRoots);
+        detectedBuildSystems.add(PackageResolutionResult.BuildSystem.PDM);
+      }
+
+      List<String> flitRoots = extractFromFlit(configTool.flit());
+      if (!flitRoots.isEmpty()) {
+        sourceRoots.addAll(flitRoots);
+        detectedBuildSystems.add(PackageResolutionResult.BuildSystem.FLIT);
+      }
     }
 
-    return new ArrayList<>(sourceRoots);
+    if (configTool == null || uvRoots.isEmpty()) {
+      List<String> buildSystemRoots = extractFromUVBuildSystem(config.buildSystem());
+      if (!buildSystemRoots.isEmpty()) {
+        sourceRoots.addAll(buildSystemRoots);
+        detectedBuildSystems.add(PackageResolutionResult.BuildSystem.UV_BUILD_DEFAULT_MODULE);
+      }
+    }
+
+    PackageResolutionResult.BuildSystem buildSystem = determineBuildSystem(detectedBuildSystems);
+    return new PyProjectExtractionResult(new ConfigSourceRoots(file, sourceRoots.stream().toList()), buildSystem);
+  }
+
+
+  private static PackageResolutionResult.BuildSystem determineBuildSystem(List<PackageResolutionResult.BuildSystem> detected) {
+    if (detected.isEmpty()) {
+      return PackageResolutionResult.BuildSystem.NONE;
+    } else if (detected.size() == 1) {
+      return detected.get(0);
+    } else {
+      return PackageResolutionResult.BuildSystem.MULTIPLE;
+    }
   }
 
   // === Build System ===
   // [build-system]
   // build-backend = "uv_build"
 
-  private static List<String> extractFromBuildSystem(@Nullable BuildSystem buildSystem) {
+  private static List<String> extractFromUVBuildSystem(@Nullable BuildSystem buildSystem) {
     if (buildSystem == null || buildSystem.buildBackend() == null) {
       return List.of();
     }

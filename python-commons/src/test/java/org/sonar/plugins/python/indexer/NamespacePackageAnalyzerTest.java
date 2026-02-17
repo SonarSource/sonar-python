@@ -238,5 +238,41 @@ class NamespacePackageAnalyzerTest {
     assertThat(result.packagesWithInit()).isEqualTo(1);
     assertThat(result.packagesWithoutInit()).isZero();
   }
+
+  @Test
+  void telemetry_has_null_resolution_info_by_default() {
+    ProjectTree emptyTree = new ProjectTree.ProjectTreeFile("/");
+    NamespacePackageAnalyzer analyzer = new NamespacePackageAnalyzer();
+
+    NamespacePackageTelemetry result = analyzer.analyze(emptyTree);
+
+    assertThat(result.resolutionMethod()).isNull();
+    assertThat(result.buildSystem()).isNull();
+  }
+
+  @Test
+  void telemetry_with_resolution_info_can_be_created() {
+    ProjectTree emptyTree = new ProjectTree.ProjectTreeFile("/");
+    NamespacePackageAnalyzer analyzer = new NamespacePackageAnalyzer();
+    NamespacePackageTelemetry baseTelemetry = analyzer.analyze(emptyTree);
+
+    NamespacePackageTelemetry withResolution = baseTelemetry.withResolutionInfo(
+      PackageResolutionResult.ResolutionMethod.PYPROJECT_TOML,
+      PackageResolutionResult.BuildSystem.SETUPTOOLS);
+
+    assertThat(withResolution.resolutionMethod()).isEqualTo(PackageResolutionResult.ResolutionMethod.PYPROJECT_TOML);
+    assertThat(withResolution.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.SETUPTOOLS);
+    // Original values preserved
+    assertThat(withResolution.packagesWithInit()).isEqualTo(baseTelemetry.packagesWithInit());
+    assertThat(withResolution.packagesWithoutInit()).isEqualTo(baseTelemetry.packagesWithoutInit());
+  }
+
+  @Test
+  void telemetry_empty_has_null_resolution_info() {
+    NamespacePackageTelemetry empty = NamespacePackageTelemetry.empty();
+
+    assertThat(empty.resolutionMethod()).isNull();
+    assertThat(empty.buildSystem()).isNull();
+  }
 }
 

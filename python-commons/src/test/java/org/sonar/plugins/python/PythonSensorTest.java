@@ -1793,4 +1793,333 @@ class PythonSensorTest {
     testReadCache.put(CACHE_VERSION_KEY, "unknownPluginVersion".getBytes(UTF_8));
     return testReadCache;
   }
+
+  // === Package Resolution Telemetry Tests ===
+
+  @Test
+  void send_telemetry_resolution_method_pyproject_toml() throws IOException {
+    Path tempDir = Files.createTempDirectory("pyproject_telemetry_test").toRealPath();
+    Path srcDir = Files.createDirectories(tempDir.resolve(Path.of("src", "mypackage")));
+    Files.writeString(srcDir.resolve("__init__.py"), "");
+    Files.writeString(srcDir.resolve("module.py"), "x = 1");
+    Files.writeString(tempDir.resolve("pyproject.toml"), """
+      [tool.setuptools.packages.find]
+      where = ["src"]
+      """);
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+
+    // Add pyproject.toml as input file
+    DefaultInputFile pyprojectFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), tempDir.resolve("pyproject.toml").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(pyprojectFile);
+
+    DefaultInputFile moduleFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), srcDir.resolve("module.py").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(moduleFile);
+
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    var contextSpy = spy(tempContext);
+    PythonSensor sensor = sensor(CUSTOM_RULES, null, analysisWarning, architectureUDGBuilderWrapper, new ProjectConfigurationBuilder());
+    sensor.execute(contextSpy);
+
+    // Verify resolution method flags
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_PYPROJECT_TOML.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SETUP_PY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SONAR_SOURCES.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_CONVENTIONAL_FOLDERS.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_BASE_DIR.key(), "0");
+
+    // Verify build system flags
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_SETUPTOOLS.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_POETRY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_HATCHLING.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_UV_BUILD.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_PDM.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_FLIT.key(), "0");
+  }
+
+  @Test
+  void send_telemetry_resolution_method_setup_py() throws IOException {
+    Path tempDir = Files.createTempDirectory("setup_py_telemetry_test").toRealPath();
+    Path srcDir = Files.createDirectories(tempDir.resolve(Path.of("src", "mypackage")));
+    Files.writeString(srcDir.resolve("__init__.py"), "");
+    Files.writeString(srcDir.resolve("module.py"), "x = 1");
+    Files.writeString(tempDir.resolve("setup.py"), """
+      from setuptools import setup
+      setup(package_dir={"": "src"})
+      """);
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+
+    // Add setup.py as input file
+    DefaultInputFile setupPyFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), tempDir.resolve("setup.py").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(setupPyFile);
+
+    DefaultInputFile moduleFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), srcDir.resolve("module.py").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(moduleFile);
+
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    var contextSpy = spy(tempContext);
+    PythonSensor sensor = sensor(CUSTOM_RULES, null, analysisWarning, architectureUDGBuilderWrapper, new ProjectConfigurationBuilder());
+    sensor.execute(contextSpy);
+
+    // Verify resolution method flags
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_PYPROJECT_TOML.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SETUP_PY.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SONAR_SOURCES.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_CONVENTIONAL_FOLDERS.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_BASE_DIR.key(), "0");
+  }
+
+  @Test
+  void send_telemetry_resolution_method_sonar_sources() throws IOException {
+    Path tempDir = Files.createTempDirectory("sonar_sources_telemetry_test").toRealPath();
+    Path customDir = Files.createDirectories(tempDir.resolve(Path.of("custom_src", "mypackage")));
+    Files.writeString(customDir.resolve("__init__.py"), "");
+    Files.writeString(customDir.resolve("module.py"), "x = 1");
+    // No pyproject.toml, setup.py, or conventional src folder - but sonar.sources is set
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+    tempContext.settings().setProperty("sonar.sources", "custom_src");
+
+    DefaultInputFile moduleFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), customDir.resolve("module.py").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(moduleFile);
+
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    var contextSpy = spy(tempContext);
+    PythonSensor sensor = sensor(CUSTOM_RULES, null, analysisWarning, architectureUDGBuilderWrapper, new ProjectConfigurationBuilder());
+    sensor.execute(contextSpy);
+
+    // Verify resolution method flags - should use sonar.sources
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_PYPROJECT_TOML.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SETUP_PY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SONAR_SOURCES.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_CONVENTIONAL_FOLDERS.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_BASE_DIR.key(), "0");
+  }
+
+  @Test
+  void send_telemetry_resolution_method_conventional_folders() throws IOException {
+    Path tempDir = Files.createTempDirectory("conventional_telemetry_test").toRealPath();
+    Path srcDir = Files.createDirectories(tempDir.resolve(Path.of("src", "mypackage")));
+    Files.writeString(srcDir.resolve("__init__.py"), "");
+    Files.writeString(srcDir.resolve("module.py"), "x = 1");
+    // No pyproject.toml or setup.py - should use conventional folder fallback
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+
+    DefaultInputFile moduleFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), srcDir.resolve("module.py").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(moduleFile);
+
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    var contextSpy = spy(tempContext);
+    PythonSensor sensor = sensor(CUSTOM_RULES, null, analysisWarning, architectureUDGBuilderWrapper, new ProjectConfigurationBuilder());
+    sensor.execute(contextSpy);
+
+    // Verify resolution method flags - should use conventional folders (src exists)
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_PYPROJECT_TOML.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SETUP_PY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SONAR_SOURCES.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_CONVENTIONAL_FOLDERS.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_BASE_DIR.key(), "0");
+  }
+
+  @Test
+  void send_telemetry_resolution_method_base_dir() throws IOException {
+    Path tempDir = Files.createTempDirectory("basedir_telemetry_test").toRealPath();
+    Path pkgDir = Files.createDirectories(tempDir.resolve("mypackage"));
+    Files.writeString(pkgDir.resolve("__init__.py"), "");
+    Files.writeString(pkgDir.resolve("module.py"), "x = 1");
+    // No pyproject.toml, setup.py, or src folder - should use base dir fallback
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+
+    DefaultInputFile moduleFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), pkgDir.resolve("module.py").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(moduleFile);
+
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    var contextSpy = spy(tempContext);
+    PythonSensor sensor = sensor(CUSTOM_RULES, null, analysisWarning, architectureUDGBuilderWrapper, new ProjectConfigurationBuilder());
+    sensor.execute(contextSpy);
+
+    // Verify resolution method flags - should use base dir fallback
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_PYPROJECT_TOML.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SETUP_PY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SONAR_SOURCES.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_CONVENTIONAL_FOLDERS.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_BASE_DIR.key(), "1");
+  }
+
+  @Test
+  void send_telemetry_resolution_method_both_pyproject_and_setup_py() throws IOException {
+    Path tempDir = Files.createTempDirectory("both_telemetry_test").toRealPath();
+    Path srcDir = Files.createDirectories(tempDir.resolve(Path.of("src", "mypackage")));
+    Path libDir = Files.createDirectories(tempDir.resolve(Path.of("lib", "otherpackage")));
+    Files.writeString(srcDir.resolve("__init__.py"), "");
+    Files.writeString(srcDir.resolve("module.py"), "x = 1");
+    Files.writeString(libDir.resolve("__init__.py"), "");
+    Files.writeString(libDir.resolve("utils.py"), "y = 2");
+
+    // pyproject.toml specifies src
+    Files.writeString(tempDir.resolve("pyproject.toml"), """
+      [tool.poetry]
+      packages = [{ include = "mypackage", from = "src" }]
+      """);
+
+    // setup.py specifies lib
+    Files.writeString(tempDir.resolve("setup.py"), """
+      from setuptools import setup
+      setup(package_dir={"": "lib"})
+      """);
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+
+    // Add config files
+    DefaultInputFile pyprojectFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), tempDir.resolve("pyproject.toml").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(pyprojectFile);
+
+    DefaultInputFile setupPyFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), tempDir.resolve("setup.py").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(setupPyFile);
+
+    DefaultInputFile moduleFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), srcDir.resolve("module.py").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(moduleFile);
+
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    var contextSpy = spy(tempContext);
+    PythonSensor sensor = sensor(CUSTOM_RULES, null, analysisWarning, architectureUDGBuilderWrapper, new ProjectConfigurationBuilder());
+    sensor.execute(contextSpy);
+
+    // Verify resolution method flags - both should be 1
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_PYPROJECT_TOML.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SETUP_PY.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SONAR_SOURCES.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_CONVENTIONAL_FOLDERS.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_BASE_DIR.key(), "0");
+
+    // Verify build system flags - Poetry should be detected
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_SETUPTOOLS.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_POETRY.key(), "1");
+  }
+
+  @Test
+  void send_telemetry_build_system_hatchling() throws IOException {
+    Path tempDir = Files.createTempDirectory("hatch_telemetry_test").toRealPath();
+    Path srcDir = Files.createDirectories(tempDir.resolve(Path.of("src", "mypackage")));
+    Files.writeString(srcDir.resolve("__init__.py"), "");
+    Files.writeString(srcDir.resolve("module.py"), "x = 1");
+    Files.writeString(tempDir.resolve("pyproject.toml"), """
+      [tool.hatch.build.targets.wheel]
+      sources = ["src"]
+      """);
+
+    SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
+    tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+
+    DefaultInputFile pyprojectFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), tempDir.resolve("pyproject.toml").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(pyprojectFile);
+
+    DefaultInputFile moduleFile = TestInputFileBuilder.create("moduleKey", tempDir.toFile(), srcDir.resolve("module.py").toFile())
+      .setLanguage("py")
+      .setType(Type.MAIN)
+      .setCharset(StandardCharsets.UTF_8)
+      .build();
+    tempContext.fileSystem().add(moduleFile);
+
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    var contextSpy = spy(tempContext);
+    PythonSensor sensor = sensor(CUSTOM_RULES, null, analysisWarning, architectureUDGBuilderWrapper, new ProjectConfigurationBuilder());
+    sensor.execute(contextSpy);
+
+    // Verify build system flags - Hatchling should be detected
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_SETUPTOOLS.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_POETRY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_HATCHLING.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_UV_BUILD.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_PDM.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_FLIT.key(), "0");
+  }
 }
