@@ -4,18 +4,18 @@ when they are received. In the case that adversaries gain physical access to the
 access the data.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> The topic contains sensitive data that could cause harm when leaked. </li>
-  <li> There are compliance requirements for the service to store data encrypted. </li>
+  <li>The topic contains sensitive data that could cause harm when leaked.</li>
+  <li>There are compliance requirements for the service to store data encrypted.</li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <p>It is recommended to encrypt SNS topics that contain sensitive information.</p>
 <p>To do so, create a master key and assign the SNS topic to it. Note that this system does not encrypt the following:</p>
 <ul>
-  <li> Topic metadata (topic name and attributes) </li>
-  <li> Message metadata (subject, message ID, timestamp, and attributes) </li>
-  <li> Data protection policy </li>
-  <li> Per-topic metrics </li>
+  <li>Topic metadata (topic name and attributes)</li>
+  <li>Message metadata (subject, message ID, timestamp, and attributes)</li>
+  <li>Data protection policy</li>
+  <li>Per-topic metrics</li>
 </ul>
 <p>Then, make sure that any publishers have the <code>kms:GenerateDataKey*</code> and <code>kms:Decrypt</code> permissions for the AWS KMS key.</p>
 <p>See <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-key-management.html#sns-what-permissions-for-sse">AWS SNS Key Management
@@ -84,12 +84,12 @@ class TopicStack(Stack):
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">AWS Documentation</a> - Encryption at rest </li>
-  <li> <a href="https://aws.amazon.com/blogs/compute/encrypting-messages-published-to-amazon-sns-with-aws-kms/">Encrypting messages published to
-  Amazon SNS with AWS KMS</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a> </li>
-  <li> STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222588">Application Security and
+  <li><a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">AWS Documentation</a> - Encryption at rest</li>
+  <li><a href="https://aws.amazon.com/blogs/compute/encrypting-messages-published-to-amazon-sns-with-aws-kms/">Encrypting messages published to Amazon
+  SNS with AWS KMS</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a></li>
+  <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222588">Application Security and
   Development: V-222588</a> - The application must implement approved cryptographic mechanisms to prevent unauthorized modification of information at
-  rest. </li>
+  rest.</li>
 </ul>
 

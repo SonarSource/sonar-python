@@ -10,14 +10,14 @@ manually disable escaping when needed.</p>
 <p>A successful exploitation of a cross-site-scripting vulnerability by an attacker allow him to execute malicious JavaScript code in a user’s web
 browser. The most severe XSS attacks involve:</p>
 <ul>
-  <li> Forced redirection </li>
-  <li> Modify presentation of content </li>
-  <li> User accounts takeover after disclosure of sensitive information like session cookies or passwords </li>
+  <li>Forced redirection</li>
+  <li>Modify presentation of content</li>
+  <li>User accounts takeover after disclosure of sensitive information like session cookies or passwords</li>
 </ul>
 <p>This rule supports the following libraries:</p>
 <ul>
-  <li> <a href="https://github.com/django/django">Django Templates</a> </li>
-  <li> <a href="https://github.com/pallets/jinja">Jinja2</a> </li>
+  <li><a href="https://github.com/django/django">Django Templates</a></li>
+  <li><a href="https://github.com/pallets/jinja">Jinja2</a></li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre>
@@ -33,24 +33,24 @@ env = Environment(autoescape=True) # Compliant
 </pre>
 <h2>Resources</h2>
 <ul>
-  <li> <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.md">OWASP Cheat
-  Sheet</a> - XSS Prevention Cheat Sheet </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A7_2017-Cross-Site_Scripting_(XSS)">Top 10 2017 Category A7 - Cross-Site Scripting
-  (XSS)</a> </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">Top 10 2017 Category A6 - Security
-  Misconfiguration</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/79">CWE-79 - Improper Neutralization of Input During Web Page Generation ('Cross-site
-  Scripting')</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/80">CWE-80 - Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic
-  XSS)</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/81">CWE-81 - Improper Neutralization of Script in an Error Message Web Page</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/82">CWE-82 - Improper Neutralization of Script in Attributes of IMG Tags in a Web
-  Page</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/83">CWE-83 - Improper Neutralization of Script in Attributes in a Web Page</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/84">CWE-84 - Improper Neutralization of Encoded URI Schemes in a Web Page</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/85">CWE-85 - Doubled Character XSS Manipulations</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/86">CWE-86 - Improper Neutralization of Invalid Characters in Identifiers in Web
-  Pages</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/87">CWE-87 - Improper Neutralization of Alternate XSS Syntax</a> </li>
+  <li><a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.md">OWASP Cheat Sheet</a>
+  - XSS Prevention Cheat Sheet</li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A7_2017-Cross-Site_Scripting_(XSS)">Top 10 2017 Category A7 - Cross-Site Scripting
+  (XSS)</a></li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">Top 10 2017 Category A6 - Security
+  Misconfiguration</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/79">CWE-79 - Improper Neutralization of Input During Web Page Generation ('Cross-site
+  Scripting')</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/80">CWE-80 - Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic
+  XSS)</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/81">CWE-81 - Improper Neutralization of Script in an Error Message Web Page</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/82">CWE-82 - Improper Neutralization of Script in Attributes of IMG Tags in a Web
+  Page</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/83">CWE-83 - Improper Neutralization of Script in Attributes in a Web Page</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/84">CWE-84 - Improper Neutralization of Encoded URI Schemes in a Web Page</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/85">CWE-85 - Doubled Character XSS Manipulations</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/86">CWE-86 - Improper Neutralization of Invalid Characters in Identifiers in Web
+  Pages</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/87">CWE-87 - Improper Neutralization of Alternate XSS Syntax</a></li>
 </ul>
 

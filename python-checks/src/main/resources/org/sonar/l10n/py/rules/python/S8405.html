@@ -7,19 +7,19 @@ These two libraries have different parameter conventions for sending request bod
 <p>In the <code>requests</code> library, the <code>data</code> parameter accepts various types including bytes, strings, and dictionaries. However, in
 <code>httpx</code>, the parameter naming is more specific:</p>
 <ul>
-  <li> The <code>data</code> parameter is reserved for form data (dictionaries that will be encoded as <code>application/x-www-form-urlencoded</code>)
-  </li>
-  <li> The <code>content</code> parameter should be used for raw bytes or text strings </li>
+  <li>The <code>data</code> parameter is reserved for form data (dictionaries that will be encoded as
+  <code>application/x-www-form-urlencoded</code>)</li>
+  <li>The <code>content</code> parameter should be used for raw bytes or text strings</li>
 </ul>
 <p>When you use <code>data</code> with bytes or text in an httpx-based <code>TestClient</code>, the request may not behave as expected. The library
 might attempt to process the raw content as form data, leading to incorrect encoding or Content-Type headers.</p>
 <p>This issue commonly appears when upgrading Starlette or FastAPI applications, causing previously working tests to fail or behave unexpectedly. The
 parameter mismatch can result in:</p>
 <ul>
-  <li> Incorrect request body encoding </li>
-  <li> Wrong Content-Type headers being set </li>
-  <li> Test failures that are difficult to diagnose </li>
-  <li> API endpoints receiving malformed data in tests </li>
+  <li>Incorrect request body encoding</li>
+  <li>Wrong Content-Type headers being set</li>
+  <li>Test failures that are difficult to diagnose</li>
+  <li>API endpoints receiving malformed data in tests</li>
 </ul>
 <h3>What is the potential impact?</h3>
 <p>Using the wrong parameter can cause tests to fail or pass incorrectly, masking real issues in the application code. This reduces the reliability of
@@ -125,13 +125,12 @@ response = client.post('/api/data', content=payload)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> HTTPX - Request Parameters - <a href="https://www.python-httpx.org/quickstart/#sending-data">Official HTTPX documentation explaining the
-  difference between 'data' and 'content' parameters</a> </li>
-  <li> Starlette TestClient Documentation - <a href="https://www.starlette.io/testclient/">Official Starlette documentation for the TestClient</a>
-  </li>
-  <li> FastAPI Testing Documentation - <a href="https://fastapi.tiangolo.com/tutorial/testing/">Official FastAPI documentation on testing
-  applications</a> </li>
-  <li> bump-testclient Migration Tool - <a href="https://pypi.org/project/bump-testclient/">Automated tool to help migrate TestClient code from
-  requests to httpx API</a> </li>
+  <li>HTTPX - Request Parameters - <a href="https://www.python-httpx.org/quickstart/#sending-data">Official HTTPX documentation explaining the
+  difference between 'data' and 'content' parameters</a></li>
+  <li>Starlette TestClient Documentation - <a href="https://www.starlette.io/testclient/">Official Starlette documentation for the TestClient</a></li>
+  <li>FastAPI Testing Documentation - <a href="https://fastapi.tiangolo.com/tutorial/testing/">Official FastAPI documentation on testing
+  applications</a></li>
+  <li>bump-testclient Migration Tool - <a href="https://pypi.org/project/bump-testclient/">Automated tool to help migrate TestClient code from
+  requests to httpx API</a></li>
 </ul>
 

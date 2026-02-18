@@ -4,16 +4,16 @@
 directly iterating over only the keys or values needed.</p>
 <p>Python dictionaries provide efficient ways to iterate over their contents:</p>
 <ul>
-  <li> Iterating directly over the dictionary yields the keys: </li>
+  <li>Iterating directly over the dictionary yields the keys:</li>
 </ul>
 <pre>
 for k in my_dict:
   ...
 </pre>
 <ul>
-  <li> Using <code>my_dict.keys()</code> explicitly yields the keys. </li>
-  <li> Using <code>my_dict.values()</code> yields the values. </li>
-  <li> Using <code>my_dict.items()</code> yields key-value pairs (as tuples). </li>
+  <li>Using <code>my_dict.keys()</code> explicitly yields the keys.</li>
+  <li>Using <code>my_dict.values()</code> yields the values.</li>
+  <li>Using <code>my_dict.items()</code> yields key-value pairs (as tuples).</li>
 </ul>
 <p>The <code>.items()</code> method is useful when you need both the key and the value within the loop. However, if your loop only uses the key,
 discarding the value, often with <code>_</code>, or only uses the value, discarding the key, calling <code>.items()</code> performs unnecessary work
@@ -50,7 +50,7 @@ for key in fruit: # Iterates directly over dictionary (yields keys)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#dictionary-view-objects">Dictionary View Objects
-  (<code>.keys()</code>, <code>.values()</code>, <code>.items()</code>)</a> </li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#dictionary-view-objects">Dictionary View Objects
+  (<code>.keys()</code>, <code>.values()</code>, <code>.items()</code>)</a></li>
 </ul>
 

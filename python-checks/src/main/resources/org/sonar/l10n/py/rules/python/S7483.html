@@ -5,12 +5,12 @@
 timeouts and cancellation, not the callee.</p>
 <p>When an <code>async</code> function accepts a <code>timeout</code> parameter, it violates this principle:</p>
 <ol>
-  <li> <strong>Coupling between logic and timeout handling</strong>: The function dictates how the timeout is handled internally, rather than letting
-  the caller decide. </li>
-  <li> <strong>Preempting caller control</strong>: The caller might want to enforce a different timeout duration or coordinate timeouts across several
-  concurrent operations. An internal timeout parameter makes this difficult or impossible. </li>
-  <li> <strong>Reducing composability</strong>: Combining functions that manage their own timeouts can lead to complex and unpredictable behavior,
-  especially when nesting calls or running tasks concurrently under a shared deadline. </li>
+  <li><strong>Coupling between logic and timeout handling</strong>: The function dictates how the timeout is handled internally, rather than letting
+  the caller decide.</li>
+  <li><strong>Preempting caller control</strong>: The caller might want to enforce a different timeout duration or coordinate timeouts across several
+  concurrent operations. An internal timeout parameter makes this difficult or impossible.</li>
+  <li><strong>Reducing composability</strong>: Combining functions that manage their own timeouts can lead to complex and unpredictable behavior,
+  especially when nesting calls or running tasks concurrently under a shared deadline.</li>
 </ol>
 <p>Instead, the caller should use the timeout features provided by the concurrency library (e.g., <code>async with asyncio.timeout()</code> or
 <code>with trio.move_on_after()</code>). This separates the concern of what the function does from how long the caller is willing to wait for it.</p>
@@ -94,9 +94,9 @@ anyio.run(main)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.timeout">Timeouts</a> </li>
-  <li> Trio documentation - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#cancellation-and-timeouts">Cancellation and
-  timeouts</a> </li>
-  <li> AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/cancellation.html#timeouts">Timeouts</a> </li>
+  <li>Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.timeout">Timeouts</a></li>
+  <li>Trio documentation - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#cancellation-and-timeouts">Cancellation and
+  timeouts</a></li>
+  <li>AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/cancellation.html#timeouts">Timeouts</a></li>
 </ul>
 

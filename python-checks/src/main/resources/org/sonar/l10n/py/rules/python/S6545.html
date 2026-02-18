@@ -13,48 +13,92 @@ inconsistencies when different parts of the codebase use different syntaxes for 
   </colgroup>
   <tbody>
     <tr>
-      <td><p>Legacy type</p></td>
-      <td><p>Replacement</p></td>
+      <td>
+        <p>Legacy type</p>
+      </td>
+      <td>
+        <p>Replacement</p>
+      </td>
     </tr>
     <tr>
-      <td><p><code>typing.List[int]</code></p></td>
-      <td><p><code>list[int]</code></p></td>
+      <td>
+        <p><code>typing.List[int]</code></p>
+      </td>
+      <td>
+        <p><code>list[int]</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p><code>typing.Dict[str, int]</code></p></td>
-      <td><p><code>dict[str, int]</code></p></td>
+      <td>
+        <p><code>typing.Dict[str, int]</code></p>
+      </td>
+      <td>
+        <p><code>dict[str, int]</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p><code>typing.Set[str]</code></p></td>
-      <td><p><code>set[str]</code></p></td>
+      <td>
+        <p><code>typing.Set[str]</code></p>
+      </td>
+      <td>
+        <p><code>set[str]</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p><code>typing.FrozenSet[str]</code></p></td>
-      <td><p><code>frozenset[str]</code></p></td>
+      <td>
+        <p><code>typing.FrozenSet[str]</code></p>
+      </td>
+      <td>
+        <p><code>frozenset[str]</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p><code>typing.Tuple[int, int]</code></p></td>
-      <td><p><code>tuple[int, int]</code></p></td>
+      <td>
+        <p><code>typing.Tuple[int, int]</code></p>
+      </td>
+      <td>
+        <p><code>tuple[int, int]</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p><code>typing.Tuple[int, ...]</code></p></td>
-      <td><p><code>tuple[int, ...]</code></p></td>
+      <td>
+        <p><code>typing.Tuple[int, ...]</code></p>
+      </td>
+      <td>
+        <p><code>tuple[int, ...]</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p><code>typing.Iterable[int]</code></p></td>
-      <td><p><code>collections.abc.Iterable[int]</code></p></td>
+      <td>
+        <p><code>typing.Iterable[int]</code></p>
+      </td>
+      <td>
+        <p><code>collections.abc.Iterable[int]</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p><code>typing.Sequence[bool]</code></p></td>
-      <td><p><code>collections.abc.Sequence[bool]</code></p></td>
+      <td>
+        <p><code>typing.Sequence[bool]</code></p>
+      </td>
+      <td>
+        <p><code>collections.abc.Sequence[bool]</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p><code>typing.Mapping[str, int]</code></p></td>
-      <td><p><code>collections.abc.Mapping[str, int]</code></p></td>
+      <td>
+        <p><code>typing.Mapping[str, int]</code></p>
+      </td>
+      <td>
+        <p><code>collections.abc.Mapping[str, int]</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p><code>typing.Type[T]</code></p></td>
-      <td><p><code>type[T]</code></p></td>
+      <td>
+        <p><code>typing.Type[T]</code></p>
+      </td>
+      <td>
+        <p><code>type[T]</code></p>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -77,8 +121,8 @@ def print_numbers(numbers: list[int]) -&gt; None:
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://mypy.readthedocs.io/en/stable/builtin_types.html#generic-types">Mypy documentation on built-in generic types</a> </li>
-  <li> <a href="https://peps.python.org/pep-0585/">PEP 585 - Type Hinting Generics In Standard Collections</a> </li>
-  <li> <a href="https://docs.python.org/3/library/typing.html#generic-concrete-collections">Python documentation on generic collections</a> </li>
+  <li><a href="https://mypy.readthedocs.io/en/stable/builtin_types.html#generic-types">Mypy documentation on built-in generic types</a></li>
+  <li><a href="https://peps.python.org/pep-0585/">PEP 585 - Type Hinting Generics In Standard Collections</a></li>
+  <li><a href="https://docs.python.org/3/library/typing.html#generic-concrete-collections">Python documentation on generic collections</a></li>
 </ul>
 

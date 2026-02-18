@@ -10,12 +10,11 @@ or pre-defined functions written in C, the use of a Python <code>lambda</code> i
 <p>To fix this issue replace the <code>map(lambda …​)</code> construct with an equivalent generator expression or a list, set, or dictionary
 comprehension.</p>
 <ul>
-  <li> Replace <code>map(lambda var: expression, iterable)</code> with the generator expression <code>(expression for var in iterable)</code>. </li>
-  <li> Replace <code>list(map(lambda var: expression, iterable))</code> with the list comprehension <code>[expression for var in iterable]</code>.
-  </li>
-  <li> Replace <code>set(map(lambda var: expression, iterable))</code> with the set comprehension <code>{expression for var in iterable}</code>. </li>
-  <li> Replace <code>dict(map(lambda var: (key_expr, value_expr), iterable))</code> with the dictionary comprehension <code>{key_expr: value_expr for
-  var in iterable}</code> . </li>
+  <li>Replace <code>map(lambda var: expression, iterable)</code> with the generator expression <code>(expression for var in iterable)</code>.</li>
+  <li>Replace <code>list(map(lambda var: expression, iterable))</code> with the list comprehension <code>[expression for var in iterable]</code>.</li>
+  <li>Replace <code>set(map(lambda var: expression, iterable))</code> with the set comprehension <code>{expression for var in iterable}</code>.</li>
+  <li>Replace <code>dict(map(lambda var: (key_expr, value_expr), iterable))</code> with the dictionary comprehension <code>{key_expr: value_expr for
+  var in iterable}</code> .</li>
 </ul>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 nums = [1, 2, 3, 4]
@@ -30,9 +29,9 @@ list_comp = [num * 2 for num in nums] # Compliant
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List Comprehensions</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/classes.html#generator-expressions">Generator Expressions</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/functions.html#map">map()</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/reference/expressions.html#lambda">Lambdas</a> </li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List Comprehensions</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/tutorial/classes.html#generator-expressions">Generator Expressions</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/functions.html#map">map()</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/expressions.html#lambda">Lambdas</a></li>
 </ul>
 

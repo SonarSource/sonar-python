@@ -10,19 +10,19 @@ For these headers to be present on all responses - including those modified by o
 <p>If you add other middleware after CORSMiddleware, those middleware will wrap around it and process requests/responses outside of the CORS layer.
 This means:</p>
 <ul>
-  <li> CORS headers may not be added to responses modified by the outer middleware </li>
-  <li> Preflight requests may not be handled correctly </li>
-  <li> Cross-origin requests from browsers will fail </li>
+  <li>CORS headers may not be added to responses modified by the outer middleware</li>
+  <li>Preflight requests may not be handled correctly</li>
+  <li>Cross-origin requests from browsers will fail</li>
 </ul>
 <h3>What is the potential impact?</h3>
 <p>When CORSMiddleware is not positioned correctly, cross-origin requests from web browsers will fail. This breaks the functionality of web
 applications that need to make API calls from a different domain.</p>
 <p>Users will see errors in their browser console, and features that depend on cross-origin requests will not work. This can affect:</p>
 <ul>
-  <li> Single-page applications (SPAs) hosted on different domains </li>
-  <li> Mobile apps using web views </li>
-  <li> Third-party integrations </li>
-  <li> Development environments where frontend and backend run on different ports </li>
+  <li>Single-page applications (SPAs) hosted on different domains</li>
+  <li>Mobile apps using web views</li>
+  <li>Third-party integrations</li>
+  <li>Development environments where frontend and backend run on different ports</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Move the <code>CORSMiddleware</code> configuration to be the last <code>add_middleware()</code> call in your application setup. Add all other
@@ -65,11 +65,11 @@ app.add_middleware(
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> FastAPI CORS Documentation - <a href="https://fastapi.tiangolo.com/tutorial/cors/">Official FastAPI documentation on CORS middleware
-  configuration</a> </li>
-  <li> FastAPI Middleware Documentation - <a href="https://fastapi.tiangolo.com/tutorial/middleware/">Official FastAPI documentation explaining
-  middleware execution order</a> </li>
-  <li> Starlette Middleware Documentation - <a href="https://www.starlette.io/middleware/">Starlette middleware documentation (FastAPI is built on
-  Starlette)</a> </li>
+  <li>FastAPI CORS Documentation - <a href="https://fastapi.tiangolo.com/tutorial/cors/">Official FastAPI documentation on CORS middleware
+  configuration</a></li>
+  <li>FastAPI Middleware Documentation - <a href="https://fastapi.tiangolo.com/tutorial/middleware/">Official FastAPI documentation explaining
+  middleware execution order</a></li>
+  <li>Starlette Middleware Documentation - <a href="https://www.starlette.io/middleware/">Starlette middleware documentation (FastAPI is built on
+  Starlette)</a></li>
 </ul>
 

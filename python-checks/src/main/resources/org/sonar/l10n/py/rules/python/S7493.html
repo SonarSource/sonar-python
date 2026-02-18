@@ -4,16 +4,16 @@
 of asynchronous programming - the ability to perform concurrent operations without blocking execution.</p>
 <p>When an async function makes a synchronous file operation:</p>
 <ul>
-  <li> The event loop is completely blocked until the file I/O operation completes </li>
-  <li> No other coroutines can run during this time, even if they’re ready to execute </li>
-  <li> The responsiveness of the application is degraded </li>
-  <li> In server applications, this can cause timeouts or failures for other concurrent requests </li>
+  <li>The event loop is completely blocked until the file I/O operation completes</li>
+  <li>No other coroutines can run during this time, even if they’re ready to execute</li>
+  <li>The responsiveness of the application is degraded</li>
+  <li>In server applications, this can cause timeouts or failures for other concurrent requests</li>
 </ul>
 <p>Instead, async libraries provide mechanisms to handle file operations asynchronously:</p>
 <ul>
-  <li> <code>aiofiles</code> library for asyncio </li>
-  <li> <code>trio.open_file()</code> for Trio </li>
-  <li> <code>anyio.open_file()</code> for AnyIO </li>
+  <li><code>aiofiles</code> library for asyncio</li>
+  <li><code>trio.open_file()</code> for Trio</li>
+  <li><code>anyio.open_file()</code> for AnyIO</li>
 </ul>
 <p>Using these constructs allows other tasks to continue executing while waiting for the potentially blocking file operation to complete.</p>
 <h2>How to fix it in Asyncio</h2>
@@ -77,12 +77,12 @@ async def read_config():
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Trio - <a href="https://trio.readthedocs.io/en/stable/reference-io.html#trio.open_file">trio.open_file() documentation</a> </li>
-  <li> AnyIO - <a href="https://anyio.readthedocs.io/en/stable/fileio.html">File I/O in AnyIO</a> </li>
-  <li> Aiofiles - <a href="https://github.com/Tinche/aiofiles">aiofiles project</a> </li>
+  <li>Trio - <a href="https://trio.readthedocs.io/en/stable/reference-io.html#trio.open_file">trio.open_file() documentation</a></li>
+  <li>AnyIO - <a href="https://anyio.readthedocs.io/en/stable/fileio.html">File I/O in AnyIO</a></li>
+  <li>Aiofiles - <a href="https://github.com/Tinche/aiofiles">aiofiles project</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> Python - <a href="https://realpython.com/async-io-python/">Async IO in Python</a> </li>
+  <li>Python - <a href="https://realpython.com/async-io-python/">Async IO in Python</a></li>
 </ul>
 

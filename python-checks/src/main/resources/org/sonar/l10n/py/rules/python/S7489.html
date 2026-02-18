@@ -5,16 +5,16 @@ the entire event loop. This undermines the primary advantage of asynchronous pro
 blocking execution.</p>
 <p>When an async function makes a synchronous OS call:</p>
 <ul>
-  <li> The event loop is completely blocked until the OS operation completes </li>
-  <li> No other coroutines can run during this time, even if they’re ready to execute </li>
-  <li> The responsiveness of the application is degraded </li>
-  <li> In server applications, this can cause timeouts or failures for other concurrent requests </li>
+  <li>The event loop is completely blocked until the OS operation completes</li>
+  <li>No other coroutines can run during this time, even if they’re ready to execute</li>
+  <li>The responsiveness of the application is degraded</li>
+  <li>In server applications, this can cause timeouts or failures for other concurrent requests</li>
 </ul>
 <p>Instead, async libraries provide mechanisms to run blocking operations in separate threads without blocking the event loop:</p>
 <ul>
-  <li> <code>asyncio.loop.run_in_executor()</code> for asyncio </li>
-  <li> <code>trio.to_thread.run_sync()</code> for Trio </li>
-  <li> <code>anyio.to_thread.run_sync()</code> for AnyIO </li>
+  <li><code>asyncio.loop.run_in_executor()</code> for asyncio</li>
+  <li><code>trio.to_thread.run_sync()</code> for Trio</li>
+  <li><code>anyio.to_thread.run_sync()</code> for AnyIO</li>
 </ul>
 <p>Using these constructs allows other tasks to continue executing while waiting for the blocking OS call to complete.</p>
 <h2>How to fix it in Asyncio</h2>
@@ -88,14 +88,14 @@ async def wait_for_child_process(pid):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python asyncio - <a href="https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor">run_in_executor()
-  documentation</a> </li>
-  <li> Trio - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.to_thread.run_sync">to_thread.run_sync() documentation</a> </li>
-  <li> AnyIO - <a href="https://anyio.readthedocs.io/en/stable/threads.html">Thread handling</a> </li>
-  <li> Python OS - <a href="https://docs.python.org/3/library/os.html#os.waitpid">os.waitpid() documentation</a> </li>
+  <li>Python asyncio - <a href="https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor">run_in_executor()
+  documentation</a></li>
+  <li>Trio - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.to_thread.run_sync">to_thread.run_sync() documentation</a></li>
+  <li>AnyIO - <a href="https://anyio.readthedocs.io/en/stable/threads.html">Thread handling</a></li>
+  <li>Python OS - <a href="https://docs.python.org/3/library/os.html#os.waitpid">os.waitpid() documentation</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> Python - <a href="https://realpython.com/python-concurrency/">Concurrency and Parallelism in Python</a> </li>
+  <li>Python - <a href="https://realpython.com/python-concurrency/">Concurrency and Parallelism in Python</a></li>
 </ul>
 

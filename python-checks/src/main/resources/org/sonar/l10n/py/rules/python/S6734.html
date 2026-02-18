@@ -14,13 +14,13 @@ object. Unfortunately, many methods supporting the inplace keyword either cannot
 operations they perform, regardless of whether <code>inplace</code> is <code>True</code> or not. For example, the following methods can never operate
 in place:</p>
 <ul>
-  <li> drop (dropping rows) </li>
-  <li> dropna </li>
-  <li> drop_duplicates </li>
-  <li> sort_values </li>
-  <li> sort_index </li>
-  <li> eval </li>
-  <li> query </li>
+  <li>drop (dropping rows)</li>
+  <li>dropna</li>
+  <li>drop_duplicates</li>
+  <li>sort_values</li>
+  <li>sort_index</li>
+  <li>eval</li>
+  <li>query</li>
 </ul>
 <p>Because of this, expecting efficiency gains through the use of <code>inplace=True</code> is not reliable.</p>
 <p>Additionally, using <code>inplace=True</code> may trigger a <code>SettingWithCopyWarning</code> and make the overall intention of the code unclear.
@@ -66,6 +66,6 @@ def foo():
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Pandas Enhancement Proposal - <a href="https://github.com/pandas-dev/pandas/pull/51466">PDEP-8: In-place methods in pandas</a> </li>
+  <li>Pandas Enhancement Proposal - <a href="https://github.com/pandas-dev/pandas/pull/51466">PDEP-8: In-place methods in pandas</a></li>
 </ul>
 

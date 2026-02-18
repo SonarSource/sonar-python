@@ -1,9 +1,9 @@
 <h2>Why is this an issue?</h2>
 <p>Importing every public name from a module using a wildcard (<code>from mymodule import *</code>) is a bad idea because:</p>
 <ul>
-  <li> It could lead to conflicts between names defined locally and the ones imported. </li>
-  <li> It reduces code readability as developers will have a hard time knowing where names come from. </li>
-  <li> It clutters the local namespace, which makes debugging more difficult. </li>
+  <li>It could lead to conflicts between names defined locally and the ones imported.</li>
+  <li>It reduces code readability as developers will have a hard time knowing where names come from.</li>
+  <li>It clutters the local namespace, which makes debugging more difficult.</li>
 </ul>
 <p>Remember that imported names can change when you update your dependencies. A wildcard import that works today might be broken tomorrow.</p>
 <h3>Exceptions</h3>
@@ -20,10 +20,10 @@ except Exception:
 <h2>How to fix it</h2>
 <p>There are two ways to avoid a wildcard import:</p>
 <ul>
-  <li> Replace it with <code>import mymodule</code> and access module members as <code>mymodule.myfunction</code>. If the module name is too long,
-  alias it to a shorter name. Example: <code>import pandas as pd</code> </li>
-  <li> List every imported name. If necessary import statements can be split on multiple lines using parentheses (preferred solution) or backslashes.
-  </li>
+  <li>Replace it with <code>import mymodule</code> and access module members as <code>mymodule.myfunction</code>. If the module name is too long,
+  alias it to a shorter name. Example: <code>import pandas as pd</code></li>
+  <li>List every imported name. If necessary import statements can be split on multiple lines using parentheses (preferred solution) or
+  backslashes.</li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -49,6 +49,6 @@ print(m_exp(0))   # "1.0" will be printed
 </pre>
 <h2>Resources</h2>
 <ul>
-  <li> <a href="https://docs.python.org/3.8/reference/simple_stmts.html#import">Python documentation - The import statement</a> </li>
+  <li><a href="https://docs.python.org/3.8/reference/simple_stmts.html#import">Python documentation - The import statement</a></li>
 </ul>
 

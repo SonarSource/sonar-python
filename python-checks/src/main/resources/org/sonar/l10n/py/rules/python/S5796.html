@@ -7,9 +7,9 @@ for the other operand to be the same object. The comparison is always <code>Fals
 <code>is</code> or <code>is not</code>.</p>
 <p>This rule raises an issue when at least one operand of an identity operator is a new object which has been created just for this check, i.e.:</p>
 <ul>
-  <li> When it is a dict, list or set literal. </li>
-  <li> When it is a call to <code>dict</code>, <code>set</code>, <code>list</code> or <code>complex</code> built-in functions. </li>
-  <li> When such a new object is assigned to only one variable and this variable is used in an identity check. </li>
+  <li>When it is a dict, list or set literal.</li>
+  <li>When it is a call to <code>dict</code>, <code>set</code>, <code>list</code> or <code>complex</code> built-in functions.</li>
+  <li>When such a new object is assigned to only one variable and this variable is used in an identity check.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Whenever using a newly created object in a comparison, the identity operator should be replaced with the equality operator (<code>==</code> or
@@ -42,9 +42,8 @@ def func(param):
 <h2>Resources</h2>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://adamj.eu/tech/2020/01/21/why-does-python-3-8-syntaxwarning-for-is-literal/">Why does Python 3.8 log a SyntaxWarning for 'is'
-  with literals?</a> - Adam Johnson </li>
-  <li> <a href="https://treyhunner.com/2019/03/unique-and-sentinel-values-in-python/#Equality_vs_identity">Equality vs identity</a> - Trey Hunner
-  </li>
+  <li><a href="https://adamj.eu/tech/2020/01/21/why-does-python-3-8-syntaxwarning-for-is-literal/">Why does Python 3.8 log a SyntaxWarning for 'is'
+  with literals?</a> - Adam Johnson</li>
+  <li><a href="https://treyhunner.com/2019/03/unique-and-sentinel-values-in-python/#Equality_vs_identity">Equality vs identity</a> - Trey Hunner</li>
 </ul>
 

@@ -1,7 +1,9 @@
 <h2>Why is this an issue?</h2>
 <p>Cloud platforms such as AWS, Azure, or GCP support virtual firewalls that can be used to restrict access to services by controlling inbound and
-outbound traffic.<br> Any firewall rule allowing traffic from all IP addresses to standard network ports on which administration services
-traditionally listen, such as 22 for SSH, can expose these services to exploits and unauthorized access.</p>
+outbound traffic.
+  <br>
+  Any firewall rule allowing traffic from all IP addresses to standard network ports on which administration services traditionally listen, such as 22
+  for SSH, can expose these services to exploits and unauthorized access.</p>
 <h3>What is the potential impact?</h3>
 <p>Like any other service, administration services can contain vulnerabilities. Administration services run with elevated privileges and thus a
 vulnerability could have a high impact on the system.</p>
@@ -196,16 +198,16 @@ ec2.CfnSecurityGroupIngress(
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">AWS Documentation</a> - Security groups for your VPC </li>
-  <li> <a href="https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview">Azure Documentation</a> - Network security
-  groups </li>
-  <li> <a href="https://cloud.google.com/vpc/docs/using-firewalls">GCP Documentation</a> - Firewalls </li>
+  <li><a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">AWS Documentation</a> - Security groups for your VPC</li>
+  <li><a href="https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview">Azure Documentation</a> - Network security
+  groups</li>
+  <li><a href="https://cloud.google.com/vpc/docs/using-firewalls">GCP Documentation</a> - Firewalls</li>
 </ul>
 <h3>Standards</h3>
 <ul>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a> </li>
-  <li> OWASP - <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">Top 10 2021 Category A1 - Broken Access Control</a> </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
-  Exposure</a> </li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a></li>
+  <li>OWASP - <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">Top 10 2021 Category A1 - Broken Access Control</a></li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
+  Exposure</a></li>
 </ul>
 

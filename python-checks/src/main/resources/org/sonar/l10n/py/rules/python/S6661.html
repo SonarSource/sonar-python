@@ -4,18 +4,18 @@
 simple expressions or as function arguments. However, there are a few reasons why you might consider alternatives to assigning a lambda to a
 variable:</p>
 <ol>
-  <li> <strong>Readability and clarity:</strong> Lambdas can be concise, but they may become less readable as the expression or logic becomes more
-  complex. For more complex or longer functions, using a regular named function defined with def can make the code more readable and self-explanatory.
-  </li>
-  <li> <strong>Reusability:</strong> Lambdas are often used for one-off or small, isolated tasks. If you find that you need to reuse a piece of
+  <li><strong>Readability and clarity:</strong> Lambdas can be concise, but they may become less readable as the expression or logic becomes more
+  complex. For more complex or longer functions, using a regular named function defined with def can make the code more readable and
+  self-explanatory.</li>
+  <li><strong>Reusability:</strong> Lambdas are often used for one-off or small, isolated tasks. If you find that you need to reuse a piece of
   functionality in multiple places within your code or across modules, it is better to define a named function using def. This promotes code
-  modularity and maintainability. </li>
-  <li> <strong>Documentation:</strong> Lambdas do not support docstrings, which are important for providing clear and comprehensive documentation for
+  modularity and maintainability.</li>
+  <li><strong>Documentation:</strong> Lambdas do not support docstrings, which are important for providing clear and comprehensive documentation for
   your functions. If you need to document the purpose, parameters, or behavior of a function, it is best to define a named function using def and
-  include a docstring. </li>
-  <li> <strong>Debugging and error handling:</strong> Lambdas are anonymous functions, which means that when an error occurs during execution, the
+  include a docstring.</li>
+  <li><strong>Debugging and error handling:</strong> Lambdas are anonymous functions, which means that when an error occurs during execution, the
   traceback will not provide a specific name associated with the lambda function. This can make it more challenging to identify and troubleshoot
-  errors. Named functions defined with def provide more meaningful tracebacks. </li>
+  errors. Named functions defined with def provide more meaningful tracebacks.</li>
 </ol>
 <p>Using a def statements rather than assigning lambdas to variable is also recommended by <a href="https://peps.python.org/pep-0008/">PEP8</a>.</p>
 <h2>How to fix it</h2>
@@ -36,7 +36,7 @@ def foo():
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">Defining Functions</a> </li>
-  <li> Style Guide for Python Code - <a href="https://peps.python.org/pep-0008/">PEP8</a> </li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">Defining Functions</a></li>
+  <li>Style Guide for Python Code - <a href="https://peps.python.org/pep-0008/">PEP8</a></li>
 </ul>
 

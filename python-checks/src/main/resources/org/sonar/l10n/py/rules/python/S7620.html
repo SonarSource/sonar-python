@@ -9,7 +9,7 @@ invocations of the same function instance.</p>
 space can be exhausted causing function failures, and stale data from previous runs can cause unexpected behavior and hard-to-debug issues.</p>
 <h3>Exceptions</h3>
 <ul>
-  <li> Writing to /tmp is recommended for caching data used by future lambda invocations. </li>
+  <li>Writing to /tmp is recommended for caching data used by future lambda invocations.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Always clean up temporary files before your Lambda function completes. It is possible to use the <code>tempfile</code> module to create temporary

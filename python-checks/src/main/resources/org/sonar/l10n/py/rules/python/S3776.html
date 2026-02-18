@@ -6,27 +6,39 @@ to read, understand, test, and modify.</p>
 <h3>Which syntax in code does impact cognitive complexity score?</h3>
 <p>Here are the core concepts:</p>
 <ul>
-  <li> <strong>Cognitive complexity is incremented each time the code breaks the normal linear reading flow.</strong><br> This concerns, for example,
-  loop structures, conditionals, catches, switches, jumps to labels, and conditions mixing multiple operators. </li>
-  <li> <strong>Each nesting level increases complexity.</strong><br> During code reading, the deeper you go through nested layers, the harder it
-  becomes to keep the context in mind. </li>
-  <li> <strong>Method calls are free</strong><br> A well-picked method name is a summary of multiple lines of code. A reader can first explore a
-  high-level view of what the code is performing then go deeper and deeper by looking at called functions content.<br> <em>Note:</em> This does not
-  apply to recursive calls, those will increment cognitive score. </li>
+  <li><strong>Cognitive complexity is incremented each time the code breaks the normal linear reading flow.</strong>
+    <br>
+    This concerns, for example, loop structures, conditionals, catches, switches, jumps to labels, and conditions mixing multiple operators.</li>
+  <li><strong>Each nesting level increases complexity.</strong>
+    <br>
+    During code reading, the deeper you go through nested layers, the harder it becomes to keep the context in mind.</li>
+  <li><strong>Method calls are free</strong>
+    <br>
+    A well-picked method name is a summary of multiple lines of code. A reader can first explore a high-level view of what the code is performing then
+    go deeper and deeper by looking at called functions content.
+    <br>
+    <em>Note:</em> This does not apply to recursive calls, those will increment cognitive score.</li>
 </ul>
 <p>The method of computation is fully detailed in the pdf linked in the resources.</p>
 <h3>What is the potential impact?</h3>
 <p>Developers spend more time reading and understanding code than writing it. High cognitive complexity slows down changes and increases the cost of
 maintenance.</p>
 <h2>How to fix it</h2>
-<p>Reducing cognitive complexity can be challenging.<br> Here are a few suggestions:</p>
+<p>Reducing cognitive complexity can be challenging.
+  <br>
+  Here are a few suggestions:</p>
 <ul>
-  <li> <strong>Extract complex conditions in a new function.</strong><br> Mixed operators in condition will increase complexity. Extracting the
-  condition in a new function with an appropriate name will reduce cognitive load. </li>
-  <li> <strong>Break down large functions.</strong><br> Large functions can be hard to understand and maintain. If a function is doing too many
-  things, consider breaking it down into smaller, more manageable functions. Each function should have a single responsibility. </li>
-  <li> <strong>Avoid deep nesting by returning early.</strong><br> To avoid the nesting of conditions, process exceptional cases first and return
-  early. </li>
+  <li><strong>Extract complex conditions in a new function.</strong>
+    <br>
+    Mixed operators in condition will increase complexity. Extracting the condition in a new function with an appropriate name will reduce cognitive
+    load.</li>
+  <li><strong>Break down large functions.</strong>
+    <br>
+    Large functions can be hard to understand and maintain. If a function is doing too many things, consider breaking it down into smaller, more
+    manageable functions. Each function should have a single responsibility.</li>
+  <li><strong>Avoid deep nesting by returning early.</strong>
+    <br>
+    To avoid the nesting of conditions, process exceptional cases first and return early.</li>
 </ul>
 <h3>Code examples</h3>
 <p><strong>Extraction of a complex condition in a new function.</strong></p>
@@ -54,7 +66,8 @@ def is_eligible_user(user):
 </pre>
 <p><strong>Break down large functions.</strong></p>
 <h4>Noncompliant code example</h4>
-<p><em>Note:</em> The code is simplified here, to illustrate the purpose. Please imagine there is more happening in the process.<br></p>
+<p><em>Note:</em> The code is simplified here, to illustrate the purpose. Please imagine there is more happening in the process.
+  <br></p>
 <p>The bellow code has a cognitive complexity score of 8.</p>
 <pre data-diff-id="3" data-diff-type="noncompliant">
 def process_user(user):
@@ -70,7 +83,9 @@ def process_user(user):
             ... # process inactive user without profile
 </pre>
 <p>This function could be refactored into smaller functions: The complexity is spread over multiple functions and the breaks in flow are no more
-nested.<br> The <code>process_user</code> has now a complexity score of two.</p>
+nested.
+  <br>
+  The <code>process_user</code> has now a complexity score of two.</p>
 <h4>Compliant solution</h4>
 <pre data-diff-id="3" data-diff-type="compliant">
 def process_user(user):
@@ -120,11 +135,11 @@ def calculate(data):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Sonar - <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
+  <li>Sonar - <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> Sonar Blog - <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing
-  Cognitive Complexity</a> </li>
+  <li>Sonar Blog - <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing
+  Cognitive Complexity</a></li>
 </ul>
 

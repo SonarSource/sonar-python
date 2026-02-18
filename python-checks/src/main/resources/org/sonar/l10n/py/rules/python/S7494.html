@@ -6,9 +6,9 @@ can directly express the same operation. Comprehensions are clearer, more concis
 expression combination.</p>
 <p>This principle applies to all three built-in collection types: <code>list</code>, <code>set</code>, and <code>dict</code>:</p>
 <ul>
-  <li> Use <code>[f(x) for x in foo]</code> instead of <code>list(f(x) for x in foo)</code> </li>
-  <li> Use <code>{f(x) for x in foo}</code> instead of <code>set(f(x) for x in foo)</code> </li>
-  <li> Use <code>{k: v for k, v in items}</code> instead of <code>dict((k, v) for k, v in items)</code> </li>
+  <li>Use <code>[f(x) for x in foo]</code> instead of <code>list(f(x) for x in foo)</code></li>
+  <li>Use <code>{f(x) for x in foo}</code> instead of <code>set(f(x) for x in foo)</code></li>
+  <li>Use <code>{k: v for k, v in items}</code> instead of <code>dict((k, v) for k, v in items)</code></li>
 </ul>
 <h3>Exceptions</h3>
 <p>If the generator expression doesn’t filter or modify the collection, the rule does not raise. For example, <code>list(x for x in foo)</code> is
@@ -33,8 +33,8 @@ def f(x):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List Comprehensions</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">Dictionaries</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#sets">Sets</a> </li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List Comprehensions</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">Dictionaries</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/tutorial/datastructures.html#sets">Sets</a></li>
 </ul>
 

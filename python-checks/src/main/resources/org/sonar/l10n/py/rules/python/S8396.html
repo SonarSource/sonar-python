@@ -18,10 +18,10 @@ way of explicitly marking a field as required. This creates a direct contradicti
 <p>When optional fields lack explicit default values, the application will reject valid requests where users omit fields they believe to be optional.
 This leads to:</p>
 <ul>
-  <li> Poor user experience with confusing "field required" validation errors </li>
-  <li> API contract violations where the schema suggests fields are optional but validation requires them </li>
-  <li> Increased support burden as users struggle to understand why optional fields are being rejected </li>
-  <li> Potential data quality issues if developers work around the problem by sending placeholder values instead of omitting fields </li>
+  <li>Poor user experience with confusing "field required" validation errors</li>
+  <li>API contract violations where the schema suggests fields are optional but validation requires them</li>
+  <li>Increased support burden as users struggle to understand why optional fields are being rejected</li>
+  <li>Potential data quality issues if developers work around the problem by sending placeholder values instead of omitting fields</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Add an explicit default value (typically <code>None</code>) to fields with <code>Optional</code> type hints. This makes the field truly optional
@@ -56,11 +56,11 @@ class UserRead(BaseModel):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Pydantic - Required fields - <a href="https://docs.pydantic.dev/latest/concepts/models/#required-fields">Official Pydantic documentation
-  explaining required vs optional fields</a> </li>
-  <li> Pydantic - Field function - <a href="https://docs.pydantic.dev/latest/concepts/fields/">Documentation on using the Field() function for field
-  customization</a> </li>
-  <li> Python typing - Optional - <a href="https://docs.python.org/3/library/typing.html#typing.Optional">Python’s typing module documentation for
-  Optional type hints</a> </li>
+  <li>Pydantic - Required fields - <a href="https://docs.pydantic.dev/latest/concepts/models/#required-fields">Official Pydantic documentation
+  explaining required vs optional fields</a></li>
+  <li>Pydantic - Field function - <a href="https://docs.pydantic.dev/latest/concepts/fields/">Documentation on using the Field() function for field
+  customization</a></li>
+  <li>Python typing - Optional - <a href="https://docs.python.org/3/library/typing.html#typing.Optional">Python’s typing module documentation for
+  Optional type hints</a></li>
 </ul>
 

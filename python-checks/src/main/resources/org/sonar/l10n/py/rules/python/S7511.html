@@ -5,13 +5,13 @@
 <code>reversed()</code> is unnecessary and inefficient. The slicing operation creates a new copy of the iterable in reverse order, which is not needed
 for the following reasons:</p>
 <ul>
-  <li> <code>set()</code>: The order of elements in a set is inherently undefined, so reversing the iterable before creating the set has no effect on
-  the final set, and it introduces unnecessary computation. </li>
-  <li> <code>sorted()</code>: The <code>sorted()</code> function has a <code>reverse</code> parameter that provides a more efficient way to sort in
-  descending order. Using slicing to reverse the result of <code>sorted()</code> is less efficient and less readable. </li>
-  <li> <code>reversed()</code>: Applying <code>reversed()</code> twice on the same iterable effectively returns the original iterable, if it supports
+  <li><code>set()</code>: The order of elements in a set is inherently undefined, so reversing the iterable before creating the set has no effect on
+  the final set, and it introduces unnecessary computation.</li>
+  <li><code>sorted()</code>: The <code>sorted()</code> function has a <code>reverse</code> parameter that provides a more efficient way to sort in
+  descending order. Using slicing to reverse the result of <code>sorted()</code> is less efficient and less readable.</li>
+  <li><code>reversed()</code>: Applying <code>reversed()</code> twice on the same iterable effectively returns the original iterable, if it supports
   direct iteration. If the iterable is a one-time iterator, then you will need to create an iterator from the original iterable using
-  <code>iter(iterable)</code>. Using slicing adds unnecessary overhead. </li>
+  <code>iter(iterable)</code>. Using slicing adds unnecessary overhead.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>To fix these issues remove the redundant slicing operation: * <code>set(iterable[::-1])</code>: Replace with <code>set(iterable)</code>. *
@@ -31,8 +31,8 @@ result = set(iterable)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/functions.html#sorted">sorted</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/functions.html#reversed">reversed</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/functions.html#func-set">set</a> </li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/functions.html#sorted">sorted</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/functions.html#reversed">reversed</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/functions.html#func-set">set</a></li>
 </ul>
 

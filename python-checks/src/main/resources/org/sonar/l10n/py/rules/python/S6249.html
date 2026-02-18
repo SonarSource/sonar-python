@@ -3,16 +3,16 @@
 means that a malicious actor who is able to intercept traffic from the network can read, modify or corrupt the transported content.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> The S3 bucket stores sensitive information. </li>
-  <li> The infrastructure has to comply with AWS Foundational Security Best Practices standard. </li>
+  <li>The S3 bucket stores sensitive information.</li>
+  <li>The infrastructure has to comply with AWS Foundational Security Best Practices standard.</li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <p>It’s recommended to deny all HTTP requests:</p>
 <ul>
-  <li> for all objects (<code>*</code>) of the bucket </li>
-  <li> for all principals (<code>*</code>) </li>
-  <li> for all actions (<code>*</code>) </li>
+  <li>for all objects (<code>*</code>) of the bucket</li>
+  <li>for all principals (<code>*</code>)</li>
+  <li>for all actions (<code>*</code>)</li>
 </ul>
 <h2>Sensitive Code Example</h2>
 <p>No secure policy is attached to this bucket:</p>
@@ -59,12 +59,12 @@ result = bucket.add_to_resource_policy(iam.PolicyStatement(
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html#transit">AWS documentation</a> - Enforce encryption
-  of data in transit </li>
-  <li> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-s3-5">AWS Foundational Security
-  Best Practices controls</a> - S3 buckets should require requests to use Secure Socket Layer </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/319">CWE-319 - Cleartext Transmission of Sensitive Information</a> </li>
-  <li> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-s3-5">AWS Foundational Security
-  Best Practices controls</a> - S3 buckets should require requests to use Secure Socket Layer </li>
+  <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html#transit">AWS documentation</a> - Enforce encryption
+  of data in transit</li>
+  <li><a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-s3-5">AWS Foundational Security
+  Best Practices controls</a> - S3 buckets should require requests to use Secure Socket Layer</li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/319">CWE-319 - Cleartext Transmission of Sensitive Information</a></li>
+  <li><a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-s3-5">AWS Foundational Security
+  Best Practices controls</a> - S3 buckets should require requests to use Secure Socket Layer</li>
 </ul>
 

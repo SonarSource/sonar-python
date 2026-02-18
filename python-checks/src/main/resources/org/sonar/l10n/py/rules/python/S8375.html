@@ -4,10 +4,10 @@
 handlers wants to short-circuit the normal request processing flow.</p>
 <p>Before-request handlers commonly return responses for scenarios like:</p>
 <ul>
-  <li> Authentication failures that should redirect to a login page </li>
-  <li> Authorization checks that should return 403 Forbidden responses </li>
-  <li> Rate limiting that should return 429 Too Many Requests </li>
-  <li> Maintenance mode that should return 503 Service Unavailable </li>
+  <li>Authentication failures that should redirect to a login page</li>
+  <li>Authorization checks that should return 403 Forbidden responses</li>
+  <li>Rate limiting that should return 429 Too Many Requests</li>
+  <li>Maintenance mode that should return 503 Service Unavailable</li>
 </ul>
 <p>When you ignore the return value of <code>preprocess_request()</code>, these important early responses are lost. The application continues with
 normal request processing instead of returning the intended response, leading to incorrect behavior.</p>
@@ -35,13 +35,13 @@ if response is not None:
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Flask preprocess_request documentation - <a href="https://flask.palletsprojects.com/en/stable/api/#flask.Flask.preprocess_request">Official
-  documentation</a> </li>
-  <li> Flask Request Hooks - <a href="https://flask.palletsprojects.com/en/stable/reqcontext/#request-hooks">Documentation about Flask’s
-  before-request and after-request hooks</a> </li>
+  <li>Flask preprocess_request documentation - <a href="https://flask.palletsprojects.com/en/stable/api/#flask.Flask.preprocess_request">Official
+  documentation</a></li>
+  <li>Flask Request Hooks - <a href="https://flask.palletsprojects.com/en/stable/reqcontext/#request-hooks">Documentation about Flask’s before-request
+  and after-request hooks</a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
-  <li> {rule:python:S899} - Return values from functions without side effects should not be ignored (Java) </li>
+  <li>{rule:python:S899} - Return values from functions without side effects should not be ignored (Java)</li>
 </ul>
 

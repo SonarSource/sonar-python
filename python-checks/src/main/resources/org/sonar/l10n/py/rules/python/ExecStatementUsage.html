@@ -4,13 +4,13 @@
 3.0. Instead, the built-in <code>exec()</code> function can be used.</p>
 <p>Use of the <code>exec</code> statement is strongly discouraged for several reasons such as:</p>
 <ul>
-  <li> <strong>Security Risks:</strong> Executing code from a string opens up the possibility of code injection attacks. </li>
-  <li> <strong>Readability and Maintainability:</strong> Code executed with <code>exec</code> statement is often harder to read and understand since
-  it is not explicitly written in the source code. </li>
-  <li> <strong>Performance Implications:</strong> The use of <code>exec</code> statement can have performance implications since the code is compiled
-  and executed at runtime. </li>
-  <li> <strong>Limited Static Analysis:</strong> Since the code executed with <code>exec</code> statement is only known at runtime, static code
-  analysis tools may not be able to catch certain errors or issues, leading to potential bugs. </li>
+  <li><strong>Security Risks:</strong> Executing code from a string opens up the possibility of code injection attacks.</li>
+  <li><strong>Readability and Maintainability:</strong> Code executed with <code>exec</code> statement is often harder to read and understand since it
+  is not explicitly written in the source code.</li>
+  <li><strong>Performance Implications:</strong> The use of <code>exec</code> statement can have performance implications since the code is compiled
+  and executed at runtime.</li>
+  <li><strong>Limited Static Analysis:</strong> Since the code executed with <code>exec</code> statement is only known at runtime, static code
+  analysis tools may not be able to catch certain errors or issues, leading to potential bugs.</li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>

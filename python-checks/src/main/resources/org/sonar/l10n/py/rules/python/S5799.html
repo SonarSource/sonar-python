@@ -4,9 +4,9 @@
 is sometimes used to split a long string on multiple lines. However an implicit string concatenation can also be very confusing. In the following
 contexts it might indicate that a comma was forgotten:</p>
 <ul>
-  <li> when the two strings are on the same line. This could be interpreted as an incorrectly formatted tuple (parentheses are not mandatory to create
-  a tuple, only the comma is). </li>
-  <li> when the strings are in a list, a set or a tuple. </li>
+  <li>when the two strings are on the same line. This could be interpreted as an incorrectly formatted tuple (parentheses are not mandatory to create
+  a tuple, only the comma is).</li>
+  <li>when the strings are in a list, a set or a tuple.</li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -32,8 +32,8 @@ def func():
 <h3>Exceptions</h3>
 <p>This rule will not raise any issues when there is a visible reason for the string concatenation:</p>
 <ul>
-  <li> when the quotes used for both strings are different. This can be used to avoid escaping quotes. </li>
-  <li> when the strings or bytes have different prefixes, i.e. "f" for f-strings, "r" for raw, "u" for unicode and no prefix for normal strings. </li>
-  <li> when strings are visibly split to avoid long lines of code, i.e. when the first string ends with a space, punctuation or <code>\n</code>. </li>
+  <li>when the quotes used for both strings are different. This can be used to avoid escaping quotes.</li>
+  <li>when the strings or bytes have different prefixes, i.e. "f" for f-strings, "r" for raw, "u" for unicode and no prefix for normal strings.</li>
+  <li>when strings are visibly split to avoid long lines of code, i.e. when the first string ends with a space, punctuation or <code>\n</code>.</li>
 </ul>
 

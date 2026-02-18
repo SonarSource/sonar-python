@@ -6,17 +6,17 @@ implement timeouts and cancellation. However, these mechanisms only work when th
 Without any checkpoints, the timeout will never be triggered, making it ineffective.</p>
 <p>A checkpoint is a point in the code where cancellation can be detected and acted upon. Common checkpoints include:</p>
 <ul>
-  <li> Explicit calls to the checkpoint method of the used framework </li>
-  <li> <code>yield</code> statements </li>
-  <li> <code>await</code> statements </li>
+  <li>Explicit calls to the checkpoint method of the used framework</li>
+  <li><code>yield</code> statements</li>
+  <li><code>await</code> statements</li>
 </ul>
 <h3>What is the potential impact?</h3>
 <p>Without proper checkpoints in cancel scopes:</p>
 <ul>
-  <li> Timeouts won’t work as expected </li>
-  <li> Resources might be held longer than intended </li>
-  <li> The application might become unresponsive or hang </li>
-  <li> Cancellation operations won’t be honored </li>
+  <li>Timeouts won’t work as expected</li>
+  <li>Resources might be held longer than intended</li>
+  <li>The application might become unresponsive or hang</li>
+  <li>Cancellation operations won’t be honored</li>
 </ul>
 <h2>How to fix it in Asyncio</h2>
 <p>There is no direct checkpoint method in <code>asyncio</code>, but you can use <code>await asyncio.sleep(0)</code> as a workaround.</p>
@@ -91,8 +91,8 @@ async def process_data(data):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Trio documentation - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#cancellation-and-timeouts">Cancellation and
-  timeouts</a> </li>
-  <li> AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/cancellation.html#timeouts">Timeouts</a> </li>
+  <li>Trio documentation - <a href="https://trio.readthedocs.io/en/stable/reference-core.html#cancellation-and-timeouts">Cancellation and
+  timeouts</a></li>
+  <li>AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/cancellation.html#timeouts">Timeouts</a></li>
 </ul>
 

@@ -4,8 +4,8 @@
 interpreted.</p>
 <p>When you concatenate a Template with a str, it’s unclear whether the str should be:</p>
 <ul>
-  <li> Treated as a static string part of the template </li>
-  <li> Treated as an interpolation value that should be processed dynamically </li>
+  <li>Treated as a static string part of the template</li>
+  <li>Treated as an interpolation value that should be processed dynamically</li>
 </ul>
 <p>This ambiguity can lead to unexpected behavior and makes the code’s intent unclear. Python’s PEP 750 specification explicitly prohibits this
 operation to force developers to be explicit about their intentions.</p>
@@ -29,7 +29,7 @@ template = t"Hello " + Template(name)
 </pre>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://peps.python.org/pep-0750/">PEP 750</a> </li>
-  <li> Python Documentation - <a href="https://peps.python.org/pep-0750/#template-string-concatenation">Template String Concatenation</a> </li>
+  <li>Python Documentation - <a href="https://peps.python.org/pep-0750/">PEP 750</a></li>
+  <li>Python Documentation - <a href="https://peps.python.org/pep-0750/#template-string-concatenation">Template String Concatenation</a></li>
 </ul>
 

@@ -1,26 +1,28 @@
-<p>Using unencrypted RDS DB resources exposes data to unauthorized access.<br> This includes database data, logs, automatic backups, read replicas,
-snapshots, and cluster metadata.</p>
+<p>Using unencrypted RDS DB resources exposes data to unauthorized access.
+  <br>
+  This includes database data, logs, automatic backups, read replicas, snapshots, and cluster metadata.</p>
 <p>This situation can occur in a variety of scenarios, such as:</p>
 <ul>
-  <li> A malicious insider working at the cloud provider gains physical access to the storage device. </li>
-  <li> Unknown attackers penetrate the cloud provider’s logical infrastructure and systems. </li>
+  <li>A malicious insider working at the cloud provider gains physical access to the storage device.</li>
+  <li>Unknown attackers penetrate the cloud provider’s logical infrastructure and systems.</li>
 </ul>
 <p>After a successful intrusion, the underlying applications are exposed to:</p>
 <ul>
-  <li> theft of intellectual property and/or personal data </li>
-  <li> extortion </li>
-  <li> denial of services and security bypasses via data corruption or deletion </li>
+  <li>theft of intellectual property and/or personal data</li>
+  <li>extortion</li>
+  <li>denial of services and security bypasses via data corruption or deletion</li>
 </ul>
 <p>AWS-managed encryption at rest reduces this risk with a simple switch.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> The database contains sensitive data that could cause harm when leaked. </li>
-  <li> There are compliance requirements for the service to store data encrypted. </li>
+  <li>The database contains sensitive data that could cause harm when leaked.</li>
+  <li>There are compliance requirements for the service to store data encrypted.</li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
-<p>It is recommended to enable encryption at rest on any RDS DB resource, regardless of the engine.<br> In any case, no further maintenance is
-required as encryption at rest is fully managed by AWS.</p>
+<p>It is recommended to enable encryption at rest on any RDS DB resource, regardless of the engine.
+  <br>
+  In any case, no further maintenance is required as encryption at rest is fully managed by AWS.</p>
 <h2>Sensitive Code Example</h2>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.DatabaseCluster.html">aws_cdk.aws_rds.DatabaseCluster</a> and <a
 href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.DatabaseInstance.html">aws_cdk.aws_rds.DatabaseInstance</a>:</p>
@@ -87,11 +89,11 @@ class DatabaseStack(Stack):
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html">AWS Documentation</a> - Encrypting Amazon RDS
-  resources </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a> </li>
-  <li> STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222588">Application Security and
+  <li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html">AWS Documentation</a> - Encrypting Amazon RDS
+  resources</li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a></li>
+  <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222588">Application Security and
   Development: V-222588</a> - The application must implement approved cryptographic mechanisms to prevent unauthorized modification of information at
-  rest. </li>
+  rest.</li>
 </ul>
 

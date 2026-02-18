@@ -11,12 +11,12 @@ def myfunction(param=foo()):  # foo is called only once, when the function is de
 share the same value and modifying one object will modify all of them.</p>
 <p>This rule raises an issue when:</p>
 <ul>
-  <li> a default value is either modified in the function or assigned to anything other than a variable and it has one of the following types:
+  <li>a default value is either modified in the function or assigned to anything other than a variable and it has one of the following types:
     <ul>
-      <li> <a href="https://docs.python.org/3/library/collections.html">collections</a> module: deque, UserList, ChainMap, Counter, OrderedDict,
-      defaultdict, UserDict. </li>
-    </ul>  </li>
-  <li> an attribute of a default value is assigned. </li>
+      <li><a href="https://docs.python.org/3/library/collections.html">collections</a> module: deque, UserList, ChainMap, Counter, OrderedDict,
+      defaultdict, UserDict.</li>
+    </ul></li>
+  <li>an attribute of a default value is assigned.</li>
 </ul>
 <h3>Exceptions</h3>
 <p>In some rare cases, modifying a default value is intentional. For example, default values can be used as a cache.</p>
@@ -53,10 +53,10 @@ print(myfunction()) # returns ['a']
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#function-definitions">Function definitions</a> </li>
+  <li>Python documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#function-definitions">Function definitions</a></li>
 </ul>
 <h3>External coding guidelines</h3>
 <ul>
-  <li> The Hitchhiker’s Guide to Python - <a href="https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments">Common Gotchas</a> </li>
+  <li>The Hitchhiker’s Guide to Python - <a href="https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments">Common Gotchas</a></li>
 </ul>
 

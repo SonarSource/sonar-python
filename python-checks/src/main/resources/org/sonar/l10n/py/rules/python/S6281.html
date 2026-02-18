@@ -2,11 +2,11 @@
 <p>This access control can be relaxed with ACLs or policies.</p>
 <p>To prevent permissive policies to be set on a S3 bucket the following booleans settings can be enabled:</p>
 <ul>
-  <li> <code>block_public_acls</code>: to block or not public ACLs to be set to the S3 bucket. </li>
-  <li> <code>ignore_public_acls</code>: to consider or not existing public ACLs set to the S3 bucket. </li>
-  <li> <code>block_public_policy</code>: to block or not public policies to be set to the S3 bucket. </li>
-  <li> <code>restrict_public_buckets</code>: to restrict or not the access to the S3 endpoints of public policies to the principals within the bucket
-  owner account. </li>
+  <li><code>block_public_acls</code>: to block or not public ACLs to be set to the S3 bucket.</li>
+  <li><code>ignore_public_acls</code>: to consider or not existing public ACLs set to the S3 bucket.</li>
+  <li><code>block_public_policy</code>: to block or not public policies to be set to the S3 bucket.</li>
+  <li><code>restrict_public_buckets</code>: to restrict or not the access to the S3 endpoints of public policies to the principals within the bucket
+  owner account.</li>
 </ul>
 <p>The other attribute <code>BlockPublicAccess.BLOCK_ACLS</code> only turns on <code>block_public_acls</code> and <code>ignore_public_acls</code>. The
 public policies can still affect the S3 bucket.</p>
@@ -14,19 +14,19 @@ public policies can still affect the S3 bucket.</p>
 <code>BlockPublicAccess.BLOCK_ALL</code>.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> The S3 bucket stores sensitive data. </li>
-  <li> The S3 bucket is not used to store static resources of websites (images, css …​). </li>
-  <li> Many users have the permission to set ACL or policy to the S3 bucket. </li>
-  <li> These settings are not already enforced to true at the account level. </li>
+  <li>The S3 bucket stores sensitive data.</li>
+  <li>The S3 bucket is not used to store static resources of websites (images, css …​).</li>
+  <li>Many users have the permission to set ACL or policy to the S3 bucket.</li>
+  <li>These settings are not already enforced to true at the account level.</li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <p>It’s recommended to configure:</p>
 <ul>
-  <li> <code>block_public_acls</code> to <code>True</code> to block new attempts to set public ACLs. </li>
-  <li> <code>ignore_public_acls</code> to <code>True</code> to block existing public ACLs. </li>
-  <li> <code>block_public_policy</code> to <code>True</code> to block new attempts to set public policies. </li>
-  <li> <code>restrict_public_buckets</code> to <code>True</code> to restrict existing public policies. </li>
+  <li><code>block_public_acls</code> to <code>True</code> to block new attempts to set public ACLs.</li>
+  <li><code>ignore_public_acls</code> to <code>True</code> to block existing public ACLs.</li>
+  <li><code>block_public_policy</code> to <code>True</code> to block new attempts to set public policies.</li>
+  <li><code>restrict_public_buckets</code> to <code>True</code> to restrict existing public policies.</li>
 </ul>
 <h2>Sensitive Code Example</h2>
 <p>By default, when not set, the <code>block_public_access</code> is fully deactivated (nothing is blocked):</p>
@@ -75,11 +75,11 @@ bucket = s3.Bucket(self, "bucket",
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html">AWS Documentation</a> - Blocking public
-  access to your Amazon S3 storage </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a> </li>
-  <li> STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222620">Application Security and
-  Development: V-222620</a> - Application web servers must be on a separate network segment from the application and database servers. </li>
-  <li> <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_s3/Bucket.html">AWS CDK version 2</a> - Bucket </li>
+  <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html">AWS Documentation</a> - Blocking public
+  access to your Amazon S3 storage</li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a></li>
+  <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222620">Application Security and
+  Development: V-222620</a> - Application web servers must be on a separate network segment from the application and database servers.</li>
+  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_s3/Bucket.html">AWS CDK version 2</a> - Bucket</li>
 </ul>
 

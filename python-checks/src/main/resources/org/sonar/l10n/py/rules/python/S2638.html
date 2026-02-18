@@ -5,26 +5,26 @@ that relate to the <a href="https://en.wikipedia.org/wiki/Liskov_substitution_pr
 overriding method should be callable with the same parameters as the overriden one.</p>
 <p>The following modifications are OK:</p>
 <ul>
-  <li> Adding an optional parameter, i.e. with a default value, as long as they don’t change the order of positional parameters. </li>
-  <li> Renaming a positional-only parameter. </li>
-  <li> Reordering keyword-only parameters. </li>
-  <li> Adding a default value to an existing parameter. </li>
-  <li> Changing the default value of an existing parameter. </li>
-  <li> Extend the ways a parameter can be provided, i.e. change a keyword-only or positional-only parameter to a keyword-or-positional parameter. This
-  is only true if the order of positional parameters doesn’t change. New positional parameters should be placed at the end. </li>
-  <li> Adding a vararg parameter (<code>*args</code>). </li>
-  <li> Adding a keywords parameter (<code>**kwargs</code>). </li>
+  <li>Adding an optional parameter, i.e. with a default value, as long as they don’t change the order of positional parameters.</li>
+  <li>Renaming a positional-only parameter.</li>
+  <li>Reordering keyword-only parameters.</li>
+  <li>Adding a default value to an existing parameter.</li>
+  <li>Changing the default value of an existing parameter.</li>
+  <li>Extend the ways a parameter can be provided, i.e. change a keyword-only or positional-only parameter to a keyword-or-positional parameter. This
+  is only true if the order of positional parameters doesn’t change. New positional parameters should be placed at the end.</li>
+  <li>Adding a vararg parameter (<code>*args</code>).</li>
+  <li>Adding a keywords parameter (<code>**kwargs</code>).</li>
 </ul>
 <p>The following modifications are not OK:</p>
 <ul>
-  <li> Removing parameters, even when they have default values. </li>
-  <li> Adding mandatory parameters, i.e. without a default value. </li>
-  <li> Removing the default value of a parameter. </li>
-  <li> Reordering parameters, except when they are keyword-only parameters. </li>
-  <li> Removing some ways of providing a parameter. If a parameter could be passed as keyword it should still be possible to pass it as keyword, and
-  the same is true for positional parameters. </li>
-  <li> Removing a vararg parameter (<code>*args</code>). </li>
-  <li> Removing a keywords parameter (<code>**kwargs</code>). </li>
+  <li>Removing parameters, even when they have default values.</li>
+  <li>Adding mandatory parameters, i.e. without a default value.</li>
+  <li>Removing the default value of a parameter.</li>
+  <li>Reordering parameters, except when they are keyword-only parameters.</li>
+  <li>Removing some ways of providing a parameter. If a parameter could be passed as keyword it should still be possible to pass it as keyword, and
+  the same is true for positional parameters.</li>
+  <li>Removing a vararg parameter (<code>*args</code>).</li>
+  <li>Removing a keywords parameter (<code>**kwargs</code>).</li>
 </ul>
 <p>This rule raises an issue when the signature of an overriding method does not accept the same parameters as the overriden one. Only instance
 methods are considered, class methods and static methods are ignored.</p>
@@ -86,8 +86,8 @@ class ChildClassReordered(ParentClass):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> SOLID - <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Wikipedia - Liskov substitution principle</a> </li>
-  <li> Python Enhancement Proposal (PEP) 3102 - <a href="https://www.python.org/dev/peps/pep-3102/">Keyword-Only Arguments</a> </li>
-  <li> Python Enhancement Proposal (PEP) 570 - <a href="https://www.python.org/dev/peps/pep-0570/">Python Positional-Only Parameters</a> </li>
+  <li>SOLID - <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Wikipedia - Liskov substitution principle</a></li>
+  <li>Python Enhancement Proposal (PEP) 3102 - <a href="https://www.python.org/dev/peps/pep-3102/">Keyword-Only Arguments</a></li>
+  <li>Python Enhancement Proposal (PEP) 570 - <a href="https://www.python.org/dev/peps/pep-0570/">Python Positional-Only Parameters</a></li>
 </ul>
 

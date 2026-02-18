@@ -30,17 +30,17 @@ changes depending on the value.</p>
 href="https://docs.python.org/3.8/whatsnew/3.8.html#changes-in-python-behavior">warns about comparing literals using identity operators</a>.</p>
 <p>This rule raises an issue when at least one operand of an identity operator:</p>
 <ul>
-  <li> is of type <code>int</code>, <code>bytes</code>, <code>float</code>, <code>frozenset</code> or <code>tuple</code>. </li>
-  <li> is a string literal. </li>
+  <li>is of type <code>int</code>, <code>bytes</code>, <code>float</code>, <code>frozenset</code> or <code>tuple</code>.</li>
+  <li>is a string literal.</li>
 </ul>
 <p>If you need to compare these types you should use the equality operators instead <code>==</code> or <code>!=</code>.</p>
 <h3>Exceptions</h3>
 <p>The only case where the <code>is</code> operator could be used with a cached type is with "interned" strings. The Python interpreter provides a way
 to explicitly cache any string literals and benefit from improved performances, such as:</p>
 <ul>
-  <li> saved memory space. </li>
-  <li> faster string comparison: as only their memory address need to be compared. </li>
-  <li> faster dictionary lookup: if the dictionary keys are interned, the lookup can be done by comparing memory address as well. </li>
+  <li>saved memory space.</li>
+  <li>faster string comparison: as only their memory address need to be compared.</li>
+  <li>faster dictionary lookup: if the dictionary keys are interned, the lookup can be done by comparing memory address as well.</li>
 </ul>
 <p>This explicit caching is done through interned strings (i.e. <code>sys.intern("some string")</code>).</p>
 <pre>
@@ -75,15 +75,14 @@ my_int == 2000
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3.8/whatsnew/3.8.html#changes-in-python-behavior">Changes in Python behaviour</a>.
-  </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/sys.html?highlight=sys.intern#sys.intern">sys.intern</a> </li>
+  <li>Python Documentation - <a href="https://docs.python.org/3.8/whatsnew/3.8.html#changes-in-python-behavior">Changes in Python behaviour</a>.</li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/sys.html?highlight=sys.intern#sys.intern">sys.intern</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> Adam Johnson’s Blog - <a href="https://adamj.eu/tech/2020/01/21/why-does-python-3-8-syntaxwarning-for-is-literal/">Why does Python 3.8 log a
-  SyntaxWarning for 'is' with literals?</a> </li>
-  <li> Trey Hunner’s Blog - <a href="https://treyhunner.com/2019/03/unique-and-sentinel-values-in-python/#Equality_vs_identity">Equality vs
-  identity</a> </li>
+  <li>Adam Johnson’s Blog - <a href="https://adamj.eu/tech/2020/01/21/why-does-python-3-8-syntaxwarning-for-is-literal/">Why does Python 3.8 log a
+  SyntaxWarning for 'is' with literals?</a></li>
+  <li>Trey Hunner’s Blog - <a href="https://treyhunner.com/2019/03/unique-and-sentinel-values-in-python/#Equality_vs_identity">Equality vs
+  identity</a></li>
 </ul>
 

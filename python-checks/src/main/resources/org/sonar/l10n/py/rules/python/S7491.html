@@ -9,10 +9,10 @@ intention is to create a checkpoint in the code where the current task can yield
 <code>anyio.lowlevel.checkpoint()</code>. These functions clearly communicate the intent to create a checkpoint for task switching.</p>
 <h3>What is the potential impact?</h3>
 <ul>
-  <li> <strong>Readability</strong>: Code using <code>sleep(0)</code> is less self-documenting and can be confusing to other developers who need to
-  know the non-obvious intent of the code. </li>
-  <li> <strong>Maintainability</strong>: The intent behind <code>sleep(0)</code> is not immediately clear to developers reviewing or maintaining the
-  code. </li>
+  <li><strong>Readability</strong>: Code using <code>sleep(0)</code> is less self-documenting and can be confusing to other developers who need to
+  know the non-obvious intent of the code.</li>
+  <li><strong>Maintainability</strong>: The intent behind <code>sleep(0)</code> is not immediately clear to developers reviewing or maintaining the
+  code.</li>
 </ul>
 <h2>How to fix it in Trio</h2>
 <p>Replace <code>trio.sleep(0)</code> with <code>trio.lowlevel.checkpoint()</code>.</p>
@@ -59,8 +59,8 @@ anyio.run(main)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Trio Documentation - <a
-  href="https://trio.readthedocs.io/en/stable/reference-lowlevel.html#trio.lowlevel.checkpoint">trio.lowlevel.checkpoint</a> </li>
-  <li> AnyIO Documentation - <a href="https://anyio.readthedocs.io/en/stable/api.html#anyio.lowlevel.checkpoint">anyio.lowlevel.checkpoint</a> </li>
+  <li>Trio Documentation - <a
+  href="https://trio.readthedocs.io/en/stable/reference-lowlevel.html#trio.lowlevel.checkpoint">trio.lowlevel.checkpoint</a></li>
+  <li>AnyIO Documentation - <a href="https://anyio.readthedocs.io/en/stable/api.html#anyio.lowlevel.checkpoint">anyio.lowlevel.checkpoint</a></li>
 </ul>
 

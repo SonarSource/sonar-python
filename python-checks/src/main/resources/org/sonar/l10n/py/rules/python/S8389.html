@@ -7,9 +7,9 @@ this data is transmitted requires careful consideration due to HTTP protocol con
 <h2>Understanding HTTP Content Types</h2>
 <p>HTTP requests can encode data in different ways, specified by the <code>Content-Type</code> header:</p>
 <ul>
-  <li> <code>application/json</code> - Used for JSON data in the request body </li>
-  <li> <code>multipart/form-data</code> - Required for file uploads, encodes both files and form fields </li>
-  <li> Query parameters - Appended to the URL after a <code>?</code> character </li>
+  <li><code>application/json</code> - Used for JSON data in the request body</li>
+  <li><code>multipart/form-data</code> - Required for file uploads, encodes both files and form fields</li>
+  <li>Query parameters - Appended to the URL after a <code>?</code> character</li>
 </ul>
 <p>When a FastAPI endpoint includes <code>File()</code> parameters, the client must send the request using <code>multipart/form-data</code> encoding.
 This creates a fundamental incompatibility: you cannot mix <code>Body()</code> parameters (which expect <code>application/json</code>) with
@@ -23,21 +23,21 @@ results in validation errors like "value is not a valid dict" or similar type mi
 Pydantic model. While this avoids the encoding conflict, it creates a serious security vulnerability.</p>
 <p>Query parameters appear in the URL itself, which means they are:</p>
 <ul>
-  <li> Visible in browser address bars </li>
-  <li> Stored in browser history </li>
-  <li> Logged in web server access logs </li>
-  <li> Potentially cached by proxies and CDNs </li>
-  <li> Visible in network monitoring tools </li>
+  <li>Visible in browser address bars</li>
+  <li>Stored in browser history</li>
+  <li>Logged in web server access logs</li>
+  <li>Potentially cached by proxies and CDNs</li>
+  <li>Visible in network monitoring tools</li>
 </ul>
 <p>If the structured data contains sensitive information (user credentials, personal data, tokens, etc.), this exposure creates a significant security
 risk. An attacker with access to server logs, browser history, or network traffic can extract this sensitive information.</p>
 <h2>Why Form Data is the Solution</h2>
 <p>Form data transmitted via <code>multipart/form-data</code> encoding:</p>
 <ul>
-  <li> Is compatible with file uploads </li>
-  <li> Is sent in the request body, not the URL </li>
-  <li> Does not appear in server logs (only the URL path is logged) </li>
-  <li> Can be properly validated and parsed by FastAPI </li>
+  <li>Is compatible with file uploads</li>
+  <li>Is sent in the request body, not the URL</li>
+  <li>Does not appear in server logs (only the URL path is logged)</li>
+  <li>Can be properly validated and parsed by FastAPI</li>
 </ul>
 <p>The challenge is that form data is transmitted as strings, not as structured JSON objects. This is where Pydantic’s custom validators become
 essential - they allow you to parse JSON strings from form fields while maintaining type safety and validation.</p>
@@ -45,10 +45,10 @@ essential - they allow you to parse JSON strings from form fields while maintain
 <h3>Exposure of Sensitive Data</h3>
 <p>When structured data containing sensitive information is passed through query parameters, it becomes visible in multiple locations:</p>
 <ul>
-  <li> Server access logs permanently record the full URL including all query parameters </li>
-  <li> Browser history stores the complete URL, accessible to anyone with access to the device </li>
-  <li> Network intermediaries (proxies, load balancers) may log or cache the URLs </li>
-  <li> Referrer headers may leak the URL to third-party sites </li>
+  <li>Server access logs permanently record the full URL including all query parameters</li>
+  <li>Browser history stores the complete URL, accessible to anyone with access to the device</li>
+  <li>Network intermediaries (proxies, load balancers) may log or cache the URLs</li>
+  <li>Referrer headers may leak the URL to third-party sites</li>
 </ul>
 <p>This exposure can lead to unauthorized access to user accounts, personal information disclosure, or compliance violations (GDPR, HIPAA,
 PCI-DSS).</p>
@@ -56,10 +56,10 @@ PCI-DSS).</p>
 <p>When <code>Body()</code> and <code>File()</code> parameters are mixed incorrectly, the application will fail at runtime with validation errors.
 Users will be unable to complete file upload operations, resulting in:</p>
 <ul>
-  <li> Poor user experience </li>
-  <li> Failed business processes </li>
-  <li> Support burden from confused users </li>
-  <li> Potential data loss if users abandon the operation </li>
+  <li>Poor user experience</li>
+  <li>Failed business processes</li>
+  <li>Support burden from confused users</li>
+  <li>Potential data loss if users abandon the operation</li>
 </ul>
 <h2>How to fix it in FastAPI</h2>
 <p>Replace <code>Body()</code> parameters with <code>Form()</code> parameters and add a Pydantic validator to parse JSON strings. This ensures
@@ -162,11 +162,11 @@ async def upload_data(
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> FastAPI - Request Forms and Files - <a href="https://fastapi.tiangolo.com/tutorial/request-forms-and-files/">Official FastAPI documentation on
-  handling forms and files together</a> </li>
-  <li> FastAPI - Request Body - <a href="https://fastapi.tiangolo.com/tutorial/body/">Official documentation explaining Body parameters and JSON
-  encoding</a> </li>
-  <li> Pydantic - Validators - <a href="https://docs.pydantic.dev/latest/concepts/validators/">Documentation on Pydantic validators for custom data
-  parsing</a> </li>
+  <li>FastAPI - Request Forms and Files - <a href="https://fastapi.tiangolo.com/tutorial/request-forms-and-files/">Official FastAPI documentation on
+  handling forms and files together</a></li>
+  <li>FastAPI - Request Body - <a href="https://fastapi.tiangolo.com/tutorial/body/">Official documentation explaining Body parameters and JSON
+  encoding</a></li>
+  <li>Pydantic - Validators - <a href="https://docs.pydantic.dev/latest/concepts/validators/">Documentation on Pydantic validators for custom data
+  parsing</a></li>
 </ul>
 

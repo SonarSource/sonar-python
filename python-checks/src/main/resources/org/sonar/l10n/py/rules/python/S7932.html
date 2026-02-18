@@ -12,9 +12,9 @@ guarantee.</p>
 <h3>What is the potential impact?</h3>
 <p>Using control flow statements that exit <code>finally</code> blocks can lead to:</p>
 <ul>
-  <li> <strong>Debugging difficulties</strong>: The actual cause of issues may be hidden when exceptions are suppressed unexpectedly </li>
-  <li> <strong>Future compatibility issues</strong>: Code may break in future Python versions when this becomes a syntax error </li>
-  <li> <strong>Reduced code maintainability</strong>: Control flow becomes harder to follow and understand </li>
+  <li><strong>Debugging difficulties</strong>: The actual cause of issues may be hidden when exceptions are suppressed unexpectedly</li>
+  <li><strong>Future compatibility issues</strong>: Code may break in future Python versions when this becomes a syntax error</li>
+  <li><strong>Reduced code maintainability</strong>: Control flow becomes harder to follow and understand</li>
 </ul>
 <h3>How to fix?</h3>
 <p>Move the return statement outside the finally block and use a variable to store the return value if needed.</p>
@@ -40,7 +40,7 @@ def safe_function():
 </pre>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://peps.python.org/pep-0765/">PEP 765</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">The Try Statement</a> </li>
+  <li>Python Documentation - <a href="https://peps.python.org/pep-0765/">PEP 765</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">The Try Statement</a></li>
 </ul>
 

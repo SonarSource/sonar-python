@@ -5,9 +5,9 @@
 <code>join</code>.</p>
 <p>When using these methods, it is possible to specify how the merge will be performed:</p>
 <ul>
-  <li> The parameter <code>how</code> specifies the type of merge (<code>left</code>, <code>inner</code>, <code>outer</code>, etc..). </li>
-  <li> The parameter <code>on</code> specifies the column(s) on which the merge will be performed. </li>
-  <li> The parameter <code>validate</code> specifies a way to verify if the merge result is what was expected. </li>
+  <li>The parameter <code>how</code> specifies the type of merge (<code>left</code>, <code>inner</code>, <code>outer</code>, etc..).</li>
+  <li>The parameter <code>on</code> specifies the column(s) on which the merge will be performed.</li>
+  <li>The parameter <code>validate</code> specifies a way to verify if the merge result is what was expected.</li>
 </ul>
 <pre>
 import pandas as pd
@@ -34,34 +34,74 @@ merge only contains unique keys in both data frames. If this check fails a <code
   </colgroup>
   <tbody>
     <tr>
-      <td><p>row</p></td>
-      <td><p>user_id</p></td>
-      <td><p>age</p></td>
-      <td><p>name</p></td>
+      <td>
+        <p>row</p>
+      </td>
+      <td>
+        <p>user_id</p>
+      </td>
+      <td>
+        <p>age</p>
+      </td>
+      <td>
+        <p>name</p>
+      </td>
     </tr>
     <tr>
-      <td><p>0</p></td>
-      <td><p>1</p></td>
-      <td><p>42</p></td>
-      <td><p>a</p></td>
+      <td>
+        <p>0</p>
+      </td>
+      <td>
+        <p>1</p>
+      </td>
+      <td>
+        <p>42</p>
+      </td>
+      <td>
+        <p>a</p>
+      </td>
     </tr>
     <tr>
-      <td><p>1</p></td>
-      <td><p>2</p></td>
-      <td><p>45</p></td>
-      <td><p>b</p></td>
+      <td>
+        <p>1</p>
+      </td>
+      <td>
+        <p>2</p>
+      </td>
+      <td>
+        <p>45</p>
+      </td>
+      <td>
+        <p>b</p>
+      </td>
     </tr>
     <tr>
-      <td><p>2</p></td>
-      <td><p>3</p></td>
-      <td><p>NaN</p></td>
-      <td><p>c</p></td>
+      <td>
+        <p>2</p>
+      </td>
+      <td>
+        <p>3</p>
+      </td>
+      <td>
+        <p>NaN</p>
+      </td>
+      <td>
+        <p>c</p>
+      </td>
     </tr>
     <tr>
-      <td><p>3</p></td>
-      <td><p>4</p></td>
-      <td><p>35</p></td>
-      <td><p>d</p></td>
+      <td>
+        <p>3</p>
+      </td>
+      <td>
+        <p>4</p>
+      </td>
+      <td>
+        <p>35</p>
+      </td>
+      <td>
+        <p>d</p>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -80,9 +120,9 @@ result = age_df.merge(name_df)
 </pre>
 <p>In this example:</p>
 <ul>
-  <li> The <code>how</code> parameter defaults to <code>inner</code>. </li>
-  <li> The <code>on</code> parameter defaults to the columns which have a similar name, in our case <code>user_id</code> . </li>
-  <li> The <code>validate</code> parameter will be set to <code>many_to_many</code>, meaning no validation will be performed. </li>
+  <li>The <code>how</code> parameter defaults to <code>inner</code>.</li>
+  <li>The <code>on</code> parameter defaults to the columns which have a similar name, in our case <code>user_id</code> .</li>
+  <li>The <code>validate</code> parameter will be set to <code>many_to_many</code>, meaning no validation will be performed.</li>
 </ul>
 <p>Here is the resulting data frame:</p>
 <table>
@@ -94,38 +134,70 @@ result = age_df.merge(name_df)
   </colgroup>
   <tbody>
     <tr>
-      <td><p>row</p></td>
-      <td><p>user_id</p></td>
-      <td><p>age</p></td>
-      <td><p>name</p></td>
+      <td>
+        <p>row</p>
+      </td>
+      <td>
+        <p>user_id</p>
+      </td>
+      <td>
+        <p>age</p>
+      </td>
+      <td>
+        <p>name</p>
+      </td>
     </tr>
     <tr>
-      <td><p>0</p></td>
-      <td><p>1</p></td>
-      <td><p>42</p></td>
-      <td><p>a</p></td>
+      <td>
+        <p>0</p>
+      </td>
+      <td>
+        <p>1</p>
+      </td>
+      <td>
+        <p>42</p>
+      </td>
+      <td>
+        <p>a</p>
+      </td>
     </tr>
     <tr>
-      <td><p>1</p></td>
-      <td><p>2</p></td>
-      <td><p>45</p></td>
-      <td><p>b</p></td>
+      <td>
+        <p>1</p>
+      </td>
+      <td>
+        <p>2</p>
+      </td>
+      <td>
+        <p>45</p>
+      </td>
+      <td>
+        <p>b</p>
+      </td>
     </tr>
     <tr>
-      <td><p>2</p></td>
-      <td><p>4</p></td>
-      <td><p>35</p></td>
-      <td><p>d</p></td>
+      <td>
+        <p>2</p>
+      </td>
+      <td>
+        <p>4</p>
+      </td>
+      <td>
+        <p>35</p>
+      </td>
+      <td>
+        <p>d</p>
+      </td>
     </tr>
   </tbody>
 </table>
 <p>While the example above is perfectly valid, using the <code>merge</code> and <code>join</code> methods without providing the <code>how</code>,
 <code>on</code> and <code>validate</code> arguments has two main drawbacks:</p>
 <ul>
-  <li> It makes the code intention unclear: without the <code>how</code> parameter set, it is unclear if the developer noticed that a
-  <code>user_id</code> (<code>3</code>) will be missing from the resulting data frame, or if it is done on purpose. </li>
-  <li> It makes the code harder to maintain: if one of the data frame would change its <code>user_id</code> column name to <code>id</code>, the code
-  would still run but the result would be entirely different. </li>
+  <li>It makes the code intention unclear: without the <code>how</code> parameter set, it is unclear if the developer noticed that a
+  <code>user_id</code> (<code>3</code>) will be missing from the resulting data frame, or if it is done on purpose.</li>
+  <li>It makes the code harder to maintain: if one of the data frame would change its <code>user_id</code> column name to <code>id</code>, the code
+  would still run but the result would be entirely different.</li>
 </ul>
 <p>In order to mitigate these drawbacks, setting the <code>how</code> parameter to <code>inner</code> would better convey that the intention is to
 only keep <code>user_id</code>s present in both data frame. Setting the <code>on</code> parameter to <code>user_id</code> could also avoid issues in
@@ -165,9 +237,9 @@ def merge_dfs(age_df:pd.DataFrame, name_df:pd.DataFrame):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Pandas Documentation - <a
-  href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html#pandas-dataframe-merge">pandas.DataFrame.merge</a> </li>
-  <li> Pandas Documentation - <a
-  href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html#pandas-dataframe-join">pandas.DataFrame.join</a> </li>
+  <li>Pandas Documentation - <a
+  href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html#pandas-dataframe-merge">pandas.DataFrame.merge</a></li>
+  <li>Pandas Documentation - <a
+  href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html#pandas-dataframe-join">pandas.DataFrame.join</a></li>
 </ul>
 

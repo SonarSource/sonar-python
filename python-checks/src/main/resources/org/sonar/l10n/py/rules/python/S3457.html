@@ -10,10 +10,10 @@ difference is that they will log an error instead of raising an exception when t
 failure at compile time. However, it is easy to forget curly braces, which will not lead to any detectable errors.</p>
 <p>This rule raises an issue when:</p>
 <ul>
-  <li> A string formatted with <code>%</code> will not return the expected text because some arguments are unused. </li>
-  <li> A string formatted with <code>str.format</code> will not return the expected string because some arguments are unused. </li>
-  <li> An "f-string" doesn’t contain any replacement field, which probably means some curly braces are missing. </li>
-  <li> Loggers will log an error because their message is not formatted properly. </li>
+  <li>A string formatted with <code>%</code> will not return the expected text because some arguments are unused.</li>
+  <li>A string formatted with <code>str.format</code> will not return the expected string because some arguments are unused.</li>
+  <li>An "f-string" doesn’t contain any replacement field, which probably means some curly braces are missing.</li>
+  <li>Loggers will log an error because their message is not formatted properly.</li>
 </ul>
 <p>Rule {rule:python:S2275} covers cases where formatting a string will raise an exception.</p>
 <h2>How to fix it</h2>
@@ -49,13 +49,13 @@ logging.error("Error: User %s has not been able to access %s", "Alice", "MyFile"
 </pre>
 <h2>Resources</h2>
 <ul>
-  <li> <a href="https://docs.python.org/3/library/string.html#format-string-syntax">Python documentation - Format String Syntax</a> </li>
-  <li> <a href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">Python documentation - printf-style String
-  Formatting</a> </li>
-  <li> <a href="https://docs.python.org/3/howto/logging.html#loggers">Python documentation - Loggers</a> </li>
-  <li> <a href="https://docs.python.org/3/howto/logging-cookbook.html#using-particular-formatting-styles-throughout-your-application">Python
-  documentation - Using particular formatting styles throughout your application</a> </li>
-  <li> <a href="https://docs.python.org/3/reference/lexical_analysis.html#formatted-string-literals">Python documentation - Formatted string
-  literals</a> </li>
+  <li><a href="https://docs.python.org/3/library/string.html#format-string-syntax">Python documentation - Format String Syntax</a></li>
+  <li><a href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">Python documentation - printf-style String
+  Formatting</a></li>
+  <li><a href="https://docs.python.org/3/howto/logging.html#loggers">Python documentation - Loggers</a></li>
+  <li><a href="https://docs.python.org/3/howto/logging-cookbook.html#using-particular-formatting-styles-throughout-your-application">Python
+  documentation - Using particular formatting styles throughout your application</a></li>
+  <li><a href="https://docs.python.org/3/reference/lexical_analysis.html#formatted-string-literals">Python documentation - Formatted string
+  literals</a></li>
 </ul>
 

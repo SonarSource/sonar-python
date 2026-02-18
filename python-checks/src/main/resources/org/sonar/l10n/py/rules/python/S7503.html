@@ -5,14 +5,14 @@ non-blocking operations (like I/O), or employs other asynchronous features like 
 <p>If none of these asynchronous mechanisms are utilized within the function’s body, the <code>async</code> declaration is superfluous.</p>
 <p>Using <code>async</code> unnecessarily can:</p>
 <ul>
-  <li> <strong>Reduce Code Clarity:</strong> It misleads developers into thinking the function performs asynchronous operations when it doesn’t,
-  making the codebase harder to understand and reason about. </li>
-  <li> <strong>Introduce Minor Overhead:</strong> Calling an <code>async def</code> function creates a coroutine object. While modern Python is
+  <li><strong>Reduce Code Clarity:</strong> It misleads developers into thinking the function performs asynchronous operations when it doesn’t, making
+  the codebase harder to understand and reason about.</li>
+  <li><strong>Introduce Minor Overhead:</strong> Calling an <code>async def</code> function creates a coroutine object. While modern Python is
   efficient, this still incurs more overhead than a direct synchronous function call if the asynchronicity isn’t actually leveraged. The function’s
   body will execute synchronously until an <code>await</code> (if any) is encountered. If there’s no <code>await</code> or other async feature, it
-  essentially runs synchronously but wrapped as a coroutine. </li>
-  <li> <strong>Complicate Usage:</strong> Callers must use <code>await</code> (or schedule it as a task) to execute the coroutine and get its result.
-  This is an unnecessary ceremony if the function itself isn’t truly asynchronous. </li>
+  essentially runs synchronously but wrapped as a coroutine.</li>
+  <li><strong>Complicate Usage:</strong> Callers must use <code>await</code> (or schedule it as a task) to execute the coroutine and get its result.
+  This is an unnecessary ceremony if the function itself isn’t truly asynchronous.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Either remove the <code>async</code> keyword, or start using the appropriate asynchronous features.</p>
@@ -44,6 +44,6 @@ async def my_function():  # Compliant
 <h2>Resources</h2>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">What Color Is Your Function? - Bob Nystrom</a> </li>
+  <li><a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">What Color Is Your Function? - Bob Nystrom</a></li>
 </ul>
 

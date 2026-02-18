@@ -5,13 +5,13 @@ easier to understand the program and preventing bugs from being introduced.</p>
 <p>Python has no real private methods. Every method is accessible. There are however two conventions indicating that a method is not meant to be
 "public":</p>
 <ul>
-  <li> methods with a name starting with a single underscore (ex: <code>_mymethod</code>) should be seen as non-public and might change without prior
+  <li>methods with a name starting with a single underscore (ex: <code>_mymethod</code>) should be seen as non-public and might change without prior
   notice. They should not be used by third-party libraries or software. It is ok to use those methods inside the library defining them but it should
-  be done with caution. </li>
-  <li> "class-private" methods have a name which starts with at least two underscores and ends with at most one underscore. These methods' names will
+  be done with caution.</li>
+  <li>"class-private" methods have a name which starts with at least two underscores and ends with at most one underscore. These methods' names will
   be automatically mangled to avoid collision with subclasses' methods. For example <code>__mymethod</code> will be renamed as
   <code>_classname__mymethod</code>, where <code>classname</code> is the method’s class name without its leading underscore(s). These methods
-  shouldn’t be used outside of their enclosing class. </li>
+  shouldn’t be used outside of their enclosing class.</li>
 </ul>
 <p>This rule raises an issue when a class-private method (two leading underscores, max one underscore at the end) is never called inside the class.
 Class methods, static methods and instance methods will all raise an issue.</p>
@@ -53,7 +53,7 @@ class Compliant:
 </pre>
 <h2>Resources</h2>
 <ul>
-  <li> <a href="https://docs.python.org/3.8/tutorial/classes.html#private-variables">Python documentation – Private Variables</a> </li>
-  <li> <a href="https://www.python.org/dev/peps/pep-0008/#designing-for-inheritance">PEP8 – Designing for Inheritance</a> </li>
+  <li><a href="https://docs.python.org/3.8/tutorial/classes.html#private-variables">Python documentation – Private Variables</a></li>
+  <li><a href="https://www.python.org/dev/peps/pep-0008/#designing-for-inheritance">PEP8 – Designing for Inheritance</a></li>
 </ul>
 

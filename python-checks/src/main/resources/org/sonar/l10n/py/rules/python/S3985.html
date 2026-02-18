@@ -6,13 +6,13 @@ being introduced.</p>
 <p>Python has no real private classes. Every class is accessible. There are however two conventions indicating that a class is not meant to be
 "public":</p>
 <ul>
-  <li> classes with a name starting with a single underscore (ex: <code>_MyClass</code>) should be seen as non-public and might change without prior
+  <li>classes with a name starting with a single underscore (ex: <code>_MyClass</code>) should be seen as non-public and might change without prior
   notice. They should not be used by third-party libraries or software. It is ok to use those classes inside the library defining them but it should
-  be done with caution. </li>
-  <li> "class-private" classes are defined inside another class, and have a name starting with at least two underscores and ending with at most one
+  be done with caution.</li>
+  <li>"class-private" classes are defined inside another class, and have a name starting with at least two underscores and ending with at most one
   underscore. These classes' names will be automatically mangled to avoid collision with subclasses' nested classes. For example
   <code>__MyClass</code> will be renamed as <code>_classname__MyClass</code>, where <code>classname</code> is the enclosing class’s name without its
-  leading underscore(s). Class-Private classes shouldn’t be used outside of their enclosing class. </li>
+  leading underscore(s). Class-Private classes shouldn’t be used outside of their enclosing class.</li>
 </ul>
 <p>This rule raises an issue when a private nested class (either with one or two leading underscores) is never used inside its parent class.</p>
 <h3>Code examples</h3>
@@ -33,7 +33,7 @@ class TopLevel:
 </pre>
 <h2>Resources</h2>
 <ul>
-  <li> <a href="https://docs.python.org/3.8/tutorial/classes.html#private-variables">Python documentation – Private Variables</a> </li>
-  <li> <a href="https://www.python.org/dev/peps/pep-0008/#designing-for-inheritance">PEP 8 – Style Guide for Python Code</a> </li>
+  <li><a href="https://docs.python.org/3.8/tutorial/classes.html#private-variables">Python documentation – Private Variables</a></li>
+  <li><a href="https://www.python.org/dev/peps/pep-0008/#designing-for-inheritance">PEP 8 – Style Guide for Python Code</a></li>
 </ul>
 

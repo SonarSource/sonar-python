@@ -5,10 +5,10 @@ annotation.</p>
 annotation and the <code>response_model</code> parameter, you create unnecessary duplication.</p>
 <p>This duplication has several drawbacks:</p>
 <ul>
-  <li> <strong>Maintenance burden</strong>: When the response type needs to change, you must update it in two places, increasing the risk of
-  inconsistencies. </li>
-  <li> <strong>Code verbosity</strong>: The redundant parameter adds visual noise without providing additional value. </li>
-  <li> <strong>Confusion</strong>: Developers might wonder if the two specifications serve different purposes or if they should be kept in sync. </li>
+  <li><strong>Maintenance burden</strong>: When the response type needs to change, you must update it in two places, increasing the risk of
+  inconsistencies.</li>
+  <li><strong>Code verbosity</strong>: The redundant parameter adds visual noise without providing additional value.</li>
+  <li><strong>Confusion</strong>: Developers might wonder if the two specifications serve different purposes or if they should be kept in sync.</li>
 </ul>
 <p>FastAPI’s automatic inference from return type annotations is the recommended approach. The <code>response_model</code> parameter exists for
 special cases where you need to override the default behavior, such as when returning a different model internally than what should be serialized in
@@ -67,9 +67,9 @@ def get_user(user_id: int) -&gt; UserInternal:
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> FastAPI Documentation - Response Model - <a href="https://fastapi.tiangolo.com/tutorial/response-model/">Official FastAPI documentation
-  explaining response models and return type annotations</a> </li>
-  <li> Ruff Rule FAST001 - <a href="https://docs.astral.sh/ruff/rules/fast-api-redundant-response-model/">Ruff linter rule documentation for detecting
-  redundant response_model parameters</a> </li>
+  <li>FastAPI Documentation - Response Model - <a href="https://fastapi.tiangolo.com/tutorial/response-model/">Official FastAPI documentation
+  explaining response models and return type annotations</a></li>
+  <li>Ruff Rule FAST001 - <a href="https://docs.astral.sh/ruff/rules/fast-api-redundant-response-model/">Ruff linter rule documentation for detecting
+  redundant response_model parameters</a></li>
 </ul>
 

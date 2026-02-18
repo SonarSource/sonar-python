@@ -5,16 +5,16 @@ entire event loop. This undermines the primary advantage of asynchronous program
 execution.</p>
 <p>When an async function makes a synchronous HTTP request:</p>
 <ul>
-  <li> The event loop is completely blocked until the HTTP operation completes </li>
-  <li> No other coroutines can run during this time, even if they’re ready to execute </li>
-  <li> The responsiveness of the application is degraded </li>
-  <li> In server applications, this can cause timeouts or failures for other concurrent requests </li>
+  <li>The event loop is completely blocked until the HTTP operation completes</li>
+  <li>No other coroutines can run during this time, even if they’re ready to execute</li>
+  <li>The responsiveness of the application is degraded</li>
+  <li>In server applications, this can cause timeouts or failures for other concurrent requests</li>
 </ul>
 <p>Instead, async-compatible HTTP clients should be used:</p>
 <ul>
-  <li> <code>httpx.AsyncClient</code> - works with asyncio, Trio, and AnyIO </li>
-  <li> <code>aiohttp.ClientSession</code> - works with asyncio </li>
-  <li> <code>asks</code> - works with Trio and asyncio </li>
+  <li><code>httpx.AsyncClient</code> - works with asyncio, Trio, and AnyIO</li>
+  <li><code>aiohttp.ClientSession</code> - works with asyncio</li>
+  <li><code>asks</code> - works with Trio and asyncio</li>
 </ul>
 <p>Using these libraries allows other tasks to continue executing while waiting for HTTP responses, significantly improving application performance
 and responsiveness.</p>
@@ -43,12 +43,12 @@ async def fetch_data():
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> HTTPX - <a href="https://www.python-httpx.org/async/">Async Usage</a> </li>
-  <li> AIOHTTP - <a href="https://docs.aiohttp.org/en/stable/client_quickstart.html">Client Quickstart</a> </li>
-  <li> Asks - <a href="https://asks.readthedocs.io/en/latest/">Documentation</a> </li>
+  <li>HTTPX - <a href="https://www.python-httpx.org/async/">Async Usage</a></li>
+  <li>AIOHTTP - <a href="https://docs.aiohttp.org/en/stable/client_quickstart.html">Client Quickstart</a></li>
+  <li>Asks - <a href="https://asks.readthedocs.io/en/latest/">Documentation</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> Python - <a href="https://realpython.com/async-io-python/">Async IO in Python</a> </li>
+  <li>Python - <a href="https://realpython.com/async-io-python/">Async IO in Python</a></li>
 </ul>
 

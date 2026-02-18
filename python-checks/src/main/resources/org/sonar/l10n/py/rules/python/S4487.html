@@ -4,13 +4,13 @@ error in the code.</p>
 <p>Python has no real private attribute. Every attribute is accessible. There are however two conventions indicating that an attribute is not meant to
 be "public":</p>
 <ul>
-  <li> attributes with a name starting with a single underscore (ex: <code>_myattribute</code>) should be seen as non-public and might change without
+  <li>attributes with a name starting with a single underscore (ex: <code>_myattribute</code>) should be seen as non-public and might change without
   prior notice. They should not be used by third-party libraries or software. It is ok to use those methods inside the library defining them but it
-  should be done with caution. </li>
-  <li> "class-private" attributes have a name starting with at least two underscores and ending with at most one underscore. These attributes' names
+  should be done with caution.</li>
+  <li>"class-private" attributes have a name starting with at least two underscores and ending with at most one underscore. These attributes' names
   will be automatically mangled to avoid collision with subclasses' attributes. For example <code>__myattribute</code> will be renamed as
   <code>_classname__myattribute</code>, where <code>classname</code> is the attribute’s class name without its leading underscore(s). They shouldn’t
-  be used outside of the class defining the attribute. </li>
+  be used outside of the class defining the attribute.</li>
 </ul>
 <p>This rule raises an issue when a class-private attribute (two leading underscores, max one underscore at the end) is never read inside the class.
 It optionally raises an issue on unread attributes prefixed with a single underscore. Both class attributes and instance attributes will raise an
@@ -47,7 +47,7 @@ class Compliant:
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3.8/tutorial/classes.html#private-variables">Python documentation – Private Variables</a> </li>
-  <li> <a href="https://www.python.org/dev/peps/pep-0008/#designing-for-inheritance">PEP 8 – Style Guide for Python Code</a> </li>
+  <li><a href="https://docs.python.org/3.8/tutorial/classes.html#private-variables">Python documentation – Private Variables</a></li>
+  <li><a href="https://www.python.org/dev/peps/pep-0008/#designing-for-inheritance">PEP 8 – Style Guide for Python Code</a></li>
 </ul>
 

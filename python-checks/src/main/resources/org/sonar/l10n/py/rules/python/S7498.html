@@ -6,31 +6,31 @@ also offers a direct literal syntax for initializing dictionaries with key-value
 <p>Using the function calls <code>dict()</code>, <code>list()</code>, and <code>tuple()</code> for these purposes is generally less preferred for a
 few reasons:</p>
 <ul>
-  <li> Readability and Directness: Literals are often considered more "Pythonic" and directly express the intent of creating an empty container or a
-  dictionary with specific initial values. </li>
-  <li> Consistency: Python encourages the use of literals where they are clear and effective. </li>
-  <li> Performance: Calling a function involves overhead, including name lookup for <code>dict</code>, <code>list</code>, or <code>tuple</code> in the
+  <li>Readability and Directness: Literals are often considered more "Pythonic" and directly express the intent of creating an empty container or a
+  dictionary with specific initial values.</li>
+  <li>Consistency: Python encourages the use of literals where they are clear and effective.</li>
+  <li>Performance: Calling a function involves overhead, including name lookup for <code>dict</code>, <code>list</code>, or <code>tuple</code> in the
   current scope. While often negligible for single calls, using literals is a direct instruction to the interpreter and can be marginally faster,
-  especially in performance-sensitive code or tight loops. </li>
+  especially in performance-sensitive code or tight loops.</li>
 </ul>
 <p>Specifically, the following patterns are discouraged:</p>
 <ul>
-  <li> Using <code>dict()</code> to create an empty dictionary instead of <code>{}</code>. </li>
-  <li> Using <code>list()</code> to create an empty list instead of <code>[]</code>. </li>
-  <li> Using <code>tuple()</code> to create an empty tuple instead of <code>()</code>. </li>
-  <li> Using <code>dict(key='value', …​)</code> to initialize a dictionary instead of <code>{'key': 'value', …​}</code> when keys are simple strings
-  valid as identifiers. </li>
+  <li>Using <code>dict()</code> to create an empty dictionary instead of <code>{}</code>.</li>
+  <li>Using <code>list()</code> to create an empty list instead of <code>[]</code>.</li>
+  <li>Using <code>tuple()</code> to create an empty tuple instead of <code>()</code>.</li>
+  <li>Using <code>dict(key='value', …​)</code> to initialize a dictionary instead of <code>{'key': 'value', …​}</code> when keys are simple strings
+  valid as identifiers.</li>
 </ul>
 <p>While the functional difference is minimal for creating empty collections or simple dictionaries, adopting literals promotes a more direct and
 idiomatic coding style.</p>
 <h2>How to fix it</h2>
 <p>To fix this replace the function calls <code>dict()</code>, <code>list()</code>, and <code>tuple()</code> with their equivalent literal syntax.</p>
 <ul>
-  <li> To create an empty dictionary, replace <code>dict()</code> with <code>{}</code>. </li>
-  <li> To create an empty list, replace <code>list()</code> with <code>[]</code>. </li>
-  <li> To create an empty tuple, replace <code>tuple()</code> with <code>()</code>. </li>
-  <li> To initialize a dictionary with keyword arguments (where keys are simple strings that are valid identifiers), replace <code>dict(key1=value1,
-  key2=value2)</code> with <code>{'key1': value1, 'key2': value2}</code>. </li>
+  <li>To create an empty dictionary, replace <code>dict()</code> with <code>{}</code>.</li>
+  <li>To create an empty list, replace <code>list()</code> with <code>[]</code>.</li>
+  <li>To create an empty tuple, replace <code>tuple()</code> with <code>()</code>.</li>
+  <li>To initialize a dictionary with keyword arguments (where keys are simple strings that are valid identifiers), replace <code>dict(key1=value1,
+  key2=value2)</code> with <code>{'key1': value1, 'key2': value2}</code>.</li>
 </ul>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 empty_d = dict() # Noncompliant: the dict constructor is used instead of the literal syntax
@@ -41,8 +41,8 @@ empty_d = {} # Compliant
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#dict">dict()</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#list">list()</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple()</a> </li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#dict">dict()</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#list">list()</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple()</a></li>
 </ul>
 

@@ -8,10 +8,10 @@
 different approach that emphasizes clarity and explicitness.</p>
 <p>Using specific HTTP method decorators offers several advantages:</p>
 <ul>
-  <li> <strong>Immediate clarity</strong>: The HTTP method is visible at a glance without needing to read the decorator’s parameters </li>
-  <li> <strong>Less verbose</strong>: The specific decorators require less code and fewer parameters </li>
-  <li> <strong>Framework conventions</strong>: This is the standard, documented way to define endpoints in FastAPI </li>
-  <li> <strong>Better tooling support</strong>: IDEs and linters can provide better autocomplete and validation with the specific decorators </li>
+  <li><strong>Immediate clarity</strong>: The HTTP method is visible at a glance without needing to read the decorator’s parameters</li>
+  <li><strong>Less verbose</strong>: The specific decorators require less code and fewer parameters</li>
+  <li><strong>Framework conventions</strong>: This is the standard, documented way to define endpoints in FastAPI</li>
+  <li><strong>Better tooling support</strong>: IDEs and linters can provide better autocomplete and validation with the specific decorators</li>
 </ul>
 <p>While both approaches work functionally, using the generic <code>route()</code> decorator in FastAPI code suggests unfamiliarity with the
 framework’s conventions and can make the codebase harder to read for developers who expect idiomatic FastAPI patterns.</p>
@@ -85,9 +85,9 @@ def list_items():
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> FastAPI - Path Operation Decorators - <a href="https://fastapi.tiangolo.com/tutorial/first-steps/#define-a-path-operation-decorator">Official
-  FastAPI documentation explaining the use of specific HTTP method decorators</a> </li>
-  <li> flake8-fastapi - CF001 Rule - <a href="https://pypi.org/project/flake8-fastapi/#cf001---route-decorator-error">Documentation for the
-  flake8-fastapi plugin rule that detects this pattern</a> </li>
+  <li>FastAPI - Path Operation Decorators - <a href="https://fastapi.tiangolo.com/tutorial/first-steps/#define-a-path-operation-decorator">Official
+  FastAPI documentation explaining the use of specific HTTP method decorators</a></li>
+  <li>flake8-fastapi - CF001 Rule - <a href="https://pypi.org/project/flake8-fastapi/#cf001---route-decorator-error">Documentation for the
+  flake8-fastapi plugin rule that detects this pattern</a></li>
 </ul>
 

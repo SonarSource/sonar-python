@@ -16,9 +16,9 @@ arr.put(indices=1, values=3) # No issues raised.
 <h2>How to fix it</h2>
 <p>To fix this issue, either:</p>
 <ul>
-  <li> pass a Python list instead of a generator to the <code>np.array</code> function or, </li>
-  <li> explicitly show the intention to create a 0-dimensional array of objects by either adding <code>Any</code> as the type hint of the generator or
-  by specifying the <code>dtype</code> parameter of the NumPy array as <code>object</code>. </li>
+  <li>pass a Python list instead of a generator to the <code>np.array</code> function or,</li>
+  <li>explicitly show the intention to create a 0-dimensional array of objects by either adding <code>Any</code> as the type hint of the generator or
+  by specifying the <code>dtype</code> parameter of the NumPy array as <code>object</code>.</li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -42,6 +42,6 @@ arr = np.array(gen) # Compliant: the generator is explicitly type hinted with An
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> NumPy Documentation - <a href="https://numpy.org/doc/stable/reference/typing.html#arraylike">ArrayLike</a> </li>
+  <li>NumPy Documentation - <a href="https://numpy.org/doc/stable/reference/typing.html#arraylike">ArrayLike</a></li>
 </ul>
 

@@ -15,11 +15,11 @@ isn’t really a default value in the traditional sense.</p>
 <h3>What is the potential impact?</h3>
 <p>Using the deprecated syntax makes code less maintainable in several ways:</p>
 <ul>
-  <li> Type checkers and IDEs cannot accurately infer the actual runtime type of parameters, reducing the effectiveness of static analysis and
-  autocompletion </li>
-  <li> Developers reading the code must mentally separate the dependency injection mechanism from the actual parameter type </li>
-  <li> Mixing old and new syntax across a codebase creates inconsistency that increases cognitive load </li>
-  <li> Future FastAPI versions may deprecate or remove support for the old syntax, requiring migration work </li>
+  <li>Type checkers and IDEs cannot accurately infer the actual runtime type of parameters, reducing the effectiveness of static analysis and
+  autocompletion</li>
+  <li>Developers reading the code must mentally separate the dependency injection mechanism from the actual parameter type</li>
+  <li>Mixing old and new syntax across a codebase creates inconsistency that increases cognitive load</li>
+  <li>Future FastAPI versions may deprecate or remove support for the old syntax, requiring migration work</li>
 </ul>
 <h2>How to fix it in FastAPI</h2>
 <p>Replace dependency declarations in default values with <code>Annotated</code> type hints. Import <code>Annotated</code> from the
@@ -112,11 +112,11 @@ async def read_items(commons: Annotated[dict, Depends(common_parameters)]):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> FastAPI Documentation - Dependencies - <a href="https://fastapi.tiangolo.com/tutorial/dependencies/">Official FastAPI documentation on
-  dependency injection</a> </li>
-  <li> FastAPI Documentation - Annotated Dependencies - <a href="https://fastapi.tiangolo.com/tutorial/dependencies/#use-annotated-in-fastapi">FastAPI
-  guide on using Annotated for dependencies</a> </li>
-  <li> Python typing.Annotated - <a href="https://docs.python.org/3/library/typing.html#typing.Annotated">Python documentation for the Annotated type
-  hint</a> </li>
+  <li>FastAPI Documentation - Dependencies - <a href="https://fastapi.tiangolo.com/tutorial/dependencies/">Official FastAPI documentation on
+  dependency injection</a></li>
+  <li>FastAPI Documentation - Annotated Dependencies - <a href="https://fastapi.tiangolo.com/tutorial/dependencies/#use-annotated-in-fastapi">FastAPI
+  guide on using Annotated for dependencies</a></li>
+  <li>Python typing.Annotated - <a href="https://docs.python.org/3/library/typing.html#typing.Annotated">Python documentation for the Annotated type
+  hint</a></li>
 </ul>
 

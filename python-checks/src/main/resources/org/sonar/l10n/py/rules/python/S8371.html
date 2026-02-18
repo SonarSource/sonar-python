@@ -18,9 +18,9 @@ This creates a poor user experience and can make your application appear unrelia
 <p>Always use the <code>.get()</code> method instead of dictionary-style header access. This returns <code>None</code> for missing headers instead of
 raising an exception, and should be used consistently even when guards appear to protect the access. This consistent approach:</p>
 <ul>
-  <li> Prevents KeyError exceptions from missing headers </li>
-  <li> Makes the optional nature of headers explicit in the code </li>
-  <li> Reduces the risk of runtime errors during code evolution and refactoring </li>
+  <li>Prevents KeyError exceptions from missing headers</li>
+  <li>Makes the optional nature of headers explicit in the code</li>
+  <li>Reduces the risk of runtime errors during code evolution and refactoring</li>
 </ul>
 <p>Add appropriate checks to handle missing headers gracefully after retrieving them with <code>.get()</code>.</p>
 <h3>Code examples</h3>
@@ -51,10 +51,10 @@ def api_endpoint():
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Flask Request Headers Documentation - <a href="https://flask.palletsprojects.com/en/2.3.x/api/#flask.Request.headers">Official Flask
-  documentation for accessing request headers</a> </li>
-  <li> Werkzeug Headers Documentation - <a
+  <li>Flask Request Headers Documentation - <a href="https://flask.palletsprojects.com/en/2.3.x/api/#flask.Request.headers">Official Flask
+  documentation for accessing request headers</a></li>
+  <li>Werkzeug Headers Documentation - <a
   href="https://werkzeug.palletsprojects.com/en/2.3.x/datastructures/#werkzeug.datastructures.Headers">Documentation for the Headers class used by
-  Flask’s request.headers</a> </li>
+  Flask’s request.headers</a></li>
 </ul>
 

@@ -8,10 +8,10 @@ the parent router object. However, the FastAPI app has already completed its reg
 routes.</p>
 <p>This creates a situation where:</p>
 <ul>
-  <li> The child router’s endpoints exist in the parent router’s internal structure </li>
-  <li> The FastAPI app doesn’t know about these endpoints </li>
-  <li> Requests to these endpoints will return 404 errors </li>
-  <li> The endpoints won’t appear in the automatic API documentation </li>
+  <li>The child router’s endpoints exist in the parent router’s internal structure</li>
+  <li>The FastAPI app doesn’t know about these endpoints</li>
+  <li>Requests to these endpoints will return 404 errors</li>
+  <li>The endpoints won’t appear in the automatic API documentation</li>
 </ul>
 <p>The issue is particularly subtle because no error or warning is raised. The code runs without complaints, but the endpoints simply don’t work. This
 can lead to confusion during development and testing, as the routes appear to be properly defined in the code but are mysteriously unavailable at
@@ -19,10 +19,10 @@ runtime.</p>
 <h3>What is the potential impact?</h3>
 <p>When child router endpoints are not properly registered:</p>
 <ul>
-  <li> API endpoints return 404 errors even though they are defined in the code </li>
-  <li> The automatic API documentation (Swagger UI/ReDoc) will not show the missing endpoints </li>
-  <li> Integration tests may fail unexpectedly </li>
-  <li> Client applications will be unable to access the affected endpoints </li>
+  <li>API endpoints return 404 errors even though they are defined in the code</li>
+  <li>The automatic API documentation (Swagger UI/ReDoc) will not show the missing endpoints</li>
+  <li>Integration tests may fail unexpectedly</li>
+  <li>Client applications will be unable to access the affected endpoints</li>
 </ul>
 <p>This can cause significant debugging time as the code structure appears correct, but the runtime behavior doesn’t match expectations. In
 production, this could mean critical API functionality is unavailable to users.</p>
@@ -113,9 +113,9 @@ app.include_router(api_router)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> FastAPI - Bigger Applications - <a href="https://fastapi.tiangolo.com/tutorial/bigger-applications/">Official FastAPI documentation on
-  structuring larger applications with multiple routers</a> </li>
-  <li> FastAPI APIRouter Reference - <a href="https://fastapi.tiangolo.com/reference/apirouter/">API reference for the APIRouter class and its
-  methods</a> </li>
+  <li>FastAPI - Bigger Applications - <a href="https://fastapi.tiangolo.com/tutorial/bigger-applications/">Official FastAPI documentation on
+  structuring larger applications with multiple routers</a></li>
+  <li>FastAPI APIRouter Reference - <a href="https://fastapi.tiangolo.com/reference/apirouter/">API reference for the APIRouter class and its
+  methods</a></li>
 </ul>
 

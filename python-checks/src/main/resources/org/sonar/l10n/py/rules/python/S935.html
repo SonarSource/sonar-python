@@ -8,15 +8,15 @@ object.</p>
 type. Calls to a special method will throw a <code>TypeError</code> if its return type is incorrect.</p>
 <p>An issue will be raised when one of the following methods doesn’t return the indicated type:</p>
 <ul>
-  <li> <code>__bool__</code> method should return bool </li>
-  <li> <code>__index__</code> method should return integer </li>
-  <li> <code>__repr__</code> method should return string </li>
-  <li> <code>__str__</code> method should return string </li>
-  <li> <code>__bytes__</code> method should return bytes </li>
-  <li> <code>__hash__</code> method should return integer </li>
-  <li> <code>__format__</code> method should return string </li>
-  <li> <code>__getnewargs__</code> method should return tuple </li>
-  <li> <code>__getnewargs_ex__</code> method should return something which is of the form tuple(tuple, dict) </li>
+  <li><code>__bool__</code> method should return bool</li>
+  <li><code>__index__</code> method should return integer</li>
+  <li><code>__repr__</code> method should return string</li>
+  <li><code>__str__</code> method should return string</li>
+  <li><code>__bytes__</code> method should return bytes</li>
+  <li><code>__hash__</code> method should return integer</li>
+  <li><code>__format__</code> method should return string</li>
+  <li><code>__getnewargs__</code> method should return tuple</li>
+  <li><code>__getnewargs_ex__</code> method should return something which is of the form tuple(tuple, dict)</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Make sure to return a value of the same type as defined in the Python documentation for each special method.</p>
@@ -42,9 +42,9 @@ print(bool(obj1))
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Data Model Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special method names</a>
-  </li>
-  <li> Python Object Serialization Documentation - <a href="https://docs.python.org/3/library/pickle.html#pickling-class-instances">Pickling Class
-  Instances</a> </li>
+  <li>Python Data Model Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special method
+  names</a></li>
+  <li>Python Object Serialization Documentation - <a href="https://docs.python.org/3/library/pickle.html#pickling-class-instances">Pickling Class
+  Instances</a></li>
 </ul>
 

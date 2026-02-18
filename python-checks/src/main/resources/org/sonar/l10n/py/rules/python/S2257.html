@@ -3,7 +3,7 @@ been protected. Standard algorithms like <code>Argon2PasswordHasher</code>, <cod
 <p>This rule tracks creation of <code>BasePasswordHasher</code> subclasses for Django applications.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> Use a standard algorithm instead of creating a custom one. </li>
+  <li>Use a standard algorithm instead of creating a custom one.</li>
 </ul>
 <h2>Sensitive Code Example</h2>
 <pre>
@@ -12,9 +12,9 @@ class CustomPasswordHasher(BasePasswordHasher):  # Sensitive
 </pre>
 <h2>See</h2>
 <ul>
-  <li> OWASP - <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">Top 10 2021 Category A2 - Cryptographic Failures</a> </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
-  Exposure</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/327">CWE-327 - Use of a Broken or Risky Cryptographic Algorithm</a> </li>
+  <li>OWASP - <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">Top 10 2021 Category A2 - Cryptographic Failures</a></li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
+  Exposure</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/327">CWE-327 - Use of a Broken or Risky Cryptographic Algorithm</a></li>
 </ul>
 

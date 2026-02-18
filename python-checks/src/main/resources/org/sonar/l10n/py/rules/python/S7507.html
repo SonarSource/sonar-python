@@ -9,9 +9,9 @@ the standard <code>dict</code> constructor.</p>
 <p>Providing the factory using the keyword <code>default_factory=…​</code>, as in <code>defaultdict(default_factory=list)</code>, is therefore
 incorrect and leads to unexpected behavior:</p>
 <ul>
-  <li> It does <strong>not</strong> set the default factory for missing keys. The <code>defaultdict</code> behaves like a regular <code>dict</code> in
-  this regard and will raise a <code>KeyError</code> when a missing key is accessed. </li>
-  <li> It <strong>does</strong> initialize the dictionary with a single key-value pair: <code>{'default_factory': list}</code>. </li>
+  <li>It does <strong>not</strong> set the default factory for missing keys. The <code>defaultdict</code> behaves like a regular <code>dict</code> in
+  this regard and will raise a <code>KeyError</code> when a missing key is accessed.</li>
+  <li>It <strong>does</strong> initialize the dictionary with a single key-value pair: <code>{'default_factory': list}</code>.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>To fix this issue correctly initialize the <code>defaultdict</code> with a default factory by providing the factory callable as the first
@@ -29,6 +29,6 @@ d1 = defaultdict(int) # Compliant
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/collections.html#collections.defaultdict">collections.defaultdict</a> </li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/collections.html#collections.defaultdict">collections.defaultdict</a></li>
 </ul>
 

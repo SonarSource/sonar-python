@@ -7,10 +7,10 @@ Lambda from returning a valid response to the client.</p>
 <h2>How to fix it</h2>
 <p>Convert non-JSON-serializable objects to their string representation or to JSON-serializable types before returning them:</p>
 <ul>
-  <li> For <code>datetime</code> objects: Convert to ISO format strings using <code>.isoformat()</code> </li>
-  <li> For sets: Convert to lists using <code>list(set_object)</code> </li>
-  <li> For custom objects: convert them to dictionaries using the <code>__dict__</code> field, <code>dataclasses.asdict(…​)</code> for dataclasses or
-  a custom <code>todict()</code> method. </li>
+  <li>For <code>datetime</code> objects: Convert to ISO format strings using <code>.isoformat()</code></li>
+  <li>For sets: Convert to lists using <code>list(set_object)</code></li>
+  <li>For custom objects: convert them to dictionaries using the <code>__dict__</code> field, <code>dataclasses.asdict(…​)</code> for dataclasses or a
+  custom <code>todict()</code> method.</li>
 </ul>
 <p>See the following examples for more details on how to handle custom classes:</p>
 <pre>
@@ -61,11 +61,12 @@ def lambda_handler(event, context):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> AWS Documentation - <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html#python-handler-return">Define Lambda function
-  handler in Python </a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/json.html">json — JSON encoder and decoder</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#object.<em>dict</em>">object.__dict__ field</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/datetime.html#datetime.date.isoformat">datetime.date.isoformat()</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/dataclasses.html#dataclasses.asdict">dateclasses.asdict()</a> </li>
+  <li>AWS Documentation - <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html#python-handler-return">Define Lambda function
+  handler in Python </a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/json.html">json — JSON encoder and decoder</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#object.&lt;em&gt;dict&lt;/em&gt;">object.__dict__
+  field</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/datetime.html#datetime.date.isoformat">datetime.date.isoformat()</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/dataclasses.html#dataclasses.asdict">dateclasses.asdict()</a></li>
 </ul>
 

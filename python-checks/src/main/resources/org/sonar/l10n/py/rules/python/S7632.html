@@ -14,19 +14,19 @@ reduces confidence in the analysis results.</p>
 <p>Fix the syntax of issue suppression comments to follow the correct format.</p>
 <p>For <code># NOSONAR</code>:</p>
 <ul>
-  <li> Use <code># NOSONAR</code> alone to suppress all issues on the line </li>
-  <li> Use <code># NOSONAR()</code> with empty parentheses to suppress all issues </li>
-  <li> Use <code># NOSONAR(ruleKey1, ruleKey2)</code> to suppress specific rules </li>
-  <li> Don’t use redundant commas in the parentheses, e.g. <code># NOSONAR(,)</code> </li>
-  <li> The rule keys should only consist of alphanumeric characters, like <code>S7632</code> or <code>NoSonar</code> </li>
-  <li> Close all parentheses properly </li>
+  <li>Use <code># NOSONAR</code> alone to suppress all issues on the line</li>
+  <li>Use <code># NOSONAR()</code> with empty parentheses to suppress all issues</li>
+  <li>Use <code># NOSONAR(ruleKey1, ruleKey2)</code> to suppress specific rules</li>
+  <li>Don’t use redundant commas in the parentheses, e.g. <code># NOSONAR(,)</code></li>
+  <li>The rule keys should only consist of alphanumeric characters, like <code>S7632</code> or <code>NoSonar</code></li>
+  <li>Close all parentheses properly</li>
 </ul>
 <p>For <code># noqa</code>:</p>
 <ul>
-  <li> Use <code># noqa</code> alone to suppress all issues on the line </li>
-  <li> Use <code># noqa: rule1,rule2</code> to suppress specific rules (with or without spaces after colon) </li>
-  <li> Don’t use redundant commas in the comma-separated lists, e.g. <code># noqa: ,rule1</code> </li>
-  <li> Don’t forget the colon (<code>:</code>) between <code>noqa</code> and the rule ID, and don’t use other punctuation </li>
+  <li>Use <code># noqa</code> alone to suppress all issues on the line</li>
+  <li>Use <code># noqa: rule1,rule2</code> to suppress specific rules (with or without spaces after colon)</li>
+  <li>Don’t use redundant commas in the comma-separated lists, e.g. <code># noqa: ,rule1</code></li>
+  <li>Don’t forget the colon (<code>:</code>) between <code>noqa</code> and the rule ID, and don’t use other punctuation</li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -52,8 +52,8 @@ def example():
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> SonarQube documentation - <a href="https://docs.sonarqube.org/latest/user-guide/issues/#header-4">Managing your code issues</a> </li>
-  <li> Flake8 documentation - <a href="https://flake8.pycqa.org/en/latest/user/violations.html#in-line-ignoring-errors">In-line Ignoring Errors</a>
-  </li>
+  <li>SonarQube documentation - <a href="https://docs.sonarqube.org/latest/user-guide/issues/#header-4">Managing your code issues</a></li>
+  <li>Flake8 documentation - <a href="https://flake8.pycqa.org/en/latest/user/violations.html#in-line-ignoring-errors">In-line Ignoring
+  Errors</a></li>
 </ul>
 

@@ -2,14 +2,14 @@
 are an easy way to grant large privileges to predefined groups or users.</p>
 <p>The following canned ACLs are security-sensitive:</p>
 <ul>
-  <li> <code>PUBLIC_READ</code>, <code>PUBLIC_READ_WRITE</code> grant respectively "read" and "read and write" privileges to everyone in the world
-  (<code>AllUsers</code> group). </li>
-  <li> <code>AUTHENTICATED_READ</code> grants "read" privilege to all authenticated users (<code>AuthenticatedUsers</code> group). </li>
+  <li><code>PUBLIC_READ</code>, <code>PUBLIC_READ_WRITE</code> grant respectively "read" and "read and write" privileges to everyone in the world
+  (<code>AllUsers</code> group).</li>
+  <li><code>AUTHENTICATED_READ</code> grants "read" privilege to all authenticated users (<code>AuthenticatedUsers</code> group).</li>
 </ul>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> The S3 bucket stores sensitive data. </li>
-  <li> The S3 bucket is not used to store static resources of websites (images, css …​). </li>
+  <li>The S3 bucket stores sensitive data.</li>
+  <li>The S3 bucket is not used to store static resources of websites (images, css …​).</li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
@@ -41,12 +41,12 @@ s3deploy.BucketDeployment(self, "DeployWebsite",
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl">AWS Documentation</a> - Access control list (ACL)
-  overview (canned ACLs) </li>
-  <li> <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html">AWS Documentation</a> - Controlling access to a bucket with
-  user policies </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/732">CWE-732 - Incorrect Permission Assignment for Critical Resource</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a> </li>
-  <li> <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html">AWS CDK version 2</a> - Class Bucket (construct) </li>
+  <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl">AWS Documentation</a> - Access control list (ACL)
+  overview (canned ACLs)</li>
+  <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html">AWS Documentation</a> - Controlling access to a bucket with
+  user policies</li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/732">CWE-732 - Incorrect Permission Assignment for Critical Resource</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a></li>
+  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html">AWS CDK version 2</a> - Class Bucket (construct)</li>
 </ul>
 

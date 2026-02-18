@@ -5,9 +5,9 @@ operation should be cancelled. These exceptions are not typical errors indicatin
 terminate its execution prematurely and perform necessary cleanup.</p>
 <p>When a task is cancelled, the framework typically injects this cancellation exception into it. The task is expected to:</p>
 <ul>
-  <li> Catch this specific cancellation exception. </li>
-  <li> Perform any urgent and brief cleanup actions (e.g., releasing locks or other resources). </li>
-  <li> Re-raise the cancellation exception. </li>
+  <li>Catch this specific cancellation exception.</li>
+  <li>Perform any urgent and brief cleanup actions (e.g., releasing locks or other resources).</li>
+  <li>Re-raise the cancellation exception.</li>
 </ul>
 <p>If a cancellation exception is caught and not re-raised (e.g., it’s suppressed with a <code>pass</code> statement, only logged, the handler returns
 normally, or a different exception is raised instead), the cancellation signal is effectively "swallowed".</p>
@@ -17,15 +17,15 @@ continue running parts of its code after the <code>except</code> block, which is
 <h3>What is the potential impact?</h3>
 <p>Suppressing cancellation exceptions can lead to significant problems:</p>
 <ul>
-  <li> <strong>Unresponsive Applications</strong>: Tasks ignoring cancellation may run indefinitely, making the application unresponsive to shutdown
-  signals. </li>
-  <li> <strong>Resource Leaks</strong>: Tasks not stopping properly can leave resources (files, connections, locks) unreleased, leading to resource
-  exhaustion. </li>
-  <li> <strong>Incorrect State</strong>: Partial execution of cancelled operations can leave the application in an inconsistent state, risking data
-  corruption. </li>
-  <li> <strong>Debugging Difficulties</strong>: Troubleshooting why tasks continue running or why shutdown fails becomes challenging. </li>
-  <li> <strong>Broken Abstractions</strong>: Reliable cancellation is essential for async patterns and libraries; ignoring it breaks timeouts and task
-  groups. </li>
+  <li><strong>Unresponsive Applications</strong>: Tasks ignoring cancellation may run indefinitely, making the application unresponsive to shutdown
+  signals.</li>
+  <li><strong>Resource Leaks</strong>: Tasks not stopping properly can leave resources (files, connections, locks) unreleased, leading to resource
+  exhaustion.</li>
+  <li><strong>Incorrect State</strong>: Partial execution of cancelled operations can leave the application in an inconsistent state, risking data
+  corruption.</li>
+  <li><strong>Debugging Difficulties</strong>: Troubleshooting why tasks continue running or why shutdown fails becomes challenging.</li>
+  <li><strong>Broken Abstractions</strong>: Reliable cancellation is essential for async patterns and libraries; ignoring it breaks timeouts and task
+  groups.</li>
 </ul>
 <h2>How to fix it in Asyncio</h2>
 <p>If you need to catch cancellation exceptions for cleanup purposes, make sure to re-raise them after your cleanup code.</p>
@@ -123,8 +123,8 @@ While <code>asyncio.shield()</code> (or library equivalents) can protect critica
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#task-cancellation">Task Cancellation</a> </li>
-  <li> Trio documentation - <a href="https://trio.readthedocs.io/en/latest/reference-core.html#trio.Cancelled">Exceptions and warnings</a> </li>
-  <li> AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/cancellation.html#timeouts">Timeouts</a> </li>
+  <li>Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#task-cancellation">Task Cancellation</a></li>
+  <li>Trio documentation - <a href="https://trio.readthedocs.io/en/latest/reference-core.html#trio.Cancelled">Exceptions and warnings</a></li>
+  <li>AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/cancellation.html#timeouts">Timeouts</a></li>
 </ul>
 

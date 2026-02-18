@@ -3,22 +3,22 @@
 <p>Exceptions handlers (<code>except</code>) are evaluated in the order they are written. Once a match is found, the evaluation stops.</p>
 <p>In some contexts, an except block is dead code as it will never catch any exception:</p>
 <ul>
-  <li> If there is a handler for a base class followed by a handler for class derived from that base class, the second handler will never trigger: The
-  handler for the base class will match the derived class, and will be the only executed handler. </li>
-  <li> When multiple <code>except</code> statements try to catch the same exception class, only the first one will be executed. </li>
-  <li> In Python 3, <code>BaseException</code> is the parent of every exception class. When a <code>BaseException</code> is caught by an
+  <li>If there is a handler for a base class followed by a handler for class derived from that base class, the second handler will never trigger: The
+  handler for the base class will match the derived class, and will be the only executed handler.</li>
+  <li>When multiple <code>except</code> statements try to catch the same exception class, only the first one will be executed.</li>
+  <li>In Python 3, <code>BaseException</code> is the parent of every exception class. When a <code>BaseException</code> is caught by an
   <code>except</code> clause, none of the subsequent <code>except</code> statement will catch anything. This is true as well for the bare except
-  statement (<code>except:</code>). </li>
+  statement (<code>except:</code>).</li>
 </ul>
 <h2>How to fix it</h2>
 <p>When using multiple <code>except</code> statements, make sure to:</p>
 <ul>
-  <li> Order the <code>except</code> blocks from the most specialzed exception to the most generic, i.e when wanting to catch a
+  <li>Order the <code>except</code> blocks from the most specialzed exception to the most generic, i.e when wanting to catch a
   <code>FloatingPointError</code> and an <code>ArithemticError</code>, as <code>FloatingPointError</code> is a subclass of
-  <code>ArithmeticError</code>, the first <code>except</code> statement should be <code>FloatingPointError</code>. </li>
-  <li> Catch the same exception only once. </li>
-  <li> Catch a <code>BaseException</code> only once with either an <code>except BaseException:</code> statement or a bare <code>except:</code>
-  statement, as the two statements are equivalent. </li>
+  <code>ArithmeticError</code>, the first <code>except</code> statement should be <code>FloatingPointError</code>.</li>
+  <li>Catch the same exception only once.</li>
+  <li>Catch a <code>BaseException</code> only once with either an <code>except BaseException:</code> statement or a bare <code>except:</code>
+  statement, as the two statements are equivalent.</li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -75,7 +75,7 @@ meant to be caught. See <a href="https://www.python.org/dev/peps/pep-0352/#excep
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">The <code>try</code> statement</a> </li>
-  <li> <a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy">Exception hierarchy</a> </li>
+  <li><a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">The <code>try</code> statement</a></li>
+  <li><a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy">Exception hierarchy</a></li>
 </ul>
 

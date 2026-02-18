@@ -5,28 +5,28 @@ application.</p>
 hidden web request and as web browsers automatically include cookies, the actions can be authenticated and sensitive.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> The web application uses cookies to authenticate users. </li>
-  <li> There exist sensitive operations in the web application that can be performed when the user is authenticated. </li>
-  <li> The state / resources of the web application can be modified by doing HTTP POST or HTTP DELETE requests for example. </li>
+  <li>The web application uses cookies to authenticate users.</li>
+  <li>There exist sensitive operations in the web application that can be performed when the user is authenticated.</li>
+  <li>The state / resources of the web application can be modified by doing HTTP POST or HTTP DELETE requests for example.</li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> Protection against CSRF attacks is strongly recommended:
+  <li>Protection against CSRF attacks is strongly recommended:
     <ul>
-      <li> to be activated by default for all <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Safe_methods">unsafe HTTP
-      methods</a>. </li>
-      <li> implemented, for example, with an unguessable CSRF token </li>
-    </ul>  </li>
-  <li> Of course all sensitive operations should not be performed with <a
+      <li>to be activated by default for all <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Safe_methods">unsafe HTTP
+      methods</a>.</li>
+      <li>implemented, for example, with an unguessable CSRF token</li>
+    </ul></li>
+  <li>Of course all sensitive operations should not be performed with <a
   href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Safe_methods">safe HTTP</a> methods like <code>GET</code> which are designed to be
-  used only for information retrieval. </li>
+  used only for information retrieval.</li>
 </ul>
 <h2>Sensitive Code Example</h2>
 <p>For a <a href="https://docs.djangoproject.com/fr/3.0/ref/csrf/">Django</a> application, the code is sensitive when,</p>
 <ul>
-  <li> <code>django.middleware.csrf.CsrfViewMiddleware</code> is not used in the <a
-  href="https://docs.djangoproject.com/en/3.0/topics/settings/">Django settings</a>: </li>
+  <li><code>django.middleware.csrf.CsrfViewMiddleware</code> is not used in the <a
+  href="https://docs.djangoproject.com/en/3.0/topics/settings/">Django settings</a>:</li>
 </ul>
 <pre>
 MIDDLEWARE = [
@@ -39,7 +39,7 @@ MIDDLEWARE = [
 ] # Sensitive: django.middleware.csrf.CsrfViewMiddleware is missing
 </pre>
 <ul>
-  <li> the CSRF protection is disabled on a view: </li>
+  <li>the CSRF protection is disabled on a view:</li>
 </ul>
 <pre>
 @csrf_exempt # Sensitive
@@ -48,14 +48,14 @@ def example(request):
 </pre>
 <p>For a <a href="https://flask-wtf.readthedocs.io/en/latest/csrf.html">Flask</a> application, the code is sensitive when,</p>
 <ul>
-  <li> the <code>WTF_CSRF_ENABLED</code> setting is set to <code>false</code>: </li>
+  <li>the <code>WTF_CSRF_ENABLED</code> setting is set to <code>false</code>:</li>
 </ul>
 <pre>
 app = Flask(__name__)
 app.config['WTF_CSRF_ENABLED'] = False # Sensitive
 </pre>
 <ul>
-  <li> the application doesn’t use the <code>CSRFProtect</code> module: </li>
+  <li>the application doesn’t use the <code>CSRFProtect</code> module:</li>
 </ul>
 <pre>
 app = Flask(__name__) # Sensitive: CSRFProtect is missing
@@ -65,7 +65,7 @@ def hello_world():
     return 'Hello, World!'
 </pre>
 <ul>
-  <li> the CSRF protection is disabled on a view: </li>
+  <li>the CSRF protection is disabled on a view:</li>
 </ul>
 <pre>
 app = Flask(__name__)
@@ -78,7 +78,7 @@ def example():
     return 'example '
 </pre>
 <ul>
-  <li> the CSRF protection is disabled on a form: </li>
+  <li>the CSRF protection is disabled on a form:</li>
 </ul>
 <pre>
 class unprotectedForm(FlaskForm):
@@ -91,7 +91,7 @@ class unprotectedForm(FlaskForm):
 <h2>Compliant Solution</h2>
 <p>For a <a href="https://docs.djangoproject.com/fr/3.0/ref/csrf/">Django</a> application,</p>
 <ul>
-  <li> it is recommended to protect all the views with <code>django.middleware.csrf.CsrfViewMiddleware</code>: </li>
+  <li>it is recommended to protect all the views with <code>django.middleware.csrf.CsrfViewMiddleware</code>:</li>
 </ul>
 <pre>
 MIDDLEWARE = [
@@ -105,7 +105,7 @@ MIDDLEWARE = [
 ]
 </pre>
 <ul>
-  <li> and to not disable the CSRF protection on specific views: </li>
+  <li>and to not disable the CSRF protection on specific views:</li>
 </ul>
 <pre>
 def example(request): # Compliant
@@ -113,8 +113,7 @@ def example(request): # Compliant
 </pre>
 <p>For a <a href="https://flask-wtf.readthedocs.io/en/latest/csrf.html">Flask</a> application,</p>
 <ul>
-  <li> the <code>CSRFProtect</code> module should be used (and not disabled further with <code>WTF_CSRF_ENABLED</code> set to <code>false</code>):
-  </li>
+  <li>the <code>CSRFProtect</code> module should be used (and not disabled further with <code>WTF_CSRF_ENABLED</code> set to <code>false</code>):</li>
 </ul>
 <pre>
 app = Flask(__name__)
@@ -122,7 +121,7 @@ csrf = CSRFProtect()
 csrf.init_app(app) # Compliant
 </pre>
 <ul>
-  <li> and it is recommended to not disable the CSRF protection on specific views or forms: </li>
+  <li>and it is recommended to not disable the CSRF protection on specific views or forms:</li>
 </ul>
 <pre>
 @app.route('/example/', methods=['POST']) # Compliant
@@ -138,14 +137,14 @@ class unprotectedForm(FlaskForm):
 </pre>
 <h2>See</h2>
 <ul>
-  <li> OWASP - <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">Top 10 2021 Category A1 - Broken Access Control</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/352">CWE-352 - Cross-Site Request Forgery (CSRF)</a> </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">Top 10 2017 Category A6 - Security
-  Misconfiguration</a> </li>
-  <li> OWASP - <a href="https://owasp.org/www-community/attacks/csrf">Cross-Site Request Forgery</a> </li>
-  <li> STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222603">Application Security and
-  Development: V-222603</a> - The application must protect from Cross-Site Request Forgery (CSRF) vulnerabilities. </li>
-  <li> PortSwigger - <a href="https://portswigger.net/research/web-storage-the-lesser-evil-for-session-tokens">Web storage: the lesser evil for
-  session tokens</a> </li>
+  <li>OWASP - <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">Top 10 2021 Category A1 - Broken Access Control</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/352">CWE-352 - Cross-Site Request Forgery (CSRF)</a></li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">Top 10 2017 Category A6 - Security
+  Misconfiguration</a></li>
+  <li>OWASP - <a href="https://owasp.org/www-community/attacks/csrf">Cross-Site Request Forgery</a></li>
+  <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222603">Application Security and
+  Development: V-222603</a> - The application must protect from Cross-Site Request Forgery (CSRF) vulnerabilities.</li>
+  <li>PortSwigger - <a href="https://portswigger.net/research/web-storage-the-lesser-evil-for-session-tokens">Web storage: the lesser evil for session
+  tokens</a></li>
 </ul>
 

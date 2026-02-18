@@ -8,16 +8,16 @@ to counterintuitive behavior that can confuse developers and introduce bugs.</p>
 <p>In asyncio’s TaskGroup, control flow statements don’t take immediate effect. Instead, they wait for all tasks in the group to complete before
 executing. This can lead to:</p>
 <ul>
-  <li> Unexpected delays when tasks run longer than anticipated </li>
-  <li> Code that appears to exit early but actually continues running </li>
-  <li> Potential infinite loops if background tasks never complete </li>
+  <li>Unexpected delays when tasks run longer than anticipated</li>
+  <li>Code that appears to exit early but actually continues running</li>
+  <li>Potential infinite loops if background tasks never complete</li>
 </ul>
 <h4>Lost return values in Nurseries</h4>
 <p>In Trio and AnyIO nurseries, return values can be lost if other tasks in the nursery raise exceptions:</p>
 <ul>
-  <li> When a background task raises an exception, the return value from the main flow is discarded </li>
-  <li> The nursery’s exception handling takes precedence over return values </li>
-  <li> Silent data loss that’s difficult to debug </li>
+  <li>When a background task raises an exception, the return value from the main flow is discarded</li>
+  <li>The nursery’s exception handling takes precedence over return values</li>
+  <li>Silent data loss that’s difficult to debug</li>
 </ul>
 <h2>How to fix it in Asyncio</h2>
 <p>Move the control flow statement outside the TaskGroup or Nursery block, and use the appropriate cancellation mechanism before exiting the
@@ -110,12 +110,11 @@ async def process():
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#task-groups">Task Groups</a> </li>
-  <li> Trio documentation - <a href="https://trio.readthedocs.io/en/latest/reference-core.html#nurseries-and-spawning">Nurseries and spawning</a>
-  </li>
-  <li> AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/tasks.html#creating-and-managing-tasks">Creating and managing tasks</a>
-  </li>
-  <li> Trio issue #1493 - <a href="https://github.com/python-trio/trio/issues/1493">Returning a value from inside a nursery block behaves
-  counterintuitively</a> </li>
+  <li>Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#task-groups">Task Groups</a></li>
+  <li>Trio documentation - <a href="https://trio.readthedocs.io/en/latest/reference-core.html#nurseries-and-spawning">Nurseries and spawning</a></li>
+  <li>AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/tasks.html#creating-and-managing-tasks">Creating and managing
+  tasks</a></li>
+  <li>Trio issue #1493 - <a href="https://github.com/python-trio/trio/issues/1493">Returning a value from inside a nursery block behaves
+  counterintuitively</a></li>
 </ul>
 

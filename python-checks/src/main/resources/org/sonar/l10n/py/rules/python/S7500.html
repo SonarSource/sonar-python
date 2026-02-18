@@ -4,9 +4,9 @@
 copies elements from one collection to another without any transformation is less readable than using the respective constructor directly.</p>
 <p>Therefore, when a comprehension is only copying elements, use the appropriate constructor instead:</p>
 <ul>
-  <li> Replace <code>[x for x in iterable]</code> with <code>list(iterable)</code> </li>
-  <li> Replace <code>{x for x in iterable}</code> with <code>set(iterable)</code> </li>
-  <li> Replace <code>{k: v for k, v in iterable.items()}</code> with <code>dict(iterable)</code> </li>
+  <li>Replace <code>[x for x in iterable]</code> with <code>list(iterable)</code></li>
+  <li>Replace <code>{x for x in iterable}</code> with <code>set(iterable)</code></li>
+  <li>Replace <code>{k: v for k, v in iterable.items()}</code> with <code>dict(iterable)</code></li>
 </ul>
 <h2>How to fix it</h2>
 <p>Replace comprehensions that copy elements from one collection to another with the respective constructor.</p>
@@ -24,8 +24,8 @@ list(some_list) # Compliant
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#dict">dict()</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#list">list()</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#set">set()</a> </li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#dict">dict()</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#list">list()</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#set">set()</a></li>
 </ul>
 

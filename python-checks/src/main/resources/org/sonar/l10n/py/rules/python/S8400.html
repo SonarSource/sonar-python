@@ -6,21 +6,21 @@ the <code>Response</code> class to ensure an empty body.</p>
 <p>In FastAPI, if you define an endpoint with <code>status_code=204</code> but don’t explicitly handle the response, the framework may send a small
 response body (typically 4 bytes containing <code>null</code>). This violates the HTTP specification and can cause issues with:</p>
 <ul>
-  <li> HTTP clients that strictly validate response formats </li>
-  <li> Proxies and caching layers that expect empty bodies for 204 responses </li>
-  <li> API consumers relying on standard HTTP behavior </li>
+  <li>HTTP clients that strictly validate response formats</li>
+  <li>Proxies and caching layers that expect empty bodies for 204 responses</li>
+  <li>API consumers relying on standard HTTP behavior</li>
 </ul>
 <p>The problem occurs because FastAPI’s default serialization behavior attempts to serialize the return value, even when the status code indicates no
 content should be sent.</p>
 <h3>What is the potential impact?</h3>
 <p>This issue can lead to:</p>
 <ul>
-  <li> <strong>Protocol violations</strong>: The response doesn’t comply with HTTP specifications, which may cause unexpected behavior in strict HTTP
-  clients </li>
-  <li> <strong>Interoperability problems</strong>: Some clients, proxies, or middleware may reject or mishandle responses that have a body with a 204
-  status code </li>
-  <li> <strong>Confusion for API consumers</strong>: Developers using your API may be confused by receiving content when the status code explicitly
-  indicates there should be none </li>
+  <li><strong>Protocol violations</strong>: The response doesn’t comply with HTTP specifications, which may cause unexpected behavior in strict HTTP
+  clients</li>
+  <li><strong>Interoperability problems</strong>: Some clients, proxies, or middleware may reject or mishandle responses that have a body with a 204
+  status code</li>
+  <li><strong>Confusion for API consumers</strong>: Developers using your API may be confused by receiving content when the status code explicitly
+  indicates there should be none</li>
 </ul>
 <h2>How to fix it in FastAPI</h2>
 <p>Return <code>None</code> explicitly from the endpoint function. This ensures FastAPI sends an empty response body.</p>
@@ -74,11 +74,11 @@ def archive_resource(id: int):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> FastAPI Response Status Code - <a href="https://fastapi.tiangolo.com/advanced/response-change-status-code/">Official FastAPI documentation on
-  changing response status codes</a> </li>
-  <li> FastAPI Custom Response - <a href="https://fastapi.tiangolo.com/advanced/custom-response/">Official FastAPI documentation on custom
-  responses</a> </li>
-  <li> RFC 7231 - HTTP/1.1 Semantics: 204 No Content - <a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">HTTP specification defining the 204
-  No Content status code</a> </li>
+  <li>FastAPI Response Status Code - <a href="https://fastapi.tiangolo.com/advanced/response-change-status-code/">Official FastAPI documentation on
+  changing response status codes</a></li>
+  <li>FastAPI Custom Response - <a href="https://fastapi.tiangolo.com/advanced/custom-response/">Official FastAPI documentation on custom
+  responses</a></li>
+  <li>RFC 7231 - HTTP/1.1 Semantics: 204 No Content - <a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">HTTP specification defining the 204
+  No Content status code</a></li>
 </ul>
 

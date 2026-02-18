@@ -4,10 +4,10 @@
 <code>Weekmask</code> is used to customize valid business days.</p>
 <p><code>Weekmask</code> can be specified in several formats:</p>
 <ol>
-  <li> As an array of 7 <code>1</code> or <code>0</code> values, e.g. <code>[1, 1, 1, 1, 1, 0, 0]</code> </li>
-  <li> As a string of 7 <code>1</code> or <code>0</code> characters, e.g. <code>"1111100"</code> </li>
-  <li> As a string with abbreviations of valid days from this list: <code>Mon Tue Wed Thu Fri Sat Sun</code>, e.g. <code>"Mon Tue Wed Thu Fri"</code>
-  </li>
+  <li>As an array of 7 <code>1</code> or <code>0</code> values, e.g. <code>[1, 1, 1, 1, 1, 0, 0]</code></li>
+  <li>As a string of 7 <code>1</code> or <code>0</code> characters, e.g. <code>"1111100"</code></li>
+  <li>As a string with abbreviations of valid days from this list: <code>Mon Tue Wed Thu Fri Sat Sun</code>, e.g. <code>"Mon Tue Wed Thu
+  Fri"</code></li>
 </ol>
 <p>Setting an incorrect <code>weekmask</code> leads to <code>ValueError</code>.</p>
 <h2>How to fix it</h2>
@@ -28,8 +28,8 @@ offset = np.busday_offset('2012-05', 1, roll='forward', weekmask='0111100') # OK
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Numpy documentation - <a href="https://numpy.org/doc/stable/reference/arrays.datetime.html#business-day-functionality">Business Day
-  Functionality</a> </li>
-  <li> Numpy documentation - <a href="https://numpy.org/doc/stable/reference/arrays.datetime.html#custom-weekmasks">Custom Weekmasks</a> </li>
+  <li>Numpy documentation - <a href="https://numpy.org/doc/stable/reference/arrays.datetime.html#business-day-functionality">Business Day
+  Functionality</a></li>
+  <li>Numpy documentation - <a href="https://numpy.org/doc/stable/reference/arrays.datetime.html#custom-weekmasks">Custom Weekmasks</a></li>
 </ul>
 

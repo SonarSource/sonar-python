@@ -2,34 +2,34 @@
 <h2>Why is this an issue?</h2>
 <p>Data science and machine learning tasks make extensive use of random number generation. It may, for example, be used for:</p>
 <ul>
-  <li> Model initialization
+  <li>Model initialization
     <ul>
-      <li> Randomness is used to initialize the parameters of machine learning models. Initializing parameters with random values helps to break
+      <li>Randomness is used to initialize the parameters of machine learning models. Initializing parameters with random values helps to break
       symmetry and prevents models from getting stuck in local optima during training. By providing a random starting point, the model can explore
-      different regions of the parameter space and potentially find better solutions. </li>
-    </ul>  </li>
-  <li> Regularization techniques
+      different regions of the parameter space and potentially find better solutions.</li>
+    </ul></li>
+  <li>Regularization techniques
     <ul>
-      <li> Randomness is used to introduce noise into the learning process. Techniques like dropout and data augmentation use random numbers to
+      <li>Randomness is used to introduce noise into the learning process. Techniques like dropout and data augmentation use random numbers to
       randomly drop or modify features or samples during training. This helps to regularize the model, reduce overfitting, and improve generalization
-      performance. </li>
-    </ul>  </li>
-  <li> Cross-validation and bootstrapping
+      performance.</li>
+    </ul></li>
+  <li>Cross-validation and bootstrapping
     <ul>
-      <li> Randomness is often used in techniques like cross-validation, where data is split into multiple subsets. By using a predictable seed, the
-      same data splits can be generated, allowing for fair and consistent model evaluation. </li>
-    </ul>  </li>
-  <li> Hyperparameter tuning
+      <li>Randomness is often used in techniques like cross-validation, where data is split into multiple subsets. By using a predictable seed, the
+      same data splits can be generated, allowing for fair and consistent model evaluation.</li>
+    </ul></li>
+  <li>Hyperparameter tuning
     <ul>
-      <li> Many machine learning algorithms have hyperparameters that need to be tuned for optimal performance. Randomness is often used in techniques
+      <li>Many machine learning algorithms have hyperparameters that need to be tuned for optimal performance. Randomness is often used in techniques
       like random search or Bayesian optimization to explore the hyperparameter space. By using a fixed seed, the same set of hyperparameters can be
-      explored, making the tuning process more controlled and reproducible. </li>
-    </ul>  </li>
-  <li> Simulation and synthetic data generation
+      explored, making the tuning process more controlled and reproducible.</li>
+    </ul></li>
+  <li>Simulation and synthetic data generation
     <ul>
-      <li> Randomness is often used in techniques such as data augmentation and synthetic data generation to generate diverse and realistic datasets.
-      </li>
-    </ul>  </li>
+      <li>Randomness is often used in techniques such as data augmentation and synthetic data generation to generate diverse and realistic
+      datasets.</li>
+    </ul></li>
 </ul>
 <p>To ensure that results are reproducible, it is important to use a predictable seed in this context.</p>
 <p>The preferred way to do this in <code>numpy</code> is by instantiating a <code>Generator</code> object, typically through
@@ -83,18 +83,18 @@ X_train, _, y_train, _ = train_test_split(X, y, random_state=rng.integers(1)) # 
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> NumPy documentation - <a href="https://numpy.org/neps/nep-0019-rng-policy.html">NEP 19 RNG Policy</a> </li>
-  <li> Scikit-learn documentation - <a href="https://scikit-learn.org/stable/glossary.html#term-random_state">Glossary random_state</a> </li>
-  <li> Scikit-learn documentation - <a href="https://scikit-learn.org/stable/common_pitfalls.html#controlling-randomness">Controlling randomness</a>
-  </li>
+  <li>NumPy documentation - <a href="https://numpy.org/neps/nep-0019-rng-policy.html">NEP 19 RNG Policy</a></li>
+  <li>Scikit-learn documentation - <a href="https://scikit-learn.org/stable/glossary.html#term-random_state">Glossary random_state</a></li>
+  <li>Scikit-learn documentation - <a href="https://scikit-learn.org/stable/common_pitfalls.html#controlling-randomness">Controlling
+  randomness</a></li>
 </ul>
 <h3>Standards</h3>
 <ul>
-  <li> STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222642">Application Security and
-  Development: V-222642</a> - The application must not contain embedded authentication data. </li>
+  <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222642">Application Security and
+  Development: V-222642</a> - The application must not contain embedded authentication data.</li>
 </ul>
 <h3>Related rules</h3>
 <ul>
-  <li> {rule:python:S6711} - <code>numpy.random.Generator</code> should be preferred to <code>numpy.random.RandomState</code> </li>
+  <li>{rule:python:S6711} - <code>numpy.random.Generator</code> should be preferred to <code>numpy.random.RandomState</code></li>
 </ul>
 

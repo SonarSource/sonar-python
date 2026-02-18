@@ -2,9 +2,9 @@
 <p>In some cases a comparison with operators <code>==</code>, or <code>!=</code> will always return True or always return False. When this happens,
 the comparison and all its dependent code can simply be removed. This includes:</p>
 <ul>
-  <li> comparing unrelated builtin types such as string and integer. </li>
-  <li> comparing class instances which do not implement <code>__eq__</code> or <code>__ne__</code> to an object of a different type (builtin or from
-  an unrelated class which also doesn’t implement <code>__eq__</code> or <code>__ne__</code>). </li>
+  <li>comparing unrelated builtin types such as string and integer.</li>
+  <li>comparing class instances which do not implement <code>__eq__</code> or <code>__ne__</code> to an object of a different type (builtin or from an
+  unrelated class which also doesn’t implement <code>__eq__</code> or <code>__ne__</code>).</li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre>

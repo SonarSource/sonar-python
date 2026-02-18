@@ -12,25 +12,25 @@ Using unvalidated user input to set those fields&nbsp;might allow attackers to i
 Although modern libraries are filtering new line character by default, user data used in&nbsp;email "headers" should always be validated.</p>
 <p>In the past, it has led to the following vulnerabilities:</p>
 <ul>
-  <li> <a href="https://www.cve.org/CVERecord?id=CVE-2017-9801">CVE-2017-9801</a> </li>
-  <li> <a href="https://www.cve.org/CVERecord?id=CVE-2016-4803">CVE-2016-4803</a> </li>
+  <li><a href="https://www.cve.org/CVERecord?id=CVE-2017-9801">CVE-2017-9801</a></li>
+  <li><a href="https://www.cve.org/CVERecord?id=CVE-2016-4803">CVE-2016-4803</a></li>
 </ul>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> Unvalidated user input are used to set email headers. </li>
-  <li> Email content contains data provided by users and it is not sanitized. </li>
-  <li> Email recipient list or body are based on user inputs. </li>
+  <li>Unvalidated user input are used to set email headers.</li>
+  <li>Email content contains data provided by users and it is not sanitized.</li>
+  <li>Email recipient list or body are based on user inputs.</li>
 </ul>
 <p>You are at risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> Use an email library which sanitizes headers (Flask-Mail or django.core.mail). </li>
-  <li> Use html escape functions to sanitize every piece of data used to in the email body. </li>
-  <li> Verify application logic to make sure that email base feature can not be abuse to:
+  <li>Use an email library which sanitizes headers (Flask-Mail or django.core.mail).</li>
+  <li>Use html escape functions to sanitize every piece of data used to in the email body.</li>
+  <li>Verify application logic to make sure that email base feature can not be abuse to:
     <ul>
-      <li> Send arbitrary email for spamming or fishing </li>
-      <li> Disclose sensitive email content </li>
-    </ul>  </li>
+      <li>Send arbitrary email for spamming or fishing</li>
+      <li>Disclose sensitive email content</li>
+    </ul></li>
 </ul>
 <h2>Sensitive Code Example</h2>
 <p>smtplib</p>
@@ -62,10 +62,10 @@ def send(subject, msg, from_email, to_email):
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://www.damonkohler.com/2008/12/email-injection.html">Email Injection</a> </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A1_2017-Injection">Top 10 2017 Category A1 - Injection</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/93">CWE-93 - Improper Neutralization of CRLF Sequences ('CRLF Injection')</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/80">CWE-80 - Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic
-  XSS)</a> </li>
+  <li><a href="https://www.damonkohler.com/2008/12/email-injection.html">Email Injection</a></li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A1_2017-Injection">Top 10 2017 Category A1 - Injection</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/93">CWE-93 - Improper Neutralization of CRLF Sequences ('CRLF Injection')</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/80">CWE-80 - Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic
+  XSS)</a></li>
 </ul>
 

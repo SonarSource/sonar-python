@@ -6,16 +6,16 @@ when they are used to spawn only a single task that doesn’t need the nursery/T
 complexity.</p>
 <p>The main issues with using TaskGroup and Nursery for single tasks are:</p>
 <ul>
-  <li> <strong>Unnecessary overhead</strong>: Creating a nursery or TaskGroup involves additional setup and teardown that serves no purpose when only
-  one task is spawned </li>
-  <li> <strong>Misleading code</strong>: The presence of a nursery suggests that multiple tasks will be managed, which can be confusing </li>
-  <li> <strong>Reduced readability</strong>: The structured concurrency syntax is more verbose than a simple function call </li>
+  <li><strong>Unnecessary overhead</strong>: Creating a nursery or TaskGroup involves additional setup and teardown that serves no purpose when only
+  one task is spawned</li>
+  <li><strong>Misleading code</strong>: The presence of a nursery suggests that multiple tasks will be managed, which can be confusing</li>
+  <li><strong>Reduced readability</strong>: The structured concurrency syntax is more verbose than a simple function call</li>
 </ul>
 <h3>What is the potential impact?</h3>
 <ul>
-  <li> <strong>Performance</strong>: Minor performance overhead from unnecessary nursery/TaskGroup creation </li>
-  <li> <strong>Maintainability</strong>: Code is more complex than necessary, making it harder to understand and maintain </li>
-  <li> <strong>Code clarity</strong>: The intent of the code is obscured by unnecessary structured concurrency constructs </li>
+  <li><strong>Performance</strong>: Minor performance overhead from unnecessary nursery/TaskGroup creation</li>
+  <li><strong>Maintainability</strong>: Code is more complex than necessary, making it harder to understand and maintain</li>
+  <li><strong>Code clarity</strong>: The intent of the code is obscured by unnecessary structured concurrency constructs</li>
 </ul>
 <h2>How to fix it in Asyncio</h2>
 <p>Replace the TaskGroup with a direct function call when the TaskGroup body contains only a single <code>create_task()</code> call.</p>
@@ -100,10 +100,9 @@ async def main():
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#task-groups">Task Groups</a> </li>
-  <li> Trio documentation - <a href="https://trio.readthedocs.io/en/latest/reference-core.html#nurseries-and-spawning">Nurseries and spawning</a>
-  </li>
-  <li> AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/tasks.html#creating-and-managing-tasks">Creating and managing tasks</a>
-  </li>
+  <li>Asyncio documentation - <a href="https://docs.python.org/3/library/asyncio-task.html#task-groups">Task Groups</a></li>
+  <li>Trio documentation - <a href="https://trio.readthedocs.io/en/latest/reference-core.html#nurseries-and-spawning">Nurseries and spawning</a></li>
+  <li>AnyIO documentation - <a href="https://anyio.readthedocs.io/en/stable/tasks.html#creating-and-managing-tasks">Creating and managing
+  tasks</a></li>
 </ul>
 

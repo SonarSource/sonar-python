@@ -2,22 +2,22 @@
 or disruption.</p>
 <p>Depending on the component, inbound access from the Internet can be enabled via:</p>
 <ul>
-  <li> a boolean value that explicitly allows access to the public network. </li>
-  <li> the assignment of a public IP address. </li>
-  <li> database firewall rules that allow public IP ranges. </li>
+  <li>a boolean value that explicitly allows access to the public network.</li>
+  <li>the assignment of a public IP address.</li>
+  <li>database firewall rules that allow public IP ranges.</li>
 </ul>
 <p>Deciding to allow public access may happen for various reasons such as for quick maintenance, time saving, or by accident.</p>
 <p>This decision increases the likelihood of attacks on the organization, such as:</p>
 <ul>
-  <li> data breaches. </li>
-  <li> intrusions into the infrastructure to permanently steal from it. </li>
-  <li> and various malicious traffic, such as DDoS attacks. </li>
+  <li>data breaches.</li>
+  <li>intrusions into the infrastructure to permanently steal from it.</li>
+  <li>and various malicious traffic, such as DDoS attacks.</li>
 </ul>
 <h2>Ask Yourself Whether</h2>
 <p>This cloud resource:</p>
 <ul>
-  <li> should be publicly accessible to any Internet user. </li>
-  <li> requires inbound traffic from the Internet to function properly. </li>
+  <li>should be publicly accessible to any Internet user.</li>
+  <li>requires inbound traffic from the Internet to function properly.</li>
 </ul>
 <p>There is a risk if you answered no to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
@@ -181,14 +181,14 @@ rds.CfnDBInstance(
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html">AWS Documentation</a> - Amazon EC2 instance IP
-  addressing </li>
-  <li> <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.PublicPrivate.html">AWS Documentation</a> - Public and
-  private replication instances </li>
-  <li> <a href="https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html">AWS Documentation</a> - VPC Peering </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/668">CWE-668 - Exposure of Resource to Wrong Sphere</a> </li>
-  <li> STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222620">Application Security and
-  Development: V-222620</a> - Application web servers must be on a separate network segment from the application and database servers. </li>
+  <li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html">AWS Documentation</a> - Amazon EC2 instance IP
+  addressing</li>
+  <li><a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.PublicPrivate.html">AWS Documentation</a> - Public and
+  private replication instances</li>
+  <li><a href="https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html">AWS Documentation</a> - VPC Peering</li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/668">CWE-668 - Exposure of Resource to Wrong Sphere</a></li>
+  <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222620">Application Security and
+  Development: V-222620</a> - Application web servers must be on a separate network segment from the application and database servers.</li>
 </ul>
 

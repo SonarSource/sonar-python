@@ -9,10 +9,10 @@ automatically generated API documentation.</p>
 <p>This creates a gap between what your API actually does and what the documentation says it does. API consumers looking at your OpenAPI specification
 will not see these error responses, making it harder for them to:</p>
 <ul>
-  <li> Understand all possible outcomes when calling the endpoint </li>
-  <li> Write proper error handling code in their applications </li>
-  <li> Debug issues when they encounter undocumented error responses </li>
-  <li> Trust the completeness of your API documentation </li>
+  <li>Understand all possible outcomes when calling the endpoint</li>
+  <li>Write proper error handling code in their applications</li>
+  <li>Debug issues when they encounter undocumented error responses</li>
+  <li>Trust the completeness of your API documentation</li>
 </ul>
 <p>The <code>responses</code> parameter in FastAPI endpoint decorators exists specifically to document all possible HTTP responses, including error
 cases. By documenting your <code>HTTPException</code> raises, you ensure that the OpenAPI specification accurately reflects your API’s behavior,
@@ -20,14 +20,14 @@ improving the developer experience for anyone consuming your API.</p>
 <h3>What is the potential impact?</h3>
 <p>When HTTPException responses are not documented:</p>
 <ul>
-  <li> <strong>API documentation is incomplete</strong>: The automatically generated OpenAPI/Swagger documentation will not show all possible error
-  responses, misleading API consumers about the endpoint’s behavior. </li>
-  <li> <strong>Integration difficulties</strong>: Developers integrating with your API may be surprised by undocumented error responses, leading to
-  incomplete error handling and potential runtime failures. </li>
-  <li> <strong>Reduced trust</strong>: Incomplete documentation reduces confidence in the API and may lead developers to question what other behaviors
-  are undocumented. </li>
-  <li> <strong>Maintenance challenges</strong>: Without explicit documentation, it becomes harder to track what error responses an endpoint can
-  return, making refactoring and maintenance more difficult. </li>
+  <li><strong>API documentation is incomplete</strong>: The automatically generated OpenAPI/Swagger documentation will not show all possible error
+  responses, misleading API consumers about the endpoint’s behavior.</li>
+  <li><strong>Integration difficulties</strong>: Developers integrating with your API may be surprised by undocumented error responses, leading to
+  incomplete error handling and potential runtime failures.</li>
+  <li><strong>Reduced trust</strong>: Incomplete documentation reduces confidence in the API and may lead developers to question what other behaviors
+  are undocumented.</li>
+  <li><strong>Maintenance challenges</strong>: Without explicit documentation, it becomes harder to track what error responses an endpoint can return,
+  making refactoring and maintenance more difficult.</li>
 </ul>
 <h2>How to fix it in FastAPI</h2>
 <p>Add the <code>responses</code> parameter to your endpoint decorator, documenting each HTTPException status code that can be raised. The key should
@@ -108,11 +108,11 @@ def home():
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> FastAPI - Additional Responses in OpenAPI - <a href="https://fastapi.tiangolo.com/advanced/additional-responses/">Official FastAPI
-  documentation on how to document additional responses including error responses</a> </li>
-  <li> FastAPI - Handling Errors - <a href="https://fastapi.tiangolo.com/tutorial/handling-errors/">Official FastAPI documentation on error handling
-  and HTTPException</a> </li>
-  <li> OpenAPI Specification - Responses Object - <a href="https://swagger.io/specification/#responses-object">OpenAPI specification for documenting
-  API responses</a> </li>
+  <li>FastAPI - Additional Responses in OpenAPI - <a href="https://fastapi.tiangolo.com/advanced/additional-responses/">Official FastAPI documentation
+  on how to document additional responses including error responses</a></li>
+  <li>FastAPI - Handling Errors - <a href="https://fastapi.tiangolo.com/tutorial/handling-errors/">Official FastAPI documentation on error handling
+  and HTTPException</a></li>
+  <li>OpenAPI Specification - Responses Object - <a href="https://swagger.io/specification/#responses-object">OpenAPI specification for documenting
+  API responses</a></li>
 </ul>
 

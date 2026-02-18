@@ -4,10 +4,10 @@
 sequence of characters will make <code>open</code> fail with a <code>ValueError</code>.</p>
 <p>A valid mode:</p>
 <ul>
-  <li> should contain only one of the following characters: <code>r</code> (read), <code>w</code> (write), <code>a</code> (append), <code>x</code>
-  (create). </li>
-  <li> should contain zero or one of the following characters: <code>t</code> (text), <code>b</code> (binary). </li>
-  <li> should contain zero or one <code>+</code> character (open for updating) </li>
+  <li>should contain only one of the following characters: <code>r</code> (read), <code>w</code> (write), <code>a</code> (append), <code>x</code>
+  (create).</li>
+  <li>should contain zero or one of the following characters: <code>t</code> (text), <code>b</code> (binary).</li>
+  <li>should contain zero or one <code>+</code> character (open for updating)</li>
 </ul>
 <p>For example: <code>a</code>, <code>rt</code>, <code>r+</code> and <code>w+b</code> are valid modes.</p>
 <p>If no <code>t</code> or <code>b</code> character is provided the mode will default to <code>t</code> (text), so specifying <code>r</code> is
@@ -36,6 +36,6 @@ with open("test.txt", "a") as f:
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3/library/functions.html#open">The <code>open</code> builtin function</a> </li>
+  <li><a href="https://docs.python.org/3/library/functions.html#open">The <code>open</code> builtin function</a></li>
 </ul>
 

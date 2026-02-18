@@ -9,9 +9,9 @@ Using the regular <code>with</code> statement in an async context bypasses this 
 <h3>What is the potential impact?</h3>
 <p>Not following the proper async pattern can lead to:</p>
 <ul>
-  <li> <strong>Inconsistent async usage</strong>: Mixing synchronous and asynchronous patterns reduces code clarity </li>
-  <li> <strong>Missed async opportunities</strong>: Asynchronous setup and cleanup operations may not be utilized </li>
-  <li> <strong>Maintenance issues</strong>: Future developers may not understand the intended async behavior </li>
+  <li><strong>Inconsistent async usage</strong>: Mixing synchronous and asynchronous patterns reduces code clarity</li>
+  <li><strong>Missed async opportunities</strong>: Asynchronous setup and cleanup operations may not be utilized</li>
+  <li><strong>Maintenance issues</strong>: Future developers may not understand the intended async behavior</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Use the <code>async with</code> statement when working with asynchronous context managers.</p>
@@ -58,19 +58,19 @@ async def main():
 <h3>How does this work?</h3>
 <p>The <code>async with</code> statement provides the proper way to use asynchronous context managers:</p>
 <ol>
-  <li> It calls the <code>__aenter__</code> method and awaits its result </li>
-  <li> Assigns the returned value to the variable after <code>as</code> (if specified) </li>
-  <li> Executes the code block within the context </li>
-  <li> Calls the <code>__aexit__</code> method and awaits its completion, even if an exception occurs </li>
+  <li>It calls the <code>__aenter__</code> method and awaits its result</li>
+  <li>Assigns the returned value to the variable after <code>as</code> (if specified)</li>
+  <li>Executes the code block within the context</li>
+  <li>Calls the <code>__aexit__</code> method and awaits its completion, even if an exception occurs</li>
 </ol>
 <p>This ensures consistency with the async programming model and allows the context manager to perform any necessary asynchronous operations during
 setup and cleanup.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#asynchronous-context-managers">Asynchronous Context
-  Managers</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-async-with-statement">The async with statement</a>
-  </li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#asynchronous-context-managers">Asynchronous Context
+  Managers</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-async-with-statement">The async with
+  statement</a></li>
 </ul>
 
