@@ -611,6 +611,25 @@ class PythonSensorTest {
   }
 
   @Test
+  void test_ncloc_metric_on_test_file() {
+    activeRules = new ActiveRulesBuilder().build();
+    PythonInputFile inputFile = inputFile(FILE_TEST_FILE, Type.TEST);
+    sensor().execute(context);
+
+    assertThat(context.measure(inputFile.wrappedFile().key(), CoreMetrics.NCLOC).value()).isEqualTo(3);
+  }
+
+  @Test
+  void test_ncloc_metric_not_saved_on_test_file_in_sonarlint() {
+    context.setRuntime(SONARLINT_RUNTIME);
+    activeRules = new ActiveRulesBuilder().build();
+    PythonInputFile inputFile = inputFile(FILE_TEST_FILE, Type.TEST);
+    sensor().execute(context);
+
+    assertThat(context.measure(inputFile.wrappedFile().key(), CoreMetrics.NCLOC)).isNull();
+  }
+
+  @Test
   void test_failFast_triggered_on_main_files() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()

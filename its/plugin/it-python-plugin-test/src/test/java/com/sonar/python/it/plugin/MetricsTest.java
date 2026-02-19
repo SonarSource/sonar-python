@@ -75,7 +75,11 @@ public class MetricsTest {
   @Test
   void project_level() {
     // Size
-    assertThat(getProjectMeasureAsInt(NCLOC)).isEqualTo(6);
+    assertThat(getProjectMeasureAsInt(NCLOC)).satisfiesAnyOf(
+      nclocValue -> assertThat(nclocValue).isEqualTo(6),
+      // FIXME SONAR-27110 Can be removed when ITs will be run with SQS 2026.2+
+      nclocValue -> assertThat(nclocValue).isEqualTo(20)
+    );
     assertThat(getProjectMeasureAsInt(LINES)).isEqualTo(13);
     assertThat(getProjectMeasureAsInt(FILES)).isEqualTo(2);
     assertThat(getProjectMeasureAsInt(STATEMENTS)).isEqualTo(6);
@@ -83,7 +87,11 @@ public class MetricsTest {
     assertThat(getProjectMeasureAsInt(CLASSES)).isZero();
     // Documentation
     assertThat(getProjectMeasureAsInt(COMMENT_LINES)).isOne();
-    assertThat(getProjectMeasureAsDouble(COMMENT_LINES_DENSITY)).isEqualTo(14.3, OFFSET);
+    assertThat(getProjectMeasureAsDouble(COMMENT_LINES_DENSITY))
+      .satisfiesAnyOf( 
+        density -> assertThat(density).isEqualTo(14.3, OFFSET),
+        // FIXME SONAR-27110 Can be removed when ITs will be run with SQS 2026.2+
+        density -> assertThat(density).isEqualTo(4.8, OFFSET));
     // Complexity
     assertThat(getProjectMeasureAsDouble(COMPLEXITY)).isEqualTo(3.0, OFFSET);
     assertThat(getProjectMeasureAsDouble(COGNITIVE_COMPLEXITY)).isEqualTo(3.0, OFFSET);

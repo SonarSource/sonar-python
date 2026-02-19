@@ -135,9 +135,13 @@ public class PythonScanner extends Scanner {
 
     noSonarLineInfoCollector.collect(pythonFile.key(), visitorContext.rootTree());
 
-    if (fileType == InputFile.Type.MAIN && visitorContext.rootTree() != null) {
-      pushTokens(inputFile, visitorContext);
-      measuresRepository.save(inputFile, visitorContext);
+    if (visitorContext.rootTree() != null) {
+      if (fileType == InputFile.Type.MAIN) {
+        pushTokens(inputFile, visitorContext);
+        measuresRepository.save(inputFile, visitorContext);
+      } else if (fileType == InputFile.Type.TEST) {
+        measuresRepository.saveNclocForTestFile(inputFile, visitorContext);
+      }
     }
 
     var issues = visitorContext.getIssues();

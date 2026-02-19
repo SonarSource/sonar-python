@@ -61,6 +61,14 @@ public class MeasuresRepository {
     }
   }
 
+  public void saveNclocForTestFile(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
+    if (!isInSonarLint) {
+      FileMetrics fileMetrics = new FileMetrics(visitorContext, isNotebook(inputFile));
+      int linesOfCode = fileMetrics.fileLinesVisitor().getLinesOfCode().size();
+      saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode);
+    }
+  }
+
   private void saveInternal(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
     FileMetrics fileMetrics = new FileMetrics(visitorContext, isNotebook(inputFile));
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
