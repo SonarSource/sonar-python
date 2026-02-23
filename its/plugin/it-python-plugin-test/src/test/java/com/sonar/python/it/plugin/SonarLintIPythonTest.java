@@ -16,6 +16,7 @@
  */
 package com.sonar.python.it.plugin;
 
+import com.sonar.orchestrator.locator.Locators;
 import com.sonar.python.it.PluginLocator;
 import com.sonar.python.it.TestsUtils;
 import java.io.IOException;
@@ -82,8 +83,9 @@ public class SonarLintIPythonTest {
       }
     };
     SonarLintLogger.setTarget(logOutput);
+    Locators locators = new Locators(TestsUtils.dynamicOrchestrator.getConfiguration());
     var pluginJarLocation = Set
-      .of(TestsUtils.dynamicOrchestrator.getConfiguration().locators().locate(PluginLocator.Plugins.PYTHON.get(PluginLocator.isEnterpriseTest())).toPath());
+      .of(locators.locate(PluginLocator.Plugins.PYTHON.get(PluginLocator.isEnterpriseTest())).toPath());
     var enabledLanguages = Set.of(SonarLanguage.IPYTHON);
     var pluginConfiguration = new PluginsLoader.Configuration(pluginJarLocation, enabledLanguages, false, Optional.empty());
     var pluginLoader = new PluginsLoader().load(pluginConfiguration, Set.of());

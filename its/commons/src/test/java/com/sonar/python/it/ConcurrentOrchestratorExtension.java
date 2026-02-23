@@ -25,7 +25,7 @@ import com.sonar.orchestrator.container.SonarDistribution;
 import com.sonar.orchestrator.locator.Locators;
 import com.sonar.orchestrator.server.StartupLogWatcher;
 import com.sonar.orchestrator.util.System2;
-import com.sonar.orchestrator.version.Version;
+import com.sonar.orchestrator.util.Version;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
@@ -66,9 +66,9 @@ public class ConcurrentOrchestratorExtension extends Orchestrator implements Bef
   }
 
   private void installSonarScanner() {
-    Locators locators = getConfiguration().locators();
+    Locators locators = new Locators(getConfiguration());
     Version version = Version.create(SonarScanner.DEFAULT_SCANNER_VERSION);
-    new SonarScannerInstaller(locators).install(version, getConfiguration().fileSystem().workspace());
+    new SonarScannerInstaller(locators).install(version, getConfiguration().fileSystem().workspace().toFile());
   }
 
 
