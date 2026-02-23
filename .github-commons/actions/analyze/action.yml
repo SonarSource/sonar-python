@@ -7,6 +7,10 @@ inputs:
   sonar-project-key:
     description: 'SonarQube project key'
     required: true
+  disable-caching:
+    description: 'Disable caching'
+    required: false
+    default: 'false'
 
 runs:
   using: 'composite'
@@ -20,3 +24,4 @@ runs:
         deploy: false
         sonar-platform: ${{ inputs.sonarqube-instance }}
         scanner-java-opts: '-Xmx1G'
+        disable-caching: ${{ inputs.disable-caching }}
