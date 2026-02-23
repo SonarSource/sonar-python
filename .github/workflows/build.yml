@@ -64,5 +64,6 @@ jobs:
         with:
           sonarqube-instance: ${{ matrix.sonarqube-instance }}
           sonar-project-key: ${{ matrix.sonar-project-key }}
+          disable-caching: true
 
            
