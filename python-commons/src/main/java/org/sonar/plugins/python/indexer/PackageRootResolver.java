@@ -70,14 +70,14 @@ public class PackageRootResolver {
    * @return list of fallback package root absolute paths
    */
   static List<String> resolveFallback(Configuration config, File baseDir) {
-    String[] sonarSources = config.getStringArray(SONAR_SOURCES_KEY);
-    if (sonarSources.length > 0) {
-      return toAbsolutePaths(Arrays.asList(sonarSources), baseDir);
-    }
-
     List<String> conventionalFolders = findConventionalFolders(baseDir);
     if (!conventionalFolders.isEmpty()) {
       return toAbsolutePaths(conventionalFolders, baseDir);
+    }
+
+    String[] sonarSources = config.getStringArray(SONAR_SOURCES_KEY);
+    if (sonarSources.length > 0) {
+      return toAbsolutePaths(Arrays.asList(sonarSources), baseDir);
     }
 
     return List.of(baseDir.getAbsolutePath());

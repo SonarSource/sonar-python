@@ -39,7 +39,8 @@ import javax.annotation.Nullable;
  * <p>Supports the following build systems:
  * <ul>
  *   <li>setuptools: {@code [tool.setuptools.packages.find] where = ["src"]}</li>
- *   <li>Poetry: {@code [tool.poetry] packages = [{from = "src", include = "pkg"}]}</li>
+ *   <li>Poetry: {@code [tool.poetry] packages = [{from = "src", include = "pkg"}]}
+ *       or auto-detects src/ layout when build-backend is poetry.core.masonry.api</li>
  *   <li>Hatchling: {@code [tool.hatch.build.targets.wheel] sources = ["src"]}</li>
  *   <li>uv_build: {@code [build-system] build-backend = "uv_build"} or {@code [tool.uv.build-backend] module-root = "src"} - auto-detects src/ layout by convention</li>
  *   <li>PDM: {@code [tool.pdm] package-dir = "src"}</li>
@@ -130,7 +131,7 @@ public class PyProjectTomlSourceRoots {
         detectedBuildSystems.add(PackageResolutionResult.BuildSystem.SETUPTOOLS);
       }
 
-      List<String> poetryRoots = extractFromPoetry(configTool.poetry());
+      List<String> poetryRoots = extractFromPoetry(configTool.poetry(), config.buildSystem());
       if (!poetryRoots.isEmpty()) {
         sourceRoots.addAll(poetryRoots);
         detectedBuildSystems.add(PackageResolutionResult.BuildSystem.POETRY);
@@ -199,6 +200,16 @@ public class PyProjectTomlSourceRoots {
     return List.of();
   }
 
+  /**
+   * Checks if the build backend is Poetry (e.g., poetry.core.masonry.api).
+   */
+  private static boolean isPoetryBuildBackend(@Nullable BuildSystem buildSystem) {
+    if (buildSystem == null || buildSystem.buildBackend() == null) {
+      return false;
+    }
+    return buildSystem.buildBackend().contains("poetry");
+  }
+
   // === Setuptools ===
   // [tool.setuptools.packages.find]
   // where = ["src"]
@@ -213,16 +224,30 @@ public class PyProjectTomlSourceRoots {
   // === Poetry ===
   // [tool.poetry]
   // packages = [{ include = "mypackage", from = "src" }]
+  // Or auto-detects src/ layout when build-backend is poetry.core.masonry.api
 
-  private static List<String> extractFromPoetry(@Nullable Poetry poetry) {
-    if (poetry == null) {
-      return List.of();
+  private static List<String> extractFromPoetry(@Nullable Poetry poetry, @Nullable BuildSystem buildSystem) {
+    // First try to get explicit "from" paths from packages
+    if (poetry != null) {
+      List<String> explicitRoots = poetry.packages().stream()
+        .map(PoetryPackage::from)
+        .filter(from -> from != null && !from.isEmpty())
+        .distinct()
+        .toList();
+
+      if (!explicitRoots.isEmpty()) {
+        return explicitRoots;
+      }
     }
-    return poetry.packages().stream()
-      .map(PoetryPackage::from)
-      .filter(from -> from != null && !from.isEmpty())
-      .distinct()
-      .toList();
+
+    // If Poetry is the build backend but no explicit paths, use src-layout default
+    // Poetry auto-detects packages in src/ or project root; we default to src/
+    // and rely on legacy fallback for flat-layout projects
+    if (isPoetryBuildBackend(buildSystem)) {
+      return List.of("src");
+    }
+
+    return List.of();
   }
 
   // === Hatchling ===

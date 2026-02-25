@@ -193,6 +193,66 @@ class PyProjectTomlSourceRootsTest {
       """)).isEmpty();
   }
 
+  // === Poetry Auto-Detection ===
+
+  @Test
+  void extract_poetry_autoDetect_withBuildBackend_returnsSrc() {
+    assertThat(extract("""
+      [build-system]
+      build-backend = "poetry.core.masonry.api"
+      requires = ["poetry-core"]
+
+      [tool.poetry]
+      name = "mypackage"
+      version = "0.1.0"
+      """)).containsExactly("src");
+  }
+
+  @Test
+  void extract_poetry_autoDetect_emptyPackages_returnsSrc() {
+    assertThat(extract("""
+      [build-system]
+      build-backend = "poetry.core.masonry.api"
+      requires = ["poetry-core"]
+
+      [tool.poetry]
+      packages = []
+      """)).containsExactly("src");
+  }
+
+  @Test
+  void extract_poetry_autoDetect_packagesWithoutFrom_returnsSrc() {
+    assertThat(extract("""
+      [build-system]
+      build-backend = "poetry.core.masonry.api"
+      requires = ["poetry-core"]
+
+      [tool.poetry]
+      packages = [{ include = "mypackage" }]
+      """)).containsExactly("src");
+  }
+
+  @Test
+  void extract_poetry_explicitFrom_overridesAutoDetect() {
+    assertThat(extract("""
+      [build-system]
+      build-backend = "poetry.core.masonry.api"
+      requires = ["poetry-core"]
+
+      [tool.poetry]
+      packages = [{ include = "mypackage", from = "lib" }]
+      """)).containsExactly("lib");
+  }
+
+  @Test
+  void extract_poetry_noBuildBackend_noPackages_returnsEmpty() {
+    assertThat(extract("""
+      [tool.poetry]
+      name = "mypackage"
+      version = "0.1.0"
+      """)).isEmpty();
+  }
+
   // === Hatchling ===
 
   @Test
@@ -544,6 +604,22 @@ class PyProjectTomlSourceRootsTest {
     var result = extractWithBuildSystem("""
       [tool.poetry]
       packages = [{ include = "mypackage", from = "src" }]
+      """);
+
+    assertThat(result.relativeRoots()).containsExactly("src");
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.POETRY);
+  }
+
+  @Test
+  void extractWithBuildSystem_poetry_autoDetect_detectsBuildSystem() {
+    var result = extractWithBuildSystem("""
+      [build-system]
+      build-backend = "poetry.core.masonry.api"
+      requires = ["poetry-core"]
+
+      [tool.poetry]
+      name = "mypackage"
+      version = "0.1.0"
       """);
 
     assertThat(result.relativeRoots()).containsExactly("src");
