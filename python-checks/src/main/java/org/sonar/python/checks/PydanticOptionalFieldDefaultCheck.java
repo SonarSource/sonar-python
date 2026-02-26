@@ -67,30 +67,36 @@ public class PydanticOptionalFieldDefaultCheck extends PythonSubscriptionCheck {
     TypeAnnotation annotation = annotatedAssignment.annotation();
     Expression annotationExpr = annotation.expression();
 
-    if (!isOptionalType(annotationExpr, ctx)) {
-      return;
-    }
-
     Expression assignedValue = annotatedAssignment.assignedValue();
-
-    boolean hasNoDefault = assignedValue == null;
     boolean hasFieldWithEllipsis = assignedValue != null && isFieldCallWithEllipsis(ctx, assignedValue);
 
-    if (hasNoDefault || hasFieldWithEllipsis) {
+    if (isTypingOptional(annotationExpr, ctx)) {
+      // Optional[X]: raise when no default, or when Field(...) with ellipsis
+      if (assignedValue == null || hasFieldWithEllipsis) {
+        ctx.addIssue(annotationExpr, MESSAGE);
+      }
+    } else if (isNullableNonOptional(annotationExpr, ctx) && hasFieldWithEllipsis) {
+      // X | None or Union[X, None]: only raise when Field(...) with ellipsis
       ctx.addIssue(annotationExpr, MESSAGE);
     }
   }
 
-  private static boolean isOptionalType(Expression annotationExpr, SubscriptionContext ctx) {
+  private static boolean isTypingOptional(Expression annotationExpr, SubscriptionContext ctx) {
+    if (annotationExpr instanceof SubscriptionExpression subscriptionExpr) {
+      return IS_TYPING_OPTIONAL.isTrueFor(subscriptionExpr.object(), ctx);
+    }
+    return false;
+  }
+
+  private static boolean isNullableNonOptional(Expression annotationExpr, SubscriptionContext ctx) {
     // Case 1: T | None (BinaryExpression with BITWISE_OR)
     if (annotationExpr.is(Tree.Kind.BITWISE_OR)) {
-      BinaryExpression binaryExpr = (BinaryExpression) annotationExpr;
-      return containsNone(binaryExpr, ctx);
+      return containsNone((BinaryExpression) annotationExpr, ctx);
     }
 
-    // Case 2: Optional[T] or Union[T, None] (SubscriptionExpression)
+    // Case 2: Union[T, None] (SubscriptionExpression)
     if (annotationExpr instanceof SubscriptionExpression subscriptionExpr) {
-      return isOptionalOrUnionWithNone(subscriptionExpr, ctx);
+      return IS_TYPING_UNION.isTrueFor(subscriptionExpr.object(), ctx) && subscriptsContainNone(subscriptionExpr, ctx);
     }
 
     return false;
@@ -105,20 +111,6 @@ public class PydanticOptionalFieldDefaultCheck extends PythonSubscriptionCheck {
 
   private static boolean isNoneExpression(Expression expr, SubscriptionContext ctx) {
     return IS_NONE_TYPE.isTrueFor(expr, ctx);
-  }
-
-  private static boolean isOptionalOrUnionWithNone(SubscriptionExpression subscriptionExpr, SubscriptionContext ctx) {
-    Expression subscriptedObj = subscriptionExpr.object();
-
-    if (IS_TYPING_OPTIONAL.isTrueFor(subscriptedObj, ctx)) {
-      return true;
-    }
-
-    if (IS_TYPING_UNION.isTrueFor(subscriptedObj, ctx)) {
-      return subscriptsContainNone(subscriptionExpr, ctx);
-    }
-
-    return false;
   }
 
   private static boolean subscriptsContainNone(SubscriptionExpression subscriptionExpr, SubscriptionContext ctx) {

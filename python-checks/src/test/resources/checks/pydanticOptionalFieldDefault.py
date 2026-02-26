@@ -10,91 +10,9 @@ class UserModel(BaseModel):
     email: Optional[str]  # Noncompliant {{Add an explicit default value to this optional field.}}
 #          ^^^^^^^^^^^^^
 
-class ProfileModel(BaseModel):
-    bio: str | None  # Noncompliant
-#        ^^^^^^^^^^
-
 class SettingsModel(BaseModel):
     theme: Optional[str] = Field(...)  # Noncompliant
 #          ^^^^^^^^^^^^^
-
-class ArticleModel(BaseModel):
-    title: str
-    subtitle: Optional[str]  # Noncompliant
-    tags: list[str] | None  # Noncompliant
-
-class DataModel(BaseModel):
-    value: Union[str, None]  # Noncompliant
-
-class ComplexModel(BaseModel):
-    data: Union[str, int, None]  # Noncompliant
-
-# =====================
-# COMPLIANT CASES
-# =====================
-
-class UserModelCompliant(BaseModel):
-    name: str
-    email: Optional[str] = None  # Compliant
-
-class ProfileModelCompliant(BaseModel):
-    bio: str | None = None  # Compliant
-
-class SettingsModelCompliant(BaseModel):
-    theme: Optional[str] = Field(default=None)  # Compliant
-    priority: Optional[int] = Field(default=0)  # Compliant
-
-class RequiredModel(BaseModel):
-    required_field: str  # Compliant - not Optional
-    another_field: int = Field(...)  # Compliant - not Optional
-
-class ConfigModel(BaseModel):
-    timeout: Optional[int] = 30  # Compliant - has default
-
-class FactoryModel(BaseModel):
-    items: Optional[list] = Field(default_factory=list)  # Compliant
-
-class RegularClass:
-    value: Optional[str]  # Compliant - not a BaseModel
-
-# =====================
-# EDGE CASES
-# =====================
-
-class ComplexModelCompliant(BaseModel):
-    data: Union[str, int, None] = None  # Compliant
-
-class EmptyModel(BaseModel):
-    pass  # Compliant - no fields
-
-class OnlyRequiredModel(BaseModel):
-    id: int
-    name: str 
-
-# =====================
-# ADDITIONAL EDGE CASES FOR COVERAGE
-# =====================
-
-class NoneLeftModel(BaseModel):
-    value: None | str  # Noncompliant
-
-class NestedUnionLeftModel(BaseModel):
-    value: None | str | int  # Noncompliant
-
-class EmptyFieldModel(BaseModel):
-    value: Optional[str] = Field()  # Compliant - Field() with no ellipsis
-
-class FieldWithValueModel(BaseModel):
-    value: Optional[str] = Field(42)  # Compliant - first arg is not ellipsis
-
-class FieldWithKeywordFirstModel(BaseModel):
-    value: Optional[str] = Field(default=None)  # Compliant - default is specified
-
-class FieldEllipsisWithDefaultModel(BaseModel):
-    value: Optional[str] = Field(..., default=None)  # Compliant
-
-class FieldEllipsisWithFactoryModel(BaseModel):
-    value: Optional[list] = Field(..., default_factory=list)  # Compliant
 
 class ModelWithMethods(BaseModel):
     optional_field: Optional[str]  # Noncompliant
@@ -103,22 +21,101 @@ class ModelWithMethods(BaseModel):
     def some_method(self):
         pass
 
-    @classmethod
-    def class_method(cls):
-        pass
+# Field(...) with ellipsis always raises, even for X | None and Union[X, None]
 
-class MultiNestedModel(BaseModel):
-    left_none: None | str  # Noncompliant
-    right_none: str | None  # Noncompliant
-    deep_left: None | int | str  # Noncompliant
-    deep_right1: int | str | None  # Noncompliant
-    deep_right2: int | str | str | str  # Compliant
+class BitwiseOrWithFieldEllipsis(BaseModel):
+    value: str | None = Field(...)  # Noncompliant
+#          ^^^^^^^^^^
+
+class NoneLeftWithFieldEllipsis(BaseModel):
+    value: None | str = Field(...)  # Noncompliant
+#          ^^^^^^^^^^
+
+class UnionWithFieldEllipsis(BaseModel):
+    value: Union[str, None] = Field(...)  # Noncompliant
+#          ^^^^^^^^^^^^^^^^
+
+# =====================
+# COMPLIANT CASES
+# =====================
+
+class UserModelCompliant(BaseModel):
+    name: str
+    email: Optional[str] = None
+
+class ProfileModelCompliant(BaseModel):
+    bio: str | None = None
+
+class SettingsModelCompliant(BaseModel):
+    theme: Optional[str] = Field(default=None)
+    priority: Optional[int] = Field(default=0)
+
+class RequiredModel(BaseModel):
+    required_field: str
+    another_field: int = Field(...)  # not Optional, no issue
+
+class ConfigModel(BaseModel):
+    timeout: Optional[int] = 30
+
+class FactoryModel(BaseModel):
+    items: Optional[list] = Field(default_factory=list)
+
+class RegularClass:
+    value: Optional[str]  # not a BaseModel
+
+# X | None and Union[X, None] without default: not Optional[X], so no issue
+
+class BitwiseOrNoneCompliant(BaseModel):
+    reason: int | None
+
+class BitwiseOrNoneWithFieldDefaultCompliant(BaseModel):
+    title: str | None = Field(default=None)
+
+class NoneLeftCompliant(BaseModel):
+    description: None | str
+
+class UnionWithNoneCompliant(BaseModel):
+    data: Union[str, None]
+
+# =====================
+# EDGE CASES
+# =====================
+
+class ComplexModelCompliant(BaseModel):
+    data: Union[str, int, None] = None
+
+class EmptyModel(BaseModel):
+    pass
+
+class OnlyRequiredModel(BaseModel):
+    id: int
+    name: str
+
+class EmptyFieldModel(BaseModel):
+    value: Optional[str] = Field()
+
+class FieldWithValueModel(BaseModel):
+    value: Optional[str] = Field(42)
+
+class FieldWithKeywordFirstModel(BaseModel):
+    value: Optional[str] = Field(default=None)
+
+class FieldEllipsisWithDefaultModel(BaseModel):
+    value: Optional[str] = Field(..., default=None)
+
+class FieldEllipsisWithFactoryModel(BaseModel):
+    value: Optional[list] = Field(..., default_factory=list)
+
+class MultiNoneFieldCompliant(BaseModel):
+    deep_left: None | int | str
+    deep_right: int | str | None
+    no_none: int | str | str
 
 def custom_field():
     return None
 
 class CustomFieldModel(BaseModel):
-    value: Optional[str] = custom_field()  # Compliant - not pydantic.Field
+    value: Optional[str] = custom_field()
 
 class OtherSubscriptionModel(BaseModel):
-    value: list[str]  # Compliant
+    value: list[str]
