@@ -24,7 +24,6 @@ import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
 
@@ -74,9 +73,6 @@ public class FlaskRouteMethodsCheck extends PythonSubscriptionCheck {
       return true;
     }
 
-    return callExpr.arguments().stream()
-      .filter(UnpackingExpression.class::isInstance)
-      .map(UnpackingExpression.class::cast)
-      .anyMatch(unpacking -> "**".equals(unpacking.starToken().value()));
+    return callExpr.arguments().stream().anyMatch(TreeUtils::isDoubleStarExpression);
   }
 }

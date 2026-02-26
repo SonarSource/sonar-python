@@ -62,6 +62,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.api.PythonTokenType;
 
@@ -171,7 +172,7 @@ public class TreeUtils {
 
   @CheckForNull
   public static ClassDef getEnclosingClassDef(Tree tree) {
-    Tree enclosingClass = firstAncestorOfKind(tree, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF);
+    Tree enclosingClass = firstAncestorOfKind(tree, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA);
     if (enclosingClass instanceof ClassDef classDef) {
       return classDef;
     }
@@ -632,6 +633,21 @@ public class TreeUtils {
       .map(Name::symbolV2)
       .filter(Objects::nonNull)
       .collect(Collectors.toSet());
+  }
+
+  /**
+   * Checks if a tree node represents a double-star ({@code **}) expression.
+   * Supports both {@link Parameter} (e.g. {@code **kwargs} in function definitions)
+   * and {@link UnpackingExpression} (e.g. {@code **kwargs} in call arguments).
+   */
+  public static boolean isDoubleStarExpression(Tree tree) {
+    Token starToken = null;
+    if (tree instanceof Parameter parameter) {
+      starToken = parameter.starToken();
+    } else if (tree instanceof UnpackingExpression unpackingExpression) {
+      starToken = unpackingExpression.starToken();
+    }
+    return starToken != null && "**".equals(starToken.value());
   }
 
   private static final Pattern CONSTANT_NAME_PATTERN = Pattern.compile("^[_A-Z][A-Z0-9_]*$");

@@ -40,9 +40,11 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.PassStatement;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -921,6 +923,43 @@ class TreeUtilsTest {
 
     FunctionDef funcDefInner = PythonTestUtils.getFirstChild(fileInput, t -> t instanceof FunctionDef fd && "inner".equals(fd.name().name()));
     assertThat(TreeUtils.getEnclosingClassDef(funcDefInner)).isNull();
+  }
+
+  @Test
+  void test_isDoubleStarExpression() {
+    FileInput fileInput = PythonTestUtils.parse("""
+      def foo(*args, **kwargs): pass
+      bar(**x, *y)
+      """);
+
+    FunctionDef funcDef = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.FUNCDEF));
+    Parameter doubleStarParam = TreeUtils.nonTupleParameters(funcDef).stream()
+      .filter(p -> p.name() != null && "kwargs".equals(p.name().name()))
+      .findFirst().get();
+    Parameter singleStarParam = TreeUtils.nonTupleParameters(funcDef).stream()
+      .filter(p -> p.name() != null && "args".equals(p.name().name()))
+      .findFirst().get();
+
+    assertThat(TreeUtils.isDoubleStarExpression(doubleStarParam)).isTrue();
+    assertThat(TreeUtils.isDoubleStarExpression(singleStarParam)).isFalse();
+
+    CallExpression callExpr = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CALL_EXPR));
+    UnpackingExpression doubleStarUnpacking = callExpr.arguments().stream()
+      .filter(UnpackingExpression.class::isInstance)
+      .map(UnpackingExpression.class::cast)
+      .filter(u -> u.expression() instanceof Name name && "x".equals(name.name()))
+      .findFirst().get();
+    UnpackingExpression singleStarUnpacking = callExpr.arguments().stream()
+      .filter(UnpackingExpression.class::isInstance)
+      .map(UnpackingExpression.class::cast)
+      .filter(u -> u.expression() instanceof Name name && "y".equals(name.name()))
+      .findFirst().get();
+
+    assertThat(TreeUtils.isDoubleStarExpression(doubleStarUnpacking)).isTrue();
+    assertThat(TreeUtils.isDoubleStarExpression(singleStarUnpacking)).isFalse();
+
+    // A tree that is neither Parameter nor UnpackingExpression
+    assertThat(TreeUtils.isDoubleStarExpression(funcDef)).isFalse();
   }
 
   @Test

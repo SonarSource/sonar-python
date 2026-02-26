@@ -149,7 +149,7 @@ public class SetupPySourceRoots {
      */
     private void extractFromUnpackingArguments(CallExpression callExpression) {
       for (Argument argument : callExpression.arguments()) {
-        if (argument instanceof UnpackingExpression unpacking && "**".equals(unpacking.starToken().value())) {
+        if (argument instanceof UnpackingExpression unpacking && TreeUtils.isDoubleStarExpression(unpacking)) {
           Expression unpackedExpr = resolveExpression(unpacking.expression());
           if (unpackedExpr instanceof DictionaryLiteral dictLiteral) {
             extractFromSetupConfigDict(dictLiteral);
