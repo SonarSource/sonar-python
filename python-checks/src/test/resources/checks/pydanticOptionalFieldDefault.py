@@ -21,20 +21,6 @@ class ModelWithMethods(BaseModel):
     def some_method(self):
         pass
 
-# Field(...) with ellipsis always raises, even for X | None and Union[X, None]
-
-class BitwiseOrWithFieldEllipsis(BaseModel):
-    value: str | None = Field(...)  # Noncompliant
-#          ^^^^^^^^^^
-
-class NoneLeftWithFieldEllipsis(BaseModel):
-    value: None | str = Field(...)  # Noncompliant
-#          ^^^^^^^^^^
-
-class UnionWithFieldEllipsis(BaseModel):
-    value: Union[str, None] = Field(...)  # Noncompliant
-#          ^^^^^^^^^^^^^^^^
-
 # =====================
 # COMPLIANT CASES
 # =====================
@@ -52,7 +38,7 @@ class SettingsModelCompliant(BaseModel):
 
 class RequiredModel(BaseModel):
     required_field: str
-    another_field: int = Field(...)  # not Optional, no issue
+    another_field: int = Field(...)
 
 class ConfigModel(BaseModel):
     timeout: Optional[int] = 30
@@ -61,12 +47,13 @@ class FactoryModel(BaseModel):
     items: Optional[list] = Field(default_factory=list)
 
 class RegularClass:
-    value: Optional[str]  # not a BaseModel
-
-# X | None and Union[X, None] without default: not Optional[X], so no issue
+    value: Optional[str]
 
 class BitwiseOrNoneCompliant(BaseModel):
     reason: int | None
+
+class BitwiseOrNoneWithFieldEllipsisCompliant(BaseModel):
+    bio: str | None = Field(...)
 
 class BitwiseOrNoneWithFieldDefaultCompliant(BaseModel):
     title: str | None = Field(default=None)
@@ -74,8 +61,14 @@ class BitwiseOrNoneWithFieldDefaultCompliant(BaseModel):
 class NoneLeftCompliant(BaseModel):
     description: None | str
 
+class NoneLeftWithFieldEllipsisCompliant(BaseModel):
+    value: None | str = Field(...)
+
 class UnionWithNoneCompliant(BaseModel):
     data: Union[str, None]
+
+class UnionWithFieldEllipsisCompliant(BaseModel):
+    value: Union[str, None] = Field(...)
 
 # =====================
 # EDGE CASES

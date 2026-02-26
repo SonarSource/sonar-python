@@ -22,7 +22,6 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.Argument;
-import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -43,8 +42,6 @@ public class PydanticOptionalFieldDefaultCheck extends PythonSubscriptionCheck {
   private static final TypeMatcher IS_PYDANTIC_FIELD = TypeMatchers.isType("pydantic.Field");
 
   private static final TypeMatcher IS_TYPING_OPTIONAL = TypeMatchers.isType("typing.Optional");
-  private static final TypeMatcher IS_TYPING_UNION = TypeMatchers.isType("typing.Union");
-  private static final TypeMatcher IS_NONE_TYPE = TypeMatchers.isObjectOfType("NoneType");
 
   @Override
   public void initialize(Context context) {
@@ -67,16 +64,12 @@ public class PydanticOptionalFieldDefaultCheck extends PythonSubscriptionCheck {
     TypeAnnotation annotation = annotatedAssignment.annotation();
     Expression annotationExpr = annotation.expression();
 
-    Expression assignedValue = annotatedAssignment.assignedValue();
-    boolean hasFieldWithEllipsis = assignedValue != null && isFieldCallWithEllipsis(ctx, assignedValue);
+    if (!isTypingOptional(annotationExpr, ctx)) {
+      return;
+    }
 
-    if (isTypingOptional(annotationExpr, ctx)) {
-      // Optional[X]: raise when no default, or when Field(...) with ellipsis
-      if (assignedValue == null || hasFieldWithEllipsis) {
-        ctx.addIssue(annotationExpr, MESSAGE);
-      }
-    } else if (isNullableNonOptional(annotationExpr, ctx) && hasFieldWithEllipsis) {
-      // X | None or Union[X, None]: only raise when Field(...) with ellipsis
+    Expression assignedValue = annotatedAssignment.assignedValue();
+    if (assignedValue == null || isFieldCallWithEllipsis(ctx, assignedValue)) {
       ctx.addIssue(annotationExpr, MESSAGE);
     }
   }
@@ -86,36 +79,6 @@ public class PydanticOptionalFieldDefaultCheck extends PythonSubscriptionCheck {
       return IS_TYPING_OPTIONAL.isTrueFor(subscriptionExpr.object(), ctx);
     }
     return false;
-  }
-
-  private static boolean isNullableNonOptional(Expression annotationExpr, SubscriptionContext ctx) {
-    // Case 1: T | None (BinaryExpression with BITWISE_OR)
-    if (annotationExpr.is(Tree.Kind.BITWISE_OR)) {
-      return containsNone((BinaryExpression) annotationExpr, ctx);
-    }
-
-    // Case 2: Union[T, None] (SubscriptionExpression)
-    if (annotationExpr instanceof SubscriptionExpression subscriptionExpr) {
-      return IS_TYPING_UNION.isTrueFor(subscriptionExpr.object(), ctx) && subscriptsContainNone(subscriptionExpr, ctx);
-    }
-
-    return false;
-  }
-
-  private static boolean containsNone(BinaryExpression binaryExpr, SubscriptionContext ctx) {
-    return isNoneExpression(binaryExpr.leftOperand(), ctx) ||
-      isNoneExpression(binaryExpr.rightOperand(), ctx) ||
-      (binaryExpr.leftOperand().is(Tree.Kind.BITWISE_OR) && containsNone((BinaryExpression) binaryExpr.leftOperand(), ctx)) ||
-      (binaryExpr.rightOperand().is(Tree.Kind.BITWISE_OR) && containsNone((BinaryExpression) binaryExpr.rightOperand(), ctx));
-  }
-
-  private static boolean isNoneExpression(Expression expr, SubscriptionContext ctx) {
-    return IS_NONE_TYPE.isTrueFor(expr, ctx);
-  }
-
-  private static boolean subscriptsContainNone(SubscriptionExpression subscriptionExpr, SubscriptionContext ctx) {
-    return subscriptionExpr.subscripts().expressions().stream()
-      .anyMatch(expr -> isNoneExpression(expr, ctx));
   }
 
   private static boolean isFieldCallWithEllipsis(SubscriptionContext ctx, Expression assignedValue) {
