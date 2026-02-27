@@ -228,3 +228,10 @@ class LocalClassWithAnnotatedMember:
 class LocalClassChild(LocalClassWithAnnotatedMember):
   def my_member(self, param, other_param): # OK, respecting contract defined in parent
     print("Execute")
+
+
+from django.views import generic
+
+class TestDjango(generic.DetailView):
+    def get_object(self, queryset=None):
+        print("Should not raise")

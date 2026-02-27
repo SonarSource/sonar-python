@@ -1,13 +1,88 @@
 
-django.views.generic.detailŽ
+django.views.generic.detailÔ
+SingleObjectMixin-django.views.generic.detail.SingleObjectMixin"&django.views.generic.base.ContextMixin*ñ
 
-DetailView&django.views.generic.detail.DetailView"django.views.generic.base.View*a
-get_context_data7django.views.generic.detail.DetailView.get_context_data*
-self*
+get_object8django.views.generic.detail.SingleObjectMixin.get_object"
+Any*h
+self^
+-django.views.generic.detail.SingleObjectMixin"-django.views.generic.detail.SingleObjectMixin*6
+queryset&
+Union[Any,None]
+Any
+None *½
+get_queryset:django.views.generic.detail.SingleObjectMixin.get_queryset"
+Any*h
+self^
+-django.views.generic.detail.SingleObjectMixin"-django.views.generic.detail.SingleObjectMixin*Ö
+get_slug_field<django.views.generic.detail.SingleObjectMixin.get_slug_field"
+builtins.str"builtins.str*h
+self^
+-django.views.generic.detail.SingleObjectMixin"-django.views.generic.detail.SingleObjectMixin*¢
+get_context_object_nameEdjango.views.generic.detail.SingleObjectMixin.get_context_object_name"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*h
+self^
+-django.views.generic.detail.SingleObjectMixin"-django.views.generic.detail.SingleObjectMixin*
+obj
+Any*ª
+get_context_data>django.views.generic.detail.SingleObjectMixin.get_context_data"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*h
+self^
+-django.views.generic.detail.SingleObjectMixin"-django.views.generic.detail.SingleObjectMixin*
+kwargs
+Anyr
+model3django.views.generic.detail.SingleObjectMixin.modelA
+Union[Type[Any],None]
+	Type[Any]
+Any"type
+Nonerj
+queryset6django.views.generic.detail.SingleObjectMixin.queryset&
+Union[Any,None]
+Any
+Nonerd
 
-kwargsrU
-model,django.views.generic.detail.DetailView.model
-builtins.type"builtins.type*—
+slug_field8django.views.generic.detail.SingleObjectMixin.slug_field
+builtins.str"builtins.strrž
+context_object_nameAdjango.views.generic.detail.SingleObjectMixin.context_object_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerl
+slug_url_kwarg<django.views.generic.detail.SingleObjectMixin.slug_url_kwarg
+builtins.str"builtins.strrh
+pk_url_kwarg:django.views.generic.detail.SingleObjectMixin.pk_url_kwarg
+builtins.str"builtins.strrt
+query_pk_and_slug?django.views.generic.detail.SingleObjectMixin.query_pk_and_slug
+builtins.bool"builtins.boolrG
+object4django.views.generic.detail.SingleObjectMixin.object
+Anyè
+BaseDetailView*django.views.generic.detail.BaseDetailView"-django.views.generic.detail.SingleObjectMixin"django.views.generic.base.View*Ú
+get.django.views.generic.detail.BaseDetailView.get"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*b
+selfX
+*django.views.generic.detail.BaseDetailView"*django.views.generic.detail.BaseDetailView*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any
+!SingleObjectTemplateResponseMixin=django.views.generic.detail.SingleObjectTemplateResponseMixin"/django.views.generic.base.TemplateResponseMixin*½
+get_template_namesPdjango.views.generic.detail.SingleObjectTemplateResponseMixin.get_template_names"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ˆ
+self~
+=django.views.generic.detail.SingleObjectTemplateResponseMixin"=django.views.generic.detail.SingleObjectTemplateResponseMixinr®
+template_name_fieldQdjango.views.generic.detail.SingleObjectTemplateResponseMixin.template_name_fieldD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerˆ
+template_name_suffixRdjango.views.generic.detail.SingleObjectTemplateResponseMixin.template_name_suffix
+builtins.str"builtins.strŸ
+
+DetailView&django.views.generic.detail.DetailView"=django.views.generic.detail.SingleObjectTemplateResponseMixin"*django.views.generic.detail.BaseDetailView*—
 __annotations__+django.views.generic.detail.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

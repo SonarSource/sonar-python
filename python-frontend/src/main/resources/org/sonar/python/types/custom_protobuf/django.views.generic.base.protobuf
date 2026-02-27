@@ -1,23 +1,217 @@
 
-django.views.generic.baseô
-Viewdjango.views.generic.base.View"builtins.object*`
-dispatch'django.views.generic.base.View.dispatch*
-self*
-request*
-args*
+django.views.generic.base¼
+ContextMixin&django.views.generic.base.ContextMixin"builtins.object*•
+get_context_data7django.views.generic.base.ContextMixin.get_context_data"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Z
+selfP
+&django.views.generic.base.ContextMixin"&django.views.generic.base.ContextMixin*
+kwargs
+AnyrÚ
+extra_context4django.views.generic.base.ContextMixin.extra_context’
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+Nonež
+Viewdjango.views.generic.base.View"builtins.object*ü
+setup$django.views.generic.base.View.setup"
+None*J
+self@
+django.views.generic.base.View"django.views.generic.base.View*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any*À
+dispatch'django.views.generic.base.View.dispatch"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*J
+self@
+django.views.generic.base.View"django.views.generic.base.View*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any*Þ
+http_method_not_allowed6django.views.generic.base.View.http_method_not_allowed"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*J
+self@
+django.views.generic.base.View"django.views.generic.base.View*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any*¾
+options&django.views.generic.base.View.options"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*J
+self@
+django.views.generic.base.View"django.views.generic.base.View*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any*¬
+as_view&django.views.generic.base.View.as_view"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*y
+clsp
+$Type[django.views.generic.base.View]@
+django.views.generic.base.View"django.views.generic.base.View"type*
 
-kwargs*Y
-get_context_data/django.views.generic.base.View.get_context_data*
-self*
-
-kwargsž
-TemplateView&django.views.generic.base.TemplateView"django.views.generic.base.View*a
-get_context_data7django.views.generic.base.TemplateView.get_context_data*
-self*
-
-kwargsrc
-template_name4django.views.generic.base.TemplateView.template_name
-builtins.str"builtins.str*•
+initkwargs
+Any0:builtins.classmethodpr‘
+http_method_names0django.views.generic.base.View.http_method_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listru
+request&django.views.generic.base.View.requestB
+django.http.request.HttpRequest"django.http.request.HttpRequestr[
+args#django.views.generic.base.View.args.
+builtins.tuple[Any]
+Any"builtins.tuplerj
+kwargs%django.views.generic.base.View.kwargs9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict˜
+TemplateResponseMixin/django.views.generic.base.TemplateResponseMixin"builtins.object*’
+render_to_responseBdjango.views.generic.base.TemplateResponseMixin.render_to_response"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*l
+selfb
+/django.views.generic.base.TemplateResponseMixin"/django.views.generic.base.TemplateResponseMixin*d
+contextW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+response_kwargs
+Any*’
+get_template_namesBdjango.views.generic.base.TemplateResponseMixin.get_template_names"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*l
+selfb
+/django.views.generic.base.TemplateResponseMixin"/django.views.generic.base.TemplateResponseMixinr”
+template_name=django.views.generic.base.TemplateResponseMixin.template_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner˜
+template_engine?django.views.generic.base.TemplateResponseMixin.template_engineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerË
+response_class>django.views.generic.base.TemplateResponseMixin.response_classy
+'Type[django.http.response.HttpResponse]F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse"typer’
+content_type<django.views.generic.base.TemplateResponseMixin.content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None€
+TemplateView&django.views.generic.base.TemplateView"/django.views.generic.base.TemplateResponseMixin"&django.views.generic.base.ContextMixin"django.views.generic.base.View*Î
+get*django.views.generic.base.TemplateView.get"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*Z
+selfP
+&django.views.generic.base.TemplateView"&django.views.generic.base.TemplateView*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any„
+RedirectView&django.views.generic.base.RedirectView"django.views.generic.base.View*•
+get_redirect_url7django.views.generic.base.RedirectView.get_redirect_url"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Z
+selfP
+&django.views.generic.base.RedirectView"&django.views.generic.base.RedirectView*
+args
+Any*
+kwargs
+Any*Î
+get*django.views.generic.base.RedirectView.get"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*Z
+selfP
+&django.views.generic.base.RedirectView"&django.views.generic.base.RedirectView*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any*Ð
+head+django.views.generic.base.RedirectView.head"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*Z
+selfP
+&django.views.generic.base.RedirectView"&django.views.generic.base.RedirectView*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any*Ð
+post+django.views.generic.base.RedirectView.post"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*Z
+selfP
+&django.views.generic.base.RedirectView"&django.views.generic.base.RedirectView*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any*Ö
+options.django.views.generic.base.RedirectView.options"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*Z
+selfP
+&django.views.generic.base.RedirectView"&django.views.generic.base.RedirectView*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any*Ô
+delete-django.views.generic.base.RedirectView.delete"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*Z
+selfP
+&django.views.generic.base.RedirectView"&django.views.generic.base.RedirectView*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any*Î
+put*django.views.generic.base.RedirectView.put"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*Z
+selfP
+&django.views.generic.base.RedirectView"&django.views.generic.base.RedirectView*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Any*Ò
+patch,django.views.generic.base.RedirectView.patch"F
+!django.http.response.HttpResponse"!django.http.response.HttpResponse*Z
+selfP
+&django.views.generic.base.RedirectView"&django.views.generic.base.RedirectView*O
+requestB
+django.http.request.HttpRequest"django.http.request.HttpRequest*
+args
+Any*
+kwargs
+Anyr]
+	permanent0django.views.generic.base.RedirectView.permanent
+builtins.bool"builtins.boolrw
+url*django.views.generic.base.RedirectView.urlD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner‰
+pattern_name3django.views.generic.base.RedirectView.pattern_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerc
+query_string3django.views.generic.base.RedirectView.query_string
+builtins.bool"builtins.bool*•
 __annotations__)django.views.generic.base.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
