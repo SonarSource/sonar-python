@@ -48,3 +48,10 @@ def python2_multiple_expressions(cond):
 
 def no_issue_with_self_return_type():
     raise MyException().with_traceback("foo")
+
+def raised_exception_is_the_parameter(exception: BaseException):
+    raise exception
+
+global_exception = BaseException()
+def raise_global_exception():
+    raise global_exception
