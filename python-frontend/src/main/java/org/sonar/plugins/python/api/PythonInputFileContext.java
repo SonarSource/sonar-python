@@ -74,4 +74,8 @@ public class PythonInputFileContext {
   public SonarProduct sonarProduct() {
     return sonarProduct;
   }
+
+  protected ProjectLevelSymbolTable projectLevelSymbolTable() {
+    return projectLevelSymbolTable;
+  }
 }

@@ -1263,4 +1263,91 @@ class ProjectLevelSymbolTableTest {
     assertThat(symbolTable.hasModuleWithPrefix("acme.ma")).isFalse();
   }
 
+  @Test
+  void django_views_with_url_patterns() {
+    String[] urls = {
+      "from django.urls import path",
+      "import views",
+      "urlpatterns = [",
+      "  path('article/<int:pk>/', views.article_detail, name='article_detail'),",
+      "  path('user/<str:username>/post/<slug:slug>/', views.user_post, name='user_post'),",
+      "]"
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = empty();
+    projectSymbolTable.addModule(parseWithoutSymbols(urls), "", pythonFile("urls.py"));
+
+    assertThat(projectSymbolTable.isDjangoView("views.article_detail")).isTrue();
+    assertThat(projectSymbolTable.getDjangoViewInfo("views.article_detail"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly("article/<int:pk>/"));
+
+    assertThat(projectSymbolTable.isDjangoView("views.user_post")).isTrue();
+    assertThat(projectSymbolTable.getDjangoViewInfo("views.user_post"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly("user/<str:username>/post/<slug:slug>/"));
+  }
+
+  @Test
+  void django_views_with_empty_url_patterns() {
+    String[] urls = {
+      "from django.urls import path",
+      "import views",
+      "urlpatterns = [path('', views.no_pattern_view)]"
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = empty();
+    projectSymbolTable.addModule(parseWithoutSymbols(urls), "", pythonFile("urls.py"));
+
+    assertThat(projectSymbolTable.isDjangoView("views.no_pattern_view")).isTrue();
+    assertThat(projectSymbolTable.getDjangoViewInfo("views.no_pattern_view"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly(""));
+  }
+
+  @Test
+  void django_views_with_non_string_route() {
+    // Test case where route argument is not a STRING_LITERAL
+    String[] urls = {
+      "from django.urls import path",
+      "import views",
+      "route_var = 'dynamic-route'",
+      "urlpatterns = [path(route_var, views.dynamic_view)]"
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = empty();
+    projectSymbolTable.addModule(parseWithoutSymbols(urls), "", pythonFile("urls.py"));
+
+    assertThat(projectSymbolTable.isDjangoView("views.dynamic_view")).isTrue();
+    assertThat(projectSymbolTable.getDjangoViewInfo("views.dynamic_view"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).isEmpty());
+  }
+
+  @Test
+  void django_views_with_re_path() {
+    // Test re_path() with named groups
+    String[] urls = {
+      "from django.urls import re_path",
+      "import views",
+      "urlpatterns = [",
+      "  re_path(r'^items/(?P<pk>\\d+)/$', views.item_detail),",
+      "  re_path(r'^items/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$', views.item_with_slug),",
+      "]"
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = empty();
+    projectSymbolTable.addModule(parseWithoutSymbols(urls), "", pythonFile("urls.py"));
+
+    assertThat(projectSymbolTable.isDjangoView("views.item_detail")).isTrue();
+    assertThat(projectSymbolTable.getDjangoViewInfo("views.item_detail"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly("^items/(?P<pk>\\d+)/$"));
+
+    assertThat(projectSymbolTable.isDjangoView("views.item_with_slug")).isTrue();
+    assertThat(projectSymbolTable.getDjangoViewInfo("views.item_with_slug"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly("^items/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"));
+  }
+
 }

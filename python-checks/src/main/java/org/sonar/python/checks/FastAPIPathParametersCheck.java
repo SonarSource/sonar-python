@@ -31,12 +31,11 @@ import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.v2.FunctionType;
-import org.sonar.plugins.python.api.types.v2.ParameterV2;
-import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.checks.utils.FunctionParameterUtils;
+import org.sonar.python.checks.utils.FunctionParameterUtils.FunctionParameterInfo;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S8411")
@@ -56,12 +55,6 @@ public class FastAPIPathParametersCheck extends PythonSubscriptionCheck {
         TypeMatchers.isType("fastapi.FastAPI." + method),
         TypeMatchers.isType("fastapi.APIRouter." + method)))
   );
-
-  private record FunctionParameterInfo(Set<String> allParams, Set<String> positionalOnlyParams, boolean hasVariadicKeyword) {
-    static FunctionParameterInfo empty() {
-      return new FunctionParameterInfo(Set.of(), Set.of(), false);
-    }
-  }
 
   @Override
   public void initialize(Context context) {
@@ -90,7 +83,7 @@ public class FastAPIPathParametersCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    FunctionParameterInfo paramInfo = extractFunctionParameters(functionDef);
+    FunctionParameterInfo paramInfo = FunctionParameterUtils.extractFunctionParameters(functionDef);
     reportIssues(ctx, functionDef, pathParams, paramInfo);
   }
 
@@ -114,54 +107,13 @@ public class FastAPIPathParametersCheck extends PythonSubscriptionCheck {
       .map(Expressions::unescape);
   }
 
-  private static FunctionParameterInfo extractFunctionParameters(FunctionDef functionDef) {
-    return getFunctionType(functionDef)
-      .map(FastAPIPathParametersCheck::buildParameterInfo)
-      .orElse(FunctionParameterInfo.empty());
-  }
-
-  private static Optional<FunctionType> getFunctionType(FunctionDef functionDef) {
-    PythonType functionType = functionDef.name().typeV2();
-    if (functionType instanceof FunctionType funcType) {
-      return Optional.of(funcType);
-    }
-    return Optional.empty();
-  }
-
-  private static FunctionParameterInfo buildParameterInfo(FunctionType functionType) {
-    Set<String> allParams = new HashSet<>();
-    Set<String> positionalOnlyParams = new HashSet<>();
-    boolean hasVariadicKeyword = functionType.parameters().stream()
-      .anyMatch(param -> param.isVariadic() && param.isKeywordVariadic());
-
-    functionType.parameters().stream()
-      .filter(param -> !param.isVariadic())
-      .forEach(param -> addParameter(param, allParams, positionalOnlyParams));
-
-    return new FunctionParameterInfo(allParams, positionalOnlyParams, hasVariadicKeyword);
-  }
-
-  private static void addParameter(ParameterV2 param, Set<String> allParams, Set<String> positionalOnlyParams) {
-    String paramName = param.name();
-    if (paramName != null) {
-      allParams.add(paramName);
-      if (param.isPositionalOnly()) {
-        positionalOnlyParams.add(paramName);
-      }
-    }
-  }
-
   private static void reportIssues(SubscriptionContext ctx, FunctionDef functionDef, Set<String> pathParams, FunctionParameterInfo paramInfo) {
     pathParams.stream()
-      .filter(param -> isMissingFromSignature(param, paramInfo))
+      .filter(paramInfo::isMissingFromSignature)
       .forEach(param -> ctx.addIssue(functionDef.name(), String.format(MISSING_PARAM_MESSAGE, param)));
 
     pathParams.stream()
-      .filter(paramInfo.positionalOnlyParams::contains)
+      .filter(paramInfo.positionalOnlyParams()::contains)
       .forEach(param -> ctx.addIssue(functionDef.name(), String.format(POSITIONAL_ONLY_MESSAGE, param)));
-  }
-
-  private static boolean isMissingFromSignature(String pathParam, FunctionParameterInfo paramInfo) {
-    return !paramInfo.allParams.contains(pathParam) && !paramInfo.hasVariadicKeyword;
   }
 }

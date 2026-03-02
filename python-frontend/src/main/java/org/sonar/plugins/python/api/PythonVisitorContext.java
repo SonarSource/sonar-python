@@ -124,6 +124,10 @@ public class PythonVisitorContext extends PythonInputFileContext {
     return callGraph;
   }
 
+  public Optional<DjangoViewInfo> getDjangoViewInfo(String fqn) {
+    return projectLevelSymbolTable().getDjangoViewInfo(fqn);
+  }
+
   public static class Builder {
     private final PythonFile pythonFile;
     private final FileInput rootTree;

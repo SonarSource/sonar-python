@@ -22,12 +22,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.DjangoViewInfo;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -36,6 +38,8 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
@@ -58,7 +62,7 @@ public class ProjectLevelSymbolTable {
   private final PythonTypeToDescriptorConverter pythonTypeToDescriptorConverter;
   private final Map<String, Set<Descriptor>> globalDescriptorsByModuleName;
   private Map<String, Descriptor> globalDescriptorsByFQN;
-  private final Set<String> djangoViewsFQN;
+  private final Map<String, DjangoViewInfo> djangoViews;
   private final Map<String, Set<String>> importsByModule;
   private final Set<String> projectBasePackages;
   private TypeShedDescriptorsProvider typeShedDescriptorsProvider = null;
@@ -82,7 +86,7 @@ public class ProjectLevelSymbolTable {
   private ProjectLevelSymbolTable() {
     this.pythonTypeToDescriptorConverter = new PythonTypeToDescriptorConverter();
     this.globalDescriptorsByModuleName = new ConcurrentHashMap<>();
-    this.djangoViewsFQN = new HashSet<>();
+    this.djangoViews = new ConcurrentHashMap<>();
     this.importsByModule = new ConcurrentHashMap<>();
     this.projectBasePackages = new HashSet<>();
   }
@@ -115,7 +119,7 @@ public class ProjectLevelSymbolTable {
     globalDescriptorsByModuleName.merge(fullyQualifiedModuleName, moduleDescriptors, ProjectLevelSymbolTable::mergeDescriptors);
     addModuleToGlobalSymbolsByFQN(moduleDescriptors);
 
-    DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor(fullyQualifiedModuleName);
+    DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor();
     fileInput.accept(djangoViewsVisitor);
   }
 
@@ -215,12 +219,15 @@ public class ProjectLevelSymbolTable {
     return globalDescriptorsByModuleName.get(moduleName);
   }
 
-  private synchronized void addDjangoView(String fqn) {
-    djangoViewsFQN.add(fqn);
+  public boolean isDjangoView(@Nullable String fqn) {
+    return fqn != null && djangoViews.containsKey(fqn);
   }
 
-  public boolean isDjangoView(@Nullable String fqn) {
-    return djangoViewsFQN.contains(fqn);
+  public Optional<DjangoViewInfo> getDjangoViewInfo(@Nullable String fqn) {
+    if (fqn == null) {
+      return Optional.empty();
+    }
+    return Optional.ofNullable(djangoViews.get(fqn));
   }
 
   public synchronized void addProjectPackage(String projectPackage) {
@@ -274,43 +281,82 @@ public class ProjectLevelSymbolTable {
 
   private class DjangoViewsVisitor extends BaseTreeVisitor {
 
-    String fullyQualifiedModuleName;
     private TypeCheckBuilder confPathCall = null;
     private TypeCheckBuilder pathCall = null;
-
-    public DjangoViewsVisitor(String fullyQualifiedModuleName) {
-      this.fullyQualifiedModuleName = fullyQualifiedModuleName;
-    }
+    private TypeCheckBuilder confRePathCall = null;
+    private TypeCheckBuilder rePathCall = null;
 
     @Override
     public void visitFileInput(FileInput fileInput) {
       TypeChecker typeChecker = new TypeChecker(new BasicTypeTable(new ProjectLevelTypeTable(ProjectLevelSymbolTable.this)));
       confPathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.conf.path");
       pathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.path");
+      confRePathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.conf.re_path");
+      rePathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.re_path");
       super.visitFileInput(fileInput);
     }
 
     @Override
     public void visitCallExpression(CallExpression callExpression) {
       super.visitCallExpression(callExpression);
-      if (isCallRegisteringDjangoView(callExpression)) {
-        RegularArgument viewArgument = nthArgumentOrKeyword(1, "view", callExpression.arguments());
-        if (viewArgument != null) {
-          PythonType pythonType = viewArgument.expression().typeV2();
-          if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
-            String importPath = unresolvedImportType.importPath();
-            addDjangoView(importPath);
-          } else if (pythonType instanceof FunctionType functionType) {
-            addDjangoView(functionType.fullyQualifiedName());
-          }
-        }
+      if (!isCallRegisteringDjangoView(callExpression)) {
+        return;
       }
+
+      extractViewFqnFromArgument(callExpression)
+        .ifPresent(fqn -> registerDjangoView(fqn, extractUrlPattern(callExpression)));
+    }
+
+    private Optional<String> extractViewFqnFromArgument(CallExpression callExpression) {
+      return extractArgument(callExpression, 1, "view")
+        .map(arg -> arg.expression().typeV2())
+        .flatMap(this::extractFullyQualifiedName);
+    }
+
+    private Optional<RegularArgument> extractArgument(CallExpression callExpression, int position, String name) {
+      return Optional.ofNullable(nthArgumentOrKeyword(position, name, callExpression.arguments()));
+    }
+
+    private Optional<String> extractFullyQualifiedName(PythonType pythonType) {
+      if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
+        return Optional.of(unresolvedImportType.importPath());
+      } else if (pythonType instanceof FunctionType functionType) {
+        return Optional.ofNullable(functionType.fullyQualifiedName());
+      }
+      return Optional.empty();
+    }
+
+    private void registerDjangoView(String fqn, @Nullable String urlPattern) {
+      addDjangoView(fqn);
+      if (urlPattern != null) {
+        addDjangoViewUrlPattern(fqn, urlPattern);
+      }
+    }
+
+    @CheckForNull
+    private String extractUrlPattern(CallExpression callExpression) {
+      return extractArgument(callExpression, 0, "route")
+        .filter(arg -> arg.expression().is(Tree.Kind.STRING_LITERAL))
+        .map(arg -> ((StringLiteral) arg.expression()).trimmedQuotesValue())
+        .orElse(null);
     }
 
     private boolean isCallRegisteringDjangoView(CallExpression callExpression) {
       TriBool isConfPathCall = confPathCall.check(callExpression.callee().typeV2());
       TriBool isPathCall = pathCall.check(callExpression.callee().typeV2());
-      return isConfPathCall.equals(TriBool.TRUE) || isPathCall.equals(TriBool.TRUE);
+      TriBool isConfRePathCall = confRePathCall.check(callExpression.callee().typeV2());
+      TriBool isRePathCall = rePathCall.check(callExpression.callee().typeV2());
+      return isConfPathCall.equals(TriBool.TRUE) || isPathCall.equals(TriBool.TRUE)
+        || isConfRePathCall.equals(TriBool.TRUE) || isRePathCall.equals(TriBool.TRUE);
+    }
+
+    private void addDjangoView(String fqn) {
+      djangoViews.computeIfAbsent(fqn, k -> DjangoViewInfo.withoutPatterns());
+    }
+
+    private void addDjangoViewUrlPattern(String fqn, String urlPattern) {
+      djangoViews.compute(fqn, (k, existing) ->
+        existing == null ? DjangoViewInfo.withPattern(urlPattern) : existing.addPattern(urlPattern));
     }
   }
 }

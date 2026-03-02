@@ -25,10 +25,12 @@ import java.util.Deque;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.DjangoViewInfo;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
@@ -206,6 +208,11 @@ public class SubscriptionVisitor {
     public RegexParseResult regexForStringElement(StringElement stringElement, FlagSet flagSet) {
       return regexCache.computeIfAbsent(stringElement.hashCode() + "-" + flagSet.getMask(),
         s -> new RegexParser(new PythonAnalyzerRegexSource(stringElement), flagSet).parse());
+    }
+
+    @Override
+    public Optional<DjangoViewInfo> getDjangoViewInfo(String fqn) {
+      return pythonVisitorContext.getDjangoViewInfo(fqn);
     }
   }
 }

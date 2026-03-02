@@ -24,6 +24,7 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.DjangoViewInfo;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -64,7 +65,8 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private Symbol owner;
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
   private static final String STATIC_METHOD_DECORATOR = "staticmethod";
-  private boolean isDjangoView = false;
+  @Nullable
+  private DjangoViewInfo djangoViewInfo = null;
   private boolean hasReadDeclaredReturnType = false;
 
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
@@ -121,7 +123,6 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     functionDefinitionLocation = null;
     declaredReturnType = anyType();
     isStub = true;
-    isDjangoView = false;
     this.validForPythonVersions = new HashSet<>(validFor);
   }
 
@@ -168,7 +169,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       declaredReturnType = functionSymbolImpl.declaredReturnType();
     }
     isStub = functionSymbol.isStub();
-    isDjangoView = functionSymbolImpl.isDjangoView();
+    djangoViewInfo = functionSymbolImpl.djangoViewInfo;
     validForPythonVersions = functionSymbolImpl.validForPythonVersions;
 
   }
@@ -361,11 +362,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   public boolean isDjangoView() {
-    return isDjangoView;
+    return djangoViewInfo != null;
   }
 
-  public void setIsDjangoView(boolean isDjangoView) {
-    this.isDjangoView = isDjangoView;
+  public void setDjangoViewInfo(@Nullable DjangoViewInfo djangoViewInfo) {
+    this.djangoViewInfo = djangoViewInfo;
   }
 
   public static class ParameterImpl implements Parameter {

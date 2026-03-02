@@ -19,6 +19,7 @@ package org.sonar.plugins.python.api;
 import com.google.common.annotations.Beta;
 import java.io.File;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -76,4 +77,11 @@ public interface SubscriptionContext {
   ProjectConfiguration projectConfiguration();
 
   CallGraph callGraph();
+
+  /**
+   * Returns Django view information for the given fully qualified function name.
+   * @param fqn the fully qualified name of a function
+   * @return Optional containing DjangoViewInfo if the function is a Django view, empty otherwise
+   */
+  Optional<DjangoViewInfo> getDjangoViewInfo(String fqn);
 }
