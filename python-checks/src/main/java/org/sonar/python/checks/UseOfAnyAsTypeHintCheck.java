@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.semantic.SymbolUtils;
@@ -55,10 +56,18 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
     TypeAnnotation typeAnnotation = (TypeAnnotation) ctx.syntaxNode();
     Optional.of(typeAnnotation)
       .filter(UseOfAnyAsTypeHintCheck::isTypeAny)
+      .filter(Predicate.not(UseOfAnyAsTypeHintCheck::isVariadicParameter))
       .map(annotation -> (FunctionDef) TreeUtils.firstAncestorOfKind(annotation, Tree.Kind.FUNCDEF))
       .filter(Predicate.not(UseOfAnyAsTypeHintCheck::hasFunctionOverrideOrOverloadDecorator))
       .filter(Predicate.not(UseOfAnyAsTypeHintCheck::canFunctionBeAnOverride))
       .ifPresent(functionDef -> ctx.addIssue(typeAnnotation.expression(), MESSAGE));
+  }
+
+  private static boolean isVariadicParameter(TypeAnnotation typeAnnotation) {
+    return Optional.ofNullable(typeAnnotation.parent())
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Parameter.class))
+      .map(Parameter::starToken)
+      .isPresent();
   }
 
   private static boolean isTypeAny(@Nullable TypeAnnotation typeAnnotation) {

@@ -126,3 +126,26 @@ class LocalClassWithAnnotatedMember:
 class LocalClassChild(LocalClassWithAnnotatedMember):
   def my_member(self, param: Any) -> Any: # OK, defined in parent
     ...
+
+# Variadic parameters (*args, **kwargs) should not raise issues
+def function_with_args(*args: Any) -> None:  # Compliant
+    pass
+
+def function_with_kwargs(**kwargs: Any) -> None:  # Compliant
+    pass
+
+def function_with_both(*some_args: Any, **kwargs: Any) -> None:  # Compliant
+    pass
+
+def function_with_mixed(param: Any, *args: Any, **kwargs: Any) -> str:  # Noncompliant
+    pass
+
+class ClassWithVariadicMethods:
+    def method_with_args(self, *args: Any) -> None:  # Compliant
+        pass
+
+    def method_with_kwargs(self, **kwargs: Any) -> None:  # Compliant
+        pass
+
+    def method_with_both(self, param: Any, *args: Any, **kwargs: Any) -> Any:  # Noncompliant 2
+        pass
