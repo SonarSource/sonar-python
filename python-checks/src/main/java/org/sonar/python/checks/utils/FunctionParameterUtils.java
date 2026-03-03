@@ -26,7 +26,6 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
 
 /**
  * Utility class for extracting function parameter information.
- * Shared between FastAPIPathParametersCheck and DjangoViewUrlParametersCheck.
  */
 public final class FunctionParameterUtils {
 
