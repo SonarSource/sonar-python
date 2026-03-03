@@ -16,14 +16,17 @@
  */
 package org.sonar.python.checks.django;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
@@ -34,14 +37,13 @@ import static org.sonar.python.checks.django.DjangoUtils.getMetaClass;
 public class DjangoModelStrMethodCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Define a \"__str__\" method for this Django model.";
-  private static final List<String> DJANGO_MODEL_FQN = List.of("django.db.models.Model");
+  private static final TypeMatcher IS_DJANGO_MODEL = TypeMatchers.isType("django.db.models.base.Model");
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
       var classDef = (ClassDef) ctx.syntaxNode();
-      var parentClassesFQN = TreeUtils.getParentClassesFQN(classDef);
-      if (DJANGO_MODEL_FQN.equals(parentClassesFQN)) {
+      if (isDirectDjangoModelSubclass(classDef, ctx)) {
         if (isAbstractModel(classDef)) {
           return;
         }
@@ -52,6 +54,18 @@ public class DjangoModelStrMethodCheck extends PythonSubscriptionCheck {
       }
 
     });
+  }
+
+  private static boolean isDirectDjangoModelSubclass(ClassDef classDef, SubscriptionContext ctx) {
+    var args = classDef.args();
+    if (args == null) {
+      return false;
+    }
+    return args.arguments().stream()
+      .filter(RegularArgument.class::isInstance)
+      .map(RegularArgument.class::cast)
+      .map(RegularArgument::expression)
+      .anyMatch(expr -> IS_DJANGO_MODEL.isTrueFor(expr, ctx));
   }
 
   private static boolean isAbstractModel(ClassDef classDef) {

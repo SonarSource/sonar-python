@@ -34,6 +34,8 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -45,7 +47,7 @@ public class DjangoModelStringFieldCheck extends PythonSubscriptionCheck {
   private static final String REPLACE_QUICK_FIX_MESSAGE = "Replace with \"blank=True\"";
   private static final String REMOVE_QUICK_FIX_MESSAGE = "Remove the \"null=true\" flag";
 
-  private static final String DJANGO_MODEL_FQN = "django.db.models.Model";
+  private static final TypeMatcher IS_DJANGO_MODEL = TypeMatchers.isOrExtendsType("django.db.models.base.Model");
   public static final Set<String> FIELD_TYPES_FQN = Set.of(
     "django.db.models.CharField",
     "django.db.models.TextField"
@@ -55,7 +57,7 @@ public class DjangoModelStringFieldCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
       var classDef = (ClassDef) ctx.syntaxNode();
-      if (TreeUtils.getParentClassesFQN(classDef).contains(DJANGO_MODEL_FQN)) {
+      if (IS_DJANGO_MODEL.isTrueFor(classDef.name(), ctx)) {
         var modelClassBodyStatements = classDef.body().statements();
 
         if (isNotManaged(modelClassBodyStatements)) {
