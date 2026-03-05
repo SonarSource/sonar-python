@@ -55,3 +55,16 @@ def raised_exception_is_the_parameter(exception: BaseException):
 global_exception = BaseException()
 def raise_global_exception():
     raise global_exception
+
+def handle_exception(e: Exception):
+    raise e
+
+def intermediate_handle_exception(e: Exception):
+    handle_exception(e)
+
+def constructed_exceptions_passed_to_handle_exception_raise():
+    handle_exception(Exception()) # Noncompliant
+    handle_exception(BaseException()) # Noncompliant
+
+def is_instance_do_not_raise(e):
+    isInstance(e, Exception)

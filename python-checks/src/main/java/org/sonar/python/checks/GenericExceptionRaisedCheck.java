@@ -19,11 +19,15 @@ package org.sonar.python.checks;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.symbols.v2.UsageV2;
+import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
@@ -36,6 +40,8 @@ import static org.sonar.plugins.python.api.types.BuiltinTypes.EXCEPTION;
 @Rule(key = "S112")
 public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
 
+  private static final String MESSAGE = "Replace this generic exception class with a more specific one.";
+
   private final TypeMatcher isExceptionOrBaseExceptionMatcher = TypeMatchers.any(
     TypeMatchers.isObjectOfType(EXCEPTION),
     TypeMatchers.isObjectOfType(BASE_EXCEPTION),
@@ -43,35 +49,56 @@ public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
     TypeMatchers.isType(BASE_EXCEPTION)
   );
 
+  private final TypeMatcher isObjectOfTypeExceptionOrBaseExceptionMatcher = TypeMatchers.any(
+    TypeMatchers.isObjectOfType(EXCEPTION),
+    TypeMatchers.isObjectOfType(BASE_EXCEPTION)
+  );
+
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.RAISE_STMT, ctx -> {
-      RaiseStatement raise = (RaiseStatement) ctx.syntaxNode();
-      List<Expression> expressions = raise.expressions();
-      if (expressions.isEmpty()) {
-        return;
-      }
-
-      Expression expression = expressions.get(0);
-      if (!isExceptionOrBaseExceptionMatcher.isTrueFor(expression, ctx)) {
-        return;
-      }
-      if (!isExceptionFunctionLocal(expression, raise)) {
-        return;
-      }
-
-      ctx.addIssue(expression, "Replace this generic exception class with a more specific one.");
-    });
+    context.registerSyntaxNodeConsumer(Kind.RAISE_STMT, this::checkRaise);
+    context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, this::checkFunctionCall);
   }
 
-  private static boolean isExceptionFunctionLocal(Expression expression, RaiseStatement raise) {
+  private void checkRaise(SubscriptionContext ctx) {
+    RaiseStatement raise = (RaiseStatement) ctx.syntaxNode();
+    List<Expression> expressions = raise.expressions();
+    if (expressions.isEmpty()) {
+      return;
+    }
+
+    Expression expression = expressions.get(0);
+    if (!isExceptionOrBaseExceptionMatcher.isTrueFor(expression, ctx)) {
+      return;
+    }
+    if (!isExceptionFunctionLocal(expression, raise)) {
+      return;
+    }
+    ctx.addIssue(expression, MESSAGE);
+  }
+
+  private void checkFunctionCall(SubscriptionContext ctx) {
+    CallExpression call = (CallExpression) ctx.syntaxNode();
+    List<Argument> arguments = call.arguments();
+    for (Argument arg : arguments) {
+      if (!(arg instanceof RegularArgument regArg) || regArg.keywordArgument() != null) {
+        continue;
+      }
+      Expression argExpr = regArg.expression();
+      if (isObjectOfTypeExceptionOrBaseExceptionMatcher.isTrueFor(argExpr, ctx) && isExceptionFunctionLocal(argExpr, call)) {
+        ctx.addIssue(argExpr, MESSAGE);
+      }
+    }
+  }
+
+  private static boolean isExceptionFunctionLocal(Expression expression, Tree contextTree) {
     if (!(expression instanceof Name name)) return true;
     SymbolV2 symbolV2 = name.symbolV2();
-    return symbolV2 == null || isLocalVariable(symbolV2, raise);
+    return symbolV2 == null || isLocalVariable(symbolV2, contextTree);
   }
 
-  private static boolean isLocalVariable(SymbolV2 symbol, Tree raiseStatement) {
-    Tree function = TreeUtils.firstAncestorOfKind(raiseStatement, Kind.FUNCDEF);
+  private static boolean isLocalVariable(SymbolV2 symbol, Tree contextTree) {
+    Tree function = TreeUtils.firstAncestorOfKind(contextTree, Kind.FUNCDEF);
     if (function == null) {
       return false;
     }
