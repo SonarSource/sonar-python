@@ -1,4 +1,5 @@
 from numpy.lib.index_tricks import mgrid
+from pyspark.sql import Row
 from typing import Sequence
 
 class Index:
@@ -48,6 +49,11 @@ def returns_one():
 
 def returns_a_string():
     return "spam"
+
+def pyspark_row_access():
+    row = Row(name="Alice", age=30)
+    row["name"]  # OK - Row.__getitem__ accepts str keys
+    row[0]  # OK - Row.__getitem__ also accepts int keys
 
 class MyCustomSequence(Sequence):
     ...

@@ -21,10 +21,12 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.SliceItem;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SLICE_EXPR;
@@ -60,16 +62,33 @@ public class IndexMethodCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkSubscription(SubscriptionContext ctx, SubscriptionExpression subscriptionExpression) {
-    if (!subscriptionExpression.object().type().mustBeOrExtend("typing.Sequence")) return;
+    InferredType objectType = subscriptionExpression.object().type();
+    if (!objectType.mustBeOrExtend("typing.Sequence")) return;
     var expressionList = subscriptionExpression.subscripts();
     if (!expressionList.commas().isEmpty()) {
-      // if contains at least a comma, its type is going to be tuple, hence not a valid index
       ctx.addIssue(expressionList, MESSAGE);
+      return;
     }
     Expression expressionIndex = expressionList.expressions().get(0);
-    if (!isValidIndex(expressionIndex)) {
+    if (!isValidIndex(expressionIndex) && !getItemAcceptsIndexType(objectType, expressionIndex)) {
       ctx.addIssue(expressionIndex, MESSAGE);
     }
+  }
+
+  /**
+   * Checks whether the object's __getitem__ method declares a parameter type
+   * compatible with the index expression. This handles Sequence subclasses like
+   * pyspark.sql.Row that override __getitem__ to accept non-integer keys (e.g., str).
+   */
+  private static boolean getItemAcceptsIndexType(InferredType objectType, Expression index) {
+    return objectType.resolveMember("__getitem__")
+      .filter(FunctionSymbol.class::isInstance)
+      .map(FunctionSymbol.class::cast)
+      .map(FunctionSymbol::parameters)
+      .filter(params -> params.size() >= 2)
+      .map(params -> params.get(1).declaredType())
+      .map(keyType -> index.type().isCompatibleWith(keyType))
+      .orElse(false);
   }
 
   private static boolean isValidIndex(@Nullable Expression expressionIndex) {
