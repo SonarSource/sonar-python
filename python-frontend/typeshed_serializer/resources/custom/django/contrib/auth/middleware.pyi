@@ -1,0 +1,9 @@
+from typing import Any, Callable
+
+class RemoteUserMiddleware:
+    header: str
+    force_logout_if_no_header: bool
+    def __init__(self, get_response: Callable[..., Any]) -> None: ...
+    def __call__(self, request: Any) -> Any: ...
+
+class PersistentRemoteUserMiddleware(RemoteUserMiddleware): ...

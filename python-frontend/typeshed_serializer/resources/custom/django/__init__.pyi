@@ -4,4 +4,5 @@ import django.utils as utils
 import django.urls as urls
 import django.conf as conf
 import django.apps as apps
+import django.contrib as contrib
 import django.views as views

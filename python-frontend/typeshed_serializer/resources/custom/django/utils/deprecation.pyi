@@ -1,0 +1,6 @@
+from typing import Any, Callable
+
+class MiddlewareMixin:
+    get_response: Callable[..., Any]
+    def __init__(self, get_response: Callable[..., Any]) -> None: ...
+    def __call__(self, request: Any) -> Any: ...
