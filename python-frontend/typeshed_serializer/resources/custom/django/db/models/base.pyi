@@ -1,3 +1,6 @@
+from django.db.models.manager import Manager
+
 class ModelBase(type): ...
 class Model(metaclass=ModelBase):
+    objects: Manager
     def __init__(self, *args, **kwargs) -> None: ...
