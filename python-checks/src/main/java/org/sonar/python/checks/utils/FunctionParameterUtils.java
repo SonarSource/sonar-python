@@ -30,7 +30,6 @@ import org.sonar.plugins.python.api.types.v2.PythonType;
 public final class FunctionParameterUtils {
 
   private FunctionParameterUtils() {
-    // Utility class
   }
 
   /**
@@ -60,7 +59,7 @@ public final class FunctionParameterUtils {
     return Optional.empty();
   }
 
-  private static FunctionParameterInfo buildParameterInfo(FunctionType functionType) {
+  public static FunctionParameterInfo buildParameterInfo(FunctionType functionType) {
     Set<String> allParams = new HashSet<>();
     Set<String> positionalOnlyParams = new HashSet<>();
     boolean hasVariadicKeyword = functionType.parameters().stream()
