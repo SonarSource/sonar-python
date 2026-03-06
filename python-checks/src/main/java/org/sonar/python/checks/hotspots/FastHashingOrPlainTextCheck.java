@@ -37,6 +37,8 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.hotspots.CommonValidationUtils.ArgumentValidator;
 import org.sonar.python.checks.hotspots.CommonValidationUtils.CallValidator;
 import org.sonar.python.tree.TreeUtils;
@@ -58,149 +60,144 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   private static final String ARGON2_MESSAGE = "Use secure Argon2 parameters.";
   private static final String BCRYPT_MESSAGE = "Use strong bcrypt parameters.";
   private static final String DJANGO_MESSAGE = "Use a secure hashing algorithm to store passwords.";
+  private static final String DJANGO_PASSWORD_MESSAGE = "Use set_password() or create_user() to properly hash passwords.";
 
   private static final Set<String> PBKDF2_ALGOS = Set.of(
     "sha1",
     "sha256",
-    "sha512"
-  );
+    "sha512");
   private static final String ROUNDS = "rounds";
   private static final Set<String> DJANGO_FIRST_FORBIDDEN_HASHERS = Set.of(
     "django.contrib.auth.hashers.SHA1PasswordHasher",
     "django.contrib.auth.hashers.MD5PasswordHasher",
     "django.contrib.auth.hashers.UnsaltedSHA1PasswordHasher",
     "django.contrib.auth.hashers.UnsaltedMD5PasswordHasher",
-    "django.contrib.auth.hashers.CryptPasswordHasher"
-  );
-
+    "django.contrib.auth.hashers.CryptPasswordHasher");
 
   private static final ArgumentValidator SCRYPT_R = new ArgumentValidator(
     3, "r", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 8)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 8)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
   private static final ArgumentValidator SCRYPT_BUFLEN = new ArgumentValidator(
     5, "buflen", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 32)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 32)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
   private static final ArgumentValidator SCRYPT_N = new ArgumentValidator(
     2, "N", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || isLessThanExponent(argument.expression(), 13)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || isLessThanExponent(argument.expression(), 13)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
 
   private static final ArgumentValidator HASHLIB_R = new ArgumentValidator(
     3, "r", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 8)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 8)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
   private static final ArgumentValidator HASHLIB_N = new ArgumentValidator(
     2, "n", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || isLessThanExponent(argument.expression(), 13)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || isLessThanExponent(argument.expression(), 13)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
   private static final ArgumentValidator HASHLIB_DKLEN = new ArgumentValidator(
     6, "dklen", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 32)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 32)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
 
   private static final ArgumentValidator CRYPTOGRAPHY_R = new ArgumentValidator(
     3, "r", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 8)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 8)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
   private static final ArgumentValidator CRYPTOGRAPHY_N = new ArgumentValidator(
     2, "n", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || isLessThanExponent(argument.expression(), 13)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), (int) Math.pow(2, 13)) || isLessThanExponent(argument.expression(), 13)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
   private static final ArgumentValidator CRYPTOGRAPHY_LENGTH = new ArgumentValidator(
     1, "length", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 32)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 32)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
 
   private static final ArgumentValidator PASSLIB_BLOCK_SIZE = new ArgumentValidator(
     3, "block_size", (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 8)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 8)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
   private static final ArgumentValidator PASSLIB_ROUNDS = new ArgumentValidator(
     2, ROUNDS, (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 12)) {
-      ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
-    }
-  });
-
+      if (isLessThan(argument.expression(), 12)) {
+        ctx.addIssue(argument, SCRYPT_PARAMETERS_MESSAGE);
+      }
+    });
 
   private static final ArgumentValidator PASSLIB_PBKDF2 = new ArgumentValidator(
     2, ROUNDS, (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 100_000)) {
-      ctx.addIssue(argument, PBKDF2_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 100_000)) {
+        ctx.addIssue(argument, PBKDF2_MESSAGE);
+      }
+    });
   private static final CallValidator CRYPTOGRAPHY_PBKDF2 = new PBKDF2Validator(0, "algorithm", 3, "iterations");
   private static final CallValidator HASHLIB_PBKDF2 = new PBKDF2Validator(0, "hash_name", 3, "iterations");
   private static final CallValidator PASSLIB_MISSING_ROUNDS = new MissingArgumentValidator(
-    2, ROUNDS, PBKDF2_MESSAGE
-  );
+    2, ROUNDS, PBKDF2_MESSAGE);
 
   private static final CallValidator BCRYPT_GENSALT = new ArgumentValidator(
     0, ROUNDS, (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 12)) {
-      ctx.addIssue(argument, BCRYPT_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 12)) {
+        ctx.addIssue(argument, BCRYPT_MESSAGE);
+      }
+    });
   private static final CallValidator BCRYPT_KDF = new ArgumentValidator(
     3, ROUNDS, (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 4096) || isLessThanExponent(argument.expression(), 12)) {
-      ctx.addIssue(argument, BCRYPT_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 4096) || isLessThanExponent(argument.expression(), 12)) {
+        ctx.addIssue(argument, BCRYPT_MESSAGE);
+      }
+    });
   private static final CallValidator PASSLIB_BCRYPT = new ArgumentValidator(
     3, ROUNDS, (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 12)) {
-      ctx.addIssue(argument, BCRYPT_MESSAGE);
-    }
-  });
+      if (isLessThan(argument.expression(), 12)) {
+        ctx.addIssue(argument, BCRYPT_MESSAGE);
+      }
+    });
   private static final CallValidator FLASK_BCRYPT = new ArgumentValidator(
     1, ROUNDS, (ctx, argument) -> {
-    if (isLessThan(argument.expression(), 12)) {
-      ctx.addIssue(argument, BCRYPT_MESSAGE);
-    }
-  });
-
+      if (isLessThan(argument.expression(), 12)) {
+        ctx.addIssue(argument, BCRYPT_MESSAGE);
+      }
+    });
 
   private TypeCheckBuilder argon2IDTypeChecker = null;
   private final CallValidator argon2Type = new ArgumentValidator(
     0, "type", (ctx, argument) -> {
-    if (argon2IDTypeChecker.check(argument.expression().typeV2()) == TriBool.FALSE) {
-      ctx.addIssue(argument, "Use Argon2ID to improve the security of the passwords.");
-    }
-  });
+      if (argon2IDTypeChecker.check(argument.expression().typeV2()) == TriBool.FALSE) {
+        ctx.addIssue(argument, "Use Argon2ID to improve the security of the passwords.");
+      }
+    });
   private TypeCheckBuilder argon2VersionTypeChecker = null;
   private final CallValidator argon2Version = new ArgumentValidator(
     1, "version", (ctx, argument) -> {
-    var typeCheck = argon2VersionTypeChecker.check(argument.expression().typeV2());
-    if (typeCheck == TriBool.TRUE) {
-      return;
-    }
-    if (!isEqualTo(argument.expression(), 19)) {
-      ctx.addIssue(argument, "Use the latest version of Argon2 ID.");
-    }
-  });
+      var typeCheck = argon2VersionTypeChecker.check(argument.expression().typeV2());
+      if (typeCheck == TriBool.TRUE) {
+        return;
+      }
+      if (!isEqualTo(argument.expression(), 19)) {
+        ctx.addIssue(argument, "Use the latest version of Argon2 ID.");
+      }
+    });
 
   private final Map<String, Collection<CallValidator>> callExpressionValidators = Map.ofEntries(
     Map.entry("scrypt.hash", List.of(SCRYPT_R, SCRYPT_BUFLEN, SCRYPT_N)),
@@ -216,24 +213,24 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     Map.entry("passlib.handlers.argon2._Argon2Common.using", List.of(new Argon2PasswordHasherValidator(3, 4, 5))),
     Map.entry("bcrypt.gensalt", List.of(BCRYPT_GENSALT)),
     Map.entry("bcrypt.kdf", List.of(BCRYPT_KDF)),
-    Map.entry("flask_bcrypt.generate_password_hash", List.of(FLASK_BCRYPT))
-  );
+    Map.entry("flask_bcrypt.generate_password_hash", List.of(FLASK_BCRYPT)));
 
   private static final Map<String, Collection<CallValidator>> CALL_EXPRESSION_VALIDATORS_V1 = Map.ofEntries(
-    Map.entry("flask_bcrypt.Bcrypt.generate_password_hash", List.of(FLASK_BCRYPT))
-  );
+    Map.entry("flask_bcrypt.Bcrypt.generate_password_hash", List.of(FLASK_BCRYPT)));
 
   private static final Map<String, Collection<CallValidator>> QUALIFIED_EXPR_VALIDATOR = Map.of(
     "passlib.hash.pbkdf2_sha1.using", List.of(PASSLIB_PBKDF2),
     "passlib.hash.pbkdf2_sha256.using", List.of(PASSLIB_PBKDF2, PASSLIB_MISSING_ROUNDS),
     "passlib.hash.pbkdf2_sha512.using", List.of(PASSLIB_PBKDF2, PASSLIB_MISSING_ROUNDS),
-    "passlib.hash.bcrypt.using", List.of(PASSLIB_BCRYPT)
-  );
+    "passlib.hash.bcrypt.using", List.of(PASSLIB_BCRYPT));
 
+  private static final TypeMatcher djangoUserInstanceMatcher = TypeMatchers.isObjectInstanceOf("django.contrib.auth.models.AbstractBaseUser");
+  private static final TypeMatcher djangoUserManagerCreateTypeChecker = TypeMatchers.isType("django.contrib.auth.models.UserManager.create");
 
   private TypeCheckBuilder argon2CheapestProfileTypeChecker = null;
   private TypeCheckBuilder flaskConfigTypeChecker = null;
   private TypeCheckMap<Collection<CallValidator>> typeCheckMap = null;
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::registerTypeCheckers);
@@ -245,7 +242,8 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpr);
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, this::checkName);
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, subscriptionContext -> checkAssignment(subscriptionContext, flaskConfigTypeChecker));
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, subscriptionContext -> checkAssignmentOnFlaskConfig(subscriptionContext, flaskConfigTypeChecker));
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, FastHashingOrPlainTextCheck::checkDjangoUserPasswordAssignment);
   }
 
   private static void checkDjangoHasher(SubscriptionContext subscriptionContext) {
@@ -275,6 +273,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     flaskConfigTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isInstanceOf("flask.config.Config");
     argon2IDTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn("argon2.low_level.Type.ID");
     argon2VersionTypeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn("argon2.low_level.ARGON2_VERSION");
+
     typeCheckMap = new TypeCheckMap<>();
     callExpressionValidators.forEach((key, value) -> {
       var typeCheckBuilder = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithFqn(key);
@@ -282,7 +281,7 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static void checkAssignment(SubscriptionContext subscriptionContext, TypeCheckBuilder flaskConfigTypeChecker) {
+  private static void checkAssignmentOnFlaskConfig(SubscriptionContext subscriptionContext, TypeCheckBuilder flaskConfigTypeChecker) {
     var stmt = (AssignmentStatement) subscriptionContext.syntaxNode();
     var lhsSubscription = stmt.lhsExpressions().stream().findFirst()
       .map(ExpressionList::expressions)
@@ -311,6 +310,17 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
       .findFirst()
       .filter(expr -> "BCRYPT_LOG_ROUNDS".equals(CommonValidationUtils.singleAssignedString(expr)));
     return subscriptMatch.isPresent();
+  }
+
+  private static void checkDjangoUserPasswordAssignment(SubscriptionContext subscriptionContext) {
+    var assignment = (AssignmentStatement) subscriptionContext.syntaxNode();
+    // Check if LHS is `user.password = ...` where user is an instance of AbstractBaseUser
+    if (assignment.lhsExpressions().get(0).expressions().size() == 1
+      && assignment.lhsExpressions().get(0).expressions().get(0) instanceof QualifiedExpression qualifiedExpression
+      && "password".equals(qualifiedExpression.name().name())
+      && djangoUserInstanceMatcher.isTrueFor(qualifiedExpression.qualifier(), subscriptionContext)) {
+      subscriptionContext.addIssue(assignment.lhsExpressions().get(0), DJANGO_PASSWORD_MESSAGE);
+    }
   }
 
   private void checkName(SubscriptionContext subscriptionContext) {
@@ -347,18 +357,27 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
       var configs = QUALIFIED_EXPR_VALIDATOR.getOrDefault(fqn, List.of());
       configs.forEach(config -> config.validate(subscriptionContext, callExpression));
     }
+
+    // Check for Django User.objects.create(password=...) - should use create_user() instead
+    checkDjangoUserManagerCreate(subscriptionContext, callExpression);
+  }
+
+  private static void checkDjangoUserManagerCreate(SubscriptionContext subscriptionContext, CallExpression callExpression) {
+    if (!djangoUserManagerCreateTypeChecker.isTrueFor(callExpression.callee(), subscriptionContext)) {
+      return;
+    }
+    Optional.ofNullable(TreeUtils.argumentByKeyword("password", callExpression.arguments()))
+      .ifPresent(passwordArg -> subscriptionContext.addIssue(passwordArg, DJANGO_PASSWORD_MESSAGE));
   }
 
   record PBKDF2Validator(
     int algoPosition,
     String algoKeyword,
     int iterationsPosition,
-    String iterationsKeyword
-  ) implements CallValidator {
+    String iterationsKeyword) implements CallValidator {
     @Override
     public void validate(SubscriptionContext ctx, CallExpression callExpression) {
-      var algoArgument =
-        nthArgumentOrKeywordOptional(algoPosition, algoKeyword, callExpression.arguments());
+      var algoArgument = nthArgumentOrKeywordOptional(algoPosition, algoKeyword, callExpression.arguments());
       var algoString = algoArgument
         .map(RegularArgument::expression)
         .map(CommonValidationUtils::singleAssignedString)
@@ -382,17 +401,13 @@ public class FastHashingOrPlainTextCheck extends PythonSubscriptionCheck {
   record Argon2PasswordHasherValidator(
     int timeCostPosition,
     int memoryCostPosition,
-    int parallelismPosition
-  ) implements CallValidator {
+    int parallelismPosition) implements CallValidator {
 
     @Override
     public void validate(SubscriptionContext ctx, CallExpression callExpression) {
-      var timeCostArgument =
-        nthArgumentOrKeyword(timeCostPosition, "time_cost", callExpression.arguments());
-      var memoryCostArgument =
-        nthArgumentOrKeyword(memoryCostPosition, "memory_cost", callExpression.arguments());
-      var parallelismArgument =
-        nthArgumentOrKeyword(parallelismPosition, "parallelism", callExpression.arguments());
+      var timeCostArgument = nthArgumentOrKeyword(timeCostPosition, "time_cost", callExpression.arguments());
+      var memoryCostArgument = nthArgumentOrKeyword(memoryCostPosition, "memory_cost", callExpression.arguments());
+      var parallelismArgument = nthArgumentOrKeyword(parallelismPosition, "parallelism", callExpression.arguments());
 
       var isTimeCostNOk = timeCostArgument != null && isLessThan(timeCostArgument.expression(), 5);
       var isMemoryCostNOk = memoryCostArgument != null && isLessThan(memoryCostArgument.expression(), 7168);

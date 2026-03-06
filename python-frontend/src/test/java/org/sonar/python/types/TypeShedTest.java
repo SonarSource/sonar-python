@@ -285,6 +285,16 @@ class TypeShedTest {
   }
 
   @Test
+  void package_django_contrib_auth() {
+    Map<String, Symbol> djangoAuthSymbols = symbolsForModule("django.contrib.auth.models");
+    assertThat(djangoAuthSymbols).isNotEmpty();
+    Symbol userSymbol = djangoAuthSymbols.get("User");
+    assertThat(userSymbol).isNotNull();
+    assertThat(userSymbol.kind()).isEqualTo(Kind.CLASS);
+    assertThat(userSymbol.fullyQualifiedName()).isEqualTo("django.contrib.auth.models.User");
+  }
+
+  @Test
   void return_type_hints() {
     Map<String, Symbol> symbols = symbolsForModule("typing");
     assertThat(((FunctionSymbolImpl) symbols.get("get_args")).annotatedReturnTypeName()).isEqualTo("tuple");

@@ -368,3 +368,43 @@ PASSWORD_HASHERS = [
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.UnsaltedSHA1PasswordHasher",  # OK outside of settings.py
 ]
+
+
+## Django User Password
+
+def django_user_password_assignment():
+    from django.contrib.auth.models import User
+
+    user = User()
+    user.username = 'john'
+    user.password = 'mysecretpassword'  # Noncompliant {{Use set_password() or create_user() to properly hash passwords.}}
+    user.save()
+
+    # Compliant - using set_password()
+    user2 = User()
+    user2.set_password('mysecretpassword')
+    user2.save()
+
+    # Compliant - setting other attributes
+    user3 = User()
+    user3.username = 'jane'
+    user3.email = 'jane@example.com'
+
+
+def django_user_create():
+    from django.contrib.auth.models import User
+
+    # Using create() with password argument
+    user = User.objects.create(
+        username='john',
+        password='mysecretpassword'  # Noncompliant {{Use set_password() or create_user() to properly hash passwords.}}
+    )
+
+    # Compliant - using create_user()
+    user = User.objects.create_user(
+        username='john',
+        password='mysecretpassword'
+    )
+
+    # Compliant - using create() without password argument
+    user = User.objects.create(username='john')
