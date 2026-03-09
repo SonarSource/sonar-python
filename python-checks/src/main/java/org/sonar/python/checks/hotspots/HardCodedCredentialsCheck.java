@@ -55,24 +55,28 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2068")
 public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
+  public static final String MESSAGE = "\"%s\" detected here, review this potentially hard-coded credential.";
   private static final String DEFAULT_CREDENTIAL_WORDS = "password,passwd,pwd,passphrase";
 
   private static final String FLASK_CONFIG_ASSIGNMENT_FQN = "flask.app.Flask.config";
   private static final String FLASK_CONFIG_CREDENTIAL_KEY = "SECRET_KEY";
+
+  private static final TypeMatcher GETENV_MATCHER = TypeMatchers.isType("os.getenv");
+  private static final TypeMatcher ENVIRON_MATCHER = TypeMatchers.isType("os.environ");
+  private static final TypeMatcher GET_ENVIRON_MATCHER = TypeMatchers.isType("typing.Mapping.get");
 
   @RuleProperty(
     key = "credentialWords",
     description = "Comma separated list of words identifying potential credentials",
     defaultValue = DEFAULT_CREDENTIAL_WORDS)
   public String credentialWords = DEFAULT_CREDENTIAL_WORDS;
-
-  public static final String MESSAGE = "\"%s\" detected here, review this potentially hard-coded credential.";
-
   private List<Pattern> variablePatterns = null;
   private List<Pattern> literalPatterns = null;
   private Map<String, Integer> sensitiveArgumentByFQN;
@@ -132,14 +136,16 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   }
 
   private void checkKeyValuePair(KeyValuePair keyValuePair, SubscriptionContext ctx) {
-    if (keyValuePair.key().is(Kind.STRING_LITERAL) && keyValuePair.value().is(Kind.STRING_LITERAL)) {
-      String matchedCredential = matchedCredential(((StringLiteral) keyValuePair.key()).trimmedQuotesValue(), variablePatterns());
-      if (matchedCredential != null) {
-        StringLiteral literal = (StringLiteral) keyValuePair.value();
-        if (isSuspiciousStringLiteral(literal)) {
-          ctx.addIssue(keyValuePair, String.format(MESSAGE, matchedCredential));
-        }
-      }
+    if (!keyValuePair.key().is(Kind.STRING_LITERAL)) {
+      return;
+    }
+    String matchedCredential = matchedCredential(((StringLiteral) keyValuePair.key()).trimmedQuotesValue(), variablePatterns());
+    if (matchedCredential == null) {
+      return;
+    }
+    Expression value = keyValuePair.value();
+    if (isSuspiciousStringLiteral(value) || isSuspiciousEnvGetDefault(value, ctx)) {
+      ctx.addIssue(keyValuePair, String.format(MESSAGE, matchedCredential));
     }
   }
 
@@ -302,7 +308,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   private void checkAssignedValue(AssignmentStatement assignmentStatement, String matchedCredential, SubscriptionContext ctx) {
     Expression assignedValue = assignmentStatement.assignedValue();
-    if (isSuspiciousStringLiteral(assignedValue) && !isFlaskConfigAssignment(assignedValue) ) {
+    if ((isSuspiciousStringLiteral(assignedValue) || isSuspiciousEnvGetDefault(assignedValue, ctx)) && !isFlaskConfigAssignment(assignedValue)) {
       ctx.addIssue(assignmentStatement, String.format(MESSAGE, matchedCredential));
     }
   }
@@ -317,6 +323,27 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   private boolean isSuspiciousStringLiteral(Tree tree) {
     return tree.is(Kind.STRING_LITERAL) && !((StringLiteral) tree).trimmedQuotesValue().isEmpty()
       && !isCredential(((StringLiteral) tree).trimmedQuotesValue(), variablePatterns());
+  }
+
+  private static boolean isSuspiciousEnvGetDefault(Expression expression, SubscriptionContext ctx) {
+    if (!expression.is(Kind.CALL_EXPR)) {
+      return false;
+    }
+    CallExpression call = (CallExpression) expression;
+    Expression callee =  call.callee();
+    if (!GETENV_MATCHER.isTrueFor(call.callee(), ctx)
+      && !(callee instanceof QualifiedExpression qExpr && GET_ENVIRON_MATCHER.isTrueFor(callee, ctx) && ENVIRON_MATCHER.isTrueFor(qExpr.qualifier(), ctx))
+    ) {
+      return false;
+    }
+    return TreeUtils.nthArgumentOrKeywordOptional(1, "default", call.arguments())
+      .map(RegularArgument::expression)
+      .filter(HardCodedCredentialsCheck::isNonEmptyStringLiteral)
+      .isPresent();
+  }
+
+  private static boolean isNonEmptyStringLiteral(Expression expression) {
+    return expression.is(Kind.STRING_LITERAL) && !((StringLiteral) expression).trimmedQuotesValue().isEmpty();
   }
 
   private static boolean isCredential(String target, Stream<Pattern> patterns) {
