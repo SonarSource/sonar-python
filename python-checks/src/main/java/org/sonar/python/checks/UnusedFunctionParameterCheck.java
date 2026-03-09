@@ -41,6 +41,8 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.checks.utils.StringLiteralValuesCollector;
@@ -56,6 +58,12 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Remove the unused function parameter \"%s\".";
 
   private static final Set<String> AWS_LAMBDA_PARAMETERS = Set.of("event", "context");
+
+  private static final Set<String> DJANGO_MIDDLEWARE_METHODS = Set.of(
+    "process_request", "process_exception", "process_view", "process_template_response");
+
+  private static final TypeMatcher MIDDLEWARE_MIXIN_MATCHER = TypeMatchers.isFunctionOwnerSatisfying(
+    TypeMatchers.isOrExtendsType("django.utils.deprecation.MiddlewareMixin"));
 
   @Override
   public void initialize(Context context) {
@@ -119,6 +127,7 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
       hasNonCallUsages(functionSymbol) ||
       isTestFunction(ctx, functionDef) ||
       isDjangoView(functionDef) ||
+      isDjangoMiddlewareFunction(ctx, functionDef) ||
       isAbstractClass(functionDef);
   }
 
@@ -200,5 +209,14 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
     FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
     FunctionSymbolImpl functionSymbolImpl = (FunctionSymbolImpl) functionSymbol;
     return functionSymbolImpl != null && functionSymbolImpl.isDjangoView();
+  }
+
+
+  private static boolean isDjangoMiddlewareFunction(SubscriptionContext ctx, FunctionDef functionDef) {
+    String functionName = functionDef.name().name();
+    if (!DJANGO_MIDDLEWARE_METHODS.contains(functionName)) {
+      return false;
+    }
+    return MIDDLEWARE_MIXIN_MATCHER.isTrueFor(functionDef.name(), ctx);
   }
 }

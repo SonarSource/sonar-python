@@ -57,4 +57,11 @@ class UnusedFunctionParameterCheckTest {
       ),
       new UnusedFunctionParameterCheck());
   }
+
+  @Test
+  void test_django_middleware() {
+    PythonCheckVerifier.verify(
+      "src/test/resources/checks/unusedFunctionParameter/django/middleware.py",
+      new UnusedFunctionParameterCheck());
+  }
 }
