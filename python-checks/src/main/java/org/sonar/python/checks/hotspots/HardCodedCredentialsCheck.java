@@ -17,6 +17,8 @@
 package org.sonar.python.checks.hotspots;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
@@ -270,12 +272,12 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       return false;
     }
     try {
-      URL url = new URL(stringLiteral.trimmedQuotesValue());
+      URL url = new URI(stringLiteral.trimmedQuotesValue()).toURL();
       String userInfo = url.getUserInfo();
       if (userInfo != null && userInfo.matches("\\S+:\\S+")) {
         return true;
       }
-    } catch (MalformedURLException e) {
+    } catch (URISyntaxException | MalformedURLException | IllegalArgumentException e) {
       return false;
     }
     return false;
