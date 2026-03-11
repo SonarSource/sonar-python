@@ -76,6 +76,7 @@ public class PythonExtensions {
 
       Python.class,
       PythonProfile.class,
+      PythonAgentQualityProfile.class,
 
       PythonSensor.class,
       PythonRuleRepository.class,
