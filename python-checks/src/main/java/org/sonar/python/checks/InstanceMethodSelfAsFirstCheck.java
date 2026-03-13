@@ -93,6 +93,11 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
       return false;
     }
 
+    // Skip _generate_next_value_ in Enum subclasses: it is a static protocol method per the Python docs
+    if ("_generate_next_value_".equals(functionDef.name().name()) && classSymbol.isOrExtends("enum.Enum")) {
+      return false;
+    }
+
     // Skip if the class has a ignored decorator
     if (functionDef.decorators().stream().anyMatch(this::isNonInstanceMethodDecorator)) {
       return false;

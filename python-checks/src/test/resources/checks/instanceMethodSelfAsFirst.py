@@ -182,3 +182,39 @@ def used_as_decorator_call(method):  # OK
 
 @used_as_decorator_call()
 def decorated(self): ...
+
+from enum import Enum, auto
+import enum
+
+# Do not raise on _generate_next_value_ in Enum subclasses
+class MyAutoName(Enum):
+    def _generate_next_value_(name, start, count, last_values):  # OK
+        return name
+
+class Animal(Enum):
+    def _generate_next_value_(name, start, count, last_values):  # OK
+        return name.lower()
+
+    DOG = auto()
+    CAT = auto()
+
+class UpperCaseEnum(enum.Enum):
+    def _generate_next_value_(name, start, count, last_values):  # OK
+        return name.upper()
+
+class NotAnEnum:
+    def _generate_next_value_(name, start, count, last_values):  # Noncompliant
+        return name
+
+class EnumWithOtherMethod(Enum):
+    def regular_method(arg):  # Noncompliant
+        pass
+
+# Indirect Enum subclass: _generate_next_value_ should also be exempt
+class BaseAutoEnum(Enum):
+    def _generate_next_value_(name, start, count, last_values):  # OK
+        return name.upper()
+
+class DerivedAutoEnum(BaseAutoEnum):
+    def _generate_next_value_(name, start, count, last_values):  # OK
+        return name.lower()
