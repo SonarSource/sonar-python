@@ -24,8 +24,11 @@ import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.v2.callgraph.CallGraph;
@@ -77,6 +80,10 @@ public interface SubscriptionContext {
   ProjectConfiguration projectConfiguration();
 
   CallGraph callGraph();
+
+  ControlFlowGraph cfg(Tree tree);
+
+  Set<Expression> valuesAtLocation(Name name);
 
   /**
    * Returns Django view information for the given fully qualified function name.

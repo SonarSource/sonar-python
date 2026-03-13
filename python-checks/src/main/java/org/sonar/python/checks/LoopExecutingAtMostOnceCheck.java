@@ -29,8 +29,6 @@ import org.sonar.plugins.python.api.cfg.CfgBranchingBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
@@ -43,10 +41,10 @@ public class LoopExecutingAtMostOnceCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx ->
-      checkCfg(ControlFlowGraph.build((FunctionDef) ctx.syntaxNode(), ctx.pythonFile()), ctx)
+      checkCfg(ctx.cfg(ctx.syntaxNode()), ctx)
     );
     context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx ->
-      checkCfg(ControlFlowGraph.build((FileInput) ctx.syntaxNode(), ctx.pythonFile()), ctx)
+      checkCfg(ctx.cfg(ctx.syntaxNode()), ctx)
     );
   }
 

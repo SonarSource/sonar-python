@@ -30,18 +30,15 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6714")
 public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Pass a list to \"np.array\" instead of passing a generator.";
-  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis((ctx.pythonFile())));
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkNumpyArrayCall);
   }
 
@@ -63,7 +60,7 @@ public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
       .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
       .map(RegularArgument.class::cast)
       .map(RegularArgument::expression)
-      .filter(regArg -> (regArg.is(Tree.Kind.GENERATOR_EXPR) || this.isNamedGeneratorExpression(regArg)))
+      .filter(regArg -> (regArg.is(Tree.Kind.GENERATOR_EXPR) || isNamedGeneratorExpression(regArg, ctx)))
       .isEmpty()) {
       return;
     }
@@ -79,10 +76,10 @@ public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private boolean isNamedGeneratorExpression(Expression expression) {
+  private static boolean isNamedGeneratorExpression(Expression expression, SubscriptionContext ctx) {
     return Optional.of(expression)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
-      .map(name -> this.reachingDefinitionsAnalysis.valuesAtLocation(name))
+      .map(ctx::valuesAtLocation)
       .filter(NumpyListOverGeneratorCheck::checkSetProperties)
       .isPresent();
   }

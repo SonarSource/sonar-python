@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -27,7 +28,6 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
@@ -39,39 +39,33 @@ public class TorchLoadLeadsToUntrustedCodeExecutionCheck extends PythonSubscript
   public static final String PYTHON_FALSE = "False";
   public static final String WEIGHTS_ONLY = "weights_only";
 
-  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
-
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> reachingDefinitionsAnalysis =
-      new ReachingDefinitionsAnalysis(ctx.pythonFile()));
-
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
       Symbol calleeSymbol = callExpression.calleeSymbol();
       if (calleeSymbol != null && TORCH_LOAD.equals(calleeSymbol.fullyQualifiedName())
-        && isWeightsOnlyNotFoundOrSetToFalse(callExpression.arguments())) {
+        && isWeightsOnlyNotFoundOrSetToFalse(callExpression.arguments(), ctx)) {
 
         ctx.addIssue(callExpression.callee(), MESSAGE);
       }
     });
   }
 
-  private boolean isWeightsOnlyNotFoundOrSetToFalse(List<Argument> arguments) {
+  private static boolean isWeightsOnlyNotFoundOrSetToFalse(List<Argument> arguments, SubscriptionContext ctx) {
     RegularArgument weightsOnlyArg = TreeUtils.argumentByKeyword(WEIGHTS_ONLY, arguments);
     if (weightsOnlyArg == null) return !Expressions.containsSpreadOperator(arguments);
     if (weightsOnlyArg.expression() instanceof Name name) {
-      return PYTHON_FALSE.equals(name.name()) || isNameSetToFalse(name);
+      return PYTHON_FALSE.equals(name.name()) || isNameSetToFalse(name, ctx);
     }
     return false;
   }
 
-  private boolean isNameSetToFalse(Name name) {
-    Set<Expression> values = reachingDefinitionsAnalysis.valuesAtLocation(name);
+  private static boolean isNameSetToFalse(Name name, SubscriptionContext ctx) {
+    Set<Expression> values = ctx.valuesAtLocation(name);
     return values.size() == 1 && values.stream()
       .flatMap(TreeUtils.toStreamInstanceOfMapper(Name.class))
       .map(Name::name).allMatch(PYTHON_FALSE::equals);
   }
-
 
 }

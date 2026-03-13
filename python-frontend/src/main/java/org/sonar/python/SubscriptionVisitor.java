@@ -41,9 +41,12 @@ import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -202,6 +205,16 @@ public class SubscriptionVisitor {
     @Override
     public CallGraph callGraph() {
       return pythonVisitorContext.callGraph();
+    }
+
+    @Override
+    public ControlFlowGraph cfg(Tree tree) {
+      return pythonVisitorContext.cfg(tree);
+    }
+
+    @Override
+    public Set<Expression> valuesAtLocation(Name name) {
+      return pythonVisitorContext.valuesAtLocation(name);
     }
 
     @Override

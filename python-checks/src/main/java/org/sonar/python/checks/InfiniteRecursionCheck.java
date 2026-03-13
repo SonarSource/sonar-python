@@ -26,7 +26,6 @@ import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -62,7 +61,7 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
       List<Tree> allRecursiveCalls = new ArrayList<>();
-      boolean endBlockIsReachable = collectRecursiveCallsAndCheckIfEndBlockIsReachable(functionDef, ctx.pythonFile(), allRecursiveCalls);
+      boolean endBlockIsReachable = collectRecursiveCallsAndCheckIfEndBlockIsReachable(functionDef, ctx.cfg(functionDef), allRecursiveCalls);
       if (!allRecursiveCalls.isEmpty() && !endBlockIsReachable) {
         String message = String.format(MESSAGE, functionDef.isMethodDefinition() ? "method" : "function");
         PreciseIssue issue = ctx.addIssue(functionDef.name(), message);
@@ -71,13 +70,9 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean collectRecursiveCallsAndCheckIfEndBlockIsReachable(FunctionDef functionDef, PythonFile pythonFile, List<Tree> allRecursiveCalls) {
+  private static boolean collectRecursiveCallsAndCheckIfEndBlockIsReachable(FunctionDef functionDef, @Nullable ControlFlowGraph cfg, List<Tree> allRecursiveCalls) {
     Symbol functionSymbol = functionDef.name().symbol();
-    if (functionSymbol == null) {
-      return true;
-    }
-    ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, pythonFile);
-    if (cfg == null) {
+    if (functionSymbol == null || cfg == null) {
       return true;
     }
     RecursiveCallCollector recursiveCallCollector = new RecursiveCallCollector(functionDef, functionSymbol);

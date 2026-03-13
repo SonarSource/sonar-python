@@ -43,7 +43,7 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-      ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, ctx.pythonFile());
+      ControlFlowGraph cfg = ctx.cfg(functionDef);
       if (cfg == null) {
         return;
       }

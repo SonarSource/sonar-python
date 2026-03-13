@@ -32,7 +32,6 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
-import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
@@ -40,8 +39,6 @@ import org.sonar.python.tree.TreeUtils;
 public class HttpNoContentNonEmptyBodyCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Return an empty body for this endpoint returning 204 status.";
-
-  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
   private static final TypeMatcher FASTAPI_RESPONSE_INSTANCE = TypeMatchers.isObjectOfType("fastapi.Response");
   private static final TypeMatcher NONE_TYPE = TypeMatchers.isObjectOfType("NoneType");
@@ -59,9 +56,6 @@ public class HttpNoContentNonEmptyBodyCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx ->
-      reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile())
-    );
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, this::checkFunctionDef);
   }
 
@@ -176,7 +170,7 @@ public class HttpNoContentNonEmptyBodyCheck extends PythonSubscriptionCheck {
 
     if (expr.is(Tree.Kind.NAME)) {
       Name name = (Name) expr;
-      var assignedValues = reachingDefinitionsAnalysis.valuesAtLocation(name);
+      var assignedValues = ctx.valuesAtLocation(name);
 
       boolean anyInvalid = false;
       for (Expression assignedValue : assignedValues) {

@@ -39,13 +39,13 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx ->
       {
         FileInput fileInput = (FileInput) ctx.syntaxNode();
-        checkCfg(ControlFlowGraph.build(fileInput, ctx.pythonFile()), ctx, fileInput.statements());
+        checkCfg(ctx.cfg(fileInput), ctx, fileInput.statements());
       }
     );
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx ->
       {
         FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-        checkCfg(ControlFlowGraph.build(functionDef, ctx.pythonFile()), ctx, functionDef.body());
+        checkCfg(ctx.cfg(functionDef), ctx, functionDef.body());
       }
     );
 

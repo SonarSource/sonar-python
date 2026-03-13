@@ -21,16 +21,23 @@ import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 import org.sonar.python.caching.CacheContextImpl;
+import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
@@ -50,6 +57,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private final List<PreciseIssue> issues;
   private final ProjectConfiguration projectConfiguration;
   private final CallGraph callGraph;
+  private final Map<Tree, ControlFlowGraph> cfgMap;
+  private final ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
   private final TypeTable typeTable;
 
   private PythonVisitorContext(FileInput rootTree, 
@@ -61,12 +70,15 @@ public class PythonVisitorContext extends PythonInputFileContext {
       ProjectConfiguration projectConfiguration,
       ModuleType moduleType,
       CallGraph callGraph,
-      TypeTable typeTable
+      TypeTable typeTable,
+      Map<Tree, ControlFlowGraph> cfgMap
     ) {
     super(pythonFile, workingDirectory, cacheContext, sonarProduct, projectLevelSymbolTable);
     this.moduleType = moduleType;
     this.projectConfiguration = projectConfiguration;
     this.callGraph = callGraph;
+    this.cfgMap = cfgMap;
+    this.reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(pythonFile);
     this.rootTree = rootTree;
     this.parsingException = null;
     this.typeTable = typeTable;
@@ -82,6 +94,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.typeChecker = new TypeChecker(this.typeTable);
     this.projectConfiguration = new ProjectConfiguration();
     this.callGraph = CallGraph.EMPTY;
+    this.cfgMap = Map.of();
+    this.reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(pythonFile);
     this.issues = new ArrayList<>();
     this.moduleType = null;
   }
@@ -110,6 +124,10 @@ public class PythonVisitorContext extends PythonInputFileContext {
     return issues;
   }
 
+  public Set<Expression> valuesAtLocation(Name name) {
+    return reachingDefinitionsAnalysis.valuesAtLocation(name);
+  }
+
   @CheckForNull
   @Beta
   public ModuleType moduleType() {
@@ -122,6 +140,10 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
   public CallGraph callGraph() {
     return callGraph;
+  }
+
+  public ControlFlowGraph cfg(Tree tree) {
+    return cfgMap.get(tree);
   }
 
   public Optional<DjangoViewInfo> getDjangoViewInfo(String fqn) {
@@ -141,6 +163,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     private Optional<CallGraph> callGraph = Optional.empty();
     private Optional<String> packageName = Optional.empty();
     private Optional<ModuleType> moduleType = Optional.empty();
+    private Optional<Map<Tree, ControlFlowGraph>> cfgMap = Optional.empty();
 
     public Builder(FileInput rootTree, PythonFile pythonFile) {
       this.rootTree = rootTree;
@@ -192,16 +215,30 @@ public class PythonVisitorContext extends PythonInputFileContext {
       return this;
     }
 
+    // Allows passing pre-computed CFGs when moduleType is set externally and the builder skips type inference.
+    public Builder cfgMap(Map<Tree, ControlFlowGraph> cfgMap) {
+      this.cfgMap = Optional.of(cfgMap);
+      return this;
+    }
+
     public PythonVisitorContext build() {
       var symbolTable = projectLevelSymbolTable.orElseGet(ProjectLevelSymbolTable::empty);
       var pkgName = packageName.orElse("");
       buildSymbols(rootTree, pythonFile, pkgName, symbolTable);
       var finalTypeTable = this.typeTable.orElseGet(() -> new ProjectLevelTypeTable(symbolTable));
-      var mt = moduleType.orElseGet(() -> {
+
+      ModuleType mt;
+      Map<Tree, ControlFlowGraph> finalCfgMap;
+      if (moduleType.isPresent()) {
+        mt = moduleType.get();
+        finalCfgMap = cfgMap.orElse(Map.of());
+      } else {
         var symbolTableBuilderV2 = new SymbolTableBuilderV2(rootTree);
         var symbolTableV2 = symbolTableBuilderV2.build();
-        return new TypeInferenceV2(finalTypeTable, pythonFile, symbolTableV2, pkgName).inferModuleType(rootTree);
-      });
+        var typeInference = new TypeInferenceV2(finalTypeTable, pythonFile, symbolTableV2, pkgName);
+        mt = typeInference.inferModuleType(rootTree);
+        finalCfgMap = typeInference.getCfgMap();
+      }
 
       var finalCallGraph = callGraph.orElseGet(() -> CallGraphCollector.collectCallGraph(rootTree));
 
@@ -215,7 +252,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
         projectConfiguration.orElse(new ProjectConfiguration()),
         mt,
         finalCallGraph,
-        finalTypeTable
+        finalTypeTable,
+        finalCfgMap
       );
     }
 

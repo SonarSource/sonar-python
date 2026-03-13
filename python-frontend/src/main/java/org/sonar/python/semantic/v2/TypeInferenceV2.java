@@ -18,6 +18,7 @@ package org.sonar.python.semantic.v2;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,7 @@ public class TypeInferenceV2 {
   private final SymbolTable symbolTable;
   private final PythonFile pythonFile;
   private final String fullyQualifiedModuleName;
+  private final Map<Tree, ControlFlowGraph> cfgMap = new HashMap<>();
   private Set<String> importedModulesFQN;
 
   public TypeInferenceV2(TypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable, String packageName) {
@@ -156,6 +158,11 @@ public class TypeInferenceV2 {
       .map(Propagation::lhsName)
       .collect(Collectors.toSet());
 
+    ControlFlowGraph cfg = controlFlowGraphSupplier.get();
+    if (cfg != null) {
+      cfgMap.put(scopeTree, cfg);
+    }
+
     TryStatementVisitor tryStatementVisitor = new TryStatementVisitor();
     statements.accept(tryStatementVisitor);
     if (tryStatementVisitor.hasTryStatement()) {
@@ -164,7 +171,6 @@ public class TypeInferenceV2 {
         .process(getTrackedVars(declaredVariables, assignedNames));
     }
 
-    ControlFlowGraph cfg = controlFlowGraphSupplier.get();
     if (cfg == null) {
       return Map.of();
     }
@@ -220,5 +226,9 @@ public class TypeInferenceV2 {
 
   public Set<String> importedModulesFQN() {
     return importedModulesFQN;
+  }
+
+  public Map<Tree, ControlFlowGraph> getCfgMap() {
+    return Collections.unmodifiableMap(cfgMap);
   }
 }

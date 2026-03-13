@@ -62,7 +62,7 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-      ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, ctx.pythonFile());
+      ControlFlowGraph cfg = ctx.cfg(functionDef);
       if (cfg != null) {
         List<LatestExecutedBlock> latestExecutedBlocks = collectLatestExecutedBlocks(cfg);
         boolean allBlocksHaveReturnStatement = latestExecutedBlocks.stream().allMatch(LatestExecutedBlock::hasReturnStatement);

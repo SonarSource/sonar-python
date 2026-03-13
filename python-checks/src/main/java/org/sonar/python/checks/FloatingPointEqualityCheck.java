@@ -32,7 +32,6 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.TypeChecker;
@@ -52,7 +51,6 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
 
   private static final String MATH_MODULE = "math";
 
-  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
   private static final List<String> SUPPORTED_IS_CLOSE_MODULES = Arrays.asList("numpy", "torch", MATH_MODULE);
 
   private String importedModuleForIsClose;
@@ -71,7 +69,6 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
   }
 
   private void initializeAnalysis(SubscriptionContext ctx) {
-    reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile());
     importedModuleForIsClose = null;
     importedAlias = null;
     typeChecker = ctx.typeChecker();
@@ -80,19 +77,19 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
   private void checkFloatingPointEquality(SubscriptionContext ctx) {
     BinaryExpression binaryExpression = (BinaryExpression) ctx.syntaxNode();
     String operator = binaryExpression.operator().value();
-    if (("==".equals(operator) || "!=".equals(operator)) && isAnyOperandFloatingPoint(binaryExpression)) {
+    if (("==".equals(operator) || "!=".equals(operator)) && isAnyOperandFloatingPoint(binaryExpression, ctx)) {
       PreciseIssue issue = ctx.addIssue(binaryExpression, MESSAGE);
       issue.addQuickFix(createQuickFix(binaryExpression, operator));
     }
   }
 
-  private boolean isAnyOperandFloatingPoint(BinaryExpression binaryExpression) {
+  private boolean isAnyOperandFloatingPoint(BinaryExpression binaryExpression, SubscriptionContext ctx) {
     Expression leftOperand = binaryExpression.leftOperand();
     Expression rightOperand = binaryExpression.rightOperand();
 
     return isFloat(leftOperand) || isFloat(rightOperand) ||
-        isAssignedFloat(leftOperand) || isAssignedFloat(rightOperand) ||
-        isBinaryOperationWithFloat(leftOperand) || isBinaryOperationWithFloat(rightOperand);
+        isAssignedFloat(leftOperand, ctx) || isAssignedFloat(rightOperand, ctx) ||
+        isBinaryOperationWithFloat(leftOperand, ctx) || isBinaryOperationWithFloat(rightOperand, ctx);
   }
 
   private boolean isFloat(Expression expression) {
@@ -100,9 +97,9 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
     return expression.is(Tree.Kind.NUMERIC_LITERAL) && isTypeFloat == TriBool.TRUE;
   }
 
-  private boolean isAssignedFloat(Expression expression) {
+  private boolean isAssignedFloat(Expression expression, SubscriptionContext ctx) {
     if (expression.is(Tree.Kind.NAME)) {
-      Set<Expression> values = reachingDefinitionsAnalysis.valuesAtLocation((Name) expression);
+      Set<Expression> values = ctx.valuesAtLocation((Name) expression);
       if (!values.isEmpty()) {
         return values.stream().allMatch(this::isFloat);
       }
@@ -110,9 +107,9 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  private boolean isBinaryOperationWithFloat(Expression expression) {
+  private boolean isBinaryOperationWithFloat(Expression expression, SubscriptionContext ctx) {
     if (expression.is(BINARY_OPERATION_KINDS)) {
-      return isAnyOperandFloatingPoint((BinaryExpression) expression);
+      return isAnyOperandFloatingPoint((BinaryExpression) expression, ctx);
     }
     return false;
   }

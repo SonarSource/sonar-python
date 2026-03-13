@@ -47,7 +47,7 @@ public class ReferencedBeforeAssignmentCheck extends PythonSubscriptionCheck {
       if (TreeUtils.hasDescendant(functionDef, tree -> tree.is(Tree.Kind.TRY_STMT))) {
         return;
       }
-      ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, ctx.pythonFile());
+      ControlFlowGraph cfg = ctx.cfg(functionDef);
       if (cfg == null) {
         return;
       }

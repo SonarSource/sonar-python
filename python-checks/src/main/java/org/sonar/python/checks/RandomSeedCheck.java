@@ -32,7 +32,6 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.checks.cdk.CdkPredicate;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolUtils;
@@ -62,8 +61,6 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Provide a seed for this random generator.";
   private static final String SKLEARN_MESSAGE = "Provide a seed for the random_state parameter.";
-
-  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
   private static Predicate<CallExpression> keywordAbsentOrNotIn(String keyword, String... restrictedValues) {
     Set<String> restrictedValueSet = Set.of(restrictedValues);
@@ -99,7 +96,6 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT,
       ctx -> {
-        this.reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile());
         this.typeCheckMap = new TypeCheckMap<>();
         SKLEARN_EXCEPTIONS.forEach((fqn, predicate) -> this.typeCheckMap.put(ctx.typeChecker().typeCheckBuilder().isTypeWithFqn(fqn), predicate));
       });
@@ -114,12 +110,12 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
     maybeCalleeSymbol
       .map(Symbol::fullyQualifiedName)
       .map(SEED_METHODS_TO_CHECK::get)
-      .filter(argName -> isArgumentAbsentOrNone(TreeUtils.nthArgumentOrKeyword(0, argName, call.arguments())))
+      .filter(argName -> isArgumentAbsentOrNone(TreeUtils.nthArgumentOrKeyword(0, argName, call.arguments()), ctx))
       .map(arg -> MESSAGE)
       .or(() -> maybeCalleeSymbol
         .filter(symbol -> symbol.fullyQualifiedName() != null && symbol.fullyQualifiedName().startsWith(SKLEARN_FQN))
         .filter(RandomSeedCheck::hasRandomStateParameter)
-        .filter(symbol -> isArgumentAbsentOrNone(TreeUtils.argumentByKeyword(SKLEARN_ARG_NAME, call.arguments())))
+        .filter(symbol -> isArgumentAbsentOrNone(TreeUtils.argumentByKeyword(SKLEARN_ARG_NAME, call.arguments()), ctx))
         .filter(symbol -> !isSKLearnException(call))
         .map(symbol -> SKLEARN_MESSAGE))
       .ifPresent(message -> ctx.addIssue(call.callee(), message));
@@ -156,14 +152,14 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
         .anyMatch(SKLEARN_ARG_NAME::equals));
   }
 
-  private boolean isArgumentAbsentOrNone(@Nullable RegularArgument arg) {
-    return arg == null || arg.expression().is(Tree.Kind.NONE) || isAssignedNone(arg.expression());
+  private static boolean isArgumentAbsentOrNone(@Nullable RegularArgument arg, SubscriptionContext ctx) {
+    return arg == null || arg.expression().is(Tree.Kind.NONE) || isAssignedNone(arg.expression(), ctx);
   }
 
-  private boolean isAssignedNone(Expression exp) {
+  private static boolean isAssignedNone(Expression exp, SubscriptionContext ctx) {
     return Optional.of(exp)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
-      .map(reachingDefinitionsAnalysis::valuesAtLocation)
+      .map(ctx::valuesAtLocation)
       .filter(Predicate.not(Set::isEmpty))
       .filter(values -> values.stream().allMatch(value -> value.is(Tree.Kind.NONE))).isPresent();
   }

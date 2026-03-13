@@ -33,7 +33,6 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
-import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.AND;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
@@ -48,13 +47,6 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
 
   private static final String MESSAGE = "Replace this expression; used as a condition it will always be constant.";
   private static final List<String> ACCEPTED_DECORATORS = List.of("overload", "staticmethod", "classmethod");
-  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
-
-  @Override
-  public void visitFileInput(FileInput fileInput) {
-    reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(getContext().pythonFile());
-    super.visitFileInput(fileInput);
-  }
 
   @Override
   public void visitIfStatement(IfStatement ifStatement) {
@@ -143,7 +135,7 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
       }
     }
     if (expression.is(NAME)) {
-      Set<Expression> valuesAtLocation = reachingDefinitionsAnalysis.valuesAtLocation(((Name) expression));
+      Set<Expression> valuesAtLocation = getContext().valuesAtLocation(((Name) expression));
       if (valuesAtLocation.size() == 1) {
         Expression lastAssignedValue = valuesAtLocation.iterator().next();
         if (isImmutableConstant(lastAssignedValue)) {

@@ -27,21 +27,16 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6887")
 public class PytzTimeZoneInDatetimeConstructorCheck extends PythonSubscriptionCheck {
 
-  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
   private static final String MESSAGE = "Don't pass a \"pytz.timezone\" to the \"datetime.datetime\" constructor.";
   private static final String SECONDARY_MESSAGE = "The pytz.timezone is created here.";
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT,
-      ctx -> reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
-
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
   }
 
@@ -67,7 +62,7 @@ public class PytzTimeZoneInDatetimeConstructorCheck extends PythonSubscriptionCh
       }
       context.addIssue(argument, MESSAGE);
     } else if (argument.expression().is(Tree.Kind.NAME)) {
-      List<CallExpression> allSecondaryLocations = reachingDefinitionsAnalysis.valuesAtLocation((Name) argument.expression()).stream()
+      List<CallExpression> allSecondaryLocations = context.valuesAtLocation((Name) argument.expression()).stream()
         .filter(expression -> expression.is(Tree.Kind.CALL_EXPR))
         .map(CallExpression.class::cast)
         .filter(call -> Optional.ofNullable(call.calleeSymbol()).map(symbol ->"pytz.timezone".equals(symbol.fullyQualifiedName())).orElse(false))

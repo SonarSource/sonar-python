@@ -34,7 +34,6 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -58,13 +57,8 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
 
   private static final Set<String> ACCEPTED_DECORATORS = Set.of("overload", "staticmethod", "classmethod");
 
-  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
-
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx ->
-      reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
-
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSERT_STMT, ctx -> {
       AssertStatement assertStatement = (AssertStatement) ctx.syntaxNode();
       Expression condition = assertStatement.condition();
@@ -115,13 +109,13 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
   }
 
   private void checkNoneAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg) {
-    if (isUnconditional(arg)) {
+    if (isUnconditional(arg, ctx)) {
       ctx.addIssue(call, NONE_MESSAGE);
     }
   }
 
   private void checkBooleanAssertion(SubscriptionContext ctx, RegularArgument arg) {
-    if (isUnconditional(arg)) {
+    if (isUnconditional(arg, ctx)) {
       ctx.addIssue(arg, BOOLEAN_MESSAGE);
     }
   }
@@ -132,7 +126,7 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private boolean isUnconditional(RegularArgument argument) {
+  private static boolean isUnconditional(RegularArgument argument, SubscriptionContext ctx) {
     Expression expression = argument.expression();
     if (isConstant(expression)) {
       return true;
@@ -151,7 +145,7 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     }
 
     if (expression.is(NAME)) {
-      Set<Expression> valuesAtLocation = reachingDefinitionsAnalysis.valuesAtLocation(((Name) expression));
+      Set<Expression> valuesAtLocation = ctx.valuesAtLocation(((Name) expression));
       if (valuesAtLocation.size() == 1) {
         return CheckUtils.isImmutableConstant(valuesAtLocation.iterator().next());
       }

@@ -17,7 +17,10 @@
 package org.sonar.python;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -31,7 +34,11 @@ import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.PythonVisitorContext.Builder;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.regex.RegexContext;
@@ -163,6 +170,49 @@ class SubscriptionVisitorTest {
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
     assertThat(latch.getCount())
       .withFailMessage("CallGraph was not accessed")
+      .isZero();
+  }
+
+  @Test
+  void reachingDefinitionAnalysis() {
+    var latch = new CountDownLatch(2);
+    var firstResult = new AtomicReference<Set<Expression>>();
+
+    var check1 = new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.EXPRESSION_STMT, ctx -> {
+          var exprStmt = (ExpressionStatement) ctx.syntaxNode();
+          var expr = exprStmt.expressions().get(0);
+          if (expr instanceof Name name && "x".equals(name.name())) {
+            var values = ctx.valuesAtLocation(name);
+            assertThat(values).extracting(e -> ((NumericLiteral) e).valueAsString()).containsExactly("42");
+            firstResult.set(values);
+            latch.countDown();
+          }
+        });
+      }
+    };
+
+    var check2 = new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.EXPRESSION_STMT, ctx -> {
+          var exprStmt = (ExpressionStatement) ctx.syntaxNode();
+          var expr = exprStmt.expressions().get(0);
+          if (expr instanceof Name name && "x".equals(name.name())) {
+            assertThat(ctx.valuesAtLocation(name)).isSameAs(firstResult.get());
+            latch.countDown();
+          }
+        });
+      }
+    };
+
+    var fileInput = PythonTestUtils.parse("def f():\n  x = 42\n  x");
+    var context = new Builder(fileInput, PythonTestUtils.pythonFile("file")).build();
+    SubscriptionVisitor.analyze(List.of(check1, check2), context);
+    assertThat(latch.getCount())
+      .withFailMessage("valuesAtLocation was not called by both checks")
       .isZero();
   }
 }

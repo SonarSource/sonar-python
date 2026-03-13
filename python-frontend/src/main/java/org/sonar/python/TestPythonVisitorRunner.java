@@ -89,7 +89,8 @@ public class TestPythonVisitorRunner {
     var typeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
     var symbolTableBuilderV2 = new SymbolTableBuilderV2(rootTree);
     var symbolTableV2 = symbolTableBuilderV2.build();
-    var moduleType = new TypeInferenceV2(typeTable, pythonFile, symbolTableV2, packageName).inferModuleType(rootTree);
+    var typeInference = new TypeInferenceV2(typeTable, pythonFile, symbolTableV2, packageName);
+    var moduleType = typeInference.inferModuleType(rootTree);
 
     if (projectConfiguration == null) {
       var projectConfigurationBuilder = new ProjectConfigurationBuilder();
@@ -105,6 +106,7 @@ public class TestPythonVisitorRunner {
       .projectConfiguration(projectConfiguration)
       .typeTable(typeTable)
       .moduleType(moduleType)
+      .cfgMap(typeInference.getCfgMap())
       .build();
   }
 

@@ -40,7 +40,7 @@ public class ConsistentReturnCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-      ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, ctx.pythonFile());
+      ControlFlowGraph cfg = ctx.cfg(functionDef);
       if (cfg == null || hasExceptOrFinally(cfg)) {
         return;
       }
