@@ -111,8 +111,8 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
   }
 
   private static void addIssue(SubscriptionContext context, CallExpression callExpression) {
-    Optional<Tree> secondary = sensitiveArgumentValue(callExpression);
-    secondary.ifPresent(tree ->  context.addIssue(callExpression, MESSAGE).secondary(tree, null));
+    Optional<Tree> secondary = sensitiveArgumentValue(callExpression, context);
+    secondary.ifPresent(tree -> context.addIssue(callExpression, MESSAGE).secondary(tree, null));
   }
 
   private static boolean isException(CallExpression callExpression, String functionName) {
@@ -123,7 +123,7 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
     return argListNode.isEmpty();
   }
 
-  private static Optional<Tree> sensitiveArgumentValue(CallExpression callExpression) {
+  private static Optional<Tree> sensitiveArgumentValue(CallExpression callExpression, SubscriptionContext ctx) {
     List<Argument> argListNode = callExpression.arguments();
     if (argListNode.isEmpty()) {
       return Optional.empty();
@@ -134,12 +134,25 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
     }
     Expression expression = getExpression(((RegularArgument) arg).expression());
     if (expression.is(Tree.Kind.NAME)) {
-      expression = Expressions.singleAssignedValue((Name) expression);
+      return findFormattedValue((Name) expression, ctx);
     }
-    if (expression != null && isFormatted(expression)) {
+    if (isFormatted(expression)) {
       return Optional.of(expression);
     }
     return Optional.empty();
+  }
+
+  private static Optional<Tree> findFormattedValue(Name name, SubscriptionContext ctx) {
+    Set<Expression> values = ctx.valuesAtLocation(name);
+    if (!values.isEmpty()) {
+      return values.stream()
+        .filter(SQLQueriesCheck::isFormatted)
+        .findFirst()
+        .map(Tree.class::cast);
+    }
+    return Optional.ofNullable(Expressions.singleAssignedValue(name))
+      .filter(SQLQueriesCheck::isFormatted)
+      .map(Tree.class::cast);
   }
 
   private static boolean isFormatted(Expression tree) {

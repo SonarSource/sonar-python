@@ -30,7 +30,7 @@ class MyUser(models.Model):
         MyUser.objects.raw(formatted_request3)  # Noncompliant
         MyUser.objects.raw(y := formatted_request3)  # Noncompliant
         MyUser.objects.raw((y := formatted_request3))  # Noncompliant
-        MyUser.objects.raw(formatted_request4)  # FN, multiple assignments
+        MyUser.objects.raw(formatted_request4)  # Noncompliant
         MyUser.objects.raw(formatted_request5)  # OK
         MyUser.objects.raw(*formatted_request5)  # OK
 
@@ -57,6 +57,22 @@ class MyUser(models.Model):
 
         MyUser.objects.extra({ 'mycol': "select col from sometable here mycol = %s and othercol = " + value}) # Noncompliant
         MyUser.objects.extra({ 'mycol': "select col from sometable here mycol = %s and othercol = " + ""}) # Noncompliant
+
+    def test_reaching_definitions(self, request, value):
+        query = "SELECT 1"
+        if request:
+            query = 'SELECT * FROM mytable WHERE name = "%s"' % value
+        MyUser.objects.raw(query)  # Noncompliant
+
+        safe_query = "SELECT 1"
+        if request:
+            safe_query = "SELECT 2"
+        MyUser.objects.raw(safe_query)  # OK
+
+        all_formatted = 'SELECT * FROM mytable WHERE name = "%s"' % value
+        if request:
+            all_formatted = f'SELECT * FROM mytable WHERE name = "{value}"'
+        MyUser.objects.raw(all_formatted)  # Noncompliant
 
      def fun():
         pass
