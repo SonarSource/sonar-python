@@ -22,14 +22,14 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6714")
@@ -37,17 +37,19 @@ public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Pass a list to \"np.array\" instead of passing a generator.";
 
+  private static final TypeMatcher IS_NUMPY_ARRAY = TypeMatchers.withFQN("numpy.array");
+  private static final TypeMatcher IS_OBJECT_TYPE = TypeMatchers.isType("builtins.object");
+
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkNumpyArrayCall);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, NumpyListOverGeneratorCheck::checkNumpyArrayCall);
   }
 
-  private void checkNumpyArrayCall(SubscriptionContext ctx) {
+  private static void checkNumpyArrayCall(SubscriptionContext ctx) {
     CallExpression call = (CallExpression) ctx.syntaxNode();
-    Optional.ofNullable(call.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .filter("numpy.array"::equals)
-      .ifPresent(fqn -> checkGeneratorCallee(call, ctx));
+    if (IS_NUMPY_ARRAY.isTrueFor(call.callee(), ctx)) {
+      checkGeneratorCallee(call, ctx);
+    }
   }
 
   private static void checkGeneratorCallee(CallExpression call, SubscriptionContext ctx) {
@@ -65,13 +67,8 @@ public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    if (Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(1, "dtype", argList))
-      .filter(regArg -> regArg.expression().is(Tree.Kind.NAME))
-      .map(regArg -> (Name) regArg.expression())
-      .map(HasSymbol::symbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter("object"::equals)
-      .isEmpty()) {
+    RegularArgument dtypeArg = TreeUtils.nthArgumentOrKeyword(1, "dtype", argList);
+    if (dtypeArg == null || !IS_OBJECT_TYPE.isTrueFor(dtypeArg.expression(), ctx)) {
       ctx.addIssue(call, MESSAGE);
     }
   }

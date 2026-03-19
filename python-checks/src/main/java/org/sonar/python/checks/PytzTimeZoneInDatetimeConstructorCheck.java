@@ -37,10 +37,10 @@ public class PytzTimeZoneInDatetimeConstructorCheck extends PythonSubscriptionCh
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, PytzTimeZoneInDatetimeConstructorCheck::checkCallExpression);
   }
 
-  private void checkCallExpression(SubscriptionContext context) {
+  private static void checkCallExpression(SubscriptionContext context) {
     CallExpression callExpression = (CallExpression) context.syntaxNode();
     Symbol calleeSymbol = callExpression.calleeSymbol();
 
