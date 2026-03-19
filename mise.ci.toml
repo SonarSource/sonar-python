@@ -1,0 +1,4 @@
+[settings]
+# Keep tox in base mise.toml for local development, but skip mise-managed tox
+# in CI and install it explicitly via uv where needed.
+disable_tools = ["pipx:tox"]
