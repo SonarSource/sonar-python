@@ -37,7 +37,7 @@ public class ReturnAndYieldInOneFunctionCheck extends PythonSubscriptionCheck {
       func.body().accept(returnAndYieldVisitor);
 
       if (returnAndYieldVisitor.hasYield && returnAndYieldVisitor.hasReturn) {
-        ctx.addIssue(func.name(), "Use only \"return\" or only \"yield\", not both.");
+        ctx.addIssue(func.name(), "Only yield or return values from this function, not both.");
       }
     });
   }
