@@ -51,15 +51,14 @@ public class HttpNoContentNonEmptyBodyCheck extends PythonSubscriptionCheck {
     TypeMatchers.withFQN("fastapi.applications.FastAPI.patch"),
     TypeMatchers.withFQN("fastapi.applications.FastAPI.options"),
     TypeMatchers.withFQN("fastapi.applications.FastAPI.head"),
-    TypeMatchers.withFQN("fastapi.applications.FastAPI.trace")
-  );
+    TypeMatchers.withFQN("fastapi.applications.FastAPI.trace"));
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, this::checkFunctionDef);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, HttpNoContentNonEmptyBodyCheck::checkFunctionDef);
   }
 
-  private void checkFunctionDef(SubscriptionContext ctx) {
+  private static void checkFunctionDef(SubscriptionContext ctx) {
     FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
 
     if (!isFastApiEndpointWithNoContentStatus(ctx, functionDef)) {
@@ -73,9 +72,7 @@ public class HttpNoContentNonEmptyBodyCheck extends PythonSubscriptionCheck {
     for (Decorator decorator : functionDef.decorators()) {
       Expression decoratorExpression = decorator.expression();
 
-      if (decoratorExpression.is(Tree.Kind.CALL_EXPR)) {
-        CallExpression callExpr = (CallExpression) decoratorExpression;
-
+      if (decoratorExpression instanceof CallExpression callExpr) {
         if (!FASTAPI_METHODS_MATCHER.isTrueFor(callExpr.callee(), ctx)) {
           continue;
         }
@@ -100,7 +97,7 @@ public class HttpNoContentNonEmptyBodyCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  private void findProblematicReturns(SubscriptionContext ctx, FunctionDef functionDef) {
+  private static void findProblematicReturns(SubscriptionContext ctx, FunctionDef functionDef) {
     List<ReturnStatement> allReturns = new ArrayList<>();
     collectReturnStatements(functionDef.body(), allReturns);
 
@@ -135,7 +132,7 @@ public class HttpNoContentNonEmptyBodyCheck extends PythonSubscriptionCheck {
     tree.children().forEach(child -> collectReturnStatements(child, returns));
   }
 
-  private ValidationResult isValidReturnStatement(SubscriptionContext ctx, ReturnStatement returnStmt) {
+  private static ValidationResult isValidReturnStatement(SubscriptionContext ctx, ReturnStatement returnStmt) {
     List<Expression> expressions = returnStmt.expressions();
 
     if (expressions.isEmpty()) {
@@ -161,39 +158,31 @@ public class HttpNoContentNonEmptyBodyCheck extends PythonSubscriptionCheck {
     return new ValidationResult(false);
   }
 
-  private ValidationResult isValidResponseObject(SubscriptionContext ctx, Expression expr) {
+  private static ValidationResult isValidResponseObject(SubscriptionContext ctx, Expression expr) {
     if (!FASTAPI_RESPONSE_INSTANCE.isTrueFor(expr, ctx)) {
       return new ValidationResult(false);
     }
 
     List<Tree> secondaryLocations = new ArrayList<>();
 
-    if (expr.is(Tree.Kind.NAME)) {
-      Name name = (Name) expr;
+    if (expr instanceof Name name) {
       var assignedValues = ctx.valuesAtLocation(name);
 
       boolean anyInvalid = false;
       for (Expression assignedValue : assignedValues) {
-        if (assignedValue.is(Tree.Kind.CALL_EXPR)) {
-          CallExpression callExpr = (CallExpression) assignedValue;
-
+        if (assignedValue instanceof CallExpression callExpr && isInvalidResponseCall(callExpr)) {
           // Check if this Response has invalid arguments
-          if (isInvalidResponseCall(callExpr)) {
-            anyInvalid = true;
-            secondaryLocations.add(assignedValue);
-          }
+          anyInvalid = true;
+          secondaryLocations.add(assignedValue);
         }
       }
 
       if (anyInvalid) {
         return new ValidationResult(false, secondaryLocations);
       }
-    } else if (expr.is(Tree.Kind.CALL_EXPR)) {
+    } else if (expr instanceof CallExpression callExpr && isInvalidResponseCall(callExpr)) {
       // Direct Response constructor call
-      CallExpression callExpr = (CallExpression) expr;
-      if (isInvalidResponseCall(callExpr)) {
-        return new ValidationResult(false);
-      }
+      return new ValidationResult(false);
     }
 
     return new ValidationResult(true);

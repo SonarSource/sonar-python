@@ -53,7 +53,7 @@ public class PytzTimeZoneInDatetimeConstructorCheck extends PythonSubscriptionCh
     }
   }
 
-  private void checkArgument(RegularArgument argument, SubscriptionContext context) {
+  private static void checkArgument(RegularArgument argument, SubscriptionContext context) {
     if (argument.expression().is(Tree.Kind.CALL_EXPR)) {
       CallExpression callExpression = (CallExpression) argument.expression();
       Symbol calleeSymbol = callExpression.calleeSymbol();

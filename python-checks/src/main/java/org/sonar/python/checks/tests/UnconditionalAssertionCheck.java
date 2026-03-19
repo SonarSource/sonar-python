@@ -108,13 +108,13 @@ public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  private void checkNoneAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg) {
+  private static void checkNoneAssertion(SubscriptionContext ctx, CallExpression call, RegularArgument arg) {
     if (isUnconditional(arg, ctx)) {
       ctx.addIssue(call, NONE_MESSAGE);
     }
   }
 
-  private void checkBooleanAssertion(SubscriptionContext ctx, RegularArgument arg) {
+  private static void checkBooleanAssertion(SubscriptionContext ctx, RegularArgument arg) {
     if (isUnconditional(arg, ctx)) {
       ctx.addIssue(arg, BOOLEAN_MESSAGE);
     }

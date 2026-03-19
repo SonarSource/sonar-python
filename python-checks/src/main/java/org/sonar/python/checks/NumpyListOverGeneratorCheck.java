@@ -50,7 +50,7 @@ public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
       .ifPresent(fqn -> checkGeneratorCallee(call, ctx));
   }
 
-  private void checkGeneratorCallee(CallExpression call, SubscriptionContext ctx) {
+  private static void checkGeneratorCallee(CallExpression call, SubscriptionContext ctx) {
     List<Argument> argList = call.arguments();
     if (argList.isEmpty()) {
       return;
