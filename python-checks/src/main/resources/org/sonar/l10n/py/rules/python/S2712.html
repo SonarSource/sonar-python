@@ -1,14 +1,37 @@
+<p>This rule raises an issue when a <code>return</code> statement with a value is used inside a generator function (a function that uses
+<code>yield</code>).</p>
 <h2>Why is this an issue?</h2>
-<p>Functions that use <code>yield</code> are known as "generators". Before Python 3.3, generators cannot <code>return</code> values. Similarly,
-functions that use <code>return</code> cannot use <code>yield</code>. Doing so will cause a <code>SyntaxError</code>.</p>
-<p>Either upgrade your version of Python to a version &gt;= 3.3, or don’t use both return and yield in a function.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-def adder(n):
-     num = 0
-     while num &lt; n:
-         yield num
-         num += 1
-     return num  #Noncompliant
+<p>When a generator function uses <code>return</code> with a value, the value is not sent to the caller like a normal function return. Instead, it is
+silently attached to the <code>StopIteration</code> exception’s <code>value</code> attribute. Most callers iterate generators with a <code>for</code>
+loop, which swallows <code>StopIteration</code> automatically and discards the returned value entirely. This makes the <code>return</code> value
+effectively invisible and can lead to subtle bugs where developers expect the value to be accessible but it never reaches the calling code.</p>
+<p>A bare <code>return</code> (without a value) in a generator is fine — it simply ends the generator’s execution early, similar to how
+<code>return</code> works in a regular function.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def counter(n):
+    num = 0
+    while num &lt; n:
+        yield num
+        num += 1
+    return num  # Noncompliant: return with a value in a generator
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def counter(n):
+    num = 0
+    while num &lt; n:
+        yield num
+        num += 1
+    return  # Compliant: bare return for early exit is fine
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li><a href="https://peps.python.org/pep-0380/">PEP 380 - Syntax for Delegating to a Subgenerator</a> - introduces <code>return</code> in
+  generators</li>
+  <li><a href="https://docs.python.org/3/reference/simple_stmts.html#the-return-statement">Python Documentation - The return statement</a></li>
+</ul>
 
