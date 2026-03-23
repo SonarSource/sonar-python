@@ -16,34 +16,38 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S5445")
 public class TempFileCreationCheck extends PythonSubscriptionCheck {
 
-  private static final List<String> SUSPICIOUS_CALLS = Arrays.asList("os.tempnam", "os.tmpnam", "tempfile.mktemp");
+  // os.tempnam and os.tmpnam were removed in Python 3 and have no stubs.
+  // We use withFQN to match both qualified (os.tempnam) and direct import (from os import tempnam) forms,
+  // as the callee gets typed as UnresolvedImportType("os.tempnam") in both cases.
+  private static final TypeMatcher INSECURE_CALLS = TypeMatchers.any(
+    TypeMatchers.isType("tempfile.mktemp"),
+    TypeMatchers.withFQN("os.tempnam"),
+    TypeMatchers.withFQN("os.tmpnam")
+  );
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      CallExpression callExpr = (CallExpression) ctx.syntaxNode();
-      Symbol symbol = callExpr.calleeSymbol();
-      isInsecureTempFile(symbol).ifPresent(s -> ctx.addIssue(callExpr, String.format("'%s' is insecure. Use 'tempfile.TemporaryFile' instead", s)));
-    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, TempFileCreationCheck::checkCallExpression);
   }
 
-  private static Optional<String> isInsecureTempFile(@Nullable Symbol symbol) {
-    if (symbol == null) {
-      return Optional.empty();
-    }
-    return SUSPICIOUS_CALLS.stream().filter(call -> call.equals(symbol.fullyQualifiedName())).findFirst();
+  private static void checkCallExpression(SubscriptionContext ctx) {
+    CallExpression callExpr = (CallExpression) ctx.syntaxNode();
+    Optional.of(callExpr.callee())
+      .filter(callee -> INSECURE_CALLS.isTrueFor(callee, ctx))
+      .flatMap(callee -> FullyQualifiedNameHelper.getFullyQualifiedName(callee.typeV2()))
+      .ifPresent(name -> ctx.addIssue(callExpr.callee(), String.format("'%s' is insecure. Use 'tempfile.TemporaryFile' instead", name)));
   }
 }

@@ -4041,8 +4041,10 @@ public class TypeInferenceV2Test {
     var actualFoo = tupleExpr.elements().get(1);
 
     assertThat(importedFoo.typeV2())
-      .isEqualTo(PythonType.UNKNOWN)
+      .isInstanceOf(UnknownType.UnresolvedImportType.class)
       .isNotEqualTo(actualFoo.typeV2());
+    assertThat(((UnknownType.UnresolvedImportType) importedFoo.typeV2()).importPath())
+      .isEqualTo("mod2.foo");
   }
 
   @Test

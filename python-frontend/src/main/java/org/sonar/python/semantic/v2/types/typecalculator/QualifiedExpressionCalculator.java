@@ -20,8 +20,10 @@ import java.util.Optional;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.semantic.v2.types.TypeInferenceMatcher;
 import org.sonar.python.semantic.v2.types.TypeInferenceMatchers;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
@@ -38,10 +40,16 @@ public class QualifiedExpressionCalculator {
 
   public PythonType calculate(QualifiedExpression qualifiedExpression) {
     Name name = qualifiedExpression.name();
-    return Optional.of(qualifiedExpression.qualifier())
-      .map(Expression::typeV2)
+    PythonType qualifierType = qualifiedExpression.qualifier().typeV2();
+    return Optional.of(qualifierType)
       .flatMap(t -> t.resolveMember(name.name()))
       .map(this::handlePropertyFunction)
+      .orElseGet(() -> unresolvedMemberType(qualifierType, name.name()));
+  }
+
+  private static PythonType unresolvedMemberType(PythonType qualifierType, String memberName) {
+    return FullyQualifiedNameHelper.getFullyQualifiedName(qualifierType)
+      .map(qualifierFqn -> (PythonType) new UnknownType.UnresolvedImportType(qualifierFqn + "." + memberName))
       .orElse(PythonType.UNKNOWN);
   }
 

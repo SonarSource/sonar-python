@@ -22,6 +22,7 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
@@ -112,6 +113,21 @@ class QualifiedExpressionCalculatorTest {
     PythonType result = calculator.calculate(qualifiedExpression);
 
     assertThat(result).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void calculate_unknownMemberOnKnownModule_returnsUnresolvedImportType() {
+    FileInput fileInput = parseAndInferTypes("""
+      import os
+      os.nonexistent_member
+      """);
+
+    var qualifiedExpression = getQualifiedExpressionFromStatement(fileInput);
+    PythonType result = calculator.calculate(qualifiedExpression);
+
+    assertThat(result).isInstanceOf(UnknownType.UnresolvedImportType.class);
+    var unresolvedType = (UnknownType.UnresolvedImportType) result;
+    assertThat(unresolvedType.importPath()).isEqualTo("os.nonexistent_member");
   }
 
   private static QualifiedExpression getQualifiedExpressionFromStatement(FileInput fileInput) {
