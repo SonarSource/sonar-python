@@ -18,21 +18,22 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S6979")
 public class TorchAutogradVariableShouldNotBeUsedCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Replace this call with a call to \"torch.tensor\".";
-  private static final String TORCH_AUTOGRAD_VARIABLE = "torch.autograd.Variable";
+  // torch.autograd.Variable has no stubs, so the type resolves as UnresolvedImportType. Use withFQN to match on the FQN directly.
+  private static final TypeMatcher TORCH_AUTOGRAD_VARIABLE = TypeMatchers.withFQN("torch.autograd.Variable");
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-      Symbol calleeSymbol = callExpression.calleeSymbol();
-      if (calleeSymbol != null && TORCH_AUTOGRAD_VARIABLE.equals(calleeSymbol.fullyQualifiedName())) {
+      if (TORCH_AUTOGRAD_VARIABLE.isTrueFor(callExpression.callee(), ctx)) {
         ctx.addIssue(callExpression.callee(), MESSAGE);
       }
     });

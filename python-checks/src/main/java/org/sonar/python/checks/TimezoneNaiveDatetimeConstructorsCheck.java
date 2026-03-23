@@ -16,18 +16,22 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Set;
+import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.FullyQualifiedNameHelper;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S6903")
 public class TimezoneNaiveDatetimeConstructorsCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Don't use `%s` to create this datetime object.";
-  private static final Set<String> NON_COMPLIANT_FQNS = Set.of("datetime.datetime.utcnow", "datetime.datetime.utcfromtimestamp");
+  private static final TypeMatcher NON_COMPLIANT_MATCHER = TypeMatchers.any(
+    TypeMatchers.isType("datetime.datetime.utcnow"),
+    TypeMatchers.isType("datetime.datetime.utcfromtimestamp"));
 
   @Override
   public void initialize(Context context) {
@@ -36,15 +40,9 @@ public class TimezoneNaiveDatetimeConstructorsCheck extends PythonSubscriptionCh
 
   private static void checkCallExpr(SubscriptionContext context) {
     CallExpression callExpression = (CallExpression) context.syntaxNode();
-    Symbol calleeSymbol = callExpression.calleeSymbol();
-
-    if (calleeSymbol == null) {
-      return;
-    }
-    String fullyQualifiedName = calleeSymbol.fullyQualifiedName();
-    if (fullyQualifiedName == null || !NON_COMPLIANT_FQNS.contains(fullyQualifiedName)) {
-      return;
-    }
-    context.addIssue(callExpression, String.format(MESSAGE, fullyQualifiedName));
+    Optional.of(callExpression.callee())
+      .filter(callee -> NON_COMPLIANT_MATCHER.isTrueFor(callee, context))
+      .flatMap(callee -> FullyQualifiedNameHelper.getFullyQualifiedName(callee.typeV2()))
+      .ifPresent(fqn -> context.addIssue(callExpression.callee(), String.format(MESSAGE, fqn)));
   }
 }

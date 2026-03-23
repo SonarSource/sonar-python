@@ -19,12 +19,13 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
@@ -34,6 +35,7 @@ public class StrftimeConfusingHourSystemCheck extends PythonSubscriptionCheck {
   public static final String MESSAGE = "Use %I (12-hour clock) or %H (24-hour clock) without %p (AM/PM).";
   public static final String MESSAGE_12_HOURS = "Use %I (12-hour clock) with %p (AM/PM).";
   private static final String MESSAGE_SECONDARY_LOCATION = "Wrong format created here.";
+  private static final TypeMatcher STRFTIME_MATCHER = TypeMatchers.isType("datetime.time.strftime");
 
   @Override
   public void initialize(Context context) {
@@ -70,12 +72,7 @@ public class StrftimeConfusingHourSystemCheck extends PythonSubscriptionCheck {
 
   private static void checkCallExpr(SubscriptionContext context) {
     CallExpression callExpression = (CallExpression) context.syntaxNode();
-    Symbol calleeSymbol = callExpression.calleeSymbol();
-    if (calleeSymbol == null) {
-      return;
-    }
-    String fullyQualifiedName = calleeSymbol.fullyQualifiedName();
-    if (!"datetime.time.strftime".equals(fullyQualifiedName)) {
+    if (!STRFTIME_MATCHER.isTrueFor(callExpression.callee(), context)) {
       return;
     }
 

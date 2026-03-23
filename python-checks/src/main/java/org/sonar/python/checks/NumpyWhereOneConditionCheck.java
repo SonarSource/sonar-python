@@ -22,19 +22,22 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "S6729")
 public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use \"np.nonzero\" when only the condition parameter is provided to \"np.where\".";
+  // numpy.where has no stubs, so the type resolves as UnresolvedImportType. Use withFQN to match on the FQN directly.
+  private static final TypeMatcher NUMPY_WHERE = TypeMatchers.withFQN("numpy.where");
 
   @Override
   public void initialize(Context context) {
@@ -43,15 +46,11 @@ public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
 
   private static void checkNumpyWhereCall(SubscriptionContext ctx) {
     CallExpression ce = (CallExpression) ctx.syntaxNode();
-    Symbol symbol = ce.calleeSymbol();
-    Optional.ofNullable(symbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter("numpy.where"::equals)
-      .filter(fqn -> hasOneParameter(ce))
-      .ifPresent(fqn -> {
-        PreciseIssue issue = ctx.addIssue(ce, MESSAGE);
-        addQuickFix(ce, issue);
-      });
+    if (!NUMPY_WHERE.isTrueFor(ce.callee(), ctx) || !hasOneParameter(ce)) {
+      return;
+    }
+    PreciseIssue issue = ctx.addIssue(ce, MESSAGE);
+    addQuickFix(ce, issue);
   }
 
   private static void addQuickFix(CallExpression ce, PreciseIssue issue) {

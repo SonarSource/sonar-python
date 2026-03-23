@@ -20,18 +20,22 @@ import com.sonar.sslr.api.TokenType;
 import java.util.EnumSet;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.plugins.python.api.symbols.Symbol;
 
 import static org.sonar.python.checks.utils.Expressions.removeParentheses;
 
 @Rule(key = "S3981")
 public class CollectionLengthComparisonCheck extends PythonSubscriptionCheck {
+
+  private static final TypeMatcher LEN_MATCHER = TypeMatchers.isType("len");
 
   private static final EnumSet<PythonPunctuator> INVALID_OPERATORS =
     EnumSet.of(PythonPunctuator.LT, PythonPunctuator.GT_EQU);
@@ -46,8 +50,8 @@ public class CollectionLengthComparisonCheck extends PythonSubscriptionCheck {
       Expression left = removeParentheses(comparison.leftOperand());
       Expression right = removeParentheses(comparison.rightOperand());
       TokenType operator = comparison.operator().type();
-      if ((isCallToLen(left) && isZero(right) && INVALID_OPERATORS.contains(operator))
-        || (isCallToLen(right) && isZero(left) && INVALID_REVERSE_OPERATORS.contains(operator))) {
+      if ((isCallToLen(left, ctx) && isZero(right) && INVALID_OPERATORS.contains(operator))
+        || (isCallToLen(right, ctx) && isZero(left) && INVALID_REVERSE_OPERATORS.contains(operator))) {
         ctx.addIssue(comparison, "The length of a collection is always \">=0\", so update this test to either \"==0\" or \">0\".");
       }
     });
@@ -57,12 +61,8 @@ public class CollectionLengthComparisonCheck extends PythonSubscriptionCheck {
     return expression.is(Kind.NUMERIC_LITERAL) && "0".equals(((NumericLiteral) expression).valueAsString());
   }
 
-  private static boolean isCallToLen(Expression expression) {
-    if (expression.is(Kind.CALL_EXPR)) {
-      Symbol calleeSymbol = ((CallExpression) expression).calleeSymbol();
-      return calleeSymbol != null && "len".equals(calleeSymbol.fullyQualifiedName());
-    }
-    return false;
+  private static boolean isCallToLen(Expression expression, SubscriptionContext ctx) {
+    return expression.is(Kind.CALL_EXPR) && LEN_MATCHER.isTrueFor(((CallExpression) expression).callee(), ctx);
   }
 
 

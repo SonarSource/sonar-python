@@ -116,6 +116,22 @@ class QualifiedExpressionCalculatorTest {
   }
 
   @Test
+  void calculate_nonExistentMemberOnClass_returnsUnresolvedImportType() {
+    FileInput fileInput = parseAndInferTypes("""
+      class A:
+        pass
+      A.non_existent
+      """);
+
+    var qualifiedExpression = getQualifiedExpressionFromStatement(fileInput);
+    PythonType result = calculator.calculate(qualifiedExpression);
+
+    assertThat(result).isInstanceOf(UnknownType.UnresolvedImportType.class);
+    var unresolvedType = (UnknownType.UnresolvedImportType) result;
+    assertThat(unresolvedType.importPath()).isEqualTo("my_package.mod.A.non_existent");
+  }
+
+  @Test
   void calculate_unknownMemberOnKnownModule_returnsUnresolvedImportType() {
     FileInput fileInput = parseAndInferTypes("""
       import os

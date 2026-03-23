@@ -192,6 +192,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitStringLiteral(StringLiteral stringLiteral) {
+    super.visitStringLiteral(stringLiteral);
     var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     // TODO: SONARPY-1867 multiple object types to represent str instance?
     if (((StringLiteralImpl) stringLiteral).isTemplate()) {
