@@ -15,7 +15,7 @@ any of the generated methods.</p>
 <h2>How to fix it</h2>
 <p>Add type annotations to all attributes that should be dataclass fields.</p>
 <p>If you intentionally want a class variable shared across all instances, annotate it with <code>typing.ClassVar[T]</code>. This is the idiomatic
-Python way to declare class variables inside a dataclass — it makes the intent explicit and ensures the attribute is excluded from all generated
+Python way to declare class variables inside a dataclass. It makes the intent explicit and ensures the attribute is excluded from all generated
 dataclass methods.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>

@@ -1,6 +1,6 @@
 {
-  "title": "Policies granting all privileges are security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Policies should not grant all privileges",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "BLOCKER"
@@ -8,13 +8,16 @@
     "attribute": "CONVENTIONAL"
   },
   "status": "ready",
+  "quickfix": "unknown",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
   "tags": [
     "cwe",
-    "aws"
+    "aws",
+    "gcp",
+    "former-hotspot"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-6302",

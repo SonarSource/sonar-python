@@ -1,15 +1,23 @@
+<p>This rule raises an issue when the same class field is unconditionally assigned multiple times within a class body.</p>
 <h2>Why is this an issue?</h2>
 <p>When a class field is defined multiple times in the same class body, only the last assignment takes effect. All previous assignments are dead code
 that serve no purpose.</p>
-<p>This pattern typically occurs due to copy-paste errors, refactoring mistakes, merge conflicts, or misunderstanding of how class attributes work.</p>
+<p>This pattern typically occurs due to:</p>
+<ul>
+  <li><strong>copy-paste errors</strong>: duplicating code blocks without updating field names</li>
+  <li><strong>refactoring mistakes</strong>: forgetting to remove old assignments when updating values</li>
+  <li><strong>merge conflicts</strong>: incorrectly resolving version control conflicts</li>
+  <li><strong>misunderstanding</strong>: confusion about how class attributes work</li>
+</ul>
 <h3>What is the potential impact?</h3>
 <ul>
-  <li>Developers may not immediately realize which value is actually used.</li>
-  <li>Dead code must be read, understood, and maintained even though it has no effect.</li>
-  <li>The duplicate definition might indicate that two different fields were intended, suggesting a naming error.</li>
+  <li><strong>confusion</strong>: developers may not immediately realize which value is actually used</li>
+  <li><strong>maintenance burden</strong>: dead code must be read, understood, and maintained even though it has no effect</li>
+  <li><strong>hidden bugs</strong>: the duplicate definition might indicate that two different fields were intended, suggesting a naming error that
+  could lead to incorrect behavior</li>
 </ul>
 <h2>How to fix it</h2>
-<p>Remove all but the last assignment to the class field.</p>
+<p>Remove all but the last assignment to the class field. Keep only the final value that should be used.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -28,5 +36,12 @@ class MyClass:
 <h3>Documentation</h3>
 <ul>
   <li>Python Documentation - <a href="https://docs.python.org/3/tutorial/classes.html">Classes</a></li>
-  <li>Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#the-standard-type-hierarchy">The standard type hierarchy</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#the-standard-type-hierarchy">The standard type
+  hierarchy</a></li>
 </ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S4143} - Collection content should not be replaced unconditionally</li>
+  <li>{rule:python:S1534} - Member names should not be duplicated within a class or object literal</li>
+</ul>
+

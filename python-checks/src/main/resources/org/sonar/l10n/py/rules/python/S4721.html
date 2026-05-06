@@ -1,81 +1,29 @@
-<p>This rule is deprecated, and will eventually be removed.</p>
 <p>Arbitrary OS command injection vulnerabilities are more likely when a shell is spawned rather than a new process, indeed shell meta-chars can be
 used (when parameters are user-controlled for instance) to inject OS commands.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>OS command name or parameters are user-controlled.</li>
-</ul>
-<p>There is a risk if you answered yes to this question.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>Use functions that don’t spawn a shell.</p>
-<h2>Sensitive Code Example</h2>
-<p>Python 3</p>
-<pre>
-subprocess.run(cmd, shell=True)  # Sensitive
-subprocess.Popen(cmd, shell=True)  # Sensitive
-subprocess.call(cmd, shell=True)  # Sensitive
-subprocess.check_call(cmd, shell=True)  # Sensitive
-subprocess.check_output(cmd, shell=True)  # Sensitive
-os.system(cmd)  # Sensitive: a shell is always spawn
+<h2>Why is this an issue?</h2>
+<p>When a shell interpreter is used to execute OS commands, shell meta-characters in user-controlled input can be exploited to inject additional
+commands. Functions that spawn a shell process—such as <code>os.system()</code> in Python, <code>exec()</code> in JavaScript, or
+<code>Runtime.exec()</code> in Java—create an attack surface for OS command injection that would not exist if a new process were spawned directly
+without a shell. This is especially dangerous when the command name or parameters are derived from user input.</p>
+<h3>What is the potential impact?</h3>
+<p>An attacker who can control the OS command name or its parameters can inject arbitrary OS commands that execute with the privileges of the
+application. This can lead to complete system compromise, unauthorized data access, or the installation of malware on the host.</p>
+<h2>How to fix it in Python Standard Library</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+subprocess.run(cmd, shell=True)  # Noncompliant
+subprocess.Popen(cmd, shell=True)  # Noncompliant
+os.system(cmd)  # Noncompliant: a shell is always spawned
 </pre>
-<p>Python 2</p>
-<pre>
-cmd = "when a string is passed through these function, a shell is spawn"
-(_, child_stdout, _) = os.popen2(cmd)  # Sensitive
-(_, child_stdout, _) = os.popen3(cmd)  # Sensitive
-(_, child_stdout) = os.popen4(cmd)  # Sensitive
-
-
-(child_stdout, _) = popen2.popen2(cmd)  # Sensitive
-(child_stdout, _, _) = popen2.popen3(cmd)  # Sensitive
-(child_stdout, _) = popen2.popen4(cmd)  # Sensitive
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+# shell=False by default; no shell is spawned
+subprocess.run(cmd)
+subprocess.Popen(cmd)
 </pre>
-<h2>Compliant Solution</h2>
-<p>Python 3</p>
-<pre>
-# by default shell=False, a shell is not spawn
-subprocess.run(cmd)  # Compliant
-subprocess.Popen(cmd)  # Compliant
-subprocess.call(cmd)  # Compliant
-subprocess.check_call(cmd)  # Compliant
-subprocess.check_output(cmd)  # Compliant
-
-# always in a subprocess:
-os.spawnl(mode, path, *cmd)  # Compliant
-os.spawnle(mode, path, *cmd, env)  # Compliant
-os.spawnlp(mode, file, *cmd)  # Compliant
-os.spawnlpe(mode, file, *cmd, env)  # Compliant
-os.spawnv(mode, path, cmd)  # Compliant
-os.spawnve(mode, path, cmd, env)  # Compliant
-os.spawnvp(mode, file, cmd)  # Compliant
-os.spawnvpe(mode, file, cmd, env)  # Compliant
-
-(child_stdout) = os.popen(cmd, mode, 1)  # Compliant
-(_, output) = subprocess.getstatusoutput(cmd)  # Compliant
-out = subprocess.getoutput(cmd)  # Compliant
-os.startfile(path)  # Compliant
-os.execl(path, *cmd)  # Compliant
-os.execle(path, *cmd, env)  # Compliant
-os.execlp(file, *cmd)  # Compliant
-os.execlpe(file, *cmd, env)  # Compliant
-os.execv(path, cmd)  # Compliant
-os.execve(path, cmd, env)  # Compliant
-os.execvp(file, cmd)  # Compliant
-os.execvpe(file, cmd, env)  # Compliant
-</pre>
-<p>Python 2</p>
-<pre>
-cmdsargs = ("use", "a", "sequence", "to", "directly", "start", "a", "subprocess")
-
-(_, child_stdout) = os.popen2(cmdsargs)  # Compliant
-(_, child_stdout, _) = os.popen3(cmdsargs)  # Compliant
-(_, child_stdout) = os.popen4(cmdsargs)  # Compliant
-
-(child_stdout, _) = popen2.popen2(cmdsargs)  # Compliant
-(child_stdout, _, _) = popen2.popen3(cmdsargs)  # Compliant
-(child_stdout, _) = popen2.popen4(cmdsargs)  # Compliant
-</pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Standards</h3>
 <ul>
   <li>OWASP - <a href="https://owasp.org/Top10/A03_2021-Injection/">Top 10 2021 Category A3 - Injection</a></li>
   <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A1_2017-Injection">Top 10 2017 Category A1 - Injection</a></li>

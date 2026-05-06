@@ -1,9 +1,26 @@
 <p>This rule raises an issue when the same class appears more than once in the inheritance list of a class definition.</p>
 <h2>Why is this an issue?</h2>
-<p>In Python, a class definition can inherit from one or more base classes. When the same base class appears multiple times in the inheritance list,
-it serves no purpose and is always a programming error. Python's Method Resolution Order (MRO) ensures that each class appears only once in the
-inheritance chain, even if it is listed multiple times.</p>
-<p>This typically happens due to copy-paste errors, misunderstanding of inheritance, or refactoring mistakes.</p>
+<p>In Python, a class definition can inherit from one or more base classes. The syntax for this is straightforward:</p>
+<pre>
+class MyClass(BaseClass1, BaseClass2):
+    pass
+</pre>
+<p>When the same base class appears multiple times in the inheritance list, it serves no purpose and is always a programming error. Python’s Method
+Resolution Order (MRO) ensures that each class appears only once in the inheritance chain, even if it is listed multiple times.</p>
+<p>This typically happens due to:</p>
+<ul>
+  <li>copy-paste errors when defining the class</li>
+  <li>misunderstanding of how inheritance works</li>
+  <li>refactoring mistakes where duplicate entries were not cleaned up</li>
+</ul>
+<h3>What is the potential impact?</h3>
+<p>This issue has minimal runtime impact since Python automatically removes duplicate base classes from the Method Resolution Order. However, it
+affects code quality:</p>
+<ul>
+  <li><strong>Maintainability</strong>: The duplicate entries make the code confusing and harder to understand</li>
+  <li><strong>Code clarity</strong>: It suggests the code has not been properly reviewed</li>
+  <li><strong>Future errors</strong>: It may indicate a misunderstanding of inheritance that could lead to more serious bugs</li>
+</ul>
 <h2>How to fix it</h2>
 <p>Remove the duplicate base class from the inheritance list, keeping only one occurrence.</p>
 <h3>Code examples</h3>
@@ -23,3 +40,4 @@ class MyWidget(QWidget, Serializable):
   <li>Python Documentation - <a href="https://docs.python.org/3/tutorial/classes.html#multiple-inheritance">Multiple Inheritance</a></li>
   <li>Python Documentation - <a href="https://docs.python.org/3/glossary.html#term-method-resolution-order">Method Resolution Order</a></li>
 </ul>
+

@@ -1,6 +1,6 @@
 {
-  "title": "Using unencrypted SQS queues is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "SQS queues should be encrypted",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "MEDIUM"
@@ -14,12 +14,14 @@
   },
   "tags": [
     "aws",
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6330",
   "sqKey": "S6330",
   "scope": "All",
+  "quickfix": "unknown",
   "securityStandards": {
     "CWE": [
       311

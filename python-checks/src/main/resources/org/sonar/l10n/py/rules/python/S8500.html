@@ -17,8 +17,6 @@
   <li>code that expects symmetric comparisons, such as <code>a &lt; b</code> being true implying <code>b &gt; a</code> is also true, may behave
   unexpectedly</li>
 </ul>
-<p>For example, if a class defines only <code>__lt__</code>, then <code>a &lt; b</code> will work, but <code>a &gt; b</code> will fall back to
-Python’s default behavior of comparing object identities, which is almost never what you want.</p>
 <p>Python provides the <code>functools.total_ordering</code> decorator specifically to solve this problem. It allows you to define just
 <code>__eq__</code> and one other comparison method, and it automatically generates the rest. This ensures consistent and correct comparison behavior
 across all operations.</p>

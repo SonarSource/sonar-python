@@ -6,7 +6,10 @@
     "func": "Constant\/Issue",
     "constantCost": "5 min"
   },
-  "tags": [],
+  "tags": [
+    "pitfall",
+    "concurrency"
+  ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-8508",
   "sqKey": "S8508",
@@ -14,8 +17,9 @@
   "quickfix": "unknown",
   "code": {
     "impacts": {
-      "RELIABILITY": "BLOCKER"
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "HIGH"
     },
-    "attribute": "LOGICAL"
+    "attribute": "CLEAR"
   }
 }

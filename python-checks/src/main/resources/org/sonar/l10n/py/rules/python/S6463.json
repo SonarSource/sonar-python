@@ -1,6 +1,6 @@
 {
-  "title": "Allowing unrestricted outbound communications is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Security groups should not allow unrestricted outbound traffic",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "MEDIUM"
@@ -8,13 +8,15 @@
     "attribute": "COMPLETE"
   },
   "status": "ready",
+  "quickfix": "unknown",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "60min"
   },
   "tags": [
     "aws",
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6463",

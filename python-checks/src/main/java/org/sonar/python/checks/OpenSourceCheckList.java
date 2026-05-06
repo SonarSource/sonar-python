@@ -60,7 +60,6 @@ import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.HttpOnlyCookieCheck;
 import org.sonar.python.checks.hotspots.LoggersConfigurationCheck;
 import org.sonar.python.checks.hotspots.NonStandardCryptographicAlgorithmCheck;
-import org.sonar.python.checks.hotspots.OsExecCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
 import org.sonar.python.checks.hotspots.PseudoRandomCheck;
 import org.sonar.python.checks.hotspots.PubliclyWritableDirectoriesCheck;
@@ -359,7 +358,6 @@ public class OpenSourceCheckList {
       UnusedGroupNamesCheck.class,
       OctalEscapeCheck.class,
       OneStatementPerLineCheck.class,
-      OsExecCheck.class,
       OverwrittenCollectionEntryCheck.class,
       PandasAddMergeParametersCheck.class,
       PandasChainInstructionCheck.class,

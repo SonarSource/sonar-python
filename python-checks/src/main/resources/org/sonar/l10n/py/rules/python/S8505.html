@@ -1,38 +1,38 @@
-<p>This rule raises an issue when <code>@singledispatch</code> is used on a class method instead of <code>@singledispatchmethod</code>, or when
-<code>@singledispatchmethod</code> is used on a standalone function instead of <code>@singledispatch</code>.</p>
+<p>This rule raises an issue when <code>@singledispatch</code> is used on a method defined inside a class instead of
+<code>@singledispatchmethod</code>, or when <code>@singledispatchmethod</code> is used on a standalone function instead of
+<code>@singledispatch</code>. It also flags problematic combinations with <code>@classmethod</code> and <code>@staticmethod</code>.</p>
 <h2>Why is this an issue?</h2>
 <p>The <code>@singledispatch</code> and <code>@singledispatchmethod</code> decorators from <code>functools</code> serve different purposes and are not
 interchangeable.</p>
-<p><code>@singledispatch</code> is designed for standalone functions. It dispatches based on the type of the first argument. When applied to an
-instance method, the first argument is <code>self</code>, so dispatch is performed on the type of the instance instead of on the actual data argument.
-The registered type implementations (for example, for <code>int</code> or <code>str</code>) are therefore never selected based on the data, and the
-behavior depends on the receiver:</p>
+<p><code>@singledispatch</code> is designed for standalone functions. It dispatches based on the type of the first positional argument. When applied
+to an instance method, the first argument is <code>self</code>, so dispatch is performed on the type of the instance instead of on the actual data
+argument. The registered type implementations (for example, for <code>int</code> or <code>str</code>) are therefore never selected based on the
+data:</p>
 <ul>
-  <li>When called on an instance of the class where the method is defined, the base implementation is invoked regardless of the data argument’s
-  type.</li>
-  <li>When called on an instance of a subclass, dispatch may resolve to a <strong>different</strong> registered implementation depending on the
-  subclass’s MRO, so the same call can produce different results in different parts of a class hierarchy. This is typically worse than always falling
-  back to the base implementation, because the bug becomes intermittent and hierarchy-dependent.</li>
+  <li>In the typical case, every call falls through to the base implementation regardless of the data argument’s type, because the receiver class is
+  not registered as a dispatch type.</li>
+  <li>In the rarer case where the receiver class (or one of its ancestors in the MRO) happens to match a registered type, dispatch may resolve to a
+  <strong>different</strong> registered implementation depending on the receiver, so the same call site can produce different results in different
+  parts of a class hierarchy.</li>
 </ul>
 <p><code>@singledispatchmethod</code> is designed for instance methods and class methods. It returns a non-callable descriptor that relies on the
 descriptor protocol to bind to an instance or class. When applied to a standalone function, the resulting object cannot be invoked at all, and calling
-it raises <code>TypeError: 'singledispatchmethod' object is not callable</code>.</p>
+it raises a <code>TypeError</code>.</p>
 <p>This rule also flags <code>@singledispatch</code> applied to a method decorated with <code>@classmethod</code>. In that case, the dispatcher
-attempts to call a <code>classmethod</code> object directly and raises <code>TypeError</code> at call time.</p>
-<p>In all of these cases, no error or warning is raised at decoration time, making the bug silent and hard to detect by reading the code alone.</p>
+attempts to operate on a <code>classmethod</code> object rather than a plain function, and the call fails at runtime.</p>
+<p>In all of these cases, no error or warning is raised at decoration time, and some failure modes only surface on the first call, making the bug
+silent and hard to detect by reading the code alone.</p>
 <h3>Exceptions</h3>
 <p>The rule’s behavior with <code>@staticmethod</code> depends on the decorator order:</p>
 <ul>
   <li><code>@singledispatch</code> placed <strong>above</strong> <code>@staticmethod</code> <strong>is</strong> flagged. In that order,
-  <code>@singledispatch</code> wraps the <code>staticmethod</code> descriptor object, which prevents it from working as a static method and breaks
-  dispatch on instances (<code>MyClass().process(value)</code> raises <code>TypeError</code>).</li>
+  <code>@singledispatch</code> wraps the <code>staticmethod</code> descriptor object, which makes both registration of overloads and dispatch on
+  instances unreliable.</li>
   <li><code>@staticmethod</code> placed <strong>above</strong> <code>@singledispatch</code> is <strong>not</strong> flagged, because
   <code>@singledispatch</code> is then applied to a regular function and <code>@staticmethod</code> simply prevents Python from binding
   <code>self</code>, so dispatch correctly happens on the data argument.</li>
 </ul>
-<p>Note that even the non-flagged order is uncommon and easy to misuse: stacked decorators must be ordered carefully, and a future refactor that swaps
-the order silently reintroduces the bug. Prefer using <code>@singledispatch</code> on a module-level function, or <code>@singledispatchmethod</code>
-when the dispatcher needs to live on a class.</p>
+<p>Note that even the non-flagged order is uncommon and easy to misuse: a future refactor that swaps the order silently reintroduces the bug.</p>
 <h3>What is the potential impact?</h3>
 <p>Confusing these two decorators causes the type dispatch mechanism to behave incorrectly:</p>
 <ul>
@@ -41,10 +41,8 @@ when the dispatcher needs to live on a class.</p>
   implementations than calls on the base class, so the same call site can produce different results depending on the receiver’s type</li>
   <li>the code may appear to work in simple tests but fail or behave inconsistently in production with different input types or in larger class
   hierarchies</li>
-  <li>debugging is difficult because no error or warning is raised at decoration time</li>
-  <li>the application may process data incorrectly, potentially leading to data corruption or security issues if type-specific validation or
-  sanitization is bypassed</li>
-  <li>combining <code>@singledispatch</code> with <code>@classmethod</code> raises a <code>TypeError</code> at call time</li>
+  <li>debugging is difficult because no error or warning is raised at decoration time, and broken combinations such as <code>@singledispatch</code>
+  with <code>@classmethod</code> or above <code>@staticmethod</code> typically fail only at call time</li>
 </ul>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
@@ -116,14 +114,24 @@ def _(data):
 def _(data):
     return f"Processing str: {data}"
 </pre>
-<h3>How does this work?</h3>
-<p>Use <code>@singledispatch</code> for standalone, module-level functions and <code>@singledispatchmethod</code> for instance methods and class
-methods. The <code>@singledispatch</code> decorator dispatches on the first argument, while <code>@singledispatchmethod</code> skips <code>self</code>
-or <code>cls</code> and dispatches on the next argument.</p>
-<p>When combining <code>@singledispatchmethod</code> with <code>@classmethod</code>, <code>@singledispatchmethod</code> must remain the outermost
-decorator so that the registration mechanism (<code>process.register</code>) is still available. <code>@classmethod</code> is then applied to the base
-implementation and to each registered overload:</p>
-<pre>
+<h4>Noncompliant code example</h4>
+<p>Using <code>@singledispatch</code> on a <code>@classmethod</code>:</p>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+from functools import singledispatch
+
+class Processor:
+    @singledispatch  # Noncompliant: @singledispatch wraps a classmethod descriptor
+    @classmethod
+    def process(cls, data):
+        return f"Processing: {data}"
+
+    @process.register(int)
+    @classmethod
+    def _(cls, data):
+        return f"Processing int: {data}"
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
 from functools import singledispatchmethod
 
 class Processor:
@@ -137,10 +145,18 @@ class Processor:
     def _(cls, data: int):
         return f"Processing int: {data}"
 </pre>
+<h3>How does this work?</h3>
+<p>Use <code>@singledispatch</code> for standalone, module-level functions and <code>@singledispatchmethod</code> for instance methods and class
+methods. The <code>@singledispatch</code> decorator dispatches on the first argument, while <code>@singledispatchmethod</code> skips <code>self</code>
+or <code>cls</code> and dispatches on the next argument.</p>
+<p>When combining <code>@singledispatchmethod</code> with <code>@classmethod</code>, <code>@singledispatchmethod</code> must remain the outermost
+decorator so that the registration mechanism (<code>process.register</code>) is still available. <code>@classmethod</code> is then applied to the base
+implementation and to each registered overload.</p>
 <p>For static methods, prefer turning the function into a module-level function decorated with <code>@singledispatch</code>. If the dispatcher must
 live on the class, place <code>@staticmethod</code> <strong>above</strong> <code>@singledispatch</code> so that <code>@singledispatch</code> wraps a
-regular function rather than a <code>staticmethod</code> descriptor; the inverse order breaks dispatch on instance calls and is reported by this
-rule.</p>
+regular function rather than a <code>staticmethod</code> descriptor; the inverse order is reported by this rule. More generally, prefer
+<code>@singledispatch</code> on a module-level function whenever the dispatcher does not need to live on a class, since stacked-decorator orders are
+easy to misuse and silently regress on refactors.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>

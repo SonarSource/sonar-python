@@ -1,52 +1,63 @@
 <p>Predefined permissions, also known as <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl">canned ACLs</a>,
-are an easy way to grant large privileges to predefined groups or users.</p>
+are an easy way to grant broad privileges to predefined groups or users.</p>
 <p>The following canned ACLs are security-sensitive:</p>
 <ul>
-  <li><code>PUBLIC_READ</code>, <code>PUBLIC_READ_WRITE</code> grant respectively "read" and "read and write" privileges to everyone in the world
+  <li><code>PublicRead</code>, <code>PublicReadWrite</code> grant respectively "read" and "read and write" privileges to everyone in the world
   (<code>AllUsers</code> group).</li>
-  <li><code>AUTHENTICATED_READ</code> grants "read" privilege to all authenticated users (<code>AuthenticatedUsers</code> group).</li>
+  <li><code>AuthenticatedRead</code> grants "read" privilege to all authenticated users (<code>AuthenticatedUsers</code> group).</li>
 </ul>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The S3 bucket stores sensitive data.</li>
-  <li>The S3 bucket is not used to store static resources of websites (images, css …​).</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to implement the least privilege policy, i.e., to grant necessary permissions only to users for their required tasks. In the
-context of canned ACL, set it to <code>PRIVATE</code> (the default one), and if needed more granularity then use an appropriate S3 policy.</p>
-<h2>Sensitive Code Example</h2>
-<p>All users (ie: anyone in the world authenticated or not) have read and write permissions with the <code>PUBLIC_READ_WRITE</code> access
-control:</p>
-<pre>
+<h2>Why is this an issue?</h2>
+<p>When an S3 bucket is configured with a canned ACL such as <code>PublicRead</code>, <code>PublicReadWrite</code>, or <code>AuthenticatedRead</code>,
+it grants broad read or write access to either all internet users or all authenticated AWS users, far beyond what is typically required.</p>
+<h3>What is the potential impact?</h3>
+<h4>Unauthorized data access</h4>
+<p>When an S3 bucket is publicly readable, any user on the internet can enumerate and download its contents. This can expose sensitive business data,
+personally identifiable information (PII), credentials, or configuration files to unauthorized parties.</p>
+<h4>Data tampering</h4>
+<p>When an S3 bucket is publicly writable (e.g., <code>PublicReadWrite</code>), attackers can upload malicious files, overwrite existing objects, or
+delete bucket content, leading to data integrity loss or supply chain attacks if the bucket serves application assets.</p>
+<h2>How to fix it in AWS CDK</h2>
+<p>Set the <code>access_control</code> property to <code>PRIVATE</code> (the default) to restrict bucket access to the owner only. For more granular
+access control, use an appropriate S3 bucket policy instead of canned ACLs.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import aws_cdk.aws_s3 as s3
+import aws_cdk.aws_s3_deployment as s3deploy
+
 bucket = s3.Bucket(self, "bucket",
-    access_control=s3.BucketAccessControl.PUBLIC_READ_WRITE     # Sensitive
+    access_control=s3.BucketAccessControl.PUBLIC_READ_WRITE     # Noncompliant
 )
 
 s3deploy.BucketDeployment(self, "DeployWebsite",
-    access_control=s3.BucketAccessControl.PUBLIC_READ_WRITE     # Sensitive
+    access_control=s3.BucketAccessControl.PUBLIC_READ_WRITE     # Noncompliant
 )
 </pre>
-<h2>Compliant Solution</h2>
-<p>With the <code>PRIVATE</code> access control (default), only the bucket owner has the read/write permissions on the buckets and its ACL.</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import aws_cdk.aws_s3 as s3
+import aws_cdk.aws_s3_deployment as s3deploy
+
 bucket = s3.Bucket(self, "bucket",
-    access_control=s3.BucketAccessControl.PRIVATE       # Compliant
+    access_control=s3.BucketAccessControl.PRIVATE
 )
 
-# Another example
 s3deploy.BucketDeployment(self, "DeployWebsite",
-    access_control=s3.BucketAccessControl.PRIVATE       # Compliant
+    access_control=s3.BucketAccessControl.PRIVATE
 )
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl">AWS Documentation</a> - Access control list (ACL)
   overview (canned ACLs)</li>
   <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html">AWS Documentation</a> - Controlling access to a bucket with
   user policies</li>
+  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html">AWS CDK version 2</a> - Class Bucket (construct)</li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/732">CWE-732 - Incorrect Permission Assignment for Critical Resource</a></li>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a></li>
-  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html">AWS CDK version 2</a> - Class Bucket (construct)</li>
 </ul>
 

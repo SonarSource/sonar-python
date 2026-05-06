@@ -1,10 +1,36 @@
-<p>This rule raises an issue when a nested loop uses the same variable name as an outer loop, causing the inner loop to shadow the outer loop variable.</p>
+<p>This rule raises an issue when a nested loop uses the same variable name as an outer loop, causing the inner loop to shadow the outer loop
+variable.</p>
 <h2>Why is this an issue?</h2>
 <p>In Python, loop variables persist after the loop completes and can be reassigned by inner loops without any warning. Unlike languages with
-block-scoped variables, Python allows inner loops to silently overwrite outer loop variables, making the outer variable inaccessible within the
-inner loop scope.</p>
-<p>This pattern almost always indicates a programmer error. Common scenarios include copying loop patterns without changing variable names, or
-confusion about Python's scoping rules. The shadowing happens silently without any compiler or runtime warning, making these bugs difficult to spot.</p>
+block-scoped variables, Python allows inner loops to silently overwrite outer loop variables, making the outer variable inaccessible within the inner
+loop scope.</p>
+<p>This happens because Python’s <code>for</code> loop assigns the loop variable in the current scope, regardless of whether a variable with that name
+already exists. When you write:</p>
+<pre>
+for i in range(10):
+    for i in range(5):
+        pass
+</pre>
+<p>The inner loop reassigns <code>i</code> on each iteration, completely replacing the value from the outer loop. After the inner loop completes,
+<code>i</code> contains the last value from the inner loop (4), not the current value from the outer loop.</p>
+<p>This pattern almost always indicates a programmer error rather than intentional behavior. Common scenarios include:</p>
+<ul>
+  <li>copying loop patterns without changing variable names</li>
+  <li>iterating over an object’s properties using the object’s own name</li>
+  <li>confusion about Python’s scoping rules</li>
+</ul>
+<p>The shadowing happens silently without any compiler or runtime warning, making these bugs difficult to spot during code review and testing.</p>
+<h3>What is the potential impact?</h3>
+<p>Using the same variable in nested loops leads to logic errors that can be difficult to debug:</p>
+<ul>
+  <li><strong>Incorrect iteration behavior</strong>: any code after the inner loop but within the outer loop body will see the wrong value of the loop
+  variable.</li>
+  <li><strong>Unexpected variable values</strong>: after the inner loop completes, the variable contains the last value from the inner loop instead of
+  the expected outer loop value.</li>
+  <li><strong>Silent failures</strong>: the code may appear to work in simple test cases but fail in production with different data.</li>
+  <li><strong>Maintenance issues</strong>: future modifications may rely on the outer loop variable, causing new bugs when it contains unexpected
+  values.</li>
+</ul>
 <h2>How to fix it</h2>
 <p>Use different variable names for each loop. Choose descriptive names that reflect what each variable represents.</p>
 <h3>Code examples</h3>
@@ -28,4 +54,10 @@ for i in range(10):
 <h3>Documentation</h3>
 <ul>
   <li>Python Documentation - <a href="https://docs.python.org/3/reference/executionmodel.html#naming-and-binding">Naming and Binding</a></li>
+  <li>PEP 3104 - <a href="https://peps.python.org/pep-3104/">Access to Names in Outer Scopes</a></li>
 </ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S1117} - Local variables should not shadow other variables</li>
+</ul>
+

@@ -13,7 +13,7 @@ sequence of function calls that led to the exception, which is essential for und
 <ul>
   <li>It automatically captures the traceback without requiring <code>exc_info=True</code></li>
   <li>It clearly signals to other developers that you’re logging an exception</li>
-  <li>It follows Python’s principle of being explicit about intent</li>
+  <li>It is the purpose-built method for logging exceptions and is the established Python idiom for this use case</li>
 </ul>
 <p>Using <code>logging.error()</code> in an exception handler means you’re either:</p>
 <ul>
@@ -22,21 +22,9 @@ sequence of function calls that led to the exception, which is essential for und
 </ul>
 <p>The <code>logging.exception()</code> method is specifically designed for this use case and is the established Python idiom for logging
 exceptions.</p>
-<p>If omitting the traceback is intentional, explicitly passing <code>exc_info=False</code> (or <code>exc_info=None</code>) makes that intent clear
-and is therefore not flagged.</p>
-<h3>What is the potential impact?</h3>
-<p>Using <code>logging.error()</code> instead of <code>logging.exception()</code> in exception handlers reduces code maintainability and makes
-debugging more difficult.</p>
-<p>When traceback information is missing from logs, developers must spend additional time reproducing issues to understand their root cause. In
-production environments, where issues may be intermittent or difficult to reproduce, missing traceback information can make it nearly impossible to
-diagnose problems effectively.</p>
-<p>Additionally, using <code>logging.error()</code> with <code>exc_info=True</code> instead of the more idiomatic <code>logging.exception()</code>
-makes the code less readable and may confuse developers who are unfamiliar with this pattern.</p>
 <h2>How to fix it</h2>
 <p>Replace <code>logging.error()</code> with <code>logging.exception()</code> when logging within an exception handler. If you were using
 <code>exc_info=True</code>, you can remove it since <code>logging.exception()</code> includes traceback information by default.</p>
-<p>If you intentionally do not want to log the traceback, explicitly pass <code>exc_info=False</code> to <code>logging.error()</code> to signal that
-intent.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -55,15 +43,6 @@ try:
     raise ValueError("Invalid value")
 except ValueError:
     logging.exception("Exception occurred")
-</pre>
-<p>If logging the traceback is not desired, explicitly opt out with <code>exc_info=False</code>:</p>
-<pre>
-import logging
-
-try:
-    raise ValueError("Invalid value")
-except ValueError:
-    logging.error("Exception occurred", exc_info=False)
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>

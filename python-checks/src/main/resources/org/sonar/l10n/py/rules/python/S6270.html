@@ -1,16 +1,17 @@
 <p>Resource-based policies granting access to all users can lead to information leakage.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The AWS resource stores or processes sensitive data.</li>
-  <li>The AWS resource is designed to be private.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to implement the least privilege principle, i.e. to grant necessary permissions only to users for their required tasks. In the
-context of resource-based policies, list the principals that need the access and grant to them only the required privileges.</p>
-<h2>Sensitive Code Example</h2>
-<p>This policy allows all users, including anonymous ones, to access an S3 bucket:</p>
-<pre>
+<h2>Why is this an issue?</h2>
+<p>Resource-based policies in AWS define who can access a resource and what actions they can perform. When the <code>Principal</code> element of a
+policy is set to <code>"*"</code>, access is granted to all users, including anonymous and unauthenticated ones. This violates the principle of least
+privilege and can expose sensitive data or operations to unauthorized parties.</p>
+<h3>What is the potential impact?</h3>
+<h4>Unauthorized data access</h4>
+<p>When a resource-based policy grants access to all principals, any user on the internet can read, modify, or delete the resource’s contents. This
+can lead to data breaches, exposure of sensitive information, and potential misuse of cloud resources.</p>
+<h2>How to fix it in AWS CDK</h2>
+<p>Use a specific principal such as <code>AccountRootPrincipal</code> instead of <code>AnyPrincipal</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk.aws_iam import PolicyStatement, AnyPrincipal, Effect
 from aws_cdk.aws_s3 import Bucket
 
@@ -20,12 +21,11 @@ bucket.add_to_resource_policy(PolicyStatement(
   effect=Effect.ALLOW,
   actions=["s3:*"],
   resources=[bucket.arn_for_objects("*")],
-  principals=[AnyPrincipal()] # Sensitive
+  principals=[AnyPrincipal()] # Noncompliant
 ))
 </pre>
-<h2>Compliant Solution</h2>
-<p>This policy allows only the authorized users:</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk.aws_iam import PolicyStatement, AccountRootPrincipal, Effect
 from aws_cdk.aws_s3 import Bucket
 
@@ -38,10 +38,14 @@ bucket.add_to_resource_policy(PolicyStatement(
   principals=[AccountRootPrincipal()]
 ))
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege">AWS Documentation</a> - Grant least
   privilege</li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/732">CWE-732 - Incorrect Permission Assignment for Critical Resource</a></li>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a></li>
   <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222620">Application Security and

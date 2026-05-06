@@ -1,6 +1,6 @@
 {
-  "title": "Using non-standard cryptographic algorithms is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Custom cryptographic algorithms should not be used",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "HIGH"
@@ -12,9 +12,11 @@
     "func": "Constant\/Issue",
     "constantCost": "1d"
   },
+  "quickfix": "unknown",
   "tags": [
     "cwe",
-    "bad-practice"
+    "bad-practice",
+    "former-hotspot"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-2257",

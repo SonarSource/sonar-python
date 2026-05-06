@@ -1,6 +1,6 @@
 {
-  "title": "Using unencrypted RDS DB resources is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Amazon RDS resources should be encrypted at rest",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "MEDIUM"
@@ -8,13 +8,15 @@
     "attribute": "TRUSTWORTHY"
   },
   "status": "ready",
+  "quickfix": "unknown",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "10min"
   },
   "tags": [
     "aws",
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6303",

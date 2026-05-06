@@ -1,14 +1,16 @@
 {
-  "title": "Usage of \"torch.load\" can lead to untrusted code execution",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Models should not be loaded with \"torch.load\" without restricting deserialization",
+  "type": "VULNERABILITY",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "15min"
   },
   "tags": [
+    "cwe",
     "pytorch",
-    "machine-learning"
+    "machine-learning",
+    "former-hotspot"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-6985",
@@ -23,7 +25,7 @@
   },
   "securityStandards": {
     "CWE": [
-      94,
+      913,
       502
     ]
   }

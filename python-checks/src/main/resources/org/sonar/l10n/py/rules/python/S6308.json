@@ -1,6 +1,6 @@
 {
-  "title": "Using unencrypted OpenSearch domains is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "OpenSearch domains should have encryption at rest enabled",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "MEDIUM"
@@ -14,9 +14,11 @@
   },
   "tags": [
     "aws",
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Major",
+  "quickfix": "unknown",
   "ruleSpecification": "RSPEC-6308",
   "sqKey": "S6308",
   "scope": "All",

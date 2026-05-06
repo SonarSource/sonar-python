@@ -6,10 +6,20 @@
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
-  "tags": [],
+  "tags": [
+    "type",
+    "pitfall"
+  ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-8515",
   "sqKey": "S8515",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER",
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
 }

@@ -1,6 +1,6 @@
 {
-  "title": "Policies authorizing public access to resources are security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "AWS resource-based policies should not grant public access",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "BLOCKER"
@@ -8,13 +8,15 @@
     "attribute": "CONVENTIONAL"
   },
   "status": "ready",
+  "quickfix": "unknown",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
   "tags": [
     "aws",
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-6270",

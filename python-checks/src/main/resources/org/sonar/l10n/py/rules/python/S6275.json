@@ -1,6 +1,6 @@
 {
-  "title": "Using unencrypted EBS volumes is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "EBS volumes should be encrypted",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "MEDIUM"
@@ -8,9 +8,15 @@
     "attribute": "TRUSTWORTHY"
   },
   "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "quickfix": "unknown",
   "tags": [
     "aws",
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6275",

@@ -1,32 +1,26 @@
-<p>Using unencrypted RDS DB resources exposes data to unauthorized access.
-  <br>
-  This includes database data, logs, automatic backups, read replicas, snapshots, and cluster metadata.</p>
-<p>This situation can occur in a variety of scenarios, such as:</p>
-<ul>
-  <li>A malicious insider working at the cloud provider gains physical access to the storage device.</li>
-  <li>Unknown attackers penetrate the cloud provider’s logical infrastructure and systems.</li>
-</ul>
-<p>After a successful intrusion, the underlying applications are exposed to:</p>
-<ul>
-  <li>theft of intellectual property and/or personal data</li>
-  <li>extortion</li>
-  <li>denial of services and security bypasses via data corruption or deletion</li>
-</ul>
-<p>AWS-managed encryption at rest reduces this risk with a simple switch.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The database contains sensitive data that could cause harm when leaked.</li>
-  <li>There are compliance requirements for the service to store data encrypted.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It is recommended to enable encryption at rest on any RDS DB resource, regardless of the engine.
-  <br>
-  In any case, no further maintenance is required as encryption at rest is fully managed by AWS.</p>
-<h2>Sensitive Code Example</h2>
+<p>AWS Relational Database Service (RDS) supports encryption at rest using AWS Key Management Service (KMS) to protect database instances and
+clusters.</p>
+<h2>Why is this an issue?</h2>
+<p>When RDS database instances and clusters are not encrypted at rest, all data stored on disk is exposed to anyone who gains access to the underlying
+storage. This includes database data, logs, automatic backups, read replicas, snapshots, and cluster metadata. The rule flags explicit disabling of
+storage encryption as well as configurations where the property is omitted and encryption is disabled by default. AWS-managed encryption at rest
+reduces this risk with a simple configuration change and requires no further maintenance.</p>
+<h3>What is the potential impact?</h3>
+<h4>Unauthorized Data Access</h4>
+<p>If an attacker or malicious insider gains access to unencrypted RDS storage — whether through a breach of the cloud provider’s infrastructure or
+physical access to storage devices — all stored data is readable in plaintext. This exposes sensitive information such as personal data, financial
+records, or proprietary business data.</p>
+<h4>Data Theft and Compliance Violations</h4>
+<p>Theft of unencrypted data can result in regulatory fines, reputational damage, and legal liability, particularly for data subject to compliance
+requirements such as PCI DSS.</p>
+<h2>How to fix it in AWS CDK</h2>
+<h3>Code examples</h3>
+<p>The following examples create RDS resources with <code>storageEncrypted</code> set to <code>false</code> or omitted, which leaves all database
+data, logs, automatic backups, read replicas, and snapshots unprotected at rest.</p>
+<h4>Noncompliant code example</h4>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.DatabaseCluster.html">aws_cdk.aws_rds.DatabaseCluster</a> and <a
 href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.DatabaseInstance.html">aws_cdk.aws_rds.DatabaseInstance</a>:</p>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk import (
     aws_rds as rds
 )
@@ -34,30 +28,15 @@ from aws_cdk import (
 class DatabaseStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
         super().__init__(scope, construct_id, **kwargs)
-        rds.DatabaseCluster( # Sensitive, unencrypted by default
+        rds.DatabaseCluster( # Noncompliant, unencrypted by default
             self,
             "example"
         )
 </pre>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.CfnDBCluster.html">aws_cdk.aws_rds.CfnDBCluster</a> and <a
-href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.CfnDBInstance.html">aws_cdk.aws_rds.CfnDBInstance</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_rds as rds
-)
-
-class DatabaseStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
-        super().__init__(scope, construct_id, **kwargs)
-        rds.CfnDBCluster( # Sensitive, unencrypted by default
-            self,
-            "example"
-        )
-</pre>
-<h2>Compliant Solution</h2>
+<h4>Compliant solution</h4>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.DatabaseCluster.html">aws_cdk.aws_rds.DatabaseCluster</a> and <a
 href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.DatabaseInstance.html">aws_cdk.aws_rds.DatabaseInstance</a>:</p>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk import (
     aws_rds as rds
 )
@@ -71,26 +50,14 @@ class DatabaseStack(Stack):
             storage_encrypted=True
         )
 </pre>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.CfnDBCluster.html">aws_cdk.aws_rds.CfnDBCluster</a> and <a
-href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.CfnDBInstance.html">aws_cdk.aws_rds.CfnDBInstance</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_rds as rds
-)
-
-class DatabaseStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
-        super().__init__(scope, construct_id, **kwargs)
-        rds.CfnDBCluster(
-            self,
-            "example",
-            storage_encrypted=True
-        )
-</pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html">AWS Documentation</a> - Encrypting Amazon RDS
   resources</li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a></li>
   <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222588">Application Security and
   Development: V-222588</a> - The application must implement approved cryptographic mechanisms to prevent unauthorized modification of information at

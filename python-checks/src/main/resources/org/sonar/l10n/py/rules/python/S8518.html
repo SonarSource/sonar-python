@@ -1,14 +1,33 @@
-<p>This rule raises an issue when a loop iterates over <code>enumerate()</code> but accesses list elements by index instead of unpacking the value directly from the enumeration.</p>
+<p>This rule raises an issue when a loop iterates over <code>enumerate()</code> but accesses list elements by index instead of unpacking the value
+directly from the enumeration.</p>
 <h2>Why is this an issue?</h2>
-<p>The <code>enumerate()</code> function provides both the index and the value of each element when iterating over a sequence. When you only unpack the index and then use it to subscript the original list, the value is already available from <code>enumerate()</code> and the subscript operation is redundant.</p>
-<p>This pattern results in unnecessary operations and reduced readability.</p>
+<p>The <code>enumerate()</code> function in Python is designed to provide both the index and the value of each element when iterating over a sequence.
+It returns tuples in the form <code>(index, value)</code> for each iteration.</p>
+<p>When you use <code>enumerate()</code> in a loop but only unpack the index, then use that index to access the list element via subscript notation
+(e.g., <code>lst[i]</code>), you are performing an unnecessary lookup operation. The value you are looking up is already available from
+<code>enumerate()</code> itself - you are simply not capturing it.</p>
+<p>This pattern does not take advantage of a built-in feature of <code>enumerate()</code> and results in:</p>
+<ul>
+  <li><strong>unnecessary operations</strong>: the list subscript operation is redundant since <code>enumerate()</code> already provides the
+  value</li>
+  <li><strong>reduced readability</strong>: the code is more verbose than necessary and obscures the intent</li>
+  <li><strong>performance overhead</strong>: while minor, each subscript operation requires a lookup that could be avoided</li>
+</ul>
+<p>The Pythonic approach is to unpack both values from the tuple that <code>enumerate()</code> returns. This makes the code clearer, more efficient,
+and more idiomatic.</p>
+<h3>What is the potential impact?</h3>
+<p>Non-idiomatic code patterns increase the cognitive load for developers maintaining the codebase. Over time, redundant index lookups can also mask
+bugs when the sequence is modified between the <code>enumerate()</code> call and the subscript access.</p>
+<h2>How to fix it</h2>
+<p>Unpack both the index and value from the <code>enumerate()</code> tuple directly in the loop declaration. Replace the subscript access with the
+unpacked value variable.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 fruits = ['apple', 'banana', 'cherry']
 
-for i, _ in enumerate(fruits):
-    print(f"Index {i}: {fruits[i]}")  # Noncompliant
+for i, fruit in enumerate(fruits):
+    print(f"Index {i}: {fruits[i]}")  # Noncompliant: use the unpacked value instead of "fruits[i]"
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
@@ -21,4 +40,6 @@ for i, fruit in enumerate(fruits):
 <h3>Documentation</h3>
 <ul>
   <li>Python Documentation - <a href="https://docs.python.org/3/library/functions.html#enumerate">enumerate()</a></li>
+  <li>PEP - <a href="https://peps.python.org/pep-0279/">PEP 279 - The enumerate() built-in function</a></li>
 </ul>
+

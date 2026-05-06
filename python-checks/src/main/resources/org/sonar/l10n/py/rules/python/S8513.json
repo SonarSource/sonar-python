@@ -4,14 +4,21 @@
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
-    "constantCost": "5min"
+    "constantCost": "5 min"
   },
   "tags": [
-    "convention"
+    "performance",
+    "pythonic"
   ],
-  "defaultSeverity": "Minor",
+  "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-8513",
   "sqKey": "S8513",
   "scope": "All",
-  "quickfix": "covered"
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "EFFICIENT"
+  }
 }

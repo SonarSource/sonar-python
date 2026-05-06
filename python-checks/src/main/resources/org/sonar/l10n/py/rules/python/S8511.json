@@ -4,17 +4,21 @@
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
-    "constantCost": "15 min"
+    "constantCost": "30min"
   },
-  "tags": [],
-  "defaultSeverity": "Critical",
+  "tags": [
+    "design",
+    "inheritance",
+    "pitfall"
+  ],
+  "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-8511",
   "sqKey": "S8511",
   "scope": "Main",
   "quickfix": "unknown",
   "code": {
     "impacts": {
-      "RELIABILITY": "HIGH"
+      "RELIABILITY": "BLOCKER"
     },
     "attribute": "LOGICAL"
   }

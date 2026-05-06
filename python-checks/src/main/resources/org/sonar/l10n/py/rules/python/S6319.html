@@ -1,19 +1,19 @@
-<p>Amazon SageMaker is a managed machine learning service in a hosted production-ready environment. To train machine learning models, SageMaker
-instances can process potentially sensitive data, such as personal information that should not be stored unencrypted. In the event that adversaries
-physically access the storage media, they cannot decrypt encrypted data.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The instance contains sensitive data that could cause harm when leaked.</li>
-  <li>There are compliance requirements for the service to store data encrypted.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to encrypt SageMaker notebook instances that contain sensitive information. Encryption and decryption are handled transparently by
-SageMaker, so no further modifications to the application are necessary.</p>
-<h2>Sensitive Code Example</h2>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_sagemaker/CfnNotebookInstance.html">aws_cdk.aws_sagemaker.CfnNotebookInstance</a>:</p>
-<pre>
+<p>Amazon SageMaker notebook instances can process sensitive data, such as personal information, and should encrypt this data at rest.</p>
+<h2>Why is this an issue?</h2>
+<p>Amazon SageMaker notebook instances can process potentially sensitive data, such as personal information, as part of machine learning workflows. By
+default, SageMaker notebook instances do not encrypt data stored on the instance’s storage volume. This rule raises an issue when a notebook instance
+is created without a KMS key configured for encryption at rest.</p>
+<h3>What is the potential impact?</h3>
+<h4>Exposure of sensitive data</h4>
+<p>When a SageMaker notebook instance is not encrypted, an attacker who gains access to the underlying storage media can read all data stored on it in
+plaintext. This includes training datasets, model artifacts, credentials, and any other sensitive information processed during machine learning
+workflows.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<p>The following code is vulnerable because the SageMaker notebook instance is created without specifying a KMS key, leaving data stored on the
+instance’s storage volume unencrypted.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk import (
     aws_sagemaker as sagemaker
 )
@@ -23,15 +23,13 @@ class CfnSagemakerStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         sagemaker.CfnNotebookInstance(
-            self, "Sensitive",
+            self, "Example",
             instance_type="instanceType",
             role_arn="roleArn"
-        )  # Sensitive, no KMS key is set by default; thus, encryption is disabled
+        )  # Noncompliant: no KMS key is set by default; thus, encryption is disabled
 </pre>
-<h2>Compliant Solution</h2>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_sagemaker/CfnNotebookInstance.html">aws_cdk.aws_sagemaker.CfnNotebookInstance</a>:</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk import (
     aws_sagemaker as sagemaker,
     aws_kms as kms
@@ -43,16 +41,22 @@ class CfnSagemakerStack(Stack):
 
         my_key = kms.Key(self, "Key")
         sagemaker.CfnNotebookInstance(
-            self, "Compliant",
+            self, "Example",
             instance_type="instanceType",
             role_arn="roleArn",
             kms_key_id=my_key.key_id
         )
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html">Protect Data at Rest Using Encryption</a></li>
-  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a></li>
+  <li><a
+  href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_sagemaker/CfnNotebookInstance.html">aws_cdk.aws_sagemaker.CfnNotebookInstance</a></li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/312">CWE-312 - Cleartext Storage of Sensitive Information</a></li>
   <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222588">Application Security and
   Development: V-222588</a> - The application must implement approved cryptographic mechanisms to prevent unauthorized modification of information at
   rest.</li>

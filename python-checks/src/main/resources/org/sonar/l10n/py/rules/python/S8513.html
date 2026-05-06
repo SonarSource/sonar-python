@@ -1,16 +1,27 @@
-<p>This rule raises an issue when multiple <code>startswith()</code> or <code>endswith()</code> calls on the same string are chained with the
-<code>or</code> operator to check for different prefixes or suffixes.</p>
+<p>This rule raises an issue when multiple <code>startswith()</code> or <code>endswith()</code> calls on the same string are chained together using
+the <code>or</code> operator to check for different prefixes or suffixes.</p>
 <h2>Why is this an issue?</h2>
 <p>When you need to check if a string starts or ends with one of several possible values, chaining multiple <code>startswith()</code> or
-<code>endswith()</code> calls with the <code>or</code> operator creates unnecessary verbosity. Both methods accept a tuple of strings as their first
-argument, so a single call with a tuple is both more concise and more readable.</p>
+<code>endswith()</code> calls with the <code>or</code> operator creates unnecessary verbosity and redundancy. Each additional prefix or suffix
+requires a separate method call and another <code>or</code> operator, making the condition increasingly difficult to read and maintain.</p>
+<p>This pattern is particularly common when validating file extensions, URL protocols, or any scenario where you need to check for multiple valid
+prefixes or suffixes.</p>
+<h3>What is the potential impact?</h3>
+<p>The consolidated form is easier to read and maintain, reducing the cognitive load on developers reviewing or modifying the code. The performance
+gain from a single consolidated call is modest but accumulates in loops or hot paths.</p>
 <h2>How to fix it</h2>
 <p>Replace multiple <code>startswith()</code> or <code>endswith()</code> calls connected by <code>or</code> operators with a single call that uses a
-tuple containing all the prefixes or suffixes.</p>
+tuple containing all the prefixes or suffixes to check.</p>
+<p>Both <code>startswith()</code> and <code>endswith()</code> methods accept a tuple of strings as their first argument. When you pass a tuple, the
+method checks if the string starts or ends with any of the values in that tuple. This has two main benefits:</p>
+<ul>
+  <li><strong>readability:</strong> the code is more concise and easier to understand at a glance.</li>
+  <li><strong>performance:</strong> the method is called only once instead of multiple times, reducing overhead.</li>
+</ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-if s.startswith("http://") or s.startswith("https://"):  # Noncompliant
+if s.startswith("http://") or s.startswith("https://"):  # Noncompliant: use a tuple argument instead
     process_url(s)
 </pre>
 <h4>Compliant solution</h4>
@@ -20,7 +31,7 @@ if s.startswith(("http://", "https://")):
 </pre>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="2" data-diff-type="noncompliant">
-if filename.endswith(".jpg") or filename.endswith(".png") or filename.endswith(".gif"):  # Noncompliant
+if filename.endswith(".jpg") or filename.endswith(".png") or filename.endswith(".gif"):  # Noncompliant: use a tuple argument instead
     display_image(filename)
 </pre>
 <h4>Compliant solution</h4>
@@ -31,11 +42,12 @@ if filename.endswith((".jpg", ".png", ".gif")):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#str.startswith">str.startswith()</a></li>
-  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#str.endswith">str.endswith()</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#str.startswith"><code>str.startswith()</code></a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#str.endswith"><code>str.endswith()</code></a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
   <li>{rule:python:S6659} - <code>startswith</code> or <code>endswith</code> methods should be used instead of string slicing in condition
   expressions</li>
 </ul>
+

@@ -1,6 +1,6 @@
 {
-  "title": "Granting access to S3 buckets to all or authenticated users is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "S3 buckets should not grant access to all users or authenticated users",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "BLOCKER"
@@ -8,13 +8,15 @@
     "attribute": "CONVENTIONAL"
   },
   "status": "ready",
+  "quickfix": "unknown",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
   "tags": [
     "aws",
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-6265",

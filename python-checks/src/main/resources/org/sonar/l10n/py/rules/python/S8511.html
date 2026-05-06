@@ -1,20 +1,24 @@
 <p>This rule raises an issue when a class definition with multiple inheritance results in an unresolvable Method Resolution Order (MRO).</p>
 <h2>Why is this an issue?</h2>
-<p>Python uses the C3 linearization algorithm to determine the Method Resolution Order (MRO) — the order in which base classes are searched when
-looking up methods and attributes. When a class is created with multiple inheritance, Python must be able to construct a valid MRO. If the inheritance
-structure violates the C3 linearization rules, Python raises a <code>TypeError</code> at class definition time, preventing the class from being
-created at all.</p>
+<p>Python uses the C3 linearization algorithm (also called C3 superclass linearization) to determine the Method Resolution Order (MRO) - the order in
+which base classes are searched when looking up methods and attributes. This algorithm ensures a consistent and predictable class hierarchy.</p>
+<p>When a class is created with multiple inheritance, Python must be able to construct a valid MRO. If the inheritance structure violates the C3
+linearization rules, Python raises a <code>TypeError</code> at class definition time, preventing the class from being created at all.</p>
+<h3>C3 linearization rules</h3>
 <p>The C3 algorithm enforces these key constraints:</p>
 <ul>
-  <li><strong>Local precedence ordering</strong>: If class <code>C</code> inherits from <code>A</code> then <code>B</code>, then <code>A</code> must
-  appear before <code>B</code> in the MRO.</li>
+  <li><strong>Local precedence ordering</strong>: If class <code>C</code> inherits from <code>A</code> then <code>B</code> (i.e., <code>class C(A,
+  B)</code>), then <code>A</code> must appear before <code>B</code> in the MRO</li>
   <li><strong>Monotonicity</strong>: If class <code>A</code> appears before class <code>B</code> in the MRO of a parent class, then <code>A</code>
-  must also appear before <code>B</code> in the MRO of any child class.</li>
+  must also appear before <code>B</code> in the MRO of any child class</li>
 </ul>
-<p>MRO inconsistencies cause immediate runtime failures. The class cannot be instantiated or used, breaking the application at import time.</p>
+<p>Violating these rules creates an inconsistent hierarchy where Python cannot determine which parent class should take precedence.</p>
+<h3>What is the potential impact?</h3>
+<p>MRO inconsistencies cause immediate failures at class definition time — Python raises a <code>TypeError</code> and the class is never created,
+breaking the application at import time.</p>
 <h2>How to fix it</h2>
-<p>Restructure the inheritance hierarchy to respect the C3 linearization rules. Remove redundant base classes from the inheritance list, as a class
-does not need to directly inherit from a grandparent if it is already inherited through a parent.</p>
+<p>To fix MRO inconsistencies, restructure the inheritance hierarchy to respect the C3 linearization rules. Remove redundant base classes from the
+inheritance list, as a class does not need to directly inherit from a grandparent if it is already inherited through a parent.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -27,7 +31,7 @@ class B(A):
 class C(A):
     pass
 
-class D(B, A, C):  # Noncompliant: explicitly inheriting from A violates local precedence
+class D(B, A, C):  # Noncompliant: inconsistent MRO for bases A and C; D requires A before C, but C inherits from A
     pass
 </pre>
 <h4>Compliant solution</h4>
@@ -48,6 +52,8 @@ class D(B, C):  # Compliant: A is inherited through B and C
 <h3>Documentation</h3>
 <ul>
   <li>Python Documentation - <a href="https://docs.python.org/3/tutorial/classes.html#multiple-inheritance">Multiple Inheritance</a></li>
-  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#class.__mro__"><code>__mro__</code> attribute</a></li>
+  <li>Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#class.&lt;em&gt;mro&lt;/em&gt;"><code>__mro__</code>
+  attribute</a></li>
   <li>Python - <a href="https://www.python.org/download/releases/2.3/mro/">The Python 2.3 Method Resolution Order</a></li>
 </ul>
+

@@ -1,22 +1,19 @@
-<p>Amazon Elastic Block Store (EBS) is a block-storage service for Amazon Elastic Compute Cloud (EC2). EBS volumes can be encrypted, ensuring the
-security of both data-at-rest and data-in-transit between an instance and its attached EBS storage. In the case that adversaries gain physical access
-to the storage medium they are not able to access the data. Encryption can be enabled for specific volumes or for <a
-href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default">all new volumes and snapshots</a>. Volumes created
-from snapshots inherit their encryption configuration. A volume created from an encrypted snapshot will also be encrypted by default.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The disk contains sensitive data that could cause harm when leaked.</li>
-  <li>There are compliance requirements for the service to store data encrypted.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to encrypt EBS volumes that contain sensitive information. Encryption and decryption are handled transparently by EC2, so no
-further modifications to the application are necessary. Instead of enabling encryption for every volume, it is also possible to enable encryption
-globally for a specific region. While creating volumes from encrypted snapshots will result in them being encrypted, explicitly enabling this security
-parameter will prevent any future unexpected security downgrade.</p>
-<h2>Sensitive Code Example</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.Volume.html">aws_cdk.aws_ec2.Volume</a>:</p>
-<pre>
+<p>Amazon Elastic Block Store (EBS) is a block-storage service for Amazon EC2 that supports encryption of data at rest and in transit.</p>
+<h2>Why is this an issue?</h2>
+<p>When EBS volume encryption is disabled, data stored on the volume is not protected cryptographically. If an attacker gains access to the underlying
+storage — for example, through a misconfigured snapshot or a compromised AWS account — the data is exposed in plaintext. Encryption and decryption are
+handled transparently by EC2, so enabling it requires no modifications to the application.</p>
+<h3>What is the potential impact?</h3>
+<h4>Exposure of sensitive data</h4>
+<p>Unencrypted EBS volumes can expose all data they contain if the underlying storage is accessed without authorization. This includes database files,
+application data, logs, and other sensitive information that an attacker could read, copy, or exfiltrate, leading to data breaches and regulatory
+non-compliance.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<p>EBS volume encryption is disabled, either explicitly by setting the encryption attribute to <code>false</code> or implicitly by omitting it when
+the default encryption setting is not enabled.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk.aws_ec2 import Volume
 
 class EBSVolumeStack(Stack):
@@ -24,28 +21,13 @@ class EBSVolumeStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
         super().__init__(scope, construct_id, **kwargs)
         Volume(self,
-            "unencrypted-explicit",
-            availability_zone="eu-west-1a",
-            size=Size.gibibytes(1),
-            encrypted=False  # Sensitive
-        )
-</pre>
-<pre>
-from aws_cdk.aws_ec2 import Volume
-
-class EBSVolumeStack(Stack):
-
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
-        super().__init__(scope, construct_id, **kwargs)
-        Volume(self,
-            "unencrypted-implicit",
+            "example-volume",
             availability_zone="eu-west-1a",
             size=Size.gibibytes(1)
-        ) # Sensitive as encryption is disabled by default
+        ) # Noncompliant: encryption is disabled by default
 </pre>
-<h2>Compliant Solution</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.Volume.html">aws_cdk.aws_ec2.Volume</a>:</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk.aws_ec2 import Volume
 
 class EBSVolumeStack(Stack):
@@ -53,15 +35,20 @@ class EBSVolumeStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
         super().__init__(scope, construct_id, **kwargs)
         Volume(self,
-            "encrypted-explicit",
+            "example-volume",
             availability_zone="eu-west-1a",
             size=Size.gibibytes(1),
             encrypted=True
         )
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
+  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.Volume.html">aws_cdk.aws_ec2.Volume</a></li>
   <li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a></li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a></li>
 </ul>
 

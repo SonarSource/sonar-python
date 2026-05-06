@@ -4,18 +4,22 @@
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
-    "constantCost": "5min"
+    "constantCost": "2 min"
   },
-  "tags": [],
+  "tags": [
+    "pythonic",
+    "performance",
+    "idiom"
+  ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-8502",
   "sqKey": "S8502",
   "scope": "All",
-  "quickfix": "targeted",
+  "quickfix": "partial",
   "code": {
     "impacts": {
       "MAINTAINABILITY": "LOW"
     },
-    "attribute": "CONVENTIONAL"
+    "attribute": "EFFICIENT"
   }
 }

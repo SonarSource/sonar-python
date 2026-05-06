@@ -62,14 +62,14 @@ class PythonRuleRepositoryTest {
   @Test
   void owaspSecurityStandard() {
     RulesDefinition.Repository repository_9_3 = buildRepository(9, 3);
-    RulesDefinition.Rule s4721_9_3 = repository_9_3.rule("S4721");
-    assertThat(s4721_9_3).isNotNull();
-    assertThat(s4721_9_3.securityStandards()).contains("owaspTop10-2021:a3");
+    RulesDefinition.Rule s2077_9_3 = repository_9_3.rule("S2077");
+    assertThat(s2077_9_3).isNotNull();
+    assertThat(s2077_9_3.securityStandards()).contains("owaspTop10-2021:a3");
 
     RulesDefinition.Repository repository_9_2 = buildRepository(9, 2);
-    RulesDefinition.Rule s4721_9_2 = repository_9_2.rule("S4721");
-    assertThat(s4721_9_2).isNotNull();
-    assertThat(s4721_9_2.securityStandards()).doesNotContain("owaspTop10-2021:a3");
+    RulesDefinition.Rule s2077_9_2 = repository_9_2.rule("S2077");
+    assertThat(s2077_9_2).isNotNull();
+    assertThat(s2077_9_2.securityStandards()).doesNotContain("owaspTop10-2021:a3");
   }
 
   @Test
@@ -120,8 +120,8 @@ class PythonRuleRepositoryTest {
   @Test
   void hotspotRules() {
     RulesDefinition.Repository repository = buildRepository();
-    RulesDefinition.Rule hardcodedIp = repository.rule("S1313");
-    assertThat(hardcodedIp.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
+    RulesDefinition.Rule sqlInjection = repository.rule("S2077");
+    assertThat(sqlInjection.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
   }
 
   private static RulesDefinition.Repository buildRepository() {

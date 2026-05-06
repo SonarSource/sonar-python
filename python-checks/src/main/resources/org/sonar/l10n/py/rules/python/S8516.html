@@ -1,5 +1,5 @@
-<p>This rule raises an issue when a group iterator returned by <code>itertools.groupby()</code> is stored outside the loop body for later use, instead
-of being consumed immediately.</p>
+<p>This rule raises an issue when a group iterator returned by <code>itertools.groupby()</code> is stored in a container that persists beyond the
+current loop iteration, instead of being consumed immediately.</p>
 <h2>Why is this an issue?</h2>
 <p>The <code>itertools.groupby()</code> function groups consecutive items from an iterable based on a key function. It returns pairs of <code>(key,
 group_iterator)</code> where each <code>group_iterator</code> is a sub-iterator that yields items for that specific group.</p>

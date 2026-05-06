@@ -1,18 +1,17 @@
-<p>Amazon Simple Queue Service (SQS) is a managed message queuing service for application-to-application (A2A) communication. Amazon SQS can store
-messages encrypted as soon as they are received. In the case that adversaries gain physical access to the storage medium or otherwise leak a message
-from the file system, for example through a vulnerability in the service, they are not able to access the data.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The queue contains sensitive data that could cause harm when leaked.</li>
-  <li>There are compliance requirements for the service to store data encrypted.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to encrypt SQS queues that contain sensitive information. Encryption and decryption are handled transparently by SQS, so no
-further modifications to the application are necessary.</p>
-<h2>Sensitive Code Example</h2>
+<p>Amazon SQS queues should be encrypted to protect sensitive message data at rest.</p>
+<h2>Why is this an issue?</h2>
+<p>Amazon Simple Queue Service (SQS) is a managed message queuing service for application-to-application communication. SQS can store messages
+encrypted as soon as they are received. This rule raises an issue when an SQS queue is created with encryption explicitly disabled.</p>
+<h3>What is the potential impact?</h3>
+<p>If an adversary gains physical access to the storage medium or otherwise reads a message from the file system, for example through a vulnerability
+in the service, they can access the data. This could result in the exposure of sensitive information such as personal data, credentials, or
+business-critical messages.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<p>Encryption and decryption are handled transparently by SQS, so no further modifications to the application are necessary.</p>
+<h4>Noncompliant code example</h4>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sqs.CfnQueue.html">aws_cdk.aws_sqs.CfnQueue</a>:</p>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk import (
     aws_sqs as sqs
 )
@@ -23,12 +22,12 @@ class CfnQueueStack(Stack):
         sqs.CfnQueue(
             self,
             "example",
-            sqs_managed_sse_enabled=False # Sensitive, unencrypted
+            sqs_managed_sse_enabled=False # Noncompliant, unencrypted
         )
 </pre>
-<h2>Compliant Solution</h2>
+<h4>Compliant solution</h4>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sqs.CfnQueue.html">aws_cdk.aws_sqs.CfnQueue</a>:</p>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk import (
     aws_sqs as sqs
 )
@@ -42,10 +41,14 @@ class CfnQueueStack(Stack):
             sqs_managed_sse_enabled=True
         )
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html">AWS Documentation</a> -
   Encryption at rest</li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a></li>
   <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222588">Application Security and
   Development: V-222588</a> - The application must implement approved cryptographic mechanisms to prevent unauthorized modification of information at

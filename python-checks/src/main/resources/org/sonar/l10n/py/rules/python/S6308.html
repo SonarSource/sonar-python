@@ -9,74 +9,56 @@ version), or Elasticsearch with a version of 5.1 or above. Enabling encryption a
   <li>automated snapshots</li>
 </ul>
 <p>Thus, adversaries cannot access the data if they gain physical access to the storage medium.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The database contains sensitive data that could cause harm when leaked.</li>
-  <li>There are compliance requirements for the service to store data encrypted.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It is recommended to encrypt OpenSearch domains that contain sensitive information.</p>
-<p>OpenSearch handles encryption and decryption transparently, so no further modifications to the application are necessary.</p>
-<h2>Sensitive Code Example</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_opensearchservice/Domain.html">aws_cdk.aws_opensearchservice.Domain</a>:</p>
-<pre>
+<h2>Why is this an issue?</h2>
+<p>OpenSearch domains store indexed data that may contain sensitive information. Without encryption at rest, this data is stored in plain text and can
+be accessed by anyone with physical or administrative access to the underlying storage. This rule detects OpenSearch domain configurations where
+encryption at rest is disabled or not explicitly enabled.</p>
+<h3>What is the potential impact?</h3>
+<p>Disabling encryption at rest leaves stored data vulnerable if the storage medium is compromised.</p>
+<h4>Unauthorized access to sensitive data</h4>
+<p>An attacker who gains physical access to the storage medium, or unauthorized administrative access, can read all indexed data in plain text. This
+may include sensitive business data, personal information, or credentials that can be exploited for further attacks or cause regulatory compliance
+failures.</p>
+<h2>How to fix it</h2>
+<p>Enable encryption at rest by setting <code>encryption_at_rest</code> with <code>enabled=True</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk.aws_opensearchservice import Domain, EngineVersion
 
 class DomainStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
         super().__init__(scope, construct_id, **kwargs)
 
-        Domain(self, "Sensitive",
+        Domain(self, "ExampleDomain",
             version=EngineVersion.OPENSEARCH_1_3
-        ) # Sensitive, encryption is disabled by default
+        ) # Noncompliant: encryption is disabled by default
 </pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_opensearchservice/CfnDomain.html">aws_cdk.aws_opensearchservice.CfnDomain</a>:</p>
-<pre>
-from aws_cdk.aws_opensearchservice import CfnDomain
-
-class CfnDomainStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
-        super().__init__(scope, construct_id, **kwargs)
-
-        CfnDomain(self, "Sensitive") # Sensitive, encryption is disabled by default
-</pre>
-<h2>Compliant Solution</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_opensearchservice/Domain.html">aws_cdk.aws_opensearchservice.Domain</a>:</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk.aws_opensearchservice import Domain, EncryptionAtRestOptions, EngineVersion
 
 class DomainStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
         super().__init__(scope, construct_id, **kwargs)
 
-        Domain(self, "Compliant",
+        Domain(self, "ExampleDomain",
             version=EngineVersion.OPENSEARCH_1_3,
             encryption_at_rest=EncryptionAtRestOptions(
                 enabled=True
             )
         )
 </pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_opensearchservice/CfnDomain.html">aws_cdk.aws_opensearchservice.CfnDomain</a>:</p>
-<pre>
-from aws_cdk.aws_opensearchservice import CfnDomain
-
-class CfnDomainStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
-        super().__init__(scope, construct_id, **kwargs)
-
-        CfnDomain(self, "Compliant",
-            encryption_at_rest_options=CfnDomain.EncryptionAtRestOptionsProperty(
-                enabled=True
-            )
-        )
-</pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html">AWS Documentation</a> - Encryption of
   data at rest for Amazon OpenSearch Service</li>
+  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_opensearchservice/Domain.html">AWS CDK Documentation</a> -
+  <code>aws_cdk.aws_opensearchservice.Domain</code></li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a></li>
   <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222588">Application Security and
   Development: V-222588</a> - The application must implement approved cryptographic mechanisms to prevent unauthorized modification of information at

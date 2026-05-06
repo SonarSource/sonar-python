@@ -1,19 +1,18 @@
+<p>Amazon Elastic File System (EFS) file systems should be encrypted to protect sensitive data at rest.</p>
+<h2>Why is this an issue?</h2>
 <p>Amazon Elastic File System (EFS) is a serverless file system that does not require provisioning or managing storage. Stored files can be
-automatically encrypted by the service. In the case that adversaries gain physical access to the storage medium or otherwise leak a message they are
-not able to access the data.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The file system contains sensitive data that could cause harm when leaked.</li>
-  <li>There are compliance requirements for the service to store data encrypted.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to encrypt EFS file systems that contain sensitive information. Encryption and decryption are handled transparently by EFS, so no
-further modifications to the application are necessary.</p>
-<h2>Sensitive Code Example</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_efs.FileSystem.html">aws_cdk.aws_efs.FileSystem</a> and <a
-href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_efs.CfnFileSystem.html">aws_cdk.aws_efs.CfnFileSystem</a>:</p>
-<pre>
+automatically encrypted by the service, but this feature is not always enabled by default. This rule raises an issue when an EFS file system is
+created with encryption disabled.</p>
+<h3>What is the potential impact?</h3>
+<p>If adversaries gain physical access to the storage medium or otherwise read data from the file system, for example through a vulnerability in the
+service, they can access the data. This could result in the exposure of sensitive information such as personal data, credentials, or business-critical
+files.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<p>Encryption and decryption are handled transparently by EFS, so no further modifications to the application are necessary.</p>
+<h4>Noncompliant code example</h4>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_efs.FileSystem.html">aws_cdk.aws_efs.FileSystem</a>:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk import (
     aws_efs as efs
 )
@@ -21,13 +20,12 @@ from aws_cdk import (
 efs.FileSystem(
     self,
     "example",
-    encrypted=False  # Sensitive
+    encrypted=False  # Noncompliant
 )
 </pre>
-<h2>Compliant Solution</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_efs.FileSystem.html">aws_cdk.aws_efs.FileSystem</a> and <a
-href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_efs.CfnFileSystem.html">aws_cdk.aws_efs.CfnFileSystem</a>:</p>
-<pre>
+<h4>Compliant solution</h4>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_efs.FileSystem.html">aws_cdk.aws_efs.FileSystem</a>:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk import (
     aws_efs as efs
 )
@@ -38,9 +36,13 @@ efs.FileSystem(
     encrypted=True
 )
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/efs/latest/ug/encryption.html">AWS Documentation</a> - Data encryption in Amazon EFS</li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a></li>
 </ul>
 

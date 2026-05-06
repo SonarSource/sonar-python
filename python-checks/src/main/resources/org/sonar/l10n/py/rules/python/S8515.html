@@ -6,7 +6,9 @@
   <li><strong>covariant</strong> with <code>covariant=True</code>: the type can be replaced with a subtype</li>
   <li><strong>contravariant</strong> with <code>contravariant=True</code>: the type can be replaced with a supertype</li>
 </ul>
-<p>These variance modes are mutually exclusive. A type variable cannot be both covariant and contravariant simultaneously because these represent opposite relationships in the type hierarchy. Python's <code>typing</code> module will raise a <code>ValueError</code> at runtime when it encounters such a declaration.</p>
+<p>These variance modes are mutually exclusive. A type variable cannot be both covariant and contravariant simultaneously because these represent
+opposite relationships in the type hierarchy. Python’s <code>typing</code> module will raise a <code>ValueError</code> at runtime when it encounters
+such a declaration.</p>
 <h3>What is the potential impact?</h3>
 <ul>
   <li>Python raises a <code>ValueError</code> when the module is imported, causing the application to crash immediately.</li>
@@ -24,12 +26,14 @@
 <pre data-diff-id="1" data-diff-type="noncompliant">
 from typing import TypeVar
 
+# Invalid: cannot be both covariant and contravariant
 T = TypeVar('T', covariant=True, contravariant=True)  # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 from typing import TypeVar
 
+# Valid: covariant type variable
 T_co = TypeVar('T_co', covariant=True)
 </pre>
 <h2>Resources</h2>
@@ -39,3 +43,4 @@ T_co = TypeVar('T_co', covariant=True)
   <li>PEP 484 - <a href="https://peps.python.org/pep-0484/#covariance-and-contravariance">Covariance and Contravariance</a></li>
   <li>Mypy - <a href="https://mypy.readthedocs.io/en/stable/generics.html#variance-of-generic-types">Variance of generic types</a></li>
 </ul>
+

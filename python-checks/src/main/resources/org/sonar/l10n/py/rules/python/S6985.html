@@ -1,8 +1,12 @@
-<p>This rule raises an issue when <code>pytorch.load</code> is used to load a model.</p>
+<p>Loading serialized PyTorch models with <code>torch.load</code> without restricting deserialization can lead to arbitrary code execution.</p>
 <h2>Why is this an issue?</h2>
 <p>In PyTorch, it is common to load serialized models using the <code>torch.load</code> function. Under the hood, <code>torch.load</code> uses the
 <code>pickle</code> library to load the model and the weights. If the model comes from an untrusted source, an attacker could inject a malicious
 payload which would be executed during the deserialization.</p>
+<h3>What is the potential impact?</h3>
+<h4>Remote code execution</h4>
+<p>An attacker who controls a model file loaded with <code>torch.load</code> can execute arbitrary code on the target machine. This can lead to full
+system compromise, data exfiltration, or further lateral movement within a network.</p>
 <h2>How to fix it</h2>
 <p>Use a safer alternative to load the model, such as <code>safetensors.torch.load_model</code>. Alternatively, PyTorch can be instructed to only load
 the weights by setting the parameter <code>weights_only=True</code>. This avoids the use of the <code>pickle</code> library and is therefore safe.
@@ -12,7 +16,7 @@ Note that the use of <code>weights_only</code> requires saving only the <code>st
 <pre data-diff-id="1" data-diff-type="noncompliant">
 import torch
 
-model = torch.load('model.pth') # Noncompliant: torch.load is used to load the model
+model = torch.load('model.pth') # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
@@ -25,7 +29,12 @@ safetensors.torch.load_model(model, 'model.pth')
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li>Pytorch documentation: <a href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model">Save/Load Entire
+  <li>Pytorch documentation - <a href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model">Save/Load Entire
   Model</a></li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/913">CWE-913 - Improper Control of Dynamically-Managed Code Resources</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/502">CWE-502 - Deserialization of Untrusted Data</a></li>
 </ul>
 

@@ -1,6 +1,6 @@
 {
-  "title": "Using unencrypted EFS file systems is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Amazon EFS file systems should be encrypted",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "MEDIUM"
@@ -14,12 +14,14 @@
   },
   "tags": [
     "aws",
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6332",
   "sqKey": "S6332",
   "scope": "All",
+  "quickfix": "unknown",
   "securityStandards": {
     "CWE": [
       311
