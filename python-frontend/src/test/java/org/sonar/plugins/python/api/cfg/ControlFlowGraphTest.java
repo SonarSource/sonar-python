@@ -753,6 +753,99 @@ class ControlFlowGraphTest {
   }
 
   @Test
+  void match_statement_group_pattern_is_irrefutable() {
+    ControlFlowGraph cfg = cfg("""
+      foo()   """,
+      "match x:",
+      "  case \"a\": y()",
+      "  case (z): w()",
+      "bar()"
+    );
+
+    PythonCfgBranchingBlock start = (PythonCfgBranchingBlock) cfg.start();
+    PythonCfgEndBlock end = (PythonCfgEndBlock) cfg.end();
+    assertThat(end.predecessors()).hasSize(1);
+    CfgBlock barBlock = end.predecessors().stream().findFirst().get();
+
+    // case "a" false successor must be the irrefutable block (case (z)), not barBlock
+    PythonCfgSimpleBlock irrefutableBlock = (PythonCfgSimpleBlock) start.falseSuccessor();
+    assertThat(irrefutableBlock.elements()).extracting(Tree::getKind)
+      .containsExactly(Kind.NAME, Kind.GROUP_PATTERN);
+
+    CfgBlock irrefutableBody = irrefutableBlock.successors().stream().findFirst().get();
+    assertThat(irrefutableBody.successors()).containsExactly(barBlock);
+  }
+
+  @Test
+  void match_statement_group_wildcard_pattern_is_irrefutable() {
+    ControlFlowGraph cfg = cfg("""
+      foo()   """,
+      "match x:",
+      "  case \"a\": y()",
+      "  case (_): w()",
+      "bar()"
+    );
+
+    PythonCfgBranchingBlock start = (PythonCfgBranchingBlock) cfg.start();
+    // case "a" false successor must be a simple block (irrefutable), not a branching block
+    PythonCfgSimpleBlock irrefutableBlock = (PythonCfgSimpleBlock) start.falseSuccessor();
+    assertThat(irrefutableBlock.elements()).extracting(Tree::getKind)
+      .containsExactly(Kind.NAME, Kind.GROUP_PATTERN);
+  }
+
+  @Test
+  void match_statement_nested_group_pattern_is_irrefutable() {
+    ControlFlowGraph cfg = cfg("""
+      foo()   """,
+      "match x:",
+      "  case \"a\": y()",
+      "  case ((z)): w()",
+      "bar()"
+    );
+
+    PythonCfgBranchingBlock start = (PythonCfgBranchingBlock) cfg.start();
+    // case "a" false successor must be a simple block (irrefutable), not a branching block
+    PythonCfgSimpleBlock irrefutableBlock = (PythonCfgSimpleBlock) start.falseSuccessor();
+    assertThat(irrefutableBlock.elements()).extracting(Tree::getKind)
+      .containsExactly(Kind.NAME, Kind.GROUP_PATTERN);
+  }
+
+  @Test
+  void match_statement_group_literal_pattern_is_refutable() {
+    ControlFlowGraph cfg = cfg("""
+      foo()   """,
+      "match x:",
+      "  case \"a\": y()",
+      "  case (42): w()",
+      "bar()"
+    );
+
+    // Both cases are refutable — the second case must be a branching block
+    PythonCfgBranchingBlock start = (PythonCfgBranchingBlock) cfg.start();
+    PythonCfgBranchingBlock secondCase = (PythonCfgBranchingBlock) start.falseSuccessor();
+    assertThat(secondCase).isInstanceOf(PythonCfgBranchingBlock.class);
+    // The false path of the second case leads directly to barBlock (no-match path)
+    PythonCfgEndBlock end = (PythonCfgEndBlock) cfg.end();
+    CfgBlock barBlock = end.predecessors().stream().findFirst().get();
+    assertThat(secondCase.falseSuccessor()).isEqualTo(barBlock);
+  }
+
+  @Test
+  void match_statement_guarded_group_pattern_is_refutable() {
+    ControlFlowGraph cfg = cfg("""
+      foo()   """,
+      "match x:",
+      "  case \"a\": y()",
+      "  case (z) if w(): v()",
+      "bar()"
+    );
+
+    // Both cases are refutable — the second case must be a branching block
+    PythonCfgBranchingBlock start = (PythonCfgBranchingBlock) cfg.start();
+    assertThat(start.falseSuccessor()).isInstanceOf(PythonCfgBranchingBlock.class);
+  }
+
+  @Test
   void CFGBlock_toString() {
     PythonCfgEndBlock endBlock = new PythonCfgEndBlock();
     assertThat(endBlock).hasToString("END");

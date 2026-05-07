@@ -42,6 +42,7 @@ import org.sonar.plugins.python.api.tree.Guard;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.MatchStatement;
 import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.GroupPattern;
 import org.sonar.plugins.python.api.tree.Pattern;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
@@ -251,7 +252,17 @@ public class ControlFlowGraphBuilder {
   }
 
   private static boolean isIrrefutablePattern(CaseBlock caseBlock) {
-    return caseBlock.guard() == null && caseBlock.pattern().is(Tree.Kind.WILDCARD_PATTERN, Tree.Kind.CAPTURE_PATTERN);
+    return caseBlock.guard() == null && isIrrefutablePatternKind(caseBlock.pattern());
+  }
+
+  private static boolean isIrrefutablePatternKind(Pattern pattern) {
+    if (pattern.is(Tree.Kind.WILDCARD_PATTERN, Tree.Kind.CAPTURE_PATTERN)) {
+      return true;
+    }
+    if (pattern.is(Tree.Kind.GROUP_PATTERN)) {
+      return isIrrefutablePatternKind(((GroupPattern) pattern).pattern());
+    }
+    return false;
   }
 
   private PythonCfgBlock buildWithStatement(WithStatement withStatement, PythonCfgBlock successor) {

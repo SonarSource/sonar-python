@@ -152,6 +152,45 @@ def match_irrefutable_in_middle(x):
     case 1:
       pass
 
+def match_group_capture_is_irrefutable(x):
+  match x:
+    case 0:
+      return x
+    case (y):
+      return y
+
+
+def match_group_wildcard_is_irrefutable(x):
+  match x:
+    case 0:
+      return x
+    case (_):
+      return 42
+
+
+def match_nested_group_is_irrefutable(x):
+  match x:
+    case 0:
+      return x
+    case ((y)):
+      return y
+
+
+def match_guarded_group_is_refutable(x): # Noncompliant
+  match x:
+    case 0:
+      return x
+    case (y) if x > 0:
+      return y
+
+
+def match_group_literal_is_refutable(x): # Noncompliant
+  match x:
+    case 0:
+      return x
+    case (42):
+      return 42
+
 # raise / assert
 
 def return_value_or_raise(x):
