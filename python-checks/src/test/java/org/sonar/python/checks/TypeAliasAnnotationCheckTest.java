@@ -17,14 +17,22 @@
 package org.sonar.python.checks;
 
 import java.util.EnumSet;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TypeAliasAnnotationCheckTest {
+
+  @AfterEach
+  void reset_python_version() {
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+    TypeShed.resetBuiltinSymbols();
+  }
 
   @Test
   void verify_python_312_issues() {

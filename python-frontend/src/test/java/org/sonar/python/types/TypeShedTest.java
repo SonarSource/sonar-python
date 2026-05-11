@@ -615,4 +615,16 @@ class TypeShedTest {
     var pymysql = symbolsForModule("pymysql");
     assertThat(pymysql.get("connect")).isInstanceOf(FunctionSymbol.class);
   }
+
+  @Test
+  void resets_typeshed_after_python_version_change() {
+    setPythonVersions(Set.of(PythonVersionUtils.Version.V_310));
+
+    assertThat(TypeShed.typeShedClass("object").canHaveMember("__getstate__")).isFalse();
+
+    setPythonVersions(PythonVersionUtils.allVersions());
+
+    assertThat(TypeShed.typeShedClass("object").canHaveMember("__getstate__")).isTrue();
+  }
+
 }

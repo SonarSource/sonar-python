@@ -22,12 +22,14 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+import org.sonar.python.types.TypeShed;
 
 class WeakSSLProtocolCheckTest {
 
   @AfterEach
   void reset_python_version() {
     ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+    TypeShed.resetBuiltinSymbols();
   }
 
   @Test
