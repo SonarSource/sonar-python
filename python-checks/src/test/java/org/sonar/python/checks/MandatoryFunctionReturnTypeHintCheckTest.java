@@ -243,6 +243,19 @@ class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
+  void no_quick_fix_mixed_supported_and_unsupported_return_types() {
+    String codeWithIssue = code(
+      "class Foo:",
+      "    pass",
+      "def foo(condition: bool):",
+      "    if condition:",
+      "        return 42",
+      "    return Foo()");
+    MandatoryFunctionReturnTypeHintCheck check = new MandatoryFunctionReturnTypeHintCheck();
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, codeWithIssue);
+  }
+
+  @Test
   void no_quick_fix_ambiguous_type() {
     String codeWithIssue = code(
       "def foo(alice: str, bob: int):",

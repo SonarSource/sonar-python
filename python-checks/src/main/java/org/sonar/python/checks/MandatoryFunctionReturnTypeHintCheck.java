@@ -17,11 +17,10 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -34,22 +33,23 @@ import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.FunctionDefImpl;
-import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S6538")
 public class MandatoryFunctionReturnTypeHintCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Add a return type hint to this function declaration.";
   public static final String CONSTRUCTOR_MESSAGE = "Annotate the return type of this constructor with `None`.";
-  private static final List<String> SUPPORTED_TYPES = List.of(
-    BuiltinTypes.STR,
-    BuiltinTypes.NONE_TYPE,
-    BuiltinTypes.BOOL,
-    BuiltinTypes.COMPLEX,
-    BuiltinTypes.FLOAT,
-    BuiltinTypes.INT);
+  private static final List<SupportedReturnType> SUPPORTED_TYPES = List.of(
+    new SupportedReturnType(TypeMatchers.isObjectOfType("builtins.str"), BuiltinTypes.STR),
+    new SupportedReturnType(TypeMatchers.isObjectOfType("NoneType"), "None"),
+    new SupportedReturnType(TypeMatchers.isObjectOfType("builtins.bool"), BuiltinTypes.BOOL),
+    new SupportedReturnType(TypeMatchers.isObjectOfType("builtins.complex"), BuiltinTypes.COMPLEX),
+    new SupportedReturnType(TypeMatchers.isObjectOfType("builtins.float"), BuiltinTypes.FLOAT),
+    new SupportedReturnType(TypeMatchers.isObjectOfType("builtins.int"), BuiltinTypes.INT));
 
   @Override
   public void initialize(Context context) {
@@ -78,7 +78,7 @@ public class MandatoryFunctionReturnTypeHintCheck extends PythonSubscriptionChec
     ReturnStatementVisitor returnStatementVisitor = new ReturnStatementVisitor();
     functionDef.body().accept(returnStatementVisitor);
     if (!returnStatementVisitor.returnStatements.isEmpty()) {
-      addQuickFixForReturnType(issue, functionDef, returnStatementVisitor.returnStatements);
+      addQuickFixForReturnType(ctx, issue, functionDef, returnStatementVisitor.returnStatements);
     } else if (returnStatementVisitor.yieldStatements.isEmpty()) {
       addQuickFixForNoneType(issue, functionDef);
     }
@@ -91,26 +91,39 @@ public class MandatoryFunctionReturnTypeHintCheck extends PythonSubscriptionChec
     issue.addQuickFix(quickFix);
   }
 
-  private static void addQuickFixForReturnType(PreciseIssue issue, FunctionDef functionDef, List<ReturnStatement> statements) {
-    Set<String> returnTypes = statements.stream()
-      .flatMap(stmts -> stmts.expressions().stream())
-      .map(Expression::type)
-      .map(InferredTypes::typeName)
-      .filter(Objects::nonNull)
-      .collect(Collectors.toSet());
+  private static void addQuickFixForReturnType(SubscriptionContext ctx, PreciseIssue issue, FunctionDef functionDef, List<ReturnStatement> statements) {
+    Set<String> returnTypes = collectSupportedReturnTypeAnnotations(statements, ctx);
     if (returnTypes.size() == 1) {
-      String typeName = returnTypes.stream().iterator().next();
-      if (SUPPORTED_TYPES.contains(typeName)) {
-        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(MandatoryFunctionReturnTypeHintCheck.MESSAGE)
-          .addTextEdit(TextEditUtils.insertAfter(functionDef.rightPar(), String.format(" -> %s", fixTypeName(typeName))))
-          .build();
-        issue.addQuickFix(quickFix);
-      }
+      String annotation = returnTypes.iterator().next();
+      PythonQuickFix quickFix = PythonQuickFix.newQuickFix(MandatoryFunctionReturnTypeHintCheck.MESSAGE)
+        .addTextEdit(TextEditUtils.insertAfter(functionDef.rightPar(), String.format(" -> %s", annotation)))
+        .build();
+      issue.addQuickFix(quickFix);
     }
   }
 
-  private static String fixTypeName(String typeName) {
-    return typeName.equals(BuiltinTypes.NONE_TYPE) ? "None" : typeName;
+  private static Set<String> collectSupportedReturnTypeAnnotations(List<ReturnStatement> statements, SubscriptionContext ctx) {
+    Set<String> returnTypes = new HashSet<>();
+    for (ReturnStatement stmt : statements) {
+      for (Expression expression : stmt.expressions()) {
+        Optional<String> annotation = supportedReturnTypeAnnotation(expression, ctx);
+        if (annotation.isEmpty()) {
+          return Set.of();
+        }
+        returnTypes.add(annotation.get());
+      }
+    }
+    return returnTypes;
+  }
+
+  private static Optional<String> supportedReturnTypeAnnotation(Expression expression, SubscriptionContext ctx) {
+    return SUPPORTED_TYPES.stream()
+      .filter(supportedType -> supportedType.matcher().isTrueFor(expression, ctx))
+      .map(SupportedReturnType::annotation)
+      .findFirst();
+  }
+
+  private record SupportedReturnType(TypeMatcher matcher, String annotation) {
   }
 
   private static class ReturnStatementVisitor extends BaseTreeVisitor {

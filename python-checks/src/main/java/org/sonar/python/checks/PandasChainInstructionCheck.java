@@ -19,21 +19,19 @@ package org.sonar.python.checks;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.matchers.InternalTypeMatchers;
 
 @Rule(key = "S6742")
 public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
@@ -42,6 +40,10 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
   private static final int MAX_CHAIN_LENGTH = 7;
 
   private static final String DATAFRAME_FQN = "pandas.core.frame.DataFrame";
+  private static final TypeMatcher IS_DATAFRAME = TypeMatchers.isObjectOfType(DATAFRAME_FQN);
+  private static final TypeMatcher IS_OR_CONTAINS_DATAFRAME = TypeMatchers.any(
+    IS_DATAFRAME,
+    InternalTypeMatchers.isAnyTypeInUnionSatisfying(IS_DATAFRAME));
 
   private final Set<QualifiedExpression> visited = new HashSet<>();
 
@@ -54,7 +56,7 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
   private void checkChainedInstructions(SubscriptionContext ctx) {
     QualifiedExpression expr = (QualifiedExpression) ctx.syntaxNode();
     List<QualifiedExpression> chain = visitQualifier(expr, new ArrayList<>());
-    if (chain.size() >= MAX_CHAIN_LENGTH && isValidPandasCall(chain)) {
+    if (chain.size() >= MAX_CHAIN_LENGTH && isValidPandasCall(chain, ctx)) {
       ctx.addIssue(chain.iterator().next(), MESSAGE);
     }
   }
@@ -94,44 +96,21 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
     return Optional.empty();
   }
 
-  private static boolean isValidPandasCall(List<QualifiedExpression> chain) {
+  private static boolean isValidPandasCall(List<QualifiedExpression> chain, SubscriptionContext ctx) {
     QualifiedExpression firstQualifiedExpression = chain.get(chain.size() - 1);
 
-    boolean isADataFrameMethodCall = Optional.ofNullable(firstQualifiedExpression.symbol())
-      .map(Symbol::fullyQualifiedName)
-      .filter(fqn -> fqn.startsWith(DATAFRAME_FQN))
-      .isPresent();
+    boolean isAFunctionReturningADataFrame = firstQualifiedExpression.parent() instanceof CallExpression callExpression
+      && callExpression.callee() == firstQualifiedExpression
+      && IS_OR_CONTAINS_DATAFRAME.isTrueFor(callExpression, ctx);
 
-    boolean isAFunctionReturningADataFrame = Optional.ofNullable(firstQualifiedExpression.symbol())
-      .flatMap(PandasChainInstructionCheck::isReturnTypeADataFrame)
-      .orElse(false);
-
+    // We do not resolve "DataFrame.pipe" as pipe is a generic on NDFrame. 
+    // As we get an unknown type on typeV2 we need to use the name instead
     boolean doesNotContainACallToPipe = chain.stream()
-      .map(QualifiedExpression::symbol)
-      .filter(Objects::nonNull)
-      .map(Symbol::fullyQualifiedName)
-      .filter(Objects::nonNull)
-      .noneMatch((DATAFRAME_FQN + ".pipe")::equals);
+      .noneMatch(qe -> "pipe".equals(qe.name().name()));
 
-    boolean isADataFrame = DATAFRAME_FQN.equals(InferredTypes.fullyQualifiedTypeName(firstQualifiedExpression.qualifier().type()));
+    boolean isADataFrame = IS_OR_CONTAINS_DATAFRAME.isTrueFor(firstQualifiedExpression.qualifier(), ctx);
 
-    return (isADataFrameMethodCall || isAFunctionReturningADataFrame || isADataFrame) && doesNotContainACallToPipe;
-  }
-
-  private static Optional<Boolean> isReturnTypeADataFrame(Symbol symbol) {
-    return Optional.of(symbol)
-      .filter(s -> s.is(Symbol.Kind.AMBIGUOUS))
-      .map(AmbiguousSymbol.class::cast)
-      .map(s -> s.alternatives().stream()
-        .filter(a -> a.is(Symbol.Kind.FUNCTION))
-        .map(FunctionSymbol.class::cast)
-        .map(FunctionSymbol::annotatedReturnTypeName)
-        .anyMatch(DATAFRAME_FQN::equals))
-      .or(() -> Optional.of(symbol)
-        .filter(s -> s.is(Symbol.Kind.FUNCTION))
-        .map(FunctionSymbol.class::cast)
-        .map(FunctionSymbol::annotatedReturnTypeName)
-        .map(DATAFRAME_FQN::equals));
+    return (isAFunctionReturningADataFrame || isADataFrame) && doesNotContainACallToPipe;
   }
 
 }

@@ -23,7 +23,8 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
-import org.sonar.python.types.InferredTypes;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 @Rule(key = "S2761")
 
@@ -31,6 +32,7 @@ public class DoublePrefixOperatorCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use the \"%s\" operator just once or not at all.";
   private static final String MESSAGE_NOT = "Use the \"bool()\" builtin function instead of calling \"not\" twice.";
+  private static final TypeMatcher IS_INT = TypeMatchers.isObjectOfType("builtins.int");
 
   @Override
   public void initialize(Context context) {
@@ -52,7 +54,7 @@ public class DoublePrefixOperatorCheck extends PythonSubscriptionCheck {
         if (invertedExpr.is(Tree.Kind.NOT)) {
           ctx.addIssue(original, MESSAGE_NOT);
         } else {
-          if (((UnaryExpression) invertedExpr).expression().type() == InferredTypes.INT) {
+          if (IS_INT.isTrueFor(((UnaryExpression) invertedExpr).expression(), ctx)) {
             ctx.addIssue(original, String.format(MESSAGE, original.operator().value()));
           }
         }

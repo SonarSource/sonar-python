@@ -26,7 +26,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ListLiteral;
@@ -35,10 +35,12 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
-import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.python.checks.utils.Expressions.getAssignedName;
 
@@ -48,6 +50,8 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
   public static final String MESSAGE = "Avoid accessing transformers in a cached pipeline.";
   public static final String MESSAGE_SECONDARY = "The transformer is accessed here";
   public static final String MESSAGE_SECONDARY_CREATION = "The Pipeline is created here";
+  private static final TypeMatcher IS_PIPELINE = TypeMatchers.isType("sklearn.pipeline.Pipeline");
+  private static final TypeMatcher IS_MAKE_PIPELINE = TypeMatchers.isType("sklearn.pipeline.make_pipeline");
 
   @Override
   public void initialize(Context context) {
@@ -56,14 +60,16 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
 
   private static void checkCallExpr(SubscriptionContext subscriptionContext) {
     CallExpression callExpression = (CallExpression) subscriptionContext.syntaxNode();
-    Optional<PipelineCreation> pipelineCreationOptional = isPipelineCreation(callExpression);
+    Optional<PipelineCreation> pipelineCreationOptional = isPipelineCreation(callExpression, subscriptionContext);
     if (pipelineCreationOptional.isEmpty()) {
       return;
     }
     PipelineCreation pipelineCreation = pipelineCreationOptional.get();
 
     var memoryArgument = TreeUtils.argumentByKeyword("memory", callExpression.arguments());
-    if (memoryArgument == null || memoryArgument.expression().is(Tree.Kind.NONE) || memoryArgument.expression().type() == InferredTypes.anyType()) {
+    if (memoryArgument == null || 
+        memoryArgument.expression().is(Tree.Kind.NONE) || 
+        memoryArgument.expression().typeV2() instanceof UnknownType) {
       return;
     }
     var stepsArgument = TreeUtils.nthArgumentOrKeyword(0, "steps", callExpression.arguments());
@@ -149,7 +155,7 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
   }
 
   private static Map<Tree, QualifiedExpression> symbolIsUsedInQualifiedExpression(Name name) {
-    Symbol symbol = name.symbol();
+    SymbolV2 symbol = name.symbolV2();
     if (symbol == null) {
       return new HashMap<>();
     }
@@ -166,16 +172,13 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
     MAKE_PIPELINE
   }
 
-  private static Optional<PipelineCreation> isPipelineCreation(CallExpression callExpression) {
-    return Optional.ofNullable(callExpression.calleeSymbol()).map(Symbol::fullyQualifiedName)
-      .map(fqn -> {
-        if ("sklearn.pipeline.Pipeline".equals(fqn)) {
-          return PipelineCreation.PIPELINE;
-        }
-        if ("sklearn.pipeline.make_pipeline".equals(fqn)) {
-          return PipelineCreation.MAKE_PIPELINE;
-        }
-        return null;
-      });
+  private static Optional<PipelineCreation> isPipelineCreation(CallExpression callExpression, SubscriptionContext ctx) {
+    if (IS_PIPELINE.isTrueFor(callExpression.callee(), ctx)) {
+      return Optional.of(PipelineCreation.PIPELINE);
+    }
+    if (IS_MAKE_PIPELINE.isTrueFor(callExpression.callee(), ctx)) {
+      return Optional.of(PipelineCreation.MAKE_PIPELINE);
+    }
+    return Optional.empty();
   }
 }

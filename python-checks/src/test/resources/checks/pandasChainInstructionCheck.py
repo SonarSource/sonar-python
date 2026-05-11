@@ -8,7 +8,7 @@ def non_compliant(df: pd.DataFrame, df2: DataFrame):
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     DataFrame().set_index("name").filter(like='joe', axis=0).groupby("team")["salary"].add(10).mean().round().to_parquet()  # Noncompliant {{Refactor this long chain of instructions with "pandas.pipe"}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    df.set_index("name").filter(like='joe', axis=0).groupby("team")["salary"].add(10).mean().round().to_parquet()  # FN see SONARPY-1503
+    df.set_index("name").filter(like='joe', axis=0).groupby("team")["salary"].add(10).mean().round().to_parquet()  # Noncompliant {{Refactor this long chain of instructions with "pandas.pipe"}}
 
     df2.set_index("name").filter(like='joe', axis=0).groupby("team")["salary"]["test"].add(10).mean().round().to_parquet()  # Noncompliant {{Refactor this long chain of instructions with "pandas.pipe"}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -38,4 +38,3 @@ def compliant(df: pd.DataFrame, my_function, something, df2: DataFrame):
     DataFrame().set_index("name").pipe(my_function).filter(like='joe', axis=0).groupby("team")["salary"].add(10).round().mean().to_json()
 
     something.set_index("name").filter(like='joe', axis=0).groupby("team")["salary"].add(10).round().mean().to_parquet()
-

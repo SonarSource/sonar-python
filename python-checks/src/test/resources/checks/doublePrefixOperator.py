@@ -7,7 +7,7 @@ def start():
     #   ^^^
     d = not (not (not (not a)))  # Noncompliant 3
 
-    e = ~~~~~a  # Noncompliant
+    e = ~~~~~a  # Noncompliant 4
     f = ~(((((~a)))))  # Noncompliant {{Use the "~" operator just once or not at all.}}
 
     g = not (a == b)

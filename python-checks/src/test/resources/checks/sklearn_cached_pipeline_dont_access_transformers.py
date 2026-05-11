@@ -4,6 +4,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.decomposition import FastICA
+from sklearn.some_import import cache
 
 
 def case1():
@@ -82,7 +83,7 @@ def case5():
     pca3 = PCA()
     pipel = Pipeline([(clever_generator())])
 
-def case5():
+def case6():
     from sklearn.pipeline import Pipeline
     from sklearn.preprocessing import StandardScaler
     from sklearn.decomposition import PCA
@@ -96,3 +97,16 @@ def case5():
     obj.pipeline =  Pipeline([('scaler', scaler), ('pca', pca)], memory="cache") # Noncompliant
 
     scaler.szsdgf_ = 12
+
+
+def unknown_cache_import():
+    diabetes = load_diabetes()
+    scaler = RobustScaler()
+    knn = KNeighborsRegressor(n_neighbors=5)
+
+    pipeline = Pipeline([
+        ('scaler', scaler), 
+        ('knn', knn)
+    ], memory=cache) # Cannot resolve cache 
+
+    print(scaler.center_)
