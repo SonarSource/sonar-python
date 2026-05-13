@@ -19,6 +19,7 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,6 +57,7 @@ import org.sonar.plugins.python.telemetry.collectors.TestFileTelemetry;
 import org.sonar.plugins.python.telemetry.collectors.TestFileTelemetryCollector;
 import org.sonar.plugins.python.telemetry.collectors.TypeInferenceTelemetry;
 import org.sonar.plugins.python.telemetry.collectors.TypeInferenceTelemetryCollector;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.IPythonLocation;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.parser.PythonParser;
@@ -85,15 +87,24 @@ public class PythonScanner extends Scanner {
   private final Lock lock;
   private final TypeInferenceTelemetryCollector typeInferenceTelemetryCollector;
   private final TestFileTelemetryCollector testFileTelemetryCollector;
+  private final boolean testSourcesConfigured;
+  private final AnalysisWarningsWrapper analysisWarnings;
+  private final AtomicBoolean heuristicWarningEmitted = new AtomicBoolean(false);
+  static final String UNSET_SONAR_TESTS_WARNING = "SonarPython detected files that look like test code " +
+    "but 'sonar.tests' is not configured. Rules targeting production code were not executed on these files. " +
+    "Configure 'sonar.tests' in your project properties for a more accurate analysis.";
 
   public PythonScanner(
     SensorContext context, PythonChecks checks, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
-    Supplier<PythonParser> parserSupplier, PythonIndexer indexer, PythonFileConsumer architectureCallback, NoSonarLineInfoCollector noSonarLineInfoCollector) {
+    Supplier<PythonParser> parserSupplier, PythonIndexer indexer, PythonFileConsumer architectureCallback,
+    NoSonarLineInfoCollector noSonarLineInfoCollector, AnalysisWarningsWrapper analysisWarnings) {
     super(context);
     this.checks = checks;
     this.parserSupplier = parserSupplier;
     this.indexer = indexer;
     this.noSonarLineInfoCollector = noSonarLineInfoCollector;
+    this.analysisWarnings = analysisWarnings;
+    this.testSourcesConfigured = TestFileClassifier.isTestSourceConfigured(context.config());
     this.indexer.buildOnce(context);
     this.architectureCallback = architectureCallback;
     this.checksExecutedWithoutParsingByFiles = new ConcurrentHashMap<>();
@@ -125,9 +136,14 @@ public class PythonScanner extends Scanner {
     var pythonFile = SonarQubePythonFile.create(inputFile);
     InputFile.Type fileType = inputFile.wrappedFile().type();
     PythonVisitorContext visitorContext = createVisitorContext(inputFile, pythonFile);
+    InputFile.Type effectiveTypeForRules = resolveEffectiveTypeForRules(
+      fileType, projectRelativePath(inputFile), visitorContext.rootTree());
+    if (!testSourcesConfigured && fileType == InputFile.Type.MAIN) {
+      indexer.writeEffectiveFileType(inputFile.wrappedFile().key(), effectiveTypeForRules);
+    }
 
-    executeChecks(visitorContext, checks.sonarPythonChecks(), fileType, inputFile);
-    executeOtherChecks(inputFile, visitorContext, fileType);
+    executeChecks(visitorContext, checks.sonarPythonChecks(), effectiveTypeForRules, inputFile);
+    executeOtherChecks(inputFile, visitorContext, effectiveTypeForRules);
 
 
     runLockedByRepository(ARCHITECTURE_CALLBACK_LOCK_KEY, () -> architectureCallback.scanFile(visitorContext));
@@ -241,6 +257,11 @@ public class PythonScanner extends Scanner {
   @Override
   public boolean scanFileWithoutParsing(PythonInputFile inputFile) {
     InputFile.Type fileType = inputFile.wrappedFile().type();
+    InputFile.Type effectiveTypeForRules = resolveEffectiveTypeForRulesFromCache(
+      fileType, projectRelativePath(inputFile), inputFile.wrappedFile().key());
+    if (effectiveTypeForRules == null) {
+      return false;
+    }
     boolean result = true;
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
     PythonInputFileContext inputFileContext = new PythonInputFileContext(
@@ -251,13 +272,13 @@ public class PythonScanner extends Scanner {
       indexer.projectLevelSymbolTable()
     );
 
-    result = scanFileWithoutParsingSonarPython(inputFile, fileType, inputFileContext, result);
+    result = scanFileWithoutParsingSonarPython(inputFile, effectiveTypeForRules, inputFileContext, result);
 
     var atomicResult = new AtomicBoolean(result);
     var otherChecks = checks.noSonarPythonChecks();
     otherChecks.forEach((repositoryKey, repositoryChecks) -> runLockedByRepository(repositoryKey, () -> {
       for (var check : repositoryChecks) {
-        var scanResult = scanFileWithoutParsingNotSonarPython(inputFile, check, fileType, atomicResult.get(), inputFileContext);
+        var scanResult = scanFileWithoutParsingNotSonarPython(inputFile, check, effectiveTypeForRules, atomicResult.get(), inputFileContext);
         atomicResult.set(scanResult);
       }
     }));
@@ -320,6 +341,49 @@ public class PythonScanner extends Scanner {
 
   private void endOfAnalysisForRepository(String repositoryKey, List<EndOfAnalysis> endOfAnalyses) {
     runLockedByRepository(repositoryKey, () -> endOfAnalyses.forEach(c -> c.endOfAnalysis(indexer.cacheContext())));
+  }
+
+  private String projectRelativePath(PythonInputFile inputFile) {
+    return context.fileSystem().baseDir().toURI()
+      .relativize(inputFile.wrappedFile().uri())
+      .toString();
+  }
+
+  private boolean isBypassed(InputFile.Type platformType) {
+    return testSourcesConfigured || platformType == InputFile.Type.TEST;
+  }
+
+  private InputFile.Type resolveEffectiveTypeForRules(InputFile.Type platformType, String filePath, @Nullable FileInput tree) {
+    if (isBypassed(platformType)) {
+      return platformType;
+    }
+    boolean isTest = TestFileClassifier.looksLikeTestFile(filePath, tree);
+    if (isTest) {
+      maybeEmitHeuristicWarning();
+      return InputFile.Type.TEST;
+    }
+    return InputFile.Type.MAIN;
+  }
+
+  @Nullable
+  private InputFile.Type resolveEffectiveTypeForRulesFromCache(InputFile.Type platformType, String filePath, String fileKey) {
+    if (isBypassed(platformType)) {
+      return platformType;
+    }
+    InputFile.Type cached = indexer.readEffectiveFileType(fileKey);
+    if (cached == null) {
+      // Cache entry is missing while the file is unchanged — the cache is in an inconsistent state
+      // This should never happen in normal operation. Fall back to a full parse rather than guessing the type.
+      LOG.debug("No cached effective file type for '{}': triggering full parse", filePath);
+    }
+    return cached;
+  }
+
+  private void maybeEmitHeuristicWarning() {
+    if (heuristicWarningEmitted.compareAndSet(false, true)) {
+      LOG.warn(UNSET_SONAR_TESTS_WARNING);
+      analysisWarnings.addUnique(UNSET_SONAR_TESTS_WARNING);
+    }
   }
 
   boolean isCheckNotApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {

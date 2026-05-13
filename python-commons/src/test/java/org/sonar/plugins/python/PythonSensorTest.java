@@ -38,6 +38,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
@@ -129,7 +130,9 @@ import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_CACHE_KEY_PREF
 import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_STRING_TABLE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.TEST_SOURCES_CONFIGURED_KEY;
 import static org.sonar.plugins.python.caching.Caching.TYPESHED_MODULES_KEY;
+import static org.sonar.plugins.python.caching.Caching.effectiveFileTypeCacheKey;
 import static org.sonar.plugins.python.caching.Caching.fileContentHashCacheKey;
 import static org.sonar.plugins.python.caching.Caching.importsMapCacheKey;
 import static org.sonar.plugins.python.caching.Caching.projectSymbolTableCacheKey;
@@ -630,6 +633,110 @@ class PythonSensorTest {
   }
 
   @Test
+  void test_auto_reclassify_filename_heuristic_suppresses_main_rules() {
+    // sonar.tests NOT set: filename test_*.py triggers heuristic → S1226 (MAIN-scoped) must not fire
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S1226"))
+        .build())
+      .build();
+
+    PythonInputFile inputFile = inputFile(FILE_TEST_FILE, Type.MAIN);
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
+    // Metrics must still be computed as for a MAIN file (not just NCLOC)
+    assertThat(context.measure(inputFile.wrappedFile().key(), CoreMetrics.FUNCTIONS).value()).isEqualTo(1);
+    verify(analysisWarning).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+    "sonar.tests,                              tests",
+    "sonar.test.inclusions,                    tests/**",
+    "sonar.test.exclusions,                    tests/generated/**",
+    "sonar.python.testFileHeuristic.disabled,  true"
+  })
+  void test_auto_reclassify_bypassed_when_test_source_configured(String property, String value) {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S1226"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty(property.strip(), value.strip()));
+    inputFile(FILE_TEST_FILE, Type.MAIN);
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(1);
+    assertThat(context.allIssues().iterator().next().ruleKey().rule()).isEqualTo("S1226");
+    verify(analysisWarning, Mockito.never()).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+  }
+
+  @Test
+  void test_auto_reclassify_not_bypassed_by_blank_sonar_tests() {
+    // sonar.tests set to blank string is treated as "not configured" — heuristic still fires
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S1226"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.tests", ""));
+    inputFile(FILE_TEST_FILE, Type.MAIN);
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
+    verify(analysisWarning).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+  }
+
+  @Test
+  void test_auto_reclassify_not_bypassed_by_blank_sonar_test_inclusions() {
+    // blank sonar.test.inclusions is treated as "not configured" — same as not setting it
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S1226"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.test.inclusions", ""));
+    inputFile(FILE_TEST_FILE, Type.MAIN);
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
+    verify(analysisWarning).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+  }
+
+  @Test
+  void test_auto_reclassify_path_directory_heuristic() {
+    // File inside a `tests/` directory classified as MAIN → heuristic fires, S1226 suppressed
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S1226"))
+        .build())
+      .build();
+
+    PythonInputFile inputFile = inputFile("tests/test_file.py", Type.MAIN);
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
+    assertThat(context.measure(inputFile.wrappedFile().key(), CoreMetrics.FUNCTIONS).value()).isEqualTo(1);
+    verify(analysisWarning).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+  }
+
+  @Test
+  void test_auto_reclassify_warning_emitted_once_for_multiple_heuristic_files() {
+    activeRules = new ActiveRulesBuilder().build();
+
+    inputFile(FILE_TEST_FILE, Type.MAIN);
+    inputFile("tests/test_file.py", Type.MAIN);
+    sensor().execute(context);
+
+    // warning must be emitted exactly once regardless of how many files match the heuristic
+    verify(analysisWarning, times(1)).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+  }
+
+  @Test
   void test_failFast_triggered_on_main_files() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
@@ -976,6 +1083,7 @@ class PythonSensorTest {
     readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data);
     readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
     readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
+    readCache.put(effectiveFileTypeCacheKey(inputFile.wrappedFile().key()), "MAIN".getBytes(UTF_8));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -1080,6 +1188,7 @@ class PythonSensorTest {
     readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data);
     readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
     readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
+    readCache.put(effectiveFileTypeCacheKey(inputFile.wrappedFile().key()), "MAIN".getBytes(UTF_8));
 
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
@@ -1122,6 +1231,77 @@ class PythonSensorTest {
     sensor().execute(context);
 
     assertThat(context.allIssues()).isEmpty();
+  }
+
+  @Test
+  void test_scan_without_parsing_uses_cached_effective_file_type() throws IOException {
+    // File whose path doesn't match path-based test heuristics (no test_ prefix, not in tests/)
+    // but was previously classified as TEST via AST (imports pytest + test_ function with assert).
+    // The cached effectiveFileType=TEST must be used during the cache hit so that S1226 (MAIN-scoped) doesn't fire.
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S1226"))
+        .build())
+      .build();
+
+    PythonInputFile inputFile = inputFile("helper_with_tests.py", Type.MAIN, InputFile.Status.SAME);
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("test_helper", "helper_with_tests.test_helper", null))).toByteArray();
+    TestReadCache readCache = getValidReadCache();
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(Collections.emptyList());
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), "pytest".getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
+    readCache.put(effectiveFileTypeCacheKey(inputFile.wrappedFile().key()), "TEST".getBytes(StandardCharsets.UTF_8));
+    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data);
+    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+
+    context.setPreviousCache(readCache);
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
+    assertThat(logTester.logs(Level.INFO))
+      .contains("The Python analyzer was able to leverage cached data from previous analyses for 1 out of 1 files. These files were not parsed.");
+    verify(analysisWarning, Mockito.never()).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+  }
+
+  @Test
+  void test_scan_without_parsing_falls_back_to_full_parse_when_effective_type_missing_from_cache() throws IOException {
+    // If the effective file type is absent from cache (inconsistent state after e.g. a plugin rollback),
+    // scanFileWithoutParsing must return false so the file is fully re-parsed rather than guessing the type.
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S1226"))
+        .build())
+      .build();
+
+    PythonInputFile inputFile = inputFile("helper_with_tests.py", Type.MAIN, InputFile.Status.SAME);
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("test_helper", "helper_with_tests.test_helper", null))).toByteArray();
+    TestReadCache readCache = getValidReadCache();
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(Collections.emptyList());
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), "pytest".getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
+    // effectiveFileTypeCacheKey intentionally absent — simulates inconsistent cache state
+    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data);
+    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+
+    context.setPreviousCache(readCache);
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+    sensor().execute(context);
+
+    // File is fully re-parsed: the AST-based classifier identifies it as a test file and suppresses S1226.
+    assertThat(context.allIssues()).isEmpty();
+    assertThat(logTester.logs(Level.INFO))
+      .contains("The Python analyzer was able to leverage cached data from previous analyses for 0 out of 1 files. These files were not parsed.");
   }
 
   @Test
@@ -1236,7 +1416,8 @@ class PythonSensorTest {
 
     assertThat(writeCache.getData().keySet()).containsExactlyInAnyOrder(
       "python:cache_version", "python:files", "python:descriptors:moduleKey:pass.py", "python:imports:moduleKey:pass.py",
-      "python:cpd:data:moduleKey:pass.py", "python:cpd:stringTable:moduleKey:pass.py", "python:content_hashes:moduleKey:pass.py", "python:typeshed_modules");
+      "python:cpd:data:moduleKey:pass.py", "python:cpd:stringTable:moduleKey:pass.py", "python:content_hashes:moduleKey:pass.py",
+      "python:typeshed_modules", "python:test_sources_configured", "python:effective_file_type:moduleKey:pass.py");
 
     byte[] tokenData = writeCache.getData().get("python:cpd:data:moduleKey:pass.py");
     byte[] stringTable = writeCache.getData().get("python:cpd:stringTable:moduleKey:pass.py");
@@ -1786,7 +1967,7 @@ class PythonSensorTest {
 
     ClientInputFile clientFile = mock(ClientInputFile.class);
 
-    when(clientFile.relativePath()).thenReturn(pathToQuickFixTestFile);
+    when(clientFile.relativePath()).thenReturn(FILE_QUICKFIX);
     when(clientFile.getPath()).thenReturn(file.getAbsolutePath());
     when(clientFile.uri()).thenReturn(file.getAbsoluteFile().toURI());
     when(clientFile.contents()).thenReturn(content);
@@ -1810,6 +1991,7 @@ class PythonSensorTest {
   TestReadCache getValidReadCache() {
     TestReadCache testReadCache = new TestReadCache();
     testReadCache.put(CACHE_VERSION_KEY, "unknownPluginVersion".getBytes(UTF_8));
+    testReadCache.put(TEST_SOURCES_CONFIGURED_KEY, "false".getBytes(UTF_8));
     return testReadCache;
   }
 

@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.PythonInputFile;
+import org.sonar.plugins.python.TestFileClassifier;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.caching.Caching;
 import org.sonar.python.index.Descriptor;
@@ -53,6 +54,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   private static final Logger LOG = LoggerFactory.getLogger(SonarQubePythonIndexer.class);
 
   private final Caching caching;
+  private final boolean testSourcesConfigured;
   private final Set<PythonInputFile> fullySkippableFiles = new HashSet<>();
   private final Set<PythonInputFile> partiallySkippableFiles = new HashSet<>();
   private final List<PythonInputFile> inputFiles = new ArrayList<>();
@@ -63,6 +65,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     this.packageRoots = resolvePackageRoots(context);
     this.caching = new Caching(cacheContext, getCacheVersion(context));
+    this.testSourcesConfigured = TestFileClassifier.isTestSourceConfigured(context.config());
     inputFiles.forEach(f -> {
       this.inputFiles.add(f);
       inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.wrappedFile().filename()));
@@ -99,7 +102,8 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   private boolean shouldOptimizeAnalysis(SensorContext context) {
     return caching.isCacheEnabled()
       && (context.canSkipUnchangedFiles() || context.config().getBoolean(SONAR_CAN_SKIP_UNCHANGED_FILES_KEY).orElse(false))
-      && caching.isCacheVersionUpToDate();
+      && caching.isCacheVersionUpToDate()
+      && caching.isTestSourcesConfiguredUnchanged(testSourcesConfigured);
   }
 
   private void computeGlobalSymbolsUsingCache(SensorContext context) {
@@ -192,6 +196,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
       saveMainFilesListInCache(new HashSet<>(inputFileToFQN.values()));
       // Information on used Typeshed stubs needs to be done at the end of the analysis, as it is not computed during indexing anymore
       caching.writeCacheVersion();
+      caching.writeTestSourcesConfigured(testSourcesConfigured);
     }
   }
 
@@ -239,6 +244,18 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   @Override
   public CacheContext cacheContext() {
     return caching.cacheContext();
+  }
+
+  @Override
+  public void writeEffectiveFileType(String fileKey, InputFile.Type type) {
+    if (caching.isCacheEnabled()) {
+      caching.writeEffectiveFileType(fileKey, type);
+    }
+  }
+
+  @Override
+  public InputFile.Type readEffectiveFileType(String fileKey) {
+    return caching.readEffectiveFileType(fileKey);
   }
 
   private static String getCacheVersion(SensorContext context) {

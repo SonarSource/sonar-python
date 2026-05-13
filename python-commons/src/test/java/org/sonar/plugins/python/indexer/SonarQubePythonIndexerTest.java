@@ -54,6 +54,7 @@ import static org.mockito.Mockito.when;
 import static org.sonar.plugins.python.TestUtils.createInputFile;
 import static org.sonar.plugins.python.caching.Caching.CACHE_VERSION_KEY;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_FILES_KEY;
+import static org.sonar.plugins.python.caching.Caching.TEST_SOURCES_CONFIGURED_KEY;
 import static org.sonar.plugins.python.caching.Caching.TYPESHED_MODULES_KEY;
 import static org.sonar.plugins.python.caching.Caching.fileContentHashCacheKey;
 import static org.sonar.plugins.python.caching.Caching.importsMapCacheKey;
@@ -90,6 +91,7 @@ class SonarQubePythonIndexerTest {
     writeCache.bind(readCache);
     cacheVersion = "unknownPluginVersion";
     readCache.put(CACHE_VERSION_KEY, cacheVersion.getBytes(StandardCharsets.UTF_8));
+    readCache.put(TEST_SOURCES_CONFIGURED_KEY, "false".getBytes(StandardCharsets.UTF_8));
     PythonWriteCache pythonWriteCache = new PythonWriteCacheImpl(writeCache);
     PythonReadCache pythonReadCache = new PythonReadCacheImpl(readCache);
     cacheContext = new CacheContextImpl(true, pythonWriteCache, pythonReadCache);

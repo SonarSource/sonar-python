@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.CheckForNull;
+import org.sonar.api.batch.fs.InputFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.caching.CacheContext;
@@ -45,6 +46,8 @@ public class Caching {
   public static final String CACHE_VERSION_KEY = "python:cache_version";
   public static final String CPD_TOKENS_CACHE_KEY_PREFIX = "python:cpd:data:";
   public static final String CPD_TOKENS_STRING_TABLE_KEY_PREFIX = "python:cpd:stringTable:";
+  public static final String EFFECTIVE_FILE_TYPE_CACHE_KEY_PREFIX = "python:effective_file_type:";
+  public static final String TEST_SOURCES_CONFIGURED_KEY = "python:test_sources_configured";
 
   private static final Logger LOG = LoggerFactory.getLogger(Caching.class);
 
@@ -89,6 +92,42 @@ public class Caching {
     cacheContext.getWriteCache().copyFromPrevious(importsMapCacheKey(fileKey));
     cacheContext.getWriteCache().copyFromPrevious(projectSymbolTableCacheKey(fileKey));
     cacheContext.getWriteCache().copyFromPrevious(fileContentHashCacheKey(fileKey));
+    if (cacheContext.getReadCache().contains(effectiveFileTypeCacheKey(fileKey))) {
+      cacheContext.getWriteCache().copyFromPrevious(effectiveFileTypeCacheKey(fileKey));
+    }
+  }
+
+  public void writeEffectiveFileType(String fileKey, InputFile.Type type) {
+    cacheContext.getWriteCache().write(effectiveFileTypeCacheKey(fileKey), type.name().getBytes(StandardCharsets.UTF_8));
+  }
+
+  @CheckForNull
+  public InputFile.Type readEffectiveFileType(String fileKey) {
+    byte[] bytes = cacheContext.getReadCache().readBytes(effectiveFileTypeCacheKey(fileKey));
+    if (bytes != null) {
+      try {
+        return InputFile.Type.valueOf(new String(bytes, StandardCharsets.UTF_8));
+      } catch (IllegalArgumentException e) {
+        LOG.debug("Failed to deserialize cached effective file type for key: \"{}\"", fileKey);
+      }
+    }
+    return null;
+  }
+
+  public void writeTestSourcesConfigured(boolean testSourcesConfigured) {
+    cacheContext.getWriteCache().write(TEST_SOURCES_CONFIGURED_KEY, String.valueOf(testSourcesConfigured).getBytes(StandardCharsets.UTF_8));
+  }
+
+  public boolean isTestSourcesConfiguredUnchanged(boolean current) {
+    byte[] bytes = cacheContext.getReadCache().readBytes(TEST_SOURCES_CONFIGURED_KEY);
+    if (bytes == null) {
+      return false;
+    }
+    String cached = new String(bytes, StandardCharsets.UTF_8);
+    if (!"true".equals(cached) && !"false".equals(cached)) {
+      return false;
+    }
+    return current == Boolean.parseBoolean(cached);
   }
 
   @CheckForNull
@@ -171,5 +210,9 @@ public class Caching {
 
   public static  String fileContentHashCacheKey(String key) {
     return CONTENT_HASHES_KEY + key.replace('\\', '/');
+  }
+
+  public static String effectiveFileTypeCacheKey(String key) {
+    return EFFECTIVE_FILE_TYPE_CACHE_KEY_PREFIX + key.replace('\\', '/');
   }
 }

@@ -206,6 +206,14 @@ public abstract class PythonIndexer {
 
   public abstract CacheContext cacheContext();
 
+  public void writeEffectiveFileType(String fileKey, InputFile.Type type) {
+  }
+
+  @CheckForNull
+  public InputFile.Type readEffectiveFileType(String fileKey) {
+    return null;
+  }
+
   class GlobalSymbolsScanner extends Scanner {
     protected GlobalSymbolsScanner(SensorContext context) {
       super(context);

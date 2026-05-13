@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.sonar.api.batch.fs.InputFile;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockito.Mockito;
@@ -46,8 +47,10 @@ import org.sonar.python.types.protobuf.DescriptorsProtos;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.sonar.plugins.python.caching.Caching.EFFECTIVE_FILE_TYPE_CACHE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.effectiveFileTypeCacheKey;
 import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 
 class CachingTest {
@@ -185,5 +188,80 @@ class CachingTest {
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod", new byte[] {42});
     assertThat(caching.readProjectLevelSymbolTableEntry(module)).isNull();
     assertThat(logTester.logs(Level.DEBUG)).contains("Failed to deserialize project level symbol table entry for module: \"mod\"");
+  }
+
+  @Test
+  void writeAndReadEffectiveFileType() {
+    TestWriteCache writeCache = new TestWriteCache();
+    TestReadCache readCache = new TestReadCache();
+    writeCache.bind(readCache);
+    CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), new PythonReadCacheImpl(readCache));
+
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
+
+    caching.writeEffectiveFileType("module:src/helper.py", InputFile.Type.MAIN);
+    assertThat(writeCache.getData()).containsKey(EFFECTIVE_FILE_TYPE_CACHE_KEY_PREFIX + "module:src/helper.py");
+
+    caching.writeEffectiveFileType("module:src/test_helper.py", InputFile.Type.TEST);
+    assertThat(writeCache.getData()).containsKey(EFFECTIVE_FILE_TYPE_CACHE_KEY_PREFIX + "module:src/test_helper.py");
+
+    readCache.put(effectiveFileTypeCacheKey("module:src/helper.py"), "MAIN".getBytes(StandardCharsets.UTF_8));
+    readCache.put(effectiveFileTypeCacheKey("module:src/test_helper.py"), "TEST".getBytes(StandardCharsets.UTF_8));
+    assertThat(caching.readEffectiveFileType("module:src/helper.py")).isEqualTo(InputFile.Type.MAIN);
+    assertThat(caching.readEffectiveFileType("module:src/test_helper.py")).isEqualTo(InputFile.Type.TEST);
+  }
+
+  @Test
+  void readEffectiveFileTypeMissingEntry() {
+    TestWriteCache writeCache = new TestWriteCache();
+    TestReadCache readCache = new TestReadCache();
+    CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), new PythonReadCacheImpl(readCache));
+
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
+    assertThat(caching.readEffectiveFileType("module:src/unknown.py")).isNull();
+  }
+
+  @Test
+  void isTestSourcesConfiguredUnchangedReturnsFalseForInvalidCachedValue() {
+    TestWriteCache writeCache = new TestWriteCache();
+    TestReadCache readCache = new TestReadCache();
+    CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), new PythonReadCacheImpl(readCache));
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
+
+    readCache.put(Caching.TEST_SOURCES_CONFIGURED_KEY, "INVALID".getBytes(StandardCharsets.UTF_8));
+    // unrecognised value must never be treated as "unchanged" — always invalidate
+    assertThat(caching.isTestSourcesConfiguredUnchanged(false)).isFalse();
+    assertThat(caching.isTestSourcesConfiguredUnchanged(true)).isFalse();
+  }
+
+  @Test
+  void readEffectiveFileTypeReturnsNullForInvalidCachedValue() {
+    TestWriteCache writeCache = new TestWriteCache();
+    TestReadCache readCache = new TestReadCache();
+    CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), new PythonReadCacheImpl(readCache));
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
+
+    readCache.put(effectiveFileTypeCacheKey("module:src/helper.py"), "INVALID_TYPE".getBytes(StandardCharsets.UTF_8));
+    assertThat(caching.readEffectiveFileType("module:src/helper.py")).isNull();
+  }
+
+  @Test
+  void copyFromPreviousIncludesEffectiveFileType() {
+    TestWriteCache writeCache = new TestWriteCache();
+    TestReadCache readCache = new TestReadCache();
+    writeCache.bind(readCache);
+    CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), new PythonReadCacheImpl(readCache));
+
+    Caching caching = new Caching(cacheContext, CACHE_VERSION);
+    String fileKey = "module:src/helper.py";
+    // copyFromPrevious copies all 4 per-file keys — all must be present in the read cache
+    readCache.put(Caching.importsMapCacheKey(fileKey), new byte[0]);
+    readCache.put(Caching.projectSymbolTableCacheKey(fileKey), new byte[0]);
+    readCache.put(Caching.fileContentHashCacheKey(fileKey), new byte[0]);
+    readCache.put(effectiveFileTypeCacheKey(fileKey), "TEST".getBytes(StandardCharsets.UTF_8));
+
+    caching.copyFromPrevious(fileKey);
+
+    assertThat(writeCache.getData()).containsKey(effectiveFileTypeCacheKey(fileKey));
   }
 }

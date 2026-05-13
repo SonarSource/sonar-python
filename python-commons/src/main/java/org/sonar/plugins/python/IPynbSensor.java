@@ -42,6 +42,7 @@ import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
 import org.sonar.plugins.python.telemetry.SensorTelemetryStorage;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
@@ -119,7 +120,7 @@ public final class IPynbSensor implements Sensor {
     }
     if (isInSonarLintRuntime(context)) {
       PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::createIPythonParser,
-        indexer, new DummyArchitectureCallback(), noSonarLineInfoCollector);
+        indexer, new DummyArchitectureCallback(), noSonarLineInfoCollector, new AnalysisWarningsWrapper());
       scanner.execute(pythonFiles, context);
     } else {
       processNotebooksFiles(pythonFiles, context);
@@ -139,7 +140,7 @@ public final class IPynbSensor implements Sensor {
     CacheContext cacheContext = CacheContextImpl.dummyCache();
     PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context, projectConfigurationBuilder);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::createIPythonParser,
-      pythonIndexer, new DummyArchitectureCallback(), noSonarLineInfoCollector);
+      pythonIndexer, new DummyArchitectureCallback(), noSonarLineInfoCollector, new AnalysisWarningsWrapper());
     scanner.execute(pythonFiles, context);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY, scanner.getRecognitionErrorCount());
     updateDatabricksTelemetry(scanner);

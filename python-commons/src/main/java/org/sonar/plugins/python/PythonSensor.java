@@ -153,7 +153,7 @@ public final class PythonSensor implements Sensor {
     pythonIndexer.setSonarLintCache(sonarLintCache);
     TypeShed.setProjectLevelSymbolTable(pythonIndexer.projectLevelSymbolTable());
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::create,
-      pythonIndexer, architectureCallback, noSonarLineInfoCollector);
+      pythonIndexer, architectureCallback, noSonarLineInfoCollector, analysisWarnings);
     scanner.execute(pythonFiles, context);
     Duration sensorTime = Duration.between(sensorStartTime, Instant.now());
 
