@@ -57,10 +57,8 @@ public final class TestsUtils {
     var builder = ConcurrentOrchestratorExtension.builderEnv()
       .useDefaultAdminCredentialsForBuilds(true)
       .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
-      // Disable telemetry waiting for ORCH-497
+      // Disable telemetry to avoid external network calls during tests
       .setServerProperty("sonar.telemetry.enable", "false")
-
-      // Custom rules plugin
       .addPlugin(Plugins.PYTHON_CUSTOM_RULES.get(isEnterprise))
       .addPlugin(Plugins.PYTHON_CUSTOM_RULES_EXAMPLE.get(isEnterprise))
       .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-custom-rules-example.xml"))

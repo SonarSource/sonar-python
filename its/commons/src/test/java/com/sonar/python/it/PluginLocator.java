@@ -33,7 +33,7 @@ public class PluginLocator {
       new LocalPlugin("../python-custom-rules-plugin/target", "python-custom-rules-plugin-*.jar"),
       new LocalPlugin("../../../its/plugin/python-custom-rules-plugin/target", "python-custom-rules-plugin-*.jar")),
     PYTHON_CUSTOM_RULES_EXAMPLE(
-      new LocalPlugin("../../docs/python-custom-rules-example/target", "python-custom-rules-example-*.jar"),
+      new LocalPlugin("../../../docs/python-custom-rules-example/target", "python-custom-rules-example-*.jar"),
       new LocalPlugin("../../../docs/python-custom-rules-example/target", "python-custom-rules-example-*.jar"));
 
     private final LocalPlugin ossPlugin;
