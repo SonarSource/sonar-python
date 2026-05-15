@@ -19,9 +19,11 @@ package org.sonar.python.semantic.v2.types.typecalculator;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -30,6 +32,7 @@ import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
+import org.sonar.plugins.python.api.types.v2.SuperProxyType;
 import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.plugins.python.api.types.v2.UnionType;
@@ -51,6 +54,12 @@ public final class CallReturnTypeCalculator {
       return getFirstArgumentType(callExpr);
     }
 
+    // Zero-argument super() inside a method: return a proxy type that resolves members from the parent class hierarchy.
+    PythonType superProxy = computeSuperProxyType(callExpr, typePredicateContext);
+    if (superProxy != null) {
+      return superProxy;
+    }
+
     PythonType calleeType = callExpr.callee().typeV2();
     TypeSource typeSource = computeTypeSource(calleeType, callExpr);
     PythonType returnType = returnTypeOfCall(calleeType);
@@ -62,6 +71,46 @@ public final class CallReturnTypeCalculator {
     }
 
     return collapseSelfTypeIfNeeded(callExpr, returnType, typePredicateContext);
+  }
+
+  /**
+   * When {@code super()} is called with zero arguments inside a method, Python returns a
+   * proxy object that delegates attribute lookup to the parent class hierarchy (skipping the
+   * current class). This method computes an {@code ObjectType} backed by a proxy type that resolves
+   * members on the enclosing class's C3 MRO tail.
+   *
+   * @return the super proxy {@code ObjectType}, or {@code null} if the call is not a zero-arg super()
+   */
+  @CheckForNull
+  private static PythonType computeSuperProxyType(CallExpression callExpr, TypePredicateContext typePredicateContext) {
+    // Only handle zero-argument super() calls
+    if (!callExpr.arguments().isEmpty()) {
+      return null;
+    }
+    // The callee must resolve to the builtin 'super' ClassType
+    var isSuper = TypeInferenceMatcher.of(TypeInferenceMatchers.isType(SuperProxyType.SUPER_FQN)).evaluate(callExpr.callee().typeV2(), typePredicateContext);
+    if (isSuper != TriBool.TRUE) {
+      return null;
+    }
+
+    ClassType ownerClassType = findEnclosingMethodOwner(callExpr);
+    if (ownerClassType == null || ownerClassType.mro().filter(mro -> mro.size() > 1).isEmpty()) {
+      return null;
+    }
+    return ObjectType.fromType(new SuperProxyType(ownerClassType));
+  }
+
+  @CheckForNull
+  private static ClassType findEnclosingMethodOwner(CallExpression callExpr) {
+    FunctionDef enclosingFunctionDef = TreeUtils.firstAncestorOfClass(callExpr, FunctionDef.class);
+    if (enclosingFunctionDef == null) {
+      return null;
+    }
+    PythonType funcType = enclosingFunctionDef.name().typeV2();
+    if (!(funcType instanceof FunctionType functionType) || (!functionType.isInstanceMethod() && !functionType.isClassMethod())) {
+      return null;
+    }
+    return functionType.owner() instanceof ClassType classType ? classType : null;
   }
 
   private static PythonType returnTypeOfCall(PythonType calleeType) {

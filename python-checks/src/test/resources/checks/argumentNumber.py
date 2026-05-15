@@ -160,7 +160,7 @@ def methods():
     class B2(B1):
       def foo(self):
         super().__reduce__(1, 2) # OK, __reduce__ is not 'object.__reduce__' but B1.__reduce__
-        super().__reduce__(1, 2, 3) # FN
+        super().__reduce__(1, 2, 3) # Noncompliant
 
     class MethodsWithKeywordArguments:
         @classmethod

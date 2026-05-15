@@ -147,7 +147,7 @@ public final class ClassType implements PythonType {
       .or(() -> inheritedMember(memberName, visited));
   }
 
-  private Optional<PythonType> localMember(String memberName) {
+  Optional<PythonType> localMember(String memberName) {
     return members.stream()
       .filter(m -> m.name().equals(memberName))
       .map(Member::type)

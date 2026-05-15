@@ -5188,4 +5188,156 @@ public class TypeInferenceV2Test {
       .element(0)
       .is(TypesTestUtils.objectTypeOf(projectLevelIntType));
   }
+
+  @Test
+  void superCallMemberResolvesFromBaseClass() {
+    // super() inside a method should resolve members from the superclass hierarchy,
+    // not from the builtin super class itself.
+    FileInput root = inferTypes("""
+      class Base:
+        def my_method(self, p1, p2): pass
+      class A(Base):
+        def foo(self):
+          super().my_method(1, 2)
+      """);
+
+    // super().my_method should resolve to Base.my_method
+    // Find the qualified expression super().my_method
+    List<QualifiedExpression> qualifiedExprs = PythonTestUtils.getAllDescendant(root, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    QualifiedExpression superMyMethod = qualifiedExprs.stream()
+      .filter(qe -> "my_method".equals(qe.name().name()))
+      .findFirst()
+      .orElseThrow(() -> new AssertionError("Could not find super().my_method qualified expression"));
+
+    PythonType memberType = superMyMethod.name().typeV2();
+
+    // The member should be a FunctionType for Base.my_method
+    assertThat(memberType).isInstanceOf(FunctionType.class);
+    FunctionType functionType = (FunctionType) memberType;
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("my_package.mod.Base.my_method");
+  }
+
+  @Test
+  void superCallAssignedVariableMemberResolvesFromBaseClass() {
+    // s = super(); s.my_method should also resolve to the base class member
+    FileInput root = inferTypes("""
+      class Base:
+        def my_method(self, p1, p2): pass
+      class A(Base):
+        def foo(self):
+          s = super()
+          s.my_method(1, 2)
+      """);
+
+    // Find s.my_method qualified expression
+    List<QualifiedExpression> qualifiedExprs = PythonTestUtils.getAllDescendant(root, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    QualifiedExpression sMyMethod = qualifiedExprs.stream()
+      .filter(qe -> "my_method".equals(qe.name().name()))
+      .findFirst()
+      .orElseThrow(() -> new AssertionError("Could not find s.my_method qualified expression"));
+
+    PythonType memberType = sMyMethod.name().typeV2();
+
+    assertThat(memberType).isInstanceOf(FunctionType.class);
+    FunctionType functionType = (FunctionType) memberType;
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("my_package.mod.Base.my_method");
+  }
+
+  @Test
+  void superCallDoesNotResolveChildClassOnlyMethods() {
+    FileInput root = inferTypes("""
+      class Base:
+        def base_method(self): pass
+      class A(Base):
+        def foo(self):
+          super().child_only_method
+        def child_only_method(self): pass
+      """);
+
+    List<QualifiedExpression> qualifiedExprs = PythonTestUtils.getAllDescendant(root, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    QualifiedExpression superChildOnlyMethod = qualifiedExprs.stream()
+      .filter(qe -> "child_only_method".equals(qe.name().name()))
+      .findFirst()
+      .orElseThrow(() -> new AssertionError("Could not find super().child_only_method qualified expression"));
+
+    assertThat(superChildOnlyMethod.name().typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void superCallInClassMethodResolvesFromBaseClass() {
+    FileInput root = inferTypes("""
+      class Base:
+        def base_method(self): pass
+      class A(Base):
+        @classmethod
+        def foo(cls):
+          super().base_method
+      """);
+
+    List<QualifiedExpression> qualifiedExprs = PythonTestUtils.getAllDescendant(root, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    QualifiedExpression superBaseMethod = qualifiedExprs.stream()
+      .filter(qe -> "base_method".equals(qe.name().name()))
+      .findFirst()
+      .orElseThrow(() -> new AssertionError("Could not find super().base_method qualified expression"));
+
+    PythonType memberType = superBaseMethod.name().typeV2();
+
+    assertThat(memberType).isInstanceOf(FunctionType.class);
+    FunctionType functionType = (FunctionType) memberType;
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("my_package.mod.Base.base_method");
+  }
+
+  @Test
+  void superCallMemberResolvesFollowingMro() {
+    FileInput root = inferTypes("""
+      class O:
+        def target(self): pass
+      class X(O): pass
+      class Y(O):
+        def target(self): pass
+      class A(X, Y):
+        def foo(self):
+          super().target
+      """);
+
+    List<QualifiedExpression> qualifiedExprs = PythonTestUtils.getAllDescendant(root, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    QualifiedExpression superTarget = qualifiedExprs.stream()
+      .filter(qe -> "target".equals(qe.name().name()))
+      .findFirst()
+      .orElseThrow(() -> new AssertionError("Could not find super().target qualified expression"));
+
+    PythonType memberType = superTarget.name().typeV2();
+
+    assertThat(memberType).isInstanceOf(FunctionType.class);
+    FunctionType functionType = (FunctionType) memberType;
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("my_package.mod.Y.target");
+  }
+
+  @Test
+  void superCallMemberResolvesFollowingMroWhenYNotInheritingO() {
+    // Y does not inherit from O. MRO of A(X, Y) is [A, X, O, Y, object].
+    // super() in A skips A -> X (no target) -> O (has target) -> resolves O.target
+    FileInput root = inferTypes("""
+      class O:
+        def target(self): pass
+      class X(O): pass
+      class Y:
+        def target(self): pass
+      class A(X, Y):
+        def foo(self):
+          super().target
+      """);
+
+    List<QualifiedExpression> qualifiedExprs = PythonTestUtils.getAllDescendant(root, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    QualifiedExpression superTarget = qualifiedExprs.stream()
+      .filter(qe -> "target".equals(qe.name().name()))
+      .findFirst()
+      .orElseThrow(() -> new AssertionError("Could not find super().target qualified expression"));
+
+    PythonType memberType = superTarget.name().typeV2();
+
+    assertThat(memberType).isInstanceOf(FunctionType.class);
+    FunctionType functionType = (FunctionType) memberType;
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("my_package.mod.O.target");
+  }
 }

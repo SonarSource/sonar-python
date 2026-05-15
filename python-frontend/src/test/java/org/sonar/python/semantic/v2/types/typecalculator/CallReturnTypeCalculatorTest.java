@@ -19,12 +19,14 @@ package org.sonar.python.semantic.v2.types.typecalculator;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.types.v2.ClassType;
+import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
@@ -89,6 +91,98 @@ class CallReturnTypeCalculatorTest {
 
     PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
     assertThat(result).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void computeCallExpressionType_superCall_returnsProxyResolvingMroTail() {
+    FileInput fileInput = parseAndInferTypes("""
+      class O(object):
+        def target(self): pass
+      class X(O): pass
+      class Y(O):
+        def target(self): pass
+      class A(X, Y):
+        def foo(self):
+          super()
+      """);
+
+    CallExpression callExpr = getSuperCall(fileInput);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+
+    assertThat(result).isInstanceOf(ObjectType.class);
+    ObjectType objectType = (ObjectType) result;
+    assertThat(objectType.type()).isNotInstanceOf(ClassType.class);
+    assertThat(objectType.type().name()).isEqualTo("super");
+    assertThat(objectType.resolveMember("target"))
+      .hasValueSatisfying(member -> {
+        assertThat(member).isInstanceOf(FunctionType.class);
+        assertThat(((FunctionType) member).fullyQualifiedName()).isEqualTo("my_package.mod.Y.target");
+      });
+    assertThat(objectType.hasMember("target")).isEqualTo(TriBool.TRUE);
+    // ObjectType.hasMember only dispatches to ClassType.instancesHaveMember; SuperProxyType is not
+    // a ClassType so the fallthrough always returns UNKNOWN for unresolved members.
+    assertThat(objectType.hasMember("missing")).isEqualTo(TriBool.UNKNOWN);
+  }
+
+  @Test
+  void computeCallExpressionType_superCallInClassMethod_returnsProxy() {
+    FileInput fileInput = parseAndInferTypes("""
+      class Base:
+        def base_method(self): pass
+      class A(Base):
+        @classmethod
+        def foo(cls):
+          super()
+      """);
+
+    CallExpression callExpr = getSuperCall(fileInput);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+
+    assertThat(result).isInstanceOf(ObjectType.class);
+    ObjectType objectType = (ObjectType) result;
+    assertThat(objectType.type()).isNotInstanceOf(ClassType.class);
+    assertThat(objectType.resolveMember("base_method"))
+      .hasValueSatisfying(member -> {
+        assertThat(member).isInstanceOf(FunctionType.class);
+        assertThat(((FunctionType) member).fullyQualifiedName()).isEqualTo("my_package.mod.Base.base_method");
+      });
+  }
+
+  @Test
+  void computeCallExpressionType_superCallOutsideMethod_returnsBuiltinSuperObject() {
+    FileInput fileInput = parseAndInferTypes("""
+      super()
+      """);
+
+    CallExpression callExpr = getSuperCall(fileInput);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+
+    assertThat(result).isInstanceOf(ObjectType.class);
+    ObjectType objectType = (ObjectType) result;
+    assertThat(objectType.type()).isInstanceOfSatisfying(ClassType.class, classType -> assertThat(classType.fullyQualifiedName()).isEqualTo("super"));
+  }
+
+  @Test
+  void computeCallExpressionType_superCallInStaticMethod_returnsBuiltinSuperObject() {
+    FileInput fileInput = parseAndInferTypes("""
+      class Base:
+        def base_method(self): pass
+      class A(Base):
+        @staticmethod
+        def foo():
+          super()
+      """);
+
+    CallExpression callExpr = getSuperCall(fileInput);
+
+    PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
+
+    assertThat(result).isInstanceOf(ObjectType.class);
+    ObjectType objectType = (ObjectType) result;
+    assertThat(objectType.type()).isInstanceOfSatisfying(ClassType.class, classType -> assertThat(classType.fullyQualifiedName()).isEqualTo("super"));
   }
 
   @Test
@@ -533,5 +627,11 @@ class CallReturnTypeCalculatorTest {
     PythonType result = CallReturnTypeCalculator.computeCallExpressionType(callExpr, typePredicateContext);
     assertThat(result).isInstanceOf(ObjectType.class);
     assertThat(((ObjectType) result).unwrappedType()).isEqualTo(TypesTestUtils.STR_TYPE);
+  }
+
+  private static CallExpression getSuperCall(FileInput fileInput) {
+    return getFirstDescendant(fileInput, tree -> tree instanceof CallExpression callExpression
+      && callExpression.callee() instanceof Name name
+      && "super".equals(name.name()));
   }
 }
