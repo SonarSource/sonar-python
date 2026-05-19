@@ -290,7 +290,11 @@ public class PythonScanner extends Scanner {
       // We must avoid pushing measures twice due to the risk of duplicate cache key error.
       return false;
     }
-    return restoreAndPushMeasuresIfApplicable(inputFile);
+    boolean success = restoreAndPushMeasuresIfApplicable(inputFile);
+    if (success && !testSourcesConfigured && fileType == InputFile.Type.MAIN) {
+      indexer.writeEffectiveFileType(inputFile.wrappedFile().key(), effectiveTypeForRules);
+    }
+    return success;
   }
 
   private boolean scanFileWithoutParsingNotSonarPython(PythonInputFile inputFile, PythonCheck check, InputFile.Type fileType,

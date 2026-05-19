@@ -1093,6 +1093,8 @@ class PythonSensorTest {
     assertThat(context.allIssues()).isEmpty();
     assertThat(logTester.logs(Level.INFO))
       .contains("The Python analyzer was able to leverage cached data from previous analyses for 1 out of 1 files. These files were not parsed.");
+    assertThat(writeCache.getData())
+      .containsEntry(effectiveFileTypeCacheKey(inputFile.wrappedFile().key()), "MAIN".getBytes(UTF_8));
   }
 
   @Test
@@ -1202,6 +1204,8 @@ class PythonSensorTest {
     byte[] bytes = writeCache.getData().get(TYPESHED_MODULES_KEY);
     Set<String> resolvedTypeshedModules = new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
     assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder("math");
+    assertThat(writeCache.getData())
+      .containsEntry(effectiveFileTypeCacheKey(inputFile.wrappedFile().key()), "MAIN".getBytes(UTF_8));
   }
 
   @Test
@@ -1324,6 +1328,7 @@ class PythonSensorTest {
     readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
     readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
+    readCache.put(effectiveFileTypeCacheKey(inputFile.wrappedFile().key()), "MAIN".getBytes(UTF_8));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -1356,6 +1361,7 @@ class PythonSensorTest {
     readCache.put(importsMapCacheKey(inputFile2.wrappedFile().key()), String.join(";", List.of("file1.py")).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile2.wrappedFile().key()), serializedSymbolTable);
     readCache.put(fileContentHashCacheKey(inputFile2.wrappedFile().key()), inputFile2.wrappedFile().md5Hash().getBytes(UTF_8));
+    readCache.put(effectiveFileTypeCacheKey(inputFile2.wrappedFile().key()), "MAIN".getBytes(UTF_8));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -1509,6 +1515,7 @@ class PythonSensorTest {
     readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
     readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
+    readCache.put(effectiveFileTypeCacheKey(inputFile.wrappedFile().key()), "MAIN".getBytes(UTF_8));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1597,6 +1604,7 @@ class PythonSensorTest {
     readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
     readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
+    readCache.put(effectiveFileTypeCacheKey(inputFile.wrappedFile().key()), "MAIN".getBytes(UTF_8));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1670,6 +1678,7 @@ class PythonSensorTest {
     readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
     readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
+    readCache.put(effectiveFileTypeCacheKey(inputFile.wrappedFile().key()), "MAIN".getBytes(UTF_8));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);

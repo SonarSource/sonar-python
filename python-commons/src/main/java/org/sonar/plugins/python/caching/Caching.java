@@ -92,9 +92,6 @@ public class Caching {
     cacheContext.getWriteCache().copyFromPrevious(importsMapCacheKey(fileKey));
     cacheContext.getWriteCache().copyFromPrevious(projectSymbolTableCacheKey(fileKey));
     cacheContext.getWriteCache().copyFromPrevious(fileContentHashCacheKey(fileKey));
-    if (cacheContext.getReadCache().contains(effectiveFileTypeCacheKey(fileKey))) {
-      cacheContext.getWriteCache().copyFromPrevious(effectiveFileTypeCacheKey(fileKey));
-    }
   }
 
   public void writeEffectiveFileType(String fileKey, InputFile.Type type) {

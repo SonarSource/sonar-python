@@ -246,7 +246,7 @@ class CachingTest {
   }
 
   @Test
-  void copyFromPreviousIncludesEffectiveFileType() {
+  void copyFromPreviousCopiesThreeIndexingKeys() {
     TestWriteCache writeCache = new TestWriteCache();
     TestReadCache readCache = new TestReadCache();
     writeCache.bind(readCache);
@@ -254,14 +254,16 @@ class CachingTest {
 
     Caching caching = new Caching(cacheContext, CACHE_VERSION);
     String fileKey = "module:src/helper.py";
-    // copyFromPrevious copies all 4 per-file keys — all must be present in the read cache
     readCache.put(Caching.importsMapCacheKey(fileKey), new byte[0]);
     readCache.put(Caching.projectSymbolTableCacheKey(fileKey), new byte[0]);
     readCache.put(Caching.fileContentHashCacheKey(fileKey), new byte[0]);
-    readCache.put(effectiveFileTypeCacheKey(fileKey), "TEST".getBytes(StandardCharsets.UTF_8));
 
     caching.copyFromPrevious(fileKey);
 
-    assertThat(writeCache.getData()).containsKey(effectiveFileTypeCacheKey(fileKey));
+    assertThat(writeCache.getData())
+      .containsKey(Caching.importsMapCacheKey(fileKey))
+      .containsKey(Caching.projectSymbolTableCacheKey(fileKey))
+      .containsKey(Caching.fileContentHashCacheKey(fileKey))
+      .doesNotContainKey(effectiveFileTypeCacheKey(fileKey));
   }
 }
