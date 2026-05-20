@@ -5,12 +5,12 @@ from exportedBlueprint import routes as other_routes
 methods = Blueprint('methods', __name__)
 
 # 127.0.0.1:5000/methods/sensitive1
-@methods.route('/sensitive1', methods=['GET', 'POST'])  # Noncompliant
+@methods.route('/sensitive1', methods=['GET', 'POST'])  # Compliant - methods explicitly specified
 def sensitive1():
     return Response("Method: " + request.method, 200)
 
 # 127.0.0.1:5000/methods/sensitive1
-@other_routes.route('/sensitive1', methods=['GET', 'POST'])  # Noncompliant
+@other_routes.route('/sensitive1', methods=['GET', 'POST'])  # Compliant - methods explicitly specified
 def sensitive1_other_routes():
     return Response("Method: " + request.method, 200)
 
@@ -56,7 +56,7 @@ def inside_fn():
     methods = Blueprint('methods', __name__)
 
     # 127.0.0.1:5000/methods/sensitive1
-    @methods.route('/sensitive1', methods=['GET', 'POST'])  # Noncompliant
+    @methods.route('/sensitive1', methods=['GET', 'POST'])  # Compliant - methods explicitly specified
     def sensitive1():
         return Response("Method: " + request.method, 200)
 

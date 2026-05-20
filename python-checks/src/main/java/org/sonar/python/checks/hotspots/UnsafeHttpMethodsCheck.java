@@ -16,50 +16,34 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.ListLiteral;
-import org.sonar.plugins.python.api.tree.RegularArgument;
-import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.types.v2.UnknownType;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.tree.FunctionDefImpl;
-import org.sonar.python.tree.TreeUtils;
 
-import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.FILE_INPUT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.LIST_LITERAL;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.REGULAR_ARGUMENT;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
-import static org.sonar.python.tree.TreeUtils.argumentByKeyword;
-import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 
 @Rule(key = "S3752")
 public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
 
-  private static final Set<String> SAFE_HTTP_METHODS = new HashSet<>(Arrays.asList("GET", "HEAD", "OPTIONS"));
-  private static final Set<String> UNSAFE_HTTP_METHODS = new HashSet<>(Arrays.asList("POST", "PUT", "DELETE"));
-  private static final Set<String> COMPLIANT_DECORATORS = new HashSet<>(Arrays.asList(
-    "django.views.decorators.http.require_POST",
-    "django.views.decorators.http.require_GET",
-    "django.views.decorators.http.require_safe"
-  ));
-  private static final String MESSAGE = "Make sure allowing safe and unsafe HTTP methods is safe here.";
+  private static final TypeMatcher COMPLIANT_DECORATORS = TypeMatchers.any(
+    TypeMatchers.isType("django.views.decorators.http.require_POST"),
+    TypeMatchers.isType("django.views.decorators.http.require_GET"),
+    TypeMatchers.isType("django.views.decorators.http.require_safe"));
+
+  private static final TypeMatcher IS_REQUIRED_HTTP_METHOD = TypeMatchers.isType("django.views.decorators.http.require_http_methods");
+
+  private static final String MESSAGE = "Explicitly specify the HTTP methods this endpoint accepts.";
 
   @Override
   public void initialize(Context context) {
@@ -67,55 +51,37 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
       if (isDjangoView(functionDef)) {
         checkDjangoView(functionDef, ctx);
-      } else {
-        getFlaskViewDecorator(functionDef).ifPresent(callExpression -> checkFlaskView(callExpression, ctx));
       }
     });
   }
 
   private static void checkDjangoView(FunctionDef functionDef, SubscriptionContext ctx) {
     for (Decorator decorator : functionDef.decorators()) {
-      if (getSymbolFromTree(decorator.expression())
-        .filter(symbol -> symbol.fullyQualifiedName() == null || COMPLIANT_DECORATORS.contains(symbol.fullyQualifiedName()))
-        .isPresent()) {
+      Expression decoratorExpr = decorator.expression();
+      if (COMPLIANT_DECORATORS.isTrueFor(decoratorExpr, ctx) ||
+        isCallRequiredHTTPMethod(decoratorExpr, ctx)) {
         return;
       }
-      if (decorator.expression().is(CALL_EXPR)) {
-        CallExpression callExpression = (CallExpression) decorator.expression();
-        Symbol symbol = callExpression.calleeSymbol();
-        if (symbol != null && "django.views.decorators.http.require_http_methods".equals(symbol.fullyQualifiedName())) {
-          checkRequireHttpMethodsDecorator(ctx, callExpression);
-          return;
-        }
+      if (!isKnownNonCompliantDjangoHttpDecorator(decoratorExpr)) {
+        // Not from django.views.decorators.http — unknown or user-defined decorator
+        // may restrict methods, so give benefit of the doubt.
+        return;
       }
     }
     ctx.addIssue(functionDef.name(), MESSAGE);
   }
 
-  private static void checkRequireHttpMethodsDecorator(SubscriptionContext ctx, CallExpression callExpression) {
-    List<Argument> arguments = callExpression.arguments();
-    if (!arguments.isEmpty() && hasBothUnsafeAndSafeHttpMethods(arguments.get(0))) {
-      ctx.addIssue(callExpression, MESSAGE);
-    }
+  private static boolean isCallRequiredHTTPMethod(Expression expression, SubscriptionContext ctx) {
+    return expression instanceof CallExpression callExpression &&
+      IS_REQUIRED_HTTP_METHOD.isTrueFor(callExpression.callee(), ctx);
   }
 
-  private static boolean hasBothUnsafeAndSafeHttpMethods(Argument argument) {
-    boolean hasSafeHttpMethod = false;
-    boolean hasUnsafeHttpMethod = false;
-    if (argument.is(REGULAR_ARGUMENT) && ((RegularArgument) argument).expression().is(LIST_LITERAL)) {
-      ListLiteral listLiteral = (ListLiteral) ((RegularArgument) argument).expression();
-      for (Expression expression : listLiteral.elements().expressions()) {
-        if (expression.is(STRING_LITERAL)) {
-          String value = ((StringLiteral) expression).trimmedQuotesValue();
-          if (SAFE_HTTP_METHODS.contains(value)) {
-            hasSafeHttpMethod = true;
-          } else if (UNSAFE_HTTP_METHODS.contains(value)) {
-            hasUnsafeHttpMethod = true;
-          }
-        }
-      }
-    }
-    return hasSafeHttpMethod && hasUnsafeHttpMethod;
+  private static boolean isKnownNonCompliantDjangoHttpDecorator(Expression expression) {
+    var type = expression instanceof CallExpression callExpr
+      ? callExpr.callee().typeV2()
+      : expression.typeV2();
+    return type instanceof UnknownType.UnresolvedImportType uit &&
+      uit.importPath().startsWith("django.views.decorators.http.");
   }
 
   private static boolean isDjangoView(FunctionDef functionDef) {
@@ -123,39 +89,6 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
     return Optional.ofNullable(functionSymbol)
       .map(FunctionSymbolImpl.class::cast)
       .filter(FunctionSymbolImpl::isDjangoView)
-      .isPresent();
-  }
-
-  private static Optional<CallExpression> getFlaskViewDecorator(FunctionDef functionDef) {
-    return functionDef.decorators().stream()
-      .map(Decorator::expression)
-      .filter(expression -> expression.is(CALL_EXPR))
-      .map(CallExpression.class::cast)
-      .filter(UnsafeHttpMethodsCheck::isFlaskRouteDecorator)
-      .findFirst();
-  }
-
-  private static boolean isFlaskRouteDecorator(CallExpression callExpression) {
-    Symbol calleeSymbol = callExpression.calleeSymbol();
-    if (calleeSymbol == null) {
-      return false;
-    }
-    return "route".equals(calleeSymbol.name());
-  }
-
-  private static void checkFlaskView(CallExpression callExpression, SubscriptionContext ctx) {
-    RegularArgument methodsArg = argumentByKeyword("methods", callExpression.arguments());
-    if (methodsArg != null && hasBothUnsafeAndSafeHttpMethods(methodsArg) && isFlaskImported(callExpression)) {
-      ctx.addIssue(callExpression, MESSAGE);
-    }
-  }
-
-  private static boolean isFlaskImported(CallExpression callExpression) {
-    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, FILE_INPUT))
-      .filter(fileInput -> ((FileInput) fileInput).globalVariables().stream()
-          .map(Symbol::fullyQualifiedName)
-          .filter(Objects::nonNull)
-          .anyMatch(fqn -> fqn.contains("flask")))
       .isPresent();
   }
 }

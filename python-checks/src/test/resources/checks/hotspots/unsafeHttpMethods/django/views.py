@@ -3,8 +3,8 @@ from django.views.decorators.http import require_http_methods, require_POST, req
 def sensitive1(request):  # Noncompliant
   ...
 
-@require_http_methods(["GET", "POST"])  # Noncompliant
-def sensitive2(request):
+@require_http_methods(["GET", "POST"])  # Compliant - methods explicitly specified
+def compliant_explicit_methods(request):
   ...
 
 @require_http_methods(["POST"])  # Compliant
@@ -24,12 +24,12 @@ def compliant_require_http_methods4(request):
     ...
 
 @unknown(["GET", "POST"])
-def compliant_require_http_methods5(request): # Noncompliant
+def compliant_require_http_methods5(request): # Compliant: Unknown decorrator might rerstrict allowed HTTP verbs
     ...
 
 def foo(): ...
 @foo(["GET", "POST"])
-def compliant_require_http_methods6(request): # Noncompliant
+def compliant_require_http_methods6(request): # Compliant
     ...
 
 @require_POST  # Compliant

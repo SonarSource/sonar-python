@@ -42,7 +42,8 @@ class UnsafeHttpMethodsCheckTest {
 
   @Test
   void test_flask() {
-    PythonCheckVerifier.verify(Arrays.asList(
+    // Flask always requires explicit method specification; any explicit choice is intentional, so no issues are raised.
+    PythonCheckVerifier.verifyNoIssue(Arrays.asList(
       "src/test/resources/checks/hotspots/unsafeHttpMethods/flask/views.py",
       "src/test/resources/checks/hotspots/unsafeHttpMethods/flask/otherDecorator.py"
     ), new UnsafeHttpMethodsCheck());
