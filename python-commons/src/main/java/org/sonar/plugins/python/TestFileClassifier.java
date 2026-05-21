@@ -27,6 +27,8 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 
 /**
  * Heuristic classifier used when {@code sonar.tests} is not configured.
@@ -98,72 +100,45 @@ public class TestFileClassifier {
   }
 
   private static boolean isImportBasedTestFile(FileInput tree) {
-    var visitor = new TestImportVisitor();
-    tree.accept(visitor);
-    return visitor.hasTestFrameworkImport;
-  }
-
-  private static boolean isPytestPatternFile(FileInput tree) {
-    var visitor = new PytestPatternVisitor();
-    tree.accept(visitor);
-    return visitor.hasPytestPattern;
-  }
-
-  private static class TestImportVisitor extends BaseTreeVisitor {
-    boolean hasTestFrameworkImport = false;
-
-    @Override
-    public void visitImportName(ImportName importName) {
-      if (hasTestFrameworkImport) {
-        return;
-      }
-      for (var aliasedName : importName.modules()) {
-        var names = aliasedName.dottedName().names();
-        if (!names.isEmpty() && TEST_FRAMEWORK_MODULES.contains(names.get(0).name())) {
-          hasTestFrameworkImport = true;
-          return;
-        }
-      }
-      super.visitImportName(importName);
+    StatementList statements = tree.statements();
+    if (statements == null) {
+      return false;
     }
+    return statements.statements().stream().anyMatch(TestFileClassifier::isTestFrameworkImport);
+  }
 
-    @Override
-    public void visitImportFrom(ImportFrom importFrom) {
-      if (hasTestFrameworkImport) {
-        return;
-      }
+  private static boolean isTestFrameworkImport(Statement statement) {
+    if (statement instanceof ImportName importName) {
+      return importName.modules().stream()
+        .map(aliasedName -> aliasedName.dottedName().names())
+        .filter(names -> !names.isEmpty())
+        .anyMatch(names -> TEST_FRAMEWORK_MODULES.contains(names.get(0).name()));
+    }
+    if (statement instanceof ImportFrom importFrom) {
       var module = importFrom.module();
       if (module != null) {
         var names = module.names();
-        if (!names.isEmpty() && TEST_FRAMEWORK_MODULES.contains(names.get(0).name())) {
-          hasTestFrameworkImport = true;
-          return;
-        }
+        return !names.isEmpty() && TEST_FRAMEWORK_MODULES.contains(names.get(0).name());
       }
-      super.visitImportFrom(importFrom);
     }
+    return false;
   }
 
-  private static class PytestPatternVisitor extends BaseTreeVisitor {
-    boolean hasPytestPattern = false;
-
-    @Override
-    public void visitFunctionDef(FunctionDef functionDef) {
-      if (hasPytestPattern) {
-        return;
-      }
-      if (functionDef.name().name().startsWith("test_") && containsAssert(functionDef)) {
-        hasPytestPattern = true;
-        return;
-      }
-      super.visitFunctionDef(functionDef);
+  private static boolean isPytestPatternFile(FileInput tree) {
+    StatementList statements = tree.statements();
+    if (statements == null) {
+      return false;
     }
+    return statements.statements().stream()
+      .filter(FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .anyMatch(f -> f.name().name().startsWith("test_") && containsAssert(f));
+  }
 
-    private static boolean containsAssert(FunctionDef functionDef) {
-      var visitor = new AssertVisitor();
-      functionDef.body().accept(visitor);
-      return visitor.hasAssert;
-    }
+  private static boolean containsAssert(FunctionDef functionDef) {
+    var visitor = new AssertVisitor();
+    functionDef.body().accept(visitor);
+    return visitor.hasAssert;
   }
 
   private static class AssertVisitor extends BaseTreeVisitor {

@@ -105,8 +105,7 @@ class TestFileClassifierTest {
   }
 
   @Test
-  void multiple_imports_early_exit_after_first_match() {
-    // Second `import unittest` must hit the early-exit branch (hasTestFrameworkImport already true)
+  void multiple_top_level_imports_both_checked() {
     FileInput tree = parse("import unittest\nimport unittest\n");
     assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isTrue();
   }
@@ -123,13 +122,26 @@ class TestFileClassifierTest {
   }
 
   @Test
-  void multiple_from_imports_early_exit_after_first_match() {
-    // Second from-import hits the early-exit branch (hasTestFrameworkImport already true)
+  void nested_import_not_detected() {
+    // import inside a function body must not classify the file as a test file
+    FileInput tree = parse("def helper():\n    from unittest.mock import Mock\n    return Mock()\n");
+    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isFalse();
+  }
+
+  @Test
+  void nested_test_function_not_detected() {
+    // a test_* function nested inside another function must not classify the file as a test file
+    FileInput tree = parse("def outer():\n    def test_inner():\n        assert True\n");
+    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isFalse();
+  }
+
+  @Test
+  void multiple_from_imports_all_checked() {
     FileInput tree = parse("from unittest import TestCase\nfrom unittest import mock\n");
     assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isTrue();
   }
 
-  // --- pytest pattern detection (visitFunctionDef + AssertVisitor) ---
+  // --- pytest pattern detection (top-level functions only) ---
 
   @Test
   void test_function_with_assert_detected() {
@@ -138,8 +150,7 @@ class TestFileClassifierTest {
   }
 
   @Test
-  void multiple_test_functions_early_exit_after_first_match() {
-    // Second test_ function hits the early-exit branch (hasPytestPattern already true)
+  void multiple_top_level_test_functions_checked() {
     FileInput tree = parse("def test_one():\n    assert True\ndef test_two():\n    assert True\n");
     assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isTrue();
   }
@@ -151,11 +162,8 @@ class TestFileClassifierTest {
     assertThat(TestFileClassifier.looksLikeTestFile("tests/foo.py", tree)).isTrue();
   }
 
-  // --- isImportBasedTestFile short-circuit (||) ---
-
   @Test
-  void import_based_short_circuits_pytest_pattern_check() {
-    // import unittest is true → isPytestPatternFile never called (|| short-circuit)
+  void import_match_takes_precedence_over_pytest_pattern() {
     FileInput tree = parse("import unittest\ndef regular_function():\n    pass\n");
     assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isTrue();
   }

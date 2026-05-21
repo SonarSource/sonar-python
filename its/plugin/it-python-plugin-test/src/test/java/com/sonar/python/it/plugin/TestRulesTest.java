@@ -22,7 +22,6 @@ import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -160,6 +159,6 @@ public class TestRulesTest {
     return newWsClient().issues().search(new SearchRequest().setRules(singletonList(rulekey))).getIssuesList()
       .stream()
       .sorted(Comparator.comparing(Issues.Issue::getComponent).thenComparingInt(Issues.Issue::getLine))
-      .collect(Collectors.toList());
+      .toList();
   }
 }
