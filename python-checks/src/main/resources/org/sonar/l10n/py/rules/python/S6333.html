@@ -1,89 +1,82 @@
-<p>Creating APIs without authentication unnecessarily increases the attack surface on the target infrastructure.</p>
-<p>Unless another authentication method is used, attackers have the opportunity to attempt attacks against the underlying API.
-  <br>
-  This means attacks both on the functionality provided by the API and its infrastructure.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The underlying API exposes all of its contents to any anonymous Internet user.</li>
-</ul>
-<p>There is a risk if you answered yes to this question.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>In general, prefer limiting API access to a specific set of people or entities.</p>
-<p>AWS provides multiple methods to do so:</p>
-<ul>
-  <li><code>AWS_IAM</code>, to use standard AWS IAM roles and policies.</li>
-  <li><code>COGNITO_USER_POOLS</code>, to use customizable OpenID Connect (OIDC) identity providers (IdP).</li>
-  <li><code>CUSTOM</code>, to use an AWS-independant OIDC provider, glued to the infrastructure with a Lambda authorizer.</li>
-</ul>
-<h2>Sensitive Code Example</h2>
+<p>Creating AWS API Gateway resources without enforcing authentication exposes the underlying API to any anonymous internet user.</p>
+<h2>Why is this an issue?</h2>
+<p>Unless an authentication method is explicitly configured, AWS API Gateway allows any internet user to call the API without proving their identity.
+This unnecessarily increases the attack surface, giving unauthenticated actors the opportunity to target both the functionality provided by the API
+and its underlying infrastructure.</p>
+<h3>What is the potential impact?</h3>
+<h4>Unauthorized access</h4>
+<p>An unauthenticated API endpoint can be reached by any internet user without proving their identity. Attackers may abuse the exposed functionality
+to extract sensitive data, trigger resource-intensive operations, or exploit other vulnerabilities in the backend infrastructure.</p>
+<h2>How to fix it in AWS API Gateway</h2>
+<h3>Code examples</h3>
+<p>The following examples show API Gateway resources configured without authentication, allowing access by any internet user.</p>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_apigateway/Resource.html">aws_cdk.aws_apigateway.Resource</a>:</p>
-<pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk import (
     aws_apigateway as apigateway
 )
 
 resource = api.root.add_resource("example")
 resource.add_method(
-    "GET",
-    authorization_type=apigateway.AuthorizationType.NONE  # Sensitive
+    "POST",
+    authorization_type=apigateway.AuthorizationType.NONE  # Noncompliant
 )
 </pre>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_apigatewayv2.CfnRoute.html">aws_cdk.aws_apigatewayv2.CfnRoute</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_apigatewayv2 as apigateway
-)
-
-apigateway.CfnRoute(
-    self,
-    "no-auth",
-    api_id=api.ref,
-    route_key="GET /test",
-    authorization_type="NONE"  # Sensitive
-)
-</pre>
-<h2>Compliant Solution</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_apigateway/Resource.html">aws_cdk.aws_apigateway.Resource</a>:</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk import (
     aws_apigateway as apigateway
 )
 
-opts = apigateway.MethodOptions(
-    authorization_type=apigateway.AuthorizationType.IAM
-)
-resource = api.root.add_resource(
-    "example",
-    default_method_options=opts
-)
+resource = api.root.add_resource("example")
 resource.add_method(
     "POST",
     authorization_type=apigateway.AuthorizationType.IAM
 )
-resource.add_method(  # authorization_type is inherited from the Resource's configured default_method_options
-    "POST"
-)
 </pre>
+<h2>How to fix it in AWS API Gateway V2</h2>
+<h3>Code examples</h3>
+<p>The following examples show API Gateway resources configured without authentication, allowing access by any internet user.</p>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_apigatewayv2.CfnRoute.html">aws_cdk.aws_apigatewayv2.CfnRoute</a>:</p>
-<pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
 from aws_cdk import (
     aws_apigatewayv2 as apigateway
 )
 
 apigateway.CfnRoute(
     self,
-    "auth",
+    "update",
     api_id=api.ref,
-    route_key="GET /test",
+    route_key="POST /update",
+    authorization_type="NONE"  # Noncompliant
+)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from aws_cdk import (
+    aws_apigatewayv2 as apigateway
+)
+
+apigateway.CfnRoute(
+    self,
+    "update",
+    api_id=api.ref,
+    route_key="POST /update",
     authorization_type="AWS_IAM"
 )
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-control-access-to-api.html">AWS Documentation</a> - Controlling
   and managing access to a REST API in API Gateway</li>
-  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a></li>
-  <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222620">Application Security and
-  Development: V-222620</a> - Application web servers must be on a separate network segment from the application and database servers.</li>
+  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_apigateway/Resource.html">aws_cdk.aws_apigateway.Resource</a></li>
+  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_apigatewayv2.CfnRoute.html">aws_cdk.aws_apigatewayv2.CfnRoute</a></li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/306">CWE-306 - Missing Authentication for Critical Function</a></li>
 </ul>
 

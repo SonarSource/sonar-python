@@ -1,6 +1,6 @@
 {
-  "title": "Creating public APIs is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "AWS API Gateway should require authentication",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "BLOCKER"
@@ -8,13 +8,15 @@
     "attribute": "COMPLETE"
   },
   "status": "ready",
+  "quickfix": "unknown",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "15min"
   },
   "tags": [
     "aws",
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-6333",
@@ -22,7 +24,7 @@
   "scope": "Main",
   "securityStandards": {
     "CWE": [
-      284
+      306
     ],
     "PCI DSS 3.2": [
       "6.5.8"

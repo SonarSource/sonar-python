@@ -11,10 +11,10 @@ the <code>item_id</code> is a path parameter that would capture values like <cod
 arguments. When a request comes in, FastAPI extracts the values from the URL path and injects them into the function call.</p>
 <p>When path parameters are missing from the function signature, several problems occur:</p>
 <ul>
-  <li> The parameter values cannot be accessed in the function body, making it impossible to use them for business logic </li>
-  <li> FastAPI cannot perform automatic validation and type conversion on the parameter </li>
-  <li> The application will raise a runtime error when the route is accessed </li>
-  <li> The mismatch between the route definition and function signature indicates a programming error </li>
+  <li>The parameter values cannot be accessed in the function body, making it impossible to use them for business logic</li>
+  <li>FastAPI cannot perform automatic validation and type conversion on the parameter</li>
+  <li>The application will raise a runtime error when the route is accessed</li>
+  <li>The mismatch between the route definition and function signature indicates a programming error</li>
 </ul>
 <p>Additionally, if a path parameter is declared as a positional-only argument (using <code>/</code> in the function signature), FastAPI cannot inject
 it because the framework uses keyword arguments for parameter injection. This is a subtle but important constraint of how FastAPI’s dependency
@@ -24,10 +24,10 @@ runtime failures in production.</p>
 <h3>What is the potential impact?</h3>
 <p>When path parameters are missing from the function signature, the application will fail at runtime when the route is accessed. This causes:</p>
 <ul>
-  <li> <strong>Service disruption</strong>: The endpoint becomes completely non-functional, returning HTTP 500 errors to clients </li>
-  <li> <strong>Poor user experience</strong>: Users receive error responses instead of the expected data or functionality </li>
-  <li> <strong>Debugging difficulty</strong>: The error may not be immediately obvious, especially if the route is not covered by tests </li>
-  <li> <strong>Maintenance burden</strong>: Developers must spend time investigating and fixing runtime errors that could have been prevented </li>
+  <li><strong>Service disruption</strong>: The endpoint becomes completely non-functional, returning HTTP 500 errors to clients</li>
+  <li><strong>Poor user experience</strong>: Users receive error responses instead of the expected data or functionality</li>
+  <li><strong>Debugging difficulty</strong>: The error may not be immediately obvious, especially if the route is not covered by tests</li>
+  <li><strong>Maintenance burden</strong>: Developers must spend time investigating and fixing runtime errors that could have been prevented</li>
 </ul>
 <p>The impact is particularly severe because this is a complete failure of the endpoint - there is no graceful degradation or partial functionality.
 Every request to the affected route will fail until the code is corrected and redeployed.</p>
@@ -124,13 +124,13 @@ async def read_thing(thing_id: int, query: str):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> FastAPI - Path Parameters - <a href="https://fastapi.tiangolo.com/tutorial/path-params/">Official FastAPI documentation on path parameters</a>
-  </li>
-  <li> Ruff - FAST003 Rule - <a href="https://docs.astral.sh/ruff/rules/fast-api-unused-path-parameter/">Ruff linter documentation for this rule</a>
-  </li>
+  <li>FastAPI - Path Parameters - <a href="https://fastapi.tiangolo.com/tutorial/path-params/">Official FastAPI documentation on path
+  parameters</a></li>
+  <li>Ruff - FAST003 Rule - <a href="https://docs.astral.sh/ruff/rules/fast-api-unused-path-parameter/">Ruff linter documentation for this
+  rule</a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
-  <li> {rule:python:S6856} - Similar rule for Java Spring framework path variables </li>
+  <li>{rule:python:S6856} - Similar rule for Java Spring framework path variables</li>
 </ul>
 
