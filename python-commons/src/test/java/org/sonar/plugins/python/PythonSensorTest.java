@@ -1770,6 +1770,49 @@ class PythonSensorTest {
   }
 
   @Test
+  void send_telemetry_heuristic_triggered_when_file_reclassified() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    inputFile(FILE_TEST_FILE, Type.MAIN);
+    var contextSpy = spy(context);
+    sensor().execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_TEST_FILE_HEURISTIC_TRIGGERED.key(), "1");
+  }
+
+  @Test
+  void send_telemetry_heuristic_not_triggered_when_no_file_reclassified() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    inputFile(FILE_1);
+    var contextSpy = spy(context);
+    sensor().execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_TEST_FILE_HEURISTIC_TRIGGERED.key(), "0");
+  }
+
+  @Test
+  void send_telemetry_heuristic_not_triggered_when_heuristic_inactive() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.tests", "tests"));
+    inputFile(FILE_TEST_FILE, Type.MAIN);
+    var contextSpy = spy(context);
+    sensor().execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_TEST_FILE_HEURISTIC_TRIGGERED.key(), "0");
+  }
+
+  @Test
   void detects_databricks() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()

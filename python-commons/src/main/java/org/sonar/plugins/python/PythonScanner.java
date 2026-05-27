@@ -445,6 +445,10 @@ public class PythonScanner extends Scanner {
     return testFileTelemetryCollector.getTelemetry();
   }
 
+  public boolean wasTestFileHeuristicTriggered() {
+    return heuristicWarningEmitted.get();
+  }
+
   private void runLockedByRepository(String repositoryKey, Runnable runnable) {
     var repositoryLock = repositoryLocks.computeIfAbsent(repositoryKey, k -> new ReentrantLock());
     try {
