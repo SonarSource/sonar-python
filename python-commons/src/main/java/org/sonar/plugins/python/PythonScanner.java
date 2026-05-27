@@ -90,6 +90,7 @@ public class PythonScanner extends Scanner {
   private final boolean testSourcesConfigured;
   private final AnalysisWarningsWrapper analysisWarnings;
   private final AtomicBoolean heuristicWarningEmitted = new AtomicBoolean(false);
+  private volatile int filesScannedWithCache = 0;
   static final String UNSET_SONAR_TESTS_WARNING = "SonarPython detected files that look like test code " +
     "but 'sonar.tests' is not configured. Rules targeting production code were not executed on these files. " +
     "Configure 'sonar.tests' in your project properties for a more accurate analysis.";
@@ -415,6 +416,7 @@ public class PythonScanner extends Scanner {
 
   @Override
   protected void reportStatistics(int numSkippedFiles, int numTotalFiles) {
+    filesScannedWithCache = numSkippedFiles;
     LOG.info("""
              The Python analyzer was able to leverage cached data from previous analyses for {} out of {} files. These files were not \
              parsed.""",
@@ -447,6 +449,10 @@ public class PythonScanner extends Scanner {
 
   public boolean wasTestFileHeuristicTriggered() {
     return heuristicWarningEmitted.get();
+  }
+
+  public int getFilesScannedWithCache() {
+    return filesScannedWithCache;
   }
 
   private void runLockedByRepository(String repositoryKey, Runnable runnable) {

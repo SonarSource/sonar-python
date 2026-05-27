@@ -55,6 +55,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
 
   private final Caching caching;
   private final boolean testSourcesConfigured;
+  private boolean analysisOptimized = false;
   private final Set<PythonInputFile> fullySkippableFiles = new HashSet<>();
   private final Set<PythonInputFile> partiallySkippableFiles = new HashSet<>();
   private final List<PythonInputFile> inputFiles = new ArrayList<>();
@@ -81,6 +82,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     analyzeNamespacePackages(projectTree);
 
     if (shouldOptimizeAnalysis(context)) {
+      analysisOptimized = true;
       computeGlobalSymbolsUsingCache(context);
       return;
     }
@@ -97,6 +99,11 @@ public class SonarQubePythonIndexer extends PythonIndexer {
         caching.writeTypeshedModules(stubModules);
       }
     }
+  }
+
+  @Override
+  public boolean isAnalysisOptimized() {
+    return analysisOptimized;
   }
 
   private boolean shouldOptimizeAnalysis(SensorContext context) {

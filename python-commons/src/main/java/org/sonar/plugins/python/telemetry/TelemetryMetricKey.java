@@ -75,7 +75,9 @@ public enum TelemetryMetricKey {
   PYTHON_MAIN_FILES_MISCLASSIFIED_PATH_BASED_ONLY("python.files.main.misclassified_path_based_only"),
   PYTHON_MAIN_LINES_MISCLASSIFIED_PATH_BASED_ONLY("python.lines.main.misclassified_path_based_only"),
   PYTHON_SONAR_TESTS_SET("python.sonar_tests.set"),
-  PYTHON_TEST_FILE_HEURISTIC_TRIGGERED("python.test_file_heuristic.triggered");
+  PYTHON_TEST_FILE_HEURISTIC_TRIGGERED("python.test_file_heuristic.triggered"),
+  PYTHON_ANALYSIS_USES_CACHE("python.analysis.uses_cache"),
+  PYTHON_FILES_SCANNED_WITH_CACHE("python.files.scanned_with_cache");
 
   private final String key;
 

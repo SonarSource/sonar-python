@@ -1813,6 +1813,52 @@ class PythonSensorTest {
   }
 
   @Test
+  void send_telemetry_analysis_uses_cache_when_optimization_active() throws IOException {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    PythonInputFile inputFile = inputFile(FILE_2, Type.MAIN, InputFile.Status.SAME);
+    TestReadCache readCache = getValidReadCache();
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(Collections.emptyList());
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
+    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data);
+    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
+    readCache.put(effectiveFileTypeCacheKey(inputFile.wrappedFile().key()), "MAIN".getBytes(UTF_8));
+    context.setPreviousCache(readCache);
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+
+    var contextSpy = spy(context);
+    sensor().execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_ANALYSIS_USES_CACHE.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_FILES_SCANNED_WITH_CACHE.key(), "1");
+  }
+
+  @Test
+  void send_telemetry_analysis_not_uses_cache_when_no_optimization() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    inputFile(FILE_1);
+    var contextSpy = spy(context);
+    sensor().execute(contextSpy);
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_ANALYSIS_USES_CACHE.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_FILES_SCANNED_WITH_CACHE.key(), "0");
+  }
+
+  @Test
   void detects_databricks() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()

@@ -161,6 +161,7 @@ public final class PythonSensor implements Sensor {
     updateDatabricksTelemetry(scanner);
     updateTypeInferenceTelemetry(scanner);
     updateTestFileTelemetry(scanner);
+    updateCacheAnalysisTelemetry(context, pythonIndexer, scanner);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEY, noSonarLineInfoCollector.getSuppressedRuleIds());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_COMMENTS_KEY, noSonarLineInfoCollector.getCommentWithExactlyOneRuleSuppressed());
     updateNamespacePackageTelemetry(pythonIndexer);
@@ -277,6 +278,14 @@ public final class PythonSensor implements Sensor {
       buildSystem == PackageResolutionResult.BuildSystem.PDM ? 1 : 0);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_BUILD_SYSTEM_FLIT,
       buildSystem == PackageResolutionResult.BuildSystem.FLIT ? 1 : 0);
+  }
+
+  private void updateCacheAnalysisTelemetry(SensorContext context, PythonIndexer indexer, PythonScanner scanner) {
+    if (context.runtime().getProduct() == SonarProduct.SONARLINT) {
+      return;
+    }
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_ANALYSIS_USES_CACHE, indexer.isAnalysisOptimized());
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_FILES_SCANNED_WITH_CACHE, scanner.getFilesScannedWithCache());
   }
 
   private void updateSonarTestsTelemetry(SensorContext context) {

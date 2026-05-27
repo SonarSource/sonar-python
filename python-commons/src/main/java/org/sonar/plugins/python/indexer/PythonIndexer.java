@@ -206,6 +206,10 @@ public abstract class PythonIndexer {
 
   public abstract CacheContext cacheContext();
 
+  public boolean isAnalysisOptimized() {
+    return false;
+  }
+
   public void writeEffectiveFileType(String fileKey, InputFile.Type type) {
   }
 
