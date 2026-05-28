@@ -27,6 +27,7 @@ public class BuiltinTypes {
   public static final String TUPLE = "tuple";
   public static final String LIST = "list";
   public static final String SET = "set";
+  public static final String FROZENSET = "frozenset";
   public static final String DICT = "dict";
 
   // https://docs.python.org/3/library/stdtypes.html#bytes-objects

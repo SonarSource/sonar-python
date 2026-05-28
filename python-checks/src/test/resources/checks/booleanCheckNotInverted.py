@@ -1,4 +1,4 @@
-from typing import Set, Any
+from typing import Set, FrozenSet, Any
 
 a = 1
 b = 2
@@ -125,4 +125,38 @@ def check_conditional_set_comparison(a, cond):
         b = "hello"
     # FP: We don't know whether b is of type set in this case. An issue shouldn't be raised.
     if not (a <= b): # Noncompliant
+        ...
+
+
+def check_frozenset_as_declared_type(a: frozenset[str], b: frozenset[str]) -> None:
+    if not (a <= b): # OK: comparing two frozensets.
+        ...
+    if not (a == b): # Noncompliant
+        ...
+    if not (a < b): # OK: comparing two frozensets.
+        ...
+    if not (a > b): # OK: comparing two frozensets.
+        ...
+    if not (a >= b): # OK: comparing two frozensets.
+        ...
+
+
+class CustomFrozenSet(frozenset):
+    ...
+
+
+def check_frozenset_as_custom_subclass(a: CustomFrozenSet, b: CustomFrozenSet) -> None:
+    if not (a <= b): # OK
+        ...
+
+
+def check_frozenset_literal(a, b) -> None:
+    x: frozenset[int] = frozenset({1, 2})
+    y: frozenset[int] = frozenset({1, 2, 3})
+    if not x <= y: # OK: comparing two frozensets.
+        ...
+
+
+def check_frozenset_typing_annotation(a: FrozenSet[str], b: FrozenSet[str]) -> None:
+    if not (a <= b): # OK: comparing two frozensets with typing.FrozenSet.
         ...

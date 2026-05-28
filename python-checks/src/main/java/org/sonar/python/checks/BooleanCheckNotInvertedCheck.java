@@ -157,6 +157,7 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
       binaryExpression.leftOperand().type(),
       binaryExpression.rightOperand().type()
     );
-    return inferredTypeSet.stream().anyMatch(inferredType -> inferredType.mustBeOrExtend(BuiltinTypes.SET));
+    return inferredTypeSet.stream().anyMatch(inferredType ->
+      inferredType.mustBeOrExtend(BuiltinTypes.SET) || inferredType.mustBeOrExtend(BuiltinTypes.FROZENSET));
   }
 }
