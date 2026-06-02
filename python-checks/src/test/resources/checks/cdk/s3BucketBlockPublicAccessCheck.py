@@ -7,23 +7,19 @@ class NonCompliantStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        # NonCompliant@+1 {{No Public Access Block configuration prevents public ACL/policies to be set on this S3 bucket. Make sure it is safe here.}}
-        bucket = s3.Bucket(self, "PublicAccessIsNotBlockedByDefault")
-        #        ^^^^^^^^^
+        # NonCompliant@+2 {{Using BLOCK_ACLS_ONLY allows public access via bucket policies.}}
+        bucket = s3.Bucket(self, "PublicAccessOnlyBlockAclsOnly",
+                           block_public_access=s3.BlockPublicAccess.BLOCK_ACLS_ONLY)
 
-        # NonCompliant@+2 {{Make sure allowing public ACL/policies to be set is safe here.}}
-        bucket = s3.Bucket(self, "PublicAccessOnlyBlockAcls",
-                           block_public_access=s3.BlockPublicAccess.BLOCK_ACLS)
-
-        public_access_only_block_acls_by_reference = s3.BlockPublicAccess.BLOCK_ACLS
-    #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{Propagated setting.}}
-        bucket = s3.Bucket(self, "PublicAccessOnlyBlockAclsByReference",
-                           block_public_access=public_access_only_block_acls_by_reference)  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
-    #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        public_access_only_block_acls_only_by_reference = s3.BlockPublicAccess.BLOCK_ACLS_ONLY
+    #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{Propagated setting.}}
+        bucket = s3.Bucket(self, "PublicAccessOnlyBlockAclsOnlyByReference",
+                           block_public_access=public_access_only_block_acls_only_by_reference)  # NonCompliant {{Using BLOCK_ACLS_ONLY allows public access via bucket policies.}}
+    #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         bucket = s3.Bucket(self, "SingleUnblockPublicAccesses",
                            block_public_access=s3.BlockPublicAccess(
-                               block_public_acls=False,  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
+                               block_public_acls=False,  # NonCompliant {{Disabling public access block settings allows public ACL/policies to be set on this S3 bucket.}}
                            #   ^^^^^^^^^^^^^^^^^^^^^^^
                                ignore_public_acls=True,
                                block_public_policy=True,
@@ -31,16 +27,16 @@ class NonCompliantStack(Stack):
 
         bucket = s3.Bucket(self, "MultipleUnblockPublicAccesses",
                            block_public_access=s3.BlockPublicAccess(
-                               block_public_acls=False,  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
+                               block_public_acls=False,  # NonCompliant {{Disabling public access block settings allows public ACL/policies to be set on this S3 bucket.}}
                            #   ^^^^^^^^^^^^^^^^^^^^^^^
                                ignore_public_acls=True,
-                               block_public_policy=False,  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
+                               block_public_policy=False,  # NonCompliant {{Disabling public access block settings allows public ACL/policies to be set on this S3 bucket.}}
                            #   ^^^^^^^^^^^^^^^^^^^^^^^^^
                                restrict_public_buckets=True))
 
         referenced_unblock_public_accesses = s3.BlockPublicAccess(
             block_public_acls=True,
-            ignore_public_acls=False,  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
+            ignore_public_acls=False,  # NonCompliant {{Disabling public access block settings allows public ACL/policies to be set on this S3 bucket.}}
             block_public_policy=True,
             restrict_public_buckets=True)
 
@@ -51,7 +47,7 @@ class NonCompliantStack(Stack):
     #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{Propagated setting.}}
         bucket = s3.Bucket(self, "ReferencedValueUnblockPublicAccesses",
                            block_public_access=s3.BlockPublicAccess(
-                               block_public_acls=referenced_value_unblock_public_accesses,  # NonCompliant {{Make sure allowing public ACL/policies to be set is safe here.}}
+                               block_public_acls=referenced_value_unblock_public_accesses,  # NonCompliant {{Disabling public access block settings allows public ACL/policies to be set on this S3 bucket.}}
                            #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                                ignore_public_acls=True,
                                block_public_policy=True,
@@ -62,8 +58,13 @@ class CompliantStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
+        bucket = s3.Bucket(self, "PublicAccessIsNotBlockedByDefault")
+
         bucket = s3.Bucket(self, "PublicAccessOnlyBlockAll",
                            block_public_access=s3.BlockPublicAccess.BLOCK_ALL)
+
+        bucket = s3.Bucket(self, "PublicAccessOnlyBlockAcls",
+                           block_public_access=s3.BlockPublicAccess.BLOCK_ACLS)
 
         bucket = s3.Bucket(self, "AllBlockPublicAccesses",
                            block_public_access=s3.BlockPublicAccess(
