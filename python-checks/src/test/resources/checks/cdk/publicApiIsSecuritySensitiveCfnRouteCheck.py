@@ -3,16 +3,16 @@ import aws_cdk.aws_apigatewayv2 as apigateway
 class PublicApiIsSecuritySensitiveCfnRouteCheck:
     def __init__(self, auth_from_argument):
 
-        apigateway.CfnRoute(  # NonCompliant{{Omitting "authorization_type" disables authentication. Make sure it is safe here.}}
+        apigateway.CfnRoute(
             self,
-            "default-no-auth"
+            "no-auth",
+            authorization_type="NONE"  # NonCompliant{{Ensure this API route requires authentication.}}
         )
 
         apigateway.CfnRoute(
             self,
-            "no-auth",
-            authorization_type="NONE"  # NonCompliant{{Make sure that creating public APIs is safe here.}}
-        )
+            "default-no-auth"
+        )  # Compliant - omission no longer flagged
 
         apigateway.CfnRoute(
             self,
@@ -31,7 +31,7 @@ class PublicApiIsSecuritySensitiveCfnRouteCheck:
         apigateway.CfnRoute(
             self,
             "no-auth",
-            authorization_type=auth_type_none  # NonCompliant{{Make sure that creating public APIs is safe here.}}
+            authorization_type=auth_type_none  # NonCompliant{{Ensure this API route requires authentication.}}
 #           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         )
 

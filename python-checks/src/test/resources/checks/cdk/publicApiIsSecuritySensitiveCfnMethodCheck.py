@@ -5,8 +5,13 @@ class PublicApiIsSecuritySensitiveCfnMethodCheck:
         apigateway.CfnMethod(
             self,
             "no-auth",
-            authorization_type="NONE"  # NonCompliant{{Make sure that creating public APIs is safe here.}}
+            authorization_type="NONE"  # NonCompliant{{Ensure this API route requires authentication.}}
         )
+
+        apigateway.CfnMethod(
+            self,
+            "no-auth-omit"
+        )  # Compliant - omission no longer flagged
 
         apigateway.CfnMethod(
             self,
@@ -32,17 +37,12 @@ class PublicApiIsSecuritySensitiveCfnMethodCheck:
             authorization_type="COGNITO_USER_POOLS"  # Compliant
         )
 
-        apigateway.CfnMethod(   # NonCompliant{{Omitting "authorization_type" disables authentication. Make sure it is safe here.}}
-            self,
-            "no-auth"
-        )
-
         auth_type_none = "NONE"
 #       ^^^^^^^^^^^^^^^^^^^^^^^>
         apigateway.CfnMethod(
             self,
             "no-auth",
-            authorization_type=auth_type_none  # NonCompliant{{Make sure that creating public APIs is safe here.}}
+            authorization_type=auth_type_none  # NonCompliant{{Ensure this API route requires authentication.}}
 #           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         )
 
