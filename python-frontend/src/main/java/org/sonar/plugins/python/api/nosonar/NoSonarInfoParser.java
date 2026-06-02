@@ -33,14 +33,19 @@ public class NoSonarInfoParser {
   private static final String NOQA_PATTERN_REGEX = "^#\\s*noqa(?::\\s*(.+))?(?:[\\s;:].*)?";
   private static final String NOSONAR_PREFIX_REGEX = "^#\\s*NOSONAR(\\W.*)?";
   private static final String NOSONAR_PATTERN_REGEX = "^#\\s*NOSONAR(?:\\s*\\(([^)]*)\\))?($|\\s.*)";
+  // Bandit `# nosec`. Anything after `nosec` is treated as a free-form description; rule IDs
+  // are not parsed, so every `# nosec` suppresses all issues on the line.
+  private static final String NOSEC_PATTERN_REGEX = "(?i)^#\\s*nosec\\b[:\\s]*(.*)";
   private static final String RULE_KEY_PATTERN_REGEX = "^[a-zA-Z0-9]+$";
 
   private final Pattern noSonarPattern;
   private final Pattern noQaPattern;
+  private final Pattern noSecPattern;
 
   public NoSonarInfoParser() {
     noSonarPattern = Pattern.compile(NOSONAR_PATTERN_REGEX);
     noQaPattern = Pattern.compile(NOQA_PATTERN_REGEX);
+    noSecPattern = Pattern.compile(NOSEC_PATTERN_REGEX);
   }
 
   public boolean isInvalidIssueSuppressionComment(String commentsLine) {
@@ -94,6 +99,10 @@ public class NoSonarInfoParser {
     return noSonarCommentLine.matches(NOQA_PATTERN_REGEX);
   }
 
+  public static boolean isValidNoSec(String commentLine) {
+    return commentLine.matches(NOSEC_PATTERN_REGEX);
+  }
+
   public Optional<NoSonarLineInfo> parse(String commentLine) {
     var rules = new HashSet<String>();
     StringBuilder concatenatedCommentBuilder = new StringBuilder();
@@ -132,6 +141,9 @@ public class NoSonarInfoParser {
         .filter(Predicate.not(String::isEmpty))
         .forEach(rules::add);
       comment = parseNoQaComment(commentLine);
+    } else if (isValidNoSec(commentLine)) {
+      // `# nosec` always suppresses all rules on the line; we do not parse Bandit IDs.
+      comment = parseNoSecComment(commentLine);
     } else {
       return null;
     }
@@ -172,6 +184,12 @@ public class NoSonarInfoParser {
 
   private String parseNoQaComment(String noSonarCommentLine) {
     return getTruncatedCommentString(noQaPattern, noSonarCommentLine).strip();
+  }
+
+  private String parseNoSecComment(String noSecCommentLine) {
+    var raw = getPatternGroup(1, noSecPattern, noSecCommentLine);
+    var truncated = raw.length() > MAX_COMMENT_LENGTH ? raw.substring(0, MAX_COMMENT_LENGTH) : raw;
+    return truncated.strip();
   }
 
   private static String getParamsString(Pattern pattern, String noSonarCommentLine) {

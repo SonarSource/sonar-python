@@ -130,6 +130,34 @@ class NoSonarInfoParserTest {
       Arguments.of(
         "# noqa; noqa; noqa; noqa; noqa",
         new NoSonarLineInfo(Set.of())
+      ),
+      Arguments.of(
+        "# nosec",
+        new NoSonarLineInfo(Set.of())
+      ),
+      Arguments.of(
+        "# nosec B101",
+        new NoSonarLineInfo(Set.of(), "B101")
+      ),
+      Arguments.of(
+        "# nosec B101, B102 reason text",
+        new NoSonarLineInfo(Set.of(), "B101, B102 reason text")
+      ),
+      Arguments.of(
+        "# nosec: it's fine",
+        new NoSonarLineInfo(Set.of(), "it's fine")
+      ),
+      Arguments.of(
+        "# NOSEC",
+        new NoSonarLineInfo(Set.of())
+      ),
+      Arguments.of(
+        "# nosec a very long comment that I don't want to keep that long because there is more than 50 characters",
+        new NoSonarLineInfo(Set.of(), "a very long comment that I don't want to keep that")
+      ),
+      Arguments.of(
+        "# some text # nosec",
+        new NoSonarLineInfo(Set.of())
       )
     );
   }
