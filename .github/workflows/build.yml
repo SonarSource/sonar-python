@@ -48,9 +48,9 @@ jobs:
           git sparse-checkout set stubs/sklearn
           git checkout
 
-      - uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
+      - uses: jdx/mise-action@e79ddf65a11cec7b0e882bedced08d6e976efb2d # v3.6.2
         with:
-          version: 2025.12.12
+          version: 2026.5.15
           cache: false
         env:
           MISE_ENV: test-and-analyze
