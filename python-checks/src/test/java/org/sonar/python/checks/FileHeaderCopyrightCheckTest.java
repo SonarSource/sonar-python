@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import org.assertj.core.api.Assertions;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -31,6 +30,7 @@ import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileHeaderCopyrightCheckTest {
 
@@ -147,7 +147,7 @@ class FileHeaderCopyrightCheckTest {
 
     Assertions.assertThatThrownBy(() -> SubscriptionVisitor.analyze(check, context)).isInstanceOf(IllegalArgumentException.class);
 
-    IllegalArgumentException e = Assert.assertThrows(IllegalArgumentException.class, () -> SubscriptionVisitor.analyze(check, context));
+    IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> SubscriptionVisitor.analyze(check, context));
     Assertions.assertThat(e.getMessage()).isEqualTo("[FileHeaderCopyrightCheck] Unable to compile the regular expression: "+fileHeaderCopyrightCheck.headerFormat);
   }
 
