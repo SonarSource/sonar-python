@@ -31,7 +31,6 @@ import org.sonar.python.checks.cdk.ResourceAccessPolicyCheck;
 import org.sonar.python.checks.cdk.S3BucketBlockPublicAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketGrantedAccessCheck;
 import org.sonar.python.checks.cdk.S3BucketHTTPCommunicationCheck;
-import org.sonar.python.checks.cdk.S3BucketServerEncryptionCheck;
 import org.sonar.python.checks.cdk.S3BucketVersioningCheck;
 import org.sonar.python.checks.cdk.UnencryptedEbsVolumeCheck;
 import org.sonar.python.checks.cdk.UnencryptedSageMakerNotebookCheck;
@@ -42,15 +41,12 @@ import org.sonar.python.checks.django.DjangoModelFormFieldsCheck;
 import org.sonar.python.checks.django.DjangoModelStrMethodCheck;
 import org.sonar.python.checks.django.DjangoModelStringFieldCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
-import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.CorsCheck;
 import org.sonar.python.checks.hotspots.CsrfDisabledCheck;
-import org.sonar.python.checks.hotspots.DataEncryptionCheck;
 import org.sonar.python.checks.hotspots.DebugModeCheck;
 import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeCheck;
 import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeLegacyCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
-import org.sonar.python.checks.hotspots.EmailSendingCheck;
 import org.sonar.python.checks.hotspots.ExpandingArchiveCheck;
 import org.sonar.python.checks.hotspots.FastHashingOrPlainTextCheck;
 import org.sonar.python.checks.hotspots.GraphQLIntrospectionCheck;
@@ -58,15 +54,12 @@ import org.sonar.python.checks.hotspots.HardCodedCredentialsCheck;
 import org.sonar.python.checks.hotspots.HardCodedCredentialsEntropyCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.HttpOnlyCookieCheck;
-import org.sonar.python.checks.hotspots.LoggersConfigurationCheck;
 import org.sonar.python.checks.hotspots.NonStandardCryptographicAlgorithmCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
 import org.sonar.python.checks.hotspots.PseudoRandomCheck;
 import org.sonar.python.checks.hotspots.PubliclyWritableDirectoriesCheck;
-import org.sonar.python.checks.hotspots.RegexCheck;
 import org.sonar.python.checks.hotspots.SQLQueriesCheck;
 import org.sonar.python.checks.hotspots.SecureCookieCheck;
-import org.sonar.python.checks.hotspots.StandardInputCheck;
 import org.sonar.python.checks.hotspots.StrongCryptographicKeysCheck;
 import org.sonar.python.checks.hotspots.UnsafeHttpMethodsCheck;
 import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
@@ -166,7 +159,6 @@ public class OpenSourceCheckList {
       CollapsibleIfStatementsCheck.class,
       CollectionCreationWrappedInConstructorCheck.class,
       CollectionLengthComparisonCheck.class,
-      CommandLineArgsCheck.class,
       CommentedCodeCheck.class,
       CommentRegularExpressionCheck.class,
       ComparisonToNoneCheck.class,
@@ -183,7 +175,6 @@ public class OpenSourceCheckList {
       DataClassFunctionCallDefaultCheck.class,
       DataClassOnEnumCheck.class,
       DataclassFieldDefinitionCheck.class,
-      DataEncryptionCheck.class,
       DbNoPasswordCheck.class,
       DeadStoreCheck.class,
       DebugModeCheck.class,
@@ -211,7 +202,6 @@ public class OpenSourceCheckList {
       DynamicCodeExecutionCheck.class,
       EinopsSyntaxCheck.class,
       ElseAfterLoopsWithoutBreakCheck.class,
-      EmailSendingCheck.class,
       EmptyAlternativeCheck.class,
       EmptyCollectionConstructorCheck.class,
       EmptyCollectionMembershipTestCheck.class,
@@ -313,7 +303,6 @@ public class OpenSourceCheckList {
       LineLengthCheck.class,
       ListIterableFirstElementCheck.class,
       LocalVariableAndParameterNameConventionCheck.class,
-      LoggersConfigurationCheck.class,
       LoggingExceptionCheck.class,
       LoggingBestPracticesCheck.class,
       LongIntegerWithLowercaseSuffixUsageCheck.class,
@@ -388,7 +377,6 @@ public class OpenSourceCheckList {
       PossessiveQuantifierContinuationCheck.class,
       RedundantRegexAlternativesCheck.class,
       ReluctantQuantifierCheck.class,
-      RegexCheck.class,
       ReluctantQuantifierWithEmptyContinuationCheck.class,
       ResourceAccessPolicyCheck.class,
       ReturnAndYieldInOneFunctionCheck.class,
@@ -398,7 +386,6 @@ public class OpenSourceCheckList {
       S3BucketBlockPublicAccessCheck.class,
       S3BucketGrantedAccessCheck.class,
       S3BucketHTTPCommunicationCheck.class,
-      S3BucketServerEncryptionCheck.class,
       S3BucketVersioningCheck.class,
       SameBranchCheck.class,
       SameConditionCheck.class,
@@ -422,7 +409,6 @@ public class OpenSourceCheckList {
       SpecialMethodParamListCheck.class,
       SpecialMethodReturnTypeCheck.class,
       SQLQueriesCheck.class,
-      StandardInputCheck.class,
       StartsWithEndsWithTupleCheck.class,
       StopIterationInGeneratorCheck.class,
       StrftimeConfusingHourSystemCheck.class,
