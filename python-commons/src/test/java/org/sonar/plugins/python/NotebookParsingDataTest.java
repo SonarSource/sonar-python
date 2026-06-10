@@ -100,7 +100,7 @@ class NotebookParsingDataTest {
   void testEquals() {
     var empty = NotebookParsingData.empty();
     assertEquals(empty, empty);
-    assertNotEquals(empty, "test");
+    assertNotEquals("test", empty);
 
     var data = new NotebookParsingData(new StringBuilder().append("Test"), Map.of(), 0);
     assertNotEquals(data, empty);
