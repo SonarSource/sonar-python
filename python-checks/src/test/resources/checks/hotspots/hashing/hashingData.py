@@ -135,6 +135,62 @@ def hash_data(algorithm):
 
     md5  # Noncompliant
 
+# S4790 suppressed when the hashlib call (or its .hexdigest()/.digest() qualifier)
+# is immediately consumed by a bounded slice — truncated output cannot serve
+# as a password hash, MAC, or integrity digest.
+def hash_for_identifier(payload, email, seed, n):
+    uid    = hashlib.sha1(b"data").hexdigest()[:8]          # OK — short identifier
+    short  = hashlib.md5(payload).digest()[:4]              # OK — bounded keyspace
+    prefix = hashlib.sha1(email.encode()).hexdigest()[0:5]  # OK — k-anonymity prefix
+    otp    = hashlib.sha1(seed).hexdigest()[-6:]            # OK — HOTP-style truncation
+    direct = hashlib.md5(payload)[:8]                       # OK — direct slice without digest call
+    s224   = hashlib.sha224(b"data").hexdigest()[:8]        # OK — sha224 with bounded slice
+
+    # Still flagged: slice bound too large (could be full-digest use)
+    hashlib.sha1(b"data").hexdigest()[:]        # Noncompliant
+    hashlib.sha1(b"data").hexdigest()[:17]      # Noncompliant
+    hashlib.sha1(b"data").hexdigest()[-17:]     # Noncompliant
+
+    # Still flagged: variable or dynamic bound — not a literal
+    hashlib.sha1(b"data").hexdigest()[:n]       # Noncompliant
+
+    # Still flagged: stride present — bounded size not guaranteed
+    hashlib.sha1(b"data").hexdigest()[-6::2]    # Noncompliant
+
+    # Still flagged: positive lower bound with no upper — unbounded tail
+    hashlib.sha1(b"data").hexdigest()[6:]       # Noncompliant
+
+    # Still flagged: zero upper bound
+    hashlib.sha1(b"data").hexdigest()[:0]       # Noncompliant
+
+    # Still flagged: chained method is neither hexdigest nor digest
+    hashlib.sha1(b"data").copy()[:8]            # Noncompliant
+
+    # Still flagged: hexdigest accessed as attribute, not called
+    hashlib.sha1(b"data").hexdigest             # Noncompliant
+
+    # Still flagged: negative upper bound keeps almost the whole digest
+    hashlib.sha1(b"data").hexdigest()[:-4]      # Noncompliant
+
+    # Still flagged: multi-dimensional slice
+    hashlib.sha1(b"data").hexdigest()[1:4, 2:8] # Noncompliant
+
+    # Still flagged: float literal upper bound
+    hashlib.sha1(b"data").hexdigest()[:1.5]     # Noncompliant
+
+    # Still flagged: float literal lower bound magnitude
+    hashlib.sha1(b"data").hexdigest()[-1.5:]    # Noncompliant
+
+    # Still flagged: unary plus lower bound
+    hashlib.sha1(b"data").hexdigest()[+5:]      # Noncompliant
+
+    # Still flagged: variable under unary minus
+    hashlib.sha1(b"data").hexdigest()[-n:]      # Noncompliant
+
+    # Still flagged: intermediate variable breaks the chain
+    h = hashlib.sha1(b"data")                  # Noncompliant
+    h.hexdigest()[:8]
+
 def test_if_usedforsecurity_works_only_for_hashlib():
     import Cryptodome
     Cryptodome.Hash.MD2.new(usedforsecurity=False) # Noncompliant

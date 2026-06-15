@@ -34,10 +34,14 @@ import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.SliceExpression;
+import org.sonar.plugins.python.api.tree.SliceItem;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
@@ -99,6 +103,10 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     .collect(Collectors.toSet());
 
   private static final Set<String> questionableHashers = immutableSet("crypt", "unsalted_sha1", "unsalted_md5", "sha1", "md5");
+
+  // Maximum absolute value of a slice bound considered "small" (clearly not full-digest length).
+  // MD5 hex = 32 chars, MD5 bytes = 16 — anything ≤ 16 is unambiguously truncated.
+  private static final int BOUNDED_SLICE_MAX = 16;
 
   @Override
   public void initialize(Context context) {
@@ -221,8 +229,64 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     }
 
     String fullyQualifiedName = name.symbol() != null ? name.symbol().fullyQualifiedName() : "";
-    if (questionableHashlibAlgorithm.contains(fullyQualifiedName) || questionablePasslibAlgorithm.contains(fullyQualifiedName)) {
+    if (questionableHashlibAlgorithm.contains(fullyQualifiedName)) {
+      if (!isHashlibCallConsumedByBoundedSlice(name)) {
+        ctx.addIssue(name, MESSAGE);
+      }
+    } else if (questionablePasslibAlgorithm.contains(fullyQualifiedName)) {
       ctx.addIssue(name, MESSAGE);
+    }
+  }
+
+  private static boolean isHashlibCallConsumedByBoundedSlice(Name name) {
+    Tree callTree = TreeUtils.firstAncestorOfKind(name, Tree.Kind.CALL_EXPR);
+    if (!(callTree instanceof CallExpression hashlibCall)) {
+      return false;
+    }
+
+    // The call may optionally be chained with .hexdigest() or .digest() before being sliced.
+    Tree candidate = hashlibCall;
+    Tree parent = hashlibCall.parent();
+
+    if (parent instanceof QualifiedExpression qualExpr) {
+      String member = qualExpr.name().name();
+      if (("hexdigest".equals(member) || "digest".equals(member)) && qualExpr.parent() instanceof CallExpression digestCall) {
+        candidate = digestCall;
+        parent = digestCall.parent();
+      }
+    }
+
+    return parent instanceof SliceExpression sliceExpr
+      && sliceExpr.object() == candidate
+      && isBoundedSlice(sliceExpr);
+  }
+
+  private static boolean isBoundedSlice(SliceExpression sliceExpr) {
+    List<Tree> slices = sliceExpr.sliceList().slices();
+    if (slices.size() != 1) {
+      return false;
+    }
+    // A single-item SliceExpression always holds a SliceItem (parser invariant).
+    SliceItem sliceItem = (SliceItem) slices.get(0);
+    // [:N] or [M:N] — small positive upper bound
+    if (sliceItem.upperBound() instanceof NumericLiteral numLit) {
+      return isBoundedLiteral(numLit);
+    }
+    // [-N:] — negative lower bound, no upper bound (last N elements)
+    boolean isUnboundedAbove = sliceItem.upperBound() == null && sliceItem.stride() == null;
+    return isUnboundedAbove
+      && sliceItem.lowerBound() instanceof UnaryExpression unary
+      && unary.is(Tree.Kind.UNARY_MINUS)
+      && unary.expression() instanceof NumericLiteral numLit
+      && isBoundedLiteral(numLit);
+  }
+
+  private static boolean isBoundedLiteral(NumericLiteral lit) {
+    try {
+      long v = lit.valueAsLong();
+      return v > 0 && v <= BOUNDED_SLICE_MAX;
+    } catch (NumberFormatException e) {
+      return false;
     }
   }
 
