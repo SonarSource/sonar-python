@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -35,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tests.UnittestUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -42,6 +44,8 @@ import org.sonar.python.tree.TreeUtils;
 public class NotDiscoverableTestMethodCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Rename this method so that it starts with \"test\" or remove this unused helper.";
+  private static final String QUICK_FIX_MESSAGE = "Rename '%s' to '%s'";
+  private static final String DISCOVERABLE_TEST_PREFIX = "test_";
   private final Set<String> globalFixture = new HashSet<>();
 
   @Override
@@ -112,9 +116,35 @@ public class NotDiscoverableTestMethodCheck extends PythonSubscriptionCheck {
     suspiciousFunctionsAndDefinitions.forEach((s, d) -> {
       List<Usage> usages = s.usages();
       if (usages.size() == 1 || usages.stream().noneMatch(u -> TreeUtils.firstAncestor(u.tree(), allDefinitions::contains) != null)) {
-        ctx.addIssue(d.name(), MESSAGE);
+        var issue = ctx.addIssue(d.name(), MESSAGE);
+        createQuickFix(d).ifPresent(issue::addQuickFix);
       }
     });
+  }
+
+  private static Optional<PythonQuickFix> createQuickFix(FunctionDef functionDef) {
+    String currentName = functionDef.name().name();
+    String newName = discoverableName(currentName);
+
+    if (isAlreadyUsedInEnclosingClass(functionDef, newName)) {
+      return Optional.empty();
+    }
+
+    return Optional.of(PythonQuickFix.newQuickFix(String.format(QUICK_FIX_MESSAGE, currentName, newName))
+      .addTextEdit(TextEditUtils.renameAllUsages(functionDef.name(), newName))
+      .build());
+  }
+
+  private static String discoverableName(String currentName) {
+    return DISCOVERABLE_TEST_PREFIX + currentName;
+  }
+
+  private static boolean isAlreadyUsedInEnclosingClass(FunctionDef functionDef, String newName) {
+    return Optional.ofNullable(TreeUtils.getEnclosingClassDef(functionDef)).stream()
+      .flatMap(classDef -> TreeUtils.topLevelFunctionDefs(classDef).stream())
+      .filter(enclosingFunctionDef -> enclosingFunctionDef != functionDef)
+      .map(enclosingFunctionDef -> enclosingFunctionDef.name().name())
+      .anyMatch(newName::equals);
   }
 
   private static boolean inheritsOnlyFromUnitTest(ClassDef classDef) {

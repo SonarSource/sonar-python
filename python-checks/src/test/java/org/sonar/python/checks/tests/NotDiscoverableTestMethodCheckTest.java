@@ -18,6 +18,7 @@ package org.sonar.python.checks.tests;
 
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,6 +28,47 @@ class NotDiscoverableTestMethodCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/notDiscoverableTestMethod.py", new NotDiscoverableTestMethodCheck());
+  }
+
+  @Test
+  void quick_fix_renames_method() {
+    var check = new NotDiscoverableTestMethodCheck();
+    String before = """
+        import unittest
+
+        class MyTest(unittest.TestCase):
+
+            def helper(self):
+                ...
+        """;
+    PythonQuickFixVerifier.verify(
+      check,
+      before,
+      """
+        import unittest
+
+        class MyTest(unittest.TestCase):
+
+            def test_helper(self):
+                ...
+        """);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Rename 'helper' to 'test_helper'");
+  }
+
+  @Test
+  void no_quick_fix_when_discoverable_name_already_exists() {
+    PythonQuickFixVerifier.verifyNoQuickFixes(
+      new NotDiscoverableTestMethodCheck(),
+      """
+        import unittest
+
+        class MyTest(unittest.TestCase):
+
+            def helper(self):
+                ...
+            def test_helper(self):
+                ...
+        """);
   }
 
   @Test
