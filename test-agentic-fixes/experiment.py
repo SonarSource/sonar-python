@@ -42,7 +42,9 @@ def format_issue_location(finding: dict) -> str:
 
 
 def format_prompt(prompt: str, finding) -> str:
-    return prompt.format(format_issue_message(finding), format_issue_location(finding))
+    prompt = prompt.format(format_issue_message(finding), format_issue_location(finding))
+    prompt = prompt.replace('"', "'")
+    return f'"{prompt}"'
 
 
 def prepare_env() -> tempfile.TemporaryDirectory:
@@ -96,15 +98,11 @@ def fix_with_agent(model: str, prompt: str, env: tempfile.TemporaryDirectory):
 
     elif model.lower() == "codex":
         # Launch local Codex via Ollama runtime architecture inside the sandbox context
-        cmd = [
-            "codex",
-            "exec", prompt,
-        ]
+        cmd = ["codex", "exec", "--sandbox", "workspace-write", "--skip-git-repo-check", prompt]
 
     elif model.lower() == "gemma4":
-        cmd = [
-            "codex", "--oss", "-m", "gemma4:26b-mlx-bf16", "exec", prompt
-        ]
+        cmd = ["codex", "--oss", "-m", "gemma4:26b-mlx-bf16", "exec",
+               "--skip-git-repo-check", "--sandbox", "workspace-write","--local-provider=ollama", prompt]
 
     else:
         raise ValueError(f"Unknown or unsupported model configuration: {model}")
@@ -113,33 +111,35 @@ def fix_with_agent(model: str, prompt: str, env: tempfile.TemporaryDirectory):
     print(f"Command payload -> {' '.join(cmd)}")
 
     try:
-        # Run the command and capture the returned completed process object
-        result = subprocess.run(
+        subprocess.run(
             cmd,
             cwd=env_path,
-            capture_output=True,
+            env=os.environ,
+            stdout=None,
+            stderr=None,
+            stdin=subprocess.DEVNULL,
             text=True,
             check=True
         )
-        print(f"[{model} Response Log]: Execution completed successfully.")
-
-        # Print the captured output
-        if result.stdout:
-            print(f"STDOUT Log:\n{result.stdout}")
-        if result.stderr:
-            print(f"STDERR Log:\n{result.stderr}")
-
+        print(f"\n[{model} Response Log]: Execution completed successfully.")
     except subprocess.CalledProcessError as e:
-        print(f"⚠️  Error: {model} pipeline exited abnormally.")
-        print(f"STDOUT Log:\n{e.stdout}")
-        print(f"STDERR Log:\n{e.stderr}")
+        print(f"\n⚠️  Error: {model} pipeline exited abnormally with code {e.returncode}.")
 
 
-def fetch_findings_from_sonarqube(server_url: str, token: str, project_key: str) -> list:
+def fetch_findings_from_sonarqube(server_url: str, project_key: str) -> list:
+    """Fetches open issues dynamically using the SonarQube Web API.
+
+    Pulls the authentication token directly from the SONAR_TOKEN environment
+    variable.
     """
-    Fetches open issues dynamically using the SonarQube Web API.
-    Replaces the need for a manually downloaded CSV file.
-    """
+    # Retrieve the token from the environment
+    token = os.environ.get("SONAR_TOKEN")
+
+    if not token:
+        raise ValueError(
+            "Environment variable 'SONAR_TOKEN' is not set. Please set it before running the script."
+        )
+
     # The dedicated API endpoint for pulling issues/findings
     api_url = f"{server_url.rstrip('/')}/api/issues/search"
 
@@ -147,13 +147,11 @@ def fetch_findings_from_sonarqube(server_url: str, token: str, project_key: str)
     params = {
         "componentKeys": project_key,
         "statuses": "OPEN",
-        "ps": 500  # Page size (max allowed by SonarQube is 500)
+        "ps": 500,  # Page size (max allowed by SonarQube is 500)
     }
 
     # Authenticate via Bearer Token
-    headers = {
-        "Authorization": f"Bearer {token}"
-    }
+    headers = {"Authorization": f"Bearer {token}"}
 
     try:
         response = requests.get(api_url, params=params, headers=headers)
@@ -217,14 +215,15 @@ def analyze(env: tempfile.TemporaryDirectory) -> dict:
     }
 
 
-def experiment(findings) -> dict:
+def experiment(findings) -> list:
     env = prepare_env()
     print(env.name)
     for finding in findings:
-        fix_with_agent(model='claude', prompt=format_prompt(prompt_short, finding), env=env)
+        fix_with_agent(model='codex', prompt=format_prompt(prompt_short, finding), env=env)
         break  # TODO remove
-    result = analyze(env=env)
-    print(result)
+    analyze(env=env)
+    result = fetch_findings_from_sonarqube("http://localhost:9000", "quick-fixes-agent-integration")
+    print(len(result), result)
     return result
 
 
