@@ -6,7 +6,7 @@ import smtplib
 import ssl
 
 def clear_text_protocol():
-  url = "http://" # Noncompliant {{Using http protocol is insecure. Use https instead}}
+  url = "http://" # Noncompliant {{Using HTTP protocol is insecure. Use HTTPS instead.}}
   #     ^^^^^^^^^
   url = "http://exemple.com" # Noncompliant
   url = "http://0001::1" # Noncompliant
@@ -17,10 +17,10 @@ def clear_text_protocol():
   url = "http://subdomain.exemple.com" # Noncompliant
   #     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  url = "ftp://" # Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead}}
+  url = "ftp://" # Noncompliant {{Using FTP protocol is insecure. Use SFTP, SCP or FTPS instead.}}
   url = "ftp://anonymous@exemple.com" # Noncompliant
   url = "telnet://" # Noncompliant
-  url = "telnet://anonymous@exemple.com" # Noncompliant {{Using telnet protocol is insecure. Use ssh instead}}
+  url = "telnet://anonymous@exemple.com" # Noncompliant {{Using Telnet protocol is insecure. Use SSH instead.}}
 
   # Argument default value
   def download(url='http://exemple.com'): # Noncompliant
@@ -41,7 +41,7 @@ def clear_text_protocol():
   # The url domain component is a loopback address.
   url = "http://localhost" # Compliant
   url = "http://127.0.0.1" # Compliant
-  url = "http://::1" # Compliant
+  url = "http://::1" # Noncompliant
   url = "ftp://user@localhost" # Compliant
 
   # url without authority
@@ -52,10 +52,10 @@ def clear_text_protocol():
       print(url)
 
 
-  cnx = telnetlib.Telnet("towel.blinkenlights.nl") # Noncompliant {{Using telnet protocol is insecure. Use ssh instead}}
+  cnx = telnetlib.Telnet("towel.blinkenlights.nl") # Noncompliant {{Using Telnet protocol is insecure. Use SSH instead.}}
   #     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   cnx = Telnet("towel.blinkenlights.nl") # Noncompliant
-  cnx = ftplib.FTP("194.244.111.175") # Noncompliant  {{Using ftp protocol is insecure. Use sftp, scp or ftps instead}}
+  cnx = ftplib.FTP("194.244.111.175") # Noncompliant  {{Using FTP protocol is insecure. Use SFTP, SCP or FTPS instead.}}
   cnx = FTP("194.244.111.175") # Noncompliant
   cnx = ftplib.FTP_TLS("secure.example.com") # Compliant
   cnx = FTP_TLS("secure.example.com") # Compliant
@@ -77,16 +77,48 @@ def clear_text_protocol():
   url = "http://127.63.31.15" # Compliant
   url = "http://127.255.255.254" # Compliant
 
-  url = "http://0:0:0:0:0:0:0:1" # Compliant
-  url = "http://0000:0000:0000:0000:0000:0000:0000:0001" # Compliant
-  url = "http://::1" # Compliant
-  url = "http://0::1" # Compliant
-  url = "http://0:0:0::1" # Compliant
-  url = "http://0000::0001" # Compliant
-  url = "http://0000:0:0000::0001" # Compliant
-  url = "http://0000:0:0000::1" # Compliant
-  url = "http://0::0:1" # Compliant
+  # Unbracketed IPv6 is not a valid HTTP URL (RFC 3986 requires brackets); the new filter no longer treats these as safe
+  url = "http://0:0:0:0:0:0:0:1" # Noncompliant
+  url = "http://0000:0000:0000:0000:0000:0000:0000:0001" # Noncompliant
+  url = "http://::1" # Noncompliant
+  url = "http://0::1" # Noncompliant
+  url = "http://0:0:0::1" # Noncompliant
+  url = "http://0000::0001" # Noncompliant
+  url = "http://0000:0:0000::0001" # Noncompliant
+  url = "http://0000:0:0000::1" # Noncompliant
+  url = "http://0::0:1" # Noncompliant
   url = "ftp://user@localhost" # Compliant
+
+  # Bracketed IPv6 loopback is a valid URL and is safe
+  url = "http://[::1]" # Compliant
+  url = "http://[0:0:0:0:0:0:0:1]" # Compliant
+  url = "http://[::1]:8080/api" # Compliant
+
+  # Cloud instance metadata endpoints are internal and not publicly reachable
+  url = "http://169.254.169.254/latest/meta-data/" # Compliant
+  url = "http://169.254.169.254/latest/api/token" # Compliant
+  url = "http://[fd00:ec2::254]/latest/meta-data/" # Compliant
+  url = "http://168.63.129.16/" # Compliant
+  url = "http://100.100.100.200/latest/meta-data/" # Compliant
+  url = "http://metadata.google.internal/computeMetadata/v1" # Compliant
+
+  # Docker and Kubernetes internal hostnames are not publicly reachable
+  url = "http://host.docker.internal:8085/metrics" # Compliant
+  url = "http://vault.vault.svc.cluster.local:8200" # Compliant
+  url = "http://auth-service.prod.svc.cluster.local:3001/auth" # Compliant
+
+  # Well-known namespace URI authorities: http:// prefix is part of the identifier, not a network endpoint
+  url = "http://www.w3.org/2001/XMLSchema" # Compliant
+  url = "http://schemas.xmlsoap.org/soap/envelope/" # Compliant
+  url = "http://www.springframework.org/schema/beans" # Compliant
+  url = "http://maven.apache.org/POM/4.0.0" # Compliant
+  url = "http://schema.org/Person" # Compliant
+
+  # IANA-reserved documentation domains are placeholder URLs, not real endpoints
+  url = "http://example.com/path" # Compliant
+  url = "http://example.net" # Compliant
+  url = "http://api.example.com/v1/users" # Compliant
+  url = "ftp://example.com/file" # Compliant
 
   self.server_url = 'http://127.0.0.1:%s' % self.server.port # compliant, loopback
   def get_url(self, path):

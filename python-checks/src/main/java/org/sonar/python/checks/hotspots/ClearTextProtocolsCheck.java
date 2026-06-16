@@ -16,15 +16,10 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -45,15 +40,11 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.cdk.ClearTextProtocolsCheckPart;
 import org.sonar.python.tree.TreeUtils;
+import org.sonarsource.analyzer.commons.appsec.CleartextProtocolFilter;
 
 @Rule(key = "S5332")
 public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
-  private static final List<String> SENSITIVE_PROTOCOLS = Arrays.asList("http://", "ftp://", "telnet://");
-  private static final Pattern LOOPBACK = Pattern.compile("localhost|127(?:\\.\\d+){0,2}\\.\\d+$|^(?:0*\\:)*?:?0*1", Pattern.CASE_INSENSITIVE);
-  private static final Map<String, String> ALTERNATIVES = Map.of(
-    "http", "https",
-    "ftp", "sftp, scp or ftps",
-    "telnet", "ssh");
+  private static final Set<String> CLEARTEXT_PROTOCOLS = CleartextProtocolFilter.getCleartextProtocols();
   private static final String SENSITIVE_HTTP_SERVER_START_FQN = "socketserver.BaseServer.serve_forever";
   private static final String SENSITIVE_HTTP_SERVER_BIND_FQN = "socketserver.BaseServer.server_bind";
   private static final Set<String> SENSITIVE_HTTP_SERVER_METHOD_NAMES = Set.of("serve_forever", "server_bind");
@@ -166,28 +157,22 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   }
 
   private static Optional<String> unsafeProtocol(String literalValue) {
-    for (String protocol : SENSITIVE_PROTOCOLS) {
-      if (literalValue.startsWith(protocol)) {
-        try {
-          URI uri = new URI(literalValue);
-          String host = uri.getHost();
-          if (host == null) {
-            // handle ipv6 loopback
-            host = uri.getAuthority();
-          }
-          if (host == null || LOOPBACK.matcher(host).matches()) {
-            return Optional.empty();
-          }
-        } catch (URISyntaxException e) {
-          // not parseable uri, try to find loopback in the substring without protocol, this handles case of url formatted as string
-          if (LOOPBACK.matcher(literalValue.substring(protocol.length())).find()) {
-            return Optional.empty();
-          }
+    return CLEARTEXT_PROTOCOLS.stream()
+      .filter(literalValue::startsWith)
+      .filter(p -> {
+        String rest = literalValue.substring(p.length());
+        if (rest.isEmpty()) {
+          // Bare scheme string (e.g. "http://") — always flag
+          return true;
         }
-        return Optional.of(protocol);
-      }
-    }
-    return Optional.empty();
+        char first = rest.charAt(0);
+        if (first == '/' || first == '?' || first == '#') {
+          // No authority component (e.g. "http:///path") — no host to evaluate
+          return false;
+        }
+        return !CleartextProtocolFilter.isSafeWithoutTls(literalValue);
+      })
+      .findFirst();
   }
 
   private static Optional<String> isUnsafeLib(String qualifiedName) {
@@ -204,6 +189,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   }
 
   private static String message(String protocol) {
-    return "Using " + protocol + " protocol is insecure. Use " + ALTERNATIVES.get(protocol) + " instead";
+    return CleartextProtocolFilter.getIssueMessage(protocol)
+      .orElse("Using " + protocol + " protocol is insecure. Use a secure alternative instead.");
   }
 }
