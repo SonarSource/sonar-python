@@ -1,8 +1,11 @@
 import csv
+import json
 import shutil
 import subprocess
 import tempfile
 import os
+from pathlib import Path
+
 import requests
 
 prompt_short = """{} {}
@@ -102,7 +105,7 @@ def fix_with_agent(model: str, prompt: str, env: tempfile.TemporaryDirectory):
 
     elif model.lower() == "gemma4":
         cmd = ["codex", "--oss", "-m", "gemma4:26b-mlx", "exec",
-               "--skip-git-repo-check", "--sandbox", "workspace-write","--local-provider=ollama", prompt]
+               "--skip-git-repo-check", "--sandbox", "workspace-write", "--local-provider=ollama", prompt]
 
     else:
         raise ValueError(f"Unknown or unsupported model configuration: {model}")
@@ -215,32 +218,39 @@ def analyze(env: tempfile.TemporaryDirectory) -> dict:
     }
 
 
-def experiment(findings) -> list:
+def experiment(findings, model, prompt) -> tuple:
     env = prepare_env()
     print(env.name)
     for finding in findings:
-        fix_with_agent(model='gemma4', prompt=format_prompt(prompt_short, finding), env=env)
-        break  # TODO remove
+        fix_with_agent(model=model, prompt=format_prompt(prompt, finding), env=env)
+        break
     analyze(env=env)
     result = fetch_findings_from_sonarqube("http://localhost:9000", "quick-fixes-agent-integration")
     print(len(result), result)
-    return result
+    return result, env
+
+
+def run_all(findings):
+    for model in models:
+        for prompt_type, prompt in prompts.items():
+            output_folder = Path(f"experiment_results/{model}/{prompt_type}")
+            output_folder.mkdir(parents=True, exist_ok=True)
+            print(f"\n[Experiment]: Running with model '{model}' and prompt type '{prompt_type}'...")
+            new_findings, tempDirectory = experiment(findings, model=model, prompt=prompt)
+            with open(output_folder / "findings.json", "w") as f:
+                json.dump(new_findings, f)
+            shutil.copy(tempDirectory.name + "/file_to_analyze.py", output_folder / "file_to_analyze.py")
+            break #TODO remove
+        break #TODO remove
 
 
 def main():
+    # print(fetch_findings_from_sonarqube("http://localhost:9000", "quick-fixes-agent-integration"))
+    # return
     with open('open_findings_on_overall_code.csv', 'r') as findingsFile:
         findings_reader = csv.DictReader(findingsFile)
         findings = list(findings_reader)
-        experiment(findings)
-        return
-        # for finding in findings:
-        #     print('#' * 100)
-        #     print(format_issue_message(finding))
-        #     print('#' * 100)
-        #     for prompt_type, prompt in prompts.items() :
-        #         print('-' * 100 + prompt_type)
-        #         formatted_prompt = format_prompt(prompt, finding)
-        #         print(formatted_prompt)
+        run_all(findings)
 
 
 if __name__ == '__main__':
