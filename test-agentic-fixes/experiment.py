@@ -101,7 +101,7 @@ def fix_with_agent(model: str, prompt: str, env: tempfile.TemporaryDirectory):
         cmd = ["codex", "exec", "--sandbox", "workspace-write", "--skip-git-repo-check", prompt]
 
     elif model.lower() == "gemma4":
-        cmd = ["codex", "--oss", "-m", "gemma4:26b-mlx-bf16", "exec",
+        cmd = ["codex", "--oss", "-m", "gemma4:26b-mlx", "exec",
                "--skip-git-repo-check", "--sandbox", "workspace-write","--local-provider=ollama", prompt]
 
     else:
@@ -219,7 +219,7 @@ def experiment(findings) -> list:
     env = prepare_env()
     print(env.name)
     for finding in findings:
-        fix_with_agent(model='codex', prompt=format_prompt(prompt_short, finding), env=env)
+        fix_with_agent(model='gemma4', prompt=format_prompt(prompt_short, finding), env=env)
         break  # TODO remove
     analyze(env=env)
     result = fetch_findings_from_sonarqube("http://localhost:9000", "quick-fixes-agent-integration")
