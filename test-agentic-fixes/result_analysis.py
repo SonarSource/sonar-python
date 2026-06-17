@@ -44,16 +44,25 @@ def plot_experiment_heatmap(base_dir: str = "experiment_results"):
     pivot_df = pivot_df.reindex(columns=existing_order)
 
     # 4. Generate the Heatmap
-    plt.figure(figsize=(10, 8))
-    sns.heatmap(pivot_df, annot=True, cmap="YlGnBu", fmt="g", cbar_kws={'label': 'Number of Findings'})
+    # Shrink figsize so a 2x2 grid doesn't look awkwardly stretched
+    plt.figure(figsize=(4, 2))
 
-    plt.title("Experiment Findings Count Heatmap", fontsize=14, pad=15)
-    plt.ylabel("Models", fontsize=12)
-    plt.xlabel("Prompt Types", fontsize=12)
-    plt.xticks(rotation=45, ha="right")
+    # cbar=False removes the heatbar; annot_kws controls text size inside the squares
+    sns.heatmap(
+        pivot_df,
+        annot=True,
+        cmap="YlGnBu",
+        fmt="g",
+        cbar=False,
+        annot_kws={"size": 14, "weight": "bold"}
+    )
+
+    plt.title("Issues found after fixing all issues with agent", fontsize=12, pad=15)
+    plt.ylabel("Model", fontsize=11)
+    plt.xlabel("Prompt Type", fontsize=11)
+    plt.xticks(rotation=0, ha="center") # 2x2 doesn't usually need 45° rotation
+    plt.yticks(rotation=0)
     plt.tight_layout()
-
-    # 5. Save the plot
     plt.savefig("experiment_heatmap.png", dpi=300)
 
 def plot_feasibility_histogram(file_path: str = "current-analyzer-rules.md"):
