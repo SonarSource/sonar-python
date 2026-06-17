@@ -36,11 +36,11 @@ def full_and_partial_match(_input):
     re.split(r"(.*,)*", _input)  # OK, partial match
     re.sub(r"(.*,)*", _input)  # OK, partial match
     re.subn(r"(.*,)*", _input)  # OK, partial match
-    re.search(r"\s*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.findall(r"\s*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.split(r"\s*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.sub(r"\s*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.subn(r"\s*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.search(r"\s*\s*+,", _input)  # OK, polynomial cases now reported by S8786
+    re.findall(r"\s*\s*+,", _input)  # OK
+    re.split(r"\s*\s*+,", _input)  # OK
+    re.sub(r"\s*\s*+,", _input)  # OK
+    re.subn(r"\s*\s*+,", _input)  # OK
 
 def always_exponential(_input):
     re.fullmatch(r"(.*,)*?", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to exponential runtime due to backtracking, cannot lead to denial of service.}}
@@ -55,12 +55,12 @@ def always_exponential(_input):
 
 
 def always_quadratic(_input):
-    re.fullmatch(r"x*\w*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.fullmatch(r".*.*X", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.match(r".*.*X", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.fullmatch(r"x*a*x*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.fullmatch(r"x*(xy?)*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.fullmatch(r"x*xx*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.fullmatch(r"x*\w*", _input)  # OK, polynomial cases now reported by S8786
+    re.fullmatch(r".*.*X", _input)  # OK
+    re.match(r".*.*X", _input)  # OK
+    re.fullmatch(r"x*a*x*", _input)  # OK
+    re.fullmatch(r"x*(xy?)*", _input)  # OK
+    re.fullmatch(r"x*xx*", _input)  # OK
 
 
 def always_quadratic_other_match_types(_input):
@@ -71,59 +71,59 @@ def always_quadratic_other_match_types(_input):
     re.match(r"x*(xy?)*", _input)  # OK
     re.search(r"x*(xy?)*", _input)  # OK
     re.match(r"x*xx*", _input)  # OK
-    # FP
-    re.search(r"x*xx*", _input)  # Noncompliant
+    re.search(r"x*xx*", _input)  # OK
 
 
 def non_possessive_followed_by_possessive(_input):
-    re.fullmatch(r".*\s*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.fullmatch(r".*\s*", _input)  # OK, polynomial cases now reported by S8786
     re.match(r".*\s*", _input)  # OK
     re.search(r".*\s*", _input)  # OK
-    re.fullmatch(r".*\s*+", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.fullmatch(r".*\s*+", _input)  # OK
     re.match(r".*\s*+", _input)  # OK
     re.search(r".*\s*+", _input)  # OK
-    re.fullmatch(r"\s*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.match(r"\s*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.search(r"\s*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.fullmatch(r"[a\s]*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.match(r"[a\s]*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.search(r"[a\s]*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.fullmatch(r"[a\s]*b*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.match(r"[a\s]*b*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.search(r"[a\s]*b*\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.fullmatch(r"\s*\s*+,", _input)  # OK
+    re.match(r"\s*\s*+,", _input)  # OK
+    re.search(r"\s*\s*+,", _input)  # OK
+    re.fullmatch(r"[a\s]*\s*+,", _input)  # OK
+    re.match(r"[a\s]*\s*+,", _input)  # OK
+    re.search(r"[a\s]*\s*+,", _input)  # OK
+    re.fullmatch(r"[a\s]*b*\s*+,", _input)  # OK
+    re.match(r"[a\s]*b*\s*+,", _input)  # OK
+    re.search(r"[a\s]*b*\s*+,", _input)  # OK
 
 
 def implicit_reluctant_quantifier_in_partial_match(_input):
-    re.search(r"\s*,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.search(r"\s*,", _input)  # OK, polynomial cases now reported by S8786
     re.match(r"\s*,", _input)  # OK
     re.fullmatch(r"\s*,", _input)  # OK
-    re.search(r"\s*+,", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.search(r"\s*+,", _input)  # OK
     re.match(r"\s*+,", _input)  # OK
     re.fullmatch(r"\s*+,", _input)  # OK
-    re.search(r"(?s:.*)\s*,(?s:.*)", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.match(r"(?s:.*)\s*,(?s:.*)", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.fullmatch(r"(?s:.*)\s*,(?s:.*)", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.search(r"(?s:.*)\s*+,(?s:.*)", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.match(r"(?s:.*)\s*+,(?s:.*)", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.fullmatch(r"(?s:.*)\s*+,(?s:.*)", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.search(r"(?s:.*)\s*,(?s:.*)", _input)  # OK
+    re.match(r"(?s:.*)\s*,(?s:.*)", _input)  # OK
+    re.fullmatch(r"(?s:.*)\s*,(?s:.*)", _input)  # OK
+    re.search(r"(?s:.*)\s*+,(?s:.*)", _input)  # OK
+    re.match(r"(?s:.*)\s*+,(?s:.*)", _input)  # OK
+    re.fullmatch(r"(?s:.*)\s*+,(?s:.*)", _input)  # OK
 
 
 def different_polynomials(_input):
-    re.fullmatch(r"x*x*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.fullmatch(r"x*x*", _input)  # OK, polynomial cases now reported by S8786
     re.match(r"x*x*", _input)  # OK
     re.search(r"x*x*", _input)  # OK
-    re.fullmatch(r"x*x*x*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.fullmatch(r"x*x*x*", _input)  # OK
     re.match(r"x*x*x*", _input)  # OK
     re.search(r"x*x*x*", _input)  # OK
-    re.fullmatch(r"x*x*x*x*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.fullmatch(r"x*x*x*x*", _input)  # OK
     re.match(r"x*x*x*x*", _input)  # OK
     re.search(r"x*x*x*x*", _input)  # OK
-    re.fullmatch(r"x*x*x*x*x*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.fullmatch(r"x*x*x*x*x*", _input)  # OK
     re.match(r"x*x*x*x*x*", _input)  # OK
     re.search(r"x*x*x*x*x*", _input)  # OK
-    re.fullmatch(r"[^=]*.*.*=.*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.match(r"[^=]*.*.*=.*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
-    re.search(r"[^=]*.*.*=.*", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.fullmatch(r"[^=]*.*.*=.*", _input)  # OK
+    re.match(r"[^=]*.*.*=.*", _input)  # OK
+    re.search(r"[^=]*.*.*=.*", _input)  # OK
+    re.search(r"a+b", _input) # OK
 
 
 def should_be_ok(_input):
@@ -138,10 +138,10 @@ def should_be_ok(_input):
 def java9_optimized_cases_not_optimized_in_python(_input):
     re.fullmatch(r"(.?,)*X", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to exponential runtime due to backtracking, cannot lead to denial of service.}}
     re.match(r"(.?,)*X", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to exponential runtime due to backtracking, cannot lead to denial of service.}}
-    re.search(r"(.?,)*X", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.search(r"(.?,)*X", _input)  # OK, ALWAYS_QUADRATIC in search mode, reported by S8786
     re.fullmatch(r"(.?,)*\1", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to exponential runtime due to backtracking, cannot lead to denial of service.}}
     re.match(r"(.?,)*\1", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to exponential runtime due to backtracking, cannot lead to denial of service.}}
-    re.search(r"(.?,)*\1", _input)  # Noncompliant  {{Make sure the regex used here, which is vulnerable to polynomial runtime due to backtracking, cannot lead to denial of service.}}
+    re.search(r"(.?,)*\1", _input)  # OK, ALWAYS_QUADRATIC in search mode, reported by S8786
     re.fullmatch(r"(?:(.?)\1,)*", _input)  # FN
     re.match(r"(?:(.?)\1,)*", _input)  # OK
     re.search(r"(?:(.?)\1,)*", _input)  # OK
@@ -198,6 +198,6 @@ def compliant(_input):
     re.fullmatch(r"(?s)(.*,)*.*", _input)
     re.fullmatch(r"(?:(.)\1)*", _input)
     re.fullmatch(r"(?:\1|x(.))*", _input)
-    re.fullmatch(r"(?:\1|x(.))+", _input)
+    re.fullmatch(r"(?:\1|x(.))+" , _input)
     re.fullmatch(r"(?:\1|x(.)){1,2}", _input)
     re.fullmatch(r"(.)(?:\1\2|x(.))*", _input)

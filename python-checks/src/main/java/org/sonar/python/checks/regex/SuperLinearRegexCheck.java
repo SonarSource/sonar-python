@@ -21,19 +21,15 @@ import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonarsource.analyzer.commons.regex.finders.RedosFinder;
 
-@Rule(key = "S5852")
-public class RedosCheck extends AbstractRedosCheck {
+@Rule(key = "S8786")
+public class SuperLinearRegexCheck extends AbstractRedosCheck {
 
-  private static final String MESSAGE = """
-    Make sure the regex used here, which is vulnerable to %s runtime due to backtracking,\
-     cannot lead to denial of service.""";
-  private static final String EXP = "exponential";
+  private static final String MESSAGE = "Simplify this regular expression to reduce its runtime, as it has super-linear performance due to backtracking.";
 
   @Override
   protected Optional<String> buildMessage(RedosFinder.BacktrackingType backtrackingType, boolean regexContainsBackReference) {
     return switch (backtrackingType) {
-      // Python has no JIT-style optimisation for QUADRATIC_WHEN_OPTIMIZED or LINEAR_WHEN_OPTIMIZED, so it stays in S5852
-      case ALWAYS_EXPONENTIAL, QUADRATIC_WHEN_OPTIMIZED, LINEAR_WHEN_OPTIMIZED -> Optional.of(String.format(MESSAGE, EXP));
+      case ALWAYS_QUADRATIC -> Optional.of(MESSAGE);
       default -> Optional.empty();
     };
   }

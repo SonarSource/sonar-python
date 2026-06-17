@@ -87,6 +87,7 @@ import org.sonar.python.checks.regex.SingleCharCharacterClassCheck;
 import org.sonar.python.checks.regex.SingleCharacterAlternationCheck;
 import org.sonar.python.checks.regex.StringReplaceCheck;
 import org.sonar.python.checks.regex.SuperfluousCurlyBraceCheck;
+import org.sonar.python.checks.regex.SuperLinearRegexCheck;
 import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 import org.sonar.python.checks.regex.UnusedGroupNamesCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
@@ -424,6 +425,7 @@ public class OpenSourceCheckList {
       SklearnPipelineSpecifyMemoryArgumentCheck.class,
       SklearnPipelineParameterAreCorrectCheck.class,
       SuperfluousCurlyBraceCheck.class,
+      SuperLinearRegexCheck.class,
       SynchronousFileOperationsInAsyncCheck.class,
       SynchronousHttpOperationsInAsyncCheck.class,
       SynchronousSubprocessOperationsInAsyncCheck.class,
