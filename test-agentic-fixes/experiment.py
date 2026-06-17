@@ -27,13 +27,17 @@ After reasoning and fixing the issue, you must provide a short summary of your c
 
 prompts = {
     'short': prompt_short,
-    'long': prompt_long,
+    # 'long': prompt_long,
 }
 
 CLAUDE = 'claude'
 CODEX = 'codex'
 GEMMA4 = 'gemma4'  # Small model to challenge the prompts
-models = [CLAUDE, CODEX, GEMMA4]
+models = [
+    CLAUDE,
+    # CODEX,
+    # GEMMA4
+]
 
 
 def format_issue_message(finding: dict) -> str:
@@ -122,11 +126,16 @@ def fix_with_agent(model: str, prompt: str, env: tempfile.TemporaryDirectory):
             stderr=None,
             stdin=subprocess.DEVNULL,
             text=True,
-            check=True
+            check=True,
+            timeout=300
         )
         print(f"\n[{model} Response Log]: Execution completed successfully.")
     except subprocess.CalledProcessError as e:
         print(f"\n⚠️  Error: {model} pipeline exited abnormally with code {e.returncode}.")
+    except subprocess.TimeoutExpired as e:
+        print(f"\n⚠️  Error: {model} pipeline timed out after {e.timeout} seconds.")
+    except Exception as e:
+        print(f"\n⚠️  Unexpected error during {model} execution: {e}")
 
 
 def fetch_findings_from_sonarqube(server_url: str, project_key: str) -> list:
@@ -223,8 +232,8 @@ def experiment(findings, model, prompt) -> tuple:
     print(env.name)
     for finding in findings:
         fix_with_agent(model=model, prompt=format_prompt(prompt, finding), env=env)
-        break
-    analyze(env=env)
+    result = analyze(env=env)
+    print("Analysis result :", result)
     result = fetch_findings_from_sonarqube("http://localhost:9000", "quick-fixes-agent-integration")
     print(len(result), result)
     return result, env
@@ -240,8 +249,6 @@ def run_all(findings):
             with open(output_folder / "findings.json", "w") as f:
                 json.dump(new_findings, f)
             shutil.copy(tempDirectory.name + "/file_to_analyze.py", output_folder / "file_to_analyze.py")
-            break #TODO remove
-        break #TODO remove
 
 
 def main():
