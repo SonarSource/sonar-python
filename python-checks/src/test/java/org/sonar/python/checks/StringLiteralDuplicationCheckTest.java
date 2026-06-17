@@ -18,6 +18,7 @@ package org.sonar.python.checks;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -49,5 +50,59 @@ class StringLiteralDuplicationCheckTest {
       () -> PythonCheckVerifier.verify("src/test/resources/checks/stringLiteralDuplicationCustom.py", check));
     Assertions.assertThat(e.getMessage()).isEqualTo("Unable to compile regular expression: a+*(");
 
+  }
+
+  @Test
+  void quickfix_function_scope() {
+    var before = """
+      def greet():
+          print("hello world")
+          value = "hello world"
+          return "hello world"
+      """;
+    var after = """
+      def greet():
+          HELLO_WORLD = "hello world"
+          print(HELLO_WORLD)
+          value = HELLO_WORLD
+          return HELLO_WORLD
+      """;
+
+    PythonQuickFixVerifier.verify(new StringLiteralDuplicationCheck(), before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new StringLiteralDuplicationCheck(), before, "Extract duplicated literal into constant 'HELLO_WORLD'");
+  }
+
+  @Test
+  void quickfix_module_scope_after_docstring() {
+    var before = """
+      \"\"\"module doc\"\"\"
+      print("status ready")
+      print("status ready")
+      print("status ready")
+      """;
+    var after = """
+      \"\"\"module doc\"\"\"
+      STATUS_READY = "status ready"
+      print(STATUS_READY)
+      print(STATUS_READY)
+      print(STATUS_READY)
+      """;
+
+    PythonQuickFixVerifier.verify(new StringLiteralDuplicationCheck(), before, after);
+  }
+
+  @Test
+  void no_quickfix_when_duplicates_span_multiple_scopes() {
+    var before = """
+      def first():
+          print("shared message")
+
+      def second():
+          print("shared message")
+
+      print("shared message")
+      """;
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(new StringLiteralDuplicationCheck(), before);
   }
 }

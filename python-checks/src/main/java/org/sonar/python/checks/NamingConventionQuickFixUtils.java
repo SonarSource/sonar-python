@@ -39,6 +39,20 @@ final class NamingConventionQuickFixUtils {
     return rename(name, newName);
   }
 
+  static String toConstantCase(String value) {
+    String convertedBody = splitWords(value).stream()
+      .map(word -> word.toUpperCase(Locale.ROOT))
+      .collect(Collectors.joining("_"));
+
+    if (convertedBody.isEmpty()) {
+      convertedBody = "DUPLICATED_STRING_LITERAL";
+    }
+    if (Character.isDigit(convertedBody.charAt(0))) {
+      convertedBody = "STRING_" + convertedBody;
+    }
+    return convertedBody;
+  }
+
   private static Optional<PythonQuickFix> rename(Name name, String newName) {
     if (newName.equals(name.name()) || name.symbol() == null) {
       return Optional.empty();
