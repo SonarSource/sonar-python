@@ -17,6 +17,7 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class UnreachableExceptCheckTest {
@@ -24,6 +25,53 @@ class UnreachableExceptCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/unreachableExcept.py", new UnreachableExceptCheck());
+  }
+
+  @Test
+  void quickfix_remove_duplicate_except_clause() {
+    var before = """
+      def foo():
+          try:
+              work()
+          except ValueError:
+              handle_value()
+          except ValueError:
+              fallback()
+      """;
+    var after = """
+      def foo():
+          try:
+              work()
+          except ValueError:
+              handle_value()
+      """;
+
+    PythonQuickFixVerifier.verify(new UnreachableExceptCheck(), before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new UnreachableExceptCheck(), before, "Remove unreachable except clause");
+  }
+
+  @Test
+  void quickfix_remove_duplicate_type_from_tuple() {
+    var before = """
+      def foo():
+          try:
+              work()
+          except (ValueError, TypeError):
+              handle_value()
+          except (ValueError, RuntimeError):
+              fallback()
+      """;
+    var after = """
+      def foo():
+          try:
+              work()
+          except (ValueError, TypeError):
+              handle_value()
+          except RuntimeError:
+              fallback()
+      """;
+
+    PythonQuickFixVerifier.verify(new UnreachableExceptCheck(), before, after);
   }
 
 }

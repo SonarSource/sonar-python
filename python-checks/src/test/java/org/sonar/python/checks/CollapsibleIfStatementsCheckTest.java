@@ -17,6 +17,7 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class CollapsibleIfStatementsCheckTest {
@@ -24,6 +25,22 @@ class CollapsibleIfStatementsCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/collapsibleIfStatements.py", new CollapsibleIfStatementsCheck());
+  }
+
+  @Test
+  void quickfix() {
+    var before = """
+      if first_condition:
+        if second_condition:
+          do_work()
+      """;
+    var after = """
+      if first_condition and second_condition:
+          do_work()
+      """;
+
+    PythonQuickFixVerifier.verify(new CollapsibleIfStatementsCheck(), before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new CollapsibleIfStatementsCheck(), before, "Merge this if statement with the enclosing one");
   }
 
 }

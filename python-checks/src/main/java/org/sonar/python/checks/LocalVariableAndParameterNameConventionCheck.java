@@ -19,6 +19,7 @@ package org.sonar.python.checks;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -32,6 +33,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.symbols.v2.UsageV2;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -55,7 +57,7 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
 
   private static final String CONSTANT_PATTERN = "^[_A-Z][A-Z0-9_]*$";
 
-  private static final String DEFAULT = "^[_a-z][a-z0-9_]*$";
+  static final String DEFAULT = "^[_a-z][a-z0-9_]*$";
   @RuleProperty(
     key = "format",
     description = "Regular expression used to check the names against.",
@@ -174,7 +176,15 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
     } else if (kind == UsageV2.Kind.PARAMETER && (isParameterNameFromOverriddenMethod(usage, name) || MarimoUtils.isTreeInMarimoDecoratedFunction(usage.tree(), ctx))) {
       return;
     }
-    ctx.addIssue(usage.tree(), String.format(MESSAGE, type, name, format));
+    var issue = ctx.addIssue(usage.tree(), String.format(MESSAGE, type, name, format));
+    createQuickFix(usage.tree()).ifPresent(issue::addQuickFix);
+  }
+
+  private Optional<PythonQuickFix> createQuickFix(Tree tree) {
+    if (!DEFAULT.equals(format) || !(tree instanceof Name nameTree)) {
+      return Optional.empty();
+    }
+    return NamingConventionQuickFixUtils.renameToSnakeCase(nameTree);
   }
 
   private static boolean isParameterNameFromOverriddenMethod(UsageV2 usage, String parameterName) {

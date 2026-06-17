@@ -17,6 +17,7 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class ClassNameCheckTest {
@@ -24,6 +25,25 @@ class ClassNameCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/className.py", new ClassNameCheck());
+  }
+
+  @Test
+  void quickfix() {
+    var before = """
+      class myClassName:
+          value = 1
+      
+      print(myClassName.value)
+      """;
+    var after = """
+      class MyClassName:
+          value = 1
+      
+      print(MyClassName.value)
+      """;
+
+    PythonQuickFixVerifier.verify(new ClassNameCheck(), before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new ClassNameCheck(), before, "Rename 'myClassName' to 'MyClassName'");
   }
 
 }

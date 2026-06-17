@@ -17,6 +17,7 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class LocalVariableAndParameterNameConventionCheckTest {
@@ -27,6 +28,37 @@ class LocalVariableAndParameterNameConventionCheckTest {
     check.format = "^[_a-z][a-z0-9_]+$";
     PythonCheckVerifier.verify("src/test/resources/checks/localVariableAndParameterNameIncompatibility.py", check);
 
+  }
+
+  @Test
+  void quickfix_parameter() {
+    var before = """
+      def foo(inputPar):
+          return inputPar + 1
+      """;
+    var after = """
+      def foo(input_par):
+          return input_par + 1
+      """;
+
+    PythonQuickFixVerifier.verify(new LocalVariableAndParameterNameConventionCheck(), before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new LocalVariableAndParameterNameConventionCheck(), before, "Rename 'inputPar' to 'input_par'");
+  }
+
+  @Test
+  void quickfix_local_variable() {
+    var before = """
+      def foo():
+          localVar = 1
+          return localVar
+      """;
+    var after = """
+      def foo():
+          local_var = 1
+          return local_var
+      """;
+
+    PythonQuickFixVerifier.verify(new LocalVariableAndParameterNameConventionCheck(), before, after);
   }
 
 }

@@ -17,6 +17,7 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class FunctionNameCheckTest {
@@ -24,6 +25,25 @@ class FunctionNameCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/functionName.py", new FunctionNameCheck());
+  }
+
+  @Test
+  void quickfix() {
+    var before = """
+      def Badly_Named_Function():
+          return 1
+      
+      print(Badly_Named_Function())
+      """;
+    var after = """
+      def badly_named_function():
+          return 1
+      
+      print(badly_named_function())
+      """;
+
+    PythonQuickFixVerifier.verify(new FunctionNameCheck(), before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new FunctionNameCheck(), before, "Rename 'Badly_Named_Function' to 'badly_named_function'");
   }
 
 }

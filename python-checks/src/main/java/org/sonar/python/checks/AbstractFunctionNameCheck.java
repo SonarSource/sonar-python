@@ -16,14 +16,16 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 
 public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
 
-  private static final String DEFAULT = "^[a-z_][a-z0-9_]*$";
+  static final String DEFAULT = "^[a-z_][a-z0-9_]*$";
   private static final String MESSAGE = "Rename %s \"%s\" to match the regular expression %s.";
 
   @RuleProperty(
@@ -48,9 +50,17 @@ public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
       String name = functionNameTree.name();
       if (!pattern().matcher(name).matches()) {
         String message = String.format(MESSAGE, typeName(), name, this.format);
-        ctx.addIssue(functionNameTree, message);
+        var issue = ctx.addIssue(functionNameTree, message);
+        createQuickFix(functionNameTree).ifPresent(issue::addQuickFix);
       }
     });
+  }
+
+  private Optional<PythonQuickFix> createQuickFix(Name functionNameTree) {
+    if (!DEFAULT.equals(format)) {
+      return Optional.empty();
+    }
+    return NamingConventionQuickFixUtils.renameToSnakeCase(functionNameTree);
   }
 
   public abstract String typeName();

@@ -20,12 +20,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_EXPRESSION;
@@ -34,6 +37,7 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_EXPRESSION;
 public class CollapsibleIfStatementsCheck extends PythonVisitorCheck {
   public static final String CHECK_KEY = "S1066";
   private static final String MESSAGE = "Merge this if statement with the enclosing one.";
+  private static final String QUICK_FIX_MESSAGE = "Merge this if statement with the enclosing one";
   private static final int MAX_LINE_LENGTH = 80;
 
   // consider 'and' plus 2 surrounding spaces
@@ -66,9 +70,32 @@ public class CollapsibleIfStatementsCheck extends PythonVisitorCheck {
       if (isException(singleIfChild, ifStatement)) {
         return;
       }
-      addIssue(singleIfChild.keyword(), MESSAGE).secondary(ifStatement.keyword(), "enclosing");
+      var issue = addIssue(singleIfChild.keyword(), MESSAGE).secondary(ifStatement.keyword(), "enclosing");
+      issue.addQuickFix(createQuickFix(ifStatement, singleIfChild));
     }
     super.visitIfStatement(ifStatement);
+  }
+
+  private static PythonQuickFix createQuickFix(IfStatement enclosingIfStatement, IfStatement childIfStatement) {
+    PythonQuickFix.Builder builder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE);
+    String replacementCondition = conditionText(enclosingIfStatement.condition()) + " and " + conditionText(childIfStatement.condition());
+
+    builder.addTextEdit(TextEditUtils.replace(enclosingIfStatement.condition(), replacementCondition));
+    builder.addTextEdit(TextEditUtils.removeRange(childIfStatement.keyword().pythonLine(), childIfStatement.keyword().column(),
+      childIfStatement.body().firstToken().pythonLine(), childIfStatement.keyword().column()));
+    TextEditUtils.shiftLeft(childIfStatement.body()).stream()
+      .skip(1)
+      .forEach(builder::addTextEdit);
+
+    return builder.build();
+  }
+
+  private static String conditionText(Expression condition) {
+    String conditionText = TreeUtils.treeToString(condition, false);
+    if (condition.is(Tree.Kind.OR)) {
+      return "(" + conditionText + ")";
+    }
+    return conditionText;
   }
 
   private static boolean isException(IfStatement singleIfChild, IfStatement enclosingIfStatement) {

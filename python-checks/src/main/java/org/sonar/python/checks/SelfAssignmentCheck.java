@@ -20,9 +20,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -32,11 +34,14 @@ import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.semantic.BuiltinSymbols;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = SelfAssignmentCheck.CHECK_KEY)
 public class SelfAssignmentCheck extends PythonSubscriptionCheck {
@@ -44,6 +49,7 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S1656";
 
   public static final String MESSAGE = "Remove or correct this useless self-assignment.";
+  private static final String QUICK_FIX_MESSAGE = "Remove the self-assignment";
 
   private Set<String> importedNames = new HashSet<>();
 
@@ -67,8 +73,19 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
   private static void checkAssignmentExpression(SubscriptionContext ctx) {
     AssignmentExpression assignmentExpression = (AssignmentExpression) ctx.syntaxNode();
     if (CheckUtils.areEquivalent(assignmentExpression.lhsName(), assignmentExpression.expression())) {
-      ctx.addIssue(assignmentExpression.operator(), MESSAGE);
+      var issue = ctx.addIssue(assignmentExpression.operator(), MESSAGE);
+      issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE, createAssignmentExpressionQuickFix(assignmentExpression)));
     }
+  }
+
+  private static PythonTextEdit createAssignmentExpressionQuickFix(AssignmentExpression assignmentExpression) {
+    Expression expression = assignmentExpression.expression();
+    Tree parent = assignmentExpression.parent();
+    String replacement = TreeUtils.treeToString(expression, false);
+    if (parent instanceof ParenthesizedExpression) {
+      return TextEditUtils.replace(parent, replacement);
+    }
+    return TextEditUtils.replace(assignmentExpression, replacement);
   }
 
   private void checkAssignment(SubscriptionContext ctx) {
@@ -77,7 +94,8 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
     for (int i = 0; i < assignment.lhsExpressions().size(); i++) {
       ExpressionList expressionList = assignment.lhsExpressions().get(i);
       if (expressionList.commas().isEmpty() && CheckUtils.areEquivalent(assignedValue, expressionList.expressions().get(0)) && !isException(assignment, assignedValue)) {
-        ctx.addIssue(assignment.equalTokens().get(i), MESSAGE);
+        var issue = ctx.addIssue(assignment.equalTokens().get(i), MESSAGE);
+        issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE, TextEditUtils.removeStatement(assignment)));
       }
     }
   }
@@ -87,8 +105,19 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
     Expression assignedValue = assignment.assignedValue();
     Expression variable = assignment.variable();
     if (assignedValue != null && CheckUtils.areEquivalent(assignedValue, variable) && !isException(assignment, assignedValue)) {
-      ctx.addIssue(assignment.equalToken(), MESSAGE);
+      var issue = ctx.addIssue(assignment.equalToken(), MESSAGE);
+      issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE, removeAnnotatedAssignedValue(assignment)));
     }
+  }
+
+  private static PythonTextEdit removeAnnotatedAssignedValue(AnnotatedAssignment assignment) {
+    var equalToken = assignment.equalToken();
+    var assignedValue = assignment.assignedValue();
+    if (assignedValue == null) {
+      throw new IllegalStateException("Annotated assignment should have an assigned value.");
+    }
+    return TextEditUtils.removeRange(equalToken.pythonLine(), equalToken.column(), assignedValue.lastToken().pythonLine(),
+      assignedValue.lastToken().column() + assignedValue.lastToken().value().length());
   }
 
   private void addImportedName(AliasedName aliasedName) {

@@ -17,6 +17,7 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class SelfAssignmentCheckTest {
@@ -24,6 +25,38 @@ class SelfAssignmentCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/selfAssignment.py", new SelfAssignmentCheck());
+  }
+
+  @Test
+  void quickfix_assignment_statement() {
+    var before = """
+      def foo(x):
+          x = x
+          return x
+      """;
+    var after = """
+      def foo(x):
+          return x
+      """;
+
+    PythonQuickFixVerifier.verify(new SelfAssignmentCheck(), before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new SelfAssignmentCheck(), before, "Remove the self-assignment");
+  }
+
+  @Test
+  void quickfix_assignment_expression() {
+    var before = """
+      def foo(x):
+          if (x := x):
+              return x
+      """;
+    var after = """
+      def foo(x):
+          if x:
+              return x
+      """;
+
+    PythonQuickFixVerifier.verify(new SelfAssignmentCheck(), before, after);
   }
 
 }

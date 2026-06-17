@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -26,7 +27,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class ClassNameCheck extends AbstractNameCheck {
 
   public static final String CHECK_KEY = "S101";
-  private static final String DEFAULT = "^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$";
+  static final String DEFAULT = "^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$";
   private static final String MESSAGE = "Rename class \"%s\" to match the regular expression %s.";
 
   @RuleProperty(
@@ -48,8 +49,16 @@ public class ClassNameCheck extends AbstractNameCheck {
       String className = classNameTree.name();
       if(!pattern().matcher(className).matches()) {
         String message = String.format(MESSAGE, className, format);
-        ctx.addIssue(classNameTree, message);
+        var issue = ctx.addIssue(classNameTree, message);
+        createQuickFix(classNameTree).ifPresent(issue::addQuickFix);
       }
     });
+  }
+
+  private Optional<org.sonar.plugins.python.api.quickfix.PythonQuickFix> createQuickFix(Name classNameTree) {
+    if (!DEFAULT.equals(format)) {
+      return Optional.empty();
+    }
+    return NamingConventionQuickFixUtils.renameToPascalCase(classNameTree);
   }
 }
