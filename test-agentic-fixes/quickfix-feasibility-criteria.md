@@ -19,6 +19,11 @@ That can be:
 
 It does **not** need to be a single canonical edit if the safe alternatives are few and mechanically derivable.
 
+## Distribution of Scores
+Across all currently tracked analyzer rules, the distribution of estimated quick-fix feasibility scores heavily shifts toward the extremes, reflecting that rules are usually either completely deterministic or require open-ended human judgment.
+
+![Quick-Fix Feasibility Histogram](feasibility_histogram.png)
+
 ## Conditions That Favor A Quick Fix
 
 The score should be high when most of the following are true:

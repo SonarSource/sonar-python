@@ -61,12 +61,21 @@ The following rules were intentionally left without a new quick fix:
   - The analyzer cannot complete the missing task automatically.
 
 - `python:S1192` - String literals should not be duplicated
-  - A safe fix is not canonical in the general case.
-  - The analyzer would need to invent a constant name, choose the right scope, and rewrite multiple occurrences.
+  - Not implemented in this batch.
+  - This should not be treated as inherently infeasible.
+  - Under the feasibility criteria, a bounded menu of fixes is acceptable.
+  - A practical implementation could derive a constant name from the duplicated literal in many cases, choose from a small set of scopes, and rewrite the duplicated occurrences.
+  - The reason it was left out here is implementation scope, not a claim that the rule cannot support quick fixes.
 
 - `python:S1226` - Function parameters initial values should not be ignored
-  - The rule usually has multiple plausible rewrites.
-  - A safe automatic fix would need to choose between preserving the initial parameter value, introducing a new variable, or restructuring the logic.
+  - Not implemented in this batch.
+  - This should not be treated as inherently infeasible either.
+  - The rule can legitimately expose several alternative quick fixes for the same issue, with the user choosing which one to apply.
+  - Plausible bounded fixes include:
+    - change the signature and refactor compatible usages
+    - preserve the original parameter value explicitly
+    - introduce a replacement local variable for the reassigned value
+  - The reason it was left out here is that those variants still need to be engineered and constrained carefully in the current quick-fix implementation, not that the rule is conceptually unsuitable for quick fixes.
 
 ## Test Workflow Used
 
