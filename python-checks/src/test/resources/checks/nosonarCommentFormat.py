@@ -40,3 +40,18 @@
 # NOSONAR(NoSonar)
 # Noncompliant@+1
 # NOSONAR(python:S1234)
+
+# nosec
+# nosec B101
+# nosec B101, B102
+# nosec B101, B102 reason text
+# nosec: S1234, S5678
+# nosec because of foo, bar, and baz
+# Noncompliant@+1
+# nosec B101,
+# Noncompliant@+1
+# nosec ,B101
+# Noncompliant@+1
+# nosec B101,,B102
+# Noncompliant@+1
+# nosec B101 reason, B102

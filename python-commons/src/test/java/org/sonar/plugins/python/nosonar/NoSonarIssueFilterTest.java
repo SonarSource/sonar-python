@@ -71,4 +71,18 @@ class NoSonarIssueFilterTest {
       Arguments.of(Map.of(), "my_rule", 1, false, false)
     );
   }
+
+  // Known FN of `# nosec` handling: a bare `# nosec` suppresses every rule on the line, even non-security ones.
+  @ParameterizedTest
+  @MethodSource("provideNoSecFalseNegativeParameters")
+  void noSecFalseNegativeTest(Map<Integer, NoSonarLineInfo> noSonarInfos, String ruleKey, int line, boolean filterChainAcceptResult, boolean expectedResult) {
+    test(noSonarInfos, ruleKey, line, filterChainAcceptResult, expectedResult);
+  }
+
+  private static Stream<Arguments> provideNoSecFalseNegativeParameters() {
+    return Stream.of(
+      // FN: bare `# nosec` silences a non-security rule (e.g. S1481 unused local).
+      Arguments.of(Map.of(1, new NoSonarLineInfo(Set.of(), "")), "S1481", 1, true, false)
+    );
+  }
 }

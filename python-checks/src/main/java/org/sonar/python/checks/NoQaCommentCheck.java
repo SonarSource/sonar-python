@@ -26,16 +26,25 @@ import org.sonar.plugins.python.api.tree.Trivia;
 @Rule(key = "S1309")
 public class NoQaCommentCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Is #noqa used to exclude false-positive or to hide real quality flaw?";
+  private static final String NOQA_MESSAGE = "Is 'noqa' used to exclude false-positive or to hide real quality flaw?";
+  private static final String NOSEC_MESSAGE = "Is 'nosec' used to exclude false-positive or to hide real security issue?";
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
       Token token = (Token) ctx.syntaxNode();
       for (Trivia trivia : token.trivia()) {
-        String commentLine = trivia.token().value();
-        if (NoSonarInfoParser.isValidNoQa(commentLine)) {
-          ctx.addIssue(trivia.token(), MESSAGE);
+        for (String comment : NoSonarInfoParser.splitInlineComments(trivia.token().value())) {
+          String message = null;
+          if (NoSonarInfoParser.isValidNoQa(comment)) {
+            message = NOQA_MESSAGE;
+          } else if (NoSonarInfoParser.isValidNoSec(comment)) {
+            message = NOSEC_MESSAGE;
+          }
+          if (message != null) {
+            ctx.addIssue(trivia.token(), message);
+            break;
+          }
         }
       }
     });

@@ -33,20 +33,24 @@ public class NoSonarInfoParser {
   private static final String NOQA_PATTERN_REGEX = "^#\\s*noqa(?::\\s*(.+))?(?:[\\s;:].*)?";
   private static final String NOSONAR_PREFIX_REGEX = "^#\\s*NOSONAR(\\W.*)?";
   private static final String NOSONAR_PATTERN_REGEX = "^#\\s*NOSONAR(?:\\s*\\(([^)]*)\\))?($|\\s.*)";
+  private static final String NOSEC_PATTERN_REGEX = "(?i)^#\\s*nosec\\b[:\\s]*(.*)";
+  private static final String NOSEC_RULE_KEY_REGEX = "^[A-Za-z]\\d+$";
   private static final String RULE_KEY_PATTERN_REGEX = "^[a-zA-Z0-9]+$";
 
   private final Pattern noSonarPattern;
   private final Pattern noQaPattern;
+  private final Pattern noSecPattern;
 
   public NoSonarInfoParser() {
     noSonarPattern = Pattern.compile(NOSONAR_PATTERN_REGEX);
     noQaPattern = Pattern.compile(NOQA_PATTERN_REGEX);
+    noSecPattern = Pattern.compile(NOSEC_PATTERN_REGEX);
   }
 
   public boolean isInvalidIssueSuppressionComment(String commentsLine) {
     return splitInlineComments(commentsLine)
       .stream()
-      .anyMatch(comment -> isInvalidNoSonarComment(comment) || isInvalidNoQaComment(comment));
+      .anyMatch(comment -> isInvalidNoSonarComment(comment) || isInvalidNoQaComment(comment) || isInvalidNoSecComment(comment));
   }
 
   private boolean isInvalidNoSonarComment(String comment) {
@@ -86,12 +90,30 @@ public class NoSonarInfoParser {
     return !rules.isEmpty() && rules.stream().anyMatch(r -> r.isBlank() || r.contains(" "));
   }
 
+  private boolean isInvalidNoSecComment(String comment) {
+    if (!isValidNoSec(comment)) {
+      return false;
+    }
+    var args = getParamsString(noSecPattern, comment);
+    if (!args.contains(",")) {
+      return false;
+    }
+    var tokens = parseSuppressionRules(args);
+    // Only flag when the args look like a rule list (>=1 rule-shape token); free-form reasons with commas stay valid.
+    var ruleKeys = tokens.stream().filter(t -> t.matches(NOSEC_RULE_KEY_REGEX)).toList();
+    return !ruleKeys.isEmpty() && ruleKeys.size() != tokens.size();
+  }
+
   private static boolean isValidNoSonar(String noSonarCommentLine) {
     return noSonarCommentLine.matches(NOSONAR_PATTERN_REGEX);
   }
 
   public static boolean isValidNoQa(String noSonarCommentLine) {
     return noSonarCommentLine.matches(NOQA_PATTERN_REGEX);
+  }
+
+  public static boolean isValidNoSec(String commentLine) {
+    return commentLine.matches(NOSEC_PATTERN_REGEX);
   }
 
   public Optional<NoSonarLineInfo> parse(String commentLine) {
@@ -132,13 +154,20 @@ public class NoSonarInfoParser {
         .filter(Predicate.not(String::isEmpty))
         .forEach(rules::add);
       comment = parseNoQaComment(commentLine);
+    } else if (isValidNoSec(commentLine)) {
+      var noSecRules = parseNoSecRules(commentLine);
+      if (noSecRules.isEmpty()) {
+        comment = parseNoSecComment(commentLine);
+      } else {
+        rules.addAll(noSecRules);
+      }
     } else {
       return null;
     }
     return new NoSonarLineInfo(rules, comment);
   }
 
-  private static List<String> splitInlineComments(String commentsLine) {
+  public static List<String> splitInlineComments(String commentsLine) {
     return Stream.of(commentsLine.split("#"))
       .filter(Predicate.not(String::isBlank))
       .map(s -> "#" + s)
@@ -155,7 +184,21 @@ public class NoSonarInfoParser {
   }
 
   private List<String> parseNoQaRules(String noSonarCommentLine) {
-    var paramsString = getParamsString(noQaPattern, noSonarCommentLine);
+    return parseSuppressionRules(getParamsString(noQaPattern, noSonarCommentLine));
+  }
+
+  private String parseNoQaComment(String noSonarCommentLine) {
+    return getTruncatedCommentString(noQaPattern, noSonarCommentLine).strip();
+  }
+
+  private List<String> parseNoSecRules(String noSecCommentLine) {
+    return parseSuppressionRules(getParamsString(noSecPattern, noSecCommentLine))
+      .stream()
+      .filter(t -> t.matches(NOSEC_RULE_KEY_REGEX))
+      .toList();
+  }
+
+  private static List<String> parseSuppressionRules(String paramsString) {
     var paramsList = parseParamsString(paramsString).collect(Collectors.toList());
     if (!paramsList.isEmpty()) {
       // to get the last suppressed rule ID we need to split it to cut the trailing comment text.
@@ -170,8 +213,10 @@ public class NoSonarInfoParser {
     return paramsList;
   }
 
-  private String parseNoQaComment(String noSonarCommentLine) {
-    return getTruncatedCommentString(noQaPattern, noSonarCommentLine).strip();
+  private String parseNoSecComment(String noSecCommentLine) {
+    var raw = getPatternGroup(1, noSecPattern, noSecCommentLine);
+    var truncated = raw.length() > MAX_COMMENT_LENGTH ? raw.substring(0, MAX_COMMENT_LENGTH) : raw;
+    return truncated.strip();
   }
 
   private static String getParamsString(Pattern pattern, String noSonarCommentLine) {

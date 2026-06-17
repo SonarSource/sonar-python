@@ -31,6 +31,7 @@ public class NoSonarTest {
   private static final String NO_SONAR_PROJECT_KEY = "nosonar";
   private static final String EXTERNAL_ISSUE_PROJECT_KEY = "external-issues";
   private static final String NOQA_PROJECT_KEY = "noqa";
+  private static final String NO_SEC_PROJECT_KEY = "nosec";
 
   private static final String PROFILE_NAME = "nosonar";
 
@@ -130,6 +131,48 @@ public class NoSonarTest {
         // noqa at the end of file
         .containsIssue(21, "python:S1309")
         .containsIssue(22, "python:S1309").doesNotContainIssue(22, "python:PrintStatementUsage");
+  }
+
+  @Test
+  void test_nosec() {
+    analyzeProject(createScanner(NO_SEC_PROJECT_KEY, "projects/nosonar/nosec-project"));
+
+    IssueListAssert.assertThat(issues(NO_SEC_PROJECT_KEY))
+        .hasSize(14)
+        // bare nosec suppresses everything on the line; S1309 still fires (whitelisted)
+        .containsIssue(4, "python:S4423")
+        .doesNotContainIssue(5, "python:S4423")
+        .containsIssue(5, "python:S1309")
+
+        // scoped bandit ID has no Sonar mapping, so S4423 still fires
+        .containsIssue(8, "python:S4423")
+        .containsIssue(8, "python:S1309")
+
+        // selective suppression by Sonar rule key
+        .doesNotContainIssue(11, "python:S4423")
+        .containsIssue(11, "python:S1309")
+
+        // selective suppression narrows to listed keys; OneStatementPerLine still fires
+        .doesNotContainIssue(14, "python:S4423")
+        .containsIssue(14, "python:OneStatementPerLine")
+        .containsIssue(14, "python:S1309")
+
+        // baseline: 2 x S4423 + OneStatementPerLine all fire
+        .containsIssue(17, "python:S4423")
+        .containsIssue(17, "python:OneStatementPerLine")
+
+        // FN: bare nosec silences a non-security rule on the same line
+        .doesNotContainIssue(20, "python:S4423")
+        .doesNotContainIssue(20, "python:OneStatementPerLine")
+        .containsIssue(20, "python:S1309")
+
+        // nosec at end of file
+        .doesNotContainIssue(23, "python:S4423")
+        .containsIssue(23, "python:S1309")
+
+        // scoped nosec with unrelated key does not suppress S4423
+        .containsIssue(26, "python:S4423")
+        .containsIssue(26, "python:S1309");
   }
 
   private void analyzeProject(SonarScanner scanner) {

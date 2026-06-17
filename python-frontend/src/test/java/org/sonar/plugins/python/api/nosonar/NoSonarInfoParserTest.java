@@ -45,6 +45,10 @@ class NoSonarInfoParserTest {
   }
 
   private static Stream<Arguments> provideParserParameters() {
+    return Stream.concat(provideNoSonarAndNoQaParserParameters(), provideNoSecParserParameters());
+  }
+
+  private static Stream<Arguments> provideNoSonarAndNoQaParserParameters() {
     return Stream.of(
       Arguments.of(
         "# NOSONAR(something)",
@@ -134,6 +138,55 @@ class NoSonarInfoParserTest {
     );
   }
 
+  private static Stream<Arguments> provideNoSecParserParameters() {
+    return Stream.of(
+      Arguments.of(
+        "# nosec",
+        new NoSonarLineInfo(Set.of())
+      ),
+      Arguments.of(
+        "# nosec B101",
+        new NoSonarLineInfo(Set.of("B101"))
+      ),
+      Arguments.of(
+        "# nosec B101, B102 reason text",
+        new NoSonarLineInfo(Set.of("B101", "B102"))
+      ),
+      Arguments.of(
+        "# nosec S1234",
+        new NoSonarLineInfo(Set.of("S1234"))
+      ),
+      Arguments.of(
+        "# nosec S1234, S5678",
+        new NoSonarLineInfo(Set.of("S1234", "S5678"))
+      ),
+      Arguments.of(
+        "# nosec: S1234, S5678 reason text",
+        new NoSonarLineInfo(Set.of("S1234", "S5678"))
+      ),
+      Arguments.of(
+        "# nosec B303, S1234",
+        new NoSonarLineInfo(Set.of("B303", "S1234"))
+      ),
+      Arguments.of(
+        "# nosec: it's fine",
+        new NoSonarLineInfo(Set.of(), "it's fine")
+      ),
+      Arguments.of(
+        "# NOSEC",
+        new NoSonarLineInfo(Set.of())
+      ),
+      Arguments.of(
+        "# nosec a very long comment that I don't want to keep that long because there is more than 50 characters",
+        new NoSonarLineInfo(Set.of(), "a very long comment that I don't want to keep that")
+      ),
+      Arguments.of(
+        "# some text # nosec",
+        new NoSonarLineInfo(Set.of())
+      )
+    );
+  }
+
   @ParameterizedTest
   @MethodSource("provideValidationParameters")
   void validationTest(String commentString, boolean expectedIsInvalid) {
@@ -187,7 +240,19 @@ class NoSonarInfoParserTest {
       Arguments.of("#NOSONAR(S3)", false),
       Arguments.of("#NOSONAR(python:S3723)", true),
       Arguments.of("#NOSONAR(S-123)", true),
-      Arguments.of("#NOSONAR(NoSonar)", false)
+      Arguments.of("#NOSONAR(NoSonar)", false),
+
+      Arguments.of("# nosec", false),
+      Arguments.of("# nosec B101", false),
+      Arguments.of("# nosec B101, B102", false),
+      Arguments.of("# nosec B101, B102 reason text", false),
+      Arguments.of("# nosec: S1234, S5678", false),
+      Arguments.of("# nosec because of foo, bar, and baz", false),
+      Arguments.of("# nosec B101,", true),
+      Arguments.of("# nosec ,B101", true),
+      Arguments.of("# nosec B101,,B102", true),
+      Arguments.of("# nosec B101, foo", true),
+      Arguments.of("# nosec B101 reason, B102", true)
     );
   }
 

@@ -185,6 +185,33 @@ class NoSonarLineInfoCollectorTest {
         Set.of(1, 2, 3, 4, 5),
         "",
         ""
+      ),
+      Arguments.of("""
+          import hashlib
+          hashlib.md5(b"x").hexdigest() # nosec
+          """,
+        Map.of(2, new NoSonarLineInfo(Set.of(), "")),
+        Set.of(2),
+        "",
+        ""
+      ),
+      Arguments.of("""
+          import hashlib
+          hashlib.md5(b"x").hexdigest() # nosec B303 legacy hash
+          """,
+        Map.of(2, new NoSonarLineInfo(Set.of("B303"))),
+        Set.of(),
+        "B303",
+        "B303:"
+      ),
+      Arguments.of("""
+          import ssl
+          ssl.SSLContext(ssl.PROTOCOL_TLSv1) # nosec S4423
+          """,
+        Map.of(2, new NoSonarLineInfo(Set.of("S4423"))),
+        Set.of(),
+        "S4423",
+        "S4423:"
       )
     );
   }
