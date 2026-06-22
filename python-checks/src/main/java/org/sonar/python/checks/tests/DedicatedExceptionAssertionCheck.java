@@ -31,7 +31,6 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
-import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.tests.UnittestUtils;
 
 @Rule(key = "S8714")
@@ -39,6 +38,7 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
   private static final String PYTEST_FAIL_FQN = "pytest.fail";
   private static final String PYTEST_MESSAGE = "Replace this try/except block with a \"pytest.raises\" context manager.";
   private static final String UNITTEST_MESSAGE = "Replace this try/except block with \"self.assertRaises()\".";
+  private static final String NO_EXCEPTION_MESSAGE = "Remove this try/except block and let the test fail naturally if an exception is raised.";
 
   @Override
   public void initialize(Context context) {
@@ -51,9 +51,14 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkTryStatement(SubscriptionContext ctx, TryStatement tryStatement) {
-    if (!hasSimpleExceptClauses(tryStatement) || tryStatement.finallyClause() != null) {
+    if (!hasSupportedExceptClauses(tryStatement) || tryStatement.finallyClause() != null) {
       return;
     }
+
+    tryStatement.exceptClauses().stream()
+      .map(exceptClause -> failCallFromSingleStatementBody(exceptClause.body().statements()))
+      .filter(callExpression -> callExpression != null)
+      .forEach(callExpression -> ctx.addIssue(callExpression, NO_EXCEPTION_MESSAGE));
 
     CallExpression failCall = failCallFromElseClause(tryStatement.elseClause());
     if (failCall == null) {
@@ -69,11 +74,9 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean hasSimpleExceptClauses(TryStatement tryStatement) {
+  private static boolean hasSupportedExceptClauses(TryStatement tryStatement) {
     return !tryStatement.exceptClauses().isEmpty() && tryStatement.exceptClauses().stream().allMatch(exceptClause ->
-      exceptClause.starToken() == null
-        && exceptClause.exception() != null
-        && exceptClause.body().statements().stream().allMatch(CheckUtils::isEmptyStatement));
+      exceptClause.starToken() == null && exceptClause.exception() != null);
   }
 
   @Nullable
@@ -81,11 +84,7 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
     if (elseClause == null) {
       return null;
     }
-    List<Statement> statements = elseClause.body().statements();
-    if (statements.size() != 1) {
-      return null;
-    }
-    return failCallFromStatement(statements.get(0));
+    return failCallFromSingleStatementBody(elseClause.body().statements());
   }
 
   @Nullable
@@ -97,6 +96,14 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
   }
 
   @Nullable
+  private static CallExpression failCallFromSingleStatementBody(List<Statement> statements) {
+    if (statements.size() != 1) {
+      return null;
+    }
+    return failCallFromStatement(statements.get(0));
+  }
+
+  @Nullable
   private static CallExpression failCallFromStatement(Statement statement) {
     if (!(statement instanceof ExpressionStatement expressionStatement) || expressionStatement.expressions().size() != 1) {
       return null;
@@ -105,7 +112,10 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
     if (!(expression instanceof CallExpression callExpression)) {
       return null;
     }
-    return isPytestFail(callExpression) || isUnittestFail(callExpression) ? callExpression : null;
+    if (!(isPytestFail(callExpression) || isUnittestFail(callExpression))) {
+      return null;
+    }
+    return callExpression;
   }
 
   private static boolean isPytestFail(CallExpression callExpression) {
