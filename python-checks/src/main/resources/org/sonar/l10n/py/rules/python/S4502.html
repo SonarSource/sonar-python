@@ -1,34 +1,23 @@
-<p>A cross-site request forgery (CSRF) attack occurs when a trusted user of a web application can be forced, by an attacker, to perform sensitive
-actions that he didn’t intend, such as updating his profile or sending a message, more generally anything that can change the state of the
-application.</p>
-<p>The attacker can trick the user/victim to click on a link, corresponding to the privileged action, or to visit a malicious web site that embeds a
-hidden web request and as web browsers automatically include cookies, the actions can be authenticated and sensitive.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The web application uses cookies to authenticate users.</li>
-  <li>There exist sensitive operations in the web application that can be performed when the user is authenticated.</li>
-  <li>The state / resources of the web application can be modified by doing HTTP POST or HTTP DELETE requests for example.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<ul>
-  <li>Protection against CSRF attacks is strongly recommended:
-    <ul>
-      <li>to be activated by default for all <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Safe_methods">unsafe HTTP
-      methods</a>.</li>
-      <li>implemented, for example, with an unguessable CSRF token</li>
-    </ul></li>
-  <li>Of course all sensitive operations should not be performed with <a
-  href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Safe_methods">safe HTTP</a> methods like <code>GET</code> which are designed to be
-  used only for information retrieval.</li>
-</ul>
-<h2>Sensitive Code Example</h2>
-<p>For a <a href="https://docs.djangoproject.com/fr/3.0/ref/csrf/">Django</a> application, the code is sensitive when,</p>
-<ul>
-  <li><code>django.middleware.csrf.CsrfViewMiddleware</code> is not used in the <a
-  href="https://docs.djangoproject.com/en/3.0/topics/settings/">Django settings</a>:</li>
-</ul>
-<pre>
+<p>Cross-site request forgery (CSRF) forces an authenticated user to perform unintended state-changing actions in a web application. This rule detects
+when CSRF protection is explicitly disabled or missing from an application.</p>
+<h2>Why is this an issue?</h2>
+<p>When CSRF protection is disabled or bypassed, an attacker can trick a logged-in user into submitting requests the application treats as
+authenticated. The rule flags configurations that disable framework CSRF middleware, exempt specific routes or views, or leave unsafe HTTP methods
+unprotected.</p>
+<h3>What is the potential impact?</h3>
+<h4>Unauthorized state changes</h4>
+<p>An attacker can change passwords, transfer funds, modify data, or perform other privileged operations using the victim’s session.</p>
+<h4>Account compromise</h4>
+<p>Successful CSRF attacks can lead to full account takeover when combined with sensitive actions such as email or credential changes.</p>
+<h2>How to fix it in Django</h2>
+<p>Enable <code>django.middleware.csrf.CsrfViewMiddleware</code> in settings and do not exempt views from CSRF protection unless strictly
+necessary.</p>
+<h3>Code examples</h3>
+<p>Disabling or bypassing CSRF protection allows an authenticated user’s browser to execute state-changing requests the user did not intend.</p>
+<h4>Noncompliant code example</h4>
+<p><code>django.middleware.csrf.CsrfViewMiddleware</code> is not used in the <a href="https://docs.djangoproject.com/en/3.0/topics/settings/">Django
+settings</a>:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -36,115 +25,111 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-] # Sensitive: django.middleware.csrf.CsrfViewMiddleware is missing
+] # Noncompliant: django.middleware.csrf.CsrfViewMiddleware is missing
 </pre>
-<ul>
-  <li>the CSRF protection is disabled on a view:</li>
-</ul>
-<pre>
-@csrf_exempt # Sensitive
+<p>The CSRF protection is disabled on a view:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+@csrf_exempt # Noncompliant
 def example(request):
     return HttpResponse("default")
 </pre>
-<p>For a <a href="https://flask-wtf.readthedocs.io/en/latest/csrf.html">Flask</a> application, the code is sensitive when,</p>
-<ul>
-  <li>the <code>WTF_CSRF_ENABLED</code> setting is set to <code>false</code>:</li>
-</ul>
-<pre>
-app = Flask(__name__)
-app.config['WTF_CSRF_ENABLED'] = False # Sensitive
-</pre>
-<ul>
-  <li>the application doesn’t use the <code>CSRFProtect</code> module:</li>
-</ul>
-<pre>
-app = Flask(__name__) # Sensitive: CSRFProtect is missing
-
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
-</pre>
-<ul>
-  <li>the CSRF protection is disabled on a view:</li>
-</ul>
-<pre>
-app = Flask(__name__)
-csrf = CSRFProtect()
-csrf.init_app(app)
-
-@app.route('/example/', methods=['POST'])
-@csrf.exempt # Sensitive
-def example():
-    return 'example '
-</pre>
-<ul>
-  <li>the CSRF protection is disabled on a form:</li>
-</ul>
-<pre>
-class unprotectedForm(FlaskForm):
-    class Meta:
-        csrf = False # Sensitive
-
-    name = TextField('name')
-    submit = SubmitField('submit')
-</pre>
-<h2>Compliant Solution</h2>
-<p>For a <a href="https://docs.djangoproject.com/fr/3.0/ref/csrf/">Django</a> application,</p>
-<ul>
-  <li>it is recommended to protect all the views with <code>django.middleware.csrf.CsrfViewMiddleware</code>:</li>
-</ul>
-<pre>
+<h4>Compliant solution</h4>
+<p>Protect all views with <code>django.middleware.csrf.CsrfViewMiddleware</code>:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware', # Compliant
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 </pre>
-<ul>
-  <li>and to not disable the CSRF protection on specific views:</li>
-</ul>
-<pre>
-def example(request): # Compliant
+<p>Do not disable the CSRF protection on specific views:</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+def example(request):
     return HttpResponse("default")
 </pre>
-<p>For a <a href="https://flask-wtf.readthedocs.io/en/latest/csrf.html">Flask</a> application,</p>
-<ul>
-  <li>the <code>CSRFProtect</code> module should be used (and not disabled further with <code>WTF_CSRF_ENABLED</code> set to <code>false</code>):</li>
-</ul>
-<pre>
+<h2>How to fix it in Flask</h2>
+<p>Use the <code>CSRFProtect</code> module from Flask-WTF and keep <code>WTF_CSRF_ENABLED</code> enabled.</p>
+<h3>Code examples</h3>
+<p>Disabling or bypassing CSRF protection allows an authenticated user’s browser to execute state-changing requests the user did not intend.</p>
+<h4>Noncompliant code example</h4>
+<p>The <code>WTF_CSRF_ENABLED</code> setting is set to <code>false</code>:</p>
+<pre data-diff-id="3" data-diff-type="noncompliant">
 app = Flask(__name__)
-csrf = CSRFProtect()
-csrf.init_app(app) # Compliant
+app.config['WTF_CSRF_ENABLED'] = False # Noncompliant
 </pre>
-<ul>
-  <li>and it is recommended to not disable the CSRF protection on specific views or forms:</li>
-</ul>
-<pre>
-@app.route('/example/', methods=['POST']) # Compliant
+<p>The application doesn’t use the <code>CSRFProtect</code> module:</p>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+app = Flask(__name__) # Noncompliant: CSRFProtect is missing
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+</pre>
+<p>The CSRF protection is disabled on a view:</p>
+<pre data-diff-id="5" data-diff-type="noncompliant">
+@app.route('/example/', methods=['POST'])
+@csrf.exempt # Noncompliant
 def example():
     return 'example '
-
+</pre>
+<p>The CSRF protection is disabled on a form:</p>
+<pre data-diff-id="6" data-diff-type="noncompliant">
 class unprotectedForm(FlaskForm):
     class Meta:
-        csrf = True # Compliant
+        csrf = False # Noncompliant
 
     name = TextField('name')
     submit = SubmitField('submit')
 </pre>
-<h2>See</h2>
+<h4>Compliant solution</h4>
+<p>Use the <code>CSRFProtect</code> module (and do not disable it with <code>WTF_CSRF_ENABLED</code> set to <code>false</code>):</p>
+<pre data-diff-id="3" data-diff-type="compliant">
+app = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(app)
+</pre>
+<pre data-diff-id="4" data-diff-type="compliant">
+app = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(app)
+</pre>
+<p>Do not disable the CSRF protection on specific views or forms:</p>
+<pre data-diff-id="5" data-diff-type="compliant">
+@app.route('/example/', methods=['POST'])
+def example():
+    return 'example '
+</pre>
+<pre data-diff-id="6" data-diff-type="compliant">
+class unprotectedForm(FlaskForm):
+    class Meta:
+        csrf = True
+
+    name = TextField('name')
+    submit = SubmitField('submit')
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li><a href="https://docs.djangoproject.com/en/3.0/ref/csrf/">Django</a> - Cross Site Request Forgery protection</li>
+  <li><a href="https://flask-wtf.readthedocs.io/en/latest/csrf.html">Flask-WTF</a> - CSRF protection</li>
+  <li><a href="https://owasp.org/www-community/attacks/csrf">OWASP</a> - Cross-Site Request Forgery</li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li>PortSwigger - <a href="https://portswigger.net/research/web-storage-the-lesser-evil-for-session-tokens">Web storage: the lesser evil for session
+  tokens</a></li>
+</ul>
+<h3>Standards</h3>
 <ul>
   <li>OWASP - <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">Top 10 2021 Category A1 - Broken Access Control</a></li>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/352">CWE-352 - Cross-Site Request Forgery (CSRF)</a></li>
   <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">Top 10 2017 Category A6 - Security
   Misconfiguration</a></li>
-  <li>OWASP - <a href="https://owasp.org/www-community/attacks/csrf">Cross-Site Request Forgery</a></li>
   <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222603">Application Security and
   Development: V-222603</a> - The application must protect from Cross-Site Request Forgery (CSRF) vulnerabilities.</li>
-  <li>PortSwigger - <a href="https://portswigger.net/research/web-storage-the-lesser-evil-for-session-tokens">Web storage: the lesser evil for session
-  tokens</a></li>
 </ul>
 

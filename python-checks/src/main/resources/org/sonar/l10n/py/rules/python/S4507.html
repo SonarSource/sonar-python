@@ -1,37 +1,60 @@
-<p>Development tools and frameworks usually have options to make debugging easier for developers. Although these features are useful during
-development, they should never be enabled for applications deployed in production. Debug instructions or error messages can leak detailed information
-about the system, like the application’s path or file names.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The code or configuration enabling the application debug features is deployed on production servers or distributed to end users.</li>
-  <li>The application runs by default with debug features activated.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>Do not enable debugging features on production servers or applications distributed to end users.</p>
-<h2>Sensitive Code Example</h2>
-<p>Django application startup:</p>
+<p>Development tools and frameworks usually have options to make debugging easier for developers, but these features should never be enabled for
+applications deployed in production.</p>
+<h2>Why is this an issue?</h2>
+<p>Debug instructions or error messages can leak detailed information about the system, such as the application’s path, file names, or stack traces.
+The rule flags configurations and API calls that enable debug features, including stack trace printing, verbose logging, debug mode flags, and remote
+debugging endpoints.</p>
+<h3>What is the potential impact?</h3>
+<h4>Information disclosure</h4>
+<p>Attackers can exploit debug output to learn internal application details, file paths, stack traces, and configuration data that can be leveraged to
+craft further attacks.</p>
+<h4>Increased attack surface</h4>
+<p>Debug features may expose remote debugging endpoints, profiling APIs, or detailed error pages that significantly increase the attack surface of the
+application.</p>
+<h2>How to fix it in Django</h2>
+<h3>Code examples</h3>
+<p>Debug features should be disabled or guarded by environment checks before deploying to production.</p>
+<h4>Noncompliant code example</h4>
+<p><code>django.conf.settings.configure</code> is called with debug settings enabled in the <a
+href="https://docs.djangoproject.com/en/3.0/topics/settings/">Django settings</a>:</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 from django.conf import settings
 
-settings.configure(DEBUG=True)  # Sensitive when set to True
-settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=True)  # Sensitive when set to True
+settings.configure(DEBUG=True)  # Noncompliant
+settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=True)  # Noncompliant
 
 def custom_config(config):
-    settings.configure(default_settings=config, DEBUG=True)  # Sensitive
+    settings.configure(default_settings=config, DEBUG=True)  # Noncompliant
 </pre>
 <p>Inside <code>settings.py</code> or <code>global_settings.py</code>, which are the default configuration files for a Django application:</p>
 <pre data-diff-id="2" data-diff-type="noncompliant">
-DEBUG = True  # Sensitive
-DEBUG_PROPAGATE_EXCEPTIONS = True  # Sensitive
+DEBUG = True  # Noncompliant
+DEBUG_PROPAGATE_EXCEPTIONS = True  # Noncompliant
 </pre>
-<p>Flask application startup:</p>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from django.conf import settings
+
+settings.configure(DEBUG=False)
+settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=False)
+
+def custom_config(config):
+    settings.configure(default_settings=config, DEBUG=False)
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+DEBUG = False
+DEBUG_PROPAGATE_EXCEPTIONS = False
+</pre>
+<h2>How to fix it in Flask</h2>
+<h3>Code examples</h3>
+<p>Debug features should be disabled or guarded by environment checks before deploying to production.</p>
+<h4>Noncompliant code example</h4>
 <pre data-diff-id="3" data-diff-type="noncompliant">
 from flask import Flask
 
 app = Flask()
-app.debug = True  # Sensitive
-app.run(debug=True)  # Sensitive
+app.debug = True  # Noncompliant
+app.run(debug=True)  # Noncompliant
 </pre>
 <p>The following code defines a GraphQL endpoint with GraphiQL enabled. While this might be a useful configuration during development, it should never
 be enabled for applications deployed in production:</p>
@@ -46,24 +69,11 @@ app.add_url_rule(
     view_func=GraphQLView.as_view(
         'graphql',
         schema=schema,
-        graphiql=True # Sensitive
+        graphiql=True # Noncompliant
     )
 )
 </pre>
-<h2>Compliant Solution</h2>
-<pre data-diff-id="1" data-diff-type="compliant">
-from django.conf import settings
-
-settings.configure(DEBUG=False)
-settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=False)
-
-def custom_config(config):
-    settings.configure(default_settings=config, DEBUG=False)
-</pre>
-<pre data-diff-id="2" data-diff-type="compliant">
-DEBUG = False
-DEBUG_PROPAGATE_EXCEPTIONS = False
-</pre>
+<h4>Compliant solution</h4>
 <pre data-diff-id="3" data-diff-type="compliant">
 from flask import Flask
 
@@ -85,7 +95,8 @@ app.add_url_rule(
     )
 )
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Standards</h3>
 <ul>
   <li>OWASP - <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">Top 10 2021 Category A5 - Security Misconfiguration</a></li>
   <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data

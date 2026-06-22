@@ -1,6 +1,6 @@
 {
-  "title": "Policies granting access to all resources of an account are security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "IAM policies should not grant access to all account resources",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "BLOCKER"
@@ -8,13 +8,15 @@
     "attribute": "CONVENTIONAL"
   },
   "status": "ready",
+  "quickfix": "unknown",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
   "tags": [
     "aws",
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-6304",

@@ -1,19 +1,20 @@
-<p>A policy that allows identities to access all resources in an AWS account may violate <a
-href="https://en.wikipedia.org/wiki/Principle_of_least_privilege">the principle of least privilege</a>. Suppose an identity has permission to access
-all resources even though it only requires access to some non-sensitive ones. In this case, unauthorized access and disclosure of sensitive
-information will occur.</p>
-<h2>Ask Yourself Whether</h2>
-<p>The AWS account has more than one resource with different levels of sensitivity.</p>
-<p>A risk exists if you answered yes to this question.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to apply the least privilege principle, i.e., by only granting access to necessary resources. A good practice to achieve this is
-to organize or <a
-href="https://aws.amazon.com/blogs/security/simplify-granting-access-to-your-aws-resources-by-using-tags-on-aws-iam-users-and-roles/">tag</a>
-resources depending on the sensitivity level of data they store or process. Therefore, managing a secure access control is less prone to errors.</p>
-<h2>Sensitive Code Example</h2>
-<p>The wildcard <code>"*"</code> is specified as the resource for this <code>PolicyStatement</code>. This grants the update permission for all
-policies of the account:</p>
-<pre>
+<p>IAM policies scope permissions to AWS resources using the <code>Resource</code> element in each policy statement.</p>
+<h2>Why is this an issue?</h2>
+<p>When an IAM policy uses <code>"*"</code> in the <code>Resource</code> element, the granted identity can access every resource in the AWS account,
+even when only a subset is needed. This violates the principle of least privilege.</p>
+<h3>What is the potential impact?</h3>
+<h4>Unauthorized access to sensitive resources</h4>
+<p>An identity with overly broad permissions can read, modify, or delete resources it was never intended to access. If the account contains resources
+with different sensitivity levels, a compromised or misused credential exposes all of them.</p>
+<h4>Data disclosure and privilege escalation</h4>
+<p>Attackers who obtain credentials with wildcard resource access can exfiltrate sensitive data or escalate privileges by modifying IAM policies,
+roles, or other security controls across the account.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<p>Update permission is granted for all policies when the wildcard (<code>*</code>) is used in the <code>Resource</code> property instead of
+restricting access to a specific subset of resources.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk.aws_iam import Effect, PolicyDocument, PolicyStatement
 
 PolicyDocument(
@@ -21,14 +22,14 @@ PolicyDocument(
         PolicyStatement(
             effect=Effect.ALLOW,
             actions="iam:CreatePolicyVersion",
-            resources=["*"] # Sensitive
+            resources=["*"] # Noncompliant
         )
     ]
 )
 </pre>
-<h2>Compliant Solution</h2>
+<h4>Compliant solution</h4>
 <p>Restrict the update permission to the appropriate subset of policies:</p>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk import Aws
 from aws_cdk.aws_iam import Effect, PolicyDocument, PolicyStatement
 
@@ -42,15 +43,14 @@ PolicyDocument(
     ]
 )
 </pre>
-<h2>Exceptions</h2>
-<ul>
-  <li>Should not be raised on key policies (when AWS KMS actions are used.)</li>
-  <li>Should not be raised on policies not using any resources (if and only if all actions in the policy never require resources.)</li>
-</ul>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege">AWS Documentation</a> - Grant least
   privilege</li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/732">CWE-732 - Incorrect Permission Assignment for Critical Resource</a></li>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a></li>
 </ul>

@@ -1,28 +1,18 @@
-<p>Amazon Simple Notification Service (SNS) is a managed messaging service for application-to-application (A2A) and application-to-person (A2P)
-communication. SNS topics allows publisher systems to fanout messages to a large number of subscriber systems. Amazon SNS allows to encrypt messages
-when they are received. In the case that adversaries gain physical access to the storage medium or otherwise leak a message they are not able to
-access the data.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The topic contains sensitive data that could cause harm when leaked.</li>
-  <li>There are compliance requirements for the service to store data encrypted.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It is recommended to encrypt SNS topics that contain sensitive information.</p>
-<p>To do so, create a master key and assign the SNS topic to it. Note that this system does not encrypt the following:</p>
-<ul>
-  <li>Topic metadata (topic name and attributes)</li>
-  <li>Message metadata (subject, message ID, timestamp, and attributes)</li>
-  <li>Data protection policy</li>
-  <li>Per-topic metrics</li>
-</ul>
-<p>Then, make sure that any publishers have the <code>kms:GenerateDataKey*</code> and <code>kms:Decrypt</code> permissions for the AWS KMS key.</p>
-<p>See <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-key-management.html#sns-what-permissions-for-sse">AWS SNS Key Management
-Documentation</a> for more information.</p>
-<h2>Sensitive Code Example</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sns.Topic.html">aws_cdk.aws_sns.Topic</a>:</p>
-<pre>
+<p>Amazon Simple Notification Service (SNS) is a managed messaging service that supports server-side encryption (SSE) to protect messages stored at
+rest.</p>
+<h2>Why is this an issue?</h2>
+<p>Amazon SNS topics do not enable server-side encryption by default. When encryption is not configured, messages stored in SNS topics remain in
+plaintext, making them readable to anyone who gains unauthorized access to the underlying storage. This rule raises an issue when an SNS topic is
+created without a KMS master key configured.</p>
+<h3>What is the potential impact?</h3>
+<h4>Sensitive data exposure</h4>
+<p>If an attacker gains unauthorized access to the underlying storage medium, they can read the contents of SNS messages in plaintext. Depending on
+the data carried by the messages, this may expose sensitive information such as user data, financial records, or internal communications.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<p>The following code creates an SNS topic without a KMS master key configured, leaving messages stored at rest unencrypted.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk import (
     aws_sns as sns
 )
@@ -30,28 +20,13 @@ from aws_cdk import (
 class TopicStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
         super().__init__(scope, construct_id, **kwargs)
-        sns.Topic( # Sensitive, unencrypted by default
+        sns.Topic( # Noncompliant: unencrypted by default
             self,
             "example"
         )
 </pre>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sns.CfnTopic.html">aws_cdk.aws_sns.CfnTopic</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_sns as sns
-)
-
-class TopicStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
-        super().__init__(scope, construct_id, **kwargs)
-        sns.CfnTopic( # Sensitive, unencrypted by default
-            self,
-            "example"
-        )
-</pre>
-<h2>Compliant Solution</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sns.Topic.html">aws_cdk.aws_sns.Topic</a>:</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk import (
     aws_sns as sns
 )
@@ -66,27 +41,20 @@ class TopicStack(Stack):
             master_key=my_key
         )
 </pre>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sns.CfnTopic.html">aws_cdk.aws_sns.CfnTopic</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_sns as sns
-)
-
-class TopicStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
-        super().__init__(scope, construct_id, **kwargs)
-        my_key = kms.Key(self, "key")
-        sns.CfnTopic(
-            self,
-            "example",
-            kms_master_key_id=my_key.key_id
-        )
-</pre>
-<h2>See</h2>
+<p>The same fix applies to <code>CfnTopic</code>: pass the KMS key via the <code>kms_master_key_id</code> parameter.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">AWS Documentation</a> - Encryption at rest</li>
-  <li><a href="https://aws.amazon.com/blogs/compute/encrypting-messages-published-to-amazon-sns-with-aws-kms/">Encrypting messages published to Amazon
-  SNS with AWS KMS</a></li>
+  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sns.Topic.html">AWS CDK</a> - aws-cdk-lib.aws_sns.Topic</li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li><a href="https://aws.amazon.com/blogs/compute/encrypting-messages-published-to-amazon-sns-with-aws-kms/">AWS Blog</a> - Encrypting messages
+  published to Amazon SNS with AWS KMS</li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/311">CWE-311 - Missing Encryption of Sensitive Data</a></li>
   <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222588">Application Security and
   Development: V-222588</a> - The application must implement approved cryptographic mechanisms to prevent unauthorized modification of information at

@@ -1,30 +1,39 @@
-<p>S3 buckets can be versioned. When the S3 bucket is unversioned it means that a new version of an object overwrites an existing one in the S3
-bucket.</p>
-<p>It can lead to unintentional or intentional information loss.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The bucket stores information that require high availability.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to enable S3 versioning and thus to have the possibility to retrieve and restore different versions of an object.</p>
-<h2>Sensitive Code Example</h2>
-<pre>
+<p>Amazon S3 buckets can be unversioned, have versioning enabled, or have versioning suspended.</p>
+<h2>Why is this an issue?</h2>
+<p>When an S3 bucket is unversioned or has versioning suspended, uploading a new object overwrites the previous one instead of preserving prior
+versions. The rule flags buckets without versioning enabled, including when the versioning property is omitted and defaults to disabled.</p>
+<h3>What is the potential impact?</h3>
+<h4>Data loss</h4>
+<p>Objects can be permanently overwritten or deleted without the ability to restore previous versions. This can result from accidental changes,
+misconfiguration, or malicious activity.</p>
+<h4>Reduced availability of historical data</h4>
+<p>Buckets that store information requiring long-term preservation become vulnerable to unintentional or intentional information loss when versioning
+is not enabled.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<p>Versioning is disabled when the property is omitted or explicitly set to disable versioning, so new object uploads overwrite existing ones.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 bucket = s3.Bucket(self, "bucket",
-    versioned=False       # Sensitive
+    versioned=False       # Noncompliant
 )
 </pre>
-<p>The default value of <code>versioned</code> is <code>False</code> so the absence of this parameter is also sensitive.</p>
-<h2>Compliant Solution</h2>
-<pre>
+<p>The default value of <code>versioned</code> is <code>False</code> so the absence of this parameter is also noncompliant.</p>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 bucket = s3.Bucket(self, "bucket",
     versioned=True
 )
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html">AWS documentation</a> - Using versioning in S3 buckets</li>
   <li><a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html#versioned">AWS CDK version 2</a> - Using versioning in S3
   buckets</li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/16">CWE-16 - Configuration</a></li>
 </ul>
 

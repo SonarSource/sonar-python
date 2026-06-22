@@ -1,71 +1,31 @@
-<p>By default S3 buckets are private, it means that only the bucket owner can access it.</p>
-<p>This access control can be relaxed with ACLs or policies.</p>
-<p>To prevent permissive policies to be set on a S3 bucket the following booleans settings can be enabled:</p>
-<ul>
-  <li><code>block_public_acls</code>: to block or not public ACLs to be set to the S3 bucket.</li>
-  <li><code>ignore_public_acls</code>: to consider or not existing public ACLs set to the S3 bucket.</li>
-  <li><code>block_public_policy</code>: to block or not public policies to be set to the S3 bucket.</li>
-  <li><code>restrict_public_buckets</code>: to restrict or not the access to the S3 endpoints of public policies to the principals within the bucket
-  owner account.</li>
-</ul>
-<p>The other attribute <code>BlockPublicAccess.BLOCK_ACLS</code> only turns on <code>block_public_acls</code> and <code>ignore_public_acls</code>. The
-public policies can still affect the S3 bucket.</p>
-<p>However, all of those options can be enabled by setting the <code>block_public_access</code> property of the S3 bucket to
-<code>BlockPublicAccess.BLOCK_ALL</code>.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The S3 bucket stores sensitive data.</li>
-  <li>The S3 bucket is not used to store static resources of websites (images, css …​).</li>
-  <li>Many users have the permission to set ACL or policy to the S3 bucket.</li>
-  <li>These settings are not already enforced to true at the account level.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to configure:</p>
-<ul>
-  <li><code>block_public_acls</code> to <code>True</code> to block new attempts to set public ACLs.</li>
-  <li><code>ignore_public_acls</code> to <code>True</code> to block existing public ACLs.</li>
-  <li><code>block_public_policy</code> to <code>True</code> to block new attempts to set public policies.</li>
-  <li><code>restrict_public_buckets</code> to <code>True</code> to restrict existing public policies.</li>
-</ul>
-<h2>Sensitive Code Example</h2>
-<p>By default, when not set, the <code>block_public_access</code> is fully deactivated (nothing is blocked):</p>
-<pre>
-bucket = s3.Bucket(self,
-    "bucket"        # Sensitive
-)
-</pre>
-<p>This <code>block_public_access</code> allows public ACL to be set:</p>
-<pre>
+<p>Amazon S3 provides four independent Public Access Block settings to prevent public access from being granted to a bucket through ACLs or bucket
+policies. This rule flags S3 bucket configurations where any of these settings is set to false.</p>
+<h2>Why is this an issue?</h2>
+<p>Amazon S3 buckets are private by default, but their access control can be relaxed using ACLs or bucket policies that allow public access. Although
+AWS enables all four Public Access Block settings by default, infrastructure code can inadvertently re-expose a bucket by setting any of them to
+false.</p>
+<h3>What is the potential impact?</h3>
+<p>If public access is not fully blocked on an S3 bucket that contains sensitive data, any unauthenticated user on the internet can read, download, or
+exfiltrate that data. This can lead to data breaches, compliance violations, and reputational damage to the organization.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 bucket = s3.Bucket(self,
     "bucket",
     block_public_access=s3.BlockPublicAccess(
-        block_public_acls=False,       # Sensitive
+        block_public_acls=False,       # Noncompliant
         ignore_public_acls=True,
         block_public_policy=True,
         restrict_public_buckets=True
     )
 )
 </pre>
-<p>The attribute <code>BLOCK_ACLS</code> only blocks and ignores public ACLs:</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 bucket = s3.Bucket(self,
     "bucket",
-    block_public_access=s3.BlockPublicAccess.BLOCK_ACLS     # Sensitive
-)
-</pre>
-<h2>Compliant Solution</h2>
-<p>This <code>block_public_access</code> blocks public ACLs and policies, ignores existing public ACLs and restricts existing public policies:</p>
-<pre>
-bucket = s3.Bucket(self,
-    "bucket",
-    block_public_access=s3.BlockPublicAccess.BLOCK_ALL # Compliant
-)
-</pre>
-<p>A similar configuration to the one above can obtained by setting all parameters of the <code>block_public_access</code></p>
-<pre>
-bucket = s3.Bucket(self, "bucket",
-    block_public_access=s3.BlockPublicAccess(       # Compliant
+    block_public_access=s3.BlockPublicAccess(
         block_public_acls=True,
         ignore_public_acls=True,
         block_public_policy=True,
@@ -73,13 +33,47 @@ bucket = s3.Bucket(self, "bucket",
     )
 )
 </pre>
-<h2>See</h2>
+<p>The attribute <code>BLOCK_ACLS_ONLY</code> only blocks and ignores public ACLs, but public policies can still affect the S3 bucket:</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+bucket = s3.Bucket(self,
+    "bucket",
+    block_public_access=s3.BlockPublicAccess.BLOCK_ACLS_ONLY     # Noncompliant
+)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+bucket = s3.Bucket(self,
+    "bucket",
+    block_public_access=s3.BlockPublicAccess.BLOCK_ALL
+)
+</pre>
+<h3>How does this work?</h3>
+<p>The <code>BlockPublicAccess</code> class controls public access to an S3 bucket through four independent settings:</p>
+<ul>
+  <li><code>block_public_acls</code>: blocks new public ACLs from being set on the bucket.</li>
+  <li><code>ignore_public_acls</code>: causes existing public ACLs on the bucket to be ignored.</li>
+  <li><code>block_public_policy</code>: blocks new public bucket policies from being set.</li>
+  <li><code>restrict_public_buckets</code>: restricts access to the bucket to principals within the bucket owner account when a public policy is in
+  effect.</li>
+</ul>
+<p>When <code>block_public_access</code> is not set, or when <code>BlockPublicAccess(…​)</code> is used with some attributes omitted, AWS CDK defaults
+the missing attributes to <code>True</code>. The <code>BlockPublicAccess.BLOCK_ALL</code> preset enables all four settings explicitly, providing
+complete protection. The <code>BlockPublicAccess.BLOCK_ACLS_ONLY</code> preset only enables <code>block_public_acls</code> and
+<code>ignore_public_acls</code>, explicitly setting <code>block_public_policy</code> and <code>restrict_public_buckets</code> to
+<code>False</code>.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html">AWS Documentation</a> - Blocking public
   access to your Amazon S3 storage</li>
+  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_s3/Bucket.html">AWS CDK version 2</a> - Bucket</li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/284">CWE-284 - Improper Access Control</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/732">CWE-732 - Incorrect Permission Assignment for Critical Resource</a></li>
   <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222620">Application Security and
   Development: V-222620</a> - Application web servers must be on a separate network segment from the application and database servers.</li>
-  <li><a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_s3/Bucket.html">AWS CDK version 2</a> - Bucket</li>
 </ul>
 

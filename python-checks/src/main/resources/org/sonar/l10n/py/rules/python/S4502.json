@@ -1,6 +1,6 @@
 {
-  "title": "Disabling CSRF protections is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "CSRF protections should not be disabled",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "HIGH"
@@ -8,6 +8,7 @@
     "attribute": "CONVENTIONAL"
   },
   "status": "ready",
+  "quickfix": "unknown",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
@@ -15,7 +16,8 @@
   "tags": [
     "cwe",
     "django",
-    "flask"
+    "flask",
+    "former-hotspot"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-4502",

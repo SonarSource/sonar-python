@@ -1,75 +1,59 @@
-<p>Clear-text protocols such as <code>ftp</code>, <code>telnet</code>, or <code>http</code> lack encryption of transported data, as well as the
-capability to build an authenticated connection. It means that an attacker able to sniff traffic from the network can read, modify, or corrupt the
-transported content. These protocols are not secure as they expose applications to an extensive range of risks:</p>
-<ul>
-  <li>sensitive data exposure</li>
-  <li>traffic redirected to a malicious endpoint</li>
-  <li>malware-infected software update or installer</li>
-  <li>execution of client-side code</li>
-  <li>corruption of critical information</li>
-</ul>
-<p>Even in the context of isolated networks like offline environments or segmented cloud environments, the insider threat exists. Thus, attacks
-involving communications being sniffed or tampered with can still happen.</p>
-<p>For example, attackers could successfully compromise prior security layers by:</p>
-<ul>
-  <li>bypassing isolation mechanisms</li>
-  <li>compromising a component of the network</li>
-  <li>getting the credentials of an internal IAM account (either from a service account or an actual person)</li>
-</ul>
-<p>In such cases, encrypting communications would decrease the chances of attackers to successfully leak data or steal credentials from other network
-components. By layering various security practices (segmentation and encryption, for example), the application will follow the
-<em>defense-in-depth</em> principle.</p>
-<p>Note that using the <code>http</code> protocol is being deprecated by <a
-href="https://blog.mozilla.org/security/2015/04/30/deprecating-non-secure-http">major web browsers</a>.</p>
-<p>In the past, it has led to the following vulnerabilities:</p>
-<ul>
-  <li><a href="https://nvd.nist.gov/vuln/detail/CVE-2019-6169">CVE-2019-6169</a></li>
-  <li><a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12327">CVE-2019-12327</a></li>
-  <li><a href="https://nvd.nist.gov/vuln/detail/CVE-2019-11065">CVE-2019-11065</a></li>
-</ul>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>Application data needs to be protected against falsifications or leaks when transiting over the network.</li>
-  <li>Application data transits over an untrusted network.</li>
-  <li>Compliance rules require the service to encrypt data in transit.</li>
-  <li>Your application renders web pages with a relaxed mixed content policy.</li>
-  <li>OS-level protections against clear-text traffic are deactivated.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<ul>
-  <li>Make application data transit over a secure, authenticated and encrypted protocol like TLS or SSH. Here are a few alternatives to the most
-  common clear-text protocols:
-    <ul>
-      <li>Use <code>ssh</code> as an alternative to <code>telnet</code>.</li>
-      <li>Use <code>sftp</code>, <code>scp</code>, or <code>ftps</code> instead of <code>ftp</code>.</li>
-      <li>Use <code>https</code> instead of <code>http</code>.</li>
-      <li>Use <code>SMTP</code> over <code>SSL/TLS</code> or <code>SMTP</code> with <code>STARTTLS</code> instead of clear-text SMTP.</li>
-    </ul></li>
-  <li>Enable encryption of cloud components communications whenever it is possible.</li>
-  <li>Configure your application to block mixed content when rendering web pages.</li>
-  <li>If available, enforce OS-level deactivation of all clear-text traffic.</li>
-</ul>
-<p>It is recommended to secure all transport channels, even on local networks, as it can take a single non-secure connection to compromise an entire
-application or system.</p>
-<h2>Sensitive Code Example</h2>
-<pre>
-url = "http://example.com" # Sensitive
-url = "ftp://anonymous@example.com" # Sensitive
-url = "telnet://anonymous@example.com" # Sensitive
+<p>Using clear-text protocols exposes data in transit to eavesdropping and man-in-the-middle attacks.</p>
+<h2>Why is this an issue?</h2>
+<p>An attacker who can observe network traffic — for example through a compromised network device, a position on the same network segment, or a cloud
+environment breach — can read, modify, or inject data sent over <code>ftp</code>, <code>telnet</code>, <code>http</code>, or unencrypted SMTP without
+detection. This is true even on internal or isolated networks, where insider threats or lateral movement after an initial compromise can expose
+unencrypted traffic. This rule raises an issue when a clear-text protocol scheme is used or when encryption is explicitly disabled for a network
+connection.</p>
+<h3>What is the potential impact?</h3>
+<h4>Sensitive data exposure</h4>
+<p>An attacker who can intercept network traffic can read all data transmitted over clear-text connections, including credentials, session tokens, API
+keys, or personal data.</p>
+<h4>Data tampering</h4>
+<p>Because clear-text protocols provide no integrity protection, an attacker in a man-in-the-middle position can silently modify data in transit —
+redirecting users to malicious endpoints, injecting malicious content into responses, or altering commands sent to remote services.</p>
+<h2>How to fix it in Python Standard Library</h2>
+<h3>Code examples</h3>
+<p>The following code uses a clear-text protocol or disables encryption for a network connection, leaving transmitted data exposed to
+interception.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+url = "http://example.com" # Noncompliant
+url = "ftp://anonymous@example.com" # Noncompliant
+url = "telnet://anonymous@example.com" # Noncompliant
 
 import telnetlib
-cnx = telnetlib.Telnet("towel.blinkenlights.nl") # Sensitive
+cnx = telnetlib.Telnet("telnet.example.com") # Noncompliant
 
 import ftplib
-cnx = ftplib.FTP("ftp.example.com") # Sensitive
+cnx = ftplib.FTP("ftp.example.com") # Noncompliant
 
 import smtplib
-smtp = smtplib.SMTP("smtp.example.com", port=587) # Sensitive
+smtp = smtplib.SMTP("smtp.example.com", port=587) # Noncompliant
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+url = "https://example.com"
+url = "sftp://anonymous@example.com"
+url = "ssh://anonymous@example.com"
+
+import ftplib
+cnx = ftplib.FTP_TLS("ftp.example.com")
+
+import smtplib
+smtp = smtplib.SMTP("smtp.example.com", port=587)
+smtp.starttls(context=context)
+
+smtp_ssl = smtplib.SMTP_SSL("smtp.example.com", port=465)
+</pre>
+<h2>How to fix it in AWS Elastic Load Balancing</h2>
+<h3>Code examples</h3>
+<p>The following code uses a clear-text protocol or disables encryption for a network connection, leaving transmitted data exposed to
+interception.</p>
+<h4>Noncompliant code example</h4>
 <p>For <a
 href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/ApplicationLoadBalancer.html">aws_cdk.aws_elasticloadbalancingv2.ApplicationLoadBalancer</a>:</p>
-<pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
 from aws_cdk import (
     aws_elasticloadbalancingv2 as elbv2,
 )
@@ -83,258 +67,18 @@ lb = elbv2.ApplicationLoadBalancer(
 
 lb.add_listener(
     "Listener-default",
-    port=80, # Sensitive
+    port=80, # Noncompliant
     open=True
 )
 lb.add_listener(
     "Listener-http-explicit",
-    protocol=elbv2.ApplicationProtocol.HTTP, # Sensitive
+    protocol=elbv2.ApplicationProtocol.HTTP, # Noncompliant
     port=8080,
     open=True
 )
 </pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/ApplicationListener.html">aws_cdk.aws_elasticloadbalancingv2.ApplicationListener</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancingv2 as elbv2,
-)
-
-elbv2.ApplicationListener(
-    self,
-    "listener-http-explicit-const",
-    load_balancer=lb,
-    protocol=elbv2.ApplicationProtocol.HTTP, # Sensitive
-    port=8081,
-    open=True
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/NetworkLoadBalancer.html">aws_cdk.aws_elasticloadbalancingv2.NetworkLoadBalancer</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancingv2 as elbv2,
-)
-lb = elbv2.NetworkLoadBalancer(
-    self,
-    "LB",
-    vpc=vpc,
-    internet_facing=True
-)
-
-lb.add_listener( # Sensitive
-    "Listener-default",
-    port=1234
-)
-lb.add_listener(
-    "Listener-TCP-explicit",
-    protocol=elbv2.Protocol.TCP, # Sensitive
-    port=1337
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/NetworkListener.html">aws_cdk.aws_elasticloadbalancingv2.NetworkListener</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancingv2 as elbv2,
-)
-
-elbv2.NetworkListener(
-    self,
-    "Listener-TCP-explicit",
-    protocol=elbv2.Protocol.TCP, # Sensitive
-    port=1338,
-    load_balancer=lb
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/CfnListener.html">aws_cdk.aws_elasticloadbalancingv2.CfnListener</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancingv2 as elbv2,
-)
-
-elbv2.CfnListener(
-    self,
-    "listener-http",
-    default_actions=[application_default_action],
-    load_balancer_arn=lb.load_balancer_arn,
-    protocol="HTTP", # Sensitive
-    port=80
-)
-
-elbv2.CfnListener(
-    self,
-    "listener-tcp",
-    default_actions=[network_default_action],
-    load_balancer_arn=lb.load_balancer_arn,
-    protocol="TCP", # Sensitive
-    port=1000
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancing/LoadBalancerListener.html">aws_cdk.aws_elasticloadbalancing.LoadBalancerListener</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancing as elb,
-)
-
-elb.LoadBalancerListener(
-    external_port=10000,
-    external_protocol=elb.LoadBalancingProtocol.TCP, # Sensitive
-    internal_port=10000
-)
-
-elb.LoadBalancerListener(
-    external_port=10080,
-    external_protocol=elb.LoadBalancingProtocol.HTTP, # Sensitive
-    internal_port=10080
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancing/CfnLoadBalancer.html">aws_cdk.aws_elasticloadbalancing.CfnLoadBalancer</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancing as elb
-)
-
-elb.CfnLoadBalancer(
-    self,
-    "elb-tcp",
-    listeners=[
-        elb.CfnLoadBalancer.ListenersProperty(
-            instance_port="10000",
-            load_balancer_port="10000",
-            protocol="tcp" # Sensitive
-        )
-    ],
-    subnets=vpc.select_subnets().subnet_ids
-)
-
-elb.CfnLoadBalancer(
-    self,
-    "elb-http-dict",
-    listeners=[
-        {
-            "instancePort":"10000",
-            "loadBalancerPort":"10000",
-            "protocol":"http" # Sensitive
-        }
-    ],
-    subnets=vpc.select_subnets().subnet_ids
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancing/LoadBalancer.html">aws_cdk.aws_elasticloadbalancing.LoadBalancer</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancing as elb,
-)
-
-elb.LoadBalancer(
-    self,
-    "elb-tcp-dict",
-    vpc=vpc,
-    listeners=[
-        {
-            "externalPort":10000,
-            "externalProtocol":elb.LoadBalancingProtocol.TCP, # Sensitive
-            "internalPort":10000
-        }
-    ]
-)
-
-loadBalancer.add_listener(
-    external_port=10081,
-    external_protocol=elb.LoadBalancingProtocol.HTTP, # Sensitive
-    internal_port=10081
-)
-loadBalancer.add_listener(
-    external_port=10001,
-    external_protocol=elb.LoadBalancingProtocol.TCP, # Sensitive
-    internal_port=10001
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticache/CfnReplicationGroup.html">aws_cdk.aws_elasticache.CfnReplicationGroup</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticache as elasticache
-)
-
-elasticache.CfnReplicationGroup(
-    self,
-    "unencrypted-explicit",
-    replication_group_description="a replication group",
-    automatic_failover_enabled=False,
-    transit_encryption_enabled=False, # Sensitive
-    cache_subnet_group_name="test",
-    engine="redis",
-    engine_version="3.2.6",
-    num_cache_clusters=1,
-    cache_node_type="cache.t2.micro"
-)
-
-elasticache.CfnReplicationGroup( # Sensitive, encryption is disabled by default
-    self,
-    "unencrypted-implicit",
-    replication_group_description="a test replication group",
-    automatic_failover_enabled=False,
-    cache_subnet_group_name="test",
-    engine="redis",
-    engine_version="3.2.6",
-    num_cache_clusters=1,
-    cache_node_type="cache.t2.micro"
-)
-</pre>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_kinesis/CfnStream.html">aws_cdk.aws_kinesis.CfnStream</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_kinesis as kinesis,
-)
-
-kinesis.CfnStream( # Sensitive, encryption is disabled by default for CfnStreams
-    self,
-    "cfnstream-implicit-unencrytped",
-    shard_count=1
-)
-
-kinesis.CfnStream(self,
-    "cfnstream-explicit-unencrytped",
-    shard_count=1,
-    stream_encryption=None # Sensitive
-)
-</pre>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_kinesis/Stream.html">aws_cdk.aws_kinesis.Stream</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_kinesis as kinesis,
-)
-
-stream = kinesis.Stream(self,
-    "stream-explicit-unencrypted",
-    shard_count=1,
-    encryption=kinesis.StreamEncryption.UNENCRYPTED # Sensitive
-)
-</pre>
-<h2>Compliant Solution</h2>
-<pre>
-url = "https://example.com"
-url = "sftp://anonymous@example.com"
-url = "ssh://anonymous@example.com"
-
-import ftplib
-cnx = ftplib.FTP_TLS("ftp.example.com")
-
-import smtplib
-smtp = smtplib.SMTP("smtp.example.com", port=587)
-smtp.starttls(context=context)
-
-smtp_ssl = smtplib.SMTP_SSL("smtp.gmail.com", port=465)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/ApplicationLoadBalancer.html">aws_cdk.aws_elasticloadbalancingv2.ApplicationLoadBalancer</a>:</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
 from aws_cdk import (
     aws_elasticloadbalancingv2 as elbv2,
 )
@@ -361,206 +105,52 @@ lb.add_listener(
     open=True
 )
 </pre>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/ApplicationListener.html">
-aws_cdk.aws_elasticloadbalancingv2.ApplicationListener</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancingv2 as elbv2,
-)
-
-elbv2.ApplicationListener(
-    self,
-    "listener-https-explicit-const",
-    load_balancer=lb,
-    protocol=elbv2.ApplicationProtocol.HTTPS,
-    certificates=[elbv2.ListenerCertificate("certificateARN")],
-    port=444,
-    open=True
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/NetworkLoadBalancer.html">aws_cdk.aws_elasticloadbalancingv2.NetworkLoadBalancer</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancingv2 as elbv2,
-)
-lb = elbv2.NetworkLoadBalancer(
-    self,
-    "LB",
-    vpc=vpc,
-    internet_facing=True
-)
-
-lb.add_listener(
-    "Listener-TLS-explicit",
-    protocol=elbv2.Protocol.TLS,
-    certificates=[elbv2.ListenerCertificate("certificateARN")],
-    port=443
-)
-lb.add_listener(
-    "Listener-TLS-implicit",
-    certificates=[elbv2.ListenerCertificate("certificateARN")],
-    port=1024
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/NetworkListener.html">aws_cdk.aws_elasticloadbalancingv2.NetworkListener</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancingv2 as elbv2,
-)
-
-elbv2.NetworkListener(
-    self,
-    "Listener-TLS-explicit",
-    protocol=elbv2.Protocol.TLS,
-    certificates=[elbv2.ListenerCertificate("certificateARN")],
-    port=443,
-    load_balancer=lb
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancingv2/CfnListener.html">aws_cdk.aws_elasticloadbalancingv2.CfnListener</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancingv2 as elbv2,
-)
-
-elbv2.CfnListener(
-    self,
-    "listener-https",
-    default_actions=[application_default_action],
-    load_balancer_arn=lb.load_balancer_arn,
-    protocol="HTTPS",
-    port=443,
-    certificates=[elbv2.CfnListener.CertificateProperty(
-        certificate_arn="certificateARN"
-    )]
-)
-
-elbv2.CfnListener(
-    self,
-    "listener-tls",
-    default_actions=[network_default_action],
-    load_balancer_arn=lb.load_balancer_arn,
-    protocol="TLS",
-    port=1001,
-    certificates=[elbv2.CfnListener.CertificateProperty(
-        certificate_arn="certificateARN"
-    )]
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancing/LoadBalancerListener.html">aws_cdk.aws_elasticloadbalancing.LoadBalancerListener</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancing as elb,
-)
-
-elb.LoadBalancerListener(
-    external_port=10043,
-    external_protocol=elb.LoadBalancingProtocol.SSL,
-    internal_port=10043,
-    ssl_certificate_arn="certificateARN"
-)
-
-elb.LoadBalancerListener(
-    external_port=10443,
-    external_protocol=elb.LoadBalancingProtocol.HTTPS,
-    internal_port=10443,
-    ssl_certificate_arn="certificateARN"
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancing/CfnLoadBalancer.html">aws_cdk.aws_elasticloadbalancing.CfnLoadBalancer</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancing as elb,
-)
-
-elb.CfnLoadBalancer(
-    self,
-    "elb-ssl",
-    listeners=[
-        elb.CfnLoadBalancer.ListenersProperty(
-            instance_port="10043",
-            load_balancer_port="10043",
-            protocol="ssl",
-            ssl_certificate_id=CERTIFICATE_ARN
-        )
-    ],
-    subnets=vpc.select_subnets().subnet_ids
-)
-
-elb.CfnLoadBalancer(
-    self,
-    "elb-https-dict",
-    listeners=[
-        {
-            "instancePort":"10443",
-            "loadBalancerPort":"10443",
-            "protocol":"https",
-            "sslCertificateId":CERTIFICATE_ARN
-        }
-    ],
-    subnets=vpc.select_subnets().subnet_ids
-)
-</pre>
-<p>For <a
-href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticloadbalancing/LoadBalancer.html">aws_cdk.aws_elasticloadbalancing.LoadBalancer</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_elasticloadbalancing as elb,
-)
-
-elb.LoadBalancer(
-    self,
-    "elb-ssl",
-    vpc=vpc,
-    listeners=[
-        {
-            "externalPort":10044,
-            "externalProtocol":elb.LoadBalancingProtocol.SSL,
-            "internalPort":10044,
-            "sslCertificateArn":"certificateARN"
-        },
-        {
-            "externalPort":10444,
-            "externalProtocol":elb.LoadBalancingProtocol.HTTPS,
-            "internalPort":10444,
-            "sslCertificateArn":"certificateARN"
-        }
-    ]
-)
-
-loadBalancer = elb.LoadBalancer(
-        self,
-        "elb-multi-listener",
-        vpc=vpc
-)
-loadBalancer.add_listener(
-    external_port=10045,
-    external_protocol=elb.LoadBalancingProtocol.SSL,
-    internal_port=10045,
-    ssl_certificate_arn="certificateARN"
-)
-loadBalancer.add_listener(
-    external_port=10445,
-    external_protocol=elb.LoadBalancingProtocol.HTTPS,
-    internal_port=10445,
-    ssl_certificate_arn="certificateARN"
-)
-</pre>
+<h2>How to fix it in Amazon ElastiCache</h2>
+<h3>Code examples</h3>
+<p>The following code uses a clear-text protocol or disables encryption for a network connection, leaving transmitted data exposed to
+interception.</p>
+<h4>Noncompliant code example</h4>
 <p>For <a
 href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_elasticache/CfnReplicationGroup.html">aws_cdk.aws_elasticache.CfnReplicationGroup</a>:</p>
-<pre>
+<pre data-diff-id="3" data-diff-type="noncompliant">
 from aws_cdk import (
     aws_elasticache as elasticache
 )
 
 elasticache.CfnReplicationGroup(
     self,
-    "encrypted-explicit",
+    "example-explicit",
+    replication_group_description="a replication group",
+    automatic_failover_enabled=False,
+    transit_encryption_enabled=False, # Noncompliant
+    cache_subnet_group_name="test",
+    engine="redis",
+    engine_version="3.2.6",
+    num_cache_clusters=1,
+    cache_node_type="cache.t2.micro"
+)
+
+elasticache.CfnReplicationGroup( # Noncompliant: encryption is disabled by default
+    self,
+    "example-implicit",
+    replication_group_description="a replication group",
+    automatic_failover_enabled=False,
+    cache_subnet_group_name="test",
+    engine="redis",
+    engine_version="3.2.6",
+    num_cache_clusters=1,
+    cache_node_type="cache.t2.micro"
+)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+from aws_cdk import (
+    aws_elasticache as elasticache
+)
+
+elasticache.CfnReplicationGroup(
+    self,
+    "example-explicit",
     replication_group_description="a test replication group",
     automatic_failover_enabled=False,
     transit_encryption_enabled=True,
@@ -571,34 +161,58 @@ elasticache.CfnReplicationGroup(
     cache_node_type="cache.t2.micro"
 )
 </pre>
+<h2>How to fix it in AWS Kinesis</h2>
+<h3>Code examples</h3>
+<p>The following code uses a clear-text protocol or disables encryption for a network connection, leaving transmitted data exposed to
+interception.</p>
+<h4>Noncompliant code example</h4>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_kinesis/CfnStream.html">aws_cdk.aws_kinesis.CfnStream</a>:</p>
-<pre>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+from aws_cdk import (
+    aws_kinesis as kinesis,
+)
+
+kinesis.CfnStream( # Noncompliant: encryption is disabled by default for CfnStreams
+    self,
+    "example-cfnstream-implicit",
+    shard_count=1
+)
+
+kinesis.CfnStream(self,
+    "example-cfnstream-explicit",
+    shard_count=1,
+    stream_encryption=None # Noncompliant
+)
+</pre>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_kinesis/Stream.html">aws_cdk.aws_kinesis.Stream</a>:</p>
+<pre data-diff-id="5" data-diff-type="noncompliant">
+from aws_cdk import (
+    aws_kinesis as kinesis,
+)
+
+stream = kinesis.Stream(self,
+    "example-stream",
+    shard_count=1,
+    encryption=kinesis.StreamEncryption.UNENCRYPTED # Noncompliant
+)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="4" data-diff-type="compliant">
 from aws_cdk import (
     aws_kinesis as kinesis,
 )
 
 kinesis.CfnStream(
     self,
-    "cfnstream-explicit-encrytped",
+    "example-cfnstream-explicit",
     shard_count=1,
     stream_encryption=kinesis.CfnStream.StreamEncryptionProperty(
         encryption_type="KMS",
         key_id="alias/aws/kinesis"
     )
 )
-
-stream = kinesis.CfnStream(
-    self,
-    "cfnstream-explicit-encrytped-dict",
-    shard_count=1,
-    stream_encryption={
-        "encryptionType": "KMS",
-        "keyId": "alias/aws/kinesis"
-    }
-)
 </pre>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_kinesis/Stream.html">aws_cdk.aws_kinesis.Stream</a>:</p>
-<pre>
+<pre data-diff-id="5" data-diff-type="compliant">
 from aws_cdk import (
     aws_kinesis as kinesis,
     aws_kms as kms
@@ -606,32 +220,28 @@ from aws_cdk import (
 
 stream = kinesis.Stream( # Encryption is enabled by default for Streams
     self,
-    "stream-implicit-encrypted",
+    "example-stream",
     shard_count=1
 )
 
 stream = kinesis.Stream(
     self,
-    "stream-explicit-encrypted-managed",
+    "example-stream-managed",
     shard_count=1,
     encryption=kinesis.StreamEncryption.MANAGED
 )
-
-key = kms.Key(self, "managed_key")
-stream = kinesis.Stream(
-    self,
-    "stream-explicit-encrypted-selfmanaged",
-    shard_count=1,
-    encryption=kinesis.StreamEncryption.KMS,
-    encryption_key=key
-)
 </pre>
 <h2>Exceptions</h2>
-<p>No issue is reported for the following cases because they are not considered sensitive:</p>
+<p>No issue is reported for the following cases:</p>
 <ul>
-  <li>Insecure protocol scheme followed by loopback addresses like 127.0.0.1 or <code>localhost</code>.</li>
+  <li>URLs whose host resolves only within a private runtime environment and is not reachable from the public internet (including loopback and cloud
+  metadata hosts)</li>
+  <li>Well-known namespace URI authorities used in in XML, JSON-LD, RDF, or similar formats (for example, <code>www.w3.org</code>,
+  <code>schemas.android.com</code>, <code>schema.org</code>).</li>
+  <li>IANA-reserved documentation and test domains like <code>example.com</code>, <code>example.net</code>, <code>example.org</code> (RFC 6761). These
+  are almost always placeholders in source code, not real connection targets.</li>
 </ul>
-<h2>See</h2>
+<h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li>AWS Documentation - <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html">Listeners for

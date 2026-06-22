@@ -1,6 +1,6 @@
 {
-  "title": "Creating cookies without the \"HttpOnly\" flag is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Cookies should have the \"HttpOnly\" flag",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "LOW"
@@ -12,12 +12,14 @@
     "func": "Constant\/Issue",
     "constantCost": "10min"
   },
+  "quickfix": "unknown",
   "tags": [
     "cwe",
     "privacy",
     "flask",
     "fastapi",
-    "django"
+    "django",
+    "former-hotspot"
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-3330",

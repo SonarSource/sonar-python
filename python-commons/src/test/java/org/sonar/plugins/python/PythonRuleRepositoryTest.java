@@ -105,10 +105,10 @@ class PythonRuleRepositoryTest {
   }
 
   @Test
-  void hotspotRules() {
+  void convertedHotspotRules() {
     RulesDefinition.Repository repository = buildRepository();
     RulesDefinition.Rule sqlInjection = repository.rule("S2077");
-    assertThat(sqlInjection.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
+    assertThat(sqlInjection.type()).isEqualTo(RuleType.VULNERABILITY);
   }
 
   private static RulesDefinition.Repository buildRepository() {

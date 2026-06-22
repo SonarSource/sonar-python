@@ -1,6 +1,6 @@
 {
-  "title": "Dynamically executing code is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Dynamic code execution should not use user-controlled data",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "MAINTAINABILITY": "LOW",
@@ -9,12 +9,14 @@
     "attribute": "TRUSTWORTHY"
   },
   "status": "deprecated",
+  "quickfix": "unknown",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "30min"
   },
   "tags": [
-    "deprecated"
+    "deprecated",
+    "former-hotspot"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-1523",
@@ -41,6 +43,5 @@
       "5.2.4",
       "5.5.4"
     ]
-  },
-  "quickfix": "unknown"
+  }
 }
