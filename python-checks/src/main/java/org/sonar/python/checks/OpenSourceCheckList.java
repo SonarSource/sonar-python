@@ -95,6 +95,7 @@ import org.sonar.python.checks.tests.AssertAfterRaiseCheck;
 import org.sonar.python.checks.tests.AssertOnDissimilarTypesCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
+import org.sonar.python.checks.tests.DedicatedExceptionAssertionCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
@@ -180,6 +181,7 @@ public class OpenSourceCheckList {
       DeadStoreCheck.class,
       DebugModeCheck.class,
       DedicatedAssertionCheck.class,
+      DedicatedExceptionAssertionCheck.class,
       DefaultFactoryArgumentCheck.class,
       DeprecatedNumpyTypesCheck.class,
       DictKeysMembershipTestCheck.class,
