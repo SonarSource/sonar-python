@@ -244,4 +244,20 @@ class FloatingPointEqualityCheckTest {
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"torch.isclose()\".");
   }
+
+  @Test
+    void quickfixReturn(){
+        String noncompliant =
+        """
+        import math
+        def foo(a):
+            return a == 1.0""";
+        String compliant =
+        """
+        import math
+        def foo(a):
+            return math.isclose(a, 1.0, rel_tol=1e-09, abs_tol=1e-09)""";
+        PythonQuickFixVerifier.verify(check, noncompliant, compliant);
+        PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"math.isclose()\".");
+    }
 }

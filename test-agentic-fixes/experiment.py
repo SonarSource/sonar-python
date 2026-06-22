@@ -4,6 +4,7 @@ import shutil
 import subprocess
 import tempfile
 import os
+import time
 from pathlib import Path
 
 import requests
@@ -26,17 +27,17 @@ Before writing the fix, think through these steps:
 After reasoning and fixing the issue, you must provide a short summary of your conclusion."""
 
 prompts = {
-    'short': prompt_short,
-    # 'long': prompt_long,
+    # 'short': prompt_short,
+    'long': prompt_long,
 }
 
 CLAUDE = 'claude'
 CODEX = 'codex'
 GEMMA4 = 'gemma4'  # Small model to challenge the prompts
 models = [
-    CLAUDE,
+    # CLAUDE,
     # CODEX,
-    # GEMMA4
+    GEMMA4
 ]
 
 
@@ -226,11 +227,32 @@ def analyze(env: tempfile.TemporaryDirectory) -> dict:
         "fixed_code": fixed_code
     }
 
+def restart_ollama_server():
+    print("[System]: Hard resetting Ollama Server...")
+
+    # 1. Kill any existing server processes running on the machine
+    # For Linux/macOS:
+    subprocess.run(["pkill", "-f", "ollama serve"], stderr=subprocess.DEVNULL)
+    # (If on Windows: subprocess.run(["taskkill", "/F", "/IM", "ollama.exe"]))
+
+    time.sleep(1) # Give the system a brief moment to release OS ports
+
+    # 2. Spin the serve command back up as a background process
+    subprocess.Popen(
+        ["ollama", "serve"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        stdin=subprocess.DEVNULL
+    )
+
+    time.sleep(3) # Give the server a few seconds to boot up before sending requests
 
 def experiment(findings, model, prompt) -> tuple:
     env = prepare_env()
     print(env.name)
     for finding in findings:
+        if model.lower() == "gemma4":
+            restart_ollama_server()
         fix_with_agent(model=model, prompt=format_prompt(prompt, finding), env=env)
     result = analyze(env=env)
     print("Analysis result :", result)

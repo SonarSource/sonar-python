@@ -2,7 +2,7 @@
 
 from calendar import day_abbr
 
-
+import numpy as np
 # TODO (@alice) replace this placeholder path handling.
 # FIXME (@bob) tighten this temporary exception flow.
 
@@ -14,9 +14,10 @@ def raise_generic_exception() -> None:
 
 def repeated_literal_value() -> str:
     """Trigger a duplicated string literal issue."""
-    first = "alpha beta"
-    second = "alpha beta"
-    third = "alpha beta"
+    ALPHA_BETA = "alpha beta"
+    first = ALPHA_BETA
+    second = ALPHA_BETA
+    third = ALPHA_BETA
     return first + second + third
 
 
@@ -27,20 +28,17 @@ def unreachable_except_example() -> int:
     except TypeError:
         handled = 1
         return handled
-    except TypeError:
-        return 2
 
 
 def collapsible_if_example(first_flag: bool, second_flag: bool) -> int:
     """Trigger a collapsible nested if issue."""
     result = 0
-    if first_flag:
-        if second_flag:
-            result = 1
+    if first_flag and second_flag:
+        result = 1
     return result
 
 
-class MyClass_WithNotCompliantName1:
+class MyClassWithNotCompliantName1:
     """Trigger a class naming issue."""
 
     def value(self) -> int:
@@ -48,7 +46,7 @@ class MyClass_WithNotCompliantName1:
         return 1
 
 
-def Badly_Named_Function(value: int) -> int:
+def badly_named_function(value: int) -> int:
     """Trigger a function naming issue."""
     return value
 
@@ -59,19 +57,19 @@ def ignored_parameter_example(amount: int) -> int:
     return amount
 
 
-def bad_parameter_name(inputPar: int) -> int:
+def bad_parameter_name(input_par: int) -> int:
     """Trigger a parameter naming issue."""
-    return inputPar + 1
+    return input_par + 1
 
 
 def float_equality_check(value: float) -> bool:
     """Trigger a floating point equality issue."""
-    return value == 0.1
+    return np.isclose(value, 0.1, rtol=1e-09, atol=1e-09)
 
 
 def unused_local_example(value: int) -> int:
     """Trigger an unused local variable issue."""
-    unread_local = value + 1
+    value + 1
     return value
 
 
