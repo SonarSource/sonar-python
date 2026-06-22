@@ -103,6 +103,14 @@ class SomeTest(unittest.TestCase):
         except ValidationError as e:
             self.assertEqual("Invalid email", str(e))
 
+    def test_multiple_except_clauses(self):
+        try:
+            self.user_service.register_user(self.valid_user)
+        except ValidationError:
+            self.fail("got ValidationError")
+        except TypeError:
+            self.assertEqual("bad type", "bad type")
+
     def test_no_issue_outside_unittest(self):
         try:
             explode()

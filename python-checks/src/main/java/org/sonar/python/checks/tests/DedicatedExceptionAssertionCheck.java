@@ -55,10 +55,12 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    tryStatement.exceptClauses().stream()
-      .map(exceptClause -> failCallFromSingleStatementBody(exceptClause.body().statements()))
-      .filter(callExpression -> callExpression != null)
-      .forEach(callExpression -> ctx.addIssue(callExpression, NO_EXCEPTION_MESSAGE));
+    if (tryStatement.exceptClauses().size() == 1) {
+      tryStatement.exceptClauses().stream()
+        .map(exceptClause -> failCallFromSingleStatementBody(exceptClause.body().statements()))
+        .filter(callExpression -> callExpression != null)
+        .forEach(callExpression -> ctx.addIssue(callExpression, NO_EXCEPTION_MESSAGE));
+    }
 
     CallExpression failCall = failCallFromElseClause(tryStatement.elseClause());
     if (failCall == null) {
