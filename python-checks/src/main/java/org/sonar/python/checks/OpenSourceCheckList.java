@@ -137,6 +137,7 @@ public class OpenSourceCheckList {
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
       BareRaiseInFinallyCheck.class,
+      BeautifulSoupRawHtmlInsertionCheck.class,
       BindToAllNetworkInterfacesCheck.class,
       BooleanExpressionInExceptCheck.class,
       BooleanCheckNotInvertedCheck.class,

@@ -1,0 +1,58 @@
+<p>When inserting HTML elements into an in-memory document structure using methods that add content nodes with raw HTML strings.</p>
+<p>In Python, this specifically refers to BeautifulSoup operations like <code>insert()</code>, <code>append()</code>, and similar methods that add
+HTML content to the document tree.</p>
+<h2>Why is this an issue?</h2>
+<p>Document parsing and manipulation libraries provide APIs for building and modifying HTML and XML document trees. When working with these libraries,
+you need to add new elements to the document structure programmatically.</p>
+<p>A common mistake is to insert raw markup strings directly into the document tree. When you do this, the library treats the string as text content
+rather than markup. This means all markup special characters get escaped:</p>
+<ul>
+  <li><code>&lt;</code> becomes <code>&lt;</code></li>
+  <li><code>&gt;</code> becomes <code>&gt;</code></li>
+  <li><code>"</code> becomes <code>"</code></li>
+</ul>
+<p>As a result, instead of creating actual elements in the document tree, you end up with visible text that looks like markup code on the rendered
+page. The document structure becomes invalid, and the intended functionality is lost.</p>
+<p>Factory methods provided by the library are the correct API for creating new elements programmatically. These methods create proper element objects
+that integrate seamlessly into the document tree. You specify the element name as the first argument and can pass attributes as additional
+parameters.</p>
+<p>Using factory methods ensures:</p>
+<ul>
+  <li>Elements are created as actual element objects, not text</li>
+  <li>Attributes are properly set without manual string formatting</li>
+  <li>The document structure remains valid</li>
+  <li>The code is more readable and maintainable</li>
+</ul>
+<p>In Python’s BeautifulSoup library specifically, this factory method is called <code>new_tag()</code>.</p>
+<h3>What is the potential impact?</h3>
+<p>The incorrect HTML structure will cause the web page to display escaped HTML text instead of rendering the intended elements. This breaks the
+application’s functionality and user interface. Users will see literal HTML code like angle brackets and tag names displayed as text instead of the
+intended page structure.</p>
+<h2>How to fix it</h2>
+<p>Replace raw HTML string insertion with the <code>new_tag()</code> factory method. Create the tag object first by calling
+<code>soup.new_tag()</code> with the tag name and attributes, then insert it into the document tree.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup('&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;', 'html.parser')
+soup.body.insert(0, '&lt;div id="file_history"&gt;&lt;/div&gt;')  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup('&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;', 'html.parser')
+new_tag = soup.new_tag('div', id='file_history')
+soup.body.insert(0, new_tag)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>BeautifulSoup Documentation - Modifying the tree - <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#modifying-the-tree">Official
+  documentation on how to create and insert new elements using new_tag()</a></li>
+  <li>BeautifulSoup Documentation - new_tag() method - <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#new-tag">Detailed reference for
+  the new_tag() factory method</a></li>
+</ul>
+
