@@ -49,7 +49,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PythonTreeMakerMatchStatementTest extends RuleTest {
 
@@ -331,12 +331,8 @@ class PythonTreeMakerMatchStatementTest extends RuleTest {
 
   @Test
   void class_pattern_positional_after_keyword() {
-    try {
-      pattern("case A(foo=42, x, y): ...");
-      fail("Position patterns cannot follow keyword patterns");
-    } catch (RecognitionException exception) {
-      assertThat(exception.getMessage()).isEqualTo("Parse error at line 1: Positional patterns follow keyword patterns.");
-    }
+    RecognitionException exception = assertThrows(RecognitionException.class, () -> pattern("case A(foo=42, x, y): ..."));
+    assertThat(exception.getMessage()).isEqualTo("Parse error at line 1: Positional patterns follow keyword patterns.");
   }
 
   private void assertSequenceElements(SequencePattern sequencePattern, String... elements) {

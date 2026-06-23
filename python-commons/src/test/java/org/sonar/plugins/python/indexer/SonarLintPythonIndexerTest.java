@@ -16,7 +16,6 @@
  */
 package org.sonar.plugins.python.indexer;
 
-import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -53,7 +52,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -279,11 +278,7 @@ class SonarLintPythonIndexerTest {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     PythonInputFile txtFile = createInputFile("non_python.txt", language);
     when(moduleFileEvent.getTarget()).thenReturn(txtFile.wrappedFile());
-    try {
-      pythonIndexer.process(moduleFileEvent);
-    } catch (RecognitionException exception) {
-      fail("Non Python files should not be parsed.");
-    }
+    assertDoesNotThrow(() -> pythonIndexer.process(moduleFileEvent), "Non Python files should not be parsed.");
     assertThat(logTester.logs(Level.DEBUG)).contains("Module file event for non_python.txt has been ignored because it's not a Python file.");
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("non_python")).isNull();
   }

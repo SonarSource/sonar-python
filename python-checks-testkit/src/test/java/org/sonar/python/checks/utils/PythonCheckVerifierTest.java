@@ -28,7 +28,8 @@ import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 
-import static org.assertj.core.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class PythonCheckVerifierTest {
 
@@ -90,17 +91,8 @@ class PythonCheckVerifierTest {
   }
 
   private void assertNoFailureOfVerifier(String filePath, PythonCheck check) {
-    try {
-      PythonCheckVerifier.verify(filePath, check);
-    } catch (AssertionError e) {
-      fail("should not fail", e);
-    }
-
-    try {
-      PythonCheckVerifier.verify(Collections.singletonList(filePath), check);
-    } catch (AssertionError e) {
-      fail("should not fail", e);
-    }
+    assertDoesNotThrow(() -> PythonCheckVerifier.verify(filePath, check), "should not fail");
+    assertDoesNotThrow(() -> PythonCheckVerifier.verify(Collections.singletonList(filePath), check), "should not fail");
   }
 
   private static void assertFailOfVerifier(String filepath, PythonCheck check) {

@@ -119,7 +119,6 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
@@ -164,12 +163,8 @@ class PythonTreeMakerTest extends RuleTest {
 
   @Test
   void unexpected_expression_should_throw_an_exception() {
-    try {
-      parse("", treeMaker::expression);
-      fail("unexpected ASTNode type for expression should not succeed to be translated to Strongly typed AST");
-    } catch (IllegalStateException iae) {
-      assertThat(iae).hasMessage("Expression FILE_INPUT not correctly translated to strongly typed AST");
-    }
+    IllegalStateException iae = assertThrows(IllegalStateException.class, () -> parse("", treeMaker::expression));
+    assertThat(iae).hasMessage("Expression FILE_INPUT not correctly translated to strongly typed AST");
   }
 
   @Test
@@ -1391,13 +1386,9 @@ class PythonTreeMakerTest extends RuleTest {
 
 
     setRootRule(PythonGrammar.NAMED_EXPR_TEST);
-    try {
-      astNode = p.parse("a.b := 12");
-      treeMaker.expression(astNode);
-      fail("Expected RecognitionException");
-    } catch (RecognitionException e) {
-      assertThat(e.getLine()).isOne();
-    }
+    AstNode invalidWalrusNode = p.parse("a.b := 12");
+    RecognitionException walrusException = assertThrows(RecognitionException.class, () -> treeMaker.expression(invalidWalrusNode));
+    assertThat(walrusException.getLine()).isOne();
   }
 
   @Test
@@ -2483,12 +2474,8 @@ class PythonTreeMakerTest extends RuleTest {
     firstArg = ((RegularArgument) call.arguments().get(0)).expression();
     assertThat(firstArg.getKind()).isEqualTo(Tree.Kind.GENERATOR_EXPR);
 
-    try {
-      parse("foo(1, x*x for x in range(10))", treeMaker::expression);
-      fail("generator expression must be parenthesized unless it's the unique argument in arglist");
-    } catch (RecognitionException re) {
-      assertThat(re).hasMessage("Parse error at line 1: Generator expression must be parenthesized if not sole argument.");
-    }
+    RecognitionException re = assertThrows(RecognitionException.class, () -> parse("foo(1, x*x for x in range(10))", treeMaker::expression));
+    assertThat(re).hasMessage("Parse error at line 1: Generator expression must be parenthesized if not sole argument.");
   }
 
   @Test
@@ -2706,18 +2693,12 @@ class PythonTreeMakerTest extends RuleTest {
   @Test
   @Timeout(2)
   public void should_not_require_exponential_time() {
-    try {
-      p.parse("((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
-      fail("Expected RecognitionException");
-    } catch (RecognitionException e) {
-      assertThat(e.getLine()).isOne();
-    }
-    try {
-      p.parse("````````````````````````````````````````````````````````````````````````````````");
-      fail("Expected RecognitionException");
-    } catch (RecognitionException e) {
-      assertThat(e.getLine()).isOne();
-    }
+    RecognitionException openParensException = assertThrows(RecognitionException.class,
+      () -> p.parse("(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((("));
+    assertThat(openParensException.getLine()).isOne();
+    RecognitionException backticksException = assertThrows(RecognitionException.class,
+      () -> p.parse("````````````````````````````````````````````````````````````````````````````````"));
+    assertThat(backticksException.getLine()).isOne();
   }
 
   @Test
