@@ -1,0 +1,74 @@
+<p>When testing code that should raise an exception, having multiple method calls in the tested code makes it unclear which call is expected to raise
+the exception.</p>
+<h2>Why is this an issue?</h2>
+<p>When writing tests for exception handling, clarity is essential. If you chain multiple method calls within the code being tested for an exception,
+it becomes ambiguous which specific call is expected to raise that exception.</p>
+<p>For example, consider this code:</p>
+<pre>
+pytest.raises(IndexError, lambda: get_item().process())
+</pre>
+<p>Here, both <code>get_item()</code> and <code>process()</code> could potentially raise an <code>IndexError</code>. If the test passes, you cannot be
+certain which method actually raised the exception. This ambiguity reduces test reliability.</p>
+<p>By isolating the method call you want to test, you make your test explicit and unambiguous. This improves test reliability and makes your test
+suite a better specification of expected behavior.</p>
+<h3>What is the potential impact?</h3>
+<p>Writing tests with multiple method calls when testing for exceptions reduces test quality:</p>
+<ul>
+  <li><strong>Incorrect test coverage</strong>: You may think you’re testing one method’s exception behavior when you’re actually testing
+  another’s.</li>
+  <li><strong>Maintenance burden</strong>: Other developers (or future you) will struggle to understand what the test is verifying.</li>
+  <li><strong>Reduced confidence</strong>: Passing tests don’t guarantee that the specific behavior you intended to test is working correctly.</li>
+</ul>
+<h2>How to fix it in pytest</h2>
+<p>When using pytest’s <code>pytest.raises()</code> context manager, extract intermediate method calls into separate variables before the assertion.
+This ensures only the final method call that you want to test is inside the exception-testing block.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pytest
+
+def test_process():
+    # Which method raises the exception: get_item() or process()?
+    with pytest.raises(IndexError):  # Noncompliant
+        get_item().process()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+def test_process():
+    item = get_item()
+    with pytest.raises(IndexError):
+        item.process()
+</pre>
+<h2>How to fix it in unittest</h2>
+<p>When using unittest’s <code>assertRaises()</code> method, extract intermediate method calls before the assertion. This makes it clear which
+specific method is being tested for the exception.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import unittest
+
+class TestMyCode(unittest.TestCase):
+    def test_process(self):
+        # Which method raises the exception: get_item() or process()?
+        self.assertRaises(IndexError, lambda: get_item().process())  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import unittest
+
+class TestMyCode(unittest.TestCase):
+    def test_process(self):
+        item = get_item()
+        self.assertRaises(IndexError, item.process)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/assert.html#assertions-about-expected-exceptions">Official pytest guide
+  on testing exceptions</a></li>
+  <li>unittest documentation - <a href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises">Python standard library
+  documentation on assertRaises</a></li>
+</ul>
+

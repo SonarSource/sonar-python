@@ -97,6 +97,7 @@ import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
+import org.sonar.python.checks.tests.SingleInvocationRuntimeExceptionCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 import org.sonar.python.checks.tests.UnconditionalAssertionCheck;
 
@@ -403,6 +404,7 @@ public class OpenSourceCheckList {
       SingleCharacterAlternationCheck.class,
       SingleCharCharacterClassCheck.class,
       SingleDispatchMixupCheck.class,
+      SingleInvocationRuntimeExceptionCheck.class,
       SkippedTestNoReasonCheck.class,
       SkLearnEstimatorDontInitializeEstimatedValuesCheck.class,
       SleepZeroInAsyncCheck.class,
