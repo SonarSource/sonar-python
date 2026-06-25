@@ -23,6 +23,7 @@ import java.util.Objects;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -72,7 +73,10 @@ public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionChe
       return;
     }
 
-    reportIfMultipleInvocations(ctx, unsafeInvocations(withStatement.statements()));
+    var invocations = unsafeInvocations(withStatement.statements());
+    if (invocations.size() > 1) {
+      reportIfMultipleInvocations(ctx.addIssue(withStatement.withKeyword(), withStatement.colon(), MESSAGE), invocations);
+    }
   }
 
   private static void checkDirectRaiseCall(SubscriptionContext ctx, CallExpression callExpression) {
@@ -82,7 +86,8 @@ public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionChe
 
     findLambdaArgument(callExpression.arguments())
       .map(lambdaExpression -> unsafeInvocations(lambdaExpression.expression()))
-      .ifPresent(invocations -> reportIfMultipleInvocations(ctx, invocations));
+      .filter(invocations -> invocations.size() > 1)
+      .ifPresent(invocations -> reportIfMultipleInvocations(ctx.addIssue(callExpression, MESSAGE), invocations));
   }
 
   private static boolean isPytestRaise(CallExpression callExpression) {
@@ -114,13 +119,8 @@ public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionChe
       .findFirst();
   }
 
-  private static void reportIfMultipleInvocations(SubscriptionContext ctx, List<CallExpression> invocations) {
-    if (invocations.size() <= 1) {
-      return;
-    }
-
-    var issue = ctx.addIssue(invocations.get(0), MESSAGE);
-    invocations.stream().skip(1).forEach(invocation -> issue.secondary(invocationLocation(invocation, SECONDARY_MESSAGE)));
+  private static void reportIfMultipleInvocations(PythonCheck.PreciseIssue issue, List<CallExpression> invocations) {
+    invocations.forEach(invocation -> issue.secondary(invocationLocation(invocation, SECONDARY_MESSAGE)));
   }
 
   private static IssueLocation invocationLocation(CallExpression invocation, String message) {

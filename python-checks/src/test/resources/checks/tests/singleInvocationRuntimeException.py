@@ -25,16 +25,18 @@ class DummyContextManager:
 
 
 def test_pytest_with_call_chain():
-    with pytest.raises(ValueError):
-        get_item().process()  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
-#       ^^^^^^^^^^
+    with pytest.raises(ValueError):  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        get_item().process()
+#       ^^^^^^^^^^< {{Invocation possibly throwing an exception.}}
 #                  ^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
 
 
 def test_pytest_with_nested_calls():
-    with pytest.raises(ValueError):
-        do_work(get_item())  # Noncompliant
-#       ^^^^^^^^^^^^^^^^^^^
+    with pytest.raises(ValueError):  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        do_work(get_item())
+#       ^^^^^^^^^^^^^^^^^^^< {{Invocation possibly throwing an exception.}}
 #               ^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
 
 
@@ -90,23 +92,26 @@ def test_pytest_with_safe_object():
 
 
 def test_pytest_with_unsafe_builtin_arguments():
-    with pytest.raises(ValueError):
-        do_work(object(1))  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
-#       ^^^^^^^^^^^^^^^^^^
+    with pytest.raises(ValueError):  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        do_work(object(1))
+#       ^^^^^^^^^^^^^^^^^^< {{Invocation possibly throwing an exception.}}
 #               ^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
 
 
 def test_pytest_with_unsafe_collection_arguments():
-    with pytest.raises(ValueError):
-        do_work(set(5))  # Noncompliant
-#       ^^^^^^^^^^^^^^^
+    with pytest.raises(ValueError):  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        do_work(set(5))
+#       ^^^^^^^^^^^^^^^< {{Invocation possibly throwing an exception.}}
 #               ^^^^^^@-1< {{Invocation possibly throwing an exception.}}
 
 
 def test_pytest_direct_lambda():
     pytest.raises(ValueError, lambda: get_item().process())  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
-#                                     ^^^^^^^^^^
-#                                                ^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                                     ^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+#                                                ^^^^^^^^^@-2< {{Invocation possibly throwing an exception.}}
 
 
 def test_pytest_direct_callable():
@@ -124,8 +129,9 @@ def test_pytest_direct_lambda_single_invocation():
 
 def test_pytest_direct_lambda_with_unsafe_builtin_argument():
     pytest.raises(ValueError, lambda: do_work(dict(5)))  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
-#                                     ^^^^^^^^^^^^^^^^
-#                                             ^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                                     ^^^^^^^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+#                                             ^^^^^^^@-2< {{Invocation possibly throwing an exception.}}
 
 
 def test_non_raise_with_statement():
@@ -147,9 +153,10 @@ def test_pytest_with_nested_helper_definition():
 
 class TestCase(unittest.TestCase):
     def test_unittest_with_statement(self):
-        with self.assertRaises(ValueError):
-            get_item().process()  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
-#           ^^^^^^^^^^
+        with self.assertRaises(ValueError):  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            get_item().process()
+#           ^^^^^^^^^^< {{Invocation possibly throwing an exception.}}
 #                      ^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
 
     def test_unittest_with_safe_builtin(self):
@@ -158,13 +165,15 @@ class TestCase(unittest.TestCase):
 
     def test_unittest_lambda(self):
         self.assertRaises(ValueError, lambda: get_item().process())  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
-#                                             ^^^^^^^^^^
-#                                                        ^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                                             ^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+#                                                        ^^^^^^^^^@-2< {{Invocation possibly throwing an exception.}}
 
     def test_unittest_lambda_nested_calls(self):
         self.assertRaises(ValueError, lambda: do_work(get_item()))  # Noncompliant
-#                                             ^^^^^^^^^^^^^^^^^^^
-#                                                     ^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                                             ^^^^^^^^^^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+#                                                     ^^^^^^^^^^@-2< {{Invocation possibly throwing an exception.}}
 
     def test_unittest_lambda_with_safe_builtin(self):
         self.assertRaises(ValueError, lambda: do_work(bytearray()))
@@ -178,8 +187,9 @@ class TestCase(unittest.TestCase):
 
     def test_unittest_lambda_with_unsafe_builtin_argument(self):
         self.assertRaises(ValueError, lambda: do_work(frozenset(5)))  # Noncompliant
-#                                             ^^^^^^^^^^^^^^^^^^^^^
-#                                                     ^^^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                                             ^^^^^^^^^^^^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
+#                                                     ^^^^^^^^^^^^@-2< {{Invocation possibly throwing an exception.}}
 
     def test_unittest_invalid_raise_method(self):
         self.assertRaisesRandom(ValueError, lambda: do_work(get_item()))
