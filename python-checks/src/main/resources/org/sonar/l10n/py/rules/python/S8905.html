@@ -1,0 +1,67 @@
+<p>This rule raises an issue when an HTML/XML parser object is created without explicitly specifying which parsing engine to use (typically the second
+positional parameter or a named parameter in the constructor).</p>
+<p>In Python, this specifically refers to the <code>BeautifulSoup</code> object from the BeautifulSoup4 library.</p>
+<h2>Why is this an issue?</h2>
+<p>When you initialize an HTML parsing library without specifying which parser to use, the library automatically selects what it considers the "best
+available" parser on your system. This might seem convenient, but it creates several problems.</p>
+<p>The parser that the library chooses depends on which parsing libraries are installed in your environment. Common parsing strategies include a
+language’s built-in HTML parser, faster third-party parsers with native code components, and more lenient parsers that prioritize compatibility.
+Different environments—such as your local machine, a colleague’s computer, a CI/CD server, or a production deployment—may have different parsers
+installed.</p>
+<p>This environment-dependent behavior leads to inconsistent parsing results. Different parsers handle HTML differently, especially when dealing with
+malformed or ambiguous markup. For example:</p>
+<ul>
+  <li>Parsers with native code components are faster but may be stricter about HTML structure</li>
+  <li>Compatibility-focused parsers are more lenient and parse HTML like a web browser would</li>
+  <li>Built-in parsers offer a middle ground and require no external dependencies</li>
+</ul>
+<p>When parsing untrusted or poorly-formed HTML from external sources, these differences can produce completely different parse trees. Code that works
+perfectly in your development environment might fail or behave unexpectedly in production. A query that successfully locates an element with one
+parser might return nothing with another.</p>
+<p>Beyond correctness issues, this inconsistency makes debugging difficult. When a bug appears only in certain environments, tracking down the cause
+becomes challenging if you don’t realize the parser is different.</p>
+<p>For security-sensitive applications that parse untrusted HTML, relying on an unspecified parser introduces additional risk. Different parsers may
+interpret potentially malicious markup differently, and you lose control over this critical parsing behavior.</p>
+<p>In Python’s BeautifulSoup library, the common parsers are <code>html.parser</code> (Python’s built-in), <code>lxml</code> (faster with native
+code), and <code>html5lib</code> (most lenient and browser-like).</p>
+<h3>What is the potential impact?</h3>
+<p>When HTML parsing libraries use different parsers across environments, your application may:</p>
+<ul>
+  <li>Parse the same HTML differently in development versus production</li>
+  <li>Experience bugs that only occur on certain machines or in specific deployment environments</li>
+  <li>Fail to extract expected data from HTML documents, causing application logic errors</li>
+  <li>Behave unpredictably when processing HTML from external sources</li>
+</ul>
+<p>These issues reduce code reliability and make your application harder to maintain and debug.</p>
+<h2>How to fix it</h2>
+<p>Add the parser name as the second argument when creating a BeautifulSoup object. Python’s built-in <code>html.parser</code> is a good default
+choice as it requires no additional dependencies.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+
+webpage = urlopen('http://example.com')
+soup = BeautifulSoup(webpage)  # Noncompliant
+table = soup.find('table', {'class': 'data'})
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+
+webpage = urlopen('http://example.com')
+soup = BeautifulSoup(webpage, 'html.parser')
+table = soup.find('table', {'class': 'data'})
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>BeautifulSoup Documentation - <a
+  href="https://beautiful-soup-4.readthedocs.io/en/latest/index.html?highlight=specifying#specifying-the-parser-to-use">Specifying the parser to
+  use</a></li>
+  <li>BeautifulSoup Documentation - <a
+  href="https://beautiful-soup-4.readthedocs.io/en/latest/index.html?highlight=specifying#installing-a-parser">Installing a parser</a></li>
+</ul>
+

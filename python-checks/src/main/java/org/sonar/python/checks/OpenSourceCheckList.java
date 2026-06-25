@@ -137,6 +137,7 @@ public class OpenSourceCheckList {
       AwsWaitersInsteadOfCustomPollingCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
+      BeautifulSoupParserCheck.class,
       BareRaiseInFinallyCheck.class,
       BeautifulSoupRawHtmlInsertionCheck.class,
       BindToAllNetworkInterfacesCheck.class,
