@@ -511,6 +511,7 @@ public class OpenSourceCheckList {
       WebEntryPointDecoratorCheck.class,
       DjangoModelStringFieldCheck.class,
       DjangoModelStrMethodCheck.class,
-      HardcodedCredentialsCallCheck.class);
+      HardcodedCredentialsCallCheck.class,
+      BeautifulSoupDeprecatedNamesCheck.class);
   }
 }

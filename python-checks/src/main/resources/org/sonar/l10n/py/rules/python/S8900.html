@@ -1,0 +1,213 @@
+<p>This is an issue when you use deprecated methods from a previous major version of an HTML/XML parsing library, particularly methods that follow an
+older naming convention (such as camelCase methods) that have been superseded by methods using a different naming convention in the current
+version.</p>
+<p>In Python with Beautiful Soup 4, this applies to:</p>
+<ul>
+  <li>Deprecated camelCase method names carried over from Beautiful Soup 3, such as <code>findAll()</code>, <code>findChildren()</code>,
+  <code>findParent()</code>, and <code>findNext()</code></li>
+  <li>Deprecated camelCase attribute names such as <code>nextSibling</code> and <code>previousSibling</code></li>
+  <li>The deprecated <code>text=</code> keyword argument to search methods, replaced by <code>string=</code></li>
+</ul>
+<h2>Why is this an issue?</h2>
+<p>A major version update of this parsing library introduced a more consistent naming convention for its methods. The old naming convention from the
+previous major version (like methods following the earlier style) was kept for backward compatibility but marked as deprecated.</p>
+<p>While these deprecated methods still work in current versions, they create several problems:</p>
+<ul>
+  <li><strong>Inconsistent code style</strong>: Mixing deprecated methods with modern methods makes your codebase harder to read and understand.</li>
+  <li><strong>Future compatibility risk</strong>: Deprecated methods may be removed in future library versions, breaking your code.</li>
+  <li><strong>Confusion for maintainers</strong>: Developers familiar with the modern API will find deprecated methods unexpected and may not
+  understand why they’re being used.</li>
+  <li><strong>Missing improvements</strong>: Modern methods may include performance optimizations or bug fixes not backported to deprecated
+  versions.</li>
+</ul>
+<p>The library’s documentation explicitly recommends using the modern equivalents to ensure long-term code maintainability.</p>
+<p>In Beautiful Soup specifically, this refers to the transition from Beautiful Soup 3’s camelCase naming (like <code>findAll()</code>,
+<code>nextSibling</code>) to Beautiful Soup 4’s underscore-separated naming convention (like <code>find_all()</code>, <code>next_sibling</code>).</p>
+<h3>What is the potential impact?</h3>
+<p>Using deprecated methods creates technical debt that will require refactoring effort later. When the library eventually removes these methods, your
+application may break unexpectedly during a dependency update, requiring emergency fixes. This is especially problematic in production environments
+where dependency updates should be routine maintenance rather than risky operations.</p>
+<h2>How to fix it</h2>
+<p>Replace the deprecated name with its modern equivalent. The full list of replacements is:</p>
+<table>
+  <colgroup>
+    <col style="width: 50%;">
+    <col style="width: 50%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Deprecated name</th>
+      <th>Modern equivalent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>findAll()</code></p>
+      </td>
+      <td>
+        <p><code>find_all()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findChild()</code></p>
+      </td>
+      <td>
+        <p><code>find()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findChildren()</code></p>
+      </td>
+      <td>
+        <p><code>find_all()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findNext()</code></p>
+      </td>
+      <td>
+        <p><code>find_next()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findAllNext()</code></p>
+      </td>
+      <td>
+        <p><code>find_all_next()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findPrevious()</code></p>
+      </td>
+      <td>
+        <p><code>find_previous()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findAllPrevious()</code></p>
+      </td>
+      <td>
+        <p><code>find_all_previous()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findNextSibling()</code></p>
+      </td>
+      <td>
+        <p><code>find_next_sibling()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findNextSiblings()</code></p>
+      </td>
+      <td>
+        <p><code>find_next_siblings()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findPreviousSibling()</code></p>
+      </td>
+      <td>
+        <p><code>find_previous_sibling()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findPreviousSiblings()</code></p>
+      </td>
+      <td>
+        <p><code>find_previous_siblings()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findParent()</code></p>
+      </td>
+      <td>
+        <p><code>find_parent()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>findParents()</code></p>
+      </td>
+      <td>
+        <p><code>find_parents()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>replaceWith()</code></p>
+      </td>
+      <td>
+        <p><code>replace_with()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>getText()</code></p>
+      </td>
+      <td>
+        <p><code>get_text()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>.nextSibling</code></p>
+      </td>
+      <td>
+        <p><code>.next_sibling</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>.previousSibling</code></p>
+      </td>
+      <td>
+        <p><code>.previous_sibling</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>text=</code> argument in <code>find*()</code> methods</p>
+      </td>
+      <td>
+        <p><code>string=</code> argument</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(html, 'html.parser')
+result = soup.find_all('a', text='Click here')  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(html, 'html.parser')
+result = soup.find_all('a', string='Click here')
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Beautiful Soup Documentation - Method Names - <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#method-names">Official Beautiful
+  Soup documentation explaining the naming convention changes and deprecated methods</a></li>
+  <li>Beautiful Soup 4.9.0 Changelog - <a href="https://git.launchpad.net/beautifulsoup/tree/CHANGELOG">Changelog documenting the deprecation of
+  camelCase method names</a></li>
+</ul>
+
