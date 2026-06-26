@@ -1,0 +1,122 @@
+<p>This is an issue when at least 3 test methods differ only by a few hardcoded values and could be refactored into a single parameterized test with
+less than 4 parameters.</p>
+<h2>Why is this an issue?</h2>
+<p>When multiple test methods contain nearly identical logic but differ only in a few hardcoded values, they create unnecessary code duplication. This
+duplication makes the test suite harder to maintain and increases the risk of introducing bugs.</p>
+<p>Consider a scenario where you have three test methods that each verify a calculation with different input values. If you later discover a bug in
+the test logic itself, you would need to fix it in three places instead of one. This redundancy is error-prone and wastes time.</p>
+<p>Parameterized tests solve this problem by allowing you to write the test logic once and execute it multiple times with different input values. Most
+modern testing frameworks, including pytest for Python, provide built-in support for parameterization.</p>
+<p>This approach offers several benefits:</p>
+<ul>
+  <li><strong>Reduced code duplication</strong>: The test logic is written once, making it easier to understand and maintain.</li>
+  <li><strong>Fewer bugs</strong>: Changes to test logic only need to be made in one place.</li>
+  <li><strong>Better readability</strong>: The data-driven nature of parameterized tests makes it clear what variations are being tested.</li>
+  <li><strong>Easier to extend</strong>: Adding new test cases becomes as simple as adding new parameter values.</li>
+</ul>
+<p>However, balance is important. If parameterizing tests makes them significantly more complex than the original versions, it may not be worth it.
+The goal is to improve maintainability, not to force every similar test into a parameterized structure.</p>
+<h3>What is the potential impact?</h3>
+<p>Duplicated test methods lead to higher maintenance costs and increased likelihood of bugs. When test logic needs to be updated, developers must
+remember to make identical changes across multiple methods, which is easy to forget.</p>
+<p>This can result in inconsistent test coverage where some variations of a test are updated while others remain outdated. Such inconsistencies can
+cause false positives or, worse, false negatives that let bugs slip through.</p>
+<p>The impact on team productivity compounds over time as the test suite grows. More time is spent maintaining redundant code instead of writing new
+tests or improving application code.</p>
+<h2>How to fix it in pytest</h2>
+<p>Use pytest’s <code>@pytest.mark.parametrize</code> decorator to combine similar tests into a single parameterized test. The decorator accepts a
+string of parameter names and a list of tuples containing the values for each test case.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pytest
+
+class TestApp:
+    def test_not_null1(self):  # Noncompliant
+        setup_tax()
+        assert get_tax(1) is not None
+
+    def test_not_null2(self):
+        setup_tax()
+        assert get_tax(2) is not None
+
+    def test_not_null3(self):
+        setup_tax()
+        assert get_tax(3) is not None
+
+    def test_level1(self):  # Noncompliant
+        set_level(1)
+        run_game()
+        assert player_health() == 100
+
+    def test_level2(self):
+        set_level(2)
+        run_game()
+        assert player_health() == 200
+
+    def test_level3(self):
+        set_level(3)
+        run_game()
+        assert player_health() == 300
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+class TestApp:
+    @pytest.mark.parametrize("tax_id", [1, 2, 3])
+    def test_not_null(self, tax_id):
+        setup_tax()
+        assert get_tax(tax_id) is not None
+
+    @pytest.mark.parametrize("level,health", [
+        (1, 100),
+        (2, 200),
+        (3, 300),
+    ])
+    def test_levels(self, level, health):
+        set_level(level)
+        run_game()
+        assert player_health() == health
+</pre>
+<h2>How to fix it in unittest</h2>
+<p>For unittest, you can use the <code>parameterized</code> library to achieve similar functionality. Install it with <code>pip install
+parameterized</code> and use the <code>@parameterized.expand</code> decorator.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import unittest
+
+class TestApp(unittest.TestCase):
+    def test_not_null1(self):  # Noncompliant
+        setup_tax()
+        self.assertIsNotNone(get_tax(1))
+
+    def test_not_null2(self):
+        setup_tax()
+        self.assertIsNotNone(get_tax(2))
+
+    def test_not_null3(self):
+        setup_tax()
+        self.assertIsNotNone(get_tax(3))
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import unittest
+from parameterized import parameterized
+
+class TestApp(unittest.TestCase):
+    @parameterized.expand([1, 2, 3])
+    def test_not_null(self, tax_id):
+        setup_tax()
+        self.assertIsNotNone(get_tax(tax_id))
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/parametrize.html">Official guide on parametrizing fixtures and test
+  functions</a></li>
+  <li>parameterized library documentation - <a href="https://github.com/wolever/parameterized">Documentation for the parameterized library for
+  unittest and nose</a></li>
+</ul>
+

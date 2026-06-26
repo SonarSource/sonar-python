@@ -96,6 +96,7 @@ import org.sonar.python.checks.tests.AssertOnDissimilarTypesCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.DedicatedExceptionAssertionCheck;
+import org.sonar.python.checks.tests.GroupSimilarTestsParameterizedCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SingleInvocationRuntimeExceptionCheck;
@@ -264,6 +265,7 @@ public class OpenSourceCheckList {
       GraphQLDenialOfServiceCheck.class,
       GraphQLIntrospectionCheck.class,
       GroupByIteratorReuseCheck.class,
+      GroupSimilarTestsParameterizedCheck.class,
       GroupReplacementCheck.class,
       HardCodedCredentialsCheck.class,
       HardCodedCredentialsEntropyCheck.class,
