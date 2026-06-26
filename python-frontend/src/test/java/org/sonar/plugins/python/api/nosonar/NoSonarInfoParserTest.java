@@ -140,10 +140,12 @@ class NoSonarInfoParserTest {
 
   private static Stream<Arguments> provideNoSecParserParameters() {
     return Stream.of(
+      // bare nosec → security-only suppression (no explicit keys)
       Arguments.of(
         "# nosec",
-        new NoSonarLineInfo(Set.of())
+        NoSonarLineInfo.securityOnly()
       ),
+      // nosec with explicit bandit key
       Arguments.of(
         "# nosec B101",
         new NoSonarLineInfo(Set.of("B101"))
@@ -152,6 +154,7 @@ class NoSonarInfoParserTest {
         "# nosec B101, B102 reason text",
         new NoSonarLineInfo(Set.of("B101", "B102"))
       ),
+      // nosec with explicit Sonar key
       Arguments.of(
         "# nosec S1234",
         new NoSonarLineInfo(Set.of("S1234"))
@@ -168,21 +171,30 @@ class NoSonarInfoParserTest {
         "# nosec B303, S1234",
         new NoSonarLineInfo(Set.of("B303", "S1234"))
       ),
+      // bare nosec with free-text reason → security-only suppression
       Arguments.of(
         "# nosec: it's fine",
-        new NoSonarLineInfo(Set.of(), "it's fine")
+        NoSonarLineInfo.securityOnly("it's fine")
       ),
+      // case-insensitive bare nosec
       Arguments.of(
         "# NOSEC",
-        new NoSonarLineInfo(Set.of())
+        NoSonarLineInfo.securityOnly()
       ),
+      // bare nosec with long reason → truncated comment, security-only
       Arguments.of(
         "# nosec a very long comment that I don't want to keep that long because there is more than 50 characters",
-        new NoSonarLineInfo(Set.of(), "a very long comment that I don't want to keep that")
+        NoSonarLineInfo.securityOnly("a very long comment that I don't want to keep that")
       ),
+      // non-suppression text before bare nosec → comment captured, security-only
       Arguments.of(
         "# some text # nosec",
-        new NoSonarLineInfo(Set.of())
+        NoSonarLineInfo.securityOnly("# some text")
+      ),
+      // mixed: explicit rule key from noqa + bare nosec → explicit key suppressed, security rules also suppressed
+      Arguments.of(
+        "# noqa: E501 # nosec",
+        new NoSonarLineInfo(Set.of("E501"), "", true)
       )
     );
   }

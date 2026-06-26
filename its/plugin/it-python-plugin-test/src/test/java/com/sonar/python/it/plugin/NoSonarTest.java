@@ -138,8 +138,8 @@ public class NoSonarTest {
     analyzeProject(createScanner(NO_SEC_PROJECT_KEY, "projects/nosonar/nosec-project"));
 
     IssueListAssert.assertThat(issues(NO_SEC_PROJECT_KEY))
-        .hasSize(14)
-        // bare nosec suppresses everything on the line; S1309 still fires (whitelisted)
+        .hasSize(15)
+        // bare nosec suppresses security rules on the line; S1309 still fires (whitelisted)
         .containsIssue(4, "python:S4423")
         .doesNotContainIssue(5, "python:S4423")
         .containsIssue(5, "python:S1309")
@@ -161,9 +161,9 @@ public class NoSonarTest {
         .containsIssue(17, "python:S4423")
         .containsIssue(17, "python:OneStatementPerLine")
 
-        // FN: bare nosec silences a non-security rule on the same line
+        // bare nosec suppresses security rules (S4423) but not non-security rules (OneStatementPerLine)
         .doesNotContainIssue(20, "python:S4423")
-        .doesNotContainIssue(20, "python:OneStatementPerLine")
+        .containsIssue(20, "python:OneStatementPerLine")
         .containsIssue(20, "python:S1309")
 
         // nosec at end of file

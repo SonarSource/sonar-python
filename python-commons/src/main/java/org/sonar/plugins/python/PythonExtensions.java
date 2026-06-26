@@ -41,6 +41,7 @@ import org.sonar.plugins.python.mypy.MypyRulesDefinition;
 import org.sonar.plugins.python.mypy.MypySensor;
 import org.sonar.plugins.python.nosonar.NoSonarIssueFilter;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
+import org.sonar.plugins.python.nosonar.SecurityRuleKeyProvider;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.plugins.python.pylint.PylintRulesDefinition;
 import org.sonar.plugins.python.pylint.PylintSensor;
@@ -69,6 +70,7 @@ public class PythonExtensions {
     context.addExtensions(
       ProjectConfigurationBuilder.class,
       NoSonarLineInfoCollector.class,
+      SecurityRuleKeyProvider.class,
       NoSonarIssueFilter.class,
       buildPythonSuffix(),
       buildIpynbPythonSuffix(),

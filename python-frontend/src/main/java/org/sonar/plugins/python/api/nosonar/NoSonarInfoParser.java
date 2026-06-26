@@ -118,25 +118,35 @@ public class NoSonarInfoParser {
 
   public Optional<NoSonarLineInfo> parse(String commentLine) {
     var rules = new HashSet<String>();
-    StringBuilder concatenatedCommentBuilder = new StringBuilder();
+    var concatenatedCommentBuilder = new StringBuilder();
+    var hasSecurityOnlyNosec = false;
     var comments = splitInlineComments(commentLine);
     for (var comment : comments) {
       var noSonarLineInfo = parseComment(comment);
 
       if (noSonarLineInfo != null) {
-        if (noSonarLineInfo.isSuppressedRuleKeysEmpty()) {
+        if (noSonarLineInfo.isSuppressedRuleKeysEmpty() && !noSonarLineInfo.securityOnlySuppression()) {
+          // bare NOSONAR or bare noqa → suppress all rules on this line
           return Optional.of(noSonarLineInfo);
+        } else if (noSonarLineInfo.securityOnlySuppression() && noSonarLineInfo.isSuppressedRuleKeysEmpty()) {
+          // bare nosec → security-only suppression; continue to process remaining comments
+          hasSecurityOnlyNosec = true;
+          concatenatedCommentBuilder.append(noSonarLineInfo.comment());
+        } else {
+          rules.addAll(noSonarLineInfo.suppressedRuleKeys());
+          concatenatedCommentBuilder.append(noSonarLineInfo.comment());
         }
-        rules.addAll(noSonarLineInfo.suppressedRuleKeys());
-        concatenatedCommentBuilder.append(noSonarLineInfo.comment());
       } else {
         concatenatedCommentBuilder.append(comment.strip());
       }
     }
     if (rules.isEmpty()) {
+      if (hasSecurityOnlyNosec) {
+        return Optional.of(NoSonarLineInfo.securityOnly(concatenatedCommentBuilder.toString()));
+      }
       return Optional.empty();
     }
-    return Optional.of(new NoSonarLineInfo(rules, concatenatedCommentBuilder.toString()));
+    return Optional.of(new NoSonarLineInfo(rules, concatenatedCommentBuilder.toString(), hasSecurityOnlyNosec));
   }
 
   @CheckForNull
@@ -158,6 +168,7 @@ public class NoSonarInfoParser {
       var noSecRules = parseNoSecRules(commentLine);
       if (noSecRules.isEmpty()) {
         comment = parseNoSecComment(commentLine);
+        return NoSonarLineInfo.securityOnly(comment);
       } else {
         rules.addAll(noSecRules);
       }

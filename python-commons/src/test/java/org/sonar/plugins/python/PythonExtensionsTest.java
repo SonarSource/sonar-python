@@ -43,10 +43,10 @@ class PythonExtensionsTest {
   void testGetExtensions() {
     Version v79 = Version.create(7, 9);
     SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(v79, SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
-    assertThat(extensions(runtime)).hasSize(45);
+    assertThat(extensions(runtime)).hasSize(46);
     assertThat(extensions(runtime)).contains(AnalysisWarningsWrapper.class);
     assertThat(extensions(SonarRuntimeImpl.forSonarLint(v79)))
-      .hasSize(25)
+      .hasSize(26)
       .contains(SonarLintCache.class);
   }
 

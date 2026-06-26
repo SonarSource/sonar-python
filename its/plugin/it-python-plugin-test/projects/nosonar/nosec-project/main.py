@@ -16,7 +16,7 @@ ssl.SSLContext(ssl.PROTOCOL_TLSv1); ssl.SSLContext(ssl.PROTOCOL_TLSv1_1)  # nose
 # Baseline: two S4423 + OneStatementPerLine all fire.
 ssl.SSLContext(ssl.PROTOCOL_TLSv1); ssl.SSLContext(ssl.PROTOCOL_TLSv1_1)
 
-# Known FN: bare nosec silences a non-security rule on the same line.
+# Bare nosec suppresses security rules but lets non-security rules (e.g. OneStatementPerLine) through.
 ssl.SSLContext(ssl.PROTOCOL_TLSv1); ssl.SSLContext(ssl.PROTOCOL_TLSv1_1)  # nosec
 
 # Trailing directive on the last statement.

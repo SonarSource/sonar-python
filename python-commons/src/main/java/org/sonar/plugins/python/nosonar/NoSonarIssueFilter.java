@@ -33,9 +33,11 @@ public class NoSonarIssueFilter implements IssueFilter {
   private static final Set<String> WHITELISTED_RULES = Set.of("S1309", "NoSonar");
 
   private final NoSonarLineInfoCollector noSonarLineInfoCollector;
+  private final SecurityRuleKeyProvider securityRuleKeyProvider;
 
-  public NoSonarIssueFilter(NoSonarLineInfoCollector noSonarLineInfoCollector) {
+  public NoSonarIssueFilter(NoSonarLineInfoCollector noSonarLineInfoCollector, SecurityRuleKeyProvider securityRuleKeyProvider) {
     this.noSonarLineInfoCollector = noSonarLineInfoCollector;
+    this.securityRuleKeyProvider = securityRuleKeyProvider;
   }
 
   @Override
@@ -51,25 +53,28 @@ public class NoSonarIssueFilter implements IssueFilter {
     String ruleId = issue.ruleKey().rule();
 
     if(WHITELISTED_RULES.contains(ruleId)) {
-      LOG.debug("Rule {} cannot be filtered out as it is whitelisted (all whitelisted rules: {}) for component with key: {} on line: {}", 
-        ruleId, 
+      LOG.debug("Rule {} cannot be filtered out as it is whitelisted (all whitelisted rules: {}) for component with key: {} on line: {}",
+        ruleId,
         WHITELISTED_RULES,
-        issueComponentKey, 
+        issueComponentKey,
         issueLine);
 
       // while whitelisted rules should never be filtered out, returning true here screws up the LITs plugin
-      return chain.accept(issue); 
+      return chain.accept(issue);
     }
 
-    var isNotFilteredOutByNoSonar = noSonarLineInfo == null || 
-      (!noSonarLineInfo.isSuppressedRuleKeysEmpty() && !noSonarLineInfo.suppressedRuleKeys().contains(ruleId));
-    if (!isNotFilteredOutByNoSonar) {
+    var isSuppressedByNoSonar = noSonarLineInfo != null && (
+      (noSonarLineInfo.isSuppressedRuleKeysEmpty() && !noSonarLineInfo.securityOnlySuppression())
+      || noSonarLineInfo.suppressedRuleKeys().contains(ruleId)
+      || (noSonarLineInfo.securityOnlySuppression() && securityRuleKeyProvider.isSecurityRule(ruleId))
+    );
+    if (isSuppressedByNoSonar) {
       LOG.debug("Filtering out issue in the component with key: {} for rule: {} on line: {} based on the file NoSonar infos {}",
         issueComponentKey,
         issue.ruleKey().rule(),
         issueLine,
         noSonarLineInfos.values());
     }
-    return isNotFilteredOutByNoSonar && chain.accept(issue);
+    return !isSuppressedByNoSonar && chain.accept(issue);
   }
 }

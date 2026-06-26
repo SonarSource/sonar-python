@@ -18,9 +18,21 @@ package org.sonar.plugins.python.api.nosonar;
 
 import java.util.Set;
 
-public record NoSonarLineInfo(Set<String> suppressedRuleKeys, String comment) {
+public record NoSonarLineInfo(Set<String> suppressedRuleKeys, String comment, boolean securityOnlySuppression) {
   public NoSonarLineInfo(Set<String> suppressedRuleKeys) {
-    this(suppressedRuleKeys, "");
+    this(suppressedRuleKeys, "", false);
+  }
+
+  public NoSonarLineInfo(Set<String> suppressedRuleKeys, String comment) {
+    this(suppressedRuleKeys, comment, false);
+  }
+
+  public static NoSonarLineInfo securityOnly(String comment) {
+    return new NoSonarLineInfo(Set.of(), comment, true);
+  }
+
+  public static NoSonarLineInfo securityOnly() {
+    return securityOnly("");
   }
 
   public boolean isSuppressedRuleKeysEmpty() {

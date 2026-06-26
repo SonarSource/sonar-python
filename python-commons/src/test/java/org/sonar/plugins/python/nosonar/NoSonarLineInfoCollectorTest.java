@@ -190,7 +190,7 @@ class NoSonarLineInfoCollectorTest {
           import hashlib
           hashlib.md5(b"x").hexdigest() # nosec
           """,
-        Map.of(2, new NoSonarLineInfo(Set.of(), "")),
+        Map.of(2, new NoSonarLineInfo(Set.of(), "", true)),
         Set.of(2),
         "",
         ""
