@@ -100,6 +100,7 @@ import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SingleInvocationRuntimeExceptionCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
+import org.sonar.python.checks.tests.SpecificExceptionAssertionCheck;
 import org.sonar.python.checks.tests.UnconditionalAssertionCheck;
 
 public class OpenSourceCheckList {
@@ -415,6 +416,7 @@ public class OpenSourceCheckList {
       SlotsAssignmentCheck.class,
       SpecialMethodParamListCheck.class,
       SpecialMethodReturnTypeCheck.class,
+      SpecificExceptionAssertionCheck.class,
       SQLQueriesCheck.class,
       StartsWithEndsWithTupleCheck.class,
       StopIterationInGeneratorCheck.class,

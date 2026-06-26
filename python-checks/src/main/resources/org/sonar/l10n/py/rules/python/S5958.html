@@ -1,0 +1,122 @@
+<p>This is an issue when test code verifies that an exception was raised without checking its type or its message.</p>
+<h2>Why is this an issue?</h2>
+<p>Assertions are statements that check whether certain conditions are true. They validate that the actual results of a code snippet match the
+expected outcomes. By using assertions, developers ensure their code behaves as intended and identify potential bugs or issues early in the
+development process.</p>
+<p>When testing exception handling, it is not sufficient to verify only that <em>some</em> exception was raised. Tests should also validate the
+exception type or message to differentiate expected exceptions from unexpected ones.</p>
+<p>Consider a function that should raise a <code>ValueError</code> when given invalid input. If your test only checks that an exception occurred, it
+cannot distinguish between:</p>
+<ul>
+  <li>The expected <code>ValueError</code> indicating proper input validation</li>
+  <li>An unexpected <code>TypeError</code> from a bug in the code</li>
+  <li>An unexpected <code>AttributeError</code> from a null reference error</li>
+</ul>
+<p>All three scenarios would make the test pass, even though two represent actual bugs.</p>
+<p>In Python testing frameworks like pytest and unittest, several patterns can lead to insufficiently specific exception testing:</p>
+<ul>
+  <li>Using <code>pytest.raises(Exception)</code> without specifying the exception type or checking the message</li>
+  <li>Using <code>unittest.assertRaises(Exception)</code> which catches any exception</li>
+  <li>Not validating the exception message when the same exception type could be raised for different reasons</li>
+  <li>Catching exceptions in try-except blocks without asserting on the caught exception</li>
+</ul>
+<p>These patterns create fragile tests that may pass for the wrong reasons, allowing bugs to slip through your test suite undetected.</p>
+<h3>What is the potential impact?</h3>
+<p>Tests that do not verify the exception type or message can:</p>
+<ul>
+  <li><strong>Miss bugs</strong>: Your tests may pass even when your code throws unexpected exceptions due to bugs</li>
+  <li><strong>Reduce confidence</strong>: You cannot trust that your error handling works correctly</li>
+  <li><strong>Hide breaking changes</strong>: Refactoring that changes exception types will not be caught by tests</li>
+  <li><strong>Complicate debugging</strong>: When tests fail, you will not have clear information about what went wrong</li>
+</ul>
+<p>This weakens the safety net that your test suite provides and can lead to production issues that could have been caught during development.</p>
+<h2>How to fix it in pytest</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pytest
+
+class InvalidConfigError(Exception):
+    def __init__(self, field, message):
+        self.field = field
+        super().__init__(message)
+
+def load_config(data):
+    if 'api_key' not in data:
+        raise InvalidConfigError('api_key', 'Missing required field')
+
+def test_missing_config():
+    with pytest.raises(Exception):  # Noncompliant: does not verify the type or the message
+        load_config({})
+</pre>
+<h4>Compliant solution</h4>
+<p>With pytest, use <code>pytest.raises()</code> with a specific exception type instead of the generic <code>Exception</code> class, or use the
+<code>match</code> parameter to validate the exception message using a regular expression pattern. You can also use both when appropriate.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+class InvalidConfigError(Exception):
+    def __init__(self, field, message):
+        self.field = field
+        super().__init__(message)
+
+def load_config(data):
+    if 'api_key' not in data:
+        raise InvalidConfigError('api_key', 'Missing required field')
+
+def test_missing_config():
+    with pytest.raises(InvalidConfigError) as exc_info:
+        load_config({})
+
+    assert exc_info.value.field == 'api_key'
+    assert 'Missing required field' in str(exc_info.value)
+
+    # or
+    with pytest.raises(Exception, match=r"Missing required field"):
+        load_config({})
+</pre>
+<h2>How to fix it in unittest</h2>
+<p>With unittest, use <code>assertRaises()</code> with a specific exception type, or <code>assertRaisesRegex()</code> when you want to verify the
+message as well. You can use either approach depending on what the test needs to verify.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import unittest
+
+def parse_age(value):
+    age = int(value)
+    if age &lt; 0:
+        raise ValueError("Age cannot be negative")
+    return age
+
+class TestAgeParser(unittest.TestCase):
+    def test_negative_age(self):
+        with self.assertRaises(Exception):  # Noncompliant: does not verify which exception
+            parse_age("-5")
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+import unittest
+
+def parse_age(value):
+    age = int(value)
+    if age &lt; 0:
+        raise ValueError("Age cannot be negative")
+    return age
+
+class TestAgeParser(unittest.TestCase):
+    def test_negative_age(self):
+        with self.assertRaises(ValueError):
+            parse_age("-5")
+
+        # or
+        with self.assertRaisesRegex(Exception, r"Age cannot be negative"):
+            parse_age("-5")
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/reference/reference.html#pytest-raises">raises</a></li>
+  <li>unittest documentation - <a href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises">assertRaises</a></li>
+</ul>
+
