@@ -1,0 +1,141 @@
+<p>This rule raises an issue when a test uses a <code>try-except</code> block combined with <code>fail()</code> to verify whether an exception is
+raised or not raised.</p>
+<h2>Why is this an issue?</h2>
+<p>Using <code>try-except</code> blocks combined with <code>fail()</code> to test for the presence or absence of exceptions is an anti-pattern.</p>
+<p>Modern testing frameworks like <code>pytest</code> and Python’s built-in <code>unittest</code> provide dedicated assertion methods that make
+exception testing cleaner and more explicit. These methods eliminate boilerplate code, clearly communicate test intent, and make it easier to assert
+on exception details.</p>
+<p>The <code>try-except-fail()</code> pattern has several drawbacks:</p>
+<ul>
+  <li>It adds unnecessary boilerplate that obscures the test’s purpose</li>
+  <li>It requires manual exception handling instead of using framework features</li>
+  <li>It makes the test harder to maintain and read</li>
+  <li>It provides no straightforward way to assert on exception attributes when an exception is expected</li>
+</ul>
+<p>Dedicated exception assertions solve these problems by providing a declarative way to express exception expectations.</p>
+<h3>What is the potential impact?</h3>
+<p>Using <code>try-except</code> with <code>fail()</code> instead of dedicated exception assertions reduces test code quality and maintainability:</p>
+<ul>
+  <li><strong>Readability</strong>: Tests become harder to understand at a glance, especially for developers unfamiliar with the codebase</li>
+  <li><strong>Maintainability</strong>: More verbose code means more places for bugs to hide and more effort required to update tests</li>
+  <li><strong>Intent clarity</strong>: The test’s purpose (verifying exception behavior) is buried in control flow rather than being explicit</li>
+  <li><strong>Lost functionality</strong>: It’s harder to assert on exception messages, types, or other attributes when using the
+  <code>try-except</code> pattern</li>
+</ul>
+<h2>How to fix it in unittest</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>Replace <code>try-except</code> blocks that use <code>fail()</code> with <code>assertRaises</code> used as a context manager. This built-in method
+from Python’s <code>unittest</code> framework provides a clean way to verify exception behavior.</p>
+<p>When you expect no exception, simply call the code directly without wrapping it in a <code>try-except</code> block. If an unexpected exception is
+raised, the test framework will catch it and fail the test automatically.</p>
+<p>When you expect an exception, use <code>assertRaises</code> as a context manager. This allows you to capture the exception and make additional
+assertions on its properties.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import unittest
+
+class UserServiceTest(unittest.TestCase):
+    def test_no_exception_thrown(self):
+        try:
+            self.user_service.register_user(self.valid_user)
+        except ValidationError:
+            self.fail("Should not have thrown any exception")  # Noncompliant
+</pre>
+<p>When verifying that an exception is raised, use <code>assertRaises</code> as a context manager. This provides access to the exception object for
+further assertions.</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import unittest
+
+class UserServiceTest(unittest.TestCase):
+    def test_exception_is_thrown(self):
+        try:
+            self.user_service.register_user(self.invalid_user)
+            self.fail("Expected ValidationError to be thrown")  # Noncompliant
+        except ValidationError as e:
+            self.assertEqual("Invalid email", str(e))
+</pre>
+<h4>Compliant solution</h4>
+<p>Replace <code>try-except</code> blocks that use <code>fail()</code> with <code>assertRaises</code> used as a context manager. This built-in method
+from Python’s <code>unittest</code> framework provides a clean way to verify exception behavior.</p>
+<p>When you expect no exception, simply call the code directly without wrapping it in a <code>try-except</code> block. If an unexpected exception is
+raised, the test framework will catch it and fail the test automatically.</p>
+<p>When you expect an exception, use <code>assertRaises</code> as a context manager. This allows you to capture the exception and make additional
+assertions on its properties.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+import unittest
+
+class UserServiceTest(unittest.TestCase):
+    def test_no_exception_thrown(self):
+        # Simply call the method - unittest will fail if an exception is raised
+        self.user_service.register_user(self.valid_user)
+</pre>
+<p>When verifying that an exception is raised, use <code>assertRaises</code> as a context manager. This provides access to the exception object for
+further assertions.</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+import unittest
+
+class UserServiceTest(unittest.TestCase):
+    def test_exception_is_thrown(self):
+        with self.assertRaises(ValidationError) as context:
+            self.user_service.register_user(self.invalid_user)
+
+        self.assertEqual("Invalid email", str(context.exception))
+</pre>
+<h2>How to fix it in pytest</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>Replace <code>try-except</code> blocks with <code>pytest.raises</code> used as a context manager. Pytest is the most popular Python testing
+framework and provides excellent exception testing support.</p>
+<p>When you expect no exception, simply call the code directly. Pytest will fail the test if an unexpected exception occurs.</p>
+<p>When you expect an exception, use <code>pytest.raises</code> as a context manager to verify the exception type and optionally inspect its
+properties.</p>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import pytest
+
+def test_no_exception_thrown(user_service, valid_user):
+    try:
+        user_service.register_user(valid_user)
+    except ValidationError:
+        pytest.fail("Should not have thrown any exception")  # Noncompliant
+</pre>
+<p>When verifying that an exception is raised with pytest, use <code>pytest.raises</code> as a context manager. This gives you access to the exception
+object for additional assertions using the <code>match</code> parameter or the <code>value</code> attribute.</p>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+import pytest
+
+def test_exception_is_thrown(user_service, invalid_user):
+    try:
+        user_service.register_user(invalid_user)
+        pytest.fail("Expected ValidationError to be thrown")  # Noncompliant
+    except ValidationError as e:
+        assert str(e) == "Invalid email"
+</pre>
+<h4>Compliant solution</h4>
+<p>Replace <code>try-except</code> blocks with <code>pytest.raises</code> used as a context manager. Pytest is the most popular Python testing
+framework and provides excellent exception testing support.</p>
+<p>When you expect no exception, simply call the code directly. Pytest will fail the test if an unexpected exception occurs.</p>
+<p>When you expect an exception, use <code>pytest.raises</code> as a context manager to verify the exception type and optionally inspect its
+properties.</p>
+<pre data-diff-id="3" data-diff-type="compliant">
+def test_no_exception_thrown(user_service, valid_user):
+    # Simply call the method - pytest will fail if an exception is raised
+    user_service.register_user(valid_user)
+</pre>
+<p>When verifying that an exception is raised with pytest, use <code>pytest.raises</code> as a context manager. This gives you access to the exception
+object for additional assertions using the <code>match</code> parameter or the <code>value</code> attribute.</p>
+<pre data-diff-id="4" data-diff-type="compliant">
+import pytest
+
+def test_exception_is_thrown(user_service, invalid_user):
+    with pytest.raises(ValidationError) as exc_info:
+        user_service.register_user(invalid_user)
+
+    assert str(exc_info.value) == "Invalid email"
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>unittest documentation - <a href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises">assertRaises</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/reference/reference.html#pytest.raises">raises</a></li>
+</ul>
+
