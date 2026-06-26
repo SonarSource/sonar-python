@@ -141,6 +141,8 @@ public class OpenSourceCheckList {
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
       BareRaiseInFinallyCheck.class,
+      BeautifulSoupClassListCheck.class,
+      BeautifulSoupDeprecatedNamesCheck.class,
       BeautifulSoupParserCheck.class,
       BeautifulSoupRawHtmlInsertionCheck.class,
       BeautifulSoupNoneCheck.class,
@@ -516,7 +518,6 @@ public class OpenSourceCheckList {
       WebEntryPointDecoratorCheck.class,
       DjangoModelStringFieldCheck.class,
       DjangoModelStrMethodCheck.class,
-      HardcodedCredentialsCallCheck.class,
-      BeautifulSoupDeprecatedNamesCheck.class);
+      HardcodedCredentialsCallCheck.class);
   }
 }
