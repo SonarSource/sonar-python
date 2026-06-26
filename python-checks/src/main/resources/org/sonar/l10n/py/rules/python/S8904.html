@@ -1,0 +1,179 @@
+<p>This is an issue when accessing attributes, methods, or using subscript notation on HTML/XML parsing library search results without first verifying
+the element exists.</p>
+<p>This rule raises an issue when you access attributes, text content, or methods of BeautifulSoup elements without first checking if they exist.</p>
+<p>BeautifulSoup’s search methods like <code>find()</code>, <code>find_next()</code>, and <code>select_one()</code> return <code>None</code> when they
+cannot locate a matching element. If you try to access properties or methods on <code>None</code>, Python raises an <code>AttributeError</code> or
+<code>TypeError</code>, causing your program to crash.</p>
+<p>This commonly happens when:</p>
+<ul>
+  <li>You assume an HTML element will always be present in the parsed content</li>
+  <li>You chain multiple <code>find()</code> calls without intermediate checks</li>
+  <li>You access element attributes using subscript notation (e.g., <code>element['href']</code>)</li>
+  <li>You access the <code>.text</code>, <code>.string</code>, or other properties directly after a search</li>
+</ul>
+<p>The following methods and access patterns can return <code>None</code> and are covered by this rule:</p>
+<table>
+  <colgroup>
+    <col style="width: 25%;">
+    <col style="width: 50%;">
+    <col style="width: 25%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Method / Access</th>
+      <th>Description</th>
+      <th>Returns <code>None</code> when</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>find()</code></p>
+      </td>
+      <td>
+        <p>Searches descendants for the first tag or string matching the given criteria.</p>
+      </td>
+      <td>
+        <p>No matching element exists.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>find_next()</code></p>
+      </td>
+      <td>
+        <p>Finds the first tag or string that follows the current element in document order matching the given criteria.</p>
+      </td>
+      <td>
+        <p>No matching element exists after the current position.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>find_previous()</code></p>
+      </td>
+      <td>
+        <p>Finds the first tag or string that precedes the current element in document order matching the given criteria.</p>
+      </td>
+      <td>
+        <p>No matching element exists before the current position.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>find_next_sibling()</code></p>
+      </td>
+      <td>
+        <p>Finds the first sibling tag after the current element matching the given criteria.</p>
+      </td>
+      <td>
+        <p>No matching sibling exists after the current element.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>find_previous_sibling()</code></p>
+      </td>
+      <td>
+        <p>Finds the first sibling tag before the current element matching the given criteria.</p>
+      </td>
+      <td>
+        <p>No matching sibling exists before the current element.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>find_parent()</code></p>
+      </td>
+      <td>
+        <p>Finds the first parent tag matching the given criteria by traversing upward in the tree.</p>
+      </td>
+      <td>
+        <p>No matching parent exists.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>select_one()</code></p>
+      </td>
+      <td>
+        <p>Returns the first tag matching the given CSS selector.</p>
+      </td>
+      <td>
+        <p>No element matches the CSS selector.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h2>Why is this an issue?</h2>
+<p>HTML and XML parsing libraries provide search methods to locate elements in parsed document trees. These search methods typically return a null or
+none value when they cannot find a matching element, rather than throwing an exception. This is expected behavior because:</p>
+<ul>
+  <li>HTML structures vary between pages and websites</li>
+  <li>Content may be dynamically loaded or conditionally present</li>
+  <li>Selectors might be incorrect or outdated</li>
+  <li>The page structure may change over time</li>
+</ul>
+<p>The problem occurs when code assumes an element will always be found and immediately accesses its properties or methods. Attempting to operate on a
+null result causes runtime errors when:</p>
+<ul>
+  <li>Accessing properties like text content, tag names, or other element attributes on null values</li>
+  <li>Using subscript or indexing operations to access element attributes on null values</li>
+  <li>Calling methods to navigate the document tree or retrieve information on null values</li>
+  <li>Chaining multiple search operations without intermediate null checks amplifies the risk</li>
+</ul>
+<p>These runtime errors cause the program to crash, often in production when encountering unexpected HTML structures. The errors can be difficult to
+diagnose because they depend on the specific content being parsed, which may vary between:</p>
+<ul>
+  <li>Different pages on the same website</li>
+  <li>The same page at different times</li>
+  <li>Different user sessions or geographic locations</li>
+  <li>Development versus production environments</li>
+</ul>
+<h3>What is the potential impact?</h3>
+<p>When HTML/XML parser element references are accessed without null checks, the application crashes with null reference exceptions or type errors.
+This has several consequences:</p>
+<ul>
+  <li><strong>Service disruption</strong>: Web scraping scripts fail mid-execution, leaving incomplete or corrupt data</li>
+  <li><strong>Poor user experience</strong>: Applications that parse HTML for features crash unexpectedly</li>
+  <li><strong>Difficult debugging</strong>: Errors only occur with specific HTML content, making them hard to reproduce</li>
+  <li><strong>Data loss</strong>: Partially processed data may be lost when the program terminates</li>
+  <li><strong>Maintenance burden</strong>: Developers must handle support requests and emergency fixes</li>
+</ul>
+<p>The impact is particularly severe in production web scraping pipelines, automated testing tools, and applications that process user-provided HTML
+content.</p>
+<h2>How to fix it</h2>
+<p>Check if the element exists before accessing its attributes. Store the search result in a variable and verify it’s not None using a conditional
+statement. This approach makes the code self-documenting and provides a clear place to handle missing elements.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(html_content, "html.parser")
+figure = soup.find("dd", class_="investment_sought").text  # Noncompliant
+print(figure)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(html_content, "html.parser")
+element = soup.find("dd", class_="investment_sought")
+if element:
+    figure = element.text
+    print(figure)
+else:
+    print("Element not found")
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>BeautifulSoup Documentation - find() - <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#find">Official documentation for the
+  find() method, explaining its return behavior</a></li>
+  <li>BeautifulSoup Documentation - Navigating the tree - <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#navigating-the-tree">Guide
+  to navigating HTML document trees and accessing element attributes</a></li>
+  <li>Python AttributeError - <a href="https://docs.python.org/3/library/exceptions.html#AttributeError">Python documentation on AttributeError
+  exceptions</a></li>
+</ul>
+
