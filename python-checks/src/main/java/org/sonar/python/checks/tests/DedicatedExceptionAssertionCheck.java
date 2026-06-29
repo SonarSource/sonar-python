@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
@@ -38,7 +39,10 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
   private static final String PYTEST_MESSAGE = "Replace this try/except block with a \"pytest.raises\" context manager.";
   private static final String UNITTEST_MESSAGE = "Replace this try/except block with \"self.assertRaises()\".";
   private static final String NO_EXCEPTION_MESSAGE = "Remove this try/except block and let the test fail naturally if an exception is raised.";
-  private record FailCall(CallExpression callExpression, String message) {
+  private static final String DEDICATED_ASSERTION_SECONDARY_MESSAGE = "Replace this fail call with a dedicated exception assertion.";
+  private static final String NO_EXCEPTION_SECONDARY_MESSAGE = "Remove this fail call and let the test fail naturally if an exception is raised.";
+
+  private record FailCall(CallExpression callExpression, String primaryMessage, String secondaryMessage) {
   }
 
   @Override
@@ -59,7 +63,8 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
     if (tryStatement.exceptClauses().size() == 1) {
       FailCall exceptFail = failCallFromSingleStatementBody(tryStatement.exceptClauses().get(0).body().statements(), ctx);
       if (exceptFail != null) {
-        ctx.addIssue(exceptFail.callExpression(), NO_EXCEPTION_MESSAGE);
+        ctx.addIssue(tryStatement.tryKeyword(), endToken(tryStatement), NO_EXCEPTION_MESSAGE)
+          .secondary(exceptFail.callExpression(), NO_EXCEPTION_SECONDARY_MESSAGE);
         return;
       }
     }
@@ -72,7 +77,20 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    ctx.addIssue(failCall.callExpression(), failCall.message());
+    ctx.addIssue(tryStatement.tryKeyword(), endToken(tryStatement), failCall.primaryMessage())
+      .secondary(failCall.callExpression(), failCall.secondaryMessage());
+  }
+
+  private static Token endToken(TryStatement tryStatement) {
+    var elseClause = tryStatement.elseClause();
+    if (elseClause != null) {
+      return lastStatement(elseClause.body().statements()).lastToken();
+    }
+    return lastStatement(tryStatement.exceptClauses().get(tryStatement.exceptClauses().size() - 1).body().statements()).lastToken();
+  }
+
+  private static Statement lastStatement(List<Statement> statements) {
+    return statements.get(statements.size() - 1);
   }
 
   private static boolean hasSupportedExceptClauses(TryStatement tryStatement) {
@@ -114,10 +132,10 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
       return null;
     }
     if (isPytestFail(callExpression, ctx)) {
-      return new FailCall(callExpression, PYTEST_MESSAGE);
+      return new FailCall(callExpression, PYTEST_MESSAGE, DEDICATED_ASSERTION_SECONDARY_MESSAGE);
     }
     if (isUnittestFail(callExpression, ctx)) {
-      return new FailCall(callExpression, UNITTEST_MESSAGE);
+      return new FailCall(callExpression, UNITTEST_MESSAGE, DEDICATED_ASSERTION_SECONDARY_MESSAGE);
     }
     return null;
   }

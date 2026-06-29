@@ -7,43 +7,53 @@ def explode():
     raise ValueError()
 
 def test_pytest_reproducer():
-    try:
+    try:  # Noncompliant {{Replace this try/except block with a "pytest.raises" context manager.}}
+#   ^[el=+6;ec=42]
         explode()
     except ValueError:
         pass
     else:
-        pytest.fail("ValueError expected")  # Noncompliant {{Replace this try/except block with a "pytest.raises" context manager.}}
+        pytest.fail("ValueError expected")
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Replace this fail call with a dedicated exception assertion.}}
 
 def test_pytest_else_fail():
-    try:
+    try:  # Noncompliant {{Replace this try/except block with a "pytest.raises" context manager.}}
+#   ^[el=+6;ec=42]
         explode()
     except ValueError:
         pass
     else:
-        pytest.fail("ValueError expected")  # Noncompliant {{Replace this try/except block with a "pytest.raises" context manager.}}
+        pytest.fail("ValueError expected")
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Replace this fail call with a dedicated exception assertion.}}
 
 def test_pytest_try_fail():
-    try:
+    try:  # Noncompliant {{Replace this try/except block with a "pytest.raises" context manager.}}
+#   ^[el=+6;ec=12]
         explode()
-        pytest.fail("ValueError expected")  # Noncompliant {{Replace this try/except block with a "pytest.raises" context manager.}}
+        pytest.fail("ValueError expected")
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Replace this fail call with a dedicated exception assertion.}}
     except ValueError:
         pass
 
 def test_pytest_imported_fail():
-    try:
+    try:  # Noncompliant {{Replace this try/except block with a "pytest.raises" context manager.}}
+#   ^[el=+6;ec=44]
         explode()
     except ValueError:
         pass
     else:
-        imported_fail("ValueError expected")  # Noncompliant {{Replace this try/except block with a "pytest.raises" context manager.}}
+        imported_fail("ValueError expected")
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Replace this fail call with a dedicated exception assertion.}}
 
 def test_except_body_with_extra_logic():
-    try:
+    try:  # Noncompliant
+#   ^[el=+6;ec=42]
         explode()
     except ValueError as err:
         print(err)
     else:
-        pytest.fail("ValueError expected")  # Noncompliant
+        pytest.fail("ValueError expected")
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Replace this fail call with a dedicated exception assertion.}}
 
 def test_no_issue_on_non_pytest_fail():
     try:
@@ -101,10 +111,12 @@ def test_no_issue_with_non_call_expression_else():
         "ValueError expected"
 
 def test_fail_in_except():
-    try:
+    try:  # Noncompliant {{Remove this try/except block and let the test fail naturally if an exception is raised.}}
+#   ^[el=+4;ec=33]
         explode()
     except ValueError:
-        pytest.fail("unexpected")  # Noncompliant {{Remove this try/except block and let the test fail naturally if an exception is raised.}}
+        pytest.fail("unexpected")
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^< {{Remove this fail call and let the test fail naturally if an exception is raised.}}
 
 def test_no_issue_with_multi_statement_except_body():
     try:
@@ -114,9 +126,11 @@ def test_no_issue_with_multi_statement_except_body():
         pytest.fail(message)
 
 def test_try_fail_with_multiple_except_clauses():
-    try:
+    try:  # Noncompliant {{Replace this try/except block with a "pytest.raises" context manager.}}
+#   ^[el=+8;ec=37]
         explode()
-        pytest.fail("ValueError expected")  # Noncompliant {{Replace this try/except block with a "pytest.raises" context manager.}}
+        pytest.fail("ValueError expected")
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Replace this fail call with a dedicated exception assertion.}}
     except ValueError:
         pass
     except TypeError as err:
@@ -129,30 +143,38 @@ class SomeTest(unittest.TestCase):
         self.invalid_user = None
 
     def test_unittest_else_fail(self):
-        try:
+        try:  # Noncompliant {{Replace this try/except block with "self.assertRaises()".}}
+#       ^[el=+6;ec=44]
             explode()
         except ValueError:
             pass
         else:
-            self.fail("ValueError expected")  # Noncompliant {{Replace this try/except block with "self.assertRaises()".}}
+            self.fail("ValueError expected")
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Replace this fail call with a dedicated exception assertion.}}
 
     def test_unittest_try_fail(self):
-        try:
+        try:  # Noncompliant {{Replace this try/except block with "self.assertRaises()".}}
+#       ^[el=+6;ec=16]
             explode()
-            self.fail("ValueError expected")  # Noncompliant {{Replace this try/except block with "self.assertRaises()".}}
+            self.fail("ValueError expected")
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Replace this fail call with a dedicated exception assertion.}}
         except ValueError:
             pass
 
     def test_no_exception_expected(self):
-        try:
+        try:  # Noncompliant {{Remove this try/except block and let the test fail naturally if an exception is raised.}}
+#       ^[el=+4;ec=61]
             self.user_service.register_user(self.valid_user)
         except ValidationError:
-            self.fail("Should not have thrown any exception")  # Noncompliant {{Remove this try/except block and let the test fail naturally if an exception is raised.}}
+            self.fail("Should not have thrown any exception")
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Remove this fail call and let the test fail naturally if an exception is raised.}}
 
     def test_exception_details(self):
-        try:
+        try:  # Noncompliant {{Replace this try/except block with "self.assertRaises()".}}
+#       ^[el=+6;ec=53]
             self.user_service.register_user(self.invalid_user)
-            self.fail("Expected ValidationError to be thrown")  # Noncompliant {{Replace this try/except block with "self.assertRaises()".}}
+            self.fail("Expected ValidationError to be thrown")
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^< {{Replace this fail call with a dedicated exception assertion.}}
         except ValidationError as e:
             self.assertEqual("Invalid email", str(e))
 
