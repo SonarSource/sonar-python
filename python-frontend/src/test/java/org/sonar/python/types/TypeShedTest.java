@@ -27,7 +27,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.mockito.Mockito;
 import org.slf4j.event.Level;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
@@ -48,6 +47,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.sonar.python.types.TypeShed.symbolWithFQN;
 import static org.sonar.python.types.TypeShed.symbolsForModule;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TypeShedTest {
 
@@ -148,10 +149,10 @@ class TypeShedTest {
 
   @Test
   void symbols_not_retrieved_when_within_same_project() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = Mockito.mock(ProjectLevelSymbolTable.class);
+    ProjectLevelSymbolTable projectLevelSymbolTable = mock(ProjectLevelSymbolTable.class);
     TypeShed.setProjectLevelSymbolTable(projectLevelSymbolTable);
 
-    Mockito.when(projectLevelSymbolTable.projectBasePackages()).thenReturn(Set.of("sklearn"));
+    when(projectLevelSymbolTable.projectBasePackages()).thenReturn(Set.of("sklearn"));
     Map<String, Symbol> sklearnSymbols = symbolsForModule("sklearn.ensemble");
     assertThat(sklearnSymbols).isEmpty();
     sklearnSymbols = symbolsForModule("sklearn");
@@ -159,7 +160,7 @@ class TypeShedTest {
     Symbol symbol = symbolWithFQN("sklearn.ensemble", "sklearn.ensemble.RandomForestClassifier");
     assertThat(symbol).isNull();
 
-    Mockito.when(projectLevelSymbolTable.projectBasePackages()).thenReturn(Set.of("unrelated"));
+    when(projectLevelSymbolTable.projectBasePackages()).thenReturn(Set.of("unrelated"));
     sklearnSymbols = symbolsForModule("sklearn.ensemble");
     assertThat(sklearnSymbols).isNotEmpty();
     symbol = symbolWithFQN("sklearn.ensemble", "sklearn.ensemble.RandomForestClassifier");

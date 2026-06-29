@@ -23,9 +23,9 @@ import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
@@ -34,7 +34,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 
 class ReachingDefinitionsAnalysisTest {
-  private final PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
+  private final PythonFile file = mock(PythonFile.class, "file1.py");
   ReachingDefinitionsAnalysis analysis = new ReachingDefinitionsAnalysis(file);
 
   @Test

@@ -18,18 +18,20 @@ package org.sonar.python.semantic.v2.converter;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 class ConversionContextTest {
 
   @Test
   void lazyTypeContextTest() {
-    var expectedLazyTypeContext = Mockito.mock(LazyTypesContext.class);
-    var rootConverter = Mockito.mock(DescriptorToPythonTypeConverter.class);
+    var expectedLazyTypeContext = mock(LazyTypesContext.class);
+    var rootConverter = mock(DescriptorToPythonTypeConverter.class);
     var ctx = new ConversionContext("", expectedLazyTypeContext, rootConverter, TypeOrigin.LOCAL);
     var lazyTypesContext = ctx.lazyTypesContext();
     Assertions.assertSame(expectedLazyTypeContext, lazyTypesContext);
@@ -37,11 +39,11 @@ class ConversionContextTest {
 
   @Test
   void parentsTest() {
-    var expectedLazyTypeContext = Mockito.mock(LazyTypesContext.class);
-    var rootConverter = Mockito.mock(DescriptorToPythonTypeConverter.class);
+    var expectedLazyTypeContext = mock(LazyTypesContext.class);
+    var rootConverter = mock(DescriptorToPythonTypeConverter.class);
     var ctx = new ConversionContext("", expectedLazyTypeContext, rootConverter, TypeOrigin.LOCAL);
-    var firstParent = Mockito.mock(PythonType.class);
-    var secondParent = Mockito.mock(PythonType.class);
+    var firstParent = mock(PythonType.class);
+    var secondParent = mock(PythonType.class);
 
     Assertions.assertNull(ctx.currentParent());
     ctx.pushParent(firstParent);
@@ -56,14 +58,14 @@ class ConversionContextTest {
 
   @Test
   void convertTest() {
-    var descriptor = Mockito.mock(Descriptor.class);
-    var expectedType = Mockito.mock(PythonType.class);
+    var descriptor = mock(Descriptor.class);
+    var expectedType = mock(PythonType.class);
 
-    var lazyTypeContext = Mockito.mock(LazyTypesContext.class);
-    var rootConverter = Mockito.mock(DescriptorToPythonTypeConverter.class);
+    var lazyTypeContext = mock(LazyTypesContext.class);
+    var rootConverter = mock(DescriptorToPythonTypeConverter.class);
     var ctx = new ConversionContext("", lazyTypeContext, rootConverter, TypeOrigin.LOCAL);
 
-    Mockito.when(rootConverter.convert(ctx, descriptor))
+    when(rootConverter.convert(ctx, descriptor))
       .thenReturn(expectedType);
 
     var type = ctx.convert(descriptor);

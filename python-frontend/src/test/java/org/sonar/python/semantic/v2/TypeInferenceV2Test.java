@@ -33,7 +33,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
@@ -110,6 +109,10 @@ import static org.sonar.python.types.v2.TypesTestUtils.SET_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.TUPLE_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.TYPE_TYPE;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 public class TypeInferenceV2Test {
 
@@ -3126,15 +3129,15 @@ public class TypeInferenceV2Test {
         """
     );
     CallExpression callExpression = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0));
-    CallExpression callExpressionSpy = Mockito.spy(callExpression);
+    CallExpression callExpressionSpy = spy(callExpression);
 
     // Inconsistent union type, should not happen
-    UnionType unionType = Mockito.mock(UnionType.class);
-    Mockito.when(unionType.candidates()).thenReturn(Set.of(PythonType.UNKNOWN));
+    UnionType unionType = mock(UnionType.class);
+    when(unionType.candidates()).thenReturn(Set.of(PythonType.UNKNOWN));
 
-    Name mock = Mockito.mock(Name.class);
-    Mockito.when(mock.typeV2()).thenReturn(unionType);
-    Mockito.doReturn(mock).when(callExpressionSpy).callee();
+    Name mock = mock(Name.class);
+    when(mock.typeV2()).thenReturn(unionType);
+    doReturn(mock).when(callExpressionSpy).callee();
 
     assertThat(callExpressionSpy.typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
@@ -3147,15 +3150,15 @@ public class TypeInferenceV2Test {
         """
     );
     CallExpression callExpression = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0));
-    CallExpression callExpressionSpy = Mockito.spy(callExpression);
+    CallExpression callExpressionSpy = spy(callExpression);
 
     // Inconsistent union type, should not happen
-    UnionType unionType = Mockito.mock(UnionType.class);
-    Mockito.when(unionType.candidates()).thenReturn(Set.of());
+    UnionType unionType = mock(UnionType.class);
+    when(unionType.candidates()).thenReturn(Set.of());
 
-    Name mock = Mockito.mock(Name.class);
-    Mockito.when(mock.typeV2()).thenReturn(unionType);
-    Mockito.doReturn(mock).when(callExpressionSpy).callee();
+    Name mock = mock(Name.class);
+    when(mock.typeV2()).thenReturn(unionType);
+    doReturn(mock).when(callExpressionSpy).callee();
 
     assertThat(callExpressionSpy.typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
@@ -3273,8 +3276,8 @@ public class TypeInferenceV2Test {
     ModuleType builtinModule = symbolsModuleTypeProvider.getRootModule();
     symbolsModuleTypeProvider.convertModuleType(List.of("typing"), builtinModule);
 
-    ClassSymbol symbol = Mockito.mock(ClassSymbolImpl.class);
-    Mockito.when(symbol.kind()).thenReturn(Symbol.Kind.OTHER);
+    ClassSymbol symbol = mock(ClassSymbolImpl.class);
+    when(symbol.kind()).thenReturn(Symbol.Kind.OTHER);
     assertThat(PROJECT_LEVEL_TYPE_TABLE.lazyTypesContext().getOrCreateLazyType("typing.Iterable.unknown").resolve()).isEqualTo(PythonType.UNKNOWN);
   }
 

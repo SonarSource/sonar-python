@@ -26,7 +26,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.TriBool;
@@ -53,6 +52,7 @@ import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.semantic.ProjectLevelSymbolTable.empty;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
+import static org.mockito.Mockito.mock;
 
 public class ClassTypeTest {
 
@@ -98,7 +98,7 @@ public class ClassTypeTest {
 
   @Test
   void members() {
-    FunctionType barMember = Mockito.mock(FunctionType.class);
+    FunctionType barMember = mock(FunctionType.class);
     Member bar = new Member("bar", barMember);
     Member qix = new Member("qix", PythonType.UNKNOWN);
     ClassType classType = new ClassType(

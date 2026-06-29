@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
@@ -42,13 +41,17 @@ import org.sonar.plugins.python.api.types.v2.TypeOrigin;
 import org.sonar.plugins.python.api.types.v2.TypeWrapper;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 
+import static org.mockito.Mockito.argThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 class DescriptorToPythonTypeConverterTest {
 
   @Test
   void unknownDescriptorToPythonTypeConverterTest() {
-    var ctx = Mockito.mock(ConversionContext.class);
-    var descriptor = Mockito.mock(Descriptor.class);
-    Mockito.when(descriptor.kind()).thenReturn(null);
+    var ctx = mock(ConversionContext.class);
+    var descriptor = mock(Descriptor.class);
+    when(descriptor.kind()).thenReturn(null);
     var converter = new UnknownDescriptorToPythonTypeConverter();
     var type = converter.convert(ctx, descriptor);
     Assertions.assertThat(type).isEqualTo(PythonType.UNKNOWN);
@@ -56,21 +59,21 @@ class DescriptorToPythonTypeConverterTest {
 
   @Test
   void ambiguousDescriptorConversionTest() {
-    var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
+    var lazyTypesContext = mock(LazyTypesContext.class);
     var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
 
-    var descriptorAlternative1 = Mockito.mock(FunctionDescriptor.class);
+    var descriptorAlternative1 = mock(FunctionDescriptor.class);
 
     var returnTypeName = "Returned";
     String fullyQualifiedName = "returned.ReturnTypeName";
     var resolvedReturnType = new ClassTypeBuilder(returnTypeName, fullyQualifiedName).build();
-    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.importPath()))))
+    when(lazyTypesContext.resolveLazyType(argThat(lt -> returnTypeName.equals(lt.importPath()))))
       .thenReturn(resolvedReturnType);
 
-    Mockito.when(descriptorAlternative1.kind()).thenReturn(Descriptor.Kind.FUNCTION);
-    Mockito.when(descriptorAlternative1.name()).thenReturn("Sample");
-    Mockito.when(descriptorAlternative1.annotatedReturnTypeName()).thenReturn(returnTypeName);
-    Mockito.when(descriptorAlternative1.parameters()).thenReturn(List.of(
+    when(descriptorAlternative1.kind()).thenReturn(Descriptor.Kind.FUNCTION);
+    when(descriptorAlternative1.name()).thenReturn("Sample");
+    when(descriptorAlternative1.annotatedReturnTypeName()).thenReturn(returnTypeName);
+    when(descriptorAlternative1.parameters()).thenReturn(List.of(
       new FunctionDescriptor.Parameter(
         "p1",
         "Returned",
@@ -83,11 +86,11 @@ class DescriptorToPythonTypeConverterTest {
         new LocationInFile("m1", 1, 10,  1, 15))
     ));
 
-    var descriptorAlternative2 = Mockito.mock(FunctionDescriptor.class);
-    Mockito.when(descriptorAlternative2.kind()).thenReturn(Descriptor.Kind.FUNCTION);
-    Mockito.when(descriptorAlternative2.name()).thenReturn("Sample");
-    Mockito.when(descriptorAlternative2.annotatedReturnTypeName()).thenReturn(returnTypeName);
-    Mockito.when(descriptorAlternative2.parameters()).thenReturn(List.of(
+    var descriptorAlternative2 = mock(FunctionDescriptor.class);
+    when(descriptorAlternative2.kind()).thenReturn(Descriptor.Kind.FUNCTION);
+    when(descriptorAlternative2.name()).thenReturn("Sample");
+    when(descriptorAlternative2.annotatedReturnTypeName()).thenReturn(returnTypeName);
+    when(descriptorAlternative2.parameters()).thenReturn(List.of(
       new FunctionDescriptor.Parameter(
         "p2",
         "Returned",
@@ -100,9 +103,9 @@ class DescriptorToPythonTypeConverterTest {
         new LocationInFile("m1", 2, 10,  2, 15))
     ));
 
-    var descriptor = Mockito.mock(AmbiguousDescriptor.class);
-    Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.AMBIGUOUS);
-    Mockito.when(descriptor.alternatives()).thenReturn(Set.of(descriptorAlternative1, descriptorAlternative2));
+    var descriptor = mock(AmbiguousDescriptor.class);
+    when(descriptor.kind()).thenReturn(Descriptor.Kind.AMBIGUOUS);
+    when(descriptor.alternatives()).thenReturn(Set.of(descriptorAlternative1, descriptorAlternative2));
 
     var type = (UnionType) converter.convert("", descriptor, TypeOrigin.LOCAL);
     Assertions.assertThat(type.candidates())
@@ -118,28 +121,28 @@ class DescriptorToPythonTypeConverterTest {
 
   @Test
   void classDescriptorConversionTest() {
-    var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
+    var lazyTypesContext = mock(LazyTypesContext.class);
     var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
-    var descriptor = Mockito.mock(ClassDescriptor.class);
+    var descriptor = mock(ClassDescriptor.class);
 
     var parentClassName = "Parent";
     String parentClassFqn = "parent.Parent";
     var resolvedParent = new ClassTypeBuilder(parentClassName, parentClassFqn).build();
 
-    var member = Mockito.mock(AmbiguousDescriptor.class);
-    Mockito.when(member.kind()).thenReturn(Descriptor.Kind.AMBIGUOUS);
-    Mockito.when(member.name()).thenReturn("member");
+    var member = mock(AmbiguousDescriptor.class);
+    when(member.kind()).thenReturn(Descriptor.Kind.AMBIGUOUS);
+    when(member.name()).thenReturn("member");
 
-    Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.CLASS);
-    Mockito.when(descriptor.name()).thenReturn("Sample");
-    Mockito.when(descriptor.superClasses()).thenReturn(List.of(parentClassName));
-    Mockito.when(descriptor.members()).thenReturn(List.of(
+    when(descriptor.kind()).thenReturn(Descriptor.Kind.CLASS);
+    when(descriptor.name()).thenReturn("Sample");
+    when(descriptor.superClasses()).thenReturn(List.of(parentClassName));
+    when(descriptor.members()).thenReturn(List.of(
       member
     ));
-    Mockito.when(lazyTypesContext.getOrCreateLazyType(parentClassName))
+    when(lazyTypesContext.getOrCreateLazyType(parentClassName))
       .thenReturn(new LazyType(parentClassName, lazyTypesContext));
 
-    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> parentClassName.equals(lt.importPath()))))
+    when(lazyTypesContext.resolveLazyType(argThat(lt -> parentClassName.equals(lt.importPath()))))
       .thenReturn(resolvedParent);
 
     var type = (ClassType) converter.convert("", descriptor, TypeOrigin.LOCAL);
@@ -157,24 +160,24 @@ class DescriptorToPythonTypeConverterTest {
 
   @Test
   void functionDescriptorConversionTest() {
-    var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
+    var lazyTypesContext = mock(LazyTypesContext.class);
     var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
-    var descriptor = Mockito.mock(FunctionDescriptor.class);
+    var descriptor = mock(FunctionDescriptor.class);
 
     var returnTypeName = "Returned";
     String returnTypeFqn = "returned.Returned";
     var resolvedReturnType = new ClassTypeBuilder(returnTypeName, returnTypeFqn).build();
 
-    Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.FUNCTION);
-    Mockito.when(descriptor.name()).thenReturn("Sample");
-    Mockito.when(descriptor.annotatedReturnTypeName()).thenReturn(returnTypeName);
+    when(descriptor.kind()).thenReturn(Descriptor.Kind.FUNCTION);
+    when(descriptor.name()).thenReturn("Sample");
+    when(descriptor.annotatedReturnTypeName()).thenReturn(returnTypeName);
 
-    TypeAnnotationDescriptor typeAnnotationDescriptor = Mockito.mock(TypeAnnotationDescriptor.class);
-    Mockito.when(typeAnnotationDescriptor.kind()).thenReturn(TypeAnnotationDescriptor.TypeKind.INSTANCE);
-    Mockito.when(typeAnnotationDescriptor.fullyQualifiedName()).thenReturn(returnTypeName);
-    Mockito.when(descriptor.typeAnnotationDescriptor()).thenReturn(typeAnnotationDescriptor);
+    TypeAnnotationDescriptor typeAnnotationDescriptor = mock(TypeAnnotationDescriptor.class);
+    when(typeAnnotationDescriptor.kind()).thenReturn(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    when(typeAnnotationDescriptor.fullyQualifiedName()).thenReturn(returnTypeName);
+    when(descriptor.typeAnnotationDescriptor()).thenReturn(typeAnnotationDescriptor);
 
-    Mockito.when(descriptor.parameters()).thenReturn(List.of(
+    when(descriptor.parameters()).thenReturn(List.of(
       new FunctionDescriptor.Parameter(
         "p1",
         "Returned",
@@ -187,10 +190,10 @@ class DescriptorToPythonTypeConverterTest {
         new LocationInFile("m1", 1, 10,  1, 15))
     ));
 
-    Mockito.when(lazyTypesContext.getOrCreateLazyType(returnTypeName))
+    when(lazyTypesContext.getOrCreateLazyType(returnTypeName))
       .thenReturn(new LazyType(returnTypeName, lazyTypesContext));
 
-    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.importPath()))))
+    when(lazyTypesContext.resolveLazyType(argThat(lt -> returnTypeName.equals(lt.importPath()))))
       .thenReturn(resolvedReturnType);
 
     var type = (FunctionType) converter.convert("", descriptor, TypeOrigin.LOCAL);
@@ -209,22 +212,22 @@ class DescriptorToPythonTypeConverterTest {
 
   @Test
   void variableDescriptorConversionTest() {
-    var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
+    var lazyTypesContext = mock(LazyTypesContext.class);
     var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
-    var descriptor = Mockito.mock(VariableDescriptor.class);
+    var descriptor = mock(VariableDescriptor.class);
 
     var variableTypeName = "Returned";
     String variableTypeFqn = "returned.Returned";
     var resolvedVariableType = new ClassTypeBuilder(variableTypeName, variableTypeFqn).build();
 
-    Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.VARIABLE);
-    Mockito.when(descriptor.name()).thenReturn("variable");
-    Mockito.when(descriptor.annotatedType()).thenReturn(variableTypeName);
+    when(descriptor.kind()).thenReturn(Descriptor.Kind.VARIABLE);
+    when(descriptor.name()).thenReturn("variable");
+    when(descriptor.annotatedType()).thenReturn(variableTypeName);
 
-    Mockito.when(lazyTypesContext.getOrCreateLazyTypeWrapper(variableTypeName))
+    when(lazyTypesContext.getOrCreateLazyTypeWrapper(variableTypeName))
       .thenReturn(new LazyTypeWrapper(new LazyType(variableTypeName, lazyTypesContext)));
 
-    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> variableTypeName.equals(lt.importPath()))))
+    when(lazyTypesContext.resolveLazyType(argThat(lt -> variableTypeName.equals(lt.importPath()))))
       .thenReturn(resolvedVariableType);
 
     var type = (ObjectType) converter.convert("", descriptor, TypeOrigin.LOCAL);

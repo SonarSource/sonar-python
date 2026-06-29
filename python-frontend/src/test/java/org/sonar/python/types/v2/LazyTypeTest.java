@@ -17,7 +17,6 @@
 package org.sonar.python.types.v2;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -26,6 +25,8 @@ import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
@@ -34,8 +35,8 @@ class LazyTypeTest {
 
   @Test
   void lazyTypeThrowExceptionsWhenInteractedWith() {
-    LazyTypesContext lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    when(lazyTypesContext.resolveLazyType(Mockito.any())).thenReturn(INT_TYPE);
+    LazyTypesContext lazyTypesContext = mock(LazyTypesContext.class);
+    when(lazyTypesContext.resolveLazyType(any())).thenReturn(INT_TYPE);
     LazyType lazyType = new LazyType("random", lazyTypesContext);
     assertThat(lazyType.resolve()).isEqualTo(INT_TYPE);
     assertThatThrownBy(lazyType::unwrappedType).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");

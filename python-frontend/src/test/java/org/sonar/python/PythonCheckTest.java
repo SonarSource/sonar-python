@@ -19,7 +19,6 @@ package org.sonar.python;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
@@ -74,7 +73,7 @@ class PythonCheckTest {
     assertThat(primaryLocation.endLineOffset()).isEqualTo(9);
 
     assertThat(firstIssue.quickFixes()).isEmpty();
-    PythonTextEdit textEdit = Mockito.mock(PythonTextEdit.class);
+    PythonTextEdit textEdit = mock(PythonTextEdit.class);
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New Quickfix")
       .addTextEdit(textEdit)
       .build();

@@ -24,11 +24,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mockito;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scan.issue.filter.FilterableIssue;
 import org.sonar.api.scan.issue.filter.IssueFilterChain;
 import org.sonar.plugins.python.api.nosonar.NoSonarLineInfo;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class NoSonarIssueFilterTest {
 
@@ -40,19 +42,19 @@ class NoSonarIssueFilterTest {
     var componentKey = "foo.py";
     var ruleRepo = "my_repo";
 
-    var collector = Mockito.mock(NoSonarLineInfoCollector.class);
-    Mockito.when(collector.get(componentKey))
+    var collector = mock(NoSonarLineInfoCollector.class);
+    when(collector.get(componentKey))
       .thenReturn(noSonarInfos);
 
     var filter = new NoSonarIssueFilter(collector, new SecurityRuleKeyProvider(SECURITY_RULES));
 
-    var issue = Mockito.mock(FilterableIssue.class);
-    Mockito.when(issue.componentKey()).thenReturn(componentKey);
-    Mockito.when(issue.line()).thenReturn(line);
-    Mockito.when(issue.ruleKey()).thenReturn(RuleKey.of(ruleRepo, ruleKey));
+    var issue = mock(FilterableIssue.class);
+    when(issue.componentKey()).thenReturn(componentKey);
+    when(issue.line()).thenReturn(line);
+    when(issue.ruleKey()).thenReturn(RuleKey.of(ruleRepo, ruleKey));
 
-    var filterChain = Mockito.mock(IssueFilterChain.class);
-    Mockito.when(filterChain.accept(issue)).thenReturn(filterChainAcceptResult);
+    var filterChain = mock(IssueFilterChain.class);
+    when(filterChain.accept(issue)).thenReturn(filterChainAcceptResult);
 
     var result = filter.accept(issue, filterChain);
     Assertions.assertThat(result)

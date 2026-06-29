@@ -19,7 +19,6 @@ package org.sonar.python.semantic.v2.converter;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.index.ClassDescriptor;
@@ -30,12 +29,13 @@ import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.SpecialFormType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 class VariableDescriptorToPythonTypeConverterTest {
   @Test
   void unsupportedClassTest() {
-    var ctx = Mockito.mock(ConversionContext.class);
-    var descriptor = Mockito.mock(ClassDescriptor.class);
+    var ctx = mock(ConversionContext.class);
+    var descriptor = mock(ClassDescriptor.class);
     var converter = new VariableDescriptorToPythonTypeConverter();
     Assertions.assertThatThrownBy(() -> converter.convert(ctx, descriptor))
       .isInstanceOf(IllegalArgumentException.class)
@@ -44,7 +44,7 @@ class VariableDescriptorToPythonTypeConverterTest {
 
   @Test
   void testSpecialFormTypeConversion() {
-    var ctx = Mockito.mock(ConversionContext.class);
+    var ctx = mock(ConversionContext.class);
     var converter = new VariableDescriptorToPythonTypeConverter();
 
     var typingSelfDescriptor = new VariableDescriptor("Self", "typing.Self", "typing._SpecialForm");

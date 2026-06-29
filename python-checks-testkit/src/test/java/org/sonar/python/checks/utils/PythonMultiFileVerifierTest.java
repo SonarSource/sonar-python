@@ -22,12 +22,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.types.v2.ModuleType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mockStatic;
 
 class PythonMultiFileVerifierTest {
 
@@ -56,7 +57,7 @@ class PythonMultiFileVerifierTest {
 
   @Test
   void createTemporaryDirectorException() {
-    try (var files = Mockito.mockStatic(Files.class)) {
+    try (var files = mockStatic(Files.class)) {
       files.when(() -> Files.createTempDirectory(""))
         .thenThrow(IOException.class);
 
@@ -69,8 +70,8 @@ class PythonMultiFileVerifierTest {
   void writeTempFileException() {
     var entry = Map.entry("foo.py", "class Foo: ...");
     var tempDirectoryPath = Path.of("temp");
-    try (var files = Mockito.mockStatic(Files.class)) {
-      files.when(() -> Files.newBufferedWriter(Mockito.any()))
+    try (var files = mockStatic(Files.class)) {
+      files.when(() -> Files.newBufferedWriter(any()))
         .thenThrow(IOException.class);
 
       assertThatThrownBy(() -> PythonMultiFileVerifier.writeTempFile(entry, tempDirectoryPath))

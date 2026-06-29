@@ -18,7 +18,6 @@ package org.sonar.python.quickfix;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonLine;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -33,6 +32,7 @@ import org.sonar.python.PythonTestUtils;
 import org.sonarsource.analyzer.commons.collections.ListUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.parse;
 
@@ -232,7 +232,7 @@ class TextEditUtilsTest {
   }
 
   private static Token mockToken(String value, int line, int column) {
-    Token token = Mockito.mock(Token.class);
+    Token token = mock(Token.class);
     when(token.firstToken()).thenReturn(token);
     when(token.lastToken()).thenReturn(token);
 

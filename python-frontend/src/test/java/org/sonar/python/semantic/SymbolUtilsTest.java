@@ -43,7 +43,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -254,17 +253,17 @@ class SymbolUtilsTest {
 
   @Test
   void path_of() throws IOException, URISyntaxException {
-    PythonFile pythonFile = Mockito.mock(PythonFile.class);
+    PythonFile pythonFile = mock(PythonFile.class);
     URI uri = Files.createTempFile("foo.py", "py").toUri();
-    Mockito.when(pythonFile.uri()).thenReturn(uri);
+    when(pythonFile.uri()).thenReturn(uri);
     assertThat(pathOf(pythonFile)).isEqualTo(Paths.get(uri));
 
     uri = new URI("myscheme", null, "/file1.py", null);
 
-    Mockito.when(pythonFile.uri()).thenReturn(uri);
+    when(pythonFile.uri()).thenReturn(uri);
     assertThat(pathOf(pythonFile)).isNull();
 
-    Mockito.when(pythonFile.uri()).thenThrow(InvalidPathException.class);
+    when(pythonFile.uri()).thenThrow(InvalidPathException.class);
     assertThat(pathOf(pythonFile)).isNull();
   }
 

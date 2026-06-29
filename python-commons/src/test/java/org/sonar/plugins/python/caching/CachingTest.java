@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
 import org.sonar.api.batch.fs.InputFile;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.mockito.Mockito;
 import org.slf4j.event.Level;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
@@ -46,6 +45,7 @@ import org.sonar.python.types.protobuf.DescriptorsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.sonar.plugins.python.caching.Caching.EFFECTIVE_FILE_TYPE_CACHE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
@@ -120,10 +120,10 @@ class CachingTest {
     TestReadCache readCache = new TestReadCache();
     InputStream inputStream = mock(InputStream.class);
     when(inputStream.readAllBytes()).thenThrow(new IOException("Boom!"));
-    PythonReadCacheImpl pythonReadCache = Mockito.spy(new PythonReadCacheImpl(readCache));
+    PythonReadCacheImpl pythonReadCache = spy(new PythonReadCacheImpl(readCache));
     String cacheKey = PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod";
     readCache.put(cacheKey, new byte[0]);
-    Mockito.when(pythonReadCache.read(cacheKey)).thenReturn(inputStream);
+    when(pythonReadCache.read(cacheKey)).thenReturn(inputStream);
 
     CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), pythonReadCache);
     Caching caching = new Caching(cacheContext, CACHE_VERSION);

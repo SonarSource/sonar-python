@@ -20,13 +20,14 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.annotation.Testable;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.python.semantic.v2.TestProject;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @Testable
 class TypeMatcherUtilsTest {
@@ -57,10 +58,10 @@ class TypeMatcherUtilsTest {
     TypeMatcher allMatcher1 = List.of("bar", "foo").stream()
       .map(TypeMatchers::hasMember)
       .collect(TypeMatcherUtils.allCollector());
-    assertThat(allMatcher1.evaluateFor(expression, Mockito.mock())).isEqualTo(TriBool.TRUE);
+    assertThat(allMatcher1.evaluateFor(expression, mock())).isEqualTo(TriBool.TRUE);
 
     var allMatcher2 = TypeMatchers.all(Stream.of("bar", "foo").map(TypeMatchers::hasMember));
-    assertThat(allMatcher2.evaluateFor(expression, Mockito.mock())).isEqualTo(TriBool.TRUE);
+    assertThat(allMatcher2.evaluateFor(expression, mock())).isEqualTo(TriBool.TRUE);
   }
 
   @Test
@@ -83,8 +84,8 @@ class TypeMatcherUtilsTest {
       .map(TypeMatchers::isObjectOfType)
       .collect(TypeMatcherUtils.anyCollector());
 
-    var ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    var ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     assertThat(anyMatcher1.evaluateFor(expression, ctx)).isEqualTo(TriBool.TRUE);
 

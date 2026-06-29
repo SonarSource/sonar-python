@@ -18,7 +18,6 @@ package org.sonar.python.checks.utils;
 
 import com.sonar.sslr.api.AstNode;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -31,6 +30,8 @@ import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class MarimoUtilsTest {
 
@@ -62,8 +63,8 @@ class MarimoUtilsTest {
     var symbolTableV2 = new SymbolTableBuilderV2(fileInput).build();
     new TypeInferenceV2(typeTable, mockFile, symbolTableV2, "").inferModuleType(fileInput);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(typeTable);
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(typeTable);
 
     var statements = fileInput.statements().statements();
     var functionDef = (FunctionDef) statements.get(statements.size() - 1);
@@ -73,8 +74,8 @@ class MarimoUtilsTest {
   }
 
   private static SubscriptionContext mockSubscriptionContext() {
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
     return ctx;
   }
 

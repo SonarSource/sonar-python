@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -32,13 +31,15 @@ import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 class IsObjectSatisfyingPredicateTest {
 
   @ParameterizedTest
   @MethodSource("objectTypeWithWrappedPredicateResults")
   void testObjectTypeUnwrapsAndDelegatesToWrappedPredicate(TriBool wrappedPredicateResult, TriBool expectedResult) {
-    PythonType wrappedType = Mockito.mock(PythonType.class);
+    PythonType wrappedType = mock(PythonType.class);
     ObjectType objectType = ObjectType.fromType(wrappedType);
     TypePredicate wrappedPredicate = MatchersTestUtils.mockPredicateReturning(wrappedType, wrappedPredicateResult);
 
@@ -57,12 +58,12 @@ class IsObjectSatisfyingPredicateTest {
   @ParameterizedTest
   @MethodSource("nonObjectTypesWithExpectedResults")
   void testNonObjectTypeDoesNotDelegateToWrappedPredicate(PythonType nonObjectType, TriBool expectedResult) {
-    TypePredicate wrappedPredicate = Mockito.mock(TypePredicate.class);
+    TypePredicate wrappedPredicate = mock(TypePredicate.class);
 
     TriBool result = checkType(nonObjectType, wrappedPredicate);
 
     assertThat(result).isEqualTo(expectedResult);
-    Mockito.verifyNoInteractions(wrappedPredicate);
+    verifyNoInteractions(wrappedPredicate);
   }
 
 
@@ -70,13 +71,13 @@ class IsObjectSatisfyingPredicateTest {
     return Stream.of(
       Arguments.of(PythonType.UNKNOWN, TriBool.UNKNOWN),
       Arguments.of(new UnknownType.UnresolvedImportType("some.module"), TriBool.UNKNOWN),
-      Arguments.of(Mockito.mock(PythonType.class), TriBool.FALSE)
+      Arguments.of(mock(PythonType.class), TriBool.FALSE)
     );
   }
 
   @Test
   void testTypeMatchersIsObjectSatisfyingIntegration() {
-    PythonType wrappedType = Mockito.mock(PythonType.class);
+    PythonType wrappedType = mock(PythonType.class);
     ObjectType objectType = ObjectType.fromType(wrappedType);
 
     TypePredicate innerPredicate = MatchersTestUtils.mockPredicateReturning(wrappedType, TriBool.TRUE);
@@ -84,7 +85,7 @@ class IsObjectSatisfyingPredicateTest {
 
     TypeMatcher objectThatMatcher = TypeMatchers.isObjectSatisfying(innerMatcher);
 
-    TypePredicateContext ctx = Mockito.mock(TypePredicateContext.class);
+    TypePredicateContext ctx = mock(TypePredicateContext.class);
     TriBool result = MatchersTestUtils.getPredicate(objectThatMatcher).check(objectType, ctx);
 
     assertThat(result).isEqualTo(TriBool.TRUE);
@@ -92,7 +93,7 @@ class IsObjectSatisfyingPredicateTest {
 
   private static TriBool checkType(PythonType type, TypePredicate wrappedPredicate) {
     IsObjectSatisfyingPredicate predicate = new IsObjectSatisfyingPredicate(wrappedPredicate);
-    TypePredicateContext ctx = TypePredicateContext.of(Mockito.mock(TypeTable.class));
+    TypePredicateContext ctx = TypePredicateContext.of(mock(TypeTable.class));
     return predicate.check(type, ctx);
   }
 }

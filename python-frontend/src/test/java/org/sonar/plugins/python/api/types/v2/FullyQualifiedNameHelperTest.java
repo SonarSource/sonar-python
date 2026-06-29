@@ -17,29 +17,30 @@
 package org.sonar.plugins.python.api.types.v2;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.python.types.v2.SpecialFormType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class FullyQualifiedNameHelperTest {
   
   @Test
   void testGetFullyQualifiedName() {
-    FunctionType function1 = Mockito.mock(FunctionType.class);
-    FunctionType nullFunctionType = Mockito.mock(FunctionType.class);
-    ClassType class1 = Mockito.mock(ClassType.class);
-    UnknownType.UnresolvedImportType unresolvedImport = Mockito.mock(UnknownType.UnresolvedImportType.class);
-    ModuleType module1 = Mockito.mock(ModuleType.class);
-    SpecialFormType specialFormType1 = Mockito.mock(SpecialFormType.class);
-    UnknownType.UnknownTypeImpl unknownType = Mockito.mock(UnknownType.UnknownTypeImpl.class);
+    FunctionType function1 = mock(FunctionType.class);
+    FunctionType nullFunctionType = mock(FunctionType.class);
+    ClassType class1 = mock(ClassType.class);
+    UnknownType.UnresolvedImportType unresolvedImport = mock(UnknownType.UnresolvedImportType.class);
+    ModuleType module1 = mock(ModuleType.class);
+    SpecialFormType specialFormType1 = mock(SpecialFormType.class);
+    UnknownType.UnknownTypeImpl unknownType = mock(UnknownType.UnknownTypeImpl.class);
 
-    Mockito.when(function1.fullyQualifiedName()).thenReturn("foo.bar.func1");
-    Mockito.when(nullFunctionType.fullyQualifiedName()).thenReturn(null);
-    Mockito.when(class1.fullyQualifiedName()).thenReturn("foo.bar.class1");
-    Mockito.when(module1.fullyQualifiedName()).thenReturn("mod.module1");
-    Mockito.when(specialFormType1.fullyQualifiedName()).thenReturn("typing.List");
-    Mockito.when(unresolvedImport.importPath()).thenReturn("imported.module1");
+    when(function1.fullyQualifiedName()).thenReturn("foo.bar.func1");
+    when(nullFunctionType.fullyQualifiedName()).thenReturn(null);
+    when(class1.fullyQualifiedName()).thenReturn("foo.bar.class1");
+    when(module1.fullyQualifiedName()).thenReturn("mod.module1");
+    when(specialFormType1.fullyQualifiedName()).thenReturn("typing.List");
+    when(unresolvedImport.importPath()).thenReturn("imported.module1");
 
     assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(function1)).contains("foo.bar.func1");
     assertThat(FullyQualifiedNameHelper.getFullyQualifiedName(nullFunctionType)).isEmpty();

@@ -18,7 +18,6 @@ package org.sonar.python.types.v2;
 
 import java.util.Set;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
 import org.sonar.plugins.python.api.types.v2.UnknownType;
@@ -27,6 +26,9 @@ import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.types.v2.TypesTestUtils.FLOAT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
@@ -35,8 +37,8 @@ class LazyUnionTypeTest {
 
   @Test
   void lazyUnionTypeResolvesNestedLazyTypesWhenAccessed() {
-    LazyTypesContext lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    when(lazyTypesContext.resolveLazyType(Mockito.any())).thenReturn(INT_TYPE);
+    LazyTypesContext lazyTypesContext = mock(LazyTypesContext.class);
+    when(lazyTypesContext.resolveLazyType(any())).thenReturn(INT_TYPE);
     LazyType lazyType = new LazyType("random", lazyTypesContext);
     LazyUnionType lazyUnionType = (LazyUnionType) LazyUnionType.or(Set.of(lazyType, FLOAT_TYPE));
     UnionType unionType = (UnionType) lazyUnionType.resolve();
@@ -45,7 +47,7 @@ class LazyUnionTypeTest {
 
   @Test
   void flattened() {
-    LazyTypesContext lazyTypesContext = Mockito.spy(new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
+    LazyTypesContext lazyTypesContext = spy(new LazyTypesContext(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
 
     var lazyType1 = lazyTypeUnresolved("lazy1", lazyTypesContext);
     var lazyType2 = lazyTypeUnresolved("lazy2", lazyTypesContext);

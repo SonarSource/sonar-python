@@ -19,7 +19,6 @@ package org.sonar.python.semantic.v2.converter;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.types.v2.ClassType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.SelfType;
@@ -34,12 +33,13 @@ import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 class ClassDescriptorToPythonTypeConverterTest {
   @Test
   void unsupportedClassTest() {
-    var ctx = Mockito.mock(ConversionContext.class);
-    var descriptor = Mockito.mock(FunctionDescriptor.class);
+    var ctx = mock(ConversionContext.class);
+    var descriptor = mock(FunctionDescriptor.class);
     var converter = new ClassDescriptorToPythonTypeConverter();
     Assertions.assertThatThrownBy(() -> converter.convert(ctx, descriptor))
       .isInstanceOf(IllegalArgumentException.class)

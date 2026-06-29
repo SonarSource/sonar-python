@@ -19,13 +19,14 @@ package org.sonar.python.cfg.fixpoint;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.cfg.CfgValidator;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.PythonTestUtils;
+
+import static org.mockito.Mockito.mock;
 
 /**
  * This Defined Variable Analysis Test uses a meta-language to specify the expected values for each basic block.
@@ -48,7 +49,7 @@ import org.sonar.python.PythonTestUtils;
  * 3. the name of the function is the identifier of the basic block
  */
 class DefinedVariablesAnalysisTest {
-  private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
+  private PythonFile file = mock(PythonFile.class, "file1.py");
 
   @Test
   void test_simple_def() {

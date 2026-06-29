@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.CfgValidator;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -31,6 +30,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * This Live Variable Analysis Test uses a meta-language to specify the expected LVA values for each basic block.
@@ -53,7 +53,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 3. the name of the function is the identifier of the basic block
  */
 class LiveVariablesAnalysisTest {
-  private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
+  private PythonFile file = mock(PythonFile.class, "file1.py");
 
   @Test
   void test_simple_kill() {

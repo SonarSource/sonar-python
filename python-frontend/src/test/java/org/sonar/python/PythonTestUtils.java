@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -39,6 +38,8 @@ import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public final class PythonTestUtils {
 
@@ -106,10 +107,10 @@ public final class PythonTestUtils {
   }
 
   public static PythonFile pythonFile(String fileName) {
-    PythonFile pythonFile = Mockito.mock(PythonFile.class);
-    Mockito.when(pythonFile.fileName()).thenReturn(fileName);
+    PythonFile pythonFile = mock(PythonFile.class);
+    when(pythonFile.fileName()).thenReturn(fileName);
     try {
-      Mockito.when(pythonFile.uri()).thenReturn(Files.createTempFile(fileName, "py").toUri());
+      when(pythonFile.uri()).thenReturn(Files.createTempFile(fileName, "py").toUri());
     } catch (IOException e) {
       throw new IllegalStateException("Cannot create temporary file");
     }

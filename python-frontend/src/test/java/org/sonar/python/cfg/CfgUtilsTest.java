@@ -22,7 +22,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -31,10 +30,11 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 class CfgUtilsTest {
 
-  private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
+  private PythonFile file = mock(PythonFile.class, "file1.py");
 
   @Test
   void unreachableBlocks_empty() {

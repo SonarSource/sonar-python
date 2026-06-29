@@ -40,7 +40,6 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
@@ -121,6 +120,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -296,7 +296,7 @@ class PythonSensorTest {
   @Test
   void test_execute_on_sonarlint_quickfix() throws IOException {
     context.setRuntime(SONARLINT_RUNTIME);
-    context = Mockito.spy(context);
+    context = spy(context);
     when(context.newIssue()).thenReturn(new MockSonarLintIssue(context));
 
     activate_rule_S2710();
@@ -329,7 +329,7 @@ class PythonSensorTest {
   @Test
   void test_execute_on_sonarlint_quickfix_broken() throws IOException {
     context.setRuntime(SONARLINT_RUNTIME);
-    context = Mockito.spy(context);
+    context = spy(context);
     when(context.newIssue()).thenReturn(new MockSonarLintIssue(context) {
       @Override
       public NewQuickFix newQuickFix() {
@@ -670,7 +670,7 @@ class PythonSensorTest {
 
     assertThat(context.allIssues()).hasSize(1);
     assertThat(context.allIssues().iterator().next().ruleKey().rule()).isEqualTo("S1226");
-    verify(analysisWarning, Mockito.never()).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+    verify(analysisWarning, never()).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
   }
 
   @Test
@@ -1270,7 +1270,7 @@ class PythonSensorTest {
     assertThat(context.allIssues()).isEmpty();
     assertThat(logTester.logs(Level.INFO))
       .contains("The Python analyzer was able to leverage cached data from previous analyses for 1 out of 1 files. These files were not parsed.");
-    verify(analysisWarning, Mockito.never()).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+    verify(analysisWarning, never()).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
   }
 
   @Test
@@ -1909,7 +1909,7 @@ class PythonSensorTest {
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.ANALYSIS_THREADS_PARAM_KEY.key(), "2");
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PARALLEL_ANALYSIS_KEY.key(), "1");
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_NUMBER_OF_FILES_KEY.key(), "2");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(eq(TelemetryMetricKey.ANALYSIS_DURATION_KEY.key()), anyString());
+    verify(contextSpy, times(1)).addTelemetryProperty(eq(TelemetryMetricKey.ANALYSIS_DURATION_KEY.key()), anyString());
   }
 
   @Test
@@ -1934,7 +1934,7 @@ class PythonSensorTest {
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.ANALYSIS_THREADS_KEY.key(), "1");
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PARALLEL_ANALYSIS_KEY.key(), "0");
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_NUMBER_OF_FILES_KEY.key(), "2");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(eq(TelemetryMetricKey.ANALYSIS_DURATION_KEY.key()), anyString());
+    verify(contextSpy, times(1)).addTelemetryProperty(eq(TelemetryMetricKey.ANALYSIS_DURATION_KEY.key()), anyString());
   }
 
   @Test
@@ -1988,7 +1988,7 @@ class PythonSensorTest {
     ProjectConfigurationBuilder projectConfigurationBuilder) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
-    when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
+    when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
     return new PythonSensor(
       fileLinesContextFactory,

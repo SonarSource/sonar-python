@@ -17,7 +17,6 @@
 package org.sonar.python.types.v2.matchers;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -28,6 +27,8 @@ import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.semantic.v2.TestProject;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class IsTypeOrSuperTypeSatisfyingPredicateTest {
 
@@ -43,8 +44,8 @@ class IsTypeOrSuperTypeSatisfyingPredicateTest {
       A()
       """);
 
-    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext subscriptionContext = mock(SubscriptionContext.class);
+    when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     assertThat(TypeMatchers.isObjectInstanceOf("my_file.A").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.TRUE);
     assertThat(TypeMatchers.isObjectInstanceOf("str").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.FALSE);
@@ -66,8 +67,8 @@ class IsTypeOrSuperTypeSatisfyingPredicateTest {
       B()
       """);
 
-    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext subscriptionContext = mock(SubscriptionContext.class);
+    when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     assertThat(TypeMatchers.isObjectInstanceOf("my_file.A").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.TRUE);
     assertThat(TypeMatchers.isObjectInstanceOf("my_file.B").evaluateFor(objectTypeExpression, subscriptionContext)).isEqualTo(TriBool.TRUE);
@@ -89,8 +90,8 @@ class IsTypeOrSuperTypeSatisfyingPredicateTest {
 
     TypePredicateContext ctx = TypePredicateContext.of(project.projectLevelTypeTable());
 
-    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext subscriptionContext = mock(SubscriptionContext.class);
+    when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     var predicate = new IsTypeOrSuperTypeSatisfyingPredicate(new IsTypePredicate("my_file.A"));
 
@@ -114,8 +115,8 @@ class IsTypeOrSuperTypeSatisfyingPredicateTest {
 
     TypePredicateContext ctx = TypePredicateContext.of(project.projectLevelTypeTable());
 
-    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext subscriptionContext = mock(SubscriptionContext.class);
+    when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     var predicateA = new IsTypeOrSuperTypeSatisfyingPredicate(new IsTypePredicate("my_file.A"));
     var predicateB = new IsTypeOrSuperTypeSatisfyingPredicate(new IsTypePredicate("my_file.B"));
@@ -206,8 +207,8 @@ class IsTypeOrSuperTypeSatisfyingPredicateTest {
 
     TypePredicateContext ctx = TypePredicateContext.of(project.projectLevelTypeTable());
 
-    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext subscriptionContext = mock(SubscriptionContext.class);
+    when(subscriptionContext.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     var predicate = new IsTypeOrSuperTypeSatisfyingPredicate(new HasFQNPredicate("my_file.A"));
 
@@ -239,8 +240,8 @@ class IsTypeOrSuperTypeSatisfyingPredicateTest {
   @Test
   void testUnknownType() {
     var project = new TestProject();
-    Expression unknownTypeExpression = Mockito.mock(Expression.class);
-    Mockito.when(unknownTypeExpression.typeV2()).thenReturn(PythonType.UNKNOWN);
+    Expression unknownTypeExpression = mock(Expression.class);
+    when(unknownTypeExpression.typeV2()).thenReturn(PythonType.UNKNOWN);
 
     TypePredicateContext ctx = TypePredicateContext.of(project.projectLevelTypeTable());
 

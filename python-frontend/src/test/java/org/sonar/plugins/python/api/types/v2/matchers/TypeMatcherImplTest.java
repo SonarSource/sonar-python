@@ -21,7 +21,6 @@ import javax.annotation.Nullable;
 import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -38,6 +37,8 @@ import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.plugins.python.api.types.v2.matchers.MatchersTestUtils.createTypeMatcher;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TypeMatcherImplTest {
 
@@ -53,63 +54,63 @@ class TypeMatcherImplTest {
 
   TypeMatcher typeMatcher = createTypeMatcher(isFunctionType);
 
-  PythonType functionType = Mockito.mock(FunctionType.class);
-  PythonType functionType2 = Mockito.mock(FunctionType.class);
-  PythonType objectType = Mockito.mock(ObjectType.class);
-  PythonType objectType2 = Mockito.mock(ObjectType.class);
-  PythonType unknownType = Mockito.mock(UnknownType.UnknownTypeImpl.class);
+  PythonType functionType = mock(FunctionType.class);
+  PythonType functionType2 = mock(FunctionType.class);
+  PythonType objectType = mock(ObjectType.class);
+  PythonType objectType2 = mock(ObjectType.class);
+  PythonType unknownType = mock(UnknownType.UnknownTypeImpl.class);
   PythonType unionWithFunctionAndUnknown = UnionType.or(Set.of(functionType, unknownType));
   PythonType unionWithObjectAndUnknown = UnionType.or(Set.of(objectType, unknownType));
   PythonType unionWithFunctionAndObject = UnionType.or(Set.of(functionType, objectType));
   PythonType unionOfFunctions = UnionType.or(Set.of(functionType, functionType2));
   PythonType unionOfObjects = UnionType.or(Set.of(objectType, objectType2));
 
-  Expression functionExpr = Mockito.mock(Expression.class);
-  Expression unknownExpr = Mockito.mock(Expression.class);
-  Expression objectExpr = Mockito.mock(Expression.class);
-  Expression unionWithFunctionAndUnknownExpr = Mockito.mock(Expression.class);
-  Expression unionWithObjectAndUnknownExpr = Mockito.mock(Expression.class);
-  Expression unionWithFunctionAndObjectExpr = Mockito.mock(Expression.class);
-  Expression unionOfFunctionExpr = Mockito.mock(Expression.class);
-  Expression unionOfObjectExpr = Mockito.mock(Expression.class);
+  Expression functionExpr = mock(Expression.class);
+  Expression unknownExpr = mock(Expression.class);
+  Expression objectExpr = mock(Expression.class);
+  Expression unionWithFunctionAndUnknownExpr = mock(Expression.class);
+  Expression unionWithObjectAndUnknownExpr = mock(Expression.class);
+  Expression unionWithFunctionAndObjectExpr = mock(Expression.class);
+  Expression unionOfFunctionExpr = mock(Expression.class);
+  Expression unionOfObjectExpr = mock(Expression.class);
 
   @BeforeEach
   void prepare() {
-    functionType = Mockito.mock(FunctionType.class);
-    functionType2 = Mockito.mock(FunctionType.class);
-    objectType = Mockito.mock(ObjectType.class);
-    objectType2 = Mockito.mock(ObjectType.class);
-    unknownType = Mockito.mock(UnknownType.UnknownTypeImpl.class);
+    functionType = mock(FunctionType.class);
+    functionType2 = mock(FunctionType.class);
+    objectType = mock(ObjectType.class);
+    objectType2 = mock(ObjectType.class);
+    unknownType = mock(UnknownType.UnknownTypeImpl.class);
     unionWithFunctionAndUnknown = UnionType.or(Set.of(functionType, unknownType));
     unionWithObjectAndUnknown = UnionType.or(Set.of(objectType, unknownType));
     unionWithFunctionAndObject = UnionType.or(Set.of(functionType, objectType));
     unionOfFunctions = UnionType.or(Set.of(functionType, functionType2));
     unionOfObjects = UnionType.or(Set.of(objectType, objectType2));
 
-    functionExpr = Mockito.mock(Expression.class);
-    unknownExpr = Mockito.mock(Expression.class);
-    objectExpr = Mockito.mock(Expression.class);
-    unionWithFunctionAndUnknownExpr = Mockito.mock(Expression.class);
-    unionWithObjectAndUnknownExpr = Mockito.mock(Expression.class);
-    unionWithFunctionAndObjectExpr = Mockito.mock(Expression.class);
-    unionOfFunctionExpr = Mockito.mock(Expression.class);
-    unionOfObjectExpr = Mockito.mock(Expression.class);
+    functionExpr = mock(Expression.class);
+    unknownExpr = mock(Expression.class);
+    objectExpr = mock(Expression.class);
+    unionWithFunctionAndUnknownExpr = mock(Expression.class);
+    unionWithObjectAndUnknownExpr = mock(Expression.class);
+    unionWithFunctionAndObjectExpr = mock(Expression.class);
+    unionOfFunctionExpr = mock(Expression.class);
+    unionOfObjectExpr = mock(Expression.class);
 
 
-    Mockito.when(unknownExpr.typeV2()).thenReturn(unknownType);
-    Mockito.when(objectExpr.typeV2()).thenReturn(objectType);
-    Mockito.when(functionExpr.typeV2()).thenReturn(functionType);
-    Mockito.when(unionWithFunctionAndUnknownExpr.typeV2()).thenReturn(unionWithFunctionAndUnknown);
-    Mockito.when(unionWithObjectAndUnknownExpr.typeV2()).thenReturn(unionWithObjectAndUnknown);
-    Mockito.when(unionWithFunctionAndObjectExpr.typeV2()).thenReturn(unionWithFunctionAndObject);
-    Mockito.when(unionOfFunctionExpr.typeV2()).thenReturn(unionOfFunctions);
-    Mockito.when(unionOfObjectExpr.typeV2()).thenReturn(unionOfObjects);
+    when(unknownExpr.typeV2()).thenReturn(unknownType);
+    when(objectExpr.typeV2()).thenReturn(objectType);
+    when(functionExpr.typeV2()).thenReturn(functionType);
+    when(unionWithFunctionAndUnknownExpr.typeV2()).thenReturn(unionWithFunctionAndUnknown);
+    when(unionWithObjectAndUnknownExpr.typeV2()).thenReturn(unionWithObjectAndUnknown);
+    when(unionWithFunctionAndObjectExpr.typeV2()).thenReturn(unionWithFunctionAndObject);
+    when(unionOfFunctionExpr.typeV2()).thenReturn(unionOfFunctions);
+    when(unionOfObjectExpr.typeV2()).thenReturn(unionOfObjects);
   }
 
   @Test
   void testIsFor() {
-    SubscriptionContext ctx = Mockito.mock();
-    Mockito.when(ctx.typeTable()).thenReturn(Mockito.mock(TypeTable.class));
+    SubscriptionContext ctx = mock();
+    when(ctx.typeTable()).thenReturn(mock(TypeTable.class));
     assertThat(typeMatcher.evaluateFor(functionExpr, ctx)).isEqualTo(TriBool.TRUE);
     assertThat(typeMatcher.evaluateFor(unknownExpr, ctx)).isEqualTo(TriBool.UNKNOWN);
     assertThat(typeMatcher.evaluateFor(objectExpr, ctx)).isEqualTo(TriBool.FALSE);
@@ -121,8 +122,8 @@ class TypeMatcherImplTest {
 
   @Test
   void testIsTrueFor() {
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(Mockito.mock(TypeTable.class));
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(mock(TypeTable.class));
     assertThat(typeMatcher.isTrueFor(functionExpr, ctx)).isTrue();
     assertThat(typeMatcher.isTrueFor(unknownExpr, ctx)).isFalse();
     assertThat(typeMatcher.isTrueFor(objectExpr, ctx)).isFalse();
@@ -149,8 +150,8 @@ class TypeMatcherImplTest {
       a
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     assertThat(TypeMatchers.isObjectOfType("my_file.A").evaluateFor(objectTypeExpression, ctx)).isEqualTo(TriBool.TRUE);
     assertThat(TypeMatchers.isObjectOfType("my_file.B").isTrueFor(objectTypeExpression, ctx)).isFalse();
@@ -169,8 +170,8 @@ class TypeMatcherImplTest {
       func1
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     assertThat(TypeMatchers.isObjectOfType("my_file.func1").evaluateFor(func1Expression, ctx)).isEqualTo(TriBool.FALSE);
     assertThat(func1Expression.typeV2()).isNotInstanceOf(UnknownType.class);
@@ -195,8 +196,8 @@ class TypeMatcherImplTest {
       a
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     assertThat(unknownTypeExpression.typeV2()).isInstanceOf(UnknownType.class);
     assertThat(knownTypeExpression.typeV2()).isInstanceOf(ObjectType.class);
@@ -219,8 +220,8 @@ class TypeMatcherImplTest {
         param
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     assertThat(unionTypeExpression.typeV2()).isInstanceOf(UnionType.class);
     assertThat(InternalTypeMatchers.isAnyTypeInUnionSatisfying(TypeMatchers.isObjectOfType("my_file.A")).isTrueFor(unionTypeExpression, ctx)).isTrue();

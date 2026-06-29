@@ -17,7 +17,6 @@
 package org.sonar.python.types.v2.matchers;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -29,49 +28,51 @@ import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.types.v2.SpecialFormType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class HasFQNPredicateTest {
 
   @Test
   void testCheck() {
-    FunctionType function1 = Mockito.mock(FunctionType.class);
-    FunctionType function2 = Mockito.mock(FunctionType.class);
-    FunctionType nullFunctionType = Mockito.mock(FunctionType.class);
+    FunctionType function1 = mock(FunctionType.class);
+    FunctionType function2 = mock(FunctionType.class);
+    FunctionType nullFunctionType = mock(FunctionType.class);
 
-    ClassType class1 = Mockito.mock(ClassType.class);
-    ClassType class2 = Mockito.mock(ClassType.class);
-    ClassType classWithSameFQNAsFunction = Mockito.mock(ClassType.class);
+    ClassType class1 = mock(ClassType.class);
+    ClassType class2 = mock(ClassType.class);
+    ClassType classWithSameFQNAsFunction = mock(ClassType.class);
 
-    UnknownType.UnresolvedImportType unresolvedImport = Mockito.mock(UnknownType.UnresolvedImportType.class);
-    UnknownType.UnresolvedImportType unresolvedImport2 = Mockito.mock(UnknownType.UnresolvedImportType.class);
+    UnknownType.UnresolvedImportType unresolvedImport = mock(UnknownType.UnresolvedImportType.class);
+    UnknownType.UnresolvedImportType unresolvedImport2 = mock(UnknownType.UnresolvedImportType.class);
 
-    ModuleType module1 = Mockito.mock(ModuleType.class);
-    ModuleType module2 = Mockito.mock(ModuleType.class);
+    ModuleType module1 = mock(ModuleType.class);
+    ModuleType module2 = mock(ModuleType.class);
 
-    SpecialFormType specialFormType1 = Mockito.mock(SpecialFormType.class);
-    SpecialFormType specialFormType2 = Mockito.mock(SpecialFormType.class);
+    SpecialFormType specialFormType1 = mock(SpecialFormType.class);
+    SpecialFormType specialFormType2 = mock(SpecialFormType.class);
 
-    UnknownType.UnknownTypeImpl unknownType = Mockito.mock(UnknownType.UnknownTypeImpl.class);
+    UnknownType.UnknownTypeImpl unknownType = mock(UnknownType.UnknownTypeImpl.class);
 
-    Expression func1Expression = Mockito.mock(Expression.class);
-    Mockito.when(func1Expression.typeV2()).thenReturn(function1);
+    Expression func1Expression = mock(Expression.class);
+    when(func1Expression.typeV2()).thenReturn(function1);
 
-    Mockito.when(function1.fullyQualifiedName()).thenReturn("foo.bar.func1");
-    Mockito.when(function2.fullyQualifiedName()).thenReturn("foo.bar.func2");
-    Mockito.when(nullFunctionType.fullyQualifiedName()).thenReturn(null);
+    when(function1.fullyQualifiedName()).thenReturn("foo.bar.func1");
+    when(function2.fullyQualifiedName()).thenReturn("foo.bar.func2");
+    when(nullFunctionType.fullyQualifiedName()).thenReturn(null);
 
-    Mockito.when(class1.fullyQualifiedName()).thenReturn("foo.bar.class1");
-    Mockito.when(class2.fullyQualifiedName()).thenReturn("foo.bar.class2");
-    Mockito.when(classWithSameFQNAsFunction.fullyQualifiedName()).thenReturn("foo.bar.func1");
+    when(class1.fullyQualifiedName()).thenReturn("foo.bar.class1");
+    when(class2.fullyQualifiedName()).thenReturn("foo.bar.class2");
+    when(classWithSameFQNAsFunction.fullyQualifiedName()).thenReturn("foo.bar.func1");
 
-    Mockito.when(module1.fullyQualifiedName()).thenReturn("mod.module1");
-    Mockito.when(module2.fullyQualifiedName()).thenReturn("mod.module2");
+    when(module1.fullyQualifiedName()).thenReturn("mod.module1");
+    when(module2.fullyQualifiedName()).thenReturn("mod.module2");
 
-    Mockito.when(specialFormType1.fullyQualifiedName()).thenReturn("typing.List");
-    Mockito.when(specialFormType2.fullyQualifiedName()).thenReturn("typing.Set");
+    when(specialFormType1.fullyQualifiedName()).thenReturn("typing.List");
+    when(specialFormType2.fullyQualifiedName()).thenReturn("typing.Set");
 
-    Mockito.when(unresolvedImport.importPath()).thenReturn("imported.module1");
-    Mockito.when(unresolvedImport2.importPath()).thenReturn("imported.module2");
+    when(unresolvedImport.importPath()).thenReturn("imported.module1");
+    when(unresolvedImport2.importPath()).thenReturn("imported.module2");
 
     HasFQNPredicate hasFQNPredicateFunction1 = new HasFQNPredicate("foo.bar.func1");
     HasFQNPredicate hasFQNPredicateClass1 = new HasFQNPredicate("foo.bar.class1");
@@ -79,8 +80,8 @@ class HasFQNPredicateTest {
     HasFQNPredicate hasFQNPredicateModule1 = new HasFQNPredicate("mod.module1");
     HasFQNPredicate hasFQNPredicateSpecialFormList = new HasFQNPredicate("typing.List");
 
-    TypePredicateContext predicateContext = TypePredicateContext.of(Mockito.mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
-    SubscriptionContext subscriptionContext = Mockito.mock(SubscriptionContext.class);
+    TypePredicateContext predicateContext = TypePredicateContext.of(mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
+    SubscriptionContext subscriptionContext = mock(SubscriptionContext.class);
 
     assertThat(hasFQNPredicateFunction1.check(function1, predicateContext)).isEqualTo(TriBool.TRUE);
     assertThat(TypeMatchers.withFQN("foo.bar.func1").evaluateFor(func1Expression, subscriptionContext)).isEqualTo(TriBool.TRUE);

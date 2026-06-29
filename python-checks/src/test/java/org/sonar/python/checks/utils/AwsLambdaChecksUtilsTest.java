@@ -17,7 +17,6 @@
 package org.sonar.python.checks.utils;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.project.configuration.AwsLambdaHandlerInfo;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
@@ -32,6 +31,8 @@ import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class AwsLambdaChecksUtilsTest {
   @Test
@@ -125,9 +126,9 @@ class AwsLambdaChecksUtilsTest {
   }
 
   private static SubscriptionContext subscriptionContext(CallGraph callGraph) {
-    var subscriptionContext = Mockito.mock(org.sonar.plugins.python.api.SubscriptionContext.class);
-    Mockito.when(subscriptionContext.projectConfiguration()).thenReturn(new ProjectConfiguration());
-    Mockito.when(subscriptionContext.callGraph()).thenReturn(callGraph);
+    var subscriptionContext = mock(org.sonar.plugins.python.api.SubscriptionContext.class);
+    when(subscriptionContext.projectConfiguration()).thenReturn(new ProjectConfiguration());
+    when(subscriptionContext.callGraph()).thenReturn(callGraph);
 
     return subscriptionContext;
   }
@@ -138,17 +139,17 @@ class AwsLambdaChecksUtilsTest {
   }
 
   private static FunctionType functionType(String name) {
-    FunctionType functionNameType = Mockito.mock(FunctionType.class);
-    Mockito.when(functionNameType.fullyQualifiedName()).thenReturn(name);
+    FunctionType functionNameType = mock(FunctionType.class);
+    when(functionNameType.fullyQualifiedName()).thenReturn(name);
     return functionNameType;
   }
 
   private static FunctionDef functionDef(PythonType type) {
-    Name functionName = Mockito.mock(Name.class);
-    FunctionDef functionDef = Mockito.mock(FunctionDef.class);
+    Name functionName = mock(Name.class);
+    FunctionDef functionDef = mock(FunctionDef.class);
 
-    Mockito.when(functionName.typeV2()).thenReturn(type);
-    Mockito.when(functionDef.name()).thenReturn(functionName);
+    when(functionName.typeV2()).thenReturn(type);
+    when(functionDef.name()).thenReturn(functionName);
     return functionDef;
   }
 

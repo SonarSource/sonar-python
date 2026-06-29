@@ -17,7 +17,6 @@
 package org.sonar.python.types.v2.matchers;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -29,6 +28,9 @@ import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.semantic.v2.TestProject;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class HasMemberPredicateTest {
 
@@ -46,8 +48,8 @@ class HasMemberPredicateTest {
       a
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
     TypePredicateContext predicateContext = TypePredicateContext.of(project.projectLevelTypeTable());
 
     HasMemberPredicate hasFooTypePredicate = new HasMemberPredicate("foo");
@@ -63,12 +65,12 @@ class HasMemberPredicateTest {
 
     assertThat(objectType).isNotInstanceOf(UnknownType.class);
 
-    TypePredicate truePredicate = Mockito.mock(TypePredicate.class);
-    TypePredicate falsePredicate = Mockito.mock(TypePredicate.class);
-    TypePredicate unknownPredicate = Mockito.mock(TypePredicate.class);
-    Mockito.when(truePredicate.check(Mockito.any(), Mockito.any())).thenReturn(TriBool.TRUE);
-    Mockito.when(falsePredicate.check(Mockito.any(), Mockito.any())).thenReturn(TriBool.FALSE);
-    Mockito.when(unknownPredicate.check(Mockito.any(), Mockito.any())).thenReturn(TriBool.UNKNOWN);
+    TypePredicate truePredicate = mock(TypePredicate.class);
+    TypePredicate falsePredicate = mock(TypePredicate.class);
+    TypePredicate unknownPredicate = mock(TypePredicate.class);
+    when(truePredicate.check(any(), any())).thenReturn(TriBool.TRUE);
+    when(falsePredicate.check(any(), any())).thenReturn(TriBool.FALSE);
+    when(unknownPredicate.check(any(), any())).thenReturn(TriBool.UNKNOWN);
 
     TypeMatcher trueMatcher = MatchersTestUtils.createTypeMatcher(truePredicate);
     TypeMatcher falseMatcher = MatchersTestUtils.createTypeMatcher(falsePredicate);

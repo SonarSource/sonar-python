@@ -18,14 +18,15 @@ package org.sonar.python.semantic.v2.converter;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.python.index.ClassDescriptor;
+
+import static org.mockito.Mockito.mock;
 
 class FunctionDescriptorToPythonTypeConverterTest {
   @Test
   void unsupportedClassTest() {
-    var ctx = Mockito.mock(ConversionContext.class);
-    var descriptor = Mockito.mock(ClassDescriptor.class);
+    var ctx = mock(ConversionContext.class);
+    var descriptor = mock(ClassDescriptor.class);
     var converter = new FunctionDescriptorToPythonTypeConverter();
     Assertions.assertThatThrownBy(() -> converter.convert(ctx, descriptor))
       .isInstanceOf(IllegalArgumentException.class)

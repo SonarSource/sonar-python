@@ -19,7 +19,6 @@ package org.sonar.python.semantic.v2.converter;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
@@ -28,13 +27,14 @@ import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyUnionType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class AmbiguousDescriptorToPythonTypeConverterTest {
   @Test
   void unsupportedClassTest() {
-    var ctx = Mockito.mock(ConversionContext.class);
-    var descriptor = Mockito.mock(ClassDescriptor.class);
+    var ctx = mock(ConversionContext.class);
+    var descriptor = mock(ClassDescriptor.class);
     var converter = new AmbiguousDescriptorToPythonTypeConverter();
     Assertions.assertThatThrownBy(() -> converter.convert(ctx, descriptor))
       .isInstanceOf(IllegalArgumentException.class)
@@ -43,17 +43,17 @@ class AmbiguousDescriptorToPythonTypeConverterTest {
 
   @Test
   void testDescriptorWithLazyTypes() {
-    var descriptor = Mockito.mock(Descriptor.class);
+    var descriptor = mock(Descriptor.class);
     when(descriptor.kind()).thenReturn(Descriptor.Kind.VARIABLE);
 
-    var descriptor2 = Mockito.mock(Descriptor.class);
+    var descriptor2 = mock(Descriptor.class);
     when(descriptor2.kind()).thenReturn(Descriptor.Kind.VARIABLE);
 
-    var lazyTypeContext = Mockito.mock(LazyTypesContext.class);
+    var lazyTypeContext = mock(LazyTypesContext.class);
     var lazyType1 = new LazyType("lazy1", lazyTypeContext);
     var lazyType2 = new LazyType("lazy2", lazyTypeContext);
 
-    var ctx = Mockito.mock(ConversionContext.class);
+    var ctx = mock(ConversionContext.class);
     when(ctx.convert(descriptor)).thenReturn(lazyType1);
     when(ctx.convert(descriptor2)).thenReturn(lazyType2);
 

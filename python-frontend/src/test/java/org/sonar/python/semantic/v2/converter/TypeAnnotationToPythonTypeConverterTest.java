@@ -19,7 +19,6 @@ package org.sonar.python.semantic.v2.converter;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.index.TypeAnnotationDescriptor;
@@ -27,16 +26,18 @@ import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.types.v2.TypesTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TypeAnnotationToPythonTypeConverterTest {
 
   @Test
   void typeVarWithIncorrectArgsAndIsSelfTrueReturnsUnknown() {
-    var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    var ctx = Mockito.mock(ConversionContext.class);
+    var lazyTypesContext = mock(LazyTypesContext.class);
+    var ctx = mock(ConversionContext.class);
     var converter = new TypeAnnotationToPythonTypeConverter();
 
-    Mockito.when(ctx.lazyTypesContext()).thenReturn(lazyTypesContext);
+    when(ctx.lazyTypesContext()).thenReturn(lazyTypesContext);
 
     // Create a TYPE_VAR TypeAnnotationDescriptor with isSelf=true and multiple args
     var innerArg1 = new TypeAnnotationDescriptor("int", TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), "int", false);
@@ -74,10 +75,10 @@ class TypeAnnotationToPythonTypeConverterTest {
    @Test
    void testListInstanceWithAttributes() {
      var lazyTypesContext = new LazyTypesContext(TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE);
-     var ctx = Mockito.mock(ConversionContext.class);
+     var ctx = mock(ConversionContext.class);
      var converter = new TypeAnnotationToPythonTypeConverter();
 
-     Mockito.when(ctx.lazyTypesContext()).thenReturn(lazyTypesContext);
+     when(ctx.lazyTypesContext()).thenReturn(lazyTypesContext);
 
      // Create a INSTANCE TypeAnnotationDescriptor for list[int]
      var intArg = new TypeAnnotationDescriptor("int", TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), "int", false);

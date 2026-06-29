@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.PythonType;
@@ -30,6 +29,8 @@ import org.sonar.plugins.python.api.types.v2.matchers.MatchersTestUtils;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TypeSourcePredicateTest {
 
@@ -38,7 +39,7 @@ class TypeSourcePredicateTest {
   void testMatchingTypeSources(TypeSource typeSource) {
     PythonType type = createTypeWithSource(typeSource);
     TypeSourcePredicate predicate = new TypeSourcePredicate(typeSource);
-    TypePredicateContext ctx = TypePredicateContext.of(Mockito.mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
+    TypePredicateContext ctx = TypePredicateContext.of(mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
 
     assertThat(predicate.check(type, ctx)).isEqualTo(TriBool.TRUE);
   }
@@ -48,7 +49,7 @@ class TypeSourcePredicateTest {
   void testNonMatchingTypeSources(TypeSource typeTypeSource, TypeSource predicateTypeSource) {
     PythonType type = createTypeWithSource(typeTypeSource);
     TypeSourcePredicate predicate = new TypeSourcePredicate(predicateTypeSource);
-    TypePredicateContext ctx = TypePredicateContext.of(Mockito.mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
+    TypePredicateContext ctx = TypePredicateContext.of(mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
 
     assertThat(predicate.check(type, ctx)).isEqualTo(TriBool.FALSE);
   }
@@ -57,7 +58,7 @@ class TypeSourcePredicateTest {
   void testThroughTypeMatchers() {
     PythonType typeWithExactSource = createTypeWithSource(TypeSource.EXACT);
     PythonType typeWithTypeHintSource = createTypeWithSource(TypeSource.TYPE_HINT);
-    TypePredicateContext predicateContext = TypePredicateContext.of(Mockito.mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
+    TypePredicateContext predicateContext = TypePredicateContext.of(mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
 
     assertThat(MatchersTestUtils.getPredicate(TypeMatchers.hasTypeSource(TypeSource.EXACT)).check(typeWithExactSource, predicateContext)).isEqualTo(TriBool.TRUE);
     assertThat(MatchersTestUtils.getPredicate(TypeMatchers.hasTypeSource(TypeSource.EXACT)).check(typeWithTypeHintSource, predicateContext)).isEqualTo(TriBool.FALSE);
@@ -69,13 +70,13 @@ class TypeSourcePredicateTest {
   void testObjectTypeIsNotUnwrapped() {
     PythonType wrappedType = createTypeWithSource(TypeSource.TYPE_HINT);
 
-    ObjectType objectType = Mockito.mock(ObjectType.class);
-    Mockito.when(objectType.typeSource()).thenReturn(TypeSource.EXACT);
-    Mockito.when(objectType.unwrappedType()).thenReturn(wrappedType);
+    ObjectType objectType = mock(ObjectType.class);
+    when(objectType.typeSource()).thenReturn(TypeSource.EXACT);
+    when(objectType.unwrappedType()).thenReturn(wrappedType);
 
     TypeSourcePredicate exactPredicate = new TypeSourcePredicate(TypeSource.EXACT);
     TypeSourcePredicate typeHintPredicate = new TypeSourcePredicate(TypeSource.TYPE_HINT);
-    TypePredicateContext ctx = TypePredicateContext.of(Mockito.mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
+    TypePredicateContext ctx = TypePredicateContext.of(mock(org.sonar.python.semantic.v2.typetable.TypeTable.class));
 
     assertThat(exactPredicate.check(objectType, ctx)).isEqualTo(TriBool.TRUE);
     assertThat(typeHintPredicate.check(objectType, ctx)).isEqualTo(TriBool.FALSE);
@@ -93,8 +94,8 @@ class TypeSourcePredicateTest {
   }
 
   private static PythonType createTypeWithSource(TypeSource typeSource) {
-    PythonType type = Mockito.mock(PythonType.class);
-    Mockito.when(type.typeSource()).thenReturn(typeSource);
+    PythonType type = mock(PythonType.class);
+    when(type.typeSource()).thenReturn(typeSource);
     return type;
   }
 }

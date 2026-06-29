@@ -24,7 +24,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.mockito.Mockito;
 import org.slf4j.event.Level;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
@@ -60,6 +59,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -137,7 +137,7 @@ class IPynbSensorTest {
   private IPynbSensor sensor(PythonIndexer indexer) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
-    when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
+    when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
     return new IPynbSensor(fileLinesContextFactory,
       checkFactory,
@@ -186,7 +186,7 @@ class IPynbSensorTest {
   private IPynbSensor notebookSensor() {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
-    when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
+    when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
     return new IPynbSensor(fileLinesContextFactory,
       checkFactory,
@@ -236,11 +236,11 @@ class IPynbSensorTest {
     var sensor = spy(notebookSensor());
     var contextSpy = spy(context);
     assertDoesNotThrow(() -> sensor.execute(contextSpy));
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_PRESENT_KEY.key(), "1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "0");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(eq(TelemetryMetricKey.NOTEBOOKS_ANALYSIS_DURATION_KEY.key()), anyString());
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_PRESENT_KEY.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(eq(TelemetryMetricKey.NOTEBOOKS_ANALYSIS_DURATION_KEY.key()), anyString());
   }
 
   @Test
@@ -262,10 +262,10 @@ class IPynbSensorTest {
     sensor.execute(contextSpy);
     var logs = String.join("", logTester.logs());
     assertThat(logs).contains("Unable to parse file: notebook_parse_error.ipynbParse error at line 1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_PRESENT_KEY.key(), "1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
-    verify(contextSpy, Mockito.times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_PRESENT_KEY.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_RECOGNITION_ERROR_KEY.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_TOTAL_KEY.key(), "1");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.NOTEBOOK_EXCEPTION_KEY.key(), "0");
   }
 
   @Test

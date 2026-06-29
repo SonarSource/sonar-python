@@ -17,7 +17,6 @@
 package org.sonar.python.types.v2.matchers;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -29,6 +28,8 @@ import org.sonar.python.semantic.v2.TestProject;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class IsTypePredicateTest {
 
@@ -49,8 +50,8 @@ class IsTypePredicateTest {
       a
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
     TypePredicateContext predicateContext = TypePredicateContext.of(project.projectLevelTypeTable());
 
     IsTypePredicate isTypeAPredicate = new IsTypePredicate("my_file.A");
@@ -78,8 +79,8 @@ class IsTypePredicateTest {
       A
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
     TypePredicateContext predicateContext = TypePredicateContext.of(project.projectLevelTypeTable());
 
     IsTypePredicate isTypeAPredicate = new IsTypePredicate("my_file.A");
@@ -112,8 +113,8 @@ class IsTypePredicateTest {
       a
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
     TypePredicateContext predicateContext = TypePredicateContext.of(project.projectLevelTypeTable());
 
     IsTypePredicate isTypeAPredicate = new IsTypePredicate("my_file.A");
@@ -139,8 +140,8 @@ class IsTypePredicateTest {
       A
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     assertThat(TypeMatchers.isType("my_file.A").isTrueFor(classTypeExpression, ctx)).isTrue();
     assertThat(TypeMatchers.isType("my_file.B").isTrueFor(classTypeExpression, ctx)).isFalse();
@@ -166,8 +167,8 @@ class IsTypePredicateTest {
       A # will result the class A defined in package/A.py
       """);
 
-    SubscriptionContext ctx = Mockito.mock(SubscriptionContext.class);
-    Mockito.when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
+    SubscriptionContext ctx = mock(SubscriptionContext.class);
+    when(ctx.typeTable()).thenReturn(project.projectLevelTypeTable());
 
     // isType(fqn) resolves the FQN like "import package.A.A" which will prefer the class A defined in __init__.py
     assertThat(TypeMatchers.isType("package.A.A").evaluateFor(classTypeExpression, ctx)).isEqualTo(TriBool.FALSE);
@@ -192,9 +193,9 @@ class IsTypePredicateTest {
     
     assertThat(isTypePredicate.check(selfType, ctx)).isEqualTo(TriBool.UNKNOWN);
     
-    var mockTypeTable = Mockito.mock(TypeTable.class);
+    var mockTypeTable = mock(TypeTable.class);
     // mocking this to improve coverage, should normally never happen
-    Mockito.when(mockTypeTable.getType("my_file.A")).thenReturn(selfType);
+    when(mockTypeTable.getType("my_file.A")).thenReturn(selfType);
 
     ctx = TypePredicateContext.of(mockTypeTable);
     assertThat(isTypePredicate.check(classTypeExpression.typeV2(), ctx)).isEqualTo(TriBool.UNKNOWN);

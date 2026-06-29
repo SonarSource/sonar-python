@@ -17,7 +17,6 @@
 package org.sonar.python.types.v2.matchers;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -31,6 +30,8 @@ import org.sonar.python.semantic.v2.TestProject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class IsFunctionOwnerSatisfyingPredicateTest {
 
@@ -109,8 +110,8 @@ class IsFunctionOwnerSatisfyingPredicateTest {
   @Test
   void testUnknownType() {
     var project = new TestProject();
-    Expression unknownTypeExpression = Mockito.mock(Expression.class);
-    Mockito.when(unknownTypeExpression.typeV2()).thenReturn(PythonType.UNKNOWN);
+    Expression unknownTypeExpression = mock(Expression.class);
+    when(unknownTypeExpression.typeV2()).thenReturn(PythonType.UNKNOWN);
 
     TypePredicateContext ctx = TypePredicateContext.of(project.projectLevelTypeTable());
 

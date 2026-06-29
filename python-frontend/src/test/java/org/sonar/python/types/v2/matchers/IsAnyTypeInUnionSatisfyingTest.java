@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.plugins.python.api.types.v2.UnionType;
@@ -30,17 +29,22 @@ import org.sonar.plugins.python.api.types.v2.matchers.MatchersTestUtils;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 class IsAnyTypeInUnionSatisfyingTest {
 
   @Test
   void testUnionTypeWithOneMatchingCandidate() {
-    PythonType candidate1 = Mockito.mock(PythonType.class);
-    PythonType candidate2 = Mockito.mock(PythonType.class);
+    PythonType candidate1 = mock(PythonType.class);
+    PythonType candidate2 = mock(PythonType.class);
     UnionType unionType = (UnionType) UnionType.or(candidate1, candidate2);
 
     TypePredicate wrappedPredicate = MatchersTestUtils.mockPredicateReturning(candidate1, TriBool.TRUE);
-    Mockito.when(wrappedPredicate.check(Mockito.eq(candidate2), Mockito.any())).thenReturn(TriBool.FALSE);
+    when(wrappedPredicate.check(eq(candidate2), any())).thenReturn(TriBool.FALSE);
 
     TriBool result = checkType(unionType, wrappedPredicate);
     assertThat(result).isEqualTo(TriBool.TRUE);
@@ -48,12 +52,12 @@ class IsAnyTypeInUnionSatisfyingTest {
 
   @Test
   void testUnionTypeWithAllNonMatchingCandidates() {
-    PythonType candidate1 = Mockito.mock(PythonType.class);
-    PythonType candidate2 = Mockito.mock(PythonType.class);
+    PythonType candidate1 = mock(PythonType.class);
+    PythonType candidate2 = mock(PythonType.class);
     UnionType unionType = (UnionType) UnionType.or(candidate1, candidate2);
 
     TypePredicate wrappedPredicate = MatchersTestUtils.mockPredicateReturning(candidate1, TriBool.FALSE);
-    Mockito.when(wrappedPredicate.check(Mockito.eq(candidate2), Mockito.any())).thenReturn(TriBool.FALSE);
+    when(wrappedPredicate.check(eq(candidate2), any())).thenReturn(TriBool.FALSE);
 
     TriBool result = checkType(unionType, wrappedPredicate);
     assertThat(result).isEqualTo(TriBool.FALSE);
@@ -61,12 +65,12 @@ class IsAnyTypeInUnionSatisfyingTest {
 
   @Test
   void testUnionTypeWithUnknownCandidate() {
-    PythonType candidate1 = Mockito.mock(PythonType.class);
-    PythonType candidate2 = Mockito.mock(PythonType.class);
+    PythonType candidate1 = mock(PythonType.class);
+    PythonType candidate2 = mock(PythonType.class);
     UnionType unionType = (UnionType) UnionType.or(candidate1, candidate2);
 
     TypePredicate wrappedPredicate = MatchersTestUtils.mockPredicateReturning(candidate1, TriBool.FALSE);
-    Mockito.when(wrappedPredicate.check(Mockito.eq(candidate2), Mockito.any())).thenReturn(TriBool.UNKNOWN);
+    when(wrappedPredicate.check(eq(candidate2), any())).thenReturn(TriBool.UNKNOWN);
 
     TriBool result = checkType(unionType, wrappedPredicate);
     assertThat(result).isEqualTo(TriBool.UNKNOWN);
@@ -76,25 +80,25 @@ class IsAnyTypeInUnionSatisfyingTest {
   @ParameterizedTest
   @MethodSource("nonUnionTypesWithExpectedResults")
   void testNonUnionTypeDoesNotDelegateToWrappedPredicate(PythonType nonUnionType, TriBool expectedResult) {
-    TypePredicate wrappedPredicate = Mockito.mock(TypePredicate.class);
+    TypePredicate wrappedPredicate = mock(TypePredicate.class);
 
     TriBool result = checkType(nonUnionType, wrappedPredicate);
 
     assertThat(result).isEqualTo(expectedResult);
-    Mockito.verifyNoInteractions(wrappedPredicate);
+    verifyNoInteractions(wrappedPredicate);
   }
 
   static Stream<Arguments> nonUnionTypesWithExpectedResults() {
     return Stream.of(
       Arguments.of(PythonType.UNKNOWN, TriBool.UNKNOWN),
       Arguments.of(new UnknownType.UnresolvedImportType("some.module"), TriBool.UNKNOWN),
-      Arguments.of(Mockito.mock(PythonType.class), TriBool.FALSE)
+      Arguments.of(mock(PythonType.class), TriBool.FALSE)
     );
   }
 
   private static TriBool checkType(PythonType type, TypePredicate wrappedPredicate) {
     IsAnyTypeInUnionSatisfying predicate = new IsAnyTypeInUnionSatisfying(wrappedPredicate);
-    TypePredicateContext ctx = TypePredicateContext.of(Mockito.mock(TypeTable.class));
+    TypePredicateContext ctx = TypePredicateContext.of(mock(TypeTable.class));
     return predicate.check(type, ctx);
   }
 }

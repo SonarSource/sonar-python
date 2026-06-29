@@ -23,7 +23,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.project.configuration.AwsLambdaHandlerInfo;
 import org.sonar.plugins.python.api.project.configuration.ProjectConfiguration;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
@@ -48,6 +47,7 @@ import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 class SubscriptionVisitorTest {
 
@@ -78,7 +78,7 @@ class SubscriptionVisitorTest {
   @Test
   void exposed_visitor_data() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): ...");
-    var cache = Mockito.mock(CacheContext.class);
+    var cache = mock(CacheContext.class);
 
     PythonFile pythonFile = PythonTestUtils.pythonFile("file");
     PythonVisitorContext context = new PythonVisitorContext.Builder(fileInput, pythonFile)
@@ -150,7 +150,7 @@ class SubscriptionVisitorTest {
 
   @Test
   void callGraph() {
-    var callGraph = Mockito.mock(CallGraph.class);
+    var callGraph = mock(CallGraph.class);
     var latch = new CountDownLatch(1);
     var check = new PythonSubscriptionCheck() {
       @Override

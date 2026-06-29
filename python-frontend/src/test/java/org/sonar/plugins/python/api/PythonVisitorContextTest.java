@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -42,6 +41,7 @@ import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
 class PythonVisitorContextTest {
@@ -63,7 +63,7 @@ class PythonVisitorContextTest {
       .hasFieldOrPropertyWithValue("fullyQualifiedName", "my_module");
 
     // file without extension
-    Mockito.when(pythonFile.fileName()).thenReturn("my_module");
+    when(pythonFile.fileName()).thenReturn("my_module");
     ctx = new PythonVisitorContext.Builder(fileInput, pythonFile).packageName("my_package").build();
     functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");

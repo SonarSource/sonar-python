@@ -17,31 +17,34 @@
 package org.sonar.python.caching;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.api.batch.sensor.cache.WriteCache;
+
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 class PythonWriteCacheImplTest {
 
   @Test
   void write() {
     byte[] bytes = "hello".getBytes();
-    WriteCache writeCache = Mockito.spy(WriteCache.class);
+    WriteCache writeCache = spy(WriteCache.class);
 
     PythonWriteCacheImpl pythonWriteCache = new PythonWriteCacheImpl(writeCache);
     pythonWriteCache.write("key", bytes);
 
-    Mockito.verify(writeCache, Mockito.times(1))
+    verify(writeCache, times(1))
       .write("key", bytes);
   }
 
   @Test
   void copy_from_previous() {
-    WriteCache writeCache = Mockito.spy(WriteCache.class);
+    WriteCache writeCache = spy(WriteCache.class);
 
     PythonWriteCacheImpl pythonWriteCache = new PythonWriteCacheImpl(writeCache);
     pythonWriteCache.copyFromPrevious("key");
 
-    Mockito.verify(writeCache, Mockito.times(1))
+    verify(writeCache, times(1))
       .copyFromPrevious("key");
   }
 }

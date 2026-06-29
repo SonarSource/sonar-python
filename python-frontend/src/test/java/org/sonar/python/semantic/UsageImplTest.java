@@ -17,11 +17,11 @@
 package org.sonar.python.semantic;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 
 class UsageImplTest {
@@ -39,7 +39,7 @@ class UsageImplTest {
   }
 
   private static void assertBindingUsage(Usage.Kind kind, boolean isBinding) {
-    Tree mockTree = Mockito.mock(Tree.class);
+    Tree mockTree = mock(Tree.class);
     UsageImpl usage = new UsageImpl(mockTree, kind);
     assertThat(usage.kind()).isEqualTo(kind);
     assertThat(usage.isBindingUsage()).isEqualTo(isBinding);

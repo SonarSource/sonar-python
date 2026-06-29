@@ -19,7 +19,6 @@ package org.sonar.python.semantic;
 import java.net.URI;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -37,6 +36,7 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.getAllDescendant;
 import static org.sonar.python.PythonTestUtils.getFirstChild;
@@ -467,7 +467,7 @@ class FullyQualifiedNameTest {
   void init_module_relative_import() {
     String code = String.join(System.getProperty("line.separator"), "from .. import fn", "fn()", "class A: pass");
     FileInput fileInput = new PythonTreeMaker().fileInput(PythonParser.create().parse(code));
-    PythonFile pythonFile = Mockito.mock(PythonFile.class, "__init__.py");
+    PythonFile pythonFile = mock(PythonFile.class, "__init__.py");
     when(pythonFile.fileName()).thenReturn("__init__.py");
     when(pythonFile.uri()).thenReturn(URI.create("mod/__init__.py"));
     PythonVisitorContext context = new PythonVisitorContext.Builder(fileInput, pythonFile).packageName("foo.bar").build();

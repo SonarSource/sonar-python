@@ -16,7 +16,6 @@
  */
 package org.sonar.plugins.python.api.types.v2.matchers;
 
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.PythonType;
 import org.sonar.python.types.v2.matchers.TypePredicate;
@@ -25,14 +24,16 @@ import org.sonar.python.types.v2.matchers.TypePredicateContext;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class MatchersTestUtils {
   private MatchersTestUtils() {
   }
 
   public static TypePredicate mockPredicateReturning(PythonType expectedType, TriBool result) {
-    TypePredicate predicate = Mockito.mock(TypePredicate.class);
-    Mockito.when(predicate.check(eq(expectedType), any(TypePredicateContext.class))).thenReturn(result);
+    TypePredicate predicate = mock(TypePredicate.class);
+    when(predicate.check(eq(expectedType), any(TypePredicateContext.class))).thenReturn(result);
     return predicate;
   }
 

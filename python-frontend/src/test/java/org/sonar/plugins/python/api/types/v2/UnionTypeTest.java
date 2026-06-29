@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Set;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -39,6 +38,7 @@ import static org.sonar.python.types.v2.TypesTestUtils.FLOAT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
+import static org.mockito.Mockito.mock;
 
 
 class UnionTypeTest {
@@ -183,7 +183,7 @@ class UnionTypeTest {
 
   @Test
   void noLazyTypeInUnionType() {
-    PythonType lazyType = new LazyType("foo", Mockito.mock(LazyTypesContext.class));
+    PythonType lazyType = new LazyType("foo", mock(LazyTypesContext.class));
     assertThatThrownBy(() -> UnionType.or(INT_TYPE, lazyType))
       .isInstanceOf(IllegalArgumentException.class)
       .hasMessage("UnionType cannot contain Lazy types");

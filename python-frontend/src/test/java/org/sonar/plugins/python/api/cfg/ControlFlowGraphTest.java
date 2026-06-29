@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -35,10 +34,11 @@ import org.sonar.python.cfg.PythonCfgEndBlock;
 import org.sonar.python.cfg.PythonCfgSimpleBlock;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 class ControlFlowGraphTest {
 
-  private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
+  private PythonFile file = mock(PythonFile.class, "file1.py");
 
   @Test
   void empty_file() {
