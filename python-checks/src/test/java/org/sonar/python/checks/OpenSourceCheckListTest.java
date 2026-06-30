@@ -24,7 +24,6 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -132,7 +131,15 @@ class OpenSourceCheckListTest {
   void test_locally_deprecated_rules_stay_deprecated() throws IOException {
     // Some rules have been deprecated only for Python. When executed, rule-api reverts those rule to "ready" status, which is incorrect.
     // This test is here to ensure it doesn't happen.
-    List<String> locallyDeprecatedRules = Arrays.asList();
+    List<String> locallyDeprecatedRules = List.of(
+            "S1721",
+            "S2733",
+            "S5439",
+            "S5042",
+            "S1717",
+            "S4828",
+            "ClassComplexity",
+            "FileComplexity");
     try (Stream<Path> fileStream = Files.find(METADATA_DIR, 1, (path, attr) -> path.toString().endsWith(".json"))) {
       Set<String> deprecatedKeys = fileStream
         .filter(path -> !path.toString().endsWith("_profile.json"))
