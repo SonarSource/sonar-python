@@ -46,7 +46,6 @@ import org.sonar.python.checks.hotspots.CsrfDisabledCheck;
 import org.sonar.python.checks.hotspots.DebugModeCheck;
 import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeCheck;
 import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeLegacyCheck;
-import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
 import org.sonar.python.checks.hotspots.ExpandingArchiveCheck;
 import org.sonar.python.checks.hotspots.FastHashingOrPlainTextCheck;
 import org.sonar.python.checks.hotspots.GraphQLIntrospectionCheck;
@@ -210,7 +209,6 @@ public class OpenSourceCheckList {
       DuplicatedMethodFieldNamesCheck.class,
       DuplicatedMethodImplementationCheck.class,
       DuplicatesInCharacterClassCheck.class,
-      DynamicCodeExecutionCheck.class,
       EinopsSyntaxCheck.class,
       ElseAfterLoopsWithoutBreakCheck.class,
       EmptyAlternativeCheck.class,
