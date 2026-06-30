@@ -70,10 +70,6 @@ def test_missing_config():
 
     assert exc_info.value.field == 'api_key'
     assert 'Missing required field' in str(exc_info.value)
-
-    # or
-    with pytest.raises(Exception, match=r"Missing required field"):
-        load_config({})
 </pre>
 <h2>How to fix it in unittest</h2>
 <p>With unittest, use <code>assertRaises()</code> with a specific exception type, or <code>assertRaisesRegex()</code> when you want to verify the
@@ -107,10 +103,6 @@ def parse_age(value):
 class TestAgeParser(unittest.TestCase):
     def test_negative_age(self):
         with self.assertRaises(ValueError):
-            parse_age("-5")
-
-        # or
-        with self.assertRaisesRegex(Exception, r"Age cannot be negative"):
             parse_age("-5")
 </pre>
 <h2>Resources</h2>

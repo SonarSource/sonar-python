@@ -1,21 +1,10 @@
-<p>This is an issue when at least 3 test methods differ only by a few hardcoded values and could be refactored into a single parameterized test with
-less than 4 parameters.</p>
+<p>This rule raises an issue when at least 3 test methods could be refactored into a single parameterized test with less than 4 parameters.</p>
 <h2>Why is this an issue?</h2>
-<p>When multiple test methods contain nearly identical logic but differ only in a few hardcoded values, they create unnecessary code duplication. This
-duplication makes the test suite harder to maintain and increases the risk of introducing bugs.</p>
-<p>Consider a scenario where you have three test methods that each verify a calculation with different input values. If you later discover a bug in
-the test logic itself, you would need to fix it in three places instead of one. This redundancy is error-prone and wastes time.</p>
-<p>Parameterized tests solve this problem by allowing you to write the test logic once and execute it multiple times with different input values. Most
-modern testing frameworks, including pytest for Python, provide built-in support for parameterization.</p>
-<p>This approach offers several benefits:</p>
-<ul>
-  <li><strong>Reduced code duplication</strong>: The test logic is written once, making it easier to understand and maintain.</li>
-  <li><strong>Fewer bugs</strong>: Changes to test logic only need to be made in one place.</li>
-  <li><strong>Better readability</strong>: The data-driven nature of parameterized tests makes it clear what variations are being tested.</li>
-  <li><strong>Easier to extend</strong>: Adding new test cases becomes as simple as adding new parameter values.</li>
-</ul>
-<p>However, balance is important. If parameterizing tests makes them significantly more complex than the original versions, it may not be worth it.
-The goal is to improve maintainability, not to force every similar test into a parameterized structure.</p>
+<p>When multiple tests differ only by a few hardcoded values, they should be refactored into a single parameterized test. This reduces duplication,
+makes the tests easier to read, and lowers the risk of introducing bugs when the test logic needs to change.</p>
+<p>Parameterized tests are supported by most testing frameworks.</p>
+<p>The right balance still needs to be found. There is little value in parameterizing tests when the resulting test becomes significantly more complex
+than the original versions.</p>
 <h3>What is the potential impact?</h3>
 <p>Duplicated test methods lead to higher maintenance costs and increased likelihood of bugs. When test logic needs to be updated, developers must
 remember to make identical changes across multiple methods, which is easy to forget.</p>
@@ -32,18 +21,6 @@ string of parameter names and a list of tuples containing the values for each te
 import pytest
 
 class TestApp:
-    def test_not_null1(self):  # Noncompliant
-        setup_tax()
-        assert get_tax(1) is not None
-
-    def test_not_null2(self):
-        setup_tax()
-        assert get_tax(2) is not None
-
-    def test_not_null3(self):
-        setup_tax()
-        assert get_tax(3) is not None
-
     def test_level1(self):  # Noncompliant
         set_level(1)
         run_game()
@@ -64,11 +41,6 @@ class TestApp:
 import pytest
 
 class TestApp:
-    @pytest.mark.parametrize("tax_id", [1, 2, 3])
-    def test_not_null(self, tax_id):
-        setup_tax()
-        assert get_tax(tax_id) is not None
-
     @pytest.mark.parametrize("level,health", [
         (1, 100),
         (2, 200),
@@ -114,9 +86,9 @@ class TestApp(unittest.TestCase):
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/parametrize.html">Official guide on parametrizing fixtures and test
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/parametrize.html">How to parametrize fixtures and test
   functions</a></li>
-  <li>parameterized library documentation - <a href="https://github.com/wolever/parameterized">Documentation for the parameterized library for
-  unittest and nose</a></li>
+  <li>parameterized library documentation - <a href="https://github.com/wolever/parameterized">Parameterized testing with any Python test
+  framework</a></li>
 </ul>
 

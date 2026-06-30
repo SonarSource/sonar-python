@@ -23,7 +23,7 @@ becomes challenging if you don’t realize the parser is different.</p>
 <p>For security-sensitive applications that parse untrusted HTML, relying on an unspecified parser introduces additional risk. Different parsers may
 interpret potentially malicious markup differently, and you lose control over this critical parsing behavior.</p>
 <p>In Python’s BeautifulSoup library, the common parsers are <code>html.parser</code> (Python’s built-in), <code>lxml</code> (faster with native
-code), and <code>html5lib</code> (most lenient and browser-like).</p>
+code), <code>lxml-xml</code> or <code>xml</code> (for XML documents), and <code>html5lib</code> (most lenient and browser-like).</p>
 <h3>What is the potential impact?</h3>
 <p>When HTML parsing libraries use different parsers across environments, your application may:</p>
 <ul>

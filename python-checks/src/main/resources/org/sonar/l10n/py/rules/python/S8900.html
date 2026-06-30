@@ -17,8 +17,6 @@ previous major version (like methods following the earlier style) was kept for b
   <li><strong>Future compatibility risk</strong>: Deprecated methods may be removed in future library versions, breaking your code.</li>
   <li><strong>Confusion for maintainers</strong>: Developers familiar with the modern API will find deprecated methods unexpected and may not
   understand why they’re being used.</li>
-  <li><strong>Missing improvements</strong>: Modern methods may include performance optimizations or bug fixes not backported to deprecated
-  versions.</li>
 </ul>
 <p>The library’s documentation explicitly recommends using the modern equivalents to ensure long-term code maintainability.</p>
 <p>In Beautiful Soup specifically, this refers to the transition from Beautiful Soup 3’s camelCase naming (like <code>findAll()</code>,
@@ -202,12 +200,24 @@ from bs4 import BeautifulSoup
 soup = BeautifulSoup(html, 'html.parser')
 result = soup.find_all('a', string='Click here')
 </pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(html, 'html.parser')
+result = soup.findAll('a', string='Click here')  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(html, 'html.parser')
+result = soup.find_all('a', string='Click here')
+</pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li>Beautiful Soup Documentation - Method Names - <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#method-names">Official Beautiful
-  Soup documentation explaining the naming convention changes and deprecated methods</a></li>
-  <li>Beautiful Soup 4.9.0 Changelog - <a href="https://git.launchpad.net/beautifulsoup/tree/CHANGELOG">Changelog documenting the deprecation of
-  camelCase method names</a></li>
+  <li>Beautiful Soup Documentation - <a
+  href="https://beautiful-soup-4.readthedocs.io/en/latest/index.html?highlight=method%20names#method-names">Method names</a></li>
 </ul>
 
