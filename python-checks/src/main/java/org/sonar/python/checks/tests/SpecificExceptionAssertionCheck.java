@@ -28,7 +28,7 @@ import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
-import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.checks.utils.UnittestUtils;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.EXCEPTION;
@@ -36,20 +36,6 @@ import static org.sonar.plugins.python.api.types.BuiltinTypes.EXCEPTION;
 @Rule(key = "S5958")
 public class SpecificExceptionAssertionCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Specify a more specific exception type here.";
-  private static final String UNITTEST_TEST_CASE_FQN_PREFIX = "unittest.case.TestCase.";
-  private static final String PYTEST_EXPECTED_EXCEPTION = "expected_exception";
-  private static final String PYTEST_MATCH = "match";
-  private static final String UNITTEST_EXCEPTION = "exception";
-  private static final TypeMatcher PYTEST_RAISES_MATCHER = TypeMatchers.withFQN("pytest.raises");
-  private static final TypeMatcher UNITTEST_ASSERT_RAISES_MATCHER = TypeMatchers.any(
-    TypeMatchers.withFQN(UNITTEST_TEST_CASE_FQN_PREFIX + "assertRaises"),
-    TypeMatchers.withFQN(UNITTEST_TEST_CASE_FQN_PREFIX + "assertRaisesRegex"),
-    TypeMatchers.withFQN(UNITTEST_TEST_CASE_FQN_PREFIX + "assertRaisesRegexp")
-  );
-  private static final TypeMatcher UNITTEST_ASSERT_RAISES_WITH_MESSAGE_CHECK_MATCHER = TypeMatchers.any(
-    TypeMatchers.withFQN(UNITTEST_TEST_CASE_FQN_PREFIX + "assertRaisesRegex"),
-    TypeMatchers.withFQN(UNITTEST_TEST_CASE_FQN_PREFIX + "assertRaisesRegexp")
-  );
   private static final TypeMatcher GENERIC_EXCEPTION_MATCHER = TypeMatchers.any(
     TypeMatchers.isObjectOfType(EXCEPTION),
     TypeMatchers.isObjectOfType(BASE_EXCEPTION),
@@ -65,7 +51,7 @@ public class SpecificExceptionAssertionCheck extends PythonSubscriptionCheck {
 
   @Override
   public CheckScope scope() {
-    return CheckScope.ALL;
+    return CheckScope.TESTS;
   }
 
   private static void checkWithStatement(SubscriptionContext ctx, WithStatement withStatement) {
@@ -93,32 +79,20 @@ public class SpecificExceptionAssertionCheck extends PythonSubscriptionCheck {
   @Nullable
   private static Expression genericExceptionArgument(CallExpression callExpression, SubscriptionContext ctx) {
     RegularArgument exceptionArgument = null;
-    if (PYTEST_RAISES_MATCHER.isTrueFor(callExpression.callee(), ctx)) {
-      if (hasPytestMessageCheck(callExpression)) {
+    if (UnittestUtils.isPytestRaises(callExpression, ctx)) {
+      if (UnittestUtils.hasPytestRaisesMatchArgument(callExpression)) {
         return null;
       }
-      exceptionArgument = TreeUtils.nthArgumentOrKeyword(0, PYTEST_EXPECTED_EXCEPTION, callExpression.arguments());
-    } else if (isUnittestAssertRaises(callExpression, ctx)) {
-      if (hasUnittestMessageCheck(callExpression, ctx)) {
+      exceptionArgument = UnittestUtils.pytestExpectedExceptionArgument(callExpression);
+    } else if (UnittestUtils.isUnittestAssertRaises(callExpression, ctx)) {
+      if (UnittestUtils.hasUnittestAssertRaisesMessageCheck(callExpression, ctx)) {
         return null;
       }
-      exceptionArgument = TreeUtils.nthArgumentOrKeyword(0, UNITTEST_EXCEPTION, callExpression.arguments());
+      exceptionArgument = UnittestUtils.unittestExceptionArgument(callExpression);
     }
     if (exceptionArgument == null || !GENERIC_EXCEPTION_MATCHER.isTrueFor(exceptionArgument.expression(), ctx)) {
       return null;
     }
     return exceptionArgument.expression();
-  }
-
-  private static boolean hasPytestMessageCheck(CallExpression callExpression) {
-    return TreeUtils.argumentByKeyword(PYTEST_MATCH, callExpression.arguments()) != null;
-  }
-
-  private static boolean hasUnittestMessageCheck(CallExpression callExpression, SubscriptionContext ctx) {
-    return UNITTEST_ASSERT_RAISES_WITH_MESSAGE_CHECK_MATCHER.isTrueFor(callExpression.callee(), ctx);
-  }
-
-  private static boolean isUnittestAssertRaises(CallExpression callExpression, SubscriptionContext ctx) {
-    return UNITTEST_ASSERT_RAISES_MATCHER.isTrueFor(callExpression.callee(), ctx);
   }
 }

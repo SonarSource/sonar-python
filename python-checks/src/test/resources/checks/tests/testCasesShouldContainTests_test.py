@@ -1,4 +1,5 @@
 import unittest
+import pytest
 
 
 def test_module_level_test():
@@ -7,7 +8,8 @@ def test_module_level_test():
 
 class TestPytestWithoutTests:  # Noncompliant {{Add some tests to this class.}}
 #     ^^^^^^^^^^^^^^^^^^^^^^
-    def helper(self):
+    @pytest.fixture
+    def setup_data(self):
         return 42
 
 
@@ -16,9 +18,53 @@ class TestPytestWithTest:
         assert True
 
 
+class TestPytestEndpoint:
+    @pytest.fixture(autouse=True)
+    def setup_attrs(self):
+        self.value = 42
+
+    def teardown_method(self):
+        self.value = None
+
+
+class TestPytestDeleteEndpoint(TestPytestEndpoint):
+    def test_ok(self):
+        assert self.value == 42
+
+
+class TestPytestXunitOnly:
+    def teardown_method(self):
+        self.value = None
+
+
+class TestPytestXunitChild(TestPytestXunitOnly):
+    def test_ok(self):
+        assert True
+
+
 class HelperPytestClass:
     def helper(self):
         return 42
+
+
+class TestPytestHelperWithInit:
+    def __init__(self):
+        self.value = 42
+
+    def helper(self):
+        return self.value
+
+
+class TestPytestHelperWithNew:
+    def __new__(cls):
+        return super().__new__(cls)
+
+    def helper(self):
+        return 42
+
+
+class TestPlugin:
+    name = "test-plugin-cli"
 
 
 class EmptyUnittestCase(unittest.TestCase):  # Noncompliant {{Add some tests to this class.}}
@@ -109,6 +155,14 @@ class CamelCaseTestMethod(unittest.TestCase):
 
 class TestUnknownParent(UnknownParent):  # Noncompliant {{Add some tests to this class.}}
 #     ^^^^^^^^^^^^^^^^^
+    def setUp(self):
+        return 42
+
+    def helper(self):
+        return 42
+
+
+class TestWithUnknownParentAndNoLifecycle(UnknownParent):
     def helper(self):
         return 42
 
@@ -119,6 +173,14 @@ def TestAmbiguous():
 
 class TestAmbiguous:  # Noncompliant {{Add some tests to this class.}}
 #     ^^^^^^^^^^^^^
+    def tearDown(self):
+        return 42
+
+    def helper(self):
+        return 42
+
+
+class TestAmbiguousWithoutLifecycle:
     def helper(self):
         return 42
 
@@ -147,6 +209,14 @@ def FactoryBase():
 
 class TestFunctionBase(FactoryBase):  # Noncompliant {{Add some tests to this class.}}
 #     ^^^^^^^^^^^^^^^^
+    def setUpClass(self):
+        return 42
+
+    def helper(self):
+        return 42
+
+
+class TestFunctionBaseWithoutLifecycle(FactoryBase):
     def helper(self):
         return 42
 
@@ -165,5 +235,13 @@ class RightNoTest(SharedNoTest):
 
 class TestDiamondNoTests(LeftNoTest, RightNoTest):  # Noncompliant {{Add some tests to this class.}}
 #     ^^^^^^^^^^^^^^^^^^
+    def tearDownClass(self):
+        return 42
+
+    def helper(self):
+        return 42
+
+
+class TestDiamondNoTestsWithoutLifecycle(LeftNoTest, RightNoTest):
     def helper(self):
         return 42

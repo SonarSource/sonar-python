@@ -38,7 +38,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
-import org.sonar.python.tests.UnittestUtils;
+import org.sonar.python.checks.utils.UnittestUtils;
 
 @Rule(key = "S5778")
 public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionCheck {

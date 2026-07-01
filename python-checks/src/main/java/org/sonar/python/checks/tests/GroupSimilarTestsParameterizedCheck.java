@@ -35,7 +35,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.CheckUtils;
-import org.sonar.python.tests.UnittestUtils;
+import org.sonar.python.checks.utils.UnittestUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import javax.annotation.Nullable;

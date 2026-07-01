@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.UnittestUtils;
 
 import static java.util.function.Predicate.not;
 import static org.sonar.python.tree.TreeUtils.getClassSymbolFromDef;
@@ -45,9 +46,6 @@ import static org.sonar.python.tree.TreeUtils.getClassSymbolFromDef;
 public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
   private static final String CLASS_MESSAGE = "Add some tests to this class.";
   private static final String FILE_MESSAGE = "Add some tests to this file.";
-  private static final TypeMatcher UNITTEST_TEST_CASE_MATCHER = TypeMatchers.any(
-    TypeMatchers.isOrExtendsType("unittest.TestCase"),
-    TypeMatchers.isOrExtendsType("unittest.case.TestCase"));
   private static final TypeMatcher ABSTRACT_BASE_CLASS_MATCHER = TypeMatchers.isOrExtendsType("abc.ABC");
   private static final TypeMatcher NOT_IMPLEMENTED_ERROR_MATCHER = TypeMatchers.any(
     TypeMatchers.isType("builtins.NotImplementedError"),
@@ -65,7 +63,7 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    boolean pytestStyleFile = isPytestStyleFile(ctx);
+    boolean pytestStyleFile = UnittestUtils.isPytestFileName(ctx.pythonFile().fileName());
     List<CandidateClass> candidateClasses = collectCandidateClasses(ctx, statements, pytestStyleFile);
     boolean hasCollectedTests = hasModuleLevelPytestTests(statements) || hasClassLevelTests(statements);
 
@@ -97,7 +95,7 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
     return statements.statements().stream()
       .filter(FunctionDef.class::isInstance)
       .map(FunctionDef.class::cast)
-      .anyMatch(TestCasesShouldContainTestsCheck::isTestMethod);
+      .anyMatch(TestCasesShouldContainTestsCheck::isCollectedTestMethod);
   }
 
   private static boolean hasClassLevelTests(StatementList statements) {
@@ -108,16 +106,8 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isCandidateTestClass(SubscriptionContext ctx, ClassDef classDef, boolean pytestStyleFile) {
-    return (pytestStyleFile && classDef.name().name().startsWith("Test")) || isUnittestTestCaseClass(classDef, ctx);
-  }
-
-  private static boolean isPytestStyleFile(SubscriptionContext ctx) {
-    String fileName = ctx.pythonFile().fileName();
-    return fileName.startsWith("test_") || fileName.endsWith("_test.py");
-  }
-
-  private static boolean isUnittestTestCaseClass(ClassDef classDef, SubscriptionContext ctx) {
-    return hasAncestorMatching(classDef, UNITTEST_TEST_CASE_MATCHER, ctx);
+    return (pytestStyleFile && UnittestUtils.isPytestStyleTestClass(classDef, ctx.pythonFile().fileName()))
+      || UnittestUtils.isUnittestTestCaseClass(classDef);
   }
 
   private static boolean hasCollectedTests(ClassDef classDef) {
@@ -128,7 +118,7 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
     return classDef.body().statements().stream()
       .filter(FunctionDef.class::isInstance)
       .map(FunctionDef.class::cast)
-      .anyMatch(TestCasesShouldContainTestsCheck::isTestMethod);
+      .anyMatch(TestCasesShouldContainTestsCheck::isCollectedTestMethod);
   }
 
   private static boolean hasInheritedTestMethod(ClassDef classDef) {
@@ -224,12 +214,12 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
     return NOT_IMPLEMENTED_ERROR_MATCHER.isTrueFor(expression, ctx);
   }
 
-  private static boolean isTestMethod(FunctionDef functionDef) {
-    return isTestMethodName(functionDef.name().name());
+  private static boolean isCollectedTestMethod(FunctionDef functionDef) {
+    return UnittestUtils.isTestMethodName(functionDef.name().name());
   }
 
   private static boolean isTestMethodName(String name) {
-    return name.startsWith("test");
+    return UnittestUtils.isTestMethodName(name);
   }
 
   private record CandidateClass(ClassDef classDef, @Nullable ClassSymbol classSymbol, boolean hasCollectedTests) {

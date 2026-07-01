@@ -35,7 +35,7 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tests.UnittestUtils;
+import org.sonar.python.checks.utils.UnittestUtils;
 
 @Rule(key = "S5918")
 public class ImplicitlySkippedTestCheck extends PythonSubscriptionCheck {

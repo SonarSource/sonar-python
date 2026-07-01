@@ -35,7 +35,7 @@ import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tests.UnittestUtils;
+import org.sonar.python.checks.utils.UnittestUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5899")

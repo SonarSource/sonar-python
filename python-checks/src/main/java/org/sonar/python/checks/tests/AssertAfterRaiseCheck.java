@@ -34,7 +34,7 @@ import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.python.quickfix.TextEditUtils;
-import org.sonar.python.tests.UnittestUtils;
+import org.sonar.python.checks.utils.UnittestUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5915")
