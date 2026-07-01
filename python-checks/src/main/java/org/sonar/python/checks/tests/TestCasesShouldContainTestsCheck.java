@@ -52,6 +52,11 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
     TypeMatchers.isObjectInstanceOf("builtins.NotImplementedError"));
 
   @Override
+  public CheckScope scope() {
+    return CheckScope.TESTS;
+  }
+
+  @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, TestCasesShouldContainTestsCheck::checkFileInput);
   }
@@ -64,7 +69,10 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
     }
 
     boolean pytestStyleFile = UnittestUtils.isPytestFileName(ctx.pythonFile().fileName());
-    List<CandidateClass> candidateClasses = collectCandidateClasses(ctx, statements, pytestStyleFile);
+    List<ClassInfo> classes = collectClasses(ctx, statements, pytestStyleFile);
+    List<ClassInfo> candidateClasses = classes.stream()
+      .filter(ClassInfo::isCandidate)
+      .toList();
     boolean hasCollectedTests = hasModuleLevelPytestTests(statements) || hasClassLevelTests(statements);
 
     if (pytestStyleFile && !hasCollectedTests) {
@@ -74,21 +82,21 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
 
     candidateClasses
             .stream()
-            .filter(not(CandidateClass::hasCollectedTests))
-            .filter(candidateClass -> !hasDescendantWithTests(candidateClass, candidateClasses))
+            .filter(not(ClassInfo::hasCollectedTests))
+            .filter(candidateClass -> !hasDescendantWithTests(candidateClass, classes))
             .filter(candidateClass -> !isLikelySharedBaseClass(candidateClass, ctx))
             .forEach(candidateClass -> ctx.addIssue(candidateClass.classDef().name(), CLASS_MESSAGE));
   }
 
-  private static List<CandidateClass> collectCandidateClasses(SubscriptionContext ctx, StatementList statements, boolean pytestStyleFile) {
+  private static List<ClassInfo> collectClasses(SubscriptionContext ctx, StatementList statements, boolean pytestStyleFile) {
     return statements.statements()
-            .stream().filter(ClassDef.class::isInstance)
-            .map(ClassDef.class::cast)
-            .filter(classDef -> isCandidateTestClass(ctx, classDef, pytestStyleFile))
-            .map(classDef ->
-                    new CandidateClass(classDef, getClassSymbolFromDef(classDef), hasCollectedTests(classDef))
-            )
-            .toList();
+      .stream().filter(ClassDef.class::isInstance)
+      .map(ClassDef.class::cast)
+      .map(classDef -> {
+        ClassSymbol classSymbol = getClassSymbolFromDef(classDef);
+        return new ClassInfo(classDef, classSymbol, hasCollectedTests(classDef), isCandidateTestClass(ctx, classDef, pytestStyleFile));
+      })
+      .toList();
   }
 
   private static boolean hasModuleLevelPytestTests(StatementList statements) {
@@ -142,20 +150,20 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
             );
   }
 
-  private static boolean hasDescendantWithTests(CandidateClass candidateClass, List<CandidateClass> candidateClasses) {
+  private static boolean hasDescendantWithTests(ClassInfo candidateClass, List<ClassInfo> classes) {
     ClassSymbol classSymbol = candidateClass.classSymbol();
     if (classSymbol == null) {
       return false;
     }
-    return candidateClasses.stream()
+    return classes.stream()
       .filter(other -> other != candidateClass)
-      .filter(CandidateClass::hasCollectedTests)
-      .map(CandidateClass::classSymbol)
+      .filter(ClassInfo::hasCollectedTests)
+      .map(ClassInfo::classSymbol)
       .filter(Objects::nonNull)
       .anyMatch(otherClassSymbol -> otherClassSymbol.isOrExtends(classSymbol));
   }
 
-  private static boolean isLikelySharedBaseClass(CandidateClass candidateClass, SubscriptionContext ctx) {
+  private static boolean isLikelySharedBaseClass(ClassInfo candidateClass, SubscriptionContext ctx) {
     ClassDef classDef = candidateClass.classDef();
     String className = classDef.name().name();
     return className.startsWith("Base")
@@ -222,6 +230,6 @@ public class TestCasesShouldContainTestsCheck extends PythonSubscriptionCheck {
     return UnittestUtils.isTestMethodName(name);
   }
 
-  private record CandidateClass(ClassDef classDef, @Nullable ClassSymbol classSymbol, boolean hasCollectedTests) {
+  private record ClassInfo(ClassDef classDef, @Nullable ClassSymbol classSymbol, boolean hasCollectedTests, boolean isCandidate) {
   }
 }

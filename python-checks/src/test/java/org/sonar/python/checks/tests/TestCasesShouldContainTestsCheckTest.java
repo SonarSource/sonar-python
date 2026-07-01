@@ -17,9 +17,17 @@
 package org.sonar.python.checks.tests;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class TestCasesShouldContainTestsCheckTest {
+
+  @Test
+  void scope() {
+    assertThat(new TestCasesShouldContainTestsCheck().scope()).isEqualTo(PythonCheck.CheckScope.TESTS);
+  }
 
   @Test
   void test() {
