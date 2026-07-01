@@ -1,0 +1,72 @@
+<h2>Why is this an issue?</h2>
+<p>Test files and test classes are meant to verify behavior. When a file looks like a test module, or a class looks like a collected test class,
+readers expect it to contain executable test cases. If it only contains helpers, fixtures, or lifecycle code, it gives the false impression that the
+covered behavior is actually tested.</p>
+<p>In Python, this can happen in different ways depending on the test framework:</p>
+<ul>
+  <li>In <code>pytest</code>, a file such as <code>test_example.py</code> or <code>example_test.py</code> can define fixtures or helper classes but no
+  collected test functions or test methods.</li>
+  <li>In <code>unittest</code>, a class can inherit from <code>unittest.TestCase</code> but only define setup helpers and no <code>test_</code>
+  methods.</li>
+</ul>
+<p>Such files and classes are misleading because they appear to contribute test coverage while actually verifying nothing.</p>
+<h3>Exceptions</h3>
+<p>There are scenarios where not having local test cases is acceptable.</p>
+<h4>Base classes used only for shared test logic</h4>
+<p>Shared helpers or setup code can live in a base class or mixin that is meant to be inherited by real test classes. Those classes are not
+problematic by themselves as long as the actual derived test classes contain collected tests.</p>
+<h4>Derived classes that inherit tests</h4>
+<p>Some test classes inherit test methods from a base class. In that case, the derived class may not declare its own <code>test_</code> methods
+locally, but it still participates in real tests and should not be flagged.</p>
+<h2>How to fix it in pytest</h2>
+<p>To fix this issue in <code>pytest</code>, it is important that all test files contain at least one test case.</p>
+<p>Test cases in pytest are identified by:</p>
+<ul>
+  <li>Functions prefixed with <code>test_</code> in files prefixed with <code>test_</code> or suffixed with <code>_test.py</code></li>
+  <li>Methods prefixed with <code>test_</code> in classes prefixed with <code>Test</code></li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+# test_example.py
+class TestSomeClass:
+    pass  # Noncompliant: no test methods
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+# test_example.py
+class TestSomeClass:
+    def test_some_method_should_return_true(self):
+        assert some_method() is True
+</pre>
+<h2>How to fix it in unittest</h2>
+<p>To fix this issue in <code>unittest</code>, it is important that all test classes that inherit from <code>unittest.TestCase</code> contain at least
+one test method.</p>
+<p>Test methods in unittest must:</p>
+<ul>
+  <li>Be prefixed with <code>test_</code></li>
+  <li>Be part of a class that inherits from <code>unittest.TestCase</code></li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="11" data-diff-type="noncompliant">
+import unittest
+
+class TestSomeClass(unittest.TestCase):
+    pass  # Noncompliant: no test methods
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="11" data-diff-type="compliant">
+import unittest
+
+class TestSomeClass(unittest.TestCase):
+    def test_some_method_should_return_true(self):
+        self.assertTrue(some_method())
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li><a href="https://docs.pytest.org/">pytest: helps you write better programs</a></li>
+  <li><a href="https://docs.python.org/3/library/unittest.html">unittest — Unit testing framework</a></li>
+</ul>
+
