@@ -17,9 +17,17 @@
 package org.sonar.python.checks.tests;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class SingleInvocationRuntimeExceptionCheckTest {
+
+  @Test
+  void scope() {
+    assertEquals(PythonCheck.CheckScope.TESTS, new SingleInvocationRuntimeExceptionCheck().scope());
+  }
 
   @Test
   void test() {

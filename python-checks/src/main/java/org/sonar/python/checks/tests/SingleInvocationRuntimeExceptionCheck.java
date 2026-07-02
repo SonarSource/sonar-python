@@ -62,6 +62,11 @@ public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionChe
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> checkDirectRaiseCall(ctx, (CallExpression) ctx.syntaxNode()));
   }
 
+  @Override
+  public CheckScope scope() {
+    return CheckScope.TESTS;
+  }
+
   private static void checkWithStatement(SubscriptionContext ctx, WithStatement withStatement) {
     boolean isRaiseAssertion = withStatement.withItems().stream()
       .map(WithItem::test)
