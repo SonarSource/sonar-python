@@ -46,13 +46,13 @@ public class UnittestUtils {
   public static final String ASSERT_RAISES_REGEXP = "assertRaisesRegexp";
   public static final String ASSERT_RAISES_REGEX = "assertRaisesRegex";
   private static final TypeMatcher UNITTEST_ASSERT_RAISES_MATCHER = TypeMatchers.any(
-    TypeMatchers.withFQN(UNITTEST_TEST_CASE_FQN_PREFIX + "assertRaises"),
-    TypeMatchers.withFQN(UNITTEST_TEST_CASE_FQN_PREFIX + ASSERT_RAISES_REGEX),
-    TypeMatchers.withFQN(UNITTEST_TEST_CASE_FQN_PREFIX + ASSERT_RAISES_REGEXP)
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + "assertRaises"),
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + ASSERT_RAISES_REGEX),
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + ASSERT_RAISES_REGEXP)
   );
   private static final TypeMatcher UNITTEST_ASSERT_RAISES_WITH_MESSAGE_CHECK_MATCHER = TypeMatchers.any(
-    TypeMatchers.withFQN(UNITTEST_TEST_CASE_FQN_PREFIX + ASSERT_RAISES_REGEX),
-    TypeMatchers.withFQN(UNITTEST_TEST_CASE_FQN_PREFIX + ASSERT_RAISES_REGEXP)
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + ASSERT_RAISES_REGEX),
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + ASSERT_RAISES_REGEXP)
   );
 
   private UnittestUtils() {
@@ -143,7 +143,6 @@ public class UnittestUtils {
     ClassDef parentClass = directlyEnclosingClass(functionDef);
     return parentClass == null || isTestClassName(parentClass.name().name());
   }
-
   public static boolean isPytestRaises(CallExpression callExpression, SubscriptionContext ctx) {
     return PYTEST_RAISES_MATCHER.isTrueFor(callExpression.callee(), ctx);
   }
