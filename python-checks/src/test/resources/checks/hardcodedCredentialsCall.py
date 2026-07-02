@@ -24,27 +24,27 @@ def obj_creation_hardcoded_credentials_named_arguments():
                                     username="username",
                                     password_hash="password_hash") # Noncompliant
 
-    temp_user = test_connection.TempUser(password="password") # Noncompliant
+    temp_user = test_connection.TempUser(password="Azerty123") # Noncompliant
 
 
 def obj_creation_hardcoded_assigned_value(password):
     temp_user = test_connection.TempUser(password=password)
     temp_user = test_connection.TempUser(password=foo())
 
-    api_key = "abc"
-#             ^^^^^> 1 {{Revoke and change this password, as it is compromised.}}
+    api_key = "Azerty123"
+#             ^^^^^^^^^^^> 1 {{Revoke and change this password, as it is compromised.}}
     network = pylast.LibreFMNetwork(api_key=api_key) # Noncompliant
 #                                   ^^^^^^^^^^^^^^^ 1
 
-    value = "abcd"
-#           ^^^^^^> 1 {{Revoke and change this password, as it is compromised.}}
+    value = "Azerty123"
+#           ^^^^^^^^^^^> 1 {{Revoke and change this password, as it is compromised.}}
     api_secret = value
     network = pylast.LibreFMNetwork(api_secret=api_secret) # Noncompliant
 #                                   ^^^^^^^^^^^^^^^^^^^^^ 1
 
 
 def top_level_function_call():
-    psycopg2cffi.connect(password="abc") # Noncompliant
+    psycopg2cffi.connect(password="Azerty123") # Noncompliant
 
 
 # Methods manually defined in "manual_hardcoded_credentials_call_check_meta.json"
@@ -58,22 +58,22 @@ from pymongo import MongoClient
 import boto3
 
 def manually_defined_method_calls_with_named_params():
-    psycopg.connect(password="abc") # Noncompliant
-    psycopg2.connect(password="abc") # Noncompliant
-    mysql.connector.connect(password='abc') # Noncompliant
-    mysql.connector.connect(passwd='abc') # Noncompliant
-    mysql.connector.connect(password1='abc', password2='abc', password3='abc') # Noncompliant 3
-    MySQLConnection(password='abc') # Noncompliant
-    MySQLConnection(passwd='abc') # Noncompliant
-    MySQLConnection(password1='abc', password2='abc', password3='abc') # Noncompliant 3
-    pymysql.connect(password="abc") # Noncompliant
-    pymysql.connect(passwd="abc") # Noncompliant
-    r.Redis(password="abc") # Noncompliant
-    MongoClient(password="abc") # Noncompliant
-    boto3.resource(aws_secret_access_key="abc") # Noncompliant
+    psycopg.connect(password="Azerty123") # Noncompliant
+    psycopg2.connect(password="Azerty123") # Noncompliant
+    mysql.connector.connect(password='Azerty123') # Noncompliant
+    mysql.connector.connect(passwd='Azerty123') # Noncompliant
+    mysql.connector.connect(password1='Azerty123', password2='Azerty123', password3='Azerty123') # Noncompliant 3
+    MySQLConnection(password='Azerty123') # Noncompliant
+    MySQLConnection(passwd='Azerty123') # Noncompliant
+    MySQLConnection(password1='Azerty123', password2='Azerty123', password3='Azerty123') # Noncompliant 3
+    pymysql.connect(password="Azerty123") # Noncompliant
+    pymysql.connect(passwd="Azerty123") # Noncompliant
+    r.Redis(password="Azerty123") # Noncompliant
+    MongoClient(password="Azerty123") # Noncompliant
+    boto3.resource(aws_secret_access_key="Azerty123") # Noncompliant
 
 def manually_defined_method_calls_with_positional_params():
-    r.Redis("host", "port", "db", "password") # Noncompliant
+    r.Redis("host", "port", "db", "Azerty123") # Noncompliant
     # The following calls are compliant because the password can't be a positional parameter
     psycopg.connect("abc")
     psycopg2.connect("abc")
@@ -119,10 +119,10 @@ def db_connect(pwd, PASS):
 
     mysql.connector.connection.MySQLConnection(host='localhost', user='sonarsource', password='')
     pymysql.connect(host='localhost', user='sonarsource', password='')
-    pymysql.connections.Connection(host='localhost', user='sonarsource', password='abc') # Noncompliant
+    pymysql.connections.Connection(host='localhost', user='sonarsource', password='Azerty123') # Noncompliant
     pymysql.connections.Connection(host='localhost', user='sonarsource', password=f'{PASS}') # Compliant
     pymysql.connections.Connection(host='localhost', user='sonarsource', password=f'') # Compliant
-    pymysql.connections.Connection(host='localhost', user='sonarsource', password=f'pass') # Noncompliant
+    pymysql.connections.Connection(host='localhost', user='sonarsource', password=f'Azerty123') # Noncompliant
     psycopg2.connect(host='localhost', user='postgres', password='')
     pgdb.connect(host='localhost', user='postgres', password='')
 
@@ -132,8 +132,8 @@ def db_connect(pwd, PASS):
 
 
 def byte_decode_hardcoded_value():
-    apiKey = b"abc".decode("utf-8")
-#            ^^^^^^> 1 {{Revoke and change this password, as it is compromised.}}
+    apiKey = b"Azerty123".decode("utf-8")
+#            ^^^^^^^^^^^^> 1 {{Revoke and change this password, as it is compromised.}}
     network = pylast.LibreFMNetwork(api_key = apiKey) # Noncompliant {{Revoke and change this password, as it is compromised.}}
 #                                   ^^^^^^^^^^^^^^^^ 1
 
@@ -152,4 +152,4 @@ def oauth2_session():
 
     oauth.fetch_token(
         'https://api.example.com/o/oauth2/token',
-        client_secret='example_Password') # Noncompliant
+        client_secret='Azerty123') # Noncompliant

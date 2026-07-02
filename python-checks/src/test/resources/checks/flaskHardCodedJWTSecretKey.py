@@ -4,13 +4,13 @@ def test_non_compliant_assignment_expressions(x):
     assigned_secret = 'hardcoded_secret'
 
     # Tests for "flask.app.Flask.config"
-    app.config['JWT_SECRET_KEY'] = 'secret'  # Noncompliant {{Don't disclose "Flask" JWT secret keys.}}
+    app.config['JWT_SECRET_KEY'] = 'Azerty123'  # Noncompliant {{Don't disclose "Flask" JWT secret keys.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^>                           {{Assignment to sensitive property.}}
-#                                  ^^^^^^^^@-1
+#                                  ^^^^^^^^^^^@-1
     app.config['JWT_SECRET_KEY'] = assigned_secret  # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^
-    _ = app.config['JWT_SECRET_KEY'] = 'secret'  # Noncompliant
-#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^
+    _ = app.config['JWT_SECRET_KEY'] = 'Azerty123'  # Noncompliant
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^
 
     #   False negatives.
     app.config['JWT_SECRET_KEY'], _ = 'secret', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
@@ -18,19 +18,19 @@ def test_non_compliant_assignment_expressions(x):
 
 
     # Tests for "flask.globals.current_app.config"
-    current_app.config['JWT_SECRET_KEY'] = 'secret'  # Noncompliant {{Don't disclose "Flask" JWT secret keys.}}
+    current_app.config['JWT_SECRET_KEY'] = 'Azerty123'  # Noncompliant {{Don't disclose "Flask" JWT secret keys.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>                           {{Assignment to sensitive property.}}
-#                                          ^^^^^^^^@-1
+#                                          ^^^^^^^^^^^@-1
     current_app.config['JWT_SECRET_KEY'] = assigned_secret  # Noncompliant
-    _ = current_app.config['JWT_SECRET_KEY'] = 'secret'  # Noncompliant
+    _ = current_app.config['JWT_SECRET_KEY'] = 'Azerty123'  # Noncompliant
 
     #   False negatives.
     current_app.config['JWT_SECRET_KEY'], _ = 'mysecret', x # FN
     current_app.config['JWT_SECRET_KEY'], _ = _, current_app.config['JWT_SECRET_KEY'] = 'secret', x # FN
 
 
-    current_app.config['JWT_SECRET_KEY'] = app.config['JWT_SECRET_KEY'] = 'secret'      # Noncompliant
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^
+    current_app.config['JWT_SECRET_KEY'] = app.config['JWT_SECRET_KEY'] = 'Azerty123'      # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^
 
 
 

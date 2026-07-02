@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
+import org.sonarsource.analyzer.commons.appsec.SecretClassifier;
 
 @Rule(key = "S6437")
 public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
@@ -91,6 +92,7 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
         .map(StringLiteral.class::cast)
         .filter(Predicate.not(HardcodedCredentialsCallCheck::containsFormattedExpressions))
         .filter(HardcodedCredentialsCallCheck::isNotEmpty)
+        .filter(HardcodedCredentialsCallCheck::isNotKnownNonSecret)
         .ifPresent(string -> ctx.addIssue(argument, MESSAGE));
     } else if (argExp.is(Tree.Kind.NAME)) {
       findAssignment((Name) argExp, 0)
@@ -98,6 +100,7 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
         .map(StringLiteral.class::cast)
         .filter(Predicate.not(HardcodedCredentialsCallCheck::containsFormattedExpressions))
         .filter(HardcodedCredentialsCallCheck::isNotEmpty)
+        .filter(HardcodedCredentialsCallCheck::isNotKnownNonSecret)
         .ifPresent(assignedValue -> ctx.addIssue(argument, MESSAGE).secondary(assignedValue, MESSAGE));
     }
   }
@@ -106,7 +109,11 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
     return Optional.of(stringLiteral)
       .map(StringLiteral::trimmedQuotesValue)
       .filter(Predicate.not(String::isEmpty))
-      .isPresent(); 
+      .isPresent();
+  }
+
+  private static boolean isNotKnownNonSecret(StringLiteral stringLiteral) {
+    return !SecretClassifier.isKnownNonSecret(stringLiteral.trimmedQuotesValue());
   }
 
   private static boolean containsFormattedExpressions(StringLiteral stringLiteral) {

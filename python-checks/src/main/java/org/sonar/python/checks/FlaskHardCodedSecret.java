@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
+import org.sonarsource.analyzer.commons.appsec.SecretClassifier;
 
 
 public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
@@ -133,20 +134,20 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .map(StringLiteral.class::cast)
       .map(StringLiteral::trimmedQuotesValue)
       .filter(getSecretKeyKeyword()::equals)
-      .isPresent() && isStringValue(keyValuePair.value());
+      .isPresent() && isPotentialSecretValue(keyValuePair.value());
   }
 
   private Optional<RegularArgument> getIllegalKeywordArgument(CallExpression callExpression) {
     return Optional.ofNullable(TreeUtils.argumentByKeyword(getSecretKeyKeyword(), callExpression.arguments()))
       .filter(argument -> Optional.of(argument)
         .map(RegularArgument::expression)
-        .filter(FlaskHardCodedSecret::isStringValue)
+        .filter(FlaskHardCodedSecret::isPotentialSecretValue)
         .isPresent());
   }
 
   private void verifyAssignmentStatement(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
-    if (!isStringValue(assignmentStatementTree.assignedValue())) {
+    if (!isPotentialSecretValue(assignmentStatementTree.assignedValue())) {
       return;
     }
     List<Expression> expressionList = assignmentStatementTree.lhsExpressions().stream()
@@ -181,24 +182,27 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .isPresent();
   }
 
-  private static boolean isStringValue(@Nullable Expression expr) {
-    return isStringValue(expr, new HashSet<>());
+  // True when expr resolves to a string literal that SecretClassifier does NOT recognize as a known non-secret placeholder.
+  private static boolean isPotentialSecretValue(@Nullable Expression expr) {
+    return resolveStringValue(expr, new HashSet<>())
+      .filter(value -> !SecretClassifier.isKnownNonSecret(value))
+      .isPresent();
   }
 
-
-  private static boolean isStringValue(@Nullable Expression expr, Set<String> visited) {
+  private static Optional<String> resolveStringValue(@Nullable Expression expr, Set<String> visited) {
     if (expr == null) {
-      return false;
+      return Optional.empty();
     }
     if (expr.is(Tree.Kind.NAME)) {
       if (visited.contains(((Name) expr).name())) {
-        return false;
+        return Optional.empty();
       }
       visited.add(((Name) expr).name());
       Expression assignmentValueExpression = Expressions.singleAssignedValue((Name) expr);
-      return isStringValue(assignmentValueExpression, visited);
-    } else {
-      return expr.is(Tree.Kind.STRING_LITERAL);
+      return resolveStringValue(assignmentValueExpression, visited);
+    } else if (expr.is(Tree.Kind.STRING_LITERAL)) {
+      return Optional.of(((StringLiteral) expr).trimmedQuotesValue());
     }
+    return Optional.empty();
   }
 }

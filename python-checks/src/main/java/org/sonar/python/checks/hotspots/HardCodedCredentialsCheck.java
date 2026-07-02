@@ -23,6 +23,7 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -57,6 +58,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.tree.TreeUtils;
+import org.sonarsource.analyzer.commons.appsec.SecretClassifier;
 
 @Rule(key = "S2068")
 public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
@@ -187,8 +189,11 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
         RegularArgument regularArgument = (RegularArgument) argument;
         if (regularArgument.keywordArgument() != null) {
           return;
-        } else if (i == argNb && regularArgument.expression().is(Kind.STRING_LITERAL) && !((StringLiteral) regularArgument.expression()).trimmedQuotesValue().isEmpty()) {
-          ctx.addIssue(regularArgument, "Review this potentially hard-coded credential.");
+        } else if (i == argNb && regularArgument.expression().is(Kind.STRING_LITERAL)) {
+          String value = ((StringLiteral) regularArgument.expression()).trimmedQuotesValue();
+          if (!value.isEmpty() && !SecretClassifier.isKnownNonSecret(value)) {
+            ctx.addIssue(regularArgument, "Review this potentially hard-coded credential.");
+          }
         }
       }
     }
@@ -211,10 +216,10 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    String matchedCredential = matchedCredential(literalValue, literalPatterns());
-    if (matchedCredential != null) {
-      ctx.addIssue(stringLiteral, String.format(MESSAGE, matchedCredential));
-    }
+    firstMatchingPattern(literalValue, literalPatterns())
+      .filter(matcher -> !SecretClassifier.isKnownNonSecret(extractValueAfterEquals(matcher.group())))
+      .ifPresent(matcher -> ctx.addIssue(stringLiteral, String.format(MESSAGE, credentialNameFromPattern(matcher.pattern()))));
+
     if (isURLWithCredentials(stringLiteral)) {
       ctx.addIssue(stringLiteral, "Review this hard-coded URL, which may contain a credential.");
     }
@@ -270,7 +275,8 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       URL url = new URI(stringLiteral.trimmedQuotesValue()).toURL();
       String userInfo = url.getUserInfo();
       if (userInfo != null && userInfo.matches("\\S+:\\S+")) {
-        return true;
+        String password = userInfo.substring(userInfo.indexOf(':') + 1);
+        return !SecretClassifier.isKnownNonSecret(password);
       }
     } catch (URISyntaxException | MalformedURLException | IllegalArgumentException e) {
       return false;
@@ -318,8 +324,13 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isSuspiciousStringLiteral(Tree tree) {
-    return tree.is(Kind.STRING_LITERAL) && !((StringLiteral) tree).trimmedQuotesValue().isEmpty()
-      && !isCredential(((StringLiteral) tree).trimmedQuotesValue(), variablePatterns());
+    if (!tree.is(Kind.STRING_LITERAL)) {
+      return false;
+    }
+    String value = ((StringLiteral) tree).trimmedQuotesValue();
+    return !value.isEmpty()
+      && !isCredential(value, variablePatterns())
+      && !SecretClassifier.isKnownNonSecret(value);
   }
 
   private static boolean isSuspiciousEnvGetDefault(Expression expression, SubscriptionContext ctx) {
@@ -336,6 +347,8 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     return TreeUtils.nthArgumentOrKeywordOptional(1, "default", call.arguments())
       .map(RegularArgument::expression)
       .filter(HardCodedCredentialsCheck::isNonEmptyStringLiteral)
+      .map(defaultExpr -> ((StringLiteral) defaultExpr).trimmedQuotesValue())
+      .filter(value -> !SecretClassifier.isKnownNonSecret(value))
       .isPresent();
   }
 
@@ -347,18 +360,28 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     return patterns.anyMatch(pattern -> pattern.matcher(target).find());
   }
 
+  private static Optional<Matcher> firstMatchingPattern(String target, Stream<Pattern> patterns) {
+    return patterns.map(pattern -> pattern.matcher(target))
+      .filter(Matcher::find)
+      .findFirst();
+  }
+
   private static String matchedCredential(String target, Stream<Pattern> patterns) {
-    Optional<Pattern> matched = patterns.filter(pattern -> pattern.matcher(target).find()).findFirst();
-    if (matched.isPresent()) {
-      String matchedPattern = matched.get().pattern();
-      int suffixStart = matchedPattern.indexOf('=');
-      if (suffixStart > 0) {
-        return matchedPattern.substring(0, suffixStart);
-      } else {
-        return matchedPattern;
-      }
-    }
-    return null;
+    return firstMatchingPattern(target, patterns)
+      .map(matcher -> credentialNameFromPattern(matcher.pattern()))
+      .orElse(null);
+  }
+
+  private static String credentialNameFromPattern(Pattern pattern) {
+    String regex = pattern.pattern();
+    int suffixStart = regex.indexOf('=');
+    return suffixStart > 0 ? regex.substring(0, suffixStart) : regex;
+  }
+
+  // literalPatterns() matches e.g. "password=hunter2" inside a literal; the value is whatever follows the first '='.
+  private static String extractValueAfterEquals(String match) {
+    int eq = match.indexOf('=');
+    return eq >= 0 ? match.substring(eq + 1) : match;
   }
 
   private List<Pattern> toPatterns(String suffix) {

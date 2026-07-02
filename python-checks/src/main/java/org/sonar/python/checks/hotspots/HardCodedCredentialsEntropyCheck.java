@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonarsource.analyzer.commons.ShannonEntropy;
+import org.sonarsource.analyzer.commons.appsec.SecretClassifier;
 
 @Rule(key = "S6418")
 public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
@@ -76,7 +77,7 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
   }
 
   private void patternMatch(String name, Tree location, String value, SubscriptionContext subscriptionContext) {
-    if (!valuePassesPostValidation(value) || !entropyShouldRaise(value)) {
+    if (!valuePassesPostValidation(value) || !entropyShouldRaise(value) || SecretClassifier.isKnownNonSecret(value)) {
       return;
     }
     patterns().stream()

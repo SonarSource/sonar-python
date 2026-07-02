@@ -87,7 +87,7 @@ class A:
         password = u'azerty123'                                   # Noncompliant
         password = f"azerty123"                                   # Noncompliant
         password = b"azerty123"                                   # Noncompliant
-        password = "?"                                            # Noncompliant
+        password = "Xk28vQ91"                                     # Noncompliant
         variableNameWithPasswordInIt = 'azerty123'                # Noncompliant
         variableNameWithPassphraseInIt = 'azerty123'              # Noncompliant
         variableNameWithPasswdInIt ='azerty123'                   # Noncompliant
@@ -139,10 +139,10 @@ class A:
         mysql.connector.connection.MySQLConnection(host='localhost', user='root', "")  # OK
 
         pymysql.connect(host='localhost', user='root', password='Azerty123') # Noncompliant
-        pymysql.connect('localhost', 'root', 'password') # Noncompliant {{Review this potentially hard-coded credential.}}
-#                                            ^^^^^^^^^^
+        pymysql.connect('localhost', 'root', 'Azerty123') # Noncompliant {{Review this potentially hard-coded credential.}}
+#                                            ^^^^^^^^^^^
         pymysql.connections.Connection(host='localhost', user='root', password='password') # OK (avoid FPs)
-        pymysql.connections.Connection('localhost', 'root', 'password') # Noncompliant
+        pymysql.connections.Connection('localhost', 'root', 'Azerty123') # Noncompliant
         pymysql.connect(host='localhost', user='root', password=pwd) # OK
         pymysql.connect('localhost', 'root', pwd) # OK
         pymysql.connections.Connection(host='localhost', user='root', password=pwd) # OK
@@ -156,24 +156,24 @@ class A:
         psycopg2.connect(host='localhost', user='postgres', password=pwd,) # OK
 
         pgdb.connect(host='localhost', user='postgres', password='Azerty123') # Noncompliant
-        pgdb.connect('localhost', 'postgres', 'password') # Noncompliant
+        pgdb.connect('localhost', 'postgres', 'Azerty123') # Noncompliant
         pgdb.connect(host='localhost', user='postgres', password=pwd) # OK
         pgdb.connect('localhost', 'postgres', pwd) # OK
 
         pg.DB(host='localhost', user='postgres', passwd='Azerty123') # Noncompliant
-        pg.DB(None, 'localhost', 5432, None, 'postgres', 'password') # Noncompliant
+        pg.DB(None, 'localhost', 5432, None, 'postgres', 'Azerty123') # Noncompliant
         pg.DB(host='localhost', user='postgres', passwd=pwd) # OK
         pg.DB(None, 'localhost', 5432, None, 'postgres', pwd) # OK
 
         pg.connect(host='localhost', user='postgres', passwd='Azerty123') # Noncompliant
-        pg.connect(None, 'localhost', 5432, None, 'postgres', 'password') # Noncompliant
+        pg.connect(None, 'localhost', 5432, None, 'postgres', 'Azerty123') # Noncompliant
         pg.connect(host='localhost', user='postgres', passwd=pwd) # OK
         pg.connect(None, 'localhost', 5432, None, 'postgres', pwd) # OK
         pg.connect(host='localhost', user='postgres', passwd='') # Compliant
         pg.connect(None, 'localhost', 5432, None, 'postgres', '') # Compliant
 
         random.call(None, password = 42) # OK
-        random.call(None, password = "hello") # Noncompliant
+        random.call(None, password = "Azerty123") # Noncompliant
         random.call(None, password = "") # OK
         pg.connect(*unpack, 'localhost', 5432, None, 'postgres', pwd) # OK
 
@@ -186,7 +186,7 @@ class PASSWORD(A):
         pass
     def somePassword(self, password=""):  # OK
         pass
-    def somePassword(self, *, password="hello"): # Noncompliant
+    def somePassword(self, *, password="Azerty123"): # Noncompliant
         pass
 
 instance = A()
@@ -235,3 +235,11 @@ def test_flask():
     app.config["SECURITY_PASSWORD_HASH"] = "sha512_crypt"  # Compliant
     a, app.config["SECRET_KEY"] = "foo", "foo"  # Noncompliant
     app.config["SECURITY_PASSWORD_HASH"], app.config["SECRET_KEY"] = "foo", "foo"  # Noncompliant
+
+def test_secret_classifier():
+    # Values recognized by SecretClassifier as known non-secrets don't raise, even though the name matches.
+    password = "changeme"                                   # Compliant, well-known placeholder secret
+    password = "Xk28"                                        # Compliant, too short to be a real secret
+    password = "${SECRET_KEY}"                               # Compliant, variable interpolation
+    password = "op://vault/secret"                           # Compliant, external secret store reference
+    password = "{cipher}1e3faa2cdab2deae117dca102e52922a"    # Compliant, encrypted marker

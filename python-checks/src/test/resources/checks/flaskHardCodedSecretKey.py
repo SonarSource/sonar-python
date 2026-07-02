@@ -4,13 +4,13 @@ def test_non_compliant_assignment_expressions(x):
     assigned_secret = 'hardcoded_secret'
 
     # Tests for "flask.app.Flask.config"
-    app.config['SECRET_KEY'] = 'secret'  # Noncompliant {{Don't disclose "Flask" secret keys.}}
+    app.config['SECRET_KEY'] = 'Azerty123'  # Noncompliant {{Don't disclose "Flask" secret keys.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^>                           {{Assignment to sensitive property.}}
-#                              ^^^^^^^^@-1
+#                              ^^^^^^^^^^^@-1
     app.config['SECRET_KEY'] = assigned_secret  # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^
-    _ = app.config['SECRET_KEY'] = 'secret'  # Noncompliant
-#       ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^
+    _ = app.config['SECRET_KEY'] = 'Azerty123'  # Noncompliant
+#       ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^
 
     #   False negatives.
     app.config['SECRET_KEY'], _ = 'secret', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
@@ -18,9 +18,9 @@ def test_non_compliant_assignment_expressions(x):
 
 
     # Tests for "flask.app.Flask.secret_key"
-    app.secret_key = 'secret'         # Noncompliant {{Don't disclose "Flask" secret keys.}}
+    app.secret_key = 'Azerty123'         # Noncompliant {{Don't disclose "Flask" secret keys.}}
 #   ^^^^^^^^^^^^^^>                                    {{Assignment to sensitive property.}}
-#                    ^^^^^^^^@-1
+#                    ^^^^^^^^^^^@-1
     app.secret_key = assigned_secret  # Noncompliant
     _ = app.secret_key = 'mysecret'  # Noncompliant
 
@@ -30,11 +30,11 @@ def test_non_compliant_assignment_expressions(x):
 
 
     # Tests for "flask.globals.current_app.config"
-    current_app.config['SECRET_KEY'] = 'secret'  # Noncompliant {{Don't disclose "Flask" secret keys.}}
+    current_app.config['SECRET_KEY'] = 'Azerty123'  # Noncompliant {{Don't disclose "Flask" secret keys.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>                                    {{Assignment to sensitive property.}}
-#                                      ^^^^^^^^@-1
+#                                      ^^^^^^^^^^^@-1
     current_app.config['SECRET_KEY'] = assigned_secret  # Noncompliant
-    _ = current_app.config['SECRET_KEY'] = 'secret'  # Noncompliant
+    _ = current_app.config['SECRET_KEY'] = 'Azerty123'  # Noncompliant
 
     #    False negatives.
     current_app.config['SECRET_KEY'], _ = 'mysecret', x # FN
@@ -42,9 +42,9 @@ def test_non_compliant_assignment_expressions(x):
 
 
     # Tests for "flask.globals.current_app.secret_key"
-    current_app.secret_key = 'secret'   # Noncompliant {{Don't disclose "Flask" secret keys.}}
+    current_app.secret_key = 'Azerty123'   # Noncompliant {{Don't disclose "Flask" secret keys.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^>                            {{Assignment to sensitive property.}}
-#                            ^^^^^^^^@-1
+#                            ^^^^^^^^^^^@-1
     current_app.secret_key = assigned_secret  # Noncompliant
     _ = current_app.secret_key = 'mysecret'  # Noncompliant
 
@@ -52,8 +52,8 @@ def test_non_compliant_assignment_expressions(x):
     current_app.secret_key, _ = assigned_secret, x # FN
     current_app.secret_key, _ = _, current_app.secret_key = 'secret', x # FN
 
-    current_app.config['SECRET_KEY'] = app.config['SECRET_KEY'] = 'secret'      # Noncompliant
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^
+    current_app.config['SECRET_KEY'] = app.config['SECRET_KEY'] = 'Azerty123'      # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^
     some_secret = assigned_secret
     some_secret1 = some_secret
     some_secret2 = some_secret1
