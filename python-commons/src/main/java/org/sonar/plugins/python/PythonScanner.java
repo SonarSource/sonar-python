@@ -392,7 +392,11 @@ public class PythonScanner extends Scanner {
   }
 
   boolean isCheckNotApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {
-    return fileType != InputFile.Type.MAIN && pythonCheck.scope() != PythonCheck.CheckScope.ALL;
+    return switch (pythonCheck.scope()) {
+      case MAIN -> fileType != InputFile.Type.MAIN;
+      case TESTS -> fileType != InputFile.Type.TEST;
+      case ALL -> false;
+    };
   }
 
   // visible for testing

@@ -97,6 +97,7 @@ public interface PythonCheck extends PythonFileConsumer {
 
   enum CheckScope {
     MAIN,
+    TESTS,
     ALL
   }
 

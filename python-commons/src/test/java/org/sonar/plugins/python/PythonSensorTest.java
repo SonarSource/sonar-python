@@ -765,6 +765,96 @@ class PythonSensorTest {
   }
 
   @Test
+  void test_cases_should_contain_tests_runs_on_test_files() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S2187"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.tests", "tests"));
+    PythonInputFile inputFile = inputFile("empty_test_case.py", Type.TEST);
+
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(1);
+    Issue issue = context.allIssues().iterator().next();
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(inputFile.wrappedFile());
+    assertThat(issue.ruleKey().rule()).isEqualTo("S2187");
+  }
+
+  @Test
+  void test_cases_should_contain_tests_skips_main_files() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S2187"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.tests", "tests"));
+    inputFile("empty_test_case.py", Type.MAIN);
+
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
+  }
+
+  @Test
+  void test_cases_should_contain_tests_skips_main_files_named_like_tests_when_sonar_tests_is_configured() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S2187"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.tests", "tests"));
+    inputFile("test_paths_loader.py", Type.MAIN);
+
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
+    verify(analysisWarning, never()).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+  }
+
+  @Test
+  void test_cases_should_contain_tests_runs_on_test_files_named_like_tests_when_sonar_tests_is_configured() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S2187"))
+        .build())
+      .build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.tests", "tests"));
+    PythonInputFile inputFile = inputFile("test_paths_loader.py", Type.TEST);
+
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(1);
+    Issue issue = context.allIssues().iterator().next();
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(inputFile.wrappedFile());
+    assertThat(issue.ruleKey().rule()).isEqualTo("S2187");
+  }
+
+  @Test
+  void test_cases_should_contain_tests_runs_on_main_files_named_like_tests_when_sonar_tests_is_not_configured() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S2187"))
+        .build())
+      .build();
+
+    PythonInputFile inputFile = inputFile("test_paths_loader.py", Type.MAIN);
+
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(1);
+    Issue issue = context.allIssues().iterator().next();
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(inputFile.wrappedFile());
+    assertThat(issue.ruleKey().rule()).isEqualTo("S2187");
+    verify(analysisWarning).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+  }
+
+  @Test
   void test_test_file_highlighting() {
     activeRules = new ActiveRulesBuilder().build();
 
@@ -1592,8 +1682,6 @@ class PythonSensorTest {
       .build();
 
     PythonInputFile inputFile = inputFile("pass.py", Type.MAIN, InputFile.Status.SAME);
-    var sslrToken = passToken(inputFile.wrappedFile().uri());
-    List<Token> tokens = List.of(new TokenImpl(sslrToken));
 
     TestReadCache readCache = getValidReadCache();
 
