@@ -143,6 +143,7 @@ public class UnittestUtils {
     ClassDef parentClass = directlyEnclosingClass(functionDef);
     return parentClass == null || isTestClassName(parentClass.name().name());
   }
+
   public static boolean isPytestRaises(CallExpression callExpression, SubscriptionContext ctx) {
     return PYTEST_RAISES_MATCHER.isTrueFor(callExpression.callee(), ctx);
   }

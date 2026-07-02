@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -64,7 +65,7 @@ class GroupSimilarTestsParameterizedCheckTest {
 
   @Test
   void scope() {
-    assertEquals(GroupSimilarTestsParameterizedCheck.CheckScope.ALL, new GroupSimilarTestsParameterizedCheck().scope());
+    assertEquals(PythonCheck.CheckScope.TESTS, new GroupSimilarTestsParameterizedCheck().scope());
   }
 
   @Test

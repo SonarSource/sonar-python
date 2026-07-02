@@ -56,7 +56,7 @@ public class GroupSimilarTestsParameterizedCheck extends PythonSubscriptionCheck
 
   @Override
   public CheckScope scope() {
-    return CheckScope.ALL;
+    return CheckScope.TESTS;
   }
 
   private static void checkFileInput(SubscriptionContext ctx, FileInput fileInput) {
@@ -108,19 +108,10 @@ public class GroupSimilarTestsParameterizedCheck extends PythonSubscriptionCheck
   }
 
   private static boolean isCandidateTestFunction(SubscriptionContext ctx, FunctionDef functionDef) {
-    return functionDef.name().name().startsWith("test")
+    return UnittestUtils.isTestMethodName(functionDef.name().name())
       && functionDef.decorators().isEmpty()
       && !isPlaceholderTest(functionDef, ctx)
-      && (isPytestStyleTest(ctx, functionDef) || UnittestUtils.isWithinUnittestTestCase(functionDef));
-  }
-
-  private static boolean isPytestStyleTest(SubscriptionContext ctx, FunctionDef functionDef) {
-    String fileName = ctx.pythonFile().fileName();
-    if (!(fileName.startsWith("test_") || fileName.endsWith("_test.py"))) {
-      return false;
-    }
-    ClassDef parentClass = CheckUtils.getParentClassDef(functionDef);
-    return parentClass == null || parentClass.name().name().startsWith("Test");
+      && (UnittestUtils.isPytestStyleTestFunction(functionDef, ctx.pythonFile().fileName()) || UnittestUtils.isWithinUnittestTestCase(functionDef));
   }
 
   private static boolean isPlaceholderTest(FunctionDef functionDef, SubscriptionContext ctx) {
