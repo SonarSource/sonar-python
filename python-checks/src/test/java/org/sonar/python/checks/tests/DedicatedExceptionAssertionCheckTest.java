@@ -20,17 +20,17 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DedicatedExceptionAssertionCheckTest {
 
   @Test
-  void sample() {
-    PythonCheckVerifier.verify("src/test/resources/checks/tests/dedicatedExceptionAssertion.py", new DedicatedExceptionAssertionCheck());
+  void scope() {
+    assertEquals(PythonCheck.CheckScope.TESTS, new DedicatedExceptionAssertionCheck().scope());
   }
 
   @Test
-  void test_scope() {
-    assertThat(new DedicatedExceptionAssertionCheck().scope()).isEqualTo(PythonCheck.CheckScope.ALL);
+  void sample() {
+    PythonCheckVerifier.verify("src/test/resources/checks/tests/dedicatedExceptionAssertion.py", new DedicatedExceptionAssertionCheck());
   }
 }

@@ -52,7 +52,7 @@ public class DedicatedExceptionAssertionCheck extends PythonSubscriptionCheck {
 
   @Override
   public CheckScope scope() {
-    return CheckScope.ALL;
+    return CheckScope.TESTS;
   }
 
   private static void checkTryStatement(SubscriptionContext ctx, TryStatement tryStatement) {
