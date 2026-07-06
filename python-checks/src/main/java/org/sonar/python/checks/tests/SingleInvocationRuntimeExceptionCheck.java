@@ -64,7 +64,7 @@ public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionChe
 
   @Override
   public CheckScope scope() {
-    return CheckScope.TESTS;
+    return CheckScope.ALL;
   }
 
   private static void checkWithStatement(SubscriptionContext ctx, WithStatement withStatement) {

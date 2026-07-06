@@ -26,7 +26,7 @@ class SingleInvocationRuntimeExceptionCheckTest {
 
   @Test
   void scope() {
-    assertEquals(PythonCheck.CheckScope.TESTS, new SingleInvocationRuntimeExceptionCheck().scope());
+    assertEquals(PythonCheck.CheckScope.ALL, new SingleInvocationRuntimeExceptionCheck().scope());
   }
 
   @Test
