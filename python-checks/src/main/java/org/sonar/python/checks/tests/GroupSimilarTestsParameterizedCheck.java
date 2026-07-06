@@ -56,7 +56,7 @@ public class GroupSimilarTestsParameterizedCheck extends PythonSubscriptionCheck
 
   @Override
   public CheckScope scope() {
-    return CheckScope.TESTS;
+    return CheckScope.ALL;
   }
 
   private static void checkFileInput(SubscriptionContext ctx, FileInput fileInput) {

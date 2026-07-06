@@ -65,7 +65,7 @@ class GroupSimilarTestsParameterizedCheckTest {
 
   @Test
   void scope() {
-    assertEquals(PythonCheck.CheckScope.TESTS, new GroupSimilarTestsParameterizedCheck().scope());
+    assertEquals(PythonCheck.CheckScope.ALL, new GroupSimilarTestsParameterizedCheck().scope());
   }
 
   @Test
