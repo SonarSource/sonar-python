@@ -51,7 +51,7 @@ public class SpecificExceptionAssertionCheck extends PythonSubscriptionCheck {
 
   @Override
   public CheckScope scope() {
-    return CheckScope.TESTS;
+    return CheckScope.ALL;
   }
 
   private static void checkWithStatement(SubscriptionContext ctx, WithStatement withStatement) {

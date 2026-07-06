@@ -26,7 +26,7 @@ class SpecificExceptionAssertionCheckTest {
 
   @Test
   void scope() {
-    assertEquals(PythonCheck.CheckScope.TESTS, new SpecificExceptionAssertionCheck().scope());
+    assertEquals(PythonCheck.CheckScope.ALL, new SpecificExceptionAssertionCheck().scope());
   }
 
   @Test
