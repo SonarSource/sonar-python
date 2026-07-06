@@ -1,0 +1,41 @@
+from typing import Any, Callable, Optional
+
+def to_json(
+    value: Any,
+    *,
+    indent: Optional[int] = ...,
+    ensure_ascii: bool = ...,
+    include: Any = ...,
+    exclude: Any = ...,
+    by_alias: bool = ...,
+    exclude_none: bool = ...,
+    round_trip: bool = ...,
+    timedelta_mode: str = ...,
+    temporal_mode: str = ...,
+    bytes_mode: str = ...,
+    inf_nan_mode: str = ...,
+    serialize_unknown: bool = ...,
+    fallback: Optional[Callable[..., Any]] = ...,
+    serialize_as_any: bool = ...,
+    polymorphic_serialization: Optional[bool] = ...,
+    context: Optional[Any] = ...,
+) -> bytes: ...
+
+def to_jsonable_python(
+    value: Any,
+    *,
+    include: Any = ...,
+    exclude: Any = ...,
+    by_alias: bool = ...,
+    exclude_none: bool = ...,
+    round_trip: bool = ...,
+    timedelta_mode: str = ...,
+    temporal_mode: str = ...,
+    bytes_mode: str = ...,
+    inf_nan_mode: str = ...,
+    serialize_unknown: bool = ...,
+    fallback: Optional[Callable[..., Any]] = ...,
+    serialize_as_any: bool = ...,
+    polymorphic_serialization: Optional[bool] = ...,
+    context: Optional[Any] = ...,
+) -> Any: ...

@@ -1,0 +1,65 @@
+<p>This rule raises an issue when calling serialization or data conversion functions without specifying a fallback parameter.</p>
+<p>In Python, this specifically applies to the <code>pydantic_core.to_json()</code>, and <code>pydantic_core.to_jsonable_python()</code>
+functions.</p>
+<h2>Why is this an issue?</h2>
+<p>When serializing data, encountering an unknown or custom type will cause a serialization error if no fallback handler is provided. This happens
+because serialization mechanisms don’t know how to convert types they haven’t been explicitly configured to handle.</p>
+<p>Without a fallback mechanism, your application will crash at runtime when it attempts to serialize unexpected data. This is particularly
+problematic in production environments where:</p>
+<ul>
+  <li>Data structures may evolve over time</li>
+  <li>Third-party libraries may introduce new types</li>
+  <li>User input may contain unexpected custom objects</li>
+  <li>Debugging serialization failures becomes difficult</li>
+</ul>
+<p>By providing a fallback handler, you create a safety net that prevents crashes and allows your application to handle unknown types gracefully, even
+if the result isn’t perfect.</p>
+<h3>Exceptions</h3>
+<p>Instances of <code>pydantic.BaseModel</code> and its subclasses are natively serializable by pydantic-core, provided their
+<code>model_config</code> does not set <code>arbitrary_types_allowed = True</code>. Calling <code>to_json</code> or <code>to_jsonable_python</code> on
+such objects without a <code>fallback</code> is safe and will not raise a <code>PydanticSerializationError</code>.</p>
+<h3>What is the potential impact?</h3>
+<p>Without a fallback handler, the application will raise an unhandled serialization exception when attempting to serialize unknown types. This leads
+to:</p>
+<ul>
+  <li><strong>runtime crashes</strong>: The application terminates unexpectedly when encountering unsupported types</li>
+  <li><strong>poor user experience</strong>: Users may lose data or see error messages instead of completed operations</li>
+  <li><strong>difficult debugging</strong>: Identifying which specific object caused the serialization failure requires examining stack traces</li>
+  <li><strong>reduced application resilience</strong>: The system becomes fragile and sensitive to data variations</li>
+</ul>
+<h2>How to fix it</h2>
+<p>Add a <code>fallback</code> parameter to your pydantic-core serialization calls. The fallback function receives the unknown object and should
+return a serializable representation. A simple approach is to convert the object to a string using <code>str()</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from pydantic_core import to_json
+
+class CustomObject:
+    def __init__(self, value):
+        self.value = value
+
+data = {"key": CustomObject(42)}
+result = to_json(data)  # Noncompliant: raises PydanticSerializationError
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from pydantic_core import to_json
+
+class CustomObject:
+    def __init__(self, value):
+        self.value = value
+
+def handle_unknown(obj):
+    return str(obj)
+
+data = {"key": CustomObject(42)}
+result = to_json(data, fallback=handle_unknown)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Pydantic Documentation - <a
+  href="https://pydantic.dev/docs/validation/latest/api/pydantic-core/pydantic_core/#pydantic_core.to_json">to_json</a></li>
+</ul>
+
