@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import org.sonar.api.SonarProduct;
@@ -33,6 +34,7 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.python.SubscriptionVisitor;
+import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -41,8 +43,11 @@ import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class PythonQuickFixVerifier {
+  private static final String SEMANTIC_BASE_DIR = "/tmp/pythonQuickFixVerifier";
+
   private PythonQuickFixVerifier() {
   }
 
@@ -56,6 +61,18 @@ public class PythonQuickFixVerifier {
 
   public static void verifyQuickFixMessages(PythonCheck check, String codeWithIssue, String... expectedMessages) {
     verifyQuickFixMessages(PythonQuickFixVerifier::createPythonVisitorContext, check, codeWithIssue, expectedMessages);
+  }
+
+  public static void verifySemantic(PythonCheck check, String path, String codeWithIssue, String... codesFixed) {
+    verify(code -> createSemanticVisitorContext(path, code), check, false, codeWithIssue, codesFixed);
+  }
+
+  public static void verifySemanticQuickFixMessages(PythonCheck check, String path, String codeWithIssue, String... expectedMessages) {
+    verifyQuickFixMessages(code -> createSemanticVisitorContext(path, code), check, codeWithIssue, expectedMessages);
+  }
+
+  public static void verifySemanticNoQuickFixes(PythonCheck check, String path, String codeWithIssue) {
+    verifyNoQuickFixes(code -> createSemanticVisitorContext(path, code), check, codeWithIssue);
   }
 
   public static void verifyIPython(PythonCheck check, String codeWithIssue, String... codesFixed) {
@@ -154,6 +171,13 @@ public class PythonQuickFixVerifier {
     return createVisitorContext(PythonParser.createIPythonParser(), new IPythonTreeMaker(), code);
   }
 
+  private static PythonVisitorContext createSemanticVisitorContext(String path, String code) {
+    var pythonFile = new TestPythonVisitorRunner.MockPythonFile(SEMANTIC_BASE_DIR, path, code);
+    ProjectLevelSymbolTable globalSymbols = TestPythonVisitorRunner.globalSymbols(Map.of(path, code), SEMANTIC_BASE_DIR);
+    String packageName = pythonPackageName(pythonFile.file(), SEMANTIC_BASE_DIR);
+    return TestPythonVisitorRunner.createContext(pythonFile, null, packageName, globalSymbols, CacheContextImpl.dummyCache());
+  }
+
   private static PythonVisitorContext createVisitorContext(PythonParser parser, PythonTreeMaker treeMaker, String code) {
     var pythonFile = new PythonQuickFixFile(code);
     var astNode = parser.parse(pythonFile.content());
@@ -206,30 +230,34 @@ public class PythonQuickFixVerifier {
   // we should return false
   private static boolean oneEnclosedByTheOther(PythonTextEdit toCheck, PythonTextEdit reference) {
     if (onSameLine(toCheck, reference)) {
-      // If on same line, we need to check that the bounds of toCheck are not contained in reference bounds
-      return !(toCheck.endLineOffset() < reference.startLineOffset() || toCheck.startLineOffset() > reference.endLineOffset());
-    } else {
-      if (compactOnDifferentLines(toCheck, reference)) {
-        return false;
-      } else if (isCompact(toCheck)) {
-        return isSecondInFirst(toCheck, reference);
-      } else if (isCompact(reference)) {
-        return isSecondInFirst(reference, toCheck);
-      } else {
-        // Both edits exploded on different lines
-        if (noLineIntersection(toCheck, reference)) {
-          return false;
-        } else {
-          // There is an intersection between edits, only need to check valid case
-          if (reference.startLine() == toCheck.endLine()) {
-            return toCheck.endLineOffset() > reference.startLineOffset();
-          } else if (reference.endLine() == toCheck.startLine()) {
-            return reference.endLineOffset() > toCheck.startLineOffset();
-          }
-        }
-      }
+      return sameLineIntersection(toCheck, reference);
     }
-    // All other cases are invalid and will cause an intersection
+    if (compactOnDifferentLines(toCheck, reference)) {
+      return false;
+    }
+    if (isCompact(toCheck)) {
+      return isSecondInFirst(toCheck, reference);
+    }
+    if (isCompact(reference)) {
+      return isSecondInFirst(reference, toCheck);
+    }
+    return explodedEditsIntersect(toCheck, reference);
+  }
+
+  private static boolean sameLineIntersection(PythonTextEdit toCheck, PythonTextEdit reference) {
+    return !(toCheck.endLineOffset() < reference.startLineOffset() || toCheck.startLineOffset() > reference.endLineOffset());
+  }
+
+  private static boolean explodedEditsIntersect(PythonTextEdit toCheck, PythonTextEdit reference) {
+    if (noLineIntersection(toCheck, reference)) {
+      return false;
+    }
+    if (reference.startLine() == toCheck.endLine()) {
+      return toCheck.endLineOffset() > reference.startLineOffset();
+    }
+    if (reference.endLine() == toCheck.startLine()) {
+      return reference.endLineOffset() > toCheck.startLineOffset();
+    }
     return true;
   }
 

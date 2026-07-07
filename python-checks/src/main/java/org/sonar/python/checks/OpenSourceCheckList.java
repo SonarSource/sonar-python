@@ -93,6 +93,7 @@ import org.sonar.python.checks.regex.VerboseRegexCheck;
 import org.sonar.python.checks.tests.AssertAfterRaiseCheck;
 import org.sonar.python.checks.tests.AssertOnDissimilarTypesCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
+import org.sonar.python.checks.tests.AssertionArgumentOrderCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.DedicatedExceptionAssertionCheck;
 import org.sonar.python.checks.tests.GroupSimilarTestsParameterizedCheck;
@@ -120,6 +121,7 @@ public class OpenSourceCheckList {
       AssertOnDissimilarTypesCheck.class,
       AssertAfterRaiseCheck.class,
       AssertOnTupleLiteralCheck.class,
+      AssertionArgumentOrderCheck.class,
       AsyncFunctionNotAsyncCheck.class,
       AsyncFunctionWithTimeoutCheck.class,
       AsyncioTaskNotStoredCheck.class,

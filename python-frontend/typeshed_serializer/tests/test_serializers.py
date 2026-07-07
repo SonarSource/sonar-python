@@ -73,8 +73,15 @@ def test_custom_stubs_serializer(typeshed_custom_stubs):
         )
         custom_stubs_serializer.serialize()
         assert custom_stubs_serializer.get_build_result.call_count == 1
-        # Not every files from "typeshed_custom_stubs" build are serialized, as some are builtins
-        assert symbols.save_module.call_count == 365
+        expected_serialized_modules = sum(
+            file != serializers.SONAR_CUSTOM_BASE_STUB_MODULE
+            and typeshed_custom_stubs.files.get(file).path.startswith(
+                custom_stubs_serializer.path
+            )
+            for file in typeshed_custom_stubs.files
+        )
+        assert symbols.save_module.call_count == expected_serialized_modules
+        assert expected_serialized_modules > 0
 
 
 def test_importer_serializer():

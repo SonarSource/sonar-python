@@ -1,0 +1,107 @@
+<p>This rule raises an issue when the expected and actual values in an assertion appear to be inverted with respect to the testing framework’s
+convention.</p>
+<h2>Why is this an issue?</h2>
+<p>Assertions are statements that check whether certain conditions are true. They validate that the actual results of a code snippet match the
+expected outcomes. By using assertions, developers can ensure that their code behaves as intended and identify potential bugs or issues early in the
+development process.</p>
+<p>Python testing frameworks follow a convention for where expected and actual values should appear in assertions:</p>
+<ul>
+  <li>In <code>unittest</code>, methods like <code>assertEqual()</code> and <code>assertIs()</code> compare two values passed as arguments. The
+  documentation commonly shows the value from the code under test first and the expected value second, for example <code>self.assertEqual(s.split(),
+  ['hello', 'world'])</code>. For consistency with that convention, place the actual value first and the expected value second.</li>
+  <li>In <code>pytest</code>, assertions should place the actual value on the left side and the expected value on the right side. The right-hand side
+  should be a literal or an identifier that represents the expected value, optionally wrapped in a helper such as <code>pytest.approx()</code>, rather
+  than a computation.</li>
+  <li>In <code>assertpy</code>, fluent assertions should place the actual value in <code>assert_that(…​)</code> and the expected value in the
+  assertion method, such as <code>.is_equal_to(…​)</code>.</li>
+</ul>
+<p>In all of these assertion styles, the value produced by the code under test comes first and the expected value comes second. Keeping each value in
+the position expected by the assertion style makes the intent easier to understand and helps readers interpret failures more quickly.</p>
+<p>Additionally, following each framework’s assertion conventions makes tests more consistent with the surrounding code and easier to read.</p>
+<h3>What is the potential impact?</h3>
+<p>Having the expected value and the actual value in the wrong order will not alter the outcome of tests (they will still succeed or fail
+appropriately). However, the error messages will contain misleading information, making debugging more difficult.</p>
+<p>For example, if you write <code>self.assertEqual(0, runner.exit_code)</code> where <code>runner.exit_code</code> is <code>-1</code>, the failure is
+reported as <code>0 != -1</code>. The message does not explicitly identify one value as expected and the other as actual, but following a consistent
+convention still makes assertions easier to read and understand.</p>
+<h2>How to fix it in unittest</h2>
+<p>Swap the order of the assertion arguments so that the actual value (from the code under test) is passed as the first argument and the expected
+value is passed as the second argument.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import unittest
+
+class TestRunner(unittest.TestCase):
+    def test_exit_code(self):
+        runner = Runner()
+        self.assertEqual(0, runner.exit_code, "Unexpected exit code")  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import unittest
+
+class TestRunner(unittest.TestCase):
+    def test_exit_code(self):
+        runner = Runner()
+        self.assertEqual(runner.exit_code, 0, "Unexpected exit code")
+</pre>
+<h2>How to fix it in pytest</h2>
+<p>In pytest, place the actual value on the left side of the assertion and the expected value on the right side. The right-hand side should be limited
+to a literal or an identifier representing the expected value, including when using helpers such as <code>pytest.approx()</code>, rather than an
+expression that computes the value.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import pytest
+
+EXPECTED_PI = 3.14
+
+def test_calculation():
+    result = perform_calculation()
+    assert 3.14 == result  # Noncompliant
+    assert pytest.approx(EXPECTED_PI) == result  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import pytest
+
+EXPECTED_PI = 3.14
+
+def test_calculation():
+    result = perform_calculation()
+    assert result == 3.14
+    assert result == pytest.approx(EXPECTED_PI)
+</pre>
+<h2>How to fix it in assertpy</h2>
+<p>In <code>assertpy</code>, place the actual value from the code under test in <code>assert_that(…​)</code> and pass the expected value to the
+assertion method.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+from assertpy import assert_that
+
+EXPECTED_EXIT_CODE = 0
+
+def test_exit_code():
+    runner = Runner()
+    assert_that(EXPECTED_EXIT_CODE).is_equal_to(runner.exit_code)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+from assertpy import assert_that
+
+EXPECTED_EXIT_CODE = 0
+
+def test_exit_code():
+    runner = Runner()
+    assert_that(runner.exit_code).is_equal_to(EXPECTED_EXIT_CODE)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>unittest documentation - <a href="https://docs.python.org/3/library/unittest.html#assert-methods">unittest — Unit testing framework</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/assert.html">How to write and report assertions in tests</a></li>
+  <li>assertpy documentation - <a href="https://assertpy.github.io/docs.html">assertpy docs</a></li>
+</ul>
+
