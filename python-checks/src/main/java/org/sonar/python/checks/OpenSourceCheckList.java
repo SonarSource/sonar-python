@@ -382,6 +382,7 @@ public class OpenSourceCheckList {
       PublicNetworkAccessToCloudResourcesCheck.class,
       PydanticCoreSerializationFallbackCheck.class,
       PydanticOptionalFieldDefaultCheck.class,
+      PydanticMultipleInheritanceConfigCheck.class,
       PyTorchDataLoaderNumWorkersCheck.class,
       PytzTimeZoneInDatetimeConstructorCheck.class,
       RaiseOutsideExceptCheck.class,

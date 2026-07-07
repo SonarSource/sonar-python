@@ -1,0 +1,108 @@
+<p>This rule raises an issue when a Pydantic model class inherits from two or more base classes that each define a <code>model_config</code>
+attribute, either directly or through their own inheritance chain. The rule uses the full C3 Method Resolution Order (MRO) when inspecting each direct
+base class. This means it also detects configurations defined in grandparent classes that are inherited through intermediate base classes without
+redefining <code>model_config</code>.</p>
+<p>Note that the rule checks for the structural presence of <code>model_config</code> in multiple bases and does not compare the actual
+<code>ConfigDict</code> values. Even if two bases currently define identical configurations, the rule still raises an issue. This is intentional:
+identical configurations can diverge independently in future code changes, and Pydantic’s non-MRO merge behavior remains unpredictable regardless of
+whether the values differ at analysis time.</p>
+<h2>Why is this an issue?</h2>
+<p>Pydantic models use the <code>model_config</code> class attribute with a <code>ConfigDict</code> to control validation, serialization, and other
+behaviors.</p>
+<p>When a Pydantic model inherits from a single base class, configuration inheritance works as expected: the child model inherits the parent’s
+configuration, and any <code>model_config</code> defined on the child overrides the parent’s settings.</p>
+<p>However, when a model inherits from <strong>multiple</strong> base classes that each define their own <code>model_config</code>, Pydantic does not
+follow Python’s standard C3 Method Resolution Order (MRO) for merging configurations. Instead, it uses its own internal merging strategy, which means
+you cannot reliably predict which configuration settings will be applied to your model.</p>
+<p>For example, if <code>Base1</code> enables a setting that converts string values to lowercase and <code>Base2</code> enables a setting that
+converts string values to uppercase, and your model inherits from both, the resulting behavior is undefined. The final configuration may use either
+setting, neither, or potentially even raise an error, depending on Pydantic’s internal implementation details.</p>
+<p>This unpredictability makes the code harder to understand and maintain. Developers reading the code cannot easily determine what configuration will
+be applied without deep knowledge of Pydantic’s internals, and the behavior may change between Pydantic versions.</p>
+<h3>Exceptions</h3>
+<p>The rule does not raise an issue when the model class itself explicitly defines its own <code>model_config</code>. In that case, the developer has
+made the configuration explicit, and Pydantic will use that definition directly, making the resolution predictable.</p>
+<p>The Pydantic documentation explicitly warns: "If your model inherits from multiple bases, Pydantic currently doesn’t follow the [MRO] for
+configuration merging."</p>
+<h3>What is the potential impact?</h3>
+<p>The unpredictable configuration merging can lead to several problems:</p>
+<ul>
+  <li><strong>Data validation bugs</strong>: String transformations, type coercion, and validation rules may not behave as expected, potentially
+  allowing invalid data to pass validation or rejecting valid data.</li>
+  <li><strong>Inconsistent behavior</strong>: The same code may behave differently across different framework versions or in different execution
+  contexts.</li>
+  <li><strong>Maintenance difficulties</strong>: Developers cannot easily understand or predict model behavior without running tests, making the
+  codebase harder to maintain.</li>
+  <li><strong>Hidden bugs</strong>: Issues may not surface immediately during development but could appear in production when specific data patterns
+  are encountered.</li>
+</ul>
+<h2>How to fix it</h2>
+<p>Use single inheritance and explicitly define the desired configuration on the final model class. This makes the configuration explicit and
+predictable.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from pydantic import BaseModel, ConfigDict
+
+class Base1(BaseModel):
+    model_config = ConfigDict(str_to_lower=True)
+
+class Base2(BaseModel):
+    model_config = ConfigDict(str_to_upper=True)
+
+class Model(Base1, Base2):  # Noncompliant
+    x: str
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from pydantic import BaseModel, ConfigDict
+
+class Base1(BaseModel):
+    model_config = ConfigDict(str_to_lower=True)
+
+class Model(Base1):
+    model_config = ConfigDict(str_to_lower=True)
+    x: str
+</pre>
+<p>The rule also flags cases where a <code>model_config</code> is inherited indirectly through an intermediate class. In the example below,
+<code>Intermediate</code> does not define its own <code>model_config</code>, but it inherits one from <code>Base1</code>. Because <code>Model</code>
+inherits from both <code>Intermediate</code> (which carries <code>Base1’s config) and `Base2</code> (which has its own config), the MRO-based check
+raises an issue. Note that even though both configs are currently identical (<code>frozen=True</code>), the rule still raises an issue because the
+configs can diverge independently in future changes.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from pydantic import BaseModel, ConfigDict
+
+class Base1(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+class Base2(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+class Intermediate(Base1):
+    pass
+
+class Model(Intermediate, Base2):  # Noncompliant
+    x: str
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from pydantic import BaseModel, ConfigDict
+
+class Base1(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+class Intermediate(Base1):
+    pass
+
+class Model(Intermediate):
+    model_config = ConfigDict(frozen=True)
+    x: str
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Pydantic Documentation - <a href="https://docs.pydantic.dev/latest/concepts/config/">Configuration</a></li>
+  <li>Pydantic API Reference - <a href="https://docs.pydantic.dev/latest/api/config/">Configuration</a></li>
+</ul>
+
