@@ -1,0 +1,47 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>SonarSource/renovate-config:quality-corelang-squad"
+  ],
+  "ignorePaths": [
+    "python-frontend/typeshed_serializer/**"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": [
+        "maven"
+      ],
+      "matchPackageNames": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
+    {
+      "matchPackageNames": [
+        "/sonar-plugin-api/",
+        "/org.sonarsource.sonarqube.*/"
+      ],
+      "groupName": "sonarqube",
+      "groupSlug": "sq"
+    },
+    {
+      "matchPackageNames": [
+        "com.google.protobuf:protobuf-java",
+        "com.google.protobuf:protoc"
+      ],
+      "groupName": "protobuf",
+      "groupSlug": "protobuf"
+    },
+    {
+      "matchPackageNames": [
+        "/org.sonarsource.sonarlint.core.*/"
+      ],
+      "groupName": "SL core"
+    }
+  ]
+}
