@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.AssertpyUtils;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.UnittestUtils;
@@ -66,7 +67,6 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     TypeMatchers.isType("unittest.case.TestCase.assertIs"),
     TypeMatchers.isType("unittest.case.TestCase.assertIsNot"));
   private static final TypeMatcher PYTEST_APPROX_MATCHER = TypeMatchers.isType("pytest.approx");
-  private static final TypeMatcher ASSERTPY_ASSERT_THAT_MATCHER = TypeMatchers.isType("assertpy.assert_that");
   private static final TypeMatcher ASSERTPY_IS_EQUAL_TO_MATCHER = TypeMatchers.isType("assertpy.AssertionBuilder.is_equal_to");
 
   @RuleProperty(
@@ -147,7 +147,7 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    CallExpression assertThatCall = originatingAssertThatCall(qualifiedExpression.qualifier(), ctx);
+    CallExpression assertThatCall = AssertpyUtils.originatingAssertThatCall(qualifiedExpression.qualifier(), ctx);
     if (assertThatCall == null) {
       return;
     }
@@ -288,26 +288,6 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     }
     if (UNITTEST_IDENTITY_ASSERTION_MATCHER.isTrueFor(callee, ctx)) {
       return new ParameterNames("expr1", "expr2");
-    }
-    return null;
-  }
-
-  private static boolean isAssertThatCall(CallExpression callExpression, SubscriptionContext ctx) {
-    return ASSERTPY_ASSERT_THAT_MATCHER.isTrueFor(callExpression.callee(), ctx);
-  }
-
-  @Nullable
-  private static CallExpression originatingAssertThatCall(Expression expression, SubscriptionContext ctx) {
-    Expression qualifier = Expressions.removeParentheses(expression);
-    while (qualifier instanceof CallExpression callExpression) {
-      if (isAssertThatCall(callExpression, ctx)) {
-        return callExpression;
-      }
-      Expression callee = Expressions.removeParentheses(callExpression.callee());
-      if (!(callee instanceof QualifiedExpression qualifiedExpression)) {
-        return null;
-      }
-      qualifier = Expressions.removeParentheses(qualifiedExpression.qualifier());
     }
     return null;
   }

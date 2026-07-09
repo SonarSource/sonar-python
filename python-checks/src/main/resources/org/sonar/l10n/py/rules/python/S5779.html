@@ -1,0 +1,220 @@
+<p>This is an issue when assertion statements, assertion methods, or fluent assertions are placed within a try block that catches
+<code>AssertionError</code> exceptions without properly handling or re-raising them.</p>
+<h2>Why is this an issue?</h2>
+<p>Assertions in Python raise an <code>AssertionError</code> when they fail. This includes built-in <code>assert</code> statements,
+<code>unittest</code> assertion helpers such as <code>assertEqual</code>, and fluent assertions from libraries such as <code>assertpy</code>. This is
+the mechanism testing frameworks use to detect test failures.</p>
+<p>When you place assertions within a try-except block that catches <code>AssertionError</code> (or its parent class <code>Exception</code>), and you
+don’t re-raise the exception or validate its properties, you create a silent failure scenario. The assertion can fail, but the exception gets
+swallowed by the except block, causing the test to pass when it should have failed.</p>
+<p>This defeats the entire purpose of writing assertions in tests. The test appears to pass, giving false confidence that the code works correctly,
+when in reality the assertion failed and detected a problem.</p>
+<p>The root cause of this anti-pattern is usually a misunderstanding of exception handling in tests. Developers might add try-except blocks around
+assertions thinking they need to "handle" exceptions, but assertions are meant to propagate upward to the test framework.</p>
+<p>This issue commonly occurs when:</p>
+<ul>
+  <li>Developers are testing code that raises exceptions and incorrectly wrap assertions in try-except blocks</li>
+  <li>Code is copied from production exception handling patterns and applied inappropriately in tests</li>
+  <li>Developers want to add context to assertion failures but do so incorrectly</li>
+  <li>Fluent assertions from libraries such as <code>assertpy</code> are treated like ordinary code inside a <code>try-except AssertionError</code>
+  block</li>
+</ul>
+<h3>What is the potential impact?</h3>
+<p>When assertions are silently caught and ignored, tests provide false confidence in the codebase. Code that should fail tests will appear to pass,
+allowing bugs to reach production.</p>
+<p>This can lead to:</p>
+<ul>
+  <li>Security vulnerabilities going undetected if security-related tests falsely pass</li>
+  <li>Functional bugs making it to production, causing user-facing issues</li>
+  <li>Regression of previously working features without detection</li>
+  <li>Wasted debugging time when issues are discovered later in the development cycle or in production</li>
+  <li>Loss of trust in the test suite’s reliability</li>
+</ul>
+<h2>How to fix it in unittest</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>The assertion (<code>self.fail(…​)</code>) raises an <code>AssertionError</code>, which is immediately caught by the surrounding <code>except
+AssertionError</code> block and silently discarded. As a result, the test can never fail, even when <code>do_something()</code> does not behave as
+expected.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import unittest
+
+class MyTest(unittest.TestCase):
+    def test_should_raise_error(self):
+        try:
+            self.do_something()
+            self.fail("Expected an AssertionError!")  # Noncompliant
+        except AssertionError:
+            pass
+
+    def do_something(self):
+        raise AssertionError("Something went wrong")
+</pre>
+<p>This variation has the same problem: the <code>AssertionError</code> is caught locally and ignored. The test appears to check the exception
+details, but it never validates anything about the caught error.</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import unittest
+
+class MyTest(unittest.TestCase):
+    def test_error_message(self):
+        try:
+            self.do_something()
+            self.fail("Expected an AssertionError!")  # Noncompliant
+        except AssertionError as e:
+            pass  # Exception caught but not validated
+
+    def do_something(self):
+        raise AssertionError("Something went wrong")
+</pre>
+<h4>Compliant solution</h4>
+<p>Use the proper assertion context managers provided by the testing framework. The <code>assertRaises</code> context manager is designed specifically
+for testing that exceptions are raised, without accidentally catching assertion failures.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+import unittest
+
+class MyTest(unittest.TestCase):
+    def test_should_raise_error(self):
+        with self.assertRaises(AssertionError):
+            self.do_something()
+
+    def do_something(self):
+        raise AssertionError("Something went wrong")
+</pre>
+<p>If you need to verify specific properties of the exception, you can access the exception object through the context manager and make assertions
+about it after the context exits. This ensures the exception is properly raised while still allowing you to validate its details.</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+import unittest
+
+class MyTest(unittest.TestCase):
+    def test_error_message(self):
+        with self.assertRaises(AssertionError) as context:
+            self.do_something()
+
+        self.assertEqual(str(context.exception), "Something went wrong")
+
+    def do_something(self):
+        raise AssertionError("Something went wrong")
+</pre>
+<h2>How to fix it in pytest</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>The <code>assert False</code> statement raises an <code>AssertionError</code>, which is then swallowed by the surrounding <code>except
+AssertionError</code> block. Because of that, the test can never fail when <code>do_something()</code> does not raise the expected error.</p>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import pytest
+
+def test_should_raise_error():
+    try:
+        do_something()
+        assert False, "Expected an AssertionError!"  # Noncompliant
+    except AssertionError:
+        pass
+
+def do_something():
+    raise AssertionError("Something went wrong")
+</pre>
+<p>Here too, the caught <code>AssertionError</code> is never validated or re-raised. The test silently succeeds instead of checking that the expected
+failure really happened.</p>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+import pytest
+
+def test_error_details():
+    try:
+        do_something()
+        assert False, "Expected an AssertionError!"  # Noncompliant
+    except AssertionError as e:
+        pass  # Exception details not validated
+
+def do_something():
+    raise AssertionError("Something went wrong")
+</pre>
+<h4>Compliant solution</h4>
+<p>When using pytest, use the <code>pytest.raises</code> context manager to properly test for exceptions. This ensures that assertion failures are not
+accidentally caught.</p>
+<pre data-diff-id="3" data-diff-type="compliant">
+import pytest
+
+def test_should_raise_error():
+    with pytest.raises(AssertionError):
+        do_something()
+
+def do_something():
+    raise AssertionError("Something went wrong")
+</pre>
+<p>To validate specific exception properties with pytest, access the exception info from the context manager. You can then make assertions about the
+exception message or other attributes.</p>
+<pre data-diff-id="4" data-diff-type="compliant">
+import pytest
+
+def test_error_details():
+    with pytest.raises(AssertionError) as exc_info:
+        do_something()
+
+    assert str(exc_info.value) == "Something went wrong"
+
+def do_something():
+    raise AssertionError("Something went wrong")
+</pre>
+<h2>How to fix it in assertpy</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>With <code>assertpy</code>, fluent assertions still raise <code>AssertionError</code>. Catching that exception in the surrounding
+<code>try-except</code> block can hide a failing test.</p>
+<pre data-diff-id="5" data-diff-type="noncompliant">
+from assertpy import assert_that
+
+def test_result():
+    try:
+        result = get_result()
+        assert_that(result).is_equal_to("expected")  # Noncompliant
+    except AssertionError:
+        pass
+</pre>
+<p>This variation also catches the failing assertion locally and ignores it. Even if <code>assert_that(…​)</code> fails, the test still passes because
+nothing validates or re-raises the caught exception.</p>
+<pre data-diff-id="6" data-diff-type="noncompliant">
+from assertpy import assert_that
+
+def test_error_message():
+    try:
+        do_something()
+        assert_that(False).described_as("Expected an AssertionError!").is_true()  # Noncompliant
+    except AssertionError as exc:
+        pass  # Exception caught but not validated
+
+def do_something():
+    raise AssertionError("Something went wrong")
+</pre>
+<h4>Compliant solution</h4>
+<p>Keep the <code>assertpy</code> assertion outside the <code>try-except</code> block so test failures are reported normally.</p>
+<pre data-diff-id="5" data-diff-type="compliant">
+from assertpy import assert_that
+
+def test_result():
+    result = get_result()
+    assert_that(result).is_equal_to("expected")
+</pre>
+<p>When you intentionally verify an <code>AssertionError</code>, use a dedicated exception assertion and then validate the message.</p>
+<pre data-diff-id="6" data-diff-type="compliant">
+import pytest
+
+def test_error_message():
+    with pytest.raises(AssertionError) as exc_info:
+        do_something()
+
+    assert str(exc_info.value) == "Something went wrong"
+
+def do_something():
+    raise AssertionError("Something went wrong")
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python unittest - Testing for exceptions - <a
+  href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises">assertRaises</a></li>
+  <li>pytest - Testing exceptions - <a href="https://docs.pytest.org/en/stable/how-to/assert.html#assertions-about-expected-exceptions">Assertions
+  about expected exceptions</a></li>
+  <li>Python Built-in Exceptions - <a href="https://docs.python.org/3/library/exceptions.html#AssertionError">AssertionError</a></li>
+  <li>assertpy documentation - <a href="https://assertpy.github.io/docs.html">assertpy docs</a></li>
+</ul>
+

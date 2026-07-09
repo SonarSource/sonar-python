@@ -1,0 +1,26 @@
+{
+  "title": "Assertions should not be made within the try block of a try-except catching AssertionError",
+  "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  },
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "tests",
+    "assertpy",
+    "pytest",
+    "unittest"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-5779",
+  "sqKey": "S5779",
+  "scope": "Tests",
+  "quickfix": "unknown"
+}

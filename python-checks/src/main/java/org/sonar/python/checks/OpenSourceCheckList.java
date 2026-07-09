@@ -91,6 +91,7 @@ import org.sonar.python.checks.regex.UnquantifiedNonCapturingGroupCheck;
 import org.sonar.python.checks.regex.UnusedGroupNamesCheck;
 import org.sonar.python.checks.regex.VerboseRegexCheck;
 import org.sonar.python.checks.tests.AssertAfterRaiseCheck;
+import org.sonar.python.checks.tests.AssertionInTryCheck;
 import org.sonar.python.checks.tests.AssertOnDissimilarTypesCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
 import org.sonar.python.checks.tests.AssertionArgumentOrderCheck;
@@ -122,6 +123,7 @@ public class OpenSourceCheckList {
       AssertAfterRaiseCheck.class,
       AssertOnTupleLiteralCheck.class,
       AssertionArgumentOrderCheck.class,
+      AssertionInTryCheck.class,
       AsyncFunctionNotAsyncCheck.class,
       AsyncFunctionWithTimeoutCheck.class,
       AsyncioTaskNotStoredCheck.class,
