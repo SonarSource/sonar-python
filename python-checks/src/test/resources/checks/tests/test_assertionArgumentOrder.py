@@ -16,8 +16,11 @@ def value():
 
 class TestUnittestAssertions(unittest.TestCase):
     def test_swapped_equality_arguments(self):
-        self.assertEqual(42, value())  # Noncompliant {{Swap these 2 arguments so they are in the correct order: actual value, expected value.}}
-#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 0
+        self.assertEqual(42, value())
+#       Noncompliant@-1 {{Swap these 2 arguments so they are in the correct order: actual value, expected value.}}
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@-1
+#                        ^^@-2< {{Expected value.}}
+#                            ^^^^^^^@-3< {{Actual value.}}
         self.assertEqual(first=EXPECTED_COUNT, second=value())  # Noncompliant
         self.assertIs(None, value())  # Noncompliant
         self.assertAlmostEqual(EXPECTED_PI, value())  # Noncompliant
@@ -31,6 +34,33 @@ class TestUnittestAssertions(unittest.TestCase):
         self.assertTrue(value())
         helper.assertEqual(value(), 42)
 
+    def test_mutable_collection_actual_with_loop_expected(self):
+        for expected in ([3], [3, 1], [1]):
+            with self.subTest(expected=expected):
+                log = []
+                log.append(1)
+                self.assertEqual(log, expected)
+
+    def test_mutable_collection_append_before_assignment(self):
+        def f1():
+            log.append(1)
+
+        def f2():
+            log.append(2)
+
+        def f3():
+            log.append(3)
+
+        for what, expected in (
+            (f1, [1]),
+            (f2, [2]),
+            (f3, [3]),
+        ):
+            with self.subTest(what=what.__name__, expected=expected):
+                log = []
+                what()
+                self.assertEqual(log, expected)
+
 
 class Helper:
     def test_not_a_unittest_test_case(self):
@@ -38,8 +68,11 @@ class Helper:
 
 
 def test_pytest_assertions():
-    assert 42 == value()  # Noncompliant {{Swap these 2 sides so they are in the correct order: actual value, expected value.}}
-#          ^^^^^^^^^^^^^ 0
+    assert 42 == value()
+#   Noncompliant@-1 {{Swap these 2 sides so they are in the correct order: actual value, expected value.}}
+#          ^^^^^^^^^^^^^@-1
+#          ^^@-2< {{Expected value.}}
+#                ^^^^^^^@-3< {{Actual value.}}
     assert EXPECTED_COUNT == value()  # Noncompliant
     assert pytest.approx(EXPECTED_PI) == value()  # Noncompliant
 
@@ -50,13 +83,20 @@ def test_pytest_assertions():
     assert 42 == EXPECTED_COUNT
     assert value()
     assert 42 != value()
-    assert 42 == pytest.approx(value())  # Noncompliant
+    assert 42 == pytest.approx(value())
+#   Noncompliant@-1
+#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^@-1
+#          ^^@-2< {{Expected value.}}
+#                              ^^^^^^^@-3< {{Actual value.}}
     assert 42 == pytest.approx(other=value())  # Noncompliant
 
 
 def test_assertpy_assertions():
-    assert_that(42).is_equal_to(value())  # Noncompliant {{Pass the actual value to "assert_that" and the expected value to "is_equal_to".}}
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 0
+    assert_that(42).is_equal_to(value())
+#   Noncompliant@-1 {{Pass the actual value to "assert_that" and the expected value to "is_equal_to".}}
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@-1
+#               ^^@-2< {{Expected value.}}
+#                               ^^^^^^^@-3< {{Actual value.}}
     assert_that(EXPECTED_COUNT).is_equal_to(value())  # Noncompliant
     assert_that(42).described_as("count").is_equal_to(value())  # Noncompliant
     assert_that(EXPECTED_COUNT).described_as("count").snapshot("baseline").is_equal_to(value())  # Noncompliant
@@ -77,3 +117,14 @@ def test_assertpy_assertions():
 def helper_assertions():
     assert 42 == value()
     assert_that(42).is_equal_to(value())
+
+
+def test_mutable_collection_actual(expected):
+    result = []
+    assert result == expected
+
+
+def test_assertion_with_message(close, expected):
+    result = []
+    result.append(value())
+    assert result == expected, (close, result, expected)

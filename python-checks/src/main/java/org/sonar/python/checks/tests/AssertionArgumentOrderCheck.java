@@ -50,9 +50,12 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
   private static final String PYTEST_EXPECTED_ON_RIGHT_MESSAGE = "Swap these 2 sides so they are in the correct order: actual value, expected value.";
   private static final String PYTEST_EXPECTED_ON_LEFT_MESSAGE = "Swap these 2 sides so they are in the correct order: expected value, actual value.";
   private static final String ASSERTPY_MESSAGE = "Pass the actual value to \"assert_that\" and the expected value to \"is_equal_to\".";
+  private static final String EXPECTED_SECONDARY_MESSAGE = "Expected value.";
+  private static final String ACTUAL_SECONDARY_MESSAGE = "Actual value.";
   private static final String UNITTEST_QUICK_FIX_MESSAGE = "Swap the actual and expected arguments";
   private static final String PYTEST_QUICK_FIX_MESSAGE = "Swap the actual and expected operands";
   private static final String ASSERTPY_QUICK_FIX_MESSAGE = "Swap the actual and expected values";
+  private static final String PYTEST_APPROX_EXPECTED_ARGUMENT_NAME = "expected";
 
   private static final TypeMatcher UNITTEST_EQUALITY_ASSERTION_MATCHER = TypeMatchers.any(
     TypeMatchers.isType("unittest.case.TestCase.assertEqual"),
@@ -113,6 +116,7 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
 
     if (areInvertedForActualExpected(firstArg.expression(), secondArg.expression(), ctx)) {
       var issue = ctx.addIssue(callExpression, UNITTEST_MESSAGE);
+      addActualExpectedSecondaryLocations(issue, secondArg.expression(), firstArg.expression());
       createSwapQuickFix(firstArg.expression(), secondArg.expression(), UNITTEST_QUICK_FIX_MESSAGE, ctx).ifPresent(issue::addQuickFix);
     }
   }
@@ -129,6 +133,7 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
 
     if (areInvertedForConfiguredPytestOrder(binaryExpression.leftOperand(), binaryExpression.rightOperand(), ctx)) {
       var issue = ctx.addIssue(condition, pytestMessage());
+      addActualExpectedSecondaryLocations(issue, pytestActualExpression(binaryExpression, ctx), pytestExpectedExpression(binaryExpression, ctx));
       createPytestQuickFix(binaryExpression, ctx).ifPresent(issue::addQuickFix);
     }
   }
@@ -155,8 +160,16 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
 
     if (areInvertedForActualExpected(actualArg.expression(), expectedArg.expression(), ctx)) {
       var issue = ctx.addIssue(callExpression, ASSERTPY_MESSAGE);
+      // On the noncompliant path the assertion arguments are inverted: the assert_that slot
+      // holds the expected value and the is_equal_to slot holds the actual value.
+      addActualExpectedSecondaryLocations(issue, expectedArg.expression(), actualArg.expression());
       createSwapQuickFix(actualArg.expression(), expectedArg.expression(), ASSERTPY_QUICK_FIX_MESSAGE, ctx).ifPresent(issue::addQuickFix);
     }
+  }
+
+  private static void addActualExpectedSecondaryLocations(org.sonar.plugins.python.api.PythonCheck.PreciseIssue issue, Expression actualExpression, Expression expectedExpression) {
+    issue.secondary(expectedExpression, EXPECTED_SECONDARY_MESSAGE);
+    issue.secondary(actualExpression, ACTUAL_SECONDARY_MESSAGE);
   }
 
   private Optional<PythonQuickFix> createPytestQuickFix(BinaryExpression binaryExpression, SubscriptionContext ctx) {
@@ -167,7 +180,7 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
       return createSwapQuickFix(binaryExpression.leftOperand(), binaryExpression.rightOperand(), PYTEST_QUICK_FIX_MESSAGE, ctx);
     }
 
-    RegularArgument approxExpectedArg = TreeUtils.nthArgumentOrKeyword(0, "expected", approxCall.arguments());
+    RegularArgument approxExpectedArg = TreeUtils.nthArgumentOrKeyword(0, PYTEST_APPROX_EXPECTED_ARGUMENT_NAME, approxCall.arguments());
     if (approxExpectedArg == null) {
       return Optional.empty();
     }
@@ -313,6 +326,16 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     return expectedOnRight ? PYTEST_EXPECTED_ON_RIGHT_MESSAGE : PYTEST_EXPECTED_ON_LEFT_MESSAGE;
   }
 
+  private Expression pytestActualExpression(BinaryExpression binaryExpression, SubscriptionContext ctx) {
+    Expression actualExpression = expectedOnRight ? binaryExpression.rightOperand() : binaryExpression.leftOperand();
+    return unwrapPytestApproxArgument(actualExpression, ctx);
+  }
+
+  private Expression pytestExpectedExpression(BinaryExpression binaryExpression, SubscriptionContext ctx) {
+    Expression expectedExpression = expectedOnRight ? binaryExpression.leftOperand() : binaryExpression.rightOperand();
+    return unwrapPytestApproxArgument(expectedExpression, ctx);
+  }
+
   private static boolean isExpectedValue(Expression expression, SubscriptionContext ctx) {
     Expression unwrapped = Expressions.removeParentheses(expression);
     if (CheckUtils.isConstant(unwrapped)) {
@@ -322,7 +345,7 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
       return true;
     }
     if (unwrapped instanceof Name name) {
-      return Expressions.singleAssignedNonNameValue(name).filter(CheckUtils::isConstant).isPresent();
+      return Expressions.singleAssignedNonNameValue(name).filter(CheckUtils::isImmutableConstant).isPresent();
     }
     return false;
   }
@@ -331,8 +354,17 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     if (!(expression instanceof CallExpression callExpression) || !PYTEST_APPROX_MATCHER.isTrueFor(callExpression.callee(), ctx)) {
       return false;
     }
-    RegularArgument expectedArg = TreeUtils.nthArgumentOrKeyword(0, "expected", callExpression.arguments());
+    RegularArgument expectedArg = TreeUtils.nthArgumentOrKeyword(0, PYTEST_APPROX_EXPECTED_ARGUMENT_NAME, callExpression.arguments());
     return expectedArg != null && isExpectedValue(expectedArg.expression(), ctx);
+  }
+
+  private static Expression unwrapPytestApproxArgument(Expression expression, SubscriptionContext ctx) {
+    CallExpression approxCall = asPytestApproxCall(expression, ctx);
+    if (approxCall == null) {
+      return expression;
+    }
+    RegularArgument expectedArg = TreeUtils.nthArgumentOrKeyword(0, PYTEST_APPROX_EXPECTED_ARGUMENT_NAME, approxCall.arguments());
+    return expectedArg != null ? expectedArg.expression() : expression;
   }
 
   private static boolean isSupportedTestFunction(SubscriptionContext ctx, Tree tree) {
