@@ -1,0 +1,67 @@
+<p>This rule raises an issue when <code>SkipValidation</code> is used in an <code>Annotated</code> type that also contains validation constraints like
+<code>Field</code>, <code>StringConstraints</code>, or other Pydantic validators.</p>
+<h2>Why is this an issue?</h2>
+<p>In Pydantic, <code>SkipValidation</code> converts a field’s validation schema to <code>any_schema</code>, which accepts any value without type or
+constraint checks. Combining it with validation constraints in the same type annotation leads to broken behavior regardless of ordering:</p>
+<ul>
+  <li>When <code>SkipValidation</code> is the outermost annotation, it replaces the entire validation schema with <code>any_schema</code>. Any
+  constraints defined in an inner <code>Annotated</code> block are silently dropped — the field accepts any value, including values that violate the
+  constraints.</li>
+  <li>When <code>SkipValidation</code> is not the outermost annotation, constraints may still be applied as post-validation functions on top of
+  <code>any_schema</code>. The type check is skipped, so passing a value of the wrong type does not produce a clean <code>ValidationError</code> but
+  instead causes a <code>TypeError</code> at runtime.</li>
+</ul>
+<p>This pattern suggests a misunderstanding of how <code>SkipValidation</code> works. Developers likely intended either to validate the data OR to
+skip validation entirely, not both. The presence of both indicates a logic error in the code.</p>
+<p>For example, in <code>Annotated[Annotated[int, Field(gt=0)], SkipValidation]</code>, the <code>Field(gt=0)</code> constraint is completely ignored
+because <code>SkipValidation</code> as the outermost annotation converts the whole schema to <code>any_schema</code>, allowing any value to pass
+through without validation.</p>
+<h3>What is the potential impact?</h3>
+<p>Using <code>SkipValidation</code> alongside validation constraints can lead to security vulnerabilities and data integrity issues:</p>
+<ul>
+  <li><strong>Invalid data acceptance</strong>: Data that should be rejected based on the defined constraints will be accepted without validation</li>
+  <li><strong>False security</strong>: The code appears to validate input (constraints are visible in the type definition), but actually accepts any
+  data, creating a false sense of security</li>
+  <li><strong>Runtime errors</strong>: Passing a value of the wrong type bypasses the type check and causes a <code>TypeError</code> instead of a
+  <code>ValidationError</code>, crashing downstream code</li>
+  <li><strong>Compliance violations</strong>: Applications subject to data validation requirements may unknowingly violate compliance rules</li>
+</ul>
+<p>The severity depends on what the data is used for - user input, configuration data, or data from external systems represent higher risk
+scenarios.</p>
+<h2>How to fix it</h2>
+<p>The fix depends on what was intended:</p>
+<ul>
+  <li><strong>To enforce validation constraints</strong>: remove <code>SkipValidation</code>. All constraints will be properly applied.</li>
+  <li><strong>To skip validation intentionally</strong>: remove the validation constraints and use <code>SkipValidation[Type]</code> on its own. This
+  is appropriate when the data is already validated upstream (for example, passing a previously-constructed model instance), or when the performance
+  cost of re-validation is not worth it and the caller guarantees valid data. The type annotation is still present for IDE and type-checker support —
+  only the runtime validation is skipped.</li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from typing import Annotated
+from pydantic import BaseModel, SkipValidation, Field
+
+class Model(BaseModel):
+    value: Annotated[Annotated[int, Field(gt=0)], SkipValidation]  # Noncompliant - Field(gt=0) is silently ignored
+    other: Annotated[int, SkipValidation, Field(gt=0)]  # Noncompliant - type check is skipped, wrong types cause TypeError
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from typing import Annotated
+from pydantic import BaseModel, SkipValidation, Field
+
+class Model(BaseModel):
+    validated: Annotated[int, Field(gt=0)]  # constraints properly enforced at runtime
+    trusted: SkipValidation[int]  # validation intentionally skipped; data is already trusted
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Pydantic Documentation - <a
+  href="https://docs.pydantic.dev/latest/api/pydantic/functional_validators/#pydantic.functional_validators.SkipValidation">SkipValidation</a></li>
+  <li>Pydantic Documentation - <a href="https://docs.pydantic.dev/latest/concepts/types/#composing-types-via-annotated">Composing types via
+  Annotated</a></li>
+</ul>
+

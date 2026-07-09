@@ -388,6 +388,7 @@ public class OpenSourceCheckList {
       PydanticJsonSchemaInputTypeWithAfterModeCheck.class,
       PydanticOptionalFieldDefaultCheck.class,
       PydanticMultipleInheritanceConfigCheck.class,
+      PydanticSkipValidationWithConstraintsCheck.class,
       PyTorchDataLoaderNumWorkersCheck.class,
       PytzTimeZoneInDatetimeConstructorCheck.class,
       RaiseOutsideExceptCheck.class,
