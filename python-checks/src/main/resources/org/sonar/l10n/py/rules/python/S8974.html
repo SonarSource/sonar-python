@@ -1,0 +1,90 @@
+<p>This rule raises an issue when a schema type specification parameter is used in a field validation decorator configured to run after type
+conversion, or when the validation timing is not explicitly specified (which defaults to running after conversion).</p>
+<p>In Python/Pydantic, this specifically refers to using the <code>json_schema_input_type</code> parameter in a <code>@field_validator</code>
+decorator.</p>
+<h2>Why is this an issue?</h2>
+<p>In validation frameworks, field validation mechanisms allow you to add custom validation logic to data fields. These mechanisms typically support
+different validation modes that determine when your validation function runs relative to the framework’s built-in validation:</p>
+<ul>
+  <li>Before-mode: Runs before the framework’s standard validation</li>
+  <li>After-mode: Runs after the framework’s standard validation (often the default)</li>
+  <li>Plain-mode: Replaces the framework’s standard validation entirely</li>
+  <li>Wrap-mode: Wraps around the framework’s standard validation, giving you control over when it runs</li>
+</ul>
+<p>Schema generation parameters for input types help validation frameworks generate accurate data schemas for validation. These parameters tell the
+framework what input type to expect when generating the schema, which is particularly useful for validators that accept raw, unvalidated input.</p>
+<p>However, such parameters only make sense for validators that run before or instead of the framework’s type validation. When using after-mode
+validation, your validator receives data that has already been validated and converted to the correct type. At this point, the input type is already
+known and fixed, so specifying an input type parameter for schema generation serves no purpose and is not supported.</p>
+<p>Using an input type schema parameter with an incompatible validation mode will cause the framework to raise a user error when your model is
+defined, preventing your application from starting.</p>
+<p>In Pydantic specifically, this refers to the <code>@field_validator</code> decorator with its <code>json_schema_input_type</code> parameter. Using
+<code>json_schema_input_type</code> with <code>mode='after'</code> will cause Pydantic to raise a <code>PydanticUserError</code> when your model is
+defined. There is no valid use of <code>json_schema_input_type</code> with <code>mode='after'</code>; this combination always fails at class
+definition time.</p>
+<h3>What is the potential impact?</h3>
+<p>This issue will cause an immediate runtime error when the affected class or type is defined. The application will fail to start, making it
+impossible to use any functionality that depends on the affected type definition.</p>
+<p>This is a critical bug that will be discovered as soon as the code path defining the type is executed, typically during application startup or when
+the relevant code unit is first loaded.</p>
+<h2>How to fix it</h2>
+<p>If you need to specify <code>json_schema_input_type</code>, change the validator mode to <code>before</code>, <code>plain</code>, or
+<code>wrap</code>:</p>
+<ul>
+  <li><code>mode='before'</code> is typically the best choice. The validator runs before Pydantic’s type conversion, so
+  <code>json_schema_input_type</code> correctly describes the raw input type the schema should expect.</li>
+  <li><code>mode='plain'</code> replaces Pydantic’s built-in validation entirely. Use it when the validator handles all type checking itself and
+  Pydantic’s standard conversion should not run.</li>
+  <li><code>mode='wrap'</code> gives the validator control over when Pydantic’s built-in validation runs by receiving a <code>handler</code> argument.
+  Use it when you need to inspect or modify the value both before and after Pydantic’s conversion.</li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from pydantic import BaseModel, field_validator
+
+class Model(BaseModel):
+    a: str
+
+    @field_validator('a', mode='after', json_schema_input_type=str)  # Noncompliant
+    @classmethod
+    def validate_a(cls, v):
+        return v
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from pydantic import BaseModel, field_validator
+
+class Model(BaseModel):
+    a: str
+
+    @field_validator('a', mode='before', json_schema_input_type=str)
+    @classmethod
+    def validate_a(cls, v):
+        return v
+</pre>
+<h3>Pitfalls</h3>
+<p>When switching to <code>mode='wrap'</code>, the validator function must accept a second <code>handler</code> argument in addition to the value.
+Using the standard <code>(cls, v)</code> signature with <code>mode='wrap'</code> causes a separate <code>PydanticUserError</code> about an
+unrecognized function signature.</p>
+<pre>
+from pydantic import BaseModel, field_validator
+
+class Model(BaseModel):
+    a: str
+
+    # mode='wrap' requires (cls, v, handler), not (cls, v)
+    @field_validator('a', mode='wrap', json_schema_input_type=str)
+    @classmethod
+    def validate_a(cls, v, handler):
+        return handler(v)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Pydantic Documentation - <a href="https://docs.pydantic.dev/latest/concepts/validators/#field-validators">Field Validators</a></li>
+  <li>Pydantic Documentation - <a
+  href="https://docs.pydantic.dev/latest/api/functional_validators/#pydantic.functional_validators.field_validator">field_validator API
+  reference</a></li>
+</ul>
+
