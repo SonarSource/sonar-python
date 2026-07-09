@@ -18,15 +18,21 @@ package org.sonar.python.checks.utils;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.SubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
@@ -54,6 +60,31 @@ public class UnittestUtils {
     TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + ASSERT_RAISES_REGEX),
     TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + ASSERT_RAISES_REGEXP)
   );
+  public static final TypeMatcher UNITTEST_EQUALITY_ASSERTION_MATCHER = TypeMatchers.any(
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + "assertEqual"),
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + "assertNotEqual"),
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + "assertAlmostEqual"),
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + "assertNotAlmostEqual"));
+  public static final TypeMatcher UNITTEST_IDENTITY_ASSERTION_MATCHER = TypeMatchers.any(
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + "assertIs"),
+    TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + "assertIsNot"));
+  public static final TypeMatcher PYTEST_APPROX_MATCHER = TypeMatchers.isType("pytest.approx");
+  public static final TypeMatcher ASSERTPY_IS_EQUAL_TO_MATCHER = TypeMatchers.isType("assertpy.AssertionBuilder.is_equal_to");
+  public static final TypeMatcher ASSERTPY_EQUALITY_ASSERTION_MATCHER = TypeMatchers.any(
+    TypeMatchers.isType("assertpy.AssertionBuilder.is_equal_to"),
+    TypeMatchers.isType("assertpy.AssertionBuilder.is_not_equal_to"));
+
+  public record AssertionParameterNames(String leftKeyword, String rightKeyword) {
+  }
+
+  public record AssertionArguments(Expression actual, Expression expected) {
+  }
+
+  public record AssertionFrameworkHandlers(
+    BiConsumer<SubscriptionContext, CallExpression> unittest,
+    BiConsumer<SubscriptionContext, CallExpression> assertpy,
+    BiConsumer<SubscriptionContext, AssertStatement> pytest) {
+  }
 
   private UnittestUtils() {
 
@@ -188,6 +219,85 @@ public class UnittestUtils {
   public static boolean isWithinUnittestTestCase(Tree tree) {
     ClassDef classDef = (ClassDef) TreeUtils.firstAncestorOfKind(tree, Tree.Kind.CLASSDEF);
     return classDef != null && isUnittestTestCaseClass(classDef);
+  }
+
+  public static boolean isPytestStyleTestFunction(SubscriptionContext ctx, Tree tree) {
+    FunctionDef functionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF);
+    return functionDef != null && isPytestStyleTestFunction(functionDef, ctx.pythonFile().fileName());
+  }
+
+  public static boolean isSupportedTestFunction(SubscriptionContext ctx, Tree tree) {
+    FunctionDef functionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF);
+    return functionDef != null && (isWithinUnittestTestCase(functionDef) || isPytestStyleTestFunction(functionDef, ctx.pythonFile().fileName()));
+  }
+
+  public static void registerAssertionSyntaxNodeConsumers(SubscriptionCheck.Context context, AssertionFrameworkHandlers handlers) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
+      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+      handlers.unittest().accept(ctx, callExpression);
+      handlers.assertpy().accept(ctx, callExpression);
+    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSERT_STMT, ctx -> handlers.pytest().accept(ctx, (AssertStatement) ctx.syntaxNode()));
+  }
+
+  @Nullable
+  public static AssertionArguments unittestAssertionArguments(CallExpression callExpression, SubscriptionContext ctx) {
+    if (!isWithinUnittestTestCase(callExpression)) {
+      return null;
+    }
+    if (!(Expressions.removeParentheses(callExpression.callee()) instanceof QualifiedExpression qualifiedExpression)
+      || !CheckUtils.isSelf(qualifiedExpression.qualifier())) {
+      return null;
+    }
+
+    AssertionParameterNames parameterNames = unittestAssertionParameterNames(callExpression.callee(), ctx);
+    if (parameterNames == null) {
+      return null;
+    }
+
+    List<Argument> arguments = callExpression.arguments();
+    RegularArgument firstArg = TreeUtils.nthArgumentOrKeyword(0, parameterNames.leftKeyword(), arguments);
+    RegularArgument secondArg = TreeUtils.nthArgumentOrKeyword(1, parameterNames.rightKeyword(), arguments);
+    if (firstArg == null || secondArg == null) {
+      return null;
+    }
+
+    return new AssertionArguments(firstArg.expression(), secondArg.expression());
+  }
+
+  @Nullable
+  public static AssertionArguments assertpyAssertionArguments(CallExpression callExpression, SubscriptionContext ctx, TypeMatcher equalityMatcher) {
+    if (!isSupportedTestFunction(ctx, callExpression)) {
+      return null;
+    }
+    if (!(Expressions.removeParentheses(callExpression.callee()) instanceof QualifiedExpression qualifiedExpression)
+      || !equalityMatcher.isTrueFor(callExpression.callee(), ctx)) {
+      return null;
+    }
+
+    CallExpression assertThatCall = AssertpyUtils.originatingAssertThatCall(qualifiedExpression.qualifier(), ctx);
+    if (assertThatCall == null) {
+      return null;
+    }
+
+    RegularArgument actualArg = TreeUtils.nthArgumentOrKeyword(0, "val", assertThatCall.arguments());
+    RegularArgument expectedArg = TreeUtils.nthArgumentOrKeyword(0, "other", callExpression.arguments());
+    if (actualArg == null || expectedArg == null) {
+      return null;
+    }
+
+    return new AssertionArguments(actualArg.expression(), expectedArg.expression());
+  }
+
+  @Nullable
+  public static AssertionParameterNames unittestAssertionParameterNames(Expression callee, SubscriptionContext ctx) {
+    if (UNITTEST_EQUALITY_ASSERTION_MATCHER.isTrueFor(callee, ctx)) {
+      return new AssertionParameterNames("first", "second");
+    }
+    if (UNITTEST_IDENTITY_ASSERTION_MATCHER.isTrueFor(callee, ctx)) {
+      return new AssertionParameterNames("expr1", "expr2");
+    }
+    return null;
   }
 
   @Nullable

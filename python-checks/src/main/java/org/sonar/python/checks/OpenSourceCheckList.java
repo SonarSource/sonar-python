@@ -98,6 +98,7 @@ import org.sonar.python.checks.tests.AssertionArgumentOrderCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.DedicatedExceptionAssertionCheck;
 import org.sonar.python.checks.tests.GroupSimilarTestsParameterizedCheck;
+import org.sonar.python.checks.tests.IdenticalAssertionArgumentsCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.SingleInvocationRuntimeExceptionCheck;
@@ -284,6 +285,7 @@ public class OpenSourceCheckList {
       IgnoredParameterCheck.class,
       IgnoredSystemExitCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
+      IdenticalAssertionArgumentsCheck.class,
       IdentityComparisonWithCachedTypesCheck.class,
       IdentityComparisonWithNewObjectCheck.class,
       IgnoredPureOperationsCheck.class,

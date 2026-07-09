@@ -16,7 +16,6 @@
  */
 package org.sonar.python.checks.tests;
 
-import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -25,24 +24,22 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
-import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
-import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
-import org.sonar.python.checks.utils.AssertpyUtils;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.UnittestUtils;
+import org.sonar.python.checks.utils.UnittestUtils.AssertionArguments;
+import org.sonar.python.checks.utils.UnittestUtils.AssertionFrameworkHandlers;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.checks.utils.UnittestUtils.ASSERTPY_IS_EQUAL_TO_MATCHER;
+import static org.sonar.python.checks.utils.UnittestUtils.PYTEST_APPROX_MATCHER;
 
 @Rule(key = "S3415")
 public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
@@ -58,34 +55,18 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
   private static final String ASSERTPY_QUICK_FIX_MESSAGE = "Swap the actual and expected values";
   private static final String PYTEST_APPROX_EXPECTED_ARGUMENT_NAME = "expected";
 
-  private static final TypeMatcher UNITTEST_EQUALITY_ASSERTION_MATCHER = TypeMatchers.any(
-    TypeMatchers.isType("unittest.case.TestCase.assertEqual"),
-    TypeMatchers.isType("unittest.case.TestCase.assertNotEqual"),
-    TypeMatchers.isType("unittest.case.TestCase.assertAlmostEqual"),
-    TypeMatchers.isType("unittest.case.TestCase.assertNotAlmostEqual"));
-  private static final TypeMatcher UNITTEST_IDENTITY_ASSERTION_MATCHER = TypeMatchers.any(
-    TypeMatchers.isType("unittest.case.TestCase.assertIs"),
-    TypeMatchers.isType("unittest.case.TestCase.assertIsNot"));
-  private static final TypeMatcher PYTEST_APPROX_MATCHER = TypeMatchers.isType("pytest.approx");
-  private static final TypeMatcher ASSERTPY_IS_EQUAL_TO_MATCHER = TypeMatchers.isType("assertpy.AssertionBuilder.is_equal_to");
-
   @RuleProperty(
     key = "expectedOnRight",
     description = "Whether the expected value should be on the right-hand side of pytest equality assertions.",
     defaultValue = "" + DEFAULT_EXPECTED_ON_RIGHT)
   public boolean expectedOnRight = DEFAULT_EXPECTED_ON_RIGHT;
 
-  private record ParameterNames(String leftKeyword, String rightKeyword) {
-  }
-
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-      checkUnittestAssertion(ctx, callExpression);
-      checkAssertpyAssertion(ctx, callExpression);
-    });
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSERT_STMT, ctx -> checkPytestAssertion(ctx, (AssertStatement) ctx.syntaxNode()));
+    UnittestUtils.registerAssertionSyntaxNodeConsumers(context, new AssertionFrameworkHandlers(
+      AssertionArgumentOrderCheck::checkUnittestAssertion,
+      AssertionArgumentOrderCheck::checkAssertpyAssertion,
+      this::checkPytestAssertion));
   }
 
   @Override
@@ -94,35 +75,22 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkUnittestAssertion(SubscriptionContext ctx, CallExpression callExpression) {
-    if (!UnittestUtils.isWithinUnittestTestCase(callExpression)) {
-      return;
-    }
-    if (!(Expressions.removeParentheses(callExpression.callee()) instanceof QualifiedExpression qualifiedExpression)
-      || !CheckUtils.isSelf(qualifiedExpression.qualifier())) {
+    AssertionArguments arguments = UnittestUtils.unittestAssertionArguments(callExpression, ctx);
+    if (arguments == null) {
       return;
     }
 
-    ParameterNames parameterNames = parameterNames(callExpression.callee(), ctx);
-    if (parameterNames == null) {
-      return;
-    }
-
-    List<Argument> arguments = callExpression.arguments();
-    RegularArgument firstArg = TreeUtils.nthArgumentOrKeyword(0, parameterNames.leftKeyword(), arguments);
-    RegularArgument secondArg = TreeUtils.nthArgumentOrKeyword(1, parameterNames.rightKeyword(), arguments);
-    if (firstArg == null || secondArg == null) {
-      return;
-    }
-
-    if (areInvertedForActualExpected(firstArg.expression(), secondArg.expression(), ctx)) {
+    if (areInvertedForActualExpected(arguments.actual(), arguments.expected(), ctx)) {
       var issue = ctx.addIssue(callExpression, UNITTEST_MESSAGE);
-      addActualExpectedSecondaryLocations(issue, secondArg.expression(), firstArg.expression());
-      createSwapQuickFix(firstArg.expression(), secondArg.expression(), UNITTEST_QUICK_FIX_MESSAGE, ctx).ifPresent(issue::addQuickFix);
+      Expression actualValue = arguments.expected();
+      Expression expectedValue = arguments.actual();
+      addActualExpectedSecondaryLocations(issue, actualValue, expectedValue);
+      createSwapQuickFix(arguments.actual(), arguments.expected(), UNITTEST_QUICK_FIX_MESSAGE, ctx).ifPresent(issue::addQuickFix);
     }
   }
 
   private void checkPytestAssertion(SubscriptionContext ctx, AssertStatement assertStatement) {
-    if (!isPytestStyleTestFunction(ctx, assertStatement)) {
+    if (!UnittestUtils.isPytestStyleTestFunction(ctx, assertStatement)) {
       return;
     }
 
@@ -139,31 +107,17 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkAssertpyAssertion(SubscriptionContext ctx, CallExpression callExpression) {
-    if (!isSupportedTestFunction(ctx, callExpression)) {
-      return;
-    }
-    if (!(Expressions.removeParentheses(callExpression.callee()) instanceof QualifiedExpression qualifiedExpression)
-      || !ASSERTPY_IS_EQUAL_TO_MATCHER.isTrueFor(callExpression.callee(), ctx)) {
+    AssertionArguments arguments = UnittestUtils.assertpyAssertionArguments(callExpression, ctx, ASSERTPY_IS_EQUAL_TO_MATCHER);
+    if (arguments == null) {
       return;
     }
 
-    CallExpression assertThatCall = AssertpyUtils.originatingAssertThatCall(qualifiedExpression.qualifier(), ctx);
-    if (assertThatCall == null) {
-      return;
-    }
-
-    RegularArgument actualArg = TreeUtils.nthArgumentOrKeyword(0, "val", assertThatCall.arguments());
-    RegularArgument expectedArg = TreeUtils.nthArgumentOrKeyword(0, "other", callExpression.arguments());
-    if (actualArg == null || expectedArg == null) {
-      return;
-    }
-
-    if (areInvertedForActualExpected(actualArg.expression(), expectedArg.expression(), ctx)) {
+    if (areInvertedForActualExpected(arguments.actual(), arguments.expected(), ctx)) {
       var issue = ctx.addIssue(callExpression, ASSERTPY_MESSAGE);
-      // On the noncompliant path the assertion arguments are inverted: the assert_that slot
-      // holds the expected value and the is_equal_to slot holds the actual value.
-      addActualExpectedSecondaryLocations(issue, expectedArg.expression(), actualArg.expression());
-      createSwapQuickFix(actualArg.expression(), expectedArg.expression(), ASSERTPY_QUICK_FIX_MESSAGE, ctx).ifPresent(issue::addQuickFix);
+      Expression actualValue = arguments.expected();
+      Expression expectedValue = arguments.actual();
+      addActualExpectedSecondaryLocations(issue, actualValue, expectedValue);
+      createSwapQuickFix(arguments.actual(), arguments.expected(), ASSERTPY_QUICK_FIX_MESSAGE, ctx).ifPresent(issue::addQuickFix);
     }
   }
 
@@ -281,17 +235,6 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     return current == '\r' || current == '\n';
   }
 
-  @Nullable
-  private static ParameterNames parameterNames(Expression callee, SubscriptionContext ctx) {
-    if (UNITTEST_EQUALITY_ASSERTION_MATCHER.isTrueFor(callee, ctx)) {
-      return new ParameterNames("first", "second");
-    }
-    if (UNITTEST_IDENTITY_ASSERTION_MATCHER.isTrueFor(callee, ctx)) {
-      return new ParameterNames("expr1", "expr2");
-    }
-    return null;
-  }
-
   private static boolean areInvertedForActualExpected(Expression actualPosition, Expression expectedPosition, SubscriptionContext ctx) {
     return isExpectedValue(actualPosition, ctx) && !isExpectedValue(expectedPosition, ctx);
   }
@@ -345,15 +288,5 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     }
     RegularArgument expectedArg = TreeUtils.nthArgumentOrKeyword(0, PYTEST_APPROX_EXPECTED_ARGUMENT_NAME, approxCall.arguments());
     return expectedArg != null ? expectedArg.expression() : expression;
-  }
-
-  private static boolean isSupportedTestFunction(SubscriptionContext ctx, Tree tree) {
-    FunctionDef functionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF);
-    return functionDef != null && (UnittestUtils.isWithinUnittestTestCase(functionDef) || UnittestUtils.isPytestStyleTestFunction(functionDef, ctx.pythonFile().fileName()));
-  }
-
-  private static boolean isPytestStyleTestFunction(SubscriptionContext ctx, Tree tree) {
-    FunctionDef functionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF);
-    return functionDef != null && UnittestUtils.isPytestStyleTestFunction(functionDef, ctx.pythonFile().fileName());
   }
 }

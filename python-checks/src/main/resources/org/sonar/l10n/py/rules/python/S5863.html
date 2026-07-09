@@ -1,0 +1,92 @@
+<p>This rule raises an issue when the actual expression of an assertion matches the expected expression, meaning the same expression is being compared
+to itself.</p>
+<h2>Why is this an issue?</h2>
+<p>Assertions that compare the same expression to itself provide no meaningful validation. They usually indicate a copy-paste mistake where the
+intended expected value was replaced by the actual one.</p>
+<p>Such assertions will always pass, or always fail for inequality checks, regardless of the code’s correctness. As a result, the test gives false
+confidence while verifying nothing useful.</p>
+<h2>How to fix it in unittest</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import unittest
+
+class TestCalculation(unittest.TestCase):
+    def test_addition(self):
+        result = 2 + 2
+        self.assertEqual(result, result)  # Noncompliant
+</pre>
+<p>For identity checks using <code>assertIs</code>, ensure you’re comparing against a different expected object, not the same one.</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import unittest
+
+class TestIdentity(unittest.TestCase):
+    def test_singleton(self):
+        obj = get_singleton()
+        self.assertIs(obj, obj)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<p>Replace the duplicate argument with the intended expected value.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+import unittest
+
+class TestCalculation(unittest.TestCase):
+    def test_addition(self):
+        result = 2 + 2
+        expected = 4
+        self.assertEqual(result, expected)
+</pre>
+<p>For identity checks using <code>assertIs</code>, compare against a different expected object.</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+import unittest
+
+class TestIdentity(unittest.TestCase):
+    def test_singleton(self):
+        obj1 = get_singleton()
+        obj2 = get_singleton()
+        self.assertIs(obj1, obj2)
+</pre>
+<h2>How to fix it in pytest</h2>
+<p>Replace the duplicate argument with the intended expected value.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+def test_string_conversion():
+    actual = str(42)
+    assert actual == actual  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+def test_string_conversion():
+    actual = str(42)
+    expected = "42"
+    assert actual == expected
+</pre>
+<h2>How to fix it in assertpy</h2>
+<p>Replace the duplicate argument with the intended expected value.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+from assertpy import assert_that
+
+def test_string_conversion():
+    actual = str(42)
+    assert_that(actual).is_equal_to(actual)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="4" data-diff-type="compliant">
+from assertpy import assert_that
+
+def test_string_conversion():
+    actual = str(42)
+    expected = "42"
+    assert_that(actual).is_equal_to(expected)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python unittest documentation - <a href="https://docs.python.org/3/library/unittest.html">unittest — Unit testing framework</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/">pytest: helps you write better programs</a></li>
+  <li>assertpy documentation - <a href="https://assertpy.github.io/docs.html">assertpy docs</a></li>
+</ul>
+
