@@ -1,0 +1,72 @@
+<p>This rule raises an issue when private attributes in data validation or modeling frameworks use a double leading underscore prefix (like
+<code>__attr</code>).</p>
+<p>In Python, this specifically applies to Pydantic models.</p>
+<h2>Why is this an issue?</h2>
+<p>In data validation frameworks, private attributes are typically defined using a specific naming convention (e.g., prefixing the attribute name with
+a single underscore). These attributes are not validated during object instantiation and are excluded from the schema or type definition.</p>
+<p>When an attribute is declared with a double leading underscore (e.g., <code>__attr</code>), Python applies name mangling at the class body level,
+renaming the attribute to <code>_ClassName__attr</code> before the framework even sees it. The class will define and instantiate without any error,
+but this creates a silent behavioral trap:</p>
+<ul>
+  <li>Accessing the attribute from outside the class using the original name (e.g., <code>obj.__attr</code>) raises an <code>AttributeError</code>,
+  because the stored name is <code>_ClassName__attr</code></li>
+  <li>A subclass method referring to <code>self.__attr</code> mangles the name to <code>_SubClass__attr</code>, not <code>_ParentClass__attr</code>,
+  causing an <code>AttributeError</code> at runtime</li>
+  <li>The attribute’s default value and configuration still apply, but only under the obscure mangled name, which is an implementation detail not
+  intended to be used directly</li>
+</ul>
+<p>This behavior causes subtle bugs that are difficult to detect, because the class appears to be defined correctly and instantiation succeeds without
+any warning.</p>
+<p>In Pydantic, private attributes must be declared with a single leading underscore (e.g., <code>_private_attr</code>). When an attribute is declared
+with a double leading underscore (e.g., <code>__private_attr</code>), Python’s name mangling silently renames it to
+<code>_ClassName__private_attr</code> before Pydantic processes the class. This causes two concrete problems:</p>
+<ul>
+  <li><strong>Broken external access</strong>: Accessing the attribute from outside the class using the original name (e.g.,
+  <code>model.__private_attr</code>) raises an <code>AttributeError</code>. Only the mangled name <code>model._ClassName__private_attr</code> works,
+  which is an implementation detail callers are not supposed to use.</li>
+  <li><strong>Broken subclass access</strong>: A subclass method that refers to <code>self.__private_attr</code> will mangle the name to
+  <code>_SubClass__private_attr</code>, not <code>_ParentClass__private_attr</code>, resulting in an <code>AttributeError</code> at runtime.</li>
+</ul>
+<h3>What is the potential impact?</h3>
+<p>Using a double leading underscore for private attributes in data modeling frameworks leads to:</p>
+<ul>
+  <li><strong>Runtime errors</strong>: Code outside the defining class that attempts to access the attribute using its original name will raise an
+  <code>AttributeError</code></li>
+  <li><strong>Broken inheritance</strong>: Subclass methods that reference the attribute will fail because name mangling produces a different key than
+  what the parent class stored</li>
+  <li><strong>Obscured intent</strong>: The attribute is technically registered but only accessible via the mangled name, which is an implementation
+  detail not part of the intended API</li>
+  <li><strong>Maintenance issues</strong>: The class definition and instantiation succeed without any error, so the bug only surfaces when the
+  attribute is accessed in a specific context, making it hard to diagnose</li>
+</ul>
+<h2>How to fix it</h2>
+<p>Replace the double leading underscores with a single underscore prefix. Pydantic recognizes single-underscore attributes as private and initializes
+them correctly.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from pydantic import BaseModel, PrivateAttr
+
+class Model(BaseModel):
+    __counter: int = PrivateAttr(default=0)  # Noncompliant: name mangling prevents expected access
+
+m = Model()
+print(m.__counter)  # Raises AttributeError: 'Model' object has no attribute '__counter'
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from pydantic import BaseModel, PrivateAttr
+
+class Model(BaseModel):
+    _counter: int = PrivateAttr(default=0)  # Compliant: single underscore prefix
+
+m = Model()
+print(m._counter)  # Works correctly: outputs 0
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Pydantic Documentation - <a href="https://docs.pydantic.dev/latest/concepts/models/#private-model-attributes">Private model attributes</a></li>
+  <li>Pydantic API Reference - <a href="https://docs.pydantic.dev/latest/api/pydantic/fields/#pydantic.fields.PrivateAttr">PrivateAttr</a></li>
+</ul>
+
