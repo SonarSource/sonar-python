@@ -58,7 +58,14 @@ class RequirementsTxtParserTest {
       "packagewithleadingspaces",
       "packagewithfixedversion",
       "packagewithconstraints",
-      "packagewithvcs");
+      "packagewithvcs",
+      "torch",
+      "labml-helpers",
+      "gym",
+      "numpy",
+      "flask",
+      "requests",
+      "certifi");
   }
 
   private DefaultInputFile createRequirementFile() {

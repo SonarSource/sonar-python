@@ -15,6 +15,15 @@ packageWithFixedVersion == 0.6.1
 packageWithConstraints [security] >= 2.8.1, == 2.8.* ; python_version < "2.7"
 packageWithVCS @ https://github.com/urllib3/urllib3/archive/refs/tags/1.26.8.zip
 
+# Package names should also be recognized when there is no space before the operator or extras
+torch>=1.10
+labml-helpers>=0.4.84
+gym[atari]
+numpy==1.19
+flask[async]>=2.0
+requests;python_version<"3.8"
+certifi@https://example.com/certifi.zip
+
 # For know, we ignore extra requirements files referred in requirements.txt
 -r other-requirements.txt
 -c constraints.txt

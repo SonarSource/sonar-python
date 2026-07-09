@@ -18,8 +18,9 @@ package org.sonar.plugins.python.dependency;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
@@ -29,6 +30,10 @@ import org.sonar.plugins.python.dependency.model.Dependency;
 public class RequirementsTxtParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(RequirementsTxtParser.class);
+
+  // Matches a PEP 508 package name, stopping before extras ("[...]") or version specifiers/markers glued without a space
+  private static final Pattern PACKAGE_NAME_PATTERN =
+    Pattern.compile("^[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?(?=$|[\\[<>=!~;@])");
 
   private RequirementsTxtParser(){}
 
@@ -47,8 +52,11 @@ public class RequirementsTxtParser {
         continue;
       }
       String[] splittedLine = line.split("\\s+");
-      if (splittedLine.length >= 1 && splittedLine[0].toUpperCase(Locale.ENGLISH).matches("^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])$")) {
-        dependencySet.add(new Dependency(splittedLine[0]));
+      if (splittedLine.length >= 1) {
+        Matcher matcher = PACKAGE_NAME_PATTERN.matcher(splittedLine[0]);
+        if (matcher.find()) {
+          dependencySet.add(new Dependency(matcher.group()));
+        }
       }
     }
     return new Dependencies(dependencySet);
