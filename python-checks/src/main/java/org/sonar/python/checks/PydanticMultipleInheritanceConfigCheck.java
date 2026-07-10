@@ -112,7 +112,7 @@ public class PydanticMultipleInheritanceConfigCheck extends PythonSubscriptionCh
       ClassDef classDef,
       Set<ClassType> visitedClassesDefiningModelConfig,
       List<Expression> superClassesWithNewModelConfig) {
-    if (visitedClassesDefiningModelConfig.size() >= 2) {
+    if (superClassesWithNewModelConfig.size() >= 2) {
       PreciseIssue issue = ctx.addIssue(classDef.name(), MESSAGE);
       for (Expression superClass : superClassesWithNewModelConfig) {
         issue.secondary(superClass, "This base class defines \"model_config\".");

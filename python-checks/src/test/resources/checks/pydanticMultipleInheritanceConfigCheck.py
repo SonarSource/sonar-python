@@ -1,4 +1,7 @@
 from pydantic import BaseModel, ConfigDict
+from typing import Generic, TypeVar
+
+T = TypeVar("T")
 
 
 # =====================
@@ -203,3 +206,38 @@ class BaseIdentical2(BaseModel):
 class ModelIdenticalConfig(BaseIdentical1, BaseIdentical2):  # Noncompliant
 #     ^^^^^^^^^^^^^^^^^^^^
     l: str
+
+
+# =====================
+# SINGLE BRANCH FP REGRESSION
+# =====================
+
+# PatchTaskInstanceBody defines model_config locally; PlainBaseModel does not.
+# The only model_config "branch" is PatchTaskInstanceBody (BaseModel is shared root).
+# No conflict → must not raise.
+class PatchTaskInstanceBody(BaseModel):
+    model_config = ConfigDict(str_to_lower=True)
+    task_id: str
+
+class PlainBaseModel(BaseModel):
+    pass
+
+class BulkTaskInstanceBody(PatchTaskInstanceBody, PlainBaseModel):  # Compliant - only one branch defines model_config
+    dag_id: str
+
+
+# =====================
+# GENERIC BASE CLASS (FP regression)
+# =====================
+
+class StrictBaseModel(BaseModel):
+    model_config = ConfigDict(strict=True)
+
+# Compliant - only one Pydantic base with model_config; Generic[T] is not a Pydantic config source
+class BulkBaseAction(StrictBaseModel, Generic[T]):  # Compliant
+    pass
+
+# Two distinct Pydantic bases each with their own model_config — still noncompliant even with Generic[T] mixed in
+class ConflictingGenericModel(Base1, Base2, Generic[T]):  # Noncompliant
+#     ^^^^^^^^^^^^^^^^^^^^^^^
+    pass
