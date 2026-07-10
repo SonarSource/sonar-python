@@ -1,11 +1,11 @@
-<p>This is an issue when assertion statements, assertion methods, or fluent assertions are placed within a try block that catches
+<p>This rule raises an issue when assertion statements, assertion methods, or fluent assertions are placed within a try block that catches
 <code>AssertionError</code> exceptions without properly handling or re-raising them.</p>
 <h2>Why is this an issue?</h2>
 <p>Assertions in Python raise an <code>AssertionError</code> when they fail. This includes built-in <code>assert</code> statements,
 <code>unittest</code> assertion helpers such as <code>assertEqual</code>, and fluent assertions from libraries such as <code>assertpy</code>. This is
 the mechanism testing frameworks use to detect test failures.</p>
 <p>When you place assertions within a try-except block that catches <code>AssertionError</code> (or its parent class <code>Exception</code>), and you
-don’t re-raise the exception or validate its properties, you create a silent failure scenario. The assertion can fail, but the exception gets
+do not re-raise the exception or validate its properties, you create a silent failure scenario. The assertion can fail, but the exception gets
 swallowed by the except block, causing the test to pass when it should have failed.</p>
 <p>This defeats the entire purpose of writing assertions in tests. The test appears to pass, giving false confidence that the code works correctly,
 when in reality the assertion failed and detected a problem.</p>
@@ -25,7 +25,7 @@ allowing bugs to reach production.</p>
 <p>This can lead to:</p>
 <ul>
   <li>Security vulnerabilities going undetected if security-related tests falsely pass</li>
-  <li>Functional bugs making it to production, causing user-facing issues</li>
+  <li>Functional bugs making it to production</li>
   <li>Regression of previously working features without detection</li>
   <li>Wasted debugging time when issues are discovered later in the development cycle or in production</li>
   <li>Loss of trust in the test suite’s reliability</li>
@@ -60,7 +60,7 @@ class MyTest(unittest.TestCase):
         try:
             self.do_something()
             self.fail("Expected an AssertionError!")  # Noncompliant
-        except AssertionError as e:
+        except AssertionError:
             pass  # Exception caught but not validated
 
     def do_something(self):
@@ -122,7 +122,7 @@ def test_error_details():
     try:
         do_something()
         assert False, "Expected an AssertionError!"  # Noncompliant
-    except AssertionError as e:
+    except AssertionError:
         pass  # Exception details not validated
 
 def do_something():
@@ -170,21 +170,6 @@ def test_result():
     except AssertionError:
         pass
 </pre>
-<p>This variation also catches the failing assertion locally and ignores it. Even if <code>assert_that(…​)</code> fails, the test still passes because
-nothing validates or re-raises the caught exception.</p>
-<pre data-diff-id="6" data-diff-type="noncompliant">
-from assertpy import assert_that
-
-def test_error_message():
-    try:
-        do_something()
-        assert_that(False).described_as("Expected an AssertionError!").is_true()  # Noncompliant
-    except AssertionError as exc:
-        pass  # Exception caught but not validated
-
-def do_something():
-    raise AssertionError("Something went wrong")
-</pre>
 <h4>Compliant solution</h4>
 <p>Keep the <code>assertpy</code> assertion outside the <code>try-except</code> block so test failures are reported normally.</p>
 <pre data-diff-id="5" data-diff-type="compliant">
@@ -194,27 +179,13 @@ def test_result():
     result = get_result()
     assert_that(result).is_equal_to("expected")
 </pre>
-<p>When you intentionally verify an <code>AssertionError</code>, use a dedicated exception assertion and then validate the message.</p>
-<pre data-diff-id="6" data-diff-type="compliant">
-import pytest
-
-def test_error_message():
-    with pytest.raises(AssertionError) as exc_info:
-        do_something()
-
-    assert str(exc_info.value) == "Something went wrong"
-
-def do_something():
-    raise AssertionError("Something went wrong")
-</pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li>Python unittest - Testing for exceptions - <a
-  href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises">assertRaises</a></li>
+  <li>unittest documentation - <a href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises">assertRaises</a></li>
   <li>pytest - Testing exceptions - <a href="https://docs.pytest.org/en/stable/how-to/assert.html#assertions-about-expected-exceptions">Assertions
   about expected exceptions</a></li>
-  <li>Python Built-in Exceptions - <a href="https://docs.python.org/3/library/exceptions.html#AssertionError">AssertionError</a></li>
+  <li>Python built-in exceptions - <a href="https://docs.python.org/3/library/exceptions.html#AssertionError">AssertionError</a></li>
   <li>assertpy documentation - <a href="https://assertpy.github.io/docs.html">assertpy docs</a></li>
 </ul>
 

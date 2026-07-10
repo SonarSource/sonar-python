@@ -3,19 +3,6 @@ conversion, or when the validation timing is not explicitly specified (which def
 <p>In Python/Pydantic, this specifically refers to using the <code>json_schema_input_type</code> parameter in a <code>@field_validator</code>
 decorator.</p>
 <h2>Why is this an issue?</h2>
-<p>In validation frameworks, field validation mechanisms allow you to add custom validation logic to data fields. These mechanisms typically support
-different validation modes that determine when your validation function runs relative to the framework’s built-in validation:</p>
-<ul>
-  <li>Before-mode: Runs before the framework’s standard validation</li>
-  <li>After-mode: Runs after the framework’s standard validation (often the default)</li>
-  <li>Plain-mode: Replaces the framework’s standard validation entirely</li>
-  <li>Wrap-mode: Wraps around the framework’s standard validation, giving you control over when it runs</li>
-</ul>
-<p>Schema generation parameters for input types help validation frameworks generate accurate data schemas for validation. These parameters tell the
-framework what input type to expect when generating the schema, which is particularly useful for validators that accept raw, unvalidated input.</p>
-<p>However, such parameters only make sense for validators that run before or instead of the framework’s type validation. When using after-mode
-validation, your validator receives data that has already been validated and converted to the correct type. At this point, the input type is already
-known and fixed, so specifying an input type parameter for schema generation serves no purpose and is not supported.</p>
 <p>Using an input type schema parameter with an incompatible validation mode will cause the framework to raise a user error when your model is
 defined, preventing your application from starting.</p>
 <p>In Pydantic specifically, this refers to the <code>@field_validator</code> decorator with its <code>json_schema_input_type</code> parameter. Using

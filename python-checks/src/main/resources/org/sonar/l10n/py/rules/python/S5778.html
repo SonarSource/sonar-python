@@ -7,10 +7,10 @@ it becomes ambiguous which specific call is expected to raise that exception.</p
 <pre>
 pytest.raises(IndexError, lambda: get_item().process())
 </pre>
-<p>Here, both <code>get_item()</code> and <code>process()</code> could potentially raise an <code>IndexError</code>. If the test passes, you cannot be
-certain which method actually raised the exception. This ambiguity reduces test reliability.</p>
-<p>By isolating the method call you want to test, you make your test explicit and unambiguous. This improves test reliability and makes your test
-suite a better specification of expected behavior.</p>
+<p>Here, both <code>get_item()</code> and <code>process()</code> could potentially raise an <code>IndexError</code>. The test does not make it
+explicit which method is expected to raise the exception. This ambiguity makes the test harder to read and maintain.</p>
+<p>By isolating the method call you want to test, you make your test explicit and unambiguous. This improves readability and maintainability, and
+makes your test suite a better specification of expected behavior.</p>
 <h3>What is the potential impact?</h3>
 <p>Writing tests with multiple method calls when testing for exceptions reduces test quality:</p>
 <ul>
