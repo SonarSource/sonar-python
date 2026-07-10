@@ -384,6 +384,7 @@ public class OpenSourceCheckList {
       PublicApiIsSecuritySensitiveCheck.class,
       PubliclyWritableDirectoriesCheck.class,
       PublicNetworkAccessToCloudResourcesCheck.class,
+      PydanticConfigDictValidationOptionsCheck.class,
       PydanticCoreSerializationFallbackCheck.class,
       PydanticDoubleUnderscorePrivateAttributeCheck.class,
       PydanticJsonSchemaInputTypeWithAfterModeCheck.class,

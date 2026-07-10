@@ -1,0 +1,55 @@
+<p>This rule raises an issue when both <code>validate_by_alias</code> and <code>validate_by_name</code> are explicitly set to <code>False</code> in a
+Pydantic v2 <code>ConfigDict</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>Data modeling frameworks use configuration options to determine how field values can be provided during object instantiation: one option controls
+whether fields can be populated using alternative names (aliases), and another controls whether they can be populated using their declared attribute
+names. These options control the valid input methods for providing data to the model’s fields.</p>
+<p>When both options are disabled, the model has no way to accept input data. This creates an invalid configuration that will cause errors when
+describing the model, as there is no valid method to pass values to any field.</p>
+<p>According to the framework documentation:</p>
+<blockquote>
+  <p>You cannot set both validation options to disable alias-based and name-based population. This would make it impossible to populate an
+  attribute.</p>
+</blockquote>
+<p>This misconfiguration typically occurs when developers are trying to restrict how data is provided to the model, but inadvertently disable all
+input methods.</p>
+<p>In Pydantic specifically, these configuration options are <code>validate_by_alias</code> and <code>validate_by_name</code> in the model’s
+<code>ConfigDict</code> or <code>Config</code> class.</p>
+<h3>What is the potential impact?</h3>
+<p>When both validation options are disabled, a <code>PydanticUserError</code> is raised at class definition time. This prevents the application from
+starting up correctly and requires the developer to fix the configuration before the model can be used.</p>
+<h2>How to fix it</h2>
+<p>Enable <code>validate_by_name</code> to allow field population using attribute names. This is the most straightforward solution and allows fields
+to be populated using their Python attribute names.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from pydantic import BaseModel, ConfigDict, Field
+
+class Model(BaseModel):
+    model_config = ConfigDict(
+        validate_by_alias=False,
+        validate_by_name=False  # Noncompliant
+    )
+    my_field: str = Field(alias='my_alias')
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from pydantic import BaseModel, ConfigDict, Field
+
+class Model(BaseModel):
+    model_config = ConfigDict(
+        validate_by_alias=False,
+        validate_by_name=True
+    )
+    my_field: str = Field(alias='my_alias')
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Pydantic Documentation - <a href="https://pydantic.dev/docs/validation/latest/api/pydantic/config/">Configuration</a></li>
+  <li>Pydantic Documentation - <a
+  href="https://pydantic.dev/docs/validation/latest/errors/usage_errors#validate-by-alias-and-name-false">validate_by_alias and validate_by_name both
+  set to False</a></li>
+</ul>
+
