@@ -96,7 +96,7 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
     String calleeFqn = calleeSymbol.fullyQualifiedName();
     if (WHERE_VERIFY_KWARG_SHOULD_BE_TRUE_FQNS.contains(calleeFqn)) {
       RegularArgument verifyArg = TreeUtils.argumentByKeyword("verify", call.arguments());
-      if (verifyArg != null && Expressions.isFalsy(verifyArg.expression())) {
+      if (verifyArg != null && Expressions.isFalsy(verifyArg.expression()) && !isVerifiedElsewhere(call)) {
         ctx.addIssue(verifyArg, MESSAGE);
         return;
       }
@@ -114,8 +114,66 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       Optional.ofNullable(TreeUtils.argumentByKeyword("options", call.arguments()))
         .map(RegularArgument::expression)
         .filter(JwtVerificationCheck::isListOrDictWithSensitiveEntry)
+        .filter(expression -> !isVerifiedElsewhere(call))
         .ifPresent(expression -> ctx.addIssue(expression, MESSAGE));
     }
+  }
+
+  /**
+   * "Peek then verify" pattern (multi-tenant JWT key discovery): an unverified decode of a token is
+   * compliant if the same token is decoded again elsewhere in the same function/module with real
+   * signature verification. If the token argument can't be resolved to a symbol, we can't disprove
+   * such a call exists, so we assume compliance rather than raise a false positive.
+   */
+  private static boolean isVerifiedElsewhere(CallExpression unverifiedCall) {
+    Symbol tokenSymbol = tokenArgumentSymbol(unverifiedCall);
+    if (tokenSymbol == null) {
+      return true;
+    }
+    Tree scope = TreeUtils.firstAncestorOfKind(unverifiedCall, Kind.FILE_INPUT, Kind.FUNCDEF);
+    return scope != null && TreeUtils.hasDescendant(scope, tree -> isVerifyingCallOnToken(tree, unverifiedCall, tokenSymbol));
+  }
+
+  private static boolean isVerifyingCallOnToken(Tree tree, CallExpression unverifiedCall, Symbol tokenSymbol) {
+    return TreeUtils.toOptionalInstanceOf(CallExpression.class, tree)
+      .filter(call -> call != unverifiedCall)
+      .filter(JwtVerificationCheck::isDecodeOrVerifyCall)
+      .filter(call -> tokenSymbol.equals(tokenArgumentSymbol(call)))
+      .filter(call -> !isUnverifiedShape(call))
+      .filter(JwtVerificationCheck::hasKeyArgument)
+      .isPresent();
+  }
+
+  private static boolean hasKeyArgument(CallExpression call) {
+    RegularArgument keyArg = TreeUtils.nthArgumentOrKeyword(1, "key", call.arguments());
+    return keyArg != null && !Expressions.isFalsy(keyArg.expression());
+  }
+
+  private static boolean isDecodeOrVerifyCall(CallExpression call) {
+    return Optional.ofNullable(call.calleeSymbol())
+      .map(Symbol::fullyQualifiedName)
+      .filter(fqn -> WHERE_VERIFY_KWARG_SHOULD_BE_TRUE_FQNS.contains(fqn) || VERIFY_SIGNATURE_OPTION_SUPPORTING_FUNCTION_FQNS.contains(fqn))
+      .isPresent();
+  }
+
+  private static boolean isUnverifiedShape(CallExpression call) {
+    RegularArgument verifyArg = TreeUtils.argumentByKeyword("verify", call.arguments());
+    if (verifyArg != null && Expressions.isFalsy(verifyArg.expression())) {
+      return true;
+    }
+    return Optional.ofNullable(TreeUtils.argumentByKeyword("options", call.arguments()))
+      .map(RegularArgument::expression)
+      .filter(JwtVerificationCheck::isListOrDictWithSensitiveEntry)
+      .isPresent();
+  }
+
+  @Nullable
+  private static Symbol tokenArgumentSymbol(CallExpression call) {
+    return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(0, "jwt", call.arguments()))
+      .map(RegularArgument::expression)
+      .filter(expression -> expression.is(Kind.NAME))
+      .map(expression -> ((Name) expression).symbol())
+      .orElse(null);
   }
 
   private static boolean isListOrDictWithSensitiveEntry(@Nullable Expression expression) {

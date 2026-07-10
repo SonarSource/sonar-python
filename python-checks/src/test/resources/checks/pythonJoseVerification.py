@@ -217,6 +217,25 @@ async def compliant_verify(token: str | None = None):
         ...
 
 
+@router.get('/compliant_peek_then_verify_jws')
+async def compliant_peek_then_verify_jws(token: str | None = None, key=None):
+    unverified = jws.verify(token, None, None, verify=False)  # Compliant: same token is re-verified below
+    return jws.verify(token, key, ["HS256"], verify=True)
+
+
+@router.get('/compliant_peek_then_verify_decode_dict')
+async def compliant_peek_then_verify_decode_dict(token: str | None = None, key=None):
+    unverified = jwt.decode(token, None, options={"verify_signature": False})  # Compliant: same token is re-decoded below with a real key
+    return jwt.decode(token, key, algorithms=["HS256"])
+
+
+# only other_token is re-verified below, not token
+@router.get('/noncompliant_peek_then_verify_different_token')
+async def noncompliant_peek_then_verify_different_token(token: str | None = None, other_token: str | None = None, key=None):
+    unverified = jwt.decode(token, None, options={"verify_signature": False})  # Noncompliant
+    return jwt.decode(other_token, key, algorithms=["HS256"])
+
+
 x = []
 class TestInfiniteRecursion():
     x = x

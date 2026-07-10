@@ -40,6 +40,53 @@ def pyjwt_decode_token_secure_1(token):
 def pyjwt_decode_token_secure_2(token):
     return jwt.decode(token, algorithms="HS256") # Compliant
 
+def peek_then_verify_options_dict(token, keys):
+    unverified = jwt.decode(token, options={"verify_signature": False, "require": ["iss"]}) # Compliant: same token is re-decoded below with real verification
+    issuer = unverified["iss"]
+    key = keys[issuer]
+    return jwt.decode(token, key, algorithms=["HS256"])
+
+def peek_then_verify_options_list(token, keys):
+    unverified = jwt.decode(token, options=[("verify_signature", False), ("require", ["iss"])]) # Compliant: same token is re-decoded below with real verification
+    issuer = unverified["iss"]
+    key = keys[issuer]
+    return jwt.decode(token, key, algorithms=["HS256"])
+
+def peek_then_verify_verify_kwarg(token, keys):
+    unverified = jwt.decode(token, verify=False) # Compliant: same token is re-decoded below with real verification
+    issuer = unverified["iss"]
+    key = keys[issuer]
+    return jwt.decode(token, key, algorithms=["HS256"])
+
+# only token_b is re-verified below, not token_a
+def peek_then_verify_different_variable(token_a, token_b, keys):
+    unverified = jwt.decode(token_a, options={"verify_signature": False}) # Noncompliant
+    key = keys[unverified["iss"]]
+    return jwt.decode(token_b, key, algorithms=["HS256"])
+
+# the later call on the same token is also unverified
+def peek_then_verify_second_call_also_unverified(token, keys):
+    unverified = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = unverified["iss"]
+    key = keys[issuer]
+    return jwt.decode(token, key, algorithms=["HS256"], verify=False) # Noncompliant
+
+def peek_then_verify_unresolvable_token(keys):
+    return jwt.decode(get_token(), options={"verify_signature": False}) # Compliant: token argument isn't a resolvable variable, assume compliant
+
+# real verification below is in a different function, out of scope
+def peek_then_verify_wrong_scope(token, keys):
+    def inner():
+        return jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    def other():
+        return jwt.decode(token, keys["k"], algorithms=["HS256"])
+    return inner(), other()
+
+module_token = "..."
+module_key = "secret"
+module_unverified = jwt.decode(module_token, options={"verify_signature": False}) # Compliant: real verification happens at module scope below
+module_verified = jwt.decode(module_token, module_key, algorithms=["HS256"])
+
 def pyjwt_decode_unverified_header(token):
     return jwt.get_unverified_header(token) # Noncompliant
 
