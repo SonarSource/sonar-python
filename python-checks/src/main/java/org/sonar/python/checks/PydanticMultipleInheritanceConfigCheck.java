@@ -86,7 +86,7 @@ public class PydanticMultipleInheritanceConfigCheck extends PythonSubscriptionCh
       }
     }
 
-    reportIfConflictingConfigs(ctx, classDef, visitedClassesDefiningModelConfig, superClassesWithNewModelConfig);
+    reportIfConflictingConfigs(ctx, classDef, superClassesWithNewModelConfig);
   }
 
   private static boolean classDefinesModelConfigLocally(ClassDef classDef) {
@@ -110,7 +110,6 @@ public class PydanticMultipleInheritanceConfigCheck extends PythonSubscriptionCh
   private static void reportIfConflictingConfigs(
       SubscriptionContext ctx,
       ClassDef classDef,
-      Set<ClassType> visitedClassesDefiningModelConfig,
       List<Expression> superClassesWithNewModelConfig) {
     if (superClassesWithNewModelConfig.size() >= 2) {
       PreciseIssue issue = ctx.addIssue(classDef.name(), MESSAGE);
