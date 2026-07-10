@@ -139,3 +139,108 @@ def get_unverified_header_compliant(token: str, keys):
     key = keys[jku]
     claims = jwt.decode(token, key, algorithms=["HS256"])
     return claims
+
+def header_comparison_whole_header(token: str):
+    expected_header = {"alg": "RS256", "typ": "JWT"}
+    received_header = jwt.get_unverified_header(token)  # Compliant: only compared, never used for a decision
+    if expected_header != received_header:
+        raise ValueError("Invalid header")
+    return True
+
+def header_comparison_inline_no_assignment(token: str, expected):
+    if jwt.get_unverified_header(token) == expected:  # Compliant: compared inline, never assigned
+        return True
+    return False
+
+def header_comparison_extracted_value_inline_no_assignment(token: str):
+    if jwt.get_unverified_header(token).get("alg") != "RS256":  # Compliant: extracted value compared inline
+        raise ValueError("Wrong algorithm")
+    return True
+
+def header_comparison_subscription_inline_no_assignment(token: str):
+    if jwt.get_unverified_header(token)["alg"] != "RS256":  # Compliant: extracted value compared inline
+        raise ValueError("Wrong algorithm")
+    return True
+
+def header_comparison_extracted_value(token: str):
+    received_header = jwt.get_unverified_header(token)  # Compliant: extracted value only compared
+    if received_header.get("alg") != "RS256":
+        raise ValueError("Wrong algorithm")
+    return True
+
+def header_comparison_subscription(token: str):
+    received_header = jwt.get_unverified_header(token)  # Compliant: extracted value only compared
+    if received_header["alg"] != "RS256":
+        raise ValueError("Wrong algorithm")
+    return True
+
+def header_comparison_multiple_safe_usages(token: str):
+    expected_header = {"alg": "RS256", "typ": "JWT"}
+    received_header = jwt.get_unverified_header(token)  # Compliant: every usage is a safe comparison
+    if expected_header != received_header:
+        raise ValueError("Invalid header")
+    if received_header == expected_header:
+        return True
+    if received_header.get("alg") != "RS256":
+        raise ValueError("Wrong algorithm")
+    return True
+
+
+# header is also returned raw below - comparing it once doesn't make the other, unsafe usage safe
+def header_comparison_mixed_with_unsafe_use(token: str) -> Dict[str, str]:
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    if header.get("alg") != "RS256":
+        raise ValueError("Wrong algorithm")
+    return header
+
+def algorithm_validated_then_used(token: str, key):
+    header = jwt.get_unverified_header(token)  # Compliant: alg is validated against an allowlist before use
+    alg = header.get("alg")
+    if alg not in ["RS256", "ES256"]:
+        raise ValueError("Unsupported algorithm")
+    return jwt.decode(token, key, algorithms=[alg])
+
+def algorithm_validated_then_used_subscription(token: str, key):
+    header = jwt.get_unverified_header(token)  # Compliant: alg is validated against an allowlist before use
+    alg = header["alg"]
+    if alg not in ("RS256", "ES256"):
+        raise ValueError("Unsupported algorithm")
+    return jwt.decode(token, key, algorithms=[alg])
+
+# alg is used to decode BEFORE it's validated - the guard doesn't protect this decode call
+def algorithm_used_before_validated(token: str, key):
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    alg = header.get("alg")
+    payload = jwt.decode(token, key, algorithms=[alg])
+    if alg not in ["RS256", "ES256"]:
+        raise ValueError("Unsupported algorithm")
+    return payload
+
+
+# alg is used directly in algorithms=[...] without ever being validated against an allowlist
+def algorithm_used_without_validation(token: str, key):
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    alg = header.get("alg")
+    return jwt.decode(token, key, algorithms=[alg])
+
+def validate_alg_elsewhere(alg):
+    if alg not in ["RS256"]:
+        raise ValueError("Unsupported algorithm")
+
+# the allowlist guard lives in a sibling function, out of scope for this one
+def algorithm_validated_wrong_scope(token: str, key):
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    alg = header.get("alg")
+    return jwt.decode(token, key, algorithms=[alg])
+
+def algorithm_validated_then_used_bare_name(token: str, key):
+    header = jwt.get_unverified_header(token)  # Compliant: alg is validated before being passed as a bare algorithms= value
+    alg = header.get("alg")
+    if alg not in ["RS256", "ES256"]:
+        raise ValueError("Unsupported algorithm")
+    return jwt.decode(token, key, algorithms=alg)
+
+# alg is never bound to a simple name (used inline), so it can't be tracked for validation
+def algorithm_extracted_inline_no_validation(token: str, key):
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    return jwt.decode(token, key, algorithms=[header.get("alg")])

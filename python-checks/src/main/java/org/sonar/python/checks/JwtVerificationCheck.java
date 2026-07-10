@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -29,10 +30,12 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.InExpression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
@@ -79,6 +82,10 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
   private static final String VERIFY_SIGNATURE_KEYWORD = "verify_signature";
 
   public static final Set<String> VERIFY_SIGNATURE_OPTION_SUPPORTING_FUNCTION_FQNS = Set.of("jose.jwt.decode", "jwt.decode");
+
+  private static final Set<String> EQUALITY_COMPARATORS = Set.of("==", "!=");
+
+  private static final String ALGORITHMS_KEYWORD = "algorithms";
 
   @Override
   public void initialize(Context context) {
@@ -240,56 +247,228 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       .isPresent();
   }
 
+  /**
+   * Fail-open: a call is compliant unless a concrete unsafe usage of the header/claims value (or a value
+   * extracted from it) is found. A usage shape this check doesn't recognize is not, by itself, grounds to raise -
+   * only known-unsafe sinks (bare pass-through, return, disallowed key access) do, unless that same usage also
+   * matches one of the safe patterns (allowed key, comparison-only, or validated-then-used-as-algorithm).
+   */
   private static boolean accessOnlyAllowedHeaderKeys(CallExpression call) {
+    // the call's own result can itself be a comparison operand, e.g. `jwt.get_unverified_header(token) == expected`
+    // - here `call` is the operand, not `call.parent()` (which is already the COMPARISON node), unlike the
+    // `.get(...)`/`[...]` chained-access shapes below where the extra level of nesting means the parent is
+    // the right thing to inspect.
+    if (isComparisonOperand(call)) {
+      return true;
+    }
+    // direct chained access on the call's own result, e.g. `jwt.get_unverified_header(token).get("x5u")`,
+    // is always checked - independent of whether the whole chained expression is itself assigned to some
+    // unrelated name (`x5u = jwt.get_unverified_header(token).get("x5u")`).
+    if (isSafeUsageSite(call.parent())) {
+      return true;
+    }
     Tree assignment = TreeUtils.firstAncestorOfKind(call, Tree.Kind.ASSIGNMENT_STMT);
-    Stream<StringLiteral> headerKeysAccessedDirectly = accessToHeaderKeyWithoutAssignment(call);
     if (assignment == null) {
-      return areStringLiteralsPartOfAllowedKeys(headerKeysAccessedDirectly);
-    } else {
-      List<Expression> lhsExpressions = ((AssignmentStatement) assignment).lhsExpressions().stream()
-        .map(ExpressionList::expressions)
-        .flatMap(Collection::stream).toList();
-      if (lhsExpressions.size() == 1 && lhsExpressions.get(0).is(Tree.Kind.NAME)) {
-        Name name = (Name) lhsExpressions.get(0);
-        Symbol symbol = name.symbol();
-        if (symbol != null) {
-          Stream<StringLiteral> argumentsOfGet = usagesAccessedByGet(symbol, call);
-          Stream<StringLiteral> argumentsOfSubscription = usagesAccessedBySubscription(symbol, call);
-          Stream<StringLiteral> headerKeysAccessFromAssignedValues = Stream.concat(argumentsOfGet, argumentsOfSubscription);
-          return areStringLiteralsPartOfAllowedKeys(Stream.concat(headerKeysAccessFromAssignedValues, headerKeysAccessedDirectly));
-        }
+      return false;
+    }
+    List<Expression> lhsExpressions = ((AssignmentStatement) assignment).lhsExpressions().stream()
+      .map(ExpressionList::expressions)
+      .flatMap(Collection::stream).toList();
+    if (lhsExpressions.size() == 1 && lhsExpressions.get(0).is(Tree.Kind.NAME)) {
+      Name name = (Name) lhsExpressions.get(0);
+      Symbol symbol = name.symbol();
+      if (symbol != null) {
+        Tree scope = TreeUtils.firstAncestorOfKind(call, Kind.FILE_INPUT, Kind.FUNCDEF);
+        List<Usage> usages = getForwardUsages(symbol, call).toList();
+        return !usages.isEmpty() && usages.stream().allMatch(usage -> isSafeUsage(usage, scope));
       }
     }
     return false;
   }
 
-  private static boolean areStringLiteralsPartOfAllowedKeys(Stream<StringLiteral> literals) {
-    var literalList = literals.toList();
-    return !literalList.isEmpty() && literalList.stream().allMatch(str -> ALLOWED_KEYS_ACCESS.contains(str.trimmedQuotesValue()));
+  /**
+   * Classifies one forward usage of the header/claims Name (e.g. the `header` in `header = jwt.get_unverified_header(token)`).
+   * Two things can make a usage safe, checked at two different tree depths:
+   *  - the bare Name itself is compared (`header == expected`) - checked directly on {@code usage.tree()};
+   *  - a value extracted from it via `.get(key)`/`[key]` is either an allowed key, compared, or validated-then-used
+   *    as an algorithm - checked on {@code usageParent}, which is the `.get(...)` call or `[...]` subscription
+   *    sitting immediately on top of this usage.
+   * Anything else (bare pass-through, `return header`, disallowed key) falls through to `false` - this is the
+   * pre-existing sink detection carried over unchanged from before this ticket, not a new way to raise issues.
+   */
+  private static boolean isSafeUsage(Usage usage, @Nullable Tree scope) {
+    Tree usageParent = usage.tree().parent();
+    if (isComparisonOperand(usage.tree())) {
+      return true;
+    }
+    Optional<CallExpression> getCall = getCallExprWhereDictIsAccessedWithGet(Stream.of(usageParent)).findFirst();
+    if (getCall.isPresent()) {
+      Stream<StringLiteral> keys = getStringLiteralArguments(getArgumentsFromCallExpr(Stream.of(getCall.get())));
+      return isSafeExtractedValueSite(getCall.get(), keys, scope);
+    }
+    Optional<SubscriptionExpression> subscription = getSubscriptions(Stream.of(usageParent)).findFirst();
+    if (subscription.isPresent()) {
+      Stream<StringLiteral> keys = getSubscriptsStringLiteral(Stream.of(subscription.get()));
+      return isSafeExtractedValueSite(subscription.get(), keys, scope);
+    }
+    return false;
   }
 
-  private static Stream<StringLiteral> accessToHeaderKeyWithoutAssignment(CallExpression call) {
-    Stream<CallExpression> callExpressionFromGetUnverifiedHeaders = getCallExprWhereDictIsAccessedWithGet(Stream.of(call.parent()));
-    Stream<Argument> argumentsOfCallExpr = getArgumentsFromCallExpr(callExpressionFromGetUnverifiedHeaders);
-    Stream<StringLiteral> stringLiteralArgumentsFromGet = getStringLiteralArguments(argumentsOfCallExpr);
-    Stream<SubscriptionExpression> subscriptionFromGetUnverifiedHeaders = getSubscriptions(Stream.of(call.parent()));
-    Stream<StringLiteral> stringLiteralArgumentFromSubscription = getSubscriptsStringLiteral(subscriptionFromGetUnverifiedHeaders);
-    return Stream.concat(stringLiteralArgumentsFromGet, stringLiteralArgumentFromSubscription);
+  /**
+   * Whether a value extracted from the header (e.g. the `.get("alg")` call itself, or a `["alg"]` subscription)
+   * is safe to use unrestricted: it's directly compared, its key is in the {@link #ALLOWED_KEYS_ACCESS} allowlist,
+   * or (algorithm pattern only) it's validated against an allowlist before being used as `algorithms=`.
+   */
+  private static boolean isSafeExtractedValueSite(Tree extractionSite, Stream<StringLiteral> keyLiterals, @Nullable Tree scope) {
+    if (isComparisonOperand(extractionSite)) {
+      return true;
+    }
+    List<StringLiteral> keys = keyLiterals.toList();
+    if (!keys.isEmpty() && keys.stream().allMatch(str -> ALLOWED_KEYS_ACCESS.contains(str.trimmedQuotesValue()))) {
+      return true;
+    }
+    return scope != null && isValidatedBeforeAlgorithmsUse(extractionSite, scope);
   }
 
-  private static Stream<StringLiteral> usagesAccessedByGet(Symbol symbol, CallExpression call) {
-    var usages = getForwardUsages(symbol, call);
-    var parentOfUsages = usages.map(Usage::tree).map(Tree::parent);
-    var callExpressionsFromUsages = getCallExprWhereDictIsAccessedWithGet(parentOfUsages);
-    return getStringLiteralArguments(getArgumentsFromCallExpr(callExpressionsFromUsages));
+  /** Whether {@code tree}'s parent is a `==`/`!=` comparison with {@code tree} as one of its two operands. */
+  private static boolean isComparisonOperand(Tree extractionSiteOrName) {
+    Tree parent = extractionSiteOrName.parent();
+    if (!parent.is(Kind.COMPARISON)) {
+      return false;
+    }
+    return EQUALITY_COMPARATORS.contains(((BinaryExpression) parent).operator().value());
   }
 
-  private static Stream<Argument> getArgumentsFromCallExpr(Stream<CallExpression> callExprs) {
-    return callExprs.map(CallExpression::arguments).flatMap(Collection::stream);
+  /**
+   * Whether {@code extractionSite} (e.g. {@code header.get("alg")}) flows, via the Name it's assigned to, into an
+   * {@code in}/{@code not in} check against a literal list/tuple allowlist that appears strictly before the
+   * value is passed as the {@code algorithms=} argument to a decode/verify call, anywhere in {@code scope}.
+   * Line position is used as a lightweight ordering proxy rather than full control-flow dominance, matching
+   * this file's existing line-number heuristics (e.g. {@link #getForwardUsages}) - the guard must be found
+   * on an earlier line than the algorithms= use, otherwise the algorithm-confusion attack this rule targets
+   * (using an unvalidated alg to decode, then validating too late or in unreachable code) would go undetected.
+   */
+  private static boolean isValidatedBeforeAlgorithmsUse(Tree extractionSite, Tree scope) {
+    Optional<Symbol> symbol = extractedValueSymbol(extractionSite);
+    if (symbol.isEmpty()) {
+      return false;
+    }
+    Optional<Integer> guardLine = firstDescendantLine(scope, tree -> isAllowlistGuardOnSymbol(tree, symbol.get()));
+    Optional<Integer> algorithmsUseLine = firstDescendantLine(scope, tree -> isAlgorithmsArgumentUsingSymbol(tree, symbol.get()));
+    return guardLine.isPresent() && algorithmsUseLine.isPresent() && guardLine.get() < algorithmsUseLine.get();
   }
 
+  private static Optional<Integer> firstDescendantLine(Tree tree, Predicate<Tree> predicate) {
+    for (Tree child : tree.children()) {
+      if (predicate.test(child)) {
+        return Optional.of(child.firstToken().line());
+      }
+      Optional<Integer> nested = firstDescendantLine(child, predicate);
+      if (nested.isPresent()) {
+        return nested;
+      }
+    }
+    return Optional.empty();
+  }
+
+  /**
+   * The symbol a `.get(key)`/`[key]` extraction result is bound to, e.g. `alg` in `alg = header.get("alg")`.
+   * Only handles the direct single-Name-LHS shape; if the extraction is used inline (e.g.
+   * `algorithms=[header.get("alg")]`) or the target isn't a plain Name, there's no symbol to track the
+   * value's later validation/use through, so this - and therefore the algorithm-validation pattern - doesn't
+   * apply. That's intentional: without a trackable symbol we can't confirm the value was validated, so the
+   * usage falls through to the pre-existing sink detection in {@link #isSafeUsage} instead of being exempted.
+   */
+  private static Optional<Symbol> extractedValueSymbol(Tree extractionSite) {
+    Tree assignment = TreeUtils.firstAncestorOfKind(extractionSite, Kind.ASSIGNMENT_STMT);
+    return Optional.ofNullable(assignment)
+      .map(AssignmentStatement.class::cast)
+      .map(AssignmentStatement::lhsExpressions)
+      .filter(list -> list.size() == 1)
+      .map(list -> list.get(0).expressions())
+      .filter(list -> list.size() == 1 && list.get(0).is(Kind.NAME))
+      .map(list -> ((Name) list.get(0)).symbol());
+  }
+
+  /** Whether {@code tree} is `symbol in [...]`/`symbol not in [...]` against a literal list/tuple (or a Name bound to one). */
+  private static boolean isAllowlistGuardOnSymbol(Tree tree, Symbol symbol) {
+    return TreeUtils.toOptionalInstanceOf(InExpression.class, tree)
+      .filter(inExpr -> isNameOfSymbol(inExpr.leftOperand(), symbol))
+      .map(InExpression::rightOperand)
+      .flatMap(Expressions::ifNameGetSingleAssignedNonNameValue)
+      .map(Expressions::expressionsFromListOrTuple)
+      .filter(elements -> !elements.isEmpty())
+      .isPresent();
+  }
+
+  /** Whether {@code tree} is a `jwt.decode`/`jose.jwt.decode` call whose `algorithms=` argument uses {@code symbol}. */
+  private static boolean isAlgorithmsArgumentUsingSymbol(Tree tree, Symbol symbol) {
+    return TreeUtils.toOptionalInstanceOf(CallExpression.class, tree)
+      .map(CallExpression::calleeSymbol)
+      .map(Symbol::fullyQualifiedName)
+      .filter(VERIFY_SIGNATURE_OPTION_SUPPORTING_FUNCTION_FQNS::contains)
+      .map(fqn -> ((CallExpression) tree).arguments())
+      .map(arguments -> TreeUtils.argumentByKeyword(ALGORITHMS_KEYWORD, arguments))
+      .map(RegularArgument::expression)
+      .filter(algorithms -> algorithmsExpressionUsesSymbol(algorithms, symbol))
+      .isPresent();
+  }
+
+  private static boolean algorithmsExpressionUsesSymbol(Expression algorithms, Symbol symbol) {
+    if (isNameOfSymbol(algorithms, symbol)) {
+      return true;
+    }
+    return Expressions.expressionsFromListOrTuple(algorithms).stream().anyMatch(element -> isNameOfSymbol(element, symbol));
+  }
+
+  private static boolean isNameOfSymbol(Expression expression, Symbol symbol) {
+    return expression.is(Kind.NAME) && symbol.equals(((Name) expression).symbol());
+  }
+
+  /**
+   * Same safety check as {@link #isSafeExtractedValueSite}, but for the "no assignment" path where the header
+   * result is chain-accessed directly (`jwt.get_unverified_header(token).get("x5u")`) instead of first bound
+   * to a Name. There's no extracted-value symbol to track here, so only comparison and allowed-key access
+   * apply - the algorithm-validation pattern needs a Name to check the `in`/`not in` guard against, see
+   * {@link #extractedValueSymbol}. {@code usageSite} is the node directly above the call - i.e. the
+   * `QualifiedExpression` for `.get(...)` chains or the `SubscriptionExpression` for `[...]` - so the
+   * comparison check must run on the resolved `.get(...)` call / subscription itself, not on {@code usageSite}:
+   * for a `.get(...)` chain, {@code usageSite} is the intermediate `.get` qualified expression, which is never
+   * itself a comparison operand (its parent is always the enclosing call).
+   */
+  private static boolean isSafeUsageSite(Tree usageSite) {
+    Optional<CallExpression> getCall = getCallExprWhereDictIsAccessedWithGet(Stream.of(usageSite)).findFirst();
+    if (getCall.isPresent()) {
+      if (isComparisonOperand(getCall.get())) {
+        return true;
+      }
+      return isAllowedKeyAccess(getStringLiteralArguments(getArgumentsFromCallExpr(Stream.of(getCall.get()))));
+    }
+    Optional<SubscriptionExpression> subscription = getSubscriptions(Stream.of(usageSite)).findFirst();
+    if (subscription.isPresent()) {
+      if (isComparisonOperand(subscription.get())) {
+        return true;
+      }
+      return isAllowedKeyAccess(getSubscriptsStringLiteral(Stream.of(subscription.get())));
+    }
+    return false;
+  }
+
+  private static boolean isAllowedKeyAccess(Stream<StringLiteral> keyLiterals) {
+    List<StringLiteral> keys = keyLiterals.toList();
+    return !keys.isEmpty() && keys.stream().allMatch(str -> ALLOWED_KEYS_ACCESS.contains(str.trimmedQuotesValue()));
+  }
+
+  /**
+   * All reads of {@code symbol} after {@code call}, using line number as a cheap proxy for "later" (this file
+   * doesn't do real control-flow analysis). Binding usages are excluded: if the same variable name is rebound
+   * later in the function (`header = jwt.get_unverified_header(token)` again), that's a fresh, independently
+   * checked call, not a use of *this* call's result - counting it here would attribute a later call's usages
+   * to this one and could wrongly flag (or wrongly clear) either call based on the other's usages.
+   */
   private static Stream<Usage> getForwardUsages(Symbol symbol, CallExpression call) {
     return symbol.usages().stream()
+      .filter(usage -> !usage.isBindingUsage())
       .filter(usage -> usage.tree().firstToken().line() > call.callee().firstToken().line());
   }
 
@@ -303,18 +482,15 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       .flatMap(TreeUtils.toStreamInstanceOfMapper(CallExpression.class));
   }
 
+  private static Stream<Argument> getArgumentsFromCallExpr(Stream<CallExpression> callExprs) {
+    return callExprs.map(CallExpression::arguments).flatMap(Collection::stream);
+  }
+
   private static Stream<StringLiteral> getStringLiteralArguments(Stream<Argument> arguments) {
     return arguments.filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
       .flatMap(TreeUtils.toStreamInstanceOfMapper(RegularArgument.class))
       .map(RegularArgument::expression)
       .flatMap(TreeUtils.toStreamInstanceOfMapper(StringLiteral.class));
-  }
-
-  private static Stream<StringLiteral> usagesAccessedBySubscription(Symbol symbol, CallExpression call) {
-    var usages = getForwardUsages(symbol, call);
-    var parentFromUsages = usages.map(Usage::tree).map(Tree::parent);
-    var subscriptionsFromUsages = getSubscriptions(parentFromUsages);
-    return getSubscriptsStringLiteral(subscriptionsFromUsages);
   }
 
   private static Stream<SubscriptionExpression> getSubscriptions(Stream<Tree> subscriptions) {
