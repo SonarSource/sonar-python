@@ -33,4 +33,23 @@ class CognitiveComplexityFunctionCheckTest {
   void default_threshold() {
     PythonCheckVerifier.verify("src/test/resources/checks/cognitiveComplexityFunctionDefault.py", check);
   }
+
+  @Test
+  void no_issue_on_django_generated_migration() {
+    check.setThreshold(0);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/django/migrations/0001_generated_migration.py", check);
+  }
+
+  @Test
+  void no_issue_on_protobuf_generated_code() {
+    check.setThreshold(0);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/generated/user_pb2.py", check);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/generated/user_pb2_grpc.py", check);
+  }
+
+  @Test
+  void issue_on_protobuf_suffix_near_match() {
+    check.setThreshold(0);
+    PythonCheckVerifier.verify("src/test/resources/checks/generated/cognitiveComplexity_pb2_test.py", check);
+  }
 }

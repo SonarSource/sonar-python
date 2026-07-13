@@ -22,8 +22,10 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.utils.GeneratedFileUtils;
 import org.sonar.python.metrics.CognitiveComplexityVisitor;
 
 @Rule(key = CognitiveComplexityFunctionCheck.CHECK_KEY)
@@ -32,6 +34,8 @@ public class CognitiveComplexityFunctionCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Refactor this function to reduce its Cognitive Complexity from %s to the %s allowed.";
   public static final String CHECK_KEY = "S3776";
   private static final int DEFAULT_THRESHOLD = 15;
+
+  private Boolean isGeneratedFile;
 
   @RuleProperty(
     key = "threshold",
@@ -43,7 +47,7 @@ public class CognitiveComplexityFunctionCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-      if (isInnerFunction(functionDef)) {
+      if (isInnerFunction(functionDef) || isGeneratedFile(ctx)) {
         return;
       }
       List<IssueLocation> secondaryLocations = new ArrayList<>();
@@ -55,6 +59,18 @@ public class CognitiveComplexityFunctionCheck extends PythonSubscriptionCheck {
         secondaryLocations.forEach(issue::secondary);
       }
     });
+  }
+
+  @Override
+  public void leaveFile() {
+    isGeneratedFile = null;
+  }
+
+  private boolean isGeneratedFile(SubscriptionContext ctx) {
+    if (isGeneratedFile == null) {
+      isGeneratedFile = GeneratedFileUtils.isGeneratedFileForReadabilityRules(ctx.pythonFile(), ctx.syntaxNode());
+    }
+    return isGeneratedFile;
   }
 
   private static boolean isInnerFunction(FunctionDef functionDef) {

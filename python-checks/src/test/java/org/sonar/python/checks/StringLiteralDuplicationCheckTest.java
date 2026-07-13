@@ -35,6 +35,22 @@ class StringLiteralDuplicationCheckTest {
   }
 
   @Test
+  void test_no_issue_on_django_generated_migration() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/django/migrations/0001_generated_migration.py", new StringLiteralDuplicationCheck());
+  }
+
+  @Test
+  void test_no_issue_on_protobuf_generated_code() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/generated/user_pb2.py", new StringLiteralDuplicationCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/generated/user_pb2_grpc.py", new StringLiteralDuplicationCheck());
+  }
+
+  @Test
+  void test_issue_on_protobuf_suffix_near_match() {
+    PythonCheckVerifier.verify("src/test/resources/checks/generated/stringLiteralDuplication_pb2_test.py", new StringLiteralDuplicationCheck());
+  }
+
+  @Test
   void test_custom_pattern() {
     StringLiteralDuplicationCheck check = new StringLiteralDuplicationCheck();
     check.customExclusionRegex = "[a\\s]+";

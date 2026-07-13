@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.checks.utils.GeneratedFileUtils;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -50,6 +51,7 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
 
   private final PythonParser parser = PythonParser.create();
   private Pattern exceptionPattern;
+  private Boolean isGeneratedFile;
 
   @RuleProperty(
     key = "exception",
@@ -62,6 +64,9 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     exceptionPattern = Pattern.compile(exception);
 
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+      if (isGeneratedFile(ctx)) {
+        return;
+      }
       Token token = (Token) ctx.syntaxNode();
       List<List<Trivia>> groupedTrivias = groupTrivias(token);
       for (List<Trivia> triviaGroup : groupedTrivias) {
@@ -70,11 +75,26 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, ctx -> {
+      if (isGeneratedFile(ctx)) {
+        return;
+      }
       StringLiteral stringLiteral = (StringLiteral) ctx.syntaxNode();
       if (isMultilineComment(stringLiteral)) {
         visitMultilineComment(stringLiteral, ctx);
       }
     });
+  }
+
+  @Override
+  public void leaveFile() {
+    isGeneratedFile = null;
+  }
+
+  private boolean isGeneratedFile(SubscriptionContext ctx) {
+    if (isGeneratedFile == null) {
+      isGeneratedFile = GeneratedFileUtils.isGeneratedFileForReadabilityRules(ctx.pythonFile(), ctx.syntaxNode());
+    }
+    return isGeneratedFile;
   }
 
   private static boolean isMultilineComment(StringLiteral stringLiteral) {

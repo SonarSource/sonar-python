@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.checks.utils.GeneratedFileUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1192")
@@ -85,7 +86,8 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
   public void visitFileInput(FileInput fileInput) {
     literalsByValue.clear();
 
-    if (this.getContext().pythonFile().fileName().startsWith("test")) {
+    if (this.getContext().pythonFile().fileName().startsWith("test")
+      || GeneratedFileUtils.isGeneratedFileForReadabilityRules(this.getContext().pythonFile(), fileInput)) {
       return;
     }
     super.visitFileInput(fileInput);
