@@ -20,7 +20,7 @@ import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
 import org.sonar.plugins.python.GeneratedIPythonFile;
 import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.SonarQubePythonFile;

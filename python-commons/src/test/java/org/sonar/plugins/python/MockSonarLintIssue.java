@@ -22,7 +22,7 @@ import java.util.Optional;
 import java.util.stream.StreamSupport;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.rule.Severity;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.issue.NewIssue;
@@ -40,6 +40,7 @@ class MockSonarLintIssue implements NewIssue, Issue {
   private boolean isQuickFixAvailable = false;
   @Nullable
   private List<String> codeVariants = null;
+  private List<String> internalTags = List.of();
   private boolean saved;
 
   MockSonarLintIssue(SensorContextTester context) {
@@ -106,6 +107,28 @@ class MockSonarLintIssue implements NewIssue, Issue {
   }
 
   @Override
+  public NewIssue setInternalTags(java.util.Collection<String> internalTags) {
+    this.internalTags = List.copyOf(internalTags);
+    return this;
+  }
+
+  @Override
+  public NewIssue addInternalTag(String internalTag) {
+    var tags = new java.util.ArrayList<>(internalTags);
+    tags.add(internalTag);
+    internalTags = List.copyOf(tags);
+    return this;
+  }
+
+  @Override
+  public NewIssue addInternalTags(java.util.Collection<String> internalTags) {
+    var tags = new java.util.ArrayList<>(this.internalTags);
+    tags.addAll(internalTags);
+    this.internalTags = List.copyOf(tags);
+    return this;
+  }
+
+  @Override
   public NewIssueLocation newLocation() {
     return parent.newLocation();
   }
@@ -166,6 +189,11 @@ class MockSonarLintIssue implements NewIssue, Issue {
   @Override
   public List<String> codeVariants() {
     return codeVariants;
+  }
+
+  @Override
+  public List<String> internalTags() {
+    return internalTags;
   }
 
   @Override

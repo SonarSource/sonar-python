@@ -18,8 +18,8 @@ package org.sonar.plugins.python;
 
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
-import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.scanner.plugin.api.impl.sensor.DefaultSensorDescriptor;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
 import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
 
 import static org.assertj.core.api.Assertions.assertThat;

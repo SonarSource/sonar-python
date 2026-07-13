@@ -22,7 +22,7 @@ import org.assertj.core.api.AbstractCollectionAssert;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ObjectAssert;
 import org.junit.jupiter.api.Test;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
 import org.sonar.plugins.python.dependency.model.Dependencies;
 import org.sonar.plugins.python.dependency.model.Dependency;
 

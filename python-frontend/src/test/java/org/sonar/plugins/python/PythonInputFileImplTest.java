@@ -19,7 +19,7 @@ package org.sonar.plugins.python;
 import java.io.IOException;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
 import org.sonar.plugins.python.PythonInputFile.Kind;
 
 import static org.assertj.core.api.Assertions.assertThat;
