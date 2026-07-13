@@ -93,8 +93,8 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
     }
 
     Optional<Expression> argumentValue = Expressions.ifNameGetSingleAssignedNonNameValue(argument.expression());
-    boolean isNotTupleNorListLiteral = argumentValue.filter(a -> a.is(Tree.Kind.LIST_LITERAL, Tree.Kind.TUPLE)).isEmpty();
-    return isNotTupleNorListLiteral || Expressions.expressionsFromListOrTuple(argumentValue.get()).stream().anyMatch(GraphQLDenialOfServiceCheck::isSafeMiddlewareName);
+    boolean isNotCollectionLiteral = argumentValue.filter(a -> a.is(Tree.Kind.LIST_LITERAL, Tree.Kind.TUPLE, Tree.Kind.SET_LITERAL)).isEmpty();
+    return isNotCollectionLiteral || Expressions.expressionsFromListOrTuple(argumentValue.get()).stream().anyMatch(GraphQLDenialOfServiceCheck::isSafeMiddlewareName);
   }
 
   private static boolean hasSafeValidationRules(List<Argument> arguments) {
@@ -104,8 +104,8 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
     }
 
     Optional<Expression> argumentValue = Expressions.ifNameGetSingleAssignedNonNameValue(argument.expression());
-    boolean isNotTupleNorListLiteral = argumentValue.filter(a -> a.is(Tree.Kind.LIST_LITERAL, Tree.Kind.TUPLE)).isEmpty();
-    return isNotTupleNorListLiteral || Expressions.expressionsFromListOrTuple(argumentValue.get()).stream().anyMatch(GraphQLDenialOfServiceCheck::isSafeValidationRule);
+    boolean isNotCollectionLiteral = argumentValue.filter(a -> a.is(Tree.Kind.LIST_LITERAL, Tree.Kind.TUPLE, Tree.Kind.SET_LITERAL)).isEmpty();
+    return isNotCollectionLiteral || Expressions.expressionsFromListOrTuple(argumentValue.get()).stream().anyMatch(GraphQLDenialOfServiceCheck::isSafeValidationRule);
   }
 
   private static boolean isSafeValidationRule(Expression value) {

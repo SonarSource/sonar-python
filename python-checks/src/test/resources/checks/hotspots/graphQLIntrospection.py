@@ -173,6 +173,14 @@ def flask_graphql_validation_rules_non_compliant(schema, some_rule):
         validation_rules=[some_rule]
     )
 
+    GraphQLView.as_view(  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^
+        name="introspection",
+        schema=schema,
+        graphiql=True,
+        validation_rules={some_rule}
+    )
+
     class UnsafeCustomMiddleware:
             ...
     my_custom_middleware = UnsafeCustomMiddleware()
@@ -185,7 +193,7 @@ def flask_graphql_validation_rules_non_compliant(schema, some_rule):
             middleware=[my_custom_middleware]
         )
 
-def flask_graphql_validation_rules_compliant(schema, some_rule, some_middleware, introspection_rule):
+def flask_graphql_validation_rules_compliant(schema, some_rule, some_middleware, introspection_rule, introspection_middleware):
     from flask_graphql import GraphQLView
     import graphene
     from graphene.validation import DisableIntrospection
@@ -228,6 +236,20 @@ def flask_graphql_validation_rules_compliant(schema, some_rule, some_middleware,
         graphiql=True,
         middleware=[],
         validation_rules=[introspection_rule]
+    )
+
+    GraphQLView.as_view(
+        name="introspection",
+        schema=schema,
+        graphiql=True,
+        validation_rules={DisableIntrospection, some_rule}
+    )
+
+    GraphQLView.as_view(
+        name="introspection",
+        schema=schema,
+        graphiql=True,
+        middleware={introspection_middleware}
     )
 
 def graphql_server_middleware_non_compliant(schema, some_middleware, CustomBackend, format_custom_error, some_module):

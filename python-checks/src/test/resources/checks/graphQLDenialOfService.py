@@ -48,6 +48,14 @@ def non_compliant():
     )
 
     app.add_url_rule("/api",
+        view_func=GraphQLView.as_view(  # Noncompliant
+            name="api",
+            schema=schema,
+            middleware={UnknownMiddleware}
+        )
+    )
+
+    app.add_url_rule("/api",
         view_func=GraphQLView.as_view()  # Noncompliant
     )
 
@@ -120,4 +128,22 @@ def compliant():
         name="introspection",
         schema=schema,
         validation_rules=some_middleware, # if it is not a list or a tuple we should not raise an issue
+    )
+
+    app.add_url_rule(
+        '/compliant/graphql',
+        view_func=GraphQLView.as_view( # Compliant
+            'compliant',
+            schema=schema,
+            middleware={DepthProtectionMiddleware}  # Safe middleware, set literal
+        )
+    )
+
+    app.add_url_rule(
+        '/compliant/graphql',
+        view_func=GraphQLView.as_view( # Compliant
+            'compliant',
+            schema=schema,
+            validation_rules={DepthLimitValidator}   # Safe validation rules, set literal
+        )
     )
