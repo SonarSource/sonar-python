@@ -28,7 +28,6 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -41,11 +40,14 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
@@ -87,6 +89,10 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
 
   private static final String ALGORITHMS_KEYWORD = "algorithms";
 
+  private static final Set<String> ISSUER_CLAIM_KEY = Set.of("iss");
+
+  private static final TypeMatcher IS_ENUM_MATCHER = TypeMatchers.isOrExtendsType("enum.Enum");
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, JwtVerificationCheck::verifyCallExpression);
@@ -103,7 +109,7 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
     String calleeFqn = calleeSymbol.fullyQualifiedName();
     if (WHERE_VERIFY_KWARG_SHOULD_BE_TRUE_FQNS.contains(calleeFqn)) {
       RegularArgument verifyArg = TreeUtils.argumentByKeyword("verify", call.arguments());
-      if (verifyArg != null && Expressions.isFalsy(verifyArg.expression()) && !isVerifiedElsewhere(call)) {
+      if (verifyArg != null && Expressions.isFalsy(verifyArg.expression()) && !isVerifiedElsewhere(call) && !isIssuerRoutingPattern(call, ctx)) {
         ctx.addIssue(verifyArg, MESSAGE);
         return;
       }
@@ -121,7 +127,7 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       Optional.ofNullable(TreeUtils.argumentByKeyword("options", call.arguments()))
         .map(RegularArgument::expression)
         .filter(JwtVerificationCheck::isListOrDictWithSensitiveEntry)
-        .filter(expression -> !isVerifiedElsewhere(call))
+        .filter(expression -> !isVerifiedElsewhere(call) && !isIssuerRoutingPattern(call, ctx))
         .ifPresent(expression -> ctx.addIssue(expression, MESSAGE));
     }
   }
@@ -181,6 +187,152 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       .filter(expression -> expression.is(Kind.NAME))
       .map(expression -> ((Name) expression).symbol())
       .orElse(null);
+  }
+
+  /**
+   * "Issuer routing" pattern: an unverified decode is compliant if its payload's ONLY use is reading the
+   * {@code iss} claim, and that issuer is then checked against a static whitelist (enum conversion, set/list/tuple
+   * membership, or an all-literal-keys dict lookup) - the real signature verification typically happens in the
+   * caller, using a key resolved from the whitelisted issuer, so unlike {@link #isVerifiedElsewhere} this doesn't
+   * require the same token to be re-decoded in this function. No ordering is enforced between the payload access
+   * and the whitelist check (unlike {@link #isValidatedBeforeAlgorithmsUse}) - there's no sink this rule can see
+   * the issuer flow into (the resolved key is typically returned or passed to a caller-supplied parameter), so
+   * there's nothing to protect by requiring the whitelist check to come first.
+   */
+  private static boolean isIssuerRoutingPattern(CallExpression unverifiedCall, SubscriptionContext ctx) {
+    Tree assignment = TreeUtils.firstAncestorOfKind(unverifiedCall, Tree.Kind.ASSIGNMENT_STMT);
+    if (assignment == null) {
+      return false;
+    }
+    List<Expression> lhsExpressions = ((AssignmentStatement) assignment).lhsExpressions().stream()
+      .map(ExpressionList::expressions)
+      .flatMap(Collection::stream).toList();
+    if (lhsExpressions.size() != 1 || !lhsExpressions.get(0).is(Tree.Kind.NAME)) {
+      return false;
+    }
+    Symbol payloadSymbol = ((Name) lhsExpressions.get(0)).symbol();
+    if (payloadSymbol == null) {
+      return false;
+    }
+    List<Usage> usages = getForwardUsages(payloadSymbol, unverifiedCall).toList();
+    if (usages.isEmpty()) {
+      return false;
+    }
+    Tree scope = TreeUtils.firstAncestorOfKind(unverifiedCall, Kind.FILE_INPUT, Kind.FUNCDEF);
+    return scope != null && usages.stream().allMatch(usage -> isIssuerClaimAccessWhitelistedElsewhere(usage, scope, ctx));
+  }
+
+  /**
+   * Whether one usage of the payload Name is a `.get("iss")`/`["iss"]` access whose extracted value (the issuer)
+   * is validated against a static whitelist somewhere in {@code scope} - either via the Name it's assigned to
+   * ({@link #isIssuerWhitelisted}), or, when never assigned at all, by being a direct operand of an inline
+   * `in`/`not in` membership check against a literal collection ({@link #isInlineLiteralMembershipOperand}).
+   * The inline case mirrors the same "no trackable symbol" limitation {@link #extractedValueSymbol} already
+   * has for the algorithm-validation pattern elsewhere in this file - see review discussion on PR #1294.
+   */
+  private static boolean isIssuerClaimAccessWhitelistedElsewhere(Usage usage, Tree scope, SubscriptionContext ctx) {
+    Tree usageParent = usage.tree().parent();
+    Optional<CallExpression> getCall = getCallExprWhereDictIsAccessedWithGet(Stream.of(usageParent)).findFirst();
+    if (getCall.isPresent()) {
+      Stream<StringLiteral> keys = getStringLiteralKeyArgument(getCall.get());
+      return isIssuerClaimKey(keys) && (isIssuerWhitelisted(getCall.get(), scope, ctx) || isInlineLiteralMembershipOperand(getCall.get()));
+    }
+    Optional<SubscriptionExpression> subscription = getSubscriptions(Stream.of(usageParent)).findFirst();
+    if (subscription.isPresent()) {
+      Stream<StringLiteral> keys = getSubscriptsStringLiteral(Stream.of(subscription.get()));
+      return isIssuerClaimKey(keys) && (isIssuerWhitelisted(subscription.get(), scope, ctx) || isInlineLiteralMembershipOperand(subscription.get()));
+    }
+    return false;
+  }
+
+  /**
+   * Whether {@code extractionSite} (e.g. {@code payload.get("iss")}) is itself a direct operand of an
+   * `in`/`not in` check against a literal string collection, e.g. {@code payload.get("iss") not in {"a", "b"}}.
+   * Unlike {@link #isLiteralMembershipGuardOnSymbol}, this needs no assignment/symbol - the extraction site is
+   * checked directly, covering the case where the claim is compared without ever being bound to a variable.
+   */
+  private static boolean isInlineLiteralMembershipOperand(Tree extractionSite) {
+    return TreeUtils.toOptionalInstanceOf(InExpression.class, extractionSite.parent())
+      .filter(inExpr -> inExpr.leftOperand() == extractionSite)
+      .map(InExpression::rightOperand)
+      .flatMap(Expressions::ifNameGetSingleAssignedNonNameValue)
+      .map(Expressions::expressionsFromListOrTuple)
+      .filter(elements -> !elements.isEmpty() && elements.stream().allMatch(JwtVerificationCheck::isNonInterpolatedStringLiteral))
+      .isPresent();
+  }
+
+  private static boolean isNonInterpolatedStringLiteral(Expression element) {
+    return TreeUtils.toOptionalInstanceOf(StringLiteral.class, element)
+      .filter(literal -> literal.stringElements().stream().noneMatch(StringElement::isInterpolated))
+      .isPresent();
+  }
+
+  private static boolean isIssuerClaimKey(Stream<StringLiteral> keyLiterals) {
+    List<StringLiteral> keys = keyLiterals.toList();
+    return !keys.isEmpty() && keys.stream().allMatch(str -> ISSUER_CLAIM_KEY.contains(str.trimmedQuotesValue()));
+  }
+
+  private static boolean isIssuerWhitelisted(Tree issuerExtractionSite, Tree scope, SubscriptionContext ctx) {
+    Optional<Symbol> issuerSymbol = extractedValueSymbol(issuerExtractionSite);
+    if (issuerSymbol.isEmpty()) {
+      return false;
+    }
+    Symbol symbol = issuerSymbol.get();
+    return TreeUtils.hasDescendant(scope, tree -> isEnumConversionOfSymbol(tree, symbol, ctx))
+      || TreeUtils.hasDescendant(scope, tree -> isLiteralMembershipGuardOnSymbol(tree, symbol))
+      || TreeUtils.hasDescendant(scope, tree -> isDictLookupOnSymbolWithLiteralKeys(tree, symbol));
+  }
+
+  /**
+   * Whether {@code tree} is `symbol in [...]`/`symbol not in [...]` against a list/tuple/set literal (or a Name
+   * bound to one) whose elements are ALL string literals. Stricter than {@link #isAllowlistGuardOnSymbol} - that
+   * one only requires the guard to exist (enough to prevent algorithm confusion, since any real check beats none),
+   * but the ticket's "static whitelist" requirement here means a guard containing even one dynamic element
+   * (`issuer in {"a", dynamic_value}`) doesn't qualify: the whitelist isn't actually static.
+   */
+  private static boolean isLiteralMembershipGuardOnSymbol(Tree tree, Symbol symbol) {
+    return TreeUtils.toOptionalInstanceOf(InExpression.class, tree)
+      .filter(inExpr -> isNameOfSymbol(inExpr.leftOperand(), symbol))
+      .map(InExpression::rightOperand)
+      .flatMap(Expressions::ifNameGetSingleAssignedNonNameValue)
+      .map(Expressions::expressionsFromListOrTuple)
+      .filter(elements -> !elements.isEmpty() && elements.stream().allMatch(JwtVerificationCheck::isNonInterpolatedStringLiteral))
+      .isPresent();
+  }
+
+  /** Whether {@code tree} is a call passing {@code symbol} to a callee whose type is a declared Enum subclass, e.g. {@code AuthIssuer(issuer)}. */
+  private static boolean isEnumConversionOfSymbol(Tree tree, Symbol symbol, SubscriptionContext ctx) {
+    return TreeUtils.toOptionalInstanceOf(CallExpression.class, tree)
+      .filter(call -> call.arguments().stream()
+        .flatMap(TreeUtils.toStreamInstanceOfMapper(RegularArgument.class))
+        .map(RegularArgument::expression)
+        .anyMatch(expression -> isNameOfSymbol(expression, symbol)))
+      .map(CallExpression::callee)
+      .filter(callee -> IS_ENUM_MATCHER.isTrueFor(callee, ctx))
+      .isPresent();
+  }
+
+  /** Whether {@code tree} is `symbol[key]` (or `key = symbol[...]`'s RHS) where the subscripted base is a dict literal with only string-literal keys. */
+  private static boolean isDictLookupOnSymbolWithLiteralKeys(Tree tree, Symbol symbol) {
+    return TreeUtils.toOptionalInstanceOf(SubscriptionExpression.class, tree)
+      .filter(subscription -> subscription.subscripts().expressions().stream().anyMatch(expression -> isNameOfSymbol(expression, symbol)))
+      .map(SubscriptionExpression::object)
+      .flatMap(Expressions::ifNameGetSingleAssignedNonNameValue)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(DictionaryLiteral.class))
+      .filter(JwtVerificationCheck::hasOnlyStringLiteralKeys)
+      .isPresent();
+  }
+
+  private static boolean hasOnlyStringLiteralKeys(DictionaryLiteral dictionaryLiteral) {
+    if (dictionaryLiteral.elements().isEmpty()) {
+      return false;
+    }
+    List<KeyValuePair> pairs = dictionaryLiteral.elements().stream()
+      .filter(KeyValuePair.class::isInstance)
+      .map(KeyValuePair.class::cast)
+      .toList();
+    return pairs.size() == dictionaryLiteral.elements().size()
+      && pairs.stream().allMatch(pair -> pair.key().is(Kind.STRING_LITERAL));
   }
 
   private static boolean isListOrDictWithSensitiveEntry(@Nullable Expression expression) {
@@ -303,7 +455,7 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
     }
     Optional<CallExpression> getCall = getCallExprWhereDictIsAccessedWithGet(Stream.of(usageParent)).findFirst();
     if (getCall.isPresent()) {
-      Stream<StringLiteral> keys = getStringLiteralArguments(getArgumentsFromCallExpr(Stream.of(getCall.get())));
+      Stream<StringLiteral> keys = getStringLiteralKeyArgument(getCall.get());
       return isSafeExtractedValueSite(getCall.get(), keys, scope);
     }
     Optional<SubscriptionExpression> subscription = getSubscriptions(Stream.of(usageParent)).findFirst();
@@ -442,7 +594,7 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       if (isComparisonOperand(getCall.get())) {
         return true;
       }
-      return isAllowedKeyAccess(getStringLiteralArguments(getArgumentsFromCallExpr(Stream.of(getCall.get()))));
+      return isAllowedKeyAccess(getStringLiteralKeyArgument(getCall.get()));
     }
     Optional<SubscriptionExpression> subscription = getSubscriptions(Stream.of(usageSite)).findFirst();
     if (subscription.isPresent()) {
@@ -482,15 +634,17 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       .flatMap(TreeUtils.toStreamInstanceOfMapper(CallExpression.class));
   }
 
-  private static Stream<Argument> getArgumentsFromCallExpr(Stream<CallExpression> callExprs) {
-    return callExprs.map(CallExpression::arguments).flatMap(Collection::stream);
-  }
-
-  private static Stream<StringLiteral> getStringLiteralArguments(Stream<Argument> arguments) {
-    return arguments.filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
-      .flatMap(TreeUtils.toStreamInstanceOfMapper(RegularArgument.class))
+  /**
+   * The `.get(key)` call's key argument, as a StringLiteral if it is one. Only the first positional/keyword
+   * argument is considered - `.get(key, default)`'s second argument is a fallback value, not part of the key,
+   * and must not be treated as an additional accessed key (e.g. `header.get("kid", "fallback")` must still be
+   * recognized as accessing only `"kid"`, not `{"kid", "fallback"}`).
+   */
+  private static Stream<StringLiteral> getStringLiteralKeyArgument(CallExpression getCall) {
+    return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(0, "key", getCall.arguments()))
       .map(RegularArgument::expression)
-      .flatMap(TreeUtils.toStreamInstanceOfMapper(StringLiteral.class));
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
+      .stream();
   }
 
   private static Stream<SubscriptionExpression> getSubscriptions(Stream<Tree> subscriptions) {

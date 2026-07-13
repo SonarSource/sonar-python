@@ -42,6 +42,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -189,12 +190,19 @@ public class Expressions {
     return Optional.of(expression);
   }
 
+  /**
+   * Extracts the element expressions of a list, tuple, or set literal. Named for its original list/tuple-only
+   * scope; widened to also cover {@link SetLiteral} since a set is just as valid a literal-collection allowlist
+   * shape (e.g. {@code x in {"a", "b"}}) as a list or tuple.
+   */
   public static List<Expression> expressionsFromListOrTuple(Expression expression) {
     return TreeUtils.toOptionalInstanceOf(ListLiteral.class, expression)
       .map(ListLiteral::elements)
       .map(ExpressionList::expressions)
       .or(() -> TreeUtils.toOptionalInstanceOf(Tuple.class, expression)
         .map(Tuple::elements))
+      .or(() -> TreeUtils.toOptionalInstanceOf(SetLiteral.class, expression)
+        .map(SetLiteral::elements))
       .orElseGet(Collections::emptyList);
   }
 

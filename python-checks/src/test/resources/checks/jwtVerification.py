@@ -1,5 +1,14 @@
 import jwt
 import python_jwt
+from enum import Enum
+
+class AuthIssuer(Enum):
+    ISSUER_A = "issuer1"
+    ISSUER_B = "issuer2"
+
+class NotAnEnum:
+    def __init__(self, value):
+        self.value = value
 
 def jwt_decode_argument(token):
     jwt.decode(token)
@@ -82,6 +91,180 @@ def peek_then_verify_wrong_scope(token, keys):
         return jwt.decode(token, keys["k"], algorithms=["HS256"])
     return inner(), other()
 
+def issuer_routing_enum_conversion(token: str, verification_key: str) -> AuthIssuer:
+    try:
+        payload = jwt.decode(token, options={"verify_signature": False}) # Compliant: only iss accessed, validated via enum conversion
+    except jwt.DecodeError:
+        raise ValueError("Invalid token format")
+    issuer_string = payload.get("iss")
+    if not issuer_string:
+        raise ValueError("Token missing 'iss' (issuer) claim")
+    try:
+        iss_enum_member = AuthIssuer(issuer_string)
+    except ValueError:
+        raise ValueError(f"Unsupported token issuer: {issuer_string}")
+    return iss_enum_member
+
+def issuer_routing_verify_kwarg(token: str):
+    payload = jwt.decode(token, verify=False) # Compliant: same pattern via the verify= kwarg shape instead of options=
+    issuer = payload.get("iss")
+    if issuer not in {"issuer1", "issuer2"}:
+        raise ValueError("Unsupported token issuer")
+    return issuer
+
+def issuer_routing_set_membership(token: str):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Compliant: only iss accessed, validated via set membership
+    issuer = payload.get("iss")
+    if issuer not in {"issuer1", "issuer2"}:
+        raise ValueError("Unsupported token issuer")
+    return issuer
+
+def issuer_routing_dict_lookup(token: str):
+    KEY_BY_ISSUER = {"issuer1": "secret1", "issuer2": "secret2"}
+    payload = jwt.decode(token, options={"verify_signature": False}) # Compliant: only iss accessed, validated via dict lookup
+    issuer = payload["iss"]
+    key = KEY_BY_ISSUER[issuer]
+    return jwt.decode(token, key, algorithms=["HS256"])
+
+def issuer_routing_get_with_default(token: str):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Compliant: the "default_issuer" fallback isn't an additional accessed key
+    issuer = payload.get("iss", "default_issuer")
+    if issuer not in {"issuer1", "issuer2", "default_issuer"}:
+        raise ValueError("Unsupported token issuer")
+    return issuer
+
+# an empty dict is never a valid static whitelist - the lookup would always KeyError
+def issuer_routing_empty_dict_lookup(token: str):
+    KEY_BY_ISSUER = {}
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload["iss"]
+    return KEY_BY_ISSUER[issuer]
+
+
+# dict has a non-literal key, not a valid static whitelist
+def issuer_routing_dict_lookup_non_literal_key(token: str, dynamic_key):
+    KEY_BY_ISSUER = {"issuer1": "secret1", dynamic_key: "secret2"}
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload["iss"]
+    return KEY_BY_ISSUER[issuer]
+
+# dict is built with a spread rather than only literal key/value pairs, not a valid static whitelist
+def issuer_routing_dict_lookup_with_spread(token: str, other_dict):
+    KEY_BY_ISSUER = {"issuer1": "secret1", **other_dict}
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload["iss"]
+    return KEY_BY_ISSUER[issuer]
+
+# set contains a non-literal element, not a valid static whitelist
+def issuer_routing_set_with_non_literal_element(token: str, dynamic_issuer):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload.get("iss")
+    if issuer not in {"issuer1", dynamic_issuer}:
+        raise ValueError("Unsupported token issuer")
+    return issuer
+
+# NotAnEnum isn't a declared Enum subclass, so this doesn't count as enum-conversion validation
+def issuer_routing_not_actually_an_enum(token: str):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer_string = payload.get("iss")
+    try:
+        wrapped = NotAnEnum(issuer_string)
+    except ValueError:
+        raise ValueError(f"Unsupported token issuer: {issuer_string}")
+    return wrapped
+
+# AuthIssuer(...) is called in scope, but not with the issuer symbol - doesn't count as validating it
+def issuer_routing_enum_call_without_issuer_argument(token: str):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload.get("iss")
+    default_issuer = AuthIssuer("issuer1")
+    return issuer, default_issuer
+
+# sub is also read from the payload, so the "only iss" requirement isn't met
+def issuer_routing_disallowed_claim_access(token: str):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload.get("iss")
+    subject = payload.get("sub")
+    if issuer not in {"issuer1", "issuer2"}:
+        raise ValueError("Unsupported token issuer")
+    return issuer, subject
+
+# payload itself is returned, not just the iss claim
+def issuer_routing_payload_returned_raw(token: str):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload.get("iss")
+    if issuer not in {"issuer1", "issuer2"}:
+        raise ValueError("Unsupported token issuer")
+    return payload
+
+def validate_issuer_elsewhere(issuer):
+    if issuer not in {"issuer1", "issuer2"}:
+        raise ValueError("Unsupported token issuer")
+
+# the whitelist check lives in a sibling function, out of scope for this one
+def issuer_routing_wrong_scope(token: str):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload.get("iss")
+    return issuer
+
+# the decode result isn't assigned to a local variable at all, so there's nothing to trace usages of
+def issuer_routing_no_assignment(token: str):
+    return jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+
+# passed to another function rather than only having "iss" read - not a recognized safe usage
+def issuer_routing_payload_passed_to_other_function(token: str, do_something_with):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    return do_something_with(payload)
+
+# the dict subscript in scope doesn't actually use the issuer symbol, so it doesn't count as a whitelist check
+def issuer_routing_unrelated_dict_lookup(token: str, other_key):
+    OTHER_LOOKUP = {"a": "1", "b": "2"}
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload.get("iss")
+    return OTHER_LOOKUP[other_key]
+
+# .get() called with no key argument at all - nothing to classify as the iss claim
+def issuer_routing_get_no_arguments(token: str):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload.get()
+    return issuer
+
+# .get() called with a non-literal key - can't tell if it's "iss" or something else
+def issuer_routing_get_non_literal_key(token: str, claim_name):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload.get(claim_name)
+    return issuer
+
+# subscription with a non-literal key - same ambiguity as the .get() case above
+def issuer_routing_subscription_non_literal_key(token: str, claim_name):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    issuer = payload[claim_name]
+    return issuer
+
+# decode result is assigned to a tuple target (a, b = ..., ...), not a single Name
+def issuer_routing_tuple_assignment_target(token: str, other_token):
+    payload, other_payload = jwt.decode(token, options={"verify_signature": False}), jwt.decode(other_token) # Noncompliant
+    return payload, other_payload
+
+def issuer_routing_iss_accessed_inline_no_binding(token: str):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Compliant: iss is compared inline against a literal whitelist, never bound to a Name
+    if payload.get("iss") not in {"issuer1", "issuer2"}:
+        raise ValueError("Unsupported token issuer")
+    return True
+
+def issuer_routing_iss_accessed_inline_no_binding_subscription(token: str):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Compliant: same as above but via subscription access
+    if payload["iss"] not in {"issuer1", "issuer2"}:
+        raise ValueError("Unsupported token issuer")
+    return True
+
+# right operand of the inline `in` check isn't a literal collection, so this isn't a static whitelist
+def issuer_routing_iss_accessed_inline_no_binding_dynamic_whitelist(token: str, allowed_issuers):
+    payload = jwt.decode(token, options={"verify_signature": False}) # Noncompliant
+    if payload.get("iss") not in allowed_issuers:
+        raise ValueError("Unsupported token issuer")
+    return True
+
 module_token = "..."
 module_key = "secret"
 module_unverified = jwt.decode(module_token, options={"verify_signature": False}) # Compliant: real verification happens at module scope below
@@ -139,6 +322,11 @@ def get_unverified_header_compliant(token: str, keys):
     key = keys[jku]
     claims = jwt.decode(token, key, algorithms=["HS256"])
     return claims
+
+def get_unverified_header_compliant_get_with_default(token: str):
+    header = jwt.get_unverified_header(token)  # Compliant: the "none" fallback isn't an additional accessed key
+    kid = header.get("kid", "none")
+    return kid
 
 def header_comparison_whole_header(token: str):
     expected_header = {"alg": "RS256", "typ": "JWT"}

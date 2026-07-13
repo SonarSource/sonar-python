@@ -37,6 +37,7 @@ import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.checks.utils.Expressions.containsSpreadOperator;
+import static org.sonar.python.checks.utils.Expressions.expressionsFromListOrTuple;
 import static org.sonar.python.checks.utils.Expressions.getAssignedName;
 import static org.sonar.python.checks.utils.Expressions.isFalsy;
 import static org.sonar.python.checks.utils.Expressions.isTruthy;
@@ -224,6 +225,14 @@ class ExpressionsTest {
 
     assertThat(containsSpreadOperator(args("some(1, test=True)"))).isFalse();
     assertThat(containsSpreadOperator(args("some()"))).isFalse();
+  }
+
+  @Test
+  void expressionsFromListOrTuple_list_tuple_set_and_other() {
+    assertThat(expressionsFromListOrTuple(exp("[1, 2, 3]"))).hasSize(3);
+    assertThat(expressionsFromListOrTuple(exp("(1, 2, 3)"))).hasSize(3);
+    assertThat(expressionsFromListOrTuple(exp("{1, 2, 3}"))).hasSize(3);
+    assertThat(expressionsFromListOrTuple(exp("42"))).isEmpty();
   }
 
   private List<Argument> args(String source) {
