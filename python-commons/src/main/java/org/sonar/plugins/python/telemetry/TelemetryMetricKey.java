@@ -27,6 +27,8 @@ public enum TelemetryMetricKey {
   IPYNB_DATABRICKS_FOUND("python.notebook.databricks.ipynb"),
   PYTHON_DEPENDENCIES("python.dependencies"),
   PYTHON_DEPENDENCIES_FORMAT_VERSION("python.dependencies.format_version"),
+  PYTHON_IMPORTS("python.imports"),
+  PYTHON_IMPORTS_FORMAT_VERSION("python.imports.format_version"),
   NOSONAR_RULE_ID_KEY("python.nosonar.rule_ids"),
   NOSONAR_COMMENTS_KEY("python.nosonar.comments"),
   NOSONAR_NOTEBOOK_RULE_ID_KEY("python.notebook.nosonar.rule_ids"),

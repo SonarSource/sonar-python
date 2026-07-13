@@ -33,6 +33,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import org.slf4j.Logger;
@@ -53,6 +54,8 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
+import org.sonar.plugins.python.telemetry.collectors.ImportsTelemetry;
+import org.sonar.plugins.python.telemetry.collectors.ImportsTelemetryCollector;
 import org.sonar.plugins.python.telemetry.collectors.TestFileTelemetry;
 import org.sonar.plugins.python.telemetry.collectors.TestFileTelemetryCollector;
 import org.sonar.plugins.python.telemetry.collectors.TypeInferenceTelemetry;
@@ -87,6 +90,8 @@ public class PythonScanner extends Scanner {
   private final Lock lock;
   private final TypeInferenceTelemetryCollector typeInferenceTelemetryCollector;
   private final TestFileTelemetryCollector testFileTelemetryCollector;
+  private final ImportsTelemetryCollector importsTelemetryCollector;
+  private final List<Consumer<FileInput>> telemetryCollectors;
   private final boolean testSourcesConfigured;
   private final AnalysisWarningsWrapper analysisWarnings;
   private final AtomicBoolean heuristicWarningEmitted = new AtomicBoolean(false);
@@ -120,6 +125,8 @@ public class PythonScanner extends Scanner {
     this.measuresRepository = new MeasuresRepository(context, noSonarFilter, fileLinesContextFactory, isInSonarLint(context), noSonarLineInfoCollector, lock);
     this.typeInferenceTelemetryCollector = new TypeInferenceTelemetryCollector();
     this.testFileTelemetryCollector = new TestFileTelemetryCollector();
+    this.importsTelemetryCollector = new ImportsTelemetryCollector();
+    this.telemetryCollectors = List.of(typeInferenceTelemetryCollector::collect, importsTelemetryCollector::collect);
   }
 
   @Override
@@ -167,7 +174,7 @@ public class PythonScanner extends Scanner {
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
       newSymbolsCollector.collect(context.newSymbolTable().onFile(inputFile.wrappedFile()), visitorContext.rootTree());
       pythonHighlighter.highlight(context, visitorContext, inputFile);
-      typeInferenceTelemetryCollector.collect(visitorContext.rootTree());
+      telemetryCollectors.forEach(c -> c.accept(visitorContext.rootTree()));
       testFileTelemetryCollector.collect(visitorContext.rootTree(), fileType, inputFile.wrappedFile().uri().getPath());
     }
 
@@ -449,6 +456,10 @@ public class PythonScanner extends Scanner {
 
   public TestFileTelemetry getTestFileTelemetry() {
     return testFileTelemetryCollector.getTelemetry();
+  }
+
+  public ImportsTelemetry getImportsTelemetry() {
+    return importsTelemetryCollector.getTelemetry();
   }
 
   public boolean wasTestFileHeuristicTriggered() {

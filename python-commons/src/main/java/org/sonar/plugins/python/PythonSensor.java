@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.SonarProduct;
@@ -51,6 +52,7 @@ import org.sonar.plugins.python.indexer.PackageResolutionResult;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
+import org.sonar.plugins.python.telemetry.collectors.ImportsTelemetry;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
 import org.sonar.plugins.python.telemetry.SensorTelemetryStorage;
 import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
@@ -161,6 +163,7 @@ public final class PythonSensor implements Sensor {
     updateDatabricksTelemetry(scanner);
     updateTypeInferenceTelemetry(scanner);
     updateTestFileTelemetry(scanner);
+    updateImportsTelemetry(scanner);
     updateCacheAnalysisTelemetry(context, pythonIndexer, scanner);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_RULE_ID_KEY, noSonarLineInfoCollector.getSuppressedRuleIds());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.NOSONAR_COMMENTS_KEY, noSonarLineInfoCollector.getCommentWithExactlyOneRuleSuppressed());
@@ -220,6 +223,15 @@ public final class PythonSensor implements Sensor {
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_FILES_MISCLASSIFIED_PATH_BASED_ONLY, telemetry.filesInPathBasedOnly());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_MAIN_LINES_MISCLASSIFIED_PATH_BASED_ONLY, telemetry.linesInPathBasedOnly());
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_TEST_FILE_HEURISTIC_TRIGGERED, scanner.wasTestFileHeuristicTriggered());
+  }
+
+  private void updateImportsTelemetry(PythonScanner scanner) {
+    ImportsTelemetry telemetry = scanner.getImportsTelemetry();
+    String importsString = telemetry.importedModules().stream()
+      .sorted()
+      .collect(Collectors.joining(","));
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_IMPORTS, importsString);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_IMPORTS_FORMAT_VERSION, "1");
   }
 
   private void updateNamespacePackageTelemetry(PythonIndexer pythonIndexer) {
