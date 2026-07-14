@@ -35,7 +35,21 @@
     </dependency>
     <dependency>
       <groupId>org.sonarsource.sonarlint.core</groupId>
-      <artifactId>sonarlint-core</artifactId>
+      <artifactId>sonarlint-core-test-utils</artifactId>
+      <version>${sonarlint-core.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.sonarlint.core</groupId>
+      <artifactId>sonarlint-rpc-protocol</artifactId>
+      <version>${sonarlint-core.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- jackson-annotations publishes 2.21 while the rest of Jackson uses 2.21.0 -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.21</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -58,6 +72,12 @@
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-ws</artifactId>
       <version>${sonar.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <version>4.3.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
