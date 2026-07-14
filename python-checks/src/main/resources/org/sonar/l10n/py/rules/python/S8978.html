@@ -1,0 +1,72 @@
+<p>This rule raises an issue when a validation model class has fields typed to accept instances of structured data types (such as dataclasses), but
+does not explicitly configure the framework’s revalidation behavior for those instances.</p>
+<p>In Pydantic specifically, this refers to <code>BaseModel</code> classes with fields typed as standard library or Pydantic dataclasses.</p>
+<h2>Why is this an issue?</h2>
+<p>Validation frameworks do not revalidate pre-existing data structure instances by default. When an already-instantiated object is passed as a field
+value, the framework skips validation and accepts it as-is — even if the object was constructed with invalid data. Because lightweight data structures
+such as dataclasses perform no runtime type checking themselves, invalid field values can silently enter a validated model without raising any
+error.</p>
+<h3>Exceptions</h3>
+<p>This rule does not raise an issue when <code>revalidate_instances</code> is explicitly set, regardless of the value. An explicit
+<code>'never'</code> signals that the developer has made a conscious choice to skip revalidation — for example, when dataclass instances are always
+constructed from trusted, pre-validated data.</p>
+<p>In Pydantic, for example, constructing <code>User(name=['not', 'a', 'string'])</code> succeeds because <code>dataclasses.dataclass</code> does not
+check types at runtime. Passing that instance to a <code>BaseModel</code> field typed as <code>User</code> raises no <code>ValidationError</code> —
+the list is stored silently in place of the expected string.</p>
+<h3>What is the potential impact?</h3>
+<p>Without proper revalidation, your application may process invalid data that should have been rejected. This can lead to:</p>
+<ul>
+  <li>Runtime errors when code assumes data has been validated</li>
+  <li>Incorrect business logic execution due to unexpected data types</li>
+  <li>Data corruption if invalid data is persisted to a database</li>
+  <li>Security vulnerabilities if validation is used to enforce security constraints</li>
+</ul>
+<h2>How to fix it</h2>
+<p>Explicitly set <code>revalidate_instances</code> on the <code>BaseModel</code> that holds the dataclass field. This can be done with
+<code>ConfigDict</code> or as a class keyword argument.</p>
+<p>Choose the value that matches your intent:</p>
+<ul>
+  <li><code>'always'</code> — Pydantic revalidates every dataclass instance passed to the model, including ones constructed elsewhere.</li>
+  <li><code>'subclass-instances'</code> — revalidates only when the instance is of a subclass of the declared field type.</li>
+  <li><code>'never'</code> — skips revalidation; use this only when dataclass instances are guaranteed to be constructed from trusted, pre-validated
+  data.</li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import dataclasses
+from pydantic import BaseModel
+
+@dataclasses.dataclass
+class User:
+    name: str
+
+class Foo(BaseModel):  # Noncompliant
+    user: User
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import dataclasses
+from pydantic import BaseModel, ConfigDict
+
+@dataclasses.dataclass
+class User:
+    name: str
+
+class Foo(BaseModel, revalidate_instances='always'):  # always revalidate
+    user: User
+
+class Bar(BaseModel):  # ConfigDict syntax
+    model_config = ConfigDict(revalidate_instances='always')
+    user: User
+
+class Baz(BaseModel, revalidate_instances='never'):  # explicitly opt out
+    user: User
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Pydantic Documentation - <a href="https://docs.pydantic.dev/latest/concepts/dataclasses/">Dataclasses</a></li>
+  <li>Pydantic Documentation - <a href="https://docs.pydantic.dev/latest/api/config/">Configuration</a></li>
+</ul>
+
