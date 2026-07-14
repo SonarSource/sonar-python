@@ -1,5 +1,20 @@
 from typing import Any, Callable, Optional
 
+# URL type (FQN: pydantic_core._pydantic_core.Url, exposed as pydantic_core.Url)
+# Identical interface to pydantic.networks.AnyUrl/_BaseUrl — same object in pydantic v2.
+class Url:
+    scheme: str
+    host: str
+    path: str
+    port: int
+    query: Optional[str]
+    fragment: Optional[str]
+    username: Optional[str]
+    password: Optional[str]
+    def unicode_string(self) -> str: ...
+    def unicode_host(self) -> str: ...
+    def query_params(self) -> list: ...
+
 def to_json(
     value: Any,
     *,
