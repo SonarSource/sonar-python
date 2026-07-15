@@ -16,6 +16,17 @@
         "python"
       ],
       "allowedVersions": "<3.10"
+    },
+    {
+      "description": "Keep protobuf Java and protoc compatible with the Python runtime used for typeshed serialization",
+      "matchDatasources": [
+        "maven"
+      ],
+      "matchPackageNames": [
+        "com.google.protobuf:protobuf-java",
+        "com.google.protobuf:protoc"
+      ],
+      "allowedVersions": "<=4.29.3"
     }
   ]
 }
