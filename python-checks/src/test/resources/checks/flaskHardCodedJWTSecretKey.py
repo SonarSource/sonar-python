@@ -1,7 +1,7 @@
 from flask import Flask, current_app
 def test_non_compliant_assignment_expressions(x):
     app = Flask(__name__)
-    assigned_secret = 'hardcoded_secret'
+    assigned_secret = 'Azerty123'
 
     # Tests for "flask.app.Flask.config"
     app.config['JWT_SECRET_KEY'] = 'Azerty123'  # Noncompliant {{Don't disclose "Flask" JWT secret keys.}}
@@ -13,8 +13,8 @@ def test_non_compliant_assignment_expressions(x):
 #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^
 
     #   False negatives.
-    app.config['JWT_SECRET_KEY'], _ = 'secret', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
-    app.config['JWT_SECRET_KEY'], _ = _, app.config['JWT_SECRET_KEY'] = 'secret', x # FN: Same as above
+    app.config['JWT_SECRET_KEY'], _ = 'Azerty123', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
+    app.config['JWT_SECRET_KEY'], _ = _, app.config['JWT_SECRET_KEY'] = 'Azerty123', x # FN: Same as above
 
 
     # Tests for "flask.globals.current_app.config"
@@ -25,8 +25,8 @@ def test_non_compliant_assignment_expressions(x):
     _ = current_app.config['JWT_SECRET_KEY'] = 'Azerty123'  # Noncompliant
 
     #   False negatives.
-    current_app.config['JWT_SECRET_KEY'], _ = 'mysecret', x # FN
-    current_app.config['JWT_SECRET_KEY'], _ = _, current_app.config['JWT_SECRET_KEY'] = 'secret', x # FN
+    current_app.config['JWT_SECRET_KEY'], _ = 'Azerty123', x # FN
+    current_app.config['JWT_SECRET_KEY'], _ = _, current_app.config['JWT_SECRET_KEY'] = 'Azerty123', x # FN
 
 
     current_app.config['JWT_SECRET_KEY'] = app.config['JWT_SECRET_KEY'] = 'Azerty123'      # Noncompliant

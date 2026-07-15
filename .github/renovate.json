@@ -8,40 +8,14 @@
   ],
   "packageRules": [
     {
+      "description": "Keep Python on 3.9 for typeshed serialization",
       "matchManagers": [
-        "maven"
+        "mise"
       ],
       "matchPackageNames": [
-        "*"
+        "python"
       ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch"
-    },
-    {
-      "matchPackageNames": [
-        "/sonar-plugin-api/",
-        "/org.sonarsource.sonarqube.*/"
-      ],
-      "groupName": "sonarqube",
-      "groupSlug": "sq"
-    },
-    {
-      "matchPackageNames": [
-        "com.google.protobuf:protobuf-java",
-        "com.google.protobuf:protoc"
-      ],
-      "groupName": "protobuf",
-      "groupSlug": "protobuf"
-    },
-    {
-      "matchPackageNames": [
-        "/org.sonarsource.sonarlint.core.*/"
-      ],
-      "groupName": "SL core"
+      "allowedVersions": "<3.10"
     }
   ]
 }

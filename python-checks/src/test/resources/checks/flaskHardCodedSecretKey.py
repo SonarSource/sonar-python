@@ -1,7 +1,7 @@
 from flask import Flask, current_app
 def test_non_compliant_assignment_expressions(x):
     app = Flask(__name__)
-    assigned_secret = 'hardcoded_secret'
+    assigned_secret = 'Azerty123'
 
     # Tests for "flask.app.Flask.config"
     app.config['SECRET_KEY'] = 'Azerty123'  # Noncompliant {{Don't disclose "Flask" secret keys.}}
@@ -13,8 +13,8 @@ def test_non_compliant_assignment_expressions(x):
 #       ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^
 
     #   False negatives.
-    app.config['SECRET_KEY'], _ = 'secret', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
-    app.config['SECRET_KEY'], _ = _, app.config['SECRET_KEY'] = 'secret', x # FN: Same as above
+    app.config['SECRET_KEY'], _ = 'Azerty123', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
+    app.config['SECRET_KEY'], _ = _, app.config['SECRET_KEY'] = 'Azerty123', x # FN: Same as above
 
 
     # Tests for "flask.app.Flask.secret_key"
@@ -22,11 +22,11 @@ def test_non_compliant_assignment_expressions(x):
 #   ^^^^^^^^^^^^^^>                                    {{Assignment to sensitive property.}}
 #                    ^^^^^^^^^^^@-1
     app.secret_key = assigned_secret  # Noncompliant
-    _ = app.secret_key = 'mysecret'  # Noncompliant
+    _ = app.secret_key = 'Azerty123'  # Noncompliant
 
     #   False negatives.
-    app.secret_key, _ = 'secret', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
-    app.secret_key, _ = _, app.secret_key = 'secret', x # FN: Same as above
+    app.secret_key, _ = 'Azerty123', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
+    app.secret_key, _ = _, app.secret_key = 'Azerty123', x # FN: Same as above
 
 
     # Tests for "flask.globals.current_app.config"
@@ -37,8 +37,8 @@ def test_non_compliant_assignment_expressions(x):
     _ = current_app.config['SECRET_KEY'] = 'Azerty123'  # Noncompliant
 
     #    False negatives.
-    current_app.config['SECRET_KEY'], _ = 'mysecret', x # FN
-    current_app.config['SECRET_KEY'], _ = _, current_app.config['SECRET_KEY'] = 'secret', x # FN
+    current_app.config['SECRET_KEY'], _ = 'Azerty123', x # FN
+    current_app.config['SECRET_KEY'], _ = _, current_app.config['SECRET_KEY'] = 'Azerty123', x # FN
 
 
     # Tests for "flask.globals.current_app.secret_key"
@@ -46,11 +46,11 @@ def test_non_compliant_assignment_expressions(x):
 #   ^^^^^^^^^^^^^^^^^^^^^^>                            {{Assignment to sensitive property.}}
 #                            ^^^^^^^^^^^@-1
     current_app.secret_key = assigned_secret  # Noncompliant
-    _ = current_app.secret_key = 'mysecret'  # Noncompliant
+    _ = current_app.secret_key = 'Azerty123'  # Noncompliant
 
     #   False negatives.
     current_app.secret_key, _ = assigned_secret, x # FN
-    current_app.secret_key, _ = _, current_app.secret_key = 'secret', x # FN
+    current_app.secret_key, _ = _, current_app.secret_key = 'Azerty123', x # FN
 
     current_app.config['SECRET_KEY'] = app.config['SECRET_KEY'] = 'Azerty123'      # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^

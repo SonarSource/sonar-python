@@ -5,10 +5,10 @@ import pymysql.tests.test_connection as test_connection
 def obj_creation_hardcoded_credentials():
     network = pylast.LibreFMNetwork("api_key", # Noncompliant {{Revoke and change this password, as it is compromised.}}
 #                                   ^^^^^^^^^ 0
-                                    "api_secret", # Noncompliant
+                                    "Azerty123", # Noncompliant
                                     "session_key",
                                     "username",
-                                    "password_hash") # Noncompliant
+                                    "Azerty123") # Noncompliant
 
 def obj_creation_empty_credentials():
     network = pylast.LibreFMNetwork("", "", "", "", "")
@@ -19,10 +19,10 @@ def obj_creation_empty_credentials():
 def obj_creation_hardcoded_credentials_named_arguments():
     network = pylast.LibreFMNetwork(api_key="api_key", # Noncompliant {{Revoke and change this password, as it is compromised.}}
 #                                   ^^^^^^^^^^^^^^^^^ 0
-                                    api_secret="api_secret", # Noncompliant
+                                    api_secret="Azerty123", # Noncompliant
                                     session_key="session_key",
                                     username="username",
-                                    password_hash="password_hash") # Noncompliant
+                                    password_hash="Azerty123") # Noncompliant
 
     temp_user = test_connection.TempUser(password="Azerty123") # Noncompliant
 

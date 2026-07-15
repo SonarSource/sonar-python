@@ -44,8 +44,8 @@ class A:
         self.passed = "passed"
         fieldNameWithPasswordInIt = "azerty123"            # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
         fieldNameWithPasswordInIt = os.getenv("password", "")  # OK
-        fieldNameWithPasswordInIt = os.getenv("password", "hardcodedPassword")  # Noncompliant
-        fieldNameWithPasswordInIt = os.environ.get("password", "hardcodedPassword")  # Noncompliant
+        fieldNameWithPasswordInIt = os.getenv("password", "Azerty123")  # Noncompliant
+        fieldNameWithPasswordInIt = os.environ.get("password", "Azerty123")  # Noncompliant
         self.fieldNameWithPasswordInIt = "azerty123"            # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
         self.fieldNameWithPasswordInIt = os.getenv("password", "")  # OK
 
@@ -199,8 +199,8 @@ DATABASES = {
         'USER': 'sonarsource',
         'PASSWORD': 'azerty123',                    # Noncompliant
         'PASSWORD': os.getenv('DB_PASSWORD'),       # Compliant
-        'PASSWORD': os.getenv("DB_PASSWORD", "hardcodedPassword"), # Noncompliant
-        'PASSWORD': os.environ.get("DB_PASSWORD", "hardcodedPassword"),  # Noncompliant
+        'PASSWORD': os.getenv("DB_PASSWORD", "Azerty123"), # Noncompliant
+        'PASSWORD': os.environ.get("DB_PASSWORD", "Azerty123"),  # Noncompliant
         'HOST': 'localhost',
         'PORT': '5432'
     },
@@ -210,8 +210,8 @@ DATABASES = {
         'USER': 'sonarsource',
         'PASSWORD': 'azerty123',                    # Noncompliant
         'PASSWORD': os.getenv('DB_PASSWORD'),       # Compliant
-        'PASSWORD': os.getenv("DB_PASSWORD", "hardcodedPassword"), # Noncompliant
-        'PASSWORD': os.environ.get("DB_PASSWORD", "hardcodedPassword"),  # Noncompliant
+        'PASSWORD': os.getenv("DB_PASSWORD", "Azerty123"), # Noncompliant
+        'PASSWORD': os.environ.get("DB_PASSWORD", "Azerty123"),  # Noncompliant
         'HOST': 'localhost',
         'PORT': '5432'
     }
