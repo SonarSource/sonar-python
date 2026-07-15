@@ -79,6 +79,12 @@ def collections():
   my_set_ok: Set = set()  # OK
 
 
+from collections.abc import Mapping as AbcMapping
+from typing import Any
+
+mapping_type_hint: AbcMapping[str, Any] = {"a": 2}  # OK
+
+
 def function_params():
   def overwritten_param(param: int):
     param = "hello"  # Out of scope (S1226)

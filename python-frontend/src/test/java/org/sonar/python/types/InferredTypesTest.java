@@ -176,6 +176,21 @@ class InferredTypesTest {
     assertThat(tupleType.isCompatibleWith(declaredType(typeClass))).isTrue();
   }
 
+  @Test
+  void dict_is_compatible_with_mapping_annotations() {
+    InferredType dictType = lastExpression("{}").type();
+
+    assertThat(dictType.isCompatibleWith(fromTypeAnnotation(typeAnnotation(
+      "from collections.abc import Mapping",
+      "mapping: Mapping[str, int]"
+    )))).isTrue();
+
+    assertThat(dictType.isCompatibleWith(fromTypeAnnotation(typeAnnotation(
+      "from typing import Mapping",
+      "mapping: Mapping[str, int]"
+    )))).isTrue();
+  }
+
   private void assertAliasedTypeAnnotation(String type, String... code) {
     TypeAnnotation typeAnnotation = typeAnnotation(code);
     ClassSymbol typeClass = typeShedClass(type);
