@@ -138,17 +138,6 @@ def type_aliases():
   with_typed_dict({'name': "Ad Astra", 'year': 2019, 'other': 'foo'}) # FN
 
 
-from collections.abc import Mapping as AbcMapping
-from typing import Any
-
-def mapping_argument(mapping: AbcMapping[str, Any]) -> dict[str, Any]:
-  return dict(mapping)
-
-mapping_argument({"a": 1}) # OK
-annotated_mapping: AbcMapping[str, Any] = {"a": 1}
-mapping_argument(annotated_mapping) # OK
-
-
 def edge_cases():
   ambiguous = 42
   def ambiguous(a: str): ...

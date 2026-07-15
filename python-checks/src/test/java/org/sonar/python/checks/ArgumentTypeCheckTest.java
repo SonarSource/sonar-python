@@ -16,11 +16,22 @@
  */
 package org.sonar.python.checks;
 
+import java.util.EnumSet;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+import org.sonar.python.types.TypeShed;
 
 class ArgumentTypeCheckTest {
+
+  @AfterEach
+  void reset_python_version() {
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+    TypeShed.resetBuiltinSymbols();
+  }
 
   @Test
   void test() {
@@ -41,5 +52,21 @@ class ArgumentTypeCheckTest {
       ),
       new ArgumentTypeCheck()
     );
+  }
+
+  @Test
+  void mapping_types_when_python_version_is_unspecified() {
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+    TypeShed.resetBuiltinSymbols();
+
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/argumentType_mapping.py", new ArgumentTypeCheck());
+  }
+
+  @Test
+  void mapping_types_when_python_version_is_39() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_39));
+    TypeShed.resetBuiltinSymbols();
+
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/argumentType_mapping.py", new ArgumentTypeCheck());
   }
 }

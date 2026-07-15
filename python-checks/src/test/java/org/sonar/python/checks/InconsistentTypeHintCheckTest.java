@@ -16,11 +16,22 @@
  */
 package org.sonar.python.checks;
 
+import java.util.EnumSet;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+import org.sonar.python.types.TypeShed;
 
 class InconsistentTypeHintCheckTest {
+
+  @AfterEach
+  void reset_python_version() {
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+    TypeShed.resetBuiltinSymbols();
+  }
 
   @Test
   void test() {
@@ -30,5 +41,21 @@ class InconsistentTypeHintCheckTest {
         "src/test/resources/checks/inconsistentTypeHint.py"
       ),
       new InconsistentTypeHintCheck());
+  }
+
+  @Test
+  void mapping_type_hint_when_python_version_is_unspecified() {
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+    TypeShed.resetBuiltinSymbols();
+
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/inconsistentTypeHint_mapping.py", new InconsistentTypeHintCheck());
+  }
+
+  @Test
+  void mapping_type_hint_when_python_version_is_39() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_39));
+    TypeShed.resetBuiltinSymbols();
+
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/inconsistentTypeHint_mapping.py", new InconsistentTypeHintCheck());
   }
 }
