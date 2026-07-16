@@ -101,6 +101,7 @@ import org.sonar.python.checks.tests.GroupSimilarTestsParameterizedCheck;
 import org.sonar.python.checks.tests.IdenticalAssertionArgumentsCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
+import org.sonar.python.checks.tests.PytestAutouseParametrizedFixtureCheck;
 import org.sonar.python.checks.tests.SingleInvocationRuntimeExceptionCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 import org.sonar.python.checks.tests.SpecificExceptionAssertionCheck;
@@ -392,6 +393,7 @@ public class OpenSourceCheckList {
       PydanticOptionalFieldDefaultCheck.class,
       PydanticMultipleInheritanceConfigCheck.class,
       PydanticSkipValidationWithConstraintsCheck.class,
+      PytestAutouseParametrizedFixtureCheck.class,
       PyTorchDataLoaderNumWorkersCheck.class,
       PytzTimeZoneInDatetimeConstructorCheck.class,
       RaiseOutsideExceptCheck.class,

@@ -1,0 +1,53 @@
+<p>This rule raises an issue when a <code>@pytest.fixture</code> decorator includes both <code>autouse=True</code> and a <code>params</code> argument
+with values.</p>
+<h2>Why is this an issue?</h2>
+<p>Test fixtures serve two important purposes: setting up test prerequisites and providing test data through parametrization. Pytest allows combining
+automatic fixture usage (<code>autouse=True</code>) with fixture parametrization (<code>params=</code>), but the result is discouraged for most test
+suites.</p>
+<p>When you mark a fixture to run automatically, pytest uses it in every test function within its scope, without requiring the test to explicitly
+request it. This is useful for setup tasks that should always run, like initializing a database connection or configuring logging.</p>
+<p>Parametrized fixtures use the <code>params</code> argument to provide multiple values. Each test that requests the fixture is executed once for
+each parameter value.</p>
+<p>When both options are combined, pytest parametrizes every test in scope, even tests that do not reference the fixture, because the autouse fixture
+is injected implicitly. A single test function can therefore run once per parameter value without any visible parametrization on the test itself,
+leading to readability and maintainability issues such as:</p>
+<ul>
+  <li>Test counts increase unexpectedly; for example, one test with three <code>params</code> values produces three test runs.</li>
+  <li>The source of the multiplied tests is not obvious when reading the test function.</li>
+  <li>Test selection and debugging become harder because the parametrization is hidden in the autouse fixture.</li>
+</ul>
+<p>This pattern is valid pytest syntax, but it makes test behavior harder to understand and maintain. This discouraged combination should never be
+suppressed. Hidden test multiplication from autouse parametrization is always a genuine issue, not an accepted trade-off.</p>
+<h3>What is the potential impact?</h3>
+<p>As test suites grow, hidden autouse parametrization increases CI runtime and makes failures harder to diagnose for developers who are not familiar
+with the fixture graph.</p>
+<h2>How to fix it</h2>
+<p>Remove the <code>params</code> argument if the fixture needs to be automatically used. Use a single, default configuration instead of multiple
+parameter values.</p>
+<p>If you need multiple setup variants for every test, parametrize the tests themselves with <code>@pytest.mark.parametrize</code> instead of
+parametrizing an autouse fixture. If only some tests need the fixture, drop <code>autouse=True</code> and declare the fixture as a test parameter so
+each test opts in explicitly.</p>
+<p>Fixtures that use <code>params</code> without <code>autouse=True</code> are valid. This rule flags only the discouraged combination of both
+options.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@pytest.fixture(autouse=True, params=[1, 2, 3])  # Noncompliant
+def my_fixture():
+    return 'value'
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@pytest.fixture(autouse=True)
+def my_fixture():
+    return 'value'
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/fixtures.html">How to use fixtures</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/fixtures.html#autouse-fixtures">Autouse fixtures (fixtures you don’t
+  have to request)</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/fixtures.html#parametrizing-fixtures">Parametrizing fixtures</a></li>
+</ul>
+
