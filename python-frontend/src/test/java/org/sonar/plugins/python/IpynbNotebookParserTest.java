@@ -261,6 +261,30 @@ class IpynbNotebookParserTest {
   }
 
   @Test
+  void testParseNotebookWithMultilineArrayElementWithoutTrailingNewline() throws IOException {
+    // "source": ["x = 1\ny", " = 2"] - the first element has no trailing newline, so its last split
+    // line ("y") is continued, not terminated, by the next array element (" = 2"), giving 2 python lines
+    // ("x = 1" and "y = 2") rather than 3. Before the fix, each array element always got its own
+    // locationMap entry regardless of whether the previous one ended with a newline, producing one more
+    // entry than there are physical lines and misaligning every location after it.
+    var inputFile = createInputFile(baseDir, "notebook_multiline_string_in_array_no_trailing_newline.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+
+    var result = resultOptional.get();
+    assertThat(result.contents()).hasLineCount(3);
+    assertThat(result.locationMap().keySet()).hasSize(3);
+    //"x = 1"
+    assertThat(result.locationMap()).extractingByKey(1).isEqualTo(new IPythonLocation(9, 9, List.of(), true));
+    //"y = 2" ("y" starts the line, " = 2" from the next array element continues it)
+    assertThat(result.locationMap()).extractingByKey(2).isEqualTo(new IPythonLocation(9, 16, List.of(), true));
+    // the cell delimiter
+    assertThat(result.locationMap()).extractingByKey(3).isEqualTo(new IPythonLocation(10, 9, List.of(), false));
+  }
+
+  @Test
   void testParseNotebookWithMultilineStringInSourceArray() throws IOException {
     var inputFile = createInputFile(baseDir, "notebook_multiline_string_in_array.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
