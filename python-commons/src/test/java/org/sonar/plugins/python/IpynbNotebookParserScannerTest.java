@@ -92,4 +92,21 @@ class IpynbNotebookParserScannerTest {
     assertThat(issues.get(2).primaryLocation().endLineOffset()).isEqualTo(249); // Should be 255
   }
 
+  @Test
+  void multiline_string_in_source_array() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_multiline_string_in_array.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    var result = IpynbNotebookParser.parseNotebook(inputFile).get();
+
+    // Should not throw IllegalStateException("No IPythonLocation found for line ...")
+    var fileInput = TestPythonVisitorRunner.parseNotebookFile(result.locationMap(), result.contents());
+
+    var statements = fileInput.statements().statements();
+    // Every statement lives on the same raw ipynb line, since the whole array element is one JSON string
+    // spanning a single physical line; columns must still strictly increase to reflect their real position.
+    assertThat(statements)
+      .hasSize(8)
+      .allSatisfy(stmt -> assertThat(stmt.firstToken().line()).isEqualTo(9))
+      .extracting(stmt -> stmt.firstToken().column()).isSorted();
+  }
+
 }

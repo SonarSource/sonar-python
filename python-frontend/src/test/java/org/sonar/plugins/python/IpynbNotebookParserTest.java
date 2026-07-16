@@ -261,6 +261,33 @@ class IpynbNotebookParserTest {
   }
 
   @Test
+  void testParseNotebookWithMultilineStringInSourceArray() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_multiline_string_in_array.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+
+    var result = resultOptional.get();
+    // 11 python lines packed into the single "source" array element, plus the cell delimiter.
+    // Before the fix, only 2 entries were produced (the whole array element counted as a single line),
+    // which made TokenEnricher fail with "No IPythonLocation found for line 3".
+    assertThat(result.contents()).hasLineCount(12);
+    assertThat(result.locationMap().keySet()).hasSize(12);
+    //"print(\"Test 1\")"
+    assertThat(result.locationMap()).extractingByKey(1).isEqualTo(new IPythonLocation(9, 9, mapToColumnMappingList(Map.of(6, 1, 13, 1)), true));
+    //"testA = \"1\""
+    assertThat(result.locationMap()).extractingByKey(2).isEqualTo(new IPythonLocation(9, 28, mapToColumnMappingList(Map.of(8, 1, 10, 1)), true));
+    // two consecutive empty lines
+    assertThat(result.locationMap()).extractingByKey(7).isEqualTo(new IPythonLocation(9, 111, List.of(), true));
+    assertThat(result.locationMap()).extractingByKey(8).isEqualTo(new IPythonLocation(9, 113, List.of(), true));
+    //"print(testAll)" (last content line, no trailing newline in the JSON value)
+    assertThat(result.locationMap()).extractingByKey(11).isEqualTo(new IPythonLocation(9, 150, List.of(), true));
+    // the cell delimiter
+    assertThat(result.locationMap()).extractingByKey(12).isEqualTo(new IPythonLocation(9, 164, List.of(), false));
+  }
+
+  @Test
   void testParseNotebook1() throws IOException {
     var inputFile = createInputFile(baseDir, "notebook_no_code.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
