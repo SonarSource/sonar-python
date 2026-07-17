@@ -97,6 +97,7 @@ import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
 import org.sonar.python.checks.tests.AssertionArgumentOrderCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.DedicatedExceptionAssertionCheck;
+import org.sonar.python.checks.tests.FixtureParamDependenciesCheck;
 import org.sonar.python.checks.tests.GroupSimilarTestsParameterizedCheck;
 import org.sonar.python.checks.tests.IdenticalAssertionArgumentsCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
@@ -249,6 +250,7 @@ public class OpenSourceCheckList {
       FilePermissionsCheck.class,
       FileHeaderCopyrightCheck.class,
       FixmeCommentCheck.class,
+      FixtureParamDependenciesCheck.class,
       FlaskErrorHandlerStatusCheck.class,
       FlaskHardCodedJWTSecretKeyCheck.class,
       FlaskHardCodedSecretKeyCheck.class,

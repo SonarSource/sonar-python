@@ -1,0 +1,25 @@
+{
+  "title": "Test functions should declare fixture dependencies as parameters instead of using \"request.getfixturevalue\" with string literals",
+  "type": "CODE_SMELL",
+  "status": "beta",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "pytest",
+    "testing",
+    "confusing"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-8993",
+  "sqKey": "S8993",
+  "scope": "Tests",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CLEAR"
+  }
+}

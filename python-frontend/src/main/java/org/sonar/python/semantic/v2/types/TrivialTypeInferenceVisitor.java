@@ -89,6 +89,7 @@ import org.sonar.python.semantic.v2.types.typecalculator.AwaitedTypeCalculator;
 import org.sonar.python.semantic.v2.types.typecalculator.CallReturnTypeCalculator;
 import org.sonar.python.semantic.v2.types.typecalculator.QualifiedExpressionCalculator;
 import org.sonar.python.semantic.v2.typetable.TypeTable;
+import org.sonar.python.semantic.v2.typeshed.TypeShedConstants;
 import org.sonar.python.tree.AwaitExpressionImpl;
 import org.sonar.python.tree.BinaryExpressionImpl;
 import org.sonar.python.tree.CallExpressionImpl;
@@ -131,6 +132,9 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     TypeInferenceMatchers.any(
       TypeInferenceMatchers.withFQN("typing.Self"),
       TypeInferenceMatchers.withFQN("typing_extensions.Self")));
+
+  private static final String PYTEST_MODULE = "pytest";
+  private static final String PYTEST_REQUEST_PARAMETER = "request";
 
   private record DeferredTree(Tree tree, Scope scope) {
   }
@@ -399,6 +403,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       scan(functionDef.typeParams());
       scan(functionDef.parameters());
       setSelfParameterType(functionDef);
+      setPytestRequestParameterType(functionDef);
       deferTree(functionDef.body());
     });
   }
@@ -478,6 +483,32 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     } else if (functionType.isClassMethod()) {
       setTypeToName(paramName, selfType);
     }
+  }
+
+  private void setPytestRequestParameterType(FunctionDef functionDef) {
+    if (!importedModulesFQN.contains(PYTEST_MODULE)) {
+      return;
+    }
+
+    var parameterList = functionDef.parameters();
+    if (parameterList == null) {
+      return;
+    }
+
+    PythonType fixtureRequestType = projectLevelTypeTable.getType(TypeShedConstants.PYTEST_FIXTURE_REQUEST_FQN);
+    if (fixtureRequestType instanceof UnknownType) {
+      return;
+    }
+
+    var requestObjectType = ObjectType.Builder.fromType(fixtureRequestType)
+      .withTypeSource(TypeSource.EXACT)
+      .build();
+
+    parameterList.nonTuple().stream()
+      .filter(parameter -> parameter.typeAnnotation() == null)
+      .map(Parameter::name)
+      .filter(name -> name != null && PYTEST_REQUEST_PARAMETER.equals(name.name()))
+      .forEach(name -> setTypeToName(name, requestObjectType));
   }
 
   @Override

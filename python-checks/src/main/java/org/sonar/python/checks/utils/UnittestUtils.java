@@ -43,7 +43,7 @@ public class UnittestUtils {
   private static final Set<String> PYTEST_LIFECYCLE_METHODS = Set.of(
     "setUp", "tearDown", "setUpClass", "tearDownClass",
     "setup_method", "teardown_method", "setup_class", "teardown_class", "setup_module", "teardown_module");
-  private static final String PYTEST_FIXTURE_DECORATOR_FQN = "pytest.fixture";
+  public static final String PYTEST_FIXTURE_DECORATOR_FQN = "pytest.fixture";
   private static final String UNITTEST_TEST_CASE_FQN_PREFIX = "unittest.case.TestCase.";
   private static final String PYTEST_EXPECTED_EXCEPTION = "expected_exception";
   private static final String PYTEST_MATCH = "match";

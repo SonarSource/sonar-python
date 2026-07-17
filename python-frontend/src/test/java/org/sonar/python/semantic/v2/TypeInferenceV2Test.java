@@ -83,6 +83,7 @@ import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.typetable.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.typeshed.TypeShedConstants;
 import org.sonar.python.tree.ExpressionStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
@@ -4183,6 +4184,21 @@ public class TypeInferenceV2Test {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
   }
 
+  private static Name pytestRequestName(FileInput root) {
+    return PythonTestUtils.getLastDescendant(root, t -> t instanceof Name name && "request".equals(name.name()));
+  }
+
+  private static PythonType fixtureRequestType() {
+    return PROJECT_LEVEL_TYPE_TABLE.getType(TypeShedConstants.PYTEST_FIXTURE_REQUEST_FQN);
+  }
+
+  private static void assertRequestIsFixtureRequest(FileInput root) {
+    PythonType requestType = pytestRequestName(root).typeV2();
+    assertThat(requestType).isInstanceOf(ObjectType.class);
+    assertThat(fixtureRequestType()).isNotEqualTo(PythonType.UNKNOWN);
+    assertThat(((ObjectType) requestType).unwrappedType()).isEqualTo(fixtureRequestType());
+  }
+
   public static FileInput inferTypes(String lines, ProjectLevelTypeTable projectLevelTypeTable) {
     FileInput root = parse(lines);
 
@@ -4381,6 +4397,98 @@ public class TypeInferenceV2Test {
     var classDef = (ClassDef) root.statements().statements().get(0);
     var fooMethodDef = (FunctionDef) classDef.body().statements().get(0);
     assertThat(fooMethodDef.name().typeV2()).isInstanceOf(FunctionType.class);
+  }
+
+  @ParameterizedTest
+  @MethodSource("pytestRequestParameterTypedWithPytestImportSource")
+  void pytestRequestParameterIsTypedWithPytestImport(String code) {
+    assertRequestIsFixtureRequest(inferTypes(code));
+  }
+
+  static Stream<String> pytestRequestParameterTypedWithPytestImportSource() {
+    return Stream.of(
+      """
+      import pytest
+
+      def test_foo(request):
+        request
+      """,
+      """
+      from pytest import fixture
+
+      def test_foo(request):
+        request
+      """,
+      """
+      import pytest as pt
+
+      def test_foo(request):
+        request
+      """
+    );
+  }
+
+  @Test
+  void pytestRequestParameterIsNotTypedWithoutPytestImport() {
+    FileInput root = inferTypes("""
+      def test_foo(request):
+        request
+      """);
+
+    assertThat(pytestRequestName(root).typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void pytestRequestParameterKeepsExplicitAnnotation() {
+    FileInput root = inferTypes("""
+      import pytest
+
+      def test_foo(request: str):
+        request
+      """);
+
+    assertThat(pytestRequestName(root).typeV2()).is(TypesTestUtils.objectTypeOf(PROJECT_LEVEL_TYPE_TABLE.getType("builtins.str")));
+  }
+
+  @Test
+  void pytestRequestParameterIsNotTypedForOtherParameterNames() {
+    FileInput root = inferTypes("""
+      import pytest
+
+      def test_foo(other):
+        other
+      """);
+
+    Name otherName = PythonTestUtils.getLastDescendant(root, t -> t instanceof Name name && "other".equals(name.name()));
+    assertThat(otherName.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void pytestRequestParameterIsTypedInFixtureFunction() {
+    FileInput root = inferTypes("""
+      import pytest
+
+      @pytest.fixture
+      def my_fixture(request):
+        request
+      """);
+
+    assertThat(((ObjectType) pytestRequestName(root).typeV2()).unwrappedType()).isEqualTo(fixtureRequestType());
+  }
+
+  @Test
+  void pytestRequestParameterIsNotTypedWhenFixtureRequestTypeUnknown() {
+    ProjectLevelTypeTable typeTable = spy(PROJECT_LEVEL_TYPE_TABLE);
+    doReturn(PythonType.UNKNOWN).when(typeTable).getType(TypeShedConstants.PYTEST_FIXTURE_REQUEST_FQN);
+
+    FileInput root = inferTypes("""
+      import pytest
+
+      def test_foo(request):
+        request
+      """, typeTable);
+
+    assertThat(pytestRequestName(root).typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test

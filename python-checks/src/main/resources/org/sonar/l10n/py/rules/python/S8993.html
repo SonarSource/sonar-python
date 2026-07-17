@@ -1,0 +1,96 @@
+<p>This rule raises an issue when a collected test function calls <code>request.getfixturevalue()</code> with a string literal fixture name instead of
+declaring that fixture as a function parameter.</p>
+<p>In Python’s pytest framework, this specifically refers to the <code>request.getfixturevalue()</code> method.</p>
+<h2>Why is this an issue?</h2>
+<p><code>request.getfixturevalue('fixture_name')</code> with a string literal hides dependencies from the function signature and static analysis.
+Refactoring fixture names leaves no trace until runtime.</p>
+<p>Declare known fixtures as test parameters instead. Dynamic lookup remains appropriate when the name comes from parametrization or inside fixture
+chains.</p>
+<p>In pytest specifically, this anti-pattern manifests when a collected test function calls <code>request.getfixturevalue()</code> with a string
+literal fixture name. When the fixture name is known at write time, declare it as a test parameter so dependencies stay visible to readers and static
+analysis.</p>
+<p><code>request.getfixturevalue()</code> remains appropriate inside <code>@pytest.fixture</code> functions for fixture chains, and in tests that
+resolve fixture names from parametrization or configuration when the name is not fixed at write time.</p>
+<h3>Exceptions</h3>
+<h4>Fixture chains</h4>
+<p>Using <code>request.getfixturevalue()</code> inside <code>@pytest.fixture</code> functions is acceptable when one fixture must load another
+conditionally.</p>
+<h4>Parametrized fixture-name resolution</h4>
+<p>When the fixture name comes from a variable, for example via <code>@pytest.mark.parametrize</code>, dynamic lookup is intentional and out of scope
+for this rule.</p>
+<h4>conftest.py and hooks</h4>
+<p>Fixture and hook definitions in <code>conftest.py</code> are not collected test functions and are not reported.</p>
+<h4>Plugin and meta tests</h4>
+<p>Tests that exercise pytest plugins or the fixture request API itself may legitimately call <code>getfixturevalue</code> with a runtime name. Review
+manually and suppress only when the test’s purpose requires dynamic fixture resolution.</p>
+<h3>What is the potential impact?</h3>
+<p>Refactoring fixture names leaves no static trace in test signatures, so broken dependencies surface only when tests execute.</p>
+<h2>How to fix it</h2>
+<p>Declare known fixtures as test parameters. Keep <code>request.getfixturevalue()</code> inside fixture functions or when the name is resolved at
+runtime from parametrization.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pytest
+
+@pytest.fixture
+def database():
+    class DB:
+        def query(self, sql):
+            return 1
+
+    return DB()
+
+def test_database_query(request):
+    # Noncompliant: known fixture name loaded dynamically
+    db = request.getfixturevalue('database')
+    result = db.query('SELECT 1')
+    assert result == 1
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+@pytest.fixture
+def database():
+    class DB:
+        def query(self, sql):
+            return 1
+
+    return DB()
+
+def test_database_query(database):
+    # Fixture dependency is now explicit
+    result = database.query('SELECT 1')
+    assert result == 1
+</pre>
+<p>Parametrized fixture-name resolution and fixture chains are acceptable and not reported:</p>
+<pre>
+import pytest
+
+@pytest.fixture
+def database():
+    return object()
+
+@pytest.fixture
+def cache():
+    return object()
+
+@pytest.fixture
+def combined(request):
+    # Compliant: fixture-to-fixture lookup
+    return request.getfixturevalue('database')
+
+@pytest.mark.parametrize('fixture_name', ['database', 'cache'])
+def test_matrix(request, fixture_name):
+    # Compliant: fixture name comes from parametrization
+    fixture = request.getfixturevalue(fixture_name)
+    assert fixture is not None
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/fixtures.html">How to use fixtures</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/reference/reference.html#request">request</a></li>
+</ul>
+

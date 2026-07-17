@@ -23,6 +23,8 @@ public class TypeShedConstants {
   public static final String BUILTINS_NONE_TYPE_FQN = BUILTINS_PREFIX + "NoneType";
   public static final String BUILTINS_TUPLE_FQN = BUILTINS_PREFIX + "tuple";
   public static final String BUILTINS_DICT_FQN = BUILTINS_PREFIX + "dict";
+  public static final String PYTEST_FIXTURE_REQUEST_FQN = "_pytest.fixtures.FixtureRequest";
+  public static final String PYTEST_FIXTURE_REQUEST_GET_FIXTURE_VALUE_FQN = PYTEST_FIXTURE_REQUEST_FQN + ".getfixturevalue";
 
   private TypeShedConstants() {
   }
