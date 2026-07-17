@@ -1,0 +1,91 @@
+<p>This rule raises an issue when test functions manually modify global state such as environment variables, object attributes, or module search paths
+without using test isolation fixtures or mocking utilities provided by the test framework.</p>
+<p>In Python/pytest, this specifically refers to using the <code>monkeypatch</code> fixture instead of directly modifying <code>sys.path</code> or
+other global state.</p>
+<h2>Why is this an issue?</h2>
+<p>Manual save/restore of environment variables, attributes, or callables is easy to forget and often skipped on exceptions. The
+<code>monkeypatch</code> fixture undoes all changes automatically when the test completes.</p>
+<h3>What is the potential impact?</h3>
+<p>State pollution from missed cleanup propagates across the suite, so failures show up in unrelated tests and erode trust in green CI runs.</p>
+<h2>How to fix it</h2>
+<p>Use <code>monkeypatch.setenv</code>, <code>monkeypatch.setattr</code>, <code>monkeypatch.setitem</code>, <code>monkeypatch.syspath_prepend</code>,
+or <code>monkeypatch.chdir</code> instead of manual save/restore logic.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import os
+
+def test_api_key():
+    old_key = os.environ.get('API_KEY')
+    os.environ['API_KEY'] = 'test_key'  # Noncompliant
+
+    result = get_api_configuration()
+    assert result['key'] == 'test_key'
+
+    # Cleanup easily forgotten or skipped on exception
+    if old_key:
+        os.environ['API_KEY'] = old_key
+    else:
+        del os.environ['API_KEY']
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def test_api_key(monkeypatch):
+    monkeypatch.setenv('API_KEY', 'test_key')
+
+    result = get_api_configuration()
+    assert result['key'] == 'test_key'
+
+    # Automatic cleanup - no manual code needed
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import myapp.config
+
+def test_feature_flag():
+    old_value = myapp.config.ENABLE_FEATURE
+    myapp.config.ENABLE_FEATURE = True  # Noncompliant
+
+    assert myapp.is_feature_enabled()
+
+    myapp.config.ENABLE_FEATURE = old_value
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+def test_feature_flag(monkeypatch):
+    monkeypatch.setattr(myapp.config, 'ENABLE_FEATURE', True)
+
+    assert myapp.is_feature_enabled()
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+import myapp.client
+
+def test_notify_user():
+    client = myapp.client.Client()
+    original_send = client.send
+    client.send = lambda message: {"sent": True}  # Noncompliant
+
+    result = client.notify("Hello")
+
+    assert result["sent"]
+    client.send = original_send
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+def test_notify_user(monkeypatch):
+    client = myapp.client.Client()
+    monkeypatch.setattr(client, "send", lambda message: {"sent": True})
+
+    result = client.notify("Hello")
+
+    assert result["sent"]
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/monkeypatch.html">How to monkeypatch/mock modules and
+  environments</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/reference/fixtures.html#built-in-fixtures">Built-in fixtures</a></li>
+</ul>
+
