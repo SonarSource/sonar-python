@@ -1,0 +1,43 @@
+<p>This rule raises an issue when the plugin configuration variable is defined in a regular test file (any file other than the designated
+configuration file).</p>
+<h2>Why is this an issue?</h2>
+<p><code>pytest_plugins</code> in <code>conftest.py</code> loads before test collection, so plugins are available for early hooks such as
+<code>pytest_addoption</code>. In test modules, plugins load only when that module is imported during collection, which can change behavior under
+parallel CI.</p>
+<p>Pytest deduplicates plugins by name, so declaring the same plugin in multiple test modules does not load it twice. The risk is late registration
+and collection-order dependence, not duplicate initialization.</p>
+<p>This rule flags any <code>pytest_plugins</code> assignment outside <code>conftest.py</code>.</p>
+<h3>What is the potential impact?</h3>
+<p>Misplaced plugin declarations make load order depend on collection sequence, so the same suite can pass locally and fail under parallel or sharded
+CI.</p>
+<h2>How to fix it</h2>
+<p>Move <code>pytest_plugins</code> from test modules to <code>conftest.py</code> in the same directory or a parent directory.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+# test_something.py
+pytest_plugins = ['pytest_cov', 'pytest_timeout']  # Noncompliant
+
+def test_feature():
+    assert True
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+# conftest.py
+pytest_plugins = ['pytest_cov', 'pytest_timeout']
+
+# test_something.py
+def test_feature():
+    assert True
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a
+  href="https://docs.pytest.org/en/stable/reference/fixtures.html#conftest-py-sharing-fixtures-across-multiple-files">conftest.py: sharing fixtures
+  across multiple files</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/plugins.html">How to install and use plugins</a></li>
+  <li>pytest documentation - <a
+  href="https://docs.pytest.org/en/stable/how-to/writing_plugins.html#requiring-loading-plugins-in-a-test-module-or-conftest-file">Requiring/Loading
+  plugins in a test module or conftest file</a></li>
+</ul>
