@@ -1,0 +1,27 @@
+{
+  "title": "Pytest fixtures should contain at most one yield statement",
+  "type": "BUG",
+  "status": "beta",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "tests",
+    "pitfall",
+    "resource-leak",
+    "pytest"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-8994",
+  "sqKey": "S8994",
+  "scope": "Tests",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH",
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  }
+}

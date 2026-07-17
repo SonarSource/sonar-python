@@ -1,0 +1,37 @@
+<p>This rule raises an issue when a <code>@pytest.fixture</code> function contains more than one <code>yield</code> statement.</p>
+<h2>Why is this an issue?</h2>
+<p>Pytest yield fixtures allow exactly one <code>yield</code>. A second <code>yield</code> triggers <code>Failed: fixture function has more than one
+'yield'</code> at teardown, and cleanup after it never runs.</p>
+<h3>What is the potential impact?</h3>
+<p>Tests can satisfy their assertions yet still fail during teardown, producing confusing pass-then-fail diagnostics in CI until the fixture is
+corrected.</p>
+<h2>How to fix it</h2>
+<p>Remove the extra <code>yield</code> statements and keep only one. If you need to return multiple values, yield a tuple or other collection. If
+setup differs by condition, compute the value first and yield once on a single code path so teardown always runs afterward.</p>
+<p>Use <code>return</code> instead of <code>yield</code> when the fixture does not need teardown logic.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@pytest.fixture
+def database_connection():
+    db = create_connection()
+    yield db  # Noncompliant
+    # Pytest raises "fixture function has more than one 'yield'" at teardown
+    yield db
+    db.close()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@pytest.fixture
+def database_connection():
+    db = create_connection()
+    yield db
+    db.close()
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/fixtures.html">How to use fixtures</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/fixtures.html#yield-fixtures-recommended">yield fixtures</a></li>
+</ul>
+
