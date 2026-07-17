@@ -1,0 +1,61 @@
+<p>This rule raises an issue when a test parameterization mechanism is configured with an empty collection as the source of test values.</p>
+<p>In Python with pytest, this specifically occurs when using the <code>@pytest.mark.parametrize</code> decorator with an empty sequence (list, tuple,
+or other iterable) as the values argument.</p>
+<h2>Why is this an issue?</h2>
+<p>Passing an empty list to <code>@pytest.mark.parametrize</code> collects the test but skips it with <code>got empty parameter set for (…​)</code>.
+The suite still passes while providing no coverage for that function.</p>
+<p>When <code>@pytest.mark.parametrize</code> has no value sets to iterate over, the test is silently skipped during collection:</p>
+<ul>
+  <li>Your test suite appears to pass, but this test isn’t actually running</li>
+  <li>You have no test coverage for the function being tested</li>
+  <li>Bugs in your code may go undetected</li>
+</ul>
+<p>This situation typically occurs due to:</p>
+<ul>
+  <li>Accidentally deleting or commenting out all test cases</li>
+  <li>Incomplete test implementation (test structure created but cases not yet added)</li>
+  <li>Copy-paste errors when creating new tests</li>
+  <li>Refactoring mistakes where test cases were moved or removed</li>
+</ul>
+<p>Unlike mistakes that cause failures, an empty parametrized test collection fails silently. The test won’t raise an error — it simply won’t run,
+which makes the problem easy to miss until you discover missing coverage.</p>
+<p>An empty parameter list is never a valid end state for a committed test. Suppressing this issue is not appropriate, as the test will not run until
+values are provided.</p>
+<h3>What is the potential impact?</h3>
+<p>Regressions can go undetected when tests are skipped silently without failing the build.</p>
+<h2>How to fix it</h2>
+<p>Add at least one case tuple to the <code>@pytest.mark.parametrize</code> values list so the test body actually runs.</p>
+<p>If the test is not ready yet, do not simply remove the decorator while keeping its parameters: pytest will treat those names as fixtures and fail
+at setup with <code>fixture '…​' not found</code>. Instead, either add the missing cases, rewrite the test without parametrization (inline the values
+in the function body), or mark the test explicitly with <code>@pytest.mark.skip(reason="…​")</code> on a parameterless function.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pytest
+
+@pytest.mark.parametrize('operand,expected', [])
+def test_double(operand, expected):
+    assert double(operand) == expected  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+@pytest.mark.parametrize('operand,expected', [
+    (1, 2),
+    (2, 4),
+    (3, 6),
+    (0, 0),
+])
+def test_double(operand, expected):
+    assert double(operand) == expected
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/parametrize.html">How to parametrize fixtures and test
+  functions</a></li>
+  <li>pytest documentation - <a
+  href="https://docs.pytest.org/en/stable/reference/reference.html#pytest-mark-parametrize">pytest.mark.parametrize</a></li>
+</ul>
+
