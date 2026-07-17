@@ -1,0 +1,112 @@
+<p>This rule raises an issue when <code>pytest.raises()</code> is called without a <code>with</code> statement, including standalone calls, the
+deprecated callable-passing form, and typos that call the function before entering the context manager.</p>
+<p>In Python, this refers to the different usages of <code>pytest.raises()</code> without a <code>with</code> statement, such as:</p>
+<ul>
+  <li>Standalone calls such as <code>pytest.raises(ValueError)</code> that never wrap the code under test</li>
+  <li>The deprecated form <code>pytest.raises(ExpectedError, func, *args, **kwargs)</code> that passes a callable and its arguments</li>
+  <li>The typo <code>pytest.raises(ExpectedError, func(*args, **kwargs))</code> that calls the function immediately and silently skips verification
+  when no exception is raised</li>
+</ul>
+<h2>Why is this an issue?</h2>
+<p>Pytest cannot verify the outcome if the code under test is not wrapped in a <code>with pytest.raises(…​):</code> block.</p>
+<h3>Standalone calls</h3>
+<p><code>pytest.raises(ValueError)</code> without <code>with</code> constructs a context manager and discards it. The test passes even when the
+following code does not raise:</p>
+<pre>
+def test_invalid_input():
+    pytest.raises(ValueError)
+    process_data('hello')  # No exception — test still passes
+</pre>
+<h3>Deprecated callable-passing form</h3>
+<p>Pytest still supports passing the callable and its arguments:</p>
+<pre>
+pytest.raises(ValueError, bootstrap_session, df=-1)  # Deprecated
+</pre>
+<p>This executes <code>bootstrap_session(df=-1)</code> and fails when no exception is raised. It works, but pytest deprecates it. Refactoring this
+form into a bare standalone call silently stops verifying exceptions.</p>
+<h3>Typo: calling the function immediately</h3>
+<p>A common mistake adds parentheses around the call:</p>
+<pre>
+pytest.raises(NotImplementedError, bootstrap_session(df=10))  # Silent failure
+</pre>
+<p>Here <code>bootstrap_session</code> runs before <code>pytest.raises</code> is entered. When <code>df=10</code> is valid and no exception is raised,
+<code>pytest.raises</code> receives the return value and the test passes without verifying anything.</p>
+<h3>Correct usage</h3>
+<pre>
+with pytest.raises(ValueError):
+    bootstrap_session(df=-1)
+</pre>
+<p>The <code>with</code> block must raise the expected exception, or the test fails.</p>
+<h3>What is the potential impact?</h3>
+<p>Tests that never enter the <code>pytest.raises</code> context manager can pass when no exception is raised, leaving error-handling regressions
+undetected. Deprecated callable-passing syntax and the parenthesis typo are prone to silent breakage during refactors.</p>
+<h2>How to fix it</h2>
+<p>In Python with pytest, use <code>with pytest.raises(ValueError):</code> around the code that should fail.</p>
+<p>Wrap the code that should raise with <code>with pytest.raises(ExpectedError):</code>. To inspect the exception, use <code>as exc_info</code> or the
+<code>match</code> parameter.</p>
+<p>Migrate deprecated callable-passing calls by moving the invocation into the <code>with</code> block.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pytest
+
+def process_data(data):
+    return data.upper()
+
+def test_invalid_input():
+    pytest.raises(ValueError)  # Noncompliant: context manager never entered
+    process_data('hello')
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+def process_data(data):
+    return data.upper()
+
+def test_invalid_input():
+    with pytest.raises(ValueError):
+        process_data('hello')
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import pytest
+
+def bootstrap_session(df=10):
+    if df &lt;= 0:
+        raise ValueError('df must be positive')
+    if df &gt; 20:
+        raise NotImplementedError('df &gt; 20 not supported')
+
+def test_invalid_df():
+    pytest.raises(ValueError, bootstrap_session, df=-1)  # Noncompliant: deprecated form
+
+def test_unsupported_df():
+    pytest.raises(NotImplementedError, bootstrap_session(df=10))  # Noncompliant: function called immediately
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import pytest
+
+def bootstrap_session(df=10):
+    if df &lt;= 0:
+        raise ValueError('df must be positive')
+    if df &gt; 20:
+        raise NotImplementedError('df &gt; 20 not supported')
+
+def test_invalid_df():
+    with pytest.raises(ValueError):
+        bootstrap_session(df=-1)
+
+def test_unsupported_df():
+    with pytest.raises(NotImplementedError):
+        bootstrap_session(df=25)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/assert.html#assertions-about-expected-exceptions">Assertions about
+  expected exceptions</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/reference/reference.html#pytest.raises">pytest.raises</a></li>
+</ul>
+
