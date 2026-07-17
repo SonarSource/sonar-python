@@ -29,4 +29,4 @@ def false_positives():
             (?P<id>.*?)
           \]
         ''', re.X | re.S)
-    # Noncompliant@-5
+    # Fixed in analyzer-commons 2.28
