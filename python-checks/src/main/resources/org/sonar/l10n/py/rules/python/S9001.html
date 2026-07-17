@@ -1,0 +1,32 @@
+<p>This rule raises an issue when <code>@pytest.mark.xfail</code> is used without a <code>reason</code> parameter.</p>
+<h2>Why is this an issue?</h2>
+<p>When writing tests, <code>@pytest.mark.xfail</code> marks a test as expected to fail, for example while a known bug remains unfixed.</p>
+<p><code>@pytest.mark.xfail</code> without <code>reason</code> leaves future maintainers without context for why the failure is expected. The
+<code>reason</code> must appear on the decorator; comments or docstrings do not satisfy this rule.</p>
+<h3>What is the potential impact?</h3>
+<p>Undocumented expected failures accumulate as the codebase changes, so teams cannot tell which markers still reflect real defects.</p>
+<h2>How to fix it</h2>
+<p>Add the <code>reason</code> parameter with a concise explanation or issue reference.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@pytest.mark.xfail  # Noncompliant
+def test_division_by_zero():
+    result = divide(10, 0)
+    assert result is None
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@pytest.mark.xfail(reason='Issue #456: divide() should raise ValueError for zero divisor')
+def test_division_by_zero():
+    result = divide(10, 0)
+    assert result is None
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/skipping.html">How to use skip and xfail to deal with tests that cannot
+  succeed</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/reference/reference.html#pytest-mark-xfail">pytest.mark.xfail</a></li>
+</ul>
+

@@ -107,6 +107,7 @@ import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 import org.sonar.python.checks.tests.SpecificExceptionAssertionCheck;
 import org.sonar.python.checks.tests.TestCasesShouldContainTestsCheck;
 import org.sonar.python.checks.tests.UnconditionalAssertionCheck;
+import org.sonar.python.checks.tests.XfailNoReasonCheck;
 
 public class OpenSourceCheckList {
 
@@ -527,6 +528,7 @@ public class OpenSourceCheckList {
       WeakSSLProtocolCheck.class,
       WildcardImportCheck.class,
       WrongAssignmentOperatorCheck.class,
+      XfailNoReasonCheck.class,
       XMLParserXXEVulnerableCheck.class,
       XMLSignatureValidationCheck.class,
       DjangoModelFormFieldsCheck.class,
