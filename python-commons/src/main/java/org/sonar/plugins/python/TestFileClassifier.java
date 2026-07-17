@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Statement;
+import static org.sonarsource.analyzer.commons.appsec.TestFileClassifier.HEURISTIC_DISABLED_KEY;
 import org.sonar.plugins.python.api.tree.StatementList;
 
 /**
@@ -51,9 +52,8 @@ public class TestFileClassifier {
    */
   public static boolean isTestSourceConfigured(Configuration config) {
     return isPropertyConfigured(config, "sonar.tests")
-      || isPropertyConfigured(config, "sonar.test.inclusions")
-      || isPropertyConfigured(config, "sonar.test.exclusions")
-      || config.getBoolean("sonar.python.testFileHeuristic.disabled").orElse(false);
+      || config.getBoolean("sonar.python.testFileHeuristic.disabled").orElse(false)
+      || config.getBoolean(HEURISTIC_DISABLED_KEY).orElse(false);
   }
 
   private static boolean isPropertyConfigured(Configuration config, String key) {

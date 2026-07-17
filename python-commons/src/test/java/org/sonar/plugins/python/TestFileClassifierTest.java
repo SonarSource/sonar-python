@@ -16,16 +16,50 @@
  */
 package org.sonar.plugins.python;
 
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.sonar.api.config.Configuration;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.sonarsource.analyzer.commons.appsec.TestFileClassifier.HEURISTIC_DISABLED_KEY;
 
 class TestFileClassifierTest {
+
+  // --- isTestSourceConfigured ---
+
+  @Test
+  void isTestSourceConfigured_returns_false_for_empty_config() {
+    var config = mock(Configuration.class);
+    when(config.get(anyString())).thenReturn(Optional.empty());
+    when(config.getBoolean(anyString())).thenReturn(Optional.empty());
+    assertThat(TestFileClassifier.isTestSourceConfigured(config)).isFalse();
+  }
+
+  @Test
+  void isTestSourceConfigured_returns_true_for_python_specific_key() {
+    var config = mock(Configuration.class);
+    when(config.get(anyString())).thenReturn(Optional.empty());
+    when(config.getBoolean(anyString())).thenReturn(Optional.empty());
+    when(config.getBoolean("sonar.python.testFileHeuristic.disabled")).thenReturn(Optional.of(true));
+    assertThat(TestFileClassifier.isTestSourceConfigured(config)).isTrue();
+  }
+
+  @Test
+  void isTestSourceConfigured_returns_true_for_generic_heuristic_disabled_key() {
+    var config = mock(Configuration.class);
+    when(config.get(anyString())).thenReturn(Optional.empty());
+    when(config.getBoolean(anyString())).thenReturn(Optional.empty());
+    when(config.getBoolean(HEURISTIC_DISABLED_KEY)).thenReturn(Optional.of(true));
+    assertThat(TestFileClassifier.isTestSourceConfigured(config)).isTrue();
+  }
 
   // --- looksLikeTestFileByPath ---
 

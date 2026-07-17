@@ -653,8 +653,6 @@ class PythonSensorTest {
   @ParameterizedTest
   @CsvSource({
     "sonar.tests,                              tests",
-    "sonar.test.inclusions,                    tests/**",
-    "sonar.test.exclusions,                    tests/generated/**",
     "sonar.python.testFileHeuristic.disabled,  true"
   })
   void test_auto_reclassify_bypassed_when_test_source_configured(String property, String value) {
@@ -683,23 +681,6 @@ class PythonSensorTest {
       .build();
 
     context.setSettings(new MapSettings().setProperty("sonar.tests", ""));
-    inputFile(FILE_TEST_FILE, Type.MAIN);
-    sensor().execute(context);
-
-    assertThat(context.allIssues()).isEmpty();
-    verify(analysisWarning).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
-  }
-
-  @Test
-  void test_auto_reclassify_not_bypassed_by_blank_sonar_test_inclusions() {
-    // blank sonar.test.inclusions is treated as "not configured" — same as not setting it
-    activeRules = new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S1226"))
-        .build())
-      .build();
-
-    context.setSettings(new MapSettings().setProperty("sonar.test.inclusions", ""));
     inputFile(FILE_TEST_FILE, Type.MAIN);
     sensor().execute(context);
 
