@@ -4,11 +4,11 @@
  */
 package org.sonar.samples.python;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.Version;
 
@@ -18,7 +18,7 @@ class CustomPythonRuleRepositoryTest {
 
   @Test
   void test_rule_repository() {
-    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.DEVELOPER);
+    SonarRuntime sonarRuntime = TestSonarRuntime.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.DEVELOPER);
     CustomPythonRuleRepository customPythonRuleRepository = new CustomPythonRuleRepository(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
     customPythonRuleRepository.define(context);

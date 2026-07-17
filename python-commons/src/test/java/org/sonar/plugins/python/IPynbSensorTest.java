@@ -16,6 +16,9 @@
  */
 package org.sonar.plugins.python;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,16 +30,8 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
-import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
-import org.sonar.scanner.plugin.api.impl.rule.ActiveRulesBuilder;
-import org.sonar.scanner.plugin.api.impl.rule.NewActiveRule;
-import org.sonar.duplications.internal.pmd.TokensLine;
-import org.sonar.scanner.plugin.api.impl.sensor.DefaultSensorDescriptor;
-import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
-import org.sonar.scanner.plugin.api.impl.config.MapSettings;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
@@ -44,6 +39,7 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
+import org.sonar.duplications.internal.pmd.TokensLine;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
@@ -54,11 +50,15 @@ import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.nosonar.NoSonarLineInfoCollector;
 import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
+import org.sonar.scanner.plugin.api.impl.config.MapSettings;
+import org.sonar.scanner.plugin.api.impl.rule.ActiveRulesBuilder;
+import org.sonar.scanner.plugin.api.impl.rule.NewActiveRule;
+import org.sonar.scanner.plugin.api.impl.sensor.DefaultSensorDescriptor;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -72,7 +72,7 @@ class IPynbSensorTest {
 
   private static final Version SONARLINT_DETECTABLE_VERSION = Version.create(9, 9);
 
-  static final SonarRuntime SONARLINT_RUNTIME = SonarRuntimeImpl.forSonarLint(SONARLINT_DETECTABLE_VERSION);
+  static final SonarRuntime SONARLINT_RUNTIME = TestSonarRuntime.forSonarLint(SONARLINT_DETECTABLE_VERSION);
 
   private static final String FILE_1 = "file1.ipynb";
   private static final String NOTEBOOK_FILE = "notebook.ipynb";

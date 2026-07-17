@@ -16,6 +16,7 @@
  */
 package org.sonar.plugins.python;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,6 @@ import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.rule.CheckFactory;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.Version;
 import org.sonar.check.Rule;
@@ -85,7 +85,7 @@ class AbstractPythonRuleRepositoryTest {
   }
 
   private RulesDefinition.Repository createDummy(List<Class<?>> checks, Set<String> templateRuleKeys, Set<String> disabledRuleKeys) {
-    var runtime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
+    var runtime = TestSonarRuntime.forSonarQube(Version.create(9, 3), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
     var dummyRepo = new DummyRuleRepository(runtime) {
       @Override
       protected List<Class<?>> getCheckClasses() {

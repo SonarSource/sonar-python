@@ -16,6 +16,7 @@
  */
 package org.sonar.plugins.python;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -24,7 +25,6 @@ import org.sonar.api.Plugin;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.api.SonarLintCache;
@@ -42,10 +42,10 @@ class PythonExtensionsTest {
   @Test
   void testGetExtensions() {
     Version v79 = Version.create(7, 9);
-    SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(v79, SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
+    SonarRuntime runtime = TestSonarRuntime.forSonarQube(v79, SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
     assertThat(extensions(runtime)).hasSize(46);
     assertThat(extensions(runtime)).contains(AnalysisWarningsWrapper.class);
-    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v79)))
+    assertThat(extensions(TestSonarRuntime.forSonarLint(v79)))
       .hasSize(26)
       .contains(SonarLintCache.class);
   }

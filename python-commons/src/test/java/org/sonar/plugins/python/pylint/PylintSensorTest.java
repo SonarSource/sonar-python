@@ -16,6 +16,9 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,16 +34,13 @@ import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
-import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
 import org.sonar.api.batch.rule.Severity;
-import org.sonar.scanner.plugin.api.impl.sensor.DefaultSensorDescriptor;
-import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.ExternalIssue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
+import org.sonar.scanner.plugin.api.impl.sensor.DefaultSensorDescriptor;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -221,7 +221,7 @@ class PylintSensorTest {
     SensorContextTester context = SensorContextTester.create(baseDir);
     try (Stream<Path> fileStream = Files.list(PROJECT_DIR)) {
       fileStream.forEach(file -> addFileToContext(context, baseDir, file));
-      context.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER, SonarEdition.DEVELOPER));
+      context.setRuntime(TestSonarRuntime.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER, SonarEdition.DEVELOPER));
       if (fileName != null) {
         String path = PROJECT_DIR.resolve(fileName).toAbsolutePath().toString();
         if (useLegacyKey) {

@@ -16,6 +16,8 @@
  */
 package org.sonar.plugins.python.telemetry;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
 import java.io.File;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,8 +26,6 @@ import org.slf4j.event.Level;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.sensor.SensorContext;
-import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
 
@@ -74,7 +74,7 @@ class SensorTelemetryStorageTest {
 
   private SensorContext sensorContext(Version version) {
     var sensorContext = spy(SensorContextTester.create(new File("")));
-    sensorContext.setRuntime(SonarRuntimeImpl.forSonarQube(version, SonarQubeSide.SERVER, SonarEdition.DEVELOPER));
+    sensorContext.setRuntime(TestSonarRuntime.forSonarQube(version, SonarQubeSide.SERVER, SonarEdition.DEVELOPER));
     return sensorContext;
   }
 }

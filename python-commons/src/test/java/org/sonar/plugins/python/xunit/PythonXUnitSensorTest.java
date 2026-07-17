@@ -16,22 +16,22 @@
  */
 package org.sonar.plugins.python.xunit;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
 import java.io.File;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputComponent;
-import org.sonar.scanner.plugin.api.impl.fs.DefaultFileSystem;
-import org.sonar.scanner.plugin.api.impl.fs.DefaultInputFile;
-import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
-import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
-import org.sonar.api.config.internal.ConfigurationBridge;
-import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
+import org.sonar.scanner.plugin.api.impl.config.ConfigurationBridge;
+import org.sonar.scanner.plugin.api.impl.config.MapSettings;
+import org.sonar.scanner.plugin.api.impl.fs.DefaultFileSystem;
+import org.sonar.scanner.plugin.api.impl.fs.DefaultInputFile;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.spy;
