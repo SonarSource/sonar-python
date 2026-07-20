@@ -28,25 +28,25 @@ dummy_context_manager = DummyContextManager()
 
 
 def test_pytest_raises_exception():
-    with pytest.raises(Exception):  # Noncompliant {{Specify a more specific exception type here.}}
+    with pytest.raises(Exception):  # Noncompliant {{This assertion is too broad; use a more specific exception type or check the exception message.}}
 #                      ^^^^^^^^^
         explode()
 
 
 def test_pytest_raises_base_exception():
-    with pytest.raises(BaseException):  # Noncompliant {{Specify a more specific exception type here.}}
+    with pytest.raises(BaseException):  # Noncompliant {{This assertion is too broad; use a more specific exception type or check the exception message.}}
 #                      ^^^^^^^^^^^^^
         explode()
 
 
 def test_pytest_raises_expected_exception_keyword():
-    with pytest.raises(expected_exception=Exception):  # Noncompliant {{Specify a more specific exception type here.}}
+    with pytest.raises(expected_exception=Exception):  # Noncompliant {{This assertion is too broad; use a more specific exception type or check the exception message.}}
 #                                         ^^^^^^^^^
         explode()
 
 
 def test_pytest_imported_raises():
-    with imported_raises(Exception):  # Noncompliant {{Specify a more specific exception type here.}}
+    with imported_raises(Exception):  # Noncompliant {{This assertion is too broad; use a more specific exception type or check the exception message.}}
 #                        ^^^^^^^^^
         explode()
 
@@ -67,12 +67,12 @@ def test_pytest_raises_generic_exception_with_match():
 
 
 def test_pytest_direct_raises_exception():
-    pytest.raises(Exception, explode)  # Noncompliant {{Specify a more specific exception type here.}}
+    pytest.raises(Exception, explode)  # Noncompliant {{This assertion is too broad; use a more specific exception type or check the exception message.}}
 #                 ^^^^^^^^^
 
 
 def test_pytest_direct_imported_raises_exception():
-    imported_raises(BaseException, explode)  # Noncompliant {{Specify a more specific exception type here.}}
+    imported_raises(BaseException, explode)  # Noncompliant {{This assertion is too broad; use a more specific exception type or check the exception message.}}
 #                   ^^^^^^^^^^^^^
 
 
@@ -93,12 +93,12 @@ def test_raise_qualifier_named_cls_parameter(cls):
 
 class MyTest(unittest.TestCase):
     def test_unittest_assert_raises_exception(self):
-        with self.assertRaises(Exception):  # Noncompliant {{Specify a more specific exception type here.}}
+        with self.assertRaises(Exception):  # Noncompliant {{This assertion is too broad; use a more specific exception type or check the exception message.}}
 #                              ^^^^^^^^^
             explode()
 
     def test_unittest_assert_raises_base_exception(self):
-        with self.assertRaises(BaseException):  # Noncompliant {{Specify a more specific exception type here.}}
+        with self.assertRaises(BaseException):  # Noncompliant {{This assertion is too broad; use a more specific exception type or check the exception message.}}
 #                              ^^^^^^^^^^^^^
             explode()
 
@@ -123,7 +123,7 @@ class MyTest(unittest.TestCase):
             raise_custom_exception()
 
     def test_unittest_direct_assert_raises_exception(self):
-        self.assertRaises(Exception, explode)  # Noncompliant {{Specify a more specific exception type here.}}
+        self.assertRaises(Exception, explode)  # Noncompliant {{This assertion is too broad; use a more specific exception type or check the exception message.}}
 #                         ^^^^^^^^^
 
     def test_unittest_direct_assert_raises_regex_exception(self):

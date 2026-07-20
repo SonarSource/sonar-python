@@ -35,7 +35,7 @@ import static org.sonar.plugins.python.api.types.BuiltinTypes.EXCEPTION;
 
 @Rule(key = "S5958")
 public class SpecificExceptionAssertionCheck extends PythonSubscriptionCheck {
-  private static final String MESSAGE = "Specify a more specific exception type here.";
+  private static final String MESSAGE = "This assertion is too broad; use a more specific exception type or check the exception message.";
   private static final TypeMatcher GENERIC_EXCEPTION_MATCHER = TypeMatchers.any(
     TypeMatchers.isObjectOfType(EXCEPTION),
     TypeMatchers.isObjectOfType(BASE_EXCEPTION),
