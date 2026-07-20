@@ -110,7 +110,8 @@ class TypeMatcherImplTest {
   @Test
   void testIsFor() {
     SubscriptionContext ctx = mock();
-    when(ctx.typeTable()).thenReturn(mock(TypeTable.class));
+    TypeTable typeTable = mock();
+    when(ctx.typeTable()).thenReturn(typeTable);
     assertThat(typeMatcher.evaluateFor(functionExpr, ctx)).isEqualTo(TriBool.TRUE);
     assertThat(typeMatcher.evaluateFor(unknownExpr, ctx)).isEqualTo(TriBool.UNKNOWN);
     assertThat(typeMatcher.evaluateFor(objectExpr, ctx)).isEqualTo(TriBool.FALSE);
@@ -123,7 +124,8 @@ class TypeMatcherImplTest {
   @Test
   void testIsTrueFor() {
     SubscriptionContext ctx = mock(SubscriptionContext.class);
-    when(ctx.typeTable()).thenReturn(mock(TypeTable.class));
+    TypeTable typeTable = mock();
+    when(ctx.typeTable()).thenReturn(typeTable);
     assertThat(typeMatcher.isTrueFor(functionExpr, ctx)).isTrue();
     assertThat(typeMatcher.isTrueFor(unknownExpr, ctx)).isFalse();
     assertThat(typeMatcher.isTrueFor(objectExpr, ctx)).isFalse();
