@@ -24,10 +24,14 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringElement;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.UnittestUtils;
 import org.sonar.python.semantic.v2.typeshed.TypeShedConstants;
 import org.sonar.python.tree.TreeUtils;
@@ -60,11 +64,31 @@ public class FixtureParamDependenciesCheck extends PythonSubscriptionCheck {
     }
 
     Expression fixtureNameExpression = fixtureNameArgument(callExpression);
-    if (fixtureNameExpression == null || !fixtureNameExpression.is(Tree.Kind.STRING_LITERAL)) {
+    if (fixtureNameExpression == null || !isStaticFixtureName(fixtureNameExpression)) {
       return;
     }
 
     ctx.addIssue(fixtureNameExpression, MESSAGE);
+  }
+
+  /**
+   * True only for plain string literals, useless f-strings (no replacement fields), or names that
+   * resolve to such a constant. Interpolated f-strings and other dynamic expressions are ignored.
+   */
+  private static boolean isStaticFixtureName(Expression expression) {
+    Expression unwrapped = Expressions.removeParentheses(expression);
+    if (unwrapped instanceof Name name) {
+      Expression assignedValue = Expressions.singleAssignedValue(name);
+      return assignedValue != null && isStaticFixtureName(assignedValue);
+    }
+    if (!(unwrapped instanceof StringLiteral stringLiteral)) {
+      return false;
+    }
+    return stringLiteral.stringElements().stream().noneMatch(FixtureParamDependenciesCheck::isDynamicallyInterpolated);
+  }
+
+  private static boolean isDynamicallyInterpolated(StringElement stringElement) {
+    return stringElement.isInterpolated() && !stringElement.formattedExpressions().isEmpty();
   }
 
   private static boolean isCollectedTestFunction(SubscriptionContext ctx, FunctionDef functionDef) {

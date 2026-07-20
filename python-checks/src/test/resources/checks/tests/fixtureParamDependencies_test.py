@@ -62,8 +62,26 @@ def test_matrix(request, fixture_name):
 
 def test_dynamic_fixture_name(request):
     name = 'database'
-    fixture = request.getfixturevalue(name)
+    fixture = request.getfixturevalue(name)  # Noncompliant {{Declare this fixture as a test function parameter instead of using "request.getfixturevalue()" with a string literal.}}
+#                                     ^^^^
     assert fixture is not None
+
+
+def test_interpolated_fstring(request):
+    key = "users"
+    request.getfixturevalue(f"pub_{key}")
+    request.getfixturevalue(f"sig_{key}")
+
+
+def test_useless_fstring(request):
+    request.getfixturevalue(f"database")  # Noncompliant {{Declare this fixture as a test function parameter instead of using "request.getfixturevalue()" with a string literal.}}
+#                           ^^^^^^^^^^^
+
+
+def test_format_and_percent_strings(request):
+    key = "users"
+    request.getfixturevalue("pub_{}".format(key))
+    request.getfixturevalue("pub_%s" % key)
 
 
 def helper_not_a_test(request):
