@@ -16,17 +16,17 @@ def bootstrap_session(df=10):
 
 
 def test_standalone_raises():
-    pytest.raises(ValueError)  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    pytest.raises(ValueError)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
     process_data('hello')
 
 
 def test_deprecated_callable_passing_form():
-    pytest.raises(ValueError, bootstrap_session, df=-1)  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    pytest.raises(ValueError, bootstrap_session, df=-1)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 def test_typo_calling_function_immediately():
-    pytest.raises(NotImplementedError, bootstrap_session(df=10))  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    pytest.raises(NotImplementedError, bootstrap_session(df=10))  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -52,7 +52,7 @@ def test_compliant_imported_raises():
 
 
 def test_noncompliant_imported_raises():
-    imported_raises(ValueError, bootstrap_session, df=-1)  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    imported_raises(ValueError, bootstrap_session, df=-1)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -100,28 +100,28 @@ def test_compliant_annotated_assignment_reused_in_with():
 
 
 def test_noncompliant_saved_raises_never_used_in_with():
-    ctx = pytest.raises(ValueError)  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    ctx = pytest.raises(ValueError)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #         ^^^^^^^^^^^^^^^^^^^^^^^^^
     process_data('hello')
 
 
 def test_noncompliant_chained_assignment_even_if_used_in_with():
     # Chained assignment is not tracked as a single saved context manager.
-    a = b = pytest.raises(ValueError)  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    a = b = pytest.raises(ValueError)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #           ^^^^^^^^^^^^^^^^^^^^^^^^^
     with a:
         process_data(123)
 
 
 def test_noncompliant_tuple_unpacking_assignment():
-    ctx, other = pytest.raises(ValueError), None  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    ctx, other = pytest.raises(ValueError), None  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #                ^^^^^^^^^^^^^^^^^^^^^^^^^
     process_data('hello')
 
 
 def test_noncompliant_attribute_assignment():
     holder = type('Holder', (), {})()
-    holder.ctx = pytest.raises(ValueError)  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    holder.ctx = pytest.raises(ValueError)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #                ^^^^^^^^^^^^^^^^^^^^^^^^^
     process_data('hello')
 
@@ -177,7 +177,7 @@ def test_compliant_parametrize_list_argnames_raises_used_in_with(expectation):
 
 @pytest.mark.parametrize(
     "expectation",
-    [pytest.raises(ValueError)],  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    [pytest.raises(ValueError)],  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #    ^^^^^^^^^^^^^^^^^^^^^^^^^
 )
 def test_noncompliant_parametrize_raises_never_used_in_with(expectation):
@@ -190,7 +190,7 @@ def test_noncompliant_parametrize_raises_never_used_in_with(expectation):
         pytest.param(
             1,
             contextlib.nullcontext(),
-            pytest.raises(ValueError),  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+            pytest.raises(ValueError),  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #           ^^^^^^^^^^^^^^^^^^^^^^^^^
         ),
     ],
@@ -202,7 +202,7 @@ def test_noncompliant_parametrize_raises_not_the_with_param(x, expectation, unus
 
 @pytest.mark.parametrize(
     "expectation",
-    [{pytest.raises(ValueError): None}],  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    [{pytest.raises(ValueError): None}],  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #     ^^^^^^^^^^^^^^^^^^^^^^^^^
 )
 def test_noncompliant_parametrize_raises_in_unsupported_row_shape(expectation):
@@ -210,14 +210,14 @@ def test_noncompliant_parametrize_raises_in_unsupported_row_shape(expectation):
         process_data(123)
 
 
-@pytest.mark.parametrize(argvalues=[pytest.raises(ValueError)])  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+@pytest.mark.parametrize(argvalues=[pytest.raises(ValueError)])  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
 def test_noncompliant_parametrize_missing_argnames(expectation):
     with expectation:
         process_data(123)
 
 
-@pytest.mark.parametrize(*["expectation", [pytest.raises(TypeError)]])  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+@pytest.mark.parametrize(*["expectation", [pytest.raises(TypeError)]])  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #                                          ^^^^^^^^^^^^^^^^^^^^^^^^
 def test_noncompliant_parametrize_starred_args(expectation):
     with expectation:
@@ -235,7 +235,7 @@ def test_compliant_parametrize_argnames_trailing_comma(expectation):
 
 def test_noncompliant_annotated_attribute_assignment():
     holder = type('Holder', (), {})()
-    holder.ctx: object = pytest.raises(ValueError)  # Noncompliant {{Wrap the code that should raise with "with pytest.raises(ExpectedError)".}}
+    holder.ctx: object = pytest.raises(ValueError)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #                        ^^^^^^^^^^^^^^^^^^^^^^^^^
     process_data('hello')
 

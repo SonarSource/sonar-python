@@ -49,7 +49,7 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S9000")
 public class PytestRaisesContextManagerCheck extends PythonSubscriptionCheck {
-  private static final String MESSAGE = "Wrap the code that should raise with \"with pytest.raises(ExpectedError)\".";
+  private static final String MESSAGE = "Prefer the context manager form: wrap the raising code in \"with pytest.raises(...)\".";
   private static final TypeMatcher PYTEST_PARAMETRIZE_MATCHER = TypeMatchers.withFQN("pytest.mark.parametrize");
 
   @Override
