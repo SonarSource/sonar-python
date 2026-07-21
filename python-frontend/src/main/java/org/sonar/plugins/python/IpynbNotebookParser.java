@@ -312,10 +312,16 @@ public class IpynbNotebookParser {
     String sourceLine = jParser.getValueAsString();
     JsonLocation tokenLocation = jParser.currentTokenLocation();
 
-    var offset = addSourceLinesToCellData(cellData, sourceLine.lines().toList(), tokenLocation, true, true);
+    List<String> lines = sourceLine.lines().toList();
+    var offset = addSourceLinesToCellData(cellData, lines, tokenLocation, true, true);
     // The last split line is always followed by a newline: either the cell delimiter or the next cell's content.
-    cellData.appendToSource("\n");
-    offset = offset.plusNewline();
+    // An empty source ("") has no split line to terminate, so there is nothing to append here - doing so
+    // regardless would insert a physical blank line with no locationMap entry of its own, drifting every
+    // following location by one.
+    if (!lines.isEmpty()) {
+      cellData.appendToSource("\n");
+      offset = offset.plusNewline();
+    }
 
     if (sourceLine.endsWith("\n")) {
       var column = tokenLocation.getColumnNr() + offset.length() + offset.extraChars();

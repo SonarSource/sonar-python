@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
@@ -32,6 +34,7 @@ import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.python.IPythonLocation;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.plugins.python.NotebookTestUtils.mapToColumnMappingList;
 
@@ -90,6 +93,33 @@ class IpynbNotebookParserTest {
     assertThat(result.locationMap()).extractingByKey(26).isEqualTo(new IPythonLocation(90, 62, List.of(), true));
     // last line with the cell delimiter which contains the EOF token the column of this token should be at the end of the previous line 
     assertThat(result.locationMap()).extractingByKey(27).isEqualTo(new IPythonLocation(90, 72, List.of(), false));
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {
+    // "source" is a plain empty string ("", not an array). Used to leave the generated blank line
+    // without a locationMap entry, drifting the cell delimiter's line onto the wrong physical line and
+    // later crashing with "No IPythonLocation found for line N" once the tree maker enriched it.
+    "notebook_empty_string_source.ipynb",
+    // "source" is an empty array ([]).
+    "notebook_empty_array_source.ipynb",
+    // "source" is an array containing a single empty string ([""]).
+    "notebook_array_with_empty_string_source.ipynb"
+  })
+  void testParseNotebookWithEmptySourceCell(String notebookFile) throws IOException {
+    var inputFile = createInputFile(baseDir, notebookFile, InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+    assertThat(resultOptional).isPresent();
+    var result = resultOptional.get();
+
+    int lineCount = result.contents().split("\n", -1).length;
+    assertThat(result.locationMap().keySet()).containsExactlyInAnyOrderElementsOf(
+      java.util.stream.IntStream.rangeClosed(1, lineCount).boxed().toList());
+
+    var ast = org.sonar.python.parser.PythonParser.createIPythonParser().parse(result.contents());
+    assertThatCode(() -> new org.sonar.python.tree.IPythonTreeMaker(result.locationMap()).fileInput(ast))
+      .doesNotThrowAnyException();
   }
 
   @Test
