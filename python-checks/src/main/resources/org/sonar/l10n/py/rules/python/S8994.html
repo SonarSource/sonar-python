@@ -1,7 +1,12 @@
 <p>This rule raises an issue when a <code>@pytest.fixture</code> function contains more than one <code>yield</code> statement.</p>
 <h2>Why is this an issue?</h2>
-<p>Pytest yield fixtures allow exactly one <code>yield</code>. A second <code>yield</code> triggers <code>Failed: fixture function has more than one
-'yield'</code> at teardown, and cleanup after it never runs.</p>
+<p>Pytest yield fixtures separate setup from teardown with a single <code>yield</code> statement. Code before <code>yield</code> runs before the test,
+the yielded value is passed to the test, and code after <code>yield</code> runs during teardown.</p>
+<p>When a fixture contains more than one <code>yield</code>, pytest accepts the fixture during test setup and runs the test, but raises an error
+during teardown: <code>Failed: fixture function has more than one 'yield'</code>. Any code after the second <code>yield</code>, including cleanup such
+as closing connections, is never executed, which can leave resources open and break test isolation.</p>
+<p>This rule targets <code>@pytest.fixture</code> setup and teardown patterns only. Ordinary generator functions that use multiple <code>yield</code>
+values outside fixture definitions are out of scope.</p>
 <h3>What is the potential impact?</h3>
 <p>Tests can satisfy their assertions yet still fail during teardown, producing confusing pass-then-fail diagnostics in CI until the fixture is
 corrected.</p>

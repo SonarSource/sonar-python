@@ -2,10 +2,24 @@
 declaring that fixture as a function parameter.</p>
 <p>In Python’s pytest framework, this specifically refers to the <code>request.getfixturevalue()</code> method.</p>
 <h2>Why is this an issue?</h2>
-<p><code>request.getfixturevalue('fixture_name')</code> with a string literal hides dependencies from the function signature and static analysis.
-Refactoring fixture names leaves no trace until runtime.</p>
-<p>Declare known fixtures as test parameters instead. Dynamic lookup remains appropriate when the name comes from parametrization or inside fixture
-chains.</p>
+<p>In testing frameworks, dependency injection is a powerful mechanism for managing test dependencies and setup code. These frameworks are designed to
+automatically discover and inject dependencies based on function signatures, creating a clear dependency graph.</p>
+<p>When a test function uses <code>request.getfixturevalue()</code> with a string literal to load a fixture whose name is already known at write time,
+it bypasses the framework’s built-in dependency tracking. This creates several problems:</p>
+<ul>
+  <li><strong>Hidden dependencies</strong>: Other developers (and the framework itself) cannot easily see what dependencies a test requires by looking
+  at its signature</li>
+  <li><strong>No static analysis</strong>: Tools cannot detect missing or misspelled dependency names until runtime</li>
+  <li><strong>Lifecycle management issues</strong>: The framework may not properly manage the dependency’s setup and teardown when loaded
+  dynamically</li>
+  <li><strong>Reduced maintainability</strong>: Refactoring dependencies becomes harder because usage is not explicit</li>
+</ul>
+<p>This issue applies when the fixture name is fixed as a string literal in the test. When the name comes from parametrization, configuration, or
+another runtime source, dynamic lookup is intentional and not reported.</p>
+<p>Dynamic dependency loading with <code>getfixturevalue()</code> remains appropriate inside fixture functions when setup must load another fixture
+conditionally. In collected test functions, dependencies with known names should be declared through the framework’s static declaration mechanism.</p>
+<p>By declaring known fixture dependencies as parameters, you make your tests more explicit, easier to understand, and better integrated with the
+framework’s dependency management system.</p>
 <p>In pytest specifically, this anti-pattern manifests when a collected test function calls <code>request.getfixturevalue()</code> with a string
 literal fixture name. When the fixture name is known at write time, declare it as a test parameter so dependencies stay visible to readers and static
 analysis.</p>
@@ -26,8 +40,10 @@ manually and suppress only when the test’s purpose requires dynamic fixture re
 <h3>What is the potential impact?</h3>
 <p>Refactoring fixture names leaves no static trace in test signatures, so broken dependencies surface only when tests execute.</p>
 <h2>How to fix it</h2>
-<p>Declare known fixtures as test parameters. Keep <code>request.getfixturevalue()</code> inside fixture functions or when the name is resolved at
-runtime from parametrization.</p>
+<p>Replace string-literal <code>request.getfixturevalue()</code> calls in test functions with explicit parameter declaration. Convert the call into a
+function parameter with the same name as the fixture being requested.</p>
+<p>Keep <code>request.getfixturevalue()</code> inside fixture functions when setup must load another fixture conditionally. When a test must exercise
+multiple fixtures from a parametrized name matrix, keep the variable lookup and treat it as an accepted pattern rather than a violation.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">

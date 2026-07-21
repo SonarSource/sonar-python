@@ -1,5 +1,5 @@
-<p>This rule raises an issue when a validation model class has fields typed to accept instances of structured data types (such as dataclasses), but
-does not explicitly configure the framework’s revalidation behavior for those instances.</p>
+<p>This rule raises an issue when a validation model class has fields typed to accept instances of dataclasses, but does not explicitly configure the
+framework’s revalidation behavior for those instances.</p>
 <p>In Pydantic specifically, this refers to <code>BaseModel</code> classes with fields typed as standard library or Pydantic dataclasses.</p>
 <h2>Why is this an issue?</h2>
 <p>Validation frameworks do not revalidate pre-existing data structure instances by default. When an already-instantiated object is passed as a field
@@ -22,6 +22,8 @@ the list is stored silently in place of the expected string.</p>
   <li>Security vulnerabilities if validation is used to enforce security constraints</li>
 </ul>
 <h2>How to fix it</h2>
+<p>There are two ways to address this issue.</p>
+<h3>Option 1: Set <code>revalidate_instances</code> explicitly</h3>
 <p>Explicitly set <code>revalidate_instances</code> on the <code>BaseModel</code> that holds the dataclass field. This can be done with
 <code>ConfigDict</code> or as a class keyword argument.</p>
 <p>Choose the value that matches your intent:</p>
@@ -31,6 +33,11 @@ the list is stored silently in place of the expected string.</p>
   <li><code>'never'</code> — skips revalidation; use this only when dataclass instances are guaranteed to be constructed from trusted, pre-validated
   data.</li>
 </ul>
+<p>Note that enabling <code>revalidate_instances</code> can have a runtime cost, particularly when a model with many nested Pydantic fields holds a
+single dataclass field, since all nested models are also revalidated recursively.</p>
+<h3>Option 2: Replace the dataclass with a Pydantic model</h3>
+<p>Convert the dataclass to a <code>BaseModel</code> (or a Pydantic <code>dataclass</code>). Pydantic models are validated at construction time, so no
+extra revalidation configuration is needed.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -62,6 +69,28 @@ class Bar(BaseModel):  # ConfigDict syntax
 
 class Baz(BaseModel, revalidate_instances='never'):  # explicitly opt out
     user: User
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import dataclasses
+from pydantic import BaseModel
+
+@dataclasses.dataclass
+class Address:
+    street: str
+
+class Order(BaseModel):  # Noncompliant
+    shipping_address: Address
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from pydantic import BaseModel
+
+class Address(BaseModel):  # Pydantic model — validated at construction time
+    street: str
+
+class Order(BaseModel):
+    shipping_address: Address
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>

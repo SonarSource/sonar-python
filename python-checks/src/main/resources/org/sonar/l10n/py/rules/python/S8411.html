@@ -1,39 +1,44 @@
-<p>This is an issue when a FastAPI route decorator declares path parameters (e.g., <code>@app.get("/items/{item_id}")</code>) but the corresponding
-function signature does not include those parameters as arguments. It is also an issue when path parameters are declared as positional-only arguments
-(using <code>/</code> in the signature).</p>
+<p>This is an issue when a FastAPI route decorator declares path parameters (e.g., <code>@app.get("/items/{item_id}")</code>) but neither the route
+handler, called a path operation function in FastAPI, nor its dependencies declare those parameters as arguments. It is also an issue when path
+parameters are declared as positional-only arguments (using <code>/</code> in the signature).</p>
 <h2>Why is this an issue?</h2>
 <p>FastAPI is a modern web framework that uses Python type hints and function signatures to automatically extract, validate, and inject request
-parameters into route handler functions. When you define a route with path parameters in the decorator (e.g.,
-<code>@app.get("/items/{item_id}")</code>), FastAPI expects these parameters to be present in the function signature.</p>
+parameters into route handlers and dependencies. FastAPI injects path values only into parameters with matching names declared by the path operation
+function or by one of its dependencies.</p>
 <p>Path parameters are segments of the URL path that are used to identify specific resources. For example, in the route <code>/items/{item_id}</code>,
 the <code>item_id</code> is a path parameter that would capture values like <code>123</code> from a request to <code>/items/123</code>.</p>
-<p>The framework works by inspecting the function signature at startup and creating a mapping between the route path parameters and the function
-arguments. When a request comes in, FastAPI extracts the values from the URL path and injects them into the function call.</p>
-<p>When path parameters are missing from the function signature, several problems occur:</p>
+<p>The framework works by inspecting function signatures at startup and creating a mapping between route path parameters and path operation function
+or dependency parameters. When a request comes in, FastAPI extracts the values from the URL path and injects them into matching parameters by
+name.</p>
+<p>When path parameters are not declared by the path operation function or its dependencies, several problems can occur:</p>
 <ul>
-  <li>The parameter values cannot be accessed in the function body, making it impossible to use them for business logic</li>
-  <li>FastAPI cannot perform automatic validation and type conversion on the parameter</li>
-  <li>The application will raise a runtime error when the route is accessed</li>
+  <li>The route contract may require a path value that the application code never consumes</li>
+  <li>A misspelled or mismatched function parameter may be treated and validated as a query parameter instead of receiving the path value</li>
+  <li>If the mismatched parameter has a default value, the endpoint may silently ignore the path value</li>
   <li>The mismatch between the route definition and function signature indicates a programming error</li>
 </ul>
 <p>Additionally, if a path parameter is declared as a positional-only argument (using <code>/</code> in the function signature), FastAPI cannot inject
 it because the framework uses keyword arguments for parameter injection. This is a subtle but important constraint of how FastAPI’s dependency
 injection system works.</p>
-<p>This type of error is particularly problematic because it may not be caught during development if the specific route is not tested, leading to
-runtime failures in production.</p>
+<p>This type of error is problematic because it may not be caught during development if the specific route is not tested, leading to validation errors
+or incorrect endpoint behavior in production.</p>
 <h3>What is the potential impact?</h3>
-<p>When path parameters are missing from the function signature, the application will fail at runtime when the route is accessed. This causes:</p>
+<p>When path parameters are not declared by the path operation function or its dependencies, the endpoint contract no longer matches the code that
+handles the request. This can cause:</p>
 <ul>
-  <li><strong>Service disruption</strong>: The endpoint becomes completely non-functional, returning HTTP 500 errors to clients</li>
-  <li><strong>Poor user experience</strong>: Users receive error responses instead of the expected data or functionality</li>
-  <li><strong>Debugging difficulty</strong>: The error may not be immediately obvious, especially if the route is not covered by tests</li>
-  <li><strong>Maintenance burden</strong>: Developers must spend time investigating and fixing runtime errors that could have been prevented</li>
+  <li><strong>Request validation errors</strong>: A wrongly named parameter may be interpreted as a required query parameter instead of the intended
+  path parameter</li>
+  <li><strong>Incorrect behavior</strong>: The endpoint may ignore the value from the URL path and use a default value or unrelated input instead</li>
+  <li><strong>Poor API contract clarity</strong>: The route path suggests that a value is required, but the handler does not consume it</li>
+  <li><strong>Maintenance burden</strong>: Developers must spend time investigating and fixing runtime errors and mismatches that could have been
+  prevented</li>
 </ul>
-<p>The impact is particularly severe because this is a complete failure of the endpoint - there is no graceful degradation or partial functionality.
-Every request to the affected route will fail until the code is corrected and redeployed.</p>
+<p>The impact depends on how the path operation function is written. Some mismatches cause immediate request failures, while others silently produce
+stale or misleading API behavior.</p>
 <h2>How to fix it in FastAPI</h2>
-<p>Include all path parameters from the route decorator in the function signature. The parameter names in the function must exactly match the
-parameter names in the route path (enclosed in curly braces). Add type hints to enable FastAPI’s automatic validation and conversion.</p>
+<p>Include all path parameters from the route decorator in the path operation function signature, or in the signature of a FastAPI dependency used by
+that route. The parameter names must match the parameter names in the route path (enclosed in curly braces). Add type hints to enable FastAPI’s
+automatic validation and conversion.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">

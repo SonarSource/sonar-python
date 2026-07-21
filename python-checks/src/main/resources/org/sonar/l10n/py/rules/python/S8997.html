@@ -3,13 +3,44 @@ without using test isolation fixtures or mocking utilities provided by the test 
 <p>In Python/pytest, this specifically refers to using the <code>monkeypatch</code> fixture instead of directly modifying <code>sys.path</code> or
 other global state.</p>
 <h2>Why is this an issue?</h2>
-<p>Manual save/restore of environment variables, attributes, or callables is easy to forget and often skipped on exceptions. The
-<code>monkeypatch</code> fixture undoes all changes automatically when the test completes.</p>
+<p>When tests manually modify global state, they risk polluting the test environment for subsequent tests. This happens because the modified state
+persists beyond the test that changed it, unless the test explicitly restores the original values.</p>
+<p>Manual cleanup has several problems:</p>
+<ul>
+  <li><strong>Easy to forget</strong>: Developers must remember to restore every modification, especially in error cases.</li>
+  <li><strong>Exception handling</strong>: If a test fails or raises an exception, cleanup code may not execute, leaving the environment in a
+  corrupted state.</li>
+  <li><strong>Maintenance burden</strong>: Every modification requires corresponding cleanup code, making tests longer and harder to read.</li>
+  <li><strong>Incomplete cleanup</strong>: Complex objects or nested modifications are difficult to restore correctly.</li>
+</ul>
+<p>Test utilities that manage state modifications solve these problems by automatically undoing all modifications when the test completes, regardless
+of whether the test passes or fails. They provide a clean, declarative API that makes the intent clear and eliminates the need for manual cleanup
+code.</p>
 <h3>What is the potential impact?</h3>
 <p>State pollution from missed cleanup propagates across the suite, so failures show up in unrelated tests and erode trust in green CI runs.</p>
 <h2>How to fix it</h2>
-<p>Use <code>monkeypatch.setenv</code>, <code>monkeypatch.setattr</code>, <code>monkeypatch.setitem</code>, <code>monkeypatch.syspath_prepend</code>,
-or <code>monkeypatch.chdir</code> instead of manual save/restore logic.</p>
+<p>Declare the <code>monkeypatch</code> fixture as a test parameter and use its API instead of manual save/restore logic:</p>
+<ul>
+  <li><code>monkeypatch.setenv(name, value)</code> and <code>monkeypatch.delenv(name)</code> for environment variables</li>
+  <li><code>monkeypatch.setattr(target, name, value)</code> and <code>monkeypatch.delattr(target, name)</code> for object attributes, module-level
+  functions, and bound methods</li>
+  <li><code>monkeypatch.setitem(mapping, name, value)</code> and <code>monkeypatch.delitem(mapping, name)</code> for dictionary-like objects</li>
+  <li><code>monkeypatch.syspath_prepend(path)</code> and <code>monkeypatch.chdir(path)</code> for import path and working-directory changes</li>
+</ul>
+<p>To replace a function or method, pass the attribute name as a string to <code>monkeypatch.setattr</code> and supply a stub function or
+<code>lambda</code> as the replacement:</p>
+<ul>
+  <li><code>monkeypatch.setattr(myapp.api, "fetch", stub_fetch)</code> — replace a module-level function</li>
+  <li><code>monkeypatch.setattr(client, "send", lambda payload: {"status": "ok"})</code> — replace a method on an object instance</li>
+</ul>
+<p>Use a named stub function when the replacement is reused or needs more than one statement; use a <code>lambda</code> for simple one-line return
+values.</p>
+<p>Each method automatically undoes the modification after the test completes, even when the test fails.</p>
+<p>For straightforward temporary changes to attributes, environment variables, or callables on existing modules and objects, prefer
+<code>monkeypatch</code>.</p>
+<p><code>unittest.mock.patch</code> is a better fit when you need to mock entire modules, assert call arguments with
+<code>Mock.assert_called_with</code>, configure complex side effects, or nest several patches with context managers. Review manually before replacing
+working <code>patch</code>-based code with <code>monkeypatch</code>.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">

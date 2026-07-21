@@ -1,5 +1,5 @@
 {
-  "title": "FastAPI path parameters should be included in route function signatures",
+  "title": "FastAPI path parameters should be declared in route handlers or dependencies",
   "type": "BUG",
   "status": "ready",
   "remediation": {
@@ -11,14 +11,14 @@
     "api",
     "pitfall"
   ],
-  "defaultSeverity": "Blocker",
+  "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-8411",
   "sqKey": "S8411",
   "scope": "Main",
   "quickfix": "unknown",
   "code": {
     "impacts": {
-      "RELIABILITY": "BLOCKER"
+      "RELIABILITY": "HIGH"
     },
     "attribute": "COMPLETE"
   }
