@@ -19,12 +19,15 @@ package org.sonar.plugins.python.ruff;
 import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
 import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
 import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
@@ -32,18 +35,25 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
+import org.sonar.api.batch.fs.FilePredicates;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.Severity;
+import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.ExternalIssue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
 import org.sonar.scanner.plugin.api.impl.sensor.DefaultSensorDescriptor;
+import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class RuffSensorTest {
 
@@ -213,6 +223,64 @@ class RuffSensorTest {
   }
 
   @Test
+  void issues_with_absolute_path_from_different_base_dir() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "absolute-path-different-base-dir.json");
+    assertThat(externalIssues).hasSize(1);
+
+    ExternalIssue first = externalIssues.get(0);
+    assertThat(first.ruleKey()).hasToString("external_ruff:D100");
+    IssueLocation firstPrimaryLoc = first.primaryLocation();
+    assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
+    assertThat(firstPrimaryLoc.message()).isEqualTo("Missing docstring in public module");
+
+    assertNoErrorWarnLogs(logTester);
+  }
+
+  @Test
+  void most_specific_relative_path_is_preferred_when_multiple_suffixes_match() throws IOException {
+    // The report path ends with both "ruff/file1.py" and the longer, more specific "ruff/other/ruff/file1.py".
+    // The longer match must win instead of being treated as ambiguous.
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "nested-relative-path-match.json");
+    assertThat(externalIssues).hasSize(1);
+
+    ExternalIssue first = externalIssues.get(0);
+    assertThat(first.ruleKey()).hasToString("external_ruff:D100");
+    IssueLocation firstPrimaryLoc = first.primaryLocation();
+    assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo("python-project:ruff/other/ruff/file1.py");
+    assertThat(firstPrimaryLoc.message()).isEqualTo("Missing docstring in public module");
+
+    assertNoErrorWarnLogs(logTester);
+  }
+
+  @Test
+  void ambiguous_relative_path_match_is_not_resolved() throws IOException, ParseException {
+    // Two distinct input files sharing the exact same relative path can only occur when the file system indexes
+    // them without deduplication (e.g. across modules in a multi-module reactor); SensorContextTester's own
+    // FileSystem dedupes by relative path, so the FileSystem is mocked here to reproduce that scenario directly.
+    InputFile firstCandidate = mock(InputFile.class);
+    when(firstCandidate.relativePath()).thenReturn("ruff/file1.py");
+    InputFile secondCandidate = mock(InputFile.class);
+    when(secondCandidate.relativePath()).thenReturn("ruff/file1.py");
+
+    FilePredicates predicates = mock(FilePredicates.class);
+    FileSystem fileSystem = mock(FileSystem.class);
+    when(fileSystem.predicates()).thenReturn(predicates);
+    when(fileSystem.inputFile(any())).thenReturn(null);
+    when(fileSystem.inputFiles(any())).thenReturn(List.of(firstCandidate, secondCandidate));
+
+    SensorContext context = mock(SensorContext.class);
+    when(context.fileSystem()).thenReturn(fileSystem);
+
+    Set<String> unresolvedInputFiles = new HashSet<>();
+    File reportFile = PROJECT_DIR.resolve("absolute-path-different-base-dir.json").toFile();
+    ruffSensor.importReport(reportFile, context, unresolvedInputFiles);
+
+    assertThat(unresolvedInputFiles).containsExactly("/builds/ci-runner-42/workspace/project/ruff/file1.py");
+    assertThat(logTester.logs(Level.DEBUG))
+      .contains("Multiple files equally match the path '/builds/ci-runner-42/workspace/project/ruff/file1.py', skipping ambiguous match");
+  }
+
+  @Test
   void unknown_json_file_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_REPORT_UNKNOWN_FILES);
     assertThat(externalIssues).hasSize(1);
@@ -307,8 +375,8 @@ class RuffSensorTest {
     @Nullable String fileName) throws IOException {
     Path baseDir = PROJECT_DIR.getParent();
     SensorContextTester context = SensorContextTester.create(baseDir);
-    try (Stream<Path> fileStream = Files.list(PROJECT_DIR)) {
-      fileStream.forEach(file -> addFileToContext(context, baseDir, file));
+    try (Stream<Path> fileStream = Files.walk(PROJECT_DIR)) {
+      fileStream.filter(Files::isRegularFile).forEach(file -> addFileToContext(context, baseDir, file));
       context.setRuntime(TestSonarRuntime.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER,
         SonarEdition.DEVELOPER));
       if (fileName != null) {

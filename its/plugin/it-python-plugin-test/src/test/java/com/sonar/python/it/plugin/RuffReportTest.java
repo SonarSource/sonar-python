@@ -66,4 +66,29 @@ class RuffReportTest {
 
   }
 
+  @Test
+  void import_report_with_absolute_path_from_different_base_dir() {
+    final String projectKey = "ruff_project_absolute_path";
+    ORCHESTRATOR.getServer().provisionProject(projectKey, projectKey);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(projectKey, "py", "no_rule");
+    ORCHESTRATOR.executeBuild(
+        ORCHESTRATOR.createSonarScanner()
+            .setProjectDir(new File("projects/ruff_project"))
+            .setProjectKey(projectKey)
+            .setProjectName(projectKey)
+            .setProperty("sonar.python.ruff.reportPaths", "ruff-report-absolute-path-from-other-machine.json"));
+
+    List<Issues.Issue> issues = issues(projectKey).stream().sorted(Comparator.comparing(Issues.Issue::getRule))
+        .toList();
+    assertThat(issues).hasSize(2);
+
+    Issues.Issue firstIssue = issues.get(0);
+    assertThat(firstIssue.getComponent()).isEqualTo(projectKey + ":src/file1.py");
+    assertThat(firstIssue.getRule()).isEqualTo("external_ruff:E501");
+
+    Issues.Issue secondIssue = issues.get(1);
+    assertThat(secondIssue.getComponent()).isEqualTo(projectKey + ":src/file1.py");
+    assertThat(secondIssue.getRule()).isEqualTo("external_ruff:F821");
+  }
+
 }

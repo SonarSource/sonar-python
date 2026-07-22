@@ -1,0 +1,2 @@
+def duplicate():
+    pass
