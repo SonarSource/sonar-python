@@ -1,0 +1,80 @@
+<p>This rule raises an issue when a test assertion combines multiple independent conditions with <code>and</code>, or when it asserts the negation of
+an <code>or</code> expression (<code>assert not (a or b)</code>).</p>
+<p>It does not raise an issue on plain <code>assert a or b</code>, because splitting that form would change the meaning from "at least one condition
+holds" to "all conditions hold".</p>
+<h2>Why is this an issue?</h2>
+<p>Composite assertions hide which condition failed. When several checks are joined in a single <code>assert</code>, a failure reports the whole
+expression as false instead of pointing at the specific condition that broke.</p>
+<h3>Assertions joined with <code>and</code></h3>
+<p><code>assert a and b</code> verifies two independent facts in one statement. If the assertion fails, the message does not clearly identify whether
+<code>a</code>, <code>b</code>, or both were false:</p>
+<pre>
+def test_user(user):
+    assert user.is_active and user.is_verified  # Which condition failed?
+</pre>
+<p>Splitting into separate asserts makes each failure actionable:</p>
+<pre>
+def test_user(user):
+    assert user.is_active
+    assert user.is_verified
+</pre>
+<h3>Negated <code>or</code> expressions</h3>
+<p><code>assert not (a or b)</code> is equivalent to asserting that both <code>a</code> and <code>b</code> are false (De Morgan’s law). It has the
+same opacity problem as an <code>and</code> chain:</p>
+<pre>
+def test_axis_hidden(axis):
+    assert not (axis.visible or axis.label_visible)  # Which flag is still true?
+</pre>
+<p>Split it into independent negated asserts:</p>
+<pre>
+def test_axis_hidden(axis):
+    assert not axis.visible
+    assert not axis.label_visible
+</pre>
+<h3>Why plain <code>or</code> is excluded</h3>
+<p><code>assert a or b</code> means at least one condition must hold. Replacing it with two separate asserts would require both to hold and would
+change the test’s intent. This rule therefore does not flag that form.</p>
+<h3>What is the potential impact?</h3>
+<p>When a composite assertion fails, developers spend extra time deciphering which condition broke. Opaque failure messages slow down debugging and
+make flaky or partial regressions harder to diagnose. Splitting assertions keeps each check independent and produces clearer failure reports.</p>
+<h2>How to fix it</h2>
+<p>Split composite assertions into separate <code>assert</code> statements, one per independent condition. For <code>assert not (a or b)</code>, use
+De Morgan’s law and write <code>assert not a</code> and <code>assert not b</code>.</p>
+<p>This applies to:</p>
+<ul>
+  <li><code>assert a and b</code> (and longer <code>and</code> chains) that combine independent conditions</li>
+  <li><code>assert not (a or b)</code> (De Morgan-equivalent negation of an <code>or</code> expression)</li>
+</ul>
+<p>Plain <code>assert a or b</code> is not flagged, because splitting it would change the meaning of the test.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def test_user(user):
+    assert user.is_active and user.is_verified  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def test_user(user):
+    assert user.is_active
+    assert user.is_verified
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+def test_axis_hidden(axis):
+    assert not (axis.visible or axis.label_visible)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+def test_axis_hidden(axis):
+    assert not axis.visible
+    assert not axis.label_visible
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Ruff - <a href="https://docs.astral.sh/ruff/rules/pytest-composite-assertion/">pytest-composite-assertion (PT018)</a></li>
+  <li>flake8-pytest-style - <a href="https://github.com/m-burst/flake8-pytest-style/blob/master/docs/rules/PT018.md">PT018</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/assert.html#asserting-with-the-assert-statement">Asserting with the
+  assert statement</a></li>
+</ul>
+

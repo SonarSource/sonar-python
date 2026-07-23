@@ -95,6 +95,7 @@ import org.sonar.python.checks.tests.AssertionInTryCheck;
 import org.sonar.python.checks.tests.AssertOnDissimilarTypesCheck;
 import org.sonar.python.checks.tests.AssertOnTupleLiteralCheck;
 import org.sonar.python.checks.tests.AssertionArgumentOrderCheck;
+import org.sonar.python.checks.tests.CompositeAssertionCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.DedicatedExceptionAssertionCheck;
 import org.sonar.python.checks.tests.EmptyParametrizeValuesCheck;
@@ -185,6 +186,7 @@ public class OpenSourceCheckList {
       CommentedCodeCheck.class,
       CommentRegularExpressionCheck.class,
       ComparisonToNoneCheck.class,
+      CompositeAssertionCheck.class,
       CompressionModulesFromNamespaceCheck.class,
       ConfusingTypeCheckingCheck.class,
       ConfusingWalrusCheck.class,
