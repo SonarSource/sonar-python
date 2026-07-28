@@ -98,6 +98,7 @@ import org.sonar.python.checks.tests.AssertionArgumentOrderCheck;
 import org.sonar.python.checks.tests.CompositeAssertionCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.DedicatedExceptionAssertionCheck;
+import org.sonar.python.checks.tests.DeprecatedYieldFixtureCheck;
 import org.sonar.python.checks.tests.EmptyParametrizeValuesCheck;
 import org.sonar.python.checks.tests.FixtureParamDependenciesCheck;
 import org.sonar.python.checks.tests.GroupSimilarTestsParameterizedCheck;
@@ -209,6 +210,7 @@ public class OpenSourceCheckList {
       EmptyParametrizeValuesCheck.class,
       DefaultFactoryArgumentCheck.class,
       DeprecatedNumpyTypesCheck.class,
+      DeprecatedYieldFixtureCheck.class,
       DictKeysMembershipTestCheck.class,
       DictionaryDuplicateKeyCheck.class,
       DictionaryStaticKeyCheck.class,
