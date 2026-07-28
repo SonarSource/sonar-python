@@ -1,0 +1,74 @@
+<p>This rule raises an issue when the <code>argvalues</code> collection of a <code>@pytest.mark.parametrize</code> decorator contains duplicate test
+cases.</p>
+<p>In Python with pytest, this occurs when <code>@pytest.mark.parametrize</code> is given an <code>argvalues</code> sequence that repeats the same
+case more than once (for example duplicate literals, names, or calls).</p>
+<h2>Why is this an issue?</h2>
+<p><code>@pytest.mark.parametrize</code> runs the decorated test once for each entry in its values collection. Duplicate cases therefore execute the
+same scenario more than once.</p>
+<p>That wastes CI time and usually signals a copy-paste mistake: an intended distinct case was never updated, so coverage looks broader than it
+is.</p>
+<p>Duplicates are detected by comparing the parametrize entries as expressions (literals, names, calls, and other AST forms), not only literal values.
+Accidental duplicates should be removed. Rarely, repeated identical entries are intentional when each run exercises mutable shared state; keep those
+only when that is deliberate.</p>
+<p>This rule complements {rule:python:S8998}, which flags empty parametrize value lists.</p>
+<h3>What is the potential impact?</h3>
+<p>Duplicate cases inflate suite runtime and can hide unfinished copy-paste edits. Teams may believe a scenario is covered in several ways when the
+same inputs are simply repeated.</p>
+<h2>How to fix it</h2>
+<p>When the duplicate is accidental, remove the repeated entries from the <code>@pytest.mark.parametrize</code> values list so each case appears only
+once. If the repeated entry was meant to be a different scenario, replace it with the intended distinct inputs.</p>
+<p>Do not remove duplicates that are intentional for stateful behavior (for example repeated invocations that observe mutable global state). In those
+cases, keep the repeated cases or make the shared-state dependency explicit another way.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pytest
+
+@pytest.mark.parametrize("n", [1, 2, 2, 3])  # Noncompliant
+def test_double(n):
+    assert double(n) == n * 2
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+@pytest.mark.parametrize("n", [1, 2, 3])
+def test_double(n):
+    assert double(n) == n * 2
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import pytest
+
+@pytest.mark.parametrize("operand,expected", [
+    (1, 2),
+    (2, 4),
+    (1, 2),  # Noncompliant
+    (3, 6),
+])
+def test_double(operand, expected):
+    assert double(operand) == expected
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import pytest
+
+@pytest.mark.parametrize("operand,expected", [
+    (1, 2),
+    (2, 4),
+    (3, 6),
+])
+def test_double(operand, expected):
+    assert double(operand) == expected
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/parametrize.html">How to parametrize fixtures and test
+  functions</a></li>
+  <li>pytest documentation - <a
+  href="https://docs.pytest.org/en/stable/reference/reference.html#pytest-mark-parametrize">pytest.mark.parametrize</a></li>
+  <li>Ruff PT014 - <a
+  href="https://docs.astral.sh/ruff/rules/pytest-duplicate-parametrize-test-cases/">pytest-duplicate-parametrize-test-cases</a></li>
+</ul>
+

@@ -71,6 +71,7 @@ public class UnittestUtils {
     TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + "assertIs"),
     TypeMatchers.isType(UNITTEST_TEST_CASE_FQN_PREFIX + "assertIsNot"));
   public static final TypeMatcher PYTEST_APPROX_MATCHER = TypeMatchers.isType("pytest.approx");
+  private static final TypeMatcher PYTEST_PARAMETRIZE_MATCHER = TypeMatchers.isType("pytest.mark.parametrize");
   public static final TypeMatcher ASSERTPY_IS_EQUAL_TO_MATCHER = TypeMatchers.isType("assertpy.AssertionBuilder.is_equal_to");
   public static final TypeMatcher ASSERTPY_EQUALITY_ASSERTION_MATCHER = TypeMatchers.any(
     TypeMatchers.isType("assertpy.AssertionBuilder.is_equal_to"),
@@ -185,14 +186,6 @@ public class UnittestUtils {
     return PYTEST_WARNS_MATCHER.isTrueFor(callExpression.callee(), ctx);
   }
 
-  public static boolean hasPytestRaisesMatchArgument(CallExpression callExpression) {
-    return TreeUtils.argumentByKeyword(PYTEST_MATCH, callExpression.arguments()) != null;
-  }
-
-  public static boolean hasPytestWarnsMatchArgument(CallExpression callExpression) {
-    return TreeUtils.argumentByKeyword(PYTEST_MATCH, callExpression.arguments()) != null;
-  }
-
   @Nullable
   public static RegularArgument pytestExpectedExceptionArgument(CallExpression callExpression) {
     return TreeUtils.nthArgumentOrKeyword(0, PYTEST_EXPECTED_EXCEPTION, callExpression.arguments());
@@ -206,6 +199,20 @@ public class UnittestUtils {
   @Nullable
   public static RegularArgument pytestMatchArgument(CallExpression callExpression) {
     return TreeUtils.argumentByKeyword(PYTEST_MATCH, callExpression.arguments());
+  }
+
+  /**
+   * Extracts the {@code argvalues} expression of a {@code @pytest.mark.parametrize(...)} decorator,
+   * or {@code null} if the decorator is not a parametrize call or has no {@code argvalues}.
+   */
+  @Nullable
+  public static Expression parametrizeArgvaluesExpression(Decorator decorator, SubscriptionContext ctx) {
+    Expression expression = decorator.expression();
+    if (!(expression instanceof CallExpression callExpression) || !PYTEST_PARAMETRIZE_MATCHER.isTrueFor(callExpression.callee(), ctx)) {
+      return null;
+    }
+    RegularArgument valuesArgument = TreeUtils.nthArgumentOrKeyword(1, "argvalues", callExpression.arguments());
+    return valuesArgument == null ? null : Expressions.removeParentheses(valuesArgument.expression());
   }
 
   public static boolean isUnittestAssertRaises(CallExpression callExpression, SubscriptionContext ctx) {

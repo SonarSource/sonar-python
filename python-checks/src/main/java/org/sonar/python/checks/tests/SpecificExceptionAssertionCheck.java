@@ -80,7 +80,7 @@ public class SpecificExceptionAssertionCheck extends PythonSubscriptionCheck {
   private static Expression genericExceptionArgument(CallExpression callExpression, SubscriptionContext ctx) {
     RegularArgument exceptionArgument = null;
     if (UnittestUtils.isPytestRaises(callExpression, ctx)) {
-      if (UnittestUtils.hasPytestRaisesMatchArgument(callExpression)) {
+      if (UnittestUtils.pytestMatchArgument(callExpression) != null) {
         return null;
       }
       exceptionArgument = UnittestUtils.pytestExpectedExceptionArgument(callExpression);

@@ -99,6 +99,7 @@ import org.sonar.python.checks.tests.CompositeAssertionCheck;
 import org.sonar.python.checks.tests.DedicatedAssertionCheck;
 import org.sonar.python.checks.tests.DedicatedExceptionAssertionCheck;
 import org.sonar.python.checks.tests.DeprecatedYieldFixtureCheck;
+import org.sonar.python.checks.tests.DuplicateParametrizeCasesCheck;
 import org.sonar.python.checks.tests.EmptyParametrizeValuesCheck;
 import org.sonar.python.checks.tests.FixtureParamDependenciesCheck;
 import org.sonar.python.checks.tests.GroupSimilarTestsParameterizedCheck;
@@ -208,6 +209,7 @@ public class OpenSourceCheckList {
       DebugModeCheck.class,
       DedicatedAssertionCheck.class,
       DedicatedExceptionAssertionCheck.class,
+      DuplicateParametrizeCasesCheck.class,
       EmptyParametrizeValuesCheck.class,
       DefaultFactoryArgumentCheck.class,
       DeprecatedNumpyTypesCheck.class,

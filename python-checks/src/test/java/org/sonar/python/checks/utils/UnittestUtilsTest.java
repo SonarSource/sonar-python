@@ -256,7 +256,7 @@ class UnittestUtilsTest {
       raises(ValueError)
       """, (ctx, callExpression) -> {
       isPytestRaises.add(UnittestUtils.isPytestRaises(callExpression, ctx));
-      hasMatchArgument.add(UnittestUtils.hasPytestRaisesMatchArgument(callExpression));
+      hasMatchArgument.add(UnittestUtils.pytestMatchArgument(callExpression) != null);
       exceptionArguments.add(UnittestUtils.pytestExpectedExceptionArgument(callExpression).expression().firstToken().value());
     });
 
@@ -279,7 +279,7 @@ class UnittestUtilsTest {
       warns(UserWarning)
       """, (ctx, callExpression) -> {
       isPytestWarns.add(UnittestUtils.isPytestWarns(callExpression, ctx));
-      hasMatchArgument.add(UnittestUtils.hasPytestWarnsMatchArgument(callExpression));
+      hasMatchArgument.add(UnittestUtils.pytestMatchArgument(callExpression) != null);
       warningArguments.add(UnittestUtils.pytestExpectedWarningArgument(callExpression).expression().firstToken().value());
       RegularArgument matchArgument = UnittestUtils.pytestMatchArgument(callExpression);
       matchArguments.add(matchArgument == null ? null : matchArgument.expression().firstToken().value());
