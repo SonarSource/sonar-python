@@ -108,6 +108,7 @@ import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.PytestAutouseParametrizedFixtureCheck;
 import org.sonar.python.checks.tests.PytestFixtureMultipleYieldCheck;
+import org.sonar.python.checks.tests.PytestFixturePositionalArgsCheck;
 import org.sonar.python.checks.tests.PytestPluginsConftestCheck;
 import org.sonar.python.checks.tests.PytestRaisesContextManagerCheck;
 import org.sonar.python.checks.tests.SingleInvocationRuntimeExceptionCheck;
@@ -412,6 +413,7 @@ public class OpenSourceCheckList {
       PydanticSkipValidationWithConstraintsCheck.class,
       PytestAutouseParametrizedFixtureCheck.class,
       PytestFixtureMultipleYieldCheck.class,
+      PytestFixturePositionalArgsCheck.class,
       PytestPluginsConftestCheck.class,
       PytestRaisesContextManagerCheck.class,
       PyTorchDataLoaderNumWorkersCheck.class,
