@@ -112,6 +112,7 @@ import org.sonar.python.checks.tests.PytestRaisesContextManagerCheck;
 import org.sonar.python.checks.tests.SingleInvocationRuntimeExceptionCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 import org.sonar.python.checks.tests.SpecificExceptionAssertionCheck;
+import org.sonar.python.checks.tests.SpecificWarningAssertionCheck;
 import org.sonar.python.checks.tests.TestCasesShouldContainTestsCheck;
 import org.sonar.python.checks.tests.UnconditionalAssertionCheck;
 import org.sonar.python.checks.tests.UseMonkeypatchFixtureCheck;
@@ -453,6 +454,7 @@ public class OpenSourceCheckList {
       SpecialMethodParamListCheck.class,
       SpecialMethodReturnTypeCheck.class,
       SpecificExceptionAssertionCheck.class,
+      SpecificWarningAssertionCheck.class,
       TestCasesShouldContainTestsCheck.class,
       SQLQueriesCheck.class,
       StartsWithEndsWithTupleCheck.class,

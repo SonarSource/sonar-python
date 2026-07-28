@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
@@ -262,6 +263,32 @@ class UnittestUtilsTest {
     assertThat(isPytestRaises).containsExactly(true, true);
     assertThat(hasMatchArgument).containsExactly(true, false);
     assertThat(exceptionArguments).containsExactly("Exception", "ValueError");
+  }
+
+  @Test
+  void test_pytest_warns_helpers() {
+    List<Boolean> isPytestWarns = new ArrayList<>();
+    List<Boolean> hasMatchArgument = new ArrayList<>();
+    List<String> warningArguments = new ArrayList<>();
+    List<String> matchArguments = new ArrayList<>();
+
+    analyzeCallExpressions("""
+      import pytest
+      from pytest import warns
+      pytest.warns(Warning, match="bad")
+      warns(UserWarning)
+      """, (ctx, callExpression) -> {
+      isPytestWarns.add(UnittestUtils.isPytestWarns(callExpression, ctx));
+      hasMatchArgument.add(UnittestUtils.hasPytestWarnsMatchArgument(callExpression));
+      warningArguments.add(UnittestUtils.pytestExpectedWarningArgument(callExpression).expression().firstToken().value());
+      RegularArgument matchArgument = UnittestUtils.pytestMatchArgument(callExpression);
+      matchArguments.add(matchArgument == null ? null : matchArgument.expression().firstToken().value());
+    });
+
+    assertThat(isPytestWarns).containsExactly(true, true);
+    assertThat(hasMatchArgument).containsExactly(true, false);
+    assertThat(warningArguments).containsExactly("Warning", "UserWarning");
+    assertThat(matchArguments).containsExactly("\"bad\"", null);
   }
 
   @Test

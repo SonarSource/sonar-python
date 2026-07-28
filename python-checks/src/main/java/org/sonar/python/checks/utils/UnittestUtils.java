@@ -46,9 +46,11 @@ public class UnittestUtils {
   public static final String PYTEST_FIXTURE_DECORATOR_FQN = "pytest.fixture";
   private static final String UNITTEST_TEST_CASE_FQN_PREFIX = "unittest.case.TestCase.";
   private static final String PYTEST_EXPECTED_EXCEPTION = "expected_exception";
+  private static final String PYTEST_EXPECTED_WARNING = "expected_warning";
   private static final String PYTEST_MATCH = "match";
   private static final String UNITTEST_EXCEPTION = "exception";
   private static final TypeMatcher PYTEST_RAISES_MATCHER = TypeMatchers.withFQN("pytest.raises");
+  private static final TypeMatcher PYTEST_WARNS_MATCHER = TypeMatchers.withFQN("pytest.warns");
   public static final String ASSERT_RAISES_REGEXP = "assertRaisesRegexp";
   public static final String ASSERT_RAISES_REGEX = "assertRaisesRegex";
   private static final TypeMatcher UNITTEST_ASSERT_RAISES_MATCHER = TypeMatchers.any(
@@ -179,13 +181,31 @@ public class UnittestUtils {
     return PYTEST_RAISES_MATCHER.isTrueFor(callExpression.callee(), ctx);
   }
 
+  public static boolean isPytestWarns(CallExpression callExpression, SubscriptionContext ctx) {
+    return PYTEST_WARNS_MATCHER.isTrueFor(callExpression.callee(), ctx);
+  }
+
   public static boolean hasPytestRaisesMatchArgument(CallExpression callExpression) {
+    return TreeUtils.argumentByKeyword(PYTEST_MATCH, callExpression.arguments()) != null;
+  }
+
+  public static boolean hasPytestWarnsMatchArgument(CallExpression callExpression) {
     return TreeUtils.argumentByKeyword(PYTEST_MATCH, callExpression.arguments()) != null;
   }
 
   @Nullable
   public static RegularArgument pytestExpectedExceptionArgument(CallExpression callExpression) {
     return TreeUtils.nthArgumentOrKeyword(0, PYTEST_EXPECTED_EXCEPTION, callExpression.arguments());
+  }
+
+  @Nullable
+  public static RegularArgument pytestExpectedWarningArgument(CallExpression callExpression) {
+    return TreeUtils.nthArgumentOrKeyword(0, PYTEST_EXPECTED_WARNING, callExpression.arguments());
+  }
+
+  @Nullable
+  public static RegularArgument pytestMatchArgument(CallExpression callExpression) {
+    return TreeUtils.argumentByKeyword(PYTEST_MATCH, callExpression.arguments());
   }
 
   public static boolean isUnittestAssertRaises(CallExpression callExpression, SubscriptionContext ctx) {
