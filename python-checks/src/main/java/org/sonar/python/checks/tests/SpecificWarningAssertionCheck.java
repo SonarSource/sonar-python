@@ -61,12 +61,12 @@ public class SpecificWarningAssertionCheck extends PythonSubscriptionCheck {
     if (!UnittestUtils.isPytestWarns(callExpression, ctx)) {
       return null;
     }
+    if (hasEffectiveMatchArgument(callExpression)) {
+      return null;
+    }
     RegularArgument warningArgument = UnittestUtils.pytestExpectedWarningArgument(callExpression);
     if (warningArgument == null) {
       return callExpression;
-    }
-    if (hasEffectiveMatchArgument(callExpression)) {
-      return null;
     }
     return broadWarningLocation(warningArgument.expression(), ctx);
   }

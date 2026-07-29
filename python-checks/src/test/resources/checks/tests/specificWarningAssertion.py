@@ -117,6 +117,29 @@ def test_warns_broad_with_match():
         emit_deprecation_warning()
 
 
+def test_warns_match_only():
+    with pytest.warns(match="x"):
+        emit_user_warning()
+
+
+def test_warns_match_only_variable():
+    warning_message = "Can't encode more than one header value for the same key."
+    with pytest.warns(match=warning_message):
+        emit_user_warning()
+
+
+def test_warns_match_only_empty():
+    with pytest.warns(match=""):  # Noncompliant {{This assertion is too broad; use a more specific warning type or check the warning message.}}
+#        ^^^^^^^^^^^^^^^^^^^^^^
+        emit_user_warning()
+
+
+def test_warns_match_only_none():
+    with pytest.warns(match=None):  # Noncompliant {{This assertion is too broad; use a more specific warning type or check the warning message.}}
+#        ^^^^^^^^^^^^^^^^^^^^^^^^
+        emit_user_warning()
+
+
 def test_warns_user_warning_with_match():
     with pytest.warns(UserWarning, match="x"):
         emit_user_warning()
