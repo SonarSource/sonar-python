@@ -1,0 +1,54 @@
+<p>This rule raises an issue when a test intentionally aborts with <code>assert False</code>, <code>assert 0</code>, or a <code>pytest.fail()</code>
+call that has no failure message.</p>
+<p>In Python with pytest, this covers:</p>
+<ul>
+  <li><code>assert False</code> or <code>assert 0</code> used as an intentional abort</li>
+  <li><code>pytest.fail()</code> called without a non-empty message (including empty string and empty <code>reason</code>)</li>
+</ul>
+<h2>Why is this an issue?</h2>
+<p>Tests sometimes need to fail on purpose: a feature is not ready, a dependency is blocked, or a branch of the test should never succeed.</p>
+<p><code>assert False</code> and <code>assert 0</code> look like accidental logic bugs rather than deliberate aborts. Readers cannot tell whether the
+author meant to stop the test or left a broken condition behind.</p>
+<p><code>pytest.fail()</code> without a message fails the test but leaves no explanation in the report, so maintainers cannot triage the failure
+without digging through history or comments.</p>
+<p><code>pytest.fail("…​")</code> states the intent and records why the test stopped.</p>
+<h3>What is the potential impact?</h3>
+<p>Intentional failures without a clear signal or message are harder to triage. Teams may waste time treating deliberate aborts as real assertion
+bugs, or overlook why a test is blocked.</p>
+<h2>How to fix it</h2>
+<p>Replace <code>assert False</code> / <code>assert 0</code> with <code>pytest.fail("…​")</code>, and always pass a concise message (or
+<code>reason=</code>) that explains why the test fails.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pytest
+
+def test_not_ready():
+    assert False  # Noncompliant
+
+def test_blocked():
+    pytest.fail()  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+def test_not_ready():
+    pytest.fail("feature not implemented yet")
+
+def test_blocked():
+    pytest.fail("blocked on issue 42")
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/reference/reference.html#pytest-fail">pytest.fail</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/assert.html">How to write and report assertions in tests</a></li>
+  <li>Ruff PT015 - <a href="https://docs.astral.sh/ruff/rules/pytest-assert-always-false/">pytest-assert-always-false</a></li>
+  <li>Ruff PT016 - <a href="https://docs.astral.sh/ruff/rules/pytest-fail-without-message/">pytest-fail-without-message</a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S5914} - Assertions should not fail or succeed unconditionally</li>
+</ul>
+

@@ -105,6 +105,7 @@ import org.sonar.python.checks.tests.FixtureParamDependenciesCheck;
 import org.sonar.python.checks.tests.GroupSimilarTestsParameterizedCheck;
 import org.sonar.python.checks.tests.IdenticalAssertionArgumentsCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
+import org.sonar.python.checks.tests.IntentionalTestFailureMessageCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.PytestAutouseParametrizedFixtureCheck;
 import org.sonar.python.checks.tests.PytestFixtureMultipleYieldCheck;
@@ -483,6 +484,7 @@ public class OpenSourceCheckList {
       SynchronousOsCallsInAsyncCheck.class,
       TempFileCreationCheck.class,
       ImplicitlySkippedTestCheck.class,
+      IntentionalTestFailureMessageCheck.class,
       TaskGroupNurseryUsedOnlyOnceCheck.class,
       TemplateStringStructuralPatternMatchingCheck.class,
       TestClientContentParameterCheck.class,
