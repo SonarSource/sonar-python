@@ -19,14 +19,12 @@ package org.sonar.python.checks.tests;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -38,23 +36,76 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.UnittestUtils;
 
 @Rule(key = "S5778")
 public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Refactor this exception test to have only one invocation possibly throwing an exception.";
   private static final String SECONDARY_MESSAGE = "Invocation possibly throwing an exception.";
-  private static final String PYTEST_RAISES = "pytest.raises";
-  private static final List<String> SAFE_BUILTINS = List.of(
-    "list",
-    "set",
-    "dict",
-    "tuple",
-    "frozenset",
-    "str",
-    "bytes",
-    "bytearray",
-    "object");
+
+  private static final TypeMatcher PYTEST_RAISES_MATCHER = TypeMatchers.isType("pytest.raises");
+
+  /**
+   * Calls that are almost never the exception under test when nested inside {@code pytest.raises} /
+   * {@code assertRaises}. Treating them as safe avoids noisy FPs on common setup helpers.
+   */
+  private static final TypeMatcher ALWAYS_SAFE_CALL_MATCHER = TypeMatchers.any(
+    TypeMatchers.isType("builtins.str"),
+    TypeMatchers.isType("builtins.bytes"),
+    TypeMatchers.isType("builtins.bytearray"),
+    TypeMatchers.isType("builtins.repr"),
+    TypeMatchers.isType("builtins.ascii"),
+    TypeMatchers.isType("builtins.format"),
+    TypeMatchers.isType("builtins.bool"),
+    TypeMatchers.isType("builtins.int"),
+    TypeMatchers.isType("builtins.float"),
+    TypeMatchers.isType("builtins.complex"),
+    TypeMatchers.isType("builtins.memoryview"),
+    TypeMatchers.isType("builtins.list"),
+    TypeMatchers.isType("builtins.tuple"),
+    TypeMatchers.isType("builtins.dict"),
+    TypeMatchers.isType("builtins.print"),
+    TypeMatchers.isType("builtins.len"),
+    TypeMatchers.isType("builtins.abs"),
+    TypeMatchers.isType("builtins.round"),
+    TypeMatchers.isType("builtins.id"),
+    TypeMatchers.isType("builtins.hash"),
+    TypeMatchers.isType("builtins.hex"),
+    TypeMatchers.isType("builtins.oct"),
+    TypeMatchers.isType("builtins.bin"),
+    TypeMatchers.isType("builtins.ord"),
+    TypeMatchers.isType("builtins.chr"),
+    TypeMatchers.isType("builtins.range"),
+    TypeMatchers.isType("builtins.enumerate"),
+    TypeMatchers.isType("builtins.zip"),
+    TypeMatchers.isType("builtins.reversed"),
+    TypeMatchers.isType("builtins.sorted"),
+    TypeMatchers.isType("builtins.slice"),
+    TypeMatchers.isType("builtins.callable"),
+    TypeMatchers.isType("pathlib.Path"),
+    TypeMatchers.isType("pathlib.PurePath"),
+    TypeMatchers.isType("pathlib.PosixPath"),
+    TypeMatchers.isType("pathlib.WindowsPath"),
+    TypeMatchers.isType("pathlib.PurePosixPath"),
+    TypeMatchers.isType("pathlib.PureWindowsPath"),
+    TypeMatchers.isType("uuid.UUID"),
+    TypeMatchers.isType("uuid.uuid1"),
+    TypeMatchers.isType("uuid.uuid3"),
+    TypeMatchers.isType("uuid.uuid4"),
+    TypeMatchers.isType("uuid.uuid5"),
+    TypeMatchers.isType("uuid.uuid6"),
+    TypeMatchers.isType("uuid.uuid7"),
+    TypeMatchers.isType("uuid.uuid8"));
+
+  /**
+   * Constructors that are safe only without arguments (with args they commonly raise TypeError).
+   */
+  private static final TypeMatcher EMPTY_ARGS_SAFE_CALL_MATCHER = TypeMatchers.any(
+    TypeMatchers.isType("builtins.set"),
+    TypeMatchers.isType("builtins.frozenset"),
+    TypeMatchers.isType("builtins.object"));
 
   @Override
   public void initialize(Context context) {
@@ -72,35 +123,31 @@ public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionChe
       .map(WithItem::test)
       .filter(CallExpression.class::isInstance)
       .map(CallExpression.class::cast)
-      .anyMatch(callExpression -> isPytestRaise(callExpression) || isUnittestRaise(callExpression));
+      .anyMatch(callExpression -> isPytestRaise(callExpression, ctx) || isUnittestRaise(callExpression));
 
     if (!isRaiseAssertion) {
       return;
     }
 
-    var invocations = unsafeInvocations(withStatement.statements());
+    var invocations = unsafeInvocations(withStatement.statements(), ctx);
     if (invocations.size() > 1) {
       reportIfMultipleInvocations(ctx.addIssue(withStatement.withKeyword(), withStatement.colon(), MESSAGE), invocations);
     }
   }
 
   private static void checkDirectRaiseCall(SubscriptionContext ctx, CallExpression callExpression) {
-    if (!isPytestRaise(callExpression) && !isUnittestRaise(callExpression)) {
+    if (!isPytestRaise(callExpression, ctx) && !isUnittestRaise(callExpression)) {
       return;
     }
 
     findLambdaArgument(callExpression.arguments())
-      .map(lambdaExpression -> unsafeInvocations(lambdaExpression.expression()))
+      .map(lambdaExpression -> unsafeInvocations(lambdaExpression.expression(), ctx))
       .filter(invocations -> invocations.size() > 1)
       .ifPresent(invocations -> reportIfMultipleInvocations(ctx.addIssue(callExpression, MESSAGE), invocations));
   }
 
-  private static boolean isPytestRaise(CallExpression callExpression) {
-    return Optional.ofNullable(callExpression.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .filter(Objects::nonNull)
-      .map(fqn -> fqn.contains(PYTEST_RAISES))
-      .orElse(false);
+  private static boolean isPytestRaise(CallExpression callExpression, SubscriptionContext ctx) {
+    return PYTEST_RAISES_MATCHER.isTrueFor(callExpression.callee(), ctx);
   }
 
   private static boolean isUnittestRaise(CallExpression callExpression) {
@@ -138,8 +185,8 @@ public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionChe
     return IssueLocation.preciseLocation(invocation, message);
   }
 
-  private static List<CallExpression> unsafeInvocations(Tree tree) {
-    var visitor = new InvocationCollector();
+  private static List<CallExpression> unsafeInvocations(Tree tree, SubscriptionContext ctx) {
+    var visitor = new InvocationCollector(ctx);
     tree.accept(visitor);
     return visitor.invocations.stream()
       .sorted(Comparator
@@ -151,11 +198,16 @@ public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionChe
   }
 
   private static class InvocationCollector extends BaseTreeVisitor {
+    private final SubscriptionContext ctx;
     private final List<CallExpression> invocations = new ArrayList<>();
+
+    private InvocationCollector(SubscriptionContext ctx) {
+      this.ctx = ctx;
+    }
 
     @Override
     public void visitCallExpression(CallExpression callExpression) {
-      if (!isSafeBuiltin(callExpression)) {
+      if (!isSafeCall(callExpression)) {
         invocations.add(callExpression);
       }
       super.visitCallExpression(callExpression);
@@ -171,17 +223,12 @@ public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionChe
       // Nested function bodies are not executed when merely defined.
     }
 
-    private static boolean isSafeBuiltin(CallExpression callExpression) {
-      if (!(callExpression.callee() instanceof Name calleeName)) {
-        return false;
+    private boolean isSafeCall(CallExpression callExpression) {
+      if (ALWAYS_SAFE_CALL_MATCHER.isTrueFor(callExpression.callee(), ctx)) {
+        return true;
       }
-
-      String callee = calleeName.name();
-      if (!SAFE_BUILTINS.contains(callee)) {
-        return false;
-      }
-
-      return callExpression.arguments().isEmpty();
+      return EMPTY_ARGS_SAFE_CALL_MATCHER.isTrueFor(callExpression.callee(), ctx)
+        && callExpression.arguments().isEmpty();
     }
   }
 }

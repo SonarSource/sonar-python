@@ -1,4 +1,7 @@
 import unittest
+import uuid
+from pathlib import Path
+from uuid import UUID, uuid4
 
 import pytest
 
@@ -107,6 +110,51 @@ def test_pytest_with_unsafe_collection_arguments():
 #               ^^^^^^@-1< {{Invocation possibly throwing an exception.}}
 
 
+def test_pytest_with_dict_named_args():
+    with pytest.raises(ValueError):
+        do_work(dict(x=1))
+
+
+def test_pytest_with_str_argument():
+    with pytest.raises(ValueError):
+        do_work(str(1))
+
+
+def test_pytest_with_print():
+    with pytest.raises(ValueError):
+        print(do_work())
+
+
+def test_pytest_with_path():
+    with pytest.raises(ValueError):
+        do_work(Path("missing"))
+
+
+def test_pytest_with_uuid4():
+    with pytest.raises(ValueError):
+        do_work(uuid4())
+
+
+def test_pytest_with_uuid_module():
+    with pytest.raises(ValueError):
+        do_work(uuid.uuid4())
+
+
+def test_pytest_with_uuid_constructor():
+    with pytest.raises(ValueError):
+        do_work(UUID(int=0))
+
+
+def test_pytest_with_len_and_repr():
+    with pytest.raises(ValueError):
+        do_work(len(repr(1)))
+
+
+def test_pytest_with_list_and_tuple_args():
+    with pytest.raises(ValueError):
+        do_work(list((1,)))
+
+
 def test_pytest_direct_lambda():
     pytest.raises(ValueError, lambda: get_item().process())  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -127,11 +175,16 @@ def test_pytest_direct_lambda_single_invocation():
     pytest.raises(ValueError, lambda: do_work())
 
 
-def test_pytest_direct_lambda_with_unsafe_builtin_argument():
-    pytest.raises(ValueError, lambda: do_work(dict(5)))  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#                                     ^^^^^^^^^^^^^^^^@-1< {{Invocation possibly throwing an exception.}}
-#                                             ^^^^^^^@-2< {{Invocation possibly throwing an exception.}}
+def test_pytest_direct_lambda_with_dict_positional_argument():
+    pytest.raises(ValueError, lambda: do_work(dict(5)))
+
+
+def test_pytest_direct_lambda_with_dict_named_args():
+    pytest.raises(ValueError, lambda: do_work(dict(x=1)))
+
+
+def test_pytest_direct_lambda_with_uuid():
+    pytest.raises(ValueError, lambda: do_work(uuid4()))
 
 
 def test_non_raise_with_statement():
@@ -162,6 +215,18 @@ class TestCase(unittest.TestCase):
     def test_unittest_with_safe_builtin(self):
         with self.assertRaises(ValueError):
             do_work(dict())
+
+    def test_unittest_with_dict_named_args(self):
+        with self.assertRaises(ValueError):
+            do_work(dict(x=1))
+
+    def test_unittest_with_path_and_str(self):
+        with self.assertRaises(ValueError):
+            do_work(str(Path("x")))
+
+    def test_unittest_with_uuid(self):
+        with self.assertRaises(ValueError):
+            do_work(uuid.uuid4())
 
     def test_unittest_lambda(self):
         self.assertRaises(ValueError, lambda: get_item().process())  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}
