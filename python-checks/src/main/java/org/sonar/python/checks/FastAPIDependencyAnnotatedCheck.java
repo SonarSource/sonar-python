@@ -16,6 +16,8 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
@@ -38,6 +40,11 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S8410")
 public class FastAPIDependencyAnnotatedCheck extends PythonSubscriptionCheck {
+
+  enum IssueReportingMode {
+    FILE_LOCAL_HEURISTIC,
+    DISABLE_FILE_LOCAL_SUPPRESSION
+  }
 
   private static final String MESSAGE = "Use \"Annotated\" type hints for FastAPI dependency injection";
 
@@ -72,12 +79,41 @@ public class FastAPIDependencyAnnotatedCheck extends PythonSubscriptionCheck {
     "typing_extensions.Annotated"
   );
 
-  @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, FastAPIDependencyAnnotatedCheck::checkFunctionDef);
+  private final IssueReportingMode issueReportingMode;
+  private final List<Parameter> pendingIssues = new ArrayList<>();
+  private SubscriptionContext fileContext;
+  private int annotatedStyleCount;
+  private int oldStyleCount;
+
+  public FastAPIDependencyAnnotatedCheck() {
+    this(IssueReportingMode.FILE_LOCAL_HEURISTIC);
   }
 
-  private static void checkFunctionDef(SubscriptionContext ctx) {
+  FastAPIDependencyAnnotatedCheck(IssueReportingMode issueReportingMode) {
+    this.issueReportingMode = issueReportingMode;
+  }
+
+  @Override
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::resetFileState);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, this::checkFunctionDef);
+  }
+
+  @Override
+  public void leaveFile() {
+    if (fileContext != null && shouldReportCollectedIssues()) {
+      pendingIssues.forEach(param -> fileContext.addIssue(param, MESSAGE));
+    }
+  }
+
+  private void resetFileState(SubscriptionContext ctx) {
+    pendingIssues.clear();
+    fileContext = ctx;
+    annotatedStyleCount = 0;
+    oldStyleCount = 0;
+  }
+
+  private void checkFunctionDef(SubscriptionContext ctx) {
     FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
 
     if (!hasFastAPIRouteDecorator(functionDef, ctx)) {
@@ -89,9 +125,7 @@ public class FastAPIDependencyAnnotatedCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    parameterList.nonTuple().stream()
-      .filter(param -> isParameterUsingOldDependencySyntax(param, ctx))
-      .forEach(param -> ctx.addIssue(param, MESSAGE));
+    parameterList.nonTuple().forEach(param -> collectParameterStyle(param, ctx));
   }
 
   private static boolean hasFastAPIRouteDecorator(FunctionDef functionDef, SubscriptionContext ctx) {
@@ -101,7 +135,36 @@ public class FastAPIDependencyAnnotatedCheck extends PythonSubscriptionCheck {
       .anyMatch(callExpr -> FASTAPI_ROUTE_METHODS_MATCHER.isTrueFor(callExpr.callee(), ctx));
   }
 
-  private static boolean isParameterUsingOldDependencySyntax(Parameter param, SubscriptionContext ctx) {
+  private void collectParameterStyle(Parameter param, SubscriptionContext ctx) {
+    TypeAnnotation typeAnnotation = param.typeAnnotation();
+    if (isUsingAnnotatedWithDependency(typeAnnotation, ctx)) {
+      annotatedStyleCount++;
+      return;
+    }
+
+    if (isParameterUsingOldDependencySyntax(param, typeAnnotation, ctx)) {
+      oldStyleCount++;
+      pendingIssues.add(param);
+    }
+  }
+
+  private boolean shouldReportCollectedIssues() {
+    final int minStyleSampleSize = 3;
+    final double oldStyleDominanceRatioThreshold = 0.75;
+    return switch (issueReportingMode) {
+      case FILE_LOCAL_HEURISTIC -> {
+        int totalStyleCount = oldStyleCount + annotatedStyleCount;
+        if (totalStyleCount < minStyleSampleSize) {
+          yield true;
+        }
+        double oldStyleRatio = (double) oldStyleCount / totalStyleCount;
+        yield oldStyleRatio < oldStyleDominanceRatioThreshold;
+      }
+      case DISABLE_FILE_LOCAL_SUPPRESSION -> true;
+    };
+  }
+
+  private static boolean isParameterUsingOldDependencySyntax(Parameter param, @Nullable TypeAnnotation typeAnnotation, SubscriptionContext ctx) {
     Expression defaultValue = param.defaultValue();
     if (!(defaultValue instanceof CallExpression callExpr)) {
       return false;
@@ -111,7 +174,6 @@ public class FastAPIDependencyAnnotatedCheck extends PythonSubscriptionCheck {
       return false;
     }
 
-    TypeAnnotation typeAnnotation = param.typeAnnotation();
     return !isUsingAnnotatedWithDependency(typeAnnotation, ctx);
   }
 

@@ -21,10 +21,38 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class FastAPIDependencyAnnotatedCheckTest {
 
-  private static final FastAPIDependencyAnnotatedCheck check = new FastAPIDependencyAnnotatedCheck();
+  @Test
+  void raw_candidates() {
+    PythonCheckVerifier.verify(
+      "src/test/resources/checks/fastAPIDependencyAnnotated.py",
+      new FastAPIDependencyAnnotatedCheck(FastAPIDependencyAnnotatedCheck.IssueReportingMode.DISABLE_FILE_LOCAL_SUPPRESSION));
+  }
 
   @Test
-  void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/fastAPIDependencyAnnotated.py", check);
+  void suppresses_issues_in_old_style_dominant_files() {
+    PythonCheckVerifier.verifyNoIssue(
+      "src/test/resources/checks/fastAPIDependencyAnnotatedFileLocalHeuristicOldStyleDominant.py",
+      new FastAPIDependencyAnnotatedCheck());
+  }
+
+  @Test
+  void reports_issues_in_annotated_dominant_files() {
+    PythonCheckVerifier.verify(
+      "src/test/resources/checks/fastAPIDependencyAnnotatedFileLocalHeuristicAnnotatedDominant.py",
+      new FastAPIDependencyAnnotatedCheck());
+  }
+
+  @Test
+  void reports_issues_when_old_style_sample_is_too_small_for_suppression() {
+    PythonCheckVerifier.verify(
+      "src/test/resources/checks/fastAPIDependencyAnnotatedFileLocalHeuristicTooSmallSample.py",
+      new FastAPIDependencyAnnotatedCheck());
+  }
+
+  @Test
+  void reports_issues_when_mixed_sample_is_too_small_for_suppression() {
+    PythonCheckVerifier.verify(
+      "src/test/resources/checks/fastAPIDependencyAnnotatedFileLocalHeuristicMixedTooSmallSample.py",
+      new FastAPIDependencyAnnotatedCheck());
   }
 }
