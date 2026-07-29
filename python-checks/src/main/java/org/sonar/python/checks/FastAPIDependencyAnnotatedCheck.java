@@ -26,7 +26,6 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
@@ -34,6 +33,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S8410")
@@ -67,6 +67,10 @@ public class FastAPIDependencyAnnotatedCheck extends PythonSubscriptionCheck {
   );
 
   private static final TypeMatcher TYPING_ANNOTATED_MATCHER = TypeMatchers.isType("typing.Annotated");
+  private static final Set<String> ANNOTATED_FULLY_QUALIFIED_NAMES = Set.of(
+    "typing.Annotated",
+    "typing_extensions.Annotated"
+  );
 
   @Override
   public void initialize(Context context) {
@@ -115,19 +119,25 @@ public class FastAPIDependencyAnnotatedCheck extends PythonSubscriptionCheck {
     if (typeAnnotation == null) {
       return false;
     }
-    Expression annotationExpr = typeAnnotation.expression();
-    if (annotationExpr instanceof SubscriptionExpression subscriptionExpr) {
-      Expression object = subscriptionExpr.object();
-      if (object instanceof Name name && TYPING_ANNOTATED_MATCHER.isTrueFor(name, ctx)) {
-        return subscriptionExpr.subscripts().expressions().stream()
-          .anyMatch(expr -> {
-            if (expr instanceof CallExpression callExpr) {
-              return FASTAPI_DEPENDENCY_FUNCTIONS_MATCHER.isTrueFor(callExpr.callee(), ctx);
-            }
-            return false;
-          });
-      }
+    Expression annotationExpr = Expressions.removeParentheses(typeAnnotation.expression());
+    if (!(annotationExpr instanceof SubscriptionExpression subscriptionExpr) || !isAnnotatedObject(subscriptionExpr.object(), ctx)) {
+      return false;
     }
-    return false;
+    return subscriptionExpr.subscripts().expressions().stream()
+      .anyMatch(expr -> {
+        if (expr instanceof CallExpression callExpr) {
+          return FASTAPI_DEPENDENCY_FUNCTIONS_MATCHER.isTrueFor(callExpr.callee(), ctx);
+        }
+        return false;
+      });
+  }
+
+  private static boolean isAnnotatedObject(Expression expression, SubscriptionContext ctx) {
+    if (TYPING_ANNOTATED_MATCHER.isTrueFor(expression, ctx)) {
+      return true;
+    }
+    return TreeUtils.fullyQualifiedNameFromExpression(expression)
+      .filter(ANNOTATED_FULLY_QUALIFIED_NAMES::contains)
+      .isPresent();
   }
 }

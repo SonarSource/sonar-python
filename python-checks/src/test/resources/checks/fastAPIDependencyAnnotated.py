@@ -231,13 +231,32 @@ def edge_case_subscription_not_annotated():
     def read_items(items: List[int] = Query()):  # Noncompliant
         return {"items": items}
 
-def false_positive_subscription_with_qualified_name():
+def compliant_typing_annotated_dependency():
     import typing
     @app.get("/items/")
-    def read_items(db: typing.Annotated[str, Depends(get_db)] = Depends(get_db)):  # Noncompliant
+    def read_items(db: typing.Annotated[str, Depends(get_db)] = Depends(get_db)):
         return {"db": db}
 
-def false_negative_annotated_with_dependency_detected():
+def compliant_aliased_typing_annotated_dependency():
+    import typing as t
+    @app.get("/items/")
+    def read_items(db: t.Annotated[str, Depends(get_db)] = Depends(get_db)):
+        return {"db": db}
+
+def compliant_aliased_typing_extensions_annotated_dependency():
+    from typing_extensions import Annotated as Ann
+    @app.get("/items/")
+    def read_items(db: Ann[str, Depends(get_db)] = Depends(get_db)):
+        return {"db": db}
+
+def compliant_parenthesized_annotated_dependency():
+    @app.get("/items/")
+    def read_items(db: (Annotated[str, Depends(get_db)]) = Depends(get_db)):
+        return {"db": db}
+
+def compliant_duplicate_old_and_new_syntax():
+    # Even though FastAPI `Depends` is used as default parameter value, 
+    # since also `Annotated` is used for FastAPI, we don't raise.
     @app.get("/items/")
     def read_items(db: Annotated[str, Depends(get_db)] = Depends(get_db)): # Compliant
         return {"db": db}
