@@ -1,0 +1,88 @@
+<p>This rule raises an issue when <code>pytest</code> is imported with <code>from pytest import …​</code> or under an alias such as <code>import
+pytest as …​</code>, instead of a plain <code>import pytest</code>.</p>
+<p>In Python, this refers to imports such as:</p>
+<ul>
+  <li><code>from pytest import mark, raises</code> (and other <code>from pytest import …​</code> forms, including subpackages)</li>
+  <li><code>import pytest as pt</code> (and other aliases that rename <code>pytest</code>)</li>
+</ul>
+<h2>Why is this an issue?</h2>
+<p>Pytest is conventionally imported as a module: <code>import pytest</code>. Members are then accessed as <code>pytest.raises</code>,
+<code>pytest.mark</code>, <code>pytest.fixture</code>, and so on.</p>
+<h3><code>from pytest import …​</code></h3>
+<p>Importing selected names from pytest scatters short unbound names through the test file:</p>
+<pre>
+from pytest import mark, raises
+
+@mark.skip
+def test_invalid_input():
+    with raises(ValueError):
+        process_data('hello')
+</pre>
+<p>Readers must check the import list to know that <code>mark</code> and <code>raises</code> come from pytest. Mixing <code>import pytest</code> in
+some files with <code>from pytest import …​</code> in others makes the suite harder to skim and to search.</p>
+<h3>Aliased imports</h3>
+<p>Renaming the module hides the standard name:</p>
+<pre>
+import pytest as pt
+
+def test_invalid_input():
+    with pt.raises(ValueError):
+        process_data('hello')
+</pre>
+<p><code>import pytest</code> keeps every call site consistent across the project.</p>
+<h3>Preferred form</h3>
+<pre>
+import pytest
+
+@pytest.mark.skip
+def test_invalid_input():
+    with pytest.raises(ValueError):
+        process_data('hello')
+</pre>
+<h3>What is the potential impact?</h3>
+<p>Inconsistent pytest imports force maintainers to resolve where helpers come from and slow down reviews. A single <code>import pytest</code> style
+keeps test APIs recognizable and easier to search across the suite.</p>
+<h2>How to fix it</h2>
+<p>Replace <code>from pytest import …​</code> and aliased imports with <code>import pytest</code>, then qualify members as <code>pytest…​.</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from pytest import mark, raises  # Noncompliant
+
+@mark.skip
+def test_invalid_input():
+    with raises(ValueError):
+        process_data('hello')
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+@pytest.mark.skip
+def test_invalid_input():
+    with pytest.raises(ValueError):
+        process_data('hello')
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import pytest as pt  # Noncompliant
+
+def test_invalid_input():
+    with pt.raises(ValueError):
+        process_data('hello')
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import pytest
+
+def test_invalid_input():
+    with pytest.raises(ValueError):
+        process_data('hello')
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Ruff - <a href="https://docs.astral.sh/ruff/rules/pytest-incorrect-pytest-import/">pytest-incorrect-pytest-import (PT013)</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/assert.html">Assertions about expected exceptions</a></li>
+</ul>
+
