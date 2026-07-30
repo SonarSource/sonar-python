@@ -33,7 +33,7 @@ public class PythonWriteCacheImpl implements PythonWriteCache {
   }
 
   @Override
-  public void copyFromPrevious(String key) {
+  public synchronized void copyFromPrevious(String key) {
     this.writeCache.copyFromPrevious(key);
   }
 }
