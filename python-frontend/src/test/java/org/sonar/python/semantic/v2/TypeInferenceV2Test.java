@@ -98,6 +98,7 @@ import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.BYTES_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.EXCEPTION_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.FLOAT_TYPE;
@@ -3632,6 +3633,34 @@ public class TypeInferenceV2Test {
 
     assertThat(bType).isSameAs(PythonType.UNKNOWN);
     assertThat(cType).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void assignmentBytesLiteral() {
+    // A bytes literal (b"...") used to be typed as `str`: visitStringLiteral didn't check the
+    // literal's prefix before resolving it against the builtin `str` type.
+    var fileInput = inferTypes("""
+      def foo():
+        a = b""
+        b = b"abc"
+        c = ""
+        a
+        b
+        c
+      """);
+
+    var statements = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::body)
+      .map(StatementList::statements)
+      .orElseGet(List::of);
+
+    var aType = ((ExpressionStatement) statements.get(statements.size() - 3)).expressions().get(0).typeV2();
+    var bType = ((ExpressionStatement) statements.get(statements.size() - 2)).expressions().get(0).typeV2();
+    var cType = ((ExpressionStatement) statements.get(statements.size() - 1)).expressions().get(0).typeV2();
+    assertThat(aType.unwrappedType()).isSameAs(BYTES_TYPE);
+    assertThat(bType.unwrappedType()).isSameAs(BYTES_TYPE);
+    assertThat(cType.unwrappedType()).isSameAs(STR_TYPE);
   }
 
   @Test

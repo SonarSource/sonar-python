@@ -43,7 +43,9 @@ public class TestClientContentParameterCheck extends PythonSubscriptionCheck {
       .map(name -> STARLETTE_TEST_CLIENT_FQN + "." + name)
       .map(TypeMatchers::isType));
 
-  private static final TypeMatcher IS_STRING = TypeMatchers.isObjectOfType("str");
+  private static final TypeMatcher IS_STRING_OR_BYTES = TypeMatchers.any(
+    TypeMatchers.isObjectOfType("str"),
+    TypeMatchers.isObjectOfType("bytes"));
 
   @Override
   public CheckScope scope() {
@@ -83,6 +85,6 @@ public class TestClientContentParameterCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isBytesOrStrLiteral(Expression expr, SubscriptionContext ctx) {
-    return IS_STRING.isTrueFor(expr, ctx);
+    return IS_STRING_OR_BYTES.isTrueFor(expr, ctx);
   }
 }

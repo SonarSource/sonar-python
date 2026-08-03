@@ -41,6 +41,7 @@ public class TypesTestUtils {
   public static final PythonType COMPLEX_TYPE = BUILTINS.resolveMember("complex").get();
   public static final PythonType BOOL_TYPE = BUILTINS.resolveMember("bool").get();
   public static final PythonType STR_TYPE = BUILTINS.resolveMember("str").get();
+  public static final PythonType BYTES_TYPE = BUILTINS.resolveMember("bytes").get();
   public static final PythonType LIST_TYPE = BUILTINS.resolveMember("list").get();
   public static final PythonType TUPLE_TYPE = BUILTINS.resolveMember("tuple").get();
   public static final PythonType SET_TYPE = BUILTINS.resolveMember("set").get();

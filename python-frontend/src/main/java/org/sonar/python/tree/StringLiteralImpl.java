@@ -90,4 +90,14 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
   public boolean isTemplate() {
     return !stringElements.isEmpty() && stringElements.stream().anyMatch(StringElement::isTemplate);
   }
+
+  /**
+   * @return {@code true} if this literal is a bytes literal (e.g. {@code b'...'}), as opposed to a
+   * str literal. Implicitly-concatenated adjacent literals (e.g. {@code b'a' b'b'}) can only mix
+   * bytes with bytes or str with str, so it is enough to check that every element carries a bytes
+   * prefix.
+   */
+  public boolean isBytes() {
+    return !stringElements.isEmpty() && stringElements.stream().allMatch(e -> BYTES_PREFIXES.contains(e.prefix()));
+  }
 }

@@ -199,12 +199,16 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     super.visitStringLiteral(stringLiteral);
     var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     // TODO: SONARPY-1867 multiple object types to represent str instance?
-    if (((StringLiteralImpl) stringLiteral).isTemplate()) {
+    StringLiteralImpl stringLiteralImpl = (StringLiteralImpl) stringLiteral;
+    if (stringLiteralImpl.isTemplate()) {
       // TODO: SONARPY-3427 once provided by typeshed the resolved type should be string.templatelib.Template
-      ((StringLiteralImpl) stringLiteral).typeV2(ObjectType.fromType(PythonType.UNKNOWN));
+      stringLiteralImpl.typeV2(ObjectType.fromType(PythonType.UNKNOWN));
+    } else if (stringLiteralImpl.isBytes()) {
+      PythonType bytesType = builtins.resolveMember("bytes").orElse(PythonType.UNKNOWN);
+      stringLiteralImpl.typeV2(ObjectType.fromType(bytesType));
     } else {
       PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
-      ((StringLiteralImpl) stringLiteral).typeV2(ObjectType.fromType(strType));
+      stringLiteralImpl.typeV2(ObjectType.fromType(strType));
     }
   }
 
