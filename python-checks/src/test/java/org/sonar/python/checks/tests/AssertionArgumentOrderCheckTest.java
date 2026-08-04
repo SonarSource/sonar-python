@@ -23,6 +23,7 @@ import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 class AssertionArgumentOrderCheckTest {
   private static final AssertionArgumentOrderCheck CHECK = new AssertionArgumentOrderCheck();
@@ -33,8 +34,18 @@ class AssertionArgumentOrderCheckTest {
   }
 
   @Test
-  void test_expected_on_left() {
-    PythonCheckVerifier.verify("src/test/resources/checks/tests/test_assertionArgumentOrderExpectedLeft.py", checkWithExpectedOnRight());
+  void test_pytest() {
+    PythonCheckVerifier.verify("src/test/resources/checks/tests/test_assertionArgumentOrderPytest.py", CHECK);
+  }
+
+  @Test
+  void test_assertpy_consistent_expected_first() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/tests/test_assertionArgumentOrderAssertpy.py", CHECK);
+  }
+
+  @Test
+  void test_consistent_actual_first() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/tests/test_assertionArgumentOrderExpectedLeft.py", CHECK);
   }
 
   @Test
@@ -43,7 +54,7 @@ class AssertionArgumentOrderCheckTest {
   }
 
   @Test
-  void unittest_quick_fix() {
+  void unify_quick_fixes_unittest() {
     String before = """
       import unittest
 
@@ -53,8 +64,9 @@ class AssertionArgumentOrderCheckTest {
       class MyTest(unittest.TestCase):
           def test_order(self):
               self.assertEqual(first=42, second=value())
+              self.assertEqual(value(), 42)
       """;
-    String after = """
+    String putExpectedSecond = """
       import unittest
 
       def value():
@@ -63,33 +75,59 @@ class AssertionArgumentOrderCheckTest {
       class MyTest(unittest.TestCase):
           def test_order(self):
               self.assertEqual(first=value(), second=42)
+              self.assertEqual(value(), 42)
       """;
-    PythonQuickFixVerifier.verifySemantic(CHECK, "unittest_case.py", before, after);
-    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "unittest_case.py", before, "Swap the actual and expected arguments");
+    String putActualSecond = """
+      import unittest
+
+      def value():
+          return 41 + 1
+
+      class MyTest(unittest.TestCase):
+          def test_order(self):
+              self.assertEqual(first=42, second=value())
+              self.assertEqual(42, value())
+      """;
+    PythonQuickFixVerifier.verifySemantic(CHECK, "unittest_case.py", before, putExpectedSecond, putActualSecond);
+    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "unittest_case.py", before,
+      "Put all expected values second",
+      "Put all actual values second");
   }
 
   @Test
-  void pytest_quick_fix() {
+  void unify_quick_fixes_pytest() {
     String before = """
       def value():
           return 41 + 1
 
       def test_order():
           assert 42 == value()
+          assert value() == 42
       """;
-    String after = """
+    String putExpectedSecond = """
       def value():
           return 41 + 1
 
       def test_order():
           assert value() == 42
+          assert value() == 42
       """;
-    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_case.py", before, after);
-    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "test_pytest_case.py", before, "Swap the actual and expected operands");
+    String putActualSecond = """
+      def value():
+          return 41 + 1
+
+      def test_order():
+          assert 42 == value()
+          assert 42 == value()
+      """;
+    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_case.py", before, putExpectedSecond, putActualSecond);
+    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "test_pytest_case.py", before,
+      "Put all expected values second",
+      "Put all actual values second");
   }
 
   @Test
-  void pytest_approx_quick_fix() {
+  void unify_quick_fixes_pytest_approx() {
     String before = """
       import pytest
 
@@ -98,8 +136,9 @@ class AssertionArgumentOrderCheckTest {
 
       def test_order():
           assert 42 == pytest.approx(value(), abs=0.1)
+          assert value() == pytest.approx(42, abs=0.1)
       """;
-    String after = """
+    String putExpectedSecond = """
       import pytest
 
       def value():
@@ -107,59 +146,26 @@ class AssertionArgumentOrderCheckTest {
 
       def test_order():
           assert value() == pytest.approx(42, abs=0.1)
+          assert value() == pytest.approx(42, abs=0.1)
       """;
-    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_approx_case.py", before, after);
-    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "test_pytest_approx_case.py", before, "Swap the actual and expected operands");
-  }
-
-  @Test
-  void pytest_quick_fix_expected_on_left() {
-    String before = """
-      def value():
-          return 41 + 1
-
-      def test_order():
-          assert value() == 42
-      """;
-    String after = """
-      def value():
-          return 41 + 1
-
-      def test_order():
-          assert 42 == value()
-      """;
-    PythonQuickFixVerifier.verifySemantic(checkWithExpectedOnRight(), "test_pytest_expected_left_case.py", before, after);
-    PythonQuickFixVerifier.verifySemanticQuickFixMessages(checkWithExpectedOnRight(), "test_pytest_expected_left_case.py", before,
-      "Swap the actual and expected operands");
-  }
-
-  @Test
-  void pytest_approx_quick_fix_expected_on_left() {
-    String before = """
+    String putActualSecond = """
       import pytest
 
       def value():
           return 3.14
 
       def test_order():
-          assert pytest.approx(value(), abs=0.1) == 42
-      """;
-    String after = """
-      import pytest
-
-      def value():
-          return 3.14
-
-      def test_order():
+          assert 42 == pytest.approx(value(), abs=0.1)
           assert pytest.approx(42, abs=0.1) == value()
       """;
-    PythonQuickFixVerifier.verifySemantic(checkWithExpectedOnRight(), "test_pytest_approx_expected_left_case.py", before, after);
-    PythonQuickFixVerifier.verifySemanticQuickFixMessages(checkWithExpectedOnRight(), "test_pytest_approx_expected_left_case.py", before,
-      "Swap the actual and expected operands");
+    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_approx_case.py", before, putExpectedSecond, putActualSecond);
+    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "test_pytest_approx_case.py", before,
+      "Put all expected values second",
+      "Put all actual values second");
   }
 
   @Test
-  void assertpy_quick_fix() {
+  void unify_quick_fixes_assertpy() {
     String before = """
       from assertpy import assert_that
 
@@ -168,8 +174,9 @@ class AssertionArgumentOrderCheckTest {
 
       def test_order():
           assert_that(42).described_as("count").is_equal_to(value())
+          assert_that(value()).described_as("count").is_equal_to(42)
       """;
-    String after = """
+    String putExpectedSecond = """
       from assertpy import assert_that
 
       def value():
@@ -177,13 +184,26 @@ class AssertionArgumentOrderCheckTest {
 
       def test_order():
           assert_that(value()).described_as("count").is_equal_to(42)
+          assert_that(value()).described_as("count").is_equal_to(42)
       """;
-    PythonQuickFixVerifier.verifySemantic(CHECK, "test_assertpy_case.py", before, after);
-    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "test_assertpy_case.py", before, "Swap the actual and expected values");
+    String putActualSecond = """
+      from assertpy import assert_that
+
+      def value():
+          return 41 + 1
+
+      def test_order():
+          assert_that(42).described_as("count").is_equal_to(value())
+          assert_that(42).described_as("count").is_equal_to(value())
+      """;
+    PythonQuickFixVerifier.verifySemantic(CHECK, "test_assertpy_case.py", before, putExpectedSecond, putActualSecond);
+    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "test_assertpy_case.py", before,
+      "Put all expected values second",
+      "Put all actual values second");
   }
 
   @Test
-  void quick_fix_for_multiline_operand() {
+  void unify_quick_fix_for_multiline_operand() {
     String before = """
       def value():
           return 41 + 1
@@ -192,8 +212,9 @@ class AssertionArgumentOrderCheckTest {
           assert 42 == (
               value()
           )
+          assert value() == 42
       """;
-    String after = """
+    String putExpectedSecond = """
       def value():
           return 41 + 1
 
@@ -201,32 +222,52 @@ class AssertionArgumentOrderCheckTest {
           assert (
               value()
           ) == 42
+          assert value() == 42
       """;
-    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_multiline_case.py", before, after);
-    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "test_pytest_multiline_case.py", before, "Swap the actual and expected operands");
+    String putActualSecond = """
+      def value():
+          return 41 + 1
+
+      def test_order():
+          assert 42 == (
+              value()
+          )
+          assert 42 == value()
+      """;
+    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_multiline_case.py", before, putExpectedSecond, putActualSecond);
   }
 
   @Test
-  void pytest_quick_fix_with_windows_line_endings() {
+  void unify_quick_fix_with_windows_line_endings() {
     String before = """
       def value():
           return 41 + 1
 
       def test_order():
           assert 42 == value()
+          assert value() == 42
       """.replace("\n", "\r\n");
-    String after = """
+    String putExpectedSecond = """
       def value():
           return 41 + 1
 
       def test_order():
           assert value() == 42
+          assert value() == 42
       """.replace("\n", "\r\n");
-    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_windows_case.py", before, after);
+    String putActualSecond = """
+      def value():
+          return 41 + 1
+
+      def test_order():
+          assert 42 == value()
+          assert 42 == value()
+      """.replace("\n", "\r\n");
+    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_windows_case.py", before, putExpectedSecond, putActualSecond);
   }
 
   @Test
-  void pytest_approx_quick_fix_with_expected_keyword() {
+  void unify_quick_fix_pytest_approx_with_expected_keyword() {
     String before = """
       import pytest
 
@@ -235,8 +276,9 @@ class AssertionArgumentOrderCheckTest {
 
       def test_order():
           assert 42 == pytest.approx(expected=value(), abs=0.1)
+          assert value() == pytest.approx(expected=42, abs=0.1)
       """;
-    String after = """
+    String putExpectedSecond = """
       import pytest
 
       def value():
@@ -244,9 +286,55 @@ class AssertionArgumentOrderCheckTest {
 
       def test_order():
           assert value() == pytest.approx(expected=42, abs=0.1)
+          assert value() == pytest.approx(expected=42, abs=0.1)
       """;
-    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_keyword_approx_case.py", before, after);
-    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "test_pytest_keyword_approx_case.py", before, "Swap the actual and expected operands");
+    String putActualSecond = """
+      import pytest
+
+      def value():
+          return 3.14
+
+      def test_order():
+          assert 42 == pytest.approx(expected=value(), abs=0.1)
+          assert pytest.approx(expected=42, abs=0.1) == value()
+      """;
+    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_keyword_approx_case.py", before, putExpectedSecond, putActualSecond);
+  }
+
+  @Test
+  void unify_quick_fix_suppressed_when_any_assertion_cannot_be_edited() {
+    String before = """
+      import pytest
+
+      def value():
+          return 41 + 1
+
+      def test_order():
+          assert 42 == value()
+          assert 42 == pytest.approx(other=value())
+          assert value() == 42
+      """;
+    String putActualSecond = """
+      import pytest
+
+      def value():
+          return 41 + 1
+
+      def test_order():
+          assert 42 == value()
+          assert 42 == pytest.approx(other=value())
+          assert 42 == value()
+      """;
+    // expected-first group includes an approx call without a swappable expected arg, so that unify QF is suppressed
+    PythonQuickFixVerifier.verifySemantic(CHECK, "test_pytest_partial_qf_case.py", before, putActualSecond);
+    PythonQuickFixVerifier.verifySemanticQuickFixMessages(CHECK, "test_pytest_partial_qf_case.py", before,
+      "Put all actual values second");
+  }
+
+  @Test
+  void leave_file_is_noop_before_initialize() {
+    AssertionArgumentOrderCheck check = new AssertionArgumentOrderCheck();
+    assertThatCode(check::leaveFile).doesNotThrowAnyException();
   }
 
   @Test
@@ -257,6 +345,9 @@ class AssertionArgumentOrderCheckTest {
     String code = "a = 1\r\nb = 2\r\n";
     assertThat(method.invoke(null, code, 2, 0)).isEqualTo(7);
     assertThat(method.invoke(null, code, 2, 5)).isEqualTo(12);
+    assertThat(method.invoke(null, code, 99, 0)).isEqualTo(-1);
+    assertThat(method.invoke(null, code, 1, -1)).isEqualTo(-1);
+    assertThat(method.invoke(null, code, 1, 50)).isEqualTo(-1);
     assertThat(method.invoke(null, code, 4, 0)).isEqualTo(-1);
     assertThat(method.invoke(null, code, 2, -1)).isEqualTo(-1);
     assertThat(method.invoke(null, code, 2, 6)).isEqualTo(-1);
@@ -271,11 +362,5 @@ class AssertionArgumentOrderCheckTest {
     assertThat(method.invoke(null, "\n", 0)).isEqualTo(1);
     assertThat(method.invoke(null, "\r", 0)).isEqualTo(1);
     assertThat(method.invoke(null, "\r\n", 0)).isEqualTo(2);
-  }
-
-  private static AssertionArgumentOrderCheck checkWithExpectedOnRight() {
-    AssertionArgumentOrderCheck check = new AssertionArgumentOrderCheck();
-    check.expectedOnRight = false;
-    return check;
   }
 }

@@ -18,6 +18,7 @@ package org.sonar.plugins.python;
 
 import java.io.File;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.locks.Lock;
@@ -70,6 +71,31 @@ public class IssuesRepository {
     var primaryLocation = newLocation(inputFile, newIssue, preciseIssue.primaryLocation());
     newIssue.at(primaryLocation);
 
+    addDataFlows(inputFile, newIssue, preciseIssue);
+    addSecondaryLocations(inputFile, newIssue, preciseIssue, primaryLocation);
+
+    handleQuickFixes(inputFile.wrappedFile(), ruleKey, newIssue, preciseIssue);
+
+    save(newIssue);
+  }
+
+  private void addDataFlows(PythonInputFile inputFile, NewIssue newIssue, PythonCheck.PreciseIssue preciseIssue) {
+    for (var flow : preciseIssue.flows()) {
+      List<NewIssueLocation> flowLocations = new ArrayList<>();
+      for (var location : flow.locations()) {
+        NewIssueLocation newLocation = resolveLocation(inputFile, newIssue, location);
+        if (newLocation != null) {
+          flowLocations.add(newLocation);
+        }
+      }
+      if (!flowLocations.isEmpty()) {
+        newIssue.addFlow(flowLocations, NewIssue.FlowType.DATA, flow.description());
+      }
+    }
+  }
+
+  private void addSecondaryLocations(PythonInputFile inputFile, NewIssue newIssue, PythonCheck.PreciseIssue preciseIssue,
+                                      NewIssueLocation primaryLocation) {
     var secondaryLocationsFlow = new ArrayDeque<NewIssueLocation>();
     for (var secondaryLocation : preciseIssue.secondaryLocations()) {
       String fileId = secondaryLocation.fileId();
@@ -88,10 +114,19 @@ public class IssuesRepository {
       secondaryLocationsFlow.addFirst(primaryLocation);
       newIssue.addFlow(secondaryLocationsFlow);
     }
+  }
 
-    handleQuickFixes(inputFile.wrappedFile(), ruleKey, newIssue, preciseIssue);
-
-    save(newIssue);
+  @CheckForNull
+  private NewIssueLocation resolveLocation(PythonInputFile defaultInputFile, NewIssue newIssue, IssueLocation location) {
+    String fileId = location.fileId();
+    if (fileId == null) {
+      return newLocation(defaultInputFile, newIssue, location);
+    }
+    InputFile issueLocationFile = component(fileId, context);
+    if (issueLocationFile == null) {
+      return null;
+    }
+    return newLocation(new PythonInputFileImpl(issueLocationFile), newIssue, location);
   }
 
   private void save(NewIssue newIssue) {

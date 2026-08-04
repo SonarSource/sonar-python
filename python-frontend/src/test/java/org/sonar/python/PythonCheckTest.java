@@ -100,6 +100,27 @@ class PythonCheckTest {
   }
 
   @Test
+  void test_flows() {
+    PythonVisitorCheck check = new PythonVisitorCheck() {
+      @Override
+      public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
+        PreciseIssue issue = addIssue(pyFunctionDefTree.name(), MESSAGE);
+        issue.addFlow("Actual value first", List.of(IssueLocation.preciseLocation(pyFunctionDefTree.name(), "Actual value first.")));
+        issue.addFlow("Expected value first", List.of(IssueLocation.preciseLocation(pyFunctionDefTree.defKeyword(), "Expected value first.")));
+        super.visitFunctionDef(pyFunctionDefTree);
+      }
+    };
+
+    List<PreciseIssue> issues = scanFileForIssues(check);
+    PreciseIssue firstIssue = issues.get(0);
+    assertThat(firstIssue.flows()).hasSize(2);
+    assertThat(firstIssue.flows().get(0).description()).isEqualTo("Actual value first");
+    assertThat(firstIssue.flows().get(0).locations()).hasSize(1);
+    assertThat(firstIssue.flows().get(0).locations().get(0).message()).isEqualTo("Actual value first.");
+    assertThat(firstIssue.flows().get(1).description()).isEqualTo("Expected value first");
+  }
+
+  @Test
   void test_secondary_location() {
     PythonVisitorCheck check = new PythonVisitorCheck() {
 

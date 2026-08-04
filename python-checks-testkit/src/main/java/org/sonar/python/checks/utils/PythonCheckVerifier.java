@@ -148,6 +148,13 @@ public class PythonCheckVerifier {
       issueBuilder.addSecondary(path, secondary.startLine(), secondary.startLineOffset() + 1, secondary.endLine(),
         secondary.endLineOffset(), secondary.message());
     }
+    // Commons verifier has no named-flow API; flatten flow locations as secondaries for sample assertions.
+    for (PythonCheck.IssueFlow flow : preciseIssue.flows()) {
+      for (IssueLocation flowLocation : flow.locations()) {
+        issueBuilder.addSecondary(path, flowLocation.startLine(), flowLocation.startLineOffset() + 1,
+          flowLocation.endLine(), flowLocation.endLineOffset(), flowLocation.message());
+      }
+    }
     return issueBuilder;
   }
 

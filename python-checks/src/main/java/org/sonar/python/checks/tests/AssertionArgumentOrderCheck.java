@@ -16,20 +16,25 @@
  */
 package org.sonar.python.checks.tests;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.check.RuleProperty;
+import org.sonar.plugins.python.api.IssueLocation;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.TokenLocation;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.UnittestUtils;
@@ -43,30 +48,59 @@ import static org.sonar.python.checks.utils.UnittestUtils.PYTEST_APPROX_MATCHER;
 
 @Rule(key = "S3415")
 public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
-  private static final boolean DEFAULT_EXPECTED_ON_RIGHT = true;
-  private static final String UNITTEST_MESSAGE = "Swap these 2 arguments so they are in the correct order: actual value, expected value.";
-  private static final String PYTEST_EXPECTED_ON_RIGHT_MESSAGE = "Swap these 2 sides so they are in the correct order: actual value, expected value.";
-  private static final String PYTEST_EXPECTED_ON_LEFT_MESSAGE = "Swap these 2 sides so they are in the correct order: expected value, actual value.";
-  private static final String ASSERTPY_MESSAGE = "Pass the actual value to \"assert_that\" and the expected value to \"is_equal_to\".";
-  private static final String EXPECTED_SECONDARY_MESSAGE = "Expected value.";
-  private static final String ACTUAL_SECONDARY_MESSAGE = "Actual value.";
-  private static final String UNITTEST_QUICK_FIX_MESSAGE = "Swap the actual and expected arguments";
-  private static final String PYTEST_QUICK_FIX_MESSAGE = "Swap the actual and expected operands";
-  private static final String ASSERTPY_QUICK_FIX_MESSAGE = "Swap the actual and expected values";
+  private static final String MESSAGE = "Unify assertion argument order in this file; both \"actual first\" and \"expected first\" conventions are used.";
+  private static final String ACTUAL_FIRST_FLOW = "Actual value first";
+  private static final String EXPECTED_FIRST_FLOW = "Expected value first";
+  private static final String ACTUAL_FIRST_LOCATION_MESSAGE = "Actual value first.";
+  private static final String EXPECTED_FIRST_LOCATION_MESSAGE = "Expected value first.";
+  private static final String PUT_EXPECTED_SECOND_QF = "Put all expected values second";
+  private static final String PUT_ACTUAL_SECOND_QF = "Put all actual values second";
   private static final String PYTEST_APPROX_EXPECTED_ARGUMENT_NAME = "expected";
 
-  @RuleProperty(
-    key = "expectedOnRight",
-    description = "Whether the expected value should be on the right-hand side of pytest equality assertions.",
-    defaultValue = "" + DEFAULT_EXPECTED_ON_RIGHT)
-  public boolean expectedOnRight = DEFAULT_EXPECTED_ON_RIGHT;
+  private enum Convention {
+    ACTUAL_FIRST,
+    EXPECTED_FIRST
+  }
+
+  private final List<OrderableAssertion> assertions = new ArrayList<>();
+  private SubscriptionContext subscriptionContext;
+
+  private record OrderableAssertion(
+    Tree primaryLocation,
+    Convention convention,
+    List<PythonTextEdit> swapEdits) {
+  }
 
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      assertions.clear();
+      subscriptionContext = ctx;
+    });
     UnittestUtils.registerAssertionSyntaxNodeConsumers(context, new AssertionFrameworkHandlers(
-      AssertionArgumentOrderCheck::checkUnittestAssertion,
-      AssertionArgumentOrderCheck::checkAssertpyAssertion,
+      this::checkUnittestAssertion,
+      this::checkAssertpyAssertion,
       this::checkPytestAssertion));
+  }
+
+  @Override
+  public void leaveFile() {
+    if (subscriptionContext == null) {
+      return;
+    }
+
+    List<OrderableAssertion> actualFirst = assertions.stream().filter(a -> a.convention() == Convention.ACTUAL_FIRST).toList();
+    List<OrderableAssertion> expectedFirst = assertions.stream().filter(a -> a.convention() == Convention.EXPECTED_FIRST).toList();
+    if (actualFirst.isEmpty() || expectedFirst.isEmpty()) {
+      return;
+    }
+
+    OrderableAssertion primary = assertions.get(0);
+    PythonCheck.PreciseIssue issue = subscriptionContext.addIssue(primary.primaryLocation(), MESSAGE);
+    issue.addFlow(ACTUAL_FIRST_FLOW, toFlowLocations(actualFirst, ACTUAL_FIRST_LOCATION_MESSAGE));
+    issue.addFlow(EXPECTED_FIRST_FLOW, toFlowLocations(expectedFirst, EXPECTED_FIRST_LOCATION_MESSAGE));
+    createUnifyQuickFix(PUT_EXPECTED_SECOND_QF, expectedFirst).ifPresent(issue::addQuickFix);
+    createUnifyQuickFix(PUT_ACTUAL_SECOND_QF, actualFirst).ifPresent(issue::addQuickFix);
   }
 
   @Override
@@ -74,19 +108,12 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     return CheckScope.TESTS;
   }
 
-  private static void checkUnittestAssertion(SubscriptionContext ctx, CallExpression callExpression) {
+  private void checkUnittestAssertion(SubscriptionContext ctx, CallExpression callExpression) {
     AssertionArguments arguments = UnittestUtils.unittestAssertionArguments(callExpression, ctx);
     if (arguments == null) {
       return;
     }
-
-    if (areInvertedForActualExpected(arguments.actual(), arguments.expected(), ctx)) {
-      var issue = ctx.addIssue(callExpression, UNITTEST_MESSAGE);
-      Expression actualValue = arguments.expected();
-      Expression expectedValue = arguments.actual();
-      addActualExpectedSecondaryLocations(issue, actualValue, expectedValue);
-      createSwapQuickFix(arguments.actual(), arguments.expected(), UNITTEST_QUICK_FIX_MESSAGE, ctx).ifPresent(issue::addQuickFix);
-    }
+    classifyAndCollect(callExpression, arguments.actual(), arguments.expected(), ctx);
   }
 
   private void checkPytestAssertion(SubscriptionContext ctx, AssertStatement assertStatement) {
@@ -99,68 +126,88 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    if (areInvertedForConfiguredPytestOrder(binaryExpression.leftOperand(), binaryExpression.rightOperand(), ctx)) {
-      var issue = ctx.addIssue(condition, pytestMessage());
-      addActualExpectedSecondaryLocations(issue, pytestActualExpression(binaryExpression, ctx), pytestExpectedExpression(binaryExpression, ctx));
-      createPytestQuickFix(binaryExpression, ctx).ifPresent(issue::addQuickFix);
+    Expression left = binaryExpression.leftOperand();
+    Expression right = binaryExpression.rightOperand();
+    boolean leftExpected = isExpectedValue(left, ctx);
+    boolean rightExpected = isExpectedValue(right, ctx);
+    if (leftExpected == rightExpected) {
+      return;
     }
+
+    Convention convention = leftExpected ? Convention.EXPECTED_FIRST : Convention.ACTUAL_FIRST;
+    List<PythonTextEdit> swapEdits = createPytestSwapEdits(binaryExpression, convention, ctx);
+    assertions.add(new OrderableAssertion(condition, convention, swapEdits));
   }
 
-  private static void checkAssertpyAssertion(SubscriptionContext ctx, CallExpression callExpression) {
+  private void checkAssertpyAssertion(SubscriptionContext ctx, CallExpression callExpression) {
     AssertionArguments arguments = UnittestUtils.assertpyAssertionArguments(callExpression, ctx, ASSERTPY_IS_EQUAL_TO_MATCHER);
     if (arguments == null) {
       return;
     }
-
-    if (areInvertedForActualExpected(arguments.actual(), arguments.expected(), ctx)) {
-      var issue = ctx.addIssue(callExpression, ASSERTPY_MESSAGE);
-      Expression actualValue = arguments.expected();
-      Expression expectedValue = arguments.actual();
-      addActualExpectedSecondaryLocations(issue, actualValue, expectedValue);
-      createSwapQuickFix(arguments.actual(), arguments.expected(), ASSERTPY_QUICK_FIX_MESSAGE, ctx).ifPresent(issue::addQuickFix);
-    }
+    classifyAndCollect(callExpression, arguments.actual(), arguments.expected(), ctx);
   }
 
-  private static void addActualExpectedSecondaryLocations(org.sonar.plugins.python.api.PythonCheck.PreciseIssue issue, Expression actualExpression, Expression expectedExpression) {
-    issue.secondary(expectedExpression, EXPECTED_SECONDARY_MESSAGE);
-    issue.secondary(actualExpression, ACTUAL_SECONDARY_MESSAGE);
+  private void classifyAndCollect(Tree primaryLocation, Expression firstPosition, Expression secondPosition, SubscriptionContext ctx) {
+    boolean firstExpected = isExpectedValue(firstPosition, ctx);
+    boolean secondExpected = isExpectedValue(secondPosition, ctx);
+    if (firstExpected == secondExpected) {
+      return;
+    }
+    Convention convention = firstExpected ? Convention.EXPECTED_FIRST : Convention.ACTUAL_FIRST;
+    assertions.add(new OrderableAssertion(primaryLocation, convention, createSwapEdits(firstPosition, secondPosition, ctx)));
   }
 
-  private Optional<PythonQuickFix> createPytestQuickFix(BinaryExpression binaryExpression, SubscriptionContext ctx) {
-    Expression actualOperand = expectedOnRight ? binaryExpression.leftOperand() : binaryExpression.rightOperand();
-    Expression expectedOperand = expectedOnRight ? binaryExpression.rightOperand() : binaryExpression.leftOperand();
-    CallExpression approxCall = asPytestApproxCall(expectedOperand, ctx);
-    if (approxCall == null) {
-      return createSwapQuickFix(binaryExpression.leftOperand(), binaryExpression.rightOperand(), PYTEST_QUICK_FIX_MESSAGE, ctx);
-    }
+  private static List<IssueLocation> toFlowLocations(List<OrderableAssertion> group, String message) {
+    return group.stream()
+      .map(assertion -> IssueLocation.preciseLocation(assertion.primaryLocation(), message))
+      .toList();
+  }
 
-    RegularArgument approxExpectedArg = TreeUtils.nthArgumentOrKeyword(0, PYTEST_APPROX_EXPECTED_ARGUMENT_NAME, approxCall.arguments());
-    if (approxExpectedArg == null) {
+  private static Optional<PythonQuickFix> createUnifyQuickFix(String description, List<OrderableAssertion> toSwap) {
+    // Only offer a unify fix when every assertion in the group can be edited; otherwise applying a
+    // partial fix would leave the file still mixing conventions.
+    if (toSwap.stream().anyMatch(assertion -> assertion.swapEdits().isEmpty())) {
       return Optional.empty();
     }
-
-    String replacementForOperand = expressionText(approxExpectedArg.expression(), ctx);
-    String replacementForApproxExpectedArg = expressionText(actualOperand, ctx);
-    if (replacementForOperand == null || replacementForApproxExpectedArg == null) {
-      return Optional.empty();
-    }
-
-    return Optional.of(PythonQuickFix.newQuickFix(PYTEST_QUICK_FIX_MESSAGE)
-      .addTextEdit(TextEditUtils.replace(actualOperand, replacementForOperand))
-      .addTextEdit(TextEditUtils.replace(approxExpectedArg.expression(), replacementForApproxExpectedArg))
-      .build());
+    List<PythonTextEdit> edits = toSwap.stream().flatMap(assertion -> assertion.swapEdits().stream()).toList();
+    return Optional.of(PythonQuickFix.newQuickFix(description).addTextEdit(edits).build());
   }
 
-  private static Optional<PythonQuickFix> createSwapQuickFix(Expression leftExpression, Expression rightExpression, String message, SubscriptionContext ctx) {
+  private static List<PythonTextEdit> createSwapEdits(Expression leftExpression, Expression rightExpression, SubscriptionContext ctx) {
     String leftText = expressionText(leftExpression, ctx);
     String rightText = expressionText(rightExpression, ctx);
     if (leftText == null || rightText == null) {
-      return Optional.empty();
+      return List.of();
     }
-    return Optional.of(PythonQuickFix.newQuickFix(message)
-      .addTextEdit(TextEditUtils.replace(leftExpression, rightText))
-      .addTextEdit(TextEditUtils.replace(rightExpression, leftText))
-      .build());
+    return List.of(
+      TextEditUtils.replace(leftExpression, rightText),
+      TextEditUtils.replace(rightExpression, leftText));
+  }
+
+  private static List<PythonTextEdit> createPytestSwapEdits(BinaryExpression binaryExpression, Convention convention, SubscriptionContext ctx) {
+    Expression left = binaryExpression.leftOperand();
+    Expression right = binaryExpression.rightOperand();
+    Expression expectedOperand = convention == Convention.EXPECTED_FIRST ? left : right;
+    Expression actualOperand = convention == Convention.EXPECTED_FIRST ? right : left;
+
+    // expected == approx(actual) (or mirrored): unwrap by swapping the constant with the approx argument
+    CallExpression approxWrappingActual = asPytestApproxCall(actualOperand, ctx);
+    if (approxWrappingActual != null) {
+      RegularArgument approxExpectedArg = TreeUtils.nthArgumentOrKeyword(0, PYTEST_APPROX_EXPECTED_ARGUMENT_NAME, approxWrappingActual.arguments());
+      if (approxExpectedArg == null) {
+        return List.of();
+      }
+      String replacementForExpectedOperand = expressionText(approxExpectedArg.expression(), ctx);
+      String replacementForApproxArg = expressionText(expectedOperand, ctx);
+      if (replacementForExpectedOperand == null || replacementForApproxArg == null) {
+        return List.of();
+      }
+      return List.of(
+        TextEditUtils.replace(expectedOperand, replacementForExpectedOperand),
+        TextEditUtils.replace(approxExpectedArg.expression(), replacementForApproxArg));
+    }
+
+    return createSwapEdits(left, right, ctx);
   }
 
   @Nullable
@@ -235,30 +282,6 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     return current == '\r' || current == '\n';
   }
 
-  private static boolean areInvertedForActualExpected(Expression actualPosition, Expression expectedPosition, SubscriptionContext ctx) {
-    return isExpectedValue(actualPosition, ctx) && !isExpectedValue(expectedPosition, ctx);
-  }
-
-  private boolean areInvertedForConfiguredPytestOrder(Expression leftOperand, Expression rightOperand, SubscriptionContext ctx) {
-    return expectedOnRight
-      ? areInvertedForActualExpected(leftOperand, rightOperand, ctx)
-      : areInvertedForActualExpected(rightOperand, leftOperand, ctx);
-  }
-
-  private String pytestMessage() {
-    return expectedOnRight ? PYTEST_EXPECTED_ON_RIGHT_MESSAGE : PYTEST_EXPECTED_ON_LEFT_MESSAGE;
-  }
-
-  private Expression pytestActualExpression(BinaryExpression binaryExpression, SubscriptionContext ctx) {
-    Expression actualExpression = expectedOnRight ? binaryExpression.rightOperand() : binaryExpression.leftOperand();
-    return unwrapPytestApproxArgument(actualExpression, ctx);
-  }
-
-  private Expression pytestExpectedExpression(BinaryExpression binaryExpression, SubscriptionContext ctx) {
-    Expression expectedExpression = expectedOnRight ? binaryExpression.leftOperand() : binaryExpression.rightOperand();
-    return unwrapPytestApproxArgument(expectedExpression, ctx);
-  }
-
   private static boolean isExpectedValue(Expression expression, SubscriptionContext ctx) {
     Expression unwrapped = Expressions.removeParentheses(expression);
     if (CheckUtils.isConstant(unwrapped)) {
@@ -279,14 +302,5 @@ public class AssertionArgumentOrderCheck extends PythonSubscriptionCheck {
     }
     RegularArgument expectedArg = TreeUtils.nthArgumentOrKeyword(0, PYTEST_APPROX_EXPECTED_ARGUMENT_NAME, callExpression.arguments());
     return expectedArg != null && isExpectedValue(expectedArg.expression(), ctx);
-  }
-
-  private static Expression unwrapPytestApproxArgument(Expression expression, SubscriptionContext ctx) {
-    CallExpression approxCall = asPytestApproxCall(expression, ctx);
-    if (approxCall == null) {
-      return expression;
-    }
-    RegularArgument expectedArg = TreeUtils.nthArgumentOrKeyword(0, PYTEST_APPROX_EXPECTED_ARGUMENT_NAME, approxCall.arguments());
-    return expectedArg != null ? expectedArg.expression() : expression;
   }
 }

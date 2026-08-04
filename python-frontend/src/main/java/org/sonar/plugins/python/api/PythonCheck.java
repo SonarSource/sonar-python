@@ -26,12 +26,19 @@ import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 
 public interface PythonCheck extends PythonFileConsumer {
 
+  /**
+   * A named flow of issue locations (reported as a DATA flow so the description is shown in the UI).
+   */
+  record IssueFlow(String description, List<IssueLocation> locations) {
+  }
+
   class PreciseIssue {
 
     private final PythonCheck check;
     private final IssueLocation primaryLocation;
     private Integer cost;
     private final List<IssueLocation> secondaryLocations;
+    private final List<IssueFlow> flows = new ArrayList<>();
     private final List<PythonQuickFix> quickFixes = new ArrayList<>();
 
     public PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
@@ -76,6 +83,15 @@ public interface PythonCheck extends PythonFileConsumer {
 
     public List<IssueLocation> secondaryLocations() {
       return secondaryLocations;
+    }
+
+    public PreciseIssue addFlow(String description, List<IssueLocation> locations) {
+      flows.add(new IssueFlow(description, List.copyOf(locations)));
+      return this;
+    }
+
+    public List<IssueFlow> flows() {
+      return List.copyOf(flows);
     }
 
     /**

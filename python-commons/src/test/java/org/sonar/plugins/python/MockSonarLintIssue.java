@@ -16,6 +16,7 @@
  */
 package org.sonar.plugins.python;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -42,6 +43,7 @@ class MockSonarLintIssue implements NewIssue, Issue {
   private List<String> codeVariants = null;
   private List<String> internalTags = List.of();
   private boolean saved;
+  private final List<Flow> flows = new ArrayList<>();
 
   MockSonarLintIssue(SensorContextTester context) {
     this.context = context;
@@ -98,12 +100,17 @@ class MockSonarLintIssue implements NewIssue, Issue {
 
   @Override
   public NewIssue addFlow(Iterable<NewIssueLocation> flowLocations) {
-    throw new IllegalStateException("Not supposed to be tested");
+    return addFlow(flowLocations, FlowType.UNDEFINED, null);
   }
 
   @Override
-  public NewIssue addFlow(Iterable<NewIssueLocation> iterable, FlowType flowType, @Nullable String s) {
-    return null;
+  public NewIssue addFlow(Iterable<NewIssueLocation> iterable, FlowType flowType, @Nullable String description) {
+    List<IssueLocation> locations = new ArrayList<>();
+    for (NewIssueLocation newIssueLocation : iterable) {
+      locations.add((IssueLocation) newIssueLocation);
+    }
+    flows.add(new RecordedFlow(locations, flowType, description));
+    return this;
   }
 
   @Override
@@ -167,7 +174,7 @@ class MockSonarLintIssue implements NewIssue, Issue {
 
   @Override
   public List<Flow> flows() {
-    throw new IllegalStateException("Not supposed to be tested");
+    return flows;
   }
 
   @Override
@@ -210,5 +217,8 @@ class MockSonarLintIssue implements NewIssue, Issue {
 
   public boolean getSaved() {
     return saved;
+  }
+
+  private record RecordedFlow(List<IssueLocation> locations, FlowType type, @Nullable String description) implements Flow {
   }
 }
