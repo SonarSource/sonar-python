@@ -111,6 +111,7 @@ import org.sonar.python.checks.tests.PytestAutouseParametrizedFixtureCheck;
 import org.sonar.python.checks.tests.PytestDecoratorParenthesesCheck;
 import org.sonar.python.checks.tests.PytestFixtureMultipleYieldCheck;
 import org.sonar.python.checks.tests.PytestFixturePositionalArgsCheck;
+import org.sonar.python.checks.tests.PytestFixtureYieldTeardownCheck;
 import org.sonar.python.checks.tests.PytestModuleImportCheck;
 import org.sonar.python.checks.tests.PytestPluginsConftestCheck;
 import org.sonar.python.checks.tests.PytestRaisesContextManagerCheck;
@@ -418,6 +419,7 @@ public class OpenSourceCheckList {
       PytestDecoratorParenthesesCheck.class,
       PytestFixtureMultipleYieldCheck.class,
       PytestFixturePositionalArgsCheck.class,
+      PytestFixtureYieldTeardownCheck.class,
       PytestModuleImportCheck.class,
       PytestPluginsConftestCheck.class,
       PytestRaisesContextManagerCheck.class,

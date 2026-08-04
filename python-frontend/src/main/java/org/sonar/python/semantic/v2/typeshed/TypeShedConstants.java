@@ -25,6 +25,7 @@ public class TypeShedConstants {
   public static final String BUILTINS_DICT_FQN = BUILTINS_PREFIX + "dict";
   public static final String PYTEST_FIXTURE_REQUEST_FQN = "_pytest.fixtures.FixtureRequest";
   public static final String PYTEST_FIXTURE_REQUEST_GET_FIXTURE_VALUE_FQN = PYTEST_FIXTURE_REQUEST_FQN + ".getfixturevalue";
+  public static final String PYTEST_FIXTURE_REQUEST_ADD_FINALIZER_FQN = PYTEST_FIXTURE_REQUEST_FQN + ".addfinalizer";
 
   private TypeShedConstants() {
   }
