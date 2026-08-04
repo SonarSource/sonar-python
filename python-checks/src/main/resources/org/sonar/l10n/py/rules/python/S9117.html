@@ -1,0 +1,37 @@
+<p>This rule raises an issue when <code>@pytest.fixture</code> explicitly sets <code>scope="function"</code>, which is already the default.</p>
+<p>In Python, this refers to <code>@pytest.fixture(scope="function")</code>, which restates the default scope.</p>
+<h2>Why is this an issue?</h2>
+<p>The default fixture scope is <code>"function"</code>. Writing <code>scope="function"</code> explicitly does not change behavior and adds clutter.
+Drop the argument and use <code>@pytest.fixture</code> alone unless you need a non-default value such as <code>"class"</code>, <code>"module"</code>,
+<code>"package"</code>, or <code>"session"</code>:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pytest
+
+@pytest.fixture(scope="function")  # Noncompliant
+def default_scope():
+    return {}
+</pre>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+@pytest.fixture
+def default_scope():
+    return {}
+</pre>
+<h3>What is the potential impact?</h3>
+<p>Redundant <code>scope="function"</code> distracts readers without changing fixture lifetime, which slows review of real scoping choices.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a
+  href="https://docs.pytest.org/en/stable/how-to/fixtures.html#scope-sharing-fixtures-across-classes-modules-packages-or-session">Fixture
+  scopes</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/reference/reference.html#pytest.fixture">pytest.fixture</a></li>
+  <li>Ruff - <a href="https://docs.astral.sh/ruff/rules/pytest-extraneous-scope-function/">PT003 — pytest-extraneous-scope-function</a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S9076} - Deprecated pytest.yield_fixture should be replaced with pytest.fixture</li>
+  <li>{rule:python:S9116} - Pytest fixture options should be passed as keyword arguments</li>
+</ul>
+

@@ -109,6 +109,7 @@ import org.sonar.python.checks.tests.IntentionalTestFailureMessageCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.PytestAutouseParametrizedFixtureCheck;
 import org.sonar.python.checks.tests.PytestDecoratorParenthesesCheck;
+import org.sonar.python.checks.tests.PytestDefaultFixtureScopeCheck;
 import org.sonar.python.checks.tests.PytestFixtureMultipleYieldCheck;
 import org.sonar.python.checks.tests.PytestFixturePositionalArgsCheck;
 import org.sonar.python.checks.tests.PytestFixtureYieldTeardownCheck;
@@ -417,6 +418,7 @@ public class OpenSourceCheckList {
       PydanticSkipValidationWithConstraintsCheck.class,
       PytestAutouseParametrizedFixtureCheck.class,
       PytestDecoratorParenthesesCheck.class,
+      PytestDefaultFixtureScopeCheck.class,
       PytestFixtureMultipleYieldCheck.class,
       PytestFixturePositionalArgsCheck.class,
       PytestFixtureYieldTeardownCheck.class,
