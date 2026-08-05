@@ -106,6 +106,7 @@ import org.sonar.python.checks.tests.GroupSimilarTestsParameterizedCheck;
 import org.sonar.python.checks.tests.IdenticalAssertionArgumentsCheck;
 import org.sonar.python.checks.tests.ImplicitlySkippedTestCheck;
 import org.sonar.python.checks.tests.IntentionalTestFailureMessageCheck;
+import org.sonar.python.checks.tests.MockPatchLambdaReturnValueCheck;
 import org.sonar.python.checks.tests.NotDiscoverableTestMethodCheck;
 import org.sonar.python.checks.tests.PytestAutouseParametrizedFixtureCheck;
 import org.sonar.python.checks.tests.PytestDecoratorParenthesesCheck;
@@ -356,6 +357,7 @@ public class OpenSourceCheckList {
       MethodShouldBeStaticCheck.class,
       MissingDocstringCheck.class,
       MissingNewlineAtEndOfFileCheck.class,
+      MockPatchLambdaReturnValueCheck.class,
       ModifiedParameterValueCheck.class,
       ModuleNameCheck.class,
       MultipleInheritanceMROConflictCheck.class,

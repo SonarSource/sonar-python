@@ -1,0 +1,78 @@
+<p>This rule raises an issue when <code>unittest.mock.patch</code> (or a pytest-mock <code>mocker.patch</code> call) is given a <code>lambda</code>
+whose body only returns a value and does not use its parameters.</p>
+<p>In Python, this refers to calls such as:</p>
+<ul>
+  <li><code>unittest.mock.patch("target", lambda: value)</code> or <code>patch("target", lambda *args: value)</code> when the lambda body does not use
+  its parameters</li>
+  <li>Equivalent <code>mocker.patch(...)</code> / <code>session_mocker.patch(...)</code> calls from pytest-mock</li>
+</ul>
+<h2>Why is this an issue?</h2>
+<p>When writing tests, <code>patch</code> and <code>mocker.patch</code> often stub a dependency so the code under test receives a fixed value.</p>
+<p>Passing a <code>lambda</code> that only returns a constant is less clear than <code>return_value=</code>. The lambda adds an unnecessary callable,
+and the mock no longer supports the usual assertions such as <code>assert_called_once_with</code>. <code>return_value=</code> also stays valid if the
+patched function’s signature changes.</p>
+<h3>Patching with a lambda that only returns a value</h3>
+<pre>
+with patch("app.api.fetch", lambda: {"ok": True}):
+    assert call_api()["ok"]
+</pre>
+<p>The lambda never uses its arguments; it only supplies a return value.</p>
+<h3>Prefer return_value</h3>
+<pre>
+with patch("app.api.fetch", return_value={"ok": True}):
+    assert call_api()["ok"]
+</pre>
+<p><code>return_value=</code> states the intent directly and keeps the mock usable for call assertions.</p>
+<p>This rule does not raise when the lambda uses its parameters, because that expresses custom behavior rather than a constant stub.</p>
+<h3>What is the potential impact?</h3>
+<p>Lambda-only stubs obscure intent and block standard mock assertions. Tests become harder to maintain when signatures change or when call arguments
+need verification.</p>
+<h2>How to fix it</h2>
+<p>Replace the lambda with <code>return_value=</code> set to the same constant. Keep a lambda (or <code>side_effect</code>) only when the stub must
+use call arguments or run custom logic.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from unittest.mock import patch
+
+def call_api():
+    from app.api import fetch
+    return fetch()
+
+def test_call_api_ok():
+    with patch("app.api.fetch", lambda: {"ok": True}):  # Noncompliant
+        assert call_api()["ok"]
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from unittest.mock import patch
+
+def call_api():
+    from app.api import fetch
+    return fetch()
+
+def test_call_api_ok():
+    with patch("app.api.fetch", return_value={"ok": True}):
+        assert call_api()["ok"]
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+def test_compute(mocker):
+    mocker.patch("module.target", lambda x, y: 7)  # Noncompliant
+    assert compute(1, 2) == 7
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+def test_compute(mocker):
+    mock_target = mocker.patch("module.target", return_value=7)
+    assert compute(1, 2) == 7
+    mock_target.assert_called_once_with(1, 2)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Ruff - <a href="https://docs.astral.sh/ruff/rules/pytest-patch-with-lambda/">PT008: pytest-patch-with-lambda</a></li>
+  <li>Python documentation - <a href="https://docs.python.org/3/library/unittest.mock.html#unittest.mock.patch">unittest.mock.patch</a></li>
+  <li>pytest-mock - <a href="https://pypi.org/project/pytest-mock/">pytest-mock on PyPI</a></li>
+</ul>
+
