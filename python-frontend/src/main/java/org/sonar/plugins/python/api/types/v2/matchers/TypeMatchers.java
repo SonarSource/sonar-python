@@ -19,11 +19,14 @@ package org.sonar.plugins.python.api.types.v2.matchers;
 import com.google.common.annotations.VisibleForTesting;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Stream;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.types.v2.TypeSource;
 import org.sonar.python.types.v2.matchers.AllTypePredicate;
 import org.sonar.python.types.v2.matchers.AnyTypePredicate;
 import org.sonar.python.types.v2.matchers.HasFQNPredicate;
+import org.sonar.python.types.v2.matchers.HasFQNSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.HasMemberPredicate;
 import org.sonar.python.types.v2.matchers.HasMemberSatisfyingPredicate;
 import org.sonar.python.types.v2.matchers.IsFunctionOwnerSatisfyingPredicate;
@@ -80,6 +83,24 @@ public final class TypeMatchers {
 
   public static TypeMatcher withFQN(String fqn) {
     return new TypeMatcherImpl(new HasFQNPredicate(fqn));
+  }
+
+  /**
+   * Matches types whose FQN satisfies {@code fqnPredicate}. Prefer {@link #isType(String)} when
+   * stubs exist; FQN-based matching is a fallback for unresolved third-party imports.
+   */
+  public static TypeMatcher withFQNSatisfying(Function<String, TriBool> fqnPredicate) {
+    return new TypeMatcherImpl(new HasFQNSatisfyingPredicate(fqnPredicate));
+  }
+
+  /**
+   * Matches types whose FQN starts with {@code fqnPrefix}. Prefer a trailing {@code '.'}
+   * (e.g. {@code "numpy."}) so sibling modules like {@code numpyish} are not matched.
+   * Prefer {@link #isType(String)} when stubs exist; FQN-based matching is a fallback for
+   * unresolved third-party imports.
+   */
+  public static TypeMatcher withFQNPrefix(String fqnPrefix) {
+    return withFQNSatisfying(typeFqn -> typeFqn.startsWith(fqnPrefix) ? TriBool.TRUE : TriBool.FALSE);
   }
 
   public static TypeMatcher isObjectSatisfying(TypeMatcher matcher) {

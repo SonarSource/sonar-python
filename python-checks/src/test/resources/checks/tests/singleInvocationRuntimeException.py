@@ -1,9 +1,14 @@
+import copy
 import unittest
 import uuid
 from pathlib import Path
 from uuid import UUID, uuid4
 
+import numpy as np
 import pytest
+from numpy import eye, identity, ones, zeros
+from numpy.polynomial.legendre import legval
+from scipy.special import legendre
 
 
 def get_item():
@@ -145,6 +150,135 @@ def test_pytest_with_uuid_constructor():
         do_work(UUID(int=0))
 
 
+def test_pytest_with_numpy_zeros():
+    with pytest.raises(ValueError):
+        do_work(np.zeros(3))
+
+
+def test_pytest_with_numpy_ones():
+    with pytest.raises(ValueError):
+        do_work(ones((2, 2)))
+
+
+def test_pytest_with_numpy_identity():
+    with pytest.raises(ValueError):
+        do_work(identity(3))
+
+
+def test_pytest_with_numpy_eye():
+    with pytest.raises(ValueError):
+        do_work(eye(3))
+
+
+def test_pytest_with_numpy_empty():
+    with pytest.raises(ValueError):
+        do_work(np.empty(2))
+
+
+def test_pytest_with_numpy_full():
+    with pytest.raises(ValueError):
+        do_work(np.full(2, 0))
+
+
+def test_pytest_with_numpy_zeros_like():
+    with pytest.raises(ValueError):
+        do_work(np.zeros_like([1, 2]))
+
+
+def test_pytest_with_numpy_ones_like():
+    with pytest.raises(ValueError):
+        do_work(np.ones_like([1, 2]))
+
+
+def test_pytest_with_numpy_empty_like():
+    with pytest.raises(ValueError):
+        do_work(np.empty_like([1, 2]))
+
+
+def test_pytest_with_numpy_full_like():
+    with pytest.raises(ValueError):
+        do_work(np.full_like([1, 2], 0))
+
+
+def test_pytest_with_numpy_array():
+    with pytest.raises(ValueError):
+        do_work(np.array([1, 2]))
+
+
+def test_pytest_with_numpy_asarray():
+    with pytest.raises(ValueError):
+        do_work(np.asarray([1, 2]))
+
+
+def test_pytest_with_numpy_arange():
+    with pytest.raises(ValueError):
+        do_work(np.arange(3))
+
+
+def test_pytest_with_numpy_linspace():
+    with pytest.raises(ValueError):
+        do_work(np.linspace(0, 1, 5))
+
+
+def test_pytest_with_numpy_random_randn():
+    with pytest.raises(ValueError):
+        do_work(np.random.randn(2, 2))
+
+
+def test_pytest_with_numpy_random_random():
+    with pytest.raises(ValueError):
+        do_work(np.random.random((2, 2)))
+
+
+def test_pytest_with_numpy_random_rand():
+    with pytest.raises(ValueError):
+        do_work(np.random.rand(2, 2))
+
+
+def test_pytest_with_numpy_random_randint():
+    with pytest.raises(ValueError):
+        do_work(np.random.randint(0, 10, size=3))
+
+
+def test_pytest_with_numpy_random_default_rng():
+    with pytest.raises(ValueError):
+        do_work(np.random.default_rng(0))
+
+
+def test_pytest_with_numpy_random_state():
+    with pytest.raises(ValueError):
+        do_work(np.random.RandomState(0))
+
+
+def test_pytest_with_numpy_copy():
+    with pytest.raises(ValueError):
+        do_work(np.copy([1, 2]))
+
+
+def test_pytest_with_numpy_legendre():
+    with pytest.raises(ValueError):
+        do_work(legval(0.5, [1, 0, 1]))
+
+
+def test_pytest_with_scipy_legendre():
+    with pytest.raises(ValueError):
+        do_work(legendre(3))
+
+
+def test_pytest_with_copy_copy():
+    with pytest.raises(ValueError):
+        do_work(copy.copy([1, 2]))
+
+
+def test_pytest_with_copy_deepcopy():
+    with pytest.raises(ValueError):
+        do_work(copy.deepcopy([1, 2]))
+
+
+def test_pytest_direct_lambda_with_numpy_zeros():
+    pytest.raises(ValueError, lambda: do_work(zeros(3)))
+
+
 def test_pytest_with_len_and_repr():
     with pytest.raises(ValueError):
         do_work(len(repr(1)))
@@ -227,6 +361,13 @@ class TestCase(unittest.TestCase):
     def test_unittest_with_uuid(self):
         with self.assertRaises(ValueError):
             do_work(uuid.uuid4())
+
+    def test_unittest_with_numpy_zeros(self):
+        with self.assertRaises(ValueError):
+            do_work(np.zeros(3))
+
+    def test_unittest_lambda_with_numpy_ones(self):
+        self.assertRaises(ValueError, lambda: do_work(ones(3)))
 
     def test_unittest_lambda(self):
         self.assertRaises(ValueError, lambda: get_item().process())  # Noncompliant {{Refactor this exception test to have only one invocation possibly throwing an exception.}}

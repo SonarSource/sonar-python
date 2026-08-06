@@ -97,7 +97,13 @@ public class SingleInvocationRuntimeExceptionCheck extends PythonSubscriptionChe
     TypeMatchers.isType("uuid.uuid5"),
     TypeMatchers.isType("uuid.uuid6"),
     TypeMatchers.isType("uuid.uuid7"),
-    TypeMatchers.isType("uuid.uuid8"));
+    TypeMatchers.isType("uuid.uuid8"),
+    TypeMatchers.isType("copy.copy"),
+    TypeMatchers.isType("copy.deepcopy"),
+    // NumPy/SciPy lack stubs → UnresolvedImportType; withFQNPrefix covers factories/helpers
+    // (zeros, random, copy, legendre, …) used as nested setup in exception assertions.
+    TypeMatchers.withFQNPrefix("numpy."),
+    TypeMatchers.withFQNPrefix("scipy."));
 
   /**
    * Constructors that are safe only without arguments (with args they commonly raise TypeError).
