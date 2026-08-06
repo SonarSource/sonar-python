@@ -414,6 +414,7 @@ public class OpenSourceCheckList {
       PydanticCoreSerializationFallbackCheck.class,
       PydanticDataclassRevalidationCheck.class,
       PydanticDoubleUnderscorePrivateAttributeCheck.class,
+      PydanticFieldValidatorReturnCheck.class,
       PydanticJsonSchemaInputTypeWithAfterModeCheck.class,
       PydanticOptionalFieldDefaultCheck.class,
       PydanticMultipleInheritanceConfigCheck.class,

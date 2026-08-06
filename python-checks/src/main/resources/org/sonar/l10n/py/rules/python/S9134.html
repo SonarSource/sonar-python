@@ -1,0 +1,73 @@
+<p>This rule raises an issue when a data validation method that is expected to transform or validate field values has a code path that does not
+explicitly return a value.</p>
+<p>In Python, this specifically applies to Pydantic’s <code>field_validator</code> decorator methods.</p>
+<h2>Why is this an issue?</h2>
+<p>In data validation frameworks, validation methods are functions or methods (marked by framework-specific decorators or annotations) that validate
+and optionally transform field values during object construction. These frameworks use the validator’s return value as the final field value.</p>
+<p>When a validation method does not explicitly return a value, the language runtime implicitly returns a null/None value. The framework then stores
+this null/None as the field value, regardless of the field’s type annotation or declaration. This happens silently - no error is raised, no warning is
+emitted, and the object appears to construct successfully.</p>
+<p>This creates a silent data corruption bug. A field declared as string, integer, or any other non-nullable type will contain null/None at runtime,
+violating its type contract without any indication to the caller.</p>
+<p>The issue commonly occurs in two scenarios:</p>
+<ul>
+  <li><strong>Forgotten return statement</strong>: The developer modifies the value in place but forgets to return it.</li>
+  <li><strong>Conditional validation</strong>: The validator raises an exception for invalid values but forgets to return the value on the valid code
+  path.</li>
+</ul>
+<p>Because the bug is silent at construction time, it only surfaces later when code that relies on the correct type encounters the unexpected
+null/None value.</p>
+<h3>What is the potential impact?</h3>
+<h3>Data Corruption</h3>
+<p>Fields that should never be null silently become null, breaking the data model’s integrity. Downstream code that trusts the type declaration will
+fail or produce incorrect results.</p>
+<p>For example, a <code>name</code> field declared as a non-nullable string type might become null, causing string operations to raise type-related
+errors or conditional checks to behave incorrectly.</p>
+<h3>Schema Violations</h3>
+<p>When serializing the model using standard serialization methods, fields will be serialized as <code>null</code> instead of their expected types.
+This breaks API contracts, database constraints, and data interchange formats.</p>
+<p>External systems receiving this data may reject it or, worse, accept it and propagate the corruption.</p>
+<h3>Difficult Debugging</h3>
+<p>Because no exception is raised during model construction, the bug manifests far from its source. You might see failures in:</p>
+<ul>
+  <li>Database operations when inserting <code>NULL</code> into non-nullable columns</li>
+  <li>API responses that violate OpenAPI schemas</li>
+  <li>Business logic that expects valid data types</li>
+</ul>
+<p>Tracing these failures back to the missing <code>return</code> statement in a validator can be time-consuming.</p>
+<p>In Python with Pydantic, this specifically occurs when using <code>model_dump()</code> or <code>model_dump_json()</code> serialization methods.</p>
+<h2>How to fix it</h2>
+<p>Always explicitly return the validated value from a <code>field_validator</code> method. If you modify the value, return the modified version. If
+you only validate without transformation, return the original value.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from pydantic import BaseModel, field_validator
+
+class UserModel(BaseModel):
+    name: str
+
+    @field_validator("name")
+    @classmethod
+    def clean_name(cls, v):
+        v = v.lower().strip()  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from pydantic import BaseModel, field_validator
+
+class UserModel(BaseModel):
+    name: str
+
+    @field_validator("name")
+    @classmethod
+    def clean_name(cls, v):
+        return v.lower().strip()
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Pydantic Documentation - <a href="https://docs.pydantic.dev/latest/concepts/validators/#field-validators">Field Validators</a></li>
+  <li>Pydantic Documentation - <a href="https://docs.pydantic.dev/latest/migration/">Migration Guide - Migrating from Pydantic V1 to V2</a></li>
+</ul>
+
