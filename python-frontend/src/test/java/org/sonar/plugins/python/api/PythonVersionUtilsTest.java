@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.slf4j.event.Level;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 
@@ -73,10 +75,72 @@ class PythonVersionUtilsTest {
   }
 
   @Test
+  void comparison_specifiers() {
+    assertThat(PythonVersionUtils.fromString(">=3.10")).containsExactly(V_310, V_311, V_312, V_313, V_314);
+    assertThat(PythonVersionUtils.fromString(">3.10")).containsExactly(V_311, V_312, V_313, V_314);
+    assertThat(PythonVersionUtils.fromString(">=3,<=3.10")).containsExactly(V_38, V_39, V_310);
+    assertThat(PythonVersionUtils.fromString(">=3,<3.10")).containsExactly(V_38, V_39);
+    assertThat(PythonVersionUtils.fromString(">=3.10.1,<3.12.4")).containsExactly(V_310, V_311);
+    assertThat(PythonVersionUtils.fromString("<3.12")).containsExactly(V_38, V_39, V_310, V_311);
+    assertThat(PythonVersionUtils.fromString(">=2.7,<3.12")).containsExactly(V_38, V_39, V_310, V_311);
+    assertThat(PythonVersionUtils.fromString(" >= 3.9 , < 3.12 ")).containsExactly(V_39, V_310, V_311);
+  }
+
+  @Test
+  void equality_and_exclusion_specifiers() {
+    assertThat(PythonVersionUtils.fromString("==3.11")).containsExactly(V_311);
+    assertThat(PythonVersionUtils.fromString("==3.*")).hasSameElementsAs(allVersions);
+    assertThat(PythonVersionUtils.fromString("==3.11.*")).containsExactly(V_311);
+    assertThat(PythonVersionUtils.fromString("==3.11.4")).containsExactly(V_311);
+    assertThat(PythonVersionUtils.fromString("!=3.11")).containsExactly(V_38, V_39, V_310, V_312, V_313, V_314);
+    assertThat(PythonVersionUtils.fromString(">=3,!=3.11")).containsExactly(V_38, V_39, V_310, V_312, V_313, V_314);
+    assertThat(PythonVersionUtils.fromString(">=3,!=3.11.*")).containsExactly(V_38, V_39, V_310, V_312, V_313, V_314);
+  }
+
+  @Test
+  void compatible_and_poetry_specifiers() {
+    assertThat(PythonVersionUtils.fromString("~=3.10")).containsExactly(V_310, V_311, V_312, V_313, V_314);
+    assertThat(PythonVersionUtils.fromString("~=3.10.1")).containsExactly(V_310);
+    assertThat(PythonVersionUtils.fromString("^3.10")).containsExactly(V_310, V_311, V_312, V_313, V_314);
+    assertThat(PythonVersionUtils.fromString("^3.10.1")).containsExactly(V_310, V_311, V_312, V_313, V_314);
+  }
+
+  @Test
+  void ranges_without_supported_versions_fall_back_to_all_versions() {
+    assertThat(PythonVersionUtils.fromString(">=3.15")).hasSameElementsAs(allVersions);
+    assertThat(logTester.logs(Level.WARN))
+      .contains("No supported Python version matches version range >=3.15. Analysis will target all supported Python versions.");
+
+    assertThat(PythonVersionUtils.fromString(">=3,<3.8")).hasSameElementsAs(allVersions);
+    assertThat(logTester.logs(Level.WARN))
+      .contains("No supported Python version matches version range >=3,<3.8. Analysis will target all supported Python versions.");
+  }
+
+  @Test
+  void contradictory_or_unsupported_ranges_fall_back_to_all_versions() {
+    assertThat(PythonVersionUtils.fromString(">=3.12,<3.11")).hasSameElementsAs(allVersions);
+    assertThat(logTester.logs(Level.WARN))
+      .contains("No supported Python version matches version range >=3.12,<3.11. Analysis will target all supported Python versions.");
+
+    assertThat(PythonVersionUtils.fromString("<3")).hasSameElementsAs(allVersions);
+    assertThat(logTester.logs(Level.WARN))
+      .contains("No supported Python version matches version range <3. Analysis will target all supported Python versions.");
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"3.10,>=3.11", "~=3", "~3.10", "===3.10", ">=3.10rc1", "^3.10 || ^3.11", ">=3.10.*", "==foo"})
+  void unsupported_range_syntax(String value) {
+    assertThat(PythonVersionUtils.fromString(value)).hasSameElementsAs(allVersions);
+    assertThat(logTester.logs(Level.WARN))
+      .contains("Error while parsing value of parameter 'sonar.python.version' (" + value
+        + "). Use comma-separated Python versions (e.g. \"3.10,3.11\") or numeric version specifiers (e.g. \">=3.10,<3.13\").");
+  }
+
+  @Test
   void error_while_parsing_version() {
     assertThat(PythonVersionUtils.fromString("foo")).hasSameElementsAs(allVersions);
     assertThat(logTester.logs(Level.WARN))
-      .contains("Error while parsing value of parameter 'sonar.python.version' (foo). Versions must be specified as MAJOR_VERSION.MINOR_VERSION (e.g. \"3.7, 3.8\")");
+      .contains("Error while parsing value of parameter 'sonar.python.version' (foo). Use comma-separated Python versions (e.g. \"3.10,3.11\") or numeric version specifiers (e.g. \">=3.10,<3.13\").");
   }
 
   @Test

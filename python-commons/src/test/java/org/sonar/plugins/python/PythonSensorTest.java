@@ -963,6 +963,20 @@ class PythonSensorTest {
     verify(analysisWarning, times(0)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
   }
 
+  @Test
+  void test_python_version_range_parameter() {
+    context.fileSystem().add(inputFile(FILE_1).wrappedFile());
+    activeRules = new ActiveRulesBuilder().build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", ">=3.10,<3.12"));
+    sensor().execute(context);
+
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(
+      PythonVersionUtils.Version.V_310,
+      PythonVersionUtils.Version.V_311);
+    assertThat(logTester.logs(Level.WARN)).doesNotContain(PythonSensor.UNSET_VERSION_WARNING);
+  }
+
   void setup_typing_concise_rule(String pythonVersion) {
     context.fileSystem().add(inputFile("python-version/typing.py").wrappedFile());
 

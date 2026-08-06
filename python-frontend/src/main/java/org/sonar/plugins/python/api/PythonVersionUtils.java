@@ -16,8 +16,10 @@
  */
 package org.sonar.plugins.python.api;
 
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,6 +115,28 @@ public class PythonVersionUtils {
     if (versions.length == 0) {
       return allVersions();
     }
+    if (PythonVersionSpecifierParser.containsVersionSpecifier(versions)) {
+      return fromVersionSpecifiers(versions);
+    }
+    return fromExactVersions(versions);
+  }
+
+  private static Set<Version> fromVersionSpecifiers(String[] versions) {
+    String propertyValue = String.join(",", Arrays.stream(versions).map(String::trim).toArray(String[]::new));
+    Optional<Set<Version>> parsedVersions = PythonVersionSpecifierParser.parse(versions);
+    if (parsedVersions.isEmpty()) {
+      logErrorMessage(propertyValue);
+      return allVersions();
+    }
+    Set<Version> matchingVersions = parsedVersions.get();
+    if (matchingVersions.isEmpty()) {
+      logWarningNoMatchingRange(propertyValue);
+      return allVersions();
+    }
+    return matchingVersions;
+  }
+
+  private static Set<Version> fromExactVersions(String[] versions) {
     Set<Version> pythonVersions = EnumSet.noneOf(Version.class);
     for (String versionValue : versions) {
       versionValue = versionValue.trim();
@@ -178,7 +202,7 @@ public class PythonVersionUtils {
 
   private static void logErrorMessage(String propertyValue) {
     LOG.warn(
-      "Error while parsing value of parameter '{}' ({}). Versions must be specified as MAJOR_VERSION.MINOR_VERSION (e.g. \"3.7, 3.8\")",
+      "Error while parsing value of parameter '{}' ({}). Use comma-separated Python versions (e.g. \"3.10,3.11\") or numeric version specifiers (e.g. \">=3.10,<3.13\").",
       PYTHON_VERSION_KEY,
       propertyValue);
   }
@@ -189,5 +213,9 @@ public class PythonVersionUtils {
 
   private static void logWarningPython2(String propertyValue) {
     LOG.warn("No explicit support for version {}. Support for Python versions prior to 3 is deprecated.", propertyValue);
+  }
+
+  private static void logWarningNoMatchingRange(String propertyValue) {
+    LOG.warn("No supported Python version matches version range {}. Analysis will target all supported Python versions.", propertyValue);
   }
 }
