@@ -104,18 +104,12 @@ class ImportsTelemetryCollectorTest {
   }
 
   @Test
-  void nameLongerThan100CharsIsFiltered() {
-    String longName = "a".repeat(100);
+  void nameNotInWhiteList() {
+    String longName = "a";
     var telemetry = collectFrom("import " + longName);
     assertThat(telemetry.importedModules()).isEmpty();
   }
 
-  @Test
-  void nameShorterThan100CharsIsKept() {
-    String shortName = "a".repeat(99);
-    var telemetry = collectFrom("import " + shortName);
-    assertThat(telemetry.importedModules()).containsExactly(shortName);
-  }
 
   @Test
   void mixOfImportTypes() {

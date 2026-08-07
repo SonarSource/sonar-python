@@ -1974,14 +1974,14 @@ class PythonSensorTest {
   @Test
   void send_telemetry_imports_comma_separated_list() {
     activeRules = new ActiveRulesBuilder().build();
-    // main.py contains "from mod import add"                          -> top-level module "mod"
+    // main.py contains "from mod import add"                          -> top-level module "mod" -> not in the whitelist
     // uses_typeshed.py contains "import math" and "from fastapi ..." -> top-level modules "math", "fastapi"
-    // Result is sorted and comma-separated: "fastapi,math,mod"
+    // Result is sorted and comma-separated: "fastapi,math"
     inputFile("main.py");
     inputFile("uses_typeshed.py");
     var contextSpy = spy(context);
     sensor().execute(contextSpy);
-    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_IMPORTS.key(), "fastapi,math,mod");
+    verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_IMPORTS.key(), "fastapi,math");
     verify(contextSpy, times(1)).addTelemetryProperty(TelemetryMetricKey.PYTHON_IMPORTS_FORMAT_VERSION.key(), "1");
   }
 
