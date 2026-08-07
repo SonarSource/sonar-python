@@ -87,7 +87,6 @@ public class PythonScanner extends Scanner {
   private final IssuesRepository issuesRepository;
   private final MeasuresRepository measuresRepository;
   private final NoSonarLineInfoCollector noSonarLineInfoCollector;
-  private final Lock lock;
   private final TypeInferenceTelemetryCollector typeInferenceTelemetryCollector;
   private final TestFileTelemetryCollector testFileTelemetryCollector;
   private final ImportsTelemetryCollector importsTelemetryCollector;
@@ -117,7 +116,7 @@ public class PythonScanner extends Scanner {
     this.recognitionErrorCount = new AtomicInteger(0);
     this.foundDatabricks = new AtomicBoolean(false);
     this.repositoryLocks = new ConcurrentHashMap<>();
-    this.lock = new ReentrantLock();
+    var lock = new ReentrantLock();
     this.cpdAnalyzer = new PythonCpdAnalyzer(context, lock);
     this.newSymbolsCollector = new NewSymbolsCollector(lock);
     this.pythonHighlighter = new PythonHighlighter(lock);
