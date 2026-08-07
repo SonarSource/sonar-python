@@ -1,14 +1,14 @@
-<p>When testing code that should raise an exception, having multiple method calls in the tested code makes it unclear which call is expected to raise
+<p>This rule raises an issue when a test for an expected exception contains multiple method calls, making it unclear which call is expected to raise
 the exception.</p>
 <h2>Why is this an issue?</h2>
 <p>When writing tests for exception handling, clarity is essential. If you chain multiple method calls within the code being tested for an exception,
 it becomes ambiguous which specific call is expected to raise that exception.</p>
-<p>For example, consider this code:</p>
+<p>For example, both <code>parse_payment(payload)</code> and <code>normalize()</code> could raise a <code>ValueError</code>:</p>
 <pre>
-pytest.raises(IndexError, lambda: get_item().process())
+with pytest.raises(ValueError):
+    parse_payment(payload).normalize()
 </pre>
-<p>Here, both <code>get_item()</code> and <code>process()</code> could potentially raise an <code>IndexError</code>. The test does not make it
-explicit which method is expected to raise the exception. This ambiguity makes the test harder to read and maintain.</p>
+<p>The test does not make it explicit which method is expected to raise the exception. This ambiguity makes the test harder to read and maintain.</p>
 <p>By isolating the method call you want to test, you make your test explicit and unambiguous. This improves readability and maintainability, and
 makes your test suite a better specification of expected behavior.</p>
 <h3>What is the potential impact?</h3>
@@ -27,19 +27,18 @@ This ensures only the final method call that you want to test is inside the exce
 <pre data-diff-id="1" data-diff-type="noncompliant">
 import pytest
 
-def test_process():
-    # Which method raises the exception: get_item() or process()?
-    with pytest.raises(IndexError):  # Noncompliant
-        get_item().process()
+def test_normalize_rejects_negative_amount():
+    with pytest.raises(ValueError):  # Noncompliant
+        parse_payment(payload).normalize()
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 import pytest
 
-def test_process():
-    item = get_item()
-    with pytest.raises(IndexError):
-        item.process()
+def test_normalize_rejects_negative_amount():
+    payment = parse_payment(payload)
+    with pytest.raises(ValueError):
+        payment.normalize()
 </pre>
 <h2>How to fix it in unittest</h2>
 <p>When using unittest’s <code>assertRaises()</code> method, extract intermediate method calls before the assertion. This makes it clear which
@@ -49,19 +48,18 @@ specific method is being tested for the exception.</p>
 <pre data-diff-id="2" data-diff-type="noncompliant">
 import unittest
 
-class TestMyCode(unittest.TestCase):
-    def test_process(self):
-        # Which method raises the exception: get_item() or process()?
-        self.assertRaises(IndexError, lambda: get_item().process())  # Noncompliant
+class TestPayment(unittest.TestCase):
+    def test_normalize_rejects_negative_amount(self):
+        self.assertRaises(ValueError, lambda: parse_payment(payload).normalize())  # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="2" data-diff-type="compliant">
 import unittest
 
-class TestMyCode(unittest.TestCase):
-    def test_process(self):
-        item = get_item()
-        self.assertRaises(IndexError, item.process)
+class TestPayment(unittest.TestCase):
+    def test_normalize_rejects_negative_amount(self):
+        payment = parse_payment(payload)
+        self.assertRaises(ValueError, payment.normalize)
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>

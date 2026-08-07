@@ -88,30 +88,6 @@ def test_feature_flag(monkeypatch):
 
     assert myapp.is_feature_enabled()
 </pre>
-<h4>Noncompliant code example</h4>
-<pre data-diff-id="3" data-diff-type="noncompliant">
-import myapp.client
-
-def test_notify_user():
-    client = myapp.client.Client()
-    original_send = client.send
-    client.send = lambda message: {"sent": True}  # Noncompliant
-
-    result = client.notify("Hello")
-
-    assert result["sent"]
-    client.send = original_send
-</pre>
-<h4>Compliant solution</h4>
-<pre data-diff-id="3" data-diff-type="compliant">
-def test_notify_user(monkeypatch):
-    client = myapp.client.Client()
-    monkeypatch.setattr(client, "send", lambda message: {"sent": True})
-
-    result = client.notify("Hello")
-
-    assert result["sent"]
-</pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>

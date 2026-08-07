@@ -24,16 +24,12 @@ fail or produce incorrect results.</p>
 <p>For example, a <code>name</code> field declared as a non-nullable string type might become null, causing string operations to raise type-related
 errors or conditional checks to behave incorrectly.</p>
 <h3>Schema Violations</h3>
-<p>When serializing the model using standard serialization methods, fields will be serialized as <code>null</code> instead of their expected types.
+<p>When serializing the model using standard serialization methods, fields will be serialized as <code>None</code> instead of their expected types.
 This breaks API contracts, database constraints, and data interchange formats.</p>
 <p>External systems receiving this data may reject it or, worse, accept it and propagate the corruption.</p>
 <h3>Difficult Debugging</h3>
-<p>Because no exception is raised during model construction, the bug manifests far from its source. You might see failures in:</p>
-<ul>
-  <li>Database operations when inserting <code>NULL</code> into non-nullable columns</li>
-  <li>API responses that violate OpenAPI schemas</li>
-  <li>Business logic that expects valid data types</li>
-</ul>
+<p>Because no exception is raised during model construction, the bug manifests far from its source. You might see failures in business logic that
+expects valid data types.</p>
 <p>Tracing these failures back to the missing <code>return</code> statement in a validator can be time-consuming.</p>
 <p>In Python with Pydantic, this specifically occurs when using <code>model_dump()</code> or <code>model_dump_json()</code> serialization methods.</p>
 <h2>How to fix it</h2>
@@ -68,6 +64,5 @@ class UserModel(BaseModel):
 <h3>Documentation</h3>
 <ul>
   <li>Pydantic Documentation - <a href="https://docs.pydantic.dev/latest/concepts/validators/#field-validators">Field Validators</a></li>
-  <li>Pydantic Documentation - <a href="https://docs.pydantic.dev/latest/migration/">Migration Guide - Migrating from Pydantic V1 to V2</a></li>
 </ul>
 
