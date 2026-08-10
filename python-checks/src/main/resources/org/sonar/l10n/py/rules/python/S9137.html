@@ -1,0 +1,100 @@
+<p>This rule raises an issue when a <code>unittest.mock.Mock</code> or <code>MagicMock</code> is created without an autospec (or equivalent
+<code>spec</code> / <code>spec_set</code>), including <code>patch</code> / pytest-mock calls that omit <code>autospec=True</code>.</p>
+<p>In Python, this includes:</p>
+<ul>
+  <li><code>Mock()</code> / <code>MagicMock()</code> without <code>spec</code> / <code>spec_set</code></li>
+  <li><code>patch("target")</code> / <code>patch.object(...)</code> without <code>autospec=True</code> (or an explicit <code>spec</code>)</li>
+  <li>Equivalent <code>mocker.patch(...)</code> calls from pytest-mock</li>
+</ul>
+<h2>Why is this an issue?</h2>
+<p>By default, <code>unittest.mock.Mock</code> accepts any attribute name and any call signature. That hides mistakes: typos on methods under test,
+wrong argument lists, and misspelled assertion helpers all succeed until something else fails later.</p>
+<p>Autospeccing means building the mock from a real object or class so that it mirrors that API. Missing attributes raise <code>AttributeError</code>,
+and calls are checked against the real signature. That turns silent mock mistakes into loud test failures.</p>
+<h3>Mock without autospec</h3>
+<pre>
+from unittest.mock import Mock
+
+client = Mock()
+client.fetsh("id")  # typo is accepted; returns another Mock
+</pre>
+<h3>Mock with autospec</h3>
+<pre>
+from unittest.mock import create_autospec
+
+client = create_autospec(ApiClient)
+client.fetch("id")  # AttributeError if fetch does not exist on ApiClient
+</pre>
+<h3>Exceptions</h3>
+<p>This rule does not raise when <code>spec</code>, <code>spec_set</code>, <code>autospec</code>, or <code>create_autospec</code> is already used.</p>
+<p>A bare <code>Mock</code> can be acceptable when there is no useful real collaborator to copy — for example a throwaway callable stub, or a test
+double invented only for this test with no production type. In those cases, review manually before changing the code; prefer autospec whenever a real
+class or function exists.</p>
+<h3>What is the potential impact?</h3>
+<p>Without autospec, tests can pass while still exercising incorrect interactions with dependencies. API renames and signature changes may go
+unnoticed, and assertion typos on the mock can pass for the same reason.</p>
+<h2>How to fix it</h2>
+<p>Create the mock from the real collaborator so it mirrors that API:</p>
+<ul>
+  <li>Use <code>create_autospec(SomeClass)</code> or <code>create_autospec(some_function)</code> when you hold the mock in a variable.</li>
+  <li>Use <code>patch("module.target", autospec=True)</code> (or <code>mocker.patch(…​, autospec=True)</code>) when replacing an import path for the
+  duration of the test.</li>
+  <li>Use <code>spec=</code> / <code>spec_set=</code> on <code>Mock</code> / <code>MagicMock</code> when you need a limited mirror of an instance
+  without full autospec behaviour; prefer <code>autospec</code> / <code>create_autospec</code> when you want signature checking as well.</li>
+</ul>
+<p>Enabling autospec may cause existing tests to fail if they called methods that do not exist on the real API or used the wrong signature. That
+failure is intended: update the test (or the call under test) to match the real collaborator. Production behaviour should stay the same; only the test
+double becomes stricter.</p>
+<p>Use a plain <code>Mock</code> only when there is no useful real API to copy. If the bare mock is intentional for that reason, treat the issue as an
+accepted trade-off after review rather than a false positive of the analysis.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from unittest.mock import Mock
+
+def test_checkout():
+    payments = Mock()  # Noncompliant
+    checkout(payments, order)
+    payments.charge.assert_called_once_with(order.total)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from unittest.mock import create_autospec
+
+def test_checkout():
+    payments = create_autospec(PaymentGateway)
+    checkout(payments, order)
+    payments.charge.assert_called_once_with(order.total)
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from unittest.mock import patch
+
+def test_notify():
+    with patch("app.notify.send") as send:  # Noncompliant
+        notify_user("u1")
+        send.assert_called_once_with("u1")
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from unittest.mock import patch
+
+def test_notify():
+    with patch("app.notify.send", autospec=True) as send:
+        notify_user("u1")
+        send.assert_called_once_with("u1")
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python documentation - <a href="https://docs.python.org/3/library/unittest.mock.html#auto-speccing">Auto-speccing</a></li>
+  <li>Python documentation - <a
+  href="https://docs.python.org/3/library/unittest.mock.html#unittest.mock.create_autospec"><code>unittest.mock.create_autospec</code></a></li>
+  <li>Python documentation - <a
+  href="https://docs.python.org/3/library/unittest.mock.html#unittest.mock.patch"><code>unittest.mock.patch</code></a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S9136} - Mock assertion method names should be spelled correctly</li>
+</ul>
+

@@ -17,7 +17,6 @@
 package org.sonar.python.checks.tests;
 
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -34,12 +33,10 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParameterList;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
-import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.checks.utils.MockPatchUtils;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -50,19 +47,6 @@ public class MockPatchLambdaReturnValueCheck extends PythonSubscriptionCheck {
   private static final String QUICK_FIX_MESSAGE = "Replace this lambda with a \"return_value\" argument";
 
   private static final String NEW_KEYWORD = "new";
-  private static final String PATCH_METHOD = "patch";
-  private static final String OBJECT_METHOD = "object";
-
-  /**
-   * The {@code mocker} fixtures come from pytest-mock, which has no typeshed stubs, hence the name based detection.
-   */
-  private static final Set<String> MOCKER_FIXTURE_NAMES = Set.of(
-    "mocker", "class_mocker", "module_mocker", "package_mocker", "session_mocker");
-
-  private static final TypeMatcher PATCHER_MATCHER = TypeMatchers.isObjectSatisfying(
-    TypeMatchers.any(
-      TypeMatchers.isType("unittest.mock._patcher"),
-      TypeMatchers.isType("mock.mock._patcher")));
 
   @Override
   public void initialize(Context context) {
@@ -81,7 +65,7 @@ public class MockPatchLambdaReturnValueCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    int newPosition = newArgumentPosition(callExpression.callee(), ctx);
+    int newPosition = MockPatchUtils.newArgumentPosition(callExpression.callee(), ctx);
     if (newPosition < 0) {
       return;
     }
@@ -137,51 +121,6 @@ public class MockPatchLambdaReturnValueCheck extends PythonSubscriptionCheck {
       .skip(1)
       .map(RegularArgument.class::cast)
       .anyMatch(argument -> argument.keywordArgument() == null);
-  }
-
-  /**
-   * @return the position of the {@code new} parameter for the patching call, or {@code -1} when the callee is not a patching call.
-   */
-  private static int newArgumentPosition(Expression callee, SubscriptionContext ctx) {
-    if (PATCHER_MATCHER.isTrueFor(callee, ctx)) {
-      return 1;
-    }
-    if (!(callee instanceof QualifiedExpression qualifiedExpression)) {
-      return -1;
-    }
-    Expression qualifier = Expressions.removeParentheses(qualifiedExpression.qualifier());
-    String memberName = qualifiedExpression.name().name();
-    if (OBJECT_METHOD.equals(memberName) && (PATCHER_MATCHER.isTrueFor(qualifier, ctx) || isMockerPatch(qualifier))) {
-      return 2;
-    }
-    if (PATCH_METHOD.equals(memberName) && isMockerFixture(qualifier)) {
-      return 1;
-    }
-    return -1;
-  }
-
-  private static boolean isMockerPatch(Expression expression) {
-    return expression instanceof QualifiedExpression qualifiedExpression
-      && PATCH_METHOD.equals(qualifiedExpression.name().name())
-      && isMockerFixture(Expressions.removeParentheses(qualifiedExpression.qualifier()));
-  }
-
-  private static boolean isMockerFixture(Expression expression) {
-    Expression expr = Expressions.removeParentheses(expression);
-    if (expr instanceof Name name) {
-      return MOCKER_FIXTURE_NAMES.contains(name.name()) && isFunctionParameter(name.symbolV2());
-    }
-    // Class-based suites often store the fixture on self in setup_method; match by attribute name only.
-    return expr instanceof QualifiedExpression qualifiedExpression
-      && Expressions.removeParentheses(qualifiedExpression.qualifier()) instanceof Name qualifier
-      && "self".equals(qualifier.name())
-      && MOCKER_FIXTURE_NAMES.contains(qualifiedExpression.name().name());
-  }
-
-  private static boolean isFunctionParameter(@Nullable SymbolV2 symbol) {
-    return Stream.ofNullable(symbol)
-      .flatMap(s -> s.usages().stream())
-      .anyMatch(usage -> usage.kind() == UsageV2.Kind.PARAMETER);
   }
 
   private static boolean usesItsParameters(LambdaExpression lambda) {
