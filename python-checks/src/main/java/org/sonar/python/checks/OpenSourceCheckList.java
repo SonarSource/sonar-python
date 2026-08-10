@@ -115,6 +115,7 @@ import org.sonar.python.checks.tests.PytestFixtureMultipleYieldCheck;
 import org.sonar.python.checks.tests.PytestFixturePositionalArgsCheck;
 import org.sonar.python.checks.tests.PytestFixtureYieldTeardownCheck;
 import org.sonar.python.checks.tests.PytestModuleImportCheck;
+import org.sonar.python.checks.tests.PytestParameterDefaultValueCheck;
 import org.sonar.python.checks.tests.PytestPluginsConftestCheck;
 import org.sonar.python.checks.tests.PytestRaisesContextManagerCheck;
 import org.sonar.python.checks.tests.SingleInvocationRuntimeExceptionCheck;
@@ -426,6 +427,7 @@ public class OpenSourceCheckList {
       PytestFixturePositionalArgsCheck.class,
       PytestFixtureYieldTeardownCheck.class,
       PytestModuleImportCheck.class,
+      PytestParameterDefaultValueCheck.class,
       PytestPluginsConftestCheck.class,
       PytestRaisesContextManagerCheck.class,
       PyTorchDataLoaderNumWorkersCheck.class,

@@ -197,6 +197,52 @@ class UnittestUtilsTest {
   }
 
   @Test
+  void test_collected_pytest_test_function() {
+    FileInput fileInput = parse("test_module.py", """
+      def test_module_level():
+        pass
+
+      class ComparisonTest:
+        def test_in_comparison_test(self):
+          pass
+
+      class DigestAuthTests:
+        def test_in_tests_suffix(self):
+          pass
+
+      class RemoteFuncsTestCase:
+        def test_in_testcase(self):
+          pass
+
+      class test_celery_style:
+        def test_in_celery_class(self):
+          pass
+
+      class Helper:
+        def test_helper(self):
+          pass
+
+        def wrapper(self):
+          def test_nested():
+            pass
+          return test_nested
+      """);
+
+    var functionsByName = allDescendants(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).stream()
+      .map(FunctionDef.class::cast)
+      .collect(java.util.stream.Collectors.toMap(f -> f.name().name(), f -> f, (a, b) -> a));
+
+    assertThat(UnittestUtils.isCollectedPytestTestFunction(functionsByName.get("test_module_level"), "test_module.py")).isTrue();
+    assertThat(UnittestUtils.isCollectedPytestTestFunction(functionsByName.get("test_in_comparison_test"), "test_module.py")).isTrue();
+    assertThat(UnittestUtils.isCollectedPytestTestFunction(functionsByName.get("test_in_tests_suffix"), "test_module.py")).isTrue();
+    assertThat(UnittestUtils.isCollectedPytestTestFunction(functionsByName.get("test_in_testcase"), "test_module.py")).isTrue();
+    assertThat(UnittestUtils.isCollectedPytestTestFunction(functionsByName.get("test_in_celery_class"), "test_module.py")).isTrue();
+    assertThat(UnittestUtils.isCollectedPytestTestFunction(functionsByName.get("test_helper"), "test_module.py")).isFalse();
+    assertThat(UnittestUtils.isCollectedPytestTestFunction(functionsByName.get("test_nested"), "test_module.py")).isTrue();
+    assertThat(UnittestUtils.isCollectedPytestTestFunction(functionsByName.get("test_module_level"), "module.py")).isFalse();
+  }
+
+  @Test
   void test_pytest_lifecycle_methods() {
     FileInput fileInput = parse("test_module.py", """
       import pytest

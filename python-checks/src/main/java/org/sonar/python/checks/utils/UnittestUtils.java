@@ -139,6 +139,18 @@ public class UnittestUtils {
     return name.startsWith("Test");
   }
 
+  /**
+   * Broader than {@link #isTestClassName}: also accepts celery-style {@code test_*},
+   * unittest-style {@code *Test}/{@code *Tests}/{@code *TestCase} names.
+   */
+  public static boolean isLikelyTestClassName(String name) {
+    return isTestClassName(name)
+      || name.startsWith("test")
+      || name.endsWith("Test")
+      || name.endsWith("Tests")
+      || name.endsWith("TestCase");
+  }
+
   public static boolean isPytestFileName(String fileName) {
     return fileName.startsWith("test_") || fileName.endsWith("_test.py");
   }
@@ -176,6 +188,18 @@ public class UnittestUtils {
     }
     ClassDef parentClass = directlyEnclosingClass(functionDef);
     return parentClass == null || isTestClassName(parentClass.name().name());
+  }
+
+  /**
+   * Like {@link #isPytestStyleTestFunction} but accepts a broader set of test class names
+   * (see {@link #isLikelyTestClassName}). Nested helpers inside non-test classes are excluded.
+   */
+  public static boolean isCollectedPytestTestFunction(FunctionDef functionDef, String fileName) {
+    if (!isPytestFileName(fileName) || !isTestMethodName(functionDef.name().name())) {
+      return false;
+    }
+    ClassDef parentClass = directlyEnclosingClass(functionDef);
+    return parentClass == null || isLikelyTestClassName(parentClass.name().name());
   }
 
   public static boolean isPytestRaises(CallExpression callExpression, SubscriptionContext ctx) {
