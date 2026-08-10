@@ -119,6 +119,7 @@ import org.sonar.python.checks.tests.PytestModuleImportCheck;
 import org.sonar.python.checks.tests.PytestParameterDefaultValueCheck;
 import org.sonar.python.checks.tests.PytestPluginsConftestCheck;
 import org.sonar.python.checks.tests.PytestRaisesContextManagerCheck;
+import org.sonar.python.checks.tests.PytestUselessYieldFixtureCheck;
 import org.sonar.python.checks.tests.SingleInvocationRuntimeExceptionCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 import org.sonar.python.checks.tests.SpecificExceptionAssertionCheck;
@@ -432,6 +433,7 @@ public class OpenSourceCheckList {
       PytestParameterDefaultValueCheck.class,
       PytestPluginsConftestCheck.class,
       PytestRaisesContextManagerCheck.class,
+      PytestUselessYieldFixtureCheck.class,
       PyTorchDataLoaderNumWorkersCheck.class,
       PytzTimeZoneInDatetimeConstructorCheck.class,
       RaiseOutsideExceptCheck.class,
