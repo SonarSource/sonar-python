@@ -17,7 +17,14 @@ def bootstrap_session(df=10):
 
 def test_standalone_raises():
     pytest.raises(ValueError)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^
     process_data('hello')
+
+
+def test_standalone_raises_with_match():
+    pytest.raises(ValueError, match="must be positive")  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    bootstrap_session(df=-1)
 
 
 def test_deprecated_callable_passing_form():
@@ -28,6 +35,13 @@ def test_deprecated_callable_passing_form():
 def test_typo_calling_function_immediately():
     pytest.raises(NotImplementedError, bootstrap_session(df=10))  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+def test_deprecated_callable_even_when_assigned():
+    # Deprecated callable form is always reported, even if assigned.
+    ctx = pytest.raises(ValueError, bootstrap_session, df=-1)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
+#         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    process_data('hello')
 
 
 def test_compliant_with_block():
@@ -51,7 +65,7 @@ def test_compliant_imported_raises():
         process_data(123)
 
 
-def test_noncompliant_imported_raises():
+def test_noncompliant_imported_raises_deprecated():
     imported_raises(ValueError, bootstrap_session, df=-1)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -63,6 +77,12 @@ def test_non_pytest_call():
 def test_compliant_parenthesized_with_block():
     with (pytest.raises(ValueError)):
         process_data(123)
+
+
+def test_noncompliant_standalone_parenthesized_raises():
+    (pytest.raises(ValueError))  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    process_data('hello')
 
 
 def test_compliant_saved_raises_reused_in_with():
@@ -87,6 +107,14 @@ def test_compliant_saved_raises_conditional_then_with():
         process_data(123)
 
 
+def test_compliant_ternary_assignment_used_in_with(descr, fields, expected):
+    # Production FP: assigned via ternary, later used as context manager.
+    context = contextlib.nullcontext() if isinstance(expected, dict) else pytest.raises(expected)
+    with context:
+        result = process_data(fields)
+        assert result == expected, descr
+
+
 def test_compliant_saved_parenthesized_raises_reused_in_with():
     ctx = (pytest.raises(ValueError))
     with ctx:
@@ -99,30 +127,26 @@ def test_compliant_annotated_assignment_reused_in_with():
         process_data(123)
 
 
-def test_noncompliant_saved_raises_never_used_in_with():
-    ctx = pytest.raises(ValueError)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
-#         ^^^^^^^^^^^^^^^^^^^^^^^^^
+def test_compliant_saved_raises_never_used_in_with():
+    # Uncertain: value may escape analysis; prefer FN over FP.
+    ctx = pytest.raises(ValueError)
     process_data('hello')
 
 
-def test_noncompliant_chained_assignment_even_if_used_in_with():
-    # Chained assignment is not tracked as a single saved context manager.
-    a = b = pytest.raises(ValueError)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
-#           ^^^^^^^^^^^^^^^^^^^^^^^^^
+def test_compliant_chained_assignment_used_in_with():
+    a = b = pytest.raises(ValueError)
     with a:
         process_data(123)
 
 
-def test_noncompliant_tuple_unpacking_assignment():
-    ctx, other = pytest.raises(ValueError), None  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
-#                ^^^^^^^^^^^^^^^^^^^^^^^^^
+def test_compliant_tuple_unpacking_assignment():
+    ctx, other = pytest.raises(ValueError), None
     process_data('hello')
 
 
-def test_noncompliant_attribute_assignment():
+def test_compliant_attribute_assignment():
     holder = type('Holder', (), {})()
-    holder.ctx = pytest.raises(ValueError)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
-#                ^^^^^^^^^^^^^^^^^^^^^^^^^
+    holder.ctx = pytest.raises(ValueError)
     process_data('hello')
 
 
@@ -177,10 +201,10 @@ def test_compliant_parametrize_list_argnames_raises_used_in_with(expectation):
 
 @pytest.mark.parametrize(
     "expectation",
-    [pytest.raises(ValueError)],  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
-#    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    [pytest.raises(ValueError)],
 )
-def test_noncompliant_parametrize_raises_never_used_in_with(expectation):
+def test_compliant_parametrize_raises_never_used_in_with(expectation):
+    # Uncertain injection usage; prefer FN over FP.
     process_data('hello')
 
 
@@ -190,58 +214,16 @@ def test_noncompliant_parametrize_raises_never_used_in_with(expectation):
         pytest.param(
             1,
             contextlib.nullcontext(),
-            pytest.raises(ValueError),  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
-#           ^^^^^^^^^^^^^^^^^^^^^^^^^
+            pytest.raises(ValueError),
         ),
     ],
 )
-def test_noncompliant_parametrize_raises_not_the_with_param(x, expectation, unused):
+def test_compliant_parametrize_raises_not_the_with_param(x, expectation, unused):
     with expectation:
         process_data(123)
-
-
-@pytest.mark.parametrize(
-    "expectation",
-    [{pytest.raises(ValueError): None}],  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
-#     ^^^^^^^^^^^^^^^^^^^^^^^^^
-)
-def test_noncompliant_parametrize_raises_in_unsupported_row_shape(expectation):
-    with expectation:
-        process_data(123)
-
-
-@pytest.mark.parametrize(argvalues=[pytest.raises(ValueError)])  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
-#                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
-def test_noncompliant_parametrize_missing_argnames(expectation):
-    with expectation:
-        process_data(123)
-
-
-@pytest.mark.parametrize(*["expectation", [pytest.raises(TypeError)]])  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
-#                                          ^^^^^^^^^^^^^^^^^^^^^^^^
-def test_noncompliant_parametrize_starred_args(expectation):
-    with expectation:
-        process_data(123)
-
-
-@pytest.mark.parametrize(
-    "expectation,",
-    [pytest.raises(ValueError)],
-)
-def test_compliant_parametrize_argnames_trailing_comma(expectation):
-    with expectation:
-        process_data(123)
-
-
-def test_noncompliant_annotated_attribute_assignment():
-    holder = type('Holder', (), {})()
-    holder.ctx: object = pytest.raises(ValueError)  # Noncompliant {{Prefer the context manager form: wrap the raising code in "with pytest.raises(...)".}}
-#                        ^^^^^^^^^^^^^^^^^^^^^^^^^
-    process_data('hello')
 
 
 def external_error_raised(expected_exception):
-    # Escapes via return for callers that use: with external_error_raised(...):
     return pytest.raises(expected_exception, match=None)
 
 
@@ -271,7 +253,6 @@ class RaisesHolder:
 
 
 def escapes_via_argument_to_other_call(expected_exception):
-    # Escapes as a call argument — caller may use it in with.
     return process_data(pytest.raises(expected_exception, match=None))
 
 
