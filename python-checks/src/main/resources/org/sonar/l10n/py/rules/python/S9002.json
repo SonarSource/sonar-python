@@ -1,0 +1,25 @@
+{
+  "title": "Function-scoped tests should use \"tmp_path\" instead of \"tmp_path_factory\"",
+  "type": "CODE_SMELL",
+  "status": "beta",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "pytest",
+    "tests",
+    "confusing"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-9002",
+  "sqKey": "S9002",
+  "scope": "Tests",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CLEAR"
+  }
+}

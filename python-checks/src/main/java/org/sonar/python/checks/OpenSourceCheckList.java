@@ -127,6 +127,7 @@ import org.sonar.python.checks.tests.SpecificWarningAssertionCheck;
 import org.sonar.python.checks.tests.TestCasesShouldContainTestsCheck;
 import org.sonar.python.checks.tests.UnconditionalAssertionCheck;
 import org.sonar.python.checks.tests.UseMonkeypatchFixtureCheck;
+import org.sonar.python.checks.tests.UseTmpPathInsteadOfFactoryCheck;
 import org.sonar.python.checks.tests.UselessPytestMarksCheck;
 import org.sonar.python.checks.tests.XfailNoReasonCheck;
 
@@ -531,6 +532,7 @@ public class OpenSourceCheckList {
       RewriteCollectionConstructorAsComprehensionCheck.class,
       UnconditionalAssertionCheck.class,
       UseMonkeypatchFixtureCheck.class,
+      UseTmpPathInsteadOfFactoryCheck.class,
       UselessPytestMarksCheck.class,
       UndefinedNameAllPropertyCheck.class,
       UnencryptedSageMakerNotebookCheck.class,
