@@ -172,7 +172,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     }
     Set<Descriptor> descriptors = caching.readProjectLevelSymbolTableEntry(inputFile.wrappedFile().key());
     if (descriptors != null && imports != null) {
-      saveRetrievedDescriptors(inputFile.wrappedFile().key(), descriptors, caching);
+      saveRetrievedDescriptors(inputFile.wrappedFile().key(), currFQN, descriptors, caching);
       return true;
     }
 
@@ -190,8 +190,8 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     return MessageDigest.isEqual(fileHash, fileInputHash);
   }
 
-  private void saveRetrievedDescriptors(String fileKey, Set<Descriptor> descriptors, Caching caching) {
-    projectLevelSymbolTable().insertEntry(fileKey, descriptors);
+  private void saveRetrievedDescriptors(String fileKey, String moduleFQN, Set<Descriptor> descriptors, Caching caching) {
+    projectLevelSymbolTable().insertEntry(moduleFQN, descriptors);
     caching.copyFromPrevious(fileKey);
   }
 

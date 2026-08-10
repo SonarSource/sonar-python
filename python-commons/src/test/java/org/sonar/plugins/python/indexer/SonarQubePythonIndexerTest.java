@@ -43,6 +43,7 @@ import org.sonar.plugins.python.caching.TestWriteCache;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.caching.PythonReadCacheImpl;
 import org.sonar.python.caching.PythonWriteCacheImpl;
+import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.types.TypeShed;
@@ -756,5 +757,35 @@ class SonarQubePythonIndexerTest {
     // FQN should be computed correctly for both
     assertThat(indexer.packageName(moduleFile)).isEqualTo("mypackage");
     assertThat(indexer.packageName(utilsFile)).isEqualTo("otherpackage");
+  }
+
+  @Test
+  void test_cached_descriptors_accessible_by_module_fqn() {
+    // Both files unchanged — triggers the optimized cache path
+    file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+
+    List<PythonInputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
+
+    VariableDescriptor modDescriptor = new VariableDescriptor("add", "mod.add", null);
+    byte[] serializedMain = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    byte[] serializedMod = toProtobufModuleDescriptor(Set.of(modDescriptor)).toByteArray();
+
+    readCache.put(importsMapCacheKey("moduleKey:main.py"), importsAsByteArray(List.of("mod")));
+    readCache.put(importsMapCacheKey("moduleKey:mod.py"), importsAsByteArray(Collections.emptyList()));
+    readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedMain);
+    readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), serializedMod);
+    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
+    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file2.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
+
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context, new ProjectConfigurationBuilder());
+    pythonIndexer.buildOnce(context);
+
+    // Confirm the optimized cache path was taken for mod.py
+    assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isTrue();
+
+    Set<Descriptor> descriptors = pythonIndexer.projectLevelSymbolTable().getDescriptorsFromModule("mod");
+    assertThat(descriptors).isNotNull();
+    assertThat(descriptors).extracting(Descriptor::name).containsExactly("add");
   }
 }
