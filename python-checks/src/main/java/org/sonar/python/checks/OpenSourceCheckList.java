@@ -121,6 +121,7 @@ import org.sonar.python.checks.tests.PytestPluginsConftestCheck;
 import org.sonar.python.checks.tests.PytestRaisesContextManagerCheck;
 import org.sonar.python.checks.tests.PytestUselessYieldFixtureCheck;
 import org.sonar.python.checks.tests.SingleInvocationRuntimeExceptionCheck;
+import org.sonar.python.checks.tests.SingleInvocationWarningCheck;
 import org.sonar.python.checks.tests.SkippedTestNoReasonCheck;
 import org.sonar.python.checks.tests.SpecificExceptionAssertionCheck;
 import org.sonar.python.checks.tests.SpecificWarningAssertionCheck;
@@ -469,6 +470,7 @@ public class OpenSourceCheckList {
       SingleCharCharacterClassCheck.class,
       SingleDispatchMixupCheck.class,
       SingleInvocationRuntimeExceptionCheck.class,
+      SingleInvocationWarningCheck.class,
       SkippedTestNoReasonCheck.class,
       SkLearnEstimatorDontInitializeEstimatedValuesCheck.class,
       SleepZeroInAsyncCheck.class,

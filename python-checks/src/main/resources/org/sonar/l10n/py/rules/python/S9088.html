@@ -1,0 +1,92 @@
+<p>When testing code that should emit a warning, having multiple method calls in the tested code makes it unclear which call is expected to emit the
+warning.</p>
+<p>In Python with pytest, this refers to <code>with pytest.warns(…​):</code> bodies that contain more than one statement, or a single statement with
+multiple method invocations that could emit the expected warning.</p>
+<h2>Why is this an issue?</h2>
+<p>When writing tests for warnings, clarity is essential. If you put several method calls inside a <code>pytest.warns</code> block, or chain multiple
+invocations in the tested expression, it becomes ambiguous which specific call is expected to emit the warning.</p>
+<p>For example, consider this code:</p>
+<pre>
+with pytest.warns(UserWarning):
+    get_item().process()
+</pre>
+<p>Here, both <code>get_item()</code> and <code>process()</code> could potentially emit a <code>UserWarning</code>. The test does not make it explicit
+which method is expected to warn. The same ambiguity appears when setup and the code under test share the <code>with</code> block:</p>
+<pre>
+with pytest.warns(UserWarning):
+    setup()
+    do_work()
+</pre>
+<p>By isolating the method call you want to test, you make the test explicit and unambiguous. This improves readability and maintainability, and makes
+your test suite a better specification of expected behavior.</p>
+<h3>What is the potential impact?</h3>
+<p>Writing tests with multiple method calls when testing for warnings reduces test quality:</p>
+<ul>
+  <li><strong>Incorrect test coverage</strong>: You may think you are testing one method’s warning behavior when you are actually testing
+  another’s.</li>
+  <li><strong>Maintenance burden</strong>: Other developers (or future you) will struggle to understand what the test is verifying.</li>
+  <li><strong>Reduced confidence</strong>: Passing tests do not guarantee that the specific behavior you intended to test is working correctly.</li>
+</ul>
+<h2>How to fix it</h2>
+<p>When using pytest’s <code>pytest.warns()</code> context manager, extract intermediate method calls into separate variables before the assertion,
+and move setup outside the <code>with</code> block. This ensures only the final method call that you want to test is inside the warning-testing
+block.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pytest
+
+def test_process():
+    # Which method emits the warning: get_item() or process()?
+    with pytest.warns(UserWarning):  # Noncompliant
+        get_item().process()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pytest
+
+def test_process():
+    item = get_item()
+    with pytest.warns(UserWarning):
+        item.process()
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import warnings
+import pytest
+
+def setup():
+    pass
+
+def test_multiple_statements():
+    with pytest.warns(UserWarning):  # Noncompliant
+        setup()
+        warnings.warn("x", UserWarning)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import warnings
+import pytest
+
+def setup():
+    pass
+
+def test_multiple_statements():
+    setup()
+    with pytest.warns(UserWarning):
+        warnings.warn("x", UserWarning)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/how-to/capture-warnings.html#warns">Asserting warnings with the warns context
+  manager</a></li>
+  <li>pytest documentation - <a href="https://docs.pytest.org/en/stable/reference/reference.html#pytest.warns">pytest.warns</a></li>
+  <li>Ruff - <a href="https://docs.astral.sh/ruff/rules/pytest-warns-with-multiple-statements/">pytest-warns-with-multiple-statements (PT031)</a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S5778} - Only one method invocation is expected when testing runtime exceptions</li>
+  <li>{rule:python:S5914} - Assertions should not fail or succeed unconditionally</li>
+</ul>
+
