@@ -1,0 +1,89 @@
+<p>This rule raises an issue when a <code>unittest.mock.Mock</code> (or a mock created by <code>patch</code> / pytest-mock) is used with an assertion
+attribute whose name closely resembles a real mock assertion method — for example a typo such as <code>assert_called_wit</code> instead of
+<code>assert_called_with</code>. This rule only applies to method names that closely match a known assertion API.</p>
+<p>Typical cases include typos on methods such as <code>assert_called</code>, <code>assert_called_with</code>, <code>assert_called_once_with</code>,
+<code>assert_any_call</code>, <code>assert_has_calls</code>, and <code>assert_not_called</code>, on <code>Mock</code>, <code>MagicMock</code>, or
+mocks returned by <code>unittest.mock.patch</code> / pytest-mock.</p>
+<h2>Why is this an issue?</h2>
+<p><code>unittest.mock.Mock</code> creates child attributes on demand. Any unknown name becomes another <code>Mock</code>, including misspelled
+assertion methods.</p>
+<p>Calling <code>mock.assert_called_wit(…​)</code> therefore does not fail: it builds a new mock and returns it. The test keeps passing even though
+the intended assertion never ran.</p>
+<h3>Misspelled assertion</h3>
+<pre>
+mock = Mock()
+service(mock)
+mock.assert_called_wit(1, 2)  # typo: creates a child mock, does not assert
+</pre>
+<p>The call looks like an assertion, but it is only attribute access on a <code>Mock</code>.</p>
+<h3>Correct assertion name</h3>
+<pre>
+mock = Mock()
+service(mock)
+mock.assert_called_with(1, 2)
+</pre>
+<p>Using a real assertion method fails the test when the mock was not called as expected.</p>
+<p>This rule reports only when the attribute name is a near miss of a documented <code>Mock</code> assertion method (a small spelling difference), so
+clearly unrelated <code>assert_*</code> names are not flagged. Review manually only if the code intentionally reads a nested mock attribute whose name
+merely resembles an assertion helper (this is rare and usually a smell of its own).</p>
+<h3>What is the potential impact?</h3>
+<p>Broken tests can pass silently. Regressions that the assertion was meant to catch go unnoticed, which weakens confidence in the suite and can let
+faulty behavior reach production.</p>
+<h2>How to fix it</h2>
+<p>Rename the attribute to the correct <code>Mock</code> assertion method so the test performs the check you intended. Do not change production code:
+only the test assertion spelling should change, and the asserted call arguments should stay the same.</p>
+<p>Optionally harden the mock with autospec (see {rule:python:S9137}) so future unknown attribute names raise instead of creating child mocks. That is
+a separate improvement; the required fix for this issue is correcting the assertion name.</p>
+<p>A won’t-fix / accepted trade-off is not appropriate for a misspelled assertion: the test is not verifying what it claims. Mark as a false positive
+only if analysis mistook a non-assertion attribute access for a mock assertion API.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from unittest.mock import Mock
+
+def test_process_calls_save():
+    saver = Mock()
+    process(saver, "item")
+    saver.save.assert_called_wit("item")  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from unittest.mock import Mock
+
+def test_process_calls_save():
+    saver = Mock()
+    process(saver, "item")
+    saver.save.assert_called_with("item")
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from unittest.mock import patch
+
+def test_notify():
+    with patch("app.notify.send") as send:
+        notify_user("u1")
+        send.assert_called_once_wit("u1")  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from unittest.mock import patch
+
+def test_notify():
+    with patch("app.notify.send") as send:
+        notify_user("u1")
+        send.assert_called_once_with("u1")
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Python documentation - <a
+  href="https://docs.python.org/3/library/unittest.mock.html#unittest.mock.Mock"><code>unittest.mock.Mock</code></a></li>
+  <li>Python documentation - <a
+  href="https://docs.python.org/3/library/unittest.mock.html#unittest.mock.Mock.assert_called_with"><code>Mock.assert_called_with</code></a></li>
+  <li>Python documentation - <a href="https://docs.python.org/3/library/unittest.mock.html#auto-speccing">Auto-speccing</a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:python:S9137} - Mocks should be created with autospec</li>
+</ul>
+
