@@ -34,43 +34,48 @@ def test_bare_magic_mock():
 
 
 def test_mock_with_return_value_only():
-    Mock(return_value=42)  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
-#   ^^^^
+    # Discarded constructor — no collaborator interaction in the test.
+    Mock(return_value=42)
 
 
 def test_mock_with_side_effect_only():
-    Mock(side_effect=ValueError)  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
-#   ^^^^
+    Mock(side_effect=ValueError)
 
 
 def test_mock_with_name_only():
-    Mock(name="payments")  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
-#   ^^^^
+    Mock(name="payments")
 
 
 def test_mock_with_wraps_only():
-    Mock(wraps=PaymentGateway())  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
-#   ^^^^
+    Mock(wraps=PaymentGateway())
 
 
 def test_fully_qualified_mock():
-    unittest.mock.Mock()  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
-#   ^^^^^^^^^^^^^^^^^^
+    unittest.mock.Mock()
 
 
 def test_fully_qualified_magic_mock():
-    unittest.mock.MagicMock()  # Noncompliant {{Replace this "MagicMock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
-#   ^^^^^^^^^^^^^^^^^^^^^^^
+    unittest.mock.MagicMock()
+
+
+def test_fully_qualified_mock_collaborator():
+    payments = unittest.mock.Mock()  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
+#              ^^^^^^^^^^^^^^^^^^
+    checkout(payments, None)
 
 
 def test_third_party_mock():
-    mock.Mock()  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
-#   ^^^^^^^^^
+    mock.Mock()
 
 
 def test_third_party_magic_mock():
-    mock.MagicMock()  # Noncompliant {{Replace this "MagicMock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
-#   ^^^^^^^^^^^^^^
+    mock.MagicMock()
+
+
+def test_third_party_mock_collaborator():
+    payments = mock.Mock()  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
+#              ^^^^^^^^^
+    checkout(payments, None)
 
 
 def test_patch_without_autospec():
@@ -80,11 +85,21 @@ def test_patch_without_autospec():
         send.assert_called_once_with("u1")
 
 
-def test_patch_as_decorator():
+def test_patch_as_decorator_unused_mock():
+    # Isolation-only patch: mock parameter is never used.
+    @patch("app.notify.send")
+    def inner(send):
+        notify_user("u1")
+
+    inner()
+
+
+def test_patch_as_decorator_used_mock():
     @patch("app.notify.send")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
 #    ^^^^^
     def inner(send):
         notify_user("u1")
+        send.assert_called_once_with("u1")
 
     inner()
 
@@ -95,47 +110,77 @@ def test_patch_object_without_autospec():
         charge(10)
 
 
-def test_fully_qualified_patch():
-    with unittest.mock.patch("app.notify.send"):  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
-#        ^^^^^^^^^^^^^^^^^^^
+def test_fully_qualified_patch_unused():
+    # No mock bound in the test — isolation only.
+    with unittest.mock.patch("app.notify.send"):
         notify_user("u1")
 
 
-def test_third_party_patch():
-    with mock.patch("app.notify.send"):  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
-#        ^^^^^^^^^^
+def test_third_party_patch_unused():
+    with mock.patch("app.notify.send"):
         notify_user("u1")
 
 
-def test_mocker_patch(mocker):
-    mocker.patch("app.notify.send")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
-#   ^^^^^^^^^^^^
+def test_mocker_patch_unused(mocker):
+    mocker.patch("app.notify.send")
 
 
-def test_mocker_patch_object(mocker):
-    mocker.patch.object(PaymentGateway, "charge")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
-#   ^^^^^^^^^^^^^^^^^^^
+def test_mocker_patch_object_unused(mocker):
+    mocker.patch.object(PaymentGateway, "charge")
 
 
-def test_class_mocker_patch(class_mocker):
-    class_mocker.patch("app.notify.send")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
-#   ^^^^^^^^^^^^^^^^^^
+def test_class_mocker_patch_unused(class_mocker):
+    class_mocker.patch("app.notify.send")
 
 
-def test_self_mocker_patch():
+def test_self_mocker_patch_unused():
     class Suite:
         def setup_method(self, mocker):
             self.mocker = mocker
 
         def test_it(self):
-            self.mocker.patch("app.notify.send")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
-#           ^^^^^^^^^^^^^^^^^
+            self.mocker.patch("app.notify.send")
 
 
-def test_patch_with_autospec_false():
-    with patch("app.notify.send", autospec=False):  # Noncompliant {{Replace "autospec=False" with "autospec=True", or pass an explicit "spec=" / "spec_set=".}}
+def test_mocker_patch_used(mocker):
+    send = mocker.patch("app.notify.send")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
+#          ^^^^^^^^^^^^
+    notify_user("u1")
+    send.assert_called_once_with("u1")
+
+
+def test_patch_with_autospec_false_unused():
+    # Isolation-only; autospec=False is irrelevant when the mock is unused.
+    with patch("app.notify.send", autospec=False):
+        notify_user("u1")
+
+
+def test_patch_with_autospec_false_used():
+    with patch("app.notify.send", autospec=False) as send:  # Noncompliant {{Replace "autospec=False" with "autospec=True", or pass an explicit "spec=" / "spec_set=".}}
 #        ^^^^^
         notify_user("u1")
+        send.assert_called_once_with("u1")
+
+
+def test_field_stub_mock_not_raised():
+    # Autospec cannot mirror instance fields populated in __init__.
+    message = Mock()
+    message.headers = {"id": "1"}
+    message.body = b""
+
+
+def test_field_stub_magic_mock_not_raised():
+    response = MagicMock()
+    response.status_code = 200
+    response.raw = MagicMock()
+
+
+def test_nested_mock_assigned_to_attribute():
+    cur = Mock()
+    connect = MagicMock()
+    connect.return_value.cursor = cur
+    cur.return_value.execute = Mock()
+    cur.return_value.execute.assert_called()
 
 
 def test_compliant_create_autospec():
@@ -239,3 +284,139 @@ def test_async_mock_not_covered():
 
 def test_property_mock_not_covered():
     unittest.mock.PropertyMock()
+
+
+def test_annotated_assignment_collaborator():
+    payments: object = Mock()  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
+#                      ^^^^
+    checkout(payments, None)
+
+
+def test_chained_assignment_collaborator():
+    payments = gateway = Mock()  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
+#                        ^^^^
+    checkout(payments, None)
+
+
+def test_inline_mock_argument():
+    checkout(Mock(), None)  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
+#            ^^^^
+
+
+def test_mock_called_directly():
+    factory = Mock()  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
+#             ^^^^
+    factory()
+
+
+def test_fully_qualified_decorator_used():
+    @unittest.mock.patch("app.notify.send")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
+#    ^^^^^^^^^^^^^^^^^^^
+    def inner(send):
+        notify_user("u1")
+        send.assert_called_once_with("u1")
+
+    inner()
+
+
+def test_patch_object_decorator_used():
+    @patch.object(PaymentGateway, "charge")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
+#    ^^^^^^^^^^^^
+    def inner(charge):
+        charge(10)
+
+    inner()
+
+
+@patch("app.notify.send")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
+#^^^^^
+class ClassLevelPatchSuite:
+    def test_it(self, send):
+        notify_user("u1")
+        send.assert_called_once_with("u1")
+
+
+def test_decorator_without_mock_parameter():
+    # More patch decorators than injectable parameters — treat as unused.
+    @patch("app.notify.send")
+    def inner():
+        notify_user("u1")
+
+    inner()
+
+
+def test_tuple_unpacking_mock_not_raised():
+    # Unpacking yields child mocks, not the constructed mock itself.
+    payments, order = Mock()
+    checkout(payments, order)
+
+
+def test_attribute_lhs_mock_not_raised_as_binding():
+    gateway = PaymentGateway()
+    gateway.charge = Mock()
+    gateway.charge(10)
+
+
+def test_patch_decorator_with_non_call_neighbor():
+    # Non-call decorators must not break patch index → parameter mapping.
+    @staticmethod
+    @patch("app.notify.send")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
+#    ^^^^^
+    def inner(send):
+        notify_user("u1")
+        send.assert_called_once_with("u1")
+
+    inner()
+
+
+def test_parenthesized_mock_assignment():
+    payments = (Mock())  # Noncompliant {{Replace this "Mock()" with "create_autospec(<collaborator>)", or pass "spec=" / "spec_set=".}}
+#               ^^^^
+    checkout(payments, None)
+
+
+def test_classmethod_patch_skips_cls_parameter():
+    class Suite:
+        @classmethod
+        @patch("app.notify.send")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
+#        ^^^^^
+        def inner(cls, send):
+            notify_user("u1")
+            send.assert_called_once_with("u1")
+
+    Suite.inner()
+
+
+def test_instance_method_patch_skips_self_parameter():
+    class Suite:
+        @patch("app.notify.send")  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
+#        ^^^^^
+        def inner(self, send):
+            notify_user("u1")
+            send.assert_called_once_with("u1")
+
+    Suite().inner()
+
+
+def test_with_patch_non_name_alias_ignored():
+    # Alias is not a simple name — cannot track usages; treat as unused.
+    class Box:
+        pass
+
+    box = Box()
+    with patch("app.notify.send") as box.send:
+        notify_user("u1")
+
+
+def test_nested_mock_inside_mock_constructor():
+    # Inner Mock is an argument to another Mock — not a collaborator use.
+    Mock(Mock())
+
+
+def test_patch_call_nested_inside_with_patch():
+    # Inner patch is not the with-item test; isolation-only unless assigned/used.
+    with patch("app.notify.send") as send:  # Noncompliant {{Add "autospec=True" to this patch call, or pass an explicit "spec=" / "spec_set=".}}
+#        ^^^^^
+        notify_user("u1")
+        send.assert_called_once_with("u1")
+        patch("app.notify.other")
