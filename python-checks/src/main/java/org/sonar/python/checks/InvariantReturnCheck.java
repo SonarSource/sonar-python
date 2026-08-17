@@ -83,7 +83,7 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
     for (CfgBlock predecessor : cfg.end().predecessors()) {
       if (predecessor instanceof PythonCfgBranchingBlock pythonCfgBranchingBlock) {
         collectBranchingBlock(collectedBlocks, pythonCfgBranchingBlock);
-      } else if (!endsWithElementKind(predecessor, Kind.RAISE_STMT)) {
+      } else {
         collectedBlocks.add(new LatestExecutedBlock(predecessor));
       }
     }
@@ -211,6 +211,10 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
     return bindings.size() == 1 ? bindings.iterator().next() : null;
   }
 
+  private static boolean endsWithElementKind(CfgBlock block, Kind kind) {
+    return lastElement(block, kind) != null;
+  }
+
   @Nullable
   private static Tree findLastBinding(List<Tree> elements, Symbol identifier) {
     for (int i = elements.size() - 1; i >= 0; i--) {
@@ -249,10 +253,6 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
       return ((ForStatement) parent).expressions().contains(child);
     }
     return true;
-  }
-
-  private static boolean endsWithElementKind(CfgBlock block, Kind kind) {
-    return lastElement(block, kind) != null;
   }
 
   @Nullable

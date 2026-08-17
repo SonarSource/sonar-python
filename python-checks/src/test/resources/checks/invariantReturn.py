@@ -433,15 +433,19 @@ def f_raise_is_not_a_return(a, b):
         raise b
     return b
 
-def f_function_exit_through_raise_should_be_ignored(a, b, c): # Noncompliant
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+def f_function_exit_through_raise_prevents_reporting(a, b, c):
     if a:
         return b
-#       ^^^^^^^^<
     if c:
         raise
     return b
-#   ^^^^^^^^<
+
+def f_early_return_with_raise_guard(already_valid, invalid, self):
+    if already_valid:
+        return self
+    if invalid:
+        raise ValueError()
+    return self
 
 def f_same_binding_through_multiple_paths(a): # Noncompliant
     d = 3
