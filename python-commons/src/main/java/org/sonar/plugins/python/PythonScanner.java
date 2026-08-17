@@ -151,9 +151,9 @@ public class PythonScanner extends Scanner {
   protected void scanFile(PythonInputFile inputFile) throws IOException {
     var pythonFile = SonarQubePythonFile.create(inputFile);
     InputFile.Type fileType = inputFile.wrappedFile().type();
-    PythonVisitorContext visitorContext = createVisitorContext(inputFile, pythonFile);
+    PythonVisitorContext visitorContext = createVisitorContext(inputFile, pythonFile, projectRelativePath(inputFile));
     InputFile.Type effectiveTypeForRules = resolveEffectiveTypeForRules(
-      fileType, projectRelativePath(inputFile), visitorContext.rootTree());
+      fileType, visitorContext.isLikelyTestFile());
     if (!testSourcesConfigured && fileType == InputFile.Type.MAIN) {
       indexer.writeEffectiveFileType(inputFile.wrappedFile().key(), effectiveTypeForRules);
     }
@@ -189,7 +189,7 @@ public class PythonScanner extends Scanner {
     searchForDataBricks(visitorContext);
   }
 
-  private PythonVisitorContext createVisitorContext(PythonInputFile inputFile, PythonFile pythonFile) throws IOException {
+  private PythonVisitorContext createVisitorContext(PythonInputFile inputFile, PythonFile pythonFile, String testFilePath) throws IOException {
     PythonVisitorContext visitorContext;
     try {
       AstNode astNode = parserSupplier.get().parse(inputFile.contents());
@@ -203,10 +203,11 @@ public class PythonScanner extends Scanner {
         .typeTable(indexer.projectLevelTypeTable())
         .cacheContext(indexer.cacheContext())
         .sonarProduct(context.runtime().getProduct())
+        .testFilePath(testFilePath)
         .build();
 
     } catch (RecognitionException e) {
-      visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct());
+      visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct(), testFilePath);
 
       var line = (inputFile.kind() == PythonInputFile.Kind.IPYTHON) ?
         ((GeneratedIPythonFile) inputFile).locationMap().get(e.getLine()).line() : e.getLine();
@@ -373,12 +374,11 @@ public class PythonScanner extends Scanner {
     return testSourcesConfigured || platformType == InputFile.Type.TEST;
   }
 
-  private InputFile.Type resolveEffectiveTypeForRules(InputFile.Type platformType, String filePath, @Nullable FileInput tree) {
+  private InputFile.Type resolveEffectiveTypeForRules(InputFile.Type platformType, boolean likelyTestFile) {
     if (isBypassed(platformType)) {
       return platformType;
     }
-    boolean isTest = TestFileClassifier.looksLikeTestFile(filePath, tree);
-    if (isTest) {
+    if (likelyTestFile) {
       maybeEmitHeuristicWarning();
       return InputFile.Type.TEST;
     }

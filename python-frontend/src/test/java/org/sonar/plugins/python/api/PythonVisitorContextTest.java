@@ -17,6 +17,7 @@
 package org.sonar.plugins.python.api;
 
 import com.sonar.sslr.api.RecognitionException;
+import java.net.URI;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -45,6 +46,25 @@ import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
 class PythonVisitorContextTest {
+  @Test
+  void likely_test_file_is_computed_from_the_parsed_file() {
+    var fileInput = PythonTestUtils.parse("import pytest");
+    var context = new PythonVisitorContext.Builder(fileInput, pythonFile("production.py")).build();
+
+    assertThat(context.isLikelyTestFile()).isTrue();
+  }
+
+  @Test
+  void likely_test_file_uses_the_project_relative_path_when_available() {
+    var file = pythonFile("production.py");
+    when(file.uri()).thenReturn(URI.create("file:///workspace/testing/production.py"));
+    var context = new PythonVisitorContext.Builder(PythonTestUtils.parse("pass"), file)
+      .testFilePath("src/production.py")
+      .build();
+
+    assertThat(context.isLikelyTestFile()).isFalse();
+  }
+
   @Test
   void fullyQualifiedModuleName() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");

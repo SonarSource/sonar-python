@@ -33,173 +33,109 @@ import static org.sonarsource.analyzer.commons.appsec.TestFileClassifier.HEURIST
 
 class TestFileClassifierTest {
 
-  // --- isTestSourceConfigured ---
-
   @Test
-  void isTestSourceConfigured_returns_false_for_empty_config() {
+  void test_source_configuration_disables_the_heuristic() {
     var config = mock(Configuration.class);
     when(config.get(anyString())).thenReturn(Optional.empty());
     when(config.getBoolean(anyString())).thenReturn(Optional.empty());
+
     assertThat(TestFileClassifier.isTestSourceConfigured(config)).isFalse();
-  }
 
-  @Test
-  void isTestSourceConfigured_returns_true_for_python_specific_key() {
-    var config = mock(Configuration.class);
-    when(config.get(anyString())).thenReturn(Optional.empty());
-    when(config.getBoolean(anyString())).thenReturn(Optional.empty());
     when(config.getBoolean("sonar.python.testFileHeuristic.disabled")).thenReturn(Optional.of(true));
     assertThat(TestFileClassifier.isTestSourceConfigured(config)).isTrue();
-  }
 
-  @Test
-  void isTestSourceConfigured_returns_true_for_generic_heuristic_disabled_key() {
-    var config = mock(Configuration.class);
-    when(config.get(anyString())).thenReturn(Optional.empty());
-    when(config.getBoolean(anyString())).thenReturn(Optional.empty());
     when(config.getBoolean(HEURISTIC_DISABLED_KEY)).thenReturn(Optional.of(true));
     assertThat(TestFileClassifier.isTestSourceConfigured(config)).isTrue();
   }
 
-  // --- looksLikeTestFileByPath ---
-
-  @Test
-  void empty_path_returns_false() {
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("")).isFalse();
-  }
-
-  @Test
-  void file_in_tests_directory_returns_true() {
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("tests/foo.py")).isTrue();
-  }
-
-  @Test
-  void file_in_test_singular_directory_returns_true() {
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("test/foo.py")).isTrue();
-  }
-
-  @Test
-  void file_in_nested_tests_directory_returns_true() {
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("src/mypackage/tests/foo.py")).isTrue();
-  }
-
-  @Test
-  void test_prefix_filename_returns_true() {
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("test_foo.py")).isTrue();
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("src/test_bar.py")).isTrue();
-  }
-
-  @Test
-  void test_suffix_filename_returns_true() {
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("foo_test.py")).isTrue();
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("src/bar_test.py")).isTrue();
-  }
-
-  @Test
-  void regular_file_in_src_returns_false() {
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("src/foo.py")).isFalse();
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("module.py")).isFalse();
-  }
-
-  @Test
-  void directory_named_testing_not_matched() {
-    // only "test" and "tests" trigger — "testing" must not
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("testing/foo.py")).isFalse();
-  }
-
-  @Test
-  void windows_style_path_normalized() {
-    assertThat(TestFileClassifier.looksLikeTestFileByPath("src\\tests\\foo.py")).isTrue();
-  }
-
-  // --- looksLikeTestFile with null tree ---
-
-  @Test
-  void null_tree_non_test_path_returns_false() {
-    assertThat(TestFileClassifier.looksLikeTestFile("src/regular.py", null)).isFalse();
-  }
-
-  @Test
-  void null_tree_test_path_returns_true() {
-    assertThat(TestFileClassifier.looksLikeTestFile("tests/foo.py", null)).isTrue();
-  }
-
-  // --- import-based detection (visitImportName / visitImportFrom) ---
-
   @ParameterizedTest
   @ValueSource(strings = {
-    "import unittest\n",
-    "import pytest\n",
-    "from unittest import TestCase\n",
-    "from pytest import mark\n"
+    "tests/helpers.py",
+    "src/TESTING/factories.py",
+    "src\\test\\conftest.py",
+    "src/TestCase.py",
+    "src/latest.py"
   })
-  void test_framework_import_detected(String code) {
-    FileInput tree = parse(code);
-    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isTrue();
+  void path_signals_include_test_support_files_and_aggressive_filename_matches(String path) {
+    assertThat(TestFileClassifier.looksLikeTestFileByPath(path)).isTrue();
   }
 
-  @Test
-  void multiple_top_level_imports_both_checked() {
-    FileInput tree = parse("import unittest\nimport unittest\n");
-    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isTrue();
+  @ParameterizedTest
+  @ValueSource(strings = {"", "src/production.py", "src/module.py"})
+  void non_test_paths_are_not_classified_without_an_ast_signal(String path) {
+    assertThat(TestFileClassifier.looksLikeTestFileByPath(path)).isFalse();
   }
 
   @ParameterizedTest
   @ValueSource(strings = {
-    "import os\nimport sys\n",              // non-test imports
-    "from . import foo\n",                  // relative import — null module, must not throw
-    "def test_something():\n    pass\n",    // test_ prefix but no assert
-    "def do_something():\n    assert True\n" // assert but no test_ prefix
+    "import pytest as pt\n",
+    "from unittest.mock import Mock\n",
+    "import doctest\n",
+    "from django.test import TestCase\n",
+    "import hypothesis.strategies as st\n",
+    "import robot\n",
+    "import behave\n",
+    "import pytest_bdd\n",
+    "import nose\n",
+    "import nose2\n",
+    "from twisted.trial import unittest\n",
+    "import testtools\n",
+    "import mock\n",
+    "import pytest_mock\n",
+    "import fixtures\n",
+    "import factory\n",
+    "import factory_boy\n",
+    "import freezegun\n",
+    "import responses\n",
+    "import requests_mock\n",
+    "import respx\n",
+    "import httpretty\n",
+    "import moto\n",
+    "import vcr\n",
+    "import testcontainers\n"
   })
-  void ast_heuristic_not_detected(String code) {
-    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", parse(code))).isFalse();
+  void test_framework_and_utility_imports_are_detected(String code) {
+    assertThat(TestFileClassifier.looksLikeTestFile("src/production.py", parse(code))).isTrue();
   }
 
   @Test
-  void nested_import_not_detected() {
-    // import inside a function body must not classify the file as a test file
-    FileInput tree = parse("def helper():\n    from unittest.mock import Mock\n    return Mock()\n");
-    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isFalse();
+  void test_shaped_top_level_declarations_are_detected() {
+    assertThat(TestFileClassifier.looksLikeTestFile("src/production.py", parse("class TestService:\n    pass\n"))).isTrue();
+    assertThat(TestFileClassifier.looksLikeTestFile("src/production.py", parse("""
+      async def TEST_first():
+          pass
+      def test_second():
+          pass
+      def helper():
+          pass
+      """))).isTrue();
   }
 
   @Test
-  void nested_test_function_not_detected() {
-    // a test_* function nested inside another function must not classify the file as a test file
-    FileInput tree = parse("def outer():\n    def test_inner():\n        assert True\n");
-    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isFalse();
+  void function_ratio_requires_a_strict_majority() {
+    assertThat(TestFileClassifier.looksLikeTestFile("src/production.py", parse("""
+      def test_first():
+          pass
+      def helper():
+          pass
+      """))).isFalse();
+    assertThat(TestFileClassifier.looksLikeTestFile("src/production.py", parse("pass\n"))).isFalse();
   }
 
   @Test
-  void multiple_from_imports_all_checked() {
-    FileInput tree = parse("from unittest import TestCase\nfrom unittest import mock\n");
-    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isTrue();
-  }
-
-  // --- pytest pattern detection (top-level functions only) ---
-
-  @Test
-  void test_function_with_assert_detected() {
-    FileInput tree = parse("def test_something():\n    assert True\n");
-    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isTrue();
+  void nested_test_signals_do_not_affect_top_level_classification() {
+    assertThat(TestFileClassifier.looksLikeTestFile("src/production.py", parse("""
+      def helper():
+          import pytest
+          def test_inner():
+              pass
+      """))).isFalse();
   }
 
   @Test
-  void multiple_top_level_test_functions_checked() {
-    FileInput tree = parse("def test_one():\n    assert True\ndef test_two():\n    assert True\n");
-    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isTrue();
-  }
-
-  @Test
-  void path_match_short_circuits_ast_check() {
-    // Path already matches — tree is never examined
-    FileInput tree = parse("import os\n");
-    assertThat(TestFileClassifier.looksLikeTestFile("tests/foo.py", tree)).isTrue();
-  }
-
-  @Test
-  void import_match_takes_precedence_over_pytest_pattern() {
-    FileInput tree = parse("import unittest\ndef regular_function():\n    pass\n");
-    assertThat(TestFileClassifier.looksLikeTestFile("regular.py", tree)).isTrue();
+  void path_signal_is_available_when_parsing_fails() {
+    assertThat(TestFileClassifier.looksLikeTestFile("tests/helpers.py", null)).isTrue();
+    assertThat(TestFileClassifier.looksLikeTestFile("src/production.py", null)).isFalse();
   }
 
   private static FileInput parse(String code) {

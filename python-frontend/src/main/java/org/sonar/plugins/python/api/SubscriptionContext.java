@@ -54,6 +54,12 @@ public interface SubscriptionContext {
   PythonFile pythonFile();
 
   /**
+   * Reports whether the current file is likely to contain test code.
+   * @return whether the file is likely test content
+   */
+  boolean isLikelyTestFile();
+
+  /**
    * List of Python versions this project is compatible with.
    */
   @Beta
