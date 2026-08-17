@@ -24,6 +24,7 @@ import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
@@ -37,6 +38,8 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.cdk.ClearTextProtocolsCheckPart;
 import org.sonar.python.tree.TreeUtils;
@@ -49,11 +52,15 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static final String SENSITIVE_HTTP_SERVER_BIND_FQN = "socketserver.BaseServer.server_bind";
   private static final Set<String> SENSITIVE_HTTP_SERVER_METHOD_NAMES = Set.of("serve_forever", "server_bind");
   private static final Set<String> SENSITIVE_HTTP_SERVER_CLASSES = Set.of("http.server.HTTPServer", "http.server.ThreadingHTTPServer");
+  private static final TypeMatcher STR_METHOD_MATCHER = TypeMatchers.isFunctionOwnerSatisfying(TypeMatchers.isOrExtendsType("builtins.str"));
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
       Tree node = ctx.syntaxNode();
+      if (isStartsWithArgument(node, ctx)) {
+        return;
+      }
       String value = Expressions.unescape((StringElement) node);
       unsafeProtocol(value)
         // cleanup slashes
@@ -173,6 +180,35 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
         return !CleartextProtocolFilter.isSafeWithoutTls(literalValue);
       })
       .findFirst();
+  }
+
+  /**
+   * Checks whether a string element is the prefix of a str.startswith call.
+   * @param stringElement string element to inspect
+   * @param context analysis context
+   * @return true when the element is part of a direct prefix argument
+   */
+  private static boolean isStartsWithArgument(Tree stringElement, SubscriptionContext context) {
+    Tree stringLiteral = stringElement.parent();
+    if (stringLiteral == null) {
+      return false;
+    }
+    Tree argumentParent = stringLiteral.parent();
+    if (argumentParent != null && argumentParent.is(Tree.Kind.TUPLE)) {
+      argumentParent = argumentParent.parent();
+    }
+    if (!(argumentParent instanceof RegularArgument argument) || argument.keywordArgument() != null) {
+      return false;
+    }
+    Tree callTree = TreeUtils.firstAncestorOfKind(argument, Tree.Kind.CALL_EXPR);
+    if (!(callTree instanceof CallExpression callExpression)
+      || callExpression.arguments().isEmpty()
+      || callExpression.arguments().get(0) != argument
+      || !(callExpression.callee() instanceof QualifiedExpression callee)
+      || !"startswith".equals(callee.name().name())) {
+      return false;
+    }
+    return STR_METHOD_MATCHER.evaluateFor(callee, context) == TriBool.TRUE;
   }
 
   private static Optional<String> isUnsafeLib(String qualifiedName) {

@@ -4,6 +4,7 @@ import ftplib
 from ftplib import FTP
 import smtplib
 import ssl
+import urllib.request
 
 def clear_text_protocol():
   url = "http://" # Noncompliant {{Using HTTP protocol is insecure. Use HTTPS instead.}}
@@ -50,6 +51,21 @@ def clear_text_protocol():
   # Argument default value
   def download(url='ssh://exemple.com'): # Compliant
       print(url)
+
+
+def clear_text_protocol_used_as_prefix(url: str):
+  url.startswith("http://insecure.com") # Compliant
+  url.startswith(("http://insecure.com", "ftp://insecure.com", "https://secure.com")) # Compliant
+
+
+def clear_text_protocol_used_by_other_code():
+  urllib.request.urlopen("http://insecure.com") # Noncompliant
+
+  class ProtocolMatcher:
+    def startswith(self, prefix):
+      pass
+
+  ProtocolMatcher().startswith("http://insecure.com") # Noncompliant
 
 
   cnx = telnetlib.Telnet("towel.blinkenlights.nl") # Noncompliant {{Using Telnet protocol is insecure. Use SSH instead.}}
