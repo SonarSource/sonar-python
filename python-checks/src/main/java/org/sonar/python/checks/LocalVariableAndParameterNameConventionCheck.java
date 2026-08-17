@@ -32,6 +32,8 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.symbols.v2.UsageV2;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
@@ -192,12 +194,17 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
   }
 
   private static Stream<Expression> getAssignedValue(Tree assignmentName) {
-    var assignmentStmt = TreeUtils.firstAncestorOfClass(assignmentName, AssignmentStatement.class);
-    if (assignmentStmt != null) {
-      return Stream.of(assignmentStmt.assignedValue());
-    } else {
-      return Stream.empty();
+    Tree assignment = TreeUtils.firstAncestor(assignmentName,
+      t -> t.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT, Tree.Kind.ASSIGNMENT_EXPRESSION));
+    Expression assignedValue = null;
+    if (assignment instanceof AssignmentStatement assignmentStatement) {
+      assignedValue = assignmentStatement.assignedValue();
+    } else if (assignment instanceof AnnotatedAssignment annotatedAssignment) {
+      assignedValue = annotatedAssignment.assignedValue();
+    } else if (assignment instanceof AssignmentExpression assignmentExpression) {
+      assignedValue = assignmentExpression.expression();
     }
+    return assignedValue != null ? Stream.of(assignedValue) : Stream.empty();
   }
 
   private static @Nullable Symbol getTypingSymbol(Expression expr) {

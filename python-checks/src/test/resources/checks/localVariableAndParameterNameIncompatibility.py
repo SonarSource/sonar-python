@@ -97,6 +97,17 @@ def builtin_type_assignments(role, roles):
     ParenthesizedRoleType = (type(role))
     BadName = wrapper(type(role))  # Noncompliant
 
+def annotated_builtin_type_assignments(role, roles):
+    AnnotatedRoleType: type = type(role)
+    AnnotatedOptionalRoleType: type | None = type(roles[0]) if roles else None
+    AnnotatedBadName: type = wrapper(type(role))  # Noncompliant
+
+def walrus_builtin_type_assignments(role):
+    if (WalrusRoleType := type(role)):
+        pass
+    while (WalrusBadName := wrapper(type(role))):  # Noncompliant
+        pass
+
 def shadowed_type_assignment():
     def type(value):
         return value
