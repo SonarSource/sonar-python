@@ -440,12 +440,12 @@ def f_function_exit_through_raise_prevents_reporting(a, b, c):
         raise
     return b
 
-def f_early_return_with_raise_guard(already_valid, invalid, self):
+def f_early_return_with_raise_guard(already_valid, invalid, obj):
     if already_valid:
-        return self
+        return obj
     if invalid:
         raise ValueError()
-    return self
+    return obj
 
 def f_unreachable_raise_does_not_prevent_reporting(a, b): # Noncompliant
     if a:
