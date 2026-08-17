@@ -129,7 +129,7 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
       for (CfgBlock predecessor : branchingBlock.predecessors()) {
         if (predecessor instanceof PythonCfgBranchingBlock pythonCfgBranchingBlock) {
           collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, pythonCfgBranchingBlock);
-        } else if (endsWithElementKind(predecessor, Kind.RETURN_STMT)) {
+        } else if (endsWithElementKind(predecessor, Kind.RETURN_STMT) || endsWithElementKind(predecessor, Kind.RAISE_STMT)) {
           collectedBlocks.add(new LatestExecutedBlock(predecessor));
         }
       }
