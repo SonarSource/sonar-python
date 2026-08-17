@@ -86,7 +86,7 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
         continue;
       }
       if (predecessor instanceof PythonCfgBranchingBlock pythonCfgBranchingBlock) {
-        collectBranchingBlock(collectedBlocks, pythonCfgBranchingBlock);
+        collectBranchingBlock(collectedBlocks, pythonCfgBranchingBlock, reachableBlocks);
       } else {
         collectedBlocks.add(new LatestExecutedBlock(predecessor));
       }
@@ -110,7 +110,7 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
     return reachable;
   }
 
-  private static void collectBranchingBlock(List<LatestExecutedBlock> collectedBlocks, PythonCfgBranchingBlock branchingBlock) {
+  private static void collectBranchingBlock(List<LatestExecutedBlock> collectedBlocks, PythonCfgBranchingBlock branchingBlock, Set<CfgBlock> reachableBlocks) {
     Tree branchingTree = branchingBlock.branchingTree();
     if (branchingTree.is(Kind.TRY_STMT)) {
       TryStatement tryStatement = (TryStatement) branchingTree;
@@ -120,15 +120,18 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
     } else if (branchingTree.is(Kind.IF_STMT) || branchingTree instanceof Pattern) {
       collectedBlocks.add(new LatestExecutedBlock(branchingBlock));
     } else {
-      collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, branchingBlock);
+      collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, branchingBlock, reachableBlocks);
     }
   }
 
-  private static void collectBlocksHavingReturnBeforeExceptOrFinallyBlock(List<LatestExecutedBlock> collectedBlocks, PythonCfgBranchingBlock branchingBlock) {
+  private static void collectBlocksHavingReturnBeforeExceptOrFinallyBlock(List<LatestExecutedBlock> collectedBlocks, PythonCfgBranchingBlock branchingBlock, Set<CfgBlock> reachableBlocks) {
     if (branchingBlock.branchingTree().is(Kind.EXCEPT_CLAUSE, Kind.FINALLY_CLAUSE)) {
       for (CfgBlock predecessor : branchingBlock.predecessors()) {
+        if (!reachableBlocks.contains(predecessor)) {
+          continue;
+        }
         if (predecessor instanceof PythonCfgBranchingBlock pythonCfgBranchingBlock) {
-          collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, pythonCfgBranchingBlock);
+          collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, pythonCfgBranchingBlock, reachableBlocks);
         } else if (endsWithElementKind(predecessor, Kind.RETURN_STMT) || endsWithElementKind(predecessor, Kind.RAISE_STMT)) {
           collectedBlocks.add(new LatestExecutedBlock(predecessor));
         }

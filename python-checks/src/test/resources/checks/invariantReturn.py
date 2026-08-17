@@ -473,6 +473,17 @@ def f_raise_in_try_with_except(early, invalid, value):
         cleanup()
     return value
 
+def f_unreachable_raise_before_finally_does_not_prevent_reporting(a, b): # Noncompliant
+    try:
+        if a:
+            return b
+        else:
+            return b
+        raise ValueError()
+    finally:
+        pass
+    return b
+
 def f_same_binding_through_multiple_paths(a): # Noncompliant
     d = 3
     try:
