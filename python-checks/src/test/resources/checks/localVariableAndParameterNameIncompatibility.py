@@ -91,6 +91,18 @@ def type_variables_fp():
     MyClassAlias = MyClass  # OK
     MyTypeVariable: type = unknown_call()  # Noncompliant
 
+def builtin_type_assignments(role, roles):
+    RoleType = type(role)
+    OptionalRoleType = type(roles[0]) if roles else None
+    ParenthesizedRoleType = (type(role))
+    BadName = wrapper(type(role))  # Noncompliant
+
+def shadowed_type_assignment():
+    def type(value):
+        return value
+
+    BadName = type("role")  # Noncompliant
+
 def ml_names():
     X = [1, 2, 3]
     Y = [0, 1, 0]

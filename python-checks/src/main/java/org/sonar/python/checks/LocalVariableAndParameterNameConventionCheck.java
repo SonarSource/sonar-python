@@ -33,6 +33,8 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
@@ -40,6 +42,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.MarimoUtils;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
@@ -107,7 +110,8 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
   private boolean isType(SymbolV2 symbolV2) {
     // TypeV1 and TypeV2 can detect different cases and work complementary to find more issues
     Symbol symbolV1 = SymbolUtils.symbolV2ToSymbolV1(symbolV2).orElse(null);
-    return symbolV1 != null && (isExtendingType(symbolV1) || isAssignedFromTyping(symbolV2) || isPythonTypeAClassType(symbolV2));
+    return symbolV1 != null && (isExtendingType(symbolV1) || isAssignedFromTyping(symbolV2) || isAssignedFromBuiltinType(symbolV2)
+      || isPythonTypeAClassType(symbolV2));
   }
 
   private static boolean isExtendingType(Symbol symbol) {
@@ -132,6 +136,52 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
       if (assignedSymbol != null && isExtendingType(assignedSymbol)) {
         return true;
       }
+    }
+    return false;
+  }
+
+  /**
+   * Determines whether a local variable is assigned from the built-in {@code type} function.
+   *
+   * @param symbol the local variable symbol
+   * @return {@code true} when an assignment directly produces a class object
+   */
+  private static boolean isAssignedFromBuiltinType(SymbolV2 symbol) {
+    return symbol.usages().stream()
+      .filter(u -> u.kind() == UsageV2.Kind.ASSIGNMENT_LHS)
+      .flatMap(usage -> getAssignedValue(usage.tree()))
+      .anyMatch(LocalVariableAndParameterNameConventionCheck::isBuiltinTypeAssignment);
+  }
+
+  /**
+   * Determines whether an assignment directly produces a class object with {@code type}.
+   *
+   * @param assignedValue the expression assigned to the local variable
+   * @return {@code true} when the expression is a built-in {@code type} call or its {@code None} conditional branch
+   */
+  private static boolean isBuiltinTypeAssignment(Expression assignedValue) {
+    Expression unwrappedValue = Expressions.removeParentheses(assignedValue);
+    if (isBuiltinTypeCall(unwrappedValue)) {
+      return true;
+    }
+    if (unwrappedValue instanceof ConditionalExpression conditionalExpression) {
+      return isBuiltinTypeCall(conditionalExpression.trueExpression()) && conditionalExpression.falseExpression().is(Tree.Kind.NONE)
+        || isBuiltinTypeCall(conditionalExpression.falseExpression()) && conditionalExpression.trueExpression().is(Tree.Kind.NONE);
+    }
+    return false;
+  }
+
+  /**
+   * Checks whether an expression is a call to the resolved built-in {@code type} function.
+   *
+   * @param expression the expression to inspect
+   * @return {@code true} when the expression calls the built-in {@code type} function
+   */
+  private static boolean isBuiltinTypeCall(Expression expression) {
+    Expression unwrappedExpression = Expressions.removeParentheses(expression);
+    if (unwrappedExpression instanceof CallExpression callExpression) {
+      Symbol calleeSymbol = callExpression.calleeSymbol();
+      return calleeSymbol != null && "type".equals(calleeSymbol.fullyQualifiedName());
     }
     return false;
   }
