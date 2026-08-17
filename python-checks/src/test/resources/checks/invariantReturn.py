@@ -447,6 +447,12 @@ def f_early_return_with_raise_guard(already_valid, invalid, self):
         raise ValueError()
     return self
 
+def f_unreachable_raise_does_not_prevent_reporting(a, b): # Noncompliant
+    if a:
+        return b
+    return b
+    raise ValueError()
+
 def f_same_binding_through_multiple_paths(a): # Noncompliant
     d = 3
     try:

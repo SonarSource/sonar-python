@@ -80,7 +80,11 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
 
   private static List<LatestExecutedBlock> collectLatestExecutedBlocks(ControlFlowGraph cfg) {
     List<LatestExecutedBlock> collectedBlocks = new ArrayList<>();
+    Set<CfgBlock> reachableBlocks = reachableBlocks(cfg.start());
     for (CfgBlock predecessor : cfg.end().predecessors()) {
+      if (!reachableBlocks.contains(predecessor)) {
+        continue;
+      }
       if (predecessor instanceof PythonCfgBranchingBlock pythonCfgBranchingBlock) {
         collectBranchingBlock(collectedBlocks, pythonCfgBranchingBlock);
       } else {
@@ -88,6 +92,22 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
       }
     }
     return collectedBlocks;
+  }
+
+  private static Set<CfgBlock> reachableBlocks(CfgBlock start) {
+    Set<CfgBlock> reachable = new HashSet<>();
+    Deque<CfgBlock> blockToVisit = new ArrayDeque<>();
+    blockToVisit.push(start);
+    reachable.add(start);
+    while (!blockToVisit.isEmpty()) {
+      CfgBlock block = blockToVisit.pop();
+      for (CfgBlock successor : block.successors()) {
+        if (reachable.add(successor)) {
+          blockToVisit.push(successor);
+        }
+      }
+    }
+    return reachable;
   }
 
   private static void collectBranchingBlock(List<LatestExecutedBlock> collectedBlocks, PythonCfgBranchingBlock branchingBlock) {
