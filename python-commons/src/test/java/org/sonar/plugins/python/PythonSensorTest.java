@@ -977,6 +977,31 @@ class PythonSensorTest {
     assertThat(logTester.logs(Level.WARN)).doesNotContain(PythonSensor.UNSET_VERSION_WARNING);
   }
 
+  @Test
+  void absent_python_version_resets_state_from_previous_analysis() throws IOException {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S6794"))
+        .build())
+      .build();
+    inputFile("python-version/type_alias.py");
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.12"));
+
+    sensor().execute(context);
+
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_312);
+    assertThat(context.allIssues()).hasSize(1);
+
+    context = SensorContextTester.create(baseDir);
+    context.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
+    inputFile("python-version/type_alias.py");
+
+    sensor().execute(context);
+
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactlyElementsOf(PythonVersionUtils.allVersions());
+    assertThat(context.allIssues()).isEmpty();
+  }
+
   void setup_typing_concise_rule(String pythonVersion) {
     context.fileSystem().add(inputFile("python-version/typing.py").wrappedFile());
 

@@ -49,6 +49,8 @@ import org.sonar.plugins.python.api.PythonFileConsumer;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
@@ -66,6 +68,9 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.types.TypeShed;
+
+import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
 
 public class PythonScanner extends Scanner {
 
@@ -111,6 +116,9 @@ public class PythonScanner extends Scanner {
     this.noSonarLineInfoCollector = noSonarLineInfoCollector;
     this.analysisWarnings = analysisWarnings;
     this.testSourcesConfigured = TestFileClassifier.isTestSourceConfigured(context.config());
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(context.config().getStringArray(PYTHON_VERSION_KEY)));
+    TypeShed.setProjectLevelSymbolTable(indexer.projectLevelSymbolTable());
+    TypeShed.resetBuiltinSymbols();
     this.indexer.buildOnce(context);
     this.architectureCallback = architectureCallback;
     this.checksExecutedWithoutParsingByFiles = new ConcurrentHashMap<>();

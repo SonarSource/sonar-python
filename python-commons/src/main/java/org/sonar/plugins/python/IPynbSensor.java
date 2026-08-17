@@ -31,8 +31,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.plugins.python.api.ProjectPythonVersion;
-import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.architecture.DummyArchitectureCallback;
 import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
@@ -47,8 +45,6 @@ import org.sonar.plugins.python.telemetry.TelemetryMetricKey;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
-
-import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
 
 public final class IPynbSensor implements Sensor {
 
@@ -114,10 +110,6 @@ public final class IPynbSensor implements Sensor {
   public void execute(SensorContext context) {
     Instant sensorStartTime = Instant.now();
     List<PythonInputFile> pythonFiles = getInputFiles(context);
-    var pythonVersions = context.config().getStringArray(PYTHON_VERSION_KEY);
-    if (pythonVersions.length != 0) {
-      ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersions));
-    }
     if (isInSonarLintRuntime(context)) {
       PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::createIPythonParser,
         indexer, new DummyArchitectureCallback(), noSonarLineInfoCollector, new AnalysisWarningsWrapper());

@@ -64,7 +64,6 @@ public class TypeShed {
 
   private static volatile Map<String, Symbol> builtins;
   private static final Map<String, Map<String, Symbol>> typeShedSymbols = new ConcurrentHashMap<>();
-  private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new ConcurrentHashMap<>();
   private static final ReentrantLock resolutionLock = new ReentrantLock();
 
   private static final String PROTOBUF_CUSTOM_STUBS = "custom_protobuf/";
@@ -115,7 +114,6 @@ public class TypeShed {
           Map<String, Symbol> builtinMap = getSymbolsFromProtobufModule(BUILTINS_FQN, PROTOBUF);
           builtinMap.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
           builtins = Collections.unmodifiableMap(builtinMap);
-          builtinGlobalSymbols.put("", new HashSet<>(builtinMap.values()));
         }
       } finally {
         resolutionLock.unlock();
@@ -316,16 +314,25 @@ public class TypeShed {
     return null;
   }
 
+  /**
+   * Invalidates cached Typeshed symbols from the previous analysis, then eagerly rebuilds the builtin symbols and
+   * supported Python version set for the current analysis.
+   */
+  public static void resetBuiltinSymbols() {
+    resolutionLock.lock();
+    try {
+      builtins = null;
+      typeShedSymbols.clear();
+      supportedPythonVersions = null;
+      builtinSymbols();
+    } finally {
+      resolutionLock.unlock();
+    }
+  }
+
   //================================================================================
   // Private methods
   //================================================================================
-
-  // used by tests whenever 'sonar.python.version' changes
-  public static void resetBuiltinSymbols() {
-    builtins = null;
-    typeShedSymbols.clear();
-    builtinSymbols();
-  }
 
   private static Map<String, Symbol> searchTypeShedForModule(String moduleName, Set<String> modulesInProgress) {
     if (modulesInProgress.contains(moduleName)) {

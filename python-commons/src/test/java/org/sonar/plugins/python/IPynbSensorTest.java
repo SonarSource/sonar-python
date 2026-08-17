@@ -199,6 +199,19 @@ class IPynbSensorTest {
       PythonVersionUtils.Version.V_311);
   }
 
+  @Test
+  void absent_python_version_resets_current_versions() {
+    context.setRuntime(SONARLINT_RUNTIME);
+    PythonInputFile inputFile = inputFile(FILE_1);
+    activeRules = new ActiveRulesBuilder().build();
+    PythonIndexer pythonIndexer = pythonIndexer(List.of(inputFile));
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString("3.10"));
+
+    sensor(pythonIndexer).execute(context);
+
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactlyElementsOf(PythonVersionUtils.allVersions());
+  }
+
   private IPynbSensor notebookSensor() {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);

@@ -57,6 +57,7 @@ class TypeShedTest {
 
   @BeforeEach
   void setPythonVersions() {
+    TypeShed.setProjectLevelSymbolTable(ProjectLevelSymbolTable.empty());
     ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
     TypeShed.resetBuiltinSymbols();
   }
@@ -149,10 +150,11 @@ class TypeShedTest {
 
   @Test
   void symbols_not_retrieved_when_within_same_project() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = mock(ProjectLevelSymbolTable.class);
-    TypeShed.setProjectLevelSymbolTable(projectLevelSymbolTable);
+    ProjectLevelSymbolTable firstProjectLevelSymbolTable = mock(ProjectLevelSymbolTable.class);
+    TypeShed.setProjectLevelSymbolTable(firstProjectLevelSymbolTable);
+    when(firstProjectLevelSymbolTable.projectBasePackages()).thenReturn(Set.of("sklearn"));
+    TypeShed.resetBuiltinSymbols();
 
-    when(projectLevelSymbolTable.projectBasePackages()).thenReturn(Set.of("sklearn"));
     Map<String, Symbol> sklearnSymbols = symbolsForModule("sklearn.ensemble");
     assertThat(sklearnSymbols).isEmpty();
     sklearnSymbols = symbolsForModule("sklearn");
@@ -160,7 +162,11 @@ class TypeShedTest {
     Symbol symbol = symbolWithFQN("sklearn.ensemble", "sklearn.ensemble.RandomForestClassifier");
     assertThat(symbol).isNull();
 
-    when(projectLevelSymbolTable.projectBasePackages()).thenReturn(Set.of("unrelated"));
+    ProjectLevelSymbolTable secondProjectLevelSymbolTable = mock(ProjectLevelSymbolTable.class);
+    TypeShed.setProjectLevelSymbolTable(secondProjectLevelSymbolTable);
+    when(secondProjectLevelSymbolTable.projectBasePackages()).thenReturn(Set.of("unrelated"));
+    TypeShed.resetBuiltinSymbols();
+
     sklearnSymbols = symbolsForModule("sklearn.ensemble");
     assertThat(sklearnSymbols).isNotEmpty();
     symbol = symbolWithFQN("sklearn.ensemble", "sklearn.ensemble.RandomForestClassifier");

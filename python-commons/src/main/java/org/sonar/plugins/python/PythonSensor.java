@@ -36,10 +36,8 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCustomRuleRepositoryWrapper;
 import org.sonar.plugins.python.api.PythonFileConsumer;
-import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.SonarLintCacheWrapper;
 import org.sonar.plugins.python.api.caching.CacheContext;
@@ -62,7 +60,6 @@ import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
-import org.sonar.python.types.TypeShed;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
 import static org.sonar.plugins.python.Scanner.PARALLEL_PROPERTY_NAME;
@@ -146,14 +143,10 @@ public final class PythonSensor implements Sensor {
       LOG.warn(UNSET_VERSION_WARNING);
       analysisWarnings.addUnique(UNSET_VERSION_WARNING);
     }
-    if (pythonVersionParameter.length != 0) {
-      ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersionParameter));
-    }
     updatePythonVersionTelemetry(context, pythonVersionParameter);
     CacheContext cacheContext = CacheContextImpl.of(context);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context, projectConfigurationBuilder);
     pythonIndexer.setSonarLintCache(sonarLintCache);
-    TypeShed.setProjectLevelSymbolTable(pythonIndexer.projectLevelSymbolTable());
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::create,
       pythonIndexer, architectureCallback, noSonarLineInfoCollector, analysisWarnings);
     scanner.execute(pythonFiles, context);
