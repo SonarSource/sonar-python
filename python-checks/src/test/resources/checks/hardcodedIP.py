@@ -25,6 +25,7 @@ version = "1.0.0.0-1" # Compliant - suffixed
 __version__ = "26.8.0.1" # Compliant
 __version__ = ("26.8.0.1") # Compliant
 __version__: str = "26.8.0.1" # Compliant
+(__version__) = "26.8.0.1" # Compliant
 version = "26.8.0.1" # Noncompliant
 VERSION = "26.8.0.1" # Noncompliant
 __version__ = version = "26.8.0.1" # Noncompliant

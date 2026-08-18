@@ -132,6 +132,9 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
    * @return whether the expression is named {@code __version__}
    */
   private static boolean isVersionName(Expression expression) {
+    while (expression instanceof ParenthesizedExpression parenthesizedExpression) {
+      expression = parenthesizedExpression.expression();
+    }
     return expression instanceof Name name && "__version__".equals(name.name());
   }
 
