@@ -29,6 +29,8 @@ __version__: str = "26.8.0.1" # Compliant
 version = "26.8.0.1" # Noncompliant
 VERSION = "26.8.0.1" # Noncompliant
 __version__ = version = "26.8.0.1" # Noncompliant
+metadata.__version__ = "26.8.0.1" # Noncompliant
+versions["__version__"] = "26.8.0.1" # Noncompliant
 
 "1080:0:0:0:8:800:200C:417A" # Noncompliant {{Make sure using this hardcoded IP address "1080:0:0:0:8:800:200C:417A" is safe here.}}
 "[1080::8:800:200C:417A]" # Noncompliant
