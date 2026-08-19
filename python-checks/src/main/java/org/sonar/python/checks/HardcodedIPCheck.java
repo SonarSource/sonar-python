@@ -23,6 +23,12 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.utils.Expressions;
@@ -63,7 +69,7 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, ctx -> {
       StringLiteral stringLiteral = (StringLiteral) ctx.syntaxNode();
-      if (isMultilineString(stringLiteral)) {
+      if (isMultilineString(stringLiteral) || isVersionLiteral(stringLiteral)) {
         return;
       }
       String content = Expressions.unescape(stringLiteral);
@@ -86,6 +92,32 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
           .ifPresent(ipv6 -> ctx.addIssue(stringLiteral, String.format(message, ipv6)));
       }
     });
+  }
+
+  private static boolean isVersionLiteral(StringLiteral stringLiteral) {
+    Expression assignedValue = stringLiteral;
+    while (assignedValue.parent() instanceof ParenthesizedExpression parenthesizedExpression) {
+      assignedValue = parenthesizedExpression;
+    }
+    Tree parent = assignedValue.parent();
+    if (parent instanceof AssignmentStatement assignment) {
+      return assignment.assignedValue() == assignedValue && hasVersionName(assignment);
+    }
+    return parent instanceof AnnotatedAssignment assignment
+      && assignment.assignedValue() == assignedValue
+      && isVersionName(assignment.variable());
+  }
+
+  private static boolean hasVersionName(AssignmentStatement assignment) {
+    if (assignment.lhsExpressions().size() != 1) {
+      return false;
+    }
+    ExpressionList lhsExpressions = assignment.lhsExpressions().get(0);
+    return lhsExpressions.expressions().size() == 1 && isVersionName(lhsExpressions.expressions().get(0));
+  }
+
+  private static boolean isVersionName(Expression expression) {
+    return Expressions.removeParentheses(expression) instanceof Name name && "__version__".equals(name.name());
   }
 
   private static boolean isMultilineString(StringLiteral pyStringLiteralTree) {
