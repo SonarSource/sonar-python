@@ -35,6 +35,8 @@ public class RequirementsTxtParser {
   private static final Pattern PACKAGE_NAME_PATTERN =
     Pattern.compile("^[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?(?=$|[\\[<>=!~;@])");
 
+  private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
+
   private RequirementsTxtParser(){}
 
   public static Dependencies parseRequirementFile(InputFile requirementFile) {
@@ -51,7 +53,7 @@ public class RequirementsTxtParser {
       if (line.isEmpty() || line.startsWith("#") || line.startsWith("-")) {
         continue;
       }
-      String[] splittedLine = line.split("\\s+");
+      String[] splittedLine = WHITESPACE_PATTERN.split(line, 2);
       if (splittedLine.length >= 1) {
         Matcher matcher = PACKAGE_NAME_PATTERN.matcher(splittedLine[0]);
         if (matcher.find()) {

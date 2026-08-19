@@ -111,7 +111,7 @@ public class TypeShed {
       try {
         if (builtins == null) {
           supportedPythonVersions = ProjectPythonVersion.currentVersions().stream().map(PythonVersionUtils.Version::serializedValue).collect(Collectors.toSet());
-          Map<String, Symbol> builtinMap = getSymbolsFromProtobufModule(BUILTINS_FQN, PROTOBUF);
+          Map<String, Symbol> builtinMap = new HashMap<>(getSymbolsFromProtobufModule(BUILTINS_FQN, PROTOBUF));
           builtinMap.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
           builtins = Collections.unmodifiableMap(builtinMap);
         }

@@ -25,6 +25,7 @@ import com.sonar.python.it.TestsUtils;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -46,6 +47,8 @@ public class CoverageTest {
   private static final String EMPTY_XML = "empty.xml";
   private static final String DEPRECATED_COVERAGE_REPORT_PATH = "sonar.python.coverage.reportPath";
   private static final String COVERAGE_REPORT_PATHS = "sonar.python.coverage.reportPaths";
+  private static final Pattern LINE_SEPARATOR = Pattern.compile("[\\r\\n]+");
+  private static final Pattern EMPTY_REPORT_LOG = Pattern.compile("The report '[^']*' seems to be empty, ignoring");
 
   @Test
   void basic_coverage_reports_with_unix_paths() {
@@ -115,12 +118,9 @@ public class CoverageTest {
       .setProperty(COVERAGE_REPORT_PATHS, EMPTY_XML);
     BuildResult buildResult = ORCHESTRATOR.executeBuild(build);
 
-    int nbLog = 0;
-    for (String s : buildResult.getLogs().split("[\\r\\n]+")) {
-      if (s.matches(".*The report '[^']*' seems to be empty, ignoring.*")) {
-        nbLog++;
-      }
-    }
+    long nbLog = LINE_SEPARATOR.splitAsStream(buildResult.getLogs())
+      .filter(line -> EMPTY_REPORT_LOG.matcher(line).find())
+      .count();
     assertThat(nbLog).isEqualTo(1);
     assertThat(TestsUtils.getMeasureAsDouble(PROJECT_KEY, COVERAGE)).isZero();
   }
