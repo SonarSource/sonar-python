@@ -94,11 +94,6 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
     });
   }
 
-  /**
-   * Checks whether a literal is directly assigned to the conventional version variable.
-   * @param stringLiteral literal to inspect
-   * @return whether the literal is a direct {@code __version__} value
-   */
   private static boolean isVersionLiteral(StringLiteral stringLiteral) {
     Expression assignedValue = stringLiteral;
     while (assignedValue.parent() instanceof ParenthesizedExpression parenthesizedExpression) {
@@ -113,11 +108,6 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
       && isVersionName(assignment.variable());
   }
 
-  /**
-   * Checks whether an assignment has exactly one {@code __version__} target.
-   * @param assignment assignment to inspect
-   * @return whether the assignment has the conventional version target
-   */
   private static boolean hasVersionName(AssignmentStatement assignment) {
     if (assignment.lhsExpressions().size() != 1) {
       return false;
@@ -126,11 +116,6 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
     return lhsExpressions.expressions().size() == 1 && isVersionName(lhsExpressions.expressions().get(0));
   }
 
-  /**
-   * Checks whether an expression is the conventional version variable.
-   * @param expression expression to inspect
-   * @return whether the expression is named {@code __version__}
-   */
   private static boolean isVersionName(Expression expression) {
     return Expressions.removeParentheses(expression) instanceof Name name && "__version__".equals(name.name());
   }
