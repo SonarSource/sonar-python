@@ -24,6 +24,7 @@ import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.TriBool;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
@@ -37,6 +38,8 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.cdk.ClearTextProtocolsCheckPart;
 import org.sonar.python.tree.TreeUtils;
@@ -49,6 +52,8 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static final String SENSITIVE_HTTP_SERVER_BIND_FQN = "socketserver.BaseServer.server_bind";
   private static final Set<String> SENSITIVE_HTTP_SERVER_METHOD_NAMES = Set.of("serve_forever", "server_bind");
   private static final Set<String> SENSITIVE_HTTP_SERVER_CLASSES = Set.of("http.server.HTTPServer", "http.server.ThreadingHTTPServer");
+  private static final TypeMatcher STR_METHOD_MATCHER = TypeMatchers.isFunctionOwnerSatisfying(TypeMatchers.isOrExtendsType("builtins.str"));
+  private static final TypeMatcher STR_TYPE_MATCHER = TypeMatchers.isType("builtins.str");
 
   @Override
   public void initialize(Context context) {
@@ -56,6 +61,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       Tree node = ctx.syntaxNode();
       String value = Expressions.unescape((StringElement) node);
       unsafeProtocol(value)
+        .filter(protocol -> !isStartsWithArgument(node, ctx))
         // cleanup slashes
         .map(protocol -> protocol.substring(0, protocol.length() - 3))
         .ifPresent(protocol -> ctx.addIssue(node, message(protocol)));
@@ -173,6 +179,27 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
         return !CleartextProtocolFilter.isSafeWithoutTls(literalValue);
       })
       .findFirst();
+  }
+
+  private static boolean isStartsWithArgument(Tree stringElement, SubscriptionContext context) {
+    Tree argumentParent = stringElement.parent().parent();
+    while (argumentParent.is(Tree.Kind.TUPLE, Tree.Kind.PARENTHESIZED)) {
+      argumentParent = argumentParent.parent();
+    }
+    if (!(argumentParent instanceof RegularArgument argument) || argument.keywordArgument() != null) {
+      return false;
+    }
+    Tree callTree = TreeUtils.firstAncestorOfKind(argument, Tree.Kind.CALL_EXPR);
+    if (!(callTree instanceof CallExpression callExpression)
+      || !(callExpression.callee() instanceof QualifiedExpression callee)
+      || !"startswith".equals(callee.name().name())
+      || STR_METHOD_MATCHER.evaluateFor(callee, context) == TriBool.FALSE) {
+      return false;
+    }
+    // unbound str.startswith(self, prefix) shifts the prefix to the second argument
+    int prefixIndex = STR_TYPE_MATCHER.evaluateFor(callee.qualifier(), context) == TriBool.TRUE ? 1 : 0;
+    List<Argument> arguments = callExpression.arguments();
+    return arguments.size() > prefixIndex && arguments.get(prefixIndex) == argument;
   }
 
   private static Optional<String> isUnsafeLib(String qualifiedName) {

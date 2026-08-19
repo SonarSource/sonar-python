@@ -4,6 +4,7 @@ import ftplib
 from ftplib import FTP
 import smtplib
 import ssl
+import urllib.request
 
 def clear_text_protocol():
   url = "http://" # Noncompliant {{Using HTTP protocol is insecure. Use HTTPS instead.}}
@@ -153,6 +154,54 @@ def clear_text_protocol():
 
   smtp4 = smtplib.SMTP("smtp.gmail.com", port=587) # Noncompliant
   unknown.unknwon(smtp4)
+
+
+def clear_text_protocol_used_as_prefix(url: str):
+  url.startswith("http://insecure.com") # Compliant
+  url.startswith(("http://insecure.com", "ftp://insecure.com", "https://secure.com")) # Compliant
+
+
+def clear_text_protocol_used_as_prefix_untyped(url):
+  url.startswith("http://insecure.com") # Compliant
+  url.startswith(("http://insecure.com", "ftp://insecure.com", "https://secure.com")) # Compliant
+
+
+def clear_text_protocol_used_as_prefix_unbound(url: str):
+  str.startswith(url, "http://insecure.com") # Compliant
+  str.startswith(url, ("http://insecure.com", "ftp://insecure.com", "https://secure.com")) # Compliant
+
+
+def clear_text_protocol_used_as_prefix_grouped(url: str):
+  url.startswith(("http://insecure.com")) # Compliant
+  url.startswith((("http://insecure.com"))) # Compliant
+
+
+def clear_text_protocol_used_outside_startswith_prefix(url: str):
+  check_protocol("http://insecure.com") # Noncompliant
+  url.endswith("http://insecure.com") # Noncompliant
+  url.startswith(prefix="http://insecure.com") # Noncompliant
+  str.startswith("http://insecure.com") # Noncompliant
+  url.startswith("https://secure.com", "http://insecure.com") # Noncompliant
+
+
+class ClearTextProtocolBase("http://insecure.com"): # Noncompliant
+  pass
+
+
+def clear_text_protocol_prefix_via_variable(url: str):
+  prefix = "http://insecure.com" # Noncompliant
+  url.startswith(prefix) # Compliant
+
+
+def clear_text_protocol_used_by_other_code():
+  urllib.request.urlopen("http://insecure.com") # Noncompliant
+
+  class ProtocolMatcher:
+    def startswith(self, prefix):
+      pass
+
+  ProtocolMatcher().startswith("http://insecure.com") # Noncompliant
+
 
 def method(self):
   self.something[smth] = None
