@@ -29,7 +29,12 @@ public class CfgUtils {
     // empty constructor
   }
 
-  public static Set<CfgBlock> unreachableBlocks(ControlFlowGraph cfg) {
+  /**
+   * Returns the blocks reachable from the control-flow graph start.
+   * @param cfg the control-flow graph to traverse
+   * @return the reachable blocks
+   */
+  public static Set<CfgBlock> reachableBlocks(ControlFlowGraph cfg) {
     Set<CfgBlock> reachableBlocks = new HashSet<>();
     Deque<CfgBlock> workList = new ArrayDeque<>();
     workList.push(cfg.start());
@@ -39,7 +44,16 @@ public class CfgUtils {
         currentBlock.successors().forEach(workList::push);
       }
     }
-    return difference(cfg.blocks(), reachableBlocks);
+    return reachableBlocks;
+  }
+
+  /**
+   * Returns the blocks that are not reachable from the control-flow graph start.
+   * @param cfg the control-flow graph to inspect
+   * @return the unreachable blocks
+   */
+  public static Set<CfgBlock> unreachableBlocks(ControlFlowGraph cfg) {
+    return difference(cfg.blocks(), reachableBlocks(cfg));
   }
 
   private static Set<CfgBlock> difference(Set<CfgBlock> a, Set<CfgBlock> b) {
