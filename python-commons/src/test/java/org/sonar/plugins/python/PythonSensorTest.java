@@ -145,6 +145,7 @@ class PythonSensorTest {
   private static final String FILE_USING_TYPESHED = "uses_typeshed.py";
   private static final String FILE_QUICKFIX = "file_quickfix.py";
   private static final String FILE_TEST_FILE = "test_file.py";
+  private static final String FILE_FRAMEWORK_HELPER = "framework_helper.py";
   private static final String FILE_INVALID_SYNTAX = "invalid_syntax.py";
   private static final String FILE_NO_SONAR_PY = "no_sonar.py";
   private static final String ONE_STATEMENT_PER_LINE_RULE_KEY = "OneStatementPerLine";
@@ -647,6 +648,21 @@ class PythonSensorTest {
     assertThat(context.allIssues()).isEmpty();
     // Metrics must still be computed as for a MAIN file (not just NCLOC)
     assertThat(context.measure(inputFile.wrappedFile().key(), CoreMetrics.FUNCTIONS).value()).isEqualTo(1);
+    verify(analysisWarning).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
+  }
+
+  @Test
+  void test_auto_reclassify_framework_import_suppresses_main_rules() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PythonRuleRepository.REPOSITORY_KEY, "S1226"))
+        .build())
+      .build();
+
+    inputFile(FILE_FRAMEWORK_HELPER, Type.MAIN);
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
     verify(analysisWarning).addUnique(PythonScanner.UNSET_SONAR_TESTS_WARNING);
   }
 

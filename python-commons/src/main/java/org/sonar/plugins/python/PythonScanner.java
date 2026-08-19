@@ -98,6 +98,7 @@ public class PythonScanner extends Scanner {
   private final ImportsTelemetryCollector importsTelemetryCollector;
   private final List<Consumer<FileInput>> telemetryCollectors;
   private final boolean testSourcesConfigured;
+  private final PythonTestFileClassifier testFileClassifier;
   private final AnalysisWarningsWrapper analysisWarnings;
   private final AtomicBoolean heuristicWarningEmitted = new AtomicBoolean(false);
   private volatile int filesScannedWithCache = 0;
@@ -115,7 +116,8 @@ public class PythonScanner extends Scanner {
     this.indexer = indexer;
     this.noSonarLineInfoCollector = noSonarLineInfoCollector;
     this.analysisWarnings = analysisWarnings;
-    this.testSourcesConfigured = TestFileClassifier.isTestSourceConfigured(context.config());
+    this.testSourcesConfigured = TestSourceConfiguration.isConfigured(context.config());
+    this.testFileClassifier = new PythonTestFileClassifier(context.config());
     ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(context.config().getStringArray(PYTHON_VERSION_KEY)));
     TypeShed.setProjectLevelSymbolTable(indexer.projectLevelSymbolTable());
     TypeShed.resetBuiltinSymbols();
@@ -153,7 +155,7 @@ public class PythonScanner extends Scanner {
     InputFile.Type fileType = inputFile.wrappedFile().type();
     PythonVisitorContext visitorContext = createVisitorContext(inputFile, pythonFile);
     InputFile.Type effectiveTypeForRules = resolveEffectiveTypeForRules(
-      fileType, projectRelativePath(inputFile), visitorContext.rootTree());
+      fileType, visitorContext.isLikelyTestFile());
     if (!testSourcesConfigured && fileType == InputFile.Type.MAIN) {
       indexer.writeEffectiveFileType(inputFile.wrappedFile().key(), effectiveTypeForRules);
     }
@@ -195,6 +197,7 @@ public class PythonScanner extends Scanner {
       AstNode astNode = parserSupplier.get().parse(inputFile.contents());
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
       FileInput parse = treeMaker.fileInput(astNode);
+      boolean likelyTestFile = isLikelyTestFile(inputFile, parse);
       visitorContext = new PythonVisitorContext.Builder(parse, pythonFile)
         .projectConfiguration(indexer.projectConfig())
         .workingDirectory(getWorkingDirectory(context))
@@ -203,10 +206,11 @@ public class PythonScanner extends Scanner {
         .typeTable(indexer.projectLevelTypeTable())
         .cacheContext(indexer.cacheContext())
         .sonarProduct(context.runtime().getProduct())
+        .likelyTestFile(likelyTestFile)
         .build();
 
     } catch (RecognitionException e) {
-      visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct());
+      visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct(), isLikelyTestFile(inputFile, null));
 
       var line = (inputFile.kind() == PythonInputFile.Kind.IPYTHON) ?
         ((GeneratedIPythonFile) inputFile).locationMap().get(e.getLine()).line() : e.getLine();
@@ -222,6 +226,10 @@ public class PythonScanner extends Scanner {
         .save();
     }
     return visitorContext;
+  }
+
+  private boolean isLikelyTestFile(PythonInputFile inputFile, @Nullable FileInput tree) {
+    return !testSourcesConfigured && testFileClassifier.looksLikeTestFile(inputFile.wrappedFile(), tree);
   }
 
   private void pushTokens(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
@@ -373,12 +381,11 @@ public class PythonScanner extends Scanner {
     return testSourcesConfigured || platformType == InputFile.Type.TEST;
   }
 
-  private InputFile.Type resolveEffectiveTypeForRules(InputFile.Type platformType, String filePath, @Nullable FileInput tree) {
+  private InputFile.Type resolveEffectiveTypeForRules(InputFile.Type platformType, boolean likelyTestFile) {
     if (isBypassed(platformType)) {
       return platformType;
     }
-    boolean isTest = TestFileClassifier.looksLikeTestFile(filePath, tree);
-    if (isTest) {
+    if (likelyTestFile) {
       maybeEmitHeuristicWarning();
       return InputFile.Type.TEST;
     }
@@ -401,7 +408,6 @@ public class PythonScanner extends Scanner {
 
   private void maybeEmitHeuristicWarning() {
     if (heuristicWarningEmitted.compareAndSet(false, true)) {
-      LOG.warn(UNSET_SONAR_TESTS_WARNING);
       analysisWarnings.addUnique(UNSET_SONAR_TESTS_WARNING);
     }
   }

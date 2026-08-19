@@ -18,6 +18,7 @@ package org.sonar.plugins.python;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.IssueLocation;
@@ -31,6 +32,19 @@ import static org.sonar.plugins.python.TestUtils.createInputFile;
 class IpynbNotebookParserScannerTest {
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python");
+
+  @Test
+  void generated_notebook_python_uses_the_test_file_classifier() {
+    var inputFile = createInputFile(baseDir, "notebook_trailing_whitespace.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    var notebook = IpynbNotebookParser.parseNotebook(inputFile).get();
+    var generatedFile = new GeneratedIPythonFile(notebook.wrappedFile(), "import pytest\n", Map.of());
+    var context = new PythonVisitorContext.Builder(
+      TestPythonVisitorRunner.parseNotebookFile(Map.of(), "import pytest\n"),
+      SonarQubePythonFile.create(generatedFile))
+      .build();
+
+    assertThat(context.isLikelyTestFile()).isTrue();
+  }
 
   @Test
   void trailing_whitespace() throws IOException {

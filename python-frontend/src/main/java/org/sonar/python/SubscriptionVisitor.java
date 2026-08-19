@@ -173,6 +173,11 @@ public class SubscriptionVisitor {
     }
 
     @Override
+    public boolean isLikelyTestFile() {
+      return pythonVisitorContext.isLikelyTestFile();
+    }
+
+    @Override
     public Collection<Symbol> stubFilesSymbols() {
       return pythonVisitorContext.stubFilesSymbols();
     }

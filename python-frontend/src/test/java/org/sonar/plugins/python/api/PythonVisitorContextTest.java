@@ -46,6 +46,49 @@ import static org.sonar.python.PythonTestUtils.pythonFile;
 
 class PythonVisitorContextTest {
   @Test
+  void likely_test_file_is_provided_by_the_scanner() {
+    var fileInput = PythonTestUtils.parse("import pytest");
+    var context = new PythonVisitorContext.Builder(fileInput, pythonFile("production.py"))
+      .likelyTestFile(true)
+      .build();
+
+    assertThat(context.isLikelyTestFile()).isTrue();
+  }
+
+  @Test
+  void likely_test_file_uses_python_ast_signals_when_not_set_by_the_scanner() {
+    var fileInput = PythonTestUtils.parse("import pytest");
+    var context = new PythonVisitorContext.Builder(fileInput, pythonFile("production.py")).build();
+
+    assertThat(context.isLikelyTestFile()).isTrue();
+  }
+
+  @Test
+  void likely_test_file_is_available_after_a_parse_error() {
+    RecognitionException parsingException = mock(RecognitionException.class);
+    var context = new PythonVisitorContext(pythonFile("production.py"), parsingException, SonarProduct.SONARQUBE, true);
+
+    assertThat(context.isLikelyTestFile()).isTrue();
+  }
+
+  @Test
+  void likely_test_file_is_false_for_parse_error_context_without_a_classification() {
+    RecognitionException parsingException = mock(RecognitionException.class);
+    var context = new PythonVisitorContext(null, parsingException, SonarProduct.SONARQUBE);
+
+    assertThat(context.isLikelyTestFile()).isFalse();
+  }
+
+  @Test
+  void likely_test_file_can_be_set_to_false() {
+    var context = new PythonVisitorContext.Builder(PythonTestUtils.parse("import pytest"), pythonFile("production.py"))
+      .likelyTestFile(false)
+      .build();
+
+    assertThat(context.isLikelyTestFile()).isFalse();
+  }
+
+  @Test
   void fullyQualifiedModuleName() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
 

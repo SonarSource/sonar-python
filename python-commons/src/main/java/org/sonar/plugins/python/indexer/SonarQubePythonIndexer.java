@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.PythonInputFile;
-import org.sonar.plugins.python.TestFileClassifier;
+import org.sonar.plugins.python.TestSourceConfiguration;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.caching.Caching;
 import org.sonar.python.index.Descriptor;
@@ -66,7 +66,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     this.packageRoots = resolvePackageRoots(context);
     this.caching = new Caching(cacheContext, getCacheVersion(context));
-    this.testSourcesConfigured = TestFileClassifier.isTestSourceConfigured(context.config());
+    this.testSourcesConfigured = TestSourceConfiguration.isConfigured(context.config());
     inputFiles.forEach(f -> {
       this.inputFiles.add(f);
       inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.wrappedFile().filename()));

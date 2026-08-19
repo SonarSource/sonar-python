@@ -77,7 +77,7 @@ class SubscriptionVisitorTest {
 
   @Test
   void exposed_visitor_data() {
-    FileInput fileInput = PythonTestUtils.parse("def foo(): ...");
+    FileInput fileInput = PythonTestUtils.parse("import pytest\ndef foo(): ...");
     var cache = mock(CacheContext.class);
 
     PythonFile pythonFile = PythonTestUtils.pythonFile("file");
@@ -92,6 +92,7 @@ class SubscriptionVisitorTest {
         context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
           assertThat(ctx.cacheContext()).isSameAs(cache);
           assertThat(ctx.pythonFile()).isEqualTo(pythonFile);
+          assertThat(ctx.isLikelyTestFile()).isTrue();
           assertThat(ctx.sourcePythonVersions()).isEqualTo(ProjectPythonVersion.currentVersions());
         });
       }

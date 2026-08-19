@@ -28,6 +28,7 @@ import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.SonarProduct;
+import org.sonar.plugins.python.PythonTestFileClassifier;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -63,6 +64,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private final Map<Tree, LiveVariablesAnalysis>  lvaMap;
   private final ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
   private final TypeTable typeTable;
+  private final boolean likelyTestFile;
 
 
 
@@ -76,7 +78,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
       ModuleType moduleType,
       CallGraph callGraph,
       TypeTable typeTable,
-      Map<Tree, ControlFlowGraph> cfgMap
+      Map<Tree, ControlFlowGraph> cfgMap,
+      boolean likelyTestFile
     ) {
     super(pythonFile, workingDirectory, cacheContext, sonarProduct, projectLevelSymbolTable);
     this.moduleType = moduleType;
@@ -90,9 +93,21 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.typeTable = typeTable;
     this.typeChecker = new TypeChecker(typeTable);
     this.issues = new ArrayList<>();
+    this.likelyTestFile = likelyTestFile;
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException, SonarProduct sonarProduct) {
+    this(pythonFile, parsingException, sonarProduct, false);
+  }
+
+  /**
+   * Creates a context for a Python file that could not be parsed.
+   * @param pythonFile analyzed Python file
+   * @param parsingException parsing failure
+   * @param sonarProduct analysis product
+   * @param likelyTestFile whether the file was classified as test content before parsing failed
+   */
+  public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException, SonarProduct sonarProduct, boolean likelyTestFile) {
     super(pythonFile, null, CacheContextImpl.dummyCache(), sonarProduct, ProjectLevelSymbolTable.empty());
     this.rootTree = null;
     this.parsingException = parsingException;
@@ -105,10 +120,19 @@ public class PythonVisitorContext extends PythonInputFileContext {
     this.lvaMap = new HashMap<>();
     this.issues = new ArrayList<>();
     this.moduleType = null;
+    this.likelyTestFile = likelyTestFile;
   }
 
   public FileInput rootTree() {
     return rootTree;
+  }
+
+  /**
+   * Reports whether this file is likely to contain test code.
+   * @return whether the file is likely test content
+   */
+  public boolean isLikelyTestFile() {
+    return likelyTestFile;
   }
 
   public TypeChecker typeChecker() {
@@ -181,10 +205,12 @@ public class PythonVisitorContext extends PythonInputFileContext {
     private Optional<String> packageName = Optional.empty();
     private Optional<ModuleType> moduleType = Optional.empty();
     private Optional<Map<Tree, ControlFlowGraph>> cfgMap = Optional.empty();
+    private boolean likelyTestFile = false;
 
     public Builder(FileInput rootTree, PythonFile pythonFile) {
       this.rootTree = rootTree;
       this.pythonFile = pythonFile;
+      this.likelyTestFile = PythonTestFileClassifier.hasTestContent(rootTree);
     }
 
     public Builder workingDirectory(@Nullable File workingDirectory) {
@@ -238,6 +264,16 @@ public class PythonVisitorContext extends PythonInputFileContext {
       return this;
     }
 
+    /**
+     * Sets the test-content classification computed from the scanner input and parsed tree.
+     * @param likelyTestFile whether the file is likely test content
+     * @return this builder
+     */
+    public Builder likelyTestFile(boolean likelyTestFile) {
+      this.likelyTestFile = likelyTestFile;
+      return this;
+    }
+
     public PythonVisitorContext build() {
       var symbolTable = projectLevelSymbolTable.orElseGet(ProjectLevelSymbolTable::empty);
       var pkgName = packageName.orElse("");
@@ -270,7 +306,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
         mt,
         finalCallGraph,
         finalTypeTable,
-        finalCfgMap
+        finalCfgMap,
+        likelyTestFile
       );
     }
 
