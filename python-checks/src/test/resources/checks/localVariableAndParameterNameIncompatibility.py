@@ -91,6 +91,40 @@ def type_variables_fp():
     MyClassAlias = MyClass  # OK
     MyTypeVariable: type = unknown_call()  # Noncompliant
 
+def builtin_type_assignments(role, roles):
+    RoleType = type(role)
+    OptionalRoleType = type(roles[0]) if roles else None
+    ParenthesizedRoleType = (type(role))
+    BadName = wrapper(type(role))  # Noncompliant
+
+def annotated_builtin_type_assignments(role, roles):
+    AnnotatedRoleType: type = type(role)
+    AnnotatedOptionalRoleType: type | None = type(roles[0]) if roles else None
+    AnnotatedBadName: type = wrapper(type(role))  # Noncompliant
+
+def walrus_builtin_type_assignments(role):
+    if (WalrusRoleType := type(role)):
+        pass
+    while (WalrusBadName := wrapper(type(role))):  # Noncompliant
+        pass
+
+def conditional_builtin_type_assignments(role, fallback, cond, roles):
+    BothBranchesType = type(role) if cond else type(fallback)
+    NestedType = type(role) if cond else type(fallback) if roles else None
+    ReversedType = None if not roles else type(roles[0])
+    ParenthesizedNoneType = type(role) if cond else (None)
+    BothBranchesNone = None if cond else None  # Noncompliant
+    MixedBranches = type(role) if cond else 5  # Noncompliant
+
+def reassigned_parameter(BadParam, role):  # Noncompliant
+    BadParam = type(role)
+
+def shadowed_type_assignment():
+    def type(value):
+        return value
+
+    BadName = type("role")  # Noncompliant
+
 def ml_names():
     X = [1, 2, 3]
     Y = [0, 1, 0]

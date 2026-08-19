@@ -32,6 +32,8 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
 import org.sonar.plugins.python.api.symbols.v2.UsageV2;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -40,6 +42,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.PythonType;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.MarimoUtils;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
@@ -92,22 +95,32 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
       return;
     }
     if (!pattern.matcher(name).matches()) {
-      if (isType(symbol)) {
+      if (hasTypeVariableType(symbol)) {
         // Type variables generally adhere to class naming conventions rather than regular variable naming conventions
         return;
       }
+      boolean assignedFromType = isAssignedFromType(symbol);
       symbol.usages().stream()
         .filter(usage -> USAGES.contains(usage.kind()))
         .sorted(Comparator.comparingInt(u -> u.tree().firstToken().line()))
         .limit(1)
-        .forEach(usage -> raiseIssueForNameAndUsage(ctx, name, usage));
+        .forEach(usage -> {
+          if (assignedFromType && usage.kind() == UsageV2.Kind.ASSIGNMENT_LHS) {
+            return;
+          }
+          raiseIssueForNameAndUsage(ctx, name, usage);
+        });
     }
   }
 
-  private boolean isType(SymbolV2 symbolV2) {
+  private boolean hasTypeVariableType(SymbolV2 symbolV2) {
     // TypeV1 and TypeV2 can detect different cases and work complementary to find more issues
     Symbol symbolV1 = SymbolUtils.symbolV2ToSymbolV1(symbolV2).orElse(null);
-    return symbolV1 != null && (isExtendingType(symbolV1) || isAssignedFromTyping(symbolV2) || isPythonTypeAClassType(symbolV2));
+    return (symbolV1 != null && isExtendingType(symbolV1)) || isPythonTypeAClassType(symbolV2);
+  }
+
+  private static boolean isAssignedFromType(SymbolV2 symbolV2) {
+    return isAssignedFromTyping(symbolV2) || isAssignedFromBuiltinType(symbolV2);
   }
 
   private static boolean isExtendingType(Symbol symbol) {
@@ -122,18 +135,13 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
   }
 
   private static boolean isAssignedFromTyping(SymbolV2 symbol) {
-    List<Expression> assignedValues = symbol.usages().stream()
-      .filter(u -> u.kind() == UsageV2.Kind.ASSIGNMENT_LHS)
-      .flatMap(usage -> getAssignedValue(usage.tree()))
-      .toList();
+    return assignedValuesOf(symbol)
+      .map(LocalVariableAndParameterNameConventionCheck::getTypingSymbol)
+      .anyMatch(assignedSymbol -> assignedSymbol != null && isExtendingType(assignedSymbol));
+  }
 
-    for (Expression assignedValue : assignedValues) {
-      Symbol assignedSymbol = getTypingSymbol(assignedValue);
-      if (assignedSymbol != null && isExtendingType(assignedSymbol)) {
-        return true;
-      }
-    }
-    return false;
+  private static boolean isAssignedFromBuiltinType(SymbolV2 symbol) {
+    return assignedValuesOf(symbol).anyMatch(Expressions::isBuiltinTypeAssignment);
   }
 
   private boolean isPythonTypeAClassType(SymbolV2 symbol) {
@@ -141,13 +149,24 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
     return isDjangoModelTypeCheck.check(type).isTrue();
   }
 
+  private static Stream<Expression> assignedValuesOf(SymbolV2 symbol) {
+    return symbol.usages().stream()
+      .filter(u -> u.kind() == UsageV2.Kind.ASSIGNMENT_LHS)
+      .flatMap(usage -> getAssignedValue(usage.tree()));
+  }
+
   private static Stream<Expression> getAssignedValue(Tree assignmentName) {
-    var assignmentStmt = TreeUtils.firstAncestorOfClass(assignmentName, AssignmentStatement.class);
-    if (assignmentStmt != null) {
-      return Stream.of(assignmentStmt.assignedValue());
-    } else {
-      return Stream.empty();
+    Tree assignment = TreeUtils.firstAncestor(assignmentName,
+      t -> t.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT, Tree.Kind.ASSIGNMENT_EXPRESSION));
+    Expression assignedValue = null;
+    if (assignment instanceof AssignmentStatement assignmentStatement) {
+      assignedValue = assignmentStatement.assignedValue();
+    } else if (assignment instanceof AnnotatedAssignment annotatedAssignment) {
+      assignedValue = annotatedAssignment.assignedValue();
+    } else if (assignment instanceof AssignmentExpression assignmentExpression) {
+      assignedValue = assignmentExpression.expression();
     }
+    return assignedValue != null ? Stream.of(assignedValue) : Stream.empty();
   }
 
   private static @Nullable Symbol getTypingSymbol(Expression expr) {

@@ -40,6 +40,7 @@ import static org.sonar.python.checks.utils.Expressions.containsSpreadOperator;
 import static org.sonar.python.checks.utils.Expressions.expressionsFromListOrTuple;
 import static org.sonar.python.checks.utils.Expressions.getAssignedName;
 import static org.sonar.python.checks.utils.Expressions.isFalsy;
+import static org.sonar.python.checks.utils.Expressions.isBuiltinTypeAssignment;
 import static org.sonar.python.checks.utils.Expressions.isTruthy;
 import static org.sonar.python.checks.utils.Expressions.removeParentheses;
 import static org.sonar.python.checks.utils.Expressions.unescape;
@@ -115,6 +116,16 @@ class ExpressionsTest {
     assertThat(removeParentheses(exp("(42)")).getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
     assertThat(removeParentheses(exp("((42))")).getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
     assertThat(removeParentheses(exp("((a))")).getKind()).isEqualTo(Kind.NAME);
+  }
+
+  @Test
+  void builtin_type_assignments() {
+    assertThat(isBuiltinTypeAssignment(expWithSemantics("type(role)"))).isTrue();
+    assertThat(isBuiltinTypeAssignment(expWithSemantics("type(role) if x else None"))).isTrue();
+    assertThat(isBuiltinTypeAssignment(expWithSemantics("None if x else type(role)"))).isTrue();
+    assertThat(isBuiltinTypeAssignment(expWithSemantics("type(role) if x else 42"))).isFalse();
+    assertThat(isBuiltinTypeAssignment(expWithSemantics("42 if x else type(role)"))).isFalse();
+    assertThat(isBuiltinTypeAssignment(expWithSemantics("None if x else None"))).isFalse();
   }
 
   @Test
@@ -251,6 +262,12 @@ class ExpressionsTest {
 
   private Expression exp(String code) {
     return exp(parse(code));
+  }
+
+  private Expression expWithSemantics(String code) {
+    FileInput root = parse(code);
+    new SymbolTableBuilder(null).visitFileInput(root);
+    return exp(root);
   }
 
   private Expression exp(Tree tree) {

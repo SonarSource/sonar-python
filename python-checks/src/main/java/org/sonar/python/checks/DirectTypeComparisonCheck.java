@@ -20,15 +20,13 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.COMPARISON;
 
 @Rule(key = "S6660")
@@ -53,13 +51,7 @@ public class DirectTypeComparisonCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isDirectTypeComparison(Expression lhs, Expression rhs) {
-    return (isTypeBuiltinCall(lhs) && TreeUtils.getSymbolFromTree(rhs).filter(s -> s.is(CLASS)).isPresent())
-      || (isTypeBuiltinCall(rhs) && TreeUtils.getSymbolFromTree(lhs).filter(s -> s.is(CLASS)).isPresent());
-  }
-
-  private static boolean isTypeBuiltinCall(Expression expression) {
-    if (!expression.is(CALL_EXPR)) return false;
-    Symbol calleeSymbol = ((CallExpression) expression).calleeSymbol();
-    return calleeSymbol != null && "type".equals(calleeSymbol.fullyQualifiedName());
+    return (Expressions.isBuiltinTypeCall(lhs) && TreeUtils.getSymbolFromTree(rhs).filter(s -> s.is(CLASS)).isPresent())
+      || (Expressions.isBuiltinTypeCall(rhs) && TreeUtils.getSymbolFromTree(lhs).filter(s -> s.is(CLASS)).isPresent());
   }
 }

@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
@@ -172,6 +173,35 @@ public class Expressions {
       res = ((ParenthesizedExpression) res).expression();
     }
     return res;
+  }
+
+  public static boolean isBuiltinTypeCall(Expression expression) {
+    Expression unwrapped = removeParentheses(expression);
+    if (unwrapped instanceof CallExpression callExpression) {
+      Symbol calleeSymbol = callExpression.calleeSymbol();
+      return calleeSymbol != null && "type".equals(calleeSymbol.fullyQualifiedName());
+    }
+    return false;
+  }
+
+  public static boolean isBuiltinTypeAssignment(Expression expression) {
+    Expression unwrappedExpression = removeParentheses(expression);
+    if (isBuiltinTypeCall(unwrappedExpression)) {
+      return true;
+    }
+    if (unwrappedExpression instanceof ConditionalExpression conditionalExpression) {
+      Expression trueExpression = conditionalExpression.trueExpression();
+      Expression falseExpression = conditionalExpression.falseExpression();
+      return isTypeValuedBranch(trueExpression)
+        && isTypeValuedBranch(falseExpression)
+        && (isBuiltinTypeAssignment(trueExpression) || isBuiltinTypeAssignment(falseExpression));
+    }
+    return false;
+  }
+
+  private static boolean isTypeValuedBranch(Expression branch) {
+    Expression unwrappedBranch = removeParentheses(branch);
+    return unwrappedBranch.is(Tree.Kind.NONE) || isBuiltinTypeAssignment(unwrappedBranch);
   }
 
   public static Optional<Expression> singleAssignedNonNameValue(Name name) {
