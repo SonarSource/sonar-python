@@ -63,7 +63,11 @@ public class SonarQubePythonIndexer extends PythonIndexer {
 
   public SonarQubePythonIndexer(List<PythonInputFile> inputFiles, CacheContext cacheContext, SensorContext context, ProjectConfigurationBuilder projectConfigurationBuilder) {
     super(projectConfigurationBuilder);
-    this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
+    // Package roots are resolved once from the current filesystem, which already reflects all
+    // PR changes (including __init__.py additions or deletions). All FQNs computed below use
+    // these roots, so they remain consistent for the entire analysis run — no mid-run
+    // recomputation is needed. This differs from SonarLint, which must refresh roots on every
+    // incremental file event because its indexer persists across multiple analysis runs.
     this.packageRoots = resolvePackageRoots(context);
     this.caching = new Caching(cacheContext, getCacheVersion(context));
     this.testSourcesConfigured = TestSourceConfiguration.isConfigured(context.config());

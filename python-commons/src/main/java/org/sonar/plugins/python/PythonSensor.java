@@ -241,20 +241,20 @@ public final class PythonSensor implements Sensor {
   }
 
   private void updateResolutionMethodTelemetry(NamespacePackageTelemetry telemetry) {
-    PackageResolutionResult.ResolutionMethod method = telemetry.resolutionMethod();
+    PackageResolutionResult.PrimaryResolutionMethod method = telemetry.resolutionMethod();
     if (method == null) {
       return;
     }
 
     // Report boolean flags for each resolution method
-    boolean usedPyproject = method == PackageResolutionResult.ResolutionMethod.PYPROJECT_TOML
-      || method == PackageResolutionResult.ResolutionMethod.PYPROJECT_AND_SETUP_PY;
-    boolean usedSetupPy = method == PackageResolutionResult.ResolutionMethod.SETUP_PY
-      || method == PackageResolutionResult.ResolutionMethod.PYPROJECT_AND_SETUP_PY;
-    boolean usedSonarSources = method == PackageResolutionResult.ResolutionMethod.SONAR_SOURCES;
-    boolean usedConventionalFolders = method == PackageResolutionResult.ResolutionMethod.CONVENTIONAL_FOLDERS;
-    boolean usedBaseDir = method == PackageResolutionResult.ResolutionMethod.BASE_DIR;
-    boolean usedLegacyInitPy = method == PackageResolutionResult.ResolutionMethod.LEGACY_INIT_PY;
+    boolean usedPyproject = method == PackageResolutionResult.PrimaryResolutionMethod.PYPROJECT_TOML
+      || method == PackageResolutionResult.PrimaryResolutionMethod.PYPROJECT_AND_SETUP_PY;
+    boolean usedSetupPy = method == PackageResolutionResult.PrimaryResolutionMethod.SETUP_PY
+      || method == PackageResolutionResult.PrimaryResolutionMethod.PYPROJECT_AND_SETUP_PY;
+    boolean usedSonarSources = method == PackageResolutionResult.PrimaryResolutionMethod.SONAR_SOURCES;
+    boolean usedConventionalFolders = method == PackageResolutionResult.PrimaryResolutionMethod.CONVENTIONAL_FOLDERS;
+    boolean usedBaseDir = method == PackageResolutionResult.PrimaryResolutionMethod.BASE_DIR;
+    boolean usedLegacyInitPy = method == PackageResolutionResult.PrimaryResolutionMethod.LEGACY_INIT_PY;
 
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_PYPROJECT_TOML, usedPyproject ? 1 : 0);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SETUP_PY, usedSetupPy ? 1 : 0);

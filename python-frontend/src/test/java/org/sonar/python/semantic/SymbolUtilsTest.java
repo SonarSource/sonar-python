@@ -38,11 +38,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Nullable;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -65,14 +68,6 @@ import org.sonar.python.tree.TreeUtils;
 class SymbolUtilsTest {
 
   @Test
-  void package_name_by_file() {
-    String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
-    assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), baseDir)).isEqualTo("sound");
-    assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/__init__.py"), baseDir)).isEqualTo("sound.formats");
-    assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/wavread.py"), baseDir)).isEqualTo("sound.formats");
-  }
-
-  @Test
   void package_name_with_package_roots_namespace_packages() {
     // Test namespace packages (PEP 420) with package roots
     // src/acme/math/stats/mean.py should have FQN "acme.math.stats" when "src" is a package root
@@ -81,17 +76,17 @@ class SymbolUtilsTest {
     List<String> packageRoots = List.of(srcRoot);
 
     // File in namespace package (acme and math have no __init__.py, stats has __init__.py)
-    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/__init__.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/__init__.py"), packageRoots))
       .isEqualTo("acme.math.stats");
-    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/mean.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/mean.py"), packageRoots))
       .isEqualTo("acme.math.stats");
-    assertThat(pythonPackageName(new File(srcRoot, "acme/math/basic/__init__.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/basic/__init__.py"), packageRoots))
       .isEqualTo("acme.math.basic");
 
     // File in regular package (mathlib has __init__.py)
-    assertThat(pythonPackageName(new File(srcRoot, "mathlib/__init__.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "mathlib/__init__.py"), packageRoots))
       .isEqualTo("mathlib");
-    assertThat(pythonPackageName(new File(srcRoot, "mathlib/utils/__init__.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "mathlib/utils/__init__.py"), packageRoots))
       .isEqualTo("mathlib.utils");
   }
 
@@ -103,33 +98,35 @@ class SymbolUtilsTest {
 
     // A file directly in the package root should have empty package name
     File fileAtRoot = new File(srcRoot, "module.py");
-    assertThat(pythonPackageName(fileAtRoot, packageRoots, baseDir)).isEmpty();
+    assertThat(pythonPackageName(fileAtRoot, packageRoots)).isEmpty();
   }
 
   @Test
-  void package_name_with_package_roots_fallback_to_legacy() {
-    // When file is not under any package root, should fall back to __init__.py detection
+  void package_name_with_resolved_root_file_at_root(@TempDir Path tempDir) throws IOException {
+    File fileAtRoot = Files.createFile(tempDir.resolve("module.py")).toFile();
+
+    assertThat(pythonPackageName(fileAtRoot, List.of(tempDir.toRealPath()))).isEmpty();
+  }
+
+  @Test
+  void package_name_with_package_roots_file_not_under_any_root_returns_empty() {
+    // When file is not under any declared root, return empty string (no fallback)
     String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
     String unrelatedRoot = new File(baseDir, "nonexistent").getAbsolutePath();
     List<String> packageRoots = List.of(unrelatedRoot);
 
-    // File is not under the package root, so fallback to legacy detection
-    assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), packageRoots, baseDir))
-      .isEqualTo("sound");
-    assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/wavread.py"), packageRoots, baseDir))
-      .isEqualTo("sound.formats");
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), packageRoots)).isEmpty();
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/wavread.py"), packageRoots)).isEmpty();
   }
 
   @Test
-  void package_name_with_empty_package_roots_uses_legacy() {
-    // Empty package roots should fall back to legacy __init__.py detection
+  void package_name_with_empty_package_roots_returns_empty() {
+    // Empty package roots: no root can match, so empty string is returned
     String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
     List<String> packageRoots = List.of();
 
-    assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), packageRoots, baseDir))
-      .isEqualTo("sound");
-    assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/wavread.py"), packageRoots, baseDir))
-      .isEqualTo("sound.formats");
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), packageRoots)).isEmpty();
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/wavread.py"), packageRoots)).isEmpty();
   }
 
   @Test
@@ -140,11 +137,11 @@ class SymbolUtilsTest {
     List<String> packageRoots = List.of(packagesRoot, namespaceRoot);
 
     // File in first root
-    assertThat(pythonPackageName(new File(packagesRoot, "sound/__init__.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(packagesRoot, "sound/__init__.py"), packageRoots))
       .isEqualTo("sound");
 
     // File in second root
-    assertThat(pythonPackageName(new File(namespaceRoot, "acme/math/stats/__init__.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(namespaceRoot, "acme/math/stats/__init__.py"), packageRoots))
       .isEqualTo("acme.math.stats");
   }
 
@@ -154,10 +151,10 @@ class SymbolUtilsTest {
     String srcRoot = new File(baseDir, "src").getAbsolutePath();
     List<String> packageRoots = List.of(srcRoot);
 
-    assertThat(pythonPackageName(new File(srcRoot, "mathlib/__init__.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "mathlib/__init__.py"), packageRoots))
       .isEqualTo("mathlib");
 
-    assertThat(pythonPackageName(new File(srcRoot, "mathlib/utils.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "mathlib/utils.py"), packageRoots))
       .isEqualTo("mathlib");
   }
 
@@ -168,8 +165,7 @@ class SymbolUtilsTest {
     List<String> packageRoots = List.of(unrelatedRoot);
 
     File fileOutsideRoot = new File(baseDir, "packages/sound/__init__.py");
-    assertThat(pythonPackageName(fileOutsideRoot, packageRoots, baseDir))
-      .isEqualTo("sound");
+    assertThat(pythonPackageName(fileOutsideRoot, packageRoots)).isEmpty();
   }
 
   @Test
@@ -177,12 +173,37 @@ class SymbolUtilsTest {
     String baseDir = new File("src/test/resources/namespace_packages").getAbsoluteFile().getAbsolutePath();
     String srcRoot = new File(baseDir, "src").getAbsolutePath();
     List<String> packageRootsWithSeparator = List.of(srcRoot + File.separator);
-    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/mean.py"), packageRootsWithSeparator, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/mean.py"), packageRootsWithSeparator))
       .isEqualTo("acme.math.stats");
 
     List<String> packageRootsWithoutSeparator = List.of(srcRoot);
-    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/mean.py"), packageRootsWithoutSeparator, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/mean.py"), packageRootsWithoutSeparator))
       .isEqualTo("acme.math.stats");
+  }
+
+  @Test
+  void package_name_resolves_equivalent_root_paths() {
+    File baseDir = new File("src/test/resources/namespace_packages").getAbsoluteFile();
+    String equivalentSrcRoot = new File(baseDir, "src/../src").getPath();
+
+    assertThat(pythonPackageName(new File(baseDir, "src/acme/math/stats/mean.py"), List.of(equivalentSrcRoot)))
+      .isEqualTo("acme.math.stats");
+  }
+
+  @Test
+  void package_name_resolves_symbolic_link_alias(@TempDir Path tempDir) throws IOException {
+    Path realRoot = Files.createDirectories(tempDir.resolve("real/src"));
+    Path module = Files.createDirectories(realRoot.resolve("acme/math")).resolve("module.py");
+    Files.writeString(module, "");
+    Path alias = tempDir.resolve("alias");
+    try {
+      Files.createSymbolicLink(alias, tempDir.resolve("real"));
+    } catch (UnsupportedOperationException | IOException | SecurityException e) {
+      Assumptions.assumeTrue(false, "Symbolic links are not available: " + e.getMessage());
+    }
+
+    assertThat(pythonPackageName(alias.resolve("src/acme/math/module.py").toFile(), List.of(realRoot.toString())))
+      .isEqualTo("acme.math");
   }
 
   @Test
@@ -192,12 +213,12 @@ class SymbolUtilsTest {
     List<String> packageRoots = List.of(srcRoot);
 
     File deeplyNestedFile = new File(srcRoot, "acme/math/stats/mean.py");
-    assertThat(pythonPackageName(deeplyNestedFile, packageRoots, baseDir))
+    assertThat(pythonPackageName(deeplyNestedFile, packageRoots))
       .isEqualTo("acme.math.stats");
 
-    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/__init__.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "acme/math/stats/__init__.py"), packageRoots))
       .isEqualTo("acme.math.stats");
-    assertThat(pythonPackageName(new File(srcRoot, "mathlib/utils/__init__.py"), packageRoots, baseDir))
+    assertThat(pythonPackageName(new File(srcRoot, "mathlib/utils/__init__.py"), packageRoots))
       .isEqualTo("mathlib.utils");
   }
 
@@ -208,7 +229,7 @@ class SymbolUtilsTest {
     List<String> packageRoots = List.of(srcRoot);
 
     File fileWithSlash = new File(srcRoot, "acme/math/basic/__init__.py");
-    String packageName = pythonPackageName(fileWithSlash, packageRoots, baseDir);
+    String packageName = pythonPackageName(fileWithSlash, packageRoots);
 
     assertThat(packageName).isEqualTo("acme.math.basic").doesNotContain("/").doesNotContain("\\");
   }
@@ -222,8 +243,8 @@ class SymbolUtilsTest {
     File rootFile1 = new File(srcRoot, "script.py");
     File rootFile2 = new File(srcRoot, "main.py");
 
-    assertThat(pythonPackageName(rootFile1, packageRoots, baseDir)).isEmpty();
-    assertThat(pythonPackageName(rootFile2, packageRoots, baseDir)).isEmpty();
+    assertThat(pythonPackageName(rootFile1, packageRoots)).isEmpty();
+    assertThat(pythonPackageName(rootFile2, packageRoots)).isEmpty();
   }
 
   @Test
@@ -234,11 +255,11 @@ class SymbolUtilsTest {
 
     List<String> packageRoots1 = List.of(soundRoot, packagesRoot);
     File soundFormatFile = new File(soundRoot, "formats/__init__.py");
-    assertThat(pythonPackageName(soundFormatFile, packageRoots1, baseDir))
+    assertThat(pythonPackageName(soundFormatFile, packageRoots1))
       .isEqualTo("formats");
 
     List<String> packageRoots2 = List.of(packagesRoot);
-    assertThat(pythonPackageName(soundFormatFile, packageRoots2, baseDir))
+    assertThat(pythonPackageName(soundFormatFile, packageRoots2))
       .isEqualTo("sound.formats");
   }
 

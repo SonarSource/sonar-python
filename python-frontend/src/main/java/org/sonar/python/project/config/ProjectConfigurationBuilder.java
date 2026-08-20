@@ -46,6 +46,10 @@ public class ProjectConfigurationBuilder {
     return this;
   }
 
+  public void clear() {
+    awsLambdaHandlersByPackage.clear();
+  }
+
   public ProjectConfiguration build() {
     return new ProjectConfiguration(
       new AwsProjectConfiguration(

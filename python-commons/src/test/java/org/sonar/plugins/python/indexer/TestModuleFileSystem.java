@@ -31,8 +31,10 @@ public class TestModuleFileSystem implements ModuleFileSystem {
   }
 
   @Override
-  public Stream<InputFile> files(String s, InputFile.Type type) {
-    return inputFiles.stream().map(PythonInputFile::wrappedFile);
+  public Stream<InputFile> files(String language, InputFile.Type type) {
+    return files()
+      .filter(file -> language.equals(file.language()))
+      .filter(file -> type == file.type());
   }
 
   @Override

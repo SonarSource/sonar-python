@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -46,7 +47,10 @@ public class PythonMultiFileVerifier {
 
     var newBaseDir = getNewBaseDir(baseDir, tempDirectoryPath);
 
-    var symbolTable = TestPythonVisitorRunner.globalSymbols(pathToCode, newBaseDir);
+    File baseDirFile = new File(newBaseDir);
+    List<File> files = pathToCode.keySet().stream().map(path -> new File(newBaseDir, path)).toList();
+    List<String> packageRoots = TestPythonVisitorRunner.computePackageRoots(files, baseDirFile);
+    var symbolTable = TestPythonVisitorRunner.globalSymbols(pathToCode, newBaseDir, packageRoots);
     Map<String, R> results = new HashMap<>();
 
     pathToFile.forEach((path, file) -> {

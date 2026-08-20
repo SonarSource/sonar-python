@@ -16,6 +16,8 @@
  */
 package org.sonar.plugins.python.indexer;
 
+import static org.sonar.python.semantic.SymbolUtils.resolvedPath;
+
 import com.google.common.annotations.VisibleForTesting;
 import java.io.File;
 import java.io.IOException;
@@ -23,13 +25,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Configuration;
 
 /**
@@ -39,9 +44,9 @@ import org.sonar.api.config.Configuration;
  * <ul>
  *   <li>Extraction from pyproject.toml build system configurations</li>
  *   <li>Extraction from setup.py configurations</li>
- *   <li>When no build config files exist: returns empty roots so that FQN resolution falls back
- *       to legacy __init__.py-based detection (see
- *       {@link org.sonar.python.semantic.SymbolUtils#pythonPackageName})</li>
+ *   <li>When no build config files exist: computes roots by scanning Python source files
+ *       and walking up __init__.py chains to find the first parent directory without __init__.py
+ *       for each file (legacy detection mode)</li>
  *   <li>Fallback when build files exist but provide no roots: conventional folders (src/, lib/),
  *       then sonar.sources, then base directory</li>
  * </ul>
@@ -60,27 +65,30 @@ public class PackageRootResolver {
    * Resolves package root directories for the project.
    *
    * <p>Attempts to extract source roots from pyproject.toml and setup.py build system configurations.
-   * When no build config files exist, returns empty roots so that FQN resolution falls back to
-   * legacy __init__.py-based detection. When build config files exist but provide no source roots,
-   * conventional folders take priority over sonar.sources, then base directory as last resort.
+   * When no build config files exist, computes roots by scanning the provided Python source files
+   * and walking up __init__.py chains to find the package root for each file. When build config
+   * files exist but provide no source roots, conventional folders take priority over sonar.sources,
+   * then base directory as last resort.
    *
    * @param fileSystem the Sonar file system providing the base directory
    * @param config the Sonar configuration
+   * @param pythonFiles the Python source files in the project (used for legacy root computation)
    * @return resolution result including resolved root absolute paths and method information
    */
-  public static PackageResolutionResult resolve(FileSystem fileSystem, Configuration config) {
+  public static PackageResolutionResult resolve(FileSystem fileSystem, Configuration config, Iterable<InputFile> pythonFiles) {
     File baseDir = fileSystem.baseDir();
 
     // Discover build config files
-    List<File> pyprojectFiles = findFilesRecursively(fileSystem, "pyproject.toml");
-    List<File> setupPyFiles = findFilesRecursively(fileSystem, "setup.py");
+    BuildConfigFiles buildConfigFiles = findBuildConfigFiles(fileSystem);
+    List<File> pyprojectFiles = buildConfigFiles.pyprojectFiles();
+    List<File> setupPyFiles = buildConfigFiles.setupPyFiles();
     boolean hasBuildConfigFiles = !pyprojectFiles.isEmpty() || !setupPyFiles.isEmpty();
 
-    // When no build config files exist, FQN resolution relies on legacy __init__.py detection.
-    // Returning empty roots causes SymbolUtils.pythonPackageName to use pythonPackageNameLegacy().
+    // When no build config files exist, compute roots from __init__.py chains in source files.
     if (!hasBuildConfigFiles) {
-      LOG.debug("No build config files found; using legacy __init__.py-based package detection");
-      return PackageResolutionResult.fromLegacyInitPy();
+      List<String> legacyRoots = computeLegacyRoots(pythonFiles, baseDir);
+      LOG.debug("No build config files found; computed package roots from __init__.py detection: {}", legacyRoots);
+      return PackageResolutionResult.fromLegacyInitPy(legacyRoots);
     }
 
     // Extract source roots from discovered files
@@ -93,8 +101,8 @@ public class PackageRootResolver {
       .filter(csr -> !csr.relativeRoots().isEmpty())
       .toList();
 
-    boolean hasPyproject = pyprojectResults.stream().anyMatch(PyProjectExtractionResult::hasRoots);
-    boolean hasSetupPy = !setupPyRoots.isEmpty();
+    boolean hasPyprojectRoots = pyprojectResults.stream().anyMatch(PyProjectExtractionResult::hasRoots);
+    boolean hasSetupPyRoots = !setupPyRoots.isEmpty();
 
     List<String> combinedRoots = Stream.concat(
         pyprojectResults.stream().map(PyProjectExtractionResult::configRoots).flatMap(crs -> crs.toAbsolutePaths().stream()),
@@ -102,36 +110,40 @@ public class PackageRootResolver {
       .distinct()
       .toList();
 
-    List<String> adjustedRoots = adjustRoots(combinedRoots, baseDir);
+    // Build configs exist but extracted no roots — fall back, then augment with uncovered files.
+    if (!hasPyprojectRoots && !hasSetupPyRoots) {
+      return resolveRootsWhenBuildConfigHasNoSourceRoots(config, baseDir, pythonFiles);
+    }
+
+    List<String> adjustedRoots = augmentWithUncoveredFileRoots(adjustRoots(combinedRoots, baseDir), pythonFiles, baseDir);
     LOG.debug("Resolved package roots from build configuration: {}", adjustedRoots);
 
-    if (hasPyproject && hasSetupPy) {
+    if (hasPyprojectRoots && hasSetupPyRoots) {
       return PackageResolutionResult.fromBothPyProjectAndSetupPy(adjustedRoots, getCombinedBuildSystem(pyprojectResults));
     }
 
-    if (hasPyproject) {
+    if (hasPyprojectRoots) {
       return PackageResolutionResult.fromPyProjectToml(adjustedRoots, getCombinedBuildSystem(pyprojectResults));
     }
 
-    if (hasSetupPy) {
-      return PackageResolutionResult.fromSetupPy(adjustedRoots);
-    }
-
-    return resolveFallback(config, baseDir);
+    return PackageResolutionResult.fromSetupPy(adjustedRoots);
   }
 
   /**
    * Resolves fallback package roots when build config files exist but provide no source roots.
    *
    * <p>Priority order: conventional folders (src/, lib/), then sonar.sources, then base directory.
+   * After resolving the primary roots, augments with legacy __init__.py-based roots for any
+   * Python files not covered by the resolved roots.
    */
-  private static PackageResolutionResult resolveFallback(Configuration config, File baseDir) {
+  private static PackageResolutionResult resolveRootsWhenBuildConfigHasNoSourceRoots(Configuration config, File baseDir, Iterable<InputFile> pythonFiles) {
     List<BiFunction<Configuration, File, Optional<PackageResolutionResult>>> candidates =
       List.of(PackageRootResolver::tryConventionalFolders, PackageRootResolver::trySonarSources);
     for (BiFunction<Configuration, File, Optional<PackageResolutionResult>> candidate : candidates) {
       Optional<PackageResolutionResult> result = candidate.apply(config, baseDir);
       if (result.isPresent()) {
-        return result.get();
+        var augmentedRoots = augmentWithUncoveredFileRoots(result.get().roots(), pythonFiles, baseDir);
+        return new PackageResolutionResult(augmentedRoots, result.get().method(), result.get().buildSystem());
       }
     }
 
@@ -236,32 +248,135 @@ public class PackageRootResolver {
   static String adjustPackageRoot(File root, File baseDir) {
     File current = root;
     String baseDirPath = baseDir.getAbsolutePath();
-    while (current != null && !current.getAbsolutePath().equals(baseDirPath)) {
+    Path comparableBaseDirPath = resolvedPath(baseDir);
+    while (current != null && !resolvedPath(current).equals(comparableBaseDirPath)) {
       File initFile = new File(current, "__init__.py");
       if (!initFile.exists()) {
         break;
       }
       current = current.getParentFile();
     }
-    if (current == null) {
+    if (current == null || resolvedPath(current).equals(comparableBaseDirPath)) {
       return baseDirPath;
+    }
+    Path comparableCurrentPath = resolvedPath(current);
+    if (comparableCurrentPath.startsWith(comparableBaseDirPath)) {
+      Path relativePath = comparableBaseDirPath.relativize(comparableCurrentPath);
+      return baseDir.toPath().toAbsolutePath().resolve(relativePath).normalize().toString();
     }
     return current.getAbsolutePath();
   }
 
   /**
-   * Recursively finds files with the given filename under the project base directory.
+   * Computes package root directories for a set of files by walking up __init__.py chains.
+   *
+   * <p>For each file, walks up from the file's parent directory toward the base directory,
+   * stopping at the first directory that does not contain an __init__.py. That directory is the
+   * package root for that file. Roots are deduplicated and sorted by path length descending so
+   * that the most specific root is matched first.
+   *
+   * <p>If no files are provided, returns the base directory as the single root.
+   *
+   * @param files   the Python source files whose roots to compute
+   * @param baseDir the project base directory (walk-up never crosses this boundary)
+   * @return deduplicated absolute package root paths, sorted deepest-first
    */
-  private static List<File> findFilesRecursively(FileSystem fileSystem, String filename) {
-    try (Stream<Path> stream = Files.walk(fileSystem.baseDir().toPath())) {
-      return stream
-        .filter(Files::isRegularFile)
-        .filter(path -> filename.equals(path.getFileName().toString()))
-        .map(Path::toFile)
+  public static List<String> computePackageRootsFromFiles(List<File> files, File baseDir) {
+    List<String> roots = files.stream()
+      .map(f -> adjustPackageRoot(f.getParentFile(), baseDir))
+      .distinct()
+      .sorted(deepestFirstComparator())
+      .toList();
+    return roots.isEmpty() ? List.of(baseDir.getAbsolutePath()) : roots;
+  }
+
+  /**
+   * Augments build-config roots with legacy __init__.py-based roots for files not covered
+   * by any existing root.
+   *
+   * <p>Build configuration files (setup.py, pyproject.toml) typically declare only the source
+   * package roots (e.g. {@code src/}). Files outside those roots — most commonly test files
+   * under a {@code tests/} directory that has its own {@code __init__.py} — would otherwise
+   * receive an empty package name, breaking FQN resolution and type inference.
+   *
+   * <p>This method identifies such uncovered files and computes additional roots for them
+   * using the same __init__.py walk-up algorithm used for legacy projects.
+   */
+  private static List<String> augmentWithUncoveredFileRoots(List<String> configRoots, Iterable<InputFile> pythonFiles, File baseDir) {
+    List<Path> comparableRoots = configRoots.stream()
+      .map(root -> resolvedPath(new File(root)))
+      .toList();
+    List<File> uncoveredFiles = StreamSupport.stream(pythonFiles.spliterator(), false)
+      .map(InputFile::file)
+      .filter(file -> !isUnderAnyComparableRoot(file, comparableRoots))
+      .toList();
+
+    if (uncoveredFiles.isEmpty()) {
+      return configRoots.stream()
+        .sorted(deepestFirstComparator())
         .toList();
-    } catch (IOException e) {
-      return List.of();
     }
+
+    List<String> additionalRoots = computePackageRootsFromFiles(uncoveredFiles, baseDir);
+    return Stream.concat(configRoots.stream(), additionalRoots.stream())
+      .distinct()
+      .sorted(deepestFirstComparator())
+      .toList();
+  }
+
+  private static boolean isUnderAnyComparableRoot(File file, List<Path> roots) {
+    Path filePath = resolvedPath(file);
+    for (Path root : roots) {
+      if (filePath.startsWith(root)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static List<String> computeLegacyRoots(Iterable<InputFile> pythonFiles, File baseDir) {
+    List<File> files = StreamSupport.stream(pythonFiles.spliterator(), false)
+      .map(InputFile::file)
+      .toList();
+    return computePackageRootsFromFiles(files, baseDir);
+  }
+
+  /**
+   * Recursively finds supported build configuration files under the project base directory.
+   */
+  private static BuildConfigFiles findBuildConfigFiles(FileSystem fileSystem) {
+    List<File> pyprojectFiles = new ArrayList<>();
+    List<File> setupPyFiles = new ArrayList<>();
+    try (Stream<Path> stream = Files.walk(fileSystem.baseDir().toPath())) {
+      stream
+        .filter(Files::isRegularFile)
+        .forEach(path -> {
+          String filename = path.getFileName().toString();
+          if ("pyproject.toml".equals(filename)) {
+            pyprojectFiles.add(path.toFile());
+          } else if ("setup.py".equals(filename)) {
+            setupPyFiles.add(path.toFile());
+          }
+        });
+    } catch (IOException e) {
+      return new BuildConfigFiles(List.of(), List.of());
+    }
+    return new BuildConfigFiles(List.copyOf(pyprojectFiles), List.copyOf(setupPyFiles));
+  }
+
+  private record BuildConfigFiles(List<File> pyprojectFiles, List<File> setupPyFiles) {
+  }
+
+  /**
+   * Returns a comparator that sorts package root paths deepest-first (by separator count),
+   * breaking ties alphabetically.
+   */
+  private static Comparator<String> deepestFirstComparator() {
+    return Comparator.comparingInt(PackageRootResolver::pathDepth).reversed().thenComparing(Comparator.naturalOrder());
+  }
+
+  private static int pathDepth(String path) {
+    return (int) path.chars().filter(c -> c == File.separatorChar).count();
   }
 
   /**

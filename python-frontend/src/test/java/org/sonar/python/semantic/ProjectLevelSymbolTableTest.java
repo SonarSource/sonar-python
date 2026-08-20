@@ -1243,6 +1243,31 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  void clear_removesProjectDerivedState() {
+    var projectLevelSymbolTable = empty();
+    var descriptor = new FunctionDescriptor.FunctionDescriptorBuilder()
+      .withName("function")
+      .withFullyQualifiedName("acme.module.function")
+      .build();
+    projectLevelSymbolTable.insertEntry("acme.module", Set.of(descriptor));
+    projectLevelSymbolTable.addProjectPackage("acme.package");
+    var typeShedProvider = projectLevelSymbolTable.typeShedDescriptorsProvider();
+    var stubSymbols = projectLevelSymbolTable.stubFilesSymbols();
+
+    assertThat(projectLevelSymbolTable.getSymbol("acme.module.function")).isNotNull();
+    assertThat(projectLevelSymbolTable.projectBasePackages()).containsExactly("acme");
+
+    projectLevelSymbolTable.clear();
+
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("acme.module")).isNull();
+    assertThat(projectLevelSymbolTable.getSymbol("acme.module.function")).isNull();
+    assertThat(projectLevelSymbolTable.importsByModule()).isEmpty();
+    assertThat(projectLevelSymbolTable.projectBasePackages()).isEmpty();
+    assertThat(projectLevelSymbolTable.typeShedDescriptorsProvider()).isNotSameAs(typeShedProvider);
+    assertThat(projectLevelSymbolTable.stubFilesSymbols()).isNotSameAs(stubSymbols);
+  }
+
+  @Test
   void hasModuleWithPrefix_detectsNamespacePackages() {
     var symbolTable = empty();
 

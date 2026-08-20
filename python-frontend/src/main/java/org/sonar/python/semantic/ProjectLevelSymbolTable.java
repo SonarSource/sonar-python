@@ -91,6 +91,19 @@ public class ProjectLevelSymbolTable {
     this.projectBasePackages = new HashSet<>();
   }
 
+  /**
+   * Clears all project-derived state while keeping this table instance stable for its consumers.
+   */
+  public synchronized void clear() {
+    globalDescriptorsByModuleName.clear();
+    globalDescriptorsByFQN = null;
+    djangoViews.clear();
+    importsByModule.clear();
+    projectBasePackages.clear();
+    typeShedDescriptorsProvider = null;
+    cachedSymbols = null;
+  }
+
   public void removeModule(String packageName, String fileName) {
     String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
     globalDescriptorsByModuleName.remove(fullyQualifiedModuleName);

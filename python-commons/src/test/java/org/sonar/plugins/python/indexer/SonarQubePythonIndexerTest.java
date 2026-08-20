@@ -516,10 +516,6 @@ class SonarQubePythonIndexerTest {
     tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
     tempContext.settings().setProperty("sonar.python.skipUnchanged", false);
 
-    // Add pyproject.toml as input file so it can be found
-    PythonInputFile pyprojectFile = createInputFile(tempDir.toFile(), "pyproject.toml", InputFile.Status.SAME, InputFile.Type.MAIN);
-    tempContext.fileSystem().add(pyprojectFile.wrappedFile());
-
     PythonInputFile meanFile = createInputFile(srcDir.toFile(),
       "mean.py",
       InputFile.Status.ADDED, InputFile.Type.MAIN);
@@ -683,10 +679,6 @@ class SonarQubePythonIndexerTest {
     tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
     tempContext.settings().setProperty("sonar.python.skipUnchanged", false);
 
-    // Add setup.py as input file so it can be found
-    PythonInputFile setupPyFile = createInputFile(tempDir.toFile(), "setup.py", InputFile.Status.SAME, InputFile.Type.MAIN);
-    tempContext.fileSystem().add(setupPyFile.wrappedFile());
-
     PythonInputFile meanFile = createInputFile(tempDir.toFile(),
       Path.of("src", "acme", "math", "stats", "mean.py").toString(),
       InputFile.Status.ADDED, InputFile.Type.MAIN);
@@ -731,12 +723,6 @@ class SonarQubePythonIndexerTest {
     SensorContextTester tempContext = SensorContextTester.create(tempDir.toFile());
     tempContext.fileSystem().setWorkDir(Files.createTempDirectory("workDir"));
     tempContext.settings().setProperty("sonar.python.skipUnchanged", false);
-
-    // Add both config files
-    PythonInputFile pyprojectFile = createInputFile(tempDir.toFile(), "pyproject.toml", InputFile.Status.SAME, InputFile.Type.MAIN);
-    PythonInputFile setupPyFile = createInputFile(tempDir.toFile(), "setup.py", InputFile.Status.SAME, InputFile.Type.MAIN);
-    tempContext.fileSystem().add(pyprojectFile.wrappedFile());
-    tempContext.fileSystem().add(setupPyFile.wrappedFile());
 
     PythonInputFile moduleFile = createInputFile(tempDir.toFile(),
       Path.of("src", "mypackage", "module.py").toString(),

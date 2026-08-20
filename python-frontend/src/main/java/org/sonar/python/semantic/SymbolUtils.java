@@ -20,14 +20,13 @@ import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
@@ -171,30 +172,35 @@ public class SymbolUtils {
   /**
    * Computes the Python package name for a file using package roots.
    *
-   * <p>If the file is under one of the provided package roots, computes the package name
-   * by converting the relative path from the root to the file's parent directory into a
-   * dotted package name. This supports PEP 420 namespace packages (directories without __init__.py).
+   * <p>Finds the first root whose path is a prefix of the file's path and computes the
+   * package name by converting the relative path from that root to the file's parent directory
+   * into a dotted package name. This supports PEP 420 namespace packages (no __init__.py required).
    *
-   * <p>If the file is not under any package root, falls back to the legacy behavior of
-   * walking up the directory tree and checking for __init__.py files.
+   * <p>Returns an empty string when the file does not fall under any of the provided roots.
    *
    * @param file the Python source file
    * @param packageRoots list of absolute paths to package root directories
-   * @param projectBaseDirAbsolutePath the project base directory absolute path (used for fallback)
-   * @return the dotted package name, or empty string if not in a package
+   * @return the dotted package name, or empty string if not under any root
    */
-  public static String pythonPackageName(File file, List<String> packageRoots, String projectBaseDirAbsolutePath) {
-    if (!packageRoots.isEmpty()) {
-      String filePath = file.getAbsolutePath();
-      for (String root : packageRoots) {
-        String normalizedRoot = root.endsWith(File.separator) ? root : (root + File.separator);
-        if (filePath.startsWith(normalizedRoot)) {
-          return computePackageNameFromRoot(file, normalizedRoot);
-        }
+  public static String pythonPackageName(File file, List<String> packageRoots) {
+    List<Path> resolvedPackageRoots = packageRoots.stream()
+      .map(root -> resolvedPath(new File(root)))
+      .toList();
+    return pythonPackageName(file, resolvedPackageRoots);
+  }
+
+  /**
+   * Computes the Python package name using package roots that have already been resolved across
+   * filesystem aliases. This overload avoids resolving the same roots for every file in a project.
+   */
+  public static String pythonPackageName(File file, Iterable<Path> resolvedPackageRoots) {
+    Path filePath = resolvedPath(file);
+    for (Path rootPath : resolvedPackageRoots) {
+      if (filePath.startsWith(rootPath)) {
+        return computePackageNameFromRoot(filePath, rootPath);
       }
     }
-    // Fallback to legacy __init__.py-based detection
-    return pythonPackageNameLegacy(file, projectBaseDirAbsolutePath);
+    return "";
   }
 
   /**
@@ -202,53 +208,38 @@ public class SymbolUtils {
    * All directories between the root and the file become part of the package name
    * (PEP 420 namespace package support).
    */
-  private static String computePackageNameFromRoot(File file, String packageRoot) {
-    File parentDir = file.getParentFile();
-    if (parentDir == null) {
+  private static String computePackageNameFromRoot(Path file, Path packageRoot) {
+    Path parentDir = file.getParent();
+    if (parentDir == null || !parentDir.startsWith(packageRoot)) {
       return "";
     }
-    String parentPath = parentDir.getAbsolutePath();
-    if (!parentPath.startsWith(packageRoot)) {
+    Path relativePath = packageRoot.relativize(parentDir);
+    if (relativePath.getNameCount() == 0) {
       return "";
     }
-    String relativePath = parentPath.substring(packageRoot.length());
-    if (relativePath.isEmpty()) {
-      return "";
-    }
-    // Convert path separators to dots
-    return relativePath.replace(File.separatorChar, '.');
+    return StreamSupport.stream(relativePath.spliterator(), false)
+      .map(Path::toString)
+      .collect(Collectors.joining("."));
   }
 
   /**
-   * Legacy method for computing Python package name using __init__.py detection.
-   * Walks up from the file's parent directory toward the project base directory,
-   * stopping when encountering a directory without __init__.py.
+   * Resolves filesystem aliases, including Windows 8.3 short paths. If the complete path does
+   * not exist, the nearest existing ancestor is resolved and the remaining path is appended.
    */
-  private static String pythonPackageNameLegacy(File file, String projectBaseDirAbsolutePath) {
-    File currentDirectory = file.getParentFile();
-    Deque<String> packages = new ArrayDeque<>();
-    while (!currentDirectory.getAbsolutePath().equals(projectBaseDirAbsolutePath)) {
-      File initFile = new File(currentDirectory, "__init__.py");
-      if (!initFile.exists()) {
-        break;
+  public static Path resolvedPath(File file) {
+    Path absolutePath = file.toPath().toAbsolutePath().normalize();
+    Path existingAncestor = absolutePath;
+    while (existingAncestor != null) {
+      try {
+        return existingAncestor.toRealPath().resolve(existingAncestor.relativize(absolutePath));
+      } catch (IOException e) {
+        existingAncestor = existingAncestor.getParent();
       }
-      packages.push(currentDirectory.getName());
-      currentDirectory = currentDirectory.getParentFile();
     }
-    return String.join(".", packages);
+    return absolutePath;
   }
 
-  /**
-   * Computes the Python package name for a file using legacy __init__.py detection only.
-   * This method is kept for backward compatibility.
-   *
-   * @param file the Python source file
-   * @param projectBaseDirAbsolutePath the project base directory absolute path
-   * @return the dotted package name, or empty string if not in a package
-   */
-  public static String pythonPackageName(File file, String projectBaseDirAbsolutePath) {
-    return pythonPackageNameLegacy(file, projectBaseDirAbsolutePath);
-  }
+
 
   @CheckForNull
   public static Path pathOf(PythonFile pythonFile) {

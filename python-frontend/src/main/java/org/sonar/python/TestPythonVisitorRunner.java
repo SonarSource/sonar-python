@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
@@ -133,20 +134,30 @@ public class TestPythonVisitorRunner {
   }
 
   public static ProjectLevelSymbolTable globalSymbols(List<File> files, File baseDir) {
+    return globalSymbols(files, computePackageRoots(files, baseDir));
+  }
+
+  public static ProjectLevelSymbolTable globalSymbols(List<File> files, List<String> packageRoots) {
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     for (File file : files) {
       var pythonFile = new TestPythonFile(file);
-      String packageName = pythonPackageName(file, baseDir.getAbsolutePath());
+      String packageName = pythonPackageName(file, packageRoots);
       fillSymbolTableWithFile(pythonFile, projectLevelSymbolTable, packageName);
     }
     return projectLevelSymbolTable;
   }
 
   public static ProjectLevelSymbolTable globalSymbols(Map<String, String> pathToContent, String baseDir) {
+    File baseDirFile = new File(baseDir);
+    List<File> files = pathToContent.keySet().stream().map(path -> new File(baseDir, path)).toList();
+    return globalSymbols(pathToContent, baseDir, computePackageRoots(files, baseDirFile));
+  }
+
+  public static ProjectLevelSymbolTable globalSymbols(Map<String, String> pathToContent, String baseDir, List<String> packageRoots) {
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     pathToContent.forEach((path, content) -> {
       var file = new MockPythonFile(baseDir, path, content);
-      var packageName = pythonPackageName(file.file(), baseDir);
+      var packageName = pythonPackageName(file.file(), packageRoots);
       fillSymbolTableWithFile(file, projectLevelSymbolTable, packageName);
     });
     return projectLevelSymbolTable;
@@ -173,6 +184,31 @@ public class TestPythonVisitorRunner {
 
     var astNode = parser.parse(file.content());
     return treeMaker.fileInput(astNode);
+  }
+
+  /**
+   * Test-only counterpart of the package-root computation in {@code PackageRootResolver}.
+   * It lives here because python-frontend cannot depend on python-commons, while downstream
+   * test utilities can reuse this class through their existing python-frontend dependency.
+   */
+  public static List<String> computePackageRoots(List<File> files, File baseDir) {
+    String baseDirPath = baseDir.getAbsolutePath();
+    List<String> roots = files.stream()
+      .map(f -> {
+        File current = f.getParentFile();
+        while (current != null && !current.getAbsolutePath().equals(baseDirPath)) {
+          if (!new File(current, "__init__.py").exists()) {
+            break;
+          }
+          current = current.getParentFile();
+        }
+        return current != null ? current.getAbsolutePath() : baseDirPath;
+      })
+      .distinct()
+      .sorted(Comparator.comparingInt((String p) -> (int) p.chars().filter(c -> c == File.separatorChar).count()).reversed()
+        .thenComparing(Comparator.naturalOrder()))
+      .toList();
+    return roots.isEmpty() ? List.of(baseDirPath) : roots;
   }
 
   interface TestablePythonFile extends PythonFile {

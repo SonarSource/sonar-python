@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks.quickfix;
 
+import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +47,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class PythonQuickFixVerifier {
-  private static final String SEMANTIC_BASE_DIR = "/tmp/pythonQuickFixVerifier";
+  private static final String SEMANTIC_BASE_DIR = new File("target/pythonQuickFixVerifier").getAbsolutePath();
 
   private PythonQuickFixVerifier() {
   }
@@ -173,8 +174,9 @@ public class PythonQuickFixVerifier {
 
   private static PythonVisitorContext createSemanticVisitorContext(String path, String code) {
     var pythonFile = new TestPythonVisitorRunner.MockPythonFile(SEMANTIC_BASE_DIR, path, code);
-    ProjectLevelSymbolTable globalSymbols = TestPythonVisitorRunner.globalSymbols(Map.of(path, code), SEMANTIC_BASE_DIR);
-    String packageName = pythonPackageName(pythonFile.file(), SEMANTIC_BASE_DIR);
+    List<String> packageRoots = TestPythonVisitorRunner.computePackageRoots(List.of(pythonFile.file()), new File(SEMANTIC_BASE_DIR));
+    ProjectLevelSymbolTable globalSymbols = TestPythonVisitorRunner.globalSymbols(Map.of(path, code), SEMANTIC_BASE_DIR, packageRoots);
+    String packageName = pythonPackageName(pythonFile.file(), packageRoots);
     return TestPythonVisitorRunner.createContext(pythonFile, null, packageName, globalSymbols, CacheContextImpl.dummyCache());
   }
 

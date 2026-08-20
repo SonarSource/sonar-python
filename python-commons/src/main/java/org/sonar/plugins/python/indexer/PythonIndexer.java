@@ -17,8 +17,10 @@
 package org.sonar.plugins.python.indexer;
 
 import com.sonar.sslr.api.AstNode;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -47,14 +49,15 @@ import org.sonar.python.semantic.v2.typetable.TypeTable;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
+import static org.sonar.python.semantic.SymbolUtils.resolvedPath;
 
 public abstract class PythonIndexer {
 
   private static final Logger LOG = LoggerFactory.getLogger(PythonIndexer.class);
 
-  protected String projectBaseDirAbsolutePath;
   protected List<String> packageRoots = List.of();
   protected @Nullable PackageResolutionResult packageResolutionResult;
+  private List<Path> resolvedPackageRoots = List.of();
 
   private final Map<URI, String> packageNames = new ConcurrentHashMap<>();
   private final Supplier<PythonParser> parserSupplier = PythonParser::create;
@@ -89,7 +92,7 @@ public abstract class PythonIndexer {
 
   public String packageName(PythonInputFile inputFile) {
     if (!packageNames.containsKey(inputFile.wrappedFile().uri())) {
-      String name = pythonPackageName(inputFile.wrappedFile().file(), packageRoots, projectBaseDirAbsolutePath);
+      String name = pythonPackageName(inputFile.wrappedFile().file(), resolvedPackageRoots);
       packageNames.put(inputFile.wrappedFile().uri(), name);
       projectLevelSymbolTable.addProjectPackage(name);
     }
@@ -98,6 +101,12 @@ public abstract class PythonIndexer {
 
   public List<String> packageRoots() {
     return packageRoots;
+  }
+
+  protected void clearProjectIndex() {
+    packageNames.clear();
+    projectLevelSymbolTable.clear();
+    projectConfigurationBuilder.clear();
   }
 
   /**
@@ -110,15 +119,32 @@ public abstract class PythonIndexer {
    * @return list of resolved package root absolute paths
    */
   protected List<String> resolvePackageRoots(SensorContext context) {
-    PackageResolutionResult result = PackageRootResolver.resolve(context.fileSystem(), context.config());
+    var fs = context.fileSystem();
+    Iterable<InputFile> pythonFiles = fs.inputFiles(fs.predicates().hasLanguage("py"));
+    PackageResolutionResult result = PackageRootResolver.resolve(fs, context.config(), pythonFiles);
+    setPackageResolutionResult(result);
+    return packageRoots;
+  }
+
+  protected void setPackageResolutionResult(PackageResolutionResult result) {
+    this.packageRoots = result.roots();
+    this.resolvedPackageRoots = packageRoots.stream()
+      .map(root -> resolvedPath(new File(root)))
+      .toList();
     this.packageResolutionResult = result;
-    return result.roots();
+  }
+
+  protected boolean isResolvedPackageRoot(Path candidateRoot) {
+    return resolvedPackageRoots.contains(candidateRoot);
+  }
+
+  protected boolean isUnderResolvedPackageRoot(Path path) {
+    return resolvedPackageRoots.stream().anyMatch(path::startsWith);
   }
 
   public void collectPackageNames(List<PythonInputFile> inputFiles) {
     for (PythonInputFile inputFile : inputFiles) {
-      String packageName = pythonPackageName(inputFile.wrappedFile().file(), packageRoots, projectBaseDirAbsolutePath);
-      projectLevelSymbolTable.addProjectPackage(packageName);
+      packageName(inputFile);
     }
   }
 
@@ -159,9 +185,7 @@ public abstract class PythonIndexer {
   void addFile(PythonInputFile inputFile) throws IOException {
     AstNode astNode = parserSupplier.get().parse(inputFile.wrappedFile().contents());
     FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
-    String packageName = pythonPackageName(inputFile.wrappedFile().file(), packageRoots, projectBaseDirAbsolutePath);
-    packageNames.put(inputFile.wrappedFile().uri(), packageName);
-    projectLevelSymbolTable.addProjectPackage(packageName);
+    String packageName = packageName(inputFile);
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
     projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
     signatureBasedAwsLambdaHandlersCollector.collect(projectConfigurationBuilder, astRoot, packageName);

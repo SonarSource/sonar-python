@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.io.TempDir;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
@@ -49,11 +50,16 @@ import org.sonar.plugins.python.api.types.v2.UnknownType;
 import org.sonar.python.caching.DummyCache;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.scanner.plugin.api.impl.config.MapSettings;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class SonarLintPythonIndexerTest {
@@ -179,6 +185,397 @@ class SonarLintPythonIndexerTest {
   }
 
   @Test
+  void incremental_update_preserves_build_config_roots(@TempDir Path projectDir) throws IOException {
+    Files.createDirectories(projectDir.resolve("src/acme"));
+    Files.writeString(projectDir.resolve("setup.py"), "setup(package_dir={'': 'src'}, packages=['acme'])");
+    PythonInputFile module = inputFile(projectDir, "src/acme/mod.py", "def original():\n    pass\n");
+    var localContext = SensorContextTester.create(projectDir.toFile());
+    localContext.fileSystem().add(module.wrappedFile());
+    var localIndexer = new SonarLintPythonIndexer(
+      new TestModuleFileSystem(new ArrayList<>(List.of(module))), new ProjectConfigurationBuilder());
+
+    localIndexer.buildOnce(localContext);
+
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.resolve("src").toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("acme.mod.original")).isNotNull();
+
+    PythonInputFile added = inputFile(projectDir, "src/acme/added.py", "def added():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, added));
+
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.resolve("src").toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("acme.added.added")).isNotNull();
+  }
+
+  @Test
+  void modified_package_configuration_file_refreshes_roots(@TempDir Path projectDir) throws IOException {
+    Path pyproject = projectDir.resolve("pyproject.toml");
+    Files.writeString(pyproject, "[project]\nname = 'before'\n");
+    PythonInputFile module = inputFile(projectDir, "module.py", "def original():\n    pass\n");
+    var localIndexer = spy(buildIndexer(projectDir, module));
+
+    String updatedConfig = "[project]\nname = 'after'\n";
+    Files.writeString(pyproject, updatedConfig);
+    InputFile configurationFile = TestInputFileBuilder.create("moduleKey", "pyproject.toml")
+      .setModuleBaseDir(projectDir)
+      .setCharset(StandardCharsets.UTF_8)
+      .setType(InputFile.Type.MAIN)
+      .setLanguage(null)
+      .initMetadata(updatedConfig)
+      .build();
+
+    localIndexer.process(event(ModuleFileEvent.Type.MODIFIED, configurationFile));
+
+    verify(localIndexer).refreshPackageRoots();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("module.original")).isNotNull();
+  }
+
+  @Test
+  void incremental_init_file_addition_rebuilds_modules_with_new_fqns(@TempDir Path projectDir) throws IOException {
+    PythonInputFile module = inputFile(projectDir, "pkg/module.py", "def foo():\n    pass\n");
+    var localContext = SensorContextTester.create(projectDir.toFile());
+    localContext.fileSystem().add(module.wrappedFile());
+    var localIndexer = spy(new SonarLintPythonIndexer(
+      new TestModuleFileSystem(new ArrayList<>(List.of(module))), new ProjectConfigurationBuilder()));
+    localIndexer.buildOnce(localContext);
+
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("module.foo")).isNotNull();
+
+    PythonInputFile packageInit = inputFile(projectDir, "pkg/__init__.py", "");
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, packageInit));
+
+    verify(localIndexer).refreshPackageRoots();
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("module.foo")).isNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("pkg.module.foo")).isNotNull();
+  }
+
+  @Test
+  void incremental_init_file_deletion_rebuilds_modules_with_new_fqns(@TempDir Path projectDir) throws IOException {
+    PythonInputFile packageInit = inputFile(projectDir, "pkg/__init__.py", "");
+    PythonInputFile module = inputFile(projectDir, "pkg/module.py", "def foo():\n    pass\n");
+    var localIndexer = spy(buildIndexer(projectDir, packageInit, module));
+
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("pkg.module.foo")).isNotNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("module.foo")).isNull();
+
+    Files.delete(packageInit.wrappedFile().path());
+
+    localIndexer.process(event(ModuleFileEvent.Type.DELETED, packageInit));
+
+    verify(localIndexer).refreshPackageRoots();
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.resolve("pkg").toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("pkg.module.foo")).isNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("module.foo")).isNotNull();
+  }
+
+  @Test
+  void created_file_under_existing_root_adds_more_specific_legacy_root(@TempDir Path projectDir) throws IOException {
+    PythonInputFile packageInit = inputFile(projectDir, "pkg/__init__.py", "");
+    PythonInputFile module = inputFile(projectDir, "pkg/module.py", "def original():\n    pass\n");
+    var localIndexer = buildIndexer(projectDir, packageInit, module);
+
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.toString());
+
+    PythonInputFile script = inputFile(projectDir, "scripts/tool.py", "def run():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, script));
+
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.resolve("scripts").toString(), projectDir.toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("tool.run")).isNotNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("scripts.tool.run")).isNull();
+  }
+
+  @Test
+  void created_file_with_existing_candidate_root_skips_root_resolution(@TempDir Path projectDir) throws IOException {
+    PythonInputFile packageInit = inputFile(projectDir, "pkg/__init__.py", "");
+    PythonInputFile module = inputFile(projectDir, "pkg/module.py", "def original():\n    pass\n");
+    var localIndexer = spy(buildIndexer(projectDir, packageInit, module));
+
+    PythonInputFile added = inputFile(projectDir, "pkg/added.py", "def added():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, added));
+
+    verify(localIndexer, never()).refreshPackageRoots();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("pkg.added.added")).isNotNull();
+  }
+
+  @Test
+  void created_file_in_new_conventional_folder_refreshes_when_candidate_root_is_active(@TempDir Path projectDir) throws IOException {
+    Files.writeString(projectDir.resolve("pyproject.toml"), "[project]\nname = 'sample'\n");
+    PythonInputFile main = inputFile(projectDir, "main.py", "def original():\n    pass\n");
+    var localIndexer = spy(buildIndexer(projectDir, main));
+    Files.createDirectories(projectDir.resolve("src"));
+    Files.writeString(projectDir.resolve("src/__init__.py"), "");
+
+    PythonInputFile added = inputFile(projectDir, "src/tool.py", "def run():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, added));
+
+    verify(localIndexer).refreshPackageRoots();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("src.tool.run")).isNotNull();
+  }
+
+  @Test
+  void created_file_covered_by_base_dir_fallback_skips_root_resolution(@TempDir Path projectDir) throws IOException {
+    Files.writeString(projectDir.resolve("pyproject.toml"), "[project]\nname = 'sample'\n");
+    PythonInputFile main = inputFile(projectDir, "main.py", "def original():\n    pass\n");
+    var localIndexer = spy(buildIndexer(projectDir, main));
+
+    PythonInputFile added = inputFile(projectDir, "scripts/tool.py", "def run():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, added));
+
+    verify(localIndexer, never()).refreshPackageRoots();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("scripts.tool.run")).isNotNull();
+  }
+
+  @Test
+  void deleted_file_covered_by_base_dir_fallback_skips_root_resolution(@TempDir Path projectDir) throws IOException {
+    Files.writeString(projectDir.resolve("pyproject.toml"), "[project]\nname = 'sample'\n");
+    PythonInputFile first = inputFile(projectDir, "scripts/first.py", "def first():\n    pass\n");
+    PythonInputFile second = inputFile(projectDir, "scripts/second.py", "def second():\n    pass\n");
+    var localIndexer = spy(buildIndexer(projectDir, first, second));
+    Files.delete(first.wrappedFile().path());
+
+    localIndexer.process(event(ModuleFileEvent.Type.DELETED, first));
+
+    verify(localIndexer, never()).refreshPackageRoots();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("scripts.first.first")).isNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("scripts.second.second")).isNotNull();
+  }
+
+  @Test
+  void deleted_file_covered_by_configured_root_skips_root_resolution(@TempDir Path projectDir) throws IOException {
+    Files.writeString(projectDir.resolve("setup.py"), "setup(package_dir={'': 'src'}, packages=['acme'])");
+    PythonInputFile module = inputFile(projectDir, "src/acme/module.py", "def original():\n    pass\n");
+    var localIndexer = spy(buildIndexer(projectDir, module));
+
+    PythonInputFile added = inputFile(projectDir, "src/acme/added.py", "def added():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, added));
+    clearInvocations(localIndexer);
+    Files.delete(added.wrappedFile().path());
+
+    localIndexer.process(event(ModuleFileEvent.Type.DELETED, added));
+
+    verify(localIndexer, never()).refreshPackageRoots();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("acme.added.added")).isNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("acme.module.original")).isNotNull();
+  }
+
+  @Test
+  void test_file_root_survives_refresh_triggered_by_main_file(@TempDir Path projectDir) throws IOException {
+    PythonInputFile packageInit = inputFile(projectDir, "pkg/__init__.py", "");
+    PythonInputFile module = inputFile(projectDir, "pkg/module.py", "def original():\n    pass\n");
+    PythonInputFile testFile = inputFile(projectDir, "tests/unit/test_only.py", "def test_something():\n    pass\n", InputFile.Type.TEST);
+    var localIndexer = buildIndexer(projectDir, packageInit, module, testFile);
+
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.resolve("tests/unit").toString(), projectDir.toString());
+    assertThat(localIndexer.getFileWithId(testFile.wrappedFile().absolutePath())).isNull();
+
+    PythonInputFile script = inputFile(projectDir, "scripts/tool.py", "def run():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, script));
+
+    assertThat(localIndexer.packageRoots()).containsExactly(
+      projectDir.resolve("tests/unit").toString(),
+      projectDir.resolve("scripts").toString(),
+      projectDir.toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("pkg.module.original")).isNotNull();
+    assertThat(localIndexer.getFileWithId(testFile.wrappedFile().absolutePath())).isNull();
+  }
+
+  @Test
+  void created_test_file_updates_roots_without_entering_project_index(@TempDir Path projectDir) throws IOException {
+    PythonInputFile packageInit = inputFile(projectDir, "pkg/__init__.py", "");
+    PythonInputFile module = inputFile(projectDir, "pkg/module.py", "def original():\n    pass\n");
+    var localIndexer = buildIndexer(projectDir, packageInit, module);
+
+    PythonInputFile testFile = inputFile(projectDir, "tests/unit/test_only.py", "def test_something():\n    pass\n", InputFile.Type.TEST);
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, testFile));
+
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.resolve("tests/unit").toString(), projectDir.toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("pkg.module.original")).isNotNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("test_only.test_something")).isNull();
+    assertThat(localIndexer.getFileWithId(testFile.wrappedFile().absolutePath())).isNull();
+  }
+
+  @Test
+  void deleted_test_file_removes_its_root_without_affecting_main_index(@TempDir Path projectDir) throws IOException {
+    PythonInputFile packageInit = inputFile(projectDir, "pkg/__init__.py", "");
+    PythonInputFile module = inputFile(projectDir, "pkg/module.py", "def original():\n    pass\n");
+    PythonInputFile testFile = inputFile(projectDir, "tests/unit/test_only.py", "def test_something():\n    pass\n", InputFile.Type.TEST);
+    var localIndexer = buildIndexer(projectDir, packageInit, module, testFile);
+
+    localIndexer.process(event(ModuleFileEvent.Type.DELETED, testFile));
+
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("pkg.module.original")).isNotNull();
+    assertThat(localIndexer.getFileWithId(testFile.wrappedFile().absolutePath())).isNull();
+  }
+
+  @Test
+  void deleted_file_with_another_root_contributor_skips_root_resolution(@TempDir Path projectDir) throws IOException {
+    PythonInputFile first = inputFile(projectDir, "scripts/first.py", "def first():\n    pass\n");
+    PythonInputFile second = inputFile(projectDir, "scripts/second.py", "def second():\n    pass\n");
+    PythonInputFile third = inputFile(projectDir, "scripts/third.py", "def third():\n    pass\n");
+    var localIndexer = spy(buildIndexer(projectDir, first, second, third));
+
+    localIndexer.process(event(ModuleFileEvent.Type.DELETED, first));
+    clearInvocations(localIndexer);
+    localIndexer.process(event(ModuleFileEvent.Type.DELETED, second));
+
+    verify(localIndexer, never()).refreshPackageRoots();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("first.first")).isNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("second.second")).isNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("third.third")).isNotNull();
+  }
+
+  @Test
+  void modified_main_file_reclassified_as_test_is_removed_from_project_index(@TempDir Path projectDir) throws IOException {
+    PythonInputFile mainFile = inputFile(projectDir, "module.py", "def original():\n    pass\n");
+    var localIndexer = buildIndexer(projectDir, mainFile);
+
+    PythonInputFile testFile = inputFile(projectDir, "module.py", "def test_something():\n    pass\n", InputFile.Type.TEST);
+    localIndexer.process(event(ModuleFileEvent.Type.MODIFIED, testFile));
+
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("module.original")).isNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("module.test_something")).isNull();
+    assertThat(localIndexer.getFileWithId(testFile.wrappedFile().absolutePath())).isNull();
+  }
+
+  @Test
+  void modified_test_file_reclassified_as_main_is_added_to_project_index(@TempDir Path projectDir) throws IOException {
+    PythonInputFile testFile = inputFile(projectDir, "module.py", "def test_something():\n    pass\n", InputFile.Type.TEST);
+    var localIndexer = buildIndexer(projectDir, testFile);
+
+    PythonInputFile mainFile = inputFile(projectDir, "module.py", "def production():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.MODIFIED, mainFile));
+
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("module.production")).isNotNull();
+    assertThat(localIndexer.getFileWithId(mainFile.wrappedFile().absolutePath())).isSameAs(mainFile.wrappedFile());
+  }
+
+  @Test
+  void deleted_file_removes_legacy_root_and_rebuilds_remaining_modules(@TempDir Path projectDir) throws IOException {
+    PythonInputFile packageInit = inputFile(projectDir, "pkg/__init__.py", "");
+    PythonInputFile module = inputFile(projectDir, "pkg/module.py", "def original():\n    pass\n");
+    PythonInputFile script = inputFile(projectDir, "scripts/tool.py", "def run():\n    pass\n");
+    var localIndexer = spy(buildIndexer(projectDir, packageInit, module, script));
+
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.resolve("scripts").toString(), projectDir.toString());
+
+    localIndexer.process(event(ModuleFileEvent.Type.DELETED, script));
+
+    verify(localIndexer).refreshPackageRoots();
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("tool.run")).isNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("pkg.module.original")).isNotNull();
+  }
+
+  @Test
+  void deleted_file_with_removed_conventional_directory_refreshes_roots(@TempDir Path projectDir) throws IOException {
+    Files.writeString(projectDir.resolve("pyproject.toml"), "[project]\nname = 'sample'\n");
+    PythonInputFile script = inputFile(projectDir, "src/scripts/tool.py", "def run():\n    pass\n");
+    var localIndexer = spy(buildIndexer(projectDir, script));
+    Files.delete(script.wrappedFile().path());
+    Files.delete(projectDir.resolve("src/scripts"));
+    Files.delete(projectDir.resolve("src"));
+
+    localIndexer.process(event(ModuleFileEvent.Type.DELETED, script));
+
+    verify(localIndexer).refreshPackageRoots();
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.toString());
+  }
+
+  @Test
+  void created_src_folder_switches_from_base_dir_to_conventional_roots(@TempDir Path projectDir) throws IOException {
+    Files.writeString(projectDir.resolve("pyproject.toml"), "[project]\nname = 'sample'\n");
+    PythonInputFile main = inputFile(projectDir, "main.py", "def original():\n    pass\n");
+    var localIndexer = buildIndexer(projectDir, main);
+
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.toString());
+
+    PythonInputFile source = inputFile(projectDir, "src/tool.py", "def run():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, source));
+
+    assertThat(localIndexer.packageRoots()).containsExactly(projectDir.resolve("src").toString(), projectDir.toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("tool.run")).isNotNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("src.tool.run")).isNull();
+  }
+
+  @Test
+  void rebuild_continues_after_invalid_python_and_keeps_it_for_root_resolution(@TempDir Path projectDir) throws IOException {
+    PythonInputFile packageInit = inputFile(projectDir, "pkg/__init__.py", "");
+    PythonInputFile module = inputFile(projectDir, "pkg/module.py", "def original():\n    pass\n");
+    PythonInputFile invalid = inputFile(projectDir, "broken/invalid.py", "foo(");
+    var localIndexer = buildIndexer(projectDir, packageInit, module, invalid);
+
+    assertThat(localIndexer.getFileWithId(invalid.wrappedFile().absolutePath())).isNull();
+
+    PythonInputFile script = inputFile(projectDir, "scripts/tool.py", "def run():\n    pass\n");
+    assertDoesNotThrow(() -> localIndexer.process(event(ModuleFileEvent.Type.CREATED, script)));
+
+    assertThat(localIndexer.packageRoots()).containsExactly(
+      projectDir.resolve("broken").toString(),
+      projectDir.resolve("scripts").toString(),
+      projectDir.toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("pkg.module.original")).isNotNull();
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("tool.run")).isNotNull();
+    assertThat(localIndexer.getFileWithId(invalid.wrappedFile().absolutePath())).isNull();
+  }
+
+  @Test
+  void modified_file_can_be_temporarily_invalid_and_recover(@TempDir Path projectDir) throws IOException {
+    PythonInputFile original = inputFile(projectDir, "module.py", "def original():\n    pass\n");
+    var localIndexer = buildIndexer(projectDir, original);
+
+    PythonInputFile invalid = inputFile(projectDir, "module.py", "foo(");
+    assertDoesNotThrow(() -> localIndexer.process(event(ModuleFileEvent.Type.MODIFIED, invalid)));
+
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("module.original")).isNull();
+    assertThat(localIndexer.getFileWithId(invalid.wrappedFile().absolutePath())).isNull();
+
+    PythonInputFile recovered = inputFile(projectDir, "module.py", "def recovered():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.MODIFIED, recovered));
+
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("module.recovered")).isNotNull();
+    assertThat(localIndexer.getFileWithId(recovered.wrappedFile().absolutePath())).isSameAs(recovered.wrappedFile());
+  }
+
+  @Test
+  void rebuild_keeps_unreadable_file_for_root_resolution(@TempDir Path projectDir) throws IOException {
+    PythonInputFile packageInit = inputFile(projectDir, "pkg/__init__.py", "");
+    PythonInputFile module = inputFile(projectDir, "pkg/module.py", "def original():\n    pass\n");
+    PythonInputFile readableInput = inputFile(projectDir, "unreadable/module.py", "def ignored():\n    pass\n");
+    InputFile unreadableFile = spy(readableInput.wrappedFile());
+    when(unreadableFile.contents()).thenThrow(new IOException("not readable"));
+    PythonInputFile unreadableInput = new PythonInputFileImpl(unreadableFile);
+    var localIndexer = buildIndexer(projectDir, packageInit, module, unreadableInput);
+
+    PythonInputFile script = inputFile(projectDir, "scripts/tool.py", "def run():\n    pass\n");
+    assertDoesNotThrow(() -> localIndexer.process(event(ModuleFileEvent.Type.CREATED, script)));
+
+    assertThat(localIndexer.packageRoots()).containsExactly(
+      projectDir.resolve("scripts").toString(),
+      projectDir.resolve("unreadable").toString(),
+      projectDir.toString());
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("pkg.module.original")).isNotNull();
+    assertThat(localIndexer.getFileWithId(unreadableFile.absolutePath())).isNull();
+  }
+
+  @Test
+  void project_over_line_limit_does_not_partially_activate_after_file_event(@TempDir Path projectDir) throws IOException {
+    PythonInputFile module = inputFile(projectDir, "module.py", "def original():\n    pass\n");
+    var localContext = SensorContextTester.create(projectDir.toFile());
+    localContext.setSettings(new MapSettings().setProperty("sonar.python.sonarlint.indexing.maxlines", 1));
+    localContext.fileSystem().add(module.wrappedFile());
+    var localIndexer = new SonarLintPythonIndexer(
+      new TestModuleFileSystem(new ArrayList<>(List.of(module))), new ProjectConfigurationBuilder());
+    localIndexer.buildOnce(localContext);
+
+    PythonInputFile added = inputFile(projectDir, "scripts/tool.py", "def run():\n    pass\n");
+    localIndexer.process(event(ModuleFileEvent.Type.CREATED, added));
+
+    assertThat(localIndexer.projectLevelSymbolTable().getSymbol("tool.run")).isNull();
+    assertThat(localIndexer.getFileWithId(added.wrappedFile().absolutePath())).isNull();
+  }
+
+  @Test
   void test_indexer_non_python_file() {
     testNonPythonFile("txt");
     testNonPythonFile(null);
@@ -301,5 +698,42 @@ class SonarLintPythonIndexerTest {
       .setLanguage(languageKey)
       .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
       .build());
+  }
+
+  private static PythonInputFile inputFile(Path projectDir, String relativePath, String content) throws IOException {
+    return inputFile(projectDir, relativePath, content, InputFile.Type.MAIN);
+  }
+
+  private static PythonInputFile inputFile(Path projectDir, String relativePath, String content, InputFile.Type type) throws IOException {
+    Path path = projectDir.resolve(relativePath);
+    Files.createDirectories(path.getParent());
+    Files.writeString(path, content);
+    return new PythonInputFileImpl(TestInputFileBuilder.create("moduleKey", relativePath)
+      .setModuleBaseDir(projectDir)
+      .setCharset(StandardCharsets.UTF_8)
+      .setType(type)
+      .setLanguage(Python.KEY)
+      .initMetadata(content)
+      .build());
+  }
+
+  private static ModuleFileEvent event(ModuleFileEvent.Type type, PythonInputFile inputFile) {
+    return event(type, inputFile.wrappedFile());
+  }
+
+  private static ModuleFileEvent event(ModuleFileEvent.Type type, InputFile inputFile) {
+    ModuleFileEvent event = mock(ModuleFileEvent.class);
+    when(event.getType()).thenReturn(type);
+    when(event.getTarget()).thenReturn(inputFile);
+    return event;
+  }
+
+  private static SonarLintPythonIndexer buildIndexer(Path projectDir, PythonInputFile... files) {
+    var localContext = SensorContextTester.create(projectDir.toFile());
+    Arrays.stream(files).map(PythonInputFile::wrappedFile).forEach(localContext.fileSystem()::add);
+    var localIndexer = new SonarLintPythonIndexer(
+      new TestModuleFileSystem(new ArrayList<>(Arrays.asList(files))), new ProjectConfigurationBuilder());
+    localIndexer.buildOnce(localContext);
+    return localIndexer;
   }
 }

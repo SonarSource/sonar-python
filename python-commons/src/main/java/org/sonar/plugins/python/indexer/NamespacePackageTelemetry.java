@@ -33,7 +33,7 @@ public record NamespacePackageTelemetry(
   int packagesWithoutInit,
   int duplicatePackagesWithoutInit,
   int namespacePackagesInRegularPackage,
-  @Nullable PackageResolutionResult.ResolutionMethod resolutionMethod,
+  @Nullable PackageResolutionResult.PrimaryResolutionMethod resolutionMethod,
   @Nullable PackageResolutionResult.BuildSystem buildSystem) {
   
   public static NamespacePackageTelemetry empty() {
@@ -44,7 +44,7 @@ public record NamespacePackageTelemetry(
    * Creates a new telemetry instance with resolution information added.
    */
   public NamespacePackageTelemetry withResolutionInfo(
-      PackageResolutionResult.ResolutionMethod method,
+      PackageResolutionResult.PrimaryResolutionMethod method,
       PackageResolutionResult.BuildSystem system) {
     return new NamespacePackageTelemetry(
       packagesWithInit,

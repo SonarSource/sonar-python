@@ -28,13 +28,13 @@ import java.util.List;
  */
 public record PackageResolutionResult(
   List<String> roots,
-  ResolutionMethod method,
+  PrimaryResolutionMethod method,
   BuildSystem buildSystem) {
 
   /**
    * How the package roots were resolved.
    */
-  public enum ResolutionMethod {
+  public enum PrimaryResolutionMethod {
     /** Resolved from pyproject.toml build configuration */
     PYPROJECT_TOML,
     /** Resolved from setup.py configuration */
@@ -47,7 +47,7 @@ public record PackageResolutionResult(
     CONVENTIONAL_FOLDERS,
     /** Fallback to project base directory */
     BASE_DIR,
-    /** No build config files found; FQN resolution uses legacy __init__.py detection */
+    /** No build config files found; roots are computed by scanning __init__.py chains in source files */
     LEGACY_INIT_PY
   }
 
@@ -69,30 +69,30 @@ public record PackageResolutionResult(
   }
 
   public static PackageResolutionResult fromPyProjectToml(List<String> roots, BuildSystem buildSystem) {
-    return new PackageResolutionResult(roots, ResolutionMethod.PYPROJECT_TOML, buildSystem);
+    return new PackageResolutionResult(roots, PrimaryResolutionMethod.PYPROJECT_TOML, buildSystem);
   }
 
   public static PackageResolutionResult fromSetupPy(List<String> roots) {
-    return new PackageResolutionResult(roots, ResolutionMethod.SETUP_PY, BuildSystem.NONE);
+    return new PackageResolutionResult(roots, PrimaryResolutionMethod.SETUP_PY, BuildSystem.NONE);
   }
 
   public static PackageResolutionResult fromBothPyProjectAndSetupPy(List<String> roots, BuildSystem buildSystem) {
-    return new PackageResolutionResult(roots, ResolutionMethod.PYPROJECT_AND_SETUP_PY, buildSystem);
+    return new PackageResolutionResult(roots, PrimaryResolutionMethod.PYPROJECT_AND_SETUP_PY, buildSystem);
   }
 
   public static PackageResolutionResult fromSonarSources(List<String> roots) {
-    return new PackageResolutionResult(roots, ResolutionMethod.SONAR_SOURCES, BuildSystem.NONE);
+    return new PackageResolutionResult(roots, PrimaryResolutionMethod.SONAR_SOURCES, BuildSystem.NONE);
   }
 
   public static PackageResolutionResult fromConventionalFolders(List<String> roots) {
-    return new PackageResolutionResult(roots, ResolutionMethod.CONVENTIONAL_FOLDERS, BuildSystem.NONE);
+    return new PackageResolutionResult(roots, PrimaryResolutionMethod.CONVENTIONAL_FOLDERS, BuildSystem.NONE);
   }
 
   public static PackageResolutionResult fromBaseDir(List<String> roots) {
-    return new PackageResolutionResult(roots, ResolutionMethod.BASE_DIR, BuildSystem.NONE);
+    return new PackageResolutionResult(roots, PrimaryResolutionMethod.BASE_DIR, BuildSystem.NONE);
   }
 
-  public static PackageResolutionResult fromLegacyInitPy() {
-    return new PackageResolutionResult(List.of(), ResolutionMethod.LEGACY_INIT_PY, BuildSystem.NONE);
+  public static PackageResolutionResult fromLegacyInitPy(List<String> roots) {
+    return new PackageResolutionResult(roots, PrimaryResolutionMethod.LEGACY_INIT_PY, BuildSystem.NONE);
   }
 }

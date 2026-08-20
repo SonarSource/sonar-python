@@ -29,7 +29,7 @@ class PackageResolutionResultTest {
     var result = PackageResolutionResult.fromPyProjectToml(roots, PackageResolutionResult.BuildSystem.SETUPTOOLS);
 
     assertThat(result.roots()).containsExactly("/project/src");
-    assertThat(result.method()).isEqualTo(PackageResolutionResult.ResolutionMethod.PYPROJECT_TOML);
+    assertThat(result.method()).isEqualTo(PackageResolutionResult.PrimaryResolutionMethod.PYPROJECT_TOML);
     assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.SETUPTOOLS);
   }
 
@@ -39,7 +39,7 @@ class PackageResolutionResultTest {
     var result = PackageResolutionResult.fromSetupPy(roots);
 
     assertThat(result.roots()).containsExactly("/project/src");
-    assertThat(result.method()).isEqualTo(PackageResolutionResult.ResolutionMethod.SETUP_PY);
+    assertThat(result.method()).isEqualTo(PackageResolutionResult.PrimaryResolutionMethod.SETUP_PY);
     assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.NONE);
   }
 
@@ -49,7 +49,7 @@ class PackageResolutionResultTest {
     var result = PackageResolutionResult.fromSonarSources(roots);
 
     assertThat(result.roots()).containsExactly("/project/src", "/project/lib");
-    assertThat(result.method()).isEqualTo(PackageResolutionResult.ResolutionMethod.SONAR_SOURCES);
+    assertThat(result.method()).isEqualTo(PackageResolutionResult.PrimaryResolutionMethod.SONAR_SOURCES);
     assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.NONE);
   }
 
@@ -59,7 +59,7 @@ class PackageResolutionResultTest {
     var result = PackageResolutionResult.fromConventionalFolders(roots);
 
     assertThat(result.roots()).containsExactly("/project/src");
-    assertThat(result.method()).isEqualTo(PackageResolutionResult.ResolutionMethod.CONVENTIONAL_FOLDERS);
+    assertThat(result.method()).isEqualTo(PackageResolutionResult.PrimaryResolutionMethod.CONVENTIONAL_FOLDERS);
     assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.NONE);
   }
 
@@ -69,7 +69,17 @@ class PackageResolutionResultTest {
     var result = PackageResolutionResult.fromBaseDir(roots);
 
     assertThat(result.roots()).containsExactly("/project");
-    assertThat(result.method()).isEqualTo(PackageResolutionResult.ResolutionMethod.BASE_DIR);
+    assertThat(result.method()).isEqualTo(PackageResolutionResult.PrimaryResolutionMethod.BASE_DIR);
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.NONE);
+  }
+
+  @Test
+  void fromLegacyInitPy_creates_correct_result() {
+    List<String> roots = List.of("/project", "/project/other");
+    var result = PackageResolutionResult.fromLegacyInitPy(roots);
+
+    assertThat(result.roots()).containsExactly("/project", "/project/other");
+    assertThat(result.method()).isEqualTo(PackageResolutionResult.PrimaryResolutionMethod.LEGACY_INIT_PY);
     assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.NONE);
   }
 
@@ -90,14 +100,14 @@ class PackageResolutionResultTest {
 
   @Test
   void all_resolution_methods_exist() {
-    assertThat(PackageResolutionResult.ResolutionMethod.values()).containsExactly(
-      PackageResolutionResult.ResolutionMethod.PYPROJECT_TOML,
-      PackageResolutionResult.ResolutionMethod.SETUP_PY,
-      PackageResolutionResult.ResolutionMethod.PYPROJECT_AND_SETUP_PY,
-      PackageResolutionResult.ResolutionMethod.SONAR_SOURCES,
-      PackageResolutionResult.ResolutionMethod.CONVENTIONAL_FOLDERS,
-      PackageResolutionResult.ResolutionMethod.BASE_DIR,
-      PackageResolutionResult.ResolutionMethod.LEGACY_INIT_PY
+    assertThat(PackageResolutionResult.PrimaryResolutionMethod.values()).containsExactly(
+      PackageResolutionResult.PrimaryResolutionMethod.PYPROJECT_TOML,
+      PackageResolutionResult.PrimaryResolutionMethod.SETUP_PY,
+      PackageResolutionResult.PrimaryResolutionMethod.PYPROJECT_AND_SETUP_PY,
+      PackageResolutionResult.PrimaryResolutionMethod.SONAR_SOURCES,
+      PackageResolutionResult.PrimaryResolutionMethod.CONVENTIONAL_FOLDERS,
+      PackageResolutionResult.PrimaryResolutionMethod.BASE_DIR,
+      PackageResolutionResult.PrimaryResolutionMethod.LEGACY_INIT_PY
     );
   }
 
@@ -107,7 +117,7 @@ class PackageResolutionResultTest {
     var result = PackageResolutionResult.fromBothPyProjectAndSetupPy(roots, PackageResolutionResult.BuildSystem.SETUPTOOLS);
 
     assertThat(result.roots()).containsExactly("/project/src", "/project/lib");
-    assertThat(result.method()).isEqualTo(PackageResolutionResult.ResolutionMethod.PYPROJECT_AND_SETUP_PY);
+    assertThat(result.method()).isEqualTo(PackageResolutionResult.PrimaryResolutionMethod.PYPROJECT_AND_SETUP_PY);
     assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.SETUPTOOLS);
   }
 }

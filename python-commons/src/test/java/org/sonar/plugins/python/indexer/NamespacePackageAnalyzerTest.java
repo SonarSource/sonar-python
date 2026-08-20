@@ -257,10 +257,10 @@ class NamespacePackageAnalyzerTest {
     NamespacePackageTelemetry baseTelemetry = analyzer.analyze(emptyTree);
 
     NamespacePackageTelemetry withResolution = baseTelemetry.withResolutionInfo(
-      PackageResolutionResult.ResolutionMethod.PYPROJECT_TOML,
+      PackageResolutionResult.PrimaryResolutionMethod.PYPROJECT_TOML,
       PackageResolutionResult.BuildSystem.SETUPTOOLS);
 
-    assertThat(withResolution.resolutionMethod()).isEqualTo(PackageResolutionResult.ResolutionMethod.PYPROJECT_TOML);
+    assertThat(withResolution.resolutionMethod()).isEqualTo(PackageResolutionResult.PrimaryResolutionMethod.PYPROJECT_TOML);
     assertThat(withResolution.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.SETUPTOOLS);
     // Original values preserved
     assertThat(withResolution.packagesWithInit()).isEqualTo(baseTelemetry.packagesWithInit());
