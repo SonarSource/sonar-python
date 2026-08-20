@@ -3356,12 +3356,36 @@ public class TypeInferenceV2Test {
   }
 
   @Test
-  void import_unknown_httpx_client() {
+  void import_httpx_client() {
     var statement = lastExpression("""
       import httpx
       httpx.Client()
       """);
-    assertThat(statement.typeV2()).isEqualTo(PythonType.UNKNOWN);
+    PythonType clientType = PROJECT_LEVEL_TYPE_TABLE.getType("httpx.Client");
+    assertThat(clientType).isNotEqualTo(PythonType.UNKNOWN);
+    assertThat(statement.typeV2()).is(TypesTestUtils.objectTypeOf(clientType));
+  }
+
+  @Test
+  void import_httpx_async_client() {
+    var statement = lastExpression("""
+      import httpx
+      httpx.AsyncClient()
+      """);
+    PythonType asyncClientType = PROJECT_LEVEL_TYPE_TABLE.getType("httpx.AsyncClient");
+    assertThat(asyncClientType).isNotEqualTo(PythonType.UNKNOWN);
+    assertThat(statement.typeV2()).is(TypesTestUtils.objectTypeOf(asyncClientType));
+  }
+
+  @Test
+  void import_confluent_kafka_aio_consumer() {
+    var statement = lastExpression("""
+      from confluent_kafka.aio import AIOConsumer
+      AIOConsumer({})
+      """);
+    PythonType aioConsumerType = PROJECT_LEVEL_TYPE_TABLE.getType("confluent_kafka.aio.AIOConsumer");
+    assertThat(aioConsumerType).isNotEqualTo(PythonType.UNKNOWN);
+    assertThat(statement.typeV2()).is(TypesTestUtils.objectTypeOf(aioConsumerType));
   }
 
   @Test

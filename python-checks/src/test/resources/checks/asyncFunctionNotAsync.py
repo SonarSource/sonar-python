@@ -189,3 +189,92 @@ async def async_comprehension():
 
 async def sync_comprehension(): # Noncompliant
     return [something for something in async_iterable()]
+
+
+# httpx.AsyncClient event hooks - coroutine callbacks are required
+import httpx
+
+async def validate_response(response: httpx.Response) -> None:  # Compliant - registered as AsyncClient hook
+    validate_url(response.url)
+
+async def validate_request(request: httpx.Request) -> None:  # Compliant - registered as AsyncClient hook
+    validate_headers(request.headers)
+
+async def both_hooks(response: httpx.Response) -> None:  # Compliant - used in both hooks
+    do_something()
+
+async_client = httpx.AsyncClient(
+    event_hooks={
+        "request": [validate_request, both_hooks],
+        "response": [validate_response, both_hooks],
+    }
+)
+
+class CustomAsyncClient(httpx.AsyncClient):
+    pass
+
+async def subclass_hook(response: httpx.Response) -> None:  # Compliant - registered as subclass of AsyncClient hook
+    validate_url(response.url)
+
+CustomAsyncClient(event_hooks={"response": [subclass_hook]})
+
+async def sync_client_hook(response: httpx.Response) -> None:  # Noncompliant
+    validate_url(response.url)
+
+sync_client = httpx.Client(
+    event_hooks={"response": [sync_client_hook]}
+)
+
+async def unrelated_hook(response) -> None:  # Noncompliant
+    validate_url(response.url)
+
+async def hook_no_event_hooks_kwarg(response) -> None:  # Noncompliant
+    validate_url(response.url)
+
+httpx.AsyncClient(timeout=hook_no_event_hooks_kwarg)  # no event_hooks kwarg
+
+# FP: function is an event hook, but event_hooks is passed as a variable; variable indirection cannot be tracked
+async def hook_via_variable(response) -> None:  # Noncompliant
+    validate_url(response.url)
+
+hooks_dict = {"response": [hook_via_variable]}
+httpx.AsyncClient(event_hooks=hooks_dict)
+
+
+# confluent_kafka.aio.AIOConsumer.subscribe - coroutine callbacks are required
+from confluent_kafka.aio import AIOConsumer
+
+consumer = AIOConsumer({"bootstrap.servers": "localhost:9092", "group.id": "mygroup"})
+
+async def on_assign_handler(consumer, partitions) -> None:  # Compliant - registered as AIOConsumer.subscribe callback
+    logger.info("Partitions assigned: %s", partitions)
+
+async def on_revoke_handler(consumer, partitions) -> None:  # Compliant - registered as AIOConsumer.subscribe callback
+    logger.info("Partitions revoked: %s", partitions)
+
+async def on_lost_handler(consumer, partitions) -> None:  # Compliant - registered as AIOConsumer.subscribe callback
+    logger.info("Partitions lost: %s", partitions)
+
+await consumer.subscribe(
+    ["topic"],
+    on_assign=on_assign_handler,
+    on_revoke=on_revoke_handler,
+    on_lost=on_lost_handler,
+)
+
+async def unrelated_subscribe_callback(consumer, partitions) -> None:  # Noncompliant
+    logger.info("Partitions: %s", partitions)
+
+unknown_obj.subscribe(on_assign=unrelated_subscribe_callback)
+
+# FP: callback is passed positionally as on_assign, but we only detect keyword arguments
+async def positional_subscribe_callback(consumer, partitions) -> None:  # Noncompliant
+    logger.info("Partitions: %s", partitions)
+
+await consumer.subscribe(["topic"], positional_subscribe_callback)
+
+# Passed via an unknown keyword argument (not on_assign/on_revoke/on_lost)
+async def unknown_kwarg_subscribe_callback(consumer, partitions) -> None:  # Noncompliant
+    logger.info("Partitions: %s", partitions)
+
+await consumer.subscribe(["topic"], on_other=unknown_kwarg_subscribe_callback)

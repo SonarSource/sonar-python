@@ -1,0 +1,1 @@
+from confluent_kafka.aio import AIOConsumer

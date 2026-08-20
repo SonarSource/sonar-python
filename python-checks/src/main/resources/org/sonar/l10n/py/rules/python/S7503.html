@@ -16,6 +16,8 @@ non-blocking operations (like I/O), or employs other asynchronous features like 
 </ul>
 <h2>How to fix it</h2>
 <p>Either remove the <code>async</code> keyword, or start using the appropriate asynchronous features.</p>
+<p>An async method may also need to remain awaitable to fulfil an inherited contract. In that case, make the contract explicit in the code, for
+example by inheriting from the relevant base class or protocol and marking the method as an override.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -40,6 +42,45 @@ async def another_function(): ...
 
 async def my_function():  # Compliant
     return await another_function()
+</pre>
+<h2>Exceptions</h2>
+<p>This rule does not raise an issue in the following cases:</p>
+<ul>
+  <li><strong>Abstract methods</strong>: Methods decorated with <code>@abstractmethod</code> or <code>@abc.abstractmethod</code> are often async to
+  signal an async contract for subclasses, even if the abstract body itself is empty.</li>
+  <li><strong>Dunder methods</strong>: Special methods such as <code>__aenter__</code>, <code>__aexit__</code>, or <code>__anext__</code> form part of
+  the async protocol interface and must be <code>async</code> regardless of their body.</li>
+  <li><strong>Decorated functions</strong>: Decorators may change the function’s behavior in ways that make the <code>async</code> keyword meaningful
+  (e.g., framework route handlers).</li>
+  <li><strong>Overriding methods</strong>: A method that overrides an async method from a parent class may legitimately be async to respect the
+  parent’s interface.</li>
+  <li><strong>Trivial bodies</strong>: Functions whose body consists only of <code>pass</code>, <code>…​</code>, or <code>raise</code> statements are
+  considered stubs or placeholders and are not flagged.</li>
+  <li><strong>Framework-required coroutine callbacks</strong>: Some frameworks require callbacks to be coroutines even when they don’t internally use
+  <code>await</code>. This rule recognizes the following cases:
+    <ul>
+      <li><code>httpx.AsyncClient</code> event hooks registered under the <code>"request"</code> or <code>"response"</code> keys of the
+      <code>event_hooks</code> parameter.</li>
+      <li><code>confluent_kafka.aio.AIOConsumer.subscribe</code> callbacks passed as <code>on_assign</code>, <code>on_revoke</code>, or
+      <code>on_lost</code> keyword arguments.</li>
+    </ul></li>
+</ul>
+<pre>
+import httpx
+
+async def log_request(request: httpx.Request) -&gt; None:  # Compliant - required coroutine callback
+    print(f"Request: {request.method} {request.url}")
+
+client = httpx.AsyncClient(event_hooks={"request": [log_request]})
+</pre>
+<pre>
+from confluent_kafka.aio import AIOConsumer
+
+async def on_assign(consumer, partitions) -&gt; None:  # Compliant - required coroutine callback
+    print(f"Assigned: {partitions}")
+
+consumer = AIOConsumer({"bootstrap.servers": "localhost:9092", "group.id": "mygroup"})
+await consumer.subscribe(["topic"], on_assign=on_assign)
 </pre>
 <h2>Resources</h2>
 <h3>Articles &amp; blog posts</h3>
