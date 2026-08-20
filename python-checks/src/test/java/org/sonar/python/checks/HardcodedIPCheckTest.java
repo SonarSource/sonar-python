@@ -22,7 +22,13 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 class HardcodedIPCheckTest {
 
   @Test
-  void test() {
+  void reports_hardcoded_ips_in_non_test_files() {
     PythonCheckVerifier.verify("src/test/resources/checks/hardcodedIP.py", new HardcodedIPCheck());
+  }
+
+  /** Verifies likely test files do not report hardcoded IP addresses. */
+  @Test
+  void skips_likely_test_files() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/hardcodedIPDjango.py", new HardcodedIPCheck());
   }
 }

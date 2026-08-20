@@ -68,6 +68,9 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, ctx -> {
+      if (ctx.isLikelyTestFile()) {
+        return;
+      }
       StringLiteral stringLiteral = (StringLiteral) ctx.syntaxNode();
       if (isMultilineString(stringLiteral) || isVersionLiteral(stringLiteral)) {
         return;
