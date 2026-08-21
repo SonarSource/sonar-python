@@ -318,3 +318,9 @@ def bound_and_unbound_methods():
 def torch():
     import torch
     torch.cat(torch.Tensor(), axis=-1)
+
+def pandas():
+    import pandas as pd
+    pd.testing.assert_index_equal(left_index, right_index, check_names=False)
+    df = pd.DataFrame()
+    df.stack("MASTER_FND_CODE", future_stack=True)

@@ -54,7 +54,7 @@
 skipna
 builtins.bool"builtins.bool *
 kwargs
-AnyÍÌ
+Anyó™
 Categorical*pandas.core.arrays.categorical.Categorical"&pandas.core.arrays.base.ExtensionArray*Ý
 __init__3pandas.core.arrays.categorical.Categorical.__init__"
 None*b
@@ -119,10 +119,6 @@ DUnion[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]P
 copy
 builtins.bool"builtins.bool *¹
 size/pandas.core.arrays.categorical.Categorical.size"
-builtins.int"builtins.int*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*Á
-itemsize3pandas.core.arrays.categorical.Categorical.itemsize"
 builtins.int"builtins.int*b
 selfX
 *pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*š
@@ -195,6 +191,50 @@ as_ordered5pandas.core.arrays.categorical.Categorical.as_ordered"X
 selfX
 *pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*…
 as_unordered7pandas.core.arrays.categorical.Categorical.as_unordered"X
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
+selfX
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*¬
+set_categories9pandas.core.arrays.categorical.Categorical.set_categories"X
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
+selfX
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
+new_categories
+Any*V
+orderedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *,
+rename
+builtins.bool"builtins.bool *¬
+rename_categories<pandas.core.arrays.categorical.Categorical.rename_categories"X
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
+selfX
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
+new_categories
+Any*†
+reorder_categories=pandas.core.arrays.categorical.Categorical.reorder_categories"X
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
+selfX
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
+new_categories
+Any*V
+orderedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *¦
+add_categories9pandas.core.arrays.categorical.Categorical.add_categories"X
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
+selfX
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
+new_categories
+Any*¦
+remove_categories<pandas.core.arrays.categorical.Categorical.remove_categories"X
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
+selfX
+*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
+removals
+Any*
+remove_unused_categoriesCpandas.core.arrays.categorical.Categorical.remove_unused_categories"X
 *pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
 selfX
 *pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*K
@@ -348,9 +388,7 @@ Hnumpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]
 builtins.str"builtins.str *N
 view/pandas.core.arrays.categorical.Categorical.view*
 self*
-dtype *I
-to_dense3pandas.core.arrays.categorical.Categorical.to_dense*
-self*m
+dtype *m
 fillna1pandas.core.arrays.categorical.Categorical.fillna*
 self*
 value *
@@ -379,18 +417,6 @@ allow_fill
 builtins.bool"builtins.bool *
 
 fill_value
-Any *
-take_nd2pandas.core.arrays.categorical.Categorical.take_nd"
-Any*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-indexer
-Any*0
-
-allow_fill
-builtins.bool"builtins.bool *
-
-fill_value
 Any *·
 __len__2pandas.core.arrays.categorical.Categorical.__len__"
 builtins.int"builtins.int*ZX
@@ -417,19 +443,10 @@ fill_value
 selfX
 *pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*,
 skipna
-builtins.bool"builtins.bool *Ò
-mode/pandas.core.arrays.categorical.Categorical.mode"
-Any*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*,
-dropna
 builtins.bool"builtins.bool *E
 unique1pandas.core.arrays.categorical.Categorical.unique*
 self*P
 equals1pandas.core.arrays.categorical.Categorical.equals*
-self*	
-other*`
-is_dtype_equal9pandas.core.arrays.categorical.Categorical.is_dtype_equal*
 self*	
 other*I
 describe3pandas.core.arrays.categorical.Categorical.describe*
@@ -442,198 +459,11 @@ fill_value
 isin/pandas.core.arrays.categorical.Categorical.isin*
 self*
 
-values2‘
-set_categories9pandas.core.arrays.categorical.Categorical.set_categoriesú
-set_categories9pandas.core.arrays.categorical.Categorical.set_categories"
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*
-ordered
-Any *,
-rename
-builtins.bool"builtins.bool *G
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadXÌ
-set_categories9pandas.core.arrays.categorical.Categorical.set_categories"X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*
-ordered
-Any *,
-rename
-builtins.bool"builtins.bool *I
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadX÷
-set_categories9pandas.core.arrays.categorical.Categorical.set_categories"ž
-6Union[pandas.core.arrays.categorical.Categorical,None]X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*
-ordered
-Any *,
-rename
-builtins.bool"builtins.bool *-
-inplace
-builtins.bool"builtins.bool 0:typing.overloadX2×	
-rename_categories<pandas.core.arrays.categorical.Categorical.rename_categoriesº
-rename_categories<pandas.core.arrays.categorical.Categorical.rename_categories"
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*G
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadXŒ
-rename_categories<pandas.core.arrays.categorical.Categorical.rename_categories"X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*I
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadX·
-rename_categories<pandas.core.arrays.categorical.Categorical.rename_categories"ž
-6Union[pandas.core.arrays.categorical.Categorical,None]X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*-
-inplace
-builtins.bool"builtins.bool 0:typing.overloadX2§
-
-reorder_categories=pandas.core.arrays.categorical.Categorical.reorder_categoriesÔ
-reorder_categories=pandas.core.arrays.categorical.Categorical.reorder_categories"
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*
-ordered
-Any *G
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadX¦
-reorder_categories=pandas.core.arrays.categorical.Categorical.reorder_categories"X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*
-ordered
-Any *I
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadXÑ
-reorder_categories=pandas.core.arrays.categorical.Categorical.reorder_categories"ž
-6Union[pandas.core.arrays.categorical.Categorical,None]X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*
-ordered
-Any *-
-inplace
-builtins.bool"builtins.bool 0:typing.overloadX2¿	
-add_categories9pandas.core.arrays.categorical.Categorical.add_categories´
-add_categories9pandas.core.arrays.categorical.Categorical.add_categories"
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*G
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadX†
-add_categories9pandas.core.arrays.categorical.Categorical.add_categories"X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*I
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadX±
-add_categories9pandas.core.arrays.categorical.Categorical.add_categories"ž
-6Union[pandas.core.arrays.categorical.Categorical,None]X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-new_categories
-Any*-
-inplace
-builtins.bool"builtins.bool 0:typing.overloadX2Å	
-remove_categories<pandas.core.arrays.categorical.Categorical.remove_categories´
-remove_categories<pandas.core.arrays.categorical.Categorical.remove_categories"
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-removals
-Any*G
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadX†
-remove_categories<pandas.core.arrays.categorical.Categorical.remove_categories"X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-removals
-Any*I
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadX±
-remove_categories<pandas.core.arrays.categorical.Categorical.remove_categories"ž
-6Union[pandas.core.arrays.categorical.Categorical,None]X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*
-removals
-Any*-
-inplace
-builtins.bool"builtins.bool 0:typing.overloadX2¸	
-remove_unused_categoriesCpandas.core.arrays.categorical.Categorical.remove_unused_categories«
-remove_unused_categoriesCpandas.core.arrays.categorical.Categorical.remove_unused_categories"
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*G
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadXý
-remove_unused_categoriesCpandas.core.arrays.categorical.Categorical.remove_unused_categories"X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*I
-inplace:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadX¨
-remove_unused_categoriesCpandas.core.arrays.categorical.Categorical.remove_unused_categories"ž
-6Union[pandas.core.arrays.categorical.Categorical,None]X
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical
-None*b
-selfX
-*pandas.core.arrays.categorical.Categorical"*pandas.core.arrays.categorical.Categorical*-
-inplace
-builtins.bool"builtins.bool 0:typing.overloadXrq
+valuesrq
 __array_priority__=pandas.core.arrays.categorical.Categorical.__array_priority__
 builtins.int"builtins.intre
 to_list2pandas.core.arrays.categorical.Categorical.to_list&
-builtins.ellipsis"builtins.ellipsisæ.
+builtins.ellipsis"builtins.ellipsis˜-
 DatetimeArray*pandas.core.arrays.datetimes.DatetimeArray"6pandas.core.arrays.datetimelike.DatetimeLikeArrayMixin"+pandas.core.arrays.datetimelike.TimelikeOps"+pandas.core.arrays.datetimelike.DatelikeOps*™
 __init__3pandas.core.arrays.datetimes.DatetimeArray.__init__"
 None*b
@@ -746,11 +576,6 @@ month_name5pandas.core.arrays.datetimes.DatetimeArray.month_name*
 builtins.ellipsis"builtins.ellipsisrk
 
 nanosecond5pandas.core.arrays.datetimes.DatetimeArray.nanosecond&
-builtins.ellipsis"builtins.ellipsisrk
-
-weekofyear5pandas.core.arrays.datetimes.DatetimeArray.weekofyear&
-builtins.ellipsis"builtins.ellipsisr_
-week/pandas.core.arrays.datetimes.DatetimeArray.week&
 builtins.ellipsis"builtins.ellipsisri
 	dayofweek4pandas.core.arrays.datetimes.DatetimeArray.dayofweek&
 builtins.ellipsis"builtins.ellipsisre
@@ -777,10 +602,12 @@ weekofyear5pandas.core.arrays.datetimes.DatetimeArray.weekofyear&
 is_year_end6pandas.core.arrays.datetimes.DatetimeArray.is_year_end&
 builtins.ellipsis"builtins.ellipsisro
 is_leap_year7pandas.core.arrays.datetimes.DatetimeArray.is_leap_year&
-builtins.ellipsis"builtins.ellipsisÂ
-IntegerArray'pandas.core.arrays.integer.IntegerArray")pandas.core.arrays.masked.BaseMaskedArray*@
-dtype-pandas.core.arrays.integer.IntegerArray.dtype*
-self*ø
+builtins.ellipsis"builtins.ellipsis„	
+IntegerArray'pandas.core.arrays.integer.IntegerArray")pandas.core.arrays.masked.BaseMaskedArray*
+dtype-pandas.core.arrays.integer.IntegerArray.dtype"T
+(pandas.core.arrays.integer._IntegerDtype"(pandas.core.arrays.integer._IntegerDtype*\
+selfR
+'pandas.core.arrays.integer.IntegerArray"'pandas.core.arrays.integer.IntegerArray0:builtins.property`*ø
 __init__0pandas.core.arrays.integer.IntegerArray.__init__"
 None*\
 selfR
@@ -812,7 +639,7 @@ weekofyear5pandas.core.arrays.datetimes.DatetimeArray.weekofyear&
 dtype
 Any**
 copy
-builtins.bool"builtins.bool óc
+builtins.bool"builtins.bool c
 IntervalArray)pandas.core.arrays.interval.IntervalArray"#pandas._libs.interval.IntervalMixin"&pandas.core.arrays.base.ExtensionArray*‡
 __new__1pandas.core.arrays.interval.IntervalArray.__new__"
 Any*›
@@ -1079,9 +906,7 @@ Hnumpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]
 Any"pandas.core.indexes.base.Index9
 numpy.ndarray[Any,Any]
 Any
-Any"numpy.ndarray0:typing.overloadXrT
-ndim.pandas.core.arrays.interval.IntervalArray.ndim
-builtins.int"builtins.intrd
+Any"numpy.ndarray0:typing.overloadXrd
 can_hold_na5pandas.core.arrays.interval.IntervalArray.can_hold_na
 builtins.bool"builtins.bool³
 PandasArray%pandas.core.arrays.numpy_.PandasArray"&pandas.core.arrays.base.ExtensionArray")pandas.core.arrays.base.ExtensionOpsMixin"&numpy.lib.mixins.NDArrayOperatorsMixin*
@@ -1093,7 +918,7 @@ Hnumpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]
 
 inputs*
 
-kwargs°
+kwargsè 
 PeriodArray%pandas.core.arrays.period.PeriodArray"6pandas.core.arrays.datetimelike.DatetimeLikeArrayMixin"+pandas.core.arrays.datetimelike.DatelikeOps*Š
 __init__.pandas.core.arrays.period.PeriodArray.__init__"
 None*X
@@ -1106,9 +931,11 @@ Hnumpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]
 dtype
 Any **
 copy
-builtins.bool"builtins.bool *>
-dtype+pandas.core.arrays.period.PeriodArray.dtype*
-self*ç
+builtins.bool"builtins.bool *õ
+dtype+pandas.core.arrays.period.PeriodArray.dtype"N
+%pandas.core.dtypes.dtypes.PeriodDtype"%pandas.core.dtypes.dtypes.PeriodDtype*X
+selfN
+%pandas.core.arrays.period.PeriodArray"%pandas.core.arrays.period.PeriodArray0:builtins.property`*ç
 	__array__/pandas.core.arrays.period.PeriodArray.__array__"9
 numpy.ndarray[Any,Any]
 Any
@@ -1196,7 +1023,7 @@ weekofyear0pandas.core.arrays.period.PeriodArray.weekofyear
 days_in_month3pandas.core.arrays.period.PeriodArray.days_in_month
 builtins.int"builtins.intr^
 daysinmonth1pandas.core.arrays.period.PeriodArray.daysinmonth
-builtins.int"builtins.int®;
+builtins.int"builtins.int¦+
 SparseArray+pandas.core.arrays.sparse.array.SparseArray"&pandas.core.arrays.base.ExtensionArray")pandas.core.arrays.base.ExtensionOpsMixin*ç
 __init__4pandas.core.arrays.sparse.array.SparseArray.__init__"
 None*d
@@ -1273,61 +1100,14 @@ fill_value
 fill_value
 Any *F
 unique2pandas.core.arrays.sparse.array.SparseArray.unique*
-self*÷
-	factorize5pandas.core.arrays.sparse.array.SparseArray.factorize"ä
-ITuple[numpy.ndarray[Any,Any],pandas.core.arrays.sparse.array.SparseArray]9
-numpy.ndarray[Any,Any]
-Any
-Any"numpy.ndarrayZ
-+pandas.core.arrays.sparse.array.SparseArray"+pandas.core.arrays.sparse.array.SparseArray*d
-selfZ
-+pandas.core.arrays.sparse.array.SparseArray"+pandas.core.arrays.sparse.array.SparseArray*/
-na_sentinel
-builtins.int"builtins.int *5
-use_na_sentinel
-builtins.bool"builtins.bool *å
+self*å
 value_counts8pandas.core.arrays.sparse.array.SparseArray.value_counts"
 Any*d
 selfZ
 +pandas.core.arrays.sparse.array.SparseArray"+pandas.core.arrays.sparse.array.SparseArray*,
 dropna
 builtins.bool"builtins.bool *J
-__getitem__7pandas.core.arrays.sparse.array.SparseArray.__getitem__* * *€
-
-take0pandas.core.arrays.sparse.array.SparseArray.take"Z
-+pandas.core.arrays.sparse.array.SparseArray"+pandas.core.arrays.sparse.array.SparseArray*d
-selfZ
-+pandas.core.arrays.sparse.array.SparseArray"+pandas.core.arrays.sparse.array.SparseArray*¶
-indices¨
-§TypeAlias[Union[typing.Sequence[builtins.int],typing.Sequence[numpy.integer[Any]],TypeAlias[numpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]]]]Ý
-œUnion[typing.Sequence[builtins.int],typing.Sequence[numpy.integer[Any]],TypeAlias[numpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]]]N
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequenced
-#typing.Sequence[numpy.integer[Any]],
-numpy.integer[Any]
-Any"numpy.integer"typing.Sequenceƒ
-STypeAlias[numpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]]†
-Hnumpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]
-Any¡
-5numpy.dtype[numpy._typing._array_like._ScalarType_co][
-(numpy._typing._array_like._ScalarType_co
-numpy.generic"numpy.generic"numpy.generic"numpy.dtype"numpy.ndarray"!numpy._typing._array_like.NDArray"pandas._typing.TakeIndexer*0
-
-allow_fill
-builtins.bool"builtins.bool *
-
-fill_value
-Any *ˆ
-searchsorted8pandas.core.arrays.sparse.array.SparseArray.searchsorted"
-Any*d
-selfZ
-+pandas.core.arrays.sparse.array.SparseArray"+pandas.core.arrays.sparse.array.SparseArray*
-v
-Any*(
-side
-builtins.str"builtins.str *
-sorter
-Any *B
+__getitem__7pandas.core.arrays.sparse.array.SparseArray.__getitem__* * *B
 copy0pandas.core.arrays.sparse.array.SparseArray.copy*
 self*í
 astype2pandas.core.arrays.sparse.array.SparseArray.astype"
