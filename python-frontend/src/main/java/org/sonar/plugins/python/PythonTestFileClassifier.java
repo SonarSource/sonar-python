@@ -41,8 +41,12 @@ public final class PythonTestFileClassifier {
 
   private static final String[] TEST_FILE_PATH_PATTERNS = {
     "**/test/**", "**/tests/**", "**/testing/**",
+    "**/Test/**", "**/Tests/**", "**/Testing/**",
     "**/TEST/**", "**/TESTS/**", "**/TESTING/**",
-    "**/*test*", "*test*", "**/*Test*", "*Test*", "**/*TEST*", "*TEST*"
+    "**/conftest.py",
+    "**/test_*.py",
+    "**/*_test.py", "**/*_tests.py",
+    "**/*doctest.py", "**/*doctests.py"
   };
   private static final Set<String> TEST_MODULE_ROOTS = Set.of(
     "pytest", "unittest", "doctest", "hypothesis", "robot", "behave", "pytest_bdd", "nose", "nose2",
@@ -62,7 +66,7 @@ public final class PythonTestFileClassifier {
    * @return whether the file is likely test content
    */
   public boolean looksLikeTestFile(InputFile inputFile, @Nullable FileInput tree) {
-    return delegate.looksLikeTestFile(inputFile, new PythonContext(tree));
+    return delegate.looksLikeTestFile(inputFile, new PythonContext(inputFile, tree));
   }
 
   /**
@@ -75,14 +79,19 @@ public final class PythonTestFileClassifier {
   }
 
   private static boolean hasTestContentContext(TestFileClassifier.Context context) {
-    return context instanceof PythonContext pythonContext
-      && hasTestContent(pythonContext.tree);
+    PythonContext pythonContext = (PythonContext) context;
+    String fileName = fileName(pythonContext.inputFile.relativePath());
+    return isUppercaseTestFileName(fileName)
+      || isCamelCaseTestFileName(fileName)
+      || hasTestContent(pythonContext.tree);
   }
 
   private static final class PythonContext implements TestFileClassifier.Context {
+    private final InputFile inputFile;
     private final FileInput tree;
 
-    private PythonContext(@Nullable FileInput tree) {
+    private PythonContext(InputFile inputFile, @Nullable FileInput tree) {
+      this.inputFile = inputFile;
       this.tree = tree;
     }
   }
@@ -96,20 +105,25 @@ public final class PythonTestFileClassifier {
     if (statements == null) {
       return false;
     }
-    int functionCount = 0;
-    int testFunctionCount = 0;
+    int declarationCount = 0;
+    int testDeclarationCount = 0;
     for (Statement statement : statements.statements()) {
-      if (isTestFrameworkImport(statement) || isTestClass(statement)) {
+      if (isTestFrameworkImport(statement)) {
         return true;
       }
       if (statement instanceof FunctionDef functionDef) {
-        functionCount++;
+        declarationCount++;
         if (isTestShaped(functionDef.name().name())) {
-          testFunctionCount++;
+          testDeclarationCount++;
+        }
+      } else if (statement instanceof ClassDef classDef) {
+        declarationCount++;
+        if (isTestShaped(classDef.name().name())) {
+          testDeclarationCount++;
         }
       }
     }
-    return testFunctionCount * 2 > functionCount;
+    return testDeclarationCount >= 2 && testDeclarationCount * 2 > declarationCount;
   }
 
   /**
@@ -166,13 +180,21 @@ public final class PythonTestFileClassifier {
       && (name.length() == 4 || !Character.isLowerCase(name.charAt(4)));
   }
 
-  /**
-   * Determines whether a statement declares a top-level test class.
-   * @param statement top-level statement to inspect
-   * @return whether the statement is a test class declaration
-   */
-  private static boolean isTestClass(Statement statement) {
-    return statement instanceof ClassDef classDef
-      && isTestShaped(classDef.name().name());
+  private static boolean isUppercaseTestFileName(String fileName) {
+    return fileName.startsWith("Test")
+      && fileName.endsWith(".py")
+      && (fileName.length() == 7 || !Character.isLowerCase(fileName.charAt(4)));
   }
+
+  private static boolean isCamelCaseTestFileName(String fileName) {
+    return fileName.startsWith("test")
+      && fileName.endsWith(".py")
+      && Character.isUpperCase(fileName.charAt(4));
+  }
+
+  private static String fileName(String path) {
+    int fileNameStart = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\')) + 1;
+    return path.substring(fileNameStart);
+  }
+
 }

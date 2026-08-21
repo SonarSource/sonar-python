@@ -41,16 +41,46 @@ class PythonTestFileClassifierTest {
   @ValueSource(strings = {
     "tests/helpers.py",
     "src/TESTING/factories.py",
-    "src\\test\\conftest.py",
-    "src/TestCase.py",
-    "src/latest.py"
+    "src/Test/helpers.py",
+    "src/Tests/helpers.py",
+    "src/Testing/factories.py",
+    "src/test/conftest.py",
+    "conftest.py",
+    "src/test_module.py",
+    "test_module.py",
+    "src/testExample.py",
+    "src/Test.py",
+    "src/TestModule.py",
+    "src/module_test.py",
+    "module_test.py",
+    "src/module_tests.py",
+    "module_tests.py",
+    "src/module_doctest.py",
+    "module_doctest.py",
+    "src/module_doctests.py",
+    "module_doctests.py"
   })
-  void path_signals_include_test_support_files_and_aggressive_filename_matches(String path) {
+  void path_signals_include_test_support_files_and_boundary_aware_filenames(String path) {
     assertThat(classifier().looksLikeTestFile(file(path), null)).isTrue();
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"", "src/production.py", "src/module.py", "src/latest/module.py"})
+  @ValueSource(strings = {
+    "",
+    "src/production.py",
+    "src/module.py",
+    "src/latest/module.py",
+    "src/greatest.py",
+    "src/latest_adopted_release_filter.py",
+    "src/primetest.py",
+    "src/stubtest.py",
+    "src/souptest.py",
+    "src/send_test_email.py",
+    "src/testExample.txt",
+    "src/testexample.py",
+    "src/Testing.py",
+    "src/Testimonial.py"
+  })
   void non_test_paths_are_not_classified_without_an_ast_signal(String path) {
     assertThat(classifier().looksLikeTestFile(file(path), null)).isFalse();
   }
@@ -62,6 +92,8 @@ class PythonTestFileClassifierTest {
 
     assertThat(new PythonTestFileClassifier(configuration)
       .looksLikeTestFile(file("src/production.py"), parse("import pytest\n"))).isFalse();
+    assertThat(new PythonTestFileClassifier(configuration)
+      .looksLikeTestFile(file("src/TestModule.py"), null)).isFalse();
   }
 
   @ParameterizedTest
@@ -112,19 +144,37 @@ class PythonTestFileClassifierTest {
   }
 
   @Test
-  void test_shaped_top_level_declarations_are_detected() {
-    assertThat(classifier().looksLikeTestFile(file("src/production.py"), parse("class TestService:\n    pass\n"))).isTrue();
-    assertThat(classifier().looksLikeTestFile(file("src/production.py"), parse("class test_service:\n    pass\n"))).isTrue();
+  void test_shaped_top_level_declarations_require_a_majority_of_two_or_more() {
+    assertThat(classifier().looksLikeTestFile(file("src/production.py"), parse("class TestService:\n    pass\n"))).isFalse();
+    assertThat(classifier().looksLikeTestFile(file("src/production.py"), parse("def test():\n    pass\n"))).isFalse();
     assertThat(classifier().looksLikeTestFile(file("src/production.py"), parse("""
-      def Test():
+      class TestService:
           pass
-      async def TEST_first():
+      def test_synchronous():
           pass
-      def test_second():
+      async def test_asynchronous():
           pass
-      def helper():
+      class ProductionService:
           pass
       """))).isTrue();
+  }
+
+  @Test
+  void test_shaped_declarations_are_counted_with_other_top_level_classes() {
+    assertThat(classifier().looksLikeTestFile(file("src/production.py"), parse("""
+      class Formatter:
+          pass
+      class HtmlFormatter:
+          pass
+      class TextFormatter:
+          pass
+      class JsonFormatter:
+          pass
+      class XmlFormatter:
+          pass
+      def test():
+          pass
+      """))).isFalse();
   }
 
   @Test
@@ -141,11 +191,21 @@ class PythonTestFileClassifierTest {
   }
 
   @Test
-  void function_ratio_requires_a_strict_majority() {
+  void test_shaped_declaration_ratio_requires_a_strict_majority() {
     assertThat(classifier().looksLikeTestFile(file("src/production.py"), parse("""
       def test_first():
           pass
       def helper():
+          pass
+      """))).isFalse();
+    assertThat(classifier().looksLikeTestFile(file("src/production.py"), parse("""
+      def test_first():
+          pass
+      def test_second():
+          pass
+      def first_helper():
+          pass
+      def second_helper():
           pass
       """))).isFalse();
     assertThat(classifier().looksLikeTestFile(file("src/production.py"), parse("pass\n"))).isFalse();
