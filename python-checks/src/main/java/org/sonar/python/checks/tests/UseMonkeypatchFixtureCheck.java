@@ -131,8 +131,8 @@ public class UseMonkeypatchFixtureCheck extends PythonSubscriptionCheck {
       .filter("sys.path"::equals)
       .isPresent()
       || (expression instanceof QualifiedExpression qualifiedExpression
-        && TypeMatchers.isType("sys").isTrueFor(qualifiedExpression.qualifier(), ctx)
-        && "path".equals(qualifiedExpression.name().name()));
+      && TypeMatchers.isType("sys").isTrueFor(qualifiedExpression.qualifier(), ctx)
+      && "path".equals(qualifiedExpression.name().name()));
   }
 
   private static boolean isManualModuleLevelAttributeAssignment(Expression expression, FunctionDef testFunction) {
@@ -151,12 +151,12 @@ public class UseMonkeypatchFixtureCheck extends PythonSubscriptionCheck {
   private static Expression leftmostExpression(Expression expression) {
     Expression current = Expressions.removeParentheses(expression);
     while (true) {
-      if (current instanceof QualifiedExpression qualifiedExpression) {
-        current = Expressions.removeParentheses(qualifiedExpression.qualifier());
-      } else if (current instanceof SubscriptionExpression subscriptionExpression) {
-        current = Expressions.removeParentheses(subscriptionExpression.object());
-      } else {
-        return current;
+      switch (current) {
+        case QualifiedExpression qualifiedExpression -> current = Expressions.removeParentheses(qualifiedExpression.qualifier());
+        case SubscriptionExpression subscriptionExpression -> current = Expressions.removeParentheses(subscriptionExpression.object());
+        default -> {
+          return current;
+        }
       }
     }
   }

@@ -174,13 +174,12 @@ public class UnprocessedTemplateStringCheck extends PythonSubscriptionCheck {
     call.arguments().forEach(arg -> {
       if (arg instanceof RegularArgument regArg) {
         Expression argExpression = regArg.expression();
-        if (argExpression instanceof ListLiteral listLiteral) {
-          listLiteral.elements().expressions().forEach(element -> raiseIfIsUnprocessedTemplateString(ctx, element));
-        } else if (argExpression instanceof Tuple tuple) {
-          tuple.elements().forEach(element -> raiseIfIsUnprocessedTemplateString(ctx, element));
-        } else {
-          // We still raise if there is a template string directly passed to .join
-          raiseIfIsUnprocessedTemplateString(ctx, argExpression);
+        switch (argExpression) {
+          case ListLiteral listLiteral -> listLiteral.elements().expressions().forEach(element -> raiseIfIsUnprocessedTemplateString(ctx, element));
+          case Tuple tuple -> tuple.elements().forEach(element -> raiseIfIsUnprocessedTemplateString(ctx, element));
+          default ->
+            // We still raise if there is a template string directly passed to .join
+            raiseIfIsUnprocessedTemplateString(ctx, argExpression);
         }
       }
     });

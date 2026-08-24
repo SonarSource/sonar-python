@@ -71,12 +71,10 @@ public abstract class Scanner {
       allTasks.join();
     } catch (CompletionException e) {
       var cause = e.getCause();
-      if (cause instanceof RuntimeException runtimeException) {
-        throw runtimeException;
-      } else if (cause instanceof Error error) {
-        throw error;
-      } else {
-        throw e;
+      switch (cause) {
+        case RuntimeException runtimeException -> throw runtimeException;
+        case Error error -> throw error;
+        case null, default -> throw e;
       }
     } finally {
       executor.shutdown();
@@ -153,7 +151,7 @@ public abstract class Scanner {
       return context.config()
         .getInt(THREADS_PROPERTY_NAME)
         .map(threads -> threads < 1 ? 1 : threads)
-        .orElse(Math.max(minNumOfThreads, Math.min(availableProcessors, MAX_NUMBER_OF_THREADS)));
+        .orElse(Math.clamp(availableProcessors, minNumOfThreads, MAX_NUMBER_OF_THREADS));
     }
     return 1;
   }

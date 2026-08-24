@@ -105,25 +105,31 @@ public class CallGraphCollector {
   }
 
   private static Optional<String> getFqn(PythonType type) {
-    if (type instanceof FunctionType functionType) {
-      return Optional.of(functionType.fullyQualifiedName());
-    } else if (type instanceof ModuleType moduleType) {
-      return Optional.of(moduleType.fullyQualifiedName());
-    } else if (type instanceof UnresolvedImportType unresolvedImportType) {
-      return Optional.of(unresolvedImportType.importPath());
-    } else if (type instanceof UnionType unionType) {
-      Set<String> unionFqnSet = unionType.candidates().stream()
-        .flatMap(candidate -> getFqn(candidate).stream())
-        .collect(Collectors.toSet());
+    switch (type) {
+      case FunctionType functionType -> {
+        return Optional.of(functionType.fullyQualifiedName());
+      }
+      case ModuleType moduleType -> {
+        return Optional.of(moduleType.fullyQualifiedName());
+      }
+      case UnresolvedImportType(String importPath) -> {
+        return Optional.of(importPath);
+      }
+      case UnionType unionType -> {
+        Set<String> unionFqnSet = unionType.candidates().stream()
+          .flatMap(candidate -> getFqn(candidate).stream())
+          .collect(Collectors.toSet());
 
-      if (unionFqnSet.size() == 1) {
-        return unionFqnSet.stream().findFirst();
-      } else {
-        // Multiple candidates, cannot determine a single FQN
+        if (unionFqnSet.size() == 1) {
+          return unionFqnSet.stream().findFirst();
+        } else {
+          // Multiple candidates, cannot determine a single FQN
+          return Optional.empty();
+        }
+      }
+      default -> {
         return Optional.empty();
       }
-    } else {
-      return Optional.empty();
     }
   }
 }

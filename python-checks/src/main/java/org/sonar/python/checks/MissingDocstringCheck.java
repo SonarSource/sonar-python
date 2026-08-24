@@ -118,14 +118,16 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
   private static void addQuickFix(PreciseIssue issue, Tree tree, DeclarationType type) {
     PythonQuickFix.Builder quickFix = PythonQuickFix.newQuickFix("Add docstring");
 
-    if (type == DeclarationType.MODULE) {
-      quickFix.addTextEdit(TextEditUtils.insertAtPosition(new PythonLine(1), 0, EMPTY_DOCSTRING));
-    } else if (type == DeclarationType.CLASS) {
-      ClassDef classDef = (ClassDef) tree;
-      quickFix.addTextEdit(TextEditUtils.insertLineAfter(classDef.colon(), classDef.body(), EMPTY_DOCSTRING));
-    } else {
-      FunctionDef functionDef = (FunctionDef) tree;
-      quickFix.addTextEdit(TextEditUtils.insertLineAfter(functionDef.colon(), functionDef.body(), EMPTY_DOCSTRING));
+    switch (type) {
+      case DeclarationType.MODULE -> quickFix.addTextEdit(TextEditUtils.insertAtPosition(new PythonLine(1), 0, EMPTY_DOCSTRING));
+      case DeclarationType.CLASS -> {
+        ClassDef classDef = (ClassDef) tree;
+        quickFix.addTextEdit(TextEditUtils.insertLineAfter(classDef.colon(), classDef.body(), EMPTY_DOCSTRING));
+      }
+      default -> {
+        FunctionDef functionDef = (FunctionDef) tree;
+        quickFix.addTextEdit(TextEditUtils.insertLineAfter(functionDef.colon(), functionDef.body(), EMPTY_DOCSTRING));
+      }
     }
 
     issue.addQuickFix(quickFix.build());

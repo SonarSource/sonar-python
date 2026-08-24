@@ -84,8 +84,7 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
     var type = expression instanceof CallExpression callExpr
       ? callExpr.callee().typeV2()
       : expression.typeV2();
-    return type instanceof UnknownType.UnresolvedImportType uit &&
-      uit.importPath().startsWith("django.");
+    return type instanceof UnknownType.UnresolvedImportType(String importPath) && importPath.startsWith("django.");
   }
 
   private static boolean hasRequestMethodCheck(FunctionDef functionDef) {

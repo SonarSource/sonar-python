@@ -28,19 +28,14 @@ public class FullyQualifiedNameHelper {
 
   @Beta
   public static Optional<String> getFullyQualifiedName(PythonType type) {
-    if (type instanceof SelfType selfType) {
-      return getFullyQualifiedName(selfType.innerType());
-    } else if (type instanceof FunctionType functionType) {
-      return Optional.ofNullable(functionType.fullyQualifiedName());
-    } else if (type instanceof ClassType classType) {
-      return Optional.ofNullable(classType.fullyQualifiedName());
-    } else if (type instanceof ModuleType moduleType) {
-      return Optional.ofNullable(moduleType.fullyQualifiedName());
-    } else if (type instanceof SpecialFormType specialFormType) {
-      return Optional.ofNullable(specialFormType.fullyQualifiedName());
-    } else if (type instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
-      return Optional.ofNullable(unresolvedImportType.importPath());
-    }
-    return Optional.empty();
+    return switch (type) {
+      case SelfType selfType -> getFullyQualifiedName(selfType.innerType());
+      case FunctionType functionType -> Optional.ofNullable(functionType.fullyQualifiedName());
+      case ClassType classType -> Optional.ofNullable(classType.fullyQualifiedName());
+      case ModuleType moduleType -> Optional.ofNullable(moduleType.fullyQualifiedName());
+      case SpecialFormType specialFormType -> Optional.ofNullable(specialFormType.fullyQualifiedName());
+      case UnknownType.UnresolvedImportType(String importPath) -> Optional.ofNullable(importPath);
+      default -> Optional.empty();
+    };
   }
 }

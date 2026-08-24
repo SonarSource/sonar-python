@@ -602,15 +602,19 @@ public class TreeUtils {
   public static PythonType inferSingleAssignedExpressionType(Expression expr) {
     if(expr.typeV2() != PythonType.UNKNOWN) {
       return expr.typeV2();
-    } 
-    
-    if(expr instanceof Name name) {
-      return inferSingleAssignedNameType(name);
-    } else if (expr instanceof QualifiedExpression qualifiedExpr) {
-      PythonType qualifierType = inferSingleAssignedExpressionType(qualifiedExpr.qualifier());
-      return qualifierType.resolveMember(qualifiedExpr.name().name()).orElse(PythonType.UNKNOWN);
-    } else {
-      return PythonType.UNKNOWN;
+    }
+
+    switch (expr) {
+      case Name name -> {
+        return inferSingleAssignedNameType(name);
+      }
+      case QualifiedExpression qualifiedExpr -> {
+        PythonType qualifierType = inferSingleAssignedExpressionType(qualifiedExpr.qualifier());
+        return qualifierType.resolveMember(qualifiedExpr.name().name()).orElse(PythonType.UNKNOWN);
+      }
+      default -> {
+        return PythonType.UNKNOWN;
+      }
     }
   }
 

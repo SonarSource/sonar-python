@@ -157,20 +157,19 @@ public class SlotsAssignmentCheck extends PythonSubscriptionCheck {
   @Nullable
   private static Set<String> extractSlotNames(Expression value) {
     List<Expression> elements;
-    if (value instanceof ListLiteral listLiteral) {
-      elements = listLiteral.elements().expressions();
-    } else if (value instanceof Tuple tuple) {
-      elements = tuple.elements();
-    } else if (value instanceof SetLiteral setLiteral) {
-      elements = setLiteral.elements();
-    } else if (value instanceof DictionaryLiteral dictionaryLiteral) {
-      elements = extractDictKeys(dictionaryLiteral);
-    } else if (value instanceof StringLiteral stringLiteral) {
-      // Single string: __slots__ = 'attr_name'
-      return Set.of(stringLiteral.trimmedQuotesValue());
-    } else {
-      // Dynamic or unsupported form
-      return null;
+    switch (value) {
+      case ListLiteral listLiteral -> elements = listLiteral.elements().expressions();
+      case Tuple tuple -> elements = tuple.elements();
+      case SetLiteral setLiteral -> elements = setLiteral.elements();
+      case DictionaryLiteral dictionaryLiteral -> elements = extractDictKeys(dictionaryLiteral);
+      case StringLiteral stringLiteral -> {
+        // Single string: __slots__ = 'attr_name'
+        return Set.of(stringLiteral.trimmedQuotesValue());
+      }
+      default -> {
+        // Dynamic or unsupported form
+        return null;
+      }
     }
     return elements != null ? extractStringLiterals(elements) : null;
   }
@@ -200,17 +199,19 @@ public class SlotsAssignmentCheck extends PythonSubscriptionCheck {
   private static Set<String> extractStringLiterals(List<Expression> elements) {
     Set<String> slots = new HashSet<>();
     for (Expression element : elements) {
-      if (element instanceof StringLiteral stringLiteral) {
-        slots.add(stringLiteral.trimmedQuotesValue());
-      } else if (element instanceof Name name) {
-        Optional<Expression> resolved = Expressions.singleAssignedNonNameValue(name);
-        if (resolved.isPresent() && resolved.get() instanceof StringLiteral stringLiteral) {
-          slots.add(stringLiteral.trimmedQuotesValue());
-        } else {
+      switch (element) {
+        case StringLiteral stringLiteral -> slots.add(stringLiteral.trimmedQuotesValue());
+        case Name name -> {
+          Optional<Expression> resolved = Expressions.singleAssignedNonNameValue(name);
+          if (resolved.isPresent() && resolved.get() instanceof StringLiteral stringLiteral) {
+            slots.add(stringLiteral.trimmedQuotesValue());
+          } else {
+            return null;
+          }
+        }
+        default -> {
           return null;
         }
-      } else {
-        return null;
       }
     }
     return slots;

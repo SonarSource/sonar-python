@@ -447,12 +447,10 @@ public class FastAPIPathParametersCheck extends PythonSubscriptionCheck {
     private static <T extends Tree> Optional<T> findDeclarationAncestor(Expression expression, UsageV2.Kind usageKind, Class<T> declarationClass, Tree.Kind declarationKind) {
       // Map a resolved symbol usage back to the local declaration syntax node.
       Name name;
-      if (expression instanceof Name n) {
-        name = n;
-      } else if (expression instanceof QualifiedExpression qe) {
-        name = qe.name();
-      } else {
-        name = null;
+      switch (expression) {
+        case Name n -> name = n;
+        case QualifiedExpression qe -> name = qe.name();
+        default -> name = null;
       }
       if (name == null) {
         return Optional.empty();
@@ -492,8 +490,8 @@ public class FastAPIPathParametersCheck extends PythonSubscriptionCheck {
     private boolean isFastApiApplicationOrRouterCall(CallExpression callExpression) {
       return FASTAPI_APPLICATION_OR_ROUTER_MATCHER.isTrueFor(callExpression.callee(), ctx)
         || localAliasResolvedName(callExpression.callee())
-          .filter(FASTAPI_APPLICATION_OR_ROUTER_NAMES::contains)
-          .isPresent();
+        .filter(FASTAPI_APPLICATION_OR_ROUTER_NAMES::contains)
+        .isPresent();
     }
 
     private static Optional<String> localAliasResolvedName(Expression expression) {

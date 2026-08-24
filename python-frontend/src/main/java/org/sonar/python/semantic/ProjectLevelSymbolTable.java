@@ -331,8 +331,8 @@ public class ProjectLevelSymbolTable {
     }
 
     private Optional<String> extractFullyQualifiedName(PythonType pythonType) {
-      if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
-        return Optional.of(unresolvedImportType.importPath());
+      if (pythonType instanceof UnknownType.UnresolvedImportType(String importPath)) {
+        return Optional.of(importPath);
       } else if (pythonType instanceof FunctionType functionType) {
         return Optional.ofNullable(functionType.fullyQualifiedName());
       }

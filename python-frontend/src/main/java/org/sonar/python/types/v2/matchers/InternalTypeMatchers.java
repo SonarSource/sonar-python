@@ -30,8 +30,8 @@ public final class InternalTypeMatchers {
   }
 
   private static TypePredicate getTypePredicate(TypeMatcher matcher) {
-    if (matcher instanceof TypeMatcherImpl typeMatcherImpl) {
-      return typeMatcherImpl.predicate();
+    if (matcher instanceof TypeMatcherImpl(TypePredicate predicate)) {
+      return predicate;
     }
     throw new IllegalArgumentException("Unsupported type matcher: " + matcher.getClass().getName());
   }

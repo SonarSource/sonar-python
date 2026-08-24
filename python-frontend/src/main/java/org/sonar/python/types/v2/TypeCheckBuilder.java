@@ -179,14 +179,12 @@ public class TypeCheckBuilder {
 
     @CheckForNull
     private static String getFullyQualifiedName(PythonType type) {
-      if (type instanceof FunctionType functionType) {
-        return functionType.fullyQualifiedName();
-      } else if (type instanceof ClassType classType) {
-        return classType.fullyQualifiedName();
-      } else if (type instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
-        return unresolvedImportType.importPath();
-      }
-      return null;
+      return switch (type) {
+        case FunctionType functionType -> functionType.fullyQualifiedName();
+        case ClassType classType -> classType.fullyQualifiedName();
+        case UnknownType.UnresolvedImportType(String importPath) -> importPath;
+        default -> null;
+      };
     }
   }
 
@@ -212,8 +210,8 @@ public class TypeCheckBuilder {
       if (pythonType instanceof SelfType || expectedType instanceof SelfType) {
         return TriBool.UNKNOWN;
       }
-      if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedPythonType && expectedType instanceof UnknownType.UnresolvedImportType unresolvedExpectedType) {
-        return unresolvedPythonType.importPath().equals(unresolvedExpectedType.importPath()) ? TriBool.TRUE : TriBool.UNKNOWN;
+      if (pythonType instanceof UnknownType.UnresolvedImportType(String importPath) && expectedType instanceof UnknownType.UnresolvedImportType(String path)) {
+        return importPath.equals(path) ? TriBool.TRUE : TriBool.UNKNOWN;
       }
       if (pythonType instanceof UnknownType || expectedType instanceof UnknownType) {
         return TriBool.UNKNOWN;
@@ -326,7 +324,7 @@ public class TypeCheckBuilder {
       if (pythonType instanceof SpecialFormType specialFormType) {
         return "typing.Generic".equals(specialFormType.fullyQualifiedName()) ? TriBool.TRUE : TriBool.UNKNOWN;
       }
-      if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedImportType && "typing.Generic".equals(unresolvedImportType.importPath())) {
+      if (pythonType instanceof UnknownType.UnresolvedImportType(String importPath) && "typing.Generic".equals(importPath)) {
         return TriBool.TRUE;
       }
       return TriBool.UNKNOWN;
