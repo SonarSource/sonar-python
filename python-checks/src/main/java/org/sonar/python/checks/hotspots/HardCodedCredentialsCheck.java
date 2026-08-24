@@ -21,8 +21,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -55,8 +58,10 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 import org.sonarsource.analyzer.commons.appsec.SecretClassifier;
 
@@ -68,6 +73,18 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   private static final String FLASK_CONFIG_ASSIGNMENT_FQN = "flask.app.Flask.config";
   private static final String FLASK_CONFIG_CREDENTIAL_KEY = "SECRET_KEY";
+
+  // The separators are disjoint from the inner character classes, so backtracking can never help here. Making the
+  // quantifiers possessive disables it anyway, which keeps the regex engine from recursing on long literals.
+  private static final Pattern LOWERCASE_IDENTIFIER_VALUE_PATTERN = Pattern.compile("[a-z]++(?:[._:/-][a-z]++)*+");
+  private static final Pattern ENVIRONMENT_VARIABLE_PATTERN = Pattern.compile("[A-Z][A-Z0-9]*+(?:_[A-Z0-9]++)++");
+  private static final Pattern CAMEL_CASE_BOUNDARY_PATTERN = Pattern.compile("([a-z0-9])([A-Z])");
+
+  // Tokens that make a value the name of a place to look a secret up, rather than the secret itself.
+  private static final Set<String> VALUE_IDENTIFIER_TOKENS = Set.of("alias", "id", "key", "name");
+  // Tokens that make the holder describe credential metadata, rather than hold the credential. Deliberately limited
+  // to the terms actually reported on SONARPY-4059 instead of every plausible synonym, to contain the false negatives.
+  private static final Set<String> HOLDER_METADATA_TOKENS = Set.of("id", "management", "name", "parameter", "policy");
 
   private static final TypeMatcher GETENV_MATCHER = TypeMatchers.isType("os.getenv");
   private static final TypeMatcher ENVIRON_MATCHER = TypeMatchers.isType("os.environ");
@@ -136,12 +153,13 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     if (!keyValuePair.key().is(Kind.STRING_LITERAL)) {
       return;
     }
-    String matchedCredential = matchedCredential(((StringLiteral) keyValuePair.key()).trimmedQuotesValue(), variablePatterns());
+    String keyName = ((StringLiteral) keyValuePair.key()).trimmedQuotesValue();
+    String matchedCredential = matchedCredential(keyName, variablePatterns());
     if (matchedCredential == null) {
       return;
     }
     Expression value = keyValuePair.value();
-    if (isSuspiciousStringLiteral(value) || isSuspiciousEnvGetDefault(value, ctx)) {
+    if (isSuspiciousStringLiteral(value, keyName) || isSuspiciousEnvGetDefault(value, keyName, ctx)) {
       ctx.addIssue(keyValuePair, String.format(MESSAGE, matchedCredential));
     }
   }
@@ -154,7 +172,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       }
       Expression defaultValue = parameter.defaultValue();
       String matchedCredential = matchedCredential(parameterName.name(), variablePatterns());
-      if (matchedCredential != null && defaultValue != null && isSuspiciousStringLiteral(defaultValue)) {
+      if (matchedCredential != null && defaultValue != null && isSuspiciousStringLiteral(defaultValue, parameterName.name())) {
         ctx.addIssue(parameter, String.format(MESSAGE, matchedCredential));
       }
     }
@@ -164,7 +182,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     Name keywordArgument = regularArgument.keywordArgument();
     if (keywordArgument != null) {
       String matchedCredential = matchedCredential(keywordArgument.name(), variablePatterns());
-      if (matchedCredential != null && isSuspiciousStringLiteral(regularArgument.expression())) {
+      if (matchedCredential != null && isSuspiciousStringLiteral(regularArgument.expression(), keywordArgument.name())) {
         ctx.addIssue(regularArgument, String.format(MESSAGE, matchedCredential));
       }
     }
@@ -210,8 +228,10 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     String literalValue = stringLiteral.trimmedQuotesValue();
 
     if (isFlaskConfigAssignment(stringLiteral)) {
-      if (FLASK_CONFIG_CREDENTIAL_KEY.equals(literalValue)) {
-        ctx.addIssue(stringLiteral, String.format(MESSAGE, FLASK_CONFIG_CREDENTIAL_KEY));
+      if (isFlaskConfigCredentialKey(stringLiteral)) {
+        flaskConfigAssignedValue(stringLiteral)
+          .filter(assignedValue -> isSuspiciousFlaskAssignedValue(assignedValue, new HashSet<>(), ctx))
+          .ifPresent(assignedValue -> ctx.addIssue(stringLiteral, String.format(MESSAGE, FLASK_CONFIG_CREDENTIAL_KEY)));
       }
       return;
     }
@@ -249,6 +269,72 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
         .isPresent();
     }
     return false;
+  }
+
+  private static boolean isFlaskConfigCredentialKey(StringLiteral stringLiteral) {
+    if (!FLASK_CONFIG_CREDENTIAL_KEY.equals(stringLiteral.trimmedQuotesValue())) {
+      return false;
+    }
+    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(stringLiteral, Kind.SUBSCRIPTION))
+      .filter(HardCodedCredentialsCheck::isFlaskConfigSubscription)
+      .isPresent();
+  }
+
+  private static Optional<Expression> flaskConfigAssignedValue(StringLiteral stringLiteral) {
+    Tree subscription = TreeUtils.firstAncestorOfKind(stringLiteral, Kind.SUBSCRIPTION);
+    Tree assignment = TreeUtils.firstAncestorOfKind(stringLiteral, Kind.ASSIGNMENT_STMT);
+    if (!(subscription instanceof SubscriptionExpression) || !(assignment instanceof AssignmentStatement assignmentStatement)) {
+      return Optional.empty();
+    }
+    for (ExpressionList targets : assignmentStatement.lhsExpressions()) {
+      int targetIndex = targets.expressions().indexOf(subscription);
+      if (targetIndex < 0) {
+        continue;
+      }
+      Expression assignedValue = assignmentStatement.assignedValue();
+      if (targets.expressions().size() == 1) {
+        return Optional.of(assignedValue);
+      }
+      if (assignedValue instanceof Tuple tuple && tuple.elements().size() == targets.expressions().size()) {
+        return Optional.of(tuple.elements().get(targetIndex));
+      }
+      return Optional.empty();
+    }
+    return Optional.empty();
+  }
+
+  /**
+   * @param visitedNames shared across the whole traversal: without it, a self-referential assignment such as
+   *                     {@code x = (x, "foo")} would make this method recurse until the stack overflows.
+   */
+  private boolean isSuspiciousFlaskAssignedValue(Expression expression, Set<Name> visitedNames, SubscriptionContext ctx) {
+    if (expression.is(Kind.STRING_LITERAL)) {
+      return isSuspiciousFlaskSecretValue((StringLiteral) expression);
+    }
+    if (expression.is(Kind.NAME)) {
+      return Expressions.singleAssignedNonNameValue((Name) expression, visitedNames)
+        .filter(assignedValue -> isSuspiciousFlaskAssignedValue(assignedValue, visitedNames, ctx))
+        .isPresent();
+    }
+    if (expression.is(Kind.TUPLE)) {
+      return ((Tuple) expression).elements().stream()
+        .anyMatch(element -> isSuspiciousFlaskAssignedValue(element, visitedNames, ctx));
+    }
+    return isSuspiciousEnvGetDefault(expression, FLASK_CONFIG_CREDENTIAL_KEY, ctx);
+  }
+
+  /**
+   * Unlike {@link #isSuspiciousStringLiteral(Tree, String)}, this applies neither the credential-word nor the
+   * {@link SecretClassifier} allowance. Here the literal <em>is</em> the Flask secret, so a placeholder-looking value
+   * such as {@code "changeme"} remains a real misconfiguration. Only the identifier-shape allowance carries over, so
+   * that a lookup key like {@code "my-lookup-key"} is treated the same as on every other path.
+   * <p>
+   * The holder name can only ever be {@code SECRET_KEY}, which matches no credential word, so
+   * {@link #holderIndicatesCredentialMetadata(String)} never contributes here.
+   */
+  private boolean isSuspiciousFlaskSecretValue(StringLiteral stringLiteral) {
+    String value = stringLiteral.trimmedQuotesValue();
+    return !value.isEmpty() && !isNonSecretIdentifierValue(value, FLASK_CONFIG_CREDENTIAL_KEY);
   }
 
   private static Optional<String> getSubscriptionFqn(SubscriptionExpression subscription) {
@@ -292,7 +378,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       Symbol symbol = hasSymbol.symbol();
       String matchedCredential = credentialSymbolName(symbol);
       if (matchedCredential != null) {
-        checkAssignedValue(assignmentStatement, matchedCredential, ctx);
+        checkAssignedValue(assignmentStatement, matchedCredential, symbol.name(), ctx);
       }
     }
 
@@ -302,16 +388,17 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
         if (expr.is(Kind.STRING_LITERAL)) {
           String matchedCredential = matchedCredential(((StringLiteral) expr).trimmedQuotesValue(), variablePatterns());
           if (matchedCredential != null) {
-            checkAssignedValue(assignmentStatement, matchedCredential, ctx);
+            checkAssignedValue(assignmentStatement, matchedCredential, ((StringLiteral) expr).trimmedQuotesValue(), ctx);
           }
         }
       }
     }
   }
 
-  private void checkAssignedValue(AssignmentStatement assignmentStatement, String matchedCredential, SubscriptionContext ctx) {
+  private void checkAssignedValue(AssignmentStatement assignmentStatement, String matchedCredential, String credentialHolderName, SubscriptionContext ctx) {
     Expression assignedValue = assignmentStatement.assignedValue();
-    if ((isSuspiciousStringLiteral(assignedValue) || isSuspiciousEnvGetDefault(assignedValue, ctx)) && !isFlaskConfigAssignment(assignedValue)) {
+    if ((isSuspiciousStringLiteral(assignedValue, credentialHolderName) || isSuspiciousEnvGetDefault(assignedValue, credentialHolderName, ctx))
+      && !isFlaskConfigAssignment(assignedValue)) {
       ctx.addIssue(assignmentStatement, String.format(MESSAGE, matchedCredential));
     }
   }
@@ -323,17 +410,18 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     return null;
   }
 
-  private boolean isSuspiciousStringLiteral(Tree tree) {
+  private boolean isSuspiciousStringLiteral(Tree tree, String credentialHolderName) {
     if (!tree.is(Kind.STRING_LITERAL)) {
       return false;
     }
     String value = ((StringLiteral) tree).trimmedQuotesValue();
     return !value.isEmpty()
       && !isCredential(value, variablePatterns())
+      && !isNonSecretIdentifierValue(value, credentialHolderName)
       && !SecretClassifier.isKnownNonSecret(value);
   }
 
-  private static boolean isSuspiciousEnvGetDefault(Expression expression, SubscriptionContext ctx) {
+  private boolean isSuspiciousEnvGetDefault(Expression expression, String credentialHolderName, SubscriptionContext ctx) {
     if (!expression.is(Kind.CALL_EXPR)) {
       return false;
     }
@@ -348,8 +436,42 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       .map(RegularArgument::expression)
       .filter(HardCodedCredentialsCheck::isNonEmptyStringLiteral)
       .map(defaultExpr -> ((StringLiteral) defaultExpr).trimmedQuotesValue())
+      .filter(value -> !isNonSecretIdentifierValue(value, credentialHolderName))
       .filter(value -> !SecretClassifier.isKnownNonSecret(value))
       .isPresent();
+  }
+
+  /**
+   * True when {@code value} names where to find a credential instead of being one: a secret-store lookup key, an
+   * environment variable name, or - when the holder itself describes credential metadata - a configuration mode.
+   */
+  private boolean isNonSecretIdentifierValue(String value, String credentialHolderName) {
+    if (ENVIRONMENT_VARIABLE_PATTERN.matcher(value).matches()) {
+      // "PAYMENTS_SECRET_NAME" names a slot to look the secret up in, "HUNTER_2" does not.
+      return valueHasIdentifierToken(value);
+    }
+    return LOWERCASE_IDENTIFIER_VALUE_PATTERN.matcher(value).matches()
+      && (valueHasIdentifierToken(value) || holderIndicatesCredentialMetadata(credentialHolderName));
+  }
+
+  private static boolean valueHasIdentifierToken(String value) {
+    return identifierTokens(value).anyMatch(VALUE_IDENTIFIER_TOKENS::contains);
+  }
+
+  private boolean holderIndicatesCredentialMetadata(String credentialHolderName) {
+    List<String> tokens = identifierTokens(credentialHolderName).toList();
+    for (int i = 0; i < tokens.size(); i++) {
+      if (isCredential(tokens.get(i), variablePatterns())
+        && tokens.subList(i + 1, tokens.size()).stream().anyMatch(HOLDER_METADATA_TOKENS::contains)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static Stream<String> identifierTokens(String identifier) {
+    String snakeCase = CAMEL_CASE_BOUNDARY_PATTERN.matcher(identifier).replaceAll("$1_$2");
+    return Stream.of(snakeCase.toLowerCase(Locale.ROOT).split("[^a-z0-9]+"));
   }
 
   private static boolean isNonEmptyStringLiteral(Expression expression) {

@@ -232,9 +232,68 @@ conn = pymssql.connect(server='yourserver', user='yourusername@yourserver',
 def test_flask():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "foo"  # Noncompliant
+    app.config["SECRET_KEY"] = "my-lookup-key"  # Compliant, secret lookup key
+    # SECRET_KEY holds the secret itself, so placeholder values are still a misconfiguration here,
+    # unlike `password = "changeme"` in test_secret_classifier below.
+    app.config["SECRET_KEY"] = "changeme"  # Noncompliant
+    app.config["SECRET_KEY"] = "APP_SECRET_KEY"  # Compliant, environment-variable name
+    # Environment-variable shape without a lookup token: not a lookup name.
+    app.config["SECRET_KEY"] = "MY_APP_VALUE"  # Noncompliant
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")  # Compliant
+    app.config["SECRET_KEY"] = os.getenv("APP_SECRET_KEY", "dev-only-placeholder")  # Compliant
+    app.config["SECRET_KEY"] = os.urandom(24).hex()  # Compliant
+    generated_secret_key = os.environ.get("FLASK_SECRET_KEY") or os.urandom(24).hex()
+    app.config["SECRET_KEY"] = generated_secret_key  # Compliant
+    hardcoded_secret_key = "hardcoded-value"
+    app.config["SECRET_KEY"] = hardcoded_secret_key  # Noncompliant
     app.config["SECURITY_PASSWORD_HASH"] = "sha512_crypt"  # Compliant
     a, app.config["SECRET_KEY"] = "foo", "foo"  # Noncompliant
     app.config["SECURITY_PASSWORD_HASH"], app.config["SECRET_KEY"] = "foo", "foo"  # Noncompliant
+    app.config["SECRET_KEY"], other = os.getenv("SECRET_KEY"), "foo"  # Compliant
+    other, app.config["SECRET_KEY"] = "foo", os.getenv("SECRET_KEY")  # Compliant
+    app.config["SECRET_KEY"], other = "foo", os.getenv("SECRET_KEY")  # Noncompliant
+    other, app.config["SECRET_KEY"] = os.getenv("SECRET_KEY"), "foo"  # Noncompliant
+    app.config["SECRET_KEY"] = (os.getenv("SECRET_KEY"), "foo")  # Noncompliant
+    # Resolving a self-referential value must terminate instead of overflowing the stack.
+    app.config["SECRET_KEY"] = recursive_value  # Noncompliant
+    recursive_value = (recursive_value, "foo")
+    if not app.config["SECRET_KEY"]:  # Compliant, reading the configured secret
+        pass
+    configured_secret_key = app.config["SECRET_KEY"]  # Compliant, reading the configured secret
+
+def test_credential_identifiers_and_configuration_modes():
+    password_policy = "strict"  # Compliant, configuration mode
+    password_management = "external"  # Compliant, configuration mode
+    settings = {"password_policy": "strict", "password_management": "default"}  # Compliant, configuration modes
+    PASSWORD_PARAMETER_KEY = "alias/aws/ssm"  # Compliant, KMS key alias
+    password_secret_name = os.getenv("PAYMENTS_SECRET_NAME", "payments-api-key")  # Compliant, secret lookup key
+    password = "PAYMENTS_SECRET_NAME"  # Compliant, environment-variable name
+    password = "payments-api-key"  # Compliant, secret lookup key
+    password = "payments-secret-id"  # Compliant, secret lookup ID
+    password = "payments-secret-name"  # Compliant, secret lookup name
+    password_id = "primary"  # Compliant, credential metadata
+    password_name = "primary"  # Compliant, credential metadata
+    password = "azerty123"  # Noncompliant
+    password_policy = "azerty123"  # Noncompliant
+    password_management = "Azerty123"  # Noncompliant
+    password_reference = "api-key-Azerty123"  # Noncompliant
+    settings = {"password_policy": "azerty123"}  # Noncompliant
+    # Generic, unreported metadata and identifier terms must not suppress issues.
+    password_reference = "external"  # Noncompliant
+    password_identifier = "strict"  # Noncompliant
+    password = "external-ref"  # Noncompliant
+    # An environment-variable shape alone is not enough: the value must name a credential slot.
+    password = "PAYMENTS_SECRET_ID"  # Compliant, environment-variable name
+    password = "HUNTER_2"  # Noncompliant
+    password = "AZERTY_123"  # Noncompliant
+    password_policy = "AZERTY_123"  # Noncompliant
+
+def test_credential_identifiers_in_arguments(password="payments-api-key"):  # Compliant, secret lookup key
+    connect(password="payments-api-key")  # Compliant, secret lookup key
+    connect(password="azerty123")  # Noncompliant
+
+def test_credential_identifiers_in_arguments_noncompliant(password="azerty123"):  # Noncompliant
+    pass
 
 def test_secret_classifier():
     # Values recognized by SecretClassifier as known non-secrets don't raise, even though the name matches.

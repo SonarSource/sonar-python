@@ -205,7 +205,16 @@ public class Expressions {
   }
 
   public static Optional<Expression> singleAssignedNonNameValue(Name name) {
-    Set<Name> visited = new HashSet<>();
+    return singleAssignedNonNameValue(name, new HashSet<>());
+  }
+
+  /**
+   * Same as {@link #singleAssignedNonNameValue(Name)}, but with a caller-supplied set of already visited names.
+   * Callers that recurse back into this method (e.g. by descending into the elements of a resolved tuple) must
+   * share a single set across the whole traversal, otherwise self-referential assignments such as
+   * {@code x = (x, "foo")} recurse forever.
+   */
+  public static Optional<Expression> singleAssignedNonNameValue(Name name, Set<Name> visited) {
     Expression result = singleAssignedValue(name, visited);
     while (result != null && result.is(Kind.NAME)) {
       result = singleAssignedValue((Name) result, visited);
