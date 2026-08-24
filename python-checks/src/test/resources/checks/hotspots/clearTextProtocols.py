@@ -203,6 +203,36 @@ def clear_text_protocol_used_by_other_code():
   ProtocolMatcher().startswith("http://insecure.com") # Noncompliant
 
 
+def clear_text_protocol_used_as_replace_target(url: str) -> str:
+  return url.replace("http://", "https://") # Compliant
+
+
+def clear_text_protocol_used_as_replace_target_unbound(url: str) -> str:
+  return str.replace(url, "http://", "https://") # Compliant
+
+
+def clear_text_protocol_used_as_replace_target_untyped(url):
+  # Known limitation: an unresolved receiver stays exempt, which can also hide a literal on a
+  # same-named non-str method (e.g. datetime.replace, dataclasses.replace, DataFrame.replace).
+  return url.replace("http://", "https://") # Compliant
+
+
+def clear_text_protocol_used_as_replace_replacement(url: str) -> str:
+  return url.replace("https://", "http://") # Noncompliant
+
+
+def clear_text_protocol_used_as_removeprefix(raw: str) -> str:
+  return raw.removeprefix("https://").removeprefix("http://") # Compliant
+
+
+def clear_text_protocol_used_as_removesuffix(raw: str) -> str:
+  return raw.removesuffix("http://") # Compliant
+
+
+def clear_text_protocol_used_as_removeprefix_unbound(raw: str) -> str:
+  return str.removeprefix(raw, "http://") # Compliant
+
+
 def method(self):
   self.something[smth] = None
 

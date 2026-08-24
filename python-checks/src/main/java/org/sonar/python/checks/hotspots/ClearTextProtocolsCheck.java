@@ -54,6 +54,8 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static final Set<String> SENSITIVE_HTTP_SERVER_CLASSES = Set.of("http.server.HTTPServer", "http.server.ThreadingHTTPServer");
   private static final TypeMatcher STR_METHOD_MATCHER = TypeMatchers.isFunctionOwnerSatisfying(TypeMatchers.isOrExtendsType("builtins.str"));
   private static final TypeMatcher STR_TYPE_MATCHER = TypeMatchers.isType("builtins.str");
+  // Methods where the first (non-self) argument is a scheme/prefix used only for identification, not sent over the network
+  private static final Set<String> PROTOCOL_IDENTIFICATION_METHODS = Set.of("startswith", "replace", "removeprefix", "removesuffix");
 
   @Override
   public void initialize(Context context) {
@@ -61,7 +63,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       Tree node = ctx.syntaxNode();
       String value = Expressions.unescape((StringElement) node);
       unsafeProtocol(value)
-        .filter(protocol -> !isStartsWithArgument(node, ctx))
+        .filter(protocol -> !isProtocolIdentificationArgument(node, ctx))
         // cleanup slashes
         .map(protocol -> protocol.substring(0, protocol.length() - 3))
         .ifPresent(protocol -> ctx.addIssue(node, message(protocol)));
@@ -181,7 +183,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       .findFirst();
   }
 
-  private static boolean isStartsWithArgument(Tree stringElement, SubscriptionContext context) {
+  private static boolean isProtocolIdentificationArgument(Tree stringElement, SubscriptionContext context) {
     Tree argumentParent = stringElement.parent().parent();
     while (argumentParent.is(Tree.Kind.TUPLE, Tree.Kind.PARENTHESIZED)) {
       argumentParent = argumentParent.parent();
@@ -190,16 +192,19 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       return false;
     }
     Tree callTree = TreeUtils.firstAncestorOfKind(argument, Tree.Kind.CALL_EXPR);
+    // UNKNOWN owner type stays exempt (same tradeoff as SONARPY-4533); on an unresolved receiver this can hide a
+    // real literal for a same-named non-str method (e.g. datetime.replace, dataclasses.replace, DataFrame.replace)
     if (!(callTree instanceof CallExpression callExpression)
       || !(callExpression.callee() instanceof QualifiedExpression callee)
-      || !"startswith".equals(callee.name().name())
+      || !PROTOCOL_IDENTIFICATION_METHODS.contains(callee.name().name())
       || STR_METHOD_MATCHER.evaluateFor(callee, context) == TriBool.FALSE) {
       return false;
     }
-    // unbound str.startswith(self, prefix) shifts the prefix to the second argument
-    int prefixIndex = STR_TYPE_MATCHER.evaluateFor(callee.qualifier(), context) == TriBool.TRUE ? 1 : 0;
+    // unbound str.startswith(self, prefix) / str.replace(self, old, new) shifts the identification argument to the second position
+    int identificationIndex = STR_TYPE_MATCHER.evaluateFor(callee.qualifier(), context) == TriBool.TRUE ? 1 : 0;
     List<Argument> arguments = callExpression.arguments();
-    return arguments.size() > prefixIndex && arguments.get(prefixIndex) == argument;
+    // only the first (scheme-identifying) argument is exempt — e.g. replace's replacement/new argument still gets flagged
+    return arguments.size() > identificationIndex && arguments.get(identificationIndex) == argument;
   }
 
   private static Optional<String> isUnsafeLib(String qualifiedName) {
