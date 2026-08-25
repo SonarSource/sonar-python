@@ -10,10 +10,14 @@ class C(B):
   def do_something(self, a, b): # no issue reported on b
     return self.compute(a)
 </pre>
-<p>This rule also ignores variables named with a single underscore <code>_</code>. Such naming is a common practice for indicating that the variable
-is insignificant.</p>
+<p>This rule ignores parameters whose names start with an underscore (<code>_</code>).</p>
+<p>This naming convention indicates that the parameter is intentionally unused.</p>
 <pre>
 def do_something(a, _): # no issue reported on _
+  return compute(a)
+</pre>
+<pre>
+def do_something(a, _param): # no issue reported on _param
   return compute(a)
 </pre>
 <p>The rule also won’t raise an issue if the parameter is referenced in a docstring or a comment:</p>
