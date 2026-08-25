@@ -8,6 +8,17 @@
   ],
   "packageRules": [
     {
+      "description": "Do not update internal Maven reactor parents",
+      "matchManagers": [
+        "maven"
+      ],
+      "matchPackageNames": [
+        "com.sonarsource.python:python-enterprise",
+        "com.sonarsource.python:its-enterprise"
+      ],
+      "enabled": false
+    },
+    {
       "description": "Keep Python on 3.9 for typeshed serialization",
       "matchManagers": [
         "mise"
