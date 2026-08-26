@@ -121,7 +121,147 @@ def endpoint_calling_nested_helpers(id: int):
     nested_helper_level_1(id)
 
 
+@app.get("/public-and-internal")
+@app.get("/internal/public-and-internal", include_in_schema=False)
+def public_and_schema_excluded_routes():
+    raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
+@router.get("/explicitly-included", include_in_schema=True)
+def route_explicitly_included():
+    raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
+@router.get("/unknown-flag", include_in_schema=some_unresolved_flag)
+def route_with_unresolved_include_flag():
+    raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
+included_router = APIRouter(include_in_schema=True)
+
+
+@included_router.get("/router-explicitly-included")
+def route_on_explicitly_included_router():
+    raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
+def build_router() -> APIRouter:
+    return APIRouter()
+
+
+dynamic_router = build_router()
+
+
+@dynamic_router.get("/dynamic")
+def route_on_unresolved_router():
+    raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
+# The receiver is a call, not a name, so there is nothing to resolve back to a constructor
+@build_router().get("/inline-factory")
+def route_on_inline_factory_router():
+    raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
+# The route method is aliased, so the decorator callee is a plain name instead of a member access
+aliased_route = app.get
+
+
+@aliased_route("/aliased-route")
+def route_on_aliased_route_method():
+    raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
+# The router is a parameter, so its construction arguments are not reachable
+def register_scoped_routes(scoped_router: APIRouter):
+    @scoped_router.get("/scoped")
+    def scoped_route():
+        raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
+publicly_included_router = APIRouter()
+app.include_router(publicly_included_router, prefix="/v1")
+
+
+@publicly_included_router.get("/publicly-included")
+def route_on_publicly_included_router():
+    raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
+# The flag only applies to the router actually being included, not to any router mentioned in the call
+misplaced_router = APIRouter()
+app.include_router(APIRouter(), dependencies=[misplaced_router], include_in_schema=False)
+
+
+@misplaced_router.get("/misplaced")
+def route_on_router_in_another_argument():
+    raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
+# The router is passed to an unrelated call, which carries no schema information
+handed_over_router = APIRouter()
+some_other_decorator(handed_over_router)
+
+
+@handed_over_router.get("/handed-over")
+def route_on_router_passed_to_unrelated_call():
+    raise HTTPException(status_code=404, detail="Not found")  # Noncompliant
+
+
 # Compliant cases
+
+@app.get("/internal/pool-stats", include_in_schema=False)
+async def schema_excluded_app_route():
+    raise HTTPException(status_code=500, detail="Internal error")  # Compliant (excluded from OpenAPI schema)
+
+
+@router.get("/internal/router-stats", include_in_schema=False)
+def schema_excluded_router_route():
+    raise HTTPException(status_code=503, detail="Service unavailable")  # Compliant (excluded from OpenAPI schema)
+
+
+@app.get("/internal/falsy-number", include_in_schema=0)
+def route_excluded_with_falsy_number():
+    raise HTTPException(status_code=500, detail="Internal error")  # Compliant (excluded from OpenAPI schema)
+
+
+@app.get("/internal/none", include_in_schema=None)
+def route_excluded_with_none():
+    raise HTTPException(status_code=500, detail="Internal error")  # Compliant (excluded from OpenAPI schema)
+
+
+internal_router = APIRouter(include_in_schema=False)
+
+
+@internal_router.get("/internal/from-router-constructor")
+def route_on_schema_excluded_router():
+    raise HTTPException(status_code=503, detail="Service unavailable")  # Compliant (router excluded from OpenAPI schema)
+
+
+internal_app = FastAPI(include_in_schema=False)
+
+
+@internal_app.get("/internal/from-app-constructor")
+def route_on_schema_excluded_app():
+    raise HTTPException(status_code=500, detail="Internal error")  # Compliant (app excluded from OpenAPI schema)
+
+
+internal_router_alias = internal_router
+
+
+@internal_router_alias.get("/internal/via-alias")
+def route_on_schema_excluded_router_alias():
+    raise HTTPException(status_code=503, detail="Service unavailable")  # Compliant (router excluded from OpenAPI schema)
+
+
+registered_router = APIRouter()
+app.include_router(registered_router, include_in_schema=False)
+
+
+@registered_router.get("/internal/via-include-router")
+def route_on_router_included_out_of_schema():
+    raise HTTPException(status_code=503, detail="Service unavailable")  # Compliant (excluded when included in the app)
+
 
 @app.get("/users2/{user_id}", responses={404: {"description": "User not found"}})
 def single_status_code_documented(user_id: int):

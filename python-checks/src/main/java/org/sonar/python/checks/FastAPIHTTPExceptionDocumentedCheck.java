@@ -25,6 +25,8 @@ import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.v2.SymbolV2;
+import org.sonar.plugins.python.api.symbols.v2.UsageV2;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
@@ -36,6 +38,7 @@ import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -61,6 +64,16 @@ public class FastAPIHTTPExceptionDocumentedCheck extends PythonSubscriptionCheck
     Stream.concat(
       ROUTES.stream().map(methodName -> TypeMatchers.isType(FASTAPI_MODULE + "." + methodName)),
       ROUTES.stream().map(methodName -> TypeMatchers.isType(API_ROUTER_MODULE + "." + methodName))));
+
+  private static final TypeMatcher FASTAPI_APP_OR_ROUTER_MATCHER = TypeMatchers.any(
+    TypeMatchers.isType("fastapi.FastAPI"),
+    TypeMatchers.isType(FASTAPI_MODULE),
+    TypeMatchers.isType("fastapi.APIRouter"),
+    TypeMatchers.isType(API_ROUTER_MODULE));
+
+  private static final TypeMatcher INCLUDE_ROUTER_MATCHER = TypeMatchers.any(
+    TypeMatchers.isType(FASTAPI_MODULE + ".include_router"),
+    TypeMatchers.isType(API_ROUTER_MODULE + ".include_router"));
 
   private static final TypeMatcher IS_HTTP_EXCEPTION = TypeMatchers.any(
     TypeMatchers.isType("fastapi.exceptions.HTTPException"),
@@ -110,6 +123,7 @@ public class FastAPIHTTPExceptionDocumentedCheck extends PythonSubscriptionCheck
         .map(Decorator::expression)
         .flatMap(TreeUtils.toStreamInstanceOfMapper(CallExpression.class))
         .filter(callExpr -> isFastApiRouteDecorator(callExpr, ctx))
+        .filter(callExpr -> !isExcludedFromSchema(callExpr))
         .toList();
 
       Set<Integer> documentedStatusCodes = new HashSet<>();
@@ -125,6 +139,86 @@ public class FastAPIHTTPExceptionDocumentedCheck extends PythonSubscriptionCheck
 
     private static boolean isFastApiRouteDecorator(CallExpression callExpr, SubscriptionContext ctx) {
       return FASTAPI_ROUTE_MATCHER.isTrueFor(callExpr.callee(), ctx);
+    }
+
+    private boolean isExcludedFromSchema(CallExpression decoratorCall) {
+      if (hasFalsyIncludeInSchema(decoratorCall)) {
+        return true;
+      }
+      // FastAPI combines the route flag with the flags of the FastAPI()/APIRouter() the route is registered on
+      // with a logical AND, so a falsy flag at any level keeps the route out of the OpenAPI schema.
+      if (!(decoratorCall.callee() instanceof QualifiedExpression qualifiedExpression)) {
+        return false;
+      }
+      Expression receiver = Expressions.removeParentheses(qualifiedExpression.qualifier());
+      return isReceiverConstructedExcluded(receiver) || isExcludedViaIncludeRouter(receiver);
+    }
+
+    private static boolean hasFalsyIncludeInSchema(CallExpression callExpr) {
+      RegularArgument includeInSchemaArg = TreeUtils.argumentByKeyword("include_in_schema", callExpr.arguments());
+      return includeInSchemaArg != null && Expressions.isFalsy(includeInSchemaArg.expression());
+    }
+
+    /**
+     * Handles {@code router = APIRouter(include_in_schema=False)} / {@code app = FastAPI(include_in_schema=False)}.
+     * A router imported from another module resolves to a bare Name, so it is left alone: its construction
+     * arguments are not reachable from a single-file analysis.
+     */
+    private boolean isReceiverConstructedExcluded(Expression receiver) {
+      Expression target = resolveLocalAliasChain(receiver);
+      return target instanceof CallExpression constructorCall
+        && FASTAPI_APP_OR_ROUTER_MATCHER.isTrueFor(constructorCall.callee(), ctx)
+        && hasFalsyIncludeInSchema(constructorCall);
+    }
+
+    /**
+     * Handles {@code app.include_router(router, include_in_schema=False)}. If the same router is also included
+     * elsewhere without the flag, one copy would still reach the schema, but this rule favours staying silent
+     * over reporting a route that cannot be proven public.
+     */
+    private boolean isExcludedViaIncludeRouter(Expression receiver) {
+      if (!(receiver instanceof Name routerName)) {
+        return false;
+      }
+      return Optional.ofNullable(routerName.symbolV2())
+        .map(SymbolV2::usages)
+        .stream()
+        .flatMap(List::stream)
+        .filter(usage -> usage.kind() == UsageV2.Kind.OTHER)
+        .anyMatch(this::isRouterArgumentOfExcludingInclude);
+    }
+
+    private boolean isRouterArgumentOfExcludingInclude(UsageV2 usage) {
+      RegularArgument argument = TreeUtils.firstAncestorOfClass(usage.tree(), RegularArgument.class);
+      if (argument == null) {
+        return false;
+      }
+      return Optional.ofNullable(TreeUtils.firstAncestorOfClass(argument, CallExpression.class))
+        .filter(parentCall -> INCLUDE_ROUTER_MATCHER.isTrueFor(parentCall.callee(), ctx))
+        .filter(parentCall -> isRouterBeingIncluded(parentCall, argument))
+        .filter(DecoratorAnalysis::hasFalsyIncludeInSchema)
+        .isPresent();
+    }
+
+    private static boolean isRouterBeingIncluded(CallExpression includeRouterCall, RegularArgument argument) {
+      return TreeUtils.nthArgumentOrKeywordOptional(0, "router", includeRouterCall.arguments())
+        .filter(routerArgument -> routerArgument == argument)
+        .isPresent();
+    }
+
+    private static Expression resolveLocalAliasChain(Expression expression) {
+      // Follow simple local aliases like `internal = APIRouter(include_in_schema=False)` while preserving the
+      // last expression when resolution stops.
+      Expression target = Expressions.removeParentheses(expression);
+      Set<Name> visitedAliases = new HashSet<>();
+      while (target instanceof Name name) {
+        Expression assignedValue = Expressions.singleAssignedValue(name, visitedAliases);
+        if (assignedValue == null) {
+          return target;
+        }
+        target = Expressions.removeParentheses(assignedValue);
+      }
+      return target;
     }
 
     private Set<Integer> processDecorator(CallExpression callExpr) {
