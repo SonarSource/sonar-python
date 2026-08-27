@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.config.Configuration;
 import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.Scanner;
 import org.sonar.plugins.python.SonarQubePythonFile;
@@ -182,7 +183,7 @@ public abstract class PythonIndexer {
     projectConfigurationBuilder.removePackageAwsLambdaHandlers(packageName);
   }
 
-  void addFile(PythonInputFile inputFile) throws IOException {
+  protected void addFile(PythonInputFile inputFile) throws IOException {
     AstNode astNode = parserSupplier.get().parse(inputFile.wrappedFile().contents());
     FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
     String packageName = packageName(inputFile);
@@ -192,6 +193,19 @@ public abstract class PythonIndexer {
   }
 
   public abstract void buildOnce(SensorContext context);
+
+  /**
+   * Whether this indexer should be used for the current analysis.
+   * <p>
+   * An indexer contributed as a plugin extension is injected into {@link PythonIndexerWrapper} unconditionally, as the
+   * container has to build it before any analysis property can be read. Overriding this allows such an indexer to
+   * stand down when its preconditions are not met, in which case the default {@link SonarQubePythonIndexer} is used
+   * instead. It is evaluated when the container is built, hence the {@link Configuration} rather than a
+   * {@code SensorContext}.
+   */
+  public boolean isApplicable(Configuration configuration) {
+    return true;
+  }
 
   public abstract void postAnalysis(SensorContext context);
 

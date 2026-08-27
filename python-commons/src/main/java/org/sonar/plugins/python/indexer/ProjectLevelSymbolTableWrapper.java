@@ -16,33 +16,29 @@
  */
 package org.sonar.plugins.python.indexer;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
-
-import org.sonar.api.config.Configuration;
 import org.sonar.api.scanner.ScannerSide;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 
 /**
- * Holds the indexer to use for the current analysis, if it is not the default {@link SonarQubePythonIndexer}.
+ * DI component that holds the project-level symbol table populated by {@code PythonSensor}.
+ * Allows subsequent sensors (e.g. {@code PythonA3SContextCollectorSensor}) to access the
+ * fully-populated symbol table without depending on {@link PythonIndexerWrapper}, which may
+ * return {@code null} in the SonarQube Scanner path.
+ *
+ * <p>Defaults to {@link ProjectLevelSymbolTable#empty()} so consumers never receive {@code null}.
  */
 @ScannerSide
 @SonarLintSide
-public class PythonIndexerWrapper {
+public class ProjectLevelSymbolTableWrapper {
 
-  private final PythonIndexer indexer;
+  private ProjectLevelSymbolTable symbolTable = ProjectLevelSymbolTable.empty();
 
-  public PythonIndexerWrapper(Configuration configuration) {
-    // Constructor to be used by pico if no indexer is to be found and injected.
-    this(configuration, null);
+  public ProjectLevelSymbolTable symbolTable() {
+    return symbolTable;
   }
 
-  public PythonIndexerWrapper(Configuration configuration, @Nullable PythonIndexer indexer) {
-    this.indexer = indexer != null && indexer.isApplicable(configuration) ? indexer : null;
-  }
-
-  @CheckForNull
-  public PythonIndexer indexer() {
-    return indexer;
+  public void setSymbolTable(ProjectLevelSymbolTable symbolTable) {
+    this.symbolTable = symbolTable;
   }
 }

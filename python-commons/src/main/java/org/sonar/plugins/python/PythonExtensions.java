@@ -35,6 +35,7 @@ import org.sonar.plugins.python.editions.OpenSourceRepositoryInfoProvider;
 import org.sonar.plugins.python.editions.RepositoryInfoProviderWrapper;
 import org.sonar.plugins.python.flake8.Flake8RulesDefinition;
 import org.sonar.plugins.python.flake8.Flake8Sensor;
+import org.sonar.plugins.python.indexer.ProjectLevelSymbolTableWrapper;
 import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.mypy.MypyRulesDefinition;
@@ -86,6 +87,7 @@ public class PythonExtensions {
       ArchitectureCallbackWrapper.class,
       PythonCustomRuleRepositoryWrapper.class,
       PythonIndexerWrapper.class,
+      ProjectLevelSymbolTableWrapper.class,
       RepositoryInfoProviderWrapper.class,
       SonarLintCacheWrapper.class, 
       

@@ -107,8 +107,19 @@ class PackageResolutionResultTest {
       PackageResolutionResult.PrimaryResolutionMethod.SONAR_SOURCES,
       PackageResolutionResult.PrimaryResolutionMethod.CONVENTIONAL_FOLDERS,
       PackageResolutionResult.PrimaryResolutionMethod.BASE_DIR,
-      PackageResolutionResult.PrimaryResolutionMethod.LEGACY_INIT_PY
+      PackageResolutionResult.PrimaryResolutionMethod.LEGACY_INIT_PY,
+      PackageResolutionResult.PrimaryResolutionMethod.A3S_CONTEXT
     );
+  }
+
+  @Test
+  void fromA3SContext_creates_correct_result() {
+    List<String> roots = List.of("/project/src");
+    var result = PackageResolutionResult.fromA3SContext(roots);
+
+    assertThat(result.roots()).containsExactly("/project/src");
+    assertThat(result.method()).isEqualTo(PackageResolutionResult.PrimaryResolutionMethod.A3S_CONTEXT);
+    assertThat(result.buildSystem()).isEqualTo(PackageResolutionResult.BuildSystem.NONE);
   }
 
   @Test

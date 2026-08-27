@@ -48,6 +48,7 @@ import org.sonar.plugins.python.editions.RepositoryInfoProviderWrapper;
 import org.sonar.plugins.python.indexer.NamespacePackageTelemetry;
 import org.sonar.plugins.python.indexer.PackageResolutionResult;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.indexer.ProjectLevelSymbolTableWrapper;
 import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.telemetry.collectors.ImportsTelemetry;
@@ -60,6 +61,7 @@ import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
+import org.sonar.python.types.TypeShed;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
 import static org.sonar.plugins.python.Scanner.PARALLEL_PROPERTY_NAME;
@@ -78,6 +80,7 @@ public final class PythonSensor implements Sensor {
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
   private final PythonFileConsumer architectureCallback;
+  private final ProjectLevelSymbolTableWrapper symbolTableWrapper;
 
   private final SonarLintCache sonarLintCache;
   private final AnalysisWarningsWrapper analysisWarnings;
@@ -102,7 +105,8 @@ public final class PythonSensor implements Sensor {
     RepositoryInfoProviderWrapper editionMetadataProviderWrapper,
     ArchitectureCallbackWrapper architectureUDGBuilderWrapper,
     NoSonarLineInfoCollector noSonarLineInfoCollector,
-    ProjectConfigurationBuilder projectConfigurationBuilder) {
+    ProjectConfigurationBuilder projectConfigurationBuilder,
+    ProjectLevelSymbolTableWrapper symbolTableWrapper) {
     this.noSonarLineInfoCollector = noSonarLineInfoCollector;
     this.projectConfigurationBuilder = projectConfigurationBuilder;
 
@@ -115,6 +119,7 @@ public final class PythonSensor implements Sensor {
     this.analysisWarnings = analysisWarnings;
     this.sensorTelemetryStorage = new SensorTelemetryStorage();
     this.architectureCallback = architectureUDGBuilderWrapper.architectureUdgBuilder();
+    this.symbolTableWrapper = symbolTableWrapper;
   }
 
   private static PythonChecks createPythonChecks(CheckFactory checkFactory, RepositoryInfoProvider[] editionMetadataProviders) {
@@ -147,6 +152,8 @@ public final class PythonSensor implements Sensor {
     CacheContext cacheContext = CacheContextImpl.of(context);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context, projectConfigurationBuilder);
     pythonIndexer.setSonarLintCache(sonarLintCache);
+    TypeShed.setProjectLevelSymbolTable(pythonIndexer.projectLevelSymbolTable());
+    symbolTableWrapper.setSymbolTable(pythonIndexer.projectLevelSymbolTable());
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser::create,
       pythonIndexer, architectureCallback, noSonarLineInfoCollector, analysisWarnings);
     scanner.execute(pythonFiles, context);
@@ -255,6 +262,7 @@ public final class PythonSensor implements Sensor {
     boolean usedConventionalFolders = method == PackageResolutionResult.PrimaryResolutionMethod.CONVENTIONAL_FOLDERS;
     boolean usedBaseDir = method == PackageResolutionResult.PrimaryResolutionMethod.BASE_DIR;
     boolean usedLegacyInitPy = method == PackageResolutionResult.PrimaryResolutionMethod.LEGACY_INIT_PY;
+    boolean usedA3sContext = method == PackageResolutionResult.PrimaryResolutionMethod.A3S_CONTEXT;
 
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_PYPROJECT_TOML, usedPyproject ? 1 : 0);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_SETUP_PY, usedSetupPy ? 1 : 0);
@@ -262,6 +270,7 @@ public final class PythonSensor implements Sensor {
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_CONVENTIONAL_FOLDERS, usedConventionalFolders ? 1 : 0);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_BASE_DIR, usedBaseDir ? 1 : 0);
     sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_LEGACY_INIT_PY, usedLegacyInitPy ? 1 : 0);
+    sensorTelemetryStorage.updateMetric(TelemetryMetricKey.PYTHON_PACKAGE_RESOLVED_VIA_A3S_CONTEXT, usedA3sContext ? 1 : 0);
   }
 
   private void updateBuildSystemTelemetry(NamespacePackageTelemetry telemetry) {

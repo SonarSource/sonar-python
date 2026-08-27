@@ -377,7 +377,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   }
 
   @Override
-  void addFile(PythonInputFile inputFile) throws IOException {
+  protected void addFile(PythonInputFile inputFile) throws IOException {
     super.addFile(inputFile);
     indexedFiles.put(inputFile.wrappedFile().absolutePath(), inputFile.wrappedFile());
     recreateProjectLevelTypeTable();

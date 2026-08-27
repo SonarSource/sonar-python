@@ -89,6 +89,7 @@ import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
 import org.sonar.plugins.python.editions.RepositoryInfoProviderWrapper;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.indexer.ProjectLevelSymbolTableWrapper;
 import org.sonar.plugins.python.indexer.PythonIndexerWrapper;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
@@ -2133,13 +2134,14 @@ class PythonSensorTest {
       checkFactory,
       mock(NoSonarFilter.class),
       new PythonCustomRuleRepositoryWrapper(customRuleRepositories),
-      new PythonIndexerWrapper(indexer),
+      new PythonIndexerWrapper(context.config(), indexer),
       new SonarLintCacheWrapper(),
       analysisWarnings,
       new RepositoryInfoProviderWrapper(),
       architectureUDGBuilderWrapper,
       new NoSonarLineInfoCollector(),
-      projectConfigurationBuilder
+      projectConfigurationBuilder,
+      new ProjectLevelSymbolTableWrapper()
     );
   }
 

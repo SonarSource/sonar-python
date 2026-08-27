@@ -50,6 +50,7 @@ public enum TelemetryMetricKey {
   PYTHON_PACKAGE_RESOLVED_VIA_CONVENTIONAL_FOLDERS("python.packages.resolved_via_conventional_folders"),
   PYTHON_PACKAGE_RESOLVED_VIA_BASE_DIR("python.packages.resolved_via_base_dir"),
   PYTHON_PACKAGE_RESOLVED_VIA_LEGACY_INIT_PY("python.packages.resolved_via_legacy_init_py"),
+  PYTHON_PACKAGE_RESOLVED_VIA_A3S_CONTEXT("python.packages.resolved_via_a3s_context"),
   // Build system flags (1 = detected, 0 = not detected) - only applicable when pyproject.toml is used
   PYTHON_PACKAGE_BUILD_SYSTEM_SETUPTOOLS("python.packages.build_system.setuptools"),
   PYTHON_PACKAGE_BUILD_SYSTEM_POETRY("python.packages.build_system.poetry"),

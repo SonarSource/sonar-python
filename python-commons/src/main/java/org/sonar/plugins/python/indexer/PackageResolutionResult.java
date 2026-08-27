@@ -48,7 +48,10 @@ public record PackageResolutionResult(
     /** Fallback to project base directory */
     BASE_DIR,
     /** No build config files found; roots are computed by scanning __init__.py chains in source files */
-    LEGACY_INIT_PY
+    LEGACY_INIT_PY,
+
+    /** Roots were provided by A3S context */
+    A3S_CONTEXT
   }
 
   /**
@@ -94,5 +97,9 @@ public record PackageResolutionResult(
 
   public static PackageResolutionResult fromLegacyInitPy(List<String> roots) {
     return new PackageResolutionResult(roots, PrimaryResolutionMethod.LEGACY_INIT_PY, BuildSystem.NONE);
+  }
+
+  public static PackageResolutionResult fromA3SContext(List<String> roots) {
+    return new PackageResolutionResult(roots, PrimaryResolutionMethod.A3S_CONTEXT, BuildSystem.NONE);
   }
 }

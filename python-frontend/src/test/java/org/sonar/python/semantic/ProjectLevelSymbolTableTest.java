@@ -1375,4 +1375,30 @@ class ProjectLevelSymbolTableTest {
       .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly("^items/(?P<pk>\\d+)/(?P<slug>[\\w-]+)/$"));
   }
 
+  @Test
+  void restore_django_view() {
+    ProjectLevelSymbolTable projectSymbolTable = empty();
+
+    projectSymbolTable.restoreDjangoView("views.article_detail", Set.of("article/<int:pk>/"));
+
+    assertThat(projectSymbolTable.isDjangoView("views.article_detail")).isTrue();
+    assertThat(projectSymbolTable.getDjangoViewInfo("views.article_detail"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly("article/<int:pk>/"));
+  }
+
+  @Test
+  void restore_django_view_filters_null_url_patterns() {
+    ProjectLevelSymbolTable projectSymbolTable = empty();
+    Set<String> urlPatterns = new HashSet<>();
+    urlPatterns.add("items/<int:pk>/");
+    urlPatterns.add(null);
+
+    projectSymbolTable.restoreDjangoView("views.item_detail", urlPatterns);
+
+    assertThat(projectSymbolTable.getDjangoViewInfo("views.item_detail"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly("items/<int:pk>/"));
+  }
+
 }

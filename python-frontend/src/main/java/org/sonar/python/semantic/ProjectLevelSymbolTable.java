@@ -88,7 +88,7 @@ public class ProjectLevelSymbolTable {
     this.globalDescriptorsByModuleName = new ConcurrentHashMap<>();
     this.djangoViews = new ConcurrentHashMap<>();
     this.importsByModule = new ConcurrentHashMap<>();
-    this.projectBasePackages = new HashSet<>();
+    this.projectBasePackages = ConcurrentHashMap.newKeySet();
   }
 
   /**
@@ -243,12 +243,20 @@ public class ProjectLevelSymbolTable {
     return Optional.ofNullable(djangoViews.get(fqn));
   }
 
-  public synchronized void addProjectPackage(String projectPackage) {
+  public Map<String, DjangoViewInfo> djangoViews(){
+    return Collections.unmodifiableMap(djangoViews);
+  }
+  public void restoreDjangoView(String viewFqn, Set<String> urlPatterns) {
+    Set<String> patterns = urlPatterns.stream().filter(Objects::nonNull).collect(Collectors.toSet());
+    djangoViews.put(viewFqn, new DjangoViewInfo(patterns));
+  }
+
+  public void addProjectPackage(String projectPackage) {
     projectBasePackages.add(projectPackage.split("\\.", 2)[0]);
   }
 
   public Set<String> projectBasePackages() {
-    return projectBasePackages;
+    return Collections.unmodifiableSet(new HashSet<>(projectBasePackages));
   }
 
   /**
@@ -263,6 +271,10 @@ public class ProjectLevelSymbolTable {
     String prefixWithDot = prefix + ".";
     return globalDescriptorsByModuleName.keySet().stream()
       .anyMatch(moduleName -> moduleName.startsWith(prefixWithDot));
+  }
+
+  public Map<String, Set<Descriptor>> globalDescriptorsByModuleName() {
+    return Collections.unmodifiableMap(globalDescriptorsByModuleName);
   }
 
   public TypeShedDescriptorsProvider typeShedDescriptorsProvider() {
@@ -282,7 +294,7 @@ public class ProjectLevelSymbolTable {
     }
     Map<String, Symbol> symbolsByFqn = new HashMap<>();
     cachedSymbols = new HashSet<>();
-    for (Descriptor descriptor : typeShedDescriptorsProvider.stubFilesDescriptors()) {
+    for (Descriptor descriptor : typeShedDescriptorsProvider().stubFilesDescriptors()) {
       if (descriptor.fullyQualifiedName() != null) {
         Symbol symbol = symbolsByFqn.computeIfAbsent(descriptor.fullyQualifiedName(), k ->
           DescriptorUtils.symbolFromDescriptor(descriptor, this, null, new HashMap<>(), new HashMap<>()));
