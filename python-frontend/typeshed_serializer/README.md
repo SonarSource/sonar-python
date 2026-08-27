@@ -14,12 +14,12 @@ tox -e selective-serialize -- custom
 ## Run a custom test
 
 ```bash
-tox -e py39 -- tests/runners/test_tox_runner.py
+tox -e py312 -- tests/runners/test_tox_runner.py
 ```
 ## Run one specific unit test
 
 ```bash
-tox -e py39 -- tests/runners/test_tox_runner.py::ToxRunnerTest::test_dry_run_unchanged_checksums -v 
+tox -e py312 -- tests/runners/test_tox_runner.py::ToxRunnerTest::test_dry_run_unchanged_checksums -v
 ```
 
 ## Dry run of tox_runner

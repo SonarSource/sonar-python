@@ -208,7 +208,7 @@ class ToxRunnerTest(unittest.TestCase):
             mocks.prev_checksum.assert_any_call(tox_runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
             mocks.checksum.assert_any_call(self.FILE_NAMES, tox_runner.normalize_text_files)
             mocks.subprocess.run.assert_called_with(
-                ["tox", "-e", "py39"], check=True
+                ["tox", "-e", "py312"], check=True
             )
 
     def test_tox_runner_modified_checksum(self):
@@ -225,7 +225,7 @@ class ToxRunnerTest(unittest.TestCase):
             mocks.checksum.assert_called_with(self.FILE_NAMES, tox_runner.normalize_text_files)
             expected_calls = [
                 mock.call(['tox', '-e', 'serialize'], check=True),
-                mock.call(['tox', '-e', 'py39'], check=True)
+                mock.call(['tox', '-e', 'py312'], check=True)
             ]
             mocks.subprocess.run.assert_has_calls(expected_calls)
 
@@ -392,7 +392,7 @@ class ToxRunnerTest(unittest.TestCase):
 
             # Should only run tests
             mocks.subprocess.run.assert_called_with(
-                ["tox", "-e", "py39"], check=True
+                ["tox", "-e", "py312"], check=True
             )
 
             # Should not update any checksums
@@ -873,7 +873,7 @@ class ToxRunnerTest(unittest.TestCase):
 
             expected_calls = [
                 mock.call(['tox', '-e', 'selective-serialize', '--', 'custom'], check=True),
-                mock.call(['tox', '-e', 'py39'], check=True)
+                mock.call(['tox', '-e', 'py312'], check=True)
             ]
             mocks.subprocess.run.assert_has_calls(expected_calls)
             mocks.update_folder_checksums_for_changed_serializers.assert_any_call(["custom"])
@@ -891,7 +891,7 @@ class ToxRunnerTest(unittest.TestCase):
 
             expected_calls = [
                 mock.call(['tox', '-e', 'selective-serialize', '--', 'custom,import'], check=True),
-                mock.call(['tox', '-e', 'py39'], check=True)
+                mock.call(['tox', '-e', 'py312'], check=True)
             ]
             mocks.subprocess.run.assert_has_calls(expected_calls)
             mocks.update_folder_checksums_for_changed_serializers.assert_any_call(["custom", "import"])

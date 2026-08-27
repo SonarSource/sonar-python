@@ -30,7 +30,7 @@ The Python interpreter is not required in that case. Typeshed stub generation is
 **Prerequisites:**
 - JDK 11
 - Maven 3.0.0 or newer
-- Python 3.9 or newer
+- Python 3.12
 - [tox](https://tox.readthedocs.io/en/latest/) - `pip install tox`
 - Run `git submodule update --init` to retrieve [Typeshed](https://github.com/python/typeshed) and [SKlearn stubs](https://github.com/microsoft/python-type-stubs/tree/main/stubs/sklearn) as a Git submodules.
 - Run the following commands to extract only the needed files for the SKlearn stubs
@@ -66,7 +66,7 @@ Alternatively, you can generate stubs during a Maven build by adding the `-Dgene
 mvn clean install -DgenerateTypeshedStubs
 ```
 
-Note: Stub generation requires Python 3.9+ and tox to be installed.
+Note: Stub generation requires Python 3.12 and tox to be installed.
 
 ## How to contribute
 
