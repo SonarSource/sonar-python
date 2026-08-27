@@ -16,13 +16,29 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class SQLQueriesCheckTest {
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/sqlQuery.py", new SQLQueriesCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/sqlQueryDjango.py", new SQLQueriesCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/sqlQueryOracleDB.py", new SQLQueriesCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/sqlQueryOracleDBFromImport.py", new SQLQueriesCheck());
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/hotspots/sqlQueryNoDjango.py", new SQLQueriesCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/hotspots/sqlQueryNoOracleDB.py", new SQLQueriesCheck());
+  }
+
+  /**
+   * The check instance is reused across files during a real analysis (see PythonScanner).
+   * This verifies that isUsingOracleDB (and the other file-scoped flags) are properly reset
+   * between files instead of leaking from one file to the next.
+   */
+  @Test
+  void test_state_is_reset_between_files() {
+    PythonCheckVerifier.verify(List.of(
+      "src/test/resources/checks/hotspots/sqlQueryOracleDB.py",
+      "src/test/resources/checks/hotspots/sqlQueryNoOracleDB.py"), new SQLQueriesCheck());
   }
 }

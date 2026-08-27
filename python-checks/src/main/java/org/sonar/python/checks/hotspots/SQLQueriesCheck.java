@@ -16,9 +16,7 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -44,8 +42,12 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 public class SQLQueriesCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S2077";
   private static final String MESSAGE = "Make sure that formatting this SQL query is safe here.";
+  private static final Set<String> ORACLEDB_SINK_METHODS = Set.of("execute", "executemany", "parse", "prepare", "fetch_df_all", "fetch_df_batches");
+  private static final Set<String> ORACLEDB_MODULE_FQNS = Set.of("oracledb", "cx_Oracle");
+  private static final Set<String> ORACLEDB_CONNECT_FQNS = Set.of("oracledb.connect", "cx_Oracle.connect");
   private boolean isUsingDjangoModel = false;
   private boolean isUsingDjangoDBConnection = false;
+  private boolean isUsingOracleDB = false;
 
   @Override
   public void initialize(Context context) {
@@ -54,33 +56,65 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
   }
 
   private void visitFile(SubscriptionContext ctx) {
-    isUsingDjangoModel = false;
-    isUsingDjangoDBConnection = false;
     FileInput tree = (FileInput) ctx.syntaxNode();
-    SymbolsFromImport visitor = new SymbolsFromImport();
+    DatabaseApiUsageVisitor visitor = new DatabaseApiUsageVisitor();
     tree.accept(visitor);
-    visitor.symbols.stream()
-      .filter(Objects::nonNull)
-      .map(Symbol::fullyQualifiedName)
-      .filter(Objects::nonNull)
-      .forEach(qualifiedName -> {
-        if (qualifiedName.contains("django.db.models")) {
-          isUsingDjangoModel = true;
-        }
-        if (qualifiedName.contains("django.db.connection")) {
-          isUsingDjangoDBConnection = true;
-        }
-      });
+    isUsingDjangoModel = visitor.usesDjangoModel;
+    isUsingDjangoDBConnection = visitor.usesDjangoDbConnection;
+    isUsingOracleDB = visitor.usesOracleDb;
   }
 
-  private static class SymbolsFromImport extends BaseTreeVisitor {
+  private static class DatabaseApiUsageVisitor extends BaseTreeVisitor {
 
-    private Set<Symbol> symbols = new HashSet<>();
+    private boolean usesDjangoModel = false;
+    private boolean usesDjangoDbConnection = false;
+    private boolean usesOracleDb = false;
 
     @Override
     public void visitAliasedName(AliasedName aliasedName) {
-      List<Name> names = aliasedName.dottedName().names();
-      symbols.add(names.get(names.size() - 1).symbol());
+      Name boundName = aliasedName.alias();
+      if (boundName == null) {
+        boundName = aliasedName.dottedName().names().get(0);
+      }
+      Symbol symbol = boundName.symbol();
+      String fullyQualifiedName = symbol != null ? symbol.fullyQualifiedName() : null;
+      if (fullyQualifiedName != null) {
+        if (fullyQualifiedName.contains("django.db.models")) {
+          usesDjangoModel = true;
+        }
+        if (fullyQualifiedName.contains("django.db.connection")) {
+          usesDjangoDbConnection = true;
+        }
+      }
+    }
+
+    @Override
+    public void visitCallExpression(CallExpression callExpression) {
+      if (isOracleDbConnectCall(callExpression)) {
+        usesOracleDb = true;
+      }
+      super.visitCallExpression(callExpression);
+    }
+
+    /**
+     * Recognizes both the {@code from oracledb import connect; connect(...)} idiom (the callee
+     * symbol itself resolves to FQN "oracledb.connect") and the {@code import oracledb;
+     * oracledb.connect(...)} idiom (no typeshed stub, so the qualifier only ever resolves to FQN
+     * "oracledb", never "oracledb.connect" — matched by qualifier FQN plus attribute name instead).
+     */
+    private static boolean isOracleDbConnectCall(CallExpression callExpression) {
+      Symbol calleeSymbol = callExpression.calleeSymbol();
+      if (calleeSymbol != null && calleeSymbol.fullyQualifiedName() != null && ORACLEDB_CONNECT_FQNS.contains(calleeSymbol.fullyQualifiedName())) {
+        return true;
+      }
+      if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+        QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
+        if ("connect".equals(qualifiedExpression.name().name()) && qualifiedExpression.qualifier().is(Tree.Kind.NAME)) {
+          Symbol qualifierSymbol = ((Name) qualifiedExpression.qualifier()).symbol();
+          return qualifierSymbol != null && qualifierSymbol.fullyQualifiedName() != null && ORACLEDB_MODULE_FQNS.contains(qualifierSymbol.fullyQualifiedName());
+        }
+      }
+      return false;
     }
   }
 
@@ -88,8 +122,11 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
     return isUsingDjangoModel && ("raw".equals(functionName) || "extra".equals(functionName));
   }
 
-  private boolean isSQLQueryFromDjangoDBConnection(String functionName) {
-    return isUsingDjangoDBConnection && "execute".equals(functionName);
+  private boolean isSQLQueryFromDBConnection(String functionName) {
+    if (isUsingDjangoDBConnection && "execute".equals(functionName)) {
+      return true;
+    }
+    return isUsingOracleDB && ORACLEDB_SINK_METHODS.contains(functionName);
   }
 
   private void checkCallExpression(SubscriptionContext context) {
@@ -103,7 +140,7 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
 
     if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
       String functionName = ((QualifiedExpression) callExpression.callee()).name().name();
-      if ((isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDjangoDBConnection(functionName))
+      if ((isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDBConnection(functionName))
         && !isException(callExpression, functionName)) {
         addIssue(context, callExpression);
       }
