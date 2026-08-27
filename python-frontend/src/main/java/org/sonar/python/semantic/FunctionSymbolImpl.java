@@ -123,7 +123,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     functionDefinitionLocation = null;
     declaredReturnType = anyType();
     isStub = true;
-    this.validForPythonVersions = new HashSet<>(validFor);
+    this.validForSemanticPythonVersions = new HashSet<>(validFor);
   }
 
   public FunctionSymbolImpl(FunctionDescriptor functionDescriptor, String symbolName) {
@@ -170,7 +170,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     }
     isStub = functionSymbol.isStub();
     djangoViewInfo = functionSymbolImpl.djangoViewInfo;
-    validForPythonVersions = functionSymbolImpl.validForPythonVersions;
+    validForSemanticPythonVersions = functionSymbolImpl.validForSemanticPythonVersions;
 
   }
 

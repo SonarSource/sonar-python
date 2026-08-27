@@ -91,7 +91,7 @@ public class TypeShed {
   }
 
   private static final Logger LOG = LoggerFactory.getLogger(TypeShed.class);
-  private static volatile Set<String> supportedPythonVersions;
+  private static volatile Set<String> supportedSemanticPythonVersions;
   private static volatile ProjectLevelSymbolTable projectLevelSymbolTable;
 
   private TypeShed() {
@@ -110,7 +110,9 @@ public class TypeShed {
       resolutionLock.lock();
       try {
         if (builtins == null) {
-          supportedPythonVersions = ProjectPythonVersion.currentVersions().stream().map(PythonVersionUtils.Version::serializedValue).collect(Collectors.toSet());
+          supportedSemanticPythonVersions = ProjectPythonVersion.currentSemanticVersions().stream()
+            .map(PythonVersionUtils.SemanticVersion::serializedValue)
+            .collect(Collectors.toSet());
           Map<String, Symbol> builtinMap = new HashMap<>(getSymbolsFromProtobufModule(BUILTINS_FQN, PROTOBUF));
           builtinMap.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
           builtins = Collections.unmodifiableMap(builtinMap);
@@ -252,15 +254,15 @@ public class TypeShed {
     return moduleName + "." + localName;
   }
 
-  public static boolean isValidForProjectPythonVersion(List<String> validForPythonVersions) {
-    if (validForPythonVersions.isEmpty()) {
+  public static boolean isValidForProjectSemanticPythonVersion(List<String> validForSemanticPythonVersions) {
+    if (validForSemanticPythonVersions.isEmpty()) {
       return true;
     }
-    if (supportedPythonVersions == null) {
-      throw new IllegalStateException("supportedPythonVersion is uninitialized. Call builtinSymbols() first");
+    if (supportedSemanticPythonVersions == null) {
+      throw new IllegalStateException("supportedSemanticPythonVersions is uninitialized. Call builtinSymbols() first");
     }
-    HashSet<String> intersection = new HashSet<>(validForPythonVersions);
-    intersection.retainAll(supportedPythonVersions);
+    HashSet<String> intersection = new HashSet<>(validForSemanticPythonVersions);
+    intersection.retainAll(supportedSemanticPythonVersions);
     return !intersection.isEmpty();
   }
 
@@ -323,7 +325,7 @@ public class TypeShed {
     try {
       builtins = null;
       typeShedSymbols.clear();
-      supportedPythonVersions = null;
+      supportedSemanticPythonVersions = null;
       builtinSymbols();
     } finally {
       resolutionLock.unlock();
@@ -367,21 +369,24 @@ public class TypeShed {
 
   /**
    * Some special symbols need NOT to be ambiguous for the frontend to work properly.
-   * This method sort ambiguous symbol by python version and returns the one which is valid for
-   * the most recent Python version.
+   * This method sorts ambiguous symbols by semantic-model version and returns the one which is valid for
+   * the most recent semantic model.
    */
   @CheckForNull
   static Symbol disambiguateWithLatestPythonSymbol(Set<Symbol> alternatives) {
     int max = Integer.MIN_VALUE;
-    Symbol latestPythonSymbol = null;
+    Symbol latestSemanticPythonSymbol = null;
     for (Symbol alternative : alternatives) {
-      int maxPythonVersionForSymbol = ((SymbolImpl) alternative).validForPythonVersions().stream().mapToInt(Integer::parseInt).max().orElse(max);
-      if (maxPythonVersionForSymbol > max) {
-        max = maxPythonVersionForSymbol;
-        latestPythonSymbol = alternative;
+      int maxSemanticPythonVersionForSymbol = ((SymbolImpl) alternative).validForSemanticPythonVersions().stream()
+        .mapToInt(Integer::parseInt)
+        .max()
+        .orElse(max);
+      if (maxSemanticPythonVersionForSymbol > max) {
+        max = maxSemanticPythonVersionForSymbol;
+        latestSemanticPythonSymbol = alternative;
       }
     }
-    return latestPythonSymbol;
+    return latestSemanticPythonSymbol;
   }
 
   private static boolean isAmbiguousSymbolOfClasses(Symbol symbol) {
@@ -426,16 +431,16 @@ public class TypeShed {
     // TODO: Use a common proxy interface Descriptor instead of using Object
     Map<String, Set<Object>> descriptorsByName = new HashMap<>();
     moduleSymbol.getClassesList().stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> isValidForProjectSemanticPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByName.computeIfAbsent(proto.getName(), d -> new HashSet<>()).add(proto));
     moduleSymbol.getFunctionsList().stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> isValidForProjectSemanticPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByName.computeIfAbsent(proto.getName(), d -> new HashSet<>()).add(proto));
     moduleSymbol.getOverloadedFunctionsList().stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> isValidForProjectSemanticPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByName.computeIfAbsent(proto.getName(), d -> new HashSet<>()).add(proto));
     moduleSymbol.getVarsList().stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> isValidForProjectSemanticPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByName.computeIfAbsent(proto.getName(), d -> new HashSet<>()).add(proto));
 
     Map<String, Symbol> deserializedSymbols = new HashMap<>();

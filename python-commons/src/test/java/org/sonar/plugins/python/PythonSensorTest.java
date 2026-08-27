@@ -963,6 +963,8 @@ class PythonSensorTest {
     activeRules = new ActiveRulesBuilder().build();
 
     sensor().execute(context);
+    assertThat(PythonSensor.UNSET_VERSION_WARNING)
+      .contains("Python versions 3.10 through 3.14");
     assertThat(logTester.logs(Level.WARN)).contains(PythonSensor.UNSET_VERSION_WARNING);
     verify(analysisWarning, times(1)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
   }
@@ -1031,19 +1033,19 @@ class PythonSensorTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"2.7", "3", "3.1", "3.9"})
-  void test_python_version_pre_310(String version) {
-    setup_typing_concise_rule(version);
-
-    assertThat(context.allIssues()).isEmpty();
-  }
-
-  @ParameterizedTest
-  @ValueSource(strings = {"3.10", "3.11", "3.12"})
-  void test_python_version_post_310(String version) {
+  @ValueSource(strings = {"3", "3.10", "3.11", "3.12"})
+  void test_python_version_at_or_mapped_to_supported_floor(String version) {
     setup_typing_concise_rule(version);
 
     assertThat(context.allIssues()).hasSize(1);
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"2.7", "3.1", "3.8", "3.9"})
+  void test_explicit_legacy_python_version_is_preserved_for_rules(String version) {
+    setup_typing_concise_rule(version);
+
+    assertThat(context.allIssues()).isEmpty();
   }
 
   @Test
@@ -1058,7 +1060,7 @@ class PythonSensorTest {
   void test_python_version_unknown_lower() {
     setup_typing_concise_rule("2.4569");
 
-    assertThat(ProjectPythonVersion.currentVersions()).containsExactlyElementsOf(PythonVersionUtils.allVersions());
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_38);
     assertThat(context.allIssues()).isEmpty();
   }
 

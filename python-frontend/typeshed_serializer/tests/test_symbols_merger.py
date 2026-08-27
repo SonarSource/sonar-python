@@ -25,7 +25,7 @@ from serializer.symbols import MergedModuleSymbol, TypeKind
 def test_build_multiple_python_version(typeshed_stdlib):
     serializers.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
     model_by_version = TypeshedSerializer().build_for_every_python_version()
-    assert set(model_by_version.keys()) == {'38', '39', '310', '311', '312', '313', '314'}
+    assert set(model_by_version.keys()) == {'310', '311', '312', '313', '314'}
 
 
 def test_merge_multiple_python_versions(typeshed_stdlib):
@@ -33,7 +33,7 @@ def test_merge_multiple_python_versions(typeshed_stdlib):
     merged_modules = TypeshedSerializer().get_merged_modules()
     for mod in merged_modules.values():
         assert isinstance(mod, MergedModuleSymbol)
-    assert len(merged_modules) == 45
+    assert len(merged_modules) == 46
 
 
 def test_basic_module_merge(typeshed_stdlib):

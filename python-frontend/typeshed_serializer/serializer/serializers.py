@@ -37,10 +37,11 @@ CUSTOM_STUBS_PATH = "../resources/custom"
 SONAR_CUSTOM_BASE_STUB_MODULE = "SonarPythonAnalyzerFakeStub"
 IMPORTER_FILE_NAME = "../resources/importer/sonar_third_party_libs.py"
 IMPORTER_FQN = "sonar_third_party_libs"
-SUPPORTED_PYTHON_VERSIONS = ((3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14))
+SUPPORTED_PYTHON_VERSIONS = ((3, 10), (3, 11), (3, 12), (3, 13), (3, 14))
+DEFAULT_PYTHON_VERSION = SUPPORTED_PYTHON_VERSIONS[0]
 
 
-def get_options(python_version=(3, 8)):
+def get_options(python_version=DEFAULT_PYTHON_VERSION):
     opt = options.Options()
     # Setting incremental to false to avoid issues with mypy caching
     opt.incremental = False
@@ -117,7 +118,7 @@ class Serializer(ABC):
     handler.setFormatter(log_formatter)
     logger.addHandler(handler)
 
-    def __init__(self, is_debug=False, python_version=(3, 8)):
+    def __init__(self, is_debug=False, python_version=DEFAULT_PYTHON_VERSION):
         self.is_debug = is_debug
         self.opt = get_options(python_version)
 

@@ -87,15 +87,9 @@ class TypeShedTest {
     ClassSymbol strClass = TypeShed.typeShedClass("str");
     assertThat(strClass.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "Sequence"));
-    // python 3.9 support
+    // Python 3.9 additions remain available for every supported Python version.
     assertThat(strClass.resolveMember("removeprefix")).isNotEmpty();
     assertThat(strClass.resolveMember("removesuffix")).isNotEmpty();
-
-    setPythonVersions(PythonVersionUtils.fromString("3.8"));
-    strClass = TypeShed.typeShedClass("str");
-    assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "Sequence"));
-    assertThat(strClass.resolveMember("removeprefix")).isEmpty();
-    assertThat(strClass.resolveMember("removesuffix")).isEmpty();
 
     setPythonVersions(PythonVersionUtils.allVersions());
   }
@@ -478,7 +472,7 @@ class TypeShedTest {
   @Test
   void pythonVersions() {
     Symbol range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("38", "39", "310", "311", "312", "313", "314");
+    assertThat(((SymbolImpl) range).validForSemanticPythonVersions()).containsExactlyInAnyOrder("310", "311", "312", "313", "314");
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
 
     // python 2
@@ -488,9 +482,9 @@ class TypeShedTest {
     assertThat(range).isNotNull();
 
     // python 3
-    setPythonVersions(PythonVersionUtils.fromString("3.8"));
+    setPythonVersions(PythonVersionUtils.fromString("3.10"));
     range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("38", "39", "310", "311", "312", "313", "314");
+    assertThat(((SymbolImpl) range).validForSemanticPythonVersions()).containsExactlyInAnyOrder("310", "311", "312", "313", "314");
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
 
     setPythonVersions(PythonVersionUtils.fromString("3.10"));
@@ -606,7 +600,7 @@ class TypeShedTest {
   @Test
   void stubFilesSymbols_third_party_symbols_should_not_be_null() {
     // six modules contain ambiguous symbols that only contain class symbols
-    // however third party symbols don't have validForPythonVersions field set
+    // however third party symbols don't have semantic-version validity metadata set
     symbolsForModule("six");
     assertThat(TypeShed.stubFilesSymbols()).doesNotContainNull();
   }

@@ -62,7 +62,13 @@ public interface SubscriptionContext {
   }
 
   /**
-   * List of Python versions this project is compatible with.
+   * Returns normalized Python source-version compatibility buckets derived from the project configuration.
+   * Configured versions older than 3.8 are represented by {@link PythonVersionUtils.Version#V_38}.
+   * Version-sensitive rules should use these versions to determine which language features and policies apply.
+   * They do not identify the serialized semantic models used during analysis; older source versions can be mapped
+   * to a newer semantic model by {@link PythonVersionUtils#toSupportedSemanticVersions(Set)}.
+   *
+   * @return the normalized source-version compatibility buckets
    */
   @Beta
   Set<PythonVersionUtils.Version> sourcePythonVersions();

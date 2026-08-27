@@ -41,18 +41,15 @@ class UnionTypeExpressionCheckTest {
   }
 
   @Test
-  void test_python_3_9() {
-    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_39, PythonVersionUtils.Version.V_310));
+  void test_explicit_python_3_9() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_39));
     var issues = PythonCheckVerifier.issues("src/test/resources/checks/unionTypeExpression.py", new UnionTypeExpressionCheck());
-    assertThat(issues)
-      .isEmpty();
+    assertThat(issues).isEmpty();
   }
 
   @Test
-  void test_python_unknown_version() {
+  void test_all_supported_python_versions() {
     ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
-    var issues = PythonCheckVerifier.issues("src/test/resources/checks/unionTypeExpression.py", new UnionTypeExpressionCheck());
-    assertThat(issues)
-      .isEmpty();
+    PythonCheckVerifier.verify("src/test/resources/checks/unionTypeExpression.py", new UnionTypeExpressionCheck());
   }
 }

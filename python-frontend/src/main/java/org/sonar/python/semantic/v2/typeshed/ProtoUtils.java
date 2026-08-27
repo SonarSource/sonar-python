@@ -45,12 +45,12 @@ public class ProtoUtils {
     return descriptors.iterator().next();
   }
 
-  static boolean isValidForPythonVersion(List<String> validForPythonVersions, Set<String> supportedPythonVersions) {
-    if (validForPythonVersions.isEmpty()) {
+  static boolean isValidForSemanticPythonVersion(List<String> validForSemanticPythonVersions, Set<String> supportedSemanticPythonVersions) {
+    if (validForSemanticPythonVersions.isEmpty()) {
       return true;
     }
-    HashSet<String> intersection = new HashSet<>(validForPythonVersions);
-    intersection.retainAll(supportedPythonVersions);
+    HashSet<String> intersection = new HashSet<>(validForSemanticPythonVersions);
+    intersection.retainAll(supportedSemanticPythonVersions);
     return !intersection.isEmpty();
   }
 }

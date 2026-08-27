@@ -34,23 +34,26 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 
 public class PythonVersionUtils {
 
+  /**
+   * Normalized Python source-version compatibility buckets derived from project configuration and exposed to
+   * version-sensitive rules. Configured versions older than 3.8 are represented by {@link #V_38}.
+   * These values do not identify the serialized semantic models used during analysis.
+   */
   public enum Version {
-    V_38(3, 8, "38"),
-    V_39(3, 9, "39"),
-    V_310(3, 10, "310"),
-    V_311(3, 11, "311"),
-    V_312(3, 12, "312"),
-    V_313(3, 13, "313"),
-    V_314(3, 14, "314");
+    V_38(3, 8),
+    V_39(3, 9),
+    V_310(3, 10),
+    V_311(3, 11),
+    V_312(3, 12),
+    V_313(3, 13),
+    V_314(3, 14);
 
     private final int major;
     private final int minor;
-    private final String serializedValue;
 
-    Version(int major, int minor, String serializedValue) {
+    Version(int major, int minor) {
       this.major = major;
       this.minor = minor;
-      this.serializedValue = serializedValue;
     }
 
     public int major() {
@@ -61,8 +64,14 @@ public class PythonVersionUtils {
       return minor;
     }
 
+    /**
+     * @deprecated Source versions no longer have a one-to-one correspondence with serialized semantic models.
+     * Use {@link SemanticVersion#serializedValue()} after calling
+     * {@link PythonVersionUtils#toSupportedSemanticVersions(Set)} when selecting semantic data.
+     */
+    @Deprecated(since = "5.31")
     public String serializedValue() {
-      return serializedValue;
+      return Integer.toString(major) + minor;
     }
 
     public int compare(int major, int minor) {
@@ -78,22 +87,52 @@ public class PythonVersionUtils {
     }
   }
 
-  private static final Version MIN_SUPPORTED_VERSION = V_38;
+  /**
+   * Python versions for which serialized semantic-model data is available.
+   * These values are internal analysis targets and are distinct from configured source-version compatibility.
+   * Values must be declared from oldest to newest so that the supported range can be derived from their order.
+   */
+  public enum SemanticVersion {
+    V_310(3, 10),
+    V_311(3, 11),
+    V_312(3, 12),
+    V_313(3, 13),
+    V_314(3, 14);
+
+    private final int major;
+    private final int minor;
+
+    SemanticVersion(int major, int minor) {
+      this.major = major;
+      this.minor = minor;
+    }
+
+    /**
+     * Returns the version identifier stored in serialized semantic-model data.
+     */
+    public String serializedValue() {
+      return Integer.toString(major) + minor;
+    }
+
+    @Override
+    public String toString() {
+      return major + "." + minor;
+    }
+  }
+
+  private static final Version MIN_RECOGNIZED_SOURCE_VERSION = V_38;
+  private static final Version MIN_SUPPORTED_SOURCE_VERSION = V_310;
   public static final Version MAX_SUPPORTED_VERSION = V_314;
 
-  /**
-   * Note that versions between 3 and 3.8 are currently mapped to 3.8 because
-   * we don't take into account those version during typeshed symbols serialization
-   */
   private static final Map<String, Version> STRING_VERSION_MAP = Map.ofEntries(
-    Map.entry("3.0", MIN_SUPPORTED_VERSION),
-    Map.entry("3.1", MIN_SUPPORTED_VERSION),
-    Map.entry("3.2", MIN_SUPPORTED_VERSION),
-    Map.entry("3.3", MIN_SUPPORTED_VERSION),
-    Map.entry("3.4", MIN_SUPPORTED_VERSION),
-    Map.entry("3.5", MIN_SUPPORTED_VERSION),
-    Map.entry("3.6", MIN_SUPPORTED_VERSION),
-    Map.entry("3.7", MIN_SUPPORTED_VERSION),
+    Map.entry("3.0", MIN_RECOGNIZED_SOURCE_VERSION),
+    Map.entry("3.1", MIN_RECOGNIZED_SOURCE_VERSION),
+    Map.entry("3.2", MIN_RECOGNIZED_SOURCE_VERSION),
+    Map.entry("3.3", MIN_RECOGNIZED_SOURCE_VERSION),
+    Map.entry("3.4", MIN_RECOGNIZED_SOURCE_VERSION),
+    Map.entry("3.5", MIN_RECOGNIZED_SOURCE_VERSION),
+    Map.entry("3.6", MIN_RECOGNIZED_SOURCE_VERSION),
+    Map.entry("3.7", MIN_RECOGNIZED_SOURCE_VERSION),
     Map.entry("3.8", V_38),
     Map.entry("3.9", V_39),
     Map.entry("3.10", V_310),
@@ -157,8 +196,55 @@ public class PythonVersionUtils {
     return pythonVersions;
   }
 
+  /**
+   * Returns the source versions targeted by default when no project version is configured.
+   */
   public static Set<Version> allVersions() {
-    return EnumSet.allOf(Version.class);
+    return EnumSet.range(MIN_SUPPORTED_SOURCE_VERSION, MAX_SUPPORTED_VERSION);
+  }
+
+  /**
+   * Maps declared source versions to versions for which serialized semantic data is available.
+   * Source versions older than 3.10 use the Python 3.10 semantic model.
+   */
+  public static Set<SemanticVersion> toSupportedSemanticVersions(Set<Version> sourcePythonVersions) {
+    Set<SemanticVersion> semanticVersions = EnumSet.noneOf(SemanticVersion.class);
+    sourcePythonVersions.stream()
+      .map(PythonVersionUtils::toSupportedSemanticVersion)
+      .forEach(semanticVersions::add);
+    return semanticVersions;
+  }
+
+  /**
+   * Returns all versions for which serialized semantic-model data is available.
+   */
+  public static Set<SemanticVersion> allSupportedSemanticVersions() {
+    return EnumSet.allOf(SemanticVersion.class);
+  }
+
+  /**
+   * Returns the oldest version for which serialized semantic-model data is available.
+   */
+  public static SemanticVersion minSupportedSemanticVersion() {
+    return SemanticVersion.values()[0];
+  }
+
+  /**
+   * Returns the newest version for which serialized semantic-model data is available.
+   */
+  public static SemanticVersion maxSupportedSemanticVersion() {
+    SemanticVersion[] versions = SemanticVersion.values();
+    return versions[versions.length - 1];
+  }
+
+  private static SemanticVersion toSupportedSemanticVersion(Version sourcePythonVersion) {
+    return switch (sourcePythonVersion) {
+      case V_38, V_39, V_310 -> minSupportedSemanticVersion();
+      case V_311 -> SemanticVersion.V_311;
+      case V_312 -> SemanticVersion.V_312;
+      case V_313 -> SemanticVersion.V_313;
+      case V_314 -> SemanticVersion.V_314;
+    };
   }
 
   private static boolean guessPythonVersion(Set<Version> pythonVersions, String versionValue) {
@@ -173,12 +259,13 @@ public class PythonVersionUtils {
         return true;
       }
       if (major < 3) {
+        pythonVersions.add(MIN_RECOGNIZED_SOURCE_VERSION);
         logWarningPython2(versionValue);
-        return false;
+        return true;
       }
-      if (MIN_SUPPORTED_VERSION.compare(major, minor) > 0) {
-        pythonVersions.add(MIN_SUPPORTED_VERSION);
-        logWarningGuessVersion(versionValue, MIN_SUPPORTED_VERSION);
+      if (MIN_RECOGNIZED_SOURCE_VERSION.compare(major, minor) > 0) {
+        pythonVersions.add(MIN_RECOGNIZED_SOURCE_VERSION);
+        logWarningGuessVersion(versionValue, MIN_RECOGNIZED_SOURCE_VERSION);
       } else if (MAX_SUPPORTED_VERSION.compare(major, minor) < 0) {
         pythonVersions.add(MAX_SUPPORTED_VERSION);
         logWarningGuessVersion(versionValue, MAX_SUPPORTED_VERSION);

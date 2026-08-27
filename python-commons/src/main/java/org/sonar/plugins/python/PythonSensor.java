@@ -67,6 +67,8 @@ import org.sonarsource.performance.measure.PerformanceMeasure;
 import static org.sonar.plugins.python.Scanner.PARALLEL_PROPERTY_NAME;
 import static org.sonar.plugins.python.Scanner.THREADS_PROPERTY_NAME;
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
+import static org.sonar.plugins.python.api.PythonVersionUtils.maxSupportedSemanticVersion;
+import static org.sonar.plugins.python.api.PythonVersionUtils.minSupportedSemanticVersion;
 
 @DependedUpon(value = "org.sonar.plugins.python.PythonSensor_before_com.sonarsource.dbd.SonarLintPythonBugDetectionSensor")
 public final class PythonSensor implements Sensor {
@@ -86,9 +88,9 @@ public final class PythonSensor implements Sensor {
   private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = LoggerFactory.getLogger(PythonSensor.class);
   static final String UNSET_VERSION_WARNING = """
-    Your code is analyzed as compatible with all Python 3 versions by default. \
+    Your code is analyzed as compatible with Python versions %s through %s by default. \
     You can get a more precise analysis by setting the Python version or version range in your configuration via the parameter "sonar.python.version"\
-    """;
+    """.formatted(minSupportedSemanticVersion(), maxSupportedSemanticVersion());
 
   private final SensorTelemetryStorage sensorTelemetryStorage;
   private final NoSonarLineInfoCollector noSonarLineInfoCollector;

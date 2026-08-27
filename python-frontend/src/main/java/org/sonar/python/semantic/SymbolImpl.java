@@ -59,7 +59,7 @@ public class SymbolImpl implements Symbol {
 
   private boolean hasReadDeserializedType = false;
 
-  protected Set<String> validForPythonVersions = Collections.emptySet();
+  protected Set<String> validForSemanticPythonVersions = Collections.emptySet();
 
   public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
     this(name, fullyQualifiedName, null);
@@ -80,7 +80,7 @@ public class SymbolImpl implements Symbol {
       this.annotatedTypeName = TypeShed.normalizedFqn(fqn);
     }
     this.deserializedType = isFromClass ? varSymbol.getTypeAnnotation() : null;
-    this.validForPythonVersions = new HashSet<>(varSymbol.getValidForList());
+    this.validForSemanticPythonVersions = new HashSet<>(varSymbol.getValidForList());
     this.kind = Kind.OTHER;
   }
 
@@ -212,7 +212,7 @@ public class SymbolImpl implements Symbol {
     return null;
   }
 
-  public Set<String> validForPythonVersions() {
-    return validForPythonVersions;
+  public Set<String> validForSemanticPythonVersions() {
+    return validForSemanticPythonVersions;
   }
 }

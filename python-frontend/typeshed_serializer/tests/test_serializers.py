@@ -26,6 +26,7 @@ from serializer.serializers import (
     MicrosoftStubsSerializer,
     TypeshedSerializer,
     ImporterSerializer,
+    SUPPORTED_PYTHON_VERSIONS,
     get_sources,
 )
 from tests import conftest
@@ -46,13 +47,16 @@ def test_serialize_typeshed_stdlib(typeshed_stdlib, caplog):
 
 def test_build_for_every_python_version(typeshed_stdlib, caplog):
     serializers.walk_typeshed_stdlib= Mock(return_value=(typeshed_stdlib, set()))
-    NUMBER_OF_PYTHON_VERSION_SUPPORTED = 7
+    number_of_supported_python_versions = len(SUPPORTED_PYTHON_VERSIONS)
     with caplog.at_level(logging.INFO):
         modules = TypeshedSerializer().build_for_every_python_version()
-        assert serializers.walk_typeshed_stdlib.call_count == NUMBER_OF_PYTHON_VERSION_SUPPORTED
-        assert len(caplog.messages) == NUMBER_OF_PYTHON_VERSION_SUPPORTED
+        assert (
+            serializers.walk_typeshed_stdlib.call_count
+            == number_of_supported_python_versions
+        )
+        assert len(caplog.messages) == number_of_supported_python_versions
         assert "Building for python version " in caplog.text 
-        assert len(modules.keys()) == NUMBER_OF_PYTHON_VERSION_SUPPORTED
+        assert len(modules.keys()) == number_of_supported_python_versions
 
 def test_microsoft_stubs_serializer(microsoft_stubs):
     save_module_mock = Mock()

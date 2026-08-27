@@ -82,7 +82,7 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
   }
 
   @Override
-  public Set<String> validForPythonVersions() {
-    return alternatives().stream().flatMap(symbol -> ((SymbolImpl) symbol).validForPythonVersions().stream()).collect(Collectors.toSet());
+  public Set<String> validForSemanticPythonVersions() {
+    return alternatives().stream().flatMap(symbol -> ((SymbolImpl) symbol).validForSemanticPythonVersions().stream()).collect(Collectors.toSet());
   }
 }

@@ -70,8 +70,8 @@ public class TypeShedDescriptorsProvider {
     this(projectBasePackages, ProjectPythonVersion.currentVersions());
   }
 
-  public TypeShedDescriptorsProvider(Set<String> projectBasePackages, Set<PythonVersionUtils.Version> projectPythonVersions) {
-    moduleConverter = new ModuleSymbolToDescriptorConverter(projectPythonVersions);
+  public TypeShedDescriptorsProvider(Set<String> projectBasePackages, Set<PythonVersionUtils.Version> projectSourcePythonVersions) {
+    moduleConverter = new ModuleSymbolToDescriptorConverter(PythonVersionUtils.toSupportedSemanticVersions(projectSourcePythonVersions));
     cachedDescriptors = new ConcurrentHashMap<>();
     descriptorsForModuleLocks = new ConcurrentHashMap<>();
     this.projectBasePackages = projectBasePackages;

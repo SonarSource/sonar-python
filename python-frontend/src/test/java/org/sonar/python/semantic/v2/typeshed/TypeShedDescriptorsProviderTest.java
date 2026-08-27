@@ -65,6 +65,19 @@ class TypeShedDescriptorsProviderTest {
   }
 
   @Test
+  void legacySourceVersionUsesPython310SemanticModel() {
+    var provider = new TypeShedDescriptorsProvider(Set.of(), Set.of(PythonVersionUtils.Version.V_38));
+
+    var intDescriptor = (ClassDescriptor) provider.builtinDescriptors().get("int");
+    var toBytesDescriptor = intDescriptor.members().stream()
+      .filter(member -> member.name().equals("to_bytes"))
+      .findFirst()
+      .orElseThrow();
+
+    assertThat(toBytesDescriptor.kind()).isEqualTo(Descriptor.Kind.FUNCTION);
+  }
+
+  @Test
   void builtinDisambiguation() {
     var provider = typeshedDescriptorsProvider();
     var builtinDescriptors = provider.builtinDescriptors();

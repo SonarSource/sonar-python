@@ -24,6 +24,8 @@ import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 import org.sonar.python.types.TypeShed;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class PytzUsageCheckTest {
 
   @AfterEach
@@ -33,9 +35,19 @@ class PytzUsageCheckTest {
   }
 
   @Test
-  void test_39_310_311_312() {
-    ProjectPythonVersion
-      .setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_39, PythonVersionUtils.Version.V_310, PythonVersionUtils.Version.V_311, PythonVersionUtils.Version.V_312));
+  void test_supported_python_versions() {
+    PythonCheckVerifier.verify("src/test/resources/checks/pytzUsage.py", new PytzUsageCheck());
+  }
+
+  @Test
+  void test_explicit_python_3_8() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_38));
+    assertThat(PythonCheckVerifier.issues("src/test/resources/checks/pytzUsage.py", new PytzUsageCheck())).isEmpty();
+  }
+
+  @Test
+  void test_explicit_python_3_9() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_39));
     PythonCheckVerifier.verify("src/test/resources/checks/pytzUsage.py", new PytzUsageCheck());
   }
 }

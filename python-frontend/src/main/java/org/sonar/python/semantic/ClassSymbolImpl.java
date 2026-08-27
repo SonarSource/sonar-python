@@ -45,7 +45,7 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 import static org.sonar.python.semantic.SymbolUtils.isPrivateName;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
-import static org.sonar.python.types.TypeShed.isValidForProjectPythonVersion;
+import static org.sonar.python.types.TypeShed.isValidForProjectSemanticPythonVersion;
 import static org.sonar.python.types.TypeShed.symbolsFromProtobufDescriptors;
 
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
@@ -118,7 +118,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     hasMetaClass = ((ClassSymbolImpl) classSymbol).hasMetaClass();
     metaclassFQN = ((ClassSymbolImpl) classSymbol).metaclassFQN;
     supportsGenerics = ((ClassSymbolImpl) classSymbol).supportsGenerics;
-    validForPythonVersions = ((ClassSymbolImpl) classSymbol).validForPythonVersions;
+    validForSemanticPythonVersions = ((ClassSymbolImpl) classSymbol).validForSemanticPythonVersions;
     superClassesFqns = ((ClassSymbolImpl) classSymbol).superClassesFqns;
     setKind(Kind.CLASS);
   }
@@ -134,13 +134,13 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     Set<Symbol> classMembers = new HashSet<>();
     Map<String, Set<Object>> descriptorsByFqn = new HashMap<>();
     classSymbolProto.getMethodsList().stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> isValidForProjectSemanticPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
     classSymbolProto.getOverloadedMethodsList().stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> isValidForProjectSemanticPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
     classSymbolProto.getAttributesList().stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> isValidForProjectSemanticPythonVersion(d.getValidForList()))
       .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
 
     inlineInheritedMethodsFromPrivateClass(classSymbolProto.getSuperClassesList(), descriptorsByFqn);
@@ -152,7 +152,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     addMembers(classMembers);
     superClassesFqns.addAll(classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).toList());
     superClassesFqns.removeAll(inlinedSuperClassFqn);
-    validForPythonVersions = new HashSet<>(classSymbolProto.getValidForList());
+    validForSemanticPythonVersions = new HashSet<>(classSymbolProto.getValidForList());
   }
 
   private void inlineInheritedMethodsFromPrivateClass(List<String> superClassesFqns, Map<String, Set<Object>> descriptorsByFqn) {

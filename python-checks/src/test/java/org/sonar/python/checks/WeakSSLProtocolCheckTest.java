@@ -33,14 +33,14 @@ class WeakSSLProtocolCheckTest {
   }
 
   @Test
-  void test() {
+  void test_default_supported_versions() {
     PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol.py", new WeakSSLProtocolCheck());
   }
 
   @Test
-  void test_python_310() {
-    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_310));
-    PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol_python310.py", new WeakSSLProtocolCheck());
+  void test_explicit_python_39_uses_python_39_rule_policy() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_39));
+    PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol_python39.py", new WeakSSLProtocolCheck());
   }
 
   @Test

@@ -2951,12 +2951,12 @@ public class TypeInferenceV2Test {
       """);
     UnionType realpathType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(realpathType.candidates()).allMatch(FunctionType.class::isInstance);
-    assertThat(realpathType.candidates()).extracting(PythonType::name).containsExactly("realpath", "realpath", "realpath", "realpath");
+    assertThat(realpathType.candidates()).extracting(PythonType::name).containsExactly("realpath", "realpath");
     assertThat(realpathType.candidates())
       .map(FunctionType.class::cast)
       .extracting(FunctionType::returnType)
       .extracting(PythonType::unwrappedType)
-      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN);
+      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN);
   }
 
   @Test
@@ -2980,7 +2980,7 @@ public class TypeInferenceV2Test {
       .map(FunctionType.class::cast)
       .extracting(FunctionType::returnType)
       .extracting(PythonType::unwrappedType)
-      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN);
+      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN);
 
     UnionType acosType2 = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(acosType2.candidates()).allMatch(FunctionType.class::isInstance);
@@ -2988,7 +2988,7 @@ public class TypeInferenceV2Test {
       .map(FunctionType.class::cast)
       .extracting(FunctionType::returnType)
       .extracting(PythonType::unwrappedType)
-      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN);
+      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN);
   }
 
   @Test

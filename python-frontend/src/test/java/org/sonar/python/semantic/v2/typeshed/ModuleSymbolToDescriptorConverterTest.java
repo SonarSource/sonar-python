@@ -28,7 +28,7 @@ import org.sonar.python.types.protobuf.SymbolsProtos;
 class ModuleSymbolToDescriptorConverterTest {
   @Test
   void test() {
-    var converter = new ModuleSymbolToDescriptorConverter(PythonVersionUtils.allVersions());
+    var converter = new ModuleSymbolToDescriptorConverter(PythonVersionUtils.allSupportedSemanticVersions());
     var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
       .setFullyQualifiedName("module")
       .addVars(SymbolsProtos.VarSymbol.newBuilder()
@@ -80,7 +80,7 @@ class ModuleSymbolToDescriptorConverterTest {
 
   @Test
   void nullSymbolTest() {
-    var converter = new ModuleSymbolToDescriptorConverter(PythonVersionUtils.allVersions());
+    var converter = new ModuleSymbolToDescriptorConverter(PythonVersionUtils.allSupportedSemanticVersions());
     var descriptor = converter.convert(null);
     Assertions.assertThat(descriptor).isNull();
   }

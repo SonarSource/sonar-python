@@ -22,7 +22,13 @@ import pytest
 from mypy import build
 
 from serializer import serializers
-from serializer.serializers import CustomStubsSerializer, MicrosoftStubsSerializer, TypeshedSerializer, get_options
+from serializer.serializers import (
+    DEFAULT_PYTHON_VERSION,
+    CustomStubsSerializer,
+    MicrosoftStubsSerializer,
+    TypeshedSerializer,
+    get_options,
+)
 
 CURRENT_PATH = os.path.dirname(__file__)
 MOCK_THIRD_PARTY_STUBS_LOCATION = "resources/mock_third_parties"
@@ -95,7 +101,7 @@ def save_location_folder():
         open(path, "w")
     return folder_location
 
-def build_modules(modules: dict[str, str], python_version=(3, 8)):
+def build_modules(modules: dict[str, str], python_version=DEFAULT_PYTHON_VERSION):
     opt = get_options(python_version)
     module_sources = []
     for module_fqn in modules.keys():

@@ -19,6 +19,7 @@ package org.sonar.python.semantic.v2.typeshed;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -28,15 +29,18 @@ public class ClassSymbolToDescriptorConverter {
   private final VarSymbolToDescriptorConverter varConverter;
   private final FunctionSymbolToDescriptorConverter functionConverter;
   private final OverloadedFunctionSymbolToDescriptorConverter overloadedFunctionConverter;
-  private final Set<String> projectPythonVersions;
+  private final Set<String> projectSemanticPythonVersions;
 
   public ClassSymbolToDescriptorConverter(VarSymbolToDescriptorConverter varConverter,
     FunctionSymbolToDescriptorConverter functionConverter,
-    OverloadedFunctionSymbolToDescriptorConverter overloadedFunctionConverter, Set<String> projectPythonVersions) {
+    OverloadedFunctionSymbolToDescriptorConverter overloadedFunctionConverter,
+    Set<PythonVersionUtils.SemanticVersion> projectSemanticPythonVersions) {
     this.varConverter = varConverter;
     this.functionConverter = functionConverter;
     this.overloadedFunctionConverter = overloadedFunctionConverter;
-    this.projectPythonVersions = projectPythonVersions;
+    this.projectSemanticPythonVersions = projectSemanticPythonVersions.stream()
+      .map(PythonVersionUtils.SemanticVersion::serializedValue)
+      .collect(Collectors.toSet());
   }
 
   public ClassDescriptor convert(SymbolsProtos.ClassSymbol classSymbol) {
@@ -46,22 +50,22 @@ public class ClassSymbolToDescriptorConverter {
 
     var variableDescriptors = classSymbol.getAttributesList()
       .stream()
-      .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
+      .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
       .map(varConverter::convert);
 
     var functionDescriptors = classSymbol.getMethodsList()
       .stream()
-      .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
+      .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
       .map(s -> functionConverter.convert(s, true));
 
     var overloadedFunctionDescriptors = classSymbol.getOverloadedMethodsList()
       .stream()
-      .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
+      .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
       .map(s -> overloadedFunctionConverter.convert(s, true));
 
     var nestedClassesDescriptors = classSymbol.getNestedClassesList()
       .stream()
-      .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
+      .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
       .map(this::convert);
 
     var members = ProtoUtils.disambiguateByName(Stream.of(variableDescriptors, functionDescriptors, overloadedFunctionDescriptors, nestedClassesDescriptors))

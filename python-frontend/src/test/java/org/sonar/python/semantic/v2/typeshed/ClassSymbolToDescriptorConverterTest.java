@@ -20,7 +20,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
@@ -34,7 +34,11 @@ class ClassSymbolToDescriptorConverterTest {
     var functionConverter = new FunctionSymbolToDescriptorConverter();
     var variableConverter = new VarSymbolToDescriptorConverter();
     var overloadedFunctionConverter = new OverloadedFunctionSymbolToDescriptorConverter(functionConverter);
-    var converter = new ClassSymbolToDescriptorConverter(variableConverter, functionConverter, overloadedFunctionConverter, ProjectPythonVersion.currentVersionValues());
+    var converter = new ClassSymbolToDescriptorConverter(
+      variableConverter,
+      functionConverter,
+      overloadedFunctionConverter,
+      PythonVersionUtils.allSupportedSemanticVersions());
 
     var symbol = SymbolsProtos.ClassSymbol.newBuilder()
       .setName("MyClass")
@@ -100,7 +104,11 @@ class ClassSymbolToDescriptorConverterTest {
     var functionConverter = new FunctionSymbolToDescriptorConverter();
     var variableConverter = new VarSymbolToDescriptorConverter();
     var overloadedFunctionConverter = new OverloadedFunctionSymbolToDescriptorConverter(functionConverter);
-    var converter = new ClassSymbolToDescriptorConverter(variableConverter, functionConverter, overloadedFunctionConverter, ProjectPythonVersion.currentVersionValues());
+    var converter = new ClassSymbolToDescriptorConverter(
+      variableConverter,
+      functionConverter,
+      overloadedFunctionConverter,
+      PythonVersionUtils.allSupportedSemanticVersions());
 
     var symbol = SymbolsProtos.ClassSymbol.newBuilder()
       .setName("int")
