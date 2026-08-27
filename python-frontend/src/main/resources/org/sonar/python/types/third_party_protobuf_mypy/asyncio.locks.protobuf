@@ -1,35 +1,6 @@
 
-asyncio.locksó
-_ContextManagerasyncio.locks._ContextManager"builtins.object*ß
-__init__&asyncio.locks._ContextManager.__init__"
-None*H
-self>
-asyncio.locks._ContextManager"asyncio.locks._ContextManager*û
-lockì
-1Union[asyncio.locks.Lock,asyncio.locks.Semaphore](
-asyncio.locks.Lock"asyncio.locks.Lock2
-asyncio.locks.Semaphore"asyncio.locks.Semaphore*Ä
-	__enter__'asyncio.locks._ContextManager.__enter__"
-None*@>
-asyncio.locks._ContextManager"asyncio.locks._ContextManager*¶
-__exit__&asyncio.locks._ContextManager.__exit__"
-None*@>
-asyncio.locks._ContextManager"asyncio.locks._ContextManager*&"
-builtins.object"builtins.object›
-_ContextManagerMixin"asyncio.locks._ContextManagerMixin"builtins.object*•
-__iter__+asyncio.locks._ContextManagerMixin.__iter__"ü
-8typing.Generator[Any,None,asyncio.locks._ContextManager]
-Any
-None>
-asyncio.locks._ContextManager"asyncio.locks._ContextManager"typing.Generator*JH
-"asyncio.locks._ContextManagerMixin""asyncio.locks._ContextManagerMixin*Ø
-	__await__,asyncio.locks._ContextManagerMixin.__await__"ü
-8typing.Generator[Any,None,asyncio.locks._ContextManager]
-Any
-None>
-asyncio.locks._ContextManager"asyncio.locks._ContextManager"typing.Generator*R
-selfH
-"asyncio.locks._ContextManagerMixin""asyncio.locks._ContextManagerMixin*·
+asyncio.locksÉ
+_ContextManagerMixin"asyncio.locks._ContextManagerMixin"builtins.object*·
 
 __aenter__-asyncio.locks._ContextManagerMixin.__aenter__"N
 typing.Coroutine[Any,Any,None]
@@ -57,16 +28,12 @@ __aenter__-asyncio.locks._ContextManagerMixin.__aenter__"N
 tbY
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-NoneHá
-Lockasyncio.locks.Lock""asyncio.locks._ContextManagerMixin*ı
+NoneHˆ
+Lockasyncio.locks.Lock""asyncio.locks._ContextManagerMixin*e
 __init__asyncio.locks.Lock.__init__"
 None*2
 self(
-asyncio.locks.Lock"asyncio.locks.Lock*ç
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None *w
+asyncio.locks.Lock"asyncio.locks.Lock*w
 lockedasyncio.locks.Lock.locked"
 builtins.bool"builtins.bool*2
 self(
@@ -82,16 +49,12 @@ __aenter__-asyncio.locks._ContextManagerMixin.__aenter__"N
 releaseasyncio.locks.Lock.release"
 None*2
 self(
-asyncio.locks.Lock"asyncio.locks.Lockÿ
-Eventasyncio.locks.Event"builtins.object*¯
+asyncio.locks.Lock"asyncio.locks.Lock«
+Eventasyncio.locks.Event"builtins.object*h
 __init__asyncio.locks.Event.__init__"
 None*4
 self*
-asyncio.locks.Event"asyncio.locks.Event*ç
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None *z
+asyncio.locks.Event"asyncio.locks.Event*z
 is_setasyncio.locks.Event.is_set"
 builtins.bool"builtins.bool*4
 self*
@@ -111,8 +74,8 @@ __aenter__-asyncio.locks._ContextManagerMixin.__aenter__"N
 Literal[builtins.bool]	
 builtins.bool"builtins.bool"typing.Coroutine*4
 self*
-asyncio.locks.Event"asyncio.locks.EventH´
-	Conditionasyncio.locks.Condition""asyncio.locks._ContextManagerMixin*Ë
+asyncio.locks.Event"asyncio.locks.EventHõ
+	Conditionasyncio.locks.Condition""asyncio.locks._ContextManagerMixin*ÿ
 __init__ asyncio.locks.Condition.__init__"
 None*<
 self2
@@ -120,10 +83,6 @@ __aenter__-asyncio.locks._ContextManagerMixin.__aenter__"N
 lockV
 Union[asyncio.locks.Lock,None](
 asyncio.locks.Lock"asyncio.locks.Lock
-None *ç
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *Ü
 lockedasyncio.locks.Condition.locked"
 builtins.bool"builtins.bool*<
@@ -170,18 +129,14 @@ __aenter__-asyncio.locks._ContextManagerMixin.__aenter__"N
 notify_all"asyncio.locks.Condition.notify_all"
 None*<
 self2
-asyncio.locks.Condition"asyncio.locks.Conditionˆ	
-	Semaphoreasyncio.locks.Semaphore""asyncio.locks._ContextManagerMixin*Ø
+asyncio.locks.Condition"asyncio.locks.ConditionÊ
+	Semaphoreasyncio.locks.Semaphore""asyncio.locks._ContextManagerMixin*ü
 __init__ asyncio.locks.Semaphore.__init__"
 None*<
 self2
 asyncio.locks.Semaphore"asyncio.locks.Semaphore*)
 value
-builtins.int"builtins.int *ç
-loopÄ
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None *Ü
+builtins.int"builtins.int *Ü
 lockedasyncio.locks.Semaphore.locked"
 builtins.bool"builtins.bool*<
 self2

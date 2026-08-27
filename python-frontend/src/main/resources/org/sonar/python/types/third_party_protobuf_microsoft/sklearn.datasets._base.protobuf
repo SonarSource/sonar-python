@@ -1,5 +1,5 @@
 
-sklearn.datasets._base´ 
+sklearn.datasets._baseÒ§
 Pathpathlib.Path"pathlib.PurePath*á
 __new__pathlib.Path.__new__"C
 pathlib.Path.Self
@@ -40,7 +40,7 @@
 clsf
 Type[pathlib.Path.Self]C
 pathlib.Path.Self
-pathlib.Path"pathlib.Path"pathlib.Path("type0:builtins.classmethodp*À
+pathlib.Path"pathlib.Path"pathlib.Path("type0:builtins.classmethodp*÷
 statpathlib.Path.stat"ü
 ™TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]]Ë
 ŽTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]
@@ -55,13 +55,17 @@
 builtins.float"builtins.float 
 builtins.float"builtins.float"os.stat_result*&
 self
-pathlib.Path"pathlib.Path*u
+pathlib.Path"pathlib.Path*5
+follow_symlinks
+builtins.bool"builtins.bool *¬
 chmodpathlib.Path.chmod"
 None*&
 self
 pathlib.Path"pathlib.Path*&
 mode
-builtins.int"builtins.int*e
+builtins.int"builtins.int*5
+follow_symlinks
+builtins.bool"builtins.bool *e
 existspathlib.Path.exists"
 builtins.bool"builtins.bool*&
 self
@@ -157,7 +161,13 @@ is_symlinkpathlib.Path.is_symlink"
 is_mountpathlib.Path.is_mount"
 builtins.bool"builtins.bool*&
 self
-pathlib.Path"pathlib.Path*«
+pathlib.Path"pathlib.Path*µ
+readlinkpathlib.Path.readlink"C
+pathlib.Path.Self
+pathlib.Path"pathlib.Path"pathlib.Path(*M
+selfC
+pathlib.Path.Self
+pathlib.Path"pathlib.Path"pathlib.Path(*«
 renamepathlib.Path.rename"C
 pathlib.Path.Self
 pathlib.Path"pathlib.Path"pathlib.Path(*M
@@ -216,7 +226,20 @@ XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtin
 os.PathLike[builtins.bytes] 
 builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*9
 target_is_directory
-builtins.bool"builtins.bool *§
+builtins.bool"builtins.bool *Ÿ
+hardlink_topathlib.Path.hardlink_to"
+None*&
+self
+pathlib.Path"pathlib.Path*Ã
+target¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*§
 touchpathlib.Path.touch"
 None*&
 self
@@ -296,7 +319,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Any"array.array
 	mmap.mmap"	mmap.mmap
 ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*½
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*’
 
 write_textpathlib.Path.write_text"
 builtins.int"builtins.int*&
@@ -309,6 +332,10 @@ write_textpathlib.Path.write_text"
 builtins.str"builtins.str
 None *R
 errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
 Union[builtins.str,None]
 builtins.str"builtins.str
 None *—

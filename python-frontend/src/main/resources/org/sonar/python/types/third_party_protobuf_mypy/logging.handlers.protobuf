@@ -1,6 +1,6 @@
 
-logging.handlersõ
-WatchedFileHandler#logging.handlers.WatchedFileHandler"logging.FileHandler*À
+logging.handlersÉ	
+WatchedFileHandler#logging.handlers.WatchedFileHandler"logging.FileHandler*”
 __init__,logging.handlers.WatchedFileHandler.__init__"
 None*T
 selfJ
@@ -18,7 +18,11 @@
 builtins.str"builtins.str
 None *+
 delay
-builtins.bool"builtins.bool *ž
+builtins.bool"builtins.bool *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ž
 _statstream/logging.handlers.WatchedFileHandler._statstream"
 None*T
 selfJ
@@ -30,8 +34,8 @@
 dev'logging.handlers.WatchedFileHandler.dev
 builtins.int"builtins.intrL
 ino'logging.handlers.WatchedFileHandler.ino
-builtins.int"builtins.intö
-BaseRotatingHandler$logging.handlers.BaseRotatingHandler"logging.FileHandler*Á
+builtins.int"builtins.intÊ
+BaseRotatingHandler$logging.handlers.BaseRotatingHandler"logging.FileHandler*•
 __init__-logging.handlers.BaseRotatingHandler.__init__"
 None*V
 selfL
@@ -49,7 +53,11 @@ $logging.handlers.BaseRotatingHandler"$logging.handlers.BaseRotatingHandler*ø
 builtins.str"builtins.str
 None *+
 delay
-builtins.bool"builtins.bool *ñ
+builtins.bool"builtins.bool *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ñ
 rotation_filename6logging.handlers.BaseRotatingHandler.rotation_filename"
 builtins.str"builtins.str*V
 selfL
@@ -73,9 +81,8 @@ $logging.handlers.BaseRotatingHandler"$logging.handlers.BaseRotatingHandler*(
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-NoneÒ
-
-RotatingFileHandler$logging.handlers.RotatingFileHandler"$logging.handlers.BaseRotatingHandler*¢
+None¦
+RotatingFileHandler$logging.handlers.RotatingFileHandler"$logging.handlers.BaseRotatingHandler*ö
 __init__-logging.handlers.RotatingFileHandler.__init__"
 None*V
 selfL
@@ -97,7 +104,11 @@ $logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandler*ø
 builtins.str"builtins.str
 None *+
 delay
-builtins.bool"builtins.bool *Ÿ
+builtins.bool"builtins.bool *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ÿ
 
 doRollover/logging.handlers.RotatingFileHandler.doRollover"
 None*V
@@ -112,8 +123,8 @@ $logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandler*2
 maxBytes-logging.handlers.RotatingFileHandler.maxBytes
 builtins.str"builtins.strr]
 backupCount0logging.handlers.RotatingFileHandler.backupCount
-builtins.int"builtins.intç
-TimedRotatingFileHandler)logging.handlers.TimedRotatingFileHandler"$logging.handlers.BaseRotatingHandler*³
+builtins.int"builtins.int»
+TimedRotatingFileHandler)logging.handlers.TimedRotatingFileHandler"$logging.handlers.BaseRotatingHandler*‡
 __init__2logging.handlers.TimedRotatingFileHandler.__init__"
 None*`
 selfV
@@ -141,6 +152,10 @@ $logging.handlers.RotatingFileHandler"$logging.handlers.RotatingFileHandler*2
 atTimeG
 Union[datetime.time,None]
 datetime.time"datetime.time
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
 None *®
 
 doRollover4logging.handlers.TimedRotatingFileHandler.doRollover"
@@ -267,7 +282,7 @@ retryStart)logging.handlers.SocketHandler.retryStart
 makeSocket+logging.handlers.DatagramHandler.makeSocket"
 socket.socket"socket.socket*N
 selfD
- logging.handlers.DatagramHandler" logging.handlers.DatagramHandlerœ%
+ logging.handlers.DatagramHandler" logging.handlers.DatagramHandlerú'
 SysLogHandlerlogging.handlers.SysLogHandler"logging.Handler*ç
 __init__'logging.handlers.SysLogHandler.__init__"
 None*J
@@ -345,6 +360,14 @@ LOG_SYSLOG)logging.handlers.SysLogHandler.LOG_SYSLOG
 LOG_AUTHPRIV+logging.handlers.SysLogHandler.LOG_AUTHPRIV
 builtins.int"builtins.intrO
 LOG_FTP&logging.handlers.SysLogHandler.LOG_FTP
+builtins.int"builtins.intrO
+LOG_NTP&logging.handlers.SysLogHandler.LOG_NTP
+builtins.int"builtins.intrY
+LOG_SECURITY+logging.handlers.SysLogHandler.LOG_SECURITY
+builtins.int"builtins.intrW
+LOG_CONSOLE*logging.handlers.SysLogHandler.LOG_CONSOLE
+builtins.int"builtins.intrW
+LOG_SOLCRON*logging.handlers.SysLogHandler.LOG_SOLCRON
 builtins.int"builtins.intrU
 
 LOG_LOCAL0)logging.handlers.SysLogHandler.LOG_LOCAL0
@@ -555,7 +578,7 @@ flushLevel)logging.handlers.MemoryHandler.flushLevel
 logging.Handler"logging.Handler
 Noner[
 flushOnClose+logging.handlers.MemoryHandler.flushOnClose
-builtins.bool"builtins.boolŒ
+builtins.bool"builtins.bool 
 HTTPHandlerlogging.handlers.HTTPHandler"logging.Handler*º
 __init__%logging.handlers.HTTPHandler.__init__"
 None*F
@@ -586,7 +609,15 @@ flushLevel)logging.handlers.MemoryHandler.flushLevel
 self<
 logging.handlers.HTTPHandler"logging.handlers.HTTPHandler*2
 record&
-logging.LogRecord"logging.LogRecordrG
+logging.LogRecord"logging.LogRecord*‘
+getConnection*logging.handlers.HTTPHandler.getConnection"8
+http.client.HTTPConnection"http.client.HTTPConnection*F
+self<
+logging.handlers.HTTPHandler"logging.handlers.HTTPHandler*&
+host
+builtins.str"builtins.str**
+secure
+builtins.bool"builtins.boolrG
 host!logging.handlers.HTTPHandler.host
 builtins.str"builtins.strrE
 url logging.handlers.HTTPHandler.url

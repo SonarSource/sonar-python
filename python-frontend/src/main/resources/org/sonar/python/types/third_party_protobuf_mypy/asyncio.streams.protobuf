@@ -195,7 +195,7 @@ is_closing'asyncio.streams.StreamWriter.is_closing"
 Any 
 builtins.bytes"builtins.bytes"typing.Coroutine*F
 self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReaderH€
+asyncio.streams.StreamReader"asyncio.streams.StreamReaderHð
 open_connectionasyncio.streams.open_connection"Ã
 Ztyping.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]]
 Any
@@ -211,10 +211,6 @@ Ztyping.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.Str
 %Union[builtins.int,builtins.str,None]
 builtins.int"builtins.int
 builtins.str"builtins.str
-None *
-loop€
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *)
 limit
 builtins.int"builtins.int *g
@@ -223,7 +219,7 @@ Ztyping.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.Str
 builtins.float"builtins.float
 None *
 kwds
-AnyH
+AnyHí
 start_serverasyncio.streams.start_server"”
 4typing.Coroutine[Any,Any,asyncio.base_events.Server]
 Any
@@ -232,19 +228,17 @@ Ztyping.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.Str
 client_connected_cb¥
 *TypeAlias[CallableType[builtins.function]]K
 CallableType[builtins.function]&
-builtins.function"builtins.function"(asyncio.streams._ClientConnectedCallback*P
-hostD
-Union[builtins.str,None]
-builtins.str"builtins.str
+builtins.function"builtins.function"(asyncio.streams._ClientConnectedCallback*¿
+host²
+6Union[builtins.str,typing.Sequence[builtins.str],None]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
 None *{
 porto
 %Union[builtins.int,builtins.str,None]
 builtins.int"builtins.int
 builtins.str"builtins.str
-None *
-loop€
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *)
 limit
 builtins.int"builtins.int *g
@@ -253,7 +247,7 @@ Ztyping.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.Str
 builtins.float"builtins.float
 None *
 kwds
-AnyH 
+AnyH
 open_unix_connection$asyncio.streams.open_unix_connection"Ã
 Ztyping.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]]
 Any
@@ -268,15 +262,11 @@ DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]é
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
 builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *
-loop€
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *)
 limit
 builtins.int"builtins.int *
 kwds
-AnyH­
+AnyH
 start_unix_server!asyncio.streams.start_unix_server"”
 4typing.Coroutine[Any,Any,asyncio.base_events.Server]
 Any
@@ -293,10 +283,6 @@ DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]é
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
 builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
-None *
-loop€
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
 None *)
 limit
 builtins.int"builtins.int *

@@ -87,7 +87,7 @@
 SIG_UNBLOCKsignal.Sigmasks.SIG_UNBLOCK
 builtins.int"builtins.intrH
 SIG_SETMASKsignal.Sigmasks.SIG_SETMASK
-builtins.int"builtins.intÕ
+builtins.int"builtins.intÈ
 struct_siginfosignal.struct_siginfo"_typeshed.structseq"builtins.tuple*¤
 si_signosignal.struct_siginfo.si_signo"
 builtins.int"builtins.int*Â
@@ -165,14 +165,23 @@ aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins
 builtins.int"builtins.int
 builtins.int"builtins.int
 builtins.int"builtins.int
-builtins.int"builtins.int0:builtins.property`8°
+builtins.int"builtins.int0:builtins.property`8rð
+__match_args__$signal.struct_siginfo.__match_args__·
+aTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str°
 default_int_handlersignal.default_int_handler"
 NoReturn
 *
 builtins.int"builtins.int*OM
 Union[types.FrameType,None]"
 types.FrameType"types.FrameType
-NoneŸ
+None¬
 	getsignalsignal.getsignal"Ð
 STypeAlias[Union[CallableType[builtins.function],builtins.int,signal.Handlers,None]]å
 HUnion[CallableType[builtins.function],builtins.int,signal.Handlers,None]K
@@ -180,11 +189,12 @@ HUnion[CallableType[builtins.function],builtins.int,signal.Handlers,None]K
 builtins.function"builtins.function
 builtins.int"builtins.int"
 signal.Handlers"signal.Handlers
-None"signal._HANDLER*¬©
+None"signal._HANDLER*¹
+	signalnum©
 -TypeAlias[Union[builtins.int,signal.Signals]]f
 "Union[builtins.int,signal.Signals]
 builtins.int"builtins.int 
-signal.Signals"signal.Signals"signal._SIGNUMï
+signal.Signals"signal.Signals"signal._SIGNUM‡
 signalsignal.signal"Ð
 STypeAlias[Union[CallableType[builtins.function],builtins.int,signal.Handlers,None]]å
 HUnion[CallableType[builtins.function],builtins.int,signal.Handlers,None]K
@@ -192,11 +202,13 @@ HUnion[CallableType[builtins.function],builtins.int,signal.Handlers,None]K
 builtins.function"builtins.function
 builtins.int"builtins.int"
 signal.Handlers"signal.Handlers
-None"signal._HANDLER*¬©
+None"signal._HANDLER*¹
+	signalnum©
 -TypeAlias[Union[builtins.int,signal.Signals]]f
 "Union[builtins.int,signal.Signals]
 builtins.int"builtins.int 
-signal.Signals"signal.Signals"signal._SIGNUM*ÓÐ
+signal.Signals"signal.Signals"signal._SIGNUM*Þ
+handlerÐ
 STypeAlias[Union[CallableType[builtins.function],builtins.int,signal.Handlers,None]]å
 HUnion[CallableType[builtins.function],builtins.int,signal.Handlers,None]K
 CallableType[builtins.function]&
@@ -217,14 +229,16 @@ $Tuple[builtins.float,builtins.float]
 pthread_killsignal.pthread_kill"
 None*
 builtins.int"builtins.int*
-builtins.int"builtins.int•
+builtins.int"builtins.int¤
 pthread_sigmasksignal.pthread_sigmask"÷
 ;builtins.set[TypeAlias[Union[builtins.int,signal.Signals]]]©
 -TypeAlias[Union[builtins.int,signal.Signals]]f
 "Union[builtins.int,signal.Signals]
 builtins.int"builtins.int 
-signal.Signals"signal.Signals"signal._SIGNUM"builtins.set*
-builtins.int"builtins.int*PN
+signal.Signals"signal.Signals"signal._SIGNUM"builtins.set*%
+how
+builtins.int"builtins.int*X
+maskN
 typing.Iterable[builtins.int]
 builtins.int"builtins.int"typing.Iterableõ
 	setitimersignal.setitimer"l
@@ -240,12 +254,13 @@ $Tuple[builtins.float,builtins.float]
 builtins.bool"builtins.bool(
 
 sigpendingsignal.sigpending"
-Any—
+Any¡
 sigwaitsignal.sigwait"©
 -TypeAlias[Union[builtins.int,signal.Signals]]f
 "Union[builtins.int,signal.Signals]
 builtins.int"builtins.int 
-signal.Signals"signal.Signals"signal._SIGNUM*PN
+signal.Signals"signal.Signals"signal._SIGNUM*Z
+sigsetN
 typing.Iterable[builtins.int]
 builtins.int"builtins.int"typing.Iterableû
 sigtimedwaitsignal.sigtimedwait"Ê
@@ -300,7 +315,13 @@ aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins
 fd
 builtins.int"builtins.int*9
 warn_on_full_buffer
-builtins.bool"builtins.bool *‚
+builtins.bool"builtins.bool §
+pidfd_send_signalsignal.pidfd_send_signal"
+None*
+builtins.int"builtins.int*
+builtins.int"builtins.int*
+None * 
+builtins.int"builtins.int *‚
 __annotations__signal.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

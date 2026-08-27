@@ -190,10 +190,10 @@ math.gamma"
 FTypeAlias[Union[typing.SupportsFloat,typing_extensions.SupportsIndex]]±
 ;Union[typing.SupportsFloat,typing_extensions.SupportsIndex],
 typing.SupportsFloat"typing.SupportsFloatB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndex"math._SupportsFloatOrIndexπ
+typing_extensions.SupportsIndex"typing_extensions.SupportsIndex"math._SupportsFloatOrIndex
 gcdmath.gcd"
-builtins.int"builtins.int*DB
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndex*DB
+builtins.int"builtins.int*P
+integersB
 typing_extensions.SupportsIndex"typing_extensions.SupportsIndex‰
 hypot
 math.hypot" 
@@ -248,6 +248,10 @@ FTypeAlias[Union[typing.SupportsFloat,typing_extensions.SupportsIndex]]±
 isqrt
 math.isqrt"
 builtins.int"builtins.int*DB
+typing_extensions.SupportsIndex"typing_extensions.SupportsIndex
+lcmmath.lcm"
+builtins.int"builtins.int*P
+integersB
 typing_extensions.SupportsIndex"typing_extensions.SupportsIndexı
 ldexp
 math.ldexp" 
@@ -299,6 +303,16 @@ FTypeAlias[Union[typing.SupportsFloat,typing_extensions.SupportsIndex]]±
 $Tuple[builtins.float,builtins.float] 
 builtins.float"builtins.float 
 builtins.float"builtins.float*ùö
+FTypeAlias[Union[typing.SupportsFloat,typing_extensions.SupportsIndex]]±
+;Union[typing.SupportsFloat,typing_extensions.SupportsIndex],
+typing.SupportsFloat"typing.SupportsFloatB
+typing_extensions.SupportsIndex"typing_extensions.SupportsIndex"math._SupportsFloatOrIndex˝
+	nextaftermath.nextafter" 
+builtins.float"builtins.float*ùö
+FTypeAlias[Union[typing.SupportsFloat,typing_extensions.SupportsIndex]]±
+;Union[typing.SupportsFloat,typing_extensions.SupportsIndex],
+typing.SupportsFloat"typing.SupportsFloatB
+typing_extensions.SupportsIndex"typing_extensions.SupportsIndex"math._SupportsFloatOrIndex*ùö
 FTypeAlias[Union[typing.SupportsFloat,typing_extensions.SupportsIndex]]±
 ;Union[typing.SupportsFloat,typing_extensions.SupportsIndex],
 typing.SupportsFloat"typing.SupportsFloatB
@@ -371,7 +385,13 @@ math.trunc"@
 builtins.object"builtins.object"builtins.object*wu
 math._SupportsTrunc[math._T]@
 math._T"
-builtins.object"builtins.object"builtins.object"math._SupportsTrunc"⁄
+builtins.object"builtins.object"builtins.object"math._SupportsTrunc—
+ulpmath.ulp" 
+builtins.float"builtins.float*ùö
+FTypeAlias[Union[typing.SupportsFloat,typing_extensions.SupportsIndex]]±
+;Union[typing.SupportsFloat,typing_extensions.SupportsIndex],
+typing.SupportsFloat"typing.SupportsFloatB
+typing_extensions.SupportsIndex"typing_extensions.SupportsIndex"math._SupportsFloatOrIndex"⁄
 ceil	math.ceilﬂ
 ceil	math.ceil"@
 math._T"

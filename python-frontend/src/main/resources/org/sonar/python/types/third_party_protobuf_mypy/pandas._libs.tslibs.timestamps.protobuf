@@ -1,5 +1,5 @@
 
-pandas._libs.tslibs.timestampsŸ1
+pandas._libs.tslibs.timestamps≥2
 _datedatetime.date"builtins.object*…
 __new__datetime.date.__new__"G
 datetime.date.Self
@@ -155,12 +155,13 @@ __format__datetime.date.__format__"
 isoweekdaydatetime.date.isoweekday"
 builtins.int"builtins.int*(
 self
-datetime.date"datetime.date*‡
-isocalendardatetime.date.isocalendar"ã
+datetime.date"datetime.date*∫
+isocalendardatetime.date.isocalendar"Â
+8TypeAlias[Tuple[builtins.int,builtins.int,builtins.int]]ã
 -Tuple[builtins.int,builtins.int,builtins.int]
 builtins.int"builtins.int
 builtins.int"builtins.int
-builtins.int"builtins.int*(
+builtins.int"builtins.int"datetime._IsoCalendarDate*(
 self
 datetime.date"datetime.date2ê
 __sub__datetime.date.__sub__ı
@@ -354,7 +355,7 @@ resolutiondatetime.time.resolution(
 datetime.datetime"datetime.datetime*,
 self"
 datetime.tzinfo"datetime.tzinfo*(&
-datetime.datetime"datetime.datetimeíõ
+datetime.datetime"datetime.datetimeÒú
 	Timestamp(pandas._libs.tslibs.timestamps.Timestamp"datetime.datetime*∂
 __new__0pandas._libs.tslibs.timestamps.Timestamp.__new__"≥
 -pandas._libs.tslibs.timestamps.Timestamp.SelfT
@@ -741,9 +742,13 @@ astimezone3pandas._libs.tslibs.timestamps.Timestamp.astimezone"≥
 isoweekday3pandas._libs.tslibs.timestamps.Timestamp.isoweekday"
 builtins.int"builtins.int*^
 selfT
-(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.Timestamp*¨
-isocalendar4pandas._libs.tslibs.timestamps.Timestamp.isocalendar"
-Any*^
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.Timestamp*ã
+isocalendar4pandas._libs.tslibs.timestamps.Timestamp.isocalendar"Â
+8TypeAlias[Tuple[builtins.int,builtins.int,builtins.int]]ã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int"datetime._IsoCalendarDate*^
 selfT
 (pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.Timestamp*‹
 is_leap_year5pandas._libs.tslibs.timestamps.Timestamp.is_leap_year"
@@ -1340,7 +1345,5 @@ resolution3pandas._libs.tslibs.timestamps.Timestamp.resolutionT
 __annotations__.pandas._libs.tslibs.timestamps.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*L
-_IsoCalendarDate/pandas._libs.tslibs.timestamps._IsoCalendarDate
-Any*
+Any"builtins.dict*
 npnumpy 

@@ -94,20 +94,26 @@ isdisjointtyping.AbstractSet.isdisjoint"
 builtins.object"builtins.object"builtins.object"typing.AbstractSet*;
 other0
 typing.Iterable[Any]
-Any"typing.IterablePñ+
+Any"typing.IterableP–/
 Randomrandom.Random"_random.Random*h
 __init__random.Random.__init__"
 None*(
 self
 random.Random"random.Random*
 x
-Any *ç
+Any *ñ
 seedrandom.Random.seed"
 None*(
 self
-random.Random"random.Random*
-a
-Any *+
+random.Random"random.Random*ò
+aé
+VUnion[builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.bytearray,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray
+None *+
 version
 builtins.int"builtins.int *|
 getstaterandom.Random.getstate".
@@ -141,6 +147,12 @@ isdisjointtyping.AbstractSet.isdisjoint"
 a
 builtins.int"builtins.int*#
 b
+builtins.int"builtins.int*ï
+	randbytesrandom.Random.randbytes" 
+builtins.bytes"builtins.bytes*(
+self
+random.Random"random.Random*#
+n
 builtins.int"builtins.int*™
 choicerandom.Random.choice"B
 	random._T"
@@ -189,7 +201,7 @@ EUnion[typing.Sequence[Union[builtins.float,fractions.Fraction]],None]∆
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None *ü
+None *∏
 samplerandom.Random.sample"m
 builtins.list[random._T]B
 	random._T"
@@ -206,7 +218,12 @@ populationØ
 	random._T"
 builtins.object"builtins.object"builtins.object"typing.AbstractSet*#
 k
-builtins.int"builtins.int*æ
+builtins.int"builtins.int*ñ
+countsá
+)Union[typing.Iterable[builtins.int],None]N
+typing.Iterable[builtins.int]
+builtins.int"builtins.int"typing.Iterable
+None *æ
 uniformrandom.Random.uniform" 
 builtins.float"builtins.float*(
 self
@@ -397,5 +414,8 @@ triangularrandom.triangularK
 CallableType[builtins.function]&
 builtins.function"builtins.function*n
 getrandbitsrandom.getrandbitsK
+CallableType[builtins.function]&
+builtins.function"builtins.function*j
+	randbytesrandom.randbytesK
 CallableType[builtins.function]&
 builtins.function"builtins.function

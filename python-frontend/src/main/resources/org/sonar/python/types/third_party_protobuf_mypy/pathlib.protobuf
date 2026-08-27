@@ -1,5 +1,5 @@
 
-pathlibƒ1
+pathlibÏ7
 PurePathpathlib.PurePath"os.PathLike*´
 partspathlib.PurePath.parts"L
 builtins.tuple[builtins.str]
@@ -112,7 +112,17 @@ __fspath__pathlib.PurePath.__fspath__"
 is_reservedpathlib.PurePath.is_reserved"
 builtins.bool"builtins.bool*.
 self$
-pathlib.PurePath"pathlib.PurePath*Ÿ
+pathlib.PurePath"pathlib.PurePath*ù
+is_relative_topathlib.PurePath.is_relative_to"
+builtins.bool"builtins.bool*.
+self$
+pathlib.PurePath"pathlib.PurePath*õ
+otheré
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*Ÿ
 matchpathlib.PurePath.match"
 builtins.bool"builtins.bool*.
 self$
@@ -138,6 +148,14 @@ __fspath__pathlib.PurePath.__fspath__"
 pathlib.PurePath.Self$
 pathlib.PurePath"pathlib.PurePath"pathlib.PurePath(*&
 name
+builtins.str"builtins.str*ƒ
+	with_stempathlib.PurePath.with_stem"S
+pathlib.PurePath.Self$
+pathlib.PurePath"pathlib.PurePath"pathlib.PurePath(*]
+selfS
+pathlib.PurePath.Self$
+pathlib.PurePath"pathlib.PurePath"pathlib.PurePath(*&
+stem
 builtins.str"builtins.str*‰
 with_suffixpathlib.PurePath.with_suffix"S
 pathlib.PurePath.Self$
@@ -171,9 +189,16 @@ __fspath__pathlib.PurePath.__fspath__"
 pathlib.PurePath"pathlib.PurePath"pathlib.PurePath(*]
 selfS
 pathlib.PurePath.Self$
-pathlib.PurePath"pathlib.PurePath"pathlib.PurePath(0:builtins.property`8
+pathlib.PurePath"pathlib.PurePath"pathlib.PurePath(0:builtins.property`*Ç
+__class_getitem__"pathlib.PurePath.__class_getitem__"(
+types.GenericAlias"types.GenericAlias*O
+clsF
+Type[pathlib.PurePath]$
+pathlib.PurePath"pathlib.PurePath"type*
+type
+Anyp8
 PurePosixPathpathlib.PurePosixPath"pathlib.PurePath<
-PureWindowsPathpathlib.PureWindowsPath"pathlib.PurePath´ 
+PureWindowsPathpathlib.PureWindowsPath"pathlib.PurePathÒ§
 Pathpathlib.Path"pathlib.PurePath*á
 __new__pathlib.Path.__new__"C
 pathlib.Path.Self
@@ -214,7 +239,7 @@ __fspath__pathlib.PurePath.__fspath__"
 clsf
 Type[pathlib.Path.Self]C
 pathlib.Path.Self
-pathlib.Path"pathlib.Path"pathlib.Path("type0:builtins.classmethodp*À
+pathlib.Path"pathlib.Path"pathlib.Path("type0:builtins.classmethodp*÷
 statpathlib.Path.stat"ü
 ™TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]]Ë
 ŽTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]
@@ -229,13 +254,17 @@ __fspath__pathlib.PurePath.__fspath__"
 builtins.float"builtins.float 
 builtins.float"builtins.float"os.stat_result*&
 self
-pathlib.Path"pathlib.Path*u
+pathlib.Path"pathlib.Path*5
+follow_symlinks
+builtins.bool"builtins.bool *¬
 chmodpathlib.Path.chmod"
 None*&
 self
 pathlib.Path"pathlib.Path*&
 mode
-builtins.int"builtins.int*e
+builtins.int"builtins.int*5
+follow_symlinks
+builtins.bool"builtins.bool *e
 existspathlib.Path.exists"
 builtins.bool"builtins.bool*&
 self
@@ -331,7 +360,13 @@ is_symlinkpathlib.Path.is_symlink"
 is_mountpathlib.Path.is_mount"
 builtins.bool"builtins.bool*&
 self
-pathlib.Path"pathlib.Path*«
+pathlib.Path"pathlib.Path*µ
+readlinkpathlib.Path.readlink"C
+pathlib.Path.Self
+pathlib.Path"pathlib.Path"pathlib.Path(*M
+selfC
+pathlib.Path.Self
+pathlib.Path"pathlib.Path"pathlib.Path(*«
 renamepathlib.Path.rename"C
 pathlib.Path.Self
 pathlib.Path"pathlib.Path"pathlib.Path(*M
@@ -390,7 +425,20 @@ XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtin
 os.PathLike[builtins.bytes] 
 builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*9
 target_is_directory
-builtins.bool"builtins.bool *§
+builtins.bool"builtins.bool *Ÿ
+hardlink_topathlib.Path.hardlink_to"
+None*&
+self
+pathlib.Path"pathlib.Path*Ã
+target¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*§
 touchpathlib.Path.touch"
 None*&
 self
@@ -470,7 +518,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Any"array.array
 	mmap.mmap"	mmap.mmap
 ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*½
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*’
 
 write_textpathlib.Path.write_text"
 builtins.int"builtins.int*&
@@ -483,6 +531,10 @@ write_textpathlib.Path.write_text"
 builtins.str"builtins.str
 None *R
 errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
 Union[builtins.str,None]
 builtins.str"builtins.str
 None *—

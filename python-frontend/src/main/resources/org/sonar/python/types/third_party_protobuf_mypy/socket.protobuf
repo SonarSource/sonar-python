@@ -1,8 +1,7 @@
 
 socket.
 gaierror_socket.gaierror"builtins.OSError*
-herror_socket.herror"builtins.OSError,
-timeout_socket.timeout"builtins.OSErrorÆ
+herror_socket.herror"builtins.OSErrorÆ
 AddressFamilysocket.AddressFamily"enum.IntEnumHrE
 AF_INETsocket.AddressFamily.AF_INET
 builtins.int"builtins.intrG
@@ -674,6 +673,47 @@ CMSG_SPACE_socket.CMSG_SPACE"
 socket.SocketKind"socket.SocketKind
 builtins.int"builtins.int*)
 proto
+builtins.int"builtins.int Å
+
+send_fdssocket.send_fds"
+builtins.int"builtins.int*(
+sock
+socket.socket"socket.socket*¢
+buffers”
+§typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]Ö
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable*W
+fdsN
+typing.Iterable[builtins.int]
+builtins.int"builtins.int"typing.Iterable*/
+flags"
+builtins.object"builtins.object *1
+address"
+builtins.object"builtins.object £
+recv_fdssocket.recv_fds"Û
+BTuple[builtins.bytes,builtins.list[builtins.int],builtins.int,Any] 
+builtins.bytes"builtins.bytesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+builtins.int"builtins.int
+Any*(
+sock
+socket.socket"socket.socket*)
+bufsize
+builtins.int"builtins.int*(
+maxfds
+builtins.int"builtins.int*)
+flags
 builtins.int"builtins.int ¿
 
 socketpairsocket.socketpair"f
@@ -1441,6 +1481,58 @@ RDS_GET_MR_socket.RDS_GET_MR
 CAN_BCM_TX_CP_CAN_ID_socket.CAN_BCM_TX_CP_CAN_ID
 builtins.int"builtins.int*^
 CAN_BCM_TX_RESET_MULTI_IDX"_socket.CAN_BCM_TX_RESET_MULTI_IDX
+builtins.int"builtins.int*<
+	CAN_J1939_socket.CAN_J1939
+builtins.int"builtins.int*R
+CAN_RAW_JOIN_FILTERS_socket.CAN_RAW_JOIN_FILTERS
+builtins.int"builtins.int*N
+J1939_EE_INFO_NONE_socket.J1939_EE_INFO_NONE
+builtins.int"builtins.int*V
+J1939_EE_INFO_TX_ABORT_socket.J1939_EE_INFO_TX_ABORT
+builtins.int"builtins.int*J
+J1939_FILTER_MAX_socket.J1939_FILTER_MAX
+builtins.int"builtins.int*H
+J1939_IDLE_ADDR_socket.J1939_IDLE_ADDR
+builtins.int"builtins.int*V
+J1939_MAX_UNICAST_ADDR_socket.J1939_MAX_UNICAST_ADDR
+builtins.int"builtins.int*T
+J1939_NLA_BYTES_ACKED_socket.J1939_NLA_BYTES_ACKED
+builtins.int"builtins.int*D
+J1939_NLA_PAD_socket.J1939_NLA_PAD
+builtins.int"builtins.int*D
+J1939_NO_ADDR_socket.J1939_NO_ADDR
+builtins.int"builtins.int*D
+J1939_NO_NAME_socket.J1939_NO_NAME
+builtins.int"builtins.int*B
+J1939_NO_PGN_socket.J1939_NO_PGN
+builtins.int"builtins.int*\
+J1939_PGN_ADDRESS_CLAIMED!_socket.J1939_PGN_ADDRESS_CLAIMED
+builtins.int"builtins.int*`
+J1939_PGN_ADDRESS_COMMANDED#_socket.J1939_PGN_ADDRESS_COMMANDED
+builtins.int"builtins.int*D
+J1939_PGN_MAX_socket.J1939_PGN_MAX
+builtins.int"builtins.int*N
+J1939_PGN_PDU1_MAX_socket.J1939_PGN_PDU1_MAX
+builtins.int"builtins.int*L
+J1939_PGN_REQUEST_socket.J1939_PGN_REQUEST
+builtins.int"builtins.int*P
+SCM_J1939_DEST_ADDR_socket.SCM_J1939_DEST_ADDR
+builtins.int"builtins.int*P
+SCM_J1939_DEST_NAME_socket.SCM_J1939_DEST_NAME
+builtins.int"builtins.int*N
+SCM_J1939_ERRQUEUE_socket.SCM_J1939_ERRQUEUE
+builtins.int"builtins.int*F
+SCM_J1939_PRIO_socket.SCM_J1939_PRIO
+builtins.int"builtins.int*L
+SO_J1939_ERRQUEUE_socket.SO_J1939_ERRQUEUE
+builtins.int"builtins.int*H
+SO_J1939_FILTER_socket.SO_J1939_FILTER
+builtins.int"builtins.int*J
+SO_J1939_PROMISC_socket.SO_J1939_PROMISC
+builtins.int"builtins.int*N
+SO_J1939_SEND_PRIO_socket.SO_J1939_SEND_PRIO
+builtins.int"builtins.int*D
+IPPROTO_MPTCP_socket.IPPROTO_MPTCP
 builtins.int"builtins.int*3
 EBADFsocket.EBADF
 builtins.int"builtins.int*5

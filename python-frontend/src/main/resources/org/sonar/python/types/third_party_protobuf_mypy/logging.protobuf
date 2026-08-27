@@ -700,8 +700,8 @@ createLocklogging.Handler.createLock"
 namelogging.Handler.nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-Noneô
-	Formatterlogging.Formatter"builtins.object*°
+NoneÆ
+	Formatterlogging.Formatter"builtins.object*Ù
 __init__logging.Formatter.__init__"
 None*0
 self&
@@ -725,6 +725,12 @@ HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 builtins.str"builtins.str"logging._FormatStyle *.
 validate
 builtins.bool"builtins.bool *¦
+defaults•
+,Union[typing.Mapping[builtins.str,Any],None]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None *¦
 formatlogging.Formatter.format"
 builtins.str"builtins.str*0
 self&
@@ -791,9 +797,11 @@ stack_info
 _stylelogging.Formatter._style,
 logging.PercentStyle"logging.PercentStylerZ
 default_time_format%logging.Formatter.default_time_format
-builtins.str"builtins.strrZ
-default_msec_format%logging.Formatter.default_msec_format
-builtins.str"builtins.strˆ	
+builtins.str"builtins.strr‚
+default_msec_format%logging.Formatter.default_msec_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneˆ	
 BufferingFormatterlogging.BufferingFormatter"builtins.object*á
 __init__#logging.BufferingFormatter.__init__"
 None*B
@@ -984,8 +992,8 @@ stack_infologging.LogRecord.stack_infoD
 threadNamelogging.LogRecord.threadNameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None¶¨
-LoggerAdapterlogging.LoggerAdapter"builtins.object*è
+NoneÊ©
+LoggerAdapterlogging.LoggerAdapter"builtins.object*³
 __init__logging.LoggerAdapter.__init__"
 None*í
 selfâ
@@ -1002,11 +1010,13 @@ logging._L”
 0Union[logging.Logger,logging.LoggerAdapter[Any]] 
 logging.Logger"logging.Logger<
 logging.LoggerAdapter[Any]
-Any"logging.LoggerAdapter*Œ
-extra€
+Any"logging.LoggerAdapter*×
+extraÉ
+8Union[typing.Mapping[builtins.str,builtins.object],None]€
 ,typing.Mapping[builtins.str,builtins.object]
 builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mapping*Ê
+builtins.object"builtins.object"typing.Mapping
+None *Ê
 processlogging.LoggerAdapter.process"¨
 2Tuple[Any,typing.MutableMapping[builtins.str,Any]]
 Anyg
@@ -1524,11 +1534,13 @@ logging._L”
 logging.LoggerAdapter[Any]
 Any"logging.LoggerAdapterrL
 managerlogging.LoggerAdapter.manager"
-logging.Manager"logging.Managerr§
-extralogging.LoggerAdapter.extra€
+logging.Manager"logging.Managerrð
+extralogging.LoggerAdapter.extraÉ
+8Union[typing.Mapping[builtins.str,builtins.object],None]€
 ,typing.Mapping[builtins.str,builtins.object]
 builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mappingè
+builtins.object"builtins.object"typing.Mapping
+Noneè
 StreamHandlerlogging.StreamHandler"logging.Handler*ä
 	setStreamlogging.StreamHandler.setStream"º
 Union[logging._StreamT,None]
@@ -1570,8 +1582,8 @@ $logging.StreamHandler[typing.TextIO]
 builtins.str"builtins.str"_typeshed.SupportsWrite"_typeshed.SupportsWriterL
 
 terminator logging.StreamHandler.terminator
-builtins.str"builtins.str
-FileHandlerlogging.FileHandler"logging.StreamHandler*
+builtins.str"builtins.strÐ	
+FileHandlerlogging.FileHandler"logging.StreamHandler*ä
 __init__logging.FileHandler.__init__"
 None*4
 self*
@@ -1589,7 +1601,11 @@ terminator logging.StreamHandler.terminator
 builtins.str"builtins.str
 None *+
 delay
-builtins.bool"builtins.bool *~
+builtins.bool"builtins.bool *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *~
 _openlogging.FileHandler._open"$
 io.TextIOWrapper"io.TextIOWrapper*4
 self*
@@ -1603,7 +1619,11 @@ terminator logging.StreamHandler.terminator
 builtins.str"builtins.str
 NonerB
 delaylogging.FileHandler.delay
-builtins.bool"builtins.bool3
+builtins.bool"builtins.boolrj
+errorslogging.FileHandler.errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None3
 NullHandlerlogging.NullHandler"logging.Handlerñ
 PlaceHolderlogging.PlaceHolder"builtins.object*—
 __init__logging.PlaceHolder.__init__"
@@ -1629,14 +1649,20 @@ RootLoggerlogging.RootLogger"logging.Logger*Ž
 self(
 logging.RootLogger"logging.RootLogger*'
 level
-builtins.int"builtins.int”
-PercentStylelogging.PercentStyle"builtins.object*’
+builtins.int"builtins.int½	
+PercentStylelogging.PercentStyle"builtins.object*»
 __init__logging.PercentStyle.__init__"
 None*6
 self,
 logging.PercentStyle"logging.PercentStyle*%
 fmt
-builtins.str"builtins.str*
+builtins.str"builtins.str*¦
+defaults•
+,Union[typing.Mapping[builtins.str,Any],None]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None *
 usesTimelogging.PercentStyle.usesTime"
 builtins.bool"builtins.bool*6
 self,
@@ -2010,7 +2036,7 @@ stacklevel
 dict€
 ,typing.Mapping[builtins.str,builtins.object]
 builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mapping¤
+builtins.object"builtins.object"typing.Mapping÷
 basicConfiglogging.basicConfig"
 None*Ï
 filename¾
@@ -2054,9 +2080,19 @@ HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 ,Union[typing.Iterable[logging.Handler],None]W
  typing.Iterable[logging.Handler]"
 logging.Handler"logging.Handler"typing.Iterable
-None *+
-force
-builtins.bool"builtins.bool k
+None *T
+forceG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None k
 shutdownlogging.shutdown"
 None*C
 handlerList0
