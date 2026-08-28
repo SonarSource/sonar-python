@@ -1,6 +1,5 @@
 
-asyncio.transportsË
-
+asyncio.transports»
 BaseTransport asyncio.transports.BaseTransport"builtins.object*µ
 __init__)asyncio.transports.BaseTransport.__init__"
 None*N
@@ -38,7 +37,10 @@ is_closing+asyncio.transports.BaseTransport.is_closing"
 get_protocol-asyncio.transports.BaseTransport.get_protocol"@
 asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol*N
 selfD
- asyncio.transports.BaseTransport" asyncio.transports.BaseTransport¹
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransportrn
+	__slots__*asyncio.transports.BaseTransport.__slots__5
+Tuple[builtins.str]
+builtins.str"builtins.strÿ
 ReadTransport asyncio.transports.ReadTransport" asyncio.transports.BaseTransport*©
 
 is_reading+asyncio.transports.ReadTransport.is_reading"
@@ -52,7 +54,9 @@ is_reading+asyncio.transports.ReadTransport.is_reading"
 resume_reading/asyncio.transports.ReadTransport.resume_reading"
 None*N
 selfD
- asyncio.transports.ReadTransport" asyncio.transports.ReadTransportó
+ asyncio.transports.ReadTransport" asyncio.transports.ReadTransportrD
+	__slots__*asyncio.transports.ReadTransport.__slots__
+Tuple[]å
 WriteTransport!asyncio.transports.WriteTransport" asyncio.transports.BaseTransport*Ó
 set_write_buffer_limits9asyncio.transports.WriteTransport.set_write_buffer_limits"
 None*P
@@ -75,27 +79,29 @@ is_reading+asyncio.transports.ReadTransport.is_reading"
 builtins.int"builtins.int
 builtins.int"builtins.int*P
 selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*Ò
+!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*å
 write'asyncio.transports.WriteTransport.write"
 None*P
 selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*Ã
-data¸
-<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
+!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*Ö
+dataË
+AUnion[builtins.bytes,builtins.bytearray,builtins.memoryview[Any]] 
 builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview*Ç
+builtins.bytearray"builtins.bytearray8
+builtins.memoryview[Any]
+Any"builtins.memoryview*ß
 
 writelines,asyncio.transports.WriteTransport.writelines"
 None*P
 selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*®
-list_of_data›
-Mtyping.Iterable[Union[builtins.bytes,builtins.bytearray,builtins.memoryview]]¸
-<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
+!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*Æ
+list_of_data³
+Rtyping.Iterable[Union[builtins.bytes,builtins.bytearray,builtins.memoryview[Any]]]Ë
+AUnion[builtins.bytes,builtins.bytearray,builtins.memoryview[Any]] 
 builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview"typing.Iterable*”
+builtins.bytearray"builtins.bytearray8
+builtins.memoryview[Any]
+Any"builtins.memoryview"typing.Iterable*”
 	write_eof+asyncio.transports.WriteTransport.write_eof"
 None*P
 selfF
@@ -107,44 +113,38 @@ Mtyping.Iterable[Union[builtins.bytes,builtins.bytearray,builtins.memoryview]]¸
 abort'asyncio.transports.WriteTransport.abort"
 None*P
 selfF
-!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransportn
-	Transportasyncio.transports.Transport" asyncio.transports.ReadTransport"!asyncio.transports.WriteTransport—
-DatagramTransport$asyncio.transports.DatagramTransport" asyncio.transports.BaseTransport*¡
+!asyncio.transports.WriteTransport"!asyncio.transports.WriteTransportrE
+	__slots__+asyncio.transports.WriteTransport.__slots__
+Tuple[]°
+	Transportasyncio.transports.Transport" asyncio.transports.ReadTransport"!asyncio.transports.WriteTransportr@
+	__slots__&asyncio.transports.Transport.__slots__
+Tuple[]û
+DatagramTransport$asyncio.transports.DatagramTransport" asyncio.transports.BaseTransport*»
 sendto+asyncio.transports.DatagramTransport.sendto"
 None*V
 selfL
-$asyncio.transports.DatagramTransport"$asyncio.transports.DatagramTransport*Ã
-data¸
-<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
+$asyncio.transports.DatagramTransport"$asyncio.transports.DatagramTransport*ý
+dataò
+JUnion[builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int]] 
 builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview*Á
-addr´
-ÕUnion[TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]],None]Í
-
-ÉTypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]ê
-¾Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]].
+builtins.bytearray"builtins.bytearrayV
+!builtins.memoryview[builtins.int]
+builtins.int"builtins.int"builtins.memoryview*¡
+addr”
+WUnion[TypeAlias[Union[builtins.tuple[Any],builtins.str,typing_extensions.Buffer]],None]¬
+KTypeAlias[Union[builtins.tuple[Any],builtins.str,typing_extensions.Buffer]]È
+@Union[builtins.tuple[Any],builtins.str,typing_extensions.Buffer].
 builtins.tuple[Any]
 Any"builtins.tuple
-builtins.str"builtins.strÖ
-–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
-‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesé
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"_socket._Address
+builtins.str"builtins.str4
+typing_extensions.Buffer"typing_extensions.Buffer"_socket._Address
 None *•
 abort*asyncio.transports.DatagramTransport.abort"
 None*V
 selfL
-$asyncio.transports.DatagramTransport"$asyncio.transports.DatagramTransportî
-
+$asyncio.transports.DatagramTransport"$asyncio.transports.DatagramTransportrH
+	__slots__.asyncio.transports.DatagramTransport.__slots__
+Tuple[]º
 SubprocessTransport&asyncio.transports.SubprocessTransport" asyncio.transports.BaseTransport*³
 get_pid.asyncio.transports.SubprocessTransport.get_pid"
 builtins.int"builtins.int*Z
@@ -177,7 +177,9 @@ $asyncio.transports.DatagramTransport"$asyncio.transports.DatagramTransportî
 kill+asyncio.transports.SubprocessTransport.kill"
 None*Z
 selfP
-&asyncio.transports.SubprocessTransport"&asyncio.transports.SubprocessTransport«
+&asyncio.transports.SubprocessTransport"&asyncio.transports.SubprocessTransportrJ
+	__slots__0asyncio.transports.SubprocessTransport.__slots__
+Tuple[]¢
 _FlowControlMixin$asyncio.transports._FlowControlMixin"asyncio.transports.Transport*Ñ
 __init__-asyncio.transports._FlowControlMixin.__init__"
 None*V
@@ -192,7 +194,13 @@ $asyncio.transports._FlowControlMixin"$asyncio.transports._FlowControlMixin*£
 loop€
 ,Union[asyncio.events.AbstractEventLoop,None]D
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None *Ž
+None rô
+	__slots__.asyncio.transports._FlowControlMixin.__slots__¶
+:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str*Ž
 __annotations__"asyncio.transports.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

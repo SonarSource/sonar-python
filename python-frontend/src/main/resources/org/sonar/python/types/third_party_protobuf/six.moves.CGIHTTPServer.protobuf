@@ -6,7 +6,7 @@ HTTPServerhttp.server.HTTPServer"socketserver.TCPServerj310j311j312j313j
 builtins.str"builtins.str*310*311*312*313*314rh
 server_port"http.server.HTTPServer.server_port
 builtins.int"builtins.int*310*311*312*313*314Ñ
-ThreadingHTTPServerhttp.server.ThreadingHTTPServer"socketserver.ThreadingMixIn"http.server.HTTPServerj310j311j312j313j314»4
+ThreadingHTTPServerhttp.server.ThreadingHTTPServer"socketserver.ThreadingMixIn"http.server.HTTPServerj310j311j312j313j314ß5
 BaseHTTPRequestHandler"http.server.BaseHTTPRequestHandler"!socketserver.StreamRequestHandler*¬
 handle_one_request5http.server.BaseHTTPRequestHandler.handle_one_request"
 None*R
@@ -98,14 +98,14 @@ send_error-http.server.BaseHTTPRequestHandler.send_error"
 version_string1http.server.BaseHTTPRequestHandler.version_string"
 builtins.str"builtins.str*R
 selfH
-"http.server.BaseHTTPRequestHandler""http.server.BaseHTTPRequestHandlerz310z311z312z313z314*©
+"http.server.BaseHTTPRequestHandler""http.server.BaseHTTPRequestHandlerz310z311z312z313z314*Ø
 date_time_string3http.server.BaseHTTPRequestHandler.date_time_string"
 builtins.str"builtins.str*R
 selfH
-"http.server.BaseHTTPRequestHandler""http.server.BaseHTTPRequestHandler*U
-	timestampD
-Union[builtins.int,None]
-builtins.int"builtins.int
+"http.server.BaseHTTPRequestHandler""http.server.BaseHTTPRequestHandler*[
+	timestampJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
 None z310z311z312z313z314*⁄
 log_date_time_string7http.server.BaseHTTPRequestHandler.log_date_time_string"
 builtins.str"builtins.str*R
@@ -132,9 +132,11 @@ send_error-http.server.BaseHTTPRequestHandler.send_error"
 path'http.server.BaseHTTPRequestHandler.path
 builtins.str"builtins.str*310*311*312*313*314r|
 request_version2http.server.BaseHTTPRequestHandler.request_version
-builtins.str"builtins.str*310*311*312*313*314r~
-headers*http.server.BaseHTTPRequestHandler.headers.
-email.message.Message"email.message.Message*310*311*312*313*314rz
+builtins.str"builtins.str*310*311*312*313*314r÷
+headers*http.server.BaseHTTPRequestHandler.headersÖ
+0email.message.Message[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"email.message.Message*310*311*312*313*314rz
 server_version1http.server.BaseHTTPRequestHandler.server_version
 builtins.str"builtins.str*310*311*312*313*314rt
 sys_version.http.server.BaseHTTPRequestHandler.sys_version
@@ -162,8 +164,8 @@ send_error-http.server.BaseHTTPRequestHandler.send_error"
 )typing.Sequence[Union[builtins.str,None]]D
 Union[builtins.str,None]
 builtins.str"builtins.str
-None"typing.Sequence*310*311*312*313*314
-SimpleHTTPRequestHandler$http.server.SimpleHTTPRequestHandler""http.server.BaseHTTPRequestHandler*Œ
+None"typing.Sequence*310*311*312*313*314Ê
+SimpleHTTPRequestHandler$http.server.SimpleHTTPRequestHandler""http.server.BaseHTTPRequestHandler* 
 __init__-http.server.SimpleHTTPRequestHandler.__init__"
 None*V
 selfL
@@ -179,10 +181,14 @@ CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
 TypeAlias[Any]
 Any"_socket._RetAddress*>
 server2
-socketserver.BaseServer"socketserver.BaseServer*U
-	directoryD
-Union[builtins.str,None]
-builtins.str"builtins.str
+socketserver.BaseServer"socketserver.BaseServer*–
+	directoryæ
+DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]È
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
 None z310z311z312z313z314*∞
 do_GET+http.server.SimpleHTTPRequestHandler.do_GET"
 None*V
@@ -191,21 +197,17 @@ $http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandlerz310
 do_HEAD,http.server.SimpleHTTPRequestHandler.do_HEAD"
 None*V
 selfL
-$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandlerz310z311z312z313z314*†
-	send_head.http.server.SimpleHTTPRequestHandler.send_head"r
-&Union[io.BytesIO,typing.BinaryIO,None]
-
-io.BytesIO"
-io.BytesIO"
+$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandlerz310z311z312z313z314*£
+	send_head.http.server.SimpleHTTPRequestHandler.send_head"u
+'Union[_io.BytesIO,typing.BinaryIO,None]
+_io.BytesIO"_io.BytesIO"
 typing.BinaryIO"typing.BinaryIO
 None*V
 selfL
-$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandlerz310z311z312z313z314*Ì
-list_directory3http.server.SimpleHTTPRequestHandler.list_directory">
-Union[io.BytesIO,None]
-
-io.BytesIO"
-io.BytesIO
+$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandlerz310z311z312z313z314*
+list_directory3http.server.SimpleHTTPRequestHandler.list_directory"A
+Union[_io.BytesIO,None]
+_io.BytesIO"_io.BytesIO
 None*V
 selfL
 $http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*Ù
@@ -248,19 +250,21 @@ $http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*Ù
 extensions_map3http.server.SimpleHTTPRequestHandler.extensions_mapu
 (builtins.dict[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*310*311*312*313*314rú
+builtins.str"builtins.str"builtins.dict*310*311*312*313*314rr
+	directory.http.server.SimpleHTTPRequestHandler.directory
+builtins.str"builtins.str*310*311*312*313*314rú
 index_pages0http.server.SimpleHTTPRequestHandler.index_pagesL
 builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*312*313*314≤
-CGIHTTPRequestHandler!http.server.CGIHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*©
+builtins.str"builtins.str"builtins.tuple*312*313*314‚
+CGIHTTPRequestHandler!http.server.CGIHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*ü
 do_POST)http.server.CGIHTTPRequestHandler.do_POST"
 None*P
 selfF
-!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandlerz310z311z312z313z314*Ω
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandlerz310z311z312*≥
 is_cgi(http.server.CGIHTTPRequestHandler.is_cgi"
 builtins.bool"builtins.bool*P
 selfF
-!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandlerz310z311z312z313z314*¬
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandlerz310z311z312*∏
 is_executable/http.server.CGIHTTPRequestHandler.is_executable"
 builtins.bool"builtins.bool*P
 selfF
@@ -270,7 +274,7 @@ $http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*Ù
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz310z311z312z313z314*∫
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz310z311z312*∞
 	is_python+http.server.CGIHTTPRequestHandler.is_python"
 builtins.bool"builtins.bool*P
 selfF
@@ -280,16 +284,148 @@ $http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*Ù
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz310z311z312z313z314*©
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz310z311z312*ü
 run_cgi)http.server.CGIHTTPRequestHandler.run_cgi"
 None*P
 selfF
-!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandlerz310z311z312z313z314j310j311j312j313j314r©
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandlerz310z311z312j310j311j312rü
 cgi_directories1http.server.CGIHTTPRequestHandler.cgi_directoriesJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*310*311*312*313*314rq
+builtins.str"builtins.str"builtins.list*310*311*312rg
 	have_fork+http.server.CGIHTTPRequestHandler.have_fork
-builtins.bool"builtins.bool*310*311*312*313*314*¨
+builtins.bool"builtins.bool*310*311*312º
+CGIHTTPRequestHandler!http.server.CGIHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*ö
+do_POST)http.server.CGIHTTPRequestHandler.do_POST"
+None*P
+selfF
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandlerz313z314*Æ
+is_cgi(http.server.CGIHTTPRequestHandler.is_cgi"
+builtins.bool"builtins.bool*P
+selfF
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandlerz313z314*≥
+is_executable/http.server.CGIHTTPRequestHandler.is_executable"
+builtins.bool"builtins.bool*P
+selfF
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandler*Ù
+pathÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz313z314*´
+	is_python+http.server.CGIHTTPRequestHandler.is_python"
+builtins.bool"builtins.bool*P
+selfF
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandler*Ù
+pathÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz313z314*ö
+run_cgi)http.server.CGIHTTPRequestHandler.run_cgi"
+None*P
+selfF
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandlerz313z3148j313j314rö
+cgi_directories1http.server.CGIHTTPRequestHandler.cgi_directoriesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*313*314rb
+	have_fork+http.server.CGIHTTPRequestHandler.have_fork
+builtins.bool"builtins.bool*313*314ñ$
+HTTPSServerhttp.server.HTTPSServer"http.server.HTTPServer*ƒ
+__init__ http.server.HTTPSServer.__init__"
+None*y
+selfo
+http.server.HTTPSServer.Self2
+http.server.HTTPSServer"http.server.HTTPSServer"http.server.HTTPSServer(*û
+server_addressâ
+TTypeAlias[Tuple[Union[builtins.str,builtins.bytes,builtins.bytearray],builtins.int]]ë
+ITuple[Union[builtins.str,builtins.bytes,builtins.bytearray],builtins.int]£
+5Union[builtins.str,builtins.bytes,builtins.bytearray]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray
+builtins.int"builtins.int"socketserver._AfInetAddress*d
+RequestHandlerClassK
+CallableType[builtins.function]&
+builtins.function"builtins.function*7
+bind_and_activate
+builtins.bool"builtins.bool *≈
+certfile∂
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*∆
+keyfile∂
+oUnion[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]∂
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath
+None *ô
+passwordà
+lUnion[TypeAlias[Union[CallableType[builtins.function],builtins.str,builtins.bytes,builtins.bytearray]],None]ã
+`TypeAlias[Union[CallableType[builtins.function],builtins.str,builtins.bytes,builtins.bytearray]]ê
+UUnion[CallableType[builtins.function],builtins.str,builtins.bytes,builtins.bytearray]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray"_ssl._PasswordType
+None *û
+alpn_protocolsá
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None z314*á
+server_activate'http.server.HTTPSServer.server_activate"
+None*<
+self2
+http.server.HTTPSServer"http.server.HTTPSServerz314j314rY
+sslhttp.server.HTTPSServer.ssl0
+http.server._SSLModule"http.server._SSLModule*314rÍ
+certfile http.server.HTTPSServer.certfile∂
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*314rË
+keyfilehttp.server.HTTPSServer.keyfile∂
+oUnion[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]∂
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath
+None*314rº
+password http.server.HTTPSServer.passwordà
+lUnion[TypeAlias[Union[CallableType[builtins.function],builtins.str,builtins.bytes,builtins.bytearray]],None]ã
+`TypeAlias[Union[CallableType[builtins.function],builtins.str,builtins.bytes,builtins.bytearray]]ê
+UUnion[CallableType[builtins.function],builtins.str,builtins.bytes,builtins.bytearray]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray"_ssl._PasswordType
+None*314rç
+alpn_protocols&http.server.HTTPSServer.alpn_protocolsN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable*314s
+ThreadingHTTPSServer http.server.ThreadingHTTPSServer"socketserver.ThreadingMixIn"http.server.HTTPSServerj314*¨
 __annotations__'six.moves.CGIHTTPServer.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

@@ -1,9 +1,11 @@
 
-pydantic.typingÂ
-TypingGenericAliastypes.GenericAlias"builtins.object*ñ
+pydantic.typing£
+TypingGenericAliastypes.GenericAlias"builtins.object*ï
 
-__origin__types.GenericAlias.__origin__"
-builtins.type"builtins.type*2
+__origin__types.GenericAlias.__origin__"ú
+4Union[builtins.type,typing_extensions.TypeAliasType]
+builtins.type"builtins.typeB
+typing_extensions.TypeAliasType"typing_extensions.TypeAliasType*2
 self(
 types.GenericAlias"types.GenericAlias0:builtins.property`*¢
 __args__types.GenericAlias.__args__".
@@ -15,35 +17,78 @@ __origin__types.GenericAlias.__origin__"
 builtins.tuple[Any]
 Any"builtins.tuple*2
 self(
-types.GenericAlias"types.GenericAlias0:builtins.property`*§
-__init__types.GenericAlias.__init__"
-None*2
-self(
-types.GenericAlias"types.GenericAlias**
-origin
-builtins.type"builtins.type*
-args
-Any*é
+types.GenericAlias"types.GenericAlias0:builtins.property`*ª
+__new__types.GenericAlias.__new__"[
+types.GenericAlias.Self(
+types.GenericAlias"types.GenericAlias"types.GenericAlias(*áÑ
+Type[types.GenericAlias.Self][
+types.GenericAlias.Self(
+types.GenericAlias"types.GenericAlias"types.GenericAlias("type* 
+builtins.type"builtins.type*	
+Anyh*é
 __getitem__types.GenericAlias.__getitem__"(
 types.GenericAlias"types.GenericAlias**(
+types.GenericAlias"types.GenericAlias*	
+Any*ï
+__eq__types.GenericAlias.__eq__"
+builtins.bool"builtins.bool**(
+types.GenericAlias"types.GenericAlias*$"
+builtins.object"builtins.object*y
+__hash__types.GenericAlias.__hash__"
+builtins.int"builtins.int*2
+self(
+types.GenericAlias"types.GenericAlias*ç
+__mro_entries__"types.GenericAlias.__mro_entries__"O
+builtins.tuple[builtins.type]
+builtins.type"builtins.type"builtins.tuple**(
+types.GenericAlias"types.GenericAlias*YW
+ typing.Iterable[builtins.object]"
+builtins.object"builtins.object"typing.Iterable*~
+__or__types.GenericAlias.__or__""
+types.UnionType"types.UnionType**(
+types.GenericAlias"types.GenericAlias*	
+Any*Ä
+__ror__types.GenericAlias.__ror__""
+types.UnionType"types.UnionType**(
 types.GenericAlias"types.GenericAlias*	
 Any*Ç
 __getattr__types.GenericAlias.__getattr__"
 Any**(
 types.GenericAlias"types.GenericAlias*
-builtins.str"builtins.str¿
+builtins.str"builtins.str8æ
 TypesUnionTypetypes.UnionType"builtins.object*ô
 __args__types.UnionType.__args__".
 builtins.tuple[Any]
 Any"builtins.tuple*,
 self"
-types.UnionType"types.UnionType0:builtins.property`*u
-__or__types.UnionType.__or__""
-types.UnionType"types.UnionType*$"
+types.UnionType"types.UnionType0:builtins.property`*•
+__parameters__types.UnionType.__parameters__".
+builtins.tuple[Any]
+Any"builtins.tuple*,
+self"
+types.UnionType"types.UnionType0:builtins.property`*û
+__or__types.UnionType.__or__"K
+Union[types.UnionType,Any]"
+types.UnionType"types.UnionType
+Any*$"
 types.UnionType"types.UnionType*	
-Any*w
-__ror__types.UnionType.__ror__""
+Any*†
+__ror__types.UnionType.__ror__"K
+Union[types.UnionType,Any]"
+types.UnionType"types.UnionType
+Any*$"
+types.UnionType"types.UnionType*	
+Any*å
+__eq__types.UnionType.__eq__"
+builtins.bool"builtins.bool*$"
 types.UnionType"types.UnionType*$"
+builtins.object"builtins.object*p
+__hash__types.UnionType.__hash__"
+builtins.int"builtins.int*,
+self"
+types.UnionType"types.UnionType*
+__getitem__types.UnionType.__getitem__""
+builtins.object"builtins.object*$"
 types.UnionType"types.UnionType*	
 Any8Ÿ
 	test_typepydantic.typing.test_type"builtins.str*¢
@@ -54,6 +99,14 @@ __origin__types.GenericAlias.__origin__"
 item
 builtins.str"builtins.str£
 evaluate_forwardref#pydantic.typing.evaluate_forwardref"
+Any*1
+type_&
+typing.ForwardRef"typing.ForwardRef*
+globalns
+Any*
+localns
+Any∞
+ evaluate_forwardref-redefinition#pydantic.typing.evaluate_forwardref"
 Any*1
 type_&
 typing.ForwardRef"typing.ForwardRef*
@@ -162,7 +215,15 @@ get_originpydantic.typing.get_origin"A
 builtins.bool"builtins.bool*'
 type_
 	Type[Any]
-Any"types
+Any"typex
+_check_typeddict_special(pydantic.typing._check_typeddict_special"
+builtins.bool"builtins.bool*
+type_
+Anyp
+is_typeddict_special$pydantic.typing.is_typeddict_special"
+builtins.bool"builtins.bool*
+type_
+Anys
 is_new_typepydantic.typing.is_new_type"
 builtins.bool"builtins.bool*'
 type_
@@ -180,8 +241,20 @@ get_originpydantic.typing.get_origin"A
 Union[Type[Any],None]
 	Type[Any]
 Any"type
+Noneú
+_check_finalvarpydantic.typing._check_finalvar"
+builtins.bool"builtins.bool*H
+vA
+Union[Type[Any],None]
+	Type[Any]
+Any"type
 Nonev
 is_classvarpydantic.typing.is_classvar"
+builtins.bool"builtins.bool**
+ann_type
+	Type[Any]
+Any"typev
+is_finalvarpydantic.typing.is_finalvar"
 builtins.bool"builtins.bool**
 ann_type
 	Type[Any]
@@ -193,7 +266,7 @@ get_originpydantic.typing.get_origin"A
 globalns
 Any*
 localns
-Any‡
+Any≠
 update_model_forward_refs)pydantic.typing.update_model_forward_refs"
 None*'
 model
@@ -201,13 +274,14 @@ get_originpydantic.typing.get_origin"A
 Any"type*Ñ
 fieldsx
 +typing.Iterable[pydantic.fields.ModelField]8
-pydantic.fields.ModelField"pydantic.fields.ModelField"typing.Iterable*ˆ
-json_encoders‚
-Wbuiltins.dict[Union[Type[Any],builtins.str],TypeAlias[CallableType[builtins.function]]]]
-Union[Type[Any],builtins.str]
+pydantic.fields.ModelField"pydantic.fields.ModelField"typing.Iterable*√
+json_encodersØ
+ibuiltins.dict[Union[Type[Any],builtins.str,typing.ForwardRef],TypeAlias[CallableType[builtins.function]]]ó
+/Union[Type[Any],builtins.str,typing.ForwardRef]
 	Type[Any]
 Any"type
-builtins.str"builtins.strò
+builtins.str"builtins.str&
+typing.ForwardRef"typing.ForwardRefò
 *TypeAlias[CallableType[builtins.function]]K
 CallableType[builtins.function]&
 builtins.function"builtins.function"pydantic.typing.AnyCallable"builtins.dict*±
@@ -263,28 +337,36 @@ get_origintyping.get_origin"&
 __annotations__pydantic.typing.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*1
+Any"builtins.dict*M
+TypingCallabletyping.Callable*
+typing._SpecialForm"typing._SpecialForm*1
 
 _eval_typepydantic.typing._eval_type
-Any*3
+Any*a
+TypedDictNotRequiredtyping_extensions.NotRequired*
+typing._SpecialForm"typing._SpecialForm*[
+TypedDictRequiredtyping_extensions.Required*
+typing._SpecialForm"typing._SpecialForm*3
 typing_basepydantic.typing.typing_base
-Any*M
-TypingCallabletyping.Callable*
-typing._SpecialForm"typing._SpecialForm*Ç
+Any*Ç
 AnnotatedTypeNames"pydantic.typing.AnnotatedTypeNamesH
 builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*A
-_UnionGenericAlias"pydantic.typing._UnionGenericAlias
-Any*Ç
+builtins.str"builtins.str"builtins.set*Z
+LITERAL_TYPESpydantic.typing.LITERAL_TYPES*
+builtins.set[Any]
+Any"builtins.set*Ç
 WithArgsTypespydantic.typing.WithArgsTypes—
 BTuple[Any,CallableType[builtins.type],CallableType[builtins.type]]
 Any?
 CallableType[builtins.type]
 builtins.type"builtins.type?
 CallableType[builtins.type]
-builtins.type"builtins.type*í
-__all__pydantic.typing.__all__Ì
-ÙTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.type"builtins.type*<
+MYPYpydantic.typing.MYPY
+builtins.bool"builtins.bool*Ω
+__all__pydantic.typing.__all__ò
+ÅTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
 builtins.str"builtins.str
 builtins.str"builtins.str
 builtins.str"builtins.str

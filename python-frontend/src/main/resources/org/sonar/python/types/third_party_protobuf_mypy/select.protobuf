@@ -1,59 +1,50 @@
 
-selectø
-
-pollselect.poll"builtins.object*÷
+selectË	
+pollselect.poll"builtins.object*ª
 registerselect.poll.register"
-None*$
-self
-select.poll"select.poll*‘
-fdÀ
+None*
+select.poll"select.poll*ŒÀ
 2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
 'Union[builtins.int,_typeshed.HasFileno]
 builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*-
-	eventmask
-builtins.int"builtins.int *–
+_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike* 
+builtins.int"builtins.int *µ
 modifyselect.poll.modify"
-None*$
-self
-select.poll"select.poll*‘
-fdÀ
+None*
+select.poll"select.poll*ŒÀ
 2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
 'Union[builtins.int,_typeshed.HasFileno]
 builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*+
-	eventmask
-builtins.int"builtins.int*´
+_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*
+builtins.int"builtins.int*ù
 
 unregisterselect.poll.unregister"
-None*$
-self
-select.poll"select.poll*‘
-fdÀ
+None*
+select.poll"select.poll*ŒÀ
 2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
 'Union[builtins.int,_typeshed.HasFileno]
 builtins.int"builtins.int*
-_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*æ
+_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*´
 pollselect.poll.poll"¢
 /builtins.list[Tuple[builtins.int,builtins.int]]`
  Tuple[builtins.int,builtins.int]
 builtins.int"builtins.int
-builtins.int"builtins.int"builtins.list*$
-self
-select.poll"select.poll*Y
-timeoutJ
+builtins.int"builtins.int"builtins.list*
+select.poll"select.poll*NJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None ∆
-epollselect.epoll"builtins.object*¨
-__init__select.epoll.__init__"
-None*&
-self
-select.epoll"select.epoll*,
+None ù
+epollselect.epoll"builtins.object*ä
+__new__select.epoll.__new__"
+select.epoll"select.epoll*p
+selff
+Type[select.epoll.Self]C
+select.epoll.Self
+select.epoll"select.epoll"select.epoll("type*,
 sizehint
 builtins.int"builtins.int *)
 flags
-builtins.int"builtins.int *à
+builtins.int"builtins.int h*à
 	__enter__select.epoll.__enter__"
 select.epoll"select.epoll*EC
 select.epoll.Self
@@ -123,10 +114,9 @@ unregisterselect.epoll.unregister"
 builtins.float"builtins.float
 None *-
 	maxevents
-builtins.int"builtins.int *Î
+builtins.int"builtins.int *‰
 fromfdselect.epoll.fromfd"
-select.epoll"select.epoll*C
-cls:
+select.epoll"select.epoll*<:
 Type[select.epoll]
 select.epoll"select.epoll"type*ŒÀ
 2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
@@ -134,21 +124,27 @@ unregisterselect.epoll.unregister"
 builtins.int"builtins.int*
 _typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike0:builtins.classmethodp8r=
 closedselect.epoll.closed
-builtins.bool"builtins.bool”
-selectselect.select"Õ
-?Tuple[builtins.list[Any],builtins.list[Any],builtins.list[Any]],
-builtins.list[Any]
-Any"builtins.list,
-builtins.list[Any]
-Any"builtins.list,
-builtins.list[Any]
-Any"builtins.list*20
-typing.Iterable[Any]
-Any"typing.Iterable*20
-typing.Iterable[Any]
-Any"typing.Iterable*20
-typing.Iterable[Any]
-Any"typing.Iterable*NJ
+builtins.bool"builtins.boolÎ
+selectselect.select"¢
+QTuple[builtins.list[select._R],builtins.list[select._W],builtins.list[select._X]]m
+builtins.list[select._R]B
+	select._R"
+builtins.object"builtins.object"builtins.object"builtins.listm
+builtins.list[select._W]B
+	select._W"
+builtins.object"builtins.object"builtins.object"builtins.listm
+builtins.list[select._X]B
+	select._X"
+builtins.object"builtins.object"builtins.object"builtins.list*sq
+typing.Iterable[select._R]B
+	select._R"
+builtins.object"builtins.object"builtins.object"typing.Iterable*sq
+typing.Iterable[select._W]B
+	select._W"
+builtins.object"builtins.object"builtins.object"typing.Iterable*sq
+typing.Iterable[select._X]B
+	select._X"
+builtins.object"builtins.object"builtins.object"typing.Iterable*NJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
 None *Ç
@@ -214,8 +210,6 @@ EPOLLRDHUPselect.EPOLLRDHUP
 EPOLLWRBANDselect.EPOLLWRBAND
 builtins.int"builtins.int*?
 EPOLLWRNORMselect.EPOLLWRNORM
-builtins.int"builtins.int*?
-EPOLL_RDHUPselect.EPOLL_RDHUP
 builtins.int"builtins.int*C
 EPOLL_CLOEXECselect.EPOLL_CLOEXEC
 builtins.int"builtins.int

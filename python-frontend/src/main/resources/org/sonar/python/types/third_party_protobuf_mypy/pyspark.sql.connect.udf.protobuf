@@ -1,12 +1,12 @@
 
-pyspark.sql.connect.udfŸ
+pyspark.sql.connect.udfù
 PySparkUDFRegistrationpyspark.sql.udf.UDFRegistration"builtins.object*ä
 __init__(pyspark.sql.udf.UDFRegistration.__init__"
 None*L
 selfB
 pyspark.sql.udf.UDFRegistration"pyspark.sql.udf.UDFRegistration*V
 sparkSessionD
- pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*¿
+ pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*ì
 register(pyspark.sql.udf.UDFRegistration.register"Z
 +pyspark.sql._typing.UserDefinedFunctionLike"+pyspark.sql._typing.UserDefinedFunctionLike*L
 selfB
@@ -17,13 +17,15 @@
 RUnion[CallableType[builtins.function],pyspark.sql._typing.UserDefinedFunctionLike]K
 CallableType[builtins.function]&
 builtins.function"builtins.functionZ
-+pyspark.sql._typing.UserDefinedFunctionLike"+pyspark.sql._typing.UserDefinedFunctionLike*¬
++pyspark.sql._typing.UserDefinedFunctionLike"+pyspark.sql._typing.UserDefinedFunctionLike*Ù
 
-returnType™
-3Union[pyspark.sql.types.DataType,builtins.str,None]8
+returnTypeÆ
+EUnion[TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]],None]ð
+9TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]]Š
+.Union[pyspark.sql.types.DataType,builtins.str]8
 pyspark.sql.types.DataType"pyspark.sql.types.DataType
-builtins.str"builtins.str
-None *¬
+builtins.str"builtins.str"$pyspark.sql._typing.DataTypeOrString
+None *Ù
 registerJavaFunction4pyspark.sql.udf.UDFRegistration.registerJavaFunction"
 None*L
 selfB
@@ -31,12 +33,14 @@ returnType™
 name
 builtins.str"builtins.str*/
 javaClassName
-builtins.str"builtins.str*¬
+builtins.str"builtins.str*Ù
 
-returnType™
-3Union[pyspark.sql.types.DataType,builtins.str,None]8
+returnTypeÆ
+EUnion[TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]],None]ð
+9TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]]Š
+.Union[pyspark.sql.types.DataType,builtins.str]8
 pyspark.sql.types.DataType"pyspark.sql.types.DataType
-builtins.str"builtins.str
+builtins.str"builtins.str"$pyspark.sql._typing.DataTypeOrString
 None *õ
 registerJavaUDAF0pyspark.sql.udf.UDFRegistration.registerJavaUDAF"
 None*L
@@ -107,14 +111,14 @@ returnType6pyspark.sql.connect.udf.UserDefinedFunction.returnType8
 evalType4pyspark.sql.connect.udf.UserDefinedFunction.evalType
 builtins.int"builtins.intrj
 deterministic9pyspark.sql.connect.udf.UserDefinedFunction.deterministic
-builtins.bool"builtins.boolÐ
+builtins.bool"builtins.boolº
 UDFRegistration'pyspark.sql.connect.udf.UDFRegistration"builtins.object*Œ
 __init__0pyspark.sql.connect.udf.UDFRegistration.__init__"
 None*\
 selfR
 'pyspark.sql.connect.udf.UDFRegistration"'pyspark.sql.connect.udf.UDFRegistration*f
 sparkSessionT
-(pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession*ÿ
+(pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession*´
 register0pyspark.sql.connect.udf.UDFRegistration.register"j
 3pyspark.sql.connect._typing.UserDefinedFunctionLike"3pyspark.sql.connect._typing.UserDefinedFunctionLike*\
 selfR
@@ -125,13 +129,15 @@ returnType6pyspark.sql.connect.udf.UserDefinedFunction.returnType8
 ZUnion[CallableType[builtins.function],pyspark.sql.connect._typing.UserDefinedFunctionLike]K
 CallableType[builtins.function]&
 builtins.function"builtins.functionj
-3pyspark.sql.connect._typing.UserDefinedFunctionLike"3pyspark.sql.connect._typing.UserDefinedFunctionLike*¬
+3pyspark.sql.connect._typing.UserDefinedFunctionLike"3pyspark.sql.connect._typing.UserDefinedFunctionLike*á
 
-returnType™
-3Union[pyspark.sql.types.DataType,builtins.str,None]8
+returnTypeÎ
+EUnion[TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]],None]ø
+9TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]]Š
+.Union[pyspark.sql.types.DataType,builtins.str]8
 pyspark.sql.types.DataType"pyspark.sql.types.DataType
-builtins.str"builtins.str
-None *Ä
+builtins.str"builtins.str",pyspark.sql.connect._typing.DataTypeOrString
+None *ù
 registerJavaFunction<pyspark.sql.connect.udf.UDFRegistration.registerJavaFunction"
 None*\
 selfR
@@ -139,12 +145,14 @@ returnType™
 name
 builtins.str"builtins.str*/
 javaClassName
-builtins.str"builtins.str*¬
+builtins.str"builtins.str*á
 
-returnType™
-3Union[pyspark.sql.types.DataType,builtins.str,None]8
+returnTypeÎ
+EUnion[TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]],None]ø
+9TypeAlias[Union[pyspark.sql.types.DataType,builtins.str]]Š
+.Union[pyspark.sql.types.DataType,builtins.str]8
 pyspark.sql.types.DataType"pyspark.sql.types.DataType
-builtins.str"builtins.str
+builtins.str"builtins.str",pyspark.sql.connect._typing.DataTypeOrString
 None *
 registerJavaUDAF8pyspark.sql.connect.udf.UDFRegistration.registerJavaUDAF"
 None*\

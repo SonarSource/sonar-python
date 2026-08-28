@@ -34,12 +34,16 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.v2.FunctionType;
 import org.sonar.plugins.python.api.types.v2.ObjectType;
 import org.sonar.plugins.python.api.types.v2.ParameterV2;
+import org.sonar.plugins.python.api.types.v2.matchers.TypeMatcher;
 import org.sonar.plugins.python.api.types.v2.matchers.TypeMatchers;
+import org.sonar.python.checks.utils.Expressions;
 
 @Rule(key = "S930")
 public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   private static final String FUNCTION_DEFINITION = "Function definition.";
+  private static final String NEW_METHOD_NAME = "__new__";
+  private static final TypeMatcher SUPER_INSTANCE_MATCHER = TypeMatchers.isObjectOfType("super");
 
   @Override
   public void initialize(Context context) {
@@ -137,8 +141,21 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       || extendsZopeInterface(ctx, callExpression)
       || isCalledAsBoundInstanceMethod(callExpression)
       || isSuperCall(ctx, callExpression)
+      || isAliasedSuperNewCall(ctx, callExpression)
       || isReceiverTypeVar(ctx, callExpression)
       || isReceiverTypeInstance(ctx, callExpression);
+  }
+
+  private static boolean isAliasedSuperNewCall(SubscriptionContext ctx, CallExpression callExpression) {
+    if (!(callExpression.callee() instanceof Name name)) {
+      return false;
+    }
+    // __new__ is implicitly static, so an alias of super().__new__ legitimately
+    // receives cls explicitly. The alias prevents isSuperCall from recognizing it.
+    Expression assignedValue = Expressions.singleAssignedValue(name);
+    return assignedValue instanceof QualifiedExpression qualifiedExpression
+      && NEW_METHOD_NAME.equals(qualifiedExpression.name().name())
+      && SUPER_INSTANCE_MATCHER.isTrueFor(qualifiedExpression.qualifier(), ctx);
   }
 
   private static boolean extendsZopeInterface(SubscriptionContext ctx, CallExpression callExpression) {
@@ -174,7 +191,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   private static boolean isSuperCall(SubscriptionContext ctx, CallExpression callExpression) {
     if (callExpression.callee() instanceof QualifiedExpression qualifiedExpression) {
-      return TypeMatchers.isObjectOfType("super").isTrueFor(qualifiedExpression.qualifier(), ctx);
+      return SUPER_INSTANCE_MATCHER.isTrueFor(qualifiedExpression.qualifier(), ctx);
     }
     return false;
   }

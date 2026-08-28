@@ -1,5 +1,5 @@
 
-multiprocessing.contextË9
+multiprocessing.contextÌ<
 _Poolmultiprocessing.pool.Pool"builtins.object*Å
 __init__"multiprocessing.pool.Pool.__init__"
 None*@
@@ -24,7 +24,15 @@
 context&
 Union[Any,None]
 Any
-None *¸
+None *Œ
+Process!multiprocessing.pool.Pool.Process"B
+multiprocessing.context.Process"multiprocessing.context.Process*Y
+ctxP
+&multiprocessing.context.DefaultContext"&multiprocessing.context.DefaultContext*
+args
+Any*
+kwds
+Any0:builtins.staticmethodh*¸
 applymultiprocessing.pool.Pool.apply"P
 multiprocessing.pool._T"
 builtins.object"builtins.object"builtins.object*@
@@ -218,11 +226,14 @@ Hmultiprocessing.pool.ApplyResult[builtins.list[multiprocessing.pool._T]]‰
 None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-NoneH
+None*p
+__del__!multiprocessing.pool.Pool.__del__"
+None*86
+multiprocessing.pool.Pool"multiprocessing.pool.PoolH
 ProcessError$multiprocessing.context.ProcessError"builtins.Exception^
 BufferTooShort&multiprocessing.context.BufferTooShort"$multiprocessing.context.ProcessErrorZ
 TimeoutError$multiprocessing.context.TimeoutError"$multiprocessing.context.ProcessErrorh
-AuthenticationError+multiprocessing.context.AuthenticationError"$multiprocessing.context.ProcessError›
+AuthenticationError+multiprocessing.context.AuthenticationError"$multiprocessing.context.ProcessErrorÉ°
 BaseContext#multiprocessing.context.BaseContext"builtins.object*­
 current_process3multiprocessing.context.BaseContext.current_process"J
 #multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess0:builtins.staticmethodh*ë
@@ -240,11 +251,15 @@ Hmultiprocessing.pool.ApplyResult[builtins.list[multiprocessing.pool._T]]‰
 Manager+multiprocessing.context.BaseContext.Manager"L
 $multiprocessing.managers.SyncManager"$multiprocessing.managers.SyncManager*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*­
-Pipe(multiprocessing.context.BaseContext.Pipe"ö
-RTuple[multiprocessing.connection.Connection,multiprocessing.connection.Connection]N
-%multiprocessing.connection.Connection"%multiprocessing.connection.ConnectionN
-%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*T
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*õ
+Pipe(multiprocessing.context.BaseContext.Pipe"¾
+dTuple[multiprocessing.connection.Connection[Any,Any],multiprocessing.connection.Connection[Any,Any]]i
+.multiprocessing.connection.Connection[Any,Any]
+Any
+Any"%multiprocessing.connection.Connectioni
+.multiprocessing.connection.Connection[Any,Any]
+Any
+Any"%multiprocessing.connection.Connection*T
 selfJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*,
 duplex
@@ -389,17 +404,17 @@ executable
 _check_available4multiprocessing.context.BaseContext._check_available"
 None*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext2Ë
-RawValue,multiprocessing.context.BaseContext.RawValueš
-RawValue,multiprocessing.context.BaseContext.RawValue"N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData*T
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext2Ñ
+RawValue,multiprocessing.context.BaseContext.RawValue 
+RawValue,multiprocessing.context.BaseContext.RawValue"Q
+multiprocessing.context._CT 
+_ctypes._CData"_ctypes._CData"_ctypes._CData*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*‘
-typecode_or_type{
-!Type[multiprocessing.context._CT]N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData"type*
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*”
+typecode_or_type~
+!Type[multiprocessing.context._CT]Q
+multiprocessing.context._CT 
+_ctypes._CData"_ctypes._CData"_ctypes._CData"type*
 args
 Any0:typing.overloadXó
 RawValue,multiprocessing.context.BaseContext.RawValue"
@@ -409,18 +424,18 @@ executable
 typecode_or_type
 builtins.str"builtins.str*
 args
-Any0:typing.overloadX2‘
-RawArray,multiprocessing.context.BaseContext.RawArrayÛ
-RawArray,multiprocessing.context.BaseContext.RawArray"‰
-)ctypes.Array[multiprocessing.context._CT]N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData"ctypes.Array*T
+Any0:typing.overloadX2™
+RawArray,multiprocessing.context.BaseContext.RawArrayã
+RawArray,multiprocessing.context.BaseContext.RawArray"Ž
+*_ctypes.Array[multiprocessing.context._CT]Q
+multiprocessing.context._CT 
+_ctypes._CData"_ctypes._CData"_ctypes._CData"_ctypes.Array*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*‘
-typecode_or_type{
-!Type[multiprocessing.context._CT]N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData"type*•
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*”
+typecode_or_type~
+!Type[multiprocessing.context._CT]Q
+multiprocessing.context._CT 
+_ctypes._CData"_ctypes._CData"_ctypes._CData"type*•
 size_or_initializer|
 (Union[builtins.int,typing.Sequence[Any]]
 builtins.int"builtins.int0
@@ -436,32 +451,19 @@ executable
 (Union[builtins.int,typing.Sequence[Any]]
 builtins.int"builtins.int0
 typing.Sequence[Any]
-Any"typing.Sequence0:typing.overloadX2Œ
-Value)multiprocessing.context.BaseContext.ValueÚ
-Value)multiprocessing.context.BaseContext.Value"N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData*T
+Any"typing.Sequence0:typing.overloadX2—$
+Value)multiprocessing.context.BaseContext.Value’	
+Value)multiprocessing.context.BaseContext.Value"Ç
+Emultiprocessing.sharedctypes.Synchronized[multiprocessing.context._T]S
+multiprocessing.context._T"
+builtins.object"builtins.object"builtins.object")multiprocessing.sharedctypes.Synchronized*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*‘
-typecode_or_type{
-!Type[multiprocessing.context._CT]N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData"type*
-args
-Any*D
-lock:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadX°
-Value)multiprocessing.context.BaseContext.Value"Ë
-Jmultiprocessing.sharedctypes.SynchronizedBase[multiprocessing.context._CT]N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData"-multiprocessing.sharedctypes.SynchronizedBase*T
-selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*‘
-typecode_or_type{
-!Type[multiprocessing.context._CT]N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData"type*
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*÷
+typecode_or_typeà
+6Type[_ctypes._SimpleCData[multiprocessing.context._T]]
+0_ctypes._SimpleCData[multiprocessing.context._T]S
+multiprocessing.context._T"
+builtins.object"builtins.object"builtins.object"_ctypes._SimpleCData"type*
 args
 Any*›
 lockŽ
@@ -471,10 +473,45 @@ rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,m
 TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
 IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXð
-Value)multiprocessing.context.BaseContext.Value"l
-2multiprocessing.sharedctypes.SynchronizedBase[Any]
-Any"-multiprocessing.sharedctypes.SynchronizedBase*T
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXÖ
+Value)multiprocessing.context.BaseContext.Value"Æ
+Fmultiprocessing.sharedctypes.Synchronized[multiprocessing.context._CT]Q
+multiprocessing.context._CT 
+_ctypes._CData"_ctypes._CData"_ctypes._CData")multiprocessing.sharedctypes.Synchronized*T
+selfJ
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*”
+typecode_or_type~
+!Type[multiprocessing.context._CT]Q
+multiprocessing.context._CT 
+_ctypes._CData"_ctypes._CData"_ctypes._CData"type*
+args
+Any*D
+lock:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool0:typing.overloadX®
+Value)multiprocessing.context.BaseContext.Value"Æ
+Fmultiprocessing.sharedctypes.Synchronized[multiprocessing.context._CT]Q
+multiprocessing.context._CT 
+_ctypes._CData"_ctypes._CData"_ctypes._CData")multiprocessing.sharedctypes.Synchronized*T
+selfJ
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*”
+typecode_or_type~
+!Type[multiprocessing.context._CT]Q
+multiprocessing.context._CT 
+_ctypes._CData"_ctypes._CData"_ctypes._CData"type*
+args
+Any*›
+lockŽ
+rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]:
+Literal[builtins.bool]	
+builtins.bool"builtins.boolÙ
+TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
+IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
+ multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXè
+Value)multiprocessing.context.BaseContext.Value"d
+.multiprocessing.sharedctypes.Synchronized[Any]
+Any")multiprocessing.sharedctypes.Synchronized*T
 selfJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*2
 typecode_or_type
@@ -488,16 +525,16 @@ rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,m
 TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
 IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXÔ
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXØ
 Value)multiprocessing.context.BaseContext.Value"
 Any*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*Ÿ
-typecode_or_typeˆ
-'Union[builtins.str,Type[ctypes._CData]]
-builtins.str"builtins.str=
-Type[ctypes._CData]
-ctypes._CData"ctypes._CData"type*
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*£
+typecode_or_typeŒ
+(Union[builtins.str,Type[_ctypes._CData]]
+builtins.str"builtins.str@
+Type[_ctypes._CData] 
+_ctypes._CData"_ctypes._CData"type*
 args
 Any*ö
 locké
@@ -506,17 +543,19 @@ iUnion[builtins.bool,TypeAlias[Union[multiprocessing.synchronize.Lock,multiproce
 TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
 IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX2¤
-Array)multiprocessing.context.BaseContext.Arrayß
-Array)multiprocessing.context.BaseContext.Array"N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData*T
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX2‹)
+Array)multiprocessing.context.BaseContext.ArrayÉ
+Array)multiprocessing.context.BaseContext.Array"Ñ
+Jmultiprocessing.sharedctypes.SynchronizedArray[multiprocessing.context._T]S
+multiprocessing.context._T"
+builtins.object"builtins.object"builtins.object".multiprocessing.sharedctypes.SynchronizedArray*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*‘
-typecode_or_type{
-!Type[multiprocessing.context._CT]N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData"type*•
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*÷
+typecode_or_typeà
+6Type[_ctypes._SimpleCData[multiprocessing.context._T]]
+0_ctypes._SimpleCData[multiprocessing.context._T]S
+multiprocessing.context._T"
+builtins.object"builtins.object"builtins.object"_ctypes._SimpleCData"type*•
 size_or_initializer|
 (Union[builtins.int,typing.Sequence[Any]]
 builtins.int"builtins.int0
@@ -524,17 +563,39 @@ IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
 Any"typing.Sequence*D
 lock:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool0:typing.overloadX·	
-Array)multiprocessing.context.BaseContext.Array"Í
-Kmultiprocessing.sharedctypes.SynchronizedArray[multiprocessing.context._CT]N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData".multiprocessing.sharedctypes.SynchronizedArray*T
+builtins.bool"builtins.bool0:typing.overloadXŒ
+Array)multiprocessing.context.BaseContext.Array"b
+/multiprocessing.sharedctypes.SynchronizedString"/multiprocessing.sharedctypes.SynchronizedString*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*‘
-typecode_or_type{
-!Type[multiprocessing.context._CT]N
-multiprocessing.context._CT
-ctypes._CData"ctypes._CData"ctypes._CData"type*•
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*S
+typecode_or_type=
+Type[ctypes.c_char]
+ctypes.c_char"ctypes.c_char"type*•
+size_or_initializer|
+(Union[builtins.int,typing.Sequence[Any]]
+builtins.int"builtins.int0
+typing.Sequence[Any]
+Any"typing.Sequence*›
+lockŽ
+rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]]:
+Literal[builtins.bool]	
+builtins.bool"builtins.boolÙ
+TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
+IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
+ multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadX¡
+
+Array)multiprocessing.context.BaseContext.Array"Ñ
+Jmultiprocessing.sharedctypes.SynchronizedArray[multiprocessing.context._T]S
+multiprocessing.context._T"
+builtins.object"builtins.object"builtins.object".multiprocessing.sharedctypes.SynchronizedArray*T
+selfJ
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*÷
+typecode_or_typeà
+6Type[_ctypes._SimpleCData[multiprocessing.context._T]]
+0_ctypes._SimpleCData[multiprocessing.context._T]S
+multiprocessing.context._T"
+builtins.object"builtins.object"builtins.object"_ctypes._SimpleCData"type*•
 size_or_initializer|
 (Union[builtins.int,typing.Sequence[Any]]
 builtins.int"builtins.int0
@@ -567,16 +628,16 @@ rUnion[Literal[builtins.bool],TypeAlias[Union[multiprocessing.synchronize.Lock,m
 TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]Û
 IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXÙ
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"!multiprocessing.context._LockLike 0:typing.overloadXÝ
 Array)multiprocessing.context.BaseContext.Array"
 Any*T
 selfJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*Ÿ
-typecode_or_typeˆ
-'Union[builtins.str,Type[ctypes._CData]]
-builtins.str"builtins.str=
-Type[ctypes._CData]
-ctypes._CData"ctypes._CData"type*•
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*£
+typecode_or_typeŒ
+(Union[builtins.str,Type[_ctypes._CData]]
+builtins.str"builtins.str@
+Type[_ctypes._CData] 
+_ctypes._CData"_ctypes._CData"type*•
 size_or_initializer|
 (Union[builtins.int,typing.Sequence[Any]]
 builtins.int"builtins.int0

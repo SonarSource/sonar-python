@@ -302,7 +302,7 @@ def main(skip_tests=False, fail_fast=False, dry_run=False):
         if dry_run:
             logger.info('DRY RUN: Would run test')
         else:
-            _ = subprocess.run(['tox', '-e', 'py312'], check=True)
+            _ = subprocess.run(['tox', '-e', 'py314'], check=True)
 
 
 if __name__ == '__main__':

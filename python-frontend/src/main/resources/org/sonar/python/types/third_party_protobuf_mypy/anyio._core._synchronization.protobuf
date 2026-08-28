@@ -1,12 +1,16 @@
 
-anyio._core._synchronization≈
+anyio._core._synchronization÷
 EventStatistics,anyio._core._synchronization.EventStatistics"builtins.object*‰
 __init__5anyio._core._synchronization.EventStatistics.__init__"
 None*f
 self\
 ,anyio._core._synchronization.EventStatistics",anyio._core._synchronization.EventStatistics*/
 tasks_waiting
-builtins.int"builtins.int8ri
+builtins.int"builtins.int*é
+__mypy-replace;anyio._core._synchronization.EventStatistics.__mypy-replace"
+None*1
+tasks_waiting
+builtins.int"builtins.int 0h8ri
 tasks_waiting:anyio._core._synchronization.EventStatistics.tasks_waiting
 builtins.int"builtins.intr®
 __match_args__;anyio._core._synchronization.EventStatistics.__match_args__Y
@@ -17,7 +21,7 @@
 2builtins.dict[builtins.str,dataclasses.Field[Any]]
 builtins.str"builtins.str4
 dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dictÁ
+Any"dataclasses.Field"builtins.dict’
 CapacityLimiterStatistics6anyio._core._synchronization.CapacityLimiterStatistics"builtins.object*œ
 __init__?anyio._core._synchronization.CapacityLimiterStatistics.__init__"
 None*z
@@ -31,7 +35,18 @@
 builtins.tuple[builtins.object]"
 builtins.object"builtins.object"builtins.tuple*/
 tasks_waiting
-builtins.int"builtins.int8rw
+builtins.int"builtins.int*Î
+__mypy-replaceEanyio._core._synchronization.CapacityLimiterStatistics.__mypy-replace"
+None*3
+borrowed_tokens
+builtins.int"builtins.int *4
+total_tokens 
+builtins.float"builtins.float *f
+	borrowersU
+builtins.tuple[builtins.object]"
+builtins.object"builtins.object"builtins.tuple *1
+tasks_waiting
+builtins.int"builtins.int 0h8rw
 borrowed_tokensFanyio._core._synchronization.CapacityLimiterStatistics.borrowed_tokens
 builtins.int"builtins.intru
 total_tokensCanyio._core._synchronization.CapacityLimiterStatistics.total_tokens 
@@ -55,7 +70,7 @@
 2builtins.dict[builtins.str,dataclasses.Field[Any]]
 builtins.str"builtins.str4
 dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dict°
+Any"dataclasses.Field"builtins.dictÊ
 LockStatistics+anyio._core._synchronization.LockStatistics"builtins.object*í
 __init__4anyio._core._synchronization.LockStatistics.__init__"
 None*d
@@ -68,7 +83,17 @@
 anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo
 None*/
 tasks_waiting
-builtins.int"builtins.int8r\
+builtins.int"builtins.int*¬
+__mypy-replace:anyio._core._synchronization.LockStatistics.__mypy-replace"
+None*,
+locked
+builtins.bool"builtins.bool *Ñ
+ownerw
+)Union[anyio._core._testing.TaskInfo,None]>
+anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo
+None *1
+tasks_waiting
+builtins.int"builtins.int 0h8r\
 locked2anyio._core._synchronization.LockStatistics.locked
 builtins.bool"builtins.boolr≥
 owner1anyio._core._synchronization.LockStatistics.ownerw
@@ -89,7 +114,7 @@ HTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 2builtins.dict[builtins.str,dataclasses.Field[Any]]
 builtins.str"builtins.str4
 dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dictÿ	
+Any"dataclasses.Field"builtins.dict‡
 ConditionStatistics0anyio._core._synchronization.ConditionStatistics"builtins.object*·
 __init__9anyio._core._synchronization.ConditionStatistics.__init__"
 None*n
@@ -98,7 +123,13 @@ HTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 tasks_waiting
 builtins.int"builtins.int*o
 lock_statisticsZ
-+anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics8rm
++anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics*Ö
+__mypy-replace?anyio._core._synchronization.ConditionStatistics.__mypy-replace"
+None*1
+tasks_waiting
+builtins.int"builtins.int *q
+lock_statisticsZ
++anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics 0h8rm
 tasks_waiting>anyio._core._synchronization.ConditionStatistics.tasks_waiting
 builtins.int"builtins.intrØ
 lock_statistics@anyio._core._synchronization.ConditionStatistics.lock_statisticsZ
@@ -113,14 +144,18 @@ HTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 2builtins.dict[builtins.str,dataclasses.Field[Any]]
 builtins.str"builtins.str4
 dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dictÂ
+Any"dataclasses.Field"builtins.dict˙
 SemaphoreStatistics0anyio._core._synchronization.SemaphoreStatistics"builtins.object*
 __init__9anyio._core._synchronization.SemaphoreStatistics.__init__"
 None*n
 selfd
 0anyio._core._synchronization.SemaphoreStatistics"0anyio._core._synchronization.SemaphoreStatistics*/
 tasks_waiting
-builtins.int"builtins.int8rm
+builtins.int"builtins.int*í
+__mypy-replace?anyio._core._synchronization.SemaphoreStatistics.__mypy-replace"
+None*1
+tasks_waiting
+builtins.int"builtins.int 0h8rm
 tasks_waiting>anyio._core._synchronization.SemaphoreStatistics.tasks_waiting
 builtins.int"builtins.intr¨
 __match_args__?anyio._core._synchronization.SemaphoreStatistics.__match_args__Y
@@ -131,13 +166,13 @@ HTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 2builtins.dict[builtins.str,dataclasses.Field[Any]]
 builtins.str"builtins.str4
 dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dict∆
-Event"anyio._core._synchronization.Event"builtins.object*á
+Any"dataclasses.Field"builtins.dict∫	
+Event"anyio._core._synchronization.Event"builtins.object*â
 __new__*anyio._core._synchronization.Event.__new__"H
 "anyio._core._synchronization.Event""anyio._core._synchronization.Event*Ö
 cls|
 (Type[anyio._core._synchronization.Event]H
-"anyio._core._synchronization.Event""anyio._core._synchronization.Event"type*ã
+"anyio._core._synchronization.Event""anyio._core._synchronization.Event"typeh*ã
 set&anyio._core._synchronization.Event.set"
 None*R
 selfH
@@ -157,13 +192,20 @@ HTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 statistics-anyio._core._synchronization.Event.statistics"\
 ,anyio._core._synchronization.EventStatistics",anyio._core._synchronization.EventStatistics*R
 selfH
-"anyio._core._synchronization.Event""anyio._core._synchronization.Eventæ
-EventAdapter)anyio._core._synchronization.EventAdapter""anyio._core._synchronization.Event*≤
+"anyio._core._synchronization.Event""anyio._core._synchronization.Eventrp
+	__slots__,anyio._core._synchronization.Event.__slots__5
+Tuple[builtins.str]
+builtins.str"builtins.str
+EventAdapter)anyio._core._synchronization.EventAdapter""anyio._core._synchronization.Event*¥
 __new__1anyio._core._synchronization.EventAdapter.__new__"V
 )anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapter*õ
 clsë
 /Type[anyio._core._synchronization.EventAdapter]V
-)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapter"type*˝
+)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapter"typeh*™
+__init__2anyio._core._synchronization.EventAdapter.__init__"
+None*`
+selfV
+)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapter*˝
 _event0anyio._core._synchronization.EventAdapter._event"H
 "anyio._core._synchronization.Event""anyio._core._synchronization.Event*`
 selfV
@@ -187,19 +229,25 @@ statistics-anyio._core._synchronization.Event.statistics"\
 statistics4anyio._core._synchronization.EventAdapter.statistics"\
 ,anyio._core._synchronization.EventStatistics",anyio._core._synchronization.EventStatistics*`
 selfV
-)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapterr’
+)anyio._core._synchronization.EventAdapter")anyio._core._synchronization.EventAdapterr¢
+	__slots__3anyio._core._synchronization.EventAdapter.__slots__`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strr’
 _internal_event9anyio._core._synchronization.EventAdapter._internal_eventÜ
 .Union[anyio._core._synchronization.Event,None]H
 "anyio._core._synchronization.Event""anyio._core._synchronization.Event
-NoneÕ
-Lock!anyio._core._synchronization.Lock"builtins.object*µ
+Noner\
+_is_set1anyio._core._synchronization.EventAdapter._is_set
+builtins.bool"builtins.bool¿
+Lock!anyio._core._synchronization.Lock"builtins.object*∑
 __new__)anyio._core._synchronization.Lock.__new__"F
 !anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock*Ç
 clsy
 'Type[anyio._core._synchronization.Lock]F
 !anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock"type*2
 fast_acquire
-builtins.bool"builtins.bool *ﬁ
+builtins.bool"builtins.bool h*ﬁ
 
 __aenter__,anyio._core._synchronization.Lock.__aenter__"N
 typing.Coroutine[Any,Any,None]
@@ -251,15 +299,18 @@ __aenter__,anyio._core._synchronization.Lock.__aenter__"N
 statistics,anyio._core._synchronization.Lock.statistics"Z
 +anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics*P
 selfF
-!anyio._core._synchronization.Lock"!anyio._core._synchronization.LockΩ
-LockAdapter(anyio._core._synchronization.LockAdapter"!anyio._core._synchronization.Lock*‡
+!anyio._core._synchronization.Lock"!anyio._core._synchronization.Lockro
+	__slots__+anyio._core._synchronization.Lock.__slots__5
+Tuple[builtins.str]
+builtins.str"builtins.str„
+LockAdapter(anyio._core._synchronization.LockAdapter"!anyio._core._synchronization.Lock*‚
 __new__0anyio._core._synchronization.LockAdapter.__new__"T
 (anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapter*ò
 clsé
 .Type[anyio._core._synchronization.LockAdapter]T
 (anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapter"type*2
 fast_acquire
-builtins.bool"builtins.bool *€
+builtins.bool"builtins.bool h*€
 __init__1anyio._core._synchronization.LockAdapter.__init__"
 None*^
 selfT
@@ -321,13 +372,17 @@ __aenter__3anyio._core._synchronization.LockAdapter.__aenter__"N
 statistics3anyio._core._synchronization.LockAdapter.statistics"Z
 +anyio._core._synchronization.LockStatistics"+anyio._core._synchronization.LockStatistics*^
 selfT
-(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapterrœ
+(anyio._core._synchronization.LockAdapter"(anyio._core._synchronization.LockAdapterr°
+	__slots__2anyio._core._synchronization.LockAdapter.__slots__`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strrœ
 _internal_lock7anyio._core._synchronization.LockAdapter._internal_lockÉ
 -Union[anyio._core._synchronization.Lock,None]F
 !anyio._core._synchronization.Lock"!anyio._core._synchronization.Lock
 Nonerg
 _fast_acquire6anyio._core._synchronization.LockAdapter._fast_acquire
-builtins.bool"builtins.boolﬂ
+builtins.bool"builtins.boolä!
 	Condition&anyio._core._synchronization.Condition"builtins.object*¥
 __init__/anyio._core._synchronization.Condition.__init__"
 None*Z
@@ -405,12 +460,29 @@ notify_all1anyio._core._synchronization.Condition.notify_all"
 Any
 None"typing.Coroutine*Z
 selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.ConditionH*Å
+&anyio._core._synchronization.Condition"&anyio._core._synchronization.ConditionH*Ø
+wait_for/anyio._core._synchronization.Condition.wait_for"∑
+8typing.Coroutine[Any,Any,anyio._core._synchronization.T]
+Any
+AnyW
+anyio._core._synchronization.T"
+builtins.object"builtins.object"builtins.object"typing.Coroutine*Z
+selfP
+&anyio._core._synchronization.Condition"&anyio._core._synchronization.Condition*Z
+	predicateK
+CallableType[builtins.function]&
+builtins.function"builtins.functionH*Å
 
 statistics1anyio._core._synchronization.Condition.statistics"d
 0anyio._core._synchronization.ConditionStatistics"0anyio._core._synchronization.ConditionStatistics*Z
 selfP
-&anyio._core._synchronization.Condition"&anyio._core._synchronization.Conditionr∫
+&anyio._core._synchronization.Condition"&anyio._core._synchronization.Conditionrˆ
+	__slots__0anyio._core._synchronization.Condition.__slots__∂
+:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strr∫
 _owner_task2anyio._core._synchronization.Condition._owner_taskw
 )Union[anyio._core._testing.TaskInfo,None]>
 anyio._core._testing.TaskInfo"anyio._core._testing.TaskInfo
@@ -419,8 +491,8 @@ statistics1anyio._core._synchronization.Condition.statistics"d
 !anyio._core._synchronization.Lock"!anyio._core._synchronization.Lockr“
 _waiters/anyio._core._synchronization.Condition._waitersî
 5collections.deque[anyio._core._synchronization.Event]H
-"anyio._core._synchronization.Event""anyio._core._synchronization.Event"collections.dequeØ
-	Semaphore&anyio._core._synchronization.Semaphore"builtins.object*‹
+"anyio._core._synchronization.Event""anyio._core._synchronization.Event"collections.deque”
+	Semaphore&anyio._core._synchronization.Semaphore"builtins.object*ﬁ
 __new__.anyio._core._synchronization.Semaphore.__new__"P
 &anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore*í
 clsà
@@ -433,7 +505,7 @@ statistics1anyio._core._synchronization.Condition.statistics"d
 builtins.int"builtins.int
 None *2
 fast_acquire
-builtins.bool"builtins.bool *›
+builtins.bool"builtins.bool h*›
 __init__/anyio._core._synchronization.Semaphore.__init__"
 None*Z
 selfP
@@ -503,10 +575,14 @@ __aenter__1anyio._core._synchronization.Semaphore.__aenter__"∏
 statistics1anyio._core._synchronization.Semaphore.statistics"d
 0anyio._core._synchronization.SemaphoreStatistics"0anyio._core._synchronization.SemaphoreStatistics*Z
 selfP
-&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphorere
+&anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphorerü
+	__slots__0anyio._core._synchronization.Semaphore.__slots__`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strre
 _fast_acquire4anyio._core._synchronization.Semaphore._fast_acquire
-builtins.bool"builtins.bool
-SemaphoreAdapter-anyio._core._synchronization.SemaphoreAdapter"&anyio._core._synchronization.Semaphore*Ü
+builtins.bool"builtins.bool«
+SemaphoreAdapter-anyio._core._synchronization.SemaphoreAdapter"&anyio._core._synchronization.Semaphore*à
 __new__5anyio._core._synchronization.SemaphoreAdapter.__new__"^
 -anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapter*ß
 clsù
@@ -519,7 +595,7 @@ statistics1anyio._core._synchronization.Semaphore.statistics"d
 builtins.int"builtins.int
 None *2
 fast_acquire
-builtins.bool"builtins.bool *Ú
+builtins.bool"builtins.bool h*Ú
 __init__6anyio._core._synchronization.SemaphoreAdapter.__init__"
 None*h
 self^
@@ -566,7 +642,12 @@ _semaphore8anyio._core._synchronization.SemaphoreAdapter._semaphore"P
 statistics8anyio._core._synchronization.SemaphoreAdapter.statistics"d
 0anyio._core._synchronization.SemaphoreStatistics"0anyio._core._synchronization.SemaphoreStatistics*h
 self^
--anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapterrÌ
+-anyio._core._synchronization.SemaphoreAdapter"-anyio._core._synchronization.SemaphoreAdapterr“
+	__slots__7anyio._core._synchronization.SemaphoreAdapter.__slots__ã
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strrÌ
 _internal_semaphoreAanyio._core._synchronization.SemaphoreAdapter._internal_semaphoreí
 2Union[anyio._core._synchronization.Semaphore,None]P
 &anyio._core._synchronization.Semaphore"&anyio._core._synchronization.Semaphore
@@ -577,15 +658,15 @@ statistics8anyio._core._synchronization.SemaphoreAdapter.statistics"d
 _max_value8anyio._core._synchronization.SemaphoreAdapter._max_valueD
 Union[builtins.int,None]
 builtins.int"builtins.int
-Noneõ!
-CapacityLimiter,anyio._core._synchronization.CapacityLimiter"builtins.object*¯
+Noneƒ!
+CapacityLimiter,anyio._core._synchronization.CapacityLimiter"builtins.object*˙
 __new__4anyio._core._synchronization.CapacityLimiter.__new__"\
 ,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*§
 clsö
 2Type[anyio._core._synchronization.CapacityLimiter]\
 ,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter"type*2
 total_tokens 
-builtins.float"builtins.float*ˇ
+builtins.float"builtins.floath*ˇ
 
 __aenter__7anyio._core._synchronization.CapacityLimiter.__aenter__"N
 typing.Coroutine[Any,Any,None]
@@ -593,13 +674,11 @@ __aenter__7anyio._core._synchronization.CapacityLimiter.__aenter__"N
 Any
 None"typing.Coroutine*f
 self\
-,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiterH*Ã
-	__aexit__6anyio._core._synchronization.CapacityLimiter.__aexit__"¢
-3typing.Coroutine[Any,Any,Union[builtins.bool,None]]
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiterH*˜
+	__aexit__6anyio._core._synchronization.CapacityLimiter.__aexit__"N
+typing.Coroutine[Any,Any,None]
 Any
-AnyG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
+Any
 None"typing.Coroutine*f
 self\
 ,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*ü
@@ -675,15 +754,18 @@ statistics7anyio._core._synchronization.CapacityLimiter.statistics"p
 self\
 ,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter*+
 value 
-builtins.float"builtins.float0:.setter∑+
-CapacityLimiterAdapter3anyio._core._synchronization.CapacityLimiterAdapter",anyio._core._synchronization.CapacityLimiter*¢
+builtins.float"builtins.float0:.setterrz
+	__slots__6anyio._core._synchronization.CapacityLimiter.__slots__5
+Tuple[builtins.str]
+builtins.str"builtins.strì,
+CapacityLimiterAdapter3anyio._core._synchronization.CapacityLimiterAdapter",anyio._core._synchronization.CapacityLimiter*§
 __new__;anyio._core._synchronization.CapacityLimiterAdapter.__new__"j
 3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*π
 clsØ
 9Type[anyio._core._synchronization.CapacityLimiterAdapter]j
 3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter"type*2
 total_tokens 
-builtins.float"builtins.float*¸
+builtins.float"builtins.floath*¸
 __init__<anyio._core._synchronization.CapacityLimiterAdapter.__init__"
 None*t
 selfj
@@ -701,13 +783,11 @@ __aenter__>anyio._core._synchronization.CapacityLimiterAdapter.__aenter__"N
 Any
 None"typing.Coroutine*t
 selfj
-3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapterH*·
-	__aexit__=anyio._core._synchronization.CapacityLimiterAdapter.__aexit__"¢
-3typing.Coroutine[Any,Any,Union[builtins.bool,None]]
+3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapterH*å
+	__aexit__=anyio._core._synchronization.CapacityLimiterAdapter.__aexit__"N
+typing.Coroutine[Any,Any,None]
 Any
-AnyG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
+Any
 None"typing.Coroutine*t
 selfj
 3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*ü
@@ -783,13 +863,17 @@ statistics>anyio._core._synchronization.CapacityLimiterAdapter.statistics"p
 selfj
 3anyio._core._synchronization.CapacityLimiterAdapter"3anyio._core._synchronization.CapacityLimiterAdapter*+
 value 
-builtins.float"builtins.float0:.setterrÅ
+builtins.float"builtins.float0:.setterr¨
+	__slots__=anyio._core._synchronization.CapacityLimiterAdapter.__slots__`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strrÅ
 _internal_limiterEanyio._core._synchronization.CapacityLimiterAdapter._internal_limiter§
 8Union[anyio._core._synchronization.CapacityLimiter,None]\
 ,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
 Nonert
 _total_tokensAanyio._core._synchronization.CapacityLimiterAdapter._total_tokens 
-builtins.float"builtins.floatÙ
+builtins.float"builtins.float·
 
 ResourceGuard*anyio._core._synchronization.ResourceGuard"builtins.object*Ÿ
 __init__3anyio._core._synchronization.ResourceGuard.__init__"
@@ -800,10 +884,8 @@ statistics>anyio._core._synchronization.CapacityLimiterAdapter.statistics"p
 builtins.str"builtins.str *ß
 	__enter__4anyio._core._synchronization.ResourceGuard.__enter__"
 None*ZX
-*anyio._core._synchronization.ResourceGuard"*anyio._core._synchronization.ResourceGuard*Ω
-__exit__3anyio._core._synchronization.ResourceGuard.__exit__"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
+*anyio._core._synchronization.ResourceGuard"*anyio._core._synchronization.ResourceGuard*˛
+__exit__3anyio._core._synchronization.ResourceGuard.__exit__"
 None*ZX
 *anyio._core._synchronization.ResourceGuard"*anyio._core._synchronization.ResourceGuard*ìê
 (Union[Type[builtins.BaseException],None]X
@@ -815,9 +897,10 @@ statistics>anyio._core._synchronization.CapacityLimiterAdapter.statistics"p
 None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-Noner£
-	__slots__4anyio._core._synchronization.ResourceGuard.__slots__`
- Tuple[builtins.str,builtins.str]
+Nonerœ
+	__slots__4anyio._core._synchronization.ResourceGuard.__slots__ã
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
 builtins.str"builtins.str
 builtins.str"builtins.strrY
 action1anyio._core._synchronization.ResourceGuard.action

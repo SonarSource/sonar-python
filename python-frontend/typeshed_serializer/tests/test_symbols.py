@@ -36,6 +36,12 @@ def test_module_symbol(typeshed_stdlib):
     assert pb_module.fully_qualified_name == "abc"
     assert len(pb_module.classes) == 3
     assert len(pb_module.functions) == 4
+    assert "__spec__" not in {var.name for var in pb_module.vars}
+
+    types_module = symbols.ModuleSymbol(typeshed_stdlib.files.get("types")).to_proto()
+    module_type = next(class_symbol for class_symbol in types_module.classes if class_symbol.name == "ModuleType")
+    assert "__spec__" in {attribute.name for attribute in module_type.attributes}
+
     imported_modules = [imported_module for imported_module in pb_module.vars if
                         imported_module.is_imported_module is True]
     assert len(imported_modules) == 0

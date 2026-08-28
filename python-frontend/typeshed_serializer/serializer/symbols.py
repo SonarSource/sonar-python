@@ -29,7 +29,14 @@ CURRENT_PATH = os.path.dirname(__file__)
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_EXPORTED_VARS = ["__name__", "__doc__", "__file__", "__package__"]
+DEFAULT_EXPORTED_VARS = [
+    "__name__",
+    "__doc__",
+    "__file__",
+    "__package__",
+]
+# Newer mypy versions add __spec__ to every module's symbol table.
+MODULE_IMPLICIT_VARS = DEFAULT_EXPORTED_VARS + ["__spec__"]
 SONAR_CUSTOM_BASE_CLASS = "SonarPythonAnalyzerFakeStub.CustomStubBase"
 SELF_TYPE_ID = 0
 
@@ -412,7 +419,7 @@ class ModuleSymbol:
                 self.overloaded_functions.append(OverloadedFunctionSymbol(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.TypeInfo) and not symbol_table_node.is_intersection:
                 self.classes.append(ClassSymbol(symbol_table_node, name=key))
-            if isinstance(symbol_table_node, mpn.Var) and symbol_table_node.name not in DEFAULT_EXPORTED_VARS:
+            if isinstance(symbol_table_node, mpn.Var) and symbol_table_node.name not in MODULE_IMPLICIT_VARS:
                 self.vars.append(VarSymbol.from_var(symbol_table_node, name=key))
             if isinstance(symbol_table_node, mpn.MypyFile):
                 module_name = symbol_table_node.fullname

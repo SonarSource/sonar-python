@@ -64,8 +64,9 @@ key_length
 builtins.int"builtins.intz310z311z312z313z314j310j311j312j313j314r⁄
 ecdsa_curves-paramiko.ecdsakey._ECDSACurveSet.ecdsa_curvesÅ
 .typing.Sequence[paramiko.ecdsakey._ECDSACurve]>
-paramiko.ecdsakey._ECDSACurve"paramiko.ecdsakey._ECDSACurve"typing.Sequence*310*311*312*313*314ô0
-ECDSAKeyparamiko.ecdsakey.ECDSAKey"paramiko.pkey.PKey*¸
+paramiko.ecdsakey._ECDSACurve"paramiko.ecdsakey._ECDSACurve"typing.Sequence*310*311*312*313*314¥3
+ECDSAKeyparamiko.ecdsakey.ECDSAKey"paramiko.pkey.PKey*…
+
 __init__#paramiko.ecdsakey.ECDSAKey.__init__"
 None*B
 self8
@@ -73,21 +74,10 @@ key_length
 msgh
 $Union[paramiko.message.Message,None]4
 paramiko.message.Message"paramiko.message.Message
-None *ó
-dataä
-¢Union[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]],None]÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer
+None *t
+datah
+$Union[typing_extensions.Buffer,None]4
+typing_extensions.Buffer"typing_extensions.Buffer
 None *T
 filenameD
 Union[builtins.str,None]
@@ -109,7 +99,41 @@ Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptograp
 builtins.str"builtins.str"	typing.IO
 None *4
 validate_point
-builtins.bool"builtins.bool z310z311z312z313z314*
+builtins.bool"builtins.bool z310z311*À
+
+__init__#paramiko.ecdsakey.ECDSAKey.__init__"
+None*B
+self8
+paramiko.ecdsakey.ECDSAKey"paramiko.ecdsakey.ECDSAKey*s
+msgh
+$Union[paramiko.message.Message,None]4
+paramiko.message.Message"paramiko.message.Message
+None *q
+datae
+#Union[_collections_abc.Buffer,None]2
+_collections_abc.Buffer"_collections_abc.Buffer
+None *T
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+passwordD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Í
+vals›
+õUnion[Tuple[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey],None]∞
+èTuple[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey]å
+Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyä
+Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey
+None *Ö
+file_obju
+#Union[typing.IO[builtins.str],None]B
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO
+None *4
+validate_point
+builtins.bool"builtins.bool z312z313z314*
  supported_key_format_identifiers;paramiko.ecdsakey.ECDSAKey.supported_key_format_identifiers"J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*

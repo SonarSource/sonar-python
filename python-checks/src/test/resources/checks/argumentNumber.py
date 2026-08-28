@@ -281,6 +281,27 @@ def jinja_apis():
     do_indent(s, first=first, blank=blank)
 
 
+def metaclass_new():
+    class ModelBase(type):
+        def __new__(cls, name, bases, attrs, **kwargs):
+            super_new = super().__new__
+            return super_new(cls, name, bases, attrs)
+
+    class ExplicitModelBase(type):
+        def __new__(cls, name, bases, attrs, **kwargs):
+            super_new = super(ExplicitModelBase, cls).__new__
+            return super_new(cls, name, bases, attrs)
+
+    class ParentModelBase(type):
+        def __new__(cls, name, bases, attrs):
+            return super().__new__(cls, name, bases, attrs)
+
+    class ChildModelBase(ParentModelBase):
+        def __new__(cls, name, bases, attrs, **kwargs):
+            super_new = super().__new__
+            return super_new(cls, name, bases, attrs)
+
+
 class BuiltinFunctionWithEmptyParameterName:
     def __init__(self, name, value):
         setattr(self, name, value)  # OK

@@ -28,8 +28,8 @@ __aenter__-asyncio.locks._ContextManagerMixin.__aenter__"N
 tbY
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-NoneHö
-Lockasyncio.locks.Lock""asyncio.locks._ContextManagerMixin*e
+NoneHô
+Lockasyncio.locks.Lock""asyncio.locks._ContextManagerMixin"asyncio.mixins._LoopBoundMixin*e
 __init__asyncio.locks.Lock.__init__"
 None*2
 self(
@@ -49,8 +49,14 @@ __aenter__-asyncio.locks._ContextManagerMixin.__aenter__"N
 releaseasyncio.locks.Lock.release"
 None*2
 self(
-asyncio.locks.Lock"asyncio.locks.LockÇ
-Eventasyncio.locks.Event"builtins.object*h
+asyncio.locks.Lock"asyncio.locks.LockrÛ
+_waitersasyncio.locks.Lock._waiters±
+3Union[collections.deque[_asyncio.Future[Any]],None]n
+'collections.deque[_asyncio.Future[Any]]0
+_asyncio.Future[Any]
+Any"_asyncio.Future"collections.deque
+Noneñ
+Eventasyncio.locks.Event"asyncio.mixins._LoopBoundMixin*h
 __init__asyncio.locks.Event.__init__"
 None*4
 self*
@@ -74,8 +80,12 @@ __aenter__-asyncio.locks._ContextManagerMixin.__aenter__"N
 Literal[builtins.bool]	
 builtins.bool"builtins.bool"typing.Coroutine*4
 self*
-asyncio.locks.Event"asyncio.locks.EventH›
-	Conditionasyncio.locks.Condition""asyncio.locks._ContextManagerMixin*Ø
+asyncio.locks.Event"asyncio.locks.EventHr˜
+_waitersasyncio.locks.Event._waitersn
+'collections.deque[_asyncio.Future[Any]]0
+_asyncio.Future[Any]
+Any"_asyncio.Future"collections.dequeÚ
+	Conditionasyncio.locks.Condition""asyncio.locks._ContextManagerMixin"asyncio.mixins._LoopBoundMixin*Ø
 __init__ asyncio.locks.Condition.__init__"
 None*<
 self2
@@ -129,8 +139,12 @@ __aenter__-asyncio.locks._ContextManagerMixin.__aenter__"N
 notify_all"asyncio.locks.Condition.notify_all"
 None*<
 self2
-asyncio.locks.Condition"asyncio.locks.Conditionæ
-	Semaphoreasyncio.locks.Semaphore""asyncio.locks._ContextManagerMixin*Ÿ
+asyncio.locks.Condition"asyncio.locks.Conditionrœ
+_waiters asyncio.locks.Condition._waitersn
+'collections.deque[_asyncio.Future[Any]]0
+_asyncio.Future[Any]
+Any"_asyncio.Future"collections.deque´	
+	Semaphoreasyncio.locks.Semaphore""asyncio.locks._ContextManagerMixin"asyncio.mixins._LoopBoundMixin*Ÿ
 __init__ asyncio.locks.Semaphore.__init__"
 None*<
 self2
@@ -158,11 +172,13 @@ notify_all"asyncio.locks.Condition.notify_all"
 self2
 asyncio.locks.Semaphore"asyncio.locks.SemaphorerF
 _valueasyncio.locks.Semaphore._value
-builtins.int"builtins.intr²
-_waiters asyncio.locks.Semaphore._waitersƒ
-.collections.deque[asyncio.futures.Future[Any]]>
-asyncio.futures.Future[Any]
-Any"asyncio.futures.Future"collections.dequeK
+builtins.int"builtins.intrà
+_waiters asyncio.locks.Semaphore._waiters±
+3Union[collections.deque[_asyncio.Future[Any]],None]n
+'collections.deque[_asyncio.Future[Any]]0
+_asyncio.Future[Any]
+Any"_asyncio.Future"collections.deque
+NoneK
 BoundedSemaphoreasyncio.locks.BoundedSemaphore"asyncio.locks.Semaphore*‰
 __annotations__asyncio.locks.__annotations__W
 builtins.dict[builtins.str,Any]

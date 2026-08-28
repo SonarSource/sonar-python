@@ -7,7 +7,7 @@
 self2
 http.client.HTTPMessage"http.client.HTTPMessage*&
 name
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314ÿ0
+builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314Ù0
 _HttplibHTTPResponsehttp.client.HTTPResponse"io.BufferedIOBase"typing.BinaryIO*è
 __init__!http.client.HTTPResponse.__init__"
 None*>
@@ -45,21 +45,19 @@ debuglevel
 self4
 http.client.HTTPResponse"http.client.HTTPResponse*%
 n
-builtins.int"builtins.int z310z311z312z313z314*ò
+builtins.int"builtins.int z310z311z312z313z314*“
 readinto!http.client.HTTPResponse.readinto"
 builtins.int"builtins.int*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponse*Ò
-bÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBufferz310z311z312z313z314*”
+http.client.HTTPResponse"http.client.HTTPResponse*;
+b4
+typing_extensions.Buffer"typing_extensions.Bufferz310z311*’
+readinto!http.client.HTTPResponse.readinto"
+builtins.int"builtins.int*>
+self4
+http.client.HTTPResponse"http.client.HTTPResponse*9
+b2
+_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*”
 readline!http.client.HTTPResponse.readline" 
 builtins.bytes"builtins.bytes*>
 self4
@@ -99,9 +97,11 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*Æ
-infohttp.client.HTTPResponse.info".
-email.message.Message"email.message.Message*>
+Nonez310z311z312z313z314*Ü
+infohttp.client.HTTPResponse.info"Ö
+0email.message.Message[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"email.message.Message*>
 self4
 http.client.HTTPResponse"http.client.HTTPResponsez310z311z312z313z314*†
 geturlhttp.client.HTTPResponse.geturl"
@@ -145,9 +145,10 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 builtins.int"builtins.int*310*311*312*313*314rh
 
 debuglevel#http.client.HTTPResponse.debuglevel
-builtins.int"builtins.int*310*311*312*313*314rb
-fphttp.client.HTTPResponse.fp&
-io.BufferedReader"io.BufferedReader*310*311*312*313*314rb
+builtins.int"builtins.int*310*311*312*313*314r∑
+fphttp.client.HTTPResponse.fp{
+-_io.BufferedReader[_io._BufferedReaderStream]6
+_io._BufferedReaderStream"_io._BufferedReaderStream"_io.BufferedReader*310*311*312*313*314rb
 closedhttp.client.HTTPResponse.closed
 builtins.bool"builtins.bool*310*311*312*313*314r`
 statushttp.client.HTTPResponse.status
@@ -167,7 +168,9 @@ chunk_left#http.client.HTTPResponse.chunk_leftD
 None*310*311*312*313*314rj
 
 will_close#http.client.HTTPResponse.will_close
-builtins.bool"builtins.bool*310*311*312*313*314ê
+builtins.bool"builtins.bool*310*311*312*313*314rZ
+urlhttp.client.HTTPResponse.url
+builtins.str"builtins.str*310*311*312*313*314ê
 DeflateDecoderurllib3.response.DeflateDecoder"builtins.object*¬
 __getattr__+urllib3.response.DeflateDecoder.__getattr__"
 Any*DB

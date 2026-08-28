@@ -1,5 +1,6 @@
 
-asyncio.streamsò
+asyncio.streams`
+_ReaduntilBuffer asyncio.streams._ReaduntilBuffer"typing_extensions.Buffer"typing.Sized8Xò
 FlowControlMixin asyncio.streams.FlowControlMixin"asyncio.protocols.Protocol*Ÿ
 __init__)asyncio.streams.FlowControlMixin.__init__"
 None*N
@@ -8,7 +9,7 @@
 loop€
 ,Union[asyncio.events.AbstractEventLoop,None]D
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None „
+None ˜
 StreamReaderProtocol$asyncio.streams.StreamReaderProtocol" asyncio.streams.FlowControlMixin"asyncio.protocols.Protocol*‡
 __init__-asyncio.streams.StreamReaderProtocol.__init__"
 None*V
@@ -25,7 +26,10 @@ $asyncio.streams.StreamReaderProtocol"$asyncio.streams.StreamReaderProtocol*O
 loop€
 ,Union[asyncio.events.AbstractEventLoop,None]D
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None Í
+None *‘
+__del__,asyncio.streams.StreamReaderProtocol.__del__"
+None*NL
+$asyncio.streams.StreamReaderProtocol"$asyncio.streams.StreamReaderProtocolÏ
 StreamWriterasyncio.streams.StreamWriter"builtins.object*ý
 __init__%asyncio.streams.StreamWriter.__init__"
 None*F
@@ -44,27 +48,29 @@ $asyncio.streams.StreamReaderProtocol"$asyncio.streams.StreamReaderProtocol*O
 	transport&asyncio.streams.StreamWriter.transport"F
 !asyncio.transports.WriteTransport"!asyncio.transports.WriteTransport*F
 self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter0:builtins.property`*Ã
+asyncio.streams.StreamWriter"asyncio.streams.StreamWriter0:builtins.property`*ý
 write"asyncio.streams.StreamWriter.write"
 None*F
 self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter*Ã
-data¸
-<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
+asyncio.streams.StreamWriter"asyncio.streams.StreamWriter*ý
+dataò
+JUnion[builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int]] 
 builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview*°
+builtins.bytearray"builtins.bytearrayV
+!builtins.memoryview[builtins.int]
+builtins.int"builtins.int"builtins.memoryview*ø
 
 writelines'asyncio.streams.StreamWriter.writelines"
 None*F
 self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriter*¦
-data›
-Mtyping.Iterable[Union[builtins.bytes,builtins.bytearray,builtins.memoryview]]¸
-<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
+asyncio.streams.StreamWriter"asyncio.streams.StreamWriter*î
+dataã
+[typing.Iterable[Union[builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int]]]ò
+JUnion[builtins.bytes,builtins.bytearray,builtins.memoryview[builtins.int]] 
 builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview"typing.Iterable*…
+builtins.bytearray"builtins.bytearrayV
+!builtins.memoryview[builtins.int]
+builtins.int"builtins.int"builtins.memoryview"typing.Iterable*…
 	write_eof&asyncio.streams.StreamWriter.write_eof"
 None*F
 self<
@@ -103,8 +109,8 @@ is_closing'asyncio.streams.StreamWriter.is_closing"
 Any
 None"typing.Coroutine*F
 self<
-asyncio.streams.StreamWriter"asyncio.streams.StreamWriterH¦
-StreamReaderasyncio.streams.StreamReader"typing.AsyncIterator*¾
+asyncio.streams.StreamWriter"asyncio.streams.StreamWriterHˆ
+StreamReaderasyncio.streams.StreamReader"builtins.object*¾
 __init__%asyncio.streams.StreamReader.__init__"
 None*F
 self<
@@ -138,33 +144,30 @@ is_closing'asyncio.streams.StreamWriter.is_closing"
 at_eof#asyncio.streams.StreamReader.at_eof"
 builtins.bool"builtins.bool*F
 self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader*š
+asyncio.streams.StreamReader"asyncio.streams.StreamReader*÷
 	feed_data&asyncio.streams.StreamReader.feed_data"
 None*F
 self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader*’
-data‡
-0typing.Iterable[typing_extensions.SupportsIndex]B
-typing_extensions.SupportsIndex"typing_extensions.SupportsIndex"typing.Iterable*í
+asyncio.streams.StreamReader"asyncio.streams.StreamReader*p
+dataf
+%typing.Iterable[typing.SupportsIndex],
+typing.SupportsIndex"typing.SupportsIndex"typing.Iterable*í
 readline%asyncio.streams.StreamReader.readline"p
 (typing.Coroutine[Any,Any,builtins.bytes]
 Any
 Any 
 builtins.bytes"builtins.bytes"typing.Coroutine*F
 self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReaderH*¼
+asyncio.streams.StreamReader"asyncio.streams.StreamReaderH*Æ
 	readuntil&asyncio.streams.StreamReader.readuntil"p
 (typing.Coroutine[Any,Any,builtins.bytes]
 Any
 Any 
 builtins.bytes"builtins.bytes"typing.Coroutine*F
 self<
-asyncio.streams.StreamReader"asyncio.streams.StreamReader*Ê
-	separator¸
-<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview H*Œ
+asyncio.streams.StreamReader"asyncio.streams.StreamReader*U
+	separatorD
+ asyncio.streams._ReaduntilBuffer" asyncio.streams._ReaduntilBuffer H*Œ
 read!asyncio.streams.StreamReader.read"p
 (typing.Coroutine[Any,Any,builtins.bytes]
 Any

@@ -1,35 +1,47 @@
 
-logging¬
-Filtererlogging.Filterer"builtins.object*ı
+loggingÍ
+_SupportsFilterlogging._SupportsFilter"builtins.object*®
+filterlogging._SupportsFilter.filter"
+builtins.bool"builtins.bool*42
+logging._SupportsFilter"logging._SupportsFilter*(&
+logging.LogRecord"logging.LogRecord8Xü
+Filtererlogging.Filterer"builtins.object*Ÿ
 	addFilterlogging.Filterer.addFilter"
 None*.
 self$
-logging.Filterer"logging.Filterer*ë
-filterÑ
-@TypeAlias[Union[logging.Filter,CallableType[builtins.function]]]®
-5Union[logging.Filter,CallableType[builtins.function]] 
+logging.Filterer"logging.Filterer*ı
+filterË
+XTypeAlias[Union[logging.Filter,CallableType[builtins.function],logging._SupportsFilter]]Ù
+MUnion[logging.Filter,CallableType[builtins.function],logging._SupportsFilter] 
 logging.Filter"logging.FilterK
 CallableType[builtins.function]&
-builtins.function"builtins.function"logging._FilterType*˚
+builtins.function"builtins.function2
+logging._SupportsFilter"logging._SupportsFilter"logging._FilterType*ﬂ
 removeFilterlogging.Filterer.removeFilter"
 None*.
 self$
-logging.Filterer"logging.Filterer*ë
-filterÑ
-@TypeAlias[Union[logging.Filter,CallableType[builtins.function]]]®
-5Union[logging.Filter,CallableType[builtins.function]] 
+logging.Filterer"logging.Filterer*ı
+filterË
+XTypeAlias[Union[logging.Filter,CallableType[builtins.function],logging._SupportsFilter]]Ù
+MUnion[logging.Filter,CallableType[builtins.function],logging._SupportsFilter] 
 logging.Filter"logging.FilterK
 CallableType[builtins.function]&
-builtins.function"builtins.function"logging._FilterType*•
+builtins.function"builtins.function2
+logging._SupportsFilter"logging._SupportsFilter"logging._FilterType*•
 filterlogging.Filterer.filter"
 builtins.bool"builtins.bool*.
 self$
 logging.Filterer"logging.Filterer*2
 record&
-logging.LogRecord"logging.LogRecordru
-filterslogging.Filterer.filtersP
-builtins.list[logging.Filter] 
-logging.Filter"logging.Filter"builtins.list÷
+logging.LogRecord"logging.LogRecordrâ
+filterslogging.Filterer.filters„
+gbuiltins.list[TypeAlias[Union[logging.Filter,CallableType[builtins.function],logging._SupportsFilter]]]Ë
+XTypeAlias[Union[logging.Filter,CallableType[builtins.function],logging._SupportsFilter]]Ù
+MUnion[logging.Filter,CallableType[builtins.function],logging._SupportsFilter] 
+logging.Filter"logging.FilterK
+CallableType[builtins.function]&
+builtins.function"builtins.function2
+logging._SupportsFilter"logging._SupportsFilter"logging._FilterType"builtins.list÷
 Managerlogging.Manager"builtins.object*î
 __init__logging.Manager.__init__"
 None*,
@@ -79,7 +91,7 @@ Ebuiltins.dict[builtins.str,Union[logging.Logger,logging.PlaceHolder]]
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-NoneÖ£
+Noneá£
 Loggerlogging.Logger"logging.Filterer*≥
 __init__logging.Logger.__init__"
 None**
@@ -235,7 +247,7 @@ stacklevel
 ,typing.Mapping[builtins.str,builtins.object]
 builtins.str"builtins.str"
 builtins.object"builtins.object"typing.Mapping
-None *é
+None *ê
 warnlogging.Logger.warn"
 None**
 self 
@@ -274,7 +286,7 @@ stacklevel
 ,typing.Mapping[builtins.str,builtins.object]
 builtins.str"builtins.str"
 builtins.object"builtins.object"typing.Mapping
-None *ê
+None 0*ê
 errorlogging.Logger.error"
 None**
 self 
@@ -604,7 +616,7 @@ ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.Traceback
 logging.Manager"logging.Managerrj
 fatallogging.Logger.fatalK
 CallableType[builtins.function]&
-builtins.function"builtins.function…
+builtins.function"builtins.functionœ
 Handlerlogging.Handler"logging.Filterer*é
 __init__logging.Handler.__init__"
 None*,
@@ -692,10 +704,10 @@ createLocklogging.Handler.createLock"
 	formatterlogging.Handler.formatterS
 Union[logging.Formatter,None]&
 logging.Formatter"logging.Formatter
-Nonerh
-locklogging.Handler.lockJ
-Union[threading.Lock,None] 
-threading.Lock"threading.Lock
+Nonern
+locklogging.Handler.lockP
+Union[_thread.LockType,None]$
+_thread.LockType"_thread.LockType
 Nonerb
 namelogging.Handler.nameD
 Union[builtins.str,None]
@@ -850,7 +862,7 @@ stack_info
 namelogging.Filter.name
 builtins.str"builtins.strr9
 nlenlogging.Filter.nlen
-builtins.int"builtins.intﬂ)
+builtins.int"builtins.int◊)
 	LogRecordlogging.LogRecord"builtins.object*ﬁ
 __init__logging.LogRecord.__init__"
 None*0
@@ -904,10 +916,9 @@ ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.Traceback
 getMessagelogging.LogRecord.getMessage"
 builtins.str"builtins.str*0
 self&
-logging.LogRecord"logging.LogRecord*ì
+logging.LogRecord"logging.LogRecord*ã
 __setattr__logging.LogRecord.__setattr__"
-None*0
-self&
+None*(&
 logging.LogRecord"logging.LogRecord*
 builtins.str"builtins.str*	
 Anyr≈
@@ -992,7 +1003,7 @@ stack_infologging.LogRecord.stack_infoD
 threadNamelogging.LogRecord.threadNameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None ©
+NoneÃ©
 LoggerAdapterlogging.LoggerAdapter"builtins.object*≥
 __init__logging.LoggerAdapter.__init__"
 None*Ì
@@ -1177,7 +1188,7 @@ stacklevel
 builtins.object"builtins.object"typing.Mapping
 None *.
 kwargs"
-builtins.object"builtins.object*â
+builtins.object"builtins.object*ã
 warnlogging.LoggerAdapter.warn"
 None*Ì
 self‚
@@ -1224,7 +1235,7 @@ stacklevel
 builtins.object"builtins.object"typing.Mapping
 None *.
 kwargs"
-builtins.object"builtins.object*ã
+builtins.object"builtins.object0*ã
 errorlogging.LoggerAdapter.error"
 None*Ì
 self‚
@@ -1582,7 +1593,8 @@ $logging.StreamHandler[typing.TextIO]
 builtins.str"builtins.str"_typeshed.SupportsWrite"_typeshed.SupportsWriterL
 
 terminator logging.StreamHandler.terminator
-builtins.str"builtins.str–	
+builtins.str"builtins.strë
+
 FileHandlerlogging.FileHandler"logging.StreamHandler*‰
 __init__logging.FileHandler.__init__"
 None*4
@@ -1605,9 +1617,10 @@ terminator logging.StreamHandler.terminator
 errorsD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *~
-_openlogging.FileHandler._open"$
-io.TextIOWrapper"io.TextIOWrapper*4
+None *æ
+_openlogging.FileHandler._open"d
+%_io.TextIOWrapper[_io._WrappedBuffer](
+_io._WrappedBuffer"_io._WrappedBuffer"_io.TextIOWrapper*4
 self*
 logging.FileHandler"logging.FileHandlerrN
 baseFilename logging.FileHandler.baseFilename
@@ -1826,7 +1839,7 @@ stacklevel
 ,typing.Mapping[builtins.str,builtins.object]
 builtins.str"builtins.str"
 builtins.object"builtins.object"typing.Mapping
-None €
+None ›
 warnlogging.warn"
 None*+
 msg"
@@ -1863,7 +1876,7 @@ stacklevel
 ,typing.Mapping[builtins.str,builtins.object]
 builtins.str"builtins.str"
 builtins.object"builtins.object"typing.Mapping
-None ›
+None 0›
 errorlogging.error"
 None*+
 msg"
@@ -2023,14 +2036,7 @@ stacklevel
 level
 builtins.int"builtins.int*+
 	levelName
-builtins.str"builtins.str›
-getLevelNamelogging.getLevelName"
-Any*≠
-level°
-+TypeAlias[Union[builtins.int,builtins.str]]`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"logging._Level‹
+builtins.str"builtins.str‹
 makeLogRecordlogging.makeLogRecord"&
 logging.LogRecord"logging.LogRecord*ã
 dictÄ
@@ -2111,7 +2117,16 @@ HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 None*X
 factoryK
 CallableType[builtins.function]&
-builtins.function"builtins.function*h
+builtins.function"builtins.function"î
+getLevelNamelogging.getLevelNameÄ
+getLevelNamelogging.getLevelName"
+builtins.str"builtins.str*'
+level
+builtins.int"builtins.int0:typing.overloadXk
+getLevelNamelogging.getLevelName"
+Any*'
+level
+builtins.str"builtins.str0:typing.overloadX*h
 __path__logging.__path__J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*É
@@ -2161,12 +2176,11 @@ logThreadslogging.logThreads
 builtins.int"builtins.int*c
 fatallogging.fatalK
 CallableType[builtins.function]&
-builtins.function"builtins.function*î
+builtins.function"builtins.function*o
 
-lastResortlogging.lastResortr
-&Union[logging.StreamHandler[Any],None]<
-logging.StreamHandler[Any]
-Any"logging.StreamHandler
+lastResortlogging.lastResortM
+Union[logging.Handler,None]"
+logging.Handler"logging.Handler
 None*>
 rootlogging.root(
 logging.RootLogger"logging.RootLogger*ä

@@ -21,6 +21,66 @@ from serializer import symbols, symbols_merger, serializers
 from serializer.serializers import TypeshedSerializer
 from serializer.symbols import MergedModuleSymbol, TypeKind
 
+EXPECTED_MERGED_MODULES = {
+    "_ast",
+    "_codecs",
+    "_collections_abc",
+    "_frozen_importlib",
+    "_frozen_importlib_external",
+    "_io",
+    "_sitebuiltins",
+    "_socket",
+    "_typeshed",
+    "_typeshed.importlib",
+    "abc",
+    "ast",
+    "builtins",
+    "cmd",
+    "codecs",
+    "collections",
+    "collections.abc",
+    "contextlib",
+    "dataclasses",
+    "email",
+    "email._policybase",
+    "email.charset",
+    "email.contentmanager",
+    "email.errors",
+    "email.header",
+    "email.message",
+    "email.policy",
+    "enum",
+    "genericpath",
+    "importlib",
+    "importlib._abc",
+    "importlib._bootstrap",
+    "importlib._bootstrap_external",
+    "importlib.abc",
+    "importlib.machinery",
+    "importlib.metadata",
+    "importlib.metadata._meta",
+    "importlib.readers",
+    "io",
+    "os",
+    "os.path",
+    "pathlib",
+    "posixpath",
+    "re",
+    "resource",
+    "socket",
+    "sre_compile",
+    "sre_constants",
+    "sre_parse",
+    "ssl",
+    "subprocess",
+    "sys",
+    "types",
+    "typing",
+    "typing_extensions",
+    "zipfile",
+    "zipimport",
+}
+
 
 def test_build_multiple_python_version(typeshed_stdlib):
     serializers.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
@@ -33,7 +93,7 @@ def test_merge_multiple_python_versions(typeshed_stdlib):
     merged_modules = TypeshedSerializer().get_merged_modules()
     for mod in merged_modules.values():
         assert isinstance(mod, MergedModuleSymbol)
-    assert len(merged_modules) == 46
+    assert set(merged_modules) == EXPECTED_MERGED_MODULES
 
 
 def test_basic_module_merge(typeshed_stdlib):
@@ -210,7 +270,16 @@ def test_actual_module_merge(fake_module_36_38):
     assert len(fakemodule_proto.overloaded_functions) == len(flattened_overloaded_funcs)
 
     all_vars = merged_fakemodule_module.vars
-    assert len(all_vars) == 8
+    assert set(all_vars) == {
+        "fakemodule.common_var",
+        "fakemodule.unique_var_36",
+        "fakemodule.unique_var_38",
+        "fakemodule.var_multiple_defs",
+        "fakemodule.alias",
+        "fakemodule.__annotations__",
+        "math",
+        "sys.flags",
+    }
     common_var = all_vars['fakemodule.common_var']
     assert len(common_var) == 1
     assert common_var[0].valid_for == ["36", "38"]

@@ -1,5 +1,5 @@
 
-asyncio.futures¶
+asyncio.futuresÿ#
 _ConcurrentFutureconcurrent.futures._base.Future"builtins.object*“
 cancel&concurrent.futures._base.Future.cancel"
 builtins.bool"builtins.bool*À
@@ -82,206 +82,48 @@ set_result*concurrent.futures._base.Future.set_result"
 	exceptionb
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-None*–
+None*‡
 __class_getitem__1concurrent.futures._base.Future.__class_getitem__"(
-types.GenericAlias"types.GenericAlias*Ž
-cls„
+types.GenericAlias"types.GenericAlias*‡„
 BType[concurrent.futures._base.Future[concurrent.futures._base._T]]µ
 <concurrent.futures._base.Future[concurrent.futures._base._T]T
 concurrent.futures._base._T"
-builtins.object"builtins.object"builtins.object"concurrent.futures._base.Future"type*
-item
-AnypPô5
-Futureasyncio.futures.Future"typing.Awaitable"typing.Iterable*—
+builtins.object"builtins.object"builtins.object"concurrent.futures._base.Future"type*	
+AnypPrd
 
-_exception!asyncio.futures.Future._exception"0
-builtins.BaseException"builtins.BaseException*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future0:builtins.property`*ä
-__init__asyncio.futures.Future.__init__"
-None*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*
-loop€
-,Union[asyncio.events.AbstractEventLoop,None]D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
-None *Ê
-__del__asyncio.futures.Future.__del__"
-None*”‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*
-get_loopasyncio.futures.Future.get_loop"D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*¸
+_condition*concurrent.futures._base.Future._condition*
+threading.Condition"threading.ConditionrN
+_state&concurrent.futures._base.Future._state
+builtins.str"builtins.strrÀ
+_result'concurrent.futures._base.Future._result‹
+'Union[concurrent.futures._base._T,None]T
+concurrent.futures._base._T"
+builtins.object"builtins.object"builtins.object
+Nonerœ
 
-_callbacks!asyncio.futures.Future._callbacks"”
-Ibuiltins.list[Tuple[CallableType[builtins.function],contextvars.Context]]·
-:Tuple[CallableType[builtins.function],contextvars.Context]K
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-contextvars.Context"contextvars.Context"builtins.list*Ø
-selfÍ
-asyncio.futures.Future.Self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future"asyncio.futures.Future(0:builtins.property`*Û
-add_done_callback(asyncio.futures.Future.add_done_callback"
-None*Ø
-selfÍ
-asyncio.futures.Future.Self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future"asyncio.futures.Future(*MK
-CallableType[builtins.function]&
-builtins.function"builtins.function*h
-contextY
-Union[contextvars.Context,None]*
-contextvars.Context"contextvars.Context
-None *™
-cancelasyncio.futures.Future.cancel"
-builtins.bool"builtins.bool*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*1
-msg&
-Union[Any,None]
-Any
-None *ì
-	cancelled asyncio.futures.Future.cancelled"
-builtins.bool"builtins.bool*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*â
-doneasyncio.futures.Future.done"
-builtins.bool"builtins.bool*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*“
-resultasyncio.futures.Future.result"K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*°
-	exception asyncio.futures.Future.exception"b
+_exception*concurrent.futures._base.Future._exceptionb
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-None*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*‹
-remove_done_callback+asyncio.futures.Future.remove_done_callback"
-builtins.int"builtins.int*Ø
-selfÍ
-asyncio.futures.Future.Self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future"asyncio.futures.Future(*MK
-CallableType[builtins.function]&
-builtins.function"builtins.function*§
-
-set_result!asyncio.futures.Future.set_result"
-None*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*MK
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object*å
-set_exception$asyncio.futures.Future.set_exception"
-None*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*„
-+Union[builtins.type,builtins.BaseException]
-builtins.type"builtins.type0
-builtins.BaseException"builtins.BaseException*æ
-__iter__asyncio.futures.Future.__iter__"¡
--typing.Generator[Any,None,asyncio.futures._T]
-Any
-NoneK
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"typing.Generator*”‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*ð
-	__await__ asyncio.futures.Future.__await__"¡
--typing.Generator[Any,None,asyncio.futures._T]
-Any
-NoneK
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"typing.Generator*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*¡
-_loopasyncio.futures.Future._loop"D
- asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future0:builtins.property`*×
-__class_getitem__(asyncio.futures.Future.__class_getitem__"(
-types.GenericAlias"types.GenericAlias*Ø
-clsÎ
-0Type[asyncio.futures.Future[asyncio.futures._T]]‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future"type*
-item
-Anyp2ü
-_log_traceback%asyncio.futures.Future._log_traceback
-_log_traceback%asyncio.futures.Future._log_traceback"
-builtins.bool"builtins.bool*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future0:builtins.propertyX`°
-_log_traceback%asyncio.futures.Future._log_traceback"
-None*œ
-self‘
-*asyncio.futures.Future[asyncio.futures._T]K
-asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*C
-val:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool0:.setterPrE
-_stateasyncio.futures.Future._state
-builtins.str"builtins.strrM
-	_blocking asyncio.futures.Future._blocking
-builtins.bool"builtins.boolrk
-_asyncio_future_blocking/asyncio.futures.Future._asyncio_future_blocking
-builtins.bool"builtins.boolq
-isfutureasyncio.futures.isfuture"
+Noner½
+_waiters(concurrent.futures._base.Future._waiters†
+/builtins.list[concurrent.futures._base._Waiter]D
+ concurrent.futures._base._Waiter" concurrent.futures._base._Waiter"builtins.listv
+isfutureasyncio.base_futures.isfuture"
 builtins.bool"builtins.bool*+
 obj"
-builtins.object"builtins.object
-wrap_futureasyncio.futures.wrap_future"‘
-*asyncio.futures.Future[asyncio.futures._T]K
+builtins.object"builtins.objectÞ
+wrap_futureasyncio.futures.wrap_future"ƒ
+#_asyncio.Future[asyncio.futures._T]K
 asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*°
-future£
-eUnion[concurrent.futures._base.Future[asyncio.futures._T],asyncio.futures.Future[asyncio.futures._T]]£
+builtins.object"builtins.object"builtins.object"_asyncio.Future*›
+futureŽ
+^Union[concurrent.futures._base.Future[asyncio.futures._T],_asyncio.Future[asyncio.futures._T]]£
 3concurrent.futures._base.Future[asyncio.futures._T]K
 asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"concurrent.futures._base.Future‘
-*asyncio.futures.Future[asyncio.futures._T]K
+builtins.object"builtins.object"builtins.object"concurrent.futures._base.Futureƒ
+#_asyncio.Future[asyncio.futures._T]K
 asyncio.futures._T"
-builtins.object"builtins.object"builtins.object"asyncio.futures.Future*
+builtins.object"builtins.object"builtins.object"_asyncio.Future*
 loop€
 ,Union[asyncio.events.AbstractEventLoop,None]D
  asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop

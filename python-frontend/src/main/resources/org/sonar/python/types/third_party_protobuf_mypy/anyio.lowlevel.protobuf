@@ -1,30 +1,41 @@
 
-anyio.lowlevel‚
-_TokenWrapperanyio.lowlevel._TokenWrapper"builtins.object*≥
-__init__%anyio.lowlevel._TokenWrapper.__init__"
-None*F
-self<
-anyio.lowlevel._TokenWrapper"anyio.lowlevel._TokenWrapper*.
-_token"
-builtins.object"builtins.object8rï
-	__slots__&anyio.lowlevel._TokenWrapper.__slots__`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.strrQ
-_token#anyio.lowlevel._TokenWrapper._token"
-builtins.object"builtins.objectrò
-__match_args__+anyio.lowlevel._TokenWrapper.__match_args__Y
-Tuple[Literal[builtins.str]]7
+anyio.lowlevelï
+EventLoopTokenanyio.lowlevel.EventLoopToken"builtins.object*À
+__init__&anyio.lowlevel.EventLoopToken.__init__"
+None*H
+self>
+anyio.lowlevel.EventLoopToken"anyio.lowlevel.EventLoopToken*å
+backend_classy
+'Type[anyio.abc._eventloop.AsyncBackend]F
+!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type*4
+native_token"
+builtins.object"builtins.object*ï
+__mypy-replace,anyio.lowlevel.EventLoopToken.__mypy-replace"
+None*é
+backend_classy
+'Type[anyio.abc._eventloop.AsyncBackend]F
+!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"type *6
+native_token"
+builtins.object"builtins.object 0h8r∑
+backend_class+anyio.lowlevel.EventLoopToken.backend_classy
+'Type[anyio.abc._eventloop.AsyncBackend]F
+!anyio.abc._eventloop.AsyncBackend"!anyio.abc._eventloop.AsyncBackend"typer^
+native_token*anyio.lowlevel.EventLoopToken.native_token"
+builtins.object"builtins.objectrÈ
+__match_args__,anyio.lowlevel.EventLoopToken.__match_args__®
+2Tuple[Literal[builtins.str],Literal[builtins.str]]7
 Literal[builtins.str]	
-builtins.str"builtins.strr„
-__dataclass_fields__1anyio.lowlevel._TokenWrapper.__dataclass_fields__ó
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.strr‰
+__dataclass_fields__2anyio.lowlevel.EventLoopToken.__dataclass_fields__ó
 2builtins.dict[builtins.str,dataclasses.Field[Any]]
 builtins.str"builtins.str4
 dataclasses.Field[Any]
 Any"dataclasses.Field"builtins.dictá
 _NoValueSetanyio.lowlevel._NoValueSet"	enum.EnumHrO
 NO_VALUE_SET'anyio.lowlevel._NoValueSet.NO_VALUE_SET
-	enum.auto"	enum.autoö
+	enum.auto"	enum.auto±
 RunvarTokenanyio.lowlevel.RunvarToken"builtins.object*
 __init__#anyio.lowlevel.RunvarToken.__init__"
 None*†
@@ -41,7 +52,29 @@
 anyio.lowlevel.T"
 builtins.object"builtins.object"builtins.objecta
 #Literal[anyio.lowlevel._NoValueSet]	8
-anyio.lowlevel._NoValueSet"anyio.lowlevel._NoValueSetPrø
+anyio.lowlevel._NoValueSet"anyio.lowlevel._NoValueSet*‰
+	__enter__$anyio.lowlevel.RunvarToken.__enter__"ï
+,anyio.lowlevel.RunvarToken[anyio.lowlevel.T]I
+anyio.lowlevel.T"
+builtins.object"builtins.object"builtins.object"anyio.lowlevel.RunvarToken*òï
+,anyio.lowlevel.RunvarToken[anyio.lowlevel.T]I
+anyio.lowlevel.T"
+builtins.object"builtins.object"builtins.object"anyio.lowlevel.RunvarToken*≠
+__exit__#anyio.lowlevel.RunvarToken.__exit__"
+None*òï
+,anyio.lowlevel.RunvarToken[anyio.lowlevel.T]I
+anyio.lowlevel.T"
+builtins.object"builtins.object"builtins.object"anyio.lowlevel.RunvarToken*ìê
+(Union[Type[builtins.BaseException],None]X
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException"type
+None*db
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*[Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+NonePrø
 	__slots__$anyio.lowlevel.RunvarToken.__slots__ã
 -Tuple[builtins.str,builtins.str,builtins.str]
 builtins.str"builtins.str
@@ -58,7 +91,7 @@
 #Literal[anyio.lowlevel._NoValueSet]	8
 anyio.lowlevel._NoValueSet"anyio.lowlevel._NoValueSetrQ
 	_redeemed$anyio.lowlevel.RunvarToken._redeemed
-builtins.bool"builtins.boolö
+builtins.bool"builtins.bool
 RunVaranyio.lowlevel.RunVar"builtins.object*ı
 __init__anyio.lowlevel.RunVar.__init__"
 None*ñ
@@ -73,10 +106,12 @@
 anyio.lowlevel.T"
 builtins.object"builtins.object"builtins.objecta
 #Literal[anyio.lowlevel._NoValueSet]	8
-anyio.lowlevel._NoValueSet"anyio.lowlevel._NoValueSet *ç
-_current_vars#anyio.lowlevel.RunVar._current_vars"¶
-,builtins.dict[builtins.str,anyio.lowlevel.T]
-builtins.str"builtins.strI
+anyio.lowlevel._NoValueSet"anyio.lowlevel._NoValueSet *ò
+_current_vars#anyio.lowlevel.RunVar._current_vars"±
+Gbuiltins.dict[anyio.lowlevel.RunVar[anyio.lowlevel.T],anyio.lowlevel.T]ã
+'anyio.lowlevel.RunVar[anyio.lowlevel.T]I
+anyio.lowlevel.T"
+builtins.object"builtins.object"builtins.object"anyio.lowlevel.RunVarI
 anyio.lowlevel.T"
 builtins.object"builtins.object"builtins.object"builtins.dict*ñ
 selfã
@@ -136,10 +171,7 @@
 builtins.str"builtins.strrï
 NO_VALUE_SET"anyio.lowlevel.RunVar.NO_VALUE_SETa
 #Literal[anyio.lowlevel._NoValueSet]	8
-anyio.lowlevel._NoValueSet"anyio.lowlevel._NoValueSetr≤
-_token_wrappers%anyio.lowlevel.RunVar._token_wrappersx
-*builtins.set[anyio.lowlevel._TokenWrapper]<
-anyio.lowlevel._TokenWrapper"anyio.lowlevel._TokenWrapper"builtins.setrB
+anyio.lowlevel._NoValueSet"anyio.lowlevel._NoValueSetrB
 _nameanyio.lowlevel.RunVar._name
 builtins.str"builtins.strrö
 _defaultanyio.lowlevel.RunVar._defaultÌ
@@ -163,20 +195,26 @@ checkpointanyio.lowlevel.checkpoint"N
 typing.Coroutine[Any,Any,None]
 Any
 Any
-None"typing.CoroutineHQ
-current_tokenanyio.lowlevel.current_token""
-builtins.object"builtins.object*ä
+None"typing.CoroutineHm
+current_tokenanyio.lowlevel.current_token">
+anyio.lowlevel.EventLoopToken"anyio.lowlevel.EventLoopToken*ä
 __annotations__anyio.lowlevel.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*Â
-	_run_varsanyio.lowlevel._run_varsΩ
->weakref.WeakKeyDictionary[Any,builtins.dict[builtins.str,Any]]
-AnyW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"weakref.WeakKeyDictionary*ª
-_token_wrappersanyio.lowlevel._token_wrappersá
-/builtins.dict[Any,anyio.lowlevel._TokenWrapper]
-Any<
-anyio.lowlevel._TokenWrapper"anyio.lowlevel._TokenWrapper"builtins.dict
+Any"builtins.dict*€
+__all__anyio.lowlevel.__all__∑
+aTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str*…
+	_run_varsanyio.lowlevel._run_vars°
+Xweakref.WeakKeyDictionary[builtins.object,builtins.dict[anyio.lowlevel.RunVar[Any],Any]]"
+builtins.object"builtins.objectÖ
+-builtins.dict[anyio.lowlevel.RunVar[Any],Any]<
+anyio.lowlevel.RunVar[Any]
+Any"anyio.lowlevel.RunVar
+Any"builtins.dict"weakref.WeakKeyDictionary

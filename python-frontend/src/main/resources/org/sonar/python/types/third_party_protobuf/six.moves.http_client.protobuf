@@ -1,5 +1,5 @@
 
-six.moves.http_client–0
+six.moves.http_clientÏ0
 HTTPResponsehttp.client.HTTPResponse"io.BufferedIOBase"typing.BinaryIO*è
 __init__!http.client.HTTPResponse.__init__"
 None*>
@@ -37,21 +37,19 @@ debuglevel
 self4
 http.client.HTTPResponse"http.client.HTTPResponse*%
 n
-builtins.int"builtins.int z310z311z312z313z314*ò
+builtins.int"builtins.int z310z311z312z313z314*“
 readinto!http.client.HTTPResponse.readinto"
 builtins.int"builtins.int*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponse*Ò
-bÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBufferz310z311z312z313z314*”
+http.client.HTTPResponse"http.client.HTTPResponse*;
+b4
+typing_extensions.Buffer"typing_extensions.Bufferz310z311*’
+readinto!http.client.HTTPResponse.readinto"
+builtins.int"builtins.int*>
+self4
+http.client.HTTPResponse"http.client.HTTPResponse*9
+b2
+_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*”
 readline!http.client.HTTPResponse.readline" 
 builtins.bytes"builtins.bytes*>
 self4
@@ -91,9 +89,11 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-Nonez310z311z312z313z314*Æ
-infohttp.client.HTTPResponse.info".
-email.message.Message"email.message.Message*>
+Nonez310z311z312z313z314*Ü
+infohttp.client.HTTPResponse.info"Ö
+0email.message.Message[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"email.message.Message*>
 self4
 http.client.HTTPResponse"http.client.HTTPResponsez310z311z312z313z314*†
 geturlhttp.client.HTTPResponse.geturl"
@@ -137,9 +137,10 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 builtins.int"builtins.int*310*311*312*313*314rh
 
 debuglevel#http.client.HTTPResponse.debuglevel
-builtins.int"builtins.int*310*311*312*313*314rb
-fphttp.client.HTTPResponse.fp&
-io.BufferedReader"io.BufferedReader*310*311*312*313*314rb
+builtins.int"builtins.int*310*311*312*313*314r∑
+fphttp.client.HTTPResponse.fp{
+-_io.BufferedReader[_io._BufferedReaderStream]6
+_io._BufferedReaderStream"_io._BufferedReaderStream"_io.BufferedReader*310*311*312*313*314rb
 closedhttp.client.HTTPResponse.closed
 builtins.bool"builtins.bool*310*311*312*313*314r`
 statushttp.client.HTTPResponse.status
@@ -159,7 +160,9 @@ chunk_left#http.client.HTTPResponse.chunk_leftD
 None*310*311*312*313*314rj
 
 will_close#http.client.HTTPResponse.will_close
-builtins.bool"builtins.bool*310*311*312*313*314∆N
+builtins.bool"builtins.bool*310*311*312*313*314rZ
+urlhttp.client.HTTPResponse.url
+builtins.str"builtins.str*310*311*312*313*314ªW
 HTTPConnectionhttp.client.HTTPConnection"builtins.object*–
 __init__#http.client.HTTPConnection.__init__"
 None*B
@@ -182,7 +185,7 @@ will_close#http.client.HTTPResponse.will_close
 builtins.int"builtins.int
 None *-
 	blocksize
-builtins.int"builtins.int z310z311z312z313z314*À
+builtins.int"builtins.int z310z311z312z313z314*∂
 request"http.client.HTTPConnection.request"
 None*B
 self8
@@ -190,35 +193,57 @@ will_close#http.client.HTTPResponse.will_close
 method
 builtins.str"builtins.str*%
 url
-builtins.str"builtins.str*§
-bodyó
-ÅUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]],builtins.str,None]Ê
-ËTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]]ﬂ
-
-›Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]b
+builtins.str"builtins.str*Ï
+bodyﬂ
+îUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],builtins.str,None]õ
+{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]Ç
+pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
 &_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadî
-ßtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
+)typing.Iterable[typing_extensions.Buffer]4
+typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
+typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
 builtins.str"builtins.str
-None *Ü
-headersw
-)typing.Mapping[builtins.str,builtins.str]
+None *∏
+headers®
+atyping.Mapping[builtins.str,TypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]]
+builtins.str"builtins.strî
+DTypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]Ø
+9Union[typing_extensions.Buffer,builtins.str,builtins.int]4
+typing_extensions.Buffer"typing_extensions.Buffer
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping *4
+builtins.int"builtins.int"http.client._HeaderValue"typing.Mapping *4
 encode_chunked
-builtins.bool"builtins.bool z310z311z312z313z314*»
+builtins.bool"builtins.bool z310z311*´
+request"http.client.HTTPConnection.request"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*(
+method
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.str*·
+body‘
+íUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]],builtins.str,None]í
+yTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]]˚
+nUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]b
+&_typeshed.SupportsRead[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReado
+(typing.Iterable[_collections_abc.Buffer]2
+_collections_abc.Buffer"_collections_abc.Buffer"typing.Iterable2
+_collections_abc.Buffer"_collections_abc.Buffer"http.client._DataType
+builtins.str"builtins.str
+None *≥
+headers£
+`typing.Mapping[builtins.str,TypeAlias[Union[_collections_abc.Buffer,builtins.str,builtins.int]]]
+builtins.str"builtins.strê
+CTypeAlias[Union[_collections_abc.Buffer,builtins.str,builtins.int]]¨
+8Union[_collections_abc.Buffer,builtins.str,builtins.int]2
+_collections_abc.Buffer"_collections_abc.Buffer
+builtins.str"builtins.str
+builtins.int"builtins.int"http.client._HeaderValue"typing.Mapping *4
+encode_chunked
+builtins.bool"builtins.bool z312z313z314*»
 getresponse&http.client.HTTPConnection.getresponse"4
 http.client.HTTPResponse"http.client.HTTPResponse*B
 self8
@@ -266,68 +291,105 @@ putrequest%http.client.HTTPConnection.putrequest"
 	skip_host
 builtins.bool"builtins.bool *:
 skip_accept_encoding
-builtins.bool"builtins.bool z310z311z312z313z314*Ó
+builtins.bool"builtins.bool z310z311z312z313z314*°
 	putheader$http.client.HTTPConnection.putheader"
 None*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnection*(
-header
-builtins.str"builtins.str**
-argument
-builtins.str"builtins.strz310z311z312z313z314*‘
+http.client.HTTPConnection"http.client.HTTPConnection*r
+headerf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*°
+valuesî
+DTypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]Ø
+9Union[typing_extensions.Buffer,builtins.str,builtins.int]4
+typing_extensions.Buffer"typing_extensions.Buffer
+builtins.str"builtins.str
+builtins.int"builtins.int"http.client._HeaderValuez310z311*¢
+	putheader$http.client.HTTPConnection.putheader"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*r
+headerf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*ù
+valuesê
+CTypeAlias[Union[_collections_abc.Buffer,builtins.str,builtins.int]]¨
+8Union[_collections_abc.Buffer,builtins.str,builtins.int]2
+_collections_abc.Buffer"_collections_abc.Buffer
+builtins.str"builtins.str
+builtins.int"builtins.int"http.client._HeaderValuez312z313z314*ç
 
 endheaders%http.client.HTTPConnection.endheaders"
 None*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnection*Å
-message_bodyÏ
-ÙUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]],None]Ê
-ËTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]]ﬂ
-
-›Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]b
+http.client.HTTPConnection"http.client.HTTPConnection*…
+message_body¥
+áUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],None]õ
+{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]Ç
+pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
 &_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadî
-ßtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
+)typing.Iterable[typing_extensions.Buffer]4
+typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
+typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
 None *4
 encode_chunked
-builtins.bool"builtins.bool z310z311z312z313z314*§
+builtins.bool"builtins.bool z310z311*á
+
+endheaders%http.client.HTTPConnection.endheaders"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*æ
+message_body©
+ÖUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]],None]í
+yTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]]˚
+nUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]b
+&_typeshed.SupportsRead[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReado
+(typing.Iterable[_collections_abc.Buffer]2
+_collections_abc.Buffer"_collections_abc.Buffer"typing.Iterable2
+_collections_abc.Buffer"_collections_abc.Buffer"http.client._DataType
+None *4
+encode_chunked
+builtins.bool"builtins.bool z312z313z314*›
 sendhttp.client.HTTPConnection.send"
 None*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnection*ì
-dataà
-¸Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]],builtins.str]Ê
-ËTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]]ﬂ
-
-›Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]b
+http.client.HTTPConnection"http.client.HTTPConnection*€
+data–
+èUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],builtins.str]õ
+{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]Ç
+pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
 &_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadî
-ßtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314rh
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
+)typing.Iterable[typing_extensions.Buffer]4
+typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
+typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
+builtins.str"builtins.strz310z311*◊
+sendhttp.client.HTTPConnection.send"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*–
+data≈
+çUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]],builtins.str]í
+yTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]]˚
+nUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[_collections_abc.Buffer],_collections_abc.Buffer]b
+&_typeshed.SupportsRead[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReado
+(typing.Iterable[_collections_abc.Buffer]2
+_collections_abc.Buffer"_collections_abc.Buffer"typing.Iterable2
+_collections_abc.Buffer"_collections_abc.Buffer"http.client._DataType
+builtins.str"builtins.strz312z313z314*ç
+get_proxy_response_headers5http.client.HTTPConnection.get_proxy_response_headers"e
+#Union[http.client.HTTPMessage,None]2
+http.client.HTTPMessage"http.client.HTTPMessage
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnectionz312z313z314j310j311j312j313j314rh
+	blocksize$http.client.HTTPConnection.blocksize
+builtins.int"builtins.int*310*311*312*313*314rh
 	auto_open$http.client.HTTPConnection.auto_open
 builtins.int"builtins.int*310*311*312*313*314rj
 
@@ -345,12 +407,13 @@ debuglevel%http.client.HTTPConnection.debuglevel
 hosthttp.client.HTTPConnection.host
 builtins.str"builtins.str*310*311*312*313*314r^
 porthttp.client.HTTPConnection.port
-builtins.int"builtins.int*310*311*312*313*314rá
-sockhttp.client.HTTPConnection.sockE
-Union[socket.socket,Any]
-socket.socket"socket.socket
-Any*310*311*312*313*314´	
-HTTPSConnectionhttp.client.HTTPSConnection"http.client.HTTPConnection*∫
+builtins.int"builtins.int*310*311*312*313*314rª
+sockhttp.client.HTTPConnection.socky
+#Union[socket.socket,TypeAlias[Any]]
+socket.socket"socket.socket0
+TypeAlias[Any]
+Any"_typeshed.MaybeNone*310*311*312*313*314˜
+HTTPSConnectionhttp.client.HTTPSConnection"http.client.HTTPConnection*´
 __init__$http.client.HTTPSConnection.__init__"
 None*D
 self:
@@ -388,11 +451,38 @@ debuglevel%http.client.HTTPConnection.debuglevel
 builtins.bool"builtins.bool
 None *-
 	blocksize
-builtins.int"builtins.int z310z311z312z313z314j310j311j312j313j314rà
-sock http.client.HTTPSConnection.sockE
-Union[ssl.SSLSocket,Any]
-ssl.SSLSocket"ssl.SSLSocket
-Any*310*311*312*313*314W
+builtins.int"builtins.int z310z311*§
+__init__$http.client.HTTPSConnection.__init__"
+None*D
+self:
+http.client.HTTPSConnection"http.client.HTTPSConnection*&
+host
+builtins.str"builtins.str*P
+portD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *≥
+source_addressú
+,Union[Tuple[builtins.str,builtins.int],None]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *Y
+contextJ
+Union[ssl.SSLContext,None] 
+ssl.SSLContext"ssl.SSLContext
+None *-
+	blocksize
+builtins.int"builtins.int z312z313z314j310j311j312j313j314rº
+sock http.client.HTTPSConnection.socky
+#Union[ssl.SSLSocket,TypeAlias[Any]]
+ssl.SSLSocket"ssl.SSLSocket0
+TypeAlias[Any]
+Any"_typeshed.MaybeNone*310*311*312*313*314W
 HTTPExceptionhttp.client.HTTPException"builtins.Exceptionj310j311j312j313j314\
 NotConnectedhttp.client.NotConnected"http.client.HTTPExceptionj310j311j312j313j314X
 
@@ -449,14 +539,24 @@ InvalidURLhttp.client.InvalidURL"http.client.HTTPExceptionj310j311j312j31
 self2
 http.client.HTTPMessage"http.client.HTTPMessage*&
 name
-builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314Ç
-parse_headershttp.client.parse_headers"2
-http.client.HTTPMessage"http.client.HTTPMessage*.
-fp&
-io.BufferedIOBase"io.BufferedIOBase*Y
+builtins.str"builtins.strz310z311z312z313z314j310j311j312j313j314"¿
+parse_headershttp.client.parse_headersê
+parse_headershttp.client.parse_headers"Å
+email._policybase._MessageTI
+email.message.Message[Any,Any]
+Any
+Any"email.message.Message"email.message.Message*r
+fpj
+*_typeshed.SupportsReadline[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadline*W
 _classK
 CallableType[builtins.function]&
-builtins.function"builtins.function z310z311z312z313z314*™
+builtins.function"builtins.function0:typing.overloadXÁ
+parse_headershttp.client.parse_headers"2
+http.client.HTTPMessage"http.client.HTTPMessage*r
+fpj
+*_typeshed.SupportsReadline[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadline0:typing.overloadX"310"311"312"313"314*™
 __annotations__%six.moves.http_client.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

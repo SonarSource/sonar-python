@@ -1,5 +1,5 @@
 
-inspect¨
+inspect•
 AbstractSettyping.AbstractSet"typing.Collection*Ž
 __contains__typing.AbstractSet.__contains__"
 builtins.bool"builtins.bool*}
@@ -84,7 +84,13 @@
 builtins.object"builtins.object"builtins.object"typing.AbstractSet*yw
 typing.AbstractSet[typing._T]B
 	typing._T"
-builtins.object"builtins.object"builtins.object"typing.AbstractSet*’
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*ê
+__eq__typing.AbstractSet.__eq__"
+builtins.bool"builtins.bool*}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*$"
+builtins.object"builtins.object*’
 
 isdisjointtyping.AbstractSet.isdisjoint"
 builtins.bool"builtins.bool*‡
@@ -130,32 +136,30 @@ tokeneaterinspect.BlockFinder.tokeneater"
 decoratorhasargs$inspect.BlockFinder.decoratorhasargs
 builtins.bool"builtins.boolr>
 lastinspect.BlockFinder.last
-builtins.int"builtins.intô
-_SupportsSetinspect._SupportsSet"builtins.object*¸
+builtins.int"builtins.intú
+_SupportsSetinspect._SupportsSet"builtins.object*¼
 __set__inspect._SupportsSet.__set__"
-None*ì
-selfá
-5inspect._SupportsSet[inspect._T_cont,inspect._V_cont]H
-inspect._T_cont"
-builtins.object"builtins.object"builtins.objectH
-inspect._V_cont"
-builtins.object"builtins.object"builtins.object"inspect._SupportsSet*JH
-inspect._T_cont"
-builtins.object"builtins.object"builtins.object*JH
-inspect._V_cont"
-builtins.object"builtins.object"builtins.objectPXã
-_SupportsDeleteinspect._SupportsDelete"builtins.object*¡
+None*ìé
+9inspect._SupportsSet[inspect._T_contra,inspect._V_contra]J
+inspect._T_contra"
+builtins.object"builtins.object"builtins.objectJ
+inspect._V_contra"
+builtins.object"builtins.object"builtins.object"inspect._SupportsSet*LJ
+inspect._T_contra"
+builtins.object"builtins.object"builtins.object*LJ
+inspect._V_contra"
+builtins.object"builtins.object"builtins.object8PXã
+_SupportsDeleteinspect._SupportsDelete"builtins.object*Ÿ
 
 __delete__"inspect._SupportsDelete.__delete__"
-None*˜
-self
-(inspect._SupportsDelete[inspect._T_cont]H
-inspect._T_cont"
-builtins.object"builtins.object"builtins.object"inspect._SupportsDelete*JH
-inspect._T_cont"
-builtins.object"builtins.object"builtins.objectPX'
+None*”‘
+*inspect._SupportsDelete[inspect._T_contra]J
+inspect._T_contra"
+builtins.object"builtins.object"builtins.object"inspect._SupportsDelete*LJ
+inspect._T_contra"
+builtins.object"builtins.object"builtins.object8PX'
 _voidinspect._void"builtins.object)
-_emptyinspect._empty"builtins.object¼
+_emptyinspect._empty"builtins.object¼
 	Signatureinspect.Signature"builtins.object*ô
 __init__inspect.Signature.__init__"
 None*0
@@ -244,10 +248,21 @@ BUnion[typing.Sequence[inspect.Parameter],Type[inspect._void],None]]
 __eq__inspect.Signature.__eq__"
 builtins.bool"builtins.bool*(&
 inspect.Signature"inspect.Signature*$"
-builtins.object"builtins.objectra
+builtins.object"builtins.object*v
+__hash__inspect.Signature.__hash__"
+builtins.int"builtins.int*0
+self&
+inspect.Signature"inspect.SignaturerŠ
+	__slots__inspect.Signature.__slots__`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strra
 emptyinspect.Signature.empty?
 CallableType[builtins.type]
-builtins.type"builtins.type–
+builtins.type"builtins.typery
+__replace__inspect.Signature.__replace__K
+CallableType[builtins.function]&
+builtins.function"builtins.function–
 _ParameterKindinspect._ParameterKind"enum.IntEnum*¢
 description"inspect._ParameterKind.description"
 builtins.str"builtins.str*:
@@ -262,7 +277,7 @@ BUnion[typing.Sequence[inspect.Parameter],Type[inspect._void],None]]
 KEYWORD_ONLY#inspect._ParameterKind.KEYWORD_ONLY
 builtins.int"builtins.intrO
 VAR_KEYWORD"inspect._ParameterKind.VAR_KEYWORD
-builtins.int"builtins.intã
+builtins.int"builtins.int¿
 	Parameterinspect.Parameter"builtins.object*ù
 __init__inspect.Parameter.__init__"
 None*0
@@ -318,7 +333,17 @@ annotation
 __eq__inspect.Parameter.__eq__"
 builtins.bool"builtins.bool*(&
 inspect.Parameter"inspect.Parameter*$"
-builtins.object"builtins.objectra
+builtins.object"builtins.object*v
+__hash__inspect.Parameter.__hash__"
+builtins.int"builtins.int*0
+self&
+inspect.Parameter"inspect.Parameterrá
+	__slots__inspect.Parameter.__slots__¶
+:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strra
 emptyinspect.Parameter.empty?
 CallableType[builtins.type]
 builtins.type"builtins.typer‹
@@ -336,8 +361,7 @@ annotation
 inspect._ParameterKind"inspect._ParameterKindrƒ
 VAR_KEYWORDinspect.Parameter.VAR_KEYWORDU
 Literal[inspect._ParameterKind]	0
-inspect._ParameterKind"inspect._ParameterKindÊ
-
+inspect._ParameterKind"inspect._ParameterKind¿
 BoundArgumentsinspect.BoundArguments"builtins.object*¦
 argsinspect.BoundArguments.args".
 builtins.tuple[Any]
@@ -371,11 +395,18 @@ annotation
 __eq__inspect.BoundArguments.__eq__"
 builtins.bool"builtins.bool*20
 inspect.BoundArguments"inspect.BoundArguments*$"
-builtins.object"builtins.objectrš
+builtins.object"builtins.objectr»
+	__slots__ inspect.BoundArguments.__slots__‹
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strrš
 	arguments inspect.BoundArguments.argumentsk
 )collections.OrderedDict[builtins.str,Any]
 builtins.str"builtins.str
-Any"collections.OrderedDict‚'
+Any"collections.OrderedDictr5
+__hash__inspect.BoundArguments.__hash__
+NoneÜ&
 	Argumentsinspect.Arguments"builtins.tuple*Ð
 _replaceinspect.Arguments._replace"Ì
 inspect.Arguments._NT°
@@ -409,7 +440,7 @@ TTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 varkwD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *ï
+None *ñ
 __new__inspect.Arguments.__new__"Ì
 inspect.Arguments._NT°
 TTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,None]]J
@@ -443,7 +474,7 @@ TTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 varkwD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*Ø
+Noneh*Ø
 _asdictinspect.Arguments._asdict"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -458,7 +489,7 @@ TTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 NoneD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*ß
+None*·
 _makeinspect.Arguments._make"Ì
 inspect.Arguments._NT°
 TTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,None]]J
@@ -484,11 +515,7 @@ TTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 None"type*>
 iterable0
 typing.Iterable[Any]
-Any"typing.Iterable*
-new
-Any *
-len
-Any 0: prj
+Any"typing.Iterable0: prj
 argsinspect.Arguments.argsJ
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.listrj
@@ -537,7 +564,7 @@ HTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
-builtins.str"builtins.strÞ-
+builtins.str"builtins.strº-
 ArgSpecinspect.ArgSpec"builtins.tuple*•	
 _replaceinspect.ArgSpec._replace"Ž
 inspect.ArgSpec._NTô
@@ -578,7 +605,7 @@ hTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 None *>
 defaults.
 builtins.tuple[Any]
-Any"builtins.tuple *°	
+Any"builtins.tuple *²	
 __new__inspect.ArgSpec.__new__"Ž
 inspect.ArgSpec._NTô
 hTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,None],builtins.tuple[Any]]J
@@ -619,7 +646,7 @@ hTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 None*<
 defaults.
 builtins.tuple[Any]
-Any"builtins.tuple*˜
+Any"builtins.tupleh*˜
 _asdictinspect.ArgSpec._asdict"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -636,7 +663,7 @@ hTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 builtins.str"builtins.str
 None.
 builtins.tuple[Any]
-Any"builtins.tuple*ß
+Any"builtins.tuple*·
 _makeinspect.ArgSpec._make"Ž
 inspect.ArgSpec._NTô
 hTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,None],builtins.tuple[Any]]J
@@ -666,11 +693,7 @@ hTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 Any"builtins.tuple"type*>
 iterable0
 typing.Iterable[Any]
-Any"typing.Iterable*
-new
-Any *
-len
-Any 0: prh
+Any"typing.Iterable0: p8rh
 argsinspect.ArgSpec.argsJ
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.listrh
@@ -728,7 +751,7 @@ hTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
-builtins.str"builtins.str…Z
+builtins.str"builtins.strßY
 FullArgSpecinspect.FullArgSpec"builtins.tuple*ÿ
 _replaceinspect.FullArgSpec._replace"ð
 inspect.FullArgSpec._NTÒ
@@ -809,7 +832,7 @@ kwonlyargsJ
 annotationsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict *˜
+Any"builtins.dict *š
 __new__inspect.FullArgSpec.__new__"ð
 inspect.FullArgSpec._NTÒ
 ÜTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.tuple[Any],None],builtins.list[builtins.str],Union[builtins.dict[builtins.str,Any],None],builtins.dict[builtins.str,Any]]J
@@ -890,7 +913,7 @@ kwonlyargsJ
 annotationsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*þ
+Any"builtins.dicth*þ
 _asdictinspect.FullArgSpec._asdict"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -919,7 +942,7 @@ kwonlyargsJ
 NoneW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*«
+Any"builtins.dict*ƒ
 _makeinspect.FullArgSpec._make"ð
 inspect.FullArgSpec._NTÒ
 ÜTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.tuple[Any],None],builtins.list[builtins.str],Union[builtins.dict[builtins.str,Any],None],builtins.dict[builtins.str,Any]]J
@@ -973,11 +996,7 @@ kwonlyargsJ
 Any"builtins.dict"type*>
 iterable0
 typing.Iterable[Any]
-Any"typing.Iterable*
-new
-Any *
-len
-Any 0: prl
+Any"typing.Iterable0: prl
 argsinspect.FullArgSpec.argsJ
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.listrl
@@ -1076,7 +1095,7 @@ aTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
-builtins.str"builtins.stré1
+builtins.str"builtins.strÃ1
 ArgInfoinspect.ArgInfo"builtins.tuple*¦
 
 _replaceinspect.ArgInfo._replace"Ã
@@ -1121,7 +1140,7 @@ tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 localsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict *Á
+Any"builtins.dict *Ã
 
 __new__inspect.ArgInfo.__new__"Ã
 inspect.ArgInfo._NT©
@@ -1166,7 +1185,7 @@ tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 localsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*Í
+Any"builtins.dicth*Í
 _asdictinspect.ArgInfo._asdict"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -1184,7 +1203,7 @@ tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 NoneW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*É
+Any"builtins.dict*¡
 _makeinspect.ArgInfo._make"Ã
 inspect.ArgInfo._NT©
 tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,None],builtins.dict[builtins.str,Any]]J
@@ -1216,11 +1235,7 @@ tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 Any"builtins.dict"type*>
 iterable0
 typing.Iterable[Any]
-Any"typing.Iterable*
-new
-Any *
-len
-Any 0: prh
+Any"typing.Iterable0: prh
 argsinspect.ArgInfo.argsJ
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.listrh
@@ -1280,7 +1295,7 @@ tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
-builtins.str"builtins.strú8
+builtins.str"builtins.strÔ8
 ClosureVarsinspect.ClosureVars"builtins.tuple*ˆ
 _replaceinspect.ClosureVars._replace"”
 inspect.ClosureVars._NTö
@@ -1324,7 +1339,7 @@ tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 Any"typing.Mapping *c
 unboundT
  typing.AbstractSet[builtins.str]
-builtins.str"builtins.str"typing.AbstractSet *§
+builtins.str"builtins.str"typing.AbstractSet *©
 __new__inspect.ClosureVars.__new__"”
 inspect.ClosureVars._NTö
 ŠTuple[typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.AbstractSet[builtins.str]]Y
@@ -1368,7 +1383,7 @@ tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 Any"typing.Mapping*a
 unboundT
  typing.AbstractSet[builtins.str]
-builtins.str"builtins.str"typing.AbstractSet*¢
+builtins.str"builtins.str"typing.AbstractSeth*¢
 _asdictinspect.ClosureVars._asdict"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -1386,7 +1401,7 @@ tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 builtins.str"builtins.str
 Any"typing.MappingT
  typing.AbstractSet[builtins.str]
-builtins.str"builtins.str"typing.AbstractSet*ó	
+builtins.str"builtins.str"typing.AbstractSet*Ë	
 _makeinspect.ClosureVars._make"”
 inspect.ClosureVars._NTö
 ŠTuple[typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.AbstractSet[builtins.str]]Y
@@ -1418,11 +1433,7 @@ tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 builtins.str"builtins.str"typing.AbstractSet"type*>
 iterable0
 typing.Iterable[Any]
-Any"typing.Iterable*
-new
-Any *
-len
-Any 0: pr…
+Any"typing.Iterable0: pr…
 	nonlocalsinspect.ClosureVars.nonlocalsY
  typing.Mapping[builtins.str,Any]
 builtins.str"builtins.str
@@ -1482,7 +1493,7 @@ tTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
-builtins.str"builtins.strú2
+builtins.str"builtins.strÔ2
 	Tracebackinspect.Traceback"builtins.tuple*
 
 _replaceinspect.Traceback._replace"²
@@ -1525,7 +1536,7 @@ nTuple[builtins.str,builtins.int,builtins.str,Union[builtins.list[builtins.str],
 indexD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *«
+None *­
 
 __new__inspect.Traceback.__new__"²
 inspect.Traceback._NT–
@@ -1568,7 +1579,7 @@ nTuple[builtins.str,builtins.int,builtins.str,Union[builtins.list[builtins.str],
 indexD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*¾
+Noneh*¾
 _asdictinspect.Traceback._asdict"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -1585,7 +1596,7 @@ nTuple[builtins.str,builtins.int,builtins.str,Union[builtins.list[builtins.str],
 NoneD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*«
+None*ƒ
 _makeinspect.Traceback._make"²
 inspect.Traceback._NT–
 nTuple[builtins.str,builtins.int,builtins.str,Union[builtins.list[builtins.str],None],Union[builtins.int,None]]
@@ -1615,11 +1626,7 @@ nTuple[builtins.str,builtins.int,builtins.str,Union[builtins.list[builtins.str],
 None"type*>
 iterable0
 typing.Iterable[Any]
-Any"typing.Iterable*
-new
-Any *
-len
-Any 0: prD
+Any"typing.Iterable0: prD
 filenameinspect.Traceback.filename
 builtins.str"builtins.strr@
 linenoinspect.Traceback.lineno
@@ -1682,7 +1689,7 @@ tTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
-builtins.str"builtins.strÍ8
+builtins.str"builtins.str§8
 	FrameInfoinspect.FrameInfo"builtins.tuple*©
 _replaceinspect.FrameInfo._replace"æ
 inspect.FrameInfo._NTÊ
@@ -1728,7 +1735,7 @@ tTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 indexD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *Â
+None *Ä
 __new__inspect.FrameInfo.__new__"æ
 inspect.FrameInfo._NTÊ
 ~Tuple[types.FrameType,builtins.str,builtins.int,builtins.str,Union[builtins.list[builtins.str],None],Union[builtins.int,None]]"
@@ -1774,7 +1781,7 @@ tTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 indexD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*ò
+Noneh*ò
 _asdictinspect.FrameInfo._asdict"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -1792,7 +1799,7 @@ tTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 NoneD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*“	
+None*ë
 _makeinspect.FrameInfo._make"æ
 inspect.FrameInfo._NTÊ
 ~Tuple[types.FrameType,builtins.str,builtins.int,builtins.str,Union[builtins.list[builtins.str],None],Union[builtins.int,None]]"
@@ -1824,11 +1831,7 @@ tTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 None"type*>
 iterable0
 typing.Iterable[Any]
-Any"typing.Iterable*
-new
-Any *
-len
-Any 0: prD
+Any"typing.Iterable0: prD
 frameinspect.FrameInfo.frame"
 types.FrameType"types.FrameTyperD
 filenameinspect.FrameInfo.filename
@@ -1898,7 +1901,7 @@ TTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
-builtins.str"builtins.strÁF
+builtins.str"builtins.str›F
 	Attributeinspect.Attribute"builtins.tuple*ñ
 _replaceinspect.Attribute._replace"Á
 inspect.Attribute._NT¥
@@ -1951,7 +1954,7 @@ tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 defining_class
 builtins.type"builtins.type *0
 object"
-builtins.object"builtins.object *Ž
+builtins.object"builtins.object *
 __new__inspect.Attribute.__new__"Á
 inspect.Attribute._NT¥
 ¦Tuple[builtins.str,Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]],builtins.type,builtins.object]
@@ -2004,7 +2007,7 @@ tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 defining_class
 builtins.type"builtins.type*.
 object"
-builtins.object"builtins.object*Í
+builtins.object"builtins.objecth*Í
 _asdictinspect.Attribute._asdict"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -2025,7 +2028,7 @@ tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 Literal[builtins.str]	
 builtins.str"builtins.str
 builtins.type"builtins.type"
-builtins.object"builtins.object*É
+builtins.object"builtins.object*¡
 _makeinspect.Attribute._make"Á
 inspect.Attribute._NT¥
 ¦Tuple[builtins.str,Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]],builtins.type,builtins.object]
@@ -2063,11 +2066,7 @@ tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 builtins.object"builtins.object"type*>
 iterable0
 typing.Iterable[Any]
-Any"typing.Iterable*
-new
-Any *
-len
-Any 0: pr<
+Any"typing.Iterable0: pr<
 nameinspect.Attribute.name
 builtins.str"builtins.strr¶
 kindinspect.Attribute.kind•
@@ -2134,13 +2133,17 @@ tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 builtins.str"builtins.str7
 Literal[builtins.str]	
 builtins.str"builtins.strF
-ClassFoundExceptioninspect.ClassFoundException"builtins.Exception”
+ClassFoundExceptioninspect.ClassFoundException"builtins.Exceptionã
 getmodulenameinspect.getmodulename"D
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*&
-path
-builtins.str"builtins.strl
+None*ô
+pathé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathl
 ismoduleinspect.ismodule"
 builtins.bool"builtins.bool*.
 object"
@@ -2254,13 +2257,7 @@ getabsfileinspect.getabsfile"
 	_filenameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None Ç
-getblockinspect.getblock"N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*Y
-linesN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.SequenceŽ
+None Ž
 getdocinspect.getdoc"D
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -2378,17 +2375,18 @@ indentsizeinspect.indentsize"
 Any"typing.Mapping
 None *.
 eval_str
-builtins.bool"builtins.bool å
-get_annotationsinspect.get_annotations"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*à
-objÖ
-AUnion[CallableType[builtins.function],Type[Any],types.ModuleType]K
+builtins.bool"builtins.bool Ò
+get_annotationsinspect.get_annotations"
+*builtins.dict[builtins.str,TypeAlias[Any]]
+builtins.str"builtins.str5
+TypeAlias[Any]
+Any"_typeshed.AnnotationForm"builtins.dict*“
+obj‰
+MUnion[CallableType[builtins.function],Type[builtins.object],types.ModuleType]K
 CallableType[builtins.function]&
-builtins.function"builtins.function
-	Type[Any]
-Any"type$
+builtins.function"builtins.functionC
+Type[builtins.object]"
+builtins.object"builtins.object"type$
 types.ModuleType"types.ModuleType*¥
 globals•
 ,Union[typing.Mapping[builtins.str,Any],None]Y
@@ -2403,18 +2401,26 @@ AUnion[CallableType[builtins.function],Type[Any],types.ModuleType]K
 Any"typing.Mapping
 None *.
 eval_str
-builtins.bool"builtins.bool Ü
-getclasstreeinspect.getclasstree",
-builtins.list[Any]
-Any"builtins.list*Z
+builtins.bool"builtins.bool ¯
+getclasstreeinspect.getclasstree"þ
+UTypeAlias[Union[builtins.list[builtins.tuple[builtins.type]],builtins.list[Unknown]]]Š
+JUnion[builtins.list[builtins.tuple[builtins.type]],builtins.list[Unknown]]Ž
+,builtins.list[builtins.tuple[builtins.type]]O
+builtins.tuple[builtins.type]
+builtins.type"builtins.type"builtins.tuple"builtins.list)
+builtins.list[Unknown] "builtins.list"inspect._ClassTreeItem*Z
 classesM
 builtins.list[builtins.type]
 builtins.type"builtins.type"builtins.list*,
 unique
-builtins.bool"builtins.bool ¼
-walktreeinspect.walktree",
-builtins.list[Any]
-Any"builtins.list*Z
+builtins.bool"builtins.bool 
+walktreeinspect.walktree"þ
+UTypeAlias[Union[builtins.list[builtins.tuple[builtins.type]],builtins.list[Unknown]]]Š
+JUnion[builtins.list[builtins.tuple[builtins.type]],builtins.list[Unknown]]Ž
+,builtins.list[builtins.tuple[builtins.type]]O
+builtins.tuple[builtins.type]
+builtins.type"builtins.type"builtins.tuple"builtins.list)
+builtins.list[Unknown] "builtins.list"inspect._ClassTreeItem*Z
 classesM
 builtins.list[builtins.type]
 builtins.type"builtins.type"builtins.list*Ä
@@ -2441,7 +2447,7 @@ TTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 builtins.str"builtins.str
 None"inspect.Arguments*(
 co 
-types.CodeType"types.CodeTypeÐ
+types.CodeType"types.CodeTypeÒ
 
 getargspecinspect.getargspec"ÿ
 sTypeAlias[Tuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,None],builtins.tuple[Any]]]ô
@@ -2457,7 +2463,7 @@ hTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,N
 builtins.tuple[Any]
 Any"builtins.tuple"inspect.ArgSpec*,
 func"
-builtins.object"builtins.object¯	
+builtins.object"builtins.object0¯	
 getfullargspecinspect.getfullargspec"Ö
 çTypeAlias[Tuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.tuple[Any],None],builtins.list[builtins.str],Union[builtins.dict[builtins.str,Any],None],builtins.dict[builtins.str,Any]]]Ò
 ÜTuple[builtins.list[builtins.str],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.tuple[Any],None],builtins.list[builtins.str],Union[builtins.dict[builtins.str,Any],None],builtins.dict[builtins.str,Any]]J
@@ -2514,7 +2520,7 @@ annotation"
 CallableType[builtins.function]&
 builtins.function"builtins.function*.
 object"
-builtins.object"builtins.object²
+builtins.object"builtins.object´
 formatargspecinspect.formatargspec"
 builtins.str"builtins.str*T
 argsJ
@@ -2566,7 +2572,7 @@ kwonlyargs‡
 builtins.function"builtins.function *c
 formatannotationK
 CallableType[builtins.function]&
-builtins.function"builtins.function Û
+builtins.function"builtins.function 0Û
 formatargvaluesinspect.formatargvalues"
 builtins.str"builtins.str*T
 argsJ
@@ -2825,31 +2831,48 @@ tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 builtins.type"builtins.type"
 builtins.object"builtins.object"inspect.Attribute"builtins.list*'
 cls
-builtins.type"builtins.type"–	
+builtins.type"builtins.type"
 
-getmembersinspect.getmembersÆ
+getmembersinspect.getmembers½
 
-getmembersinspect.getmembers"©
+getmembersinspect.getmembers" 
 8TypeAlias[builtins.list[Tuple[builtins.str,inspect._T]]]Æ
 -builtins.list[Tuple[builtins.str,inspect._T]]…
 Tuple[builtins.str,inspect._T]
 builtins.str"builtins.strC
 
 inspect._T"
-builtins.object"builtins.object"builtins.object"builtins.list""inspect._GetMembersReturnTypeGuard*.
+builtins.object"builtins.object"builtins.object"builtins.list"inspect._GetMembersReturn*.
 object"
 builtins.object"builtins.object*²
 	predicate¢
 *TypeAlias[CallableType[builtins.function]]K
 CallableType[builtins.function]&
-builtins.function"builtins.function"%inspect._GetMembersPredicateTypeGuard0:typing.overloadXª
+builtins.function"builtins.function"%inspect._GetMembersPredicateTypeGuard0:typing.overloadXº
 
-getmembersinspect.getmembers"Í
-1TypeAlias[builtins.list[Tuple[builtins.str,Any]]]{
-&builtins.list[Tuple[builtins.str,Any]]B
-Tuple[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.list"inspect._GetMembersReturn*.
+getmembersinspect.getmembers" 
+8TypeAlias[builtins.list[Tuple[builtins.str,inspect._T]]]Æ
+-builtins.list[Tuple[builtins.str,inspect._T]]…
+Tuple[builtins.str,inspect._T]
+builtins.str"builtins.strC
+
+inspect._T"
+builtins.object"builtins.object"builtins.object"builtins.list"inspect._GetMembersReturn*.
+object"
+builtins.object"builtins.object*¯
+	predicateŸ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function""inspect._GetMembersPredicateTypeIs0:typing.overloadXý
+
+getmembersinspect.getmembers" 
+8TypeAlias[builtins.list[Tuple[builtins.str,inspect._T]]]Æ
+-builtins.list[Tuple[builtins.str,inspect._T]]…
+Tuple[builtins.str,inspect._T]
+builtins.str"builtins.strC
+
+inspect._T"
+builtins.object"builtins.object"builtins.object"builtins.list"inspect._GetMembersReturn*.
 object"
 builtins.object"builtins.object*ò
 	predicateà
@@ -2907,71 +2930,71 @@ getmembersinspect.getmembers"Í
 isasyncgenfunctioninspect.isasyncgenfunction"
 builtins.bool"builtins.bool*+
 obj"
-builtins.object"builtins.object0:typing.overloadX*ƒ
+builtins.object"builtins.object0:typing.overloadX"­
+getblockinspect.getblockÔ
+getblockinspect.getblock"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*U
+linesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list0:typing.overloadXØ
+getblockinspect.getblock"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*W
+linesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple0:typing.overloadXÜ
+getblockinspect.getblock"N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*Y
+linesN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence0:typing.overloadX*ƒ
 __annotations__inspect.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*]
-CO_OPTIMIZEDinspect.CO_OPTIMIZED7
-Literal[builtins.int]	
-builtins.int"builtins.int*]
-CO_NEWLOCALSinspect.CO_NEWLOCALS7
-Literal[builtins.int]	
-builtins.int"builtins.int*Y
+Any"builtins.dict*B
+CO_OPTIMIZEDinspect.CO_OPTIMIZED
+builtins.int"builtins.int*B
+CO_NEWLOCALSinspect.CO_NEWLOCALS
+builtins.int"builtins.int*>
 
-CO_VARARGSinspect.CO_VARARGS7
-Literal[builtins.int]	
-builtins.int"builtins.int*a
-CO_VARKEYWORDSinspect.CO_VARKEYWORDS7
-Literal[builtins.int]	
-builtins.int"builtins.int*W
-	CO_NESTEDinspect.CO_NESTED7
-Literal[builtins.int]	
-builtins.int"builtins.int*]
-CO_GENERATORinspect.CO_GENERATOR7
-Literal[builtins.int]	
-builtins.int"builtins.int*W
-	CO_NOFREEinspect.CO_NOFREE7
-Literal[builtins.int]	
-builtins.int"builtins.int*]
-CO_COROUTINEinspect.CO_COROUTINE7
-Literal[builtins.int]	
-builtins.int"builtins.int*o
-CO_ITERABLE_COROUTINEinspect.CO_ITERABLE_COROUTINE7
-Literal[builtins.int]	
-builtins.int"builtins.int*i
-CO_ASYNC_GENERATORinspect.CO_ASYNC_GENERATOR7
-Literal[builtins.int]	
-builtins.int"builtins.int*k
-TPFLAGS_IS_ABSTRACTinspect.TPFLAGS_IS_ABSTRACT7
-Literal[builtins.int]	
+CO_VARARGSinspect.CO_VARARGS
+builtins.int"builtins.int*F
+CO_VARKEYWORDSinspect.CO_VARKEYWORDS
+builtins.int"builtins.int*<
+	CO_NESTEDinspect.CO_NESTED
+builtins.int"builtins.int*B
+CO_GENERATORinspect.CO_GENERATOR
+builtins.int"builtins.int*<
+	CO_NOFREEinspect.CO_NOFREE
+builtins.int"builtins.int*B
+CO_COROUTINEinspect.CO_COROUTINE
+builtins.int"builtins.int*T
+CO_ITERABLE_COROUTINEinspect.CO_ITERABLE_COROUTINE
+builtins.int"builtins.int*N
+CO_ASYNC_GENERATORinspect.CO_ASYNC_GENERATOR
+builtins.int"builtins.int*P
+TPFLAGS_IS_ABSTRACTinspect.TPFLAGS_IS_ABSTRACT
 builtins.int"builtins.int*
 modulesbyfileinspect.modulesbyfileW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*[
-GEN_CREATEDinspect.GEN_CREATED7
-Literal[builtins.str]	
-builtins.str"builtins.str*[
-GEN_RUNNINGinspect.GEN_RUNNING7
-Literal[builtins.str]	
-builtins.str"builtins.str*_
-GEN_SUSPENDEDinspect.GEN_SUSPENDED7
-Literal[builtins.str]	
-builtins.str"builtins.str*Y
+Any"builtins.dict*@
+GEN_CREATEDinspect.GEN_CREATED
+builtins.str"builtins.str*@
+GEN_RUNNINGinspect.GEN_RUNNING
+builtins.str"builtins.str*D
+GEN_SUSPENDEDinspect.GEN_SUSPENDED
+builtins.str"builtins.str*>
 
-GEN_CLOSEDinspect.GEN_CLOSED7
-Literal[builtins.str]	
-builtins.str"builtins.str*]
-CORO_CREATEDinspect.CORO_CREATED7
-Literal[builtins.str]	
-builtins.str"builtins.str*]
-CORO_RUNNINGinspect.CORO_RUNNING7
-Literal[builtins.str]	
-builtins.str"builtins.str*a
-CORO_SUSPENDEDinspect.CORO_SUSPENDED7
-Literal[builtins.str]	
-builtins.str"builtins.str*[
-CORO_CLOSEDinspect.CORO_CLOSED7
-Literal[builtins.str]	
+GEN_CLOSEDinspect.GEN_CLOSED
+builtins.str"builtins.str*B
+CORO_CREATEDinspect.CORO_CREATED
+builtins.str"builtins.str*B
+CORO_RUNNINGinspect.CORO_RUNNING
+builtins.str"builtins.str*F
+CORO_SUSPENDEDinspect.CORO_SUSPENDED
+builtins.str"builtins.str*@
+CORO_CLOSEDinspect.CORO_CLOSED
 builtins.str"builtins.str

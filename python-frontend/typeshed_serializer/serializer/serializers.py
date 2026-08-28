@@ -50,13 +50,15 @@ def get_options(python_version=DEFAULT_PYTHON_VERSION):
     return opt
 
 
-def walk_typeshed_stdlib(opt: options.Options = get_options()):
+def walk_typeshed_stdlib(opt: options.Options = None):
+    opt = opt or get_options()
     source_list, source_paths = get_sources(STDLIB_PATH)
     build_result = build.build(source_list, opt)
     return build_result, source_paths
 
 
-def walk_typeshed_third_parties(opt: options.Options = get_options()):
+def walk_typeshed_third_parties(opt: options.Options = None):
+    opt = opt or get_options()
     source_list = []
     source_paths = set()
     for third_party_stub in THIRD_PARTIES_STUBS:
@@ -137,7 +139,7 @@ class Serializer(ABC):
             )
 
     @abstractmethod
-    def get_build_result(self, opt=get_options()) -> tuple[build.BuildResult, set[str]]:
+    def get_build_result(self, opt=None) -> tuple[build.BuildResult, set[str]]:
         """returns a tuple containing the semantic model of the project and the paths of its sources"""
 
     @abstractmethod
@@ -201,7 +203,8 @@ class TypeshedSerializer(Serializer):
             model_by_version[f"{major}{minor}"] = modules
         return model_by_version
 
-    def get_build_result(self, opt=get_options()):
+    def get_build_result(self, opt=None):
+        opt = opt or self.opt
         build_result, source_paths = (
             walk_typeshed_third_parties(opt)
             if self.is_third_parties
@@ -218,10 +221,11 @@ class ImporterSerializer(Serializer):
     save_location = "third_party_protobuf_mypy"
     output_folder = f"{FolderManager.output_folder}/{save_location}"
 
-    def get_build_result(self, opt=get_options()):
+    def get_build_result(self, opt=None):
+        opt = opt or self.opt
         path = os.path.join(CURRENT_PATH, IMPORTER_FILE_NAME)
         source = build.BuildSource(path, module=IMPORTER_FQN)
-        build_result = build.build([source], options=self.opt)
+        build_result = build.build([source], options=opt)
         return build_result, {path}
 
     def is_exception(self, file, build_result, source_paths):
@@ -234,9 +238,9 @@ class MicrosoftStubsSerializer(Serializer):
     save_location = "third_party_protobuf_microsoft"
     output_folder = f"{FolderManager.output_folder}/{save_location}"
 
-    def get_build_result(self, opt=get_options()):
+    def get_build_result(self, opt=None):
+        opt = opt or self.opt
         src_list, src_paths = get_sources(SKLEARN_STUBS_PATH, self.filter_get_sources_result)
-
         build_result = build.build(src_list, opt)
         return build_result, src_paths
 
@@ -258,9 +262,10 @@ class CustomStubsSerializer(Serializer):
     save_location = "custom_protobuf"
     output_folder = f"{FolderManager.output_folder}/{save_location}"
 
-    def get_build_result(self, opt=get_options()):
+    def get_build_result(self, opt=None):
+        opt = opt or self.opt
         source_list, source_paths = get_sources(CUSTOM_STUBS_PATH)
-        build_result = build.build(source_list, self.opt)
+        build_result = build.build(source_list, opt)
         return build_result, source_paths
 
     def is_exception(self, file, build_result, source_paths=None):

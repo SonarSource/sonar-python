@@ -14,7 +14,7 @@ parse_next(paramiko.transport._KexEngine.parse_next"
 ptype
 builtins.int"builtins.int*;
 m4
-paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314Xj310j311j312j313j314³Å
+paramiko.message.Message"paramiko.message.Messagez310z311z312z313z314Xj310j311j312j313j314èÆ
 	Transportparamiko.transport.Transport"threading.Thread"#paramiko.util.ClosingContextManager*‘
 
 __init__%paramiko.transport.Transport.__init__"
@@ -556,9 +556,11 @@ kex_engine'paramiko.transport.Transport.kex_enginew
 in_kex#paramiko.transport.Transport.in_kex
 builtins.bool"builtins.bool*310*311*312*313*314rt
 authenticated*paramiko.transport.Transport.authenticated
-builtins.bool"builtins.bool*310*311*312*313*314rd
-lock!paramiko.transport.Transport.lock 
-threading.Lock"threading.Lock*310*311*312*313*314rÖ
+builtins.bool"builtins.bool*310*311*312*313*314r^
+lock!paramiko.transport.Transport.lock$
+_thread.LockType"_thread.LockType*310*311*312rQ
+lock!paramiko.transport.Transport.lock
+_thread.lock"_thread.lock*313*314rÖ
 channel_events+paramiko.transport.Transport.channel_events~
 +builtins.dict[builtins.int,threading.Event]
 builtins.int"builtins.int"
@@ -576,9 +578,11 @@ kex_engine'paramiko.transport.Transport.kex_enginew
 builtins.Exception"builtins.Exception
 None*310*311*312*313*314rx
 clear_to_send*paramiko.transport.Transport.clear_to_send"
-threading.Event"threading.Event*310*311*312*313*314r€
-clear_to_send_lock/paramiko.transport.Transport.clear_to_send_lock 
-threading.Lock"threading.Lock*310*311*312*313*314r†
+threading.Event"threading.Event*310*311*312*313*314rz
+clear_to_send_lock/paramiko.transport.Transport.clear_to_send_lock$
+_thread.LockType"_thread.LockType*310*311*312rm
+clear_to_send_lock/paramiko.transport.Transport.clear_to_send_lock
+_thread.lock"_thread.lock*313*314r†
 clear_to_send_timeout2paramiko.transport.Transport.clear_to_send_timeout 
 builtins.float"builtins.float*310*311*312*313*314rh
 log_name%paramiko.transport.Transport.log_name

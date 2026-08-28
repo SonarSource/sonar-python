@@ -48,7 +48,9 @@ re.PatternrO
 0builtins.tuple[Union[builtins.str,builtins.int]]`
  Union[builtins.str,builtins.int]
 builtins.str"builtins.str
-builtins.int"builtins.int"builtins.tupleÉ
+builtins.int"builtins.int"builtins.tuple"
+Any
+typing.Any"builtins.objectÉ
 CategoricalDtype*pandas.core.dtypes.dtypes.CategoricalDtype".pandas.core.dtypes.dtypes.PandasExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype*í
 __init__3pandas.core.dtypes.dtypes.CategoricalDtype.__init__"
 None*b
@@ -430,7 +432,7 @@ short_name:pyspark.pandas.typedef.typehints.NameTypeHolder.short_name
 isclassinspect.isclass"
 builtins.bool"builtins.bool*.
 object"
-builtins.object"builtins.object¡
+builtins.object"builtins.objectƒ
 get_type_hintstyping.get_type_hints"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -453,20 +455,21 @@ short_name:pyspark.pandas.typedef.typehints.NameTypeHolder.short_name
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
 Any"builtins.dict
-None *¢
-localnsí
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
+None *•
+localnsï
+,Union[typing.Mapping[builtins.str,Any],None]Y
+ typing.Mapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict
+Any"typing.Mapping
 None *4
 include_extras
-builtins.bool"builtins.bool ƒ
-pandas_dtype&pandas.core.dtypes.common.pandas_dtype"‹
-STypeAlias[Union[numpy.dtype[numpy.generic],pandas.core.dtypes.base.ExtensionDtype]]È
-HUnion[numpy.dtype[numpy.generic],pandas.core.dtypes.base.ExtensionDtype]I
-numpy.dtype[numpy.generic]
-numpy.generic"numpy.generic"numpy.dtypeP
+builtins.bool"builtins.bool ·
+pandas_dtype&pandas.core.dtypes.common.pandas_dtype"˘
+XTypeAlias[Union[numpy.dtype[numpy.generic[Any]],pandas.core.dtypes.base.ExtensionDtype]]Å
+MUnion[numpy.dtype[numpy.generic[Any]],pandas.core.dtypes.base.ExtensionDtype]\
+numpy.dtype[numpy.generic[Any]],
+numpy.generic[Any]
+Any"numpy.generic"numpy.dtypeP
 &pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtype"pandas._typing.DtypeObj*-
 dtype"
 builtins.object"builtins.objectÇ
@@ -566,14 +569,12 @@ ITypeAlias[Union[numpy.dtype[Any],pandas.core.dtypes.base.ExtensionDtype]]æ
 datetimedatetime *
 decimaldecimal *
 syssys *
-typingtyping *5
-Any
-typing.Any"
-builtins.object"builtins.object*G
+typingtyping *G
 Callabletyping.Callable*
-typing._SpecialForm"typing._SpecialForm*E
-Generictyping.Generic*
-typing._SpecialForm"typing._SpecialForm*A
+typing._SpecialForm"typing._SpecialForm*^
+Generictyping.GenericC
+Type[typing._Generic]"
+typing._Generic"typing._Generic"type*A
 Tupletyping.Tuple*
 typing._SpecialForm"typing._SpecialForm*A
 Uniontyping.Union*

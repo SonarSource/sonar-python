@@ -251,7 +251,7 @@ XUnion[TypeAlias[builtins.dict[builtins.str,Any]],werkzeug.wrappers.request.Requ
 new_url3werkzeug.routing.exceptions.RequestRedirect.new_url
 builtins.str"builtins.strT
 RoutingException,werkzeug.routing.exceptions.RoutingException"builtins.Exceptionb
-WebsocketMismatch-werkzeug.routing.exceptions.WebsocketMismatch"werkzeug.exceptions.BadRequestÛ3
+WebsocketMismatch-werkzeug.routing.exceptions.WebsocketMismatch"werkzeug.exceptions.BadRequest˜3
 Mapwerkzeug.routing.map.Map"builtins.object*ä
 __init__!werkzeug.routing.map.Map.__init__"
 None*>
@@ -398,9 +398,9 @@ Fbuiltins.dict[builtins.str,builtins.list[werkzeug.routing.rules.Rule]]
 *builtins.list[werkzeug.routing.rules.Rule]:
 werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule"builtins.list"builtins.dictrI
 _remapwerkzeug.routing.map.Map._remap
-builtins.bool"builtins.boolrU
-_remap_lock$werkzeug.routing.map.Map._remap_lock 
-threading.Lock"threading.Lockr]
+builtins.bool"builtins.boolrY
+_remap_lock$werkzeug.routing.map.Map._remap_lock$
+_thread.LockType"_thread.LockTyper]
 default_subdomain*werkzeug.routing.map.Map.default_subdomain
 builtins.str"builtins.strrI
 charset werkzeug.routing.map.Map.charset
@@ -772,7 +772,7 @@ JTuple[werkzeug.routing.rules.Rule,typing.MutableMapping[builtins.str,Any]]:
 builtins.str"builtins.strr«
 rules+werkzeug.routing.rules.EndpointPrefix.rulesê
 3typing.Iterable[werkzeug.routing.rules.RuleFactory]H
-"werkzeug.routing.rules.RuleFactory""werkzeug.routing.rules.RuleFactory"typing.Iterable”D
+"werkzeug.routing.rules.RuleFactory""werkzeug.routing.rules.RuleFactory"typing.Iterable›D
 Rulewerkzeug.routing.rules.Rule""werkzeug.routing.rules.RuleFactory*Å
 
 __init__$werkzeug.routing.rules.Rule.__init__"
@@ -951,8 +951,9 @@ query_varsY
 werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule*å
 __repr__$werkzeug.routing.rules.Rule.__repr__"
 builtins.str"builtins.str*<:
-werkzeug.routing.rules.Rule"werkzeug.routing.rules.Ruler0
-__hash__$werkzeug.routing.rules.Rule.__hash__rF
+werkzeug.routing.rules.Rule"werkzeug.routing.rules.Ruler:
+__hash__$werkzeug.routing.rules.Rule.__hash__
+NonerF
 rule werkzeug.routing.rules.Rule.rule
 builtins.str"builtins.strrN
 is_leaf#werkzeug.routing.rules.Rule.is_leaf

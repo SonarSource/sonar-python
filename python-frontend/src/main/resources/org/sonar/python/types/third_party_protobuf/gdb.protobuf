@@ -505,7 +505,7 @@ UnwindInfogdb.UnwindInfo"builtins.object*œ
 namegdb.Unwinder.name
 builtins.str"builtins.str*310*311*312*313*314rX
 enabledgdb.Unwinder.enabled
-builtins.bool"builtins.bool*310*311*312*313*314«"
+builtins.bool"builtins.bool*310*311*312*313*314–
 Inferiorgdb.Inferior"builtins.object*Ç
 is_validgdb.Inferior.is_valid"
 builtins.bool"builtins.bool*&
@@ -519,9 +519,10 @@ UnwindInfogdb.UnwindInfo"builtins.object*œ
 architecturegdb.Inferior.architecture"$
 gdb.Architecture"gdb.Architecture*&
 self
-gdb.Inferior"gdb.Inferiorz310z311z312z313z314*Â
-read_memorygdb.Inferior.read_memory"*
-builtins.memoryview"builtins.memoryview*&
+gdb.Inferior"gdb.Inferiorz310z311z312z313z314*ë
+read_memorygdb.Inferior.read_memory"V
+!builtins.memoryview[builtins.int]
+builtins.int"builtins.int"builtins.memoryview*&
 self
 gdb.Inferior"gdb.Inferior*§
 addressñ
@@ -530,32 +531,35 @@ UnwindInfogdb.UnwindInfo"builtins.object*œ
 	gdb.Value"	gdb.Value
 builtins.int"builtins.int"gdb._ValueOrInt*(
 length
-builtins.int"builtins.intz310z311z312z313z314*â
-write_memorygdb.Inferior.write_memory"*
-builtins.memoryview"builtins.memoryview*&
+builtins.int"builtins.intz310z311z312z313z314*»
+write_memorygdb.Inferior.write_memory"V
+!builtins.memoryview[builtins.int]
+builtins.int"builtins.int"builtins.memoryview*&
 self
 gdb.Inferior"gdb.Inferior*§
 addressñ
 (TypeAlias[Union[gdb.Value,builtins.int]]W
 Union[gdb.Value,builtins.int]
 	gdb.Value"	gdb.Value
-builtins.int"builtins.int"gdb._ValueOrInt*ù
-bufferê
-°TypeAlias[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"gdb._BufferType**
+builtins.int"builtins.int"gdb._ValueOrInt*@
+buffer4
+typing_extensions.Buffer"typing_extensions.Buffer**
 length
-builtins.int"builtins.int z310z311z312z313z314*§
+builtins.int"builtins.int z310z311*À
+write_memorygdb.Inferior.write_memory"V
+!builtins.memoryview[builtins.int]
+builtins.int"builtins.int"builtins.memoryview*&
+self
+gdb.Inferior"gdb.Inferior*§
+addressñ
+(TypeAlias[Union[gdb.Value,builtins.int]]W
+Union[gdb.Value,builtins.int]
+	gdb.Value"	gdb.Value
+builtins.int"builtins.int"gdb._ValueOrInt*>
+buffer2
+_collections_abc.Buffer"_collections_abc.Buffer**
+length
+builtins.int"builtins.int z312z313z314*∑
 search_memorygdb.Inferior.search_memory"D
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -568,21 +572,24 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 	gdb.Value"	gdb.Value
 builtins.int"builtins.int"gdb._ValueOrInt*(
 length
-builtins.int"builtins.int*û
-patternê
-°TypeAlias[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"gdb._BufferTypez310z311z312z313z314*ƒ
+builtins.int"builtins.int*A
+pattern4
+typing_extensions.Buffer"typing_extensions.Bufferz310z311*∫
+search_memorygdb.Inferior.search_memory"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*&
+self
+gdb.Inferior"gdb.Inferior*§
+addressñ
+(TypeAlias[Union[gdb.Value,builtins.int]]W
+Union[gdb.Value,builtins.int]
+	gdb.Value"	gdb.Value
+builtins.int"builtins.int"gdb._ValueOrInt*(
+length
+builtins.int"builtins.int*?
+pattern2
+_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*ƒ
 thread_from_handlegdb.Inferior.thread_from_handle"(
 gdb.InferiorThread"gdb.InferiorThread*&
 self
@@ -670,12 +677,13 @@ gdb.Record*$"
 gdb.Instruction"gdb.Instruction"builtins.list*310*311*312*313*314r≈
 function_call_history gdb.Record.function_call_historyq
 (builtins.list[gdb.RecordFunctionSegment]6
-gdb.RecordFunctionSegment"gdb.RecordFunctionSegment"builtins.list*310*311*312*313*314¨
+gdb.RecordFunctionSegment"gdb.RecordFunctionSegment"builtins.list*310*311*312*313*314Ÿ
 Instructiongdb.Instruction"builtins.objectj310j311j312j313j314rO
 pcgdb.Instruction.pc
-builtins.int"builtins.int*310*311*312*313*314ra
-datagdb.Instruction.data*
-builtins.memoryview"builtins.memoryview*310*311*312*313*314rY
+builtins.int"builtins.int*310*311*312*313*314rç
+datagdb.Instruction.dataV
+!builtins.memoryview[builtins.int]
+builtins.int"builtins.int"builtins.memoryview*310*311*312*313*314rY
 decodedgdb.Instruction.decoded
 builtins.str"builtins.str*310*311*312*313*314rS
 sizegdb.Instruction.size
@@ -1501,9 +1509,12 @@ gdb.Symtab"typing.Iterator z310z311z312z313z314Û
 builtins.bool"builtins.bool
 builtins.int"builtins.int
 builtins.str"builtins.str
-Nonez310z311z312z313z314È
-with_parametergdb.with_parameter"V
-'contextlib.AbstractContextManager[None]
+Nonez310z311z312z313z314Õ
+with_parametergdb.with_parameter"π
+Acontextlib.AbstractContextManager[None,Union[builtins.bool,None]]
+NoneG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
 None"!contextlib.AbstractContextManager*&
 name
 builtins.str"builtins.str*©

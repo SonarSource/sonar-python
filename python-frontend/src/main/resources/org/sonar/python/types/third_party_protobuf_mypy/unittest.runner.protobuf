@@ -1,33 +1,81 @@
 
-unittest.runnerè
-TextTestResultunittest.runner.TextTestResult"unittest.result.TestResult*”
+unittest.runnerv
+_SupportsWriteAndFlush&unittest.runner._SupportsWriteAndFlush"_typeshed.SupportsWrite"_typeshed.SupportsFlush8X­
+_TextTestStreamunittest.runner._TextTestStream"&unittest.runner._SupportsWriteAndFlush*Ì
+writeln'unittest.runner._TextTestStream.writeln"
+None*DB
+unittest.runner._TextTestStream"unittest.runner._TextTestStream*HD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 8XÊ	
+_WritelnDecorator!unittest.runner._WritelnDecorator"builtins.object*ğ
+__init__*unittest.runner._WritelnDecorator.__init__"
+None*P
+selfF
+!unittest.runner._WritelnDecorator"!unittest.runner._WritelnDecorator*\
+streamP
+&unittest.runner._SupportsWriteAndFlush"&unittest.runner._SupportsWriteAndFlush*á
+writeln)unittest.runner._WritelnDecorator.writeln"
+None*P
+selfF
+!unittest.runner._WritelnDecorator"!unittest.runner._WritelnDecorator*O
+argD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *¯
+__getattr__-unittest.runner._WritelnDecorator.__getattr__"
+Any*HF
+!unittest.runner._WritelnDecorator"!unittest.runner._WritelnDecorator*
+builtins.str"builtins.str*¦
+flush'unittest.runner._WritelnDecorator.flush""
+builtins.object"builtins.object*P
+selfF
+!unittest.runner._WritelnDecorator"!unittest.runner._WritelnDecorator*¾
+write'unittest.runner._WritelnDecorator.write""
+builtins.object"builtins.object*HF
+!unittest.runner._WritelnDecorator"!unittest.runner._WritelnDecorator*
+builtins.str"builtins.strr@
+stream(unittest.runner._WritelnDecorator.stream
+NoReturn
+rL
+__getstate__.unittest.runner._WritelnDecorator.__getstate__
+NoReturn
+”
+TextTestResultunittest.runner.TextTestResult"unittest.result.TestResult*™
 __init__'unittest.runner.TextTestResult.__init__"
-None*J
-self@
-unittest.runner.TextTestResult"unittest.runner.TextTestResult**
-stream
-typing.TextIO"typing.TextIO*0
+None*é
+selfŞ
+8unittest.runner.TextTestResult[unittest.runner._StreamT]
+unittest.runner._StreamTB
+unittest.runner._TextTestStream"unittest.runner._TextTestStream"unittest.runner._TextTestStream"unittest.runner.TextTestResult*
+stream
+unittest.runner._StreamTB
+unittest.runner._TextTestStream"unittest.runner._TextTestStream"unittest.runner._TextTestStream*0
 descriptions
 builtins.bool"builtins.bool*+
 	verbosity
-builtins.int"builtins.int*å
+builtins.int"builtins.int*…
 getDescription-unittest.runner.TextTestResult.getDescription"
-builtins.str"builtins.str*J
-self@
-unittest.runner.TextTestResult"unittest.runner.TextTestResult*:
+builtins.str"builtins.str*é
+selfŞ
+8unittest.runner.TextTestResult[unittest.runner._StreamT]
+unittest.runner._StreamTB
+unittest.runner._TextTestStream"unittest.runner._TextTestStream"unittest.runner._TextTestStream"unittest.runner.TextTestResult*:
 test0
-unittest.case.TestCase"unittest.case.TestCase*
+unittest.case.TestCase"unittest.case.TestCase*¾
 printErrorList-unittest.runner.TextTestResult.printErrorList"
-None*J
-self@
-unittest.runner.TextTestResult"unittest.runner.TextTestResult*)
+None*é
+selfŞ
+8unittest.runner.TextTestResult[unittest.runner._StreamT]
+unittest.runner._StreamTB
+unittest.runner._TextTestStream"unittest.runner._TextTestStream"unittest.runner._TextTestStream"unittest.runner.TextTestResult*)
 flavour
 builtins.str"builtins.str*Û
 errorsÎ
 ;typing.Iterable[Tuple[unittest.case.TestCase,builtins.str]]~
 *Tuple[unittest.case.TestCase,builtins.str]0
 unittest.case.TestCase"unittest.case.TestCase
-builtins.str"builtins.str"typing.Iterabler[
+builtins.str"builtins.str"typing.IterablePr[
 descriptions+unittest.runner.TextTestResult.descriptions
 builtins.bool"builtins.boolrK
 dots#unittest.runner.TextTestResult.dots
@@ -39,17 +87,18 @@ separator1)unittest.runner.TextTestResult.separator1
 separator2)unittest.runner.TextTestResult.separator2
 builtins.str"builtins.strrQ
 showAll&unittest.runner.TextTestResult.showAll
-builtins.bool"builtins.boolrO
-stream%unittest.runner.TextTestResult.stream
-typing.TextIO"typing.TextIOœ
-TextTestRunnerunittest.runner.TextTestRunner"builtins.object*Ø
+builtins.bool"builtins.boolr³
+stream%unittest.runner.TextTestResult.stream
+unittest.runner._StreamTB
+unittest.runner._TextTestStream"unittest.runner._TextTestStream"unittest.runner._TextTestStreamÃ
+TextTestRunnerunittest.runner.TextTestRunner"builtins.object*ğ
 __init__'unittest.runner.TextTestRunner.__init__"
 None*J
 self@
-unittest.runner.TextTestRunner"unittest.runner.TextTestRunner*U
-streamG
-Union[typing.TextIO,None]
-typing.TextIO"typing.TextIO
+unittest.runner.TextTestRunner"unittest.runner.TextTestRunner*¡
+stream’
+2Union[unittest.runner._SupportsWriteAndFlush,None]P
+&unittest.runner._SupportsWriteAndFlush"&unittest.runner._SupportsWriteAndFlush
 None *2
 descriptions
 builtins.bool"builtins.bool *-
@@ -64,20 +113,21 @@ separator2)unittest.runner.TextTestResult.separator2
 *TypeAlias[CallableType[builtins.function]]K
 CallableType[builtins.function]&
 builtins.function"builtins.function" unittest.runner._ResultClassType
-None *ˆ
-warningsx
-"Union[Type[builtins.Warning],None]F
-Type[builtins.Warning]$
-builtins.Warning"builtins.Warning"type
+None *T
+warningsD
+Union[builtins.str,None]
+builtins.str"builtins.str
 None */
 	tb_locals
-builtins.bool"builtins.bool *¿
-_makeResult*unittest.runner.TextTestRunner._makeResult"8
-unittest.result.TestResult"unittest.result.TestResult*J
+builtins.bool"builtins.bool *³
+_makeResult*unittest.runner.TextTestRunner._makeResult"«
+Aunittest.runner.TextTestResult[unittest.runner._WritelnDecorator]F
+!unittest.runner._WritelnDecorator"!unittest.runner._WritelnDecorator"unittest.runner.TextTestResult*J
 self@
-unittest.runner.TextTestRunner"unittest.runner.TextTestRunner*ß
-run"unittest.runner.TextTestRunner.run"8
-unittest.result.TestResult"unittest.result.TestResult*J
+unittest.runner.TextTestRunner"unittest.runner.TextTestRunner*Ó
+run"unittest.runner.TextTestRunner.run"«
+Aunittest.runner.TextTestResult[unittest.runner._WritelnDecorator]F
+!unittest.runner._WritelnDecorator"!unittest.runner._WritelnDecorator"unittest.runner.TextTestResult*J
 self@
 unittest.runner.TextTestRunner"unittest.runner.TextTestRunner*­
 test¢
@@ -87,7 +137,38 @@ separator2)unittest.runner.TextTestResult.separator2
 resultclass*unittest.runner.TextTestRunner.resultclass
 *TypeAlias[CallableType[builtins.function]]K
 CallableType[builtins.function]&
-builtins.function"builtins.function" unittest.runner._ResultClassType*‹
+builtins.function"builtins.function" unittest.runner._ResultClassTyperw
+stream%unittest.runner.TextTestRunner.streamF
+!unittest.runner._WritelnDecorator"!unittest.runner._WritelnDecoratorr[
+descriptions+unittest.runner.TextTestRunner.descriptions
+builtins.bool"builtins.boolrS
+	verbosity(unittest.runner.TextTestRunner.verbosity
+builtins.int"builtins.intrS
+failfast'unittest.runner.TextTestRunner.failfast
+builtins.bool"builtins.boolrO
+buffer%unittest.runner.TextTestRunner.buffer
+builtins.bool"builtins.boolrü
+warnings'unittest.runner.TextTestRunner.warningsÆ
+·Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],None]ı
+«TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]´
+ Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"warnings._ActionKind
+NonerU
+	tb_locals(unittest.runner.TextTestRunner.tb_locals
+builtins.bool"builtins.bool*‹
 __annotations__unittest.runner.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

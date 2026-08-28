@@ -27,7 +27,9 @@
 ignorepydantic.config.Extra.ignore
 builtins.str"builtins.strrD
 forbidpydantic.config.Extra.forbid
-builtins.str"builtins.strÏ$
+builtins.str"builtins.str;
+
+ConfigDictpydantic.config.ConfigDict"typing._TypedDict¹(
 
 BaseConfigpydantic.config.BaseConfig"builtins.object*Å
 get_field_info)pydantic.config.BaseConfig.get_field_info"W
@@ -51,6 +53,8 @@ BaseConfigpydantic.config.BaseConfig"builtins.object*Å
 builtins.str"builtins.str
 NonerW
 anystr_lower'pydantic.config.BaseConfig.anystr_lower
+builtins.bool"builtins.boolrW
+anystr_upper'pydantic.config.BaseConfig.anystr_upper
 builtins.bool"builtins.boolrm
 anystr_strip_whitespace2pydantic.config.BaseConfig.anystr_strip_whitespace
 builtins.bool"builtins.boolr_
@@ -114,17 +118,20 @@ json_loads%pydantic.config.BaseConfig.json_loadsK
 
 json_dumps%pydantic.config.BaseConfig.json_dumpsK
 CallableType[builtins.function]&
-builtins.function"builtins.functionrž
-json_encoders(pydantic.config.BaseConfig.json_encodersâ
-Wbuiltins.dict[Union[Type[Any],builtins.str],TypeAlias[CallableType[builtins.function]]]]
-Union[Type[Any],builtins.str]
+builtins.function"builtins.functionrë
+json_encoders(pydantic.config.BaseConfig.json_encoders¯
+ibuiltins.dict[Union[Type[Any],builtins.str,typing.ForwardRef],TypeAlias[CallableType[builtins.function]]]—
+/Union[Type[Any],builtins.str,typing.ForwardRef]
 	Type[Any]
 Any"type
-builtins.str"builtins.str˜
+builtins.str"builtins.str&
+typing.ForwardRef"typing.ForwardRef˜
 *TypeAlias[CallableType[builtins.function]]K
 CallableType[builtins.function]&
 builtins.function"builtins.function"pydantic.typing.AnyCallable"builtins.dictrw
 underscore_attrs_are_private7pydantic.config.BaseConfig.underscore_attrs_are_private
+builtins.bool"builtins.boolrY
+allow_inf_nan(pydantic.config.BaseConfig.allow_inf_nan
 builtins.bool"builtins.boolrÉ
 copy_on_model_validation3pydantic.config.BaseConfig.copy_on_model_validation÷
 HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
@@ -135,7 +142,24 @@ HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 Literal[builtins.str]	
 builtins.str"builtins.strrU
 smart_union&pydantic.config.BaseConfig.smart_union
-builtins.bool"builtins.boolŠ
+builtins.bool"builtins.boolræ
+post_init_call)pydantic.config.BaseConfig.post_init_call¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.strì
+
+get_configpydantic.config.get_config"d
+ Type[pydantic.config.BaseConfig]8
+pydantic.config.BaseConfig"pydantic.config.BaseConfig"type*Û
+configÎ
+6Union[TypeAlias[TypedDict],Type[builtins.object],None]C
+TypeAlias[TypedDict]
+	TypedDict"pydantic.config.ConfigDictC
+Type[builtins.object]"
+builtins.object"builtins.object"type
+NoneŠ
 inherit_configpydantic.config.inherit_config"±
 +TypeAlias[Type[pydantic.config.BaseConfig]]d
  Type[pydantic.config.BaseConfig]8
@@ -160,9 +184,11 @@ HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 __annotations__pydantic.config.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*Û
-__all__pydantic.config.__all__¶
-:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
+Any"builtins.dict*±
+__all__pydantic.config.__all__Œ
+TTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
 builtins.str"builtins.str
 builtins.str"builtins.str
 builtins.str"builtins.str

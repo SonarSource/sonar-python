@@ -1,104 +1,40 @@
 
-importlib.utilå
+importlib.utilê
 
-LazyLoaderimportlib.util.LazyLoader"importlib.abc.Loader*´
+LazyLoaderimportlib.util.LazyLoader"importlib._abc.Loader*¶
 __init__"importlib.util.LazyLoader.__init__"
 None*@
 self6
-importlib.util.LazyLoader"importlib.util.LazyLoader*8
-loader,
-importlib.abc.Loader"importlib.abc.Loader*¹
+importlib.util.LazyLoader"importlib.util.LazyLoader*:
+loader.
+importlib._abc.Loader"importlib._abc.Loader*»
 factory!importlib.util.LazyLoader.factory"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*j
 clsa
 Type[importlib.util.LazyLoader]6
-importlib.util.LazyLoader"importlib.util.LazyLoader"type*8
-loader,
-importlib.abc.Loader"importlib.abc.Loader0:builtins.classmethodp*²
+importlib.util.LazyLoader"importlib.util.LazyLoader"type*:
+loader.
+importlib._abc.Loader"importlib._abc.Loader0:builtins.classmethodp*²
 exec_module%importlib.util.LazyLoader.exec_module"
 None*@
 self6
 importlib.util.LazyLoader"importlib.util.LazyLoader*0
 module$
-types.ModuleType"types.ModuleTypeØ
-module_for_loader importlib.util.module_for_loader"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*T
-fxnK
-CallableType[builtins.function]&
-builtins.function"builtins.functionÊ
-
-set_loaderimportlib.util.set_loader"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*T
-fxnK
-CallableType[builtins.function]&
-builtins.function"builtins.functionÌ
-set_packageimportlib.util.set_package"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*T
-fxnK
-CallableType[builtins.function]&
-builtins.function"builtins.functionÄ
-resolve_nameimportlib.util.resolve_name"
-builtins.str"builtins.str*&
-name
-builtins.str"builtins.str*Q
-packageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None–
-cache_from_source importlib.util.cache_from_source"
-builtins.str"builtins.str*&
-path
-builtins.str"builtins.str*]
-debug_overrideG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *:
-optimization&
-Union[Any,None]
-Any
-None {
-source_from_cache importlib.util.source_from_cache"
-builtins.str"builtins.str*&
-path
-builtins.str"builtins.str·
-decode_sourceimportlib.util.decode_source"
-builtins.str"builtins.str*é
-source_bytesÖ
-–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
-‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesé
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferž
-	find_specimportlib.util.find_spec"z
-*Union[importlib.machinery.ModuleSpec,None]@
-importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec
+types.ModuleType"types.ModuleType¤
+module_from_spec"_frozen_importlib.module_from_spec"$
+types.ModuleType"types.ModuleType*F
+spec<
+_frozen_importlib.ModuleSpec"_frozen_importlib.ModuleSpec™
+spec_from_loader"_frozen_importlib.spec_from_loader"t
+(Union[_frozen_importlib.ModuleSpec,None]<
+_frozen_importlib.ModuleSpec"_frozen_importlib.ModuleSpec
 None*&
 name
-builtins.str"builtins.str*S
-packageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None ð
-spec_from_loaderimportlib.util.spec_from_loader"z
-*Union[importlib.machinery.ModuleSpec,None]@
-importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec
-None*&
-name
-builtins.str"builtins.str*h
-loader\
- Union[importlib.abc.Loader,None],
-importlib.abc.Loader"importlib.abc.Loader
+builtins.str"builtins.str*“
+loader†
+.Union[_typeshed.importlib.LoaderProtocol,None]H
+"_typeshed.importlib.LoaderProtocol""_typeshed.importlib.LoaderProtocol
 None*R
 originD
 Union[builtins.str,None]
@@ -108,10 +44,38 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 is_packageG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None Â
-spec_from_file_location&importlib.util.spec_from_file_location"z
-*Union[importlib.machinery.ModuleSpec,None]@
-importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec
+None ñ
+cache_from_source,_frozen_importlib_external.cache_from_source"
+builtins.str"builtins.str*ô
+pathé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*]
+debug_overrideG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *:
+optimization&
+Union[Any,None]
+Any
+None Ÿ
+decode_source(_frozen_importlib_external.decode_source"
+builtins.str"builtins.str*F
+source_bytes4
+typing_extensions.Buffer"typing_extensions.BufferÖ
+source_from_cache,_frozen_importlib_external.source_from_cache"
+builtins.str"builtins.str*ô
+pathé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathô
+spec_from_file_location2_frozen_importlib_external.spec_from_file_location"t
+(Union[_frozen_importlib.ModuleSpec,None]<
+_frozen_importlib.ModuleSpec"_frozen_importlib.ModuleSpec
 None*&
 name
 builtins.str"builtins.str*Ç
@@ -125,39 +89,61 @@ XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtin
 builtins.str"builtins.str"os.PathLikeL
 os.PathLike[builtins.bytes] 
 builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath
-None *j
-loader\
- Union[importlib.abc.Loader,None],
-importlib.abc.Loader"importlib.abc.Loader
+None *•
+loader†
+.Union[_typeshed.importlib.LoaderProtocol,None]H
+"_typeshed.importlib.LoaderProtocol""_typeshed.importlib.LoaderProtocol
 None *¤
 submodule_search_locations
 'Union[builtins.list[builtins.str],None]J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list
-None ¥
-module_from_specimportlib.util.module_from_spec"$
-types.ModuleType"types.ModuleType*J
-spec@
-importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec³
-source_hashimportlib.util.source_hash"
-builtins.int"builtins.int*é
-source_bytesÖ
-–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
-‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesé
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*Š
+None Ú
+module_for_loader importlib.util.module_for_loader"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*T
+fxnK
+CallableType[builtins.function]&
+builtins.function"builtins.function0Ì
+
+set_loaderimportlib.util.set_loader"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*T
+fxnK
+CallableType[builtins.function]&
+builtins.function"builtins.function0Î
+set_packageimportlib.util.set_package"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*T
+fxnK
+CallableType[builtins.function]&
+builtins.function"builtins.function0Ä
+resolve_nameimportlib.util.resolve_name"
+builtins.str"builtins.str*&
+name
+builtins.str"builtins.str*Q
+packageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None˜
+	find_specimportlib.util.find_spec"t
+(Union[_frozen_importlib.ModuleSpec,None]<
+_frozen_importlib.ModuleSpec"_frozen_importlib.ModuleSpec
+None*&
+name
+builtins.str"builtins.str*S
+packageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None “
+source_hashimportlib.util.source_hash" 
+builtins.bytes"builtins.bytes*F
+source_bytes4
+typing_extensions.Buffer"typing_extensions.Buffer*Š
 __annotations__importlib.util.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
 Any"builtins.dict*
-	importlib	importlib *M
-MAGIC_NUMBERimportlib.util.MAGIC_NUMBER 
+	importlib	importlib *Y
+MAGIC_NUMBER'_frozen_importlib_external.MAGIC_NUMBER 
 builtins.bytes"builtins.bytes

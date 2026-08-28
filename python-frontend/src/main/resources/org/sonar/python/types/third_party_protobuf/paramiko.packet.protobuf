@@ -1,6 +1,6 @@
 
 paramiko.packete
-NeedRekeyException"paramiko.packet.NeedRekeyException"builtins.Exceptionj310j311j312j313j314ÿ7
+NeedRekeyException"paramiko.packet.NeedRekeyException"builtins.Exceptionj310j311j312j313j314Û2
 
 Packetizerparamiko.packet.Packetizer"builtins.object*¬
 __init__#paramiko.packet.Packetizer.__init__"
@@ -30,7 +30,7 @@ block_size
 builtins.int"builtins.int*.
 
 mac_engine
-hashlib._Hash"hashlib._Hash**
+_hashlib.HASH"_hashlib.HASH**
 mac_size
 builtins.int"builtins.int*Ö
 mac_keyx
@@ -52,7 +52,7 @@ block_size
 builtins.int"builtins.int*.
 
 mac_engine
-hashlib._Hash"hashlib._Hash**
+_hashlib.HASH"_hashlib.HASH**
 mac_size
 builtins.int"builtins.int*Ö
 mac_keyx
@@ -137,24 +137,19 @@ read_timer%paramiko.packet.Packetizer.read_timer"
 n
 builtins.int"builtins.int*1
 check_rekey
-builtins.bool"builtins.bool z310z311z312z313z314*˚
+builtins.bool"builtins.bool z310z311z312z313z314*»
 	write_all$paramiko.packet.Packetizer.write_all"
 None*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*‡
-out÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz310z311z312z313z314*Ÿ
+paramiko.packet.Packetizer"paramiko.packet.Packetizer*=
+out4
+typing_extensions.Buffer"typing_extensions.Bufferz310z311*À
+	write_all$paramiko.packet.Packetizer.write_all"
+None*B
+self8
+paramiko.packet.Packetizer"paramiko.packet.Packetizer*;
+out2
+_collections_abc.Buffer"_collections_abc.Bufferz312z313z314*Ÿ
 readline#paramiko.packet.Packetizer.readline"
 builtins.str"builtins.str*B
 self8
@@ -180,28 +175,27 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 REKEY_PACKETS_OVERFLOW_MAX5paramiko.packet.Packetizer.REKEY_PACKETS_OVERFLOW_MAX
 builtins.int"builtins.int*310*311*312*313*314rÜ
 REKEY_BYTES_OVERFLOW_MAX3paramiko.packet.Packetizer.REKEY_BYTES_OVERFLOW_MAX
-builtins.int"builtins.int*310*311*312*313*314Ñ	
+builtins.int"builtins.int*310*311*312*313*314—
 compute_hmacparamiko.packet.compute_hmac" 
 builtins.bytes"builtins.bytes*Å
 keyx
 (Union[builtins.bytes,builtins.bytearray] 
 builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*‰
-message÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*0
+builtins.bytearray"builtins.bytearray*A
+message4
+typing_extensions.Buffer"typing_extensions.Buffer*0
 digest_class
-hashlib._Hash"hashlib._Hashz310z311z312z313z314y
+_hashlib.HASH"_hashlib.HASHz310z311‘
+compute_hmacparamiko.packet.compute_hmac" 
+builtins.bytes"builtins.bytes*Å
+keyx
+(Union[builtins.bytes,builtins.bytearray] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*?
+message2
+_collections_abc.Buffer"_collections_abc.Buffer*0
+digest_class
+_hashlib.HASH"_hashlib.HASHz312z313z314y
 	first_argparamiko.packet.first_arg"
 Any*/
 e(

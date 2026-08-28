@@ -1,6 +1,6 @@
 
-anyio._core._fileio¹K
-	AsyncFileanyio._core._fileio.AsyncFile""anyio.abc._resources.AsyncResource*Ö
+anyio._core._fileiož=
+	AsyncFileanyio._core._fileio.AsyncFile""anyio.abc._resources.AsyncResource*
 __init__&anyio._core._fileio.AsyncFile.__init__"
 None* 
 self•
@@ -10,13 +10,25 @@
 fpm
 typing.IO[typing.AnyStr]F
 typing.AnyStr"
-builtins.object"builtins.object"builtins.object"	typing.IO*—
+builtins.object"builtins.object"builtins.object"	typing.IO*´
+limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None *—
 __getattr__)anyio._core._fileio.AsyncFile.__getattr__""
 builtins.object"builtins.object*˜•
 ,anyio._core._fileio.AsyncFile[typing.AnyStr]F
 typing.AnyStr"
 builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFile*
-builtins.str"builtins.str*Ù
+builtins.str"builtins.str*‘
+limiter%anyio._core._fileio.AsyncFile.limiter"¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None* 
+self•
+,anyio._core._fileio.AsyncFile[typing.AnyStr]F
+typing.AnyStr"
+builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFile0:builtins.property`*Ù
 wrapped%anyio._core._fileio.AsyncFile.wrapped"m
 typing.IO[typing.AnyStr]F
 typing.AnyStr"
@@ -84,43 +96,27 @@
 self•
 ,anyio._core._fileio.AsyncFile[typing.AnyStr]F
 typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFileH*–
-readinto&anyio._core._fileio.AsyncFile.readinto"p
-(typing.Coroutine[Any,Any,builtins.bytes]
+builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFileH*Ù
+readinto&anyio._core._fileio.AsyncFile.readinto"j
+&typing.Coroutine[Any,Any,builtins.int]
 Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*z
+Any
+builtins.int"builtins.int"typing.Coroutine*z
 selfp
 -anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*ñ
-bé
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBufferH*˜
-	readinto1'anyio._core._fileio.AsyncFile.readinto1"p
-(typing.Coroutine[Any,Any,builtins.bytes]
+builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*;
+b4
+typing_extensions.Buffer"typing_extensions.BufferH*Û
+	readinto1'anyio._core._fileio.AsyncFile.readinto1"j
+&typing.Coroutine[Any,Any,builtins.int]
 Any
-Any 
-builtins.bytes"builtins.bytes"typing.Coroutine*z
+Any
+builtins.int"builtins.int"typing.Coroutine*z
 selfp
 -anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*ñ
-bé
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBufferH*•
+builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*;
+b4
+typing_extensions.Buffer"typing_extensions.BufferH*•
 truncate&anyio._core._fileio.AsyncFile.truncate"j
 &typing.Coroutine[Any,Any,builtins.int]
 Any
@@ -166,8 +162,8 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 self•
 ,anyio._core._fileio.AsyncFile[typing.AnyStr]F
 typing.AnyStr"
-builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFileH2ˆ
-write#anyio._core._fileio.AsyncFile.writeŒ	
+builtins.object"builtins.object"builtins.object"anyio._core._fileio.AsyncFileH2ä
+write#anyio._core._fileio.AsyncFile.writeè
 write#anyio._core._fileio.AsyncFile.write"j
 &typing.Coroutine[Any,Any,builtins.int]
 Any
@@ -175,20 +171,9 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 builtins.int"builtins.int"typing.Coroutine*z
 selfp
 -anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*Þ
-bÖ
-–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
-‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesé
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer0:typing.overloadHXÊ
+builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*;
+b4
+typing_extensions.Buffer"typing_extensions.Buffer0:typing.overloadHXÊ
 write#anyio._core._fileio.AsyncFile.write"j
 &typing.Coroutine[Any,Any,builtins.int]
 Any
@@ -198,10 +183,9 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 +anyio._core._fileio.AsyncFile[builtins.str]
 builtins.str"builtins.str"anyio._core._fileio.AsyncFile*#
 b
-builtins.str"builtins.str0:typing.overloadHX2æ
+builtins.str"builtins.str0:typing.overloadHX2Â
 
-writelines(anyio._core._fileio.AsyncFile.writelines¼
-
+writelines(anyio._core._fileio.AsyncFile.writelines˜
 
 writelines(anyio._core._fileio.AsyncFile.writelines"N
 typing.Coroutine[Any,Any,None]
@@ -210,21 +194,10 @@ writelines(anyio._core._fileio.AsyncFile.writelines"N
 None"typing.Coroutine*z
 selfp
 -anyio._core._fileio.AsyncFile[builtins.bytes] 
-builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile* 
-lines”
-§typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]Ö
-–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
-‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesé
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable0:typing.overloadHXî
+builtins.bytes"builtins.bytes"anyio._core._fileio.AsyncFile*}
+linesr
+)typing.Iterable[typing_extensions.Buffer]4
+typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable0:typing.overloadHXî
 
 writelines(anyio._core._fileio.AsyncFile.writelines"N
 typing.Coroutine[Any,Any,None]
@@ -238,37 +211,80 @@ writelines(anyio._core._fileio.AsyncFile.writelines"N
 typing.Iterable[builtins.str]
 builtins.str"builtins.str"typing.Iterable0:typing.overloadHXPr1
 _fp!anyio._core._fileio.AsyncFile._fp
-Anyâ	
-_PathIterator!anyio._core._fileio._PathIterator"typing.AsyncIterator*
-	__anext__+anyio._core._fileio._PathIterator.__anext__"Ž
-2typing.Coroutine[Any,Any,anyio._core._fileio.Path]
+AnyrÙ
+_limiter&anyio._core._fileio.AsyncFile._limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None…
+_PathIterator!anyio._core._fileio._PathIterator"typing.AsyncIterator*Ó
+	__anext__+anyio._core._fileio._PathIterator.__anext__"À
+/typing.Coroutine[Any,Any,anyio._core._fileio.T]
 Any
-Any4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*P
-selfF
-!anyio._core._fileio._PathIterator"!anyio._core._fileio._PathIteratorH*©
+Anyi
+anyio._core._fileio.T4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*Ó
+selfÈ
+8anyio._core._fileio._PathIterator[anyio._core._fileio.T]i
+anyio._core._fileio.T4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"!anyio._core._fileio._PathIteratorH*„
 __init__*anyio._core._fileio._PathIterator.__init__"
-None*P
-selfF
-!anyio._core._fileio._PathIterator"!anyio._core._fileio._PathIterator*”
+None*Ó
+selfÈ
+8anyio._core._fileio._PathIterator[anyio._core._fileio.T]i
+anyio._core._fileio.T4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"!anyio._core._fileio._PathIterator*”
 iterator…
 *typing.Iterator[os.PathLike[builtins.str]]F
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"typing.Iterator8r¾
+builtins.str"builtins.str"os.PathLike"typing.Iterator*²
+limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None*Ÿ
+path_cls
+Type[anyio._core._fileio.T]i
+anyio._core._fileio.T4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"type*Ä
+__mypy-replace0anyio._core._fileio._PathIterator.__mypy-replace"
+None*–
+iterator…
+*typing.Iterator[os.PathLike[builtins.str]]F
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"typing.Iterator *´
+limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None *¡
+path_cls
+Type[anyio._core._fileio.T]i
+anyio._core._fileio.T4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"type 0h8Pr¾
 iterator*anyio._core._fileio._PathIterator.iterator…
 *typing.Iterator[os.PathLike[builtins.str]]F
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"typing.Iteratorr
-__match_args__0anyio._core._fileio._PathIterator.__match_args__Y
-Tuple[Literal[builtins.str]]7
+builtins.str"builtins.str"os.PathLike"typing.IteratorrÛ
+limiter)anyio._core._fileio._PathIterator.limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+NonerÉ
+path_cls*anyio._core._fileio._PathIterator.path_cls
+Type[anyio._core._fileio.T]i
+anyio._core._fileio.T4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path"typer¼
+__match_args__0anyio._core._fileio._PathIterator.__match_args__÷
+HTuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
 Literal[builtins.str]	
 builtins.str"builtins.strrè
 __dataclass_fields__6anyio._core._fileio._PathIterator.__dataclass_fields__—
 2builtins.dict[builtins.str,dataclasses.Field[Any]]
 builtins.str"builtins.str4
 dataclasses.Field[Any]
-Any"dataclasses.Field"builtins.dict˜•
-Pathanyio._core._fileio.Path"builtins.object*œ
+Any"dataclasses.Field"builtins.dict¦³
+Pathanyio._core._fileio.Path"builtins.object*Ó
 __init__!anyio._core._fileio.Path.__init__"
 None*>
 self4
@@ -277,7 +293,11 @@ writelines(anyio._core._fileio.AsyncFile.writelines"N
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*
+builtins.str"builtins.str"os.PathLike*´
+limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None *
 
 __fspath__#anyio._core._fileio.Path.__fspath__"
 builtins.str"builtins.str*>
@@ -324,21 +344,31 @@ __fspath__#anyio._core._fileio.Path.__fspath__"
 anyio._core._fileio.Path"anyio._core._fileio.Path*“
 0Union[pathlib.PurePath,anyio._core._fileio.Path]$
 pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¾
-__truediv__$anyio._core._fileio.Path.__truediv__"4
-anyio._core._fileio.Path"anyio._core._fileio.Path*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*š—
+anyio._core._fileio.Path"anyio._core._fileio.Path*¼
+__truediv__$anyio._core._fileio.Path.__truediv__"s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*us
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*š—
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*À
-__rtruediv__%anyio._core._fileio.Path.__rtruediv__"4
-anyio._core._fileio.Path"anyio._core._fileio.Path*64
-anyio._core._fileio.Path"anyio._core._fileio.Path*š—
+builtins.str"builtins.str"os.PathLike*¾
+__rtruediv__%anyio._core._fileio.Path.__rtruediv__"s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*us
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*š—
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*Ì
+builtins.str"builtins.str"os.PathLike*©
+limiter anyio._core._fileio.Path.limiter"¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None*>
+self4
+anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*Ì
 partsanyio._core._fileio.Path.parts"L
 builtins.tuple[builtins.str]
 builtins.str"builtins.str"builtins.tuple*>
@@ -355,16 +385,20 @@ __fspath__#anyio._core._fileio.Path.__fspath__"
 anchoranyio._core._fileio.Path.anchor"
 builtins.str"builtins.str*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*ö
-parents anyio._core._fileio.Path.parents"r
-)typing.Sequence[anyio._core._fileio.Path]4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Sequence*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*¶
-parentanyio._core._fileio.Path.parent"4
-anyio._core._fileio.Path"anyio._core._fileio.Path*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*š
+anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*ú
+parents anyio._core._fileio.Path.parents"¶
+.typing.Sequence[anyio._core._fileio.Path.Self]s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Sequence*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(0:builtins.property`*´
+parentanyio._core._fileio.Path.parent"s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(0:builtins.property`*š
 nameanyio._core._fileio.Path.name"
 builtins.str"builtins.str*>
 self4
@@ -381,14 +415,16 @@ __fspath__#anyio._core._fileio.Path.__fspath__"
 stemanyio._core._fileio.Path.stem"
 builtins.str"builtins.str*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*€
-absolute!anyio._core._fileio.Path.absolute"Ž
-2typing.Coroutine[Any,Any,anyio._core._fileio.Path]
+anyio._core._fileio.Path"anyio._core._fileio.Path0:builtins.property`*ƒ
+absolute!anyio._core._fileio.Path.absolute"Ò
+7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
 Any
-Any4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*‹
+Anys
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(H*‹
 as_posix!anyio._core._fileio.Path.as_posix"
 builtins.str"builtins.str*>
 self4
@@ -422,35 +458,45 @@ __fspath__#anyio._core._fileio.Path.__fspath__"
 mode
 builtins.int"builtins.int*5
 follow_symlinks
-builtins.bool"builtins.bool H*¹
-cwdanyio._core._fileio.Path.cwd"Ž
-2typing.Coroutine[Any,Any,anyio._core._fileio.Path]
+builtins.bool"builtins.bool H*ú
+cwdanyio._core._fileio.Path.cwd"Ò
+7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
 Any
-Any4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*g
-cls^
-Type[anyio._core._fileio.Path]4
-anyio._core._fileio.Path"anyio._core._fileio.Path"type0:builtins.classmethodHp*Ú
+Anys
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*¬
+cls¢
+#Type[anyio._core._fileio.Path.Self]s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("type*´
+limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None 0:builtins.classmethodHp*Ú
 existsanyio._core._fileio.Path.exists"m
 'typing.Coroutine[Any,Any,builtins.bool]
 Any
 Any
 builtins.bool"builtins.bool"typing.Coroutine*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*„
+anyio._core._fileio.Path"anyio._core._fileio.PathH*‡
 
-expanduser#anyio._core._fileio.Path.expanduser"Ž
-2typing.Coroutine[Any,Any,anyio._core._fileio.Path]
+expanduser#anyio._core._fileio.Path.expanduser"Ò
+7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
 Any
-Any4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*Ž
-globanyio._core._fileio.Path.glob"|
-.typing.AsyncIterator[anyio._core._fileio.Path]4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.AsyncIterator*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*)
+Anys
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(H*’
+globanyio._core._fileio.Path.glob"À
+3typing.AsyncIterator[anyio._core._fileio.Path.Self]s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.AsyncIterator*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*)
 pattern
 builtins.str"builtins.str*Õ
 groupanyio._core._fileio.Path.group"j
@@ -474,15 +520,21 @@ XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtin
 os.PathLike[builtins.str]
 builtins.str"builtins.str"os.PathLikeL
 os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLikeH*»
-homeanyio._core._fileio.Path.home"Ž
-2typing.Coroutine[Any,Any,anyio._core._fileio.Path]
+builtins.bytes"builtins.bytes"os.PathLikeH*ü
+homeanyio._core._fileio.Path.home"Ò
+7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
 Any
-Any4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*g
-cls^
-Type[anyio._core._fileio.Path]4
-anyio._core._fileio.Path"anyio._core._fileio.Path"type0:builtins.classmethodHp*“
+Anys
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*¬
+cls¢
+#Type[anyio._core._fileio.Path.Self]s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("type*´
+limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None 0:builtins.classmethodHp*“
 is_absolute$anyio._core._fileio.Path.is_absolute"
 builtins.bool"builtins.bool*>
 self4
@@ -547,16 +599,20 @@ is_symlink#anyio._core._fileio.Path.is_symlink"m
 Any
 builtins.bool"builtins.bool"typing.Coroutine*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*é
-iterdir anyio._core._fileio.Path.iterdir"|
-.typing.AsyncIterator[anyio._core._fileio.Path]4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.AsyncIterator*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*È
-joinpath!anyio._core._fileio.Path.joinpath"4
-anyio._core._fileio.Path"anyio._core._fileio.Path*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*¢
+anyio._core._fileio.Path"anyio._core._fileio.PathH*ï
+iterdir anyio._core._fileio.Path.iterdir"À
+3typing.AsyncIterator[anyio._core._fileio.Path.Self]s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.AsyncIterator*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(H*Æ
+joinpath!anyio._core._fileio.Path.joinpath"s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*¢
 args—
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
@@ -631,61 +687,73 @@ read_bytes#anyio._core._fileio.Path.read_bytes"p
 errorsD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None H*Ï
-relative_to$anyio._core._fileio.Path.relative_to"4
-anyio._core._fileio.Path"anyio._core._fileio.Path*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*£
+None H*Í
+relative_to$anyio._core._fileio.Path.relative_to"s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*£
 other—
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*€
-readlink!anyio._core._fileio.Path.readlink"Ž
-2typing.Coroutine[Any,Any,anyio._core._fileio.Path]
+builtins.str"builtins.str"os.PathLike*ƒ
+readlink!anyio._core._fileio.Path.readlink"Ò
+7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
 Any
-Any4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*Ç
-renameanyio._core._fileio.Path.rename"Ž
-2typing.Coroutine[Any,Any,anyio._core._fileio.Path]
+Anys
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(H*Ê
+renameanyio._core._fileio.Path.rename"Ò
+7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
 Any
-Any4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*È
+Anys
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*È
 target»
 =Union[builtins.str,pathlib.PurePath,anyio._core._fileio.Path]
 builtins.str"builtins.str$
 pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*É
-replace anyio._core._fileio.Path.replace"Ž
-2typing.Coroutine[Any,Any,anyio._core._fileio.Path]
+anyio._core._fileio.Path"anyio._core._fileio.PathH*Ì
+replace anyio._core._fileio.Path.replace"Ò
+7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
 Any
-Any4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*È
+Anys
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*È
 target»
 =Union[builtins.str,pathlib.PurePath,anyio._core._fileio.Path]
 builtins.str"builtins.str$
 pathlib.PurePath"pathlib.PurePath4
-anyio._core._fileio.Path"anyio._core._fileio.PathH*¬
-resolve anyio._core._fileio.Path.resolve"Ž
-2typing.Coroutine[Any,Any,anyio._core._fileio.Path]
+anyio._core._fileio.Path"anyio._core._fileio.PathH*¯
+resolve anyio._core._fileio.Path.resolve"Ò
+7typing.Coroutine[Any,Any,anyio._core._fileio.Path.Self]
 Any
-Any4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.Coroutine*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*,
+Anys
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.Coroutine*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*,
 strict
-builtins.bool"builtins.bool H*
-rglobanyio._core._fileio.Path.rglob"|
-.typing.AsyncIterator[anyio._core._fileio.Path]4
-anyio._core._fileio.Path"anyio._core._fileio.Path"typing.AsyncIterator*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*)
+builtins.bool"builtins.bool H*”
+rglobanyio._core._fileio.Path.rglob"À
+3typing.AsyncIterator[anyio._core._fileio.Path.Self]s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path("typing.AsyncIterator*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*)
 pattern
 builtins.str"builtins.str*¹
 rmdiranyio._core._fileio.Path.rmdir"N
@@ -766,43 +834,51 @@ XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtin
 anyio._core._fileio.Path"anyio._core._fileio.Path*0
 
 missing_ok
-builtins.bool"builtins.bool H*Í
-	with_name"anyio._core._fileio.Path.with_name"4
-anyio._core._fileio.Path"anyio._core._fileio.Path*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*&
+builtins.bool"builtins.bool H*Ë
+	with_name"anyio._core._fileio.Path.with_name"s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*&
 name
-builtins.str"builtins.str*Í
-	with_stem"anyio._core._fileio.Path.with_stem"4
-anyio._core._fileio.Path"anyio._core._fileio.Path*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*&
+builtins.str"builtins.str*Ë
+	with_stem"anyio._core._fileio.Path.with_stem"s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*&
 stem
-builtins.str"builtins.str*Ó
-with_suffix$anyio._core._fileio.Path.with_suffix"4
-anyio._core._fileio.Path"anyio._core._fileio.Path*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*(
+builtins.str"builtins.str*Ñ
+with_suffix$anyio._core._fileio.Path.with_suffix"s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*(
 suffix
-builtins.str"builtins.str*Ú
-with_segments&anyio._core._fileio.Path.with_segments"4
-anyio._core._fileio.Path"anyio._core._fileio.Path*>
-self4
-anyio._core._fileio.Path"anyio._core._fileio.Path*ª
+builtins.str"builtins.str*Ø
+with_segments&anyio._core._fileio.Path.with_segments"s
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*}
+selfs
+anyio._core._fileio.Path.Self4
+anyio._core._fileio.Path"anyio._core._fileio.Path"anyio._core._fileio.Path(*ª
 pathsegments—
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike*
+builtins.str"builtins.str"os.PathLike*¡
 write_bytes$anyio._core._fileio.Path.write_bytes"j
 &typing.Coroutine[Any,Any,builtins.int]
 Any
 Any
 builtins.int"builtins.int"typing.Coroutine*>
 self4
-anyio._core._fileio.Path"anyio._core._fileio.Path**
-data 
-builtins.bytes"builtins.bytesH*†
+anyio._core._fileio.Path"anyio._core._fileio.Path*>
+data4
+typing_extensions.Buffer"typing_extensions.BufferH*†
 
 write_text#anyio._core._fileio.Path.write_text"j
 &typing.Coroutine[Any,Any,builtins.int]
@@ -1069,15 +1145,20 @@ Etyping.Coroutine[Any,Any,anyio._core._fileio.AsyncFile[builtins.str]]
 newlineD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 0:typing.overloadHXr‘
-	__slots__"anyio._core._fileio.Path.__slots__`
- Tuple[builtins.str,builtins.str]
+None 0:typing.overloadHXr½
+	__slots__"anyio._core._fileio.Path.__slots__‹
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
 builtins.str"builtins.str
 builtins.str"builtins.strr<
 __weakref__$anyio._core._fileio.Path.__weakref__
 AnyrE
 _pathanyio._core._fileio.Path._path
-pathlib.Path"pathlib.Path»
+pathlib.Path"pathlib.PathrÔ
+_limiter!anyio._core._fileio.Path._limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+Noneò
 	wrap_fileanyio._core._fileio.wrap_file"•
 ,anyio._core._fileio.AsyncFile[typing.AnyStr]F
 typing.AnyStr"
@@ -1085,8 +1166,12 @@ Etyping.Coroutine[Any,Any,anyio._core._fileio.AsyncFile[builtins.str]]
 filem
 typing.IO[typing.AnyStr]F
 typing.AnyStr"
-builtins.object"builtins.object"builtins.object"	typing.IO"Ÿ}
-	open_fileanyio._core._fileio.open_fileÿ5
+builtins.object"builtins.object"builtins.object"	typing.IO*´
+limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None "€
+	open_fileanyio._core._fileio.open_file¶7
 	open_fileanyio._core._fileio.open_file"ß
 Gtyping.Coroutine[Any,Any,anyio._core._fileio.AsyncFile[builtins.bytes]]
 Any
@@ -1204,7 +1289,11 @@ Gtyping.Coroutine[Any,Any,anyio._core._fileio.AsyncFile[builtins.bytes]]
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None 0:typing.overloadHXðF
+None *´
+limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
+None 0:typing.overloadHX§H
 	open_fileanyio._core._fileio.open_file"×
 Etyping.Coroutine[Any,Any,anyio._core._fileio.AsyncFile[builtins.str]]
 Any
@@ -1352,6 +1441,10 @@ Etyping.Coroutine[Any,Any,anyio._core._fileio.AsyncFile[builtins.str]]
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
+None *´
+limiter¤
+8Union[anyio._core._synchronization.CapacityLimiter,None]\
+,anyio._core._synchronization.CapacityLimiter",anyio._core._synchronization.CapacityLimiter
 None 0:typing.overloadHX*
 __annotations__#anyio._core._fileio.__annotations__W
 builtins.dict[builtins.str,Any]

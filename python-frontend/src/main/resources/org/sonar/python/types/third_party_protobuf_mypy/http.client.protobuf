@@ -7,7 +7,7 @@
 self2
 http.client.HTTPMessage"http.client.HTTPMessage*&
 name
-builtins.str"builtins.str¯*
+builtins.str"builtins.str≤)
 HTTPResponsehttp.client.HTTPResponse"io.BufferedIOBase"typing.BinaryIO*ˆ
 __init__!http.client.HTTPResponse.__init__"
 None*>
@@ -45,21 +45,13 @@ debuglevel
 self4
 http.client.HTTPResponse"http.client.HTTPResponse*%
 n
-builtins.int"builtins.int *ˇ
+builtins.int"builtins.int *»
 readinto!http.client.HTTPResponse.readinto"
 builtins.int"builtins.int*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponse*Ò
-bÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer*∫
+http.client.HTTPResponse"http.client.HTTPResponse*;
+b4
+typing_extensions.Buffer"typing_extensions.Buffer*∫
 readline!http.client.HTTPResponse.readline" 
 builtins.bytes"builtins.bytes*>
 self4
@@ -99,9 +91,11 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-None*ï
-infohttp.client.HTTPResponse.info".
-email.message.Message"email.message.Message*>
+None*Ì
+infohttp.client.HTTPResponse.info"Ö
+0email.message.Message[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"email.message.Message*>
 self4
 http.client.HTTPResponse"http.client.HTTPResponse*á
 geturlhttp.client.HTTPResponse.geturl"
@@ -145,9 +139,10 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 builtins.int"builtins.intrO
 
 debuglevel#http.client.HTTPResponse.debuglevel
-builtins.int"builtins.intrI
-fphttp.client.HTTPResponse.fp&
-io.BufferedReader"io.BufferedReaderrI
+builtins.int"builtins.intrû
+fphttp.client.HTTPResponse.fp{
+-_io.BufferedReader[_io._BufferedReaderStream]6
+_io._BufferedReaderStream"_io._BufferedReaderStream"_io.BufferedReaderrI
 closedhttp.client.HTTPResponse.closed
 builtins.bool"builtins.boolrG
 statushttp.client.HTTPResponse.status
@@ -167,7 +162,9 @@ chunk_left#http.client.HTTPResponse.chunk_leftD
 NonerQ
 
 will_close#http.client.HTTPResponse.will_close
-builtins.bool"builtins.boolŒJ
+builtins.bool"builtins.boolrA
+urlhttp.client.HTTPResponse.url
+builtins.str"builtins.str†4
 HTTPConnectionhttp.client.HTTPConnection"builtins.object*∑
 __init__#http.client.HTTPConnection.__init__"
 None*B
@@ -190,7 +187,7 @@ will_close#http.client.HTTPResponse.will_close
 builtins.int"builtins.int
 None *-
 	blocksize
-builtins.int"builtins.int *≤
+builtins.int"builtins.int *¨
 request"http.client.HTTPConnection.request"
 None*B
 self8
@@ -198,33 +195,26 @@ will_close#http.client.HTTPResponse.will_close
 method
 builtins.str"builtins.str*%
 url
-builtins.str"builtins.str*§
-bodyó
-ÅUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]],builtins.str,None]Ê
-ËTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]]ﬂ
-
-›Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]b
+builtins.str"builtins.str*Ï
+bodyﬂ
+îUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],builtins.str,None]õ
+{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]Ç
+pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
 &_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadî
-ßtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
+)typing.Iterable[typing_extensions.Buffer]4
+typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
+typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
 builtins.str"builtins.str
-None *Ü
-headersw
-)typing.Mapping[builtins.str,builtins.str]
+None *∏
+headers®
+atyping.Mapping[builtins.str,TypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]]
+builtins.str"builtins.strî
+DTypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]Ø
+9Union[typing_extensions.Buffer,builtins.str,builtins.int]4
+typing_extensions.Buffer"typing_extensions.Buffer
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping *4
+builtins.int"builtins.int"http.client._HeaderValue"typing.Mapping *4
 encode_chunked
 builtins.bool"builtins.bool *Ø
 getresponse&http.client.HTTPConnection.getresponse"4
@@ -274,68 +264,54 @@ putrequest%http.client.HTTPConnection.putrequest"
 	skip_host
 builtins.bool"builtins.bool *:
 skip_accept_encoding
-builtins.bool"builtins.bool *’
+builtins.bool"builtins.bool *ó
 	putheader$http.client.HTTPConnection.putheader"
 None*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnection*(
-header
-builtins.str"builtins.str**
-argument
-builtins.str"builtins.str*ª
+http.client.HTTPConnection"http.client.HTTPConnection*r
+headerf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*°
+valuesî
+DTypeAlias[Union[typing_extensions.Buffer,builtins.str,builtins.int]]Ø
+9Union[typing_extensions.Buffer,builtins.str,builtins.int]4
+typing_extensions.Buffer"typing_extensions.Buffer
+builtins.str"builtins.str
+builtins.int"builtins.int"http.client._HeaderValue*É
 
 endheaders%http.client.HTTPConnection.endheaders"
 None*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnection*Å
-message_bodyÏ
-ÙUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]],None]Ê
-ËTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]]ﬂ
-
-›Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]b
+http.client.HTTPConnection"http.client.HTTPConnection*…
+message_body¥
+áUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],None]õ
+{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]Ç
+pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
 &_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadî
-ßtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
+)typing.Iterable[typing_extensions.Buffer]4
+typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
+typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
 None *4
 encode_chunked
-builtins.bool"builtins.bool *ã
+builtins.bool"builtins.bool *”
 sendhttp.client.HTTPConnection.send"
 None*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnection*ì
-dataà
-¸Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]],builtins.str]Ê
-ËTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]]ﬂ
-
-›Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]b
+http.client.HTTPConnection"http.client.HTTPConnection*€
+data–
+èUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]],builtins.str]õ
+{TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]]Ç
+pUnion[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[typing_extensions.Buffer],typing_extensions.Buffer]b
 &_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsReadî
-ßtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadr
+)typing.Iterable[typing_extensions.Buffer]4
+typing_extensions.Buffer"typing_extensions.Buffer"typing.Iterable4
+typing_extensions.Buffer"typing_extensions.Buffer"http.client._DataType
 builtins.str"builtins.strrO
+	blocksize$http.client.HTTPConnection.blocksize
+builtins.int"builtins.intrO
 	auto_open$http.client.HTTPConnection.auto_open
 builtins.int"builtins.intrQ
 
@@ -353,11 +329,12 @@ debuglevel%http.client.HTTPConnection.debuglevel
 hosthttp.client.HTTPConnection.host
 builtins.str"builtins.strrE
 porthttp.client.HTTPConnection.port
-builtins.int"builtins.intrn
-sockhttp.client.HTTPConnection.sockE
-Union[socket.socket,Any]
-socket.socket"socket.socket
-Anyﬂ
+builtins.int"builtins.intr¢
+sockhttp.client.HTTPConnection.socky
+#Union[socket.socket,TypeAlias[Any]]
+socket.socket"socket.socket0
+TypeAlias[Any]
+Any"_typeshed.MaybeNoneî	
 HTTPSConnectionhttp.client.HTTPSConnection"http.client.HTTPConnection*°
 __init__$http.client.HTTPSConnection.__init__"
 None*D
@@ -396,11 +373,12 @@ debuglevel%http.client.HTTPConnection.debuglevel
 builtins.bool"builtins.bool
 None *-
 	blocksize
-builtins.int"builtins.int ro
-sock http.client.HTTPSConnection.sockE
-Union[ssl.SSLSocket,Any]
-ssl.SSLSocket"ssl.SSLSocket
-Any>
+builtins.int"builtins.int r£
+sock http.client.HTTPSConnection.socky
+#Union[ssl.SSLSocket,TypeAlias[Any]]
+ssl.SSLSocket"ssl.SSLSocket0
+TypeAlias[Any]
+Any"_typeshed.MaybeNone>
 HTTPExceptionhttp.client.HTTPException"builtins.ExceptionC
 NotConnectedhttp.client.NotConnected"http.client.HTTPException?
 
@@ -449,14 +427,24 @@ InvalidURLhttp.client.InvalidURL"http.client.HTTPException˜
 http.client.LineTooLong"http.client.LineTooLong*+
 	line_type
 builtins.str"builtins.strn
-RemoteDisconnectedhttp.client.RemoteDisconnected"builtins.ConnectionResetError"http.client.BadStatusLineÈ
-parse_headershttp.client.parse_headers"2
-http.client.HTTPMessage"http.client.HTTPMessage*.
-fp&
-io.BufferedIOBase"io.BufferedIOBase*Y
+RemoteDisconnectedhttp.client.RemoteDisconnected"builtins.ConnectionResetError"http.client.BadStatusLine"ß
+parse_headershttp.client.parse_headersê
+parse_headershttp.client.parse_headers"Å
+email._policybase._MessageTI
+email.message.Message[Any,Any]
+Any
+Any"email.message.Message"email.message.Message*r
+fpj
+*_typeshed.SupportsReadline[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadline*W
 _classK
 CallableType[builtins.function]&
-builtins.function"builtins.function *á
+builtins.function"builtins.function0:typing.overloadXÁ
+parse_headershttp.client.parse_headers"2
+http.client.HTTPMessage"http.client.HTTPMessage*r
+fpj
+*_typeshed.SupportsReadline[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadline0:typing.overloadX*á
 __annotations__http.client.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
@@ -476,6 +464,8 @@ HTTPS_PORThttp.client.HTTPS_PORT
 builtins.int"builtins.int*B
 
 PROCESSINGhttp.client.PROCESSING
+builtins.int"builtins.int*D
+EARLY_HINTShttp.client.EARLY_HINTS
 builtins.int"builtins.int*2
 OKhttp.client.OK
 builtins.int"builtins.int*<
@@ -493,6 +483,8 @@ NO_CONTENThttp.client.NO_CONTENT
 PARTIAL_CONTENThttp.client.PARTIAL_CONTENT
 builtins.int"builtins.int*F
 MULTI_STATUShttp.client.MULTI_STATUS
+builtins.int"builtins.int*N
+ALREADY_REPORTEDhttp.client.ALREADY_REPORTED
 builtins.int"builtins.int*<
 IM_USEDhttp.client.IM_USED
 builtins.int"builtins.int*N
@@ -509,6 +501,8 @@ NO_CONTENThttp.client.NO_CONTENT
 	USE_PROXYhttp.client.USE_PROXY
 builtins.int"builtins.int*R
 TEMPORARY_REDIRECThttp.client.TEMPORARY_REDIRECT
+builtins.int"builtins.int*R
+PERMANENT_REDIRECThttp.client.PERMANENT_REDIRECT
 builtins.int"builtins.int*D
 BAD_REQUESThttp.client.BAD_REQUEST
 builtins.int"builtins.int*F
@@ -545,12 +539,18 @@ NO_CONTENThttp.client.NO_CONTENT
 REQUESTED_RANGE_NOT_SATISFIABLE+http.client.REQUESTED_RANGE_NOT_SATISFIABLE
 builtins.int"builtins.int*R
 EXPECTATION_FAILEDhttp.client.EXPECTATION_FAILED
+builtins.int"builtins.int*D
+IM_A_TEAPOThttp.client.IM_A_TEAPOT
+builtins.int"builtins.int*T
+MISDIRECTED_REQUESThttp.client.MISDIRECTED_REQUEST
 builtins.int"builtins.int*V
 UNPROCESSABLE_ENTITY http.client.UNPROCESSABLE_ENTITY
 builtins.int"builtins.int*:
 LOCKEDhttp.client.LOCKED
 builtins.int"builtins.int*P
 FAILED_DEPENDENCYhttp.client.FAILED_DEPENDENCY
+builtins.int"builtins.int*@
+	TOO_EARLYhttp.client.TOO_EARLY
 builtins.int"builtins.int*N
 UPGRADE_REQUIREDhttp.client.UPGRADE_REQUIRED
 builtins.int"builtins.int*X
@@ -559,6 +559,8 @@ NO_CONTENThttp.client.NO_CONTENT
 TOO_MANY_REQUESTShttp.client.TOO_MANY_REQUESTS
 builtins.int"builtins.int*l
 REQUEST_HEADER_FIELDS_TOO_LARGE+http.client.REQUEST_HEADER_FIELDS_TOO_LARGE
+builtins.int"builtins.int*h
+UNAVAILABLE_FOR_LEGAL_REASONS)http.client.UNAVAILABLE_FOR_LEGAL_REASONS
 builtins.int"builtins.int*X
 INTERNAL_SERVER_ERROR!http.client.INTERNAL_SERVER_ERROR
 builtins.int"builtins.int*L
@@ -571,8 +573,12 @@ NO_CONTENThttp.client.NO_CONTENT
 GATEWAY_TIMEOUThttp.client.GATEWAY_TIMEOUT
 builtins.int"builtins.int*b
 HTTP_VERSION_NOT_SUPPORTED&http.client.HTTP_VERSION_NOT_SUPPORTED
+builtins.int"builtins.int*\
+VARIANT_ALSO_NEGOTIATES#http.client.VARIANT_ALSO_NEGOTIATES
 builtins.int"builtins.int*V
 INSUFFICIENT_STORAGE http.client.INSUFFICIENT_STORAGE
+builtins.int"builtins.int*H
+LOOP_DETECTEDhttp.client.LOOP_DETECTED
 builtins.int"builtins.int*F
 NOT_EXTENDEDhttp.client.NOT_EXTENDED
 builtins.int"builtins.int*l

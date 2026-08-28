@@ -1,5 +1,5 @@
 
-asyncio.protocols◊
+asyncio.protocolsõ
 BaseProtocolasyncio.protocols.BaseProtocol"builtins.object*Ï
 connection_made.asyncio.protocols.BaseProtocol.connection_made"
 None*J
@@ -22,7 +22,9 @@
 resume_writing-asyncio.protocols.BaseProtocol.resume_writing"
 None*J
 self@
-asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol√
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocolrB
+	__slots__(asyncio.protocols.BaseProtocol.__slots__
+Tuple[]ƒ
 Protocolasyncio.protocols.Protocol"asyncio.protocols.BaseProtocol*≥
 data_received(asyncio.protocols.Protocol.data_received"
 None*B
@@ -35,22 +37,14 @@
 builtins.bool"builtins.bool
 None*B
 self8
-asyncio.protocols.Protocol"asyncio.protocols.Protocolö
-BufferedProtocol"asyncio.protocols.BufferedProtocol"asyncio.protocols.BaseProtocol*î
+asyncio.protocols.Protocol"asyncio.protocols.Protocolr
+	__slots__$asyncio.protocols.Protocol.__slots__L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleø
+BufferedProtocol"asyncio.protocols.BufferedProtocol"asyncio.protocols.BaseProtocol*Ò
 
-get_buffer-asyncio.protocols.BufferedProtocol.get_buffer"÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*R
+get_buffer-asyncio.protocols.BufferedProtocol.get_buffer"4
+typing_extensions.Buffer"typing_extensions.Buffer*R
 selfH
 "asyncio.protocols.BufferedProtocol""asyncio.protocols.BufferedProtocol**
 sizehint
@@ -66,7 +60,9 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 builtins.bool"builtins.bool
 None*R
 selfH
-"asyncio.protocols.BufferedProtocol""asyncio.protocols.BufferedProtocol•
+"asyncio.protocols.BufferedProtocol""asyncio.protocols.BufferedProtocolrF
+	__slots__,asyncio.protocols.BufferedProtocol.__slots__
+Tuple[]Ì
 DatagramProtocol"asyncio.protocols.DatagramProtocol"asyncio.protocols.BaseProtocol*Ä
 connection_made2asyncio.protocols.DatagramProtocol.connection_made"
 None*R
@@ -91,7 +87,9 @@ $asyncio.transports.DatagramTransport"$asyncio.transports.DatagramTransport*Ú
 selfH
 "asyncio.protocols.DatagramProtocol""asyncio.protocols.DatagramProtocol*1
 exc(
-builtins.Exception"builtins.Exception≈
+builtins.Exception"builtins.ExceptionrF
+	__slots__,asyncio.protocols.DatagramProtocol.__slots__
+Tuple[]—
 SubprocessProtocol$asyncio.protocols.SubprocessProtocol"asyncio.protocols.BaseProtocol*Å
 pipe_data_received7asyncio.protocols.SubprocessProtocol.pipe_data_received"
 None*V
@@ -114,7 +112,10 @@ $asyncio.protocols.SubprocessProtocol"$asyncio.protocols.SubprocessProtocol*$
 process_exited3asyncio.protocols.SubprocessProtocol.process_exited"
 None*V
 selfL
-$asyncio.protocols.SubprocessProtocol"$asyncio.protocols.SubprocessProtocol*ç
+$asyncio.protocols.SubprocessProtocol"$asyncio.protocols.SubprocessProtocolrâ
+	__slots__.asyncio.protocols.SubprocessProtocol.__slots__L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*ç
 __annotations__!asyncio.protocols.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

@@ -7,7 +7,7 @@
 self2
 http.client.HTTPMessage"http.client.HTTPMessage*&
 name
-builtins.str"builtins.str€+
+builtins.str"builtins.strº)
 _HttplibHTTPResponsehttp.client.HTTPResponse"io.BufferedIOBase"typing.BinaryIO*ö
 __init__!http.client.HTTPResponse.__init__"
 None*>
@@ -45,21 +45,13 @@ debuglevel
 self4
 http.client.HTTPResponse"http.client.HTTPResponse*%
 n
-builtins.int"builtins.int *ÿ
+builtins.int"builtins.int *È
 readinto!http.client.HTTPResponse.readinto"
 builtins.int"builtins.int*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponse*ñ
-bé
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer*º
+http.client.HTTPResponse"http.client.HTTPResponse*;
+b4
+typing_extensions.Buffer"typing_extensions.Buffer*º
 readline!http.client.HTTPResponse.readline" 
 builtins.bytes"builtins.bytes*>
 self4
@@ -99,9 +91,11 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-None*•
-infohttp.client.HTTPResponse.info".
-email.message.Message"email.message.Message*>
+None*í
+infohttp.client.HTTPResponse.info"…
+0email.message.Message[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"email.message.Message*>
 self4
 http.client.HTTPResponse"http.client.HTTPResponse*‡
 geturlhttp.client.HTTPResponse.geturl"
@@ -145,9 +139,10 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 builtins.int"builtins.intrO
 
 debuglevel#http.client.HTTPResponse.debuglevel
-builtins.int"builtins.intrI
-fphttp.client.HTTPResponse.fp&
-io.BufferedReader"io.BufferedReaderrI
+builtins.int"builtins.intrž
+fphttp.client.HTTPResponse.fp{
+-_io.BufferedReader[_io._BufferedReaderStream]6
+_io._BufferedReaderStream"_io._BufferedReaderStream"_io.BufferedReaderrI
 closedhttp.client.HTTPResponse.closed
 builtins.bool"builtins.boolrG
 statushttp.client.HTTPResponse.status
@@ -167,7 +162,9 @@ chunk_left#http.client.HTTPResponse.chunk_leftD
 NonerQ
 
 will_close#http.client.HTTPResponse.will_close
-builtins.bool"builtins.boolÅ
+builtins.bool"builtins.boolrA
+urlhttp.client.HTTPResponse.url
+builtins.str"builtins.strÅ
 DeflateDecoderurllib3.response.DeflateDecoder"builtins.object*©
 __getattr__+urllib3.response.DeflateDecoder.__getattr__"
 Any*DB

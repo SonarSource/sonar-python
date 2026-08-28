@@ -1,5 +1,5 @@
 
-pyspark.sql.connect.session•©
+pyspark.sql.connect.sessioná´
 PySparkSession pyspark.sql.session.SparkSession"2pyspark.sql.pandas.conversion.SparkConversionMixin*˝
 builder(pyspark.sql.session.SparkSession.builder"T
 (pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*M
@@ -435,7 +435,7 @@ local_path
 _conf&pyspark.sql.session.SparkSession._conf@
 pyspark.sql.conf.RuntimeConfig"pyspark.sql.conf.RuntimeConfigrq
 _catalog)pyspark.sql.session.SparkSession._catalog:
-pyspark.sql.catalog.Catalog"pyspark.sql.catalog.Catalogzê
+pyspark.sql.catalog.Catalog"pyspark.sql.catalog.CatalogzÚ
 Builder(pyspark.sql.session.SparkSession.Builder"builtins.object*ß
 __init__1pyspark.sql.session.SparkSession.Builder.__init__"
 None*^
@@ -474,7 +474,7 @@ local_path
 create/pyspark.sql.session.SparkSession.Builder.create"D
  pyspark.sql.session.SparkSession" pyspark.sql.session.SparkSession*^
 selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder2∫
+(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder2¢
 config/pyspark.sql.session.SparkSession.Builder.config¿
 config/pyspark.sql.session.SparkSession.Builder.config"T
 (pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*^
@@ -489,27 +489,29 @@ local_path
 key
 builtins.str"builtins.str*
 value
-Any0:typing.overloadX˘
+Any0:typing.overloadX·
 config/pyspark.sql.session.SparkSession.Builder.config"T
 (pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*^
 selfT
-(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*Ú
-mapË
-ibuiltins.dict[builtins.str,TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]]
-builtins.str"builtins.strÕ
-MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Œ
-BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+(pyspark.sql.session.SparkSession.Builder"(pyspark.sql.session.SparkSession.Builder*⁄
+map–
+{builtins.dict[builtins.str,TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]]
+builtins.str"builtins.str£
+_TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]í
+TUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]≠
+HTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]]ø
+=Union[builtins.bool,builtins.float,builtins.int,builtins.str]
 builtins.bool"builtins.bool 
 builtins.float"builtins.float
 builtins.int"builtins.int
-builtins.str"builtins.str
-None")pyspark.sql._typing.OptionalPrimitiveType"builtins.dict0:typing.overloadXr]
-_lock.pyspark.sql.session.SparkSession.Builder._lock$
-threading._RLock"threading._RLockrñ
+builtins.str"builtins.str"pyspark._typing.PrimitiveType
+None")pyspark.sql._typing.OptionalPrimitiveType"builtins.dict0:typing.overloadXrW
+_lock.pyspark.sql.session.SparkSession.Builder._lock
+_thread.RLock"_thread.RLockrñ
 _options1pyspark.sql.session.SparkSession.Builder._optionsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict—É
+Any"builtins.dict∫Ü
 SparkSession(pyspark.sql.connect.session.SparkSession"builtins.object*•
 builder0pyspark.sql.connect.session.SparkSession.builder"d
 0pyspark.sql.connect.session.SparkSession.Builder"0pyspark.sql.connect.session.SparkSession.Builder*]
@@ -573,17 +575,19 @@ readStream3pyspark.sql.connect.session.SparkSession.readStream"v
 'Union[builtins.list[builtins.str],None]J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list
-None *Ë
+None *Î
 createDataFrame8pyspark.sql.connect.session.SparkSession.createDataFrame"R
 'pyspark.sql.connect.dataframe.DataFrame"'pyspark.sql.connect.dataframe.DataFrame*^
 selfT
-(pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession*Ü
-data˚
-NUnion[pandas.core.frame.DataFrame,numpy.ndarray[Any,Any],typing.Iterable[Any]]:
-pandas.core.frame.DataFrame"pandas.core.frame.DataFrame9
-numpy.ndarray[Any,Any]
-Any
-Any"numpy.ndarray0
+(pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession*â
+data˛
+kUnion[pandas.core.frame.DataFrame,numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]],typing.Iterable[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameû
+3numpy.ndarray[builtins.tuple[Any],numpy.dtype[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple(
+numpy.dtype[Any]
+Any"numpy.dtype"numpy.ndarray0
 typing.Iterable[Any]
 Any"typing.Iterable*›
 schemaŒ
@@ -755,15 +759,15 @@ local_path
 session_id3pyspark.sql.connect.session.SparkSession.session_id"
 builtins.str"builtins.str*^
 selfT
-(pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession0:builtins.property`ro
-_active_session8pyspark.sql.connect.session.SparkSession._active_session"
-threading.local"threading.localrË
+(pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession0:builtins.property`rm
+_active_session8pyspark.sql.connect.session.SparkSession._active_session 
+_thread._local"_thread._localrË
 _default_session9pyspark.sql.connect.session.SparkSession._default_sessionò
 4Union[pyspark.sql.connect.session.SparkSession,None]T
 (pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession
-Noner]
-_lock.pyspark.sql.connect.session.SparkSession._lock$
-threading._RLock"threading._RLockr•
+NonerW
+_lock.pyspark.sql.connect.session.SparkSession._lock
+_thread.RLock"_thread.RLockr•
 _client0pyspark.sql.connect.session.SparkSession._clienth
 2pyspark.sql.connect.client.core.SparkConnectClient"2pyspark.sql.connect.client.core.SparkConnectClientrê
 addArtifact4pyspark.sql.connect.session.SparkSession.addArtifactK
@@ -772,7 +776,7 @@ session_id3pyspark.sql.connect.session.SparkSession.session_id"
 _session_id4pyspark.sql.connect.session.SparkSession._session_id
 builtins.str"builtins.strrâ
 _catalog1pyspark.sql.connect.session.SparkSession._catalogJ
-#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalogz‰#
+#pyspark.sql.connect.catalog.Catalog"#pyspark.sql.connect.catalog.Catalogz“%
 Builder0pyspark.sql.connect.session.SparkSession.Builder"builtins.object*ø
 __init__9pyspark.sql.connect.session.SparkSession.Builder.__init__"
 None*n
@@ -819,7 +823,7 @@ session_id3pyspark.sql.connect.session.SparkSession.session_id"
 getOrCreate<pyspark.sql.connect.session.SparkSession.Builder.getOrCreate"T
 (pyspark.sql.connect.session.SparkSession"(pyspark.sql.connect.session.SparkSession*n
 selfd
-0pyspark.sql.connect.session.SparkSession.Builder"0pyspark.sql.connect.session.SparkSession.Builder2◊	
+0pyspark.sql.connect.session.SparkSession.Builder"0pyspark.sql.connect.session.SparkSession.Builder2À
 config7pyspark.sql.connect.session.SparkSession.Builder.configÁ
 config7pyspark.sql.connect.session.SparkSession.Builder.config"d
 0pyspark.sql.connect.session.SparkSession.Builder"0pyspark.sql.connect.session.SparkSession.Builder*n
@@ -828,23 +832,25 @@ session_id3pyspark.sql.connect.session.SparkSession.session_id"
 key
 builtins.str"builtins.str*
 value
-Any0:typing.overloadX©
+Any0:typing.overloadXù
 config7pyspark.sql.connect.session.SparkSession.Builder.config"d
 0pyspark.sql.connect.session.SparkSession.Builder"0pyspark.sql.connect.session.SparkSession.Builder*n
 selfd
-0pyspark.sql.connect.session.SparkSession.Builder"0pyspark.sql.connect.session.SparkSession.Builder*˙
-map
-ibuiltins.dict[builtins.str,TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]]
-builtins.str"builtins.str’
-MTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str,None]]Œ
-BUnion[builtins.bool,builtins.float,builtins.int,builtins.str,None]
+0pyspark.sql.connect.session.SparkSession.Builder"0pyspark.sql.connect.session.SparkSession.Builder*Ó
+map‰
+{builtins.dict[builtins.str,TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]]
+builtins.str"builtins.str∑
+_TypeAlias[Union[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]]û
+TUnion[TypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]],None]π
+HTypeAlias[Union[builtins.bool,builtins.float,builtins.int,builtins.str]]ø
+=Union[builtins.bool,builtins.float,builtins.int,builtins.str]
 builtins.bool"builtins.bool 
 builtins.float"builtins.float
 builtins.int"builtins.int
-builtins.str"builtins.str
-None"1pyspark.sql.connect._typing.OptionalPrimitiveType"builtins.dict0:typing.overloadXre
-_lock6pyspark.sql.connect.session.SparkSession.Builder._lock$
-threading._RLock"threading._RLockrû
+builtins.str"builtins.str")pyspark.sql.connect._typing.PrimitiveType
+None"1pyspark.sql.connect._typing.OptionalPrimitiveType"builtins.dict0:typing.overloadXr_
+_lock6pyspark.sql.connect.session.SparkSession.Builder._lock
+_thread.RLock"_thread.RLockrû
 _options9pyspark.sql.connect.session.SparkSession.Builder._optionsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
