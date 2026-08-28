@@ -352,7 +352,7 @@ def assert_merged_class_symbol_to_proto(merged_classes_proto, merged_classes):
         if len(merged_class_proto.overloaded_methods) > 0:
             assert_merged_overloaded_functions_to_proto(merged_class_proto.overloaded_methods,
                                                         original_class_symbol.overloaded_methods)
-        assert merged_class_proto.valid_for == original_class_symbol.valid_for
+        assert merged_class_proto.valid_for == []
 
 
 def assert_merged_function_symbol_to_proto(merged_functions_proto, merged_functions):
@@ -373,7 +373,7 @@ def assert_merged_function_symbol_to_proto(merged_functions_proto, merged_functi
         assert merged_function_proto.is_property == original_function_symbol.function_symbol.is_property
         assert merged_function_proto.is_static == original_function_symbol.function_symbol.is_static
         assert merged_function_proto.is_class_method == original_function_symbol.function_symbol.is_class_method
-        assert merged_function_proto.valid_for == original_function_symbol.valid_for
+        assert merged_function_proto.valid_for == []
 
 
 def assert_merged_overloaded_functions_to_proto(merged_overloaded_functions_proto, merged_overloaded_functions):
@@ -387,6 +387,7 @@ def assert_merged_overloaded_functions_to_proto(merged_overloaded_functions_prot
                 == original_overloaded_function.overloaded_function_symbol.fullname)
         assert (len(merged_overloaded_function_proto.definitions)
                 == len(original_overloaded_function.overloaded_function_symbol.definitions))
+        assert merged_overloaded_function_proto.valid_for == []
 
 
 def assert_abc_merged_module(merged_modules, expected_valid_for):

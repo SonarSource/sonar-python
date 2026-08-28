@@ -445,10 +445,9 @@ class MergedFunctionSymbol:
         self.function_symbol = function_symbol
         self.valid_for = valid_for
 
-    def to_proto(self) -> symbols_pb2.FunctionSymbol:
+    def to_proto(self, all_versions=None) -> symbols_pb2.FunctionSymbol:
         pb_func = self.function_symbol.to_proto()
-        for elem in self.valid_for:
-            pb_func.valid_for.append(elem)
+        write_valid_for(pb_func.valid_for, self.valid_for, all_versions)
         return pb_func
 
 
@@ -457,10 +456,9 @@ class MergedOverloadedFunctionSymbol:
         self.overloaded_function_symbol = overloaded_function_symbol
         self.valid_for = valid_for
 
-    def to_proto(self) -> symbols_pb2.FunctionSymbol:
+    def to_proto(self, all_versions=None) -> symbols_pb2.FunctionSymbol:
         pb_func = self.overloaded_function_symbol.to_proto()
-        for elem in self.valid_for:
-            pb_func.valid_for.append(elem)
+        write_valid_for(pb_func.valid_for, self.valid_for, all_versions)
         return pb_func
 
 
@@ -474,7 +472,7 @@ class MergedClassSymbol:
         self.vars = merged_attributes
         self.valid_for = valid_for
 
-    def to_proto(self) -> symbols_pb2.ClassSymbol:
+    def to_proto(self, all_versions=None) -> symbols_pb2.ClassSymbol:
         pb_class = symbols_pb2.ClassSymbol()
         pb_class.name = self.class_symbol.name
         pb_class.fully_qualified_name = self.class_symbol.fullname
@@ -488,15 +486,14 @@ class MergedClassSymbol:
             pb_class.metaclass_name = self.class_symbol.metaclass_name
         for method in self.methods:
             for elem in self.methods[method]:
-                pb_class.methods.append(elem.to_proto())
+                pb_class.methods.append(elem.to_proto(all_versions))
         for overloaded_func in self.overloaded_methods:
             for elem in self.overloaded_methods[overloaded_func]:
-                pb_class.overloaded_methods.append(elem.to_proto())
+                pb_class.overloaded_methods.append(elem.to_proto(all_versions))
         for var in self.vars:
             for elem in self.vars[var]:
-                pb_class.attributes.append(elem.to_proto())
-        for elem in self.valid_for:
-            pb_class.valid_for.append(elem)
+                pb_class.attributes.append(elem.to_proto(all_versions))
+        write_valid_for(pb_class.valid_for, self.valid_for, all_versions)
         return pb_class
 
 
@@ -505,37 +502,43 @@ class MergedVarSymbol:
         self.var_symbol = var_symbol
         self.valid_for = valid_for
 
-    def to_proto(self) -> symbols_pb2.VarSymbol:
+    def to_proto(self, all_versions=None) -> symbols_pb2.VarSymbol:
         pb_var = self.var_symbol.to_proto()
-        for elem in self.valid_for:
-            pb_var.valid_for.append(elem)
+        write_valid_for(pb_var.valid_for, self.valid_for, all_versions)
         return pb_var
 
 
 class MergedModuleSymbol:
-    def __init__(self, fullname, classes, functions, overloaded_functions, variables):
+    def __init__(self, fullname, classes, functions, overloaded_functions, variables, all_versions=None):
         self.fullname = fullname
         self.classes = classes
         self.functions = functions
         self.overloaded_functions = overloaded_functions
         self.vars = variables
+        self.all_versions = all_versions
 
     def to_proto(self):
         pb_module = symbols_pb2.ModuleSymbol()
         pb_module.fully_qualified_name = self.fullname
         for cls in self.classes:
             for elem in self.classes[cls]:
-                pb_module.classes.append(elem.to_proto())
+                pb_module.classes.append(elem.to_proto(self.all_versions))
         for func in self.functions:
             for elem in self.functions[func]:
-                pb_module.functions.append(elem.to_proto())
+                pb_module.functions.append(elem.to_proto(self.all_versions))
         for overloaded_func in self.overloaded_functions:
             for elem in self.overloaded_functions[overloaded_func]:
-                pb_module.overloaded_functions.append(elem.to_proto())
+                pb_module.overloaded_functions.append(elem.to_proto(self.all_versions))
         for var in self.vars:
             for elem in self.vars[var]:
-                pb_module.vars.append(elem.to_proto())
+                pb_module.vars.append(elem.to_proto(self.all_versions))
         return pb_module
+
+
+def write_valid_for(target, valid_for, all_versions=None):
+    unique_versions = list(dict.fromkeys(valid_for))
+    if all_versions is None or set(unique_versions) != set(all_versions):
+        target.extend(unique_versions)
 
 
 def get_decorator_name(dec: mpn.Node):

@@ -28,8 +28,14 @@ def merge_modules(all_python_modules: Set[str], model_by_version: Dict[str, Dict
         handled_funcs: Dict[str, List[MergedFunctionSymbol]] = {}
         handled_overloaded_functions: Dict[str, List[MergedOverloadedFunctionSymbol]] = {}
         handled_vars: Dict[str, List[MergedVarSymbol]] = {}
-        merged_modules[python_mod] = MergedModuleSymbol(python_mod, handled_classes,
-                                                        handled_funcs, handled_overloaded_functions, handled_vars)
+        merged_modules[python_mod] = MergedModuleSymbol(
+            python_mod,
+            handled_classes,
+            handled_funcs,
+            handled_overloaded_functions,
+            handled_vars,
+            all_versions=model_by_version.keys(),
+        )
         for version in model_by_version:
             model = model_by_version[version]
             # get current module

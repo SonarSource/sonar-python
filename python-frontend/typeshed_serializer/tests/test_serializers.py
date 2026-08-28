@@ -33,6 +33,10 @@ from tests import conftest
 from tests.conftest import MOCK_THIRD_PARTY_STUBS_LIST
 
 
+def test_supported_python_versions_match_runtime_semantic_versions():
+    assert SUPPORTED_PYTHON_VERSIONS == ((3, 10), (3, 11), (3, 12), (3, 13), (3, 14))
+
+
 def test_build_mypy_model(typeshed_stdlib):
     assert typeshed_stdlib is not None
 
