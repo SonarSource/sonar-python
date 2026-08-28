@@ -39,6 +39,8 @@ DEFAULT_EXPORTED_VARS = [
 MODULE_IMPLICIT_VARS = DEFAULT_EXPORTED_VARS + ["__spec__"]
 SONAR_CUSTOM_BASE_CLASS = "SonarPythonAnalyzerFakeStub.CustomStubBase"
 SELF_TYPE_ID = 0
+SELF_TYPE_SUFFIX = ".Self"
+
 
 class ParamKind(Enum):
     POSITIONAL_ONLY = 0
@@ -167,7 +169,10 @@ class TypeDescriptor:
         pb_type = symbols_pb2.Type()
         if self.is_unknown:
             return pb_type
-        pb_type.pretty_printed_name = self.pretty_printed_name
+        # This display value is otherwise derivable from the structural type. Keep only
+        # the compatibility marker used by the Java consumers to filter _typeshed.Self.
+        if self.pretty_printed_name.endswith(SELF_TYPE_SUFFIX):
+            pb_type.pretty_printed_name = self.pretty_printed_name
         if self.kind is not None:
             pb_type.kind = symbols_pb2.TypeKind.Value(self.kind.name)
         if self.fully_qualified_name is not None:

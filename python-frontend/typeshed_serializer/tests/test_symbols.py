@@ -154,7 +154,7 @@ def test_function_symbol(typeshed_stdlib):
     assert pb_func.fully_qualified_name == "cmd.Cmd.completenames"
     assert not pb_func.has_decorators
     assert not pb_func.is_asynchronous
-    assert pb_func.return_annotation.pretty_printed_name == "builtins.list[builtins.str]"
+    assert pb_func.return_annotation.pretty_printed_name == ""
     assert len(pb_func.resolved_decorator_names) == 0
 
     mypy_cmd_loop_method_node = mypy_cmd_class_node.names.get("cmdloop").node
