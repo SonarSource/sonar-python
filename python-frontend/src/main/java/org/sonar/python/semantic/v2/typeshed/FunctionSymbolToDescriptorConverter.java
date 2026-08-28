@@ -18,6 +18,7 @@ package org.sonar.python.semantic.v2.typeshed;
 
 import java.util.Collection;
 import java.util.Optional;
+import javax.annotation.Nullable;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -40,11 +41,16 @@ public class FunctionSymbolToDescriptorConverter {
   }
 
   public FunctionDescriptor convert(SymbolsProtos.FunctionSymbol functionSymbol) {
-    return convert(functionSymbol, false);
+    return convert(functionSymbol, false, null);
   }
 
   public FunctionDescriptor convert(SymbolsProtos.FunctionSymbol functionSymbol, boolean isParentIsAClass) {
-    var fullyQualifiedName = TypeShedUtils.normalizedFqn(functionSymbol.getFullyQualifiedName());
+    return convert(functionSymbol, isParentIsAClass, null);
+  }
+
+  public FunctionDescriptor convert(SymbolsProtos.FunctionSymbol functionSymbol, boolean isParentIsAClass, @Nullable String containerFqn) {
+    var fullyQualifiedName = TypeShedUtils.normalizedSymbolFqn(
+      functionSymbol.getFullyQualifiedName(), containerFqn, functionSymbol.getName());
     TypeAnnotationDescriptor typeAnnotationDescriptor = null;
     SymbolsProtos.Type returnAnnotation = typeTable.resolve(
       functionSymbol.getReturnAnnotationId(), functionSymbol.hasReturnAnnotation(), functionSymbol.getReturnAnnotation());

@@ -17,6 +17,7 @@
 package org.sonar.python.semantic.v2.typeshed;
 
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -30,17 +31,22 @@ public class OverloadedFunctionSymbolToDescriptorConverter {
   }
 
   public AmbiguousDescriptor convert(SymbolsProtos.OverloadedFunctionSymbol overloadedFunctionSymbol) {
-    return convert(overloadedFunctionSymbol, false);
+    return convert(overloadedFunctionSymbol, false, null);
   }
 
   public AmbiguousDescriptor convert(SymbolsProtos.OverloadedFunctionSymbol overloadedFunctionSymbol, boolean isParentIsAClass) {
+    return convert(overloadedFunctionSymbol, isParentIsAClass, null);
+  }
+
+  public AmbiguousDescriptor convert(SymbolsProtos.OverloadedFunctionSymbol overloadedFunctionSymbol, boolean isParentIsAClass,
+    @Nullable String containerFqn) {
     if (overloadedFunctionSymbol.getDefinitionsList().size() < 2) {
       throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
     }
     var name = overloadedFunctionSymbol.getName();
-    var fullyQualifiedName = TypeShedUtils.normalizedFqn(overloadedFunctionSymbol.getFullname());
+    var fullyQualifiedName = TypeShedUtils.normalizedSymbolFqn(overloadedFunctionSymbol.getFullname(), containerFqn, name);
     var descriptors = overloadedFunctionSymbol.getDefinitionsList().stream()
-      .map(fs -> functionConverter.convert(fs, isParentIsAClass))
+      .map(fs -> functionConverter.convert(fs, isParentIsAClass, containerFqn))
       .map(Descriptor.class::cast)
       .collect(Collectors.toSet());
     return new AmbiguousDescriptor(name, fullyQualifiedName, descriptors);

@@ -472,7 +472,7 @@ class TypeShedTest {
   @Test
   void pythonVersions() {
     Symbol range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForSemanticPythonVersions()).containsExactlyInAnyOrder("310", "311", "312", "313", "314");
+    assertThat(((SymbolImpl) range).validForSemanticPythonVersions()).isEmpty();
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
 
     // python 2
@@ -484,7 +484,7 @@ class TypeShedTest {
     // python 3
     setPythonVersions(PythonVersionUtils.fromString("3.10"));
     range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForSemanticPythonVersions()).containsExactlyInAnyOrder("310", "311", "312", "313", "314");
+    assertThat(((SymbolImpl) range).validForSemanticPythonVersions()).isEmpty();
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
 
     setPythonVersions(PythonVersionUtils.fromString("3.10"));
@@ -582,6 +582,53 @@ class TypeShedTest {
     FunctionSymbol function = (FunctionSymbol) TypeShed.getSymbolsFromProtobufModule(moduleSymbol).get("foo");
     assertThat(function.annotatedReturnTypeName()).isEqualTo("str");
     assertThat(function.parameters().get(0).declaredType().canOnlyBe("str")).isTrue();
+  }
+
+  @Test
+  void derivesOmittedLocalSymbolFqns() throws TextFormat.ParseException {
+    SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
+      """
+      fully_qualified_name: "mod"
+      functions { name: "foo" }
+      vars { name: "value" }
+      classes {
+        name: "MyClass"
+        methods { name: "method" }
+        attributes { name: "field" }
+        attributes { name: "alias" fully_qualified_name: "other.actual" }
+      }
+      """);
+
+    Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
+    assertThat(symbols.get("foo").fullyQualifiedName()).isEqualTo("mod.foo");
+    assertThat(symbols.get("value").fullyQualifiedName()).isEqualTo("mod.value");
+    ClassSymbol classSymbol = (ClassSymbol) symbols.get("MyClass");
+    assertThat(classSymbol.fullyQualifiedName()).isEqualTo("mod.MyClass");
+    assertThat(classSymbol.declaredMembers())
+      .extracting(Symbol::name, Symbol::fullyQualifiedName)
+      .containsExactlyInAnyOrder(
+        tuple("method", "mod.MyClass.method"),
+        tuple("field", "mod.MyClass.field"),
+        tuple("alias", "other.actual"));
+  }
+
+  @Test
+  void derivesAndNormalizesOmittedBuiltinFqns() throws TextFormat.ParseException {
+    SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
+      """
+      fully_qualified_name: "builtins"
+      vars { name: "value" }
+      classes {
+        name: "str"
+        methods { name: "upper" }
+      }
+      """);
+
+    Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
+    assertThat(symbols.get("value").fullyQualifiedName()).isEqualTo("value");
+    ClassSymbol str = (ClassSymbol) symbols.get("str");
+    assertThat(str.fullyQualifiedName()).isEqualTo("str");
+    assertThat(str.declaredMembers()).extracting(Symbol::fullyQualifiedName).containsExactly("str.upper");
   }
 
   @Test

@@ -129,7 +129,13 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto, String moduleName, TypeShedTypeTable typeTable) {
-    super(classSymbolProto.getName(), TypeShed.normalizedFqn(classSymbolProto.getFullyQualifiedName(), moduleName, classSymbolProto.getName()));
+    this(classSymbolProto, moduleName, typeTable, null);
+  }
+
+  public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto, String moduleName, TypeShedTypeTable typeTable,
+    @Nullable String containerClassFqn) {
+    super(classSymbolProto.getName(),
+      TypeShed.normalizedFqn(classSymbolProto.getFullyQualifiedName(), moduleName, classSymbolProto.getName(), containerClassFqn));
     setKind(Kind.CLASS);
     classDefinitionLocation = null;
     hasDecorators = classSymbolProto.getHasDecorators();
@@ -140,13 +146,13 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     Map<String, Set<Object>> descriptorsByFqn = new HashMap<>();
     classSymbolProto.getMethodsList().stream()
       .filter(d -> isValidForProjectSemanticPythonVersion(d.getValidForList()))
-      .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
+      .forEach(proto -> descriptorsByFqn.computeIfAbsent(effectiveMemberFqn(proto.getFullyQualifiedName(), proto.getName()), d -> new HashSet<>()).add(proto));
     classSymbolProto.getOverloadedMethodsList().stream()
       .filter(d -> isValidForProjectSemanticPythonVersion(d.getValidForList()))
-      .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullname(), d -> new HashSet<>()).add(proto));
+      .forEach(proto -> descriptorsByFqn.computeIfAbsent(effectiveMemberFqn(proto.getFullname(), proto.getName()), d -> new HashSet<>()).add(proto));
     classSymbolProto.getAttributesList().stream()
       .filter(d -> isValidForProjectSemanticPythonVersion(d.getValidForList()))
-      .forEach(proto -> descriptorsByFqn.computeIfAbsent(proto.getFullyQualifiedName(), d -> new HashSet<>()).add(proto));
+      .forEach(proto -> descriptorsByFqn.computeIfAbsent(effectiveMemberFqn(proto.getFullyQualifiedName(), proto.getName()), d -> new HashSet<>()).add(proto));
 
     inlineInheritedMethodsFromPrivateClass(classSymbolProto.getSuperClassesList(), descriptorsByFqn);
 
@@ -158,6 +164,10 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     superClassesFqns.addAll(classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).toList());
     superClassesFqns.removeAll(inlinedSuperClassFqn);
     validForSemanticPythonVersions = new HashSet<>(classSymbolProto.getValidForList());
+  }
+
+  private String effectiveMemberFqn(String serializedFqn, String localName) {
+    return serializedFqn.isEmpty() ? (fullyQualifiedName + "." + localName) : serializedFqn;
   }
 
   private void inlineInheritedMethodsFromPrivateClass(List<String> superClassesFqns, Map<String, Set<Object>> descriptorsByFqn) {

@@ -79,8 +79,13 @@ public class SymbolImpl implements Symbol {
   }
 
   public SymbolImpl(SymbolsProtos.VarSymbol varSymbol, String moduleName, boolean isFromClass, TypeShedTypeTable typeTable) {
+    this(varSymbol, moduleName, isFromClass, typeTable, null);
+  }
+
+  public SymbolImpl(SymbolsProtos.VarSymbol varSymbol, String moduleName, boolean isFromClass, TypeShedTypeTable typeTable,
+    @Nullable String containerClassFqn) {
     this.name = varSymbol.getName();
-    this.fullyQualifiedName = TypeShed.normalizedFqn(varSymbol.getFullyQualifiedName(), moduleName, name);
+    this.fullyQualifiedName = TypeShed.normalizedFqn(varSymbol.getFullyQualifiedName(), moduleName, name, containerClassFqn);
     SymbolsProtos.Type type = typeTable.resolve(
       varSymbol.getTypeAnnotationId(), varSymbol.hasTypeAnnotation(), varSymbol.getTypeAnnotation());
     if (type != null && !type.getFullyQualifiedName().isEmpty()) {

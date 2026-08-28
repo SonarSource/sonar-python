@@ -36,6 +36,8 @@ def test_module_symbol(typeshed_stdlib):
     assert pb_module.fully_qualified_name == "abc"
     assert len(pb_module.classes) == 3
     assert len(pb_module.functions) == 4
+    assert all(not cls.fully_qualified_name for cls in pb_module.classes)
+    assert all(not function.fully_qualified_name for function in pb_module.functions)
     assert len(pb_module.type_table) > 0
     assert any(function.return_annotation_id > 0 for function in pb_module.functions)
     assert all(not function.HasField("return_annotation") for function in pb_module.functions)

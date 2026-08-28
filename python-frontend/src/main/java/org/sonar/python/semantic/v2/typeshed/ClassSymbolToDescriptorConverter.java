@@ -19,6 +19,7 @@ package org.sonar.python.semantic.v2.typeshed;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -41,29 +42,33 @@ public class ClassSymbolToDescriptorConverter {
   }
 
   public ClassDescriptor convert(SymbolsProtos.ClassSymbol classSymbol) {
-    var fullyQualifiedName = TypeShedUtils.normalizedFqn(classSymbol.getFullyQualifiedName());
+    return convert(classSymbol, null);
+  }
+
+  public ClassDescriptor convert(SymbolsProtos.ClassSymbol classSymbol, @Nullable String containerFqn) {
+    var fullyQualifiedName = TypeShedUtils.normalizedSymbolFqn(classSymbol.getFullyQualifiedName(), containerFqn, classSymbol.getName());
     var superClasses = classSymbol.getSuperClassesList().stream().map(TypeShedUtils::normalizedFqn).toList();
     var metaclassName = TypeShedUtils.normalizedFqn(classSymbol.getMetaclassName());
 
     var variableDescriptors = classSymbol.getAttributesList()
       .stream()
       .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
-      .map(varConverter::convert);
+      .map(s -> varConverter.convert(s, fullyQualifiedName));
 
     var functionDescriptors = classSymbol.getMethodsList()
       .stream()
       .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
-      .map(s -> functionConverter.convert(s, true));
+      .map(s -> functionConverter.convert(s, true, fullyQualifiedName));
 
     var overloadedFunctionDescriptors = classSymbol.getOverloadedMethodsList()
       .stream()
       .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
-      .map(s -> overloadedFunctionConverter.convert(s, true));
+      .map(s -> overloadedFunctionConverter.convert(s, true, fullyQualifiedName));
 
     var nestedClassesDescriptors = classSymbol.getNestedClassesList()
       .stream()
       .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
-      .map(this::convert);
+      .map(s -> convert(s, fullyQualifiedName));
 
     var members = ProtoUtils.disambiguateByName(Stream.of(variableDescriptors, functionDescriptors, overloadedFunctionDescriptors, nestedClassesDescriptors))
       .values().stream().map(Descriptor.class::cast).collect(Collectors.toSet());

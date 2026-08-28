@@ -115,4 +115,31 @@ class ModuleSymbolToDescriptorConverterTest {
       .isEqualTo("str");
     Assertions.assertThat(function.parameters().get(0).annotatedType()).isEqualTo("str");
   }
+
+  @Test
+  void derivesOmittedLocalSymbolFqns() {
+    var converter = new ModuleSymbolToDescriptorConverter(PythonVersionUtils.allSupportedSemanticVersions());
+    var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
+      .setFullyQualifiedName("module")
+      .addFunctions(SymbolsProtos.FunctionSymbol.newBuilder().setName("foo"))
+      .addVars(SymbolsProtos.VarSymbol.newBuilder().setName("value"))
+      .addClasses(SymbolsProtos.ClassSymbol.newBuilder()
+        .setName("Outer")
+        .addMethods(SymbolsProtos.FunctionSymbol.newBuilder().setName("method"))
+        .addAttributes(SymbolsProtos.VarSymbol.newBuilder().setName("field"))
+        .addNestedClasses(SymbolsProtos.ClassSymbol.newBuilder().setName("Nested")))
+      .build();
+
+    var descriptor = converter.convert(symbol);
+    Assertions.assertThat(descriptor.members().get("foo").fullyQualifiedName()).isEqualTo("module.foo");
+    Assertions.assertThat(descriptor.members().get("value").fullyQualifiedName()).isEqualTo("module.value");
+    var outer = (ClassDescriptor) descriptor.members().get("Outer");
+    Assertions.assertThat(outer.fullyQualifiedName()).isEqualTo("module.Outer");
+    Assertions.assertThat(outer.members())
+      .extracting(d -> d.name(), d -> d.fullyQualifiedName())
+      .containsExactlyInAnyOrder(
+        Assertions.tuple("method", "module.Outer.method"),
+        Assertions.tuple("field", "module.Outer.field"),
+        Assertions.tuple("Nested", "module.Outer.Nested"));
+  }
 }

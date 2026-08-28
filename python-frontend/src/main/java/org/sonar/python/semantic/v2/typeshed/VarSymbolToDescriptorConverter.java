@@ -37,7 +37,11 @@ public class VarSymbolToDescriptorConverter {
   }
 
   public Descriptor convert(SymbolsProtos.VarSymbol varSymbol) {
-    var fullyQualifiedName = TypeShedUtils.normalizedFqn(varSymbol.getFullyQualifiedName());
+    return convert(varSymbol, null);
+  }
+
+  public Descriptor convert(SymbolsProtos.VarSymbol varSymbol, @Nullable String containerFqn) {
+    var fullyQualifiedName = TypeShedUtils.normalizedSymbolFqn(varSymbol.getFullyQualifiedName(), containerFqn, varSymbol.getName());
     SymbolsProtos.Type protoTypeAnnotation = typeTable.resolve(
       varSymbol.getTypeAnnotationId(), varSymbol.hasTypeAnnotation(), varSymbol.getTypeAnnotation());
     var isImportedModule = varSymbol.getIsImportedModule();

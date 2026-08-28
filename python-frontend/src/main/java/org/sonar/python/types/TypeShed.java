@@ -249,9 +249,13 @@ public class TypeShed {
   }
 
   public static String normalizedFqn(String fqn, String moduleName, String localName, @Nullable String containerClassFqn) {
-    if (containerClassFqn != null) return containerClassFqn + "." + localName;
+    if (fqn.isEmpty()) {
+      String containerFqn = containerClassFqn == null ? moduleName : containerClassFqn;
+      return normalizedFqn(containerFqn + "." + localName);
+    }
+    if (containerClassFqn != null) return fqn.startsWith(moduleName) ? normalizedFqn(fqn) : fqn;
     if (fqn.startsWith(moduleName)) return normalizedFqn(fqn);
-    return moduleName + "." + localName;
+    return normalizedFqn(moduleName + "." + localName);
   }
 
   public static boolean isValidForProjectSemanticPythonVersion(List<String> validForSemanticPythonVersions) {
@@ -293,7 +297,7 @@ public class TypeShed {
     return switch (descriptor) {
       case TypedProtobufDescriptor(Object nestedDescriptor, TypeShedTypeTable nestedTypeTable) ->
         symbolFromProtobufDescriptor(nestedDescriptor, containerClassFqn, moduleName, isFromClass, modulesInProgress, nestedTypeTable);
-      case SymbolsProtos.ClassSymbol classSymbolProto -> new ClassSymbolImpl(classSymbolProto, moduleName, typeTable);
+      case SymbolsProtos.ClassSymbol classSymbolProto -> new ClassSymbolImpl(classSymbolProto, moduleName, typeTable, containerClassFqn);
       case SymbolsProtos.FunctionSymbol functionSymbolProto ->
         new FunctionSymbolImpl(functionSymbolProto, containerClassFqn, functionSymbolProto.getValidForList(), moduleName, typeTable);
       case OverloadedFunctionSymbol overloadedFunctionSymbol -> {
@@ -303,7 +307,7 @@ public class TypeShed {
         yield fromOverloadedFunction(overloadedFunctionSymbol, containerClassFqn, moduleName, typeTable);
       }
       case SymbolsProtos.VarSymbol varSymbol -> {
-        SymbolImpl variableSymbol = new SymbolImpl(varSymbol, moduleName, isFromClass, typeTable);
+        SymbolImpl variableSymbol = new SymbolImpl(varSymbol, moduleName, isFromClass, typeTable, containerClassFqn);
         if (varSymbol.getIsImportedModule()) {
           Map<String, Symbol> moduleExportedSymbols = symbolsForModule(varSymbol.getFullyQualifiedName(), modulesInProgress);
           moduleExportedSymbols.values().forEach(variableSymbol::addChildSymbol);

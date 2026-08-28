@@ -39,6 +39,11 @@ public class TypeShedUtils {
     return fqn;
   }
 
+  public static String normalizedSymbolFqn(String serializedFqn, @Nullable String containerFqn, String localName) {
+    String fqn = serializedFqn.isEmpty() && containerFqn != null ? (containerFqn + "." + localName) : serializedFqn;
+    return normalizedFqn(fqn);
+  }
+
   @CheckForNull
   public static String getTypesNormalizedFqn(@Nullable SymbolsProtos.Type type) {
     return getTypesNormalizedFqn(type, TypeShedTypeTable.EMPTY);

@@ -112,8 +112,8 @@ def test_basic_module_merge(typeshed_stdlib):
     abc_merged_symbol = merged_modules["abc"]
     abc_merged_symbol_proto = abc_merged_symbol.to_proto()
     assert abc_merged_symbol_proto.fully_qualified_name == abc_merged_symbol.fullname
-    assert_merged_class_symbol_to_proto(abc_merged_symbol_proto.classes, abc_merged_symbol.classes)
-    assert_merged_function_symbol_to_proto(abc_merged_symbol_proto.functions, abc_merged_symbol.functions)
+    assert_merged_class_symbol_to_proto(abc_merged_symbol_proto.classes, abc_merged_symbol.classes, "abc")
+    assert_merged_function_symbol_to_proto(abc_merged_symbol_proto.functions, abc_merged_symbol.functions, "abc")
 
 
 def test_merged_symbols_to_proto(typeshed_stdlib):
@@ -128,8 +128,8 @@ def test_merged_symbols_to_proto(typeshed_stdlib):
     ssl_merged_symbol_proto = ssl_merged_module_symbol.to_proto()
     assert ssl_merged_symbol_proto.fully_qualified_name == ssl_merged_module_symbol.fullname
 
-    assert_merged_class_symbol_to_proto(ssl_merged_symbol_proto.classes, ssl_merged_module_symbol.classes)
-    assert_merged_function_symbol_to_proto(ssl_merged_symbol_proto.functions, ssl_merged_module_symbol.functions)
+    assert_merged_class_symbol_to_proto(ssl_merged_symbol_proto.classes, ssl_merged_module_symbol.classes, "ssl")
+    assert_merged_function_symbol_to_proto(ssl_merged_symbol_proto.functions, ssl_merged_module_symbol.functions, "ssl")
 
 
 def test_basic_functions_merge(typeshed_stdlib):
@@ -334,12 +334,17 @@ def test_actual_module_merge(fake_module_36_38):
     assert fakemodule_class_symbol.vars['fakemodule.ClassWithFields.field_multiple_defs'][1].valid_for == ["38"]
 
 
-def assert_merged_class_symbol_to_proto(merged_classes_proto, merged_classes):
+def assert_merged_class_symbol_to_proto(merged_classes_proto, merged_classes, container_fqn):
     assert len(merged_classes_proto) == len(merged_classes)
     for merged_class_proto in merged_classes_proto:
-        merged_class_symbol = merged_classes[merged_class_proto.fully_qualified_name]
+        merged_class_symbol = next(symbols for symbols in merged_classes.values()
+                                   if symbols[0].class_symbol.name == merged_class_proto.name)
         assert len(merged_class_symbol) == 1
         original_class_symbol = merged_class_symbol[0]
+        assert (merged_class_proto.fully_qualified_name
+                == expected_fqn_override(original_class_symbol.class_symbol.name,
+                                         original_class_symbol.class_symbol.fullname,
+                                         container_fqn))
         assert merged_class_proto.has_decorators == original_class_symbol.class_symbol.has_decorators
         assert merged_class_proto.has_metaclass == original_class_symbol.class_symbol.has_metaclass
         assert merged_class_proto.is_enum == original_class_symbol.class_symbol.is_enum
@@ -347,22 +352,28 @@ def assert_merged_class_symbol_to_proto(merged_classes_proto, merged_classes):
         assert merged_class_proto.is_protocol == original_class_symbol.class_symbol.is_protocol
         assert len(merged_class_proto.methods) == len(original_class_symbol.methods)
         if len(merged_class_proto.methods) > 0:
-            assert_merged_function_symbol_to_proto(merged_class_proto.methods, original_class_symbol.methods)
+            assert_merged_function_symbol_to_proto(merged_class_proto.methods, original_class_symbol.methods,
+                                                   original_class_symbol.class_symbol.fullname)
         assert len(merged_class_proto.overloaded_methods) == len(original_class_symbol.overloaded_methods)
         if len(merged_class_proto.overloaded_methods) > 0:
             assert_merged_overloaded_functions_to_proto(merged_class_proto.overloaded_methods,
-                                                        original_class_symbol.overloaded_methods)
+                                                        original_class_symbol.overloaded_methods,
+                                                        original_class_symbol.class_symbol.fullname)
         assert merged_class_proto.valid_for == []
 
 
-def assert_merged_function_symbol_to_proto(merged_functions_proto, merged_functions):
+def assert_merged_function_symbol_to_proto(merged_functions_proto, merged_functions, container_fqn):
     assert len(merged_functions_proto) == len(merged_functions)
     for merged_function_proto in merged_functions_proto:
-        matching_function_symbol = merged_functions[merged_function_proto.fully_qualified_name]
+        matching_function_symbol = next(symbols for symbols in merged_functions.values()
+                                        if symbols[0].function_symbol.name == merged_function_proto.name)
         assert len(matching_function_symbol) == 1
         original_function_symbol = matching_function_symbol[0]
         assert merged_function_proto.name == original_function_symbol.function_symbol.name
-        assert merged_function_proto.fully_qualified_name == original_function_symbol.function_symbol.fullname
+        assert (merged_function_proto.fully_qualified_name
+                == expected_fqn_override(original_function_symbol.function_symbol.name,
+                                         original_function_symbol.function_symbol.fullname,
+                                         container_fqn))
         assert merged_function_proto.has_decorators == original_function_symbol.function_symbol.has_decorators
         assert (merged_function_proto.resolved_decorator_names
                 == original_function_symbol.function_symbol.resolved_decorator_names)
@@ -376,18 +387,27 @@ def assert_merged_function_symbol_to_proto(merged_functions_proto, merged_functi
         assert merged_function_proto.valid_for == []
 
 
-def assert_merged_overloaded_functions_to_proto(merged_overloaded_functions_proto, merged_overloaded_functions):
+def assert_merged_overloaded_functions_to_proto(merged_overloaded_functions_proto, merged_overloaded_functions,
+                                                container_fqn):
     assert len(merged_overloaded_functions_proto) == len(merged_overloaded_functions)
     for merged_overloaded_function_proto in merged_overloaded_functions_proto:
-        matching_overloaded_function = merged_overloaded_functions[merged_overloaded_function_proto.fullname]
+        matching_overloaded_function = next(symbols for symbols in merged_overloaded_functions.values()
+                                            if symbols[0].overloaded_function_symbol.name
+                                            == merged_overloaded_function_proto.name)
         assert len(matching_overloaded_function) == 1
         original_overloaded_function = matching_overloaded_function[0]
         assert merged_overloaded_function_proto.name == original_overloaded_function.overloaded_function_symbol.name
         assert (merged_overloaded_function_proto.fullname
-                == original_overloaded_function.overloaded_function_symbol.fullname)
+                == expected_fqn_override(original_overloaded_function.overloaded_function_symbol.name,
+                                         original_overloaded_function.overloaded_function_symbol.fullname,
+                                         container_fqn))
         assert (len(merged_overloaded_function_proto.definitions)
                 == len(original_overloaded_function.overloaded_function_symbol.definitions))
         assert merged_overloaded_function_proto.valid_for == []
+
+
+def expected_fqn_override(name, fullname, container_fqn):
+    return "" if fullname == f"{container_fqn}.{name}" else fullname
 
 
 def assert_abc_merged_module(merged_modules, expected_valid_for):

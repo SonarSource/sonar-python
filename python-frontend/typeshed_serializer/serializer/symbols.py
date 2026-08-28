@@ -290,12 +290,14 @@ class OverloadedFunctionSymbol:
     def __eq__(self, other):
         return isinstance(other, OverloadedFunctionSymbol) and self.to_proto() == other.to_proto()
 
-    def to_proto(self, type_table: TypeTable = None) -> symbols_pb2.OverloadedFunctionSymbol:
+    def to_proto(self, type_table: TypeTable = None, container_fqn=None) -> symbols_pb2.OverloadedFunctionSymbol:
         pb_overloaded_func = symbols_pb2.OverloadedFunctionSymbol()
         pb_overloaded_func.name = self.name
-        pb_overloaded_func.fullname = self.fullname
+        fqn_override = symbol_fqn_override(self.name, self.fullname, container_fqn)
+        if fqn_override is not None:
+            pb_overloaded_func.fullname = fqn_override
         for definition in self.definitions:
-            pb_overloaded_func.definitions.append(definition.to_proto(type_table))
+            pb_overloaded_func.definitions.append(definition.to_proto(type_table, container_fqn))
         return pb_overloaded_func
 
 
@@ -323,10 +325,12 @@ class FunctionSymbol:
     def __eq__(self, other):
         return isinstance(other, FunctionSymbol) and self.to_proto() == other.to_proto()
 
-    def to_proto(self, type_table: TypeTable = None) -> symbols_pb2.FunctionSymbol:
+    def to_proto(self, type_table: TypeTable = None, container_fqn=None) -> symbols_pb2.FunctionSymbol:
         pb_func = symbols_pb2.FunctionSymbol()
         pb_func.name = self.name
-        pb_func.fully_qualified_name = self.fullname
+        fqn_override = symbol_fqn_override(self.name, self.fullname, container_fqn)
+        if fqn_override is not None:
+            pb_func.fully_qualified_name = fqn_override
         pb_func.has_decorators = self.has_decorators
         pb_func.resolved_decorator_names.extend(self.resolved_decorator_names)
         pb_func.is_abstract = self.is_abstract
@@ -395,10 +399,12 @@ class ClassSymbol:
                 and self.metaclass_name == other.metaclass_name
                 and self.has_decorators == other.has_decorators)
 
-    def to_proto(self, type_table: TypeTable = None) -> symbols_pb2.ClassSymbol:
+    def to_proto(self, type_table: TypeTable = None, container_fqn=None) -> symbols_pb2.ClassSymbol:
         pb_class = symbols_pb2.ClassSymbol()
         pb_class.name = self.name
-        pb_class.fully_qualified_name = self.fullname
+        fqn_override = symbol_fqn_override(self.name, self.fullname, container_fqn)
+        if fqn_override is not None:
+            pb_class.fully_qualified_name = fqn_override
         pb_class.super_classes.extend(self.super_classes)
         pb_class.has_decorators = self.has_decorators
         pb_class.has_metaclass = self.has_metaclass
@@ -408,13 +414,13 @@ class ClassSymbol:
         if self.metaclass_name is not None:
             pb_class.metaclass_name = self.metaclass_name
         for method in self.methods:
-            pb_class.methods.append(method.to_proto(type_table))
+            pb_class.methods.append(method.to_proto(type_table, self.fullname))
         for overloaded_method in self.overloaded_methods:
-            pb_class.overloaded_methods.append(overloaded_method.to_proto(type_table))
+            pb_class.overloaded_methods.append(overloaded_method.to_proto(type_table, self.fullname))
         for nested_class in self.nested_classes:
-            pb_class.nested_classes.append(nested_class.to_proto(type_table))
+            pb_class.nested_classes.append(nested_class.to_proto(type_table, self.fullname))
         for var in self.vars:
-            pb_class.attributes.append(var.to_proto(type_table))
+            pb_class.attributes.append(var.to_proto(type_table, self.fullname))
         return pb_class
 
 
@@ -433,10 +439,16 @@ class VarSymbol:
     def __eq__(self, other):
         return isinstance(other, VarSymbol) and self.to_proto() == other.to_proto()
 
-    def to_proto(self, type_table: TypeTable = None) -> symbols_pb2.VarSymbol:
+    def to_proto(self, type_table: TypeTable = None, container_fqn=None) -> symbols_pb2.VarSymbol:
         pb_var = symbols_pb2.VarSymbol()
         pb_var.name = self.name
-        pb_var.fully_qualified_name = self.fullname
+        fqn_override = symbol_fqn_override(
+            self.name,
+            self.fullname,
+            None if self.is_imported_module else container_fqn,
+        )
+        if fqn_override is not None:
+            pb_var.fully_qualified_name = fqn_override
         if self.type is not None:
             if type_table is None:
                 pb_var.type_annotation.CopyFrom(self.type.to_proto())
@@ -492,13 +504,13 @@ class ModuleSymbol:
         pb_module.fully_qualified_name = self.fullname
         type_table = TypeTable()
         for cls in self.classes:
-            pb_module.classes.append(cls.to_proto(type_table))
+            pb_module.classes.append(cls.to_proto(type_table, self.fullname))
         for func in self.functions:
-            pb_module.functions.append(func.to_proto(type_table))
+            pb_module.functions.append(func.to_proto(type_table, self.fullname))
         for overloaded_func in self.overloaded_functions:
-            pb_module.overloaded_functions.append(overloaded_func.to_proto(type_table))
+            pb_module.overloaded_functions.append(overloaded_func.to_proto(type_table, self.fullname))
         for var in self.vars:
-            pb_module.vars.append(var.to_proto(type_table))
+            pb_module.vars.append(var.to_proto(type_table, self.fullname))
         type_table.write_to(pb_module)
         return pb_module
 
@@ -508,8 +520,8 @@ class MergedFunctionSymbol:
         self.function_symbol = function_symbol
         self.valid_for = valid_for
 
-    def to_proto(self, type_table: TypeTable = None, all_versions=None) -> symbols_pb2.FunctionSymbol:
-        pb_func = self.function_symbol.to_proto(type_table)
+    def to_proto(self, type_table: TypeTable = None, all_versions=None, container_fqn=None) -> symbols_pb2.FunctionSymbol:
+        pb_func = self.function_symbol.to_proto(type_table, container_fqn)
         write_valid_for(pb_func.valid_for, self.valid_for, all_versions)
         return pb_func
 
@@ -519,8 +531,8 @@ class MergedOverloadedFunctionSymbol:
         self.overloaded_function_symbol = overloaded_function_symbol
         self.valid_for = valid_for
 
-    def to_proto(self, type_table: TypeTable = None, all_versions=None) -> symbols_pb2.FunctionSymbol:
-        pb_func = self.overloaded_function_symbol.to_proto(type_table)
+    def to_proto(self, type_table: TypeTable = None, all_versions=None, container_fqn=None) -> symbols_pb2.FunctionSymbol:
+        pb_func = self.overloaded_function_symbol.to_proto(type_table, container_fqn)
         write_valid_for(pb_func.valid_for, self.valid_for, all_versions)
         return pb_func
 
@@ -535,10 +547,12 @@ class MergedClassSymbol:
         self.vars = merged_attributes
         self.valid_for = valid_for
 
-    def to_proto(self, type_table: TypeTable = None, all_versions=None) -> symbols_pb2.ClassSymbol:
+    def to_proto(self, type_table: TypeTable = None, all_versions=None, container_fqn=None) -> symbols_pb2.ClassSymbol:
         pb_class = symbols_pb2.ClassSymbol()
         pb_class.name = self.class_symbol.name
-        pb_class.fully_qualified_name = self.class_symbol.fullname
+        fqn_override = symbol_fqn_override(self.class_symbol.name, self.class_symbol.fullname, container_fqn)
+        if fqn_override is not None:
+            pb_class.fully_qualified_name = fqn_override
         pb_class.super_classes.extend(self.class_symbol.super_classes)
         pb_class.has_decorators = self.class_symbol.has_decorators
         pb_class.has_metaclass = self.class_symbol.has_metaclass
@@ -549,13 +563,13 @@ class MergedClassSymbol:
             pb_class.metaclass_name = self.class_symbol.metaclass_name
         for method in self.methods:
             for elem in self.methods[method]:
-                pb_class.methods.append(elem.to_proto(type_table, all_versions))
+                pb_class.methods.append(elem.to_proto(type_table, all_versions, self.class_symbol.fullname))
         for overloaded_func in self.overloaded_methods:
             for elem in self.overloaded_methods[overloaded_func]:
-                pb_class.overloaded_methods.append(elem.to_proto(type_table, all_versions))
+                pb_class.overloaded_methods.append(elem.to_proto(type_table, all_versions, self.class_symbol.fullname))
         for var in self.vars:
             for elem in self.vars[var]:
-                pb_class.attributes.append(elem.to_proto(type_table, all_versions))
+                pb_class.attributes.append(elem.to_proto(type_table, all_versions, self.class_symbol.fullname))
         write_valid_for(pb_class.valid_for, self.valid_for, all_versions)
         return pb_class
 
@@ -565,8 +579,8 @@ class MergedVarSymbol:
         self.var_symbol = var_symbol
         self.valid_for = valid_for
 
-    def to_proto(self, type_table: TypeTable = None, all_versions=None) -> symbols_pb2.VarSymbol:
-        pb_var = self.var_symbol.to_proto(type_table)
+    def to_proto(self, type_table: TypeTable = None, all_versions=None, container_fqn=None) -> symbols_pb2.VarSymbol:
+        pb_var = self.var_symbol.to_proto(type_table, container_fqn)
         write_valid_for(pb_var.valid_for, self.valid_for, all_versions)
         return pb_var
 
@@ -586,16 +600,16 @@ class MergedModuleSymbol:
         type_table = TypeTable()
         for cls in self.classes:
             for elem in self.classes[cls]:
-                pb_module.classes.append(elem.to_proto(type_table, self.all_versions))
+                pb_module.classes.append(elem.to_proto(type_table, self.all_versions, self.fullname))
         for func in self.functions:
             for elem in self.functions[func]:
-                pb_module.functions.append(elem.to_proto(type_table, self.all_versions))
+                pb_module.functions.append(elem.to_proto(type_table, self.all_versions, self.fullname))
         for overloaded_func in self.overloaded_functions:
             for elem in self.overloaded_functions[overloaded_func]:
-                pb_module.overloaded_functions.append(elem.to_proto(type_table, self.all_versions))
+                pb_module.overloaded_functions.append(elem.to_proto(type_table, self.all_versions, self.fullname))
         for var in self.vars:
             for elem in self.vars[var]:
-                pb_module.vars.append(elem.to_proto(type_table, self.all_versions))
+                pb_module.vars.append(elem.to_proto(type_table, self.all_versions, self.fullname))
         type_table.write_to(pb_module)
         return pb_module
 
@@ -604,6 +618,12 @@ def write_valid_for(target, valid_for, all_versions=None):
     unique_versions = list(dict.fromkeys(valid_for))
     if all_versions is None or set(unique_versions) != set(all_versions):
         target.extend(unique_versions)
+
+
+def symbol_fqn_override(name, fullname, container_fqn=None):
+    if container_fqn is not None and fullname == f"{container_fqn}.{name}":
+        return None
+    return fullname
 
 
 def get_decorator_name(dec: mpn.Node):

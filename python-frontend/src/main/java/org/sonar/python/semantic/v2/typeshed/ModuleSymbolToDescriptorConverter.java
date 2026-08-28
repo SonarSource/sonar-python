@@ -61,24 +61,24 @@ public class ModuleSymbolToDescriptorConverter {
     var classesStream = moduleSymbol.getClassesList()
       .stream()
       .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
-      .map(classConverter::convert)
+      .map(s -> classConverter.convert(s, moduleSymbol.getFullyQualifiedName()))
       .map(d -> wrapInAliasIfNeeded(d, moduleSymbol.getFullyQualifiedName()))
       .map(Descriptor.class::cast);
     var functionsStream = moduleSymbol.getFunctionsList()
       .stream()
       .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
-      .map(functionConverter::convert)
+      .map(s -> functionConverter.convert(s, false, moduleSymbol.getFullyQualifiedName()))
       .map(d -> wrapInAliasIfNeeded(d, moduleSymbol.getFullyQualifiedName()))
       .map(Descriptor.class::cast);
     var overloadedFunctionsStream = moduleSymbol.getOverloadedFunctionsList()
       .stream()
       .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
-      .map(overloadedFunctionConverter::convert)
+      .map(s -> overloadedFunctionConverter.convert(s, false, moduleSymbol.getFullyQualifiedName()))
       .map(Descriptor.class::cast);
     var variablesStream = moduleSymbol.getVarsList()
       .stream()
       .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))
-      .map(variableConverter::convert)
+      .map(s -> variableConverter.convert(s, moduleSymbol.getFullyQualifiedName()))
       .map(Descriptor.class::cast);
 
     return ProtoUtils.disambiguateByName(Stream.of(classesStream, functionsStream, overloadedFunctionsStream, variablesStream));
