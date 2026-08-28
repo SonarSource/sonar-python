@@ -43,6 +43,7 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
+import org.sonar.python.types.TypeShedTypeTable;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
@@ -60,6 +61,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final boolean hasDecorators;
   private String annotatedReturnTypeName = null;
   private SymbolsProtos.Type protobufReturnType = null;
+  private TypeShedTypeTable protobufTypeTable = TypeShedTypeTable.EMPTY;
   private InferredType declaredReturnType = InferredTypes.anyType();
   private final boolean isStub;
   private Symbol owner;
@@ -90,16 +92,23 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, @Nullable String containerClassFqn, List<String> validFor, String moduleName) {
+    this(functionSymbolProto, containerClassFqn, validFor, moduleName, TypeShedTypeTable.EMPTY);
+  }
+
+  public FunctionSymbolImpl(SymbolsProtos.FunctionSymbol functionSymbolProto, @Nullable String containerClassFqn, List<String> validFor, String moduleName,
+    TypeShedTypeTable typeTable) {
     super(functionSymbolProto.getName(), TypeShed.normalizedFqn(functionSymbolProto.getFullyQualifiedName(), moduleName, functionSymbolProto.getName(), containerClassFqn));
     setKind(Kind.FUNCTION);
     isInstanceMethod = containerClassFqn != null && !functionSymbolProto.getIsStatic() && !functionSymbolProto.getIsClassMethod();
     isAsynchronous = functionSymbolProto.getIsAsynchronous();
     hasDecorators = functionSymbolProto.getHasDecorators();
     decorators = functionSymbolProto.getResolvedDecoratorNamesList();
-    SymbolsProtos.Type returnAnnotation = functionSymbolProto.getReturnAnnotation();
-    String returnTypeName = returnAnnotation.getFullyQualifiedName();
+    SymbolsProtos.Type returnAnnotation = typeTable.resolve(
+      functionSymbolProto.getReturnAnnotationId(), functionSymbolProto.hasReturnAnnotation(), functionSymbolProto.getReturnAnnotation());
+    String returnTypeName = returnAnnotation == null ? "" : returnAnnotation.getFullyQualifiedName();
     annotatedReturnTypeName = returnTypeName.isEmpty() ? null : TypeShed.normalizedFqn(returnTypeName);
     protobufReturnType = returnAnnotation;
+    protobufTypeTable = typeTable;
     for (SymbolsProtos.ParameterSymbol parameterSymbol : functionSymbolProto.getParametersList()) {
       ParameterState parameterState = new ParameterState();
       parameterState.positionalOnly = parameterSymbol.getKind() == SymbolsProtos.ParameterKind.POSITIONAL_ONLY;
@@ -116,8 +125,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
         declaredType = anyType();
       }
       String parameterName = parameterSymbol.hasName() ? parameterSymbol.getName() : null;
+      SymbolsProtos.Type parameterType = typeTable.resolve(
+        parameterSymbol.getTypeAnnotationId(), parameterSymbol.hasTypeAnnotation(), parameterSymbol.getTypeAnnotation());
       ParameterImpl parameter = new ParameterImpl(parameterName, declaredType, null, parameterSymbol.getHasDefault(), parameterState,
-        isKeywordVariadic, isPositionalVariadic, parameterSymbol.getTypeAnnotation(), null);
+        isKeywordVariadic, isPositionalVariadic, parameterType, typeTable, null);
       parameters.add(parameter);
     }
     functionDefinitionLocation = null;
@@ -165,6 +176,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     functionDefinitionLocation = functionSymbol.definitionLocation();
     FunctionSymbolImpl functionSymbolImpl = (FunctionSymbolImpl) functionSymbol;
     protobufReturnType = functionSymbolImpl.protobufReturnType;
+    protobufTypeTable = functionSymbolImpl.protobufTypeTable;
     if (functionSymbolImpl.protobufReturnType == null || functionSymbolImpl.hasReadDeclaredReturnType) {
       declaredReturnType = functionSymbolImpl.declaredReturnType();
     }
@@ -314,7 +326,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
   public InferredType declaredReturnType() {
     if (!hasReadDeclaredReturnType && protobufReturnType != null) {
-      declaredReturnType = InferredTypes.fromTypeshedProtobuf(protobufReturnType);
+      declaredReturnType = InferredTypes.fromTypeshedProtobuf(protobufReturnType, protobufTypeTable);
       hasReadDeclaredReturnType = true;
     }
     return declaredReturnType;
@@ -374,6 +386,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     private final String name;
     private InferredType declaredType;
     private SymbolsProtos.Type protobufType;
+    private TypeShedTypeTable protobufTypeTable = TypeShedTypeTable.EMPTY;
     private final String annotatedTypeName;
     private final boolean hasDefaultValue;
     private final boolean isKeywordVariadic;
@@ -385,6 +398,13 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
     ParameterImpl(@Nullable String name, InferredType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
       ParameterState parameterState, boolean isKeywordVariadic, boolean isPositionalVariadic, @Nullable SymbolsProtos.Type protobufType, @Nullable LocationInFile location) {
+      this(name, declaredType, annotatedTypeName, hasDefaultValue, parameterState, isKeywordVariadic, isPositionalVariadic,
+        protobufType, TypeShedTypeTable.EMPTY, location);
+    }
+
+    ParameterImpl(@Nullable String name, InferredType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
+      ParameterState parameterState, boolean isKeywordVariadic, boolean isPositionalVariadic, @Nullable SymbolsProtos.Type protobufType,
+      TypeShedTypeTable typeTable, @Nullable LocationInFile location) {
       this.name = name;
       this.declaredType = declaredType;
       this.hasDefaultValue = hasDefaultValue;
@@ -394,6 +414,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.isPositionalOnly = parameterState.positionalOnly;
       this.location = location;
       this.protobufType = protobufType;
+      this.protobufTypeTable = typeTable;
       this.annotatedTypeName = annotatedTypeName;
     }
 
@@ -417,7 +438,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     @Override
     public InferredType declaredType() {
       if (!hasReadDeclaredType && protobufType != null) {
-        declaredType = InferredTypes.fromTypeshedProtobuf(protobufType);
+        declaredType = InferredTypes.fromTypeshedProtobuf(protobufType, protobufTypeTable);
         hasReadDeclaredType = true;
       }
       return declaredType;

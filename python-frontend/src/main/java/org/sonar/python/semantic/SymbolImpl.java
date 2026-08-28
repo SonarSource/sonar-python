@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.TypeShedTypeTable;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 public class SymbolImpl implements Symbol {
@@ -56,6 +57,7 @@ public class SymbolImpl implements Symbol {
    * This will be lazily converted to an InferredType
    */
   private SymbolsProtos.Type deserializedType = null;
+  private TypeShedTypeTable deserializedTypeTable = TypeShedTypeTable.EMPTY;
 
   private boolean hasReadDeserializedType = false;
 
@@ -73,13 +75,19 @@ public class SymbolImpl implements Symbol {
   }
 
   public SymbolImpl(SymbolsProtos.VarSymbol varSymbol, String moduleName, boolean isFromClass) {
+    this(varSymbol, moduleName, isFromClass, TypeShedTypeTable.EMPTY);
+  }
+
+  public SymbolImpl(SymbolsProtos.VarSymbol varSymbol, String moduleName, boolean isFromClass, TypeShedTypeTable typeTable) {
     this.name = varSymbol.getName();
     this.fullyQualifiedName = TypeShed.normalizedFqn(varSymbol.getFullyQualifiedName(), moduleName, name);
-    String fqn = varSymbol.getTypeAnnotation().getFullyQualifiedName();
-    if (!fqn.isEmpty()) {
-      this.annotatedTypeName = TypeShed.normalizedFqn(fqn);
+    SymbolsProtos.Type type = typeTable.resolve(
+      varSymbol.getTypeAnnotationId(), varSymbol.hasTypeAnnotation(), varSymbol.getTypeAnnotation());
+    if (type != null && !type.getFullyQualifiedName().isEmpty()) {
+      this.annotatedTypeName = TypeShed.normalizedFqn(type.getFullyQualifiedName());
     }
-    this.deserializedType = isFromClass ? varSymbol.getTypeAnnotation() : null;
+    this.deserializedType = isFromClass ? type : null;
+    this.deserializedTypeTable = typeTable;
     this.validForSemanticPythonVersions = new HashSet<>(varSymbol.getValidForList());
     this.kind = Kind.OTHER;
   }
@@ -161,7 +169,7 @@ public class SymbolImpl implements Symbol {
    */
   public InferredType inferredType() {
     if (!hasReadDeserializedType && deserializedType != null) {
-      inferredType = InferredTypes.fromTypeshedProtobuf(deserializedType);
+      inferredType = InferredTypes.fromTypeshedProtobuf(deserializedType, deserializedTypeTable);
       hasReadDeserializedType = true;
     }
     return inferredType;
@@ -188,6 +196,7 @@ public class SymbolImpl implements Symbol {
     SymbolImpl copiedSymbol = new SymbolImpl(name, fullyQualifiedName());
     copiedSymbol.annotatedTypeName = annotatedTypeName;
     copiedSymbol.deserializedType = deserializedType;
+    copiedSymbol.deserializedTypeTable = deserializedTypeTable;
     return copiedSymbol;
   }
 

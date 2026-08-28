@@ -267,40 +267,62 @@ public class TypeShed {
   }
 
   public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, @Nullable String containerClassFqn, String moduleName, boolean isFromClass) {
-    return symbolsFromProtobufDescriptors(protobufDescriptors, containerClassFqn, moduleName, isFromClass, new HashSet<>());
+    return symbolsFromProtobufDescriptors(protobufDescriptors, containerClassFqn, moduleName, isFromClass, TypeShedTypeTable.EMPTY);
+  }
+
+  public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, @Nullable String containerClassFqn, String moduleName,
+    boolean isFromClass, TypeShedTypeTable typeTable) {
+    return symbolsFromProtobufDescriptors(protobufDescriptors, containerClassFqn, moduleName, isFromClass, new HashSet<>(), typeTable);
   }
 
   private static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, @Nullable String containerClassFqn, String moduleName, boolean isFromClass,
-    Set<String> modulesInProgress) {
+    Set<String> modulesInProgress, TypeShedTypeTable typeTable) {
     Set<Symbol> symbols = new HashSet<>();
-    for (Object descriptor : protobufDescriptors) {
-      if (descriptor instanceof SymbolsProtos.ClassSymbol classSymbolProto) {
-        symbols.add(new ClassSymbolImpl(classSymbolProto, moduleName));
-      }
-      if (descriptor instanceof SymbolsProtos.FunctionSymbol functionSymbolProto) {
-        symbols.add(new FunctionSymbolImpl(functionSymbolProto, containerClassFqn, moduleName));
-      }
-      if (descriptor instanceof OverloadedFunctionSymbol overloadedFunctionSymbol) {
-        if (overloadedFunctionSymbol.getDefinitionsList().size() < 2) {
-          throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
-        }
-        symbols.add(fromOverloadedFunction(overloadedFunctionSymbol, containerClassFqn, moduleName));
-      }
-      if (descriptor instanceof SymbolsProtos.VarSymbol varSymbol) {
-        SymbolImpl symbol = new SymbolImpl(varSymbol, moduleName, isFromClass);
-        if (varSymbol.getIsImportedModule()) {
-          Map<String, Symbol> moduleExportedSymbols = symbolsForModule(varSymbol.getFullyQualifiedName(), modulesInProgress);
-          moduleExportedSymbols.values().forEach(symbol::addChildSymbol);
-        }
+    for (Object rawDescriptor : protobufDescriptors) {
+      Symbol symbol = symbolFromProtobufDescriptor(rawDescriptor, containerClassFqn, moduleName, isFromClass, modulesInProgress, typeTable);
+      if (symbol != null) {
         symbols.add(symbol);
       }
     }
     return symbols;
   }
 
+  @CheckForNull
+  private static Symbol symbolFromProtobufDescriptor(Object descriptor, @Nullable String containerClassFqn, String moduleName, boolean isFromClass,
+    Set<String> modulesInProgress, TypeShedTypeTable typeTable) {
+    return switch (descriptor) {
+      case TypedProtobufDescriptor(Object nestedDescriptor, TypeShedTypeTable nestedTypeTable) ->
+        symbolFromProtobufDescriptor(nestedDescriptor, containerClassFqn, moduleName, isFromClass, modulesInProgress, nestedTypeTable);
+      case SymbolsProtos.ClassSymbol classSymbolProto -> new ClassSymbolImpl(classSymbolProto, moduleName, typeTable);
+      case SymbolsProtos.FunctionSymbol functionSymbolProto ->
+        new FunctionSymbolImpl(functionSymbolProto, containerClassFqn, functionSymbolProto.getValidForList(), moduleName, typeTable);
+      case OverloadedFunctionSymbol overloadedFunctionSymbol -> {
+        if (overloadedFunctionSymbol.getDefinitionsList().size() < 2) {
+          throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
+        }
+        yield fromOverloadedFunction(overloadedFunctionSymbol, containerClassFqn, moduleName, typeTable);
+      }
+      case SymbolsProtos.VarSymbol varSymbol -> {
+        SymbolImpl variableSymbol = new SymbolImpl(varSymbol, moduleName, isFromClass, typeTable);
+        if (varSymbol.getIsImportedModule()) {
+          Map<String, Symbol> moduleExportedSymbols = symbolsForModule(varSymbol.getFullyQualifiedName(), modulesInProgress);
+          moduleExportedSymbols.values().forEach(variableSymbol::addChildSymbol);
+        }
+        yield variableSymbol;
+      }
+      default -> null;
+    };
+  }
+
 
   @CheckForNull
   public static SymbolsProtos.ClassSymbol classDescriptorWithFQN(String fullyQualifiedName) {
+    ClassDescriptorWithTypeTable result = classDescriptorWithTypeTableWithFQN(fullyQualifiedName);
+    return result == null ? null : result.descriptor();
+  }
+
+  @CheckForNull
+  public static ClassDescriptorWithTypeTable classDescriptorWithTypeTableWithFQN(String fullyQualifiedName) {
     String[] fqnSplitByDot = fullyQualifiedName.split("\\.");
     String symbolLocalNameFromFqn = fqnSplitByDot[fqnSplitByDot.length - 1];
     String moduleName = Arrays.stream(fqnSplitByDot, 0, fqnSplitByDot.length - 1).collect(Collectors.joining("."));
@@ -310,10 +332,16 @@ public class TypeShed {
     if (moduleSymbol == null) return null;
     for (SymbolsProtos.ClassSymbol classSymbol : moduleSymbol.getClassesList()) {
       if (classSymbol.getName().equals(symbolLocalNameFromFqn)) {
-        return classSymbol;
+        return new ClassDescriptorWithTypeTable(classSymbol, TypeShedTypeTable.from(moduleSymbol));
       }
     }
     return null;
+  }
+
+  public record ClassDescriptorWithTypeTable(SymbolsProtos.ClassSymbol descriptor, TypeShedTypeTable typeTable) {
+  }
+
+  public record TypedProtobufDescriptor(Object descriptor, TypeShedTypeTable typeTable) {
   }
 
   /**
@@ -444,10 +472,12 @@ public class TypeShed {
       .forEach(proto -> descriptorsByName.computeIfAbsent(proto.getName(), d -> new HashSet<>()).add(proto));
 
     Map<String, Symbol> deserializedSymbols = new HashMap<>();
+    TypeShedTypeTable typeTable = TypeShedTypeTable.from(moduleSymbol);
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByName.entrySet()) {
       String name = entry.getKey();
-      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), null, moduleSymbol.getFullyQualifiedName(), false, modulesInProgress);
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(
+        entry.getValue(), null, moduleSymbol.getFullyQualifiedName(), false, modulesInProgress, typeTable);
       Symbol disambiguatedSymbol = disambiguateSymbolsWithSameName(name, symbols, moduleSymbol.getFullyQualifiedName());
       deserializedSymbols.put(name, disambiguatedSymbol);
     }
@@ -481,9 +511,10 @@ public class TypeShed {
     return firstFqn != null && symbols.stream().map(Symbol::fullyQualifiedName).allMatch(firstFqn::equals);
   }
 
-  private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol, @Nullable String containerClassFqn, String moduleName) {
+  private static AmbiguousSymbol fromOverloadedFunction(OverloadedFunctionSymbol overloadedFunctionSymbol, @Nullable String containerClassFqn, String moduleName,
+    TypeShedTypeTable typeTable) {
     Set<Symbol> overloadedSymbols = overloadedFunctionSymbol.getDefinitionsList().stream()
-      .map(def -> new FunctionSymbolImpl(def, containerClassFqn, overloadedFunctionSymbol.getValidForList(), moduleName))
+      .map(def -> new FunctionSymbolImpl(def, containerClassFqn, overloadedFunctionSymbol.getValidForList(), moduleName, typeTable))
       .collect(Collectors.toSet());
     return AmbiguousSymbolImpl.create(overloadedSymbols);
   }

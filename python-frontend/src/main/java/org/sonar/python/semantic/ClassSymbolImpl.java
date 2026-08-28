@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
+import org.sonar.python.types.TypeShedTypeTable;
 
 import static org.sonar.python.semantic.SymbolUtils.isPrivateName;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
@@ -124,6 +125,10 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto, String moduleName) {
+    this(classSymbolProto, moduleName, TypeShedTypeTable.EMPTY);
+  }
+
+  public ClassSymbolImpl(SymbolsProtos.ClassSymbol classSymbolProto, String moduleName, TypeShedTypeTable typeTable) {
     super(classSymbolProto.getName(), TypeShed.normalizedFqn(classSymbolProto.getFullyQualifiedName(), moduleName, classSymbolProto.getName()));
     setKind(Kind.CLASS);
     classDefinitionLocation = null;
@@ -146,7 +151,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     inlineInheritedMethodsFromPrivateClass(classSymbolProto.getSuperClassesList(), descriptorsByFqn);
 
     for (Map.Entry<String, Set<Object>> entry : descriptorsByFqn.entrySet()) {
-      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), fullyQualifiedName, moduleName, true);
+      Set<Symbol> symbols = symbolsFromProtobufDescriptors(entry.getValue(), fullyQualifiedName, moduleName, true, typeTable);
       classMembers.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
     }
     addMembers(classMembers);
@@ -158,16 +163,19 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   private void inlineInheritedMethodsFromPrivateClass(List<String> superClassesFqns, Map<String, Set<Object>> descriptorsByFqn) {
     for (String superClassFqn : superClassesFqns) {
       if (isPrivateName(superClassFqn)) {
-        SymbolsProtos.ClassSymbol superClass = TypeShed.classDescriptorWithFQN(superClassFqn);
-        if (superClass == null) return;
+        TypeShed.ClassDescriptorWithTypeTable superClassWithTypes = TypeShed.classDescriptorWithTypeTableWithFQN(superClassFqn);
+        if (superClassWithTypes == null) return;
+        SymbolsProtos.ClassSymbol superClass = superClassWithTypes.descriptor();
         inlinedSuperClassFqn.add(superClassFqn);
         for (SymbolsProtos.FunctionSymbol functionSymbol : superClass.getMethodsList()) {
           String methodFqn = this.fullyQualifiedName + "." + functionSymbol.getName();
-          descriptorsByFqn.computeIfAbsent(methodFqn, d -> new HashSet<>()).add(functionSymbol);
+          descriptorsByFqn.computeIfAbsent(methodFqn, d -> new HashSet<>())
+            .add(new TypeShed.TypedProtobufDescriptor(functionSymbol, superClassWithTypes.typeTable()));
         }
         for (SymbolsProtos.OverloadedFunctionSymbol functionSymbol : superClass.getOverloadedMethodsList()) {
           String methodFqn = this.fullyQualifiedName + "." + functionSymbol.getName();
-          descriptorsByFqn.computeIfAbsent(methodFqn, d -> new HashSet<>()).add(functionSymbol);
+          descriptorsByFqn.computeIfAbsent(methodFqn, d -> new HashSet<>())
+            .add(new TypeShed.TypedProtobufDescriptor(functionSymbol, superClassWithTypes.typeTable()));
         }
         this.superClassesFqns.addAll(superClass.getSuperClassesList());
       }

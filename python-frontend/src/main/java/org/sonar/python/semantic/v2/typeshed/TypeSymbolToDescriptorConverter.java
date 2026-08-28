@@ -19,11 +19,22 @@ package org.sonar.python.semantic.v2.typeshed;
 import java.util.List;
 import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
+import org.sonar.python.types.TypeShedTypeTable;
 
 public class TypeSymbolToDescriptorConverter {
 
+  private final TypeShedTypeTable typeTable;
+
+  TypeSymbolToDescriptorConverter() {
+    this(TypeShedTypeTable.EMPTY);
+  }
+
+  TypeSymbolToDescriptorConverter(TypeShedTypeTable typeTable) {
+    this.typeTable = typeTable;
+  }
+
   TypeAnnotationDescriptor convert(SymbolsProtos.Type type) {
-    List<TypeAnnotationDescriptor> args = type.getArgsList().stream()
+    List<TypeAnnotationDescriptor> args = typeTable.arguments(type).stream()
       .map(this::convert)
       .toList();
     TypeAnnotationDescriptor.TypeKind kind = TypeAnnotationDescriptor.TypeKind.valueOf(type.getKind().name());

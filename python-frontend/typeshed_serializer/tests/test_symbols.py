@@ -36,6 +36,11 @@ def test_module_symbol(typeshed_stdlib):
     assert pb_module.fully_qualified_name == "abc"
     assert len(pb_module.classes) == 3
     assert len(pb_module.functions) == 4
+    assert len(pb_module.type_table) > 0
+    assert any(function.return_annotation_id > 0 for function in pb_module.functions)
+    assert all(not function.HasField("return_annotation") for function in pb_module.functions)
+    assert all(type_id <= len(pb_module.type_table)
+               for type_entry in pb_module.type_table for type_id in type_entry.arg_type_ids)
     assert "__spec__" not in {var.name for var in pb_module.vars}
 
     types_module = symbols.ModuleSymbol(typeshed_stdlib.files.get("types")).to_proto()
@@ -154,7 +159,10 @@ def test_function_symbol(typeshed_stdlib):
     assert pb_func.fully_qualified_name == "cmd.Cmd.completenames"
     assert not pb_func.has_decorators
     assert not pb_func.is_asynchronous
+    assert pb_func.HasField("return_annotation")
     assert pb_func.return_annotation.pretty_printed_name == ""
+    assert pb_func.return_annotation.fully_qualified_name == "builtins.list"
+    assert [arg.fully_qualified_name for arg in pb_func.return_annotation.args] == ["builtins.str"]
     assert len(pb_func.resolved_decorator_names) == 0
 
     mypy_cmd_loop_method_node = mypy_cmd_class_node.names.get("cmdloop").node
@@ -167,6 +175,20 @@ def test_function_symbol(typeshed_stdlib):
     intro_param = cmd_loop.parameters[1]
     assert intro_param.has_default
     assert intro_param.kind == symbols.ParamKind.POSITIONAL_OR_KEYWORD
+
+
+def test_type_table_deduplicates_unknown_types_without_interning_their_arguments():
+    unreachable_arg = mock.Mock()
+    unknown_with_arg = mock.Mock(is_unknown=True, args=[unreachable_arg])
+    unknown_without_args = mock.Mock(is_unknown=True, args=[])
+    type_table = symbols.TypeTable()
+
+    assert type_table.add(unknown_with_arg) == type_table.add(unknown_without_args)
+
+    pb_module = symbols.symbols_pb2.ModuleSymbol()
+    type_table.write_to(pb_module)
+    assert len(pb_module.type_table) == 1
+    assert not pb_module.type_table[0].arg_type_ids
 
 
 def test_overloaded_functions(typeshed_stdlib):

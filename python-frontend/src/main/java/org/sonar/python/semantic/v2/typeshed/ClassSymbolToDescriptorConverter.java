@@ -19,7 +19,6 @@ package org.sonar.python.semantic.v2.typeshed;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -34,13 +33,11 @@ public class ClassSymbolToDescriptorConverter {
   public ClassSymbolToDescriptorConverter(VarSymbolToDescriptorConverter varConverter,
     FunctionSymbolToDescriptorConverter functionConverter,
     OverloadedFunctionSymbolToDescriptorConverter overloadedFunctionConverter,
-    Set<PythonVersionUtils.SemanticVersion> projectSemanticPythonVersions) {
+    Set<String> projectSemanticPythonVersions) {
     this.varConverter = varConverter;
     this.functionConverter = functionConverter;
     this.overloadedFunctionConverter = overloadedFunctionConverter;
-    this.projectSemanticPythonVersions = projectSemanticPythonVersions.stream()
-      .map(PythonVersionUtils.SemanticVersion::serializedValue)
-      .collect(Collectors.toSet());
+    this.projectSemanticPythonVersions = projectSemanticPythonVersions;
   }
 
   public ClassDescriptor convert(SymbolsProtos.ClassSymbol classSymbol) {

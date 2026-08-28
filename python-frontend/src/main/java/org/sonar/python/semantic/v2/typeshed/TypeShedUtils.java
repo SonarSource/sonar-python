@@ -22,6 +22,7 @@ import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.types.protobuf.SymbolsProtos;
+import org.sonar.python.types.TypeShedTypeTable;
 
 public class TypeShedUtils {
 
@@ -40,21 +41,26 @@ public class TypeShedUtils {
 
   @CheckForNull
   public static String getTypesNormalizedFqn(@Nullable SymbolsProtos.Type type) {
+    return getTypesNormalizedFqn(type, TypeShedTypeTable.EMPTY);
+  }
+
+  @CheckForNull
+  public static String getTypesNormalizedFqn(@Nullable SymbolsProtos.Type type, TypeShedTypeTable typeTable) {
     return Optional.ofNullable(type)
-      .map(TypeShedUtils::getTypesFqn)
+      .map(t -> getTypesFqn(t, typeTable))
       .map(TypeShedUtils::normalizedFqn)
       .orElse(null);
   }
 
   @CheckForNull
-  private static String getTypesFqn(SymbolsProtos.Type type) {
+  private static String getTypesFqn(SymbolsProtos.Type type, TypeShedTypeTable typeTable) {
     // Add support CALLABLE and UNION kinds
     switch (type.getKind()) {
       case INSTANCE:
         String typeName = type.getFullyQualifiedName();
         return typeName.isEmpty() ? null : typeName;
       case TYPE_ALIAS:
-        return getTypesFqn(type.getArgs(0));
+        return getTypesFqn(typeTable.argument(type, 0), typeTable);
       case TYPE:
         return TypeShedConstants.BUILTINS_TYPE_FQN;
       case TUPLE:

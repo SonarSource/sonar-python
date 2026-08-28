@@ -27,26 +27,15 @@ import org.sonar.python.index.AliasDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.ModuleDescriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
+import org.sonar.python.types.TypeShedTypeTable;
 
 public class ModuleSymbolToDescriptorConverter {
-  private final ClassSymbolToDescriptorConverter classConverter;
-  private final FunctionSymbolToDescriptorConverter functionConverter;
-  private final VarSymbolToDescriptorConverter variableConverter;
-  private final OverloadedFunctionSymbolToDescriptorConverter overloadedFunctionConverter;
   private final Set<String> projectSemanticPythonVersions;
 
   public ModuleSymbolToDescriptorConverter(Set<PythonVersionUtils.SemanticVersion> projectSemanticPythonVersions) {
     this.projectSemanticPythonVersions = projectSemanticPythonVersions.stream()
       .map(PythonVersionUtils.SemanticVersion::serializedValue)
       .collect(Collectors.toSet());
-    functionConverter = new FunctionSymbolToDescriptorConverter();
-    variableConverter = new VarSymbolToDescriptorConverter();
-    overloadedFunctionConverter = new OverloadedFunctionSymbolToDescriptorConverter(functionConverter);
-    classConverter = new ClassSymbolToDescriptorConverter(
-      variableConverter,
-      functionConverter,
-      overloadedFunctionConverter,
-      projectSemanticPythonVersions);
   }
 
   @CheckForNull
@@ -63,6 +52,12 @@ public class ModuleSymbolToDescriptorConverter {
   }
 
   private Map<String, Descriptor> getModuleDescriptors(SymbolsProtos.ModuleSymbol moduleSymbol) {
+    var typeTable = TypeShedTypeTable.from(moduleSymbol);
+    var functionConverter = new FunctionSymbolToDescriptorConverter(typeTable);
+    var variableConverter = new VarSymbolToDescriptorConverter(typeTable);
+    var overloadedFunctionConverter = new OverloadedFunctionSymbolToDescriptorConverter(functionConverter);
+    var classConverter = new ClassSymbolToDescriptorConverter(
+      variableConverter, functionConverter, overloadedFunctionConverter, projectSemanticPythonVersions);
     var classesStream = moduleSymbol.getClassesList()
       .stream()
       .filter(d -> ProtoUtils.isValidForSemanticPythonVersion(d.getValidForList(), projectSemanticPythonVersions))

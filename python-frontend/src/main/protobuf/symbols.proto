@@ -36,6 +36,7 @@ message Type {
   repeated Type args = 3;
   optional string fully_qualified_name = 4;
   bool is_self = 5;
+  repeated uint32 arg_type_ids = 6 [packed = true];
 }
 
 message ParameterSymbol {
@@ -43,11 +44,13 @@ message ParameterSymbol {
   ParameterKind kind = 2;
   optional Type type_annotation = 3;
   bool has_default = 4;
+  uint32 type_annotation_id = 5;
 }
 
 message FunctionSymbol {
   string name = 1;
   string fully_qualified_name = 2;
+  uint32 return_annotation_id = 3;
   optional Type return_annotation = 4;
   repeated ParameterSymbol parameters = 5;
   bool has_decorators = 6;
@@ -92,6 +95,7 @@ message ModuleSymbol {
   repeated FunctionSymbol functions = 3;
   repeated OverloadedFunctionSymbol overloaded_functions = 4;
   repeated VarSymbol vars = 5;
+  repeated Type type_table = 6;
 }
 
 message VarSymbol {
@@ -100,4 +104,5 @@ message VarSymbol {
   optional Type type_annotation = 3;
   bool is_imported_module = 4;
   repeated string valid_for = 5;
+  uint32 type_annotation_id = 6;
 }

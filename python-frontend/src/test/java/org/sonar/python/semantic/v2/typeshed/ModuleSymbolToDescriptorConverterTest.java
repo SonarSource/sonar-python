@@ -84,4 +84,35 @@ class ModuleSymbolToDescriptorConverterTest {
     var descriptor = converter.convert(null);
     Assertions.assertThat(descriptor).isNull();
   }
+
+  @Test
+  void convertsModuleLocalTypeIds() {
+    var converter = new ModuleSymbolToDescriptorConverter(PythonVersionUtils.allSupportedSemanticVersions());
+    var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
+      .setFullyQualifiedName("module")
+      .addTypeTable(SymbolsProtos.Type.newBuilder()
+        .setKind(SymbolsProtos.TypeKind.INSTANCE)
+        .setFullyQualifiedName("builtins.str"))
+      .addTypeTable(SymbolsProtos.Type.newBuilder()
+        .setKind(SymbolsProtos.TypeKind.TYPE_ALIAS)
+        .setFullyQualifiedName("module.Alias")
+        .addArgTypeIds(1))
+      .addFunctions(SymbolsProtos.FunctionSymbol.newBuilder()
+        .setName("foo")
+        .setFullyQualifiedName("module.foo")
+        .setReturnAnnotationId(2)
+        .addParameters(SymbolsProtos.ParameterSymbol.newBuilder()
+          .setName("value")
+          .setTypeAnnotationId(1)))
+      .build();
+
+    var descriptor = converter.convert(symbol);
+    var function = (FunctionDescriptor) descriptor.members().get("foo");
+    Assertions.assertThat(function.annotatedReturnTypeName()).isEqualTo("str");
+    Assertions.assertThat(function.typeAnnotationDescriptor().args())
+      .singleElement()
+      .extracting(type -> type.fullyQualifiedName())
+      .isEqualTo("str");
+    Assertions.assertThat(function.parameters().get(0).annotatedType()).isEqualTo("str");
+  }
 }

@@ -200,6 +200,10 @@ public class InferredTypes {
   }
 
   public static InferredType fromTypeshedProtobuf(SymbolsProtos.Type type) {
+    return fromTypeshedProtobuf(type, TypeShedTypeTable.EMPTY);
+  }
+
+  public static InferredType fromTypeshedProtobuf(SymbolsProtos.Type type, TypeShedTypeTable typeTable) {
     switch (type.getKind()) {
       case INSTANCE:
         String typeName = type.getFullyQualifiedName();
@@ -214,12 +218,12 @@ public class InferredTypes {
       case TYPE:
         return InferredTypes.TYPE;
       case TYPE_ALIAS:
-        return fromTypeshedProtobuf(type.getArgs(0));
+        return fromTypeshedProtobuf(typeTable.argument(type, 0), typeTable);
       case CALLABLE:
         // this should be handled as a function type - see SONARPY-953
         return anyType();
       case UNION:
-        return union(type.getArgsList().stream().map(InferredTypes::fromTypeshedProtobuf));
+        return union(typeTable.arguments(type).stream().map(arg -> fromTypeshedProtobuf(arg, typeTable)));
       case TUPLE:
         return InferredTypes.TUPLE;
       case NONE:

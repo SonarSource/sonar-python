@@ -21,15 +21,22 @@ import java.util.Optional;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
+import org.sonar.python.types.TypeShedTypeTable;
 
 public class FunctionSymbolToDescriptorConverter {
 
   private final ParameterSymbolToDescriptorConverter parameterConverter;
   private final TypeSymbolToDescriptorConverter typeConverter;
+  private final TypeShedTypeTable typeTable;
 
   public FunctionSymbolToDescriptorConverter() {
-    parameterConverter = new ParameterSymbolToDescriptorConverter();
-    typeConverter = new TypeSymbolToDescriptorConverter();
+    this(TypeShedTypeTable.EMPTY);
+  }
+
+  public FunctionSymbolToDescriptorConverter(TypeShedTypeTable typeTable) {
+    this.typeTable = typeTable;
+    parameterConverter = new ParameterSymbolToDescriptorConverter(typeTable);
+    typeConverter = new TypeSymbolToDescriptorConverter(typeTable);
   }
 
   public FunctionDescriptor convert(SymbolsProtos.FunctionSymbol functionSymbol) {
@@ -39,11 +46,12 @@ public class FunctionSymbolToDescriptorConverter {
   public FunctionDescriptor convert(SymbolsProtos.FunctionSymbol functionSymbol, boolean isParentIsAClass) {
     var fullyQualifiedName = TypeShedUtils.normalizedFqn(functionSymbol.getFullyQualifiedName());
     TypeAnnotationDescriptor typeAnnotationDescriptor = null;
-    if (functionSymbol.hasReturnAnnotation()) {
-      SymbolsProtos.Type returnAnnotation = functionSymbol.getReturnAnnotation();
+    SymbolsProtos.Type returnAnnotation = typeTable.resolve(
+      functionSymbol.getReturnAnnotationId(), functionSymbol.hasReturnAnnotation(), functionSymbol.getReturnAnnotation());
+    if (returnAnnotation != null) {
       typeAnnotationDescriptor = typeConverter.convert(returnAnnotation);
     }
-    String returnType = TypeShedUtils.getTypesNormalizedFqn(functionSymbol.getReturnAnnotation());
+    String returnType = TypeShedUtils.getTypesNormalizedFqn(returnAnnotation, typeTable);
     var decorators = Optional.of(functionSymbol)
       .map(SymbolsProtos.FunctionSymbol::getResolvedDecoratorNamesList)
       .stream()

@@ -22,14 +22,26 @@ import javax.annotation.Nullable;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
+import org.sonar.python.types.TypeShedTypeTable;
 
 public class VarSymbolToDescriptorConverter {
 
+  private final TypeShedTypeTable typeTable;
+
+  public VarSymbolToDescriptorConverter() {
+    this(TypeShedTypeTable.EMPTY);
+  }
+
+  public VarSymbolToDescriptorConverter(TypeShedTypeTable typeTable) {
+    this.typeTable = typeTable;
+  }
+
   public Descriptor convert(SymbolsProtos.VarSymbol varSymbol) {
     var fullyQualifiedName = TypeShedUtils.normalizedFqn(varSymbol.getFullyQualifiedName());
-    SymbolsProtos.Type protoTypeAnnotation = varSymbol.getTypeAnnotation();
+    SymbolsProtos.Type protoTypeAnnotation = typeTable.resolve(
+      varSymbol.getTypeAnnotationId(), varSymbol.hasTypeAnnotation(), varSymbol.getTypeAnnotation());
     var isImportedModule = varSymbol.getIsImportedModule();
-    var typeAnnotation = TypeShedUtils.getTypesNormalizedFqn(protoTypeAnnotation);
+    var typeAnnotation = TypeShedUtils.getTypesNormalizedFqn(protoTypeAnnotation, typeTable);
     if (isTypeAnnotationKnownToBeIncorrect(fullyQualifiedName)) {
       return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, null, isImportedModule, List.of(), List.of());
     }

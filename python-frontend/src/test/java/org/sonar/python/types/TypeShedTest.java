@@ -560,6 +560,31 @@ class TypeShedTest {
   }
 
   @Test
+  void types_from_module_local_table() throws TextFormat.ParseException {
+    SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
+      """
+      fully_qualified_name: "mod"
+      type_table {
+        fully_qualified_name: "builtins.str"
+      }
+      functions {
+        name: "foo"
+        fully_qualified_name: "mod.foo"
+        return_annotation_id: 1
+        parameters {
+          name: "value"
+          kind: POSITIONAL_OR_KEYWORD
+          type_annotation_id: 1
+        }
+      }
+      """);
+
+    FunctionSymbol function = (FunctionSymbol) TypeShed.getSymbolsFromProtobufModule(moduleSymbol).get("foo");
+    assertThat(function.annotatedReturnTypeName()).isEqualTo("str");
+    assertThat(function.parameters().get(0).declaredType().canOnlyBe("str")).isTrue();
+  }
+
+  @Test
   void stubFilesSymbols_should_not_contain_ambiguous_symbols_of_classes() {
     // populate typeshed symbols cache by importing socket module
     symbolsForModule("socket");

@@ -17,10 +17,10 @@
 package org.sonar.python.semantic.v2.typeshed;
 
 import java.util.function.Function;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
@@ -38,7 +38,7 @@ class ClassSymbolToDescriptorConverterTest {
       variableConverter,
       functionConverter,
       overloadedFunctionConverter,
-      PythonVersionUtils.allSupportedSemanticVersions());
+      Set.of("310", "311", "312", "313", "314"));
 
     var symbol = SymbolsProtos.ClassSymbol.newBuilder()
       .setName("MyClass")
@@ -108,7 +108,7 @@ class ClassSymbolToDescriptorConverterTest {
       variableConverter,
       functionConverter,
       overloadedFunctionConverter,
-      PythonVersionUtils.allSupportedSemanticVersions());
+      Set.of("310", "311", "312", "313", "314"));
 
     var symbol = SymbolsProtos.ClassSymbol.newBuilder()
       .setName("int")
