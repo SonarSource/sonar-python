@@ -179,12 +179,12 @@
             </configuration>
             <executions>
               <execution>
-                <id>tox-runner</id>
+                <id>serializer-runner</id>
                 <phase>generate-resources</phase>
                 <configuration>
                   <executable>python</executable>
                   <arguments>
-                      <argument>runners/tox_runner.py</argument>
+                      <argument>runners/serializer_runner.py</argument>
                       <argument>--skip_tests</argument>
                       <argument>${skipTests}</argument>
                       <argument>--fail_fast</argument>

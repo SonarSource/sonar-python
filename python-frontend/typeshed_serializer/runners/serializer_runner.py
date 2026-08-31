@@ -65,7 +65,7 @@ RESOURCES_FOLDERS = {
     },
 }
 
-logger = logging.getLogger('tox_runner')
+logger = logging.getLogger('runner')
 handler = logging.StreamHandler(sys.stdout)
 log_formatter = logging.Formatter(fmt='%(name)s [%(levelname)s] --- %(message)s ---')
 logger.setLevel(logging.INFO)
@@ -91,7 +91,7 @@ def fetch_resource_file_names(folder_name: str, file_extension: str) -> list[str
 
 
 def fetch_config_file_names() -> list[str]:
-    return [os.path.join(CURRENT_PATH, '../requirements.txt'), os.path.join(CURRENT_PATH, '../tox.ini')]
+    return [os.path.join(CURRENT_PATH, '../pyproject.toml'), os.path.join(CURRENT_PATH, '../uv.lock')]
 
 def fetch_source_file_names(folder_path: str) -> list[str]:
     filenames = fetch_python_file_names(folder_path)
@@ -238,8 +238,8 @@ def compute_and_compare_checksums(check_type: str, folder_name: str, folder_file
 
 
 
-def get_serialize_command_to_run(previous_source_checksum: Optional[str], current_sources_checksum: str, changed_serializers: List[str]) -> Optional[List[str]]:
-    """Determine the serialization command to run based on checksums and changed serializers.
+def get_serialize_command_to_run(previous_source_checksum: Optional[str], current_sources_checksum: str, changed_serializers: List[str]) -> Optional[List[List[str]]]:
+    """Determine the serialization commands to run based on checksums and changed serializers.
 
     Args:
         previous_source_checksum: Previous checksum of source files
@@ -247,17 +247,22 @@ def get_serialize_command_to_run(previous_source_checksum: Optional[str], curren
         changed_serializers: List of serializers that have changed
 
     Returns:
-        Command to run as list of strings, or None if no serialization needed
+        List of commands to run sequentially as list of string lists, or None if no serialization needed
     """
     if previous_source_checksum != current_sources_checksum:
         # Serializer code has changed - run full serialization
         logger.info('SERIALIZER CODE HAS CHANGED - STARTING FULL TYPESHED SERIALIZATION')
-        return ['tox', '-e', 'serialize']
+        return [
+            ['uv', 'run', 'python', '-m', 'utils.folder_manager'],
+            ['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer'],
+        ]
     elif changed_serializers:
         logger.info(f"STARTING SELECTIVE TYPESHED SERIALIZATION FOR: {','.join(changed_serializers)}")
-        # Run selective serialization through tox environment
         serializers_arg = ','.join(changed_serializers)
-        return ['tox', '-e', 'selective-serialize', '--', serializers_arg]
+        return [
+            ['uv', 'run', 'python', '-m', 'utils.folder_manager', serializers_arg],
+            ['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer', serializers_arg],
+        ]
     else:
         logger.info('SKIPPING TYPESHED SERIALIZATION')
         return None
@@ -276,33 +281,45 @@ def update_folder_checksums_for_changed_serializers(changed_serializers: List[st
                 write_folder_checksum(folder_name, source_checksum, binary_checksum)
 
 
+def _run_serialize(commands: List[List[str]], full_serialization: bool, changed_serializers: List[str], dry_run: bool) -> None:
+    if dry_run:
+        for cmd in commands:
+            logger.info(f'DRY RUN: Would execute: {" ".join(cmd)}')
+        return
+    for cmd in commands:
+        subprocess.run(cmd, check=True)
+    if full_serialization:
+        update_all_checksums()
+    else:
+        update_folder_checksums_for_changed_serializers(changed_serializers)
+
+
+def _run_tests(dry_run: bool) -> None:
+    test_cmd = ['uv', 'run', 'python', '-m', 'pytest', 'tests/']
+    if dry_run:
+        logger.info(f'DRY RUN: Would run: {" ".join(test_cmd)}')
+    else:
+        subprocess.run(test_cmd, check=True)
+
+
 def main(skip_tests=False, fail_fast=False, dry_run=False):
-    # Check if serializer source code has changed
     source_files = fetch_source_file_names(SERIALIZER_PATH)
     current_sources_checksum = compute_checksum(source_files, normalize_text_files)
     previous_sources_checksum = read_previous_checksum(SERIALIZER_SOURCE_CHECKSUM_FILE)
-    serializer_sources_changed = compute_and_compare_checksums("SERIALIZER_SOURCE", SERIALIZER_PATH, source_files, normalize_text_files, previous_sources_checksum)
+    compute_and_compare_checksums("SERIALIZER_SOURCE", SERIALIZER_PATH, source_files, normalize_text_files, previous_sources_checksum)
 
-    if serializer_sources_changed and fail_fast :
+    if previous_sources_checksum != current_sources_checksum and fail_fast:
         raise RuntimeError('INCONSISTENT SOURCES CHECKSUMS')
 
     changed_serializers = detect_required_serializations(fail_fast)
-    serialize_command_to_run = get_serialize_command_to_run(previous_sources_checksum, current_sources_checksum, changed_serializers)
+    full_serialization = previous_sources_checksum != current_sources_checksum
+    serialize_commands = get_serialize_command_to_run(previous_sources_checksum, current_sources_checksum, changed_serializers)
 
-    # Execute or display the serialize command
-    if serialize_command_to_run:
-        if dry_run:
-            logger.info(f'DRY RUN: Would execute: {" ".join(serialize_command_to_run)}')
-        else:
-            _ = subprocess.run(serialize_command_to_run, check=True)
-            update_folder_checksums_for_changed_serializers(changed_serializers)
+    if serialize_commands:
+        _run_serialize(serialize_commands, full_serialization, changed_serializers, dry_run)
 
-    # Run tests after serialization (unless skip_tests=True)
     if not skip_tests:
-        if dry_run:
-            logger.info('DRY RUN: Would run test')
-        else:
-            _ = subprocess.run(['tox', '-e', 'py314'], check=True)
+        _run_tests(dry_run)
 
 
 if __name__ == '__main__':

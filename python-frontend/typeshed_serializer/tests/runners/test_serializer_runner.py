@@ -22,21 +22,21 @@ import os
 from contextlib import ExitStack
 
 
-from runners import tox_runner
-from runners.tox_runner import SERIALIZER_SOURCE_CHECKSUM_FILE
+from runners import serializer_runner as runner
+from runners.serializer_runner import SERIALIZER_SOURCE_CHECKSUM_FILE
 
 CURRENT_PATH = os.path.dirname(__file__)
 
 
-class ToxRunnerTest(unittest.TestCase):
-    MODULE_NAME = 'runners.tox_runner'
+class RunnerTest(unittest.TestCase):
+    MODULE_NAME = 'runners.serializer_runner'
     PATH_IS_FILE_FUNCTION = f'{MODULE_NAME}.Path.is_file'
     COMPUTE_CHECKSUM_FUNCTION = f'{MODULE_NAME}.compute_checksum'
     READ_PREVIOUS_CHECKSUM_FUNCTION = f'{MODULE_NAME}.read_previous_checksum'
     SUBPROCESS_CALL = f'{MODULE_NAME}.subprocess'
     BUILTIN_OPEN_FUNCTION = 'builtins.open'
 
-    FILE_NAMES = [os.path.join('a', 'test'), os.path.join('b', 'file'), 'requirements.txt']
+    FILE_NAMES = [os.path.join('a', 'test'), os.path.join('b', 'file'), 'pyproject.toml']
     FAKEMODULE_PATH = os.path.join(CURRENT_PATH, "../resources/fakemodule.pyi")
     FAKEMODULE_IMPORTED_PATH = os.path.join(CURRENT_PATH, "../resources/fakemodule_imported.pyi")
     TEST_RESOURCES_FILE_NAMES = [FAKEMODULE_PATH, FAKEMODULE_IMPORTED_PATH]
@@ -45,7 +45,7 @@ class ToxRunnerTest(unittest.TestCase):
     def _setup_basic_main_test(self, prev_checksum="123", curr_checksum="123", changed_serializers=None):
         """Set up a basic main() test with common mocks and configuration.
 
-        This helper creates all the standard mocks needed to test tox_runner.main() function
+        This helper creates all the standard mocks needed to test runner.main() function
         with different scenarios. It returns a context manager stack and a mock container object
         that provides clean access to individual mocks without requiring tuple unpacking.
 
@@ -62,7 +62,7 @@ class ToxRunnerTest(unittest.TestCase):
         Usage:
             stack, mocks = self._setup_basic_main_test(prev_checksum="old", curr_checksum="new")
             with stack:
-                tox_runner.main()
+                runner.main()
                 mocks.subprocess.run.assert_called_once()
         """
         stack = ExitStack()
@@ -89,9 +89,10 @@ class ToxRunnerTest(unittest.TestCase):
                 self.compute_compare = stack.enter_context(mock.patch(f"{test_instance.MODULE_NAME}.compute_and_compare_checksums", return_value=serializer_changed))
                 # Mock resource folder change detection
                 self.check_changes = stack.enter_context(mock.patch(f"{test_instance.MODULE_NAME}.detect_required_serializations", return_value=changed_serializers or []))
-                # Mock subprocess calls (tox execution)
+                # Mock subprocess calls (uv execution)
                 self.subprocess = stack.enter_context(mock.patch(test_instance.SUBPROCESS_CALL))
                 self.update_folder_checksums_for_changed_serializers = stack.enter_context(mock.patch(f"{test_instance.MODULE_NAME}.update_folder_checksums_for_changed_serializers"))
+                self.update_all_checksums = stack.enter_context(mock.patch(f"{test_instance.MODULE_NAME}.update_all_checksums"))
 
         return stack, MockContainer(self)
 
@@ -100,7 +101,7 @@ class ToxRunnerTest(unittest.TestCase):
         with mock.patch('os.listdir') as mocked_listdir, mock.patch(f'{self.MODULE_NAME}.isfile') as mocked_isfile:
             mocked_listdir.return_value = ['folder1', 'folder2', 'file', 'file1.py', 'otherfile.cpp', 'file2.py']
             mocked_isfile.side_effect = [False, False, True, True, True, True]
-            fns = tox_runner.fetch_python_file_names(folder)
+            fns = runner.fetch_python_file_names(folder)
             expected = [os.path.join("test", "file1.py"), os.path.join("test", "file2.py")]
             self.assertListEqual(fns, expected)
 
@@ -111,16 +112,16 @@ class ToxRunnerTest(unittest.TestCase):
             mocked_walk.return_value = [('folder2', '', [f'__init__{extension}', f'file1{extension}']),
                                         ('folder1', '', ['file', f'__init__{extension}']),
                                         ('folder3', '', ['otherfile.cpp', 'file2.testother', 'filetest'])]
-            fns = tox_runner.fetch_resource_file_names(folder_name, extension)
+            fns = runner.fetch_resource_file_names(folder_name, extension)
             expected = [os.path.join("folder2", f'__init__{extension}'), os.path.join("folder2", f'file1{extension}'), os.path.join("folder1", f'__init__{extension}')]
             mocked_walk.assert_called_once_with(folder_name)
             self.assertListEqual(fns, expected)
 
     def test_fetch_config_file_names(self):
-        fns = tox_runner.fetch_config_file_names()
+        fns = runner.fetch_config_file_names()
         self.assertEqual(len(fns), 2)
-        self.assertTrue(fns[0].endswith('requirements.txt'))
-        self.assertTrue(fns[1].endswith('tox.ini'))
+        self.assertTrue(fns[0].endswith('pyproject.toml'))
+        self.assertTrue(fns[1].endswith('uv.lock'))
 
     def test_fetch_source_file_names(self):
         folder = "test"
@@ -128,7 +129,7 @@ class ToxRunnerTest(unittest.TestCase):
                 mock.patch(f'{self.MODULE_NAME}.fetch_config_file_names') as mock_fetch_config:
             mock_fetch_python.return_value = [os.path.join('a', '2'), os.path.join('a', '4'), os.path.join('b', '1'), os.path.join('b', '3')]
             mock_fetch_config.return_value = ['z', '_1']
-            fns = tox_runner.fetch_source_file_names(folder)
+            fns = runner.fetch_source_file_names(folder)
             expected = ['_1', os.path.join('a', '2'), os.path.join('a', '4'), os.path.join('b', '1'), os.path.join('b', '3'), 'z']
             self.assertListEqual(fns, expected)
             mock_fetch_python.assert_called_with(folder)
@@ -138,7 +139,7 @@ class ToxRunnerTest(unittest.TestCase):
         checksum_file = 'non_existant'
         with mock.patch(self.PATH_IS_FILE_FUNCTION) as mocked_isfile:
             mocked_isfile.return_value = False
-            assert tox_runner.read_previous_checksum(checksum_file) == None
+            assert runner.read_previous_checksum(checksum_file) == None
 
     def test_read_previous_checksum_file_exists(self):
         source_checksum = '123'
@@ -147,7 +148,7 @@ class ToxRunnerTest(unittest.TestCase):
         with mock.patch(self.PATH_IS_FILE_FUNCTION) as mocked_isfile, \
                 mock.patch(self.BUILTIN_OPEN_FUNCTION, mock_open(read_data=file_data)) as mocked_open:
             mocked_isfile.return_value = True
-            assert tox_runner.read_previous_checksum(checksum_file) == source_checksum
+            assert runner.read_previous_checksum(checksum_file) == source_checksum
             mocked_open.assert_called_with(checksum_file, 'r')
 
     def test_read_previous_checksum_empty(self):
@@ -156,45 +157,45 @@ class ToxRunnerTest(unittest.TestCase):
         with mock.patch(self.PATH_IS_FILE_FUNCTION) as mocked_isfile, \
                 mock.patch(self.BUILTIN_OPEN_FUNCTION, mock_open(read_data=empty_source_checksum)) as mocked_open:
             mocked_isfile.return_value = True
-            assert tox_runner.read_previous_checksum(checksum_file) == None
+            assert runner.read_previous_checksum(checksum_file) == None
             mocked_open.assert_called_with(checksum_file, 'r')
 
     def test_normalized_text_files_rn(self):
         with mock.patch(f'{self.MODULE_NAME}.Path.read_text') as mock_read_text:
             mock_read_text.return_value = "\r\ntest\r\n end\r\n"
-            text = tox_runner.normalize_text_files("test")
+            text = runner.normalize_text_files("test")
             assert text == self.FILE_CONTENT
 
     def test_normalized_text_files_r(self):
         with mock.patch(f'{self.MODULE_NAME}.Path.read_text') as mock_read_text:
             mock_read_text.return_value = "\rtest\r end\r"
-            text = tox_runner.normalize_text_files("test")
+            text = runner.normalize_text_files("test")
             assert text == self.FILE_CONTENT
 
     def test_normalized_text_files(self):
         with mock.patch(f'{self.MODULE_NAME}.Path.read_text') as mock_read_text:
             mock_read_text.return_value = "\ntest\n end\n"
-            text = tox_runner.normalize_text_files("test")
+            text = runner.normalize_text_files("test")
             assert text == self.FILE_CONTENT
 
     def test_read_file(self):
         file_bytes = bytes("\ntest end\n", 'utf-8')
         with mock.patch(f'{self.MODULE_NAME}.Path.read_bytes') as mock_read_bytes:
             mock_read_bytes.return_value = file_bytes
-            text = tox_runner.read_file("test")
+            text = runner.read_file("test")
             assert text == file_bytes
 
     def test_compute_checksum(self):
-        checksum1 = tox_runner.compute_checksum(self.TEST_RESOURCES_FILE_NAMES, tox_runner.normalize_text_files)
-        checksum2 = tox_runner.compute_checksum(self.TEST_RESOURCES_FILE_NAMES, tox_runner.normalize_text_files)
+        checksum1 = runner.compute_checksum(self.TEST_RESOURCES_FILE_NAMES, runner.normalize_text_files)
+        checksum2 = runner.compute_checksum(self.TEST_RESOURCES_FILE_NAMES, runner.normalize_text_files)
         assert checksum1 == checksum2
 
     def test_compute_different_checksum(self):
-        checksum1 = tox_runner.compute_checksum(self.TEST_RESOURCES_FILE_NAMES, tox_runner.normalize_text_files)
-        checksum2 = tox_runner.compute_checksum([self.FAKEMODULE_IMPORTED_PATH], tox_runner.normalize_text_files)
+        checksum1 = runner.compute_checksum(self.TEST_RESOURCES_FILE_NAMES, runner.normalize_text_files)
+        checksum2 = runner.compute_checksum([self.FAKEMODULE_IMPORTED_PATH], runner.normalize_text_files)
         assert checksum1 != checksum2
 
-    def test_tox_runner_unchanged_checksums(self):
+    def test_runner_unchanged_checksums(self):
         # Test scenario: source code unchanged, no folder changes -> run tests only
         stack, mocks = self._setup_basic_main_test(
             prev_checksum="123",
@@ -202,16 +203,17 @@ class ToxRunnerTest(unittest.TestCase):
             changed_serializers=[]
         )
         with stack:
-            tox_runner.main()
+            runner.main()
 
             mocks.files.assert_called_once()
-            mocks.prev_checksum.assert_any_call(tox_runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
-            mocks.checksum.assert_any_call(self.FILE_NAMES, tox_runner.normalize_text_files)
+            mocks.prev_checksum.assert_any_call(runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
+            mocks.checksum.assert_any_call(self.FILE_NAMES, runner.normalize_text_files)
             mocks.subprocess.run.assert_called_with(
-                ["tox", "-e", "py314"], check=True
+                ['uv', 'run', 'python', '-m', 'pytest', 'tests/'],
+                check=True
             )
 
-    def test_tox_runner_modified_checksum(self):
+    def test_runner_modified_checksum(self):
         # Test scenario: source code changed -> run full serialization
         stack, mocks = self._setup_basic_main_test(
             prev_checksum="123",
@@ -219,15 +221,18 @@ class ToxRunnerTest(unittest.TestCase):
             changed_serializers=[]
         )
         with stack:
-            tox_runner.main()
+            runner.main()
 
-            mocks.prev_checksum.assert_called_with(tox_runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
-            mocks.checksum.assert_called_with(self.FILE_NAMES, tox_runner.normalize_text_files)
+            mocks.prev_checksum.assert_called_with(runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
+            mocks.checksum.assert_called_with(self.FILE_NAMES, runner.normalize_text_files)
             expected_calls = [
-                mock.call(['tox', '-e', 'serialize'], check=True),
-                mock.call(['tox', '-e', 'py314'], check=True)
+                mock.call(['uv', 'run', 'python', '-m', 'utils.folder_manager'], check=True),
+                mock.call(['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer'], check=True),
+                mock.call(['uv', 'run', 'python', '-m', 'pytest', 'tests/'], check=True),
             ]
             mocks.subprocess.run.assert_has_calls(expected_calls)
+            mocks.update_all_checksums.assert_called_once()
+            mocks.update_folder_checksums_for_changed_serializers.assert_not_called()
 
     def test_skip_tests(self):
         # Test scenario: no changes but skip_tests=True -> no subprocess calls at all
@@ -237,12 +242,12 @@ class ToxRunnerTest(unittest.TestCase):
             changed_serializers=[]
         )
         with stack:
-            tox_runner.main(skip_tests=True)
+            runner.main(skip_tests=True)
 
             mocks.files.assert_called_once()
-            mocks.prev_checksum.assert_any_call(tox_runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
+            mocks.prev_checksum.assert_any_call(runner.SERIALIZER_SOURCE_CHECKSUM_FILE)
             mocks.checksum.assert_any_call(
-                self.FILE_NAMES, tox_runner.normalize_text_files
+                self.FILE_NAMES, runner.normalize_text_files
             )
             mocks.subprocess.run.assert_not_called()
 
@@ -258,7 +263,7 @@ class ToxRunnerTest(unittest.TestCase):
             stack,
             self.assertRaises(RuntimeError) as error,
         ):
-            tox_runner.main(skip_tests=False, fail_fast=True)
+            runner.main(skip_tests=False, fail_fast=True)
             mocks.subprocess.run.assert_not_called()
         self.assertEqual(str(error.exception), 'INCONSISTENT SOURCES CHECKSUMS')
 
@@ -272,15 +277,15 @@ class ToxRunnerTest(unittest.TestCase):
             mock.patch("os.makedirs") as mock_makedirs,
             mock.patch(self.BUILTIN_OPEN_FUNCTION, mock_open()) as mocked_open,
         ):
-            tox_runner.write_folder_checksum(
+            runner.write_folder_checksum(
                 folder_name, source_checksum, binary_checksum
             )
 
             mock_makedirs.assert_called_once_with(
-                tox_runner.CHECKSUMS_DIR, exist_ok=True
+                runner.CHECKSUMS_DIR, exist_ok=True
             )
             expected_file_path = os.path.join(
-                tox_runner.CHECKSUMS_DIR, "test_folder.checksum"
+                runner.CHECKSUMS_DIR, "test_folder.checksum"
             )
             mocked_open.assert_called_with(expected_file_path, "w")
             mocked_file = mocked_open()
@@ -292,7 +297,7 @@ class ToxRunnerTest(unittest.TestCase):
         folder_name = "test_folder"
         with mock.patch(self.PATH_IS_FILE_FUNCTION) as mocked_isfile:
             mocked_isfile.return_value = False
-            result = tox_runner.read_previous_folder_checksum(folder_name)
+            result = runner.read_previous_folder_checksum(folder_name)
             assert result == (None, None)
 
     def test_read_previous_folder_checksum_file_exists(self):
@@ -307,10 +312,10 @@ class ToxRunnerTest(unittest.TestCase):
             ) as mocked_open,
         ):
             mocked_isfile.return_value = True
-            result = tox_runner.read_previous_folder_checksum(folder_name)
+            result = runner.read_previous_folder_checksum(folder_name)
             assert result == (source_checksum, binary_checksum)
             expected_file_path = os.path.join(
-                tox_runner.CHECKSUMS_DIR, "test_folder.checksum"
+                runner.CHECKSUMS_DIR, "test_folder.checksum"
             )
             mocked_open.assert_called_with(expected_file_path, "r")
 
@@ -325,7 +330,7 @@ class ToxRunnerTest(unittest.TestCase):
             ) as mocked_open,
         ):
             mocked_isfile.return_value = True
-            result = tox_runner.read_previous_folder_checksum(folder_name)
+            result = runner.read_previous_folder_checksum(folder_name)
             assert result == (source_checksum, None)
 
     def test_update_all_checksums_with_resources_folders(self):
@@ -358,7 +363,7 @@ class ToxRunnerTest(unittest.TestCase):
             mock_binary_files.return_value = [os.path.join("custom_protobuf", "test.protobuf")]
             mocked_checksum.side_effect = [source_checksum, "456", "789"]
 
-            tox_runner.update_all_checksums()
+            runner.update_all_checksums()
 
             mocked_open.assert_called_with(SERIALIZER_SOURCE_CHECKSUM_FILE, "w")
             mock_write_checksum.assert_called_once_with("custom", "456", "789")
@@ -388,11 +393,12 @@ class ToxRunnerTest(unittest.TestCase):
             mock.patch(f"{self.MODULE_NAME}.RESOURCES_FOLDERS", mock_resources_folders),
             mock.patch(f"{self.MODULE_NAME}.write_folder_checksum") as mock_write_checksum,
         ):
-            tox_runner.main()
+            runner.main()
 
             # Should only run tests
             mocks.subprocess.run.assert_called_with(
-                ["tox", "-e", "py314"], check=True
+                ['uv', 'run', 'python', '-m', 'pytest', 'tests/'],
+                check=True
             )
 
             # Should not update any checksums
@@ -437,7 +443,7 @@ class ToxRunnerTest(unittest.TestCase):
                 current_binary_checksum,
             )
 
-            result = tox_runner.detect_required_serializations()
+            result = runner.detect_required_serializations()
 
             self.assertEqual(result, [])
             mock_resources_files.assert_called_once_with("custom")
@@ -485,7 +491,7 @@ class ToxRunnerTest(unittest.TestCase):
                 previous_binary_checksum,
             )
 
-            result = tox_runner.detect_required_serializations()
+            result = runner.detect_required_serializations()
 
             self.assertEqual(result, ["custom"])
 
@@ -530,7 +536,7 @@ class ToxRunnerTest(unittest.TestCase):
                 previous_binary_checksum,
             )
 
-            result = tox_runner.detect_required_serializations()
+            result = runner.detect_required_serializations()
 
             self.assertEqual(result, ["custom"])
 
@@ -562,7 +568,7 @@ class ToxRunnerTest(unittest.TestCase):
             # Empty folder - no files
             mock_resources_files.return_value = []
 
-            result = tox_runner.detect_required_serializations()
+            result = runner.detect_required_serializations()
 
             self.assertEqual(result, [])
             mock_resources_files.assert_called_once_with("custom")
@@ -614,7 +620,7 @@ class ToxRunnerTest(unittest.TestCase):
 
             # Should raise RuntimeError with fail_fast=True
             with self.assertRaises(RuntimeError) as error:
-                tox_runner.detect_required_serializations(fail_fast=True)
+                runner.detect_required_serializations(fail_fast=True)
 
             self.assertEqual(
                 str(error.exception), "INCONSISTENT RESOURCE FOLDER CHECKSUMS"
@@ -656,7 +662,7 @@ class ToxRunnerTest(unittest.TestCase):
             )
 
             with self.assertRaises(RuntimeError) as error:
-                tox_runner.detect_required_serializations(fail_fast=True)
+                runner.detect_required_serializations(fail_fast=True)
 
             self.assertEqual(
                 str(error.exception), "INCONSISTENT RESOURCE FOLDER CHECKSUMS"
@@ -698,7 +704,7 @@ class ToxRunnerTest(unittest.TestCase):
             )
 
             with self.assertRaises(RuntimeError) as error:
-                tox_runner.detect_required_serializations(fail_fast=True)
+                runner.detect_required_serializations(fail_fast=True)
 
             self.assertEqual(
                 str(error.exception), "INCONSISTENT RESOURCE FOLDER CHECKSUMS"
@@ -746,7 +752,7 @@ class ToxRunnerTest(unittest.TestCase):
             )
 
             # Should return changed serializer without fail_fast=False (default)
-            result = tox_runner.detect_required_serializations(fail_fast=False)
+            result = runner.detect_required_serializations(fail_fast=False)
             self.assertEqual(result, ["custom"])
 
     def test_detect_required_serializations_no_fail_fast_source_and_binary_inconsistent(self):
@@ -784,7 +790,7 @@ class ToxRunnerTest(unittest.TestCase):
                 "123",
             )
 
-            result = tox_runner.detect_required_serializations(fail_fast=False)
+            result = runner.detect_required_serializations(fail_fast=False)
             self.assertEqual(result, ["custom"])
 
     def test_main_fail_fast_resource_folder_checksum_inconsistent(self):
@@ -814,7 +820,7 @@ class ToxRunnerTest(unittest.TestCase):
 
             # Should propagate the RuntimeError
             with self.assertRaises(RuntimeError) as error:
-                tox_runner.main(fail_fast=True)
+                runner.main(fail_fast=True)
 
             self.assertEqual(
                 str(error.exception), "INCONSISTENT RESOURCE FOLDER CHECKSUMS"
@@ -830,7 +836,7 @@ class ToxRunnerTest(unittest.TestCase):
             changed_serializers=[]
         )
         with stack:
-            tox_runner.main(dry_run=True)
+            runner.main(dry_run=True)
 
             # Should not call subprocess in dry run mode
             mocks.subprocess.run.assert_not_called()
@@ -843,7 +849,7 @@ class ToxRunnerTest(unittest.TestCase):
             changed_serializers=[]
         )
         with stack:
-            tox_runner.main(dry_run=True)
+            runner.main(dry_run=True)
 
             # Should not call subprocess in dry run mode
             mocks.subprocess.run.assert_not_called()
@@ -856,45 +862,47 @@ class ToxRunnerTest(unittest.TestCase):
             changed_serializers=["custom"]
         )
         with stack:
-            tox_runner.main(dry_run=True)
+            runner.main(dry_run=True)
 
             # Should not call subprocess in dry run mode
             mocks.subprocess.run.assert_not_called()
 
     def test_selective_serialization_when_one_serializer_changed(self):
-        # Test dry-run scenario: folder changed -> should display selective serialization command
         stack, mocks = self._setup_basic_main_test(
             prev_checksum="123",
             curr_checksum="123",
             changed_serializers=["custom"]
         )
         with stack:
-            tox_runner.main()
+            runner.main()
 
             expected_calls = [
-                mock.call(['tox', '-e', 'selective-serialize', '--', 'custom'], check=True),
-                mock.call(['tox', '-e', 'py314'], check=True)
+                mock.call(['uv', 'run', 'python', '-m', 'utils.folder_manager', 'custom'], check=True),
+                mock.call(['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer', 'custom'], check=True),
+                mock.call(['uv', 'run', 'python', '-m', 'pytest', 'tests/'], check=True),
             ]
             mocks.subprocess.run.assert_has_calls(expected_calls)
             mocks.update_folder_checksums_for_changed_serializers.assert_any_call(["custom"])
+            mocks.update_all_checksums.assert_not_called()
 
 
     def test_selective_serialization_when_two_serializer_changed(self):
-        # Test dry-run scenario: folder changed -> should display selective serialization command
         stack, mocks = self._setup_basic_main_test(
             prev_checksum="123",
             curr_checksum="123",
             changed_serializers=["custom", "import"]
         )
         with stack:
-            tox_runner.main()
+            runner.main()
 
             expected_calls = [
-                mock.call(['tox', '-e', 'selective-serialize', '--', 'custom,import'], check=True),
-                mock.call(['tox', '-e', 'py314'], check=True)
+                mock.call(['uv', 'run', 'python', '-m', 'utils.folder_manager', 'custom,import'], check=True),
+                mock.call(['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer', 'custom,import'], check=True),
+                mock.call(['uv', 'run', 'python', '-m', 'pytest', 'tests/'], check=True),
             ]
             mocks.subprocess.run.assert_has_calls(expected_calls)
             mocks.update_folder_checksums_for_changed_serializers.assert_any_call(["custom", "import"])
+            mocks.update_all_checksums.assert_not_called()
 
 
     def test_update_folder_checksums_for_changed_serializers(self):
@@ -928,7 +936,7 @@ class ToxRunnerTest(unittest.TestCase):
             mock_binary_files.return_value = ["binary1.protobuf"]
             mock_checksum.side_effect = ["source123", "binary456", "source789", "binary012"]
 
-            tox_runner.update_folder_checksums_for_changed_serializers(changed_serializers)
+            runner.update_folder_checksums_for_changed_serializers(changed_serializers)
 
             # Should be called twice - once for "custom" and once for "typeshed_stdlib"
             assert mock_write_checksum.call_count == 2
@@ -936,27 +944,36 @@ class ToxRunnerTest(unittest.TestCase):
             mock_write_checksum.assert_any_call("typeshed_stdlib", "source789", "binary012")
 
     def test_get_serialize_command_to_run_source_changed(self):
-        # Test when source checksum has changed
-        command = tox_runner.get_serialize_command_to_run("old_checksum", "new_checksum", [])
-        expected = ['tox', '-e', 'serialize']
-        self.assertEqual(command, expected)
+        # Test when source checksum has changed -> returns full serialization commands
+        commands = runner.get_serialize_command_to_run("old_checksum", "new_checksum", [])
+        expected = [
+            ['uv', 'run', 'python', '-m', 'utils.folder_manager'],
+            ['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer'],
+        ]
+        self.assertEqual(commands, expected)
 
     def test_get_serialize_command_to_run_serializers_changed(self):
-        # Test when serializers have changed but source is the same
-        command = tox_runner.get_serialize_command_to_run("same_checksum", "same_checksum", ["custom", "stdlib"])
-        expected = ['tox', '-e', 'selective-serialize', '--', 'custom,stdlib']
-        self.assertEqual(command, expected)
+        # Test when serializers have changed but source is the same -> selective commands
+        commands = runner.get_serialize_command_to_run("same_checksum", "same_checksum", ["custom", "stdlib"])
+        expected = [
+            ['uv', 'run', 'python', '-m', 'utils.folder_manager', 'custom,stdlib'],
+            ['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer', 'custom,stdlib'],
+        ]
+        self.assertEqual(commands, expected)
 
     def test_get_serialize_command_to_run_no_changes(self):
         # Test when nothing has changed
-        command = tox_runner.get_serialize_command_to_run("same_checksum", "same_checksum", [])
-        self.assertIsNone(command)
+        commands = runner.get_serialize_command_to_run("same_checksum", "same_checksum", [])
+        self.assertIsNone(commands)
 
     def test_get_serialize_command_to_run_source_priority(self):
-        # Test that source changes take priority over serializer changes
-        command = tox_runner.get_serialize_command_to_run("old_checksum", "new_checksum", ["custom"])
-        expected = ['tox', '-e', 'serialize']
-        self.assertEqual(command, expected)
+        # Test that source changes take priority over serializer changes -> full serialization
+        commands = runner.get_serialize_command_to_run("old_checksum", "new_checksum", ["custom"])
+        expected = [
+            ['uv', 'run', 'python', '-m', 'utils.folder_manager'],
+            ['uv', 'run', 'python', '-m', 'serializer.typeshed_serializer'],
+        ]
+        self.assertEqual(commands, expected)
 
     def test_fetch_resources_subfolder_files(self):
         # Test fetching files from a subfolder
@@ -971,7 +988,7 @@ class ToxRunnerTest(unittest.TestCase):
                 (os.path.join(base_path, 'subdir'), [], ['file3.py'])
             ]
 
-            result = tox_runner.fetch_resources_subfolder_files('custom')
+            result = runner.fetch_resources_subfolder_files('custom')
             expected = [
                 os.path.join(base_path, 'file1.py'),
                 os.path.join(base_path, 'file2.pyi'),
@@ -988,11 +1005,11 @@ class ToxRunnerTest(unittest.TestCase):
     def test_compute_and_compare_checksums_changed(self):
         # Test when checksums are different (files changed)
         files = ['file1.py', 'file2.py']
-        with mock.patch('runners.tox_runner.compute_checksum', return_value='new_checksum'), \
-             mock.patch('runners.tox_runner.logger') as mock_logger:
+        with mock.patch('runners.serializer_runner.compute_checksum', return_value='new_checksum'), \
+             mock.patch('runners.serializer_runner.logger') as mock_logger:
             
-            result = tox_runner.compute_and_compare_checksums(
-                'SOURCE', 'custom', files, tox_runner.normalize_text_files, 'old_checksum'
+            result = runner.compute_and_compare_checksums(
+                'SOURCE', 'custom', files, runner.normalize_text_files, 'old_checksum'
             )
             
             self.assertTrue(result)
@@ -1004,11 +1021,11 @@ class ToxRunnerTest(unittest.TestCase):
     def test_compute_and_compare_checksums_unchanged(self):
         # Test when checksums are the same (files unchanged)
         files = ['file1.py', 'file2.py']
-        with mock.patch('runners.tox_runner.compute_checksum', return_value='same_checksum'), \
-             mock.patch('runners.tox_runner.logger') as mock_logger:
+        with mock.patch('runners.serializer_runner.compute_checksum', return_value='same_checksum'), \
+             mock.patch('runners.serializer_runner.logger') as mock_logger:
             
-            result = tox_runner.compute_and_compare_checksums(
-                'BINARY', 'importer', files, tox_runner.read_file, 'same_checksum'
+            result = runner.compute_and_compare_checksums(
+                'BINARY', 'importer', files, runner.read_file, 'same_checksum'
             )
             
             self.assertFalse(result)
