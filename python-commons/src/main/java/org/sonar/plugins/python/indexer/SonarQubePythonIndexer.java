@@ -32,8 +32,10 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.TestSourceConfiguration;
+import org.sonar.plugins.python.api.DjangoViewInfo;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.caching.Caching;
+import org.sonar.plugins.python.caching.DjangoCaching;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.project.config.ProjectConfigurationBuilder;
 import org.sonar.python.semantic.DependencyGraph;
@@ -54,6 +56,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   private static final Logger LOG = LoggerFactory.getLogger(SonarQubePythonIndexer.class);
 
   private final Caching caching;
+  private final DjangoCaching djangoCaching;
   private final boolean testSourcesConfigured;
   private boolean analysisOptimized = false;
   private final Set<PythonInputFile> fullySkippableFiles = new HashSet<>();
@@ -71,6 +74,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     this.packageRoots = resolvePackageRoots(context);
     this.caching = new Caching(cacheContext, getCacheVersion(context));
     this.testSourcesConfigured = TestSourceConfiguration.isConfigured(context.config());
+    this.djangoCaching = new DjangoCaching(cacheContext);
     inputFiles.forEach(f -> {
       this.inputFiles.add(f);
       inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.wrappedFile().filename()));
@@ -196,7 +200,14 @@ public class SonarQubePythonIndexer extends PythonIndexer {
 
   private void saveRetrievedDescriptors(String fileKey, String moduleFQN, Set<Descriptor> descriptors, Caching caching) {
     projectLevelSymbolTable().insertEntry(moduleFQN, descriptors);
+
+    Map<String, DjangoViewInfo> cachedDjangoViews = djangoCaching.readDjangoViews(fileKey);
+    if (cachedDjangoViews != null) {
+      projectLevelSymbolTable().restoreDjangoViews(cachedDjangoViews);
+    }
+
     caching.copyFromPrevious(fileKey);
+    djangoCaching.copyFromPrevious(fileKey);
   }
 
   public void computeGlobalSymbols(List<PythonInputFile> files, SensorContext context) {
@@ -223,6 +234,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
 
         caching.writeProjectLevelSymbolTableEntry(inputFile.wrappedFile().key(), descriptors);
         caching.writeImportsMapEntry(inputFile.wrappedFile().key(), imports);
+        djangoCaching.writeDjangoViews(inputFile.wrappedFile().key(), projectLevelSymbolTable().getDjangoViewsRegisteredByModule(moduleFQN));
       }
     }
   }

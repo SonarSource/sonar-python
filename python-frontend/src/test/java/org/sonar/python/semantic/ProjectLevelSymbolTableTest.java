@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.DjangoViewInfo;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -1399,6 +1400,108 @@ class ProjectLevelSymbolTableTest {
     assertThat(projectSymbolTable.getDjangoViewInfo("views.item_detail"))
       .isPresent()
       .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly("items/<int:pk>/"));
+  }
+
+  @Test
+  void django_views_survive_cache_round_trip() {
+    String[] viewsSrc = {
+      "def article_detail(request, pk): ...",
+      "def other_view(request): ..."
+    };
+    String[] urlsSrc = {
+      "from django.urls import path",
+      "import views",
+      "urlpatterns = [path('article/<int:pk>/', views.article_detail)]"
+    };
+
+    // Step 1: full analysis — addModule populates djangoViews map
+    ProjectLevelSymbolTable sourceTable = empty();
+    sourceTable.addModule(parseWithoutSymbols(viewsSrc), "", pythonFile("views.py"));
+    sourceTable.addModule(parseWithoutSymbols(urlsSrc), "", pythonFile("urls.py"));
+
+    assertThat(sourceTable.isDjangoView("views.article_detail")).isTrue();
+    assertThat(sourceTable.isDjangoView("views.other_view")).isFalse();
+
+    // Step 2: collect the registrar's view data (as the indexer would via getDjangoViewsRegisteredByModule)
+    Map<String, DjangoViewInfo> registrarViews = sourceTable.getDjangoViewsRegisteredByModule("urls");
+    assertThat(registrarViews).containsOnlyKeys("views.article_detail");
+
+    // Step 3: restore into a fresh symbol table via restoreDjangoViews
+    // (simulates what the indexer does when urls.py is loaded from cache)
+    ProjectLevelSymbolTable restoredTable = empty();
+    restoredTable.insertEntry("views", sourceTable.descriptorsForModule("views"));
+    restoredTable.restoreDjangoViews(registrarViews);
+
+    // Step 4: verify djangoViews is correctly populated in the restored table
+    assertThat(restoredTable.isDjangoView("views.article_detail")).isTrue();
+    assertThat(restoredTable.getDjangoViewInfo("views.article_detail"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly("article/<int:pk>/"));
+
+    assertThat(restoredTable.isDjangoView("views.other_view")).isFalse();
+    assertThat(restoredTable.getDjangoViewInfo("views.other_view")).isEmpty();
+  }
+
+  @Test
+  void django_views_cross_module_annotation_regardless_of_processing_order() {
+    // views.py defines the function; urls.py registers it via path()
+    // Test that the djangoViews map is populated regardless of which module is processed first.
+    String[] viewsSrc = {
+      "def article_detail(request, pk): ..."
+    };
+    String[] urlsSrc = {
+      "from django.urls import path",
+      "import views",
+      "urlpatterns = [path('article/<int:pk>/', views.article_detail)]"
+    };
+
+    // Order 1: views.py processed before urls.py
+    ProjectLevelSymbolTable tableViewsFirst = empty();
+    tableViewsFirst.addModule(parseWithoutSymbols(viewsSrc), "", pythonFile("views.py"));
+    tableViewsFirst.addModule(parseWithoutSymbols(urlsSrc), "", pythonFile("urls.py"));
+
+    assertThat(tableViewsFirst.isDjangoView("views.article_detail")).isTrue();
+
+    // Order 2: urls.py processed before views.py
+    ProjectLevelSymbolTable tableUrlsFirst = empty();
+    tableUrlsFirst.addModule(parseWithoutSymbols(urlsSrc), "", pythonFile("urls.py"));
+    tableUrlsFirst.addModule(parseWithoutSymbols(viewsSrc), "", pythonFile("views.py"));
+
+    assertThat(tableUrlsFirst.isDjangoView("views.article_detail")).isTrue();
+  }
+
+  @Test
+  void restore_django_views_populates_djangoViews_map() {
+    ProjectLevelSymbolTable table = empty();
+
+    Map<String, DjangoViewInfo> registrarViews = Map.of(
+      "views.article_detail", new DjangoViewInfo(Set.of("article/<int:pk>/")));
+    table.restoreDjangoViews(registrarViews);
+
+    assertThat(table.isDjangoView("views.article_detail")).isTrue();
+    assertThat(table.getDjangoViewInfo("views.article_detail"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactly("article/<int:pk>/"));
+    assertThat(table.isDjangoView("views.other_view")).isFalse();
+  }
+
+  @Test
+  void restore_django_views_merges_patterns_from_multiple_registrars() {
+    ProjectLevelSymbolTable table = empty();
+
+    Map<String, DjangoViewInfo> publicRegistrarViews = Map.of(
+      "views.article_detail", new DjangoViewInfo(Set.of("article/<int:pk>/")));
+    Map<String, DjangoViewInfo> adminRegistrarViews = Map.of(
+      "views.article_detail", new DjangoViewInfo(Set.of("admin/article/<slug:slug>/")));
+
+    table.restoreDjangoViews(publicRegistrarViews);
+    table.restoreDjangoViews(adminRegistrarViews);
+
+    assertThat(table.getDjangoViewInfo("views.article_detail"))
+      .isPresent()
+      .hasValueSatisfying(info -> assertThat(info.urlPatterns()).containsExactlyInAnyOrder(
+        "article/<int:pk>/",
+        "admin/article/<slug:slug>/"));
   }
 
 }

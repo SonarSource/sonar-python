@@ -42,4 +42,10 @@ public record DjangoViewInfo(Set<String> urlPatterns) {
     newPatterns.add(urlPattern);
     return new DjangoViewInfo(newPatterns);
   }
+
+  public DjangoViewInfo merge(DjangoViewInfo other) {
+    var merged = new HashSet<>(urlPatterns);
+    merged.addAll(other.urlPatterns());
+    return new DjangoViewInfo(merged);
+  }
 }

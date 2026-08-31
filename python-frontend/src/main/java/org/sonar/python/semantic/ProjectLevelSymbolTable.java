@@ -63,6 +63,8 @@ public class ProjectLevelSymbolTable {
   private final Map<String, Set<Descriptor>> globalDescriptorsByModuleName;
   private Map<String, Descriptor> globalDescriptorsByFQN;
   private final Map<String, DjangoViewInfo> djangoViews;
+  // Maps registrar module FQN → set of view FQNs it registered via path()/re_path()
+  private final Map<String, Map<String, DjangoViewInfo>> djangoViewsByRegistrar;
   private final Map<String, Set<String>> importsByModule;
   private final Set<String> projectBasePackages;
   private TypeShedDescriptorsProvider typeShedDescriptorsProvider = null;
@@ -87,6 +89,7 @@ public class ProjectLevelSymbolTable {
     this.pythonTypeToDescriptorConverter = new PythonTypeToDescriptorConverter();
     this.globalDescriptorsByModuleName = new ConcurrentHashMap<>();
     this.djangoViews = new ConcurrentHashMap<>();
+    this.djangoViewsByRegistrar = new ConcurrentHashMap<>();
     this.importsByModule = new ConcurrentHashMap<>();
     this.projectBasePackages = ConcurrentHashMap.newKeySet();
   }
@@ -98,6 +101,7 @@ public class ProjectLevelSymbolTable {
     globalDescriptorsByModuleName.clear();
     globalDescriptorsByFQN = null;
     djangoViews.clear();
+    djangoViewsByRegistrar.clear();
     importsByModule.clear();
     projectBasePackages.clear();
     typeShedDescriptorsProvider = null;
@@ -132,7 +136,7 @@ public class ProjectLevelSymbolTable {
     globalDescriptorsByModuleName.merge(fullyQualifiedModuleName, moduleDescriptors, ProjectLevelSymbolTable::mergeDescriptors);
     addModuleToGlobalSymbolsByFQN(moduleDescriptors);
 
-    DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor();
+    DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor(fullyQualifiedModuleName);
     fileInput.accept(djangoViewsVisitor);
   }
 
@@ -251,6 +255,14 @@ public class ProjectLevelSymbolTable {
     djangoViews.put(viewFqn, new DjangoViewInfo(patterns));
   }
 
+  public Map<String, DjangoViewInfo> getDjangoViewsRegisteredByModule(String moduleName) {
+    return Collections.unmodifiableMap(djangoViewsByRegistrar.getOrDefault(moduleName, Collections.emptyMap()));
+  }
+
+  public void restoreDjangoViews(Map<String, DjangoViewInfo> views) {
+    views.forEach((fqn, info) -> djangoViews.merge(fqn, info, DjangoViewInfo::merge));
+  }
+
   public void addProjectPackage(String projectPackage) {
     projectBasePackages.add(projectPackage.split("\\.", 2)[0]);
   }
@@ -306,10 +318,15 @@ public class ProjectLevelSymbolTable {
 
   private class DjangoViewsVisitor extends BaseTreeVisitor {
 
+    private final String registrarModuleName;
     private TypeCheckBuilder confPathCall = null;
     private TypeCheckBuilder pathCall = null;
     private TypeCheckBuilder confRePathCall = null;
     private TypeCheckBuilder rePathCall = null;
+
+    DjangoViewsVisitor(String registrarModuleName) {
+      this.registrarModuleName = registrarModuleName;
+    }
 
     @Override
     public void visitFileInput(FileInput fileInput) {
@@ -377,11 +394,16 @@ public class ProjectLevelSymbolTable {
 
     private void addDjangoView(String fqn) {
       djangoViews.computeIfAbsent(fqn, k -> DjangoViewInfo.withoutPatterns());
+      djangoViewsByRegistrar.computeIfAbsent(registrarModuleName, k -> new ConcurrentHashMap<>())
+        .computeIfAbsent(fqn, k -> DjangoViewInfo.withoutPatterns());
     }
 
     private void addDjangoViewUrlPattern(String fqn, String urlPattern) {
       djangoViews.compute(fqn, (k, existing) ->
         existing == null ? DjangoViewInfo.withPattern(urlPattern) : existing.addPattern(urlPattern));
+      djangoViewsByRegistrar.computeIfAbsent(registrarModuleName, k -> new ConcurrentHashMap<>())
+        .compute(fqn, (k, existing) ->
+          existing == null ? DjangoViewInfo.withPattern(urlPattern) : existing.addPattern(urlPattern));
     }
   }
 }
